@@ -9,6 +9,7 @@ defmodule Song.Mixfile do
      deps_path: "../../deps",
      lockfile: "../../mix.lock",
      elixir: "~> 1.3",
+     elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
@@ -22,6 +23,10 @@ defmodule Song.Mixfile do
     [applications: [:logger, :ecto, :postgrex],
      mod: {Song.Application, []}]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
 
   defp deps do
     [{:ecto, "~> 2.0"},
