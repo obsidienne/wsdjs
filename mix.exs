@@ -5,7 +5,12 @@ defmodule Rwp.Mixfile do
     [apps_path: "apps",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps,
+
+     # docs
+     name: "Radio WCS Platform",
+     version: "0.1.0-dev",
+     source_url: "https://github.com/obsidienne/rwp"]
   end
 
   # Dependencies can be Hex packages:
@@ -21,6 +26,6 @@ defmodule Rwp.Mixfile do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps folder
   defp deps do
-    []
+    [{:ex_doc, github: "elixir-lang/ex_doc", branch: "master", only: :dev}]
   end
 end
