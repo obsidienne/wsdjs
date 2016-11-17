@@ -1,4 +1,9 @@
-# Rwp
+# Radio WCS platform (rwp)
 
-**TODO: Add description**
+This project aims to provide a common platform for all aspect of the our community.
+The following aspect will be covered:
+  - DJs song suggestions and voting, known as **WorldSwingDeeJays**
+  - The radio API and tiny website
+  - Happenings management, known as ** Radio WCS +**
 
+  
