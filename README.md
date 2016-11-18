@@ -2,6 +2,7 @@
 
 This project aims to provide a common platform for all aspects of our community.
 The following aspect will be covered:
+
 * DJs song suggestions and voting, known as **WorldSwingDeeJays**
 * The radio API and tiny website
 * Happenings management, known as **Radio WCS +**
