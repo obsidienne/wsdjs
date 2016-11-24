@@ -9,9 +9,6 @@ pipelines:
   default:
     - step:
         script:
-          - /etc/init.d/postgresql start # starting the service
-          - sudo -u postgres sh -c 'createuser postgres' # creating a postgres user
-          - sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
           - mix local.hex --force
           - mix local.rebar --force
           - mix deps.get
