@@ -1,4 +1,4 @@
-defmodule User.Repo.Migrations.Users do
+defmodule Wcs.Repo.Migrations.Users do
   use Ecto.Migration
 
   def up do

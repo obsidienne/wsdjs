@@ -1,7 +1,5 @@
-defmodule User.Model do
+defmodule Wcs.Model do
   @moduledoc false
-
-  @primary_key {:id, :binary_id, autogenerate: true}
 
   defmacro __using__(_) do
     quote do
@@ -9,8 +7,7 @@ defmodule User.Model do
       import Ecto.Changeset
       import Ecto.Query
 
-
-      alias User.{
+      alias Wcs.{
         User
       }
     end

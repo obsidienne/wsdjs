@@ -1,5 +1,5 @@
-defmodule User.User do
-  use User.Model, :model
+defmodule Wcs.User do
+  use Wcs.Model
 
   schema "users" do
     field :email, :string
