@@ -10,5 +10,6 @@ defmodule Wcs.User do
   def changeset(model, params \\ nil) do
     model
     |> cast(params, @required_fields)
+    |> validate_required(~w(email)a)
   end
 end

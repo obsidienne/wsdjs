@@ -1,4 +1,4 @@
-defmodule Wcs.CustomerTest do
+defmodule Wcs.UserTest do
   use Wcs.Case
 
   @valid_attrs %{email: "alice@example.com"}
