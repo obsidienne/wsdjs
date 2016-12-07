@@ -20,7 +20,7 @@ defmodule WsdjsWeb.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias WsdjsWeb.Repo
+      alias User.Repo
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
@@ -32,10 +32,10 @@ defmodule WsdjsWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(WsdjsWeb.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(User.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(WsdjsWeb.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(User.Repo, {:shared, self()})
     end
 
     :ok

@@ -30,7 +30,7 @@ defmodule WsdjsWeb.Web do
     quote do
       use Phoenix.Controller
 
-      alias WsdjsWeb.Repo
+      alias User.Repo
       import Ecto
       import Ecto.Query
 
@@ -65,7 +65,7 @@ defmodule WsdjsWeb.Web do
     quote do
       use Phoenix.Channel
 
-      alias WsdjsWeb.Repo
+      alias User.Repo
       import Ecto
       import Ecto.Query
       import WsdjsWeb.Gettext

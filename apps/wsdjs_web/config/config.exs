@@ -6,8 +6,7 @@
 use Mix.Config
 
 # General application configuration
-config :wsdjs_web,
-  ecto_repos: [WsdjsWeb.Repo]
+config :wsdjs_web, ecto_repos: []
 
 # Configures the endpoint
 config :wsdjs_web, WsdjsWeb.Endpoint,

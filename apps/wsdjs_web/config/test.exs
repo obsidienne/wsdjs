@@ -8,12 +8,3 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-# Configure your database
-config :wsdjs_web, WsdjsWeb.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "wsdjs_web_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
