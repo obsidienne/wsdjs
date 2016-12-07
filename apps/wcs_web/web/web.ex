@@ -30,7 +30,6 @@ defmodule WcsWeb.Web do
     quote do
       use Phoenix.Controller
 
-      alias WcsWeb.Repo
       import Ecto
       import Ecto.Query
 

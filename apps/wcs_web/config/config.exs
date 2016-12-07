@@ -6,8 +6,7 @@
 use Mix.Config
 
 # General application configuration
-config :wcs_web,
-  ecto_repos: [WcsWeb.Repo]
+config :wcs_web, ecto_repos: []
 
 # Configures the endpoint
 config :wcs_web, WcsWeb.Endpoint,
