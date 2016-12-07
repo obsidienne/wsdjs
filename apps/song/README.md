@@ -1,6 +1,10 @@
 # Song
 
-**TODO: Add description**
+This app aims to provide
+  - song management
+  - playlist management
+  - TOP management
+  - top, like, down votes on song
 
 ## Installation
 
@@ -21,4 +25,3 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
       [applications: [:song]]
     end
     ```
-
