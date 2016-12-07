@@ -1,4 +1,4 @@
-defmodule Song.Application do
+defmodule Dj.Application do
   @moduledoc false
 
   use Application
@@ -10,12 +10,12 @@ defmodule Song.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      supervisor(Song.Repo, [])
+      supervisor(Dj.Repo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Song.Supervisor]
+    opts = [strategy: :one_for_one, name: Dj.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
