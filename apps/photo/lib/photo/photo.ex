@@ -6,6 +6,7 @@ defmodule Photo.Photo do
     field :version, :integer
 
     belongs_to :user, Wcs.User
+    belongs_to :song, Dj.Song    
   end
 
   @required_fields ~w(cld_id version)
