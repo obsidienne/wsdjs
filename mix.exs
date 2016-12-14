@@ -1,4 +1,4 @@
-defmodule Rwp.Mixfile do
+defmodule WcsPlatform.Mixfile do
   use Mix.Project
 
   def project do
@@ -9,7 +9,7 @@ defmodule Rwp.Mixfile do
      aliases: aliases(),
 
      # docs
-     name: "Radio WCS Platform",
+     name: "WCS Platform",
      version: "0.1.0-dev",
      source_url: "https://github.com/obsidienne/rwp",
      docs: [extras: ["README.md"]]]

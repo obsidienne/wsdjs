@@ -16,7 +16,7 @@ defmodule WsdjsWeb.ModelCase do
 
   using do
     quote do
-      alias User.Repo
+      alias Wcs.Repo
 
       import Ecto
       import Ecto.Changeset
@@ -26,10 +26,10 @@ defmodule WsdjsWeb.ModelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(User.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wcs.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(User.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Wcs.Repo, {:shared, self()})
     end
 
     :ok
