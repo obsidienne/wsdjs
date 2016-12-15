@@ -5,7 +5,7 @@ defmodule Dj.Top do
     field :due_date, Ecto.Date
     field :status, :string
 
-    belongs_to :user, Wcs.User
+    belongs_to :account, Wcs.Account
   end
 
   @required_fields ~w(due_date status)
@@ -15,6 +15,6 @@ defmodule Dj.Top do
     |> cast(params, @required_fields)
     |> validate_required(~w(due_date status)a)
     |> unique_constraint(:due_date)
-    |> assoc_constraint(:user)
+    |> assoc_constraint(:account)
   end
 end

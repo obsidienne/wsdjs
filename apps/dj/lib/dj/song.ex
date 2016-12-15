@@ -8,7 +8,7 @@ defmodule Dj.Song do
     field :bpm, :integer
     field :genre, :string
 
-    belongs_to :user, Wcs.User
+    belongs_to :account, Wcs.Account
     has_one :photo, Photo.Photo
   end
 
@@ -21,7 +21,7 @@ defmodule Dj.Song do
     |> cast(params, @allowed_fields)
     |> validate_required(@required_fields)
     |> unique_constraint(:title, name: :songs_title_artist_index)
-    |> assoc_constraint(:user)
+    |> assoc_constraint(:account)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)

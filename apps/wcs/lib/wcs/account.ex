@@ -1,7 +1,7 @@
-defmodule Wcs.User do
+defmodule Wcs.Account do
   use Wcs.Model
 
-  schema "users" do
+  schema "accounts" do
     field :email, :string
   end
 

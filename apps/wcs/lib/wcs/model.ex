@@ -8,7 +8,7 @@ defmodule Wcs.Model do
       import Ecto.Query
 
       alias Wcs.{
-        User
+        Account
       }
     end
   end

@@ -5,7 +5,7 @@ defmodule Photo.Photo do
     field :cld_id, :string
     field :version, :integer
 
-    belongs_to :user, Wcs.User
+    belongs_to :account, Wcs.Account
     belongs_to :song, Dj.Song
   end
 
