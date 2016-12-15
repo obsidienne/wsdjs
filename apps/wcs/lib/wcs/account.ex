@@ -3,6 +3,8 @@ defmodule Wcs.Account do
 
   schema "accounts" do
     field :email, :string
+
+    timestamps()
   end
 
   @allowed_fields ~w(email)
