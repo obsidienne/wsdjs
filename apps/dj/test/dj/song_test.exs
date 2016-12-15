@@ -1,25 +1,15 @@
 defmodule Dj.SongTest do
   use Dj.Case
 
-  @valid_attrs %{title: "song title", artist: "the artist", url: "http://url.com", bpm: 120, genre: "pop"}
-  @invalid_attrs %{}
+  defp errors_on(model, params) do
+    model.__struct__.changeset(model, params).errors
+  end
+
+  @valid_attrs %{title: "song title", artist: "the artist"}
 
   test "changeset with valid attributes" do
     changeset = Song.changeset(%Song{}, @valid_attrs)
     assert changeset.valid?
-  end
-
-  test "changeset with invalid attributes" do
-    changeset = Song.changeset(%Song{}, @invalid_attrs)
-    refute changeset.valid?
-  end
-
-  test "an artist can have multiple song" do
-    assert false
-  end
-
-  test "different artist can have the same song title" do
-    assert false
   end
 
   test "artist / title is unique" do
@@ -27,7 +17,18 @@ defmodule Dj.SongTest do
   end
 
   test "bpm must be positive" do
-    changeset = Song.changeset(%Song{}, %{@valid_attrs | bpm: -1})
-    refute changeset.valid?
+    assert {:bpm, {"must be greater than %{number}", [number: 0]}} in errors_on(%Song{}, %{bpm: -1})
+  end
+
+  test "title can't be blank" do
+    assert {:title, {"can't be blank", []}} in errors_on(%Song{}, %{title: nil})
+  end
+
+  test "artist can't be blank" do
+    assert {:artist, {"can't be blank", []}} in errors_on(%Song{}, %{artist: nil})
+  end
+
+  test "url must be valid" do
+    assert {:url, {"invalid url: :no_scheme", []}} in errors_on(%Song{}, %{url: "bullshit"})
   end
 end

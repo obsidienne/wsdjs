@@ -22,7 +22,17 @@ defmodule Dj.Song do
     |> validate_required(@required_fields)
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
-    |> validate_number(:bpm, equal_to: 0)
+    |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
+    |> validate_url(:url)
+  end
+
+  defp validate_url(changeset, field, options \\ []) do
+    validate_change changeset, field, fn _, url ->
+      case url |> String.to_char_list |> :http_uri.parse do
+        {:ok, _} -> []
+        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect msg}"}]
+      end
+    end
   end
 end
