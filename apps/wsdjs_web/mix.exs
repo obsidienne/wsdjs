@@ -39,7 +39,7 @@ defmodule WsdjsWeb.Mixfile do
      {:phoenix_ecto, "~> 3.0"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
+     {:gettext, "~> 0.13"},
      {:cowboy, "~> 1.0"},
 
      {:wcs, in_umbrella: true}]
