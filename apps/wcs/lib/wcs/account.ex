@@ -14,5 +14,10 @@ defmodule Wcs.Account do
     |> cast(params, @allowed_fields)
     |> validate_required(:email)
     |> unique_constraint(:email)
+    |> validate_format(:email, ~r/.*@.*/)
+  end
+
+  def build(params) do
+    changeset(%Wcs.Account{}, params)
   end
 end
