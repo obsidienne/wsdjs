@@ -12,16 +12,17 @@ defmodule Dj.Song do
     has_one :photo, Photo.Photo
   end
 
-  @required_fields ~w(title artist)
-  @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
+  @allowed_fields ~w(title artist url bpm genre)a
+  @required_fields ~w(title artist)a
+  @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)a
 
   def changeset(model, params \\ nil) do
     model
-    |> cast(params, @required_fields)
-    |> validate_required(~w(title artist)a)
-    |> unique_constraint([:title, :artist])
+    |> cast(params, @allowed_fields)
+    |> validate_required(@required_fields)
+    |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
-    |> validate_number(:bpm, greater_than: 0)
+    |> validate_number(:bpm, equal_to: 0)
     |> validate_inclusion(:genre, @validated_genre)
   end
 end

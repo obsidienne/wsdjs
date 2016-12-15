@@ -6,14 +6,14 @@ defmodule Photo.Photo do
     field :version, :integer
 
     belongs_to :user, Wcs.User
-    belongs_to :song, Dj.Song    
+    belongs_to :song, Dj.Song
   end
 
-  @required_fields ~w(cld_id version)
+  @allowed_fields ~w(cld_id version)
 
   def changeset(model, params \\ nil) do
     model
-    |> cast(params, @required_fields)
+    |> cast(params, @allowed_fields)
     |> validate_required(~w(cld_id version)a)
     |> unique_constraint(:cld_id)
   end

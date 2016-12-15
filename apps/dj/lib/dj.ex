@@ -16,10 +16,15 @@ defmodule Dj do
   end
 
   def update_song() do
-    
+
   end
 
-  def update_song_art do
+  def update_song_art() do
+
+  end
+
+  def find_song() do
+
   end
 
 end
