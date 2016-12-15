@@ -7,7 +7,7 @@ defmodule Dj.SongTest do
 
   @valid_attrs %{title: "song title", artist: "the artist"}
 
-  test "changeset with valid attributes" do
+  test "changeset with minimal valid attributes" do
     changeset = Song.changeset(%Song{}, @valid_attrs)
     assert changeset.valid?
   end
