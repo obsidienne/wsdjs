@@ -6,4 +6,8 @@ defmodule Wcs do
   """
   use Wcs.Model
 
+  def create_account!(email) do
+    Account.build(%{email: email})
+    |> Repo.insert!
+  end
 end
