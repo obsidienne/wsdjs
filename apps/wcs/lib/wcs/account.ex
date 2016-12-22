@@ -4,10 +4,11 @@ defmodule Wcs.Account do
   schema "accounts" do
     field :email, :string
 
+    has_many :songs, Dj.Song
     timestamps()
   end
 
-  @allowed_fields ~w(email)
+  @allowed_fields [:email]
 
   def changeset(model, params \\ nil) do
     model
@@ -17,7 +18,7 @@ defmodule Wcs.Account do
     |> validate_format(:email, ~r/.*@.*/)
   end
 
-  def build(params) do
+  def build(%{email: email} = params) do
     changeset(%Wcs.Account{}, params)
   end
 end

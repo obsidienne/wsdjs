@@ -6,9 +6,11 @@ defmodule Dj.Top do
     field :status, :string
 
     belongs_to :account, Wcs.Account
+
+    timestamps()
   end
 
-  @required_fields ~w(due_date status)
+  @required_fields [:due_date, :status]
 
   def changeset(model, params \\ nil) do
     model

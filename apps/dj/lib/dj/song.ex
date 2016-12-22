@@ -10,11 +10,13 @@ defmodule Dj.Song do
 
     belongs_to :account, Wcs.Account
     has_one :photo, Photo.Photo
+
+    timestamps()
   end
 
-  @allowed_fields ~w(title artist url bpm genre)a
-  @required_fields ~w(title artist)a
-  @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)a
+  @allowed_fields [:title, :artist, :url, :bpm, :genre, :account_id]
+  @required_fields [:title, :artist, :url, :genre]
+  @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
   def changeset(model, params \\ nil) do
     model

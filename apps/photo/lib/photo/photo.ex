@@ -7,6 +7,8 @@ defmodule Photo.Photo do
 
     belongs_to :account, Wcs.Account
     belongs_to :song, Dj.Song
+
+    timestamps()
   end
 
   @allowed_fields ~w(cld_id version)
