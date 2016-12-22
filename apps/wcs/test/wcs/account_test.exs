@@ -7,11 +7,6 @@ defmodule Wcs.AccountTest do
 
   @valid_attrs %{email: "alice@example.com"}
 
-  setup _tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wcs.Repo, [])
-    :ok
-  end
-
   test "changeset with minimal valid attributes" do
     changeset = Account.changeset(%Account{}, @valid_attrs)
     assert changeset.valid?
@@ -20,8 +15,8 @@ defmodule Wcs.AccountTest do
   test "email is unique" do
     changeset = Account.changeset(%Account{}, @valid_attrs)
     Repo.insert(changeset)
-    assert {:error, "d"} = Repo.insert(changeset)
 
+    assert {:error, %{errors: [email: {"has already been taken", []}]}} = Repo.insert(changeset)
   end
 
   test "email must have a valid format" do
