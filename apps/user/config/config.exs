@@ -4,6 +4,6 @@ use Mix.Config
 config :logger, level: :debug
 
 ## Repo
-config :wcs, ecto_repos: [Wcs.Repo]
+config :user, ecto_repos: [User.Repo]
 
 import_config "#{Mix.env}.exs"

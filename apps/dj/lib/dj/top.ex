@@ -5,7 +5,7 @@ defmodule Dj.Top do
     field :due_date, Ecto.Date
     field :status, :string
 
-    belongs_to :account, Wcs.Account
+    belongs_to :account, User.Account
 
     timestamps()
   end

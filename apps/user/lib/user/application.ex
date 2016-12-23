@@ -1,4 +1,4 @@
-defmodule Wcs.Application do
+defmodule User.Application do
   @moduledoc false
 
   use Application
@@ -10,12 +10,12 @@ defmodule Wcs.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      supervisor(Wcs.Repo, [])
+      supervisor(User.Repo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Wcs.Supervisor]
+    opts = [strategy: :one_for_one, name: User.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

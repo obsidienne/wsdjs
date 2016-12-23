@@ -1,4 +1,4 @@
-defmodule Wcs.Model do
+defmodule User.Model do
   @moduledoc false
 
 
@@ -8,7 +8,7 @@ defmodule Wcs.Model do
       import Ecto.Changeset
       import Ecto.Query
 
-      alias Wcs.{
+      alias User.{
         Repo,
         Account
       }

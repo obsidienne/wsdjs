@@ -1,5 +1,5 @@
-defmodule Wcs.AccountTest do
-  use Wcs.Case
+defmodule User.AccountTest do
+  use User.Case
 
   defp errors_on(model, params) do
     model.__struct__.changeset(model, params).errors

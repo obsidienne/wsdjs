@@ -1,21 +1,21 @@
-defmodule Wcs.Case do
+defmodule User.Case do
   use ExUnit.CaseTemplate
 
   using do
     quote do
-      alias Wcs.Repo
+      alias User.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Wcs.Case
+      import User.Case
 
-      use Wcs.Model
+      use User.Model
     end
   end
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wcs.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(User.Repo)
     :ok
   end
 end

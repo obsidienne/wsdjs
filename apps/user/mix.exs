@@ -1,8 +1,8 @@
-defmodule Wcs.Mixfile do
+defmodule User.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :wcs,
+    [app: :user,
      version: "0.1.0",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -21,7 +21,7 @@ defmodule Wcs.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger, :ecto, :postgrex],
-     mod: {Wcs.Application, []}]
+     mod: {User.Application, []}]
   end
 
   # Specifies which paths to compile per environment.

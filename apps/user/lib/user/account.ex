@@ -1,5 +1,5 @@
-defmodule Wcs.Account do
-  use Wcs.Model
+defmodule User.Account do
+  use User.Model
 
   schema "accounts" do
     field :email, :string
@@ -19,6 +19,6 @@ defmodule Wcs.Account do
   end
 
   def build(%{email: email} = params) do
-    changeset(%Wcs.Account{}, params)
+    changeset(%User.Account{}, params)
   end
 end

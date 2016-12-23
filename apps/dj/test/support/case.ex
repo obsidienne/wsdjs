@@ -17,11 +17,11 @@ defmodule Dj.Case do
   setup tags do
     opts = tags |> Map.take([:isolation]) |> Enum.to_list()
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Dj.Repo, opts)
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wcs.Repo, opts)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(User.Repo, opts)
 
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Dj.Repo, {:shared, self()})
-      Ecto.Adapters.SQL.Sandbox.mode(Wcs.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(User.Repo, {:shared, self()})
     end
 
     :ok

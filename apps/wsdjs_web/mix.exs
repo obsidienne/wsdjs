@@ -23,7 +23,7 @@ defmodule WsdjsWeb.Mixfile do
   def application do
     [mod: {WsdjsWeb.Application, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :wcs]]
+                    :phoenix_ecto, :user]]
   end
 
   # Specifies which paths to compile per environment.
@@ -42,7 +42,7 @@ defmodule WsdjsWeb.Mixfile do
      {:gettext, "~> 0.13"},
      {:cowboy, "~> 1.0"},
 
-     {:wcs, in_umbrella: true}]
+     {:user, in_umbrella: true}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -8,7 +8,7 @@ defmodule Dj.Song do
     field :bpm, :integer
     field :genre, :string
 
-    belongs_to :account, Wcs.Account
+    belongs_to :account, User.Account
     has_one :photo, Photo.Photo
 
     timestamps()
