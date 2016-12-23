@@ -1,19 +1,36 @@
 defmodule Dj.SongTest do
-  use Dj.Case
+  use Dj.Case, async: true
+
+  @valid_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
 
   defp errors_on(model, params) do
     model.__struct__.changeset(model, params).errors
   end
 
-  @valid_attrs %{title: "song title", artist: "the artist"}
+  setup _tags do
+    # need a better way
+    account = Wcs.Account.build(%{email: "test@test.com"})
+    dj = Repo.insert!(account)
+    {:ok, %{account: dj}}
+  end
 
   test "changeset with minimal valid attributes" do
     changeset = Song.changeset(%Song{}, @valid_attrs)
     assert changeset.valid?
   end
 
-  test "artist / title is unique" do
-    assert false
+  test "song suggestor must exist" do
+    params = Map.put(@valid_attrs, :account_id, Ecto.UUID.generate())
+    song = Song.changeset(%Song{}, params)
+    assert {:error, %{errors: [account: {"does not exist", _}]}} = Repo.insert(song)
+  end
+
+  test "artist / title is unique", %{account: dj} do
+    song = Song.changeset(%Song{}, @valid_attrs)
+    song_with_account = Ecto.Changeset.put_assoc(song, :account, dj)
+    Repo.insert(song_with_account)
+
+    assert {:error, %{errors: [title: {"has already been taken", []}]}} = Dj.Repo.insert(song_with_account)
   end
 
   test "bpm must be positive" do
