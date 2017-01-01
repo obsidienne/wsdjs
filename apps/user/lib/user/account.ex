@@ -3,12 +3,18 @@ defmodule User.Account do
 
   schema "accounts" do
     field :email, :string
+    field :admin, :boolean
+    field :new_song_notification
+    field :user_country, :string
+    field :last_name, :string
+    field :first_name, :string
+    field :djname, :string
 
     has_many :songs, Dj.Song
     timestamps()
   end
 
-  @allowed_fields [:email]
+  @allowed_fields [:email, :new_song_notification, :user_country, :last_name, :first_name, :djname]
 
   def changeset(model, params \\ nil) do
     model
