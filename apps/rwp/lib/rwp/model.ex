@@ -7,6 +7,10 @@ defmodule Rwp.Model do
       import Ecto.Changeset
       import Ecto.Query
 
+      alias Rwp.{
+        Photo
+      }
+
       @primary_key {:id, :binary_id, autogenerate: true}
       @foreign_key_type :binary_id
     end

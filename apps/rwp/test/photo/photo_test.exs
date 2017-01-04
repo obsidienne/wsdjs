@@ -1,5 +1,5 @@
 defmodule Photo.PhotoTest do
-  use Photo.Case
+  use Rwp.Case
 
   @valid_attrs %{cld_id: "covers/gerkk29hk1t2ydaqlqyh", version: "1464527941"}
   @invalid_attrs %{}
