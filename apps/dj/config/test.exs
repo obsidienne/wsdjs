@@ -7,7 +7,3 @@ config :dj, Dj.Repo,
   database: "rwp_#{Mix.env}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
-
-config :logger,
-  backends: [:console],
-  compile_time_purge_level: :debug
