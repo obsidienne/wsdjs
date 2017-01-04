@@ -1,16 +1,16 @@
-defmodule Rwp.Case do
+defmodule Wcsp.Case do
   use ExUnit.CaseTemplate
 
   using do
     quote do
-      alias Rwp.Repo
+      alias Wcsp.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Rwp.Case
+      import Wcsp.Case
 
-      use Rwp.Model
+      use Wcsp.Model
     end
   end
 end

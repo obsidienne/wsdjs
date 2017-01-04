@@ -1,4 +1,4 @@
-defmodule Rwp.Application do
+defmodule Wcsp.Application do
   @moduledoc false
 
   use Application
@@ -10,12 +10,12 @@ defmodule Rwp.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      supervisor(Rwp.Repo, [])
+      supervisor(Wcsp.Repo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Rwp.Supervisor]
+    opts = [strategy: :one_for_one, name: Wcsp.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

@@ -1,8 +1,8 @@
-defmodule Rwp.Mixfile do
+defmodule Wcsp.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :rwp,
+    [app: :wcsp,
      version: "0.1.0",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -21,7 +21,7 @@ defmodule Rwp.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger, :ecto, :postgrex],
-     mod: {Rwp.Application, []}]
+     mod: {Wcsp.Application, []}]
   end
 
   # Specifies which paths to compile per environment.

@@ -1,4 +1,4 @@
-defmodule Rwp.Model do
+defmodule Wcsp.Model do
   @moduledoc false
 
   defmacro __using__(_) do
@@ -7,7 +7,7 @@ defmodule Rwp.Model do
       import Ecto.Changeset
       import Ecto.Query
 
-      alias Rwp.{
+      alias Wcsp.{
         Photo
       }
 

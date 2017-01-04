@@ -1,4 +1,4 @@
-defmodule RwpTest do
+defmodule WcspTest do
   use ExUnit.Case
 
   test "the truth" do

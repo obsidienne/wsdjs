@@ -1,5 +1,5 @@
-defmodule Rwp.Photo do
-  use Rwp.Model
+defmodule Wcsp.Photo do
+  use Wcsp.Model
 
   schema "photos" do
     field :cld_id, :string

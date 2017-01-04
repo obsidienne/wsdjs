@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :rwp, Rwp.Repo,
+config :wcsp, Wcsp.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
