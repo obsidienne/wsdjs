@@ -10,7 +10,8 @@ defmodule Wcsp.Model do
       alias Wcsp.{
         Photo,
         Song,
-        Top
+        Top,
+        Account
       }
 
       @primary_key {:id, :binary_id, autogenerate: true}

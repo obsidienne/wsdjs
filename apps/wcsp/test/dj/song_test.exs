@@ -9,7 +9,7 @@ defmodule Wcsp.SongTest do
 
   setup _tags do
     # need a better way
-    account = User.Account.build(%{email: "test@test.com"})
+    account = Wcsp.Account.build(%{email: "test@test.com"})
     dj = Repo.insert!(account)
     {:ok, %{account: dj}}
   end

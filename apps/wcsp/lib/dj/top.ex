@@ -5,7 +5,7 @@ defmodule Wcsp.Top do
     field :due_date, Ecto.Date
     field :status, :string
 
-    belongs_to :account, User.Account
+    belongs_to :account, Wcsp.Account
 
     timestamps()
   end

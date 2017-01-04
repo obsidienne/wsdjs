@@ -4,7 +4,7 @@ defmodule User do
 
   `User` will be used by `rwp_web`, `song` Phoenix apps.
   """
-  use User.Model
+  use Wcsp.Model
 
   def create_account!(email) do
     Account.build(%{email: email})

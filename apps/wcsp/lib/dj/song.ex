@@ -8,7 +8,7 @@ defmodule Wcsp.Song do
     field :bpm, :integer
     field :genre, :string
 
-    belongs_to :account, User.Account
+    belongs_to :account, Wcsp.Account
     has_one :photo, Wcsp.Photo
 
     timestamps()
