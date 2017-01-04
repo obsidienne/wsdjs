@@ -8,7 +8,9 @@ defmodule Wcsp.Model do
       import Ecto.Query
 
       alias Wcsp.{
-        Photo
+        Photo,
+        Song,
+        Top
       }
 
       @primary_key {:id, :binary_id, autogenerate: true}

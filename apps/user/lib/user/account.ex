@@ -10,7 +10,7 @@ defmodule User.Account do
     field :first_name, :string
     field :djname, :string
 
-    has_many :songs, Dj.Song
+    has_many :songs, Wcsp.Song
     timestamps()
   end
 

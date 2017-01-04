@@ -1,5 +1,5 @@
-defmodule Dj.Top do
-  use Dj.Model
+defmodule Wcsp.Top do
+  use Wcsp.Model
 
   schema "tops" do
     field :due_date, Ecto.Date

@@ -13,4 +13,9 @@ defmodule Wcsp.Case do
       use Wcsp.Model
     end
   end
+
+  setup do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wcsp.Repo)
+    :ok
+  end
 end

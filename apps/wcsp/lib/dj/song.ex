@@ -1,5 +1,5 @@
-defmodule Dj.Song do
-  use Dj.Model
+defmodule Wcsp.Song do
+  use Wcsp.Model
 
   schema "songs" do
     field :title, :string
@@ -9,7 +9,7 @@ defmodule Dj.Song do
     field :genre, :string
 
     belongs_to :account, User.Account
-    has_one :photo, Photo.Photo
+    has_one :photo, Wcsp.Photo
 
     timestamps()
   end

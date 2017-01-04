@@ -1,5 +1,5 @@
-defmodule Dj.SongTest do
-  use Dj.Case, async: true
+defmodule Wcsp.SongTest do
+  use Wcsp.Case, async: true
 
   @valid_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
 
@@ -30,7 +30,7 @@ defmodule Dj.SongTest do
     song_with_account = Ecto.Changeset.put_assoc(song, :account, dj)
     Repo.insert(song_with_account)
 
-    assert {:error, %{errors: [title: {"has already been taken", []}]}} = Dj.Repo.insert(song_with_account)
+    assert {:error, %{errors: [title: {"has already been taken", []}]}} = Repo.insert(song_with_account)
   end
 
   test "bpm must be positive" do

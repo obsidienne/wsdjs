@@ -5,7 +5,7 @@ defmodule Dj do
   `Dj` will be used by `wcs_web` Phoenix apps.
   """
 
-  use Dj.Model
+  use Wcsp.Model
 
   def create_song!() do
 
