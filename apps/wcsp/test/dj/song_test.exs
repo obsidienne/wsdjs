@@ -1,17 +1,11 @@
 defmodule Wcsp.SongTest do
   use Wcsp.Case, async: true
+  import Wcsp.Factory
 
   @valid_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
 
   defp errors_on(model, params) do
     model.__struct__.changeset(model, params).errors
-  end
-
-  setup _tags do
-    # need a better way
-    account = Wcsp.Account.build(%{email: "test@test.com"})
-    dj = Repo.insert!(account)
-    {:ok, %{account: dj}}
   end
 
   test "changeset with minimal valid attributes" do
@@ -25,7 +19,8 @@ defmodule Wcsp.SongTest do
     assert {:error, %{errors: [account: {"does not exist", _}]}} = Repo.insert(song)
   end
 
-  test "artist / title is unique", %{account: dj} do
+  test "artist / title is unique" do
+    dj = insert!(:account)
     song = Song.changeset(%Song{}, @valid_attrs)
     song_with_account = Ecto.Changeset.put_assoc(song, :account, dj)
     Repo.insert(song_with_account)
