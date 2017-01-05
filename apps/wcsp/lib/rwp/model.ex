@@ -11,7 +11,8 @@ defmodule Wcsp.Model do
         Photo,
         Song,
         Top,
-        Account
+        Account,
+        Comment
       }
 
       @primary_key {:id, :binary_id, autogenerate: true}

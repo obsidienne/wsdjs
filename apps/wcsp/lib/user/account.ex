@@ -10,6 +10,7 @@ defmodule Wcsp.Account do
     field :djname, :string
 
     has_many :songs, Wcsp.Song
+    has_many :comments, Wcsp.Comment
     timestamps()
   end
 
