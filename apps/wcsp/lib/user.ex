@@ -4,6 +4,7 @@ defmodule User do
 
   `User` will be used by `rwp_web`, `song` Phoenix apps.
   """
+  alias Wcsp.Repo
   use Wcsp.Model
 
   def create_account!(email) do
