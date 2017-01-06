@@ -29,15 +29,15 @@ defmodule Wcsp.SongTest do
   end
 
   test "bpm must be positive" do
-    assert {:bpm, {"must be greater than %{number}", [number: 0]}} in errors_on(%Song{}, %{bpm: -1})
+    assert {:bpm, {"must be greater than %{number}", [validation: :number, number: 0]}} in errors_on(%Song{}, %{bpm: -1})
   end
 
   test "title can't be blank" do
-    assert {:title, {"can't be blank", []}} in errors_on(%Song{}, %{title: nil})
+    assert {:title, {"can't be blank", [validation: :required]}} in errors_on(%Song{}, %{title: nil})
   end
 
   test "artist can't be blank" do
-    assert {:artist, {"can't be blank", []}} in errors_on(%Song{}, %{artist: nil})
+    assert {:artist, {"can't be blank", [validation: :required]}} in errors_on(%Song{}, %{artist: nil})
   end
 
   test "url must be valid" do

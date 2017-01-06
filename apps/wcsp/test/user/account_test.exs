@@ -20,10 +20,10 @@ defmodule Wcsp.AccountTest do
   end
 
   test "email must have a valid format" do
-    assert {:email, {"has invalid format", []}} in errors_on(%Account{}, %{email: "bullshit"})
+    assert {:email, {"has invalid format", [validation: :format]}} in errors_on(%Account{}, %{email: "bullshit"})
   end
 
   test "email can't be blank" do
-    assert {:email, {"can't be blank", []}} in errors_on(%Account{}, %{email: nil})
+    assert {:email, {"can't be blank", [validation: :required]}} in errors_on(%Account{}, %{email: nil})
   end
 end
