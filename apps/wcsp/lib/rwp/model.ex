@@ -12,7 +12,8 @@ defmodule Wcsp.Model do
         Song,
         Top,
         Account,
-        Comment
+        Comment,
+        Rank
       }
 
       @primary_key {:id, :binary_id, autogenerate: true}

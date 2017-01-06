@@ -10,12 +10,14 @@ defmodule Wcsp.Top do
     timestamps()
   end
 
-  @required_fields [:due_date, :status]
+  @required_fields [:due_date, :status, :account_id]
+  @valid_status ~w(creating voting counting published)
 
   def changeset(model, params \\ nil) do
     model
     |> cast(params, @required_fields)
     |> validate_required(~w(due_date status)a)
+    |> validate_inclusion(:status, @valid_status)
     |> unique_constraint(:due_date)
     |> assoc_constraint(:account)
   end

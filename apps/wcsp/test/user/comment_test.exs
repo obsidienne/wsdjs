@@ -1,12 +1,7 @@
 defmodule Wcsp.CommentTest do
   use Wcsp.Case, async: true
-  import Wcsp.Factory
 
   @valid_attrs %{text: "song title"}
-
-  defp errors_on(model, params) do
-    model.__struct__.changeset(model, params).errors
-  end
 
   test "changeset with minimal valid attributes" do
     changeset = Comment.changeset(%Comment{}, @valid_attrs)
