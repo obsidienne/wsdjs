@@ -2,11 +2,13 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js",
-      order: {
-        before: [
-          "web/static/vendor/jquery-3.1.1.js"
-        ]
+      joinTo: {
+        'libraries.js': /^(?!app\/)/,
+        'app.js': /^app\//
+      },
+
+      globals: {
+        $: 'jquery', jQuery: 'jquery'
       }
 
       // To use a separate vendor.js bundle, specify two files path
@@ -69,6 +71,9 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    styles: {
+      bootstrap: ['dist/css/bootstrap.min.css']
+    }
   }
 };
