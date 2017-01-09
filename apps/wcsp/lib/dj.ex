@@ -23,8 +23,12 @@ defmodule Dj do
 
   end
 
-  def find_song() do
+  def find_song(id) do
 
+  end
+
+  def find_song(artist, title) do
+    
   end
 
 end
