@@ -1,0 +1,27 @@
+/* FAB icons styling  */
+
+#fab-container {
+  z-index: 1000;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}
+
+.btn-fab {
+  background-image: svg-url('<svg fill="#ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 100%;
+  height: 48px;
+  width: 48px;
+  background-color: #455A64;
+  border-color: #263238;
+  box-shadow: 0px 3px 7px 0px rgba(120, 144, 156, 0.72);
+  transition: all .2s ease-in-out;
+  padding: 5px;
+  background-origin: content-box;
+}
+
+.btn-fab:hover {
+  transform: scale(1.1);
+}

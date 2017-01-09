@@ -1,0 +1,60 @@
+body.devise {
+  padding-top: inherit;
+}
+
+.devise main {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+
+  background-image: url('http://res.cloudinary.com/don2kwaju/image/upload/v1462614339/wsdjs/bg.jpg');
+  background-size: cover;
+
+  .container > div > div {
+    background-color: #F8F8F8;
+    padding: 30px;
+    border-radius: 5px;
+  }
+
+  .login-logo {
+    width: 100%;
+    padding-bottom: 45px;
+    img {
+      width: 100%;
+    }
+  }
+
+  main.devise {
+    flex: 1;
+    padding: 15px;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+  }
+
+}
+
+  .global-footer {
+    background-color: #424242;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 100%;
+
+    a {
+      color: #9E9E9E;
+      font-weight: bold;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    p {
+      color: white;
+    }
+  }

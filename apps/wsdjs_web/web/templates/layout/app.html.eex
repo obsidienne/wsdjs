@@ -30,6 +30,15 @@
       </main>
 
     </div> <!-- /container -->
+
+    <footer class="global-footer container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <p>World Swing DJs</p>
+        </div>
+      </div>
+    </footer>
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

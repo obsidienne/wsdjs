@@ -1,0 +1,278 @@
+.wsdjs-label {
+  background-color: #337ab7;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.wsdjs-card-top {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+
+  header {
+    color: #333;
+    background-color: #f5f5f5;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+  }
+
+  .body {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    & > img {
+      flex: 0 0 33%;
+      width: 100%;
+      margin-bottom: 2px;
+    }
+
+  }
+}
+
+.no-gutter > [class*='col-'] {
+  padding:1px;
+}
+
+.card, .minicard {
+  border-radius: 0;
+}
+
+a.panel-heading {
+  display: block;
+}
+
+.overlay .minicard {
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.minicard {
+  margin: 0;
+  display: flex;
+
+  .panel-heading {
+    padding: 0;
+    width: 75px;
+    border: 0;
+    flex: 0 0 75px;
+  }
+  .panel-heading img.img-responsive {
+    width: 100%;
+  }
+  .panel-body {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/************************************************************************/
+/* BASIC CARD */
+.card {
+  .panel-heading {
+    padding: 0;
+    position: relative;
+  }
+
+  .panel-heading img {
+    width: 100%;
+    height: auto;
+  }
+
+  .panel-footer {
+    background-color: inherit;
+  }
+
+  .card-heading-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding-left: 15px;
+    color: white;
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+
+/************************************************************************/
+/* ONMY IMG */
+.card-top-alone span.position {
+    font-size: 68px;
+}
+
+.card-top-alone {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 10px;
+
+  .main {
+    flex: 3 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+
+    div .h4 {
+      text-overflow: ellipsis;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .action_links {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+
+      &:hover {
+        border-radius: 5px;
+        background-color: #eee;
+      }
+
+      & > a {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .song-title {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(100% - 25px);
+    display: inline-block;
+  }
+
+  .song-artist {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: inline-block;
+  }
+}
+
+.comments {
+  & .comment:hover { background-color: #eee; }
+  & .media { position: relative; padding: 5px; }
+  & .media-left img { border-radius: 50%;}
+  & .action-links {
+    margin-right: 5px;
+    margin-top: 5px;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-top-alone {
+    flex-direction: row;
+
+    & .main {
+      padding-left: inherit;
+    }
+  }
+}
+
+.card-top-alone {
+  flex-direction: column;
+  border: 0px;
+  background-color: inherit;
+  box-shadow: none;
+
+  p {
+    margin: 0;
+  }
+}
+
+.card-top-alone header {
+  flex: 0 0 auto;
+  flex-direction: row;
+  display: flex;
+
+  & .cover {
+    width: 150px;
+    height: auto;
+  }
+
+  & .song-actions {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+  }
+}
+
+
+.card-top-alone header .song-actions a {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+
+  &.up { color: rgba(0, 180, 0, .1); }
+  &.like { color: rgba(0, 0, 180, .1); }
+  &.down { color: rgba(180, 0, 0, .1); }
+
+  &.active.up, &.up:hover { color: rgb(0, 180, 0); }
+  &.active.like, &.like:hover { color: rgb(0, 0, 180); }
+  &.active.down, &.down:hover { color: rgb(180, 0, 0); }
+}
+
+
+.card-top-alone  header .song-cover {
+  position: relative;
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(100,100,100,.6);
+    display: none;
+    color: white;
+  }
+}
+
+.card-top-alone header .song-cover a,
+.card-top-alone header .song-cover:hover a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-top-alone footer {
+  & span {
+    cursor: pointer;
+  }
+}
