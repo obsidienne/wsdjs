@@ -19,6 +19,7 @@ defmodule Wcsp.Rank do
     |> cast(params, @allowed_fields)
     |> assoc_constraint(:song)
     |> assoc_constraint(:top)
+    |> unique_constraint(:song_id, name: :ranks_song_id_top_id_index)
     |> validate_number(:votes, greater_than: 0)
     |> validate_number(:bonus, greater_than: 0)
   end

@@ -12,6 +12,7 @@ defmodule Wcsp.Repo.Migrations.AddRank do
 
       timestamps
     end
+    create unique_index(:ranks, [:song_id, :top_id])
 
   end
 
