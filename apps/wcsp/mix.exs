@@ -30,7 +30,8 @@ defmodule Wcsp.Mixfile do
 
   defp deps do
     [{:ecto, "~> 2.0"},
-     {:postgrex, ">= 0.0.0"}]
+     {:postgrex, ">= 0.0.0"},
+     {:csv, "~> 1.4.4"}]
   end
 
   defp aliases do
