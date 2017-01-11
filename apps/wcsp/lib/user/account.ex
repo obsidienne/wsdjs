@@ -4,7 +4,7 @@ defmodule Wcsp.Account do
   schema "accounts" do
     field :email, :string
     field :admin, :boolean
-    field :new_song_notification
+    field :new_song_notification, :boolean
     field :user_country, :string
     field :name, :string
     field :djname, :string
