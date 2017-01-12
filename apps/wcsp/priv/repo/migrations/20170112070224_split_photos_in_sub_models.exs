@@ -5,7 +5,7 @@ defmodule Wcsp.Repo.Migrations.SplitPhotosInSubModels do
     create table(:album_arts, primary_key: false) do
       add :id, :binary_id, primary_key: true
       add :cld_id, :string, null: false
-      add :version, :timestamp, null: false
+      add :version, :integer, null: false
       add :account_id, references(:accounts, on_delete: :nothing, type: :binary_id), null: false
       add :song_id, references(:songs, on_delete: :nothing, type: :binary_id), null: false
 
@@ -15,7 +15,7 @@ defmodule Wcsp.Repo.Migrations.SplitPhotosInSubModels do
     create table(:avatars, primary_key: false) do
       add :id, :binary_id, primary_key: true
       add :cld_id, :string, null: false
-      add :version, :timestamp, null: false
+      add :version, :integer, null: false
       add :account_id, references(:accounts, on_delete: :nothing, type: :binary_id), null: false
 
       timestamps

@@ -11,21 +11,17 @@ defmodule Wcsp.Seeds do
     row = Map.put(row, :inserted_at, Ecto.DateTime.cast!(row[:inserted_at]))
     row = Map.put(row, :updated_at, Ecto.DateTime.cast!(row[:updated_at]))
 
-    row = extract_and_store_photo(row)
-
-    IO.inspect row
-    Wcsp.Repo.insert_all(Account, [row])
-  end
-
-  def extract_and_store_photo(row) do
-    params = Map.take(row, [:avatar_id, :avatar_version])
-    row = Map.drop(row, [:avatar_id, :avatar_version])
-
-    #photo_id = Wscp.Repo.insert!(%Photo{}, params)
-  end
-
-  def store_it(:song, row) do
-
+    row = case row do
+      %{avatar_id: ai, avatar_version: av} ->
+        {version, _} = Integer.parse(av)
+        avatar_id = Wcsp.Repo.insert!(%Avatar{cld_id: ai, version: version})
+        row = Map.put(row, :avatar_id, avatar_id)
+        Map.drop(row, [:avatar_version])
+      _ ->
+        Map.drop(row, [:avatar_id, :avatar_version])
+    end
+    
+    account = Wcsp.Repo.insert(Account.changeset(%Account{}, row))
   end
 end
 
