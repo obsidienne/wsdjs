@@ -6,22 +6,30 @@ defmodule Wcsp.Seeds do
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    row = Map.put(row, :admin, row[:admin] == "true")
-    row = Map.put(row, :new_song_notification, row[:new_song_notification] == "true")
-    row = Map.put(row, :inserted_at, Ecto.DateTime.cast!(row[:inserted_at]))
-    row = Map.put(row, :updated_at, Ecto.DateTime.cast!(row[:updated_at]))
+    account = %Wcsp.Account{
+      id: row[:id],
+      email: row[:email],
+      admin: row[:admin] == "true",
+      djname: row[:djname],
+      name: row[:name],
+      user_country: row[:user_country],
+      new_song_notification: row[:new_song_notification] == "true",
+      inserted_at: Ecto.DateTime.cast!(row[:inserted_at]),
+      updated_at: Ecto.DateTime.cast!(row[:updated_at])
+    }
 
-    row = case row do
+    account = case row do
+      %{avatar_id: "wsdjs/missing_avatar"} ->
+        account
       %{avatar_id: ai, avatar_version: av} ->
         {version, _} = Integer.parse(av)
-        avatar_id = Wcsp.Repo.insert!(%Avatar{cld_id: ai, version: version})
-        row = Map.put(row, :avatar_id, avatar_id)
-        Map.drop(row, [:avatar_version])
+        Map.put(account, :avatar, %Avatar{cld_id: ai, version: version})
       _ ->
-        Map.drop(row, [:avatar_id, :avatar_version])
+        account
     end
-    
-    account = Wcsp.Repo.insert(Account.changeset(%Account{}, row))
+    IO.inspect account
+
+    Wcsp.Repo.insert! account
   end
 end
 

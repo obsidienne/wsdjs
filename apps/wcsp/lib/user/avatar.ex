@@ -6,7 +6,6 @@ defmodule Wcsp.Avatar do
     field :version, :integer
 
     belongs_to :account, Wcsp.Account
-
     timestamps()
   end
 
