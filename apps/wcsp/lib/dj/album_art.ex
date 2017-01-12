@@ -1,7 +1,7 @@
-defmodule Wcsp.Photo do
+defmodule Wcsp.AlbumArt do
   use Wcsp.Model
 
-  schema "photos" do
+  schema "album_arts" do
     field :cld_id, :string
     field :version, :integer
 

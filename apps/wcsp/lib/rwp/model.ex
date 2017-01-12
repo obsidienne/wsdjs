@@ -8,7 +8,8 @@ defmodule Wcsp.Model do
       import Ecto.Query
 
       alias Wcsp.{
-        Photo,
+        AlbumArt,
+        Avatar,
         Song,
         Top,
         Account,

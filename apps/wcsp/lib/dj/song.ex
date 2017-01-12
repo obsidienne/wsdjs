@@ -9,7 +9,7 @@ defmodule Wcsp.Song do
     field :genre, :string
 
     belongs_to :account, Wcsp.Account
-    has_one :photo, Wcsp.Photo
+    has_one :album_art, Wcsp.AlbumArt
     has_many :comments, Wcsp.Comment
 
     timestamps()

@@ -1,16 +1,16 @@
-defmodule Wcsp.PhotoTest do
+defmodule Wcsp.AvatarTest do
   use Wcsp.Case
 
   @valid_attrs %{cld_id: "covers/gerkk29hk1t2ydaqlqyh", version: "1464527941"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = Photo.changeset(%Photo{}, @valid_attrs)
+    changeset = Avatar.changeset(%Avatar{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "changeset with invalid attributes" do
-    changeset = Photo.changeset(%Photo{}, @invalid_attrs)
+    changeset = Avatar.changeset(%Avatar{}, @invalid_attrs)
     refute changeset.valid?
   end
 end
