@@ -1,4 +1,4 @@
-defmodule User do
+defmodule Wcsp.User do
   @moduledoc ~S"""
   Contains account business logic of the platform.
 
@@ -10,5 +10,9 @@ defmodule User do
   def create_account!(email) do
     Account.build(%{email: email})
     |> Repo.insert!
+  end
+
+  def accounts do
+    Repo.all(Account)
   end
 end

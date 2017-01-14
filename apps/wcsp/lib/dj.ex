@@ -1,4 +1,4 @@
-defmodule Dj do
+defmodule Wcsp.Dj do
   @moduledoc ~S"""
   Contains dj business logic of the platform.
 
@@ -28,7 +28,7 @@ defmodule Dj do
   end
 
   def find_song(artist, title) do
-    
+
   end
 
 end
