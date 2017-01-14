@@ -6,7 +6,7 @@ defmodule Dj.Repo.Migrations.CreateSong do
       add :id, :binary_id, primary_key: true
       add :title, :string, null: false
       add :artist, :string, null: false
-      add :url, :string, null: false
+      add :url, :string
       add :bpm, :integer, null: false, default: 0
       add :genre, :string, null: false
 
