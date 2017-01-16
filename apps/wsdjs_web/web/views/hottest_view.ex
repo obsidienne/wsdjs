@@ -4,7 +4,7 @@ defmodule WsdjsWeb.HottestView do
   def href_song_art(%{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     "http://res.cloudinary.com/don2kwaju/image/upload/ar_1:1,c_fill,g_auto/w_auto:100:250/dpr_auto/f_auto,q_auto/v#{version}/#{cld_id}.jpg"
   end
-  def href_song_art(_), do: nil
+  def href_song_art(_), do: "http://res.cloudinary.com/don2kwaju/image/upload/ar_1:1,c_fill,g_auto/w_auto:100:250/dpr_auto/f_auto,q_auto/v1/wsdjs/missing_cover.jpg"
 
   def song_art_alt(song) do
     "#{song.artist} - #{song.title} song art"
