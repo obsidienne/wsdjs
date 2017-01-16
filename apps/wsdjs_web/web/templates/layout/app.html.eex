@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
-  <body class="hottests hottests-index ">
+  <body data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
     <nav class="glheader">
       <div class="glheader__property">
         <%= link to: page_path(@conn, :index) do %>
@@ -62,12 +62,13 @@
       </div>
     </nav>
 
-    <main class="container" role="main">
-      <%= render @view_module, @view_template, assigns %>
 
+    <div class="alerts">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-    </main> <!-- /container -->
+    </div>
+
+    <%= render @view_module, @view_template, assigns %>
 
     <footer class="global-footer container-fluid">
       <div class="row">

@@ -11,6 +11,11 @@ defmodule Wcsp.Dj do
     Repo.all from p in Song, preload: [:album_art, :account]
   end
 
+  def find_song(id) do
+    song = Repo.get(Song, id)
+    song = Repo.preload(song, [:album_art, :account])
+  end
+
   def create_song!() do
 
   end
@@ -27,9 +32,6 @@ defmodule Wcsp.Dj do
 
   end
 
-  def find_song(id) do
-
-  end
 
   def find_song(artist, title) do
 

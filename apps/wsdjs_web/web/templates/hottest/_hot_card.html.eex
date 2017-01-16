@@ -1,0 +1,29 @@
+<article class="panel panel-default card card-song" data-id="<%= @song.id %>">
+  <a href="<%= @song.url %>" class="panel-heading" target="_blank" >
+    <img width="250" height="250" src="<%= href_song_art(@song.album_art)%>" class="img-responsive song-art" alt="<%= song_art_alt(@song) %>"/>
+    <h4 class="song-art-overlay">
+      <span class="label label-default"><%= @song.genre %></span>
+      <%= if @song.bpm > 0 do %>
+      <span class="label label-primary"><%= @song.bpm %> bpm</span>
+      <% end %>
+      <span class="card-song-play "> </span>
+    </h4>
+  </a>
+
+  <a href="#" class="card-container-link">
+    <div class="panel-body">
+      <h1 class="panel-title text-ellipsis"><%= link @song.title, to: song_path(@conn, :show, @song.id) %></h1>
+      <h5 class="artist-name small text-muted"><%= @song.artist %></h5>
+
+      <h6 class="text-muted">
+        <%= gettext "suggested" %>
+        <time class="timeago" datetime="<%= DateTime.to_iso8601(DateTime.from_naive!(@song.inserted_at, "Etc/UTC")) %>"><%= @song.inserted_at %></time>
+      </h6>
+
+      <h6 class="text-muted"><%= gettext "by" %> <%= proposed_by_link(@conn, @song) %></h6>
+    </div>
+  </a>
+  <div class="panel-footer song-opinions">
+    render partial: 'votes/song_votes_mini', object: song, as: :song
+  </div>
+</article>

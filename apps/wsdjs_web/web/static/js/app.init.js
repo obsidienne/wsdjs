@@ -1,9 +1,6 @@
 window.App || (window.App = {});
 
 App.init = function() {
-  $("abbr.timeago").timeago();
-  $('input[type=checkbox][data-toggle^=toggle]').bootstrapToggle();
-  $('[data-toggle="tooltip"]').tooltip();
 
   $(document).on("click", function(event){
     if (!$(event.target).closest('.glsearch').length) {
@@ -36,16 +33,6 @@ App.init = function() {
         $(this).next().addClass( "glheader__menu--open" );
       }
     })
-  });
-
-  $(".comment").each(function() {
-    var text = $(this).html();
-
-    $(this).html(text.autoLink());
-  });
-
-  $.each(flashMessages, function(key, value) {
-    $.snackbar({content: value, style: key, timeout: 5000});
   });
 };
 
