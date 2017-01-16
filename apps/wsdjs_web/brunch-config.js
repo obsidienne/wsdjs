@@ -2,22 +2,19 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: {
-        'libraries.js': /^(?!app\/)/,
-        'app.js': /^app\//
-      },
+      //joinTo: 'js/app.js',
 
       globals: {
         $: 'jquery', jQuery: 'jquery'
-      }
+      },
 
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
-      // joinTo: {
-      //  "js/app.js": /^(web\/static\/js)/,
-      //  "js/vendor.js": /^(web\/static\/vendor)|(deps)/
-      // }
-      //
+      joinTo: {
+        "js/app.js": /^(web\/static\/js)/,
+        "js/vendor.js": /^(web\/static\/vendor)|(deps)|node_modules/
+      }
+
       // To change the order of concatenation of files, explicitly mention here
       // order: {
       //   before: [

@@ -21,7 +21,7 @@
 
 
 import "phoenix_html"
-import MainView from './views/loader';
+import loadView from './views/loader';
 import timeago from 'timeago';
 
 function handleDOMContentLoaded() {

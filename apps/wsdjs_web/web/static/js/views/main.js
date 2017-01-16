@@ -1,5 +1,6 @@
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 
+import $ from 'jquery';
 
 export default class MainView {
   mount() {
