@@ -1,0 +1,37 @@
+<h1>Listing Songs</h1>
+
+<div class="row">
+  <%= for song <- @songs do %>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <article class="panel panel-default card card-song" data-id="<%= song.id %>">
+      <a href="<%= song.url %>" class="panel-heading" target="_blank" >
+        <img width="250" height="250" src="<%= href_album_art(song.album_art)%>" class="img-responsive song-art" alt="Wqdfdlozefb3pm8lgflx"/>
+        <h4 class="song-art-overlay">
+          <span class="label label-default"><%= song.genre %></span>
+          <% if song.bpm && song.bpm > 0 do %>
+          <span class="label label-primary"><%= song.bpm %></span>
+          <% end %>
+          <span class="card-song-play "> </span>
+        </h4>
+      </a>
+
+      <a href="#" class="card-container-link">
+        <div class="panel-body">
+          <h1 class="panel-title text-ellipsis"><%= link song.title, to: song_path(@conn, :show, song.id) %></h1>
+          <h5 class="artist-name small text-muted"><%= song.artist %></h5>
+
+          <h6 class="text-muted"> :proposed_when_html, timeago: "<abbr class=\"timeago\" title=\"#{song.created_at.iso8601}\">#{l song.created_at, format: :short}</abbr>".html_safe</h6>
+          <h6 class="text-muted"> :proposed_by_html, user: "#{link_to song.created_by.name, user_path(song.created_by)}".html_safe</h6>
+        </div>
+      </a>
+      <div class="panel-footer song-opinions">
+        render partial: 'votes/song_votes_mini', object: song, as: :song 
+      </div>
+
+
+    <%= song.title %></b> (<%= song.artist %>)
+    <%= link "View", to: hottest_path(@conn, :show, song.id) %>
+    </article>
+  </div>
+  <% end %>
+</div>

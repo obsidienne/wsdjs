@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
-  <body>
+  <body class="hottests hottests-index ">
     <nav class="glheader">
       <div class="glheader__property">
         <%= link to: page_path(@conn, :index) do %>
@@ -36,7 +36,7 @@
         </a>
 
         <div class="glheader__menu glheader__menu--navigator">
-          <%= link "hot_songs", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--hotsongs" %>
+          <%= link "hot_songs", to: hottest_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--hotsongs" %>
           <%= link "tops", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--tops" %>
           <%= link "users", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--users" %>
           <%= link "invite", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--adduser" %>
@@ -62,15 +62,12 @@
       </div>
     </nav>
 
-    <div class="container">
+    <main class="container" role="main">
+      <%= render @view_module, @view_template, assigns %>
+
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> <!-- /container -->
+    </main> <!-- /container -->
 
     <footer class="global-footer container-fluid">
       <div class="row">

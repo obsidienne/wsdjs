@@ -18,6 +18,8 @@ defmodule WsdjsWeb.Router do
 
     get "/", PageController, :index
     resources "/accounts", AccountController, only: [:index, :show]
+    resources "/hottests", HottestController, only: [:index, :show]
+    resources "/songs", SongController, only: [:show]
   end
 
   # Other scopes may use custom stacks.
