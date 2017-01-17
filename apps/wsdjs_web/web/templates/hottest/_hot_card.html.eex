@@ -24,6 +24,6 @@
     </div>
   </a>
   <div class="panel-footer song-opinions">
-    render partial: 'votes/song_votes_mini', object: song, as: :song
+    <%= render "_votes.html", song: @song, conn: @conn %>
   </div>
 </article>

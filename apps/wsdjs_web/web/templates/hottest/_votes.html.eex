@@ -1,0 +1,12 @@
+<a class="song-opinion song-down " data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/e2440d28-cc55-4cab-8f04-19a10bc4aaee/votes?kind=down_vote" data-original-title="">
+  <span>0</span>
+</a>
+<a class="song-opinion song-like " data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/e2440d28-cc55-4cab-8f04-19a10bc4aaee/votes?kind=like_vote" data-original-title="">
+  <span>0</span>
+</a>
+<a class="song-opinion song-up  " data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/e2440d28-cc55-4cab-8f04-19a10bc4aaee/votes?kind=up_vote" data-original-title="">
+  <span>0</span>
+</a>
+<a class="text-muted" href="/songs/e2440d28-cc55-4cab-8f04-19a10bc4aaee">
+<i class="song-comment-empty"></i>
+</a>
