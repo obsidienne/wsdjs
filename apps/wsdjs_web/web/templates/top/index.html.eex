@@ -1,0 +1,7 @@
+<main class="container">
+  <section class="row">
+      <%= for top <- @tops do %>
+        <%= render "_top.html", top: top, conn: @conn %>
+      <% end %>
+  </section>
+</main>

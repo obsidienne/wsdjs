@@ -16,25 +16,14 @@ defmodule Wcsp.Dj do
     song = Repo.preload(song, [:album_art, :account])
   end
 
-  def create_song!() do
-
+  def tops do
+    tops = Wcsp.Top.tops() |> Repo.all
+    Repo.preload tops, ranks: Wcsp.Rank.for_tops_with_limit()
   end
 
-  def destroy_song() do
-
-  end
-
-  def update_song() do
-
-  end
-
-  def update_song_art() do
-
-  end
-
-
-  def find_song(artist, title) do
-
+  def top(id) do
+    top = Wcsp.Top.top(id) |> Repo.one
+    top_with_songs = Repo.preload top, ranks: Wcsp.Rank.for_top(id)
   end
 
 end

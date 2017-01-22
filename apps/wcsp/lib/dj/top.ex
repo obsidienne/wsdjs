@@ -2,11 +2,11 @@ defmodule Wcsp.Top do
   use Wcsp.Model
 
   schema "tops" do
-    field :due_date, Ecto.Date
+    field :due_date, :date
     field :status, :string
 
     belongs_to :account, Wcsp.Account
-
+    has_many :ranks, Wcsp.Rank
     timestamps()
   end
 
@@ -21,4 +21,15 @@ defmodule Wcsp.Top do
     |> unique_constraint(:due_date)
     |> assoc_constraint(:account)
   end
+
+  def tops() do
+    from p in Top, order_by: [desc: p.due_date]
+  end
+
+  def top(query, id) do
+    from p in query, where: p.id == ^id
+  end
+
+  def top(id), do: from p in Top, where: p.id == ^id
+
 end

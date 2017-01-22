@@ -23,4 +23,24 @@ defmodule Wcsp.Rank do
     |> validate_number(:votes, greater_than: 0)
     |> validate_number(:bonus, greater_than: 0)
   end
+
+  def for_top(id) do
+    query = from q in __MODULE__,
+    where: q.top_id == ^id,
+    order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
+    preload: [song: [{:album_art, :account}]]
+  end
+
+  def for_tops_with_limit(per \\ 9) do
+    from q in __MODULE__,
+      join: p in fragment("""
+      SELECT id, top_id, row_number() OVER (
+        PARTITION BY top_id
+        ORDER BY votes + bonus + likes DESC
+      ) as rn FROM ranks
+      """),
+    where: p.rn <= ^per and p.id == q.id,
+    order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
+    preload: [song: :album_art]
+  end
 end

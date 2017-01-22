@@ -37,7 +37,7 @@
 
         <div class="glheader__menu glheader__menu--navigator">
           <%= link "hot_songs", to: hottest_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--hotsongs" %>
-          <%= link "tops", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--tops" %>
+          <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--tops" %>
           <%= link "users", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--users" %>
           <%= link "invite", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--adduser" %>
         </div>

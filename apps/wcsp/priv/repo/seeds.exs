@@ -84,6 +84,17 @@ defmodule Wcsp.Seeds do
   def store_it(:album_art, _row) do true end
 
   def store_it(:rank, row) do
+    rank = %Wcsp.Rank{
+      id: row[:id],
+      top_id: row[:top_id],
+      song_id: row[:song_id],
+      likes: String.to_integer(row[:likes]),
+      votes: String.to_integer(row[:votes]),
+      bonus: String.to_integer(row[:bonus]),
+      inserted_at: Ecto.DateTime.cast!(row[:inserted_at]),
+      updated_at: Ecto.DateTime.cast!(row[:updated_at])
+    }
+    Wcsp.Repo.insert! rank
   end
 end
 

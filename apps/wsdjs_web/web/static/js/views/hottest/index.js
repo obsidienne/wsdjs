@@ -8,14 +8,14 @@ export default class View extends MainView {
     $("time.timeago").timeago();
 
     // Specific logic here
-    console.log('PageNewView mounted');
+    console.log('HottestIndexView mounted');
   }
 
   unmount() {
     super.unmount();
 
     // Specific logic here
-    console.log('PageNewView unmounted');
+    console.log('HottestIndexView unmounted');
   }
 
 }

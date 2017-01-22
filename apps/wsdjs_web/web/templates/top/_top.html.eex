@@ -1,0 +1,17 @@
+<a class="col-xs-12 col-sm-6 col-md-4" href="<%= top_path(@conn, :show, @top.id) %>">
+  <article class="wsdjs-card-top">
+    <header>
+      <h4>TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></h4>
+      <%= if @top.status == "voting" do %>
+        <span class="wsdjs-label">Voting</span>
+      <% end %>
+    </header>
+    <div class="body no-gutter">
+      <%= for rank <- @top.ranks do %>
+        <div class="col-xs-4">
+          <img class="img-responsive song-art" width="250" height="250" src="<%= href_song_art(rank.song.album_art) %>" alt="<%= song_art_alt(rank) %>">
+        </div>
+      <% end %>
+    </div>
+  </article>
+</a>
