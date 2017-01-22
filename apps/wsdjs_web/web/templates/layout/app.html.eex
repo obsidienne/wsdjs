@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>Hello WsdjsWeb!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
