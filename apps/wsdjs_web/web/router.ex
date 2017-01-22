@@ -16,11 +16,12 @@ defmodule WsdjsWeb.Router do
   scope "/", WsdjsWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", HottestController, :index
     resources "/accounts", AccountController, only: [:index, :show]
     resources "/hottests", HottestController, only: [:index, :show]
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
+    resources "/accounts", AccountController, only: [:index, :show]
   end
 
   # Other scopes may use custom stacks.

@@ -15,7 +15,7 @@
   <body data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
     <nav class="glheader">
       <div class="glheader__property">
-        <%= link to: page_path(@conn, :index) do %>
+        <%= link to: hottest_path(@conn, :index) do %>
           <img src="http://res.cloudinary.com/don2kwaju/image/upload/c_fill,g_auto/w_auto:50:60/dpr_auto/f_auto,q_auto/v1/wsdjs/worldswingdjs" />
         <% end %>
       </div>
@@ -38,8 +38,7 @@
         <div class="glheader__menu glheader__menu--navigator">
           <%= link "hot_songs", to: hottest_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--hotsongs" %>
           <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--tops" %>
-          <%= link "users", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--users" %>
-          <%= link "invite", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--adduser" %>
+          <%= link "users", to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--users" %>
         </div>
 
         <a class="glheader__menu-icon glheader__menu-icon--account">
@@ -48,15 +47,15 @@
           </div>
         </a>
         <div class="glheader__menu glheader__menu--account">
-          <%= link to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--account-details" do %>
+          <%= link to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--account-details" do %>
             <div class="glheader__user__avatar--container">
 <img class="glheader__account-details__avatar" src="http://res.cloudinary.com/don2kwaju/image/upload/ar_1:1,c_fill,g_custom,r_max/w_auto:50:50/dpr_auto/f_auto,q_auto/v1462181894/avatar/ug5a5yirji3s4bskkuje.jpg" alt="Ug5a5yirji3s4bskkuje">            </div>
             <div class="glheader__account-details__name">Bob marcler
             </div>
             <div class="glheader__account-details__email">Claudio Nerarde</div>
           <% end %>
-          <%= link "account_settings", to: page_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--settings" %>
-          <%= link "deconnection", to: page_path(@conn, :index), method: :delete, class: "glheader__menu__item glheader__menu__item--signout" %>
+          <%= link "account_settings", to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--settings" %>
+          <%= link "deconnection", to: account_path(@conn, :index), method: :delete, class: "glheader__menu__item glheader__menu__item--signout" %>
         </div>
 
       </div>
