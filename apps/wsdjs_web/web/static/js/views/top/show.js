@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import MainView from '../main';
 
 export default class View extends MainView {
