@@ -22,7 +22,6 @@
 
 import "phoenix_html"
 import loadView from './views/loader';
-import timeago from 'timeago';
 
 function handleDOMContentLoaded() {
   // Get the current view name
