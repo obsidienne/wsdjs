@@ -15,37 +15,59 @@ export default class MainView {
 
   // private function used to show and hide menu from the menubar
   menubar() {
-    $(document).on("click", function(event){
-      if (!$(event.target).closest('.glsearch').length) {
-         $('.glsearch').removeClass('glsearch--focused');
-         $(".glsearch__results").html("");
-         $("#glsearch").val("");
-       }
+    var self = this;
+
+    // click outside elements (bubble to document)
+    document.addEventListener("click", function(event){
        if (!$(event.target).closest('.glheader__user').length &&
            !$(event.target).closest('.glsearch').length) {
-         $(".glheader .glheader__menu--open").toggleClass("glheader__menu--open" );
-         $(".glsearch__results").html("");
-         $(".glsearch__results").removeClass("glsearch--focused")
+         self._hide_menu_element();
        }
     });
 
-    $('#glsearch').on('click', function(e){
-      $('.glsearch__results').addClass('glsearch--focused');
-      $(".glheader .glheader__menu--open").toggleClass("glheader__menu--open" );
-      $('.glsearch').addClass("glsearch--focused");
+    // click on search
+    var glSearch = document.getElementById("glsearch");
+    glSearch.addEventListener('click', function(e){
+      self._hide_menu_element();
+
+      let search_results = document.querySelector(".glsearch__results");
+      let glsearch = document.querySelector(".glsearch");
+
+      glsearch.classList.add("glsearch--focused");
+      search_results.classList.add("glsearch--focused");
     });
 
-    $(function() {
-      $(".glheader__menu-icon").on("click", function(e) {
-        if ($(this).next().hasClass("glheader__menu--open")) {
-          $(this).next().removeClass( "glheader__menu--open" );
-          $('.glsearch--focused').removeClass('glsearch--focused');
-        } else {
-          $('.glsearch--focused').removeClass('glsearch--focused');
-          $(".glheader .glheader__menu--open").toggleClass("glheader__menu--open" );
-          $(this).next().addClass( "glheader__menu--open" );
+    // switch between dropdown menu element
+    var menuIcons = document.querySelectorAll(".glheader__menu-icon");
+    Array.prototype.forEach.call(menuIcons, function(el, i){
+      el.addEventListener("click", function(e) {
+        var himself = this.nextElementSibling.classList.contains("glheader__menu--open");
+        self._hide_menu_element();
+
+        if (himself == false) {
+          this.nextElementSibling.classList.add("glheader__menu--open");
         }
-      })
+      });
     });
+  }
+
+  _hide_menu_element() {
+    // close everything
+    var elements = document.querySelectorAll(".glheader__menu--open");
+    Array.prototype.forEach.call(elements, function(el, i){
+      el.classList.remove("glheader__menu--open");
+    });
+
+    // remove focus
+    var elements = document.querySelectorAll(".glsearch--focused");
+    Array.prototype.forEach.call(elements, function(el, i){
+      el.classList.remove("glsearch--focused");
+    });
+
+    // remove data from the result list
+    document.querySelector(".glsearch__results").innerHtml = "";
+
+    // remove searched string
+    document.getElementById("glsearch").value = "";
   }
 }
