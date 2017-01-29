@@ -17,6 +17,7 @@ defmodule WsdjsWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", HottestController, :index
+    get "/search", SearchController, :index
     resources "/accounts", AccountController, only: [:index, :show]
     resources "/hottests", HottestController, only: [:index, :show]
     resources "/songs", SongController, only: [:show]

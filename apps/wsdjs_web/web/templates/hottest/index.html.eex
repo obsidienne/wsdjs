@@ -1,3 +1,6 @@
+<div id="fab-container">
+  <a href="#" class="btn btn-fab" title="suggest a song"></a>
+</div>
 
 <main class="container" role="main">
 <h1>Listing Songs</h1>
