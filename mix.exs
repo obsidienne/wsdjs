@@ -29,7 +29,8 @@ defmodule WcsPlatform.Mixfile do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps folder
   defp deps do
-    [{:ex_doc, github: "elixir-lang/ex_doc", branch: "master", only: :dev}]
+    [{:ex_doc, github: "elixir-lang/ex_doc", branch: "master", only: :dev},
+     {:credo, "~> 0.5", only: [:dev, :test]}]
   end
 
   defp aliases do
