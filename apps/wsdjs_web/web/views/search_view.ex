@@ -15,12 +15,8 @@ defmodule WsdjsWeb.SearchView do
   end
   def proposed_by_avatar(_), do: "http://res.cloudinary.com/don2kwaju/image/upload/ar_1:1,c_fill,g_auto/w_auto:100:250/dpr_auto/f_auto,q_auto/v1/wsdjs/missing_cover.jpg"
 
-  def proposed_by_display_name(%{name: name, djname: djname}) when is_binary(djname) do
-    djname
-  end
-  def proposed_by_display_name(%{name: name, djname: djname}) do
-    name
-  end
+  def proposed_by_display_name(%{name: name, djname: djname}) when is_binary(djname), do: djname
+  def proposed_by_display_name(%{name: name, djname: djname}), do: name
 
   def proposed_date(dt), do: Ecto.DateTime.to_iso8601(Ecto.DateTime.cast!(dt))
 
