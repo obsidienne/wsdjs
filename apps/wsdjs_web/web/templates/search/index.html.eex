@@ -11,7 +11,9 @@
           <div class="text-muted"><span><%= song.artist %></span></div>
           <p>
             <span class="label label-default"><%= song.genre %></span>
-            <span class="label label-primary"><%= song.bpm %> bpm</span>
+            <%= if song.bpm > 0 do %>
+              <span class="label label-primary"><%= song.bpm %> bpm</span>
+            <% end %>
             <img height="24" width="24" class="img-circle" src="<%= proposed_by_avatar(song) %>" alt="proposed by <%= proposed_by_display_name(song) %>" />
             <time class="timeago small text-muted" datetime="<%= proposed_date(song.inserted_at) %>"><%= proposed_date(song.inserted_at) %></time>
           </p>
