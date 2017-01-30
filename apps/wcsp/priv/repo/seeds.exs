@@ -23,9 +23,12 @@ defmodule Wcsp.Seeds do
       %{avatar_id: "wsdjs/missing_avatar"} ->
         nil
       %{avatar_id: ai, avatar_version: av} ->
-        version = String.to_integer(av)
-        #avatar = Wcsp.Repo.insert! %Avatar{cld_id: ai, version: version}
-        #Wcsp.Repo.update_all account, set: [avatar_id: avatar[:id]]
+        avatar = %Wcsp.Avatar{
+          cld_id: ai,
+          account_id: account.id,
+          version: String.to_integer(av)
+        }
+        Wcsp.Repo.insert! avatar
       _ ->
         nil
     end
