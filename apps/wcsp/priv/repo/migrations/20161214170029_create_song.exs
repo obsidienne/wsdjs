@@ -12,7 +12,7 @@ defmodule Dj.Repo.Migrations.CreateSong do
 
       add :account_id, references(:accounts, on_delete: :nothing, type: :binary_id), null: false
 
-      timestamps
+      timestamps()
     end
 
     create unique_index(:songs, [:title, :artist])

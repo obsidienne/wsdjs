@@ -8,7 +8,7 @@ defmodule Photo.Repo.Migrations.Photo do
       add :version, :timestamp, null: false
       add :account_id, references(:accounts, on_delete: :nothing, type: :binary_id), null: false
 
-      timestamps
+      timestamps()
     end
 
     create unique_index(:photos, [:cld_id])

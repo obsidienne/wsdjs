@@ -10,7 +10,7 @@ defmodule Wcsp.Repo.Migrations.AddRank do
       add :votes, :integer, null: false, default: 0
       add :bonus, :integer, null: false, default: 0
 
-      timestamps
+      timestamps()
     end
     create unique_index(:ranks, [:song_id, :top_id])
 

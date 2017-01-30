@@ -8,7 +8,7 @@ defmodule Wcsp.Repo.Migrations.AddCommentSchema do
       add :song_id, references(:songs, on_delete: :nothing, type: :binary_id), null: false
       add :text, :string, null: false
 
-      timestamps
+      timestamps()
     end
 
   end
