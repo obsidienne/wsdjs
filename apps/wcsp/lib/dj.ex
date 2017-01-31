@@ -8,7 +8,7 @@ defmodule Wcsp.Dj do
   use Wcsp.Model
 
   def songs_with_album_art() do
-    Repo.all from p in Song, preload: [:album_art, :account]
+    Repo.all from p in Song, preload: [:album_art, :account], order_by: [desc: p.inserted_at]
   end
 
   def find_song(id) do
