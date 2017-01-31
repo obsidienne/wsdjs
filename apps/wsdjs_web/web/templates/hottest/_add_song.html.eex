@@ -1,0 +1,3 @@
+<div id="fab-container">
+  <button type="button" class="btn btn-fab" title="suggest a song" data-toggle="modal" data-target="#add-song-modal"></button>
+</div>
