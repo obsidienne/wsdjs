@@ -24,7 +24,7 @@ defmodule WsdjsWeb.Auth do
   end
 
   def login_by_email(conn, email, opts) do
-    account = if email, do: Wcsp.User.find_account!(email: email)
+    account = if email, do: Wcsp.User.find_account(email: email)
 
     cond do
       account ->
