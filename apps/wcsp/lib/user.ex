@@ -15,4 +15,6 @@ defmodule Wcsp.User do
   def accounts do
     Repo.all(Account)
   end
+
+  def find_account!(clauses), do: Repo.get_by!(Account, clauses)
 end

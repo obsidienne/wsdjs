@@ -7,6 +7,7 @@ defmodule WsdjsWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug WsdjsWeb.Auth
   end
 
   pipeline :api do
@@ -23,6 +24,7 @@ defmodule WsdjsWeb.Router do
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
     resources "/accounts", AccountController, only: [:index, :show]
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.

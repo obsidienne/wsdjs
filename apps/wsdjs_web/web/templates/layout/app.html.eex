@@ -31,6 +31,7 @@
       </div>
 
       <div class="glheader__user">
+        <%= if @current_user do %>
         <a class="glheader__menu-icon">
           <div class="icon icon-navigator-toggle"></div>
         </a>
@@ -49,15 +50,20 @@
         <div class="glheader__menu glheader__menu--account">
           <%= link to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--account-details" do %>
             <div class="glheader__user__avatar--container">
-<img class="glheader__account-details__avatar" src="http://res.cloudinary.com/don2kwaju/image/upload/ar_1:1,c_fill,g_custom,r_max/w_auto:50:50/dpr_auto/f_auto,q_auto/v1462181894/avatar/ug5a5yirji3s4bskkuje.jpg" alt="Ug5a5yirji3s4bskkuje">            </div>
-            <div class="glheader__account-details__name">Bob marcler
+              <img class="glheader__account-details__avatar" src="http://res.cloudinary.com/don2kwaju/image/upload/ar_1:1,c_fill,g_custom,r_max/w_auto:50:50/dpr_auto/f_auto,q_auto/v1462181894/avatar/ug5a5yirji3s4bskkuje.jpg" alt="Ug5a5yirji3s4bskkuje">
             </div>
-            <div class="glheader__account-details__email">Claudio Nerarde</div>
+            <div class="glheader__account-details__name"><%= @current_user.name %>
+            </div>
+            <div class="glheader__account-details__email"><%= @current_user.email %></div>
           <% end %>
           <%= link "account_settings", to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--settings" %>
-          <%= link "deconnection", to: account_path(@conn, :index), method: :delete, class: "glheader__menu__item glheader__menu__item--signout" %>
+          <%= link "deconnection", to: session_path(@conn, :delete, @current_user), method: "delete", class: "glheader__menu__item glheader__menu__item--signout" %>
         </div>
-
+        <% else %>
+          <%= link to: session_path(@conn, :new), class: 'glheader__menu-icon glheader__menu-icon--signin' do %>
+            <div class="glheader__user__signin--container">Sign in</div>
+          <% end %>
+        <% end %>
       </div>
     </nav>
 
