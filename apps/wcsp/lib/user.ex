@@ -16,6 +16,13 @@ defmodule Wcsp.User do
     Repo.all(Account)
   end
 
-  def find_account!(clauses), do: Repo.get_by!(Account, clauses)
-  def find_account(clauses), do: Repo.get_by(Account, clauses)
+  def find_account!(clauses) do
+    Repo.get_by!(Account, clauses)
+    |> Repo.preload(:avatar)
+  end
+
+  def find_account(clauses) do
+    Repo.get_by(Account, clauses)
+    |> Repo.preload(:avatar)
+  end
 end

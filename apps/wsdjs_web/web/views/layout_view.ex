@@ -30,4 +30,13 @@ defmodule WsdjsWeb.LayoutView do
     |> String.split(".")
     |> Enum.at(0)
   end
+
+  @base_url "http://res.cloudinary.com/don2kwaju/image/upload/"
+  @small_format "ar_1:1,c_fill,g_custom,r_max/w_auto:100:100/dpr_auto/f_auto,q_auto/"
+  @missing_avatar "v1/wsdjs/missing_cover.jpg"
+
+  def href_avatar(%{cld_id: cld_id, version: version}) when is_binary(cld_id) do
+    @base_url <> @small_format <> "v#{version}/" <> "#{cld_id}.jpg"
+  end
+  def href_avatar(_), do: @base_url <> @small_format <> @missing_avatar
 end
