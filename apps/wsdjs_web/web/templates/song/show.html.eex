@@ -2,18 +2,30 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-2">
-        <%= link "", to: song_path(@conn, :show, @song.url), class: "text-muted song-play", target: "_blank" %>
+        <a href="<%= @song.url %>" class="text-muted song-play" target="_blank" ></a>
       </div>
       <div class="col-xs-6">
         <h1 class="song-title"><%= @song.title %></h1>
         <h2 class="song-artist">by <%= @song.artist %></h2>
-          <div class="song-opinions">
-
-          </div>
+        <h4 class="text-muted"> by <%= link proposed_by_display_name(@song.account), to: account_path(@conn, :show, @song.account) %></h4>
+        <div class="song-opinions">
+          <a class="song-opinion song-down" data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/da45c057-ea0e-4a48-aa03-a74e85a6ea22/votes?kind=down_vote" data-original-title="">
+            <span>0</span>
+          </a>
+          <a class="song-opinion song-like" data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/da45c057-ea0e-4a48-aa03-a74e85a6ea22/votes?kind=like_vote" data-original-title="Mike Glasgow&lt;br&gt;João  Parada&lt;br&gt;Luke Bezound&lt;br&gt;Laurent Vasque&lt;br&gt;">
+            <span>4</span>
+          </a>
+          <a class="song-opinion song-up" data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/da45c057-ea0e-4a48-aa03-a74e85a6ea22/votes?kind=up_vote" data-original-title="Mike Murphy&lt;br&gt;Maryann Newmeyer&lt;br&gt;">
+            <span>2</span>
+          </a>
+          <span class="label label-default song-genre"><%= @song.genre %></span>
+          <%= if @song.bpm > 0 do %>
+          <span class="label label-primary song-bpm"><%= @song.bpm %> bpm</span>
+          <% end %>
         </div>
-        <div class="col-xs-4">
-
-        </div>
+      </div>
+      <div class="col-xs-4">
+        <img class="img-responsive song-art" width="250" height="250" src="<%= href_song_art(@song.album_art) %>" alt="<%= song_art_alt(@song) %>">
       </div>
     </div>
   </div>
