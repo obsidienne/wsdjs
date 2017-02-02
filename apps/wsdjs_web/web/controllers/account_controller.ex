@@ -7,7 +7,8 @@ defmodule WsdjsWeb.AccountController do
     render conn, "index.html", accounts: accounts
   end
 
-  def show(conn, params) do
-    render conn, "show.html"
+  def show(conn, %{"id" => id}) do
+    account = Wcsp.User.find_account!(id: id)
+    render conn, "show.html", account: account
   end
 end

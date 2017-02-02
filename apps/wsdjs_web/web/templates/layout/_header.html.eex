@@ -24,7 +24,9 @@
     <div class="glheader__menu glheader__menu--navigator">
       <%= link "hot_songs", to: hottest_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--hotsongs" %>
       <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--tops" %>
-      <%= link "users", to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--users" %>
+      <%= if @current_user && @current_user.admin do %>
+        <%= link "users", to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--users" %>
+      <% end %>
     </div>
 
     <a class="glheader__menu-icon glheader__menu-icon--account">
@@ -33,7 +35,7 @@
       </div>
     </a>
     <div class="glheader__menu glheader__menu--account">
-      <%= link to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--account-details" do %>
+      <%= link to: account_path(@conn, :show, @current_user.id), class: "glheader__menu__item glheader__menu__item--account-details" do %>
         <div class="glheader__user__avatar--container">
           <img class="glheader__account-details__avatar" src="<%= href_avatar(@current_user.avatar) %>" alt="Ug5a5yirji3s4bskkuje">
         </div>
