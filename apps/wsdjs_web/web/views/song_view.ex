@@ -15,5 +15,5 @@ defmodule WsdjsWeb.SongView do
   def proposed_by_display_name(%{name: name, djname: djname}) when is_binary(djname) do
     "#{name} (#{djname})"
   end
-  def proposed_by_display_name(%{name: name, djname: djname}), do: name
+  def proposed_by_display_name(%{name: name}), do: name
 end

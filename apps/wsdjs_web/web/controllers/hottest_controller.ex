@@ -3,12 +3,12 @@ defmodule WsdjsWeb.HottestController do
   plug :authenticate when action in [:index, :show]
 
   def index(conn, _params) do
-    songs = Wcsp.Dj.songs_with_album_art()
+    songs = Wcsp.songs_with_album_art()
 
     render conn, "index.html", songs: songs
   end
 
-  def show(conn, params) do
+  def show(conn, _params) do
     render conn, "show.html"
   end
 

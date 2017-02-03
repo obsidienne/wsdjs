@@ -4,9 +4,9 @@ defmodule WsdjsWeb.Auth do
   def init([]), do: []
 
   def call(%{assigns: %{current_user: %{}}} = conn, _opts), do: conn
-  def call(conn, repo) do
+  def call(conn, _repo) do
     id = get_session(conn, :account_id)
-    account = if id, do: Wcsp.User.find_account!(id: id)
+    account = if id, do: Wcsp.find_account!(id: id)
 
     conn
     |> assign(:current_user, account)
@@ -23,8 +23,8 @@ defmodule WsdjsWeb.Auth do
     configure_session(conn, drop: true)
   end
 
-  def login_by_email(conn, email, opts) do
-    account = if email, do: Wcsp.User.find_account(email: email)
+  def login_by_email(conn, email, _opts) do
+    account = if email, do: Wcsp.find_account(email: email)
 
     cond do
       account ->
