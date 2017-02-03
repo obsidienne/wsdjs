@@ -21,7 +21,7 @@ defmodule Wcsp do
     |> Repo.preload(:avatar)
   end
 
-  def songs_with_album_art() do
+  def hot_songs() do
     Song
     |> preload([:album_art, :account])
     |> order_by(desc: :inserted_at)
@@ -31,11 +31,6 @@ defmodule Wcsp do
   def find_song!(clauses) do
     Repo.get_by!(Song, clauses)
     |> Repo.preload([:album_art, :account])
-  end
-
-  def find_song(id) do
-    song = Repo.get(Song, id)
-    song = Repo.preload(song, [:album_art, :account])
   end
 
   def tops do
