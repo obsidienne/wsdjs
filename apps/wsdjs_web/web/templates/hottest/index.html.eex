@@ -1,12 +1,21 @@
 <main class="container" role="main">
-<h1>Listing Songs</h1>
-<div class="row">
-  <%= for song <- @songs do %>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-    <%= render "_hot_card.html", song: song, conn: @conn %>
-  </div>
+  <%= for {month, songs} <- group_song_by_month(@songs) do %>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1><time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small>suggestions</small></h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <%= for song <- sort_songs(songs) do %>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <%= render "_hot_card.html", song: song, conn: @conn %>
+      </div>
+      <% end %>
+    </div>
   <% end %>
-</div>
 </main>
 
 <%= render "_add_song.html" %>
