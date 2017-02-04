@@ -5,3 +5,6 @@
       <% end %>
   </section>
 </main>
+
+
+<%= render "_add_top.html" %>
