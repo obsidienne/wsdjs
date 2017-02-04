@@ -1,3 +1,45 @@
 <div id="fab-container">
-  <button type="button" class="btn btn-fab" title="suggest a song" data-toggle="modal" data-target="#add-song-modal"></button>
+  <button type="button" class="btn btn-fab js-static-modal-toggle" title="suggest a song"></button>
 </div>
+
+
+<div id="static-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Suggest a new song</h4>
+      </div>
+      <div class="modal-body">
+
+        <form class="simple_form form_song" novalidate="novalidate" id="new_song" action="/songs" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="efSdLJ8a5HOCzky7ckYcGUIPX0cnQUpwXNmEopXV3eGG34nPPgbxfBEUoAGL35VbQf5QXWji2wZyInRWVWWU5g==">
+
+
+          <div class="form-group image_upload optional song_cover"><div class="cover"><div class="cover-container"><ul class="cloudinary-thumbnails"><li><img src="http://res.cloudinary.com/don2kwaju/image/upload/t_cover/v1/wsdjs/missing_cover.jpg" alt="Missing cover"></li></ul></div><div class="form-group optional song_cover"><input class="form-control" readonly="readonly" type="hidden" value="v1/wsdjs/missing_cover.jpg" name="song[cover]" id="song_cover"></div><a href="#"><span class="upload-icon">Set song art</span></a></div></div>
+          <div class="form-group string required song_artist"><label class="string required control-label" for="song_artist"><abbr title="required">*</abbr> Artist</label><input class="string required form-control" placeholder="Artist name" type="text" name="song[artist]" id="song_artist"></div>
+          <div class="form-group string required song_title"><label class="string required control-label" for="song_title"><abbr title="required">*</abbr> Title</label><input class="string required form-control" placeholder="Title name" type="text" name="song[title]" id="song_title"></div>
+          <div class="form-group select optional song_genre"><label class="select optional control-label" for="song_genre">Genre</label><select class="select optional form-control" name="song[genre]" id="song_genre"><option value="acoustic">acoustic</option>
+        <option value="blues">blues</option>
+        <option value="country">country</option>
+        <option value="dance">dance</option>
+        <option value="hiphop">hip hop</option>
+        <option value="jazz">jazz</option>
+        <option value="pop">pop</option>
+        <option value="rnb">R&amp;B</option>
+        <option value="rock">rock</option>
+        <option value="soul">soul</option></select></div>
+          <div class="form-group integer optional song_bpm"><label class="integer optional control-label" for="song_bpm">Bpm</label><input class="numeric integer optional form-control" type="number" step="1" value="0" name="song[bpm]" id="song_bpm"></div>
+          <div class="form-group url optional song_song_url"><label class="url optional control-label" for="song_song_url">Song url</label><input class="string url optional form-control" type="url" name="song[song_url]" id="song_song_url"></div>
+        </form>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Suggest song</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

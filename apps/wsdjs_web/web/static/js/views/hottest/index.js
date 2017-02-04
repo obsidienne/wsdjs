@@ -1,5 +1,6 @@
 import timeago from 'timeago.js';
 import MainView from '../main';
+import Modal from 'modal-vanilla';
 
 export default class View extends MainView {
   mount() {
@@ -7,6 +8,12 @@ export default class View extends MainView {
 
     new timeago().render(document.querySelectorAll("time.timeago"));
     this._intlDate();
+
+    document.querySelector('.js-static-modal-toggle')
+      .addEventListener('click', function() {
+        new Modal({el: document.getElementById('static-modal')}).show();
+      });
+
     // Specific logic here
     console.log('HottestIndexView mounted');
   }
@@ -28,4 +35,6 @@ export default class View extends MainView {
       elements[i].textContent = dateTimeFormat.format(datetime);
     }
   }
+
+
 }
