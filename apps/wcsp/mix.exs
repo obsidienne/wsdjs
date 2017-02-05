@@ -32,6 +32,7 @@ defmodule Wcsp.Mixfile do
     [{:ecto, "~> 2.0"},
      {:postgrex, ">= 0.0.0"},
      {:bodyguard, "~> 0.6.0"},
+     {:scrivener_ecto, "~> 1.0"},
      {:csv, "~> 1.4.4"}]
   end
 
