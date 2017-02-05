@@ -20,7 +20,7 @@ defmodule Wcsp.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :ecto, :postgrex],
+    [extra_applications: [:logger],
      mod: {Wcsp.Application, []}]
   end
 
@@ -31,6 +31,7 @@ defmodule Wcsp.Mixfile do
   defp deps do
     [{:ecto, "~> 2.0"},
      {:postgrex, ">= 0.0.0"},
+     {:bodyguard, "~> 0.6.0"},
      {:csv, "~> 1.4.4"}]
   end
 
