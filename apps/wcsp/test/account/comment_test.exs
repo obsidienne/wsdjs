@@ -9,9 +9,9 @@ defmodule Wcsp.CommentTest do
   end
 
   test "comment user and song must exist" do
-    params = Map.put(@valid_attrs, :account_id, Ecto.UUID.generate())
+    params = Map.put(@valid_attrs, :user_id, Ecto.UUID.generate())
     params = Map.put(params, :song_id, Ecto.UUID.generate())
     comment = Comment.changeset(%Comment{}, params)
-    assert {:error, %{errors: [account: {"does not exist", _}]}} = Repo.insert(comment)
+    assert {:error, %{errors: [user: {"does not exist", _}]}} = Repo.insert(comment)
   end
 end

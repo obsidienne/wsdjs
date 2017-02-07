@@ -9,8 +9,8 @@ defmodule Wcsp.TopTest do
   end
 
   test "top owner accout must exist" do
-    params = Map.put(@valid_attrs, :account_id, Ecto.UUID.generate())
+    params = Map.put(@valid_attrs, :user_id, Ecto.UUID.generate())
     top = Top.changeset(%Top{}, params)
-    assert {:error, %{errors: [account: {"does not exist", _}]}} = Repo.insert(top)
+    assert {:error, %{errors: [user: {"does not exist", _}]}} = Repo.insert(top)
   end
 end

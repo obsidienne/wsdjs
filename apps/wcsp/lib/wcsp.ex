@@ -6,31 +6,31 @@ defmodule Wcsp do
   """
   use Wcsp.Model
 
-  def accounts do
-    Account
+  def users do
+    User
     |> Repo.all
   end
 
-  def find_account!(clauses) do
-    Repo.get_by!(Account, clauses)
+  def find_user!(clauses) do
+    Repo.get_by!(User, clauses)
     |> Repo.preload(:avatar)
   end
 
-  def find_account(clauses) do
-    Repo.get_by(Account, clauses)
+  def find_user(clauses) do
+    Repo.get_by(User, clauses)
     |> Repo.preload(:avatar)
   end
 
   def hot_songs() do
     Song
-    |> preload([:album_art, :account])
+    |> preload([:album_art, :user])
     |> order_by(desc: :inserted_at)
     |> Repo.all
   end
 
   def find_song!(clauses) do
     Repo.get_by!(Song, clauses)
-    |> Repo.preload([:album_art, :account])
+    |> Repo.preload([:album_art, :user])
   end
 
   def tops do
@@ -48,12 +48,12 @@ defmodule Wcsp do
         SELECT  "songs"."id", "songs"."artist", "songs"."title", "songs"."genre", "songs"."bpm", "songs"."inserted_at",
         "album_arts"."cld_id" AS album_art_cld_id, "album_arts"."version" as album_art_version,
         "avatars"."cld_id" AS avatar_cld_id, "avatars"."version" AS avatar_version,
-        "accounts"."name", "accounts"."djname",
+        "users"."name", "users"."djname",
         COALESCE(similarity("songs"."artist", $1), 0) + COALESCE(similarity("songs"."title", $1), 0) AS "rank"
         FROM "songs"
         LEFT JOIN "album_arts" ON "album_arts"."song_id" = "songs"."id"
-        LEFT JOIN "accounts" ON "songs"."account_id" = "accounts"."id"
-        LEFT JOIN "avatars" ON "avatars"."account_id" = "accounts"."id"
+        LEFT JOIN "users" ON "songs"."user_id" = "users"."id"
+        LEFT JOIN "avatars" ON "avatars"."user_id" = "users"."id"
         WHERE (("songs"."artist" % $1)
            OR ("songs"."title" % $1))
         ORDER BY "rank" DESC

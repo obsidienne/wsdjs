@@ -13,7 +13,7 @@ defmodule Wcsp.Model do
         Avatar,
         Song,
         Top,
-        Account,
+        User,
         Comment,
         Rank
       }

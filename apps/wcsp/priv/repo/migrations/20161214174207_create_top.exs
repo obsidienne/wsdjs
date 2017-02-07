@@ -7,7 +7,7 @@ defmodule Dj.Repo.Migrations.CreateTop do
       add :due_date, :date, null: false
       add :status, :string, null: false
 
-      add :account_id, references(:accounts, on_delete: :nothing, type: :binary_id), null: false
+      add :user_id, references(:users, on_delete: :nothing, type: :binary_id), null: false
 
       timestamps()
     end

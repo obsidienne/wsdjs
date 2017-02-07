@@ -5,7 +5,7 @@ defmodule Wcsp.AlbumArt do
     field :cld_id, :string
     field :version, :integer
 
-    belongs_to :account, Wcsp.Account
+    belongs_to :user, Wcsp.User
     belongs_to :song, Wcsp.Song
 
     timestamps()

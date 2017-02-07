@@ -4,7 +4,7 @@ defmodule Wcsp.Repo.Migrations.AddCommentSchema do
   def up do
     create table(:comments, primary_key: false) do
       add :id, :uuid, primary_key: true
-      add :account_id, references(:accounts, on_delete: :nothing, type: :binary_id), null: false
+      add :user_id, references(:users, on_delete: :nothing, type: :binary_id), null: false
       add :song_id, references(:songs, on_delete: :nothing, type: :binary_id), null: false
       add :text, :string, null: false
 

@@ -3,8 +3,8 @@ defmodule Wcsp.Factory do
   use Wcsp.Model
 
   # Factories
-  def build(:account) do
-    %Account{
+  def build(:user) do
+    %User{
       email: "hello#{System.unique_integer()}@dummy.com"
     }
   end

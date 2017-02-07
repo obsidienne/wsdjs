@@ -28,7 +28,7 @@ defmodule Wcsp.Rank do
     query = from q in __MODULE__,
     where: q.top_id == ^id,
     order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
-    preload: [song: [{:album_art, :account}]]
+    preload: [song: [{:album_art, :user}]]
   end
 
   def for_tops_with_limit(per \\ 9) do

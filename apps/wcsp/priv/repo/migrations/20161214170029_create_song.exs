@@ -10,7 +10,7 @@ defmodule Dj.Repo.Migrations.CreateSong do
       add :bpm, :integer, null: false, default: 0
       add :genre, :string, null: false
 
-      add :account_id, references(:accounts, on_delete: :nothing, type: :binary_id), null: false
+      add :user_id, references(:users, on_delete: :nothing, type: :binary_id), null: false
 
       timestamps()
     end

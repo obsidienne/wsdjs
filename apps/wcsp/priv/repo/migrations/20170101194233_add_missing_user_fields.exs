@@ -2,7 +2,7 @@ defmodule User.Repo.Migrations.AddMissingUserFields do
   use Ecto.Migration
 
   def up do
-    alter table(:accounts) do
+    alter table(:users) do
       add :admin, :boolean, null: false, default: false
       add :new_song_notification, :boolean, null: false, default: false
       add :user_country, :string
@@ -13,7 +13,7 @@ defmodule User.Repo.Migrations.AddMissingUserFields do
   end
 
   def down do
-    alter table(:accounts) do
+    alter table(:users) do
       remove :admin
       remove :new_song_notification
       remove :user_country

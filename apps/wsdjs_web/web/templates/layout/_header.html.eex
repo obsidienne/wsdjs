@@ -25,7 +25,7 @@
       <%= link "hot_songs", to: hottest_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--hotsongs" %>
       <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--tops" %>
       <%= if @current_user && @current_user.admin do %>
-        <%= link "users", to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--users" %>
+        <%= link "users", to: user_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--users" %>
       <% end %>
     </div>
 
@@ -35,7 +35,7 @@
       </div>
     </a>
     <div class="glheader__menu glheader__menu--account">
-      <%= link to: account_path(@conn, :show, @current_user.id), class: "glheader__menu__item glheader__menu__item--account-details" do %>
+      <%= link to: user_path(@conn, :show, @current_user.id), class: "glheader__menu__item glheader__menu__item--account-details" do %>
         <div class="glheader__user__avatar--container">
           <img class="glheader__account-details__avatar" src="<%= href_avatar(@current_user.avatar) %>" alt="Ug5a5yirji3s4bskkuje">
         </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="glheader__account-details__email"><%= @current_user.email %></div>
       <% end %>
-      <%= link "account_settings", to: account_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--settings" %>
+      <%= link "account_settings", to: user_path(@conn, :index), class: "glheader__menu__item glheader__menu__item--settings" %>
       <%= link "deconnection", to: session_path(@conn, :delete, @current_user), method: "delete", class: "glheader__menu__item glheader__menu__item--signout" %>
     </div>
     <% else %>

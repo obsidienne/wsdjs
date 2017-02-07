@@ -5,12 +5,12 @@ defmodule Wcsp.Top do
     field :due_date, :date
     field :status, :string
 
-    belongs_to :account, Wcsp.Account
+    belongs_to :user, Wcsp.User
     has_many :ranks, Wcsp.Rank
     timestamps()
   end
 
-  @required_fields [:due_date, :status, :account_id]
+  @required_fields [:due_date, :status, :user_id]
   @valid_status ~w(creating voting counting published)
 
   def changeset(model, params \\ nil) do
@@ -19,7 +19,7 @@ defmodule Wcsp.Top do
     |> validate_required(~w(due_date status)a)
     |> validate_inclusion(:status, @valid_status)
     |> unique_constraint(:due_date)
-    |> assoc_constraint(:account)
+    |> assoc_constraint(:user)
   end
 
   def tops() do

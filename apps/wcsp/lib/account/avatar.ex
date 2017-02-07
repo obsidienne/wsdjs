@@ -5,11 +5,11 @@ defmodule Wcsp.Avatar do
     field :cld_id, :string
     field :version, :integer
 
-    belongs_to :account, Wcsp.Account
+    belongs_to :user, Wcsp.User
     timestamps()
   end
 
-  @allowed_fields ~w(cld_id version account_id)
+  @allowed_fields ~w(cld_id version user_id)
 
   def changeset(model, params \\ nil) do
     model

@@ -1,12 +1,12 @@
 defmodule Wcsp.Seeds do
   use Wcsp.Model
 
-  def store_it(:account, row) do
+  def store_it(:user, row) do
     row = row
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    account = %Wcsp.Account{
+    user = %Wcsp.User{
       id: row[:id],
       email: row[:email],
       admin: row[:admin] == "true",
@@ -17,7 +17,7 @@ defmodule Wcsp.Seeds do
       inserted_at: Ecto.DateTime.cast!(row[:inserted_at]),
       updated_at: Ecto.DateTime.cast!(row[:updated_at])
     }
-    account = Wcsp.Repo.insert! account
+    user = Wcsp.Repo.insert! user
 
     avatar = case row do
       %{avatar_id: "wsdjs/missing_avatar"} ->
@@ -25,7 +25,7 @@ defmodule Wcsp.Seeds do
       %{avatar_id: ai, avatar_version: av} ->
         avatar = %Wcsp.Avatar{
           cld_id: ai,
-          account_id: account.id,
+          user_id: user.id,
           version: String.to_integer(av)
         }
         Wcsp.Repo.insert! avatar
@@ -42,7 +42,7 @@ defmodule Wcsp.Seeds do
 
     top = %Wcsp.Top{
       id: row[:id],
-      account_id: row[:user_id],
+      user_id: row[:user_id],
       due_date: Ecto.Date.cast!(row[:due_date]),
       status: row[:status],
       inserted_at: Ecto.DateTime.cast!(row[:inserted_at]),
@@ -59,7 +59,7 @@ defmodule Wcsp.Seeds do
 
     song = %Wcsp.Song{
       id: row[:id],
-      account_id: row[:user_id],
+      user_id: row[:user_id],
       artist: row[:artist],
       title: row[:title],
       url: row[:song_url],
@@ -80,7 +80,7 @@ defmodule Wcsp.Seeds do
       cld_id: cpi,
       version: String.to_integer(cv),
       song_id: id,
-      account_id: ui
+      user_id: ui
     }
     Wcsp.Repo.insert! album_art
   end
@@ -101,13 +101,13 @@ defmodule Wcsp.Seeds do
   end
 end
 
-#import accounts
-"data/accounts.csv"
+#import users
+"data/users.csv"
 |> Path.expand(__DIR__)
 |> File.stream!
 |> Stream.drop(1)
 |> CSV.decode(strip_cells: true, headers: [:id, :email, :admin, :new_song_notification, :user_country, :name, :djname, :avatar_id, :avatar_version, :inserted_at, :updated_at])
-|> Enum.each(&Wcsp.Seeds.store_it(:account, &1))
+|> Enum.each(&Wcsp.Seeds.store_it(:user, &1))
 
 "data/tops.csv"
 |> Path.expand(__DIR__)

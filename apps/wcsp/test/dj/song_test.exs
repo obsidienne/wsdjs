@@ -14,18 +14,18 @@ defmodule Wcsp.SongTest do
   end
 
   test "song suggestor must exist" do
-    params = Map.put(@valid_attrs, :account_id, Ecto.UUID.generate())
+    params = Map.put(@valid_attrs, :user_id, Ecto.UUID.generate())
     song = Song.changeset(%Song{}, params)
-    assert {:error, %{errors: [account: {"does not exist", _}]}} = Repo.insert(song)
+    assert {:error, %{errors: [user: {"does not exist", _}]}} = Repo.insert(song)
   end
 
   test "artist / title is unique" do
-    dj = insert!(:account)
+    dj = insert!(:user)
     song = Song.changeset(%Song{}, @valid_attrs)
-    song_with_account = Ecto.Changeset.put_assoc(song, :account, dj)
-    Repo.insert(song_with_account)
+    song_with_user = Ecto.Changeset.put_assoc(song, :user, dj)
+    Repo.insert(song_with_user)
 
-    assert {:error, %{errors: [title: {"has already been taken", []}]}} = Repo.insert(song_with_account)
+    assert {:error, %{errors: [title: {"has already been taken", []}]}} = Repo.insert(song_with_user)
   end
 
   test "bpm must be positive" do

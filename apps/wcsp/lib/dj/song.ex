@@ -8,14 +8,14 @@ defmodule Wcsp.Song do
     field :bpm, :integer
     field :genre, :string
 
-    belongs_to :account, Wcsp.Account
+    belongs_to :user, Wcsp.User
     has_one :album_art, Wcsp.AlbumArt
     has_many :comments, Wcsp.Comment
 
     timestamps()
   end
 
-  @allowed_fields [:title, :artist, :url, :bpm, :genre, :account_id]
+  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id]
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
@@ -24,7 +24,7 @@ defmodule Wcsp.Song do
     |> cast(params, @allowed_fields)
     |> validate_required(@required_fields)
     |> unique_constraint(:title, name: :songs_title_artist_index)
-    |> assoc_constraint(:account)
+    |> assoc_constraint(:user)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)

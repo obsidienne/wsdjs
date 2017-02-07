@@ -2,7 +2,7 @@ defmodule Wcsp.Repo.Migrations.ChangeLastnameToName do
   use Ecto.Migration
 
   def up do
-    alter table(:accounts) do
+    alter table(:users) do
       add :name, :string
       remove :last_name
       remove :first_name
@@ -10,7 +10,7 @@ defmodule Wcsp.Repo.Migrations.ChangeLastnameToName do
   end
 
   def down do
-    alter table(:accounts) do
+    alter table(:users) do
       add :last_name, :string
       add :first_name, :string
       remove :name

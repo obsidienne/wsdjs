@@ -18,9 +18,9 @@ defmodule WsdjsWeb.HottestView do
   end
 
   def proposed_by_link(conn, song = %Wcsp.Song{}) do
-    Phoenix.HTML.Link.link(proposed_by_display_name(song.account),
-                           to: account_path(conn, :show, song.account.id),
-                           title: "#{song.account.name}")
+    Phoenix.HTML.Link.link(proposed_by_display_name(song.user),
+                           to: user_path(conn, :show, song.user.id),
+                           title: "#{song.user.name}")
   end
 
   def group_song_by_month(songs) do

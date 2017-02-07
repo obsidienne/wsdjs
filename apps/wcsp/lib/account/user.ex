@@ -1,7 +1,7 @@
-defmodule Wcsp.Account do
+defmodule Wcsp.User do
   use Wcsp.Model
 
-  schema "accounts" do
+  schema "users" do
     field :email, :string
     field :admin, :boolean
     field :new_song_notification, :boolean
@@ -26,6 +26,6 @@ defmodule Wcsp.Account do
   end
 
   def build(%{email: email} = params) do
-    changeset(%Wcsp.Account{}, params)
+    changeset(%Wcsp.User{}, params)
   end
 end

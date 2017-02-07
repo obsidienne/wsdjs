@@ -7,7 +7,7 @@
       <div class="col-xs-6">
         <h1 class="song-title"><%= @song.title %></h1>
         <h2 class="song-artist">by <%= @song.artist %></h2>
-        <h4 class="text-muted"> by <%= link proposed_by_display_name(@song.account), to: account_path(@conn, :show, @song.account) %></h4>
+        <h4 class="text-muted"> by <%= link proposed_by_display_name(@song.user), to: user_path(@conn, :show, @song.user) %></h4>
         <div class="song-opinions">
           <a class="song-opinion song-down" data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/da45c057-ea0e-4a48-aa03-a74e85a6ea22/votes?kind=down_vote" data-original-title="">
             <span>0</span>
