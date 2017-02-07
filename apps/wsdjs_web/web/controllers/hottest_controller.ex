@@ -1,6 +1,6 @@
 defmodule WsdjsWeb.HottestController do
   use WsdjsWeb.Web, :controller
-  plug :authenticate when action in [:index, :show]
+  plug :authenticate when action in [:index]
 
   def index(conn, _params) do
     songs = Wcsp.hot_songs()
@@ -8,12 +8,12 @@ defmodule WsdjsWeb.HottestController do
     render conn, "index.html", songs: songs
   end
 
-  def show(conn, _params) do
-    render conn, "show.html"
-  end
 
   defp authenticate(conn, _opts) do
-    if conn.assigns.current_user do
+    user = conn.assigns[:current_user]
+    action = conn.assigns[:action] || conn.private[:phoenix_action]
+
+    if Wscp.Policy.can?(user, action, :hottest) do
       conn
     else
       conn
