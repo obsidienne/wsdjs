@@ -8,9 +8,6 @@ defmodule Wscp.Policy do
   def can?(%User{id: user_id, admin: :false}, _action, %Song{user_id: song_user_id})
      when user_id == song_user_id, do: true
 
-  # Regular users can modify hottest
-  def can?(%User{admin: :false}, :index, :hottest), do: true
-
 
   # anonymous users
   def can?(_user, :index, Song), do: true
