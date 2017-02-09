@@ -16,7 +16,7 @@ defmodule WsdjsWeb.SongController do
     user = conn.assigns[:current_user]
     action = conn.assigns[:action] || conn.private[:phoenix_action]
 
-    if Wscp.Policy.can?(user, action, Song) do
+    if Wcsp.Policy.can?(user, action, Song) do
       conn
     else
       conn

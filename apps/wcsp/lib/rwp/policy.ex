@@ -1,4 +1,4 @@
-defmodule Wscp.Policy do
+defmodule Wcsp.Policy do
   use Wcsp.Model
 
   # Admin users are god
