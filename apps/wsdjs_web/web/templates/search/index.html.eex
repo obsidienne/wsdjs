@@ -1,7 +1,7 @@
 <ul class="list-group">
   <%= for song <- @songs do %>
   <li class="list-group-item">
-    <a href="<%= song_path(@conn, :show, song_id_uuid(song.id)) %>">
+    <a href="<%= song_path(@conn, :show, song.id) %>">
       <article class="minicard">
         <div class="panel-heading">
           <img height="75" width="75" src="<%= href_song_art(song) %>" alt="<%= song_art_alt(song) %>" />

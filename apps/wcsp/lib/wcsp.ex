@@ -43,24 +43,21 @@ defmodule Wcsp do
     top_with_songs = Repo.preload top, ranks: Wcsp.Rank.for_top(id)
   end
 
-  def search(q) do
-    query = """
-        SELECT  "songs"."id", "songs"."artist", "songs"."title", "songs"."genre", "songs"."bpm", "songs"."inserted_at",
-        "album_arts"."cld_id" AS album_art_cld_id, "album_arts"."version" as album_art_version,
-        "avatars"."cld_id" AS avatar_cld_id, "avatars"."version" AS avatar_version,
-        "users"."name", "users"."djname",
-        COALESCE(similarity("songs"."artist", $1), 0) + COALESCE(similarity("songs"."title", $1), 0) AS "rank"
-        FROM "songs"
-        LEFT JOIN "album_arts" ON "album_arts"."song_id" = "songs"."id"
-        LEFT JOIN "users" ON "songs"."user_id" = "users"."id"
-        LEFT JOIN "avatars" ON "avatars"."user_id" = "users"."id"
-        WHERE (("songs"."artist" % $1)
-           OR ("songs"."title" % $1))
-        ORDER BY "rank" DESC
-        LIMIT 5
-    """
-    {:ok, results} = Ecto.Adapters.SQL.query(Wcsp.Repo, query, [q])
-    cols = Enum.map results.columns, &(String.to_atom(&1))
-    Enum.map results.rows, fn(row) -> Map.new(Enum.zip(cols, row)) end
+  def search(user, q) do
+  query =  from s in Wcsp.Scope.scope(Song, user),
+    join: aa in assoc(s, :album_art),
+    join: u in assoc(s, :user),
+    join: a in assoc(u, :avatar),
+    where: fragment("artist % ?", ^q) or fragment("title % ?", ^q),
+    order_by: fragment("rank DESC"),
+    limit: 5,
+    select: %{id: s.id, artist: s.artist, title: s.title, genre: s.genre,
+              bpm: s.bpm, inserted_at: s.inserted_at,
+              album_art_cld_id: aa.cld_id, album_art_version: aa.version,
+              avatar_cld_id: a.cld_id, avatar_version: a.version,
+              name: u.name, djname: u.djname,
+              rank: fragment("COALESCE(similarity(artist, ?), 0) + COALESCE(similarity(title, ?), 0) AS rank", ^q, ^q)}
+
+    Repo.all(query)
   end
 end

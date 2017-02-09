@@ -19,9 +19,4 @@ defmodule WsdjsWeb.SearchView do
   def proposed_by_display_name(%{name: name}), do: name
 
   def proposed_date(dt), do: Ecto.DateTime.to_iso8601(Ecto.DateTime.cast!(dt))
-
-  def song_id_uuid(id) do
-    {:ok, uuid} = Ecto.UUID.load(id)
-    uuid
-  end
 end
