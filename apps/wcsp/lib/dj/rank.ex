@@ -5,6 +5,7 @@ defmodule Wcsp.Rank do
     field :likes, :integer
     field :votes, :integer
     field :bonus, :integer
+    field :position, :integer
 
     belongs_to :song, Wcsp.Song
     belongs_to :top, Wcsp.Top
@@ -22,6 +23,7 @@ defmodule Wcsp.Rank do
     |> unique_constraint(:song_id, name: :ranks_song_id_top_id_index)
     |> validate_number(:votes, greater_than: 0)
     |> validate_number(:bonus, greater_than: 0)
+    |> validate_number(:position, greater_than: 0)
   end
 
   def for_top(id) do

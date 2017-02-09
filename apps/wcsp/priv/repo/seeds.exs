@@ -94,6 +94,7 @@ defmodule Wcsp.Seeds do
       likes: String.to_integer(row[:likes]),
       votes: String.to_integer(row[:votes]),
       bonus: String.to_integer(row[:bonus]),
+      position: String.to_integer(row[:position]),
       inserted_at: Ecto.DateTime.cast!(row[:inserted_at]),
       updated_at: Ecto.DateTime.cast!(row[:updated_at])
     }
@@ -128,5 +129,5 @@ end
 |> Path.expand(__DIR__)
 |> File.stream!
 |> Stream.drop(1)
-|> CSV.decode(strip_cells: true, headers: [:id, :top_id, :song_id, :likes, :inserted_at, :updated_at, :votes, :bonus, :points])
+|> CSV.decode(strip_cells: true, headers: [:id, :top_id, :song_id, :likes, :inserted_at, :updated_at, :votes, :bonus, :points, :position])
 |> Enum.each(&Wcsp.Seeds.store_it(:rank, &1))
