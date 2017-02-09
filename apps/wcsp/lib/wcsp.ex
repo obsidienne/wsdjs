@@ -21,8 +21,8 @@ defmodule Wcsp do
     |> Repo.preload(:avatar)
   end
 
-  def hot_songs() do
-    Song
+  def hot_songs(user) do
+    Wcsp.Scope.scope(Song, user)
     |> preload([:album_art, :user])
     |> order_by(desc: :inserted_at)
     |> Repo.all
