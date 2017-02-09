@@ -44,7 +44,7 @@ defmodule Wcsp do
   end
 
   def search(user, q) do
-  query =  from s in Wcsp.Scope.scope(Song, user),
+  query = from s in Wcsp.Scope.scope(Song, user),
     join: aa in assoc(s, :album_art),
     join: u in assoc(s, :user),
     join: a in assoc(u, :avatar),
