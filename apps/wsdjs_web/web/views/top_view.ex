@@ -16,10 +16,7 @@ defmodule WsdjsWeb.TopView do
     "#{rank.song.artist} - #{rank.song.title} (#{rank.votes + rank.bonus + rank.likes} point)"
   end
 
-  def proposed_by_display_name(%{name: name, djname: djname}) when is_binary(djname) do
-    "#{name} (#{djname})"
-  end
-  def proposed_by_display_name(%{name: name, djname: djname}) do
-    name
-  end
+  def proposed_by_display_name(%{name: name, djname: djname})
+    when is_binary(djname), do: "#{name} (#{djname})"
+  def proposed_by_display_name(%{name: name}), do: name
 end
