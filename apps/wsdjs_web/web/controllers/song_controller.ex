@@ -4,7 +4,8 @@ defmodule WsdjsWeb.SongController do
   plug :authenticate
 
   def show(conn, %{"id" => id}) do
-    song = Wcsp.find_song!(id: id)
+    user = conn.assigns[:current_user]
+    song = Wcsp.find_song!(user, id: id)
 
     render conn, "show.html", song: song
   end

@@ -28,8 +28,9 @@ defmodule Wcsp do
     |> Repo.all
   end
 
-  def find_song!(clauses) do
-    Repo.get_by!(Song, clauses)
+  def find_song!(user, clauses) do
+    Wcsp.Scope.scope(Song, user)
+    |> Repo.get_by!(clauses)
     |> Repo.preload([:album_art, :user])
   end
 
