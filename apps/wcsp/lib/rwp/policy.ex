@@ -7,6 +7,7 @@ defmodule Wcsp.Policy do
   # Regular users can modify their own songs
   def can?(%User{id: user_id, admin: :false}, _action, %Song{user_id: song_user_id})
      when user_id == song_user_id, do: true
+  def can?(%User{}, :create, %Song{}), do: true
 
 
   # anonymous users
