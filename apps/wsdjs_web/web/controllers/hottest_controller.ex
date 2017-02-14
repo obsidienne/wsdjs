@@ -11,15 +11,14 @@ defmodule WsdjsWeb.HottestController do
     render conn, "index.html", songs: songs, changeset: changeset
   end
 
-  def create(conn, %{"song" => song_params}) do
-    changeset = Wcsp.Song.changeset(%Wcsp.Song{}, song_params)
+  def create(conn, %{"song" => params}) do
+    user = conn.assigns[:current_user]
 
-    case Wcsp.Repo.insert(changeset) do
-      {:ok, song} -> conn
-        |> put_flash(:info, "#{song.title} created!")
-        |> redirect(to: hottest_path(conn, :index))
+    case Wcsp.create_song(user, params) do
+      {:ok, song} ->
+        render conn, "_hot_card.html", song: song
       {:error, changeset} ->
-        render conn, "_add_song_modal.html", changeset: changeset
+        render(conn, "_add_song_modal.html", changeset: changeset)
     end
   end
 end

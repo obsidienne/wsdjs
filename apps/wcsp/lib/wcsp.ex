@@ -34,6 +34,12 @@ defmodule Wcsp do
     |> Repo.preload([:album_art, :user])
   end
 
+  def create_song(user, params) do
+    Song.changeset(%Song{}, params)
+    |> put_assoc(:user, user)
+    |> Repo.insert
+  end
+
   def tops do
     tops = Wcsp.Top.tops() |> Repo.all
     Repo.preload tops, ranks: Wcsp.Rank.for_tops_with_limit()
