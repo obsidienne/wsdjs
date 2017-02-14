@@ -2,7 +2,6 @@
   <button type="button" class="btn btn-fab js-static-modal-toggle" title="suggest a song"></button>
 </div>
 
-
 <div id="static-modal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -10,18 +9,21 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         <h4 class="modal-title">Create a new top</h4>
       </div>
+
+      <%= form_for @changeset, top_path(@conn, :create), fn f -> %>
       <div class="modal-body">
-        <form class="simple_form form_song" novalidate="novalidate" id="new_song" action="/songs" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="efSdLJ8a5HOCzky7ckYcGUIPX0cnQUpwXNmEopXV3eGG34nPPgbxfBEUoAGL35VbQf5QXWji2wZyInRWVWWU5g==">
-          <div class="form-group string required song_artist">
-            <label class="string required control-label" for="song_artist"><abbr title="required">*</abbr> Artist</label>
-            <input class="string required form-control" placeholder="Artist name" type="text" name="song[artist]" id="song_artist">
-          </div>
-        </form>
+        <div class="form-group">
+          <%= label f, :due_date, class: "control-label" %>
+          <%= text_input f, :due_date, placeholder: "Month: YYYY-MM-DD", class: "form-control", required: "required" %>
+          <%= error_tag f, :due_date %>
+        </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Create top</button>
+        <%= submit "Create top", class: "btn btn-primary" %>
       </div>
+      <% end %>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

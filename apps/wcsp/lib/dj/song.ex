@@ -20,7 +20,7 @@ defmodule Wcsp.Song do
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
-  def changeset(model, params \\ nil) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @allowed_fields)
     |> validate_required(@required_fields)
@@ -30,6 +30,8 @@ defmodule Wcsp.Song do
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
   end
+
+  def genre, do: @validated_genre
 
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->

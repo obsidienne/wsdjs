@@ -13,7 +13,7 @@ defmodule Wcsp.Top do
   @required_fields [:due_date, :status, :user_id]
   @valid_status ~w(creating voting counting published)
 
-  def changeset(model, params \\ nil) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields)
     |> validate_required(~w(due_date status)a)

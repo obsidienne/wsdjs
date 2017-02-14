@@ -6,5 +6,6 @@
   </section>
 </main>
 
-
-<%= render "_add_top.html" %>
+<%= if Wcsp.Policy.can?(@conn.assigns.current_user, :create, %Wcsp.Top{}) do %>
+<%= render "_add_top.html", conn: @conn, changeset: @changeset %>
+<% end %>

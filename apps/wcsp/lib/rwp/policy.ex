@@ -9,12 +9,6 @@ defmodule Wcsp.Policy do
      when user_id == song_user_id, do: true
   def can?(%User{}, :create, %Song{}), do: true
 
-
-  # anonymous users
-  def can?(_user, :index, Song), do: true
-  def can?(_user, :show, _song), do: true
-
-
   # Catch-all: deny everything else
   def can?(_, _, _), do: false
 end

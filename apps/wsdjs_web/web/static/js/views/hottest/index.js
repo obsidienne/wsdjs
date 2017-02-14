@@ -14,6 +14,11 @@ export default class View extends MainView {
         new Modal({el: document.getElementById('static-modal')}).show();
       });
 
+    document.addEventListener('ajax:success', function(xhr) {
+      var modal = document.getElementById('static-modal');
+      modal.innerHTML = xhr.data.xhr.responseText;
+    });
+
     // Specific logic here
     console.log('HottestIndexView mounted');
   }
