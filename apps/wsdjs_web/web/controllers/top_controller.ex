@@ -12,8 +12,16 @@ defmodule WsdjsWeb.TopController do
     render conn, "show.html", top: Wcsp.top(id)
   end
 
-  def create(conn, %{"top" => top_params}) do
+  def new(conn, _params) do
+    changeset = Wcsp.Top.changeset(%Wcsp.Top{})
+    render(conn, "new.html", changeset: changeset)
+  end
 
+  def create(conn, %{"top" => params}) do
+    user = conn.assigns[:current_user]
 
+    conn
+    |> put_flash(:error, "not implemented !")
+    |> redirect(to: top_path(conn, :index))
   end
 end

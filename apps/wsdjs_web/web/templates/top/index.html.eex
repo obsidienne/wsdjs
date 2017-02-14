@@ -7,5 +7,7 @@
 </main>
 
 <%= if Wcsp.Policy.can?(@conn.assigns.current_user, :create, %Wcsp.Top{}) do %>
-<%= render "_add_top.html", conn: @conn, changeset: @changeset %>
+<div id="fab-container">
+  <a class="btn btn-fab" title="Create a new top" href="<%= top_path(@conn, :new) %>">
+</div>
 <% end %>
