@@ -15,3 +15,9 @@
 <meta property="og:image" content="<%= href_song_art(@song.album_art) %>">
 <meta property="og:description" content="<%= @song.artist %> - <%= @song.genre %> <%= @song.bpm %> bpm - suggested by <%= @song.user.name %> <%= Date.to_iso8601(@song.inserted_at) %>">
 <meta property="og:site_name" content="worldswingdjs">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:url" content="<%= WsdjsWeb.Endpoint.url %><%= @conn.request_path %>">
+<meta name="twitter:title" content="<%= @song.title %>">
+<meta name="twitter:description" content="<%= @song.artist %> - <%= @song.genre %> <%= @song.bpm %> bpm - suggested by <%= @song.user.name %> <%= Date.to_iso8601(@song.inserted_at) %>">
+<meta name="twitter:image" content="<%= href_song_art(@song.album_art) %>">
