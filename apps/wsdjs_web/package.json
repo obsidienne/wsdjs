@@ -18,7 +18,8 @@
     "snackbarjs": "~1.1.0",
     "turbolinks": "~5.0.0",
     "jquery-ui-touch-punch": "~0.2.3",
-    "modal-vanilla": "0.3.6"
+    "modal-vanilla": "0.3.6",
+    "phoenix_ujs": "0.3.0"
   },
   "devDependencies": {
     "babel-brunch": "~6.0.0",
