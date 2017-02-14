@@ -20,10 +20,6 @@
 
 <%= if Wcsp.Policy.can?(@conn.assigns.current_user, :create, %Wcsp.Song{}) do %>
 <div id="fab-container">
-  <button type="button" class="btn btn-fab js-static-modal-toggle" title="suggest a song"></button>
+  <a class="btn btn-fab" title="Suggest a song" href="<%= hottest_path(@conn, :new) %>">
 </div>
-
-<div id="static-modal" class="modal fade" tabindex="-1" role="dialog">
-<%= render "_add_song_modal.html", conn: @conn, changeset: @changeset %>
-</div><!-- /.modal -->
 <% end %>

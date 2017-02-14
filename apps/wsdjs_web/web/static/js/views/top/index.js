@@ -1,5 +1,4 @@
 import MainView from '../main';
-import Modal from 'modal-vanilla';
 
 export default class View extends MainView {
   mount() {
@@ -7,10 +6,6 @@ export default class View extends MainView {
 
     // Specific logic here
     this._intlDate()
-    document.querySelector('.js-static-modal-toggle')
-      .addEventListener('click', function() {
-        new Modal({el: document.getElementById('static-modal')}).show();
-      });
 
     console.log('TopIndexView mounted');
   }

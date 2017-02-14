@@ -1,4 +1,3 @@
-
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,7 +5,7 @@
         <h4 class="modal-title">Suggest a new song</h4>
       </div>
 
-      <%= form_for @changeset, hottest_path(@conn, :create), ["ujs-remote": "true"], fn f -> %>
+      <%= form_for @changeset, hottest_path(@conn, :create), fn f -> %>
       <div class="modal-body">
         <div class="form-group">
           <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
@@ -21,7 +20,6 @@
           <%= error_tag f, :url %>
         </div>
 
-        
         <div class="form-group">
           <%= number_input f, :bpm, placeholder: "bpm", class: "form-control" %>
           <%= error_tag f, :bpm %>
@@ -30,8 +28,6 @@
           <%= select f, :genre, Wcsp.Song.genre, class: "form-control" %>
           <%= error_tag f, :genre %>
         </div>
-
-
       </div>
 
       <div class="modal-footer">

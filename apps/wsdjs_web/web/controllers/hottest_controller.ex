@@ -1,8 +1,6 @@
 defmodule WsdjsWeb.HottestController do
   use WsdjsWeb.Web, :controller
 
-  plug :put_layout, false when action in [:create]
-
   def index(conn, _params) do
     user = conn.assigns[:current_user]
     songs = Wcsp.hot_songs(user)
@@ -11,14 +9,21 @@ defmodule WsdjsWeb.HottestController do
     render conn, "index.html", songs: songs, changeset: changeset
   end
 
+  def new(conn, _params) do
+    changeset = Wcsp.Song.changeset(%Wcsp.Song{})
+    render(conn, "new.html", changeset: changeset)
+  end
+
   def create(conn, %{"song" => params}) do
     user = conn.assigns[:current_user]
 
     case Wcsp.create_song(user, params) do
       {:ok, song} ->
-        render conn, "_hot_card.html", song: song
+        conn
+        |> put_flash(:info, "#{song.title} created !")
+        |> redirect(to: hottest_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "_add_song_modal.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset)
     end
   end
 end
