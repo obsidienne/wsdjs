@@ -1,10 +1,6 @@
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<%= csrf_meta_tag %>
+<%= csrf_meta_tag() %>
 
 <title>Hello WsdjsWeb!</title>
-<link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">

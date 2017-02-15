@@ -1,23 +1,19 @@
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<%= csrf_meta_tag %>
+<%= csrf_meta_tag() %>
 
 <title>Hello WsdjsWeb!</title>
-<link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
 
 <meta property="og:url" content="<%= WsdjsWeb.Endpoint.url %><%= @conn.request_path %>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="<%= @song.title %>">
 <meta property="og:image" content="<%= href_song_art(@song.album_art) %>">
-<meta property="og:description" content="<%= @song.artist %> - <%= @song.genre %> <%= @song.bpm %> bpm - suggested by <%= @song.user.name %> <%= Date.to_iso8601(@song.inserted_at) %>">
+<meta property="og:description" content="<%= song_full_description(@song) %>">
 <meta property="og:site_name" content="worldswingdjs">
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:url" content="<%= WsdjsWeb.Endpoint.url %><%= @conn.request_path %>">
 <meta name="twitter:title" content="<%= @song.title %>">
-<meta name="twitter:description" content="<%= @song.artist %> - <%= @song.genre %> <%= @song.bpm %> bpm - suggested by <%= @song.user.name %> <%= Date.to_iso8601(@song.inserted_at) %>">
+<meta name="twitter:description" content="<%= song_full_description(@song) %>">
 <meta name="twitter:image" content="<%= href_song_art(@song.album_art) %>">
