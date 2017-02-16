@@ -1,4 +1,4 @@
-id,user_id,song_id,text,created_at,updated_at
+id,user_id,song_id,text,inserted_at,updated_at
 3650664d-4c18-4b24-af0c-a64cce4a7e39,a29dde91-29c7-4fa8-94e8-65a58e38d842,9e34ea9c-370e-47a8-8fd8-8a12b694b899,This is an 11,2016-11-09 15:36:40.737571,2016-11-09 15:36:40.737571
 65e544c7-77a3-40ae-be0a-f6de4d5e2112,36e7e58e-6049-4d2d-991e-fa803df9fb71,97aa4c3e-7cf4-4a86-9207-a791b1ff0498,https://www.youtube.com/watch?v=IXQmrdplLJQ,2016-11-23 14:27:45.069744,2016-11-23 14:27:45.069744
 749276f3-40cf-4035-a0fc-4402b74492cf,36e7e58e-6049-4d2d-991e-fa803df9fb71,65038591-c12b-474f-b62e-76eb3e0b0ad5,https://www.youtube.com/watch?v=Pm9l4QEaCNU,2016-11-23 14:29:23.220815,2016-11-23 14:29:23.220815
