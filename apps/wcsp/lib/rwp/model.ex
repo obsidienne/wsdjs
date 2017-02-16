@@ -14,7 +14,8 @@ defmodule Wcsp.Model do
         Song,
         Top,
         User,
-        Comment,
+        SongComment,
+        SongOpinion,
         Rank
       }
 
