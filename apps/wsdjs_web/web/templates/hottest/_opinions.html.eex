@@ -1,12 +1,16 @@
 <a class="song-opinion song-down " data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/e2440d28-cc55-4cab-8f04-19a10bc4aaee/votes?kind=down_vote" data-original-title="">
-  <span>0</span>
+  <span><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "down" end) %></span>
 </a>
 <a class="song-opinion song-like " data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/e2440d28-cc55-4cab-8f04-19a10bc4aaee/votes?kind=like_vote" data-original-title="">
-  <span>0</span>
+  <span><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "like" end) %></span>
 </a>
 <a class="song-opinion song-up  " data-remote="true" data-method="post" data-toggle="tooltip" data-placement="top" data-html="true" title="" href="/songs/e2440d28-cc55-4cab-8f04-19a10bc4aaee/votes?kind=up_vote" data-original-title="">
-  <span>0</span>
+  <span><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "up" end) %></span>
 </a>
 <a class="text-muted" href="/songs/e2440d28-cc55-4cab-8f04-19a10bc4aaee">
+  <%= if Enum.count(@song.comments) > 0 do %>
+  <i class="song-comment"></i>
+  <% else %>
   <i class="song-comment-empty"></i>
+  <% end %>
 </a>

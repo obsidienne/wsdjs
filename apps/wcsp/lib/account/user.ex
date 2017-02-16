@@ -12,6 +12,7 @@ defmodule Wcsp.User do
     has_many :songs, Wcsp.Song
     has_many :comments, Wcsp.SongComment
     has_one :avatar, Wcsp.Avatar
+    has_many :song_opinions, Wcsp.SongOpinion
     timestamps()
   end
 
