@@ -7,11 +7,3 @@
 <a class="song-opinion song-up" data-remote="true" data-method="post" href="<%= song_song_opinion_path(@conn, :create, @song, kind: :up) %>">
   <span><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "up" end) %></span>
 </a>
-
-<a class="text-muted" href="<%= song_path(@conn, :show, @song) %>">
-  <%= if Enum.count(@song.comments) > 0 do %>
-  <i class="song-comment"></i>
-  <% else %>
-  <i class="song-comment-empty"></i>
-  <% end %>
-</a>
