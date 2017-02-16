@@ -10,7 +10,7 @@ defmodule Wcsp.User do
     field :djname, :string
 
     has_many :songs, Wcsp.Song
-    has_many :comments, Wcsp.Comment
+    has_many :comments, Wcsp.SongComment
     has_one :avatar, Wcsp.Avatar
     timestamps()
   end

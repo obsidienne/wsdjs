@@ -10,7 +10,7 @@ defmodule Wcsp.Song do
 
     belongs_to :user, Wcsp.User
     has_one :album_art, Wcsp.AlbumArt
-    has_many :comments, Wcsp.Comment
+    has_many :comments, Wcsp.SongComment
     has_many :ranks, Wcsp.Rank
 
     timestamps()
