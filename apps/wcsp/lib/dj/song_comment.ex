@@ -15,6 +15,7 @@ defmodule Wcsp.SongComment do
     model
     |> cast(params, @allowed_fields)
     |> validate_required(:text)
+    |> validate_length(:text, min: 1)
     |> assoc_constraint(:user)
     |> assoc_constraint(:song)
   end
