@@ -11,7 +11,7 @@ defmodule Wcsp.SongComment do
 
   @allowed_fields [:text, :user_id, :song_id]
 
-  def changeset(model, params \\ nil) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @allowed_fields)
     |> validate_required(:text)
