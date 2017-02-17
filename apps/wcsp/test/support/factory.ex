@@ -1,5 +1,6 @@
 defmodule Wcsp.Factory do
   alias Wcsp.Repo
+  alias Wcsp.SongComment
   use Wcsp.Model
 
   # Factories
@@ -17,4 +18,5 @@ defmodule Wcsp.Factory do
   def insert!(factory_name, attributes \\ []) do
     Repo.insert! build(factory_name, attributes)
   end
+
 end

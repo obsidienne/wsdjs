@@ -30,3 +30,5 @@
     </div>
   </div>
 </section>
+
+<%= render @view_module, "song_comment.html", comments: @song.comments, conn: @conn %>

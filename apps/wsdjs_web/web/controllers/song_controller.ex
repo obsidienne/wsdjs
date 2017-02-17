@@ -5,7 +5,7 @@ defmodule WsdjsWeb.SongController do
 
   def show(conn, %{"id" => id}) do
     user = conn.assigns[:current_user]
-    song = Wcsp.find_song!(user, id: id)
+    song = Wcsp.find_song_with_comments!(user, id: id)
 
     render conn, "show.html", song: song
   end
