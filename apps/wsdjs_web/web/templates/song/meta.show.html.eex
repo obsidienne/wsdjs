@@ -17,3 +17,5 @@
 <meta name="twitter:title" content="<%= @song.title %>">
 <meta name="twitter:description" content="<%= song_full_description(@song) %>">
 <meta name="twitter:image" content="<%= href_song_art(@song.album_art) %>">
+
+<link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/song_comment.css") %>">
