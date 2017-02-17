@@ -1,18 +1,19 @@
-<li>
-  <div class="comment-main-level">
-    <!-- Avatar -->
-    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-    <!-- Contenedor del Comentario -->
-    <div class="comment-box">
-      <div class="comment-head">
-        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog"><%= @comment.user.name %></a></h6>
-        <span><%= Date.to_iso8601(@comment.inserted_at) %></span>
-        <i class="fa fa-reply"></i>
-        <i class="fa fa-heart"></i>
-      </div>
-      <div class="comment-content">
-        <%= @comment.text %>
-      </div>
-    </div>
-  </div>
-</li>
+<ul class="comments-container">
+	<%= for comment <- @comments do %>
+	    <li class="comment">
+	      <div class="comment-avatar">
+	        <img src="<%= href_user_avatar(comment.user.avatar) %>" alt="<%= user_avatar_alt(comment.user) %>">
+	      </div>
+
+	      <div class="comment-box">
+	        <header class="comment-head">
+	          <a class="comment-author" href="<%= user_path(@conn, :show, comment.user) %>"><%= comment.user.name %></a>
+              <time class="timeago" title="<%= comment.inserted_at %>" datetime="<%= DateTime.to_iso8601(DateTime.from_naive!(comment.inserted_at, "Etc/UTC")) %>"><%= comment.inserted_at %></time>
+	        </header>
+	        <div class="comment-content">
+	            <%= comment.text %>
+	        </div>
+	      </div>
+	    </li>
+	<% end %>
+</ul>

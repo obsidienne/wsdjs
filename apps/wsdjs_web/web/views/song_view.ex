@@ -12,6 +12,12 @@ defmodule WsdjsWeb.SongView do
 
   def song_art_alt(song), do: "#{song.artist} - #{song.title} song art"
 
+  def href_user_avatar(%{cld_id: cld_id, version: version})when is_binary(cld_id) do
+    @base_url <> @small_format <> "v#{version}/" <> "#{cld_id}.jpg"
+  end
+  def href_user_avatar(_), do: @base_url <> @small_format <> @missing_song_art
+  def user_avatar_alt(user), do: "#{user.name}"
+
   def proposed_by_display_name(%{name: name, djname: djname}) when is_binary(djname) do
     "#{name} (#{djname})"
   end

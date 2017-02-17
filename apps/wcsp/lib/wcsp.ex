@@ -34,6 +34,13 @@ defmodule Wcsp do
     |> Repo.preload([:album_art, :user])
   end
 
+  def find_song_with_comments!(user, id: id) do
+    Wcsp.find_song!(user, id: id)
+    |> Wcsp.Repo.preload(:comments)
+    |> Wcsp.Repo.preload(comments: :user)
+    |> Wcsp.Repo.preload(user: :avatar)
+  end
+
   def create_song(user, params) do
     Song.changeset(%Song{}, params)
     |> put_assoc(:user, user)

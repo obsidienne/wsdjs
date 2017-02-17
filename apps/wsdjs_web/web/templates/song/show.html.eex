@@ -31,11 +31,4 @@
   </div>
 </section>
 
-<div class="comments-container">
-	<h2>Comments</h2>
-	<ul id="comments-list" class="comments-list">
-      <%= for comment <- @song.comments do %>
-        <%= render @view_module, "song_comment.html", comment: comment %>
-      <% end %>
-  </ul>
-</div>
+<%= render @view_module, "song_comment.html", comments: @song.comments, conn: @conn %>
