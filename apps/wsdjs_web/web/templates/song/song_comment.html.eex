@@ -1,16 +1,18 @@
-<div class="comment-main-level">
-  <!-- Avatar -->
-  <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-  <!-- Contenedor del Comentario -->
-  <div class="comment-box">
-    <div class="comment-head">
-      <h6 class="comment-name by-author"><a href="http://creaticode.com/blog"><%= @comment.user.name %></a></h6>
-      <span><%= Date.to_iso8601(@comment.inserted_at) %></span>
-      <i class="fa fa-reply"></i>
-      <i class="fa fa-heart"></i>
-    </div>
-    <div class="comment-content">
-      <%= @comment.text %>
+<li>
+  <div class="comment-main-level">
+    <!-- Avatar -->
+    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+    <!-- Contenedor del Comentario -->
+    <div class="comment-box">
+      <div class="comment-head">
+        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog"><%= @comment.user.name %></a></h6>
+        <span><%= Date.to_iso8601(@comment.inserted_at) %></span>
+        <i class="fa fa-reply"></i>
+        <i class="fa fa-heart"></i>
+      </div>
+      <div class="comment-content">
+        <%= @comment.text %>
+      </div>
     </div>
   </div>
-</div>
+</li>
