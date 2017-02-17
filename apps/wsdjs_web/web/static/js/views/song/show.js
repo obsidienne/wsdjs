@@ -1,4 +1,5 @@
 import timeago from 'timeago.js';
+import autolinkjs from 'autolink-js';
 import MainView from '../main';
 
 export default class View extends MainView {
@@ -20,14 +21,11 @@ export default class View extends MainView {
   }
 
   _intlDate() {
-    var options = {year: "numeric", month: "long"};
-    var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
+    var elements = document.querySelectorAll(".comment-content");
 
-    var elements = document.querySelectorAll("time:not(.timeago)");
-    for (let i = 0; i < elements.length; i++) {
-      let datetime = Date.parse(elements[i].getAttribute("datetime"))
-      elements[i].textContent = dateTimeFormat.format(datetime);
-    }
+    Array.prototype.forEach.call(elements, function(el, i) {
+        el.innerHTML = el.innerHTML.autoLink();
+    });
   }
 
 
