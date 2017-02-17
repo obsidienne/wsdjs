@@ -1,3 +1,4 @@
+<%= if @conn.assigns[:current_user] do %>
 <a class="song-opinion song-down" data-remote="true" data-method="post" href="<%= song_song_opinion_path(@conn, :create, @song, kind: :down) %>">
   <span><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "down" end) %></span>
 </a>
@@ -7,6 +8,11 @@
 <a class="song-opinion song-up" data-remote="true" data-method="post" href="<%= song_song_opinion_path(@conn, :create, @song, kind: :up) %>">
   <span><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "up" end) %></span>
 </a>
+<% else %>
+<span class="song-opinion song-down"><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "down" end) %></span>
+<span class="song-opinion song-like"><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "like" end) %></span>
+<span class="song-opinion song-up"><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "up" end) %></span>
+<% end %>
 
 <a class="text-muted" href="<%= song_path(@conn, :show, @song) %>">
   <%= if Enum.count(@song.comments) > 0 do %>
