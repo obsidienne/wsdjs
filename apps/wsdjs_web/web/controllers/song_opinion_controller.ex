@@ -9,6 +9,6 @@ defmodule WsdjsWeb.SongOpinionController do
     song = Wcsp.find_song!(user, id: song_id)
 
     conn |>
-    render "_show.html", song: song
+    render("_show.html", song: song)
   end
 end
