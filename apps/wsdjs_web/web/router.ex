@@ -24,6 +24,7 @@ defmodule WsdjsWeb.Router do
     resources "/songs", SongController, only: [:show] do
       resources "/song_opinions", SongOpinionController, only: [:create]
     end
+    resources "/song_opinions", SongOpinionController, only: [:delete]
     resources "/tops", TopController, only: [:index, :show, :create, :new]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
   end

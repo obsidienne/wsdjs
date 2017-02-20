@@ -10,7 +10,7 @@ export default class glSearch {
         var csrf = document.querySelector("[name=csrf-token]");
 
         var request = new XMLHttpRequest();
-        request.open('POST', url, true);
+        request.open(method, url, true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         request.setRequestHeader('x-csrf-token', csrf.getAttribute("content"));
 
@@ -18,7 +18,6 @@ export default class glSearch {
           if (this.readyState === 4) {
             if (this.status >= 200 && this.status < 400) {
               self.parentNode.innerHTML = this.responseText;
-              console.log(this.responseText);
             } else {
               console.error("Error");
             }
