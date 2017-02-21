@@ -1,0 +1,12 @@
+<div class="comments-container">
+<%= form_for @changeset, @action, fn f -> %>
+<div class="modal-body">
+  <div class="form-group">
+    <%= textarea f, :text, class: "form-control", placeholder: "Comment" %>
+    <%= error_tag f, :text %>
+  </div>
+
+  <%= submit "Add comment", class: "btn btn-primary" %>
+</div>
+<% end %>
+</div>

@@ -47,6 +47,13 @@ defmodule Wcsp do
     |> Repo.insert
   end
 
+  def create_song_comment(user, song, params) do
+    SongComment.changeset(%SongComment{}, params)
+    |> put_assoc(:user, user)
+    |> put_assoc(:song, song)
+    |> Repo.insert
+  end
+
   def tops do
     tops = Wcsp.Top.tops() |> Repo.all
     Repo.preload tops, ranks: Wcsp.Rank.for_tops_with_limit()

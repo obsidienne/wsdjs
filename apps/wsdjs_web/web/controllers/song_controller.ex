@@ -5,11 +5,12 @@ defmodule WsdjsWeb.SongController do
 
   def show(conn, %{"id" => id}) do
     user = conn.assigns[:current_user]
-    song = Wcsp.find_song_with_comments!(user, id: id)
+    song = Wcsp.find_song!(user, id: id)
+    |> Wcsp.Repo.preload(:comments)
+    |> Wcsp.Repo.preload(comments: :user)
 
     render conn, "show.html", song: song
   end
-
 
   # check if the action page is authorized, then in the function according to the
   # struct check if it's authorized
