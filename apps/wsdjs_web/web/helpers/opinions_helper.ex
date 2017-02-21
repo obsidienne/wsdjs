@@ -34,9 +34,9 @@ defmodule WsdjsWeb.OpinionsHelper do
 
   def opinion_url(conn, kind, song, my_opinion) do
     if kind == my_opinion.kind do
-      song_opinion_path(conn, :delete, my_opinion.id)
+      api_song_opinion_path(conn, :delete, my_opinion.id)
     else
-      song_song_opinion_path(conn, :create, song, kind: kind)
+      api_song_opinion_path(conn, :create, song, kind: kind)
     end
   end
 

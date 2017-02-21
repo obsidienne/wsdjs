@@ -19,6 +19,10 @@ defmodule WsdjsWeb.Router do
     plug WsdjsWeb.VerifyHeader
   end
 
+  pipeline :api_auth do
+    plug WsdjsWeb.EnsureAuthenticated, handler_fn: :api_call
+  end
+
   scope "/", WsdjsWeb do
     pipe_through :browser # Use the default browser stack
 
@@ -43,7 +47,16 @@ defmodule WsdjsWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", WsdjsWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", as: :api, alias: :WsdjsWeb do
+    pipe_through [:api, :api_auth]
+
+    resources "/songs", SongController, only: [:show]
+  end
+
+  scope "/api", as: :api, alias: :WsdjsWeb do
+    pipe_through [:api, :api_auth]
+
+    post "/songs/:song_id/song_opinions", SongOpinionController, :create
+    resources "/song_opinions", SongOpinionController, only: [:delete]
+  end
 end
