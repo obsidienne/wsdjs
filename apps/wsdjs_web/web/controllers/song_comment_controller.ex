@@ -12,7 +12,9 @@ defmodule WsdjsWeb.SongCommentController do
         |> put_flash(:info, "Comment added !")
         |> redirect(to: song_path(conn, :show, song_id))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "Error on comment !")
+        |> redirect(to: song_path(conn, :show, song_id))
     end
   end
 end
