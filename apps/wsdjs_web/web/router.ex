@@ -29,15 +29,17 @@ defmodule WsdjsWeb.Router do
     resources "/songs", SongController, only: [:show] do
       resources "/song_opinions", SongOpinionController, only: [:create]
     end
-    resources "/song_opinions", SongOpinionController, only: [:delete]
-    resources "/tops", TopController, only: [:index, :show, :create, :new]
-    resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/tops", TopController, only: [:index, :show]
+    resources "/sessions", SessionController, only: [:new, :create]
   end
 
   scope "/", WsdjsWeb do
     pipe_through [:browser, :browser_auth]
 
     resources "/hottests", HottestController, only: [:create, :new]
+    resources "/song_opinions", SongOpinionController, only: [:delete]
+    resources "/tops", TopController, only: [:create, :new]
+    resources "/sessions", SessionController, only: [:delete]
   end
 
   # Other scopes may use custom stacks.
