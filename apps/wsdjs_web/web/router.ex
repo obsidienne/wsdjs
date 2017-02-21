@@ -7,11 +7,12 @@ defmodule WsdjsWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug WsdjsWeb.Auth
+    plug WsdjsWeb.VerifySession
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug WsdjsWeb.VerifyHeader
   end
 
   scope "/", WsdjsWeb do
