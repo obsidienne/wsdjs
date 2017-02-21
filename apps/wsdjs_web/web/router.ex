@@ -21,7 +21,9 @@ defmodule WsdjsWeb.Router do
     get "/search", SearchController, :index
     resources "/users", UserController, only: [:index, :show]
     resources "/hottests", HottestController, only: [:index, :create, :new]
-    resources "/songs", SongController, only: [:show]
+    resources "/songs", SongController, only: [:show] do
+      resources "/comment", SongCommentController, only: [:create]
+    end
     resources "/tops", TopController, only: [:index, :show, :create, :new]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
   end

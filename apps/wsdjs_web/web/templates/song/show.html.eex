@@ -31,4 +31,6 @@
   </div>
 </section>
 
-<%= render @view_module, "song_comment.html", comments: @song.comments, conn: @conn %>
+<%= render @view_module, "song_comment_form.html", conn: @conn, changeset: Wcsp.SongComment.changeset(%Wcsp.SongComment{}), action: song_song_comment_path(@conn, :create, @song) %>
+
+<%= render @view_module, "song_comment.html", conn: @conn, comments: Enum.reverse(@song.comments) %>
