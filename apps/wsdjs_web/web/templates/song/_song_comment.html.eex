@@ -1,19 +1,15 @@
-<ul class="comments-container">
-	<%= for comment <- Enum.reverse(@comments) do %>
-	    <li class="comment">
-	      <div class="comment-avatar">
-	        <img src="<%= href_user_avatar(comment.user.avatar) %>" alt="<%= user_avatar_alt(comment.user) %>">
-	      </div>
+<li class="comment">
+  <div class="comment-avatar">
+    <img src="<%= href_user_avatar(@comment.user.avatar) %>" alt="<%= user_avatar_alt(@comment.user) %>">
+  </div>
 
-	      <div class="comment-box">
-	        <header class="comment-head">
-	          <a class="comment-author" href="<%= user_path(@conn, :show, comment.user) %>"><%= comment.user.name %></a>
-              <time class="timeago" title="<%= comment.inserted_at %>" datetime="<%= DateTime.to_iso8601(DateTime.from_naive!(comment.inserted_at, "Etc/UTC")) %>"><%= comment.inserted_at %></time>
-	        </header>
-	        <div class="comment-content">
-	            <%= comment.text %>
-	        </div>
-	      </div>
-	    </li>
-	<% end %>
-</ul>
+  <div class="comment-box">
+    <header class="comment-head">
+      <a class="comment-author" href="<%= user_path(@conn, :show, @comment.user) %>"><%= @comment.user.name %></a>
+        <time class="timeago" title="<%= @comment.inserted_at %>" datetime="<%= DateTime.to_iso8601(DateTime.from_naive!(@comment.inserted_at, "Etc/UTC")) %>"><%= @comment.inserted_at %></time>
+    </header>
+    <div class="comment-content">
+        <%= @comment.text %>
+    </div>
+  </div>
+</li>

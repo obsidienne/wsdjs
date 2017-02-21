@@ -32,4 +32,7 @@
 </section>
 
 <%= render @view_module, "_song_comment_form.html", conn: @conn, song: @song, changeset:  @comment_changeset %>
-<%= render @view_module, "_song_comment.html", conn: @conn, comments: @song.comments %>
+
+<ul class="comments-container">
+  <%= render_many Enum.reverse(@song.comments), @view_module, "_song_comment.html", as: :comment, conn: @conn %>
+</ul>
