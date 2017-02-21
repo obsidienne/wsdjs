@@ -7,8 +7,8 @@
 
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
 
-    <%= render_existing(@view_module, "meta." <> @view_template, assigns) ||
-        render(WsdjsWeb.LayoutView, "meta.html", assigns) %>    
+    <%= render_existing(@view_module, "_meta." <> @view_template, assigns) ||
+        render(WsdjsWeb.LayoutView, "meta.html", assigns) %>
   </head>
 
   <body data-js-view-name="<%= js_view_name(@conn, @view_template) %>">

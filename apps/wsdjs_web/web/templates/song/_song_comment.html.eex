@@ -1,5 +1,5 @@
 <ul class="comments-container">
-	<%= for comment <- @comments do %>
+	<%= for comment <- Enum.reverse(@comments) do %>
 	    <li class="comment">
 	      <div class="comment-avatar">
 	        <img src="<%= href_user_avatar(comment.user.avatar) %>" alt="<%= user_avatar_alt(comment.user) %>">
