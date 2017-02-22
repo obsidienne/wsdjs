@@ -48,7 +48,7 @@ defmodule WsdjsWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api", as: :api, alias: :WsdjsWeb do
-    pipe_through [:api, :api_auth]
+    pipe_through :api
 
     resources "/songs", SongController, only: [:show]
   end
