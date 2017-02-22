@@ -19,7 +19,9 @@
   </div>
 </section>
 
+<%= if @conn.assigns[:current_user] do %>
 <%= render @view_module, "_song_comment_form.html", conn: @conn, song: @song, changeset:  @comment_changeset %>
+<% end %>
 
 <ul class="comments-container">
   <%= render_many Enum.reverse(@song.comments), @view_module, "_song_comment.html", as: :comment, conn: @conn %>
