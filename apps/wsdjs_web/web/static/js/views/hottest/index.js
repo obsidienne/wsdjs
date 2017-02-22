@@ -39,14 +39,13 @@ export default class View extends MainView {
         var self = e.target;
         var method = e.target.dataset.method;
         var url = e.target.href;
-        var csrf = document.querySelector("[name=csrf-token]").getAttribute("content");
         var token = document.querySelector("[name=channel_token]").getAttribute("content");
 
         var request = new XMLHttpRequest();
         request.open(method, url, true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        request.setRequestHeader('x-csrf-token', csrf);
         request.setRequestHeader('Authorization', "Bearer " + token);
+        request.setRequestHeader('Accept', 'application/json');
 
         request.onload = function() {
           if (this.status >= 200 && this.status < 400) {

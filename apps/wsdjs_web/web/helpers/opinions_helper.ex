@@ -29,7 +29,7 @@ defmodule WsdjsWeb.OpinionsHelper do
   end
 
   def opinion_url(conn, kind, song, my_opinion) when is_nil(my_opinion) do
-    song_song_opinion_path(conn, :create, song, kind: kind)
+    api_song_opinion_path(conn, :create, song, kind: kind)
   end
 
   def opinion_url(conn, kind, song, my_opinion) do
