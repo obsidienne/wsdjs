@@ -28,7 +28,7 @@ defmodule WsdjsWeb.OpinionsHelper do
       link to: opinion_url(conn, kind, song, my_opinion),
            class: html_class(kind, my_opinion),
            "data-method": data_method(kind, my_opinion) do
-        raw("<span>#{qty}</span>")
+        qty
       end
     else
       link to: opinion_url(conn, kind, song, my_opinion),
@@ -37,7 +37,7 @@ defmodule WsdjsWeb.OpinionsHelper do
            "data-balloon-pos": "up",
            "data-balloon-break": "true",
            "data-method": data_method(kind, my_opinion) do
-        raw("<span>#{qty}</span>")
+        qty
       end
     end
   end
