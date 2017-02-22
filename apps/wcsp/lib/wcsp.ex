@@ -40,7 +40,7 @@ defmodule Wcsp do
     Wcsp.find_song!(user, id: id)
     |> Wcsp.Repo.preload(:comments)
     |> Wcsp.Repo.preload(comments: :user)
-    |> Wcsp.Repo.preload(user: :avatar)
+    |> Wcsp.Repo.preload(comments: [user: :avatar])
   end
 
   def create_song(user, params) do
