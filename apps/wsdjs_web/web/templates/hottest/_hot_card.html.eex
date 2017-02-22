@@ -24,6 +24,6 @@
     </div>
   </a>
   <div class="panel-footer song-opinions">
-    <%= render "_votes.html", song: @song, conn: @conn %>
+    <%= render "_opinions.html", song: @song, conn: @conn %>
   </div>
 </article>

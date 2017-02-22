@@ -12,6 +12,7 @@ defmodule Wcsp.Song do
     has_one :album_art, Wcsp.AlbumArt
     has_many :comments, Wcsp.SongComment
     has_many :ranks, Wcsp.Rank
+    has_many :song_opinions, Wcsp.SongOpinion
 
     timestamps()
   end

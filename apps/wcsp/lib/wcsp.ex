@@ -23,7 +23,8 @@ defmodule Wcsp do
 
   def hot_songs(user) do
     Wcsp.Scope.scope(Song, user)
-    |> preload([:album_art, :user])
+    |> preload([:album_art, :user, :song_opinions, :comments])
+    |> preload(song_opinions: :user)
     |> order_by(desc: :inserted_at)
     |> Repo.all
   end
@@ -31,7 +32,8 @@ defmodule Wcsp do
   def find_song!(user, clauses) do
     Wcsp.Scope.scope(Song, user)
     |> Repo.get_by!(clauses)
-    |> Repo.preload([:album_art, :user])
+    |> Repo.preload([:album_art, :user, :song_opinions, :comments])
+    |> Repo.preload(song_opinions: :user)
   end
 
   def find_song_with_comments!(user, id: id) do
@@ -52,6 +54,26 @@ defmodule Wcsp do
     |> put_assoc(:user, user)
     |> put_assoc(:song, song)
     |> Repo.insert
+  end
+
+  def upsert_opinion!(user, song, kind) do
+    song_opinion = case Repo.get_by(SongOpinion, user_id: user.id, song_id: song.id) do
+      nil  -> SongOpinion.build(%{kind: kind, user_id: user.id, song_id: song.id})
+      song_opinion -> song_opinion
+    end
+
+    song_opinion
+    |> SongOpinion.changeset(%{kind: kind})
+    |> Repo.insert_or_update
+  end
+
+  def delete_song_opinion!(user, clauses) do
+    Repo.get_by(SongOpinion, clauses)
+    |> Repo.delete!()
+  end
+
+  def find_song_opinion(clauses) do
+    Repo.get_by(SongOpinion, clauses)
   end
 
   def tops do

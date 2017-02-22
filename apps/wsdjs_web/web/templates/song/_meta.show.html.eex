@@ -1,7 +1,10 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+<%= if user = @conn.assigns[:current_user] do %>
+<%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", user.id) %>
 <%= csrf_meta_tag() %>
+<% end %>
 
 <title>Hello WsdjsWeb!</title>
 

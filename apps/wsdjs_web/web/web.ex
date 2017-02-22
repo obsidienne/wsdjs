@@ -52,6 +52,9 @@ defmodule WsdjsWeb.Web do
       import WsdjsWeb.Router.Helpers
       import WsdjsWeb.ErrorHelpers
       import WsdjsWeb.Gettext
+
+      # Import custom helpers
+      import WsdjsWeb.OpinionsHelper
     end
   end
 
