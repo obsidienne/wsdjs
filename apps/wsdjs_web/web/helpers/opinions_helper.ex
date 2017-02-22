@@ -7,9 +7,7 @@ defmodule WsdjsWeb.OpinionsHelper do
     qty = opinions_count(kind, song.song_opinions)
 
     if qty == 0 do
-      content_tag :span, class: "song-opinion song-#{kind}" do
-         qty
-       end
+      content_tag :span, qty, class: "song-opinion song-#{kind}"
     else
       content_tag :span,
                   class: "song-opinion song-#{kind}",
@@ -43,46 +41,22 @@ defmodule WsdjsWeb.OpinionsHelper do
       end
     end
   end
-  #data-balloon-break
 
-  def opinions_count("like", opinions), do: Enum.count(opinions, fn(x) -> x.kind == "like" end)
-  def opinions_count("up", opinions), do: Enum.count(opinions, fn(x) -> x.kind == "up" end)
-  def opinions_count("down", opinions), do: Enum.count(opinions, fn(x) -> x.kind == "down" end)
+  def opinions_count(kind, opinions), do: Enum.count(opinions, fn(x) -> x.kind == kind end)
 
-  def data_method(_kind, my_opinion) when is_nil(my_opinion), do: "POST"
-  def data_method(kind, my_opinion) do
-    if kind == my_opinion.kind do
-      "DELETE"
-    else
-      "POST"
-    end
-  end
+  def data_method(kind, %Wcsp.SongOpinion{kind: my_kind} = my_opinion) when kind == my_kind, do: "DELETE"
+  def data_method(_, _), do: "POST"
 
-  def opinion_url(conn, kind, song, my_opinion) when is_nil(my_opinion) do
-    api_song_opinion_path(conn, :create, song, kind: kind)
+  def opinion_url(conn, kind, song, %Wcsp.SongOpinion{kind: my_kind} = my_opinion) when kind == my_kind do
+    api_song_opinion_path(conn, :delete, my_opinion.id)
   end
+  def opinion_url(conn, kind, song, _), do: api_song_opinion_path(conn, :create, song, kind: kind)
 
-  def opinion_url(conn, kind, song, my_opinion) do
-    if kind == my_opinion.kind do
-      api_song_opinion_path(conn, :delete, my_opinion.id)
-    else
-      api_song_opinion_path(conn, :create, song, kind: kind)
-    end
-  end
-
-  def html_class(kind, my_opinion) when is_nil(my_opinion) do
-    "song-opinion song-#{kind}"
-  end
-  def html_class(kind, my_opinion) do
-    if kind == my_opinion.kind do
-      "song-opinion song-#{kind} active"
-    else
-      "song-opinion song-#{kind}"
-    end
-  end
+  def html_class(kind, %Wcsp.SongOpinion{kind: my_kind} = my_opinion) when kind == my_kind, do: "song-opinion song-#{kind} active"
+  def html_class(kind, _), do: "song-opinion song-#{kind}"
 
   def opinions_names(kind, opinions) do
     kind_opinions = Enum.filter(opinions, fn(x) -> x.kind == kind end)
-    Enum.map_join(Enum.take(kind_opinions, 5),  "\u000A", &(&1.user.name))
+    Enum.map_join(Enum.take(kind_opinions, 5), "\u000A", &(&1.user.name))
   end
 end
