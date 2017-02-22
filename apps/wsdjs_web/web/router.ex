@@ -24,6 +24,15 @@ defmodule WsdjsWeb.Router do
   end
 
   scope "/", WsdjsWeb do
+    pipe_through [:browser, :browser_auth]
+
+    resources "/hottests", HottestController, only: [:create, :new]
+    resources "/song_opinions", SongOpinionController, only: [:delete]
+    resources "/tops", TopController, only: [:create, :new]
+    resources "/sessions", SessionController, only: [:delete]
+  end
+
+  scope "/", WsdjsWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", HottestController, :index
@@ -38,13 +47,11 @@ defmodule WsdjsWeb.Router do
     resources "/sessions", SessionController, only: [:new, :create]
   end
 
-  scope "/", WsdjsWeb do
-    pipe_through [:browser, :browser_auth]
+  scope "/api", as: :api, alias: :WsdjsWeb do
+    pipe_through [:api, :api_auth]
 
-    resources "/hottests", HottestController, only: [:create, :new]
+    post "/songs/:song_id/song_opinions", SongOpinionController, :create
     resources "/song_opinions", SongOpinionController, only: [:delete]
-    resources "/tops", TopController, only: [:create, :new]
-    resources "/sessions", SessionController, only: [:delete]
   end
 
   # Other scopes may use custom stacks.
@@ -52,12 +59,5 @@ defmodule WsdjsWeb.Router do
     pipe_through :api
 
     resources "/songs", SongController, only: [:show]
-  end
-
-  scope "/api", as: :api, alias: :WsdjsWeb do
-    pipe_through [:api, :api_auth]
-
-    post "/songs/:song_id/song_opinions", SongOpinionController, :create
-    resources "/song_opinions", SongOpinionController, only: [:delete]
   end
 end
