@@ -1,12 +1,6 @@
-<%= if @conn.assigns[:current_user] do %>
 <%= opinion_link("down", @conn, @song, @conn.assigns[:current_user]) %>
 <%= opinion_link("like", @conn, @song, @conn.assigns[:current_user]) %>
 <%= opinion_link("up", @conn, @song, @conn.assigns[:current_user]) %>
-<% else %>
-<span class="song-opinion song-down"><%= opinions_count("down", @song.song_opinions) %></span>
-<span class="song-opinion song-like"><%= opinions_count("like", @song.song_opinions) %></span>
-<span class="song-opinion song-up"><%= opinions_count("up", @song.song_opinions) %></span>
-<% end %>
 
 <a class="text-muted" href="<%= song_path(@conn, :show, @song) %>">
   <%= if Enum.count(@song.comments) > 0 do %>

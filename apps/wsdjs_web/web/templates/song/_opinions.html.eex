@@ -1,9 +1,3 @@
-<%= if @conn.assigns[:current_user] do %>
 <%= opinion_link("down", @conn, @song, @conn.assigns[:current_user]) %>
 <%= opinion_link("like", @conn, @song, @conn.assigns[:current_user]) %>
 <%= opinion_link("up", @conn, @song, @conn.assigns[:current_user]) %>
-<% else %>
-<span class="song-opinion song-down"><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "down" end) %></span>
-<span class="song-opinion song-like"><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "like" end) %></span>
-<span class="song-opinion song-up"><%= Enum.count(@song.song_opinions, fn(x) -> x.kind == "up" end) %></span>
-<% end %>
