@@ -57,6 +57,13 @@ defmodule WsdjsWeb.OpinionsHelper do
 
   def opinions_names(kind, opinions) do
     kind_opinions = Enum.filter(opinions, fn(x) -> x.kind == kind end)
-    Enum.map_join(Enum.take(kind_opinions, 5), "\u000A", &(&1.user.name))
+    names = Enum.map_join(Enum.take(kind_opinions, 4), "\u000A", &(&1.user.name))
+
+    remaining_qty = Enum.count(opinions, fn(x) -> x.kind == kind end) - 4
+    if remaining_qty > 0 do
+      names <> "\u000A+ #{remaining_qty} dj"
+    else
+      names
+    end
   end
 end
