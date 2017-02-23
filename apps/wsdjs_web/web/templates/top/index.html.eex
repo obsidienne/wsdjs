@@ -1,8 +1,6 @@
 <main class="container">
   <section class="row">
-      <%= for top <- @tops do %>
-        <%= render "_top.html", top: top, conn: @conn %>
-      <% end %>
+    <%= render_many @tops, @view_module, "_top.html", conn: @conn %>
   </section>
 </main>
 
