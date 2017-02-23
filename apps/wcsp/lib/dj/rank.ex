@@ -1,4 +1,16 @@
 defmodule Wcsp.Rank do
+  @moduledoc """
+  This is the Rank module. It aims to store for a Wcsp.Top :
+    - the songs
+    - the total likes/votes/bonus
+    - the position
+  It does not store the DJ votes !
+
+  likes: filled at the creation according
+  votes: filled and freezed when the voting for a Top is closed
+  bonus: filled only if the top is in the counting status and freezed on publish
+  position: filled and freezed in publish   
+  """
   use Wcsp.Model
 
   schema "ranks" do
