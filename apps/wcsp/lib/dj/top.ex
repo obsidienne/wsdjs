@@ -22,6 +22,16 @@ defmodule Wcsp.Top do
     |> assoc_constraint(:user)
   end
 
+  def create_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:due_date])
+    |> validate_required([:due_date])
+    |> put_change(:status, "creating")
+    |> validate_inclusion(:status, ["creating"])
+    |> unique_constraint(:due_date)
+    |> assoc_constraint(:user)
+  end
+
   def tops() do
     from p in Top, order_by: [desc: p.due_date]
   end

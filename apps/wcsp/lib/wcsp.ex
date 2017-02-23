@@ -86,6 +86,12 @@ defmodule Wcsp do
     top_with_songs = Repo.preload top, ranks: Wcsp.Rank.for_top(id)
   end
 
+  def create_top(user, params) do
+    Top.create_changeset(%Top{}, params)
+    |> put_assoc(:user, user)
+    |> Repo.insert
+  end
+
   def search(user, q) do
   query = from s in Wcsp.Scope.scope(Song, user),
     join: aa in assoc(s, :album_art),
