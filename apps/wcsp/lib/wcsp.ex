@@ -86,8 +86,14 @@ defmodule Wcsp do
     top_with_songs = Repo.preload top, ranks: Wcsp.Rank.for_top(id)
   end
 
-  def create_top(user, params) do
+  def create_top(user, %{"due_date" => due_date} = params) do
+    dt = Ecto.Date.cast!(due_date)
+    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, dt.day, 0, 0, 0)
+    query = from s in Song, where: s.inserted_at >= ^naive_dtime and s.inserted_at < date_add(^dt, 1, "month")
+    songs = Repo.all(query)
+
     Top.create_changeset(%Top{}, params)
+    |> put_assoc(:songs, songs)
     |> put_assoc(:user, user)
     |> Repo.insert
   end

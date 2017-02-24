@@ -7,6 +7,7 @@ defmodule Wcsp.Top do
 
     belongs_to :user, Wcsp.User
     has_many :ranks, Wcsp.Rank
+    many_to_many :songs, Wcsp.Song, join_through: Wcsp.Rank
     timestamps()
   end
 
