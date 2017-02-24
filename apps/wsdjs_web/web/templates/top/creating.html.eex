@@ -1,0 +1,22 @@
+<main class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <%= if @current_user && @current_user.id == @top.user_id do %>
+      <section class="container">
+        <nav>
+          <ol class="cd-multi-steps text-center">
+            <li class="visited"><em>Create</em></li>
+            <li class="current"><em>Check</em></li>
+            <li><em>Voting</em></li>
+            <li><em>Count</em></li>
+            <li><em>Publish</em></li>
+          </ol>
+        </nav>
+      </section>
+      <% end %>
+      <h3>
+        TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time>
+      </h3>
+    </div>
+  </div>
+</main>

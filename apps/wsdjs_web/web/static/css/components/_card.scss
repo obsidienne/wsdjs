@@ -12,9 +12,6 @@
   border-radius: .25em;
 }
 
-.wsdjs-card-top-container {
-  position: relative;
-}
 .wsdjs-card-top {
   margin-bottom: 20px;
   background-color: #fff;
@@ -45,23 +42,6 @@
       margin-bottom: 2px;
     }
 
-  }
-}
-
-.top-creator-details {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  min-height: 30px;
-  text-align: center;
-  background-color: rgba(66, 66, 66, .9);
-  color: white;
-  line-height: 30px;
-
-  &:hover {
-    color: white;
-    text-decoration: underline;
   }
 }
 

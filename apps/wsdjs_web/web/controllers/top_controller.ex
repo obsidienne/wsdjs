@@ -9,7 +9,15 @@ defmodule WsdjsWeb.TopController do
   end
 
   def show(conn, %{"id" => id}) do
-    render conn, "show.html", top: Wcsp.top(id)
+    top = Wcsp.top(id)
+
+    case top.status do
+      "creating" -> top_creating(conn, top)
+      "voting" -> top_voting(conn, top)
+      "counting" -> top_counting(conn, top)
+      "published" -> top_published(conn, top)
+    end
+
   end
 
   def new(conn, _params) do
@@ -30,5 +38,24 @@ defmodule WsdjsWeb.TopController do
         |> put_flash(:error, "Something went wrong !")
         |> render("new.html", changeset: changeset)
     end
+  end
+
+  @doc """
+  Only visible by an admin or the top creator
+  """
+  defp top_creating(conn, top) do
+    render conn, "creating.html", top: top
+  end
+
+  defp top_voting(conn, top) do
+    render conn, "voting.html", top: top
+  end
+
+  defp top_counting(conn, top) do
+    render conn, "counting.html", top: top
+  end
+
+  defp top_published(conn, top) do
+    render conn, "published.html", top: top
   end
 end
