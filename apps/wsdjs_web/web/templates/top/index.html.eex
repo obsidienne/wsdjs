@@ -6,6 +6,6 @@
 
 <%= if Wcsp.Policy.can?(@conn.assigns.current_user, :create, %Wcsp.Top{}) do %>
 <div id="fab-container">
-  <a class="btn btn-fab" title="Create a new top" href="<%= top_path(@conn, :new) %>">
+  <a class="btn btn-fab" title="Create a new top" href="<%= top_path(@conn, :new) %>"></a>
 </div>
 <% end %>
