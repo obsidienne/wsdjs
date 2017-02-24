@@ -15,8 +15,8 @@
   <div class="row">
     <%= form_for @changeset, top_path(@conn, :create), [class: "col-xs-12"], fn f -> %>
       <div class="form-group">
-        <%= label f, :due_date, class: "control-label" %>
-        <%= text_input f, :due_date, placeholder: "Month: YYYY-MM-DD", class: "form-control", required: "required" %>
+        <%= label f, :due_date, "Top of", class: "control-label" %>
+        <%= text_input f, :due_date, placeholder: "Month: YYYY-MM-DD", class: "form-control", required: "required", type: "date" %>
         <%= error_tag f, :due_date %>
         <span class="help-block">The date must be the <strong>first</strong> day of the month.</span>
       </div>
