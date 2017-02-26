@@ -12,6 +12,6 @@
 
 <%= if Wcsp.Policy.can?(@conn.assigns.current_user, :create, %Wcsp.Song{}) do %>
 <div id="fab-container">
-  <a class="btn btn-fab" title="Suggest a song" href="<%= hottest_path(@conn, :new) %>"></a>
+  <a class="fab-btn" title="Suggest a song" href="<%= hottest_path(@conn, :new) %>"></a>
 </div>
 <% end %>
