@@ -2,30 +2,6 @@
 // all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
 
-.tops-index {
-  padding-top: 70px;
-}
-
-.glheader {
-  box-sizing: border-box;
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 15px;
-  height: 50px;
-  -webkit-user-select: none;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-
-  & > * {
-    align-self: center;
-  }
-}
-
 .glheader__user .icon-navigator-toggle {
   background-image: svg-url(map-get($svg-icon-map, navigator-toggle));
   background-size: 30px 30px;
@@ -96,49 +72,6 @@
   display: inline-block;
 }
 
-.glheader__menu-icon--account {
-  position: relative;
-  display: inline-block;
-  width: 32px;
-  height: 40px;
-  padding-top: 10px;
-  margin-left: 12px;
-}
-
-.glheader__menu-icon--signin {
-  position: relative;
-  display: inline-block;
-  width: 82px;
-  height: 40px;
-  padding-top: 10px;
-  margin-left: 12px;
-}
-
-.glheader__user__signin--container {
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-  position: relative;
-  width: 80px;
-  height: 30px;
-  z-index: 2;
-  color:#79589F;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.glheader__menu--navigator {
-  position: absolute;
-  right: 56px;
-  top: 56px;
-}
-
-.glheader__menu--account {
-  position: absolute;
-  right: 8px;
-  top: 56px;
-}
-
 .glheader__menu__item {
   position: relative;
   display: block;
@@ -170,35 +103,3 @@
   background-color: #F7F8FB;
   color: #61467f;
 }
-
-.glheader__menu__item--account-details {
-  height: auto;
-  display: block;
-  line-height: normal;
-  text-align: center;
-  color: #3F3F44;
-  padding: 20px 10px 20px;
-}
-
-.glheader__account-details__name {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.glheader__account-details__email {
-  font-size: 13px;
-  display: block;
-  color: #96A3B6;
-  width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-
-.glheader__menu__item--hotsongs { background-image: svg-url(map-get($svg-icon-map, hotsongs)); }
-.glheader__menu__item--tops { background-image: svg-url(map-get($svg-icon-map, tops)); }
-.glheader__menu__item--users { background-image: svg-url(map-get($svg-icon-map, users)); }
-.glheader__menu__item--adduser { background-image: svg-url(map-get($svg-icon-map, adduser)); }
-.glheader__menu__item--settings { background-image: svg-url(map-get($svg-icon-map, settings)); }
-.glheader__menu__item--signout { background-image: svg-url(map-get($svg-icon-map, signout)); }

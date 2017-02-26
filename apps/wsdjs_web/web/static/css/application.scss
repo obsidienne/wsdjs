@@ -19,11 +19,18 @@
 @import 'layout';
 
 @import
+  'components/glmenu',
+  'components/glmenu-search',
+  'components/glmenu-app',
+  'components/glmenu-signin',
+  'components/glmenu-profil';
+
+@import
   'components/card-song',
+  'components/card-song-top',
   'components/card-shame',
   'components/card-song-mini',
   'components/card-top',
-  'components/search',
   'components/song-header',
   'components/song-comment',
   'components/multi-step',

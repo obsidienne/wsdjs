@@ -1,0 +1,23 @@
+
+.glheader__user__signin--container {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  position: relative;
+  width: 80px;
+  height: 30px;
+  z-index: 2;
+  color:#79589F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.glheader__menu-icon--signin {
+  position: relative;
+  display: inline-block;
+  width: 82px;
+  height: 40px;
+  padding-top: 10px;
+  margin-left: 12px;
+}

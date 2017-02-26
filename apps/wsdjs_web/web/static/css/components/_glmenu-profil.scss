@@ -1,0 +1,48 @@
+
+
+
+.glheader__menu--account {
+  position: absolute;
+  right: 8px;
+  top: 56px;
+}
+
+
+.glheader__menu-icon--account {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 40px;
+  padding-top: 10px;
+  margin-left: 12px;
+}
+
+
+.glheader__menu__item--account-details {
+  height: auto;
+  display: block;
+  line-height: normal;
+  text-align: center;
+  color: #3F3F44;
+  padding: 20px 10px 20px;
+}
+
+.glheader__account-details__name {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.glheader__account-details__email {
+  font-size: 13px;
+  display: block;
+  color: #96A3B6;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+
+.glheader__menu__item--settings { background-image: svg-url(map-get($svg-icon-map, settings)); }
+.glheader__menu__item--signout { background-image: svg-url(map-get($svg-icon-map, signout)); }

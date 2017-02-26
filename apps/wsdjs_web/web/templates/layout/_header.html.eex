@@ -7,7 +7,7 @@
 
   <div class="glsearch">
     <div class="glsearch__filter__wrap">
-      <i class="icon icon-search-quickjump"></i>
+      <i class="icon-search-quickjump"></i>
       <input id="glsearch" placeholder="Search song by artist or title..." type="text" class="form-control glsearch__filter" autocomplete="off" spellcheck="false">
     </div>
 
@@ -18,7 +18,7 @@
   <div class="glheader__user">
     <%= if @current_user do %>
     <a class="glheader__menu-icon">
-      <div class="icon icon-navigator-toggle"></div>
+      <div class="icon-navigator-toggle"></div>
     </a>
 
     <div class="glheader__menu glheader__menu--navigator">
