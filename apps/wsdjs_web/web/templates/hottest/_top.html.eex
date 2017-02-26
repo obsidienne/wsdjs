@@ -1,0 +1,13 @@
+<article class="card-song-top">
+  <header>
+    <div class="song-cover">
+      <img class="img-responsive song-art" width="250" height="250" src="<%= href_song_art(@rank.song.album_art)%>">
+    </div>
+  </header>
+
+  <%= link to: song_path(@conn, :show, @rank.song), class: "text-muted card-song-body" do %>
+    <span class="card-song-top-position"><%= @rank.position %></span>
+    <span><%= @rank.song.title %></span>
+    <span>suggested by <%= @rank.song.user.name %></span>
+  <% end %>
+</article>

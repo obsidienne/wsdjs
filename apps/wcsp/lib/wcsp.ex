@@ -21,12 +21,32 @@ defmodule Wcsp do
     |> Repo.preload(:avatar)
   end
 
+  @doc """
+  the current and previous month
+  """
   def hot_songs(user) do
-    Wcsp.Scope.scope(Song, user)
-    |> preload([:album_art, :user, :song_opinions, :comments])
-    |> preload(song_opinions: :user)
-    |> order_by(desc: :inserted_at)
-    |> Repo.all
+  #  {year, month, sunday}
+    dt = DateTime.to_date(DateTime.utc_now)
+    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
+
+    query = from s in Wcsp.Scope.scope(Song, user),
+      preload: [:album_art, :user, :song_opinions, :comments],
+      preload: [song_opinions: :user],
+      where: s.inserted_at > date_add(^naive_dtime, -1, "month")
+
+    Repo.all query
+  end
+
+  def last_top_10(user) do
+    Wcsp.Scope.scope(Top, user)
+    |> order_by([desc: :due_date])
+    |> where(status: "published")
+    |> limit(1)
+    |> Repo.one
+    |> Repo.preload(ranks: Wcsp.Rank.for_tops_with_limit(10))
+    |> Repo.preload(ranks: :song)
+    |> Repo.preload(ranks: [song: :album_art])
+    |> Repo.preload(ranks: [song: :user])
   end
 
   def find_song!(user, clauses) do

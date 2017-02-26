@@ -9,7 +9,7 @@ defmodule Wcsp.Rank do
   likes: filled at the creation according
   votes: filled and freezed when the voting for a Top is closed
   bonus: filled only if the top is in the counting status and freezed on publish
-  position: filled and freezed in publish   
+  position: filled and freezed in publish
   """
   use Wcsp.Model
 
@@ -54,7 +54,7 @@ defmodule Wcsp.Rank do
       ) as rn FROM ranks
       """),
     where: p.rn <= ^per and p.id == q.id,
-    order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
+    order_by: [asc: q.position],
     preload: [song: :album_art]
   end
 end
