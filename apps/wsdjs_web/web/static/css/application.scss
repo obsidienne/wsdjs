@@ -18,12 +18,7 @@
 @import 'functions';
 @import 'layout';
 
-@import
-  'components/glmenu',
-  'components/glmenu-search',
-  'components/glmenu-app',
-  'components/glmenu-signin',
-  'components/glmenu-profil';
+@import 'components/glmenu';
 
 @import
   'components/card-song',

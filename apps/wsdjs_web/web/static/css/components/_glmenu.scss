@@ -18,6 +18,51 @@
   }
 }
 
+.glheader__user .icon-navigator-toggle {
+  background-image: svg-url(map-get($svg-icon-map, navigator-toggle));
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 32px;
+  height: 50px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.glheader__user {
+  display: flex;
+  margin-left: 5px;
+}
+
+.glheader__user__avatar--container {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.glheader__menu__item--account-details .glheader__user__avatar--container {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 10px;
+  box-shadow: none;
+}
+
+.glheader__user__avatar, .glheader__account-details__avatar {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
+}
+
+.glheader__account-details__avatar {
+  width: 48px;
+  height: 48px;
+  box-shadow: none;
+}
 
 .glheader__menu {
   width: 240px;
@@ -31,4 +76,242 @@
   z-index: 9991;
   transform: translateY(-4px);
   transition: transform ease 0.1s, opacity ease 0.1s;
+}
+
+.glheader__menu--open {
+  transform: translateY(0px);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.glheader__menu-icon {
+  display: inline-block;
+}
+
+.glheader__menu-icon--account {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 40px;
+  padding-top: 10px;
+  margin-left: 12px;
+}
+
+.glheader__menu-icon--signin {
+  position: relative;
+  display: inline-block;
+  width: 82px;
+  height: 40px;
+  padding-top: 10px;
+  margin-left: 12px;
+}
+
+.glheader__user__signin--container {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  position: relative;
+  width: 80px;
+  height: 30px;
+  z-index: 2;
+  color:#79589F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glheader__menu--navigator {
+  position: absolute;
+  right: 56px;
+  top: 56px;
+}
+
+.glheader__menu--account {
+  position: absolute;
+  right: 8px;
+  top: 56px;
+}
+
+.glheader__menu__item {
+  position: relative;
+  display: block;
+  height: 40px;
+  border-bottom: 1px solid #EEF1F6;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 40px;
+  color: #79589F;
+  padding: 0 46px;
+  background-size: 21px 23px;
+  background-repeat: no-repeat;
+  background-position: 15px 48%;
+}
+
+.glheader__menu__item:first-child {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.glheader__menu__item:last-child {
+  border-bottom: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.glheader__menu__item:hover {
+  text-decoration: none;
+  background-color: #F7F8FB;
+  color: #61467f;
+}
+
+.glheader__menu__item--account-details {
+  height: auto;
+  display: block;
+  line-height: normal;
+  text-align: center;
+  color: #3F3F44;
+  padding: 20px 10px 20px;
+}
+
+.glheader__account-details__name {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.glheader__account-details__email {
+  font-size: 13px;
+  display: block;
+  color: #96A3B6;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.glheader__menu__item--hotsongs { background-image: svg-url(map-get($svg-icon-map, hotsongs)); }
+.glheader__menu__item--tops { background-image: svg-url(map-get($svg-icon-map, tops)); }
+.glheader__menu__item--users { background-image: svg-url(map-get($svg-icon-map, users)); }
+.glheader__menu__item--adduser { background-image: svg-url(map-get($svg-icon-map, adduser)); }
+.glheader__menu__item--settings { background-image: svg-url(map-get($svg-icon-map, settings)); }
+.glheader__menu__item--signout { background-image: svg-url(map-get($svg-icon-map, signout)); }
+
+
+/*******************************************/
+/* search                                  */
+/*******************************************/
+.glsearch {
+  position: fixed;
+  top: 8px;
+  left: calc(50% - 195px);
+  z-index: 49;
+  width: 390px;
+  pointer-events: none;
+}
+
+.glsearch__filter__wrap {
+    position: relative;
+    z-index: 2;
+    transition: transform ease .1s;
+}
+
+.glsearch__filter {
+  position: relative;
+  border: none;
+  background-color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .05);
+  color: #999;
+  transform: translateY(0);
+  transition: transform ease .1s;
+  pointer-events: auto;
+  font-size: 13px;
+  -webkit-appearance: none
+}
+
+.glsearch__filter__wrap .icon-search-quickjump {
+  background-image: svg-url(map-get($svg-icon-map, quickjump));
+  width: 24px;
+  height: 24px;
+  opacity: .8;
+  position: absolute;
+  z-index: 3;
+  top: 5px;
+  left: 5px;
+}
+
+.glsearch .form-control {
+    padding-left: 30px;
+}
+
+.glsearch__results {
+    background-color: #fff;
+    border-radius: 3px;
+    position: absolute;
+    top: 48px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    box-shadow: 0 3px 20px rgba(89,105,129,.3),0 1px 2px rgba(0,0,0,.05),0 0 0 1px rgba(89,105,129,.1);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: transform ease .1s,opacity ease .1s;
+}
+
+.glsearch__results.glsearch--focused {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.glsearch__results .list-group {
+  margin-bottom: 0;
+}
+.glsearch__results .list-group-item {
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+.glsearch__results .list-group-item:hover {
+  background-color: rgba(89,105,129,.1);
+}
+
+.glsearch__results .list-group-item:first-child {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border: 0;
+}
+
+
+@media (max-width:767px) {
+    .glsearch {
+        width: 310px;
+        left: calc(50% - 155px)
+    }
+
+    .glsearch__filter__wrap {
+        width: 150px;
+        margin: 0 auto
+    }
+
+    .glsearch--focused .glsearch__filter__wrap {
+        width: calc(100% - 20px);
+        transform: translateY(10px)
+    }
+    .glsearch__results {
+        top: 0;
+        padding-top: 52px;
+        z-index: 1
+    }
+}
+
+@media (max-width:480px) {
+    .glsearch__filter__wrap {
+        width: 80px
+    }
+    .glheader__menu {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
 }
