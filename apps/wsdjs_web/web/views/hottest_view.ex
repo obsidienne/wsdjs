@@ -37,4 +37,11 @@ defmodule WsdjsWeb.HottestView do
   def sort_songs(songs) do
     Enum.sort_by(songs, fn (dt) -> Date.to_erl(dt.inserted_at) end, &>=/2)
   end
+
+  def comment_class(song) do
+    case Enum.count(song.comments) do
+      0 -> "song-comment-empty"
+      _ -> "song-comment"
+    end
+  end
 end

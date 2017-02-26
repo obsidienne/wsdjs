@@ -3,9 +3,5 @@
 <%= opinion_link("up", @conn, @song, @conn.assigns[:current_user]) %>
 
 <a class="text-muted" href="<%= song_path(@conn, :show, @song) %>">
-  <%= if Enum.count(@song.comments) > 0 do %>
-  <i class="song-comment"></i>
-  <% else %>
-  <i class="song-comment-empty"></i>
-  <% end %>
+  <i class="<%= comment_class(@song) %>"></i>
 </a>
