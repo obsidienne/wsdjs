@@ -1,10 +1,10 @@
 <li class="list-group-item">
   <a href="<%= song_path(@conn, :show, @song.id) %>">
-    <article class="minicard">
-      <div class="panel-heading">
+    <article class="minicard-song">
+      <div class="minicard-song-heading">
         <img height="75" width="75" src="<%= href_song_art(@song) %>" alt="<%= song_art_alt(@song) %>" />
       </div>
-      <div class="panel-body">
+      <div class="minicard-song-body">
         <div class="text-muted"><strong><%= @song.title %></strong></div>
         <div class="text-muted"><span><%= @song.artist %></span></div>
         <p>
