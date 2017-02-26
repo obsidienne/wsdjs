@@ -83,7 +83,8 @@ defmodule Wcsp do
 
   def top(id) do
     top = Wcsp.Top.top(id) |> Repo.one
-    top_with_songs = Repo.preload top, ranks: Wcsp.Rank.for_top(id)
+    top = Repo.preload top, :user
+    Repo.preload top, ranks: Wcsp.Rank.for_top(id)
   end
 
   def create_top(user, %{"due_date" => due_date} = params) do

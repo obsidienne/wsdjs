@@ -13,6 +13,20 @@
           </ol>
         </nav>
       </section>
+
+      <details>
+         <summary>Top details</summary>
+         <table class="table">
+            <tr>
+               <th>Created by</th>
+               <td><%= @top.user.name %></td>
+            </tr>
+            <tr>
+               <th>Created at</th>
+               <td><%= @top.inserted_at %></td>
+            </tr>
+         </table>
+      </details>
       <% end %>
       <h3>
         TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time>
