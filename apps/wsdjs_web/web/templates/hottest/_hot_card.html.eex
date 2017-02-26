@@ -10,19 +10,19 @@
     </h4>
   </a>
 
-  <a href="#" class="card-container-link">
+  <div class="card-container-link">
     <div class="panel-body">
       <h1 class="panel-title text-ellipsis"><%= link @song.title, to: song_path(@conn, :show, @song.id) %></h1>
       <h5 class="artist-name small text-muted"><%= @song.artist %></h5>
 
       <h6 class="text-muted">
         <%= gettext "suggested" %>
-        <time class="timeago" title="<%= @song.inserted_at %>" datetime="<%= DateTime.to_iso8601(DateTime.from_naive!(@song.inserted_at, "Etc/UTC")) %>"><%= @song.inserted_at %></time>
+        <time class="timeago" title="<%= NaiveDateTime.to_iso8601(@song.inserted_at) %>" datetime="<%= NaiveDateTime.to_iso8601(@song.inserted_at) %>"><%=  @song.inserted_at %></time>
       </h6>
 
       <h6 class="text-muted"><%= gettext "by" %> <%= proposed_by_link(@conn, @song) %></h6>
     </div>
-  </a>
+  </div>
   <div class="panel-footer song-opinions">
     <%= render "_opinions.html", song: @song, conn: @conn %>
   </div>

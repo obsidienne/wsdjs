@@ -7,6 +7,7 @@ defmodule Wcsp.Top do
 
     belongs_to :user, Wcsp.User
     has_many :ranks, Wcsp.Rank
+    many_to_many :songs, Wcsp.Song, join_through: Wcsp.Rank
     timestamps()
   end
 
@@ -18,6 +19,16 @@ defmodule Wcsp.Top do
     |> cast(params, @required_fields)
     |> validate_required(~w(due_date status)a)
     |> validate_inclusion(:status, @valid_status)
+    |> unique_constraint(:due_date)
+    |> assoc_constraint(:user)
+  end
+
+  def create_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:due_date])
+    |> validate_required([:due_date])
+    |> put_change(:status, "creating")
+    |> validate_inclusion(:status, ["creating"])
     |> unique_constraint(:due_date)
     |> assoc_constraint(:user)
   end

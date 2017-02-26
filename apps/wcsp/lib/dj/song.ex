@@ -13,6 +13,7 @@ defmodule Wcsp.Song do
     has_many :comments, Wcsp.SongComment
     has_many :ranks, Wcsp.Rank
     has_many :song_opinions, Wcsp.SongOpinion
+    many_to_many :tops, Wcsp.Top, join_through: Wcsp.Rank
 
     timestamps()
   end

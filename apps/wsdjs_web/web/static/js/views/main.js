@@ -7,11 +7,25 @@ export default class MainView {
   mount() {
     new glMenubar().mount();
     new glSearch().mount();
+    this._intlDate()
+
     console.log('MainView mounted');
   }
 
   unmount() {
     // This will be executed when the document unloads...
     console.log('MainView unmounted');
+  }
+
+
+  _intlDate() {
+    var options = {year: "numeric", month: "long"};
+    var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
+
+    var elements = document.querySelectorAll("time");
+    for (let i = 0; i < elements.length; i++) {
+      let datetime = Date.parse(elements[i].getAttribute("datetime"))
+      elements[i].textContent = dateTimeFormat.format(datetime);
+    }
   }
 }

@@ -1,13 +1,11 @@
 <main class="container">
   <section class="row">
-      <%= for top <- @tops do %>
-        <%= render "_top.html", top: top, conn: @conn %>
-      <% end %>
+    <%= render_many @tops, @view_module, "_top.html", conn: @conn %>
   </section>
 </main>
 
 <%= if Wcsp.Policy.can?(@conn.assigns.current_user, :create, %Wcsp.Top{}) do %>
 <div id="fab-container">
-  <a class="btn btn-fab" title="Create a new top" href="<%= top_path(@conn, :new) %>">
+  <a class="btn btn-fab" title="Create a new top" href="<%= top_path(@conn, :new) %>"></a>
 </div>
 <% end %>

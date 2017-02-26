@@ -17,6 +17,7 @@
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  position: relative;
 
   header {
     color: #333;
@@ -43,6 +44,10 @@
 
   }
 }
+
+
+
+
 
 .no-gutter > [class*='col-'] {
   padding:1px;
