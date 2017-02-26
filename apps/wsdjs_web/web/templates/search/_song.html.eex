@@ -1,0 +1,21 @@
+<li class="list-group-item">
+  <a href="<%= song_path(@conn, :show, @song.id) %>">
+    <article class="minicard">
+      <div class="panel-heading">
+        <img height="75" width="75" src="<%= href_song_art(@song) %>" alt="<%= song_art_alt(@song) %>" />
+      </div>
+      <div class="panel-body">
+        <div class="text-muted"><strong><%= @song.title %></strong></div>
+        <div class="text-muted"><span><%= @song.artist %></span></div>
+        <p>
+          <span class="label label-default"><%= @song.genre %></span>
+          <%= if @song.bpm > 0 do %>
+            <span class="label label-primary"><%= @song.bpm %> bpm</span>
+          <% end %>
+          <img height="24" width="24" class="img-circle" src="<%= proposed_by_avatar(@song) %>" alt="proposed by <%= proposed_by_display_name(@song) %>" />
+          <time class="timeago small text-muted" datetime="<%= proposed_date(@song.inserted_at) %>"><%= proposed_date(@song.inserted_at) %></time>
+        </p>
+      </div>
+    </article>
+  </a>
+</li>
