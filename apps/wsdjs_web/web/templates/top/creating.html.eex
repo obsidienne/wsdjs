@@ -25,12 +25,53 @@
                <th>Created at</th>
                <td><%= @top.inserted_at %></td>
             </tr>
+            <tr>
+               <th>Song in Top</th>
+               <td><%= Enum.count(@top.ranks) %></td>
+            </tr>
          </table>
       </details>
       <% end %>
       <h3>
         TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time>
       </h3>
+
+
+
+
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Cover</th>
+                  <th>Title</th>
+                  <th>Artist</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tbody>
+                  <%= for rank <- @top.ranks do %>
+                  <tr>
+                    <td>
+                      <a class="text-muted" target="_blank" href="<%= rank.song.url %>">
+                        <img width="50" height="50" src="<%= href_song_art(rank.song.album_art)%>" alt="L8wwdm9ej02zt4b1eep2" />
+                      </a>
+                    </td>
+                    <td>
+                      <div><a href="/songs/8a1ab8a7-000b-4e6f-95f0-7aa1da4b7aa6"><%= rank.song.title %></a></div>
+                      <span class="label label-default"><%= rank.song.genre %></span>
+                      <%= if rank.song.bpm > 0 do %>
+                      <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
+                      <% end %>
+                    </td>
+                    <td>
+                      <div><%= rank.song.artist %></div>
+                    </td>
+                  </tr>
+                  <% end %>
+              </tbody>
+            </table>
+
     </div>
   </div>
 </main>
