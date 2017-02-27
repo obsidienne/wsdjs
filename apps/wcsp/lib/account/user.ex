@@ -18,7 +18,7 @@ defmodule Wcsp.User do
 
   @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname]
 
-  def changeset(model, params \\ nil) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @allowed_fields)
     |> validate_required(:email)
