@@ -19,4 +19,7 @@ defmodule Wcsp.Scope do
     from u in User,
     where: u.admin == false
   end
+
+  # unauthenticated users cant see admin user
+  def scope(Top, nil), do: Top
 end
