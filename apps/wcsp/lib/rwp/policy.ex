@@ -1,17 +1,28 @@
 defmodule Wcsp.Policy do
   use Wcsp.Model
 
-  # Admin users are god
+  @doc """
+  admin can do anything
+  """
   def can?(%User{admin: :true}, _action, _struct), do: true
 
-  # Regular users can modify their own songs
-  def can?(%User{id: user_id, admin: :false}, _action, %Song{user_id: song_user_id})
-     when user_id == song_user_id, do: true
-  def can?(%User{}, :create, %Song{}), do: true
+  @doc """
+  User can do anything to his own suggested song
+  """
+  def can?(%User{id: user_id}, _action, %Song{user_id: user_id}), do: true
 
-  # All users can read songs
-  def can?(_user, :show, Song), do: true
+  @doc """
+  A connected user can create, show a song
+  """
+  def can?(%User{}, action, %Song{}) when action in [:create, :show], do: true
 
-  # Catch-all: deny everything else
+  @doc """
+  Not connected user can show a song. Restriction by the Song scope
+  """
+  def can?(nil, :show, %Song{}), do: true
+
+  @doc """
+  If no previous match, by default everything is denied
+  """
   def can?(_, _, _), do: false
 end
