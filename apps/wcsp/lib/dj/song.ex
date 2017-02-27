@@ -35,6 +35,27 @@ defmodule Wcsp.Song do
 
   def genre, do: @validated_genre
 
+
+  @doc """
+  Admin sees everything
+  """
+  def scoped(%User{admin: :true}), do: Song
+
+  @doc """
+  Connected user can see voting and published Top + Top he has created
+  """
+  def scoped(%User{} = user), do: Song
+
+  @doc """
+  Not connected users see nothing
+  """
+  def scoped(nil) do
+    from s in Song,
+    join: r in assoc(s, :ranks),
+    where: r.position <= 10
+  end
+
+
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
       case url |> String.to_char_list |> :http_uri.parse do

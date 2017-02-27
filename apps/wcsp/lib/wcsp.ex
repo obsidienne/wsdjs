@@ -38,7 +38,7 @@ defmodule Wcsp do
   end
 
   def last_top_10(user) do
-    Wcsp.Scope.scope(Top, user)
+    Top.scoped(user)
     |> order_by([desc: :due_date])
     |> where(status: "published")
     |> limit(1)
@@ -50,7 +50,7 @@ defmodule Wcsp do
   end
 
   def find_song!(user, clauses) do
-    Wcsp.Scope.scope(Song, user)
+    Song.scoped(user)
     |> Repo.get_by!(clauses)
     |> Repo.preload([:album_art, :user, :song_opinions, :comments])
     |> Repo.preload(song_opinions: :user)
