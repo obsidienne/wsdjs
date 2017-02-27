@@ -29,4 +29,24 @@ defmodule Wcsp.User do
   def build(%{email: email} = params) do
     changeset(%Wcsp.User{}, params)
   end
+
+
+  @doc """
+  Admin see every user
+  """
+  def scoped(%User{admin: :true}), do: User
+
+  @doc """
+  Connected user can see himself and not admin users
+  """
+  def scoped(%User{} = user) do
+    from u in User, where: u.id == ^user.id or u.admin == false
+  end
+
+  @doc """
+  Not connected users see nothing
+  """
+  def scoped(nil) do
+    from u in User, where: u.admin == false
+  end
 end

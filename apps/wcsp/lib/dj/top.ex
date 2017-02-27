@@ -48,7 +48,8 @@ defmodule Wcsp.Top do
   @doc """
   Not connected users see nothing
   """
-  def scoped(nil), do: :empty
+  def scoped(nil), do: from m in Top, where: false
+
 
 
   def tops() do
