@@ -29,7 +29,7 @@ defmodule Wcsp do
     dt = DateTime.to_date(DateTime.utc_now)
     {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
 
-    query = from s in Wcsp.Scope.scope(Song, user),
+    query = from s in Song.scoped(user),
       preload: [:album_art, :user, :song_opinions, :comments],
       preload: [song_opinions: :user],
       where: s.inserted_at > date_add(^naive_dtime, -1, "month")
@@ -120,7 +120,7 @@ defmodule Wcsp do
   end
 
   def search(user, q) do
-  query = from s in Wcsp.Scope.scope(Song, user),
+  query = from s in Song.scoped(user),
     join: aa in assoc(s, :album_art),
     join: u in assoc(s, :user),
     join: a in assoc(u, :avatar),
