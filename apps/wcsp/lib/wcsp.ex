@@ -14,6 +14,7 @@ defmodule Wcsp do
   def find_user!(clauses) do
     Repo.get_by!(User, clauses)
     |> Repo.preload(:avatar)
+    |> Repo.preload(:songs)
   end
 
   def find_user(clauses) do

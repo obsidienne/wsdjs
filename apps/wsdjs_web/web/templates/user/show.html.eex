@@ -1,1 +1,32 @@
-<%= @user.name %>
+<img src="<%= href_user_avatar(@user.avatar) %>" class="profile-img">
+
+<div class="profile-text">
+  <h1 class="profile-name"><%= @user.name %></h1>
+</div>
+
+
+<div class="profile-item">
+  <div class="profile-title">Email : <%= @user.email %></div>
+</div>
+
+<div class="profile-item">
+  <div class="profile-title">Dj name : <%= @user.djname %></div>
+</div>
+
+<div class="profile-item">
+  <div class="profile-title">Status : <%= @user.djname %></div>
+</div>
+
+<div class="profile-item">
+  <div class="profile-title">Country : <%= @user.user_country %></div>
+</div>
+
+<div class="profile-item">
+  <div class="profile-title">Last connected : <%= @user.djname %></div>
+</div>
+
+<h1 class="profile-name">Suggested song</h1>
+
+<ul class="comments-container">
+  <%= render @view_module, "_suggested_song.html", as: :song, conn: @conn %>
+</ul>
