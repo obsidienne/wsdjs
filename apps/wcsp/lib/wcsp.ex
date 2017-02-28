@@ -44,9 +44,8 @@ defmodule Wcsp do
 
   def find_song!(user, clauses) do
     Song.scoped(user)
+    |> Song.with_all()
     |> Repo.get_by!(clauses)
-    |> Repo.preload([:album_art, :user, :song_opinions, :comments])
-    |> Repo.preload(song_opinions: :user)
   end
 
   def find_song_with_comments!(user, id: id) do
@@ -113,20 +112,10 @@ defmodule Wcsp do
   end
 
   def search(user, q) do
-  query = from s in Song.scoped(user),
-    join: aa in assoc(s, :album_art),
-    join: u in assoc(s, :user),
-    join: a in assoc(u, :avatar),
-    where: fragment("artist % ?", ^q) or fragment("title % ?", ^q),
-    order_by: fragment("rank DESC"),
-    limit: 5,
-    select: %{id: s.id, artist: s.artist, title: s.title, genre: s.genre,
-              bpm: s.bpm, inserted_at: s.inserted_at,
-              album_art_cld_id: aa.cld_id, album_art_version: aa.version,
-              avatar_cld_id: a.cld_id, avatar_version: a.version,
-              name: u.name, djname: u.djname,
-              rank: fragment("COALESCE(similarity(artist, ?), 0) + COALESCE(similarity(title, ?), 0) AS rank", ^q, ^q)}
-
-    Repo.all(query)
+    Song.scoped(user)
+    |> Song.with_users()
+    |> Song.with_album_art()
+    |> Song.search(q)
+    |> Repo.all()
   end
 end

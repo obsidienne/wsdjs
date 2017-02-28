@@ -2,7 +2,7 @@
   <a href="<%= song_path(@conn, :show, @song.id) %>">
     <article class="minicard-song">
       <div class="minicard-song-heading">
-        <img height="75" width="75" src="<%= href_song_art(@song) %>" alt="<%= song_art_alt(@song) %>" />
+        <img height="75" width="75" src="<%= href_song_art(@song.album_art) %>" alt="<%= song_art_alt(@song) %>" />
       </div>
       <div class="minicard-song-body">
         <div class="text-muted"><strong><%= @song.title %></strong></div>
@@ -12,7 +12,7 @@
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
-          <img height="24" width="24" class="img-circle" src="<%= proposed_by_avatar(@song) %>" alt="proposed by <%= proposed_by_display_name(@song) %>" />
+          <img height="24" width="24" class="img-circle" src="<%= proposed_by_avatar(@song.user.avatar) %>" alt="proposed by <%= proposed_by_display_name(@song.user) %>" />
           <time class="timeago small text-muted" datetime="<%= proposed_date(@song.inserted_at) %>"><%= proposed_date(@song.inserted_at) %></time>
         </p>
       </div>

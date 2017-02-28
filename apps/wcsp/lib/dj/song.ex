@@ -56,6 +56,34 @@ defmodule Wcsp.Song do
   end
 
   @doc """
+  Search query
+  """
+  def search(query, ""), do: from q in query, where: false
+   
+  def search(query, search_query) do
+    search_query = ts_query_format(search_query)
+    ft_query =
+
+    from q in query,
+    where: fragment("""
+            (to_tsvector(
+                'english',
+                coalesce(artist, '') || ' ' ||  coalesce(title, '')
+            ) @@ to_tsquery('english', ?))
+            """, ^search_query),
+    limit: 5
+  end
+
+  defp ts_query_format(search_query) do
+    search_query
+    |> String.trim
+    |> String.split(" ")
+    |> Enum.map(&("#{&1}:*"))
+    |> Enum.join(" & ")
+  end
+
+
+  @doc """
   Preload user
   """
   def with_users(query) do
