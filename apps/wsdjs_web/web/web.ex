@@ -55,6 +55,7 @@ defmodule WsdjsWeb.Web do
 
       # Import custom helpers
       import WsdjsWeb.OpinionsHelper
+      import WsdjsWeb.SongHelper
     end
   end
 
