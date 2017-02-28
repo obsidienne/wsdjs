@@ -1,12 +1,6 @@
 defmodule WsdjsWeb.HottestView do
   use WsdjsWeb.Web, :view
 
-  def proposed_by_display_name(%{name: name, djname: djname}) when is_binary(djname) do
-    "#{name} (#{djname})"
-  end
-  def proposed_by_display_name(%{name: name}), do: name
-
-
   def proposed_by_link(conn, song = %Wcsp.Song{}) do
     Phoenix.HTML.Link.link(proposed_by_display_name(song.user),
                            to: user_path(conn, :show, song.user.id),

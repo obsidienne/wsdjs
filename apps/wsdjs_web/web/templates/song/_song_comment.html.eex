@@ -1,6 +1,6 @@
 <li class="comment">
   <div class="comment-avatar">
-    <img src="<%= href_user_avatar(@comment.user.avatar) %>" alt="<%= user_avatar_alt(@comment.user) %>">
+    <img src="<%= avatar_href(@comment.user.avatar) %>" alt="<%= user_avatar_alt(@comment.user) %>">
   </div>
 
   <div class="comment-box">
