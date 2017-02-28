@@ -1,7 +1,7 @@
 <main class="container" role="main">
   <%= for {month, songs} <- group_song_by_month(@songs) do %>
     <h1 class="page-header">
-      <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small>suggestions</small>
+      <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small><%= Enum.count(songs) %> suggestions</small>
     </h1>
 
     <div class="row">

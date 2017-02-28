@@ -6,35 +6,28 @@ defmodule Wcsp do
   """
   use Wcsp.Model
 
-  def users do
-    User
-    |> Repo.all
-  end
+  def users, do: Repo.all(User)
 
   def find_user!(clauses) do
-    Repo.get_by!(User, clauses)
-    |> Repo.preload(:avatar)
+    User
+    |> User.with_avatar()
+    |> Repo.get_by!(clauses)
   end
 
   def find_user(clauses) do
-    Repo.get_by(User, clauses)
-    |> Repo.preload(:avatar)
+    User
+    |> User.with_avatar()
+    |> Repo.get_by(clauses)
   end
 
   @doc """
   the current and previous month
   """
   def hot_songs(user) do
-  #  {year, month, sunday}
-    dt = DateTime.to_date(DateTime.utc_now)
-    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
-
-    query = from s in Song.scoped(user),
-      preload: [:album_art, :user, :song_opinions, :comments],
-      preload: [song_opinions: :user],
-      where: s.inserted_at > date_add(^naive_dtime, -1, "month")
-
-    Repo.all query
+    Song.scoped(user)
+    |> Song.with_all()
+    |> Song.last_month()
+    |> Repo.all
   end
 
   def last_top_10(user) do

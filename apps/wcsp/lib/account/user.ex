@@ -49,4 +49,13 @@ defmodule Wcsp.User do
   def scoped(nil) do
     from u in User, where: u.admin == false
   end
+
+  @doc """
+  Preload user avatar using a join
+  """
+  def with_avatar(query) do
+    from q in query,
+    join: a in assoc(q, :avatar),
+    preload: [avatar: a]
+  end
 end

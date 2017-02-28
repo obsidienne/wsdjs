@@ -55,6 +55,66 @@ defmodule Wcsp.Song do
     where: r.position <= 10
   end
 
+  @doc """
+  Preload user
+  """
+  def with_users(query) do
+    from q in query,
+    join: u in assoc(q, :user),
+    left_join: a in assoc(u, :avatar),
+    preload: [user: {u, avatar: a}]
+  end
+
+  @doc """
+  Preload comments and user comments
+  """
+  def with_comments(query) do
+    from q in query,
+    left_join: c in assoc(q, :comments),
+    left_join: u in assoc(c, :user),
+    preload: [comments: {c, user: u}]
+  end
+
+  @doc """
+  Preload album art
+  """
+  def with_album_art(query) do
+    from q in query,
+    left_join: a in assoc(q, :album_art),
+    preload: [album_art: a]
+  end
+
+  @doc """
+  Preload song opinions ans user
+  """
+  def with_song_opinions(query) do
+    from q in query,
+    left_join: s in assoc(q, :song_opinions),
+    left_join: u in assoc(s, :user),
+    preload: [song_opinions: {s, user: u}]
+  end
+
+  @doc """
+  Preload everything connected to the song
+  """
+  def with_all(query) do
+    query
+    |> Song.with_users()
+    |> Song.with_comments()
+    |> Song.with_album_art()
+    |> Song.with_song_opinions()
+  end
+
+  @doc """
+  Last month
+  """
+  def last_month(query) do
+    dt = DateTime.to_date(DateTime.utc_now)
+    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
+
+    from q in query,
+    where: q.inserted_at > date_add(^naive_dtime, -1, "month")
+  end
 
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
