@@ -49,3 +49,42 @@ body {
 .profile-title {
   color: #000000;
 }
+
+.Grid {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.Grid-cell-title {
+  flex: 0 0 40%;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.Grid-cell-artist {
+  flex: 0 0 30%;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.Grid-cell-genre {
+  flex: 0 0 15%;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.Grid-cell-bpm {
+  flex: 0 0 5%;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.Grid-image {
+  flex: 0 0 10%;
+  height: 50px;
+}
+
+img { max-width: 100%; }

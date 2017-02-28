@@ -6,27 +6,24 @@
 
 
 <div class="profile-item">
-  <div class="profile-title">Email : <%= @user.email %></div>
+  <div class="profile-title"><strong>Email :</strong> <%= @user.email %></div>
 </div>
 
 <div class="profile-item">
-  <div class="profile-title">Dj name : <%= @user.djname %></div>
+  <div class="profile-title"><strong>Dj name :</strong> <%= @user.djname %></div>
 </div>
 
 <div class="profile-item">
-  <div class="profile-title">Status : <%= @user.djname %></div>
+  <div class="profile-title"><strong>Status :</strong> <%= @user.djname %></div>
 </div>
 
 <div class="profile-item">
-  <div class="profile-title">Country : <%= @user.user_country %></div>
+  <div class="profile-title"><strong>Country :</strong> <%= @user.user_country %></div>
 </div>
 
 <div class="profile-item">
-  <div class="profile-title">Last connected : <%= @user.djname %></div>
+  <div class="profile-title"><strong>Last connected :</strong> <%= @user.djname %></div>
 </div>
 
-<h1 class="profile-name">Suggested song</h1>
-
-<ul class="comments-container">
-  <%= render @view_module, "_suggested_song.html", as: :song, conn: @conn %>
-</ul>
+<h1 class="profile-name">Suggested song (<%= length(@user.songs) %>)</h1>
+<%= render_many  @user.songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>

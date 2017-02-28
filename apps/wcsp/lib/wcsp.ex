@@ -14,12 +14,18 @@ defmodule Wcsp do
   def find_user!(clauses) do
     Repo.get_by!(User, clauses)
     |> Repo.preload(:avatar)
-    |> Repo.preload(:songs)
   end
 
   def find_user(clauses) do
     Repo.get_by(User, clauses)
     |> Repo.preload(:avatar)
+  end
+
+  def find_user_with_songs(clauses) do
+    Repo.get_by(User, clauses)
+    |> Repo.preload(:avatar)
+    |> Repo.preload(:songs)
+    |> Repo.preload(songs: :album_art)
   end
 
   @doc """

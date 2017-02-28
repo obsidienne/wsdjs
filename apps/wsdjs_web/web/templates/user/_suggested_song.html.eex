@@ -1,3 +1,7 @@
-<div class="profile-item">
-  <div class="profile-title">AEAEAZEAEAZE</div>
+<div class="Grid">
+  <div class="Grid-image"><img src="<%= href_song_art(@song.album_art) %>" alt="<%= song_art_alt(@song) %>"></div>
+  <div class="Grid-cell-title"><%= @song.title %></div>
+  <div class="Grid-cell-artist"><%= @song.artist %></div>
+  <div class="Grid-cell-genre"><%= @song.genre %></div>
+  <div class="Grid-cell-bpm"><%= @song.bpm %></div>
 </div>
