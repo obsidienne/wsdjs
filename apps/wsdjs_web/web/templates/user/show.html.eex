@@ -1,3 +1,5 @@
+<div class="user-view">
+
 <img src="<%= href_user_avatar(@user.avatar) %>" class="profile-img">
 
 <div class="profile-text">
@@ -27,3 +29,5 @@
 
 <h1 class="profile-name">Suggested song (<%= length(@user.songs) %>)</h1>
 <%= render_many  @user.songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>
+
+</div>
