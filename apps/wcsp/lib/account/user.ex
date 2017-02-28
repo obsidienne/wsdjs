@@ -55,7 +55,6 @@ defmodule Wcsp.User do
   """
   def with_avatar(query) do
     from q in query,
-    join: a in assoc(q, :avatar),
-    preload: [avatar: a]
+    preload: :avatar
   end
 end

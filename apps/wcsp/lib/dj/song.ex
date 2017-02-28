@@ -59,7 +59,7 @@ defmodule Wcsp.Song do
   Search query
   """
   def search(query, ""), do: from q in query, where: false
-   
+
   def search(query, search_query) do
     search_query = ts_query_format(search_query)
     ft_query =
@@ -88,9 +88,7 @@ defmodule Wcsp.Song do
   """
   def with_users(query) do
     from q in query,
-    join: u in assoc(q, :user),
-    left_join: a in assoc(u, :avatar),
-    preload: [user: {u, avatar: a}]
+    preload: [user: :avatar]
   end
 
   @doc """
@@ -98,9 +96,7 @@ defmodule Wcsp.Song do
   """
   def with_comments(query) do
     from q in query,
-    left_join: c in assoc(q, :comments),
-    left_join: u in assoc(c, :user),
-    preload: [comments: {c, user: u}]
+    preload: [comments: :user]
   end
 
   @doc """
@@ -108,8 +104,7 @@ defmodule Wcsp.Song do
   """
   def with_album_art(query) do
     from q in query,
-    left_join: a in assoc(q, :album_art),
-    preload: [album_art: a]
+    preload: :album_art
   end
 
   @doc """
@@ -117,9 +112,7 @@ defmodule Wcsp.Song do
   """
   def with_song_opinions(query) do
     from q in query,
-    left_join: s in assoc(q, :song_opinions),
-    left_join: u in assoc(s, :user),
-    preload: [song_opinions: {s, user: u}]
+    preload: [song_opinions: :user]
   end
 
   @doc """
