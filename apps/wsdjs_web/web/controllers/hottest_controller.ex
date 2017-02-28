@@ -3,10 +3,9 @@ defmodule WsdjsWeb.HottestController do
 
   def index(conn, _params, current_user) do
     songs = Wcsp.hot_songs(current_user)
-    changeset = Wcsp.Song.changeset(%Wcsp.Song{})
     top = Wcsp.last_top_10(current_user)
 
-    render conn, "index.html", songs: songs, top: top, changeset: changeset
+    render conn, "index.html", songs: songs, top: top
   end
 
   def new(conn, _params, _current_user) do
