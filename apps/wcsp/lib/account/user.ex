@@ -57,4 +57,12 @@ defmodule Wcsp.User do
     from q in query,
     preload: :avatar
   end
+
+  def with_songs(query, current_user) do
+    preload_query = from s in Song.scoped(current_user), order_by: [desc: :inserted_at]
+
+    from p in query,
+    preload: [songs: ^preload_query],
+    preload: [songs: :album_art]
+  end
 end

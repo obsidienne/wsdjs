@@ -20,11 +20,11 @@ defmodule Wcsp do
     |> Repo.get_by(clauses)
   end
 
-  def find_user_with_songs(clauses) do
-    Repo.get_by(User, clauses)
-    |> Repo.preload(:avatar)
-    |> Repo.preload(:songs)
-    |> Repo.preload(songs: :album_art)
+  def find_user_with_songs(current_user, clauses) do
+    User.scoped(current_user)
+    |> User.with_avatar()
+    |> User.with_songs(current_user)
+    |> Repo.get_by(clauses)
   end
 
   @doc """
