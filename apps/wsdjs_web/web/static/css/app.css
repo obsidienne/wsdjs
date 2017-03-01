@@ -31,6 +31,8 @@ textarea {
   resize: vertical;
 }
 
+summary { cursor: pointer; }
+
 .text-ellipsis {
   white-space: nowrap;
   overflow: hidden;
@@ -52,4 +54,6 @@ textarea {
 @import 'components/footer';
 @import 'components/fab';
 @import 'components/shame';
+@import 'components/balloon';
 @import 'components/user';
+@import 'components/voting';

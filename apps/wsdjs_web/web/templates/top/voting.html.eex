@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
       <%= if @current_user && @current_user.id == @top.user_id do %>
-      <section class="container">
+      <section>
         <nav>
           <ol class="cd-multi-steps text-center">
             <li class="visited"><em>Create</em></li>
@@ -13,46 +13,55 @@
           </ol>
         </nav>
       </section>
-      <% end %>
-      <h3>
-        TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time>
-        <small><%= @top.status %></small>
-      </h3>
 
-      <table class="table-numbered table table-striped table-hover">
-        <thead>
+      <details open>
+        <summary>Top details</summary>
+        <table class="table">
           <tr>
-            <th></th>
-            <th>Cover</th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Points</th>
-            <th></th>
+            <th>Created by</th>
+            <td><%= @top.user.name %></td>
           </tr>
-        </thead>
+          <tr>
+            <th>Created at</th>
+            <td><%= @top.inserted_at %></td>
+          </tr>
+          <tr>
+            <th>Song in Top</th>
+            <td><%= Enum.count(@top.ranks) %></td>
+          </tr>
+        </table>
+        <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
+          <%= hidden_input f, :status, required: "required", value: "counting" %>
+          <%= submit "next step : counting", class: "btn btn-primary pull-right" %>
+        <% end %>
+        </div>
+      </details>
+    <% end %>
+    <h3 class="col-xs-12">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small></h3>
+
+    <div class="col-xs-6">
+      <span class="voting-song-title">Current month suggestions</span>
+      <div id="voting-songs-source" class="voting-song-container">
+        <%= for rank <- @top.ranks do %>
+        <div class="voting-song" id="rank_<%= rank.id %>" data-id="<%= rank.id %>" data-balloon="<%= song_full_title(rank.song) %>" data-balloon-pos="up" data-balloon-break="true">
+          <img width="50" height="50" src="<%= song_art_href(rank.song.album_art)%>"  />
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-xs-6" >
+      <span class="voting-song-title">My top 10</span>
+      <div id="voting-songs-target" class="voting-song-container">
+
+        <span class="drop-row">Drag here your vote</span>
+      </div>
+
+      <table id="rankuser-top10" class="table table-hover table-condensed">
         <tbody>
-          <tbody>
-            <%= for rank <- @top.ranks do %>
-            <tr>
-              <td></td>
-              <td>
-                <a class="text-muted" target="_blank" href="<%= rank.song.url %>">
-                  <img width="50" height="50" src="<%= song_art_href(rank.song.album_art)%>" alt="L8wwdm9ej02zt4b1eep2" />
-                </a>
-              </td>
-              <td>
-                <div><a href="/songs/8a1ab8a7-000b-4e6f-95f0-7aa1da4b7aa6"><%= rank.song.title %></a></div>
-                <span class="label label-default"><%= rank.song.genre %></span>
-                <%= if rank.song.bpm > 0 do %>
-                <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-                <% end %>
-              </td>
-              <td>
-                <div><%= rank.song.artist %></div>
-              </td>
-              <td><%= rank.votes + rank.bonus + rank.likes %></td>
-            </tr>
-            <% end %>
+          <tr class="count-excluded">
+            <td colspan="5" class="drop-row text-center text-muted h2" >Drag here your vote</td>
+          </tr>
         </tbody>
       </table>
     </div>

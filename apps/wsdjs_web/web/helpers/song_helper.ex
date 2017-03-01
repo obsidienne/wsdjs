@@ -9,4 +9,6 @@ defmodule WsdjsWeb.SongHelper do
   def song_art_href(nil), do: @base_url <> @small_format <> @missing_song_art
 
   def song_art_alt(%Wcsp.Song{artist: artist, title: title}), do: "#{artist} - #{title} song art"
+
+  def song_full_title(%Wcsp.Song{artist: artist, title: title}), do: "#{artist}\u000A#{title}"
 end
