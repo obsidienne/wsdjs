@@ -1,7 +1,7 @@
 <main class="container" role="main">
   <%= for {month, songs} <- group_song_by_month(@songs) do %>
     <h1 class="page-header">
-      <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small>suggestions</small>
+      <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small><%= Enum.count(songs) %> suggestions</small>
     </h1>
 
     <div class="row">
@@ -9,10 +9,12 @@
     </div>
   <% end %>
 
+  <%= if @top do %>
   <h1 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h1>
   <div class="song-top-container">
     <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
   </div>
+  <% end %>
 </main>
 
 <%= if Wcsp.Policy.can?(@conn.assigns.current_user, :create, %Wcsp.Song{}) do %>

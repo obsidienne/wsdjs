@@ -9,7 +9,7 @@
     <div class="card-top-body">
       <%= for rank <- @top.ranks do %>
         <div>
-          <img class="img-responsive" src="<%= href_song_art(rank.song.album_art) %>" alt="<%= song_art_alt(rank) %>">
+          <img class="img-responsive" src="<%= song_art_href(rank.song.album_art) %>" alt="<%= song_art_alt(rank.song) %>">
         </div>
       <% end %>
     </div>

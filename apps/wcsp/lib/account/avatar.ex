@@ -11,7 +11,7 @@ defmodule Wcsp.Avatar do
 
   @allowed_fields ~w(cld_id version user_id)
 
-  def changeset(model, params \\ nil) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @allowed_fields)
     |> validate_required(~w(cld_id version)a)

@@ -1,6 +1,6 @@
 <div class="user-view">
 
-<img src="<%= href_user_avatar(@user.avatar) %>" class="profile-img">
+<img src="<%= avatar_href(@user.avatar) %>" class="profile-img">
 
 <div class="profile-text">
   <h1 class="profile-name"><%= @user.name %></h1>
@@ -16,15 +16,7 @@
 </div>
 
 <div class="profile-item">
-  <div class="profile-title"><strong>Status :</strong> <%= @user.djname %></div>
-</div>
-
-<div class="profile-item">
   <div class="profile-title"><strong>Country :</strong> <%= @user.user_country %></div>
-</div>
-
-<div class="profile-item">
-  <div class="profile-title"><strong>Last connected :</strong> <%= @user.djname %></div>
 </div>
 
 <h1 class="profile-name">Suggested song (<%= length(@user.songs) %>)</h1>

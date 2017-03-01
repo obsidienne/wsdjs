@@ -1,5 +1,5 @@
 <div class="Grid">
-  <div class="Grid-image"><img src="<%= href_song_art(@song.album_art) %>" alt="<%= song_art_alt(@song) %>"></div>
+  <div class="Grid-image"><img class="img-cover" src="<%= song_art_href(@song.album_art) %>" alt="<%= song_art_alt(@song) %>"></div>
   <div class="Grid-cell-title"><%= @song.title %></div>
   <div class="Grid-cell-artist"><%= @song.artist %></div>
   <div class="Grid-cell-genre"><%= @song.genre %></div>

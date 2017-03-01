@@ -13,16 +13,22 @@
         </div>
       </div>
       <div class="col-xs-4">
-        <img class="img-responsive" width="250" height="250" src="<%= href_song_art(@song.album_art) %>" alt="<%= song_art_alt(@song) %>">
+        <img class="img-responsive" width="250" height="250" src="<%= song_art_href(@song.album_art) %>" alt="<%= song_art_alt(@song) %>">
       </div>
     </div>
   </div>
 </section>
 
-<%= if @conn.assigns[:current_user] do %>
-<%= render @view_module, "_song_comment_form.html", conn: @conn, song: @song, changeset:  @comment_changeset %>
-<% end %>
 
-<ul class="comments-container">
-  <%= render_many Enum.reverse(@song.comments), @view_module, "_song_comment.html", as: :comment, conn: @conn %>
-</ul>
+<section class="container">
+  <div class="row">
+  <%= if @conn.assigns[:current_user] do %>
+    <%= render @view_module, "_song_comment_form.html", conn: @conn, song: @song, changeset:  @comment_changeset %>
+  <% end %>
+  </div>
+  <div class="row">
+    <ul class="col-xs-6">
+      <%= render_many Enum.reverse(@song.comments), @view_module, "_song_comment.html", as: :comment, conn: @conn %>
+    </ul>
+  </div>
+</section>

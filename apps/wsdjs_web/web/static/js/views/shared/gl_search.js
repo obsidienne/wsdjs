@@ -1,5 +1,4 @@
 import timeago from 'timeago.js';
-import $ from 'jquery';
 
 export default class glSearch {
   mount() {
@@ -9,11 +8,24 @@ export default class glSearch {
       clearTimeout(timer);  //clear any running timeout on key up
       timer = setTimeout(function() { //then give it a second to see if the user is finished
         var query = document.getElementById("glsearch").value;
+        var token = document.querySelector("[name=channel_token]").getAttribute("content");
 
-        $.get('/search', { q: query }).done(function( data ) {
-          document.querySelector(".glsearch__results").innerHTML = data;
-          new timeago().render(document.querySelectorAll(".glsearch__results time.timeago"));
-        });
+        var request = new XMLHttpRequest();
+        request.open('GET', '/search?q='+query, true);
+        request.setRequestHeader('Authorization', "Bearer " + token);
+
+        request.onload = function() {
+          if (this.status >= 200 && this.status < 400) {
+            document.querySelector(".glsearch__results").innerHTML = this.response;
+            new timeago().render(document.querySelectorAll(".glsearch__results time.timeago"));
+          } else {
+            document.querySelector(".glsearch__results").innerHTML = "";
+          }
+        };
+
+        request.onerror = function() { console.log("Error search"); };
+
+        request.send();
       }, 500);
     });
   }

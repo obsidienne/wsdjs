@@ -1,13 +1,11 @@
-import $ from 'jquery';
-
 export default class glMenubar {
   mount() {
     var self = this;
 
     // click outside elements (bubble to document)
-    document.addEventListener("click", function(event){
-       if (!$(event.target).closest('.glheader__user').length &&
-           !$(event.target).closest('.glsearch').length) {
+    document.addEventListener("click", function(event) {
+       if (event.target.closest('.glheader__user') == null &&
+           event.target.closest('.glsearch') == null) {
          self._hide_menu_element();
        }
     });

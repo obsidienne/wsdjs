@@ -18,7 +18,7 @@ defmodule Wcsp.User do
 
   @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname]
 
-  def changeset(model, params \\ nil) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @allowed_fields)
     |> validate_required(:email)
@@ -28,5 +28,33 @@ defmodule Wcsp.User do
 
   def build(%{email: email} = params) do
     changeset(%Wcsp.User{}, params)
+  end
+
+
+  @doc """
+  Admin see every user
+  """
+  def scoped(%User{admin: :true}), do: User
+
+  @doc """
+  Connected user can see himself and not admin users
+  """
+  def scoped(%User{} = user) do
+    from u in User, where: u.id == ^user.id or u.admin == false
+  end
+
+  @doc """
+  Not connected users see nothing
+  """
+  def scoped(nil) do
+    from u in User, where: u.admin == false
+  end
+
+  @doc """
+  Preload user avatar using a join
+  """
+  def with_avatar(query) do
+    from q in query,
+    preload: :avatar
   end
 end

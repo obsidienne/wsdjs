@@ -27,7 +27,7 @@ defmodule Wcsp.Rank do
 
   @allowed_fields [:likes, :votes, :bonus, :song_id, :top_id]
 
-  def changeset(model, params \\ nil) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @allowed_fields)
     |> assoc_constraint(:song)

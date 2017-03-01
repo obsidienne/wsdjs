@@ -33,6 +33,25 @@ defmodule Wcsp.Top do
     |> assoc_constraint(:user)
   end
 
+  @doc """
+  Admin sees everything
+  """
+  def scoped(%User{admin: :true}), do: Top
+
+  @doc """
+  Connected user can see voting and published Top + Top he has created
+  """
+  def scoped(%User{} = user) do
+    from m in Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
+  end
+
+  @doc """
+  Not connected users see nothing
+  """
+  def scoped(nil), do: from m in Top, where: false
+
+
+
   def tops() do
     from p in Top, order_by: [desc: p.due_date]
   end
