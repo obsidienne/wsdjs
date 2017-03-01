@@ -8,7 +8,7 @@ button[data-balloon] {
 [data-balloon]:after {
   opacity: 0;
   pointer-events: none;
-  //transition: all 0.18s ease-out 0.18s;
+  /* transition: all 0.18s ease-out 0.18s; */
   bottom: 100%;
   left: 50%;
   position: absolute;

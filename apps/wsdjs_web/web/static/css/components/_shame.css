@@ -1,20 +1,20 @@
 .handle-icon {
   white-space: nowrap;
-  background-image: svg-url(map-get($svg-icon-map, handle));
+/*  background-image: svg-url(map-get($svg-icon-map, handle)); */
   background-position: center;
   background-repeat: no-repeat;
   min-width: 20px;
 }
 
 .drop-row {
-  background-image: svg-url(map-get($svg-icon-map, drop));
+/*  background-image: svg-url(map-get($svg-icon-map, drop));*/
   background-repeat: no-repeat;
   background-position: center right;
   user-select: none;
 }
 
 .delete-button {
-  background-image: svg-url(map-get($svg-icon-map, delete));
+/*  background-image: svg-url(map-get($svg-icon-map, delete));*/
   background-repeat: no-repeat;
   background-position: center center;
   user-select: none;
@@ -23,7 +23,7 @@
 }
 
 .upload-icon {
-  background-image: svg-url(map-get($svg-icon-map, upload));
+/*  background-image: svg-url(map-get($svg-icon-map, upload));*/
   background-repeat: no-repeat;
   background-position: 15px center;
   user-select: none;
@@ -38,7 +38,7 @@
   }
 }
 
-// numbers for rank
+/* numbers for rank */
 .table-numbered {
   counter-reset: rowNumber;
 

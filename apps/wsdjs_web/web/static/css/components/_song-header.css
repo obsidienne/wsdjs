@@ -25,7 +25,7 @@
     height: 139px;
     max-width: 100%;
     display: block;
-    background-image: svg-url(map-get($svg-icon-map, play));
+/*    background-image: svg-url(map-get($svg-icon-map, play)); */
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 100%;
@@ -65,36 +65,36 @@
   }
 
   .song-down{
-    background-image: svg-url(map-get($svg-icon-map, down));
+/*    background-image: svg-url(map-get($svg-icon-map, down)); */
     background-repeat: no-repeat;
     background-position-x: 5px;
     background-position-y: 2px;
   }
   .song-down.active{
-    background-image: svg-url(map-get($svg-icon-map, down-active));
+/*    background-image: svg-url(map-get($svg-icon-map, down-active)); */
     color: rgb(180, 0, 0);
     font-weight: bold;
   }
 
   .song-like{
-    background-image: svg-url(map-get($svg-icon-map, like));
+/*    background-image: svg-url(map-get($svg-icon-map, like)); */
     background-repeat: no-repeat;
     background-position-x: 5px;
     background-position-y: 2px;
   }
   .song-like.active{
-    background-image: svg-url(map-get($svg-icon-map, like-active));
+/*    background-image: svg-url(map-get($svg-icon-map, like-active)); */
     color: rgb(0, 0, 180);
     font-weight: bold;
   }
   .song-up{
-    background-image: svg-url(map-get($svg-icon-map, up));
+/*    background-image: svg-url(map-get($svg-icon-map, up)); */
     background-repeat: no-repeat;
     background-position-x: 5px;
     background-position-y: 2px;
   }
   .song-up.active{
-    background-image: svg-url(map-get($svg-icon-map, up-active));
+/*    background-image: svg-url(map-get($svg-icon-map, up-active)); */
     color: rgb(0, 180, 0);
     font-weight: bold;
   }

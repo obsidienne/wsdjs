@@ -29,7 +29,7 @@
     overflow: hidden;
   }
   .card-song-play {
-    background-image: svg-url(map-get($svg-icon-map, play));
+    background-image: svg-load("../../assets/svg/play.svg");
     background-repeat: no-repeat;
     position: absolute;
     height: 72px;
@@ -82,38 +82,39 @@
   }
 
   .song-down{
-    background-image: svg-url(map-get($svg-icon-map, down));
+    background-image: svg-load("../../assets/svg/down.svg");
     background-repeat: no-repeat;
     background-position-x: 5px;
     background-position-y: 2px;
   }
   .song-down.active{
-    background-image: svg-url(map-get($svg-icon-map, down-active));
+    background-image: svg-load("../../assets/svg/down.svg", fill: #777777);
+/*background-image: svg-url(map-get($svg-icon-map, down-active)); */
     color: rgb(180, 0, 0);
   }
   .song-like{
-    background-image: svg-url(map-get($svg-icon-map, like));
+/*    background-image: svg-url(map-get($svg-icon-map, like)); */
     background-repeat: no-repeat;
     background-position-x: 5px;
     background-position-y: 2px;
   }
   .song-like.active{
-    background-image: svg-url(map-get($svg-icon-map, like-active));
+/*    background-image: svg-url(map-get($svg-icon-map, like-active)); */
     color: rgb(0, 0, 180);
   }
   .song-up{
-    background-image: svg-url(map-get($svg-icon-map, up));
+/*    background-image: svg-url(map-get($svg-icon-map, up)); */
     background-repeat: no-repeat;
     background-position-x: 5px;
     background-position-y: 2px;
   }
   .song-up.active{
-    background-image: svg-url(map-get($svg-icon-map, up-active));
+/*    background-image: svg-url(map-get($svg-icon-map, up-active)); */
     color: rgb(0, 180, 0);
   }
 
   .song-comment {
-    background-image: svg-url(map-get($svg-icon-map, comment));
+/*    background-image: svg-url(map-get($svg-icon-map, comment)); */
     background-repeat: no-repeat;
     background-position-y: 2px;
     display: block;
@@ -122,7 +123,7 @@
   }
 
   .song-comment-empty {
-    background-image: svg-url(map-get($svg-icon-map, comment-empty));
+/*    background-image: svg-url(map-get($svg-icon-map, comment-empty)); */
     background-repeat: no-repeat;
     background-position-y: 2px;
     display: block;

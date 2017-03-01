@@ -1,9 +1,5 @@
-// -----------------------------------------------------------------------------
-// all styles related to the header of the site/application.
-// -----------------------------------------------------------------------------
-
 .glheader__user .icon-navigator-toggle {
-  background-image: svg-url(map-get($svg-icon-map, navigator-toggle));
+  background: svg-inline(navigator-toggle);
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center center;

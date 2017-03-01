@@ -8,7 +8,7 @@
 }
 
 .fab-btn {
-  background-image: svg-url(map-get($svg-icon-map, add));
+  background-image: svg-load("../../assets/svg/add.svg");
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 100%;

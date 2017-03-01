@@ -19,7 +19,7 @@
 }
 
 .glheader__user .icon-navigator-toggle {
-  background-image: svg-url(map-get($svg-icon-map, navigator-toggle));
+  background-image: svg-load('img/navigator-toggle.svg', fill=#000, stroke=#fff);
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center center;
@@ -188,13 +188,14 @@
 }
 
 
+/*
 .glheader__menu__item--hotsongs { background-image: svg-url(map-get($svg-icon-map, hotsongs)); }
 .glheader__menu__item--tops { background-image: svg-url(map-get($svg-icon-map, tops)); }
 .glheader__menu__item--users { background-image: svg-url(map-get($svg-icon-map, users)); }
 .glheader__menu__item--adduser { background-image: svg-url(map-get($svg-icon-map, adduser)); }
 .glheader__menu__item--settings { background-image: svg-url(map-get($svg-icon-map, settings)); }
 .glheader__menu__item--signout { background-image: svg-url(map-get($svg-icon-map, signout)); }
-
+*/
 
 /*******************************************/
 /* search                                  */
@@ -228,7 +229,7 @@
 }
 
 .glsearch__filter__wrap .icon-search-quickjump {
-  background-image: svg-url(map-get($svg-icon-map, quickjump));
+/*  background-image: svg-url(map-get($svg-icon-map, quickjump)); */
   width: 24px;
   height: 24px;
   opacity: .8;
