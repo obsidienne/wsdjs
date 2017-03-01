@@ -5,7 +5,6 @@
 .comment {
   display: flex;
   margin-bottom: 15px;
-/*  margin-left: 10px; */
 }
 
 .comment-avatar {
@@ -17,7 +16,6 @@
   flex: 1;
   position: relative;
   width: auto;
-/*  margin-left: -40px; */
 }
 
 .comment-head {
@@ -73,7 +71,6 @@
   .comment-avatar {
     display: flex;
     flex: 0 1 auto;
-  /*  margin-right: 20px; */
 
     .img-comment {
       width: 65px;

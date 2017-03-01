@@ -39,7 +39,6 @@ textarea {
 /* Phoenix flash messages */
 .alert:empty { display: none; }
 
-@import 'components/layout';
 @import 'components/glmenu';
 
 @import 'components/card-song';
