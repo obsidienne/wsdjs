@@ -1,8 +1,11 @@
+.comments-container {
+  padding-left: 0;
+}
+
 .comment {
   display: flex;
   margin-bottom: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
+//  margin-left: 10px;
 }
 
 .comment-avatar {
@@ -14,7 +17,7 @@
   flex: 1;
   position: relative;
   width: auto;
-  margin-left: -40px;
+//  margin-left: -40px;
 }
 
 .comment-head {
@@ -49,19 +52,11 @@
  * Responsive
  ========================*/
 @media only screen and (min-width: 768px) {
-  .comment {
-    width: 680px;
-  }
-
-  .comments-container {
-  	width: 768px;
-  }
-
   .comment-box {
-            margin-left:10px;
-            margin-right: 10px;
-            width: auto;
-      &:before,&:after {
+    margin-left:10px;
+    width: auto;
+
+    &:before,&:after {
       content: '';
       height: 0;
       width: 0;
@@ -78,7 +73,7 @@
   .comment-avatar {
     display: flex;
     flex: 0 1 auto;
-    margin-right: 20px;
+  //  margin-right: 20px;
 
     .img-comment {
       width: 65px;
