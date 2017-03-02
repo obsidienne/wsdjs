@@ -10,13 +10,6 @@ export default class View extends MainView {
     console.log('TopVotingView mounted');
   }
 
-  unmount() {
-    super.unmount();
-
-    // Specific logic here
-    console.log('TopVotingView unmounted');
-  }
-
   _sortableSongs() {
     var source = document.getElementById('voting-songs-source');
     Sortable.create(source, {group: "voting"});

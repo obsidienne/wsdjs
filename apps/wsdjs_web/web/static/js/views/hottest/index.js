@@ -12,14 +12,7 @@ export default class View extends MainView {
     // Specific logic here
     console.log('HottestIndexView mounted');
   }
-
-  unmount() {
-    super.unmount();
-
-    // Specific logic here
-    console.log('HottestIndexView unmounted');
-  }
-
+  
   _intlDate() {
     var options = {year: "numeric", month: "long"};
     var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);

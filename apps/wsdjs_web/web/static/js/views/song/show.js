@@ -14,13 +14,6 @@ export default class View extends MainView {
     console.log('SongIndexView mounted');
   }
 
-  unmount() {
-    super.unmount();
-
-    // Specific logic here
-    console.log('SongIndexView unmounted');
-  }
-
   _intlDate() {
     var elements = document.querySelectorAll(".comment-content");
 
