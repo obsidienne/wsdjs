@@ -1,5 +1,5 @@
 defmodule Wcsp.SongOpinion do
-  use Wcsp.Model
+  use Wcsp.Schema
 
   schema "song_opinions" do
     field :kind, :string
@@ -13,8 +13,8 @@ defmodule Wcsp.SongOpinion do
   @allowed_fields [:kind, :user_id, :song_id]
   @validated_opinions ~w(up like down)
 
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, @allowed_fields)
     |> validate_required([:kind])
     |> validate_inclusion(:kind, @validated_opinions)

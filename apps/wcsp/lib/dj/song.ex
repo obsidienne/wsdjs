@@ -1,5 +1,5 @@
 defmodule Wcsp.Song do
-  use Wcsp.Model
+  use Wcsp.Schema
 
   schema "songs" do
     field :title, :string
@@ -13,6 +13,7 @@ defmodule Wcsp.Song do
     has_many :comments, Wcsp.SongComment
     has_many :ranks, Wcsp.Rank
     has_many :song_opinions, Wcsp.SongOpinion
+    has_many :rank_songs, Wcsp.RankSong
     many_to_many :tops, Wcsp.Top, join_through: Wcsp.Rank
 
     timestamps()
@@ -22,8 +23,8 @@ defmodule Wcsp.Song do
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, @allowed_fields)
     |> validate_required(@required_fields)
     |> unique_constraint(:title, name: :songs_title_artist_index)

@@ -11,7 +11,7 @@ defmodule Wcsp.Rank do
   bonus: filled only if the top is in the counting status and freezed on publish
   position: filled and freezed in publish
   """
-  use Wcsp.Model
+  use Wcsp.Schema
 
   schema "ranks" do
     field :likes, :integer
@@ -27,8 +27,8 @@ defmodule Wcsp.Rank do
 
   @allowed_fields [:likes, :votes, :bonus, :song_id, :top_id]
 
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, @allowed_fields)
     |> assoc_constraint(:song)
     |> assoc_constraint(:top)

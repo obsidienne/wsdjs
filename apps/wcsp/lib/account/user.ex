@@ -1,5 +1,5 @@
 defmodule Wcsp.User do
-  use Wcsp.Model
+  use Wcsp.Schema
 
   schema "users" do
     field :email, :string
@@ -13,13 +13,15 @@ defmodule Wcsp.User do
     has_many :comments, Wcsp.SongComment
     has_one :avatar, Wcsp.Avatar
     has_many :song_opinions, Wcsp.SongOpinion
+    has_many :rank_songs, Wcsp.RankSong
+
     timestamps()
   end
 
   @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname]
 
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, @allowed_fields)
     |> validate_required(:email)
     |> unique_constraint(:email)

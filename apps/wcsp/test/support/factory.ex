@@ -1,7 +1,7 @@
 defmodule Wcsp.Factory do
   alias Wcsp.Repo
   alias Wcsp.SongComment
-  use Wcsp.Model
+  use Wcsp.Schema
 
   # Factories
   def build(:user) do

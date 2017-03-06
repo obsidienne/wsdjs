@@ -10,7 +10,7 @@ defmodule Wcsp.Case do
       import Ecto.Query
       import Wcsp.Case
 
-      use Wcsp.Model
+      use Wcsp.Schema
     end
   end
 

@@ -1,5 +1,5 @@
 defmodule Wcsp.Top do
-  use Wcsp.Model
+  use Wcsp.Schema
 
   schema "tops" do
     field :due_date, :date
@@ -7,15 +7,17 @@ defmodule Wcsp.Top do
 
     belongs_to :user, Wcsp.User
     has_many :ranks, Wcsp.Rank
+    has_many :rank_songs, Wcsp.RankSong
     many_to_many :songs, Wcsp.Song, join_through: Wcsp.Rank
+
     timestamps()
   end
 
   @required_fields [:due_date, :status, :user_id]
   @valid_status ~w(creating voting counting published)
 
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, @required_fields)
     |> validate_required(~w(due_date status)a)
     |> validate_inclusion(:status, @valid_status)
@@ -23,8 +25,8 @@ defmodule Wcsp.Top do
     |> assoc_constraint(:user)
   end
 
-  def create_changeset(model, params \\ %{}) do
-    model
+  def create_changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, [:due_date])
     |> validate_required([:due_date])
     |> put_change(:status, "creating")
@@ -32,6 +34,7 @@ defmodule Wcsp.Top do
     |> unique_constraint(:due_date)
     |> assoc_constraint(:user)
   end
+
 
   @doc """
   Admin sees everything

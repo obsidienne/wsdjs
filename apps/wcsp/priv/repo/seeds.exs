@@ -1,5 +1,5 @@
 defmodule Wcsp.Seeds do
-  use Wcsp.Model
+  use Wcsp.Schema
 
   def store_it(:user, row) do
     row = row

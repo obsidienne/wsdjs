@@ -6,8 +6,21 @@ export default class View extends MainView {
 
     this._voting();
     this._reset();
+    this._submit();
     // Specific logic here
     console.log('TopVotingView mounted');
+  }
+
+  _submit() {
+    var form = document.querySelector('#voting-form');
+    form.addEventListener('submit', function(e) {
+      var checked = document.querySelectorAll('input[type="checkbox"]:checked');
+      if (checked.length == 10) {
+        return true;
+      }
+      e.preventDefault();
+      return false;
+    })
   }
 
   _voting() {

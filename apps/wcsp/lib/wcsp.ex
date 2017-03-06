@@ -4,7 +4,7 @@ defmodule Wcsp do
 
   `Wcsp` is used by `wsdjs_web` Phoenix app.
   """
-  use Wcsp.Model
+  use Wcsp.Schema
 
   def users, do: Repo.all(User)
 

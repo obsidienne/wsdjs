@@ -1,5 +1,5 @@
 defmodule Wcsp.SongComment do
-  use Wcsp.Model
+  use Wcsp.Schema
 
   schema "comments" do
     field :text, :string
@@ -11,8 +11,8 @@ defmodule Wcsp.SongComment do
 
   @allowed_fields [:text, :user_id, :song_id]
 
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, @allowed_fields)
     |> validate_required(:text)
     |> validate_length(:text, min: 1)

@@ -5,7 +5,7 @@ defmodule Wcsp.RankSong do
 
   position: filled and freezed in publish
   """
-  use Wcsp.Model
+  use Wcsp.Schema
 
   schema "rank_songs" do
     field :votes, :integer
@@ -17,12 +17,13 @@ defmodule Wcsp.RankSong do
     timestamps()
   end
 
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, [:votes])
     |> assoc_constraint(:song)
     |> assoc_constraint(:user)
     |> assoc_constraint(:top)
     |> validate_number(:votes, greater_than: 0)
+    |> validate_number(:votes, less_than_or_equal_to: 10)
   end
 end

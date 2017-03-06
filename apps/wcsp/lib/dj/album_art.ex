@@ -1,5 +1,5 @@
 defmodule Wcsp.AlbumArt do
-  use Wcsp.Model
+  use Wcsp.Schema
 
   schema "album_arts" do
     field :cld_id, :string
@@ -11,10 +11,10 @@ defmodule Wcsp.AlbumArt do
     timestamps()
   end
 
-  @allowed_fields ~w(cld_id version)
+  @allowed_fields [:cld_id, :version]
 
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, @allowed_fields)
     |> validate_required(~w(cld_id version)a)
     |> unique_constraint(:cld_id)
