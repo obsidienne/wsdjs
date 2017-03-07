@@ -26,4 +26,9 @@ defmodule Wcsp.RankSong do
     |> validate_number(:votes, greater_than: 0)
     |> validate_number(:votes, less_than_or_equal_to: 10)
   end
+
+  def for_user_and_top(query, user) do
+    from r in query,
+    where: r.user_id == ^user.id
+  end
 end

@@ -40,7 +40,7 @@
     <h3 class="col-xs-12">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small></h3>
 
     <section class="col-xs-12">
-      <%= form_for @changeset, top_path(@conn, :update, @top.id), [id: "voting-form"], fn f -> %>
+      <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
         <table class="voting-container table">
           <tbody>
             <%= for rank <- @top.ranks do %>
@@ -48,9 +48,13 @@
               <td class="voting-song">
                 <label for="song-<%= rank.id %>">
                   <img width="60" height="60" src="<%= song_art_href(rank.song.album_art)%>"  />
-                  <div class="voting-position charted"></div>
+                  <div class="voting-position charted">
+                    <%= if rank = Enum.find(@top.rank_songs, fn(x) -> x.song_id == rank.song.id  end) do %>
+                    <div class="chart-bg"></div><div class="chart-value"><%=rank.votes %></div>
+                    <% end %>
+                  </div>
                 </label>
-                <%= checkbox f, :vote, name: "top[votes][#{rank.id}]", unchecked_value: 0, id: "song-#{rank.id}", class: "hidden" %>
+                <%= checkbox f, :vote, name: "votes[#{rank.song.id}]", unchecked_value: 0, id: "song-#{rank.id}", class: "hidden" %>
               </td>
               <td>
                 <label for="song-<%= rank.id %>">
