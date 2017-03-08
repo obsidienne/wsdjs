@@ -46,15 +46,8 @@
             <%= for rank <- @top.ranks do %>
             <tr>
               <td class="voting-song">
-                <label for="song-<%= rank.id %>">
-                  <img width="60" height="60" src="<%= song_art_href(rank.song.album_art)%>"  />
-                  <div class="voting-position charted">
-                    <%= if rank = Enum.find(@top.rank_songs, fn(x) -> x.song_id == rank.song.id  end) do %>
-                    <div class="chart-bg"></div><div class="chart-value"><%=rank.votes %></div>
-                    <% end %>
-                  </div>
-                </label>
-                <%= checkbox f, :vote, name: "votes[#{rank.song.id}]", unchecked_value: 0, id: "song-#{rank.id}", class: "hidden" %>
+                <%= voting_label(@top, rank) %>
+                <%= voting_checkbox(f, @top, rank) %>
               </td>
               <td>
                 <label for="song-<%= rank.id %>">

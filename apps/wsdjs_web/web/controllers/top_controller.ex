@@ -66,7 +66,7 @@ defmodule WsdjsWeb.TopController do
     user = conn.assigns[:current_user]
 
     changeset = Wcsp.Top.changeset(top)
-    top = Repo.preload(top, rank_songs: Wcsp.RankSong.for_user_and_top(top, user))
+    top = Wcsp.Repo.preload(top, rank_songs: Wcsp.RankSong.for_user_and_top(top, user))
     render conn, "voting.html", top: top, changeset: changeset
   end
 
