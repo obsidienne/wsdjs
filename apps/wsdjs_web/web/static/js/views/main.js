@@ -12,12 +12,6 @@ export default class MainView {
     console.log('MainView mounted');
   }
 
-  unmount() {
-    // This will be executed when the document unloads...
-    console.log('MainView unmounted');
-  }
-
-
   _intlDate() {
     var options = {year: "numeric", month: "long"};
     var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);

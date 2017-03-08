@@ -35,9 +35,4 @@ function handleDOMContentLoaded() {
   window.currentView = view;
 }
 
-function handleDocumentUnload() {
-  window.currentView.unmount();
-}
-
 window.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
-window.addEventListener('unload', handleDocumentUnload, false);

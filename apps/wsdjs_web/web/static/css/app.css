@@ -1,8 +1,4 @@
-/* This file is for your main application css. */
-
 @charset 'utf-8';
-
-
 
 body {
   background-color: #F8F8F8;
@@ -31,6 +27,8 @@ textarea {
   resize: vertical;
 }
 
+summary { cursor: pointer; }
+
 .text-ellipsis {
   white-space: nowrap;
   overflow: hidden;
@@ -38,18 +36,3 @@ textarea {
 }
 /* Phoenix flash messages */
 .alert:empty { display: none; }
-
-@import 'components/glmenu';
-
-@import 'components/card-song';
-@import 'components/card-song-top';
-@import 'components/card-shame';
-@import 'components/card-song-mini';
-@import 'components/card-top';
-@import 'components/song-header';
-@import 'components/song-comment';
-@import 'components/multi-step';
-@import 'components/footer';
-@import 'components/fab';
-@import 'components/shame';
-@import 'components/user';

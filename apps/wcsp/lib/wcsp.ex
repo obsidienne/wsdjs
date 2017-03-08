@@ -4,7 +4,7 @@ defmodule Wcsp do
 
   `Wcsp` is used by `wsdjs_web` Phoenix app.
   """
-  use Wcsp.Model
+  use Wcsp.Schema
 
   def users, do: Repo.all(User)
 
@@ -116,6 +116,20 @@ defmodule Wcsp do
     |> put_assoc(:songs, songs)
     |> put_assoc(:user, user)
     |> Repo.insert
+  end
+
+  def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
+    top = top(top_id)
+    top = Repo.preload top, rank_songs: Wcsp.RankSong.for_user_and_top(top, user)
+
+    new_votes = Map.keys(votes_param)
+    |> Enum.reject(fn(v) -> votes_param[v] == "0" end)
+    |> Enum.map(&Wcsp.RankSong.get_or_build(top, user.id, &1, votes_param[&1]))
+
+    top
+    |> Ecto.Changeset.change
+    |> Ecto.Changeset.put_assoc(:rank_songs, new_votes)
+    |> Repo.update()
   end
 
   def search(user, q) do

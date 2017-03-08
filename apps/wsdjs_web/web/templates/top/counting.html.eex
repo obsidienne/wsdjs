@@ -13,6 +13,30 @@
           </ol>
         </nav>
       </section>
+
+      <details open>
+        <summary>Top details</summary>
+        <table class="table">
+          <tr>
+            <th>Created by</th>
+            <td><%= @top.user.name %></td>
+          </tr>
+          <tr>
+            <th>Created at</th>
+            <td><%= @top.inserted_at %></td>
+          </tr>
+          <tr>
+            <th>Song in Top</th>
+            <td><%= Enum.count(@top.ranks) %></td>
+          </tr>
+        </table>
+        <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
+          <%= hidden_input f, :status, required: "required", value: "published" %>
+          <%= submit "next step : publish", class: "btn btn-primary pull-right" %>
+        <% end %>
+        </div>
+      </details>
+
       <% end %>
       <h3>
         TOP 10, counting<time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time>

@@ -4,10 +4,6 @@ exports.config = {
     javascripts: {
       joinTo: 'js/app.js',
 
-      globals: {
-        $: 'jquery', jQuery: 'jquery'
-      },
-
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
       //joinTo: {
@@ -58,13 +54,6 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
-    },
-    postcss: {
-      processors: [
-        require('precss'),
-        require('postcss-inline-svg'),
-        require('autoprefixer')
-      ]
     }
   },
 

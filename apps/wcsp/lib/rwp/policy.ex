@@ -1,5 +1,5 @@
 defmodule Wcsp.Policy do
-  use Wcsp.Model
+  use Wcsp.Schema
 
   @doc """
   admin can do anything

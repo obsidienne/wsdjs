@@ -1,4 +1,4 @@
-defmodule Wcsp.Model do
+defmodule Wcsp.Schema do
   @moduledoc false
 
   defmacro __using__(_) do
