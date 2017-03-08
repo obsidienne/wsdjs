@@ -15,7 +15,7 @@ export default class View extends MainView {
     var form = document.querySelector('#voting-form');
     form.addEventListener('submit', function(e) {
       var checked = document.querySelectorAll('input[type="checkbox"]:checked');
-      if (checked.length == 10) {
+      if (checked.length == 10 || checked.length == 0) {
         return true;
       }
       e.preventDefault();
@@ -53,13 +53,16 @@ export default class View extends MainView {
   _reset() {
     var el = document.getElementById('voting-form');
     el.addEventListener('reset', function(e) {
-      var elems = document.querySelectorAll('input[type="checkbox"]');
-      Array.prototype.forEach.call(elems, function(el, i){
-        el.value = 0;
+      var elems = document.querySelectorAll('input[type="checkbox"]:checked');
+      Array.prototype.forEach.call(elems, function(checkbox, i){
+        checkbox.value = 0;
+        checkbox.checked = false;
       })
 
       var elems = document.querySelectorAll('.voting-position');
-      Array.prototype.forEach.call(elems, function(el, i){ el.innerText = ""; });
+      Array.prototype.forEach.call(elems, function(label, i){ label.innerHTML = ""; });
+
+      e.preventDefault();
     })
   }
 

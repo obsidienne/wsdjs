@@ -7,7 +7,7 @@ defmodule Wcsp.Top do
 
     belongs_to :user, Wcsp.User
     has_many :ranks, Wcsp.Rank
-    has_many :rank_songs, Wcsp.RankSong
+    has_many :rank_songs, Wcsp.RankSong, on_replace: :delete
     many_to_many :songs, Wcsp.Song, join_through: Wcsp.Rank
 
     timestamps()
@@ -26,6 +26,16 @@ defmodule Wcsp.Top do
   end
 
   def create_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:due_date])
+    |> validate_required([:due_date])
+    |> put_change(:status, "creating")
+    |> validate_inclusion(:status, ["creating"])
+    |> unique_constraint(:due_date)
+    |> assoc_constraint(:user)
+  end
+
+  def vote_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:due_date])
     |> validate_required([:due_date])

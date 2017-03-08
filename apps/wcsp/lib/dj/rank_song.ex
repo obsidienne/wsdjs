@@ -19,12 +19,24 @@ defmodule Wcsp.RankSong do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:votes])
+    |> cast(params, [:votes, :user_id, :song_id])
     |> assoc_constraint(:song)
     |> assoc_constraint(:user)
     |> assoc_constraint(:top)
     |> validate_number(:votes, greater_than: 0)
     |> validate_number(:votes, less_than_or_equal_to: 10)
+  end
+
+  def build(%{user_id: user_id, song_id: song_id, votes: votes} = params) do
+    changeset(%Wcsp.RankSong{}, params)
+  end
+
+  def get_or_build(top, user_id, song_id, votes) do
+    struct =
+      Repo.get_by(Wcsp.RankSong, user_id: user_id, top_id: top.id, song_id: song_id) ||
+      Ecto.build_assoc(top, :rank_songs, user_id: user_id, song_id: song_id)
+
+    Ecto.Changeset.change(struct, votes: String.to_integer(votes))
   end
 
   def for_user_and_top(top, user) do

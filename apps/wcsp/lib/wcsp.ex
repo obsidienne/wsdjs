@@ -118,23 +118,18 @@ defmodule Wcsp do
     |> Repo.insert
   end
 
-  def vote(user, %{"top_id" => top_id, "votes" => votes_params}) do
+  def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
     top = top(top_id)
-    top = Repo.preload top, rank_songs: Wcsp.RankSong.for_user_and_top(top, user) 
+    top = Repo.preload top, rank_songs: Wcsp.RankSong.for_user_and_top(top, user)
 
-    song_ids = Map.keys(votes_params)
+    new_votes = Map.keys(votes_param)
+    |> Enum.reject(fn(v) -> votes_param[v] == "0" end)
+    |> Enum.map(&Wcsp.RankSong.get_or_build(top, user.id, &1, votes_param[&1]))
 
-    votes = song_ids
-    |> Enum.reject(fn(v) -> votes_params[v] == "0" end)
-    |> Enum.map(fn(song_id) ->
-      Repo.get_by(Wcsp.RankSong, user_id: user.id, top_id: top.id, song_id: song_id) ||
-      Repo.insert!(%Wcsp.RankSong{user_id: user.id, top_id: top.id, song_id: song_id, votes: String.to_integer(votes_params[song_id])})
-    end)
-IO.inspect votes
-
-#    top
-#    |> Ecto.Changeset.put_assoc(:rank_songs, votes)
-#    |> Repo.update()
+    top
+    |> Ecto.Changeset.change
+    |> Ecto.Changeset.put_assoc(:rank_songs, new_votes)
+    |> Repo.update()
   end
 
   def search(user, q) do
