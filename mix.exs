@@ -12,7 +12,7 @@ defmodule WcsPlatform.Mixfile do
      # docs
      name: "WCS Platform",
      version: "0.1.0-dev",
-     source_url: "https://github.com/obsidienne/rwp",
+     source_url: "https://bitbucket.org/radiowcsteam/radiowcs-platform",
      docs: [extras: ["README.md"]]]
   end
 
