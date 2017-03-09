@@ -2,7 +2,7 @@ defmodule Wsdjs.UserController do
   use Wsdjs, :controller
 
   def index(conn, _params) do
-    users = Wcsp.users()
+    users = Wcsp.Account.list_users()
 
     render conn, "index.html", users: users
   end

@@ -6,8 +6,6 @@ defmodule Wcsp do
   """
   use Wcsp.Schema
 
-  def users, do: Repo.all(User)
-
   def find_user!(clauses) do
     User
     |> User.with_avatar()
