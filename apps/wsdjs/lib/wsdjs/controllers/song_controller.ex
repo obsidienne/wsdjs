@@ -1,5 +1,5 @@
 defmodule Wsdjs.SongController do
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   plug :authenticate
 

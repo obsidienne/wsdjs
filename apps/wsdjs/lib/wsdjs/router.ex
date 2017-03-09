@@ -1,5 +1,5 @@
 defmodule Wsdjs.Router do
-  use Wsdjs.Web, :router
+  use Wsdjs, :router
 
   pipeline :browser do
     plug :accepts, ["html"]

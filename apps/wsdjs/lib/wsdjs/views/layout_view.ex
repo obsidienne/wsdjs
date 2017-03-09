@@ -1,5 +1,5 @@
 defmodule Wsdjs.LayoutView do
-  use Wsdjs.Web, :view
+  use Wsdjs, :view
 
   @doc """
   Generates name for the JavaScript view we want to use

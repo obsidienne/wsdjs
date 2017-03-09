@@ -1,5 +1,5 @@
 defmodule Wsdjs.SongOpinionController do
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   plug :put_layout, false when action in [:create, :delete]
 

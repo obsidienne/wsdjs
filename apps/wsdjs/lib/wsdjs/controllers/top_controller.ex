@@ -1,5 +1,5 @@
 defmodule Wsdjs.TopController do
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   def index(conn, _params, _current_user) do
     tops = Wcsp.tops()

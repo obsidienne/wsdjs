@@ -1,5 +1,5 @@
 defmodule Wsdjs.ErrorView do
-  use Wsdjs.Web, :view
+  use Wsdjs, :view
 
   def render("404.html", _assigns) do
     "Page not found"

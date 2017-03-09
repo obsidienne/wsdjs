@@ -1,5 +1,5 @@
 defmodule Wsdjs.TopView do
-  use Wsdjs.Web, :view
+  use Wsdjs, :view
 
 
   def voting_label(top, rank) do

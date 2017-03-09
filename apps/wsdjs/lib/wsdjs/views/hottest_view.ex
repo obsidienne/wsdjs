@@ -1,5 +1,5 @@
 defmodule Wsdjs.HottestView do
-  use Wsdjs.Web, :view
+  use Wsdjs, :view
 
   def proposed_by_link(conn, song = %Wcsp.Song{}) do
     Phoenix.HTML.Link.link(proposed_by_display_name(song.user),

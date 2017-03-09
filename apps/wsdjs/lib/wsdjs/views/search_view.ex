@@ -1,5 +1,5 @@
 defmodule Wsdjs.SearchView do
-  use Wsdjs.Web, :view
+  use Wsdjs, :view
 
   def proposed_date(dt), do: Ecto.DateTime.to_iso8601(Ecto.DateTime.cast!(dt))
 end

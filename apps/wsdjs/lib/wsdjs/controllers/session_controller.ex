@@ -1,5 +1,5 @@
 defmodule Wsdjs.SessionController do
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   def new(conn, _) do
     render conn, "new.html"

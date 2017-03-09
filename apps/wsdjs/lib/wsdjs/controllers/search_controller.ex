@@ -1,5 +1,5 @@
 defmodule Wsdjs.SearchController do
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   plug :put_layout, false
 

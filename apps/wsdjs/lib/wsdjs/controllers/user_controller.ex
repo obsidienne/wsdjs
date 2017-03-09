@@ -1,5 +1,5 @@
 defmodule Wsdjs.UserController do
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   def index(conn, _params) do
     users = Wcsp.users()

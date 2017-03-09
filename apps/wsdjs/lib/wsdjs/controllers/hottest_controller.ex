@@ -1,5 +1,5 @@
 defmodule Wsdjs.HottestController do
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   def index(conn, _params, current_user) do
     songs = Wcsp.hot_songs(current_user)

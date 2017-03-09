@@ -1,5 +1,5 @@
 defmodule Wsdjs.SongView do
-  use Wsdjs.Web, :view
+  use Wsdjs, :view
 
   def song_full_description(song) do
     date_str = Date.to_iso8601(song.inserted_at)

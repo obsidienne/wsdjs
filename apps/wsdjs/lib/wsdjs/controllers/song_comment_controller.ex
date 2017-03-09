@@ -1,6 +1,6 @@
 defmodule Wsdjs.SongCommentController do
   require Logger
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   def create(conn, %{"song_id" => song_id, "song_comment" => params}) do
     user = conn.assigns[:current_user]

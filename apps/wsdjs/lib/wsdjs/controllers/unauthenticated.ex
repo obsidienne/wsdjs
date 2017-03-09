@@ -1,5 +1,5 @@
 defmodule Wsdjs.Unauthenticated do
-  use Wsdjs.Web, :controller
+  use Wsdjs, :controller
 
   def api_call(conn, _params) do
     conn
