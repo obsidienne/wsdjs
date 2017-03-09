@@ -7,7 +7,7 @@
 
   <%= link to: song_path(@conn, :show, @rank.song), class: "text-muted card-song-body" do %>
     <span class="card-song-top-position"><%= @rank.position %></span>
-    <span><%= @rank.song.title %></span>
-    <span>suggested by <%= @rank.song.user.name %></span>
+    <span class="text-ellipsis"><%= @rank.song.title %></span>
+    <span class="text-ellipsis">suggested by <%= @rank.song.user.name %></span>
   <% end %>
 </article>
