@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
       <%= if @current_user && @current_user.id == @top.user_id do %>
-      <section class="container">
+      <section>
         <nav>
           <ol class="cd-multi-steps text-center">
             <li class="visited"><em>Create</em></li>
