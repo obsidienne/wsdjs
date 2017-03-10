@@ -16,7 +16,8 @@ export default class Radio {
         document.querySelector(".miniplayer-title").innerText = 'waiting..';
         document.querySelector(".miniplayer-artist").innerText = '';
       } else {
-        timer = setTimeout(self._metadata(), 500);
+        self._metadata()
+        timer = setInterval(function() { self._metadata() }, 500);
         radio.play();
         e.target.classList.remove("icon-pause");
         e.target.classList.add("icon-play");
