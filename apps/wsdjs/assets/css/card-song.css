@@ -5,7 +5,6 @@
 }
 
 .card-song .panel-heading:hover .card-song-play {
-  background-color: rgba(180,180,180,1);
   transform: scale(1.1);
 }
 
@@ -44,10 +43,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: white;
   text-decoration: none;
   border-radius: 100%;
-  background-color: rgba(180,180,180,.5);
+  background-color: rgba(200,200,200,.5);
 }
 
 .card-song .song-art-overlay {

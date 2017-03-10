@@ -1,0 +1,13 @@
+<div class="miniplayer">
+  <div class="miniplayer-art">
+    <img height="50" width="50" src="http://res.cloudinary.com/don2kwaju/image/upload/ar_1:1,c_fill,g_auto/w_auto:40:40/dpr_auto/f_auto,q_auto/v1/wsdjs/missing_cover.jpg" />
+  </div>
+  <div class="miniplayer-info">
+    <div class="miniplayer-title">waiting..</div>
+    <div class="miniplayer-artist"></div>
+  </div>
+
+  <div class="miniplayer-action">
+    <div class="toggle-player icon-pause"></div>
+  </div>
+</div>

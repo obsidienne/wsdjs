@@ -1,8 +1,6 @@
 <nav class="glheader">
   <div class="glheader__property">
-    <%= link to: hottest_path(@conn, :index) do %>
-      <img src="http://res.cloudinary.com/don2kwaju/image/upload/c_fill,g_auto/w_auto:50:60/dpr_auto/f_auto,q_auto/v1/wsdjs/worldswingdjs" />
-    <% end %>
+    <%= link "", to: hottest_path(@conn, :index), class: "logo" %>
   </div>
 
   <div class="glsearch">
