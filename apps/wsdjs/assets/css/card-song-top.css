@@ -16,7 +16,11 @@
   }
 }
 
-
+.song-art-responsive {
+  max-width: 100%;
+  height: auto;
+  width: 100%
+}
 
 .card-song-body {
   position: absolute;

@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col-xs-4">
-        <img class="img-responsive" width="250" height="250" src="<%= song_art_href(@song.album_art) %>" alt="<%= song_art_alt(@song) %>">
+        <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.album_art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
       </div>
     </div>
   </div>

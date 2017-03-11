@@ -3,14 +3,21 @@ import glMenubar from './shared/gl_menubar';
 import glSearch from './shared/gl_search';
 import Radio from './shared/radio';
 import Turbolinks from 'turbolinks';
+import Cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class MainView {
+  constructor() {
+    this.cld = Cloudinary.Cloudinary.new({cloud_name: "don2kwaju"});
+  }
+
   // This will be executed when the document loads...
   mount() {
     new glMenubar().mount();
     new glSearch().mount();
     new Radio().mount();
     this._intlDate()
+
+    this._cloudinary();
 
     Turbolinks.start()
 
@@ -26,5 +33,9 @@ export default class MainView {
       let datetime = Date.parse(elements[i].getAttribute("datetime"))
       elements[i].textContent = dateTimeFormat.format(datetime);
     }
+  }
+
+  _cloudinary() {
+    this.cld.responsive();
   }
 }

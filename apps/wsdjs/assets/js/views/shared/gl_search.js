@@ -1,4 +1,5 @@
 import timeago from 'timeago.js';
+import Cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class glSearch {
   mount() {
@@ -18,6 +19,7 @@ export default class glSearch {
           if (this.status >= 200 && this.status < 400) {
             document.querySelector(".glsearch__results").innerHTML = this.response;
             new timeago().render(document.querySelectorAll(".glsearch__results time.timeago"));
+            super._cloudinary();
           } else {
             document.querySelector(".glsearch__results").innerHTML = "";
           }

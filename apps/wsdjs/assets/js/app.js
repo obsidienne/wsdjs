@@ -35,4 +35,4 @@ function handleDOMContentLoaded() {
   window.currentView = view;
 }
 
-window.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
+window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
