@@ -17,7 +17,7 @@ export default class Radio {
         document.querySelector(".miniplayer-artist").innerText = '';
       } else {
         self._metadata()
-        timer = setInterval(function() { self._metadata() }, 500);
+        timer = setInterval(function() { self._metadata() }, 5000);
         radio.play();
         e.target.classList.remove("icon-pause");
         e.target.classList.add("icon-play");
