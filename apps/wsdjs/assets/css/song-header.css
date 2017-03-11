@@ -1,6 +1,10 @@
-.song-header.jumbotron {
+.song-header {
   padding-top: 24px;
   padding-bottom: 24px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eeeeee;
+  display: block;
 }
 
 .song-header .song-title {
