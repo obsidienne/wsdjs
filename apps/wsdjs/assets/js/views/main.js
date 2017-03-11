@@ -3,21 +3,22 @@ import glMenubar from './shared/gl_menubar';
 import glSearch from './shared/gl_search';
 import Radio from './shared/radio';
 import Turbolinks from 'turbolinks';
-import Cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class MainView {
   constructor() {
-    this.cld = Cloudinary.Cloudinary.new({cloud_name: "don2kwaju"});
+    this.cl = cloudinary.Cloudinary.new();
+    this.cl.init();
   }
 
   // This will be executed when the document loads...
   mount() {
     new glMenubar().mount();
-    new glSearch().mount();
+    new glSearch().mount(this.cl);
     new Radio().mount();
     this._intlDate()
 
-    this._cloudinary();
+    this._loadImg();
 
     Turbolinks.start()
 
@@ -35,7 +36,7 @@ export default class MainView {
     }
   }
 
-  _cloudinary() {
-    this.cld.responsive();
+  _loadImg() {
+    this.cl.responsive();
   }
 }
