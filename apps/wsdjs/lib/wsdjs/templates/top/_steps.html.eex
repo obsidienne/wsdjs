@@ -1,0 +1,34 @@
+<section>
+  <nav>
+    <ol class="cd-multi-steps text-center">
+      <li class="visited"><em>Create</em></li>
+      <li class="visited"><em>Check</em></li>
+      <li class="visited"><em>Voting</em></li>
+      <li class="current"><em>Count</em></li>
+      <li><em>Publish</em></li>
+    </ol>
+  </nav>
+</section>
+
+<details open>
+  <summary>Top details</summary>
+  <table class="table">
+    <tr>
+      <th>Created by</th>
+      <td><%= @top.user.name %></td>
+    </tr>
+    <tr>
+      <th>Created at</th>
+      <td><%= @top.inserted_at %></td>
+    </tr>
+    <tr>
+      <th>Song in Top</th>
+      <td><%= Enum.count(@top.ranks) %></td>
+    </tr>
+  </table>
+
+  <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
+    <%= hidden_input f, :status, required: "required", value: "published" %>
+    <%= submit "next step : publish", class: "btn btn-primary" %>
+  <% end %>
+</details>

@@ -16,6 +16,11 @@
   position: relative;
 }
 
+
+.counting-points {
+  white-space: nowrap;
+}
+
 .voting-song-title, .voting-song-artist {
   display: block;
 }
