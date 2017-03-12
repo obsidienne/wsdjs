@@ -12,7 +12,7 @@ export default class Radio {
         radio.pause();
         e.target.classList.remove("icon-play");
         e.target.classList.add("icon-pause");
-        document.querySelector(".miniplayer-art img").src = 'http://res.cloudinary.com/don2kwaju/image/upload/ar_1:1,c_fill,g_auto/w_auto:40:40/dpr_auto/f_auto,q_auto/v1/wsdjs/missing_cover.jpg'
+        document.querySelector(".miniplayer-art img").src = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8//PIfwAJeAO9U/c7OgAAAABJRU5ErkJggg==';
         document.querySelector(".miniplayer-title").innerText = 'waiting..';
         document.querySelector(".miniplayer-artist").innerText = '';
       } else {

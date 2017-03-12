@@ -1,14 +1,13 @@
 defmodule Wsdjs.SongHelper do
-  @base_url "http://res.cloudinary.com/don2kwaju/image/upload/"
-  @auto_format "w_auto/c_scale/"
-  @missing_song_art "dpr_auto/f_auto,q_auto/v1/wsdjs/missing_cover.jpg"
+  @base_url "http://res.cloudinary.com/don2kwaju/image/upload/w_auto/c_scale/"
+  @missing_song_art "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8//PIfwAJeAO9U/c7OgAAAABJRU5ErkJggg=="
 
   def song_art_href(%Wcsp.AlbumArt{cld_id: cld_id, version: version}) when is_binary(cld_id) do
-    @base_url <> @auto_format <> "v#{version}/" <> "#{cld_id}.jpg"
+    @base_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
-  def song_art_href(nil), do: ""
+  def song_art_href(nil), do: @missing_song_art
 
-  def song_art_href_default(), do: @base_url <> @missing_song_art
+  def song_art_href_default(), do: @missing_song_art
 
   def song_art_alt(%Wcsp.Song{artist: artist, title: title}), do: "#{artist} - #{title} song art"
 
