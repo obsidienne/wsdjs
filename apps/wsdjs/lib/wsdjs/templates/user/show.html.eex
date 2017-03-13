@@ -1,6 +1,7 @@
 <div class="user-view">
 
-<img src="<%= avatar_href(@user.avatar) %>" class="profile-img">
+<img class="profile-img cld-responsive" src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>">
+
 
 <div class="profile-text">
   <h1 class="profile-name"><%= @user.name %></h1>
