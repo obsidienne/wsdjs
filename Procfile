@@ -1,2 +1,2 @@
 web: MIX_ENV=prod mix phoenix.server
-release: mix ecto.reset
+release: mix ecto.setup
