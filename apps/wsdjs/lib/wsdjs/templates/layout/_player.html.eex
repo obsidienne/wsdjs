@@ -8,6 +8,6 @@
   </div>
 
   <div class="miniplayer-action">
-    <div class="toggle-player icon-pause"></div>
+    <div class="toggle-player icon-play"></div>
   </div>
 </div>

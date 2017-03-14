@@ -7,20 +7,20 @@ export default class Radio {
 
     var timer;
     document.querySelector(".toggle-player").addEventListener('click', function(e) {
-      if (!radio.paused) {
+      if (!radio.paused) { // play to pause
         clearInterval(timer);
         radio.pause();
-        e.target.classList.remove("icon-play");
-        e.target.classList.add("icon-pause");
+        e.target.classList.add("icon-play");
+        e.target.classList.remove("icon-pause");
         document.querySelector(".miniplayer-art img").src = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8//PIfwAJeAO9U/c7OgAAAABJRU5ErkJggg==';
         document.querySelector(".miniplayer-title").innerText = 'waiting..';
         document.querySelector(".miniplayer-artist").innerText = '';
-      } else {
+      } else { // pause to play
         self._metadata()
         timer = setInterval(function() { self._metadata() }, 5000);
         radio.play();
-        e.target.classList.remove("icon-pause");
-        e.target.classList.add("icon-play");
+        e.target.classList.add("icon-pause");
+        e.target.classList.remove("icon-play");
       }
     });
   }
