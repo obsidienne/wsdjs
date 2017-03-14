@@ -13,7 +13,6 @@
       <table class="table-numbered table table-striped table-hover">
         <thead>
           <tr>
-            <th></th>
             <th>Cover</th>
             <th>Song</th>
             <th>Points</th>
@@ -24,7 +23,6 @@
           <tbody>
             <%= for rank <- @top.ranks do %>
             <tr>
-              <td></td>
               <td>
                 <a class="text-muted" target="_blank" href="<%= rank.song.url %>">
                   <img height="60" width="60" class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.album_art)%>" />
@@ -32,17 +30,16 @@
               </td>
               <td>
                 <div>
-                  <a href="/songs/8a1ab8a7-000b-4e6f-95f0-7aa1da4b7aa6">
-                  <%= rank.song.title %> -
-                  <%= rank.song.artist %>
-                </a>
+                  <%= link to: song_path(@conn, :show, rank.song) do %>
+                  <%= rank.song.title %> - <%= rank.song.artist %>
+                  <% end %>
                 </div>
                 <span class="label label-default"><%= rank.song.genre %></span>
                 <%= if rank.song.bpm > 0 do %>
                 <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
                 <% end %>
               </td>
-              <td><span class="counting-points"><%= rank.votes + rank.likes %> + <%= rank.bonus %></span></td>
+              <td class="counting-points" data-points="<%= rank.votes + rank.likes %>" data-bonus="<%= rank.bonus %>"><%= rank.votes + rank.likes %> + <%= rank.bonus %></td>
             </tr>
             <% end %>
         </tbody>
