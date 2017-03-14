@@ -51,6 +51,14 @@ body {
   flex-direction: column;
 }
 
+
+@media (max-width:480px) {
+  body {
+    margin-bottom: 50px;
+  }
+}
+
+
 main {
   flex: 1;
 }

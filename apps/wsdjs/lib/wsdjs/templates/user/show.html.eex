@@ -1,4 +1,5 @@
-<div class="user-view">
+<main>
+  <div class="user-view">
 
 <img class="profile-img cld-responsive" src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>">
 
@@ -24,3 +25,4 @@
 <%= render_many  @user.songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>
 
 </div>
+</main>

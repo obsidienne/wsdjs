@@ -14,6 +14,9 @@
   </div>
 
   <div class="glheader__user">
+
+    <%= render "_player.html", conn: @conn %>
+
     <%= if @current_user do %>
     <a class="glheader__menu-icon">
       <div class="icon-navigator-toggle"></div>

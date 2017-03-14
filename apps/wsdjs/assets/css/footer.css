@@ -1,8 +1,9 @@
 .global-footer {
   background-color: #424242;
-  padding-top: 40px;
-  padding-bottom: 40px;
   width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .global-footer p {
