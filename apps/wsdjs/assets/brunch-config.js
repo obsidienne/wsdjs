@@ -48,6 +48,12 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
+    },
+    replacement: {
+      replacements: [
+        {files: [/app.css$/], match: {find: '{!bg-icon-color!}', replace: "%23455A64"}},
+        {files: [/app.css$/], match: {find: '{!fg-icon-color!}', replace: "%23FFC107"}}
+      ]
     }
   },
 
