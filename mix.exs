@@ -36,6 +36,7 @@ defmodule WcsPlatform.Mixfile do
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "ecto.seed"],
      "ecto.seed": ["run apps/wcsp/priv/repo/seeds.exs"],
+     "ecto.heroku_init": ["ecto.migrate", "ecto.seed"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
