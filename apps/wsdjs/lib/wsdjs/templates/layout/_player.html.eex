@@ -1,4 +1,4 @@
-<div class="miniplayer">
+<div id="miniplayer" class="miniplayer" data-turbolinks-permanent>
   <div class="miniplayer-art">
     <img height="50" width="50" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8//PIfwAJeAO9U/c7OgAAAABJRU5ErkJggg==" />
   </div>
