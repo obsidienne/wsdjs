@@ -2,7 +2,6 @@
 import glMenubar from './shared/gl_menubar';
 import glSearch from './shared/gl_search';
 import Radio from './shared/radio';
-import Turbolinks from 'turbolinks';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class MainView {
@@ -20,7 +19,6 @@ export default class MainView {
 
     this._loadImg();
 
-    Turbolinks.start()
 
     console.log('MainView mounted');
   }

@@ -22,6 +22,7 @@
 
 import "phoenix_html"
 import loadView from './views/loader';
+import Turbolinks from 'turbolinks';
 
 function handleDOMContentLoaded() {
   // Get the current view name
@@ -36,3 +37,5 @@ function handleDOMContentLoaded() {
 }
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
+
+Turbolinks.start()
