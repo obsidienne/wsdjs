@@ -37,7 +37,6 @@
       <table class="table-numbered table table-striped table-hover">
         <thead>
           <tr>
-            <th></th>
             <th>Cover</th>
             <th>Title</th>
             <th>Artist</th>
@@ -49,7 +48,6 @@
           <tbody>
             <%= for rank <- @top.ranks do %>
             <tr>
-              <td></td>
               <td>
                 <a class="text-muted" target="_blank" href="<%= rank.song.url %>">
                   <img height="60" width="60" class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.album_art)%>" />
