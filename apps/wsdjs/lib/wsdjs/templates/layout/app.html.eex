@@ -8,6 +8,7 @@
     <meta name="cloudinary_cloud_name" content="don2kwaju">
 
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) ||
         render(Wsdjs.LayoutView, "meta.html", assigns) %>
@@ -27,7 +28,7 @@
 
     <%= render @view_module, @view_template, assigns %>
 
-    
+
 
     <footer class="global-footer container-fluid">
       <div class="row">
@@ -36,7 +37,5 @@
         </div>
       </div>
     </footer>
-
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
