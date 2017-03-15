@@ -2,19 +2,19 @@
 <section class="song-header">
   <div class="container">
     <div class="row">
-      <div class="col-xs-2">
-        <a href="<%= @song.url %>" class="text-muted song-play" target="_blank" ></a>
-      </div>
-      <div class="col-xs-6">
-        <h1 class="song-title"><%= @song.title %></h1>
-        <h2 class="song-artist">by <%= @song.artist %></h2>
-        <h4 class="text-muted"> by <%= link proposed_by_display_name(@song.user), to: user_path(@conn, :show, @song.user) %></h4>
-        <div class="song-opinions">
-          <%= render "_opinions.html", conn: @conn, song: @song %>
+      <div class="col-xs-12 song-header-container">
+        <div class="song-header-details">
+          <h1 class="song-title"><%= @song.title %></h1>
+          <h2 class="song-artist">by <%= @song.artist %></h2>
+          <h4 class="text-muted"> by <%= link proposed_by_display_name(@song.user), to: user_path(@conn, :show, @song.user) %></h4>
+          <div class="song-opinions">
+            <%= render "_opinions.html", conn: @conn, song: @song %>
+          </div>
         </div>
-      </div>
-      <div class="col-xs-4">
-        <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.album_art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
+        <div class="song-header-art">
+          <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.album_art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
+          <a href="<%= @song.url %>" class="text-muted song-play" target="_blank" ></a>
+        </div>
       </div>
     </div>
   </div>

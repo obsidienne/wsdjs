@@ -4,10 +4,6 @@
   position: relative;
 }
 
-.card-song .panel-heading:hover .card-song-play {
-  transform: scale(1.1);
-}
-
 .card-song .panel-heading img {
   width: 100%;
   height: auto;
@@ -31,23 +27,6 @@
   overflow: hidden;
 }
 
-.card-song .card-song-play {
-  background-image: var(--icon-play);
-  background-repeat: no-repeat;
-  position: absolute;
-  height: 72px;
-  width: 72px;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-decoration: none;
-  border-radius: 100%;
-  background-color: rgba(255,255,255,.8)
-}
-
 .card-song .song-art-overlay {
   position: absolute;
   bottom: 0;
@@ -69,73 +48,6 @@
 .card-song .song-art-overlay a {
   margin-left: auto;
 }
-
-.card-song .song-opinion {
-  white-space: nowrap;
-  -webkit-user-select: none;
-  background: #fff;
-  border-radius: 2px;
-  background-clip: padding-box;
-  padding: 2px 0 2px 35px;
-  height: 29px;
-  display: inline-block;
-  color: #777;
-  line-height: 25px;
-}
-
-.card-song .song-down{
-  background-image: var(--icon-down);
-  background-repeat: no-repeat;
-  background-position-x: 5px;
-  background-position-y: 2px;
-}
-
-.card-song .song-down.active{
-  background-image: var(--icon-down-active);
-  color: rgb(180, 0, 0);
-}
-
-.card-song .song-like{
-  background-image: var(--icon-like);
-  background-repeat: no-repeat;
-  background-position-x: 5px;
-  background-position-y: 2px;
-}
-
-.card-song .song-like.active{
-  background-image: var(--icon-like-active);
-  color: rgb(0, 0, 180);
-}
-
-.card-song .song-up{
-  background-image: var(--icon-up);
-  background-repeat: no-repeat;
-  background-position-x: 5px;
-  background-position-y: 2px;
-}
-
-.card-song .song-up.active{
-  background-image: var(--icon-up-active);
-  color: rgb(0, 180, 0);
-}
-
-.card-song .song-comment {
-  background-image: var(--icon-comment);
-  background-position-y: 2px;
-  display: block;
-  height: 24px;
-  width: 24px;
-}
-
-.card-song .song-comment-empty {
-  background-image: var(--icon-comment-empty);
-  background-repeat: no-repeat;
-  background-position-y: 2px;
-  display: block;
-  height: 24px;
-  width: 24px;
-}
-
 
 .card-song .song-genre, .song-bpm {
   display: none;

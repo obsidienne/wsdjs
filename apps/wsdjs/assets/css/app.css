@@ -93,3 +93,98 @@ summary { cursor: pointer; }
 }
 /* Phoenix flash messages */
 .alert:empty { display: none; }
+
+
+.song-play {
+  width: 60px;
+  height: 60px;
+  max-width: 100%;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  text-decoration: none;
+  display: block;
+  background-image: var(--icon-play);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  background-color: rgba(150,150,150,.5);
+}
+.song-play:hover {
+  background-color: rgba(150,150,150,1);
+  transform: scale(1.1);
+}
+
+.song-opinion {
+  white-space: nowrap;
+  -webkit-user-select: none;
+  background: #fff;
+  border-radius: 2px;
+  background-clip: padding-box;
+  padding: 2px 0 2px 35px;
+  height: 29px;
+  display: inline-block;
+  color: #777;
+  line-height: 25px;
+}
+
+.song-header .song-opinion {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  padding: 2px 10px 2px 35px;
+}
+
+.song-comment {
+  background-image: var(--icon-comment);
+  background-position-y: 2px;
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.song-comment-empty {
+  background-image: var(--icon-comment-empty);
+  background-repeat: no-repeat;
+  background-position-y: 2px;
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.song-down{
+  background-image: var(--icon-down);
+  background-repeat: no-repeat;
+  background-position-x: 5px;
+  background-position-y: 2px;
+}
+
+.song-down.active{
+  background-image: var(--icon-down-active);
+  color: rgb(180, 0, 0);
+  font-weight: bold;
+}
+
+.song-like{
+  background-image: var(--icon-like);
+  background-repeat: no-repeat;
+  background-position-x: 5px;
+  background-position-y: 2px;
+}
+
+.song-like.active{
+  background-image: var(--icon-like-active);
+  color: rgb(0, 0, 180);
+  font-weight: bold;
+}
+
+.song-up{
+  background-image: var(--icon-up);
+  background-repeat: no-repeat;
+  background-position-x: 5px;
+  background-position-y: 2px;
+}
+
+.song-up.active{
+  background-image: var(--icon-up-active);
+  color: rgb(0, 180, 0);
+  font-weight: bold;
+}

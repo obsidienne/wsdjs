@@ -8,7 +8,7 @@
       <%= if @song.bpm > 0 do %>
       <span class="label label-primary"><%= @song.bpm %> bpm</span>
       <% end %>
-      <span class="card-song-play "> </span>
+      <span class="song-play"> </span>
     </h4>
   </a>
 
