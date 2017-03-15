@@ -51,11 +51,3 @@ a.panel-heading {
 .card .card-heading-details:hover {
   background: rgba(0, 0, 0, 0.5);
 }
-
-.comments .comment:hover { background-color: #eee; }
-.comments .media { position: relative; padding: 5px; }
-.comments .media-left img { border-radius: 50%;}
-.comments .action-links {
-  margin-right: 5px;
-  margin-top: 5px;
-}
