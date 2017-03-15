@@ -4,8 +4,6 @@
   height: 50px;
   display: flex;
   align-items: center;
-}
-
-.global-footer p {
-  color: white;
+  padding-left: 15px;
+  color: white
 }
