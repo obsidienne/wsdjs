@@ -52,6 +52,13 @@ defmodule Wsdjs.TopController do
     end
   end
 
+  def nextstep(conn, %{"top" => top_params, "id" => id}, current_user) do
+    top = Wcsp.top(id)
+  
+    redirect(conn, to: top_path(conn, :show, top))
+  end
+
+
   def action(conn, _) do apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user]) end
 
   @doc """
