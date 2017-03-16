@@ -25,16 +25,6 @@ defmodule Wcsp do
     |> Repo.get_by(clauses)
   end
 
-  @doc """
-  the current and previous month
-  """
-  def hot_songs(user) do
-    Song.scoped(user)
-    |> Song.with_all()
-    |> Song.last_month()
-    |> Repo.all
-  end
-
   def last_top_10(user) do
     Top.scoped(user)
     |> order_by([desc: :due_date])

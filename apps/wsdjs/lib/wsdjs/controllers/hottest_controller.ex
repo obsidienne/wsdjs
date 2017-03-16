@@ -2,7 +2,7 @@ defmodule Wsdjs.HottestController do
   use Wsdjs, :controller
 
   def index(conn, _params, current_user) do
-    songs = Wcsp.hot_songs(current_user)
+    songs = Wcsp.Dj.list_songs(current_user)
     top = Wcsp.last_top_10(current_user)
 
     render conn, "index.html", songs: songs, top: top
