@@ -1,7 +1,7 @@
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 import glMenubar from './shared/gl_menubar';
 import glSearch from './shared/gl_search';
-import Radio from './shared/radio';
+
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class MainView {
@@ -14,11 +14,8 @@ export default class MainView {
   mount() {
     new glMenubar().mount();
     new glSearch().mount(this.cl);
-    new Radio().mount();
     this._intlDate()
-
     this._loadImg();
-
 
     console.log('MainView mounted');
   }
