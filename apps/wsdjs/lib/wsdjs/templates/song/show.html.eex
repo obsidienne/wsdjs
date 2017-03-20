@@ -1,6 +1,6 @@
 <main>
 <section class="song-header">
-  <img style="position:absolute;top:0;left:0" src="<%= song_art_href_default()%>" data-src="<%= song_art_href_blured(@song.album_art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
+  <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href_blured(@song.album_art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
   <div class="container">
     <div class="row">
       <div class="col-xs-12 song-header-container">

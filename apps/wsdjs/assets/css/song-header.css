@@ -27,6 +27,16 @@
   height: 300px;
 }
 
+.song-art-responsive {
+  position:absolute;
+  top:0;
+  left:0;
+  display: block;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
 .song-header .song-title {
   margin-top: 0;
 } 
