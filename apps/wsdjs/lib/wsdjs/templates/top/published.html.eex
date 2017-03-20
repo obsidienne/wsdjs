@@ -41,7 +41,6 @@
             <th>Title</th>
             <th>Artist</th>
             <th>Points</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +53,9 @@
                 </a>
               </td>
               <td>
-                <div><a href="/songs/8a1ab8a7-000b-4e6f-95f0-7aa1da4b7aa6"><%= rank.song.title %></a></div>
+                <div>
+                  <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
+                </div>
                 <span class="label label-default"><%= rank.song.genre %></span>
                 <%= if rank.song.bpm > 0 do %>
                 <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
