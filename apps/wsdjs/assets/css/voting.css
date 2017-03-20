@@ -83,3 +83,23 @@
   border-radius: 100%;
   background-color: rgba(180,180,180,.5);
 }
+
+.song-art-link {
+  max-width: 160px;
+  width: 160px;
+  height: auto;
+  display: block;
+}
+
+.song-art-link img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.topsong {
+  display: flex;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  border-bottom: 1px solid #DDD;
+}
