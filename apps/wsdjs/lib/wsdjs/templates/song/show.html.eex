@@ -14,7 +14,9 @@
         </div>
         <div class="song-header-art">
           <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.album_art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
+          <%= if @song.url do %>
           <a href="<%= @song.url %>" class="text-muted song-play" target="_blank" ></a>
+          <% end %>
         </div>
       </div>
     </div>

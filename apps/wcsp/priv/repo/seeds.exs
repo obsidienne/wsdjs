@@ -152,6 +152,32 @@ end
 |> CSV.decode(strip_cells: true, headers: [:id, :email, :admin, :new_song_notification, :user_country, :name, :djname, :avatar_id, :avatar_version, :inserted_at, :updated_at])
 |> Enum.each(&Wcsp.Seeds.store_it(:user, &1))
 
+
+# Historic data coming from anchorstep
+
+"data/top_anchorstep.csv"
+|> Path.expand(__DIR__)
+|> File.stream!
+|> Stream.drop(1)
+|> CSV.decode(strip_cells: true, headers: [:id, :user_id, :inserted_at, :updated_at, :due_date, :status])
+|> Enum.each(&Wcsp.Seeds.store_it(:top, &1))
+
+"data/songs_anchorstep.csv"
+|> Path.expand(__DIR__)
+|> File.stream!
+|> Stream.drop(1)
+|> CSV.decode(strip_cells: true, headers: [:id, :artist, :title, :inserted_at, :updated_at, :song_url, :cover_public_id, :cover_version, :bpm, :user_id, :genre])
+|> Enum.each(&Wcsp.Seeds.store_it(:song, &1))
+
+"data/ranks_anchorstep.csv"
+|> Path.expand(__DIR__)
+|> File.stream!
+|> Stream.drop(1)
+|> CSV.decode(strip_cells: true, headers: [:id, :top_id, :song_id, :likes, :inserted_at, :updated_at, :votes, :bonus, :points, :position])
+|> Enum.each(&Wcsp.Seeds.store_it(:rank, &1))
+
+
+
 "data/tops.csv"
 |> Path.expand(__DIR__)
 |> File.stream!
