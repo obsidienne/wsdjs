@@ -126,6 +126,7 @@ summary { cursor: pointer; }
   display: inline-block;
   color: #777;
   line-height: 25px;
+  margin-right: 10px;
 }
 
 .song-header .song-opinion {
