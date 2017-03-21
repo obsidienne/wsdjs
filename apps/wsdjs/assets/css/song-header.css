@@ -27,6 +27,22 @@
   height: 300px;
 }
 
+@media (max-width: 767px) {
+  .song-header-container {
+    flex-direction: column-reverse;;
+  }
+
+  .song-header-details {
+    align-self: flex-start;
+  }
+
+  .song-header-art {
+    flex: 0 0 300px;
+    height: auto;;
+  }
+}
+
+
 .song-header-art-background {
   position:absolute;
   top:0;
