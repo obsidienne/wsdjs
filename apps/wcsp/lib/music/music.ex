@@ -1,4 +1,4 @@
-defmodule Wcsp.Dj do
+defmodule Wcsp.Music do
   @moduledoc """
   The boundary for the Dj system.
   """

@@ -25,17 +25,6 @@ defmodule Wcsp do
     |> Repo.get_by(clauses)
   end
 
-  def last_top_10(user) do
-    Top.scoped(user)
-    |> order_by([desc: :due_date])
-    |> where(status: "published")
-    |> limit(1)
-    |> Repo.one
-    |> Repo.preload(ranks: Wcsp.Rank.for_tops_with_limit(10))
-    |> Repo.preload(ranks: :song)
-    |> Repo.preload(ranks: [song: :album_art])
-    |> Repo.preload(ranks: [song: :user])
-  end
 
   def find_song!(user, clauses) do
     Song.scoped(user)
