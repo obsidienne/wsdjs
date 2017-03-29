@@ -1,5 +1,7 @@
 defmodule Wcsp.PolicyTest do
-  use Wcsp.Case, async: true
+  use Wcsp.DataCase, async: true
+
+  alias Wcsp.{User, Song, Top}
 
   test "admin can do everything on anything" do
     admin = %User{admin: true}
@@ -38,5 +40,4 @@ defmodule Wcsp.PolicyTest do
       refute Wcsp.Policy.can?(nil, action, %Song{})
     end)
   end
-
 end

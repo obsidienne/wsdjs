@@ -1,5 +1,7 @@
 defmodule Wcsp.SongCommentTest do
-  use Wcsp.Case, async: true
+  use Wcsp.DataCase, async: true
+
+  alias Wcsp.SongComment
 
   @valid_attrs %{text: "song title"}
 

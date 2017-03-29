@@ -1,5 +1,7 @@
 defmodule Wcsp.RankTest do
-  use Wcsp.Case, async: true
+  use Wcsp.DataCase, async: true
+
+  alias Wcsp.Rank
 
   test "rank song must exist" do
     params = %{top_id: Ecto.UUID.generate(),song_id: Ecto.UUID.generate()}

@@ -1,5 +1,6 @@
 defmodule Wcsp.TopTest do
-  use Wcsp.Case, async: true
+  use Wcsp.DataCase, async: true
+  alias Wcsp.Top
 
   @valid_attrs %{status: "creating", due_date: "2012-06-30"}
 

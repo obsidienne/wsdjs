@@ -1,12 +1,10 @@
 defmodule Wcsp.SongTest do
-  use Wcsp.Case, async: true
+  use Wcsp.DataCase, async: true
   import Wcsp.Factory
 
-  @valid_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
+  alias Wcsp.Song
 
-  defp errors_on(model, params) do
-    model.__struct__.changeset(model, params).errors
-  end
+  @valid_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
 
   test "changeset with minimal valid attributes" do
     changeset = Song.changeset(%Song{}, @valid_attrs)
@@ -16,7 +14,10 @@ defmodule Wcsp.SongTest do
   test "song suggestor must exist" do
     params = Map.put(@valid_attrs, :user_id, Ecto.UUID.generate())
     song = Song.changeset(%Song{}, params)
-    assert {:error, %{errors: [user: {"does not exist", _}]}} = Repo.insert(song)
+    {:error, changeset} = Repo.insert(song)
+
+    assert "does not exist" in errors_on(changeset, :user)
+
   end
 
   test "artist / title is unique" do
@@ -25,22 +26,27 @@ defmodule Wcsp.SongTest do
     song_with_user = Ecto.Changeset.put_assoc(song, :user, dj)
     Repo.insert(song_with_user)
 
-    assert {:error, %{errors: [title: {"has already been taken", []}]}} = Repo.insert(song_with_user)
+    {:error, changeset} = Repo.insert(song_with_user)
+    assert "has already been taken" in errors_on(changeset, :title)
   end
 
   test "bpm must be positive" do
-    assert {:bpm, {"must be greater than %{number}", [validation: :number, number: 0]}} in errors_on(%Song{}, %{bpm: -1})
+    changeset = Song.changeset(%Song{}, %{bpm: -1})
+    assert "must be greater than 0" in errors_on(changeset, :bpm)
   end
 
   test "title can't be blank" do
-    assert {:title, {"can't be blank", [validation: :required]}} in errors_on(%Song{}, %{title: nil})
+    changeset = Song.changeset(%Song{}, %{title: nil})
+    assert "can't be blank" in errors_on(changeset, :title)
   end
 
   test "artist can't be blank" do
-    assert {:artist, {"can't be blank", [validation: :required]}} in errors_on(%Song{}, %{artist: nil})
+    changeset = Song.changeset(%Song{}, %{artist: nil})
+    assert "can't be blank" in errors_on(changeset, :artist)
   end
 
   test "url must be valid" do
-    assert {:url, {"invalid url: :no_scheme", []}} in errors_on(%Song{}, %{url: "bullshit"})
+    changeset = Song.changeset(%Song{}, %{url: "bullshit"})
+    assert "invalid url: :no_scheme" in errors_on(changeset, :url)
   end
 end

@@ -1,5 +1,7 @@
 defmodule Wcsp.AvatarTest do
-  use Wcsp.Case
+  use Wcsp.DataCase
+
+  alias Wcsp.Avatar
 
   @valid_attrs %{cld_id: "covers/gerkk29hk1t2ydaqlqyh", version: "1464527941"}
   @invalid_attrs %{}
