@@ -5,7 +5,7 @@ defmodule Wsdjs.SearchController do
 
   def index(conn, %{"q" => q}) do
     user = conn.assigns[:current_user]
-    songs = Wcsp.search(user, q)
+    songs = Wcsp.Music.search(user, q)
 
     render conn, "index.html", songs: songs
   end

@@ -6,6 +6,8 @@ defmodule Wcsp.Account do
   import Ecto.{Query, Changeset}, warn: false
   alias Wcsp.Repo
 
+  alias Wcsp.User
+
 #  alias Wcsp.Accounts.User
 #  alias Wcsp.Accounts.Avatar
 
@@ -210,4 +212,23 @@ defmodule Wcsp.Account do
 #    |> cast(attrs, [:name])
 #    |> validate_required([:name])
 #  end
+
+  def find_user!(clauses) do
+    User
+    |> User.with_avatar()
+    |> Repo.get_by!(clauses)
+  end
+
+  def find_user(clauses) do
+    User
+    |> User.with_avatar()
+    |> Repo.get_by(clauses)
+  end
+
+  def find_user_with_songs(current_user, clauses) do
+    User.scoped(current_user)
+    |> User.with_avatar()
+    |> User.with_songs(current_user)
+    |> Repo.get_by(clauses)
+  end
 end

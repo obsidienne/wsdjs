@@ -9,7 +9,7 @@ defmodule Wsdjs.UserController do
 
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
-    user = Wcsp.find_user_with_songs(current_user, id: id)
+    user = Wcsp.Account.find_user_with_songs(current_user, id: id)
     render conn, "show.html", user: user
   end
 end
