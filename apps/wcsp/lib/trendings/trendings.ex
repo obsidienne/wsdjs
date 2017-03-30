@@ -1,4 +1,4 @@
-defmodule Wcsp.Trending do
+defmodule Wcsp.Trendings do
   @moduledoc """
   The boundary for the trending system.
   """

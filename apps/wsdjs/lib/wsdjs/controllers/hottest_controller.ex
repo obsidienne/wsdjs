@@ -5,7 +5,7 @@ defmodule Wsdjs.HottestController do
 
   def index(conn, _params, current_user) do
     songs = Wcsp.Musics.list_songs(current_user)
-    top = Wcsp.Trending.last_top_10(current_user)
+    top = Wcsp.Trendings.last_top_10(current_user)
 
     render conn, "index.html", songs: songs, top: top
   end

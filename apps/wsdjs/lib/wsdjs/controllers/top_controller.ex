@@ -2,14 +2,14 @@ defmodule Wsdjs.TopController do
   use Wsdjs, :controller
 
   def index(conn, _params, _current_user) do
-    tops = Wcsp.Trending.tops()
+    tops = Wcsp.Trendings.tops()
     changeset = Wcsp.Top.changeset(%Wcsp.Top{})
 
     render conn, "index.html", tops: tops, changeset: changeset
   end
 
   def show(conn, %{"id" => id}, _current_user) do
-    top = Wcsp.Trending.top(id)
+    top = Wcsp.Trendings.top(id)
 
     case top.status do
       "creating" -> top_creating(conn, top)
