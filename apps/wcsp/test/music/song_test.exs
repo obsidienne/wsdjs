@@ -4,15 +4,15 @@ defmodule Wcsp.SongTest do
 
   alias Wcsp.Song
 
-  @valid_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
+  @create_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
 
   test "changeset with minimal valid attributes" do
-    changeset = Song.changeset(%Song{}, @valid_attrs)
+    changeset = Song.changeset(%Song{}, @create_attrs)
     assert changeset.valid?
   end
 
   test "song suggestor must exist" do
-    params = Map.put(@valid_attrs, :user_id, Ecto.UUID.generate())
+    params = Map.put(@create_attrs, :user_id, Ecto.UUID.generate())
     song = Song.changeset(%Song{}, params)
     {:error, changeset} = Repo.insert(song)
 
@@ -22,7 +22,7 @@ defmodule Wcsp.SongTest do
 
   test "artist / title is unique" do
     dj = insert!(:user)
-    song = Song.changeset(%Song{}, @valid_attrs)
+    song = Song.changeset(%Song{}, @create_attrs)
     song_with_user = Ecto.Changeset.put_assoc(song, :user, dj)
     Repo.insert(song_with_user)
 

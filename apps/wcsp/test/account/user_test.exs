@@ -3,15 +3,15 @@ defmodule Wcsp.UserTest do
 
   alias Wcsp.User
 
-  @valid_attrs %{email: "alice@example.com"}
+  @create_attrs %{email: "alice@example.com"}
 
   test "changeset with minimal valid attributes" do
-    changeset = User.changeset(%User{}, @valid_attrs)
+    changeset = User.changeset(%User{}, @create_attrs)
     assert changeset.valid?
   end
 
   test "email is unique" do
-    changeset = User.changeset(%User{}, @valid_attrs)
+    changeset = User.changeset(%User{}, @create_attrs)
     Repo.insert(changeset)
 
     {:error, changeset} = Repo.insert(changeset)

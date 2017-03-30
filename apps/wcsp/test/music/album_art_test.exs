@@ -3,11 +3,11 @@ defmodule Wcsp.AlbumArtTest do
 
   alias Wcsp.AlbumArt
 
-  @valid_attrs %{cld_id: "covers/gerkk29hk1t2ydaqlqyh", version: "1464527941"}
-  @invalid_attrs %{}
+  @create_attrs %{cld_id: "covers/gerkk29hk1t2ydaqlqyh", version: "1464527941"}
+  @invalid_attrs %{cld_id: nil, version: nil}
 
   test "changeset with valid attributes" do
-    changeset = AlbumArt.changeset(%AlbumArt{}, @valid_attrs)
+    changeset = AlbumArt.changeset(%AlbumArt{}, @create_attrs)
     assert changeset.valid?
   end
 
