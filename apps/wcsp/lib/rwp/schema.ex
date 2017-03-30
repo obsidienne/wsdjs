@@ -9,9 +9,7 @@ defmodule Wcsp.Schema do
 
       alias Wcsp.{
         Repo,
-        Avatar,
         Top,
-        User,
         Rank
       }
     end

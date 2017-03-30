@@ -4,7 +4,7 @@ defmodule Wsdjs.VoteController do
   def create(conn, %{"votes" => votes_params, "top_id" => top_id} = params) do
     current_user = conn.assigns.current_user
 
-    case Wcsp.vote(current_user, params) do
+    case Wcsp.Trendings.vote(current_user, params) do
       {:ok, _top} ->
         conn
         |> put_flash(:info, "Voted !")

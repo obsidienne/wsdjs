@@ -26,7 +26,7 @@ defmodule Wsdjs.TopController do
   end
 
   def update(conn, %{"top" => top_params, "id" => id}, _current_user) do
-    top = Wcsp.top(id)
+    top = Wcsp.Trendings.top(id)
     changeset = Wcsp.Top.changeset(top, top_params)
 
     case Wcsp.Repo.update(changeset) do
@@ -40,7 +40,7 @@ defmodule Wsdjs.TopController do
   end
 
   def create(conn, %{"top" => params}, current_user) do
-    case Wcsp.create_top(current_user, params) do
+    case Wcsp.Trendings.create_top(current_user, params) do
       {:ok, top} ->
         conn
         |> put_flash(:info, "Top created !")
@@ -53,7 +53,7 @@ defmodule Wsdjs.TopController do
   end
 
   def nextstep(conn, %{"top" => top_params, "id" => id}, current_user) do
-    top = Wcsp.top(id)
+    top = Wcsp.Trendings.top(id)
 
     redirect(conn, to: top_path(conn, :show, top))
   end

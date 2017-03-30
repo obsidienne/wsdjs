@@ -16,7 +16,7 @@ defmodule Wsdjs.HottestController do
   end
 
   def create(conn, %{"song" => params}, current_user) do
-    case Wcsp.create_song(current_user, params) do
+    case Wcsp.Musics.create_song(current_user, params) do
       {:ok, song} ->
         conn
         |> put_flash(:info, "#{song.title} created !")

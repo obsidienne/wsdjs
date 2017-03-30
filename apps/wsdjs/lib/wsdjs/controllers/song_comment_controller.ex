@@ -4,9 +4,9 @@ defmodule Wsdjs.SongCommentController do
 
   def create(conn, %{"song_id" => song_id, "song_comment" => params}) do
     user = conn.assigns[:current_user]
-    song = Wcsp.find_song_with_comments!(user, id: song_id)
+    song = Wcsp.Musics.find_song_with_comments!(user, id: song_id)
 
-    case Wcsp.create_song_comment(user, song, params) do
+    case Wcsp.Musics.create_song_comment(user, song, params) do
       {:ok, song} ->
         conn
         |> put_flash(:info, "Comment added !")
