@@ -10,7 +10,7 @@ defmodule Wcsp.RankSong do
   schema "rank_songs" do
     field :votes, :integer
 
-    belongs_to :song, Wcsp.Song
+    belongs_to :song, Wcsp.Musics.Songs
     belongs_to :top, Wcsp.Top
     belongs_to :user, Wcsp.User
 

@@ -5,7 +5,7 @@ defmodule Wcsp.Musics.Comments do
     field :text, :string
 
     belongs_to :user, Wcsp.User
-    belongs_to :song, Wcsp.Musics.Song
+    belongs_to :song, Wcsp.Musics.Songs
     timestamps()
   end
 

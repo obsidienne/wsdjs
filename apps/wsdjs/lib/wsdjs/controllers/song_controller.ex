@@ -5,8 +5,8 @@ defmodule Wsdjs.SongController do
 
   def show(conn, %{"id" => id}) do
     user = conn.assigns[:current_user]
-    song = Wcsp.Music.find_song_with_comments!(user, id: id)
-    comment_changeset = Wcsp.SongComment.changeset(%Wcsp.SongComment{})
+    song = Wcsp.Musics.find_song_with_comments!(user, id: id)
+    comment_changeset = Wcsp.Musics.Comments.changeset(%Wcsp.Musics.Comments{})
 
     render conn, "show.html", song: song, comment_changeset: comment_changeset
   end
@@ -17,7 +17,7 @@ defmodule Wsdjs.SongController do
     user = conn.assigns[:current_user]
     action = conn.assigns[:action] || conn.private[:phoenix_action]
 
-    if Wcsp.Policy.can?(user, action, %Wcsp.Song{}) do
+    if Wcsp.Policy.can?(user, action, %Wcsp.Musics.Songs{}) do
       conn
     else
       conn

@@ -19,7 +19,7 @@ defmodule Wcsp.Rank do
     field :bonus, :integer
     field :position, :integer
 
-    belongs_to :song, Wcsp.Song
+    belongs_to :song, Wcsp.Musics.Songs
     belongs_to :top, Wcsp.Top
 
     timestamps()

@@ -6,7 +6,7 @@ defmodule Wcsp.Musics.Arts do
     field :version, :integer
 
     belongs_to :user, Wcsp.User
-    belongs_to :song, Wcsp.Musics.Song
+    belongs_to :song, Wcsp.Musics.Songs
 
     timestamps()
   end

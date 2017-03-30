@@ -1,4 +1,4 @@
-defmodule Wsdjs.OpinionsHelper do
+ defmodule Wsdjs.OpinionsHelper do
   use Phoenix.HTML
 
   import Wsdjs.Router.Helpers
@@ -44,15 +44,15 @@ defmodule Wsdjs.OpinionsHelper do
 
   def opinions_count(kind, opinions), do: Enum.count(opinions, fn(x) -> x.kind == kind end)
 
-  def data_method(kind, %Wcsp.SongOpinion{kind: my_kind} = my_opinion) when kind == my_kind, do: "DELETE"
+  def data_method(kind, %Wcsp.Musics.Opinions{kind: my_kind} = my_opinion) when kind == my_kind, do: "DELETE"
   def data_method(_, _), do: "POST"
 
-  def opinion_url(conn, kind, song, %Wcsp.SongOpinion{kind: my_kind} = my_opinion) when kind == my_kind do
+  def opinion_url(conn, kind, song, %Wcsp.Musics.Opinions{kind: my_kind} = my_opinion) when kind == my_kind do
     api_song_opinion_path(conn, :delete, my_opinion.id)
   end
   def opinion_url(conn, kind, song, _), do: api_song_opinion_path(conn, :create, song, kind: kind)
 
-  def html_class(kind, %Wcsp.SongOpinion{kind: my_kind} = my_opinion) when kind == my_kind, do: "song-opinion song-#{kind} active"
+  def html_class(kind, %Wcsp.Musics.Opinions{kind: my_kind} = my_opinion) when kind == my_kind, do: "song-opinion song-#{kind} active"
   def html_class(kind, _), do: "song-opinion song-#{kind}"
 
   def opinions_names(kind, opinions) do

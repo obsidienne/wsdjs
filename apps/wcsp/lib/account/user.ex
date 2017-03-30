@@ -9,10 +9,10 @@ defmodule Wcsp.User do
     field :name, :string
     field :djname, :string
 
-    has_many :songs, Wcsp.Song
-    has_many :comments, Wcsp.SongComment
+    has_many :songs, Wcsp.Musics.Songs
+    has_many :comments, Wcsp.Musics.Comments
     has_one :avatar, Wcsp.Avatar
-    has_many :song_opinions, Wcsp.SongOpinion
+    has_many :song_opinions, Wcsp.Musics.Opinions
     has_many :rank_songs, Wcsp.RankSong
 
     timestamps()
@@ -61,7 +61,7 @@ defmodule Wcsp.User do
   end
 
   def with_songs(query, current_user) do
-    preload_query = from s in Song.scoped(current_user), order_by: [desc: :inserted_at]
+    preload_query = from s in Wcsp.Musics.Songs.scoped(current_user), order_by: [desc: :inserted_at]
 
     from p in query,
     preload: [songs: ^preload_query],

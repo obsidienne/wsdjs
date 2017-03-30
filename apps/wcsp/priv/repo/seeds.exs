@@ -57,7 +57,7 @@ defmodule Wcsp.Seeds do
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    song = %Wcsp.Song{
+    song = %Wcsp.Musics.Songs{
       id: row[:id],
       user_id: row[:user_id],
       artist: row[:artist],
@@ -76,7 +76,7 @@ defmodule Wcsp.Seeds do
   end
 
   def store_it(:album_art, %{cover_public_id: cpi, cover_version: cv, user_id: ui, id: id}) when cpi != "wsdjs/missing_cover" and cpi != "" do
-    album_art = %Wcsp.AlbumArt{
+    album_art = %Wcsp.Musics.Arts{
       cld_id: cpi,
       version: String.to_integer(cv),
       song_id: id,
@@ -120,7 +120,7 @@ defmodule Wcsp.Seeds do
   end
 
   def store_it(:song_opinion, row) do
-    song_opinion = %Wcsp.SongOpinion{
+    song_opinion = %Wcsp.Musics.Opinions{
       id: row[:id],
       user_id: row[:user_id],
       song_id: row[:song_id],
@@ -132,7 +132,7 @@ defmodule Wcsp.Seeds do
   end
 
   def store_it(:song_comment, row) do
-    song_comment = %Wcsp.SongComment{
+    song_comment = %Wcsp.Musics.Comments{
       id: row[:id],
       user_id: row[:user_id],
       song_id: row[:song_id],
