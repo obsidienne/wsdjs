@@ -1,14 +1,13 @@
-defmodule Wcsp.Musics.Opinions do
+defmodule Wcsp.Musics.Opinion do
   use Wcsp.Schema
 
-  alias Wcsp.Musics.Songs
-  alias Wcsp.Musics.Opinions
-
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "song_opinions" do
     field :kind, :string
 
     belongs_to :user, Wcsp.User
-    belongs_to :song, Wcsp.Musics.Songs
+    belongs_to :song, Wcsp.Musics.Song
 
     timestamps()
   end
@@ -27,7 +26,7 @@ defmodule Wcsp.Musics.Opinions do
   end
 
   def build(%{kind: kind, user_id: user_id, song_id: song_id} = params) do
-    changeset(%Opinions{}, params)
+    changeset(%Wcsp.Musics.Opinion{}, params)
   end
 
 end

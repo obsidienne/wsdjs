@@ -1,11 +1,13 @@
-defmodule Wcsp.Musics.Comments do
+defmodule Wcsp.Musics.Comment do
   use Wcsp.Schema
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "comments" do
     field :text, :string
 
     belongs_to :user, Wcsp.User
-    belongs_to :song, Wcsp.Musics.Songs
+    belongs_to :song, Wcsp.Musics.Song
     timestamps()
   end
 

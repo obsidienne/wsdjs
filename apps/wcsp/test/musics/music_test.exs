@@ -6,6 +6,8 @@ defmodule Wcsp.MusicTest do
   alias Wcsp.Musics
   alias Wcsp.Musics.Song
 
+  @create_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
+
   def fixture(:songs, attrs \\ @create_attrs) do
     {:ok, songs} = Wcsp.Musics.create_songs(attrs)
     songs

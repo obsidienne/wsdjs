@@ -1,6 +1,8 @@
 defmodule Wcsp.Avatar do
   use Wcsp.Schema
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "avatars" do
     field :cld_id, :string
     field :version, :integer

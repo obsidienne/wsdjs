@@ -1,12 +1,14 @@
-defmodule Wcsp.Musics.Arts do
+defmodule Wcsp.Musics.Art do
   use Wcsp.Schema
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "album_arts" do
     field :cld_id, :string
     field :version, :integer
 
     belongs_to :user, Wcsp.User
-    belongs_to :song, Wcsp.Musics.Songs
+    belongs_to :song, Wcsp.Musics.Song
 
     timestamps()
   end

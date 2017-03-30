@@ -1,6 +1,8 @@
 defmodule Wcsp.Top do
   use Wcsp.Schema
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "tops" do
     field :due_date, :date
     field :status, :string
