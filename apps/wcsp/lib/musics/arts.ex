@@ -1,4 +1,4 @@
-defmodule Wcsp.AlbumArt do
+defmodule Wcsp.Musics.Arts do
   use Wcsp.Schema
 
   schema "album_arts" do
@@ -6,7 +6,7 @@ defmodule Wcsp.AlbumArt do
     field :version, :integer
 
     belongs_to :user, Wcsp.User
-    belongs_to :song, Wcsp.Song
+    belongs_to :song, Wcsp.Musics.Song
 
     timestamps()
   end

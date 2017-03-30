@@ -1,11 +1,14 @@
-defmodule Wcsp.SongOpinion do
+defmodule Wcsp.Musics.Opinions do
   use Wcsp.Schema
+
+  alias Wcsp.Musics.Songs
+  alias Wcsp.Musics.Opinions
 
   schema "song_opinions" do
     field :kind, :string
 
     belongs_to :user, Wcsp.User
-    belongs_to :song, Wcsp.Song
+    belongs_to :song, Wcsp.Musics.Songs
 
     timestamps()
   end
@@ -24,7 +27,7 @@ defmodule Wcsp.SongOpinion do
   end
 
   def build(%{kind: kind, user_id: user_id, song_id: song_id} = params) do
-    changeset(%SongOpinion{}, params)
+    changeset(%Opinions{}, params)
   end
 
 end

@@ -1,5 +1,10 @@
-defmodule Wcsp.Song do
+defmodule Wcsp.Musics.Songs do
   use Wcsp.Schema
+
+  alias Wcsp.User
+  alias Wcsp.Musics.Arts
+  alias Wcsp.Musics.Opinions
+  alias Wcsp.Musics.Comments
 
   schema "songs" do
     field :title, :string
@@ -8,11 +13,11 @@ defmodule Wcsp.Song do
     field :bpm, :integer
     field :genre, :string
 
-    belongs_to :user, Wcsp.User
-    has_one :album_art, Wcsp.AlbumArt
-    has_many :comments, Wcsp.SongComment
+    belongs_to :user, User
+    has_one :album_art, Arts
+    has_many :comments, Comments
     has_many :ranks, Wcsp.Rank
-    has_many :song_opinions, Wcsp.SongOpinion
+    has_many :song_opinions, Opinions
     has_many :rank_songs, Wcsp.RankSong
     many_to_many :tops, Wcsp.Top, join_through: Wcsp.Rank
 
@@ -40,18 +45,18 @@ defmodule Wcsp.Song do
   @doc """
   Admin sees everything
   """
-  def scoped(%User{admin: :true}), do: Song
+  def scoped(%User{admin: :true}), do: Songs
 
   @doc """
   Connected user can see voting and published Top + Top he has created
   """
-  def scoped(%User{} = user), do: Song
+  def scoped(%User{} = user), do: Songs
 
   @doc """
   Not connected users see nothing
   """
   def scoped(nil) do
-    from s in Song,
+    from s in Songs,
     join: r in assoc(s, :ranks),
     where: r.position <= 10
   end
@@ -121,10 +126,10 @@ defmodule Wcsp.Song do
   """
   def with_all(query) do
     query
-    |> Song.with_users()
-    |> Song.with_comments()
-    |> Song.with_album_art()
-    |> Song.with_song_opinions()
+    |> Songs.with_users()
+    |> Songs.with_comments()
+    |> Songs.with_album_art()
+    |> Songs.with_song_opinions()
   end
 
   @doc """

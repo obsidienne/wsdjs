@@ -1,12 +1,14 @@
 defmodule Wcsp.PolicyTest do
   use Wcsp.DataCase, async: true
 
-  alias Wcsp.{User, Song, Top}
+  alias Wcsp.User
+  alias Wcsp.Musics.Songs
+  alias Wcsp.Top
 
   test "admin can do everything on anything" do
     admin = %User{admin: true}
     actions = [:new, :create, :show, :delete, :edit, :update, :index]
-    models = [%Song{}, %Top{}]
+    models = [%Songs{}, %Top{}]
 
     Enum.each(models, fn(model) ->
       Enum.each(actions, fn(action) ->
@@ -17,8 +19,8 @@ defmodule Wcsp.PolicyTest do
 
   test "Connected user on song" do
     user = %User{id: Ecto.UUID.generate(), admin: false}
-    song = %Song{user_id: Ecto.UUID.generate()}
-    his_song = %Song{user_id: user.id}
+    song = %Songs{user_id: Ecto.UUID.generate()}
+    his_song = %Songs{user_id: user.id}
 
     Enum.each([:create, :show], fn(action) ->
       assert Wcsp.Policy.can?(user, action, song)
@@ -34,10 +36,10 @@ defmodule Wcsp.PolicyTest do
   end
 
   test "Anonymous user on song" do
-    assert Wcsp.Policy.can?(nil, :show, %Song{})
+    assert Wcsp.Policy.can?(nil, :show, %Songs{})
 
     Enum.each([:create, :new, :delete, :edit, :update, :index], fn(action) ->
-      refute Wcsp.Policy.can?(nil, action, %Song{})
+      refute Wcsp.Policy.can?(nil, action, %Songs{})
     end)
   end
 end

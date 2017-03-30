@@ -1,19 +1,19 @@
-defmodule Wcsp.SongTest do
+defmodule Wcsp.SongsTest do
   use Wcsp.DataCase, async: true
   import Wcsp.Factory
 
-  alias Wcsp.Song
+  alias Wcsp.Musics.Songs
 
   @create_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
 
   test "changeset with minimal valid attributes" do
-    changeset = Song.changeset(%Song{}, @create_attrs)
+    changeset = Songs.changeset(%Songs{}, @create_attrs)
     assert changeset.valid?
   end
 
   test "song suggestor must exist" do
     params = Map.put(@create_attrs, :user_id, Ecto.UUID.generate())
-    song = Song.changeset(%Song{}, params)
+    song = Songs.changeset(%Songs{}, params)
     {:error, changeset} = Repo.insert(song)
 
     assert "does not exist" in errors_on(changeset, :user)
@@ -22,7 +22,7 @@ defmodule Wcsp.SongTest do
 
   test "artist / title is unique" do
     dj = insert!(:user)
-    song = Song.changeset(%Song{}, @create_attrs)
+    song = Songs.changeset(%Songs{}, @create_attrs)
     song_with_user = Ecto.Changeset.put_assoc(song, :user, dj)
     Repo.insert(song_with_user)
 
@@ -31,22 +31,22 @@ defmodule Wcsp.SongTest do
   end
 
   test "bpm must be positive" do
-    changeset = Song.changeset(%Song{}, %{bpm: -1})
+    changeset = Songs.changeset(%Songs{}, %{bpm: -1})
     assert "must be greater than 0" in errors_on(changeset, :bpm)
   end
 
   test "title can't be blank" do
-    changeset = Song.changeset(%Song{}, %{title: nil})
+    changeset = Songs.changeset(%Songs{}, %{title: nil})
     assert "can't be blank" in errors_on(changeset, :title)
   end
 
   test "artist can't be blank" do
-    changeset = Song.changeset(%Song{}, %{artist: nil})
+    changeset = Songs.changeset(%Songs{}, %{artist: nil})
     assert "can't be blank" in errors_on(changeset, :artist)
   end
 
   test "url must be valid" do
-    changeset = Song.changeset(%Song{}, %{url: "bullshit"})
+    changeset = Songs.changeset(%Songs{}, %{url: "bullshit"})
     assert "invalid url: :no_scheme" in errors_on(changeset, :url)
   end
 end
