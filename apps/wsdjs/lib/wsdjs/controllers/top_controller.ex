@@ -61,9 +61,6 @@ defmodule Wsdjs.TopController do
 
   def action(conn, _) do apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user]) end
 
-  @doc """
-  Only visible by an admin or the top creator
-  """
   defp top_creating(conn, top) do
     changeset = Wcsp.Top.changeset(top)
     render conn, "creating.html", top: top, changeset: changeset

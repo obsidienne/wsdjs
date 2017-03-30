@@ -6,7 +6,7 @@ defmodule Wcsp.Musics.Opinion do
   schema "song_opinions" do
     field :kind, :string
 
-    belongs_to :user, Wcsp.User
+    belongs_to :user, Wcsp.Accounts.User
     belongs_to :song, Wcsp.Musics.Song
 
     timestamps()
@@ -25,7 +25,7 @@ defmodule Wcsp.Musics.Opinion do
     |> assoc_constraint(:song)
   end
 
-  def build(%{kind: kind, user_id: user_id, song_id: song_id} = params) do
+  def build(%{kind: _kind, user_id: _user_id, song_id: _song_id} = params) do
     changeset(%Wcsp.Musics.Opinion{}, params)
   end
 

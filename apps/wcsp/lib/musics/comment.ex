@@ -6,7 +6,7 @@ defmodule Wcsp.Musics.Comment do
   schema "comments" do
     field :text, :string
 
-    belongs_to :user, Wcsp.User
+    belongs_to :user, Wcsp.Accounts.User
     belongs_to :song, Wcsp.Musics.Song
     timestamps()
   end

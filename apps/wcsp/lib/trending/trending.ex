@@ -7,6 +7,7 @@ defmodule Wcsp.Trending do
   alias Wcsp.Repo
 
   alias Wcsp.Top
+  alias Wcsp.Musics.Song
 
   def last_top_10(user) do
     Top.scoped(user)

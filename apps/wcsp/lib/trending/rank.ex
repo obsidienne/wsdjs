@@ -21,7 +21,7 @@ defmodule Wcsp.Rank do
     field :bonus, :integer
     field :position, :integer
 
-    belongs_to :song, Wcsp.Musics.Songs
+    belongs_to :song, Wcsp.Musics.Song
     belongs_to :top, Wcsp.Top
 
     timestamps()
@@ -41,7 +41,7 @@ defmodule Wcsp.Rank do
   end
 
   def for_top(id) do
-    query = from q in __MODULE__,
+    from q in __MODULE__,
     where: q.top_id == ^id,
     order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
     preload: [song: [{:album_art, :user}]]

@@ -1,6 +1,7 @@
 defmodule Wcsp.Policy do
   use Wcsp.Schema
 
+  alias Wcsp.Accounts.User
   alias Wcsp.Musics.Song
 
   @doc """

@@ -14,7 +14,7 @@ defmodule Wcsp.RankSong do
 
     belongs_to :song, Wcsp.Musics.Songs
     belongs_to :top, Wcsp.Top
-    belongs_to :user, Wcsp.User
+    belongs_to :user, Wcsp.Accounts.User
 
     timestamps()
   end
@@ -29,7 +29,7 @@ defmodule Wcsp.RankSong do
     |> validate_number(:votes, less_than_or_equal_to: 10)
   end
 
-  def build(%{user_id: user_id, song_id: song_id, votes: votes} = params) do
+  def build(%{user_id: _user_id, song_id: _song_id, votes: _votes} = params) do
     changeset(%Wcsp.RankSong{}, params)
   end
 

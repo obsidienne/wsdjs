@@ -1,7 +1,7 @@
 defmodule Wsdjs.HottestController do
   use Wsdjs, :controller
 
-  alias Wcsp.Musics.Songs
+  alias Wcsp.Musics.Song
 
   def index(conn, _params, current_user) do
     songs = Wcsp.Musics.list_songs(current_user)
@@ -11,7 +11,7 @@ defmodule Wsdjs.HottestController do
   end
 
   def new(conn, _params, _current_user) do
-    changeset = Songs.changeset(%Songs{})
+    changeset = Song.changeset(%Song{})
     render(conn, "new.html", changeset: changeset)
   end
 

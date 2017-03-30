@@ -6,7 +6,7 @@ defmodule Wcsp.Musics do
   import Ecto.{Query, Changeset}, warn: false
   alias Wcsp.Repo
 
-  alias Wcsp.Musics.{Song, Comment}
+  alias Wcsp.Musics.{Song, Comment, Opinion}
 
   @doc """
   Returns the list of songs.the current and previous month
@@ -61,7 +61,7 @@ defmodule Wcsp.Musics do
     |> Repo.insert_or_update
   end
 
-  def delete_song_opinion!(user, clauses) do
+  def delete_song_opinion!(_user, clauses) do
     Repo.get_by(Opinion, clauses)
     |> Repo.delete!()
   end

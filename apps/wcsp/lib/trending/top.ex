@@ -1,13 +1,15 @@
 defmodule Wcsp.Top do
   use Wcsp.Schema
 
+  alias Wcsp.Accounts.User
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "tops" do
     field :due_date, :date
     field :status, :string
 
-    belongs_to :user, Wcsp.User
+    belongs_to :user, User
     has_many :ranks, Wcsp.Rank
     has_many :rank_songs, Wcsp.RankSong, on_replace: :delete
     many_to_many :songs, Wcsp.Musics.Songs, join_through: Wcsp.Rank

@@ -2,14 +2,14 @@ defmodule Wsdjs.UserController do
   use Wsdjs, :controller
 
   def index(conn, _params) do
-    users = Wcsp.Account.list_users()
+    users = Wcsp.Accounts.list_users()
 
     render conn, "index.html", users: users
   end
 
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
-    user = Wcsp.Account.find_user_with_songs(current_user, id: id)
+    user = Wcsp.Accounts.find_user_with_songs(current_user, id: id)
     render conn, "show.html", user: user
   end
 end

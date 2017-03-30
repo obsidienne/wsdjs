@@ -1,8 +1,10 @@
-defmodule Wcsp.User do
+defmodule Wcsp.Accounts.User do
   use Wcsp.Schema
 
+  alias Wcsp.Accounts.User
+
   @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+#  @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
     field :admin, :boolean
@@ -13,7 +15,7 @@ defmodule Wcsp.User do
 
     has_many :songs, Wcsp.Musics.Songs
     has_many :comments, Wcsp.Musics.Comments
-    has_one :avatar, Wcsp.Avatar
+    has_one :avatar, Wcsp.Accounts.Avatar
     has_many :song_opinions, Wcsp.Musics.Opinions
     has_many :rank_songs, Wcsp.RankSong
 
@@ -30,8 +32,8 @@ defmodule Wcsp.User do
     |> validate_format(:email, ~r/.*@.*/)
   end
 
-  def build(%{email: email} = params) do
-    changeset(%Wcsp.User{}, params)
+  def build(%{email: _} = params) do
+    changeset(%User{}, params)
   end
 
 
@@ -63,7 +65,7 @@ defmodule Wcsp.User do
   end
 
   def with_songs(query, current_user) do
-    preload_query = from s in Wcsp.Musics.Songs.scoped(current_user), order_by: [desc: :inserted_at]
+    preload_query = from s in Wcsp.Musics.Song.scoped(current_user), order_by: [desc: :inserted_at]
 
     from p in query,
     preload: [songs: ^preload_query],

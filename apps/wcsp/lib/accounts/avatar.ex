@@ -1,4 +1,4 @@
-defmodule Wcsp.Avatar do
+defmodule Wcsp.Accounts.Avatar do
   use Wcsp.Schema
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -7,7 +7,7 @@ defmodule Wcsp.Avatar do
     field :cld_id, :string
     field :version, :integer
 
-    belongs_to :user, Wcsp.User
+    belongs_to :user, Wcsp.Accounts.User
     timestamps()
   end
 

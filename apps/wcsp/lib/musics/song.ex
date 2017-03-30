@@ -1,11 +1,8 @@
 defmodule Wcsp.Musics.Song do
   use Wcsp.Schema
 
-  alias Wcsp.User
-  alias Wcsp.Musics.Song
-  alias Wcsp.Musics.Art
-  alias Wcsp.Musics.Opinion
-  alias Wcsp.Musics.Comment
+  alias Wcsp.Accounts.User
+  alias Wcsp.Musics.{Song, Art, Opinion, Comment}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -53,7 +50,7 @@ defmodule Wcsp.Musics.Song do
   @doc """
   Connected user can see voting and published Top + Top he has created
   """
-  def scoped(%User{} = user), do: Song
+  def scoped(%User{} = _user), do: Song
 
   @doc """
   Not connected users see nothing
@@ -71,7 +68,6 @@ defmodule Wcsp.Musics.Song do
 
   def search(query, search_query) do
     search_query = ts_query_format(search_query)
-    ft_query =
 
     from q in query,
     where: fragment("""
