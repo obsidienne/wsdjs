@@ -13,10 +13,10 @@ defmodule Wcsp.Accounts.User do
     field :name, :string
     field :djname, :string
 
-    has_many :songs, Wcsp.Musics.Songs
-    has_many :comments, Wcsp.Musics.Comments
+    has_many :songs, Wcsp.Musics.Song
+    has_many :comments, Wcsp.Musics.Comment
     has_one :avatar, Wcsp.Accounts.Avatar
-    has_many :song_opinions, Wcsp.Musics.Opinions
+    has_many :song_opinions, Wcsp.Musics.Opinion
     has_many :rank_songs, Wcsp.RankSong
 
     timestamps()

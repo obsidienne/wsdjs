@@ -1,19 +1,19 @@
-defmodule Wcsp.SongsTest do
+defmodule Wcsp.SongTest do
   use Wcsp.DataCase, async: true
   import Wcsp.Factory
 
-  alias Wcsp.Musics.Songs
+  alias Wcsp.Musics.Song
 
   @create_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
 
   test "changeset with minimal valid attributes" do
-    changeset = Songs.changeset(%Songs{}, @create_attrs)
+    changeset = Song.changeset(%Song{}, @create_attrs)
     assert changeset.valid?
   end
 
   test "song suggestor must exist" do
     params = Map.put(@create_attrs, :user_id, Ecto.UUID.generate())
-    song = Songs.changeset(%Songs{}, params)
+    song = Song.changeset(%Song{}, params)
     {:error, changeset} = Repo.insert(song)
 
     assert "does not exist" in errors_on(changeset, :user)
@@ -22,7 +22,7 @@ defmodule Wcsp.SongsTest do
 
   test "artist / title is unique" do
     dj = insert!(:user)
-    song = Songs.changeset(%Songs{}, @create_attrs)
+    song = Song.changeset(%Song{}, @create_attrs)
     song_with_user = Ecto.Changeset.put_assoc(song, :user, dj)
     Repo.insert(song_with_user)
 
@@ -31,22 +31,22 @@ defmodule Wcsp.SongsTest do
   end
 
   test "bpm must be positive" do
-    changeset = Songs.changeset(%Songs{}, %{bpm: -1})
+    changeset = Song.changeset(%Song{}, %{bpm: -1})
     assert "must be greater than 0" in errors_on(changeset, :bpm)
   end
 
   test "title can't be blank" do
-    changeset = Songs.changeset(%Songs{}, %{title: nil})
+    changeset = Song.changeset(%Song{}, %{title: nil})
     assert "can't be blank" in errors_on(changeset, :title)
   end
 
   test "artist can't be blank" do
-    changeset = Songs.changeset(%Songs{}, %{artist: nil})
+    changeset = Song.changeset(%Song{}, %{artist: nil})
     assert "can't be blank" in errors_on(changeset, :artist)
   end
 
   test "url must be valid" do
-    changeset = Songs.changeset(%Songs{}, %{url: "bullshit"})
+    changeset = Song.changeset(%Song{}, %{url: "bullshit"})
     assert "invalid url: :no_scheme" in errors_on(changeset, :url)
   end
 end

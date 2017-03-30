@@ -1,11 +1,10 @@
 defmodule Wcsp.Factory do
   alias Wcsp.Repo
-  alias Wcsp.SongComment
   use Wcsp.Schema
 
   # Factories
   def build(:user) do
-    %User{
+    %Wcsp.Accounts.User{
       email: "hello#{System.unique_integer()}@dummy.com"
     }
   end

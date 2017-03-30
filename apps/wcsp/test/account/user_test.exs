@@ -1,7 +1,7 @@
 defmodule Wcsp.UserTest do
   use Wcsp.DataCase, async: true
 
-  alias Wcsp.User
+  alias Wcsp.Accounts.User
 
   @create_attrs %{email: "alice@example.com"}
 
