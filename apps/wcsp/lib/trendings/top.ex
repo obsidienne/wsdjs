@@ -1,9 +1,9 @@
 defmodule Wcsp.Trendings.Top do
-  use Wcsp.Schema
+  use Ecto.Schema
+  import Ecto.Changeset
+  import Ecto.Query
 
-  alias Wcsp.Accounts
-  alias Wcsp.Trendings
-  alias Wcsp.Musics
+  alias Wcsp.{Accounts, Trendings, Musics}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

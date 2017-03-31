@@ -5,11 +5,11 @@ defmodule Wcsp.Trendings.Vote do
 
   position: filled and freezed in publish
   """
-  use Wcsp.Schema
+  use Ecto.Schema
+  import Ecto.Changeset
+  import Ecto.Query
 
-  alias Wcsp.Musics
-  alias Wcsp.Trendings
-  alias Wcsp.Accounts
+  alias Wcsp.{Musics, Trendings, Accounts}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

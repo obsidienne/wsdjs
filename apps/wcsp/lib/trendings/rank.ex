@@ -11,7 +11,9 @@ defmodule Wcsp.Trendings.Rank do
   bonus: filled only if the top is in the counting status and freezed on publish
   position: filled and freezed in publish
   """
-  use Wcsp.Schema
+  use Ecto.Schema
+  import Ecto.Changeset
+  import Ecto.Query
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

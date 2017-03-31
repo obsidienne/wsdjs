@@ -1,7 +1,4 @@
 defmodule Wcsp.Factory do
-  alias Wcsp.Repo
-  use Wcsp.Schema
-
   # Factories
   def build(:user) do
     %Wcsp.Accounts.User{
@@ -15,7 +12,7 @@ defmodule Wcsp.Factory do
   end
 
   def insert!(factory_name, attributes \\ []) do
-    Repo.insert! build(factory_name, attributes)
+    Wcsp.Repo.insert! build(factory_name, attributes)
   end
 
 end

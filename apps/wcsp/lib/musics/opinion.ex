@@ -1,5 +1,6 @@
 defmodule Wcsp.Musics.Opinion do
-  use Wcsp.Schema
+  use Ecto.Schema
+  import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
