@@ -1,8 +1,9 @@
 defmodule Wcsp.Musics.Song do
   use Wcsp.Schema
 
-  alias Wcsp.Accounts.User
-  alias Wcsp.Musics.{Song, Art, Opinion, Comment}
+  alias Wcsp.Trendings
+  alias Wcsp.Accounts
+  alias Wcsp.Musics
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -13,13 +14,13 @@ defmodule Wcsp.Musics.Song do
     field :bpm, :integer
     field :genre, :string
 
-    belongs_to :user, User
-    has_one :album_art, Art
-    has_many :comments, Comment
-    has_many :ranks, Wcsp.Rank
-    has_many :opinions, Opinion
-    has_many :rank_songs, Wcsp.RankSong
-    many_to_many :tops, Wcsp.Top, join_through: Wcsp.Rank
+    belongs_to :user, Accounts.User
+    has_one :album_art, Musics.Art
+    has_many :comments, Musics.Comment
+    has_many :ranks, Trendings.Rank
+    has_many :opinions, Musics.Opinion
+    has_many :rank_songs, Trendings.Vote
+    many_to_many :tops, Trendings.Top, join_through: Trendings.Rank
 
     timestamps()
   end
@@ -45,18 +46,18 @@ defmodule Wcsp.Musics.Song do
   @doc """
   Admin sees everything
   """
-  def scoped(%User{admin: :true}), do: Song
+  def scoped(%Accounts.User{admin: :true}), do: Musics.Song
 
   @doc """
   Connected user can see voting and published Top + Top he has created
   """
-  def scoped(%User{} = _user), do: Song
+  def scoped(%Accounts.User{} = _user), do: Musics.Song
 
   @doc """
   Not connected users see nothing
   """
   def scoped(nil) do
-    from s in Song,
+    from s in Musics.Song,
     join: r in assoc(s, :ranks),
     where: r.position <= 10
   end
@@ -109,7 +110,7 @@ defmodule Wcsp.Musics.Song do
   """
   def with_album_art(query) do
     from q in query,
-    preload: :album_art
+    preload: :art
   end
 
   @doc """
@@ -125,10 +126,10 @@ defmodule Wcsp.Musics.Song do
   """
   def with_all(query) do
     query
-    |> Song.with_users()
-    |> Song.with_comments()
-    |> Song.with_album_art()
-    |> Song.with_opinions()
+    |> Musics.Song.with_users()
+    |> Musics.Song.with_comments()
+    |> Musics.Song.with_album_art()
+    |> Musics.Song.with_opinions()
   end
 
   @doc """

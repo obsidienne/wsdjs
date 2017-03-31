@@ -3,7 +3,7 @@ defmodule Wcsp.PolicyTest do
 
   alias Wcsp.Accounts.User
   alias Wcsp.Musics.Song
-  alias Wcsp.Top
+  alias Wcsp.Trendings.Top
 
   test "admin can do everything on anything" do
     admin = %User{admin: true}

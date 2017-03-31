@@ -7,11 +7,7 @@ defmodule Wcsp.Schema do
       import Ecto.Changeset
       import Ecto.Query
 
-      alias Wcsp.{
-        Repo,
-        Top,
-        Rank
-      }
+      alias Wcsp.Repo
     end
   end
 end

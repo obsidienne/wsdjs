@@ -4,7 +4,7 @@ defmodule Wcsp.Accounts.User do
   alias Wcsp.Accounts.User
 
   @primary_key {:id, :binary_id, autogenerate: true}
-#  @foreign_key_type :binary_id
+  @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
     field :admin, :boolean
@@ -17,7 +17,7 @@ defmodule Wcsp.Accounts.User do
     has_many :comments, Wcsp.Musics.Comment
     has_one :avatar, Wcsp.Accounts.Avatar
     has_many :song_opinions, Wcsp.Musics.Opinion
-    has_many :rank_songs, Wcsp.RankSong
+    has_many :rank_songs, Wcsp.Trendings.Vote
 
     timestamps()
   end
@@ -69,6 +69,6 @@ defmodule Wcsp.Accounts.User do
 
     from p in query,
     preload: [songs: ^preload_query],
-    preload: [songs: :album_art]
+    preload: [songs: :art]
   end
 end

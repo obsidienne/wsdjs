@@ -1,4 +1,4 @@
-defmodule Wcsp.Rank do
+defmodule Wcsp.Trendings.Rank do
   @moduledoc """
   This is the Rank module. It aims to store for a Wcsp.Top :
     - the songs
@@ -22,7 +22,7 @@ defmodule Wcsp.Rank do
     field :position, :integer
 
     belongs_to :song, Wcsp.Musics.Song
-    belongs_to :top, Wcsp.Top
+    belongs_to :top, Wcsp.Trendings.Top
 
     timestamps()
   end
@@ -57,6 +57,6 @@ defmodule Wcsp.Rank do
       """),
     where: p.rn <= ^per and p.id == q.id,
     order_by: [asc: q.position],
-    preload: [song: :album_art]
+    preload: [song: :art]
   end
 end
