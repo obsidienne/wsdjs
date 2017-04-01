@@ -1,6 +1,6 @@
 defmodule Wcsp.Trendings.Vote do
   @moduledoc """
-  This is the RankSong module. It aims to store a DJ vote:
+  This is the Vote module. It aims to store a DJ vote:
   The votes is the position of the song between 1 and count(ranks) for top)
 
   position: filled and freezed in publish
