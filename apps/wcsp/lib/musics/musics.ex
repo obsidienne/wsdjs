@@ -24,6 +24,24 @@ defmodule Wcsp.Musics do
     |> Repo.all
   end
 
+  @doc """
+  Creates a song.
+
+  ## Examples
+
+      iex> create_song(%{email: "test@testing.com"})
+      {:ok, %Wcsp.Musics.Song{}}
+
+      iex> create_song(%{email: "dummy value"})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_song(user, params) do
+    Song.changeset(%Song{}, params)
+    |> put_assoc(:user, user)
+    |> Repo.insert
+  end
+
   def find_song!(user, clauses) do
     Song.scoped(user)
     |> Song.with_all()
@@ -37,11 +55,6 @@ defmodule Wcsp.Musics do
     |> Wcsp.Repo.preload(comments: [user: :avatar])
   end
 
-  def create_song(user, params) do
-    Song.changeset(%Song{}, params)
-    |> put_assoc(:user, user)
-    |> Repo.insert
-  end
 
   def create_song_comment(user, song, params) do
     Comment.changeset(%Comment{}, params)

@@ -1,7 +1,7 @@
-defmodule Wcsp.MusicTest do
+defmodule Wcsp.MusicsTest do
   use Wcsp.DataCase
 
-#  doctest Wcsp.Music
+  doctest Wcsp.Musics
 
   alias Wcsp.Musics
 

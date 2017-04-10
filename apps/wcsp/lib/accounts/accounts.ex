@@ -17,7 +17,7 @@ defmodule Wcsp.Accounts do
   ## Examples
 
       iex> list_users()
-      [%User{}, ...]
+      [%Accounts.User{}, ...]
 
   """
   def list_users do
@@ -39,24 +39,6 @@ defmodule Wcsp.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(Wcsp.Accounts.User, id)
-
-  @doc """
-  Creates a user.
-
-  ## Examples
-
-      iex> create_user(%{email: "test@testing.com"})
-      {:ok, %User{}}
-
-      iex> create_user(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_user(attrs \\ %{}) do
-    %User{}
-    |> Wcsp.Accounts.User.changeset(attrs)
-    |> Repo.insert()
-  end
 
   def find_user!(clauses) do
     User
