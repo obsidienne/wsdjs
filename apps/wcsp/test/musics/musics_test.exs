@@ -5,15 +5,16 @@ defmodule Wcsp.MusicTest do
 
   alias Wcsp.Musics
 
-  @create_attrs %{title: "song title", artist: "the artist", url: "http://song_url.com", genre: "pop"}
+  @create_attrs %{title: "song title", artist: "the artist", url: "http://song-url.com", genre: "pop"}
 
-  def fixture(:songs, attrs \\ @create_attrs) do
-    {:ok, songs} = Musics.create_songs(attrs)
+  def fixture(:songs, user, attrs \\ @create_attrs) do
+    {:ok, songs} = Musics.create_song(user, attrs)
     songs
   end
 
   test "list_song/1 returns all song" do
-    songs = fixture(:songs)
-    assert Musics.list_song() == [songs]
+    {:ok, user} = Wcsp.Accounts.create_user(%{email: "test#{System.unique_integer()}@testing.com"})
+    songs = fixture(:songs, user)
+    assert Musics.list_songs(user) == [songs]
   end
 end

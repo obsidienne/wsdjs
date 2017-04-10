@@ -24,6 +24,40 @@ defmodule Wcsp.Accounts do
     Repo.all(Wcsp.Accounts.User)
   end
 
+  @doc """
+  Gets a single user.
+
+  Raises `Ecto.NoResultsError` if the User does not exist.
+
+  ## Examples
+
+      iex> get_user!(123)
+      %User{}
+
+      iex> get_user!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_user!(id), do: Repo.get!(Wcsp.Accounts.User, id)
+
+  @doc """
+  Creates a user.
+
+  ## Examples
+
+      iex> create_user(%{email: "test@testing.com"})
+      {:ok, %User{}}
+
+      iex> create_user(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_user(attrs \\ %{}) do
+    %User{}
+    |> Wcsp.Accounts.User.changeset(attrs)
+    |> Repo.insert()
+  end
+
   def find_user!(clauses) do
     User
     |> User.with_avatar()

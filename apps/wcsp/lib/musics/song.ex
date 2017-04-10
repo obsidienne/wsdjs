@@ -17,11 +17,11 @@ defmodule Wcsp.Musics.Song do
     field :genre, :string
 
     belongs_to :user, Accounts.User
-    has_one :album_art, Musics.Art
+    has_one :art, Musics.Art
     has_many :comments, Musics.Comment
     has_many :ranks, Trendings.Rank
     has_many :opinions, Musics.Opinion
-    has_many :rank_songs, Trendings.Vote
+    has_many :votes, Trendings.Vote
     many_to_many :tops, Trendings.Top, join_through: Trendings.Rank
 
     timestamps()

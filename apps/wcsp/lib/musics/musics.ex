@@ -13,7 +13,7 @@ defmodule Wcsp.Musics do
 
   ## Examples
 
-      iex> list_songs()
+      iex> list_song()
       [%User{}, ...]
 
   """
