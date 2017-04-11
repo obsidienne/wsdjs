@@ -56,7 +56,7 @@
           <tr>
             <td>
               <a class="text-muted" target="_blank" href="<%= rank.song.url %>">
-                <img height="60" width="60" class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.album_art)%>" />
+                <img height="60" width="60" class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.art)%>" />
               </a>
             </td>
             <td>

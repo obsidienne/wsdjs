@@ -6,7 +6,16 @@ defmodule Wcsp.Musics do
   import Ecto.{Query, Changeset}, warn: false
   alias Wcsp.Repo
 
-  alias Wcsp.Musics.{Song, Comment, Opinion}
+  alias Wcsp.Musics.{Song, Comment, Opinion, Art}
+
+  def search(user, q) do
+    Song.scoped(user)
+    |> Song.with_users()
+    |> Song.with_art()
+    |> Song.search(q)
+    |> Repo.all()
+  end
+
 
   @doc """
   Returns the list of songs.the current and previous month
@@ -56,11 +65,43 @@ defmodule Wcsp.Musics do
   end
 
 
-  def create_song_comment(user, song, params) do
+  def create_comment(user, song, params) do
     Comment.changeset(%Comment{}, params)
     |> put_assoc(:user, user)
     |> put_assoc(:song, song)
     |> Repo.insert
+  end
+
+  @doc """
+  Gets a single opinion.
+
+  Raises `Ecto.NoResultsError` if the Opinion does not exist.
+
+  ## Examples
+
+      iex> get_opinion!(123)
+      %Opinion{}
+
+      iex> get_opinion!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_opinion!(id), do: Repo.get!(Opinion, id)
+
+  @doc """
+  Deletes an Opinion.
+
+  ## Examples
+
+      iex> delete_opinion(opinion)
+      {:ok, %Opinion{}}
+
+      iex> delete_opinion(opinion)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_opinion(%Opinion{} = opinion) do
+    Repo.delete(opinion)
   end
 
   def upsert_opinion!(user, song, kind) do
@@ -72,22 +113,5 @@ defmodule Wcsp.Musics do
     song_opinion
     |> Opinion.changeset(%{kind: kind})
     |> Repo.insert_or_update
-  end
-
-  def delete_song_opinion!(_user, clauses) do
-    Repo.get_by(Opinion, clauses)
-    |> Repo.delete!()
-  end
-
-  def find_song_opinion(clauses) do
-    Repo.get_by(Opinion, clauses)
-  end
-
-  def search(user, q) do
-    Song.scoped(user)
-    |> Song.with_users()
-    |> Song.with_album_art()
-    |> Song.search(q)
-    |> Repo.all()
   end
 end

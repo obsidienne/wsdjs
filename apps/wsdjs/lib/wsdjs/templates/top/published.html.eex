@@ -38,7 +38,7 @@
       <%= for rank <- @top.ranks do %>
       <article class="topsong">
         <a class="song-art-link" target="_blank" href="<%= rank.song.url %>">
-          <img height="60" width="60" class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.album_art)%>" />
+          <img height="60" width="60" class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.art)%>" />
         </a>
         <div>
           <div><%= link rank.song.title, to: song_path(@conn, :show, rank.song) %></div>

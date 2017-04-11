@@ -7,7 +7,7 @@ defmodule Wsdjs.TopView do
 
     content_tag(:label, for: "song-#{rank.id}") do
       [
-        tag(:img, width: "60", height: "60", src: song_art_href_default(), "data-src": song_art_href(rank.song.album_art)),
+        tag(:img, width: "60", height: "60", src: song_art_href_default(), "data-src": song_art_href(rank.song.art)),
         content_tag(:div, class: "voting-position charted") do
           voting_show(current_user_vote)
         end

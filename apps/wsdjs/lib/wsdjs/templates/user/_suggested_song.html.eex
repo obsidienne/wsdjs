@@ -1,7 +1,7 @@
 <a class="a-link-no-underline" href="<%= song_path(@conn, :show, @song) %>">
   <div class="Grid">
     <div class="Grid-image">
-      <img class="img-cover cld-responsive" src="<%= song_art_href_default() %>" data-src="<%= song_art_href(@song.album_art)%>" alt="<%= song_art_alt(@song) %>">
+      <img class="img-cover cld-responsive" src="<%= song_art_href_default() %>" data-src="<%= song_art_href(@song.art)%>" alt="<%= song_art_alt(@song) %>">
     </div>
     <div class="Grid-cell-title"><%= @song.title %></div>
     <div class="Grid-cell-artist"><%= @song.artist %></div>

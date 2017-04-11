@@ -2,7 +2,7 @@
   <a href="<%= song_path(@conn, :show, @song.id) %>">
     <article class="minicard-song">
       <div class="minicard-song-heading">
-        <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.album_art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
+        <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
       </div>
       <div class="minicard-song-body">
         <div class="text-muted"><strong><%= @song.title %></strong></div>

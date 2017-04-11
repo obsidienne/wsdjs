@@ -18,10 +18,10 @@ defmodule Wsdjs.SongOpinionController do
   def delete(conn, %{"id" => id}) do
     user = conn.assigns[:current_user]
 
-    song_opinion = Wcsp.Musics.find_song_opinion(id: id)
-    Wcsp.Musics.delete_song_opinion!(user, id: id)
+    opinion = Wcsp.Musics.get_opinion!(id)
+    {:ok, opinion} = Wcsp.Musics.delete_opinion(opinion)
 
-    song = Wcsp.Musics.find_song!(user, id: song_opinion.song_id)
+    song = Wcsp.Musics.find_song!(user, id: opinion.song_id)
 
     conn |>
     render("_show.html", song: song)

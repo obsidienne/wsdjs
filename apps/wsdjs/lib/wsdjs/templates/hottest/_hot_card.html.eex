@@ -2,7 +2,7 @@
 
 <article class="panel panel-default card card-song" data-id="<%= @song.id %>">
   <a href="<%= @song.url %>" class="panel-heading" target="_blank" >
-    <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.album_art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
+    <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
     <h4 class="song-art-overlay">
       <span class="label label-default"><%= @song.genre %></span>
       <%= if @song.bpm > 0 do %>

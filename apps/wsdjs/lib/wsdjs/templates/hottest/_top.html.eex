@@ -1,7 +1,7 @@
 <article class="card-song-top">
   <header>
     <div>
-      <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@rank.song.album_art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@rank.song) %>"/>
+      <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@rank.song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@rank.song) %>"/>
     </div>
   </header>
 

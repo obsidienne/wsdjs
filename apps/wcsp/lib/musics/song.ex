@@ -110,7 +110,7 @@ defmodule Wcsp.Musics.Song do
   @doc """
   Preload album art
   """
-  def with_album_art(query) do
+  def with_art(query) do
     from q in query,
     preload: :art
   end
@@ -130,7 +130,7 @@ defmodule Wcsp.Musics.Song do
     query
     |> Musics.Song.with_users()
     |> Musics.Song.with_comments()
-    |> Musics.Song.with_album_art()
+    |> Musics.Song.with_art()
     |> Musics.Song.with_opinions()
   end
 
