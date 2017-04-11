@@ -104,9 +104,9 @@ defmodule Wcsp.Musics do
     Repo.delete(opinion)
   end
 
-  def upsert_opinion!(user, song, kind) do
-    song_opinion = case Repo.get_by(Opinion, user_id: user.id, song_id: song.id) do
-      nil  -> Opinion.build(%{kind: kind, user_id: user.id, song_id: song.id})
+  def upsert_opinion!(user, song_id, kind) do
+    song_opinion = case Repo.get_by(Opinion, user_id: user.id, song_id: song_id) do
+      nil  -> Opinion.build(%{kind: kind, user_id: user.id, song_id: song_id})
       song_opinion -> song_opinion
     end
 
