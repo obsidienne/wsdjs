@@ -8,9 +8,6 @@ defmodule Wcsp.Accounts do
 
   alias Wcsp.Accounts.User
 
-#  alias Wcsp.Accounts.User
-#  alias Wcsp.Accounts.Avatar
-
   @doc """
   Returns the list of users.
 
