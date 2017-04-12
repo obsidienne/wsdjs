@@ -35,18 +35,16 @@ defmodule Wcsp.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(Wcsp.Accounts.User, id)
-
-  def find_user!(clauses) do
+  def get_user!(id) do
     User
     |> User.with_avatar()
-    |> Repo.get_by!(clauses)
+    |> Repo.get!(id)
   end
 
-  def find_user(clauses) do
+  def get_user_by_email(email) do
     User
     |> User.with_avatar()
-    |> Repo.get_by(clauses)
+    |> Repo.get_by(email: email)
   end
 
   def find_user_with_songs(current_user, clauses) do

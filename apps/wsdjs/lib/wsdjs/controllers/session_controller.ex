@@ -32,7 +32,7 @@ defmodule Wsdjs.SessionController do
   end
 
   defp login_by_email(conn, email, _opts) do
-    user = if email, do: Wcsp.Accounts.find_user(email: email)
+    user = if email, do: Wcsp.Accounts.get_user_by_email(email)
 
     cond do
       user ->
