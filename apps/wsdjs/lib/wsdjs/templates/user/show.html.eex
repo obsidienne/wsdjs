@@ -21,8 +21,8 @@
   <div class="profile-title"><strong>Country :</strong> <%= @user.user_country %></div>
 </div>
 
-<h1 class="profile-name">Suggested song (<%= length(@user.songs) %>)</h1>
-<%= render_many  @user.songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>
+<h1 class="profile-name">Suggested song (<%= length(@songs) %>)</h1>
+<%= render_many  @songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>
 
 </div>
 </main>

@@ -37,20 +37,20 @@ defmodule Wcsp.Accounts do
   """
   def get_user!(id) do
     User
-    |> User.with_avatar()
     |> Repo.get!(id)
+    |> Repo.preload(:avatar)
   end
 
   def get_user_by_email(email) do
     User
-    |> User.with_avatar()
     |> Repo.get_by(email: email)
+    |> Repo.preload(:avatar)
   end
 
-  def find_user_with_songs(current_user, clauses) do
+  def get_user_with_songs(current_user, id) do
     User.scoped(current_user)
-    |> User.with_avatar()
     |> User.with_songs(current_user)
-    |> Repo.get_by(clauses)
+    |> Repo.get(id)
+    |> Repo.preload(:avatar)
   end
 end

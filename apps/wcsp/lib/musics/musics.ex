@@ -19,17 +19,21 @@ defmodule Wcsp.Musics do
 
   @doc """
   Returns the list of songs.the current and previous month
-
-  ## Examples
-
-      iex> list_song()
-      [%User{}, ...]
-
   """
   def list_songs(user) do
     Song.scoped(user)
     |> Song.with_all()
     |> Song.last_month()
+    |> Repo.all
+  end
+
+  @doc """
+  Returns the list of songs for the user scoped by current_user
+  """
+  def list_songs(current_user, user) do
+    Song.scoped(current_user)
+    |> where([user_id: ^user.id])
+    |> Song.with_all()
     |> Repo.all
   end
 

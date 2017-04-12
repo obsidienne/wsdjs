@@ -58,20 +58,4 @@ defmodule Wcsp.Accounts.User do
   def scoped(nil) do
     from u in Accounts.User, where: u.admin == false
   end
-
-  @doc """
-  Preload user avatar using a join
-  """
-  def with_avatar(query) do
-    from q in query,
-    preload: :avatar
-  end
-
-  def with_songs(query, current_user) do
-    preload_query = from s in Musics.Song.scoped(current_user), order_by: [desc: :inserted_at]
-
-    from p in query,
-    preload: [songs: ^preload_query],
-    preload: [songs: :art]
-  end
 end
