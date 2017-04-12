@@ -36,7 +36,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6">
       <ul class="comments-container">
-        <%= render_many Enum.reverse(@song.comments), @view_module, "_song_comment.html", as: :comment, conn: @conn %>
+        <%= render_many Enum.reverse(@comments), @view_module, "_song_comment.html", as: :comment, conn: @conn %>
       </ul>
     </div>
   </div>

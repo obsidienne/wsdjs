@@ -61,11 +61,15 @@ defmodule Wcsp.Musics do
     |> Repo.get_by!(clauses)
   end
 
-  def find_song_with_comments!(user, id: id) do
-    Wcsp.Musics.find_song!(user, id: id)
-    |> Wcsp.Repo.preload(:comments)
-    |> Wcsp.Repo.preload(comments: :user)
-    |> Wcsp.Repo.preload(comments: [user: :avatar])
+  @doc """
+  List comments for a song order by desc
+  """
+  def list_comments(song_id) do
+    Comment
+    |> where([song_id: ^song_id])
+    |> order_by([desc: :inserted_at])
+    |> Repo.all
+    |> Repo.preload([user: :avatar])
   end
 
 
