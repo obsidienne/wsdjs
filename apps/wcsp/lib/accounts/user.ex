@@ -35,11 +35,6 @@ defmodule Wcsp.Accounts.User do
     |> validate_format(:email, ~r/.*@.*/)
   end
 
-  def build(%{email: _} = params) do
-    changeset(%Accounts.User{}, params)
-  end
-
-
   @doc """
   Admin see every user
   """
