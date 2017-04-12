@@ -68,17 +68,4 @@ defmodule Wcsp.Trendings.Top do
   Not connected users see nothing
   """
   def scoped(nil), do: from m in Trendings.Top, where: false
-
-
-
-  def tops() do
-    from p in Trendings.Top, order_by: [desc: p.due_date]
-  end
-
-  def top(query, id) do
-    from p in query, where: p.id == ^id
-  end
-
-  def top(id), do: from p in Trendings.Top, where: p.id == ^id
-
 end

@@ -21,15 +21,18 @@ defmodule Wcsp.Trendings do
     |> Repo.preload(ranks: [song: :user])
   end
 
-  def tops do
-    tops = Top.tops() |> Repo.all
-    Repo.preload tops, ranks: Rank.for_tops_with_limit()
+  def list_tops(user) do
+    Top.scoped(user)
+    |> order_by([desc: :due_date])
+    |> Repo.all
+    |> Repo.preload(ranks: Rank.for_tops_with_limit())
   end
 
-  def top(id) do
-    top = Top.top(id) |> Repo.one
-    top = Repo.preload top, :user
-    Repo.preload top, ranks: Rank.for_top(id)
+  def get_top(user, id) do
+    Top.scoped(user)
+    |> Repo.get!(id)
+    |> Repo.preload(:user)
+    |> Repo.preload(ranks: Rank.for_top(id))
   end
 
   def create_top(user, %{"due_date" => due_date} = params) do
@@ -45,7 +48,7 @@ defmodule Wcsp.Trendings do
   end
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
-    top = top(top_id)
+    top = get_top(user, top_id)
     top = Repo.preload top, rank_songs: Vote.for_user_and_top(top, user)
 
     new_votes = Map.keys(votes_param)
