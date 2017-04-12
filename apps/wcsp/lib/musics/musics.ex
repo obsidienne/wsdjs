@@ -26,8 +26,8 @@ defmodule Wcsp.Musics do
       [%User{}, ...]
 
   """
-  def list_songs(current_user) do
-    Song.scoped(current_user)
+  def list_songs(user) do
+    Song.scoped(user)
     |> Song.with_all()
     |> Song.last_month()
     |> Repo.all
