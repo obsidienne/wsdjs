@@ -9,7 +9,7 @@ defmodule Wcsp.Trendings do
   alias Wcsp.Trendings.{Top, Rank, Vote}
   alias Wcsp.Musics.Song
 
-  def last_top_10(user) do
+  def last_top(user) do
     Top.scoped(user)
     |> order_by([desc: :due_date])
     |> where(status: "published")
