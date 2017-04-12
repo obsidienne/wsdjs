@@ -46,11 +46,4 @@ defmodule Wcsp.Accounts do
     |> Repo.get_by(email: email)
     |> Repo.preload(:avatar)
   end
-
-  def get_user_with_songs(current_user, id) do
-    User.scoped(current_user)
-    |> User.with_songs(current_user)
-    |> Repo.get(id)
-    |> Repo.preload(:avatar)
-  end
 end
