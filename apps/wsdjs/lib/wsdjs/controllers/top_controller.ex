@@ -1,14 +1,14 @@
 defmodule Wsdjs.TopController do
   use Wsdjs, :controller
 
-  def index(conn, _params, _current_user) do
+  def index(conn, _params) do
     tops = Wcsp.Trendings.tops()
     changeset = Wcsp.Trendings.Top.changeset(%Wcsp.Trendings.Top{})
 
     render conn, "index.html", tops: tops, changeset: changeset
   end
 
-  def show(conn, %{"id" => id}, _current_user) do
+  def show(conn, %{"id" => id}) do
     top = Wcsp.Trendings.top(id)
 
     case top.status do
@@ -20,7 +20,7 @@ defmodule Wsdjs.TopController do
 
   end
 
-  def new(conn, _params, _current_user) do
+  def new(conn, _params) do
     changeset = Wcsp.Trendings.Top.changeset(%Wcsp.Trendings.Top{})
     render(conn, "new.html", changeset: changeset)
   end
@@ -39,7 +39,9 @@ defmodule Wsdjs.TopController do
     end
   end
 
-  def create(conn, %{"top" => params}, current_user) do
+  def create(conn, %{"top" => params}) do
+    current_user = conn.assigns[:current_user]
+
     case Wcsp.Trendings.create_top(current_user, params) do
       {:ok, top} ->
         conn
@@ -52,14 +54,11 @@ defmodule Wsdjs.TopController do
     end
   end
 
-  def nextstep(conn, %{"top" => top_params, "id" => id}, current_user) do
+  def nextstep(conn, %{"top" => top_params, "id" => id}) do
     top = Wcsp.Trendings.top(id)
 
     redirect(conn, to: top_path(conn, :show, top))
   end
-
-
-  def action(conn, _) do apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user]) end
 
   defp top_creating(conn, top) do
     changeset = Wcsp.Trendings.Top.changeset(top)

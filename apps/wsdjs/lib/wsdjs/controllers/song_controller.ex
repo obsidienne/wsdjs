@@ -4,8 +4,8 @@ defmodule Wsdjs.SongController do
   plug :authenticate
 
   def show(conn, %{"id" => id}) do
-    user = conn.assigns[:current_user]
-    song = Wcsp.Musics.find_song_with_comments!(user, id: id)
+    current_user = conn.assigns[:current_user]
+    song = Wcsp.Musics.find_song_with_comments!(current_user, id: id)
     comment_changeset = Wcsp.Musics.Comment.changeset(%Wcsp.Musics.Comment{})
 
     render conn, "show.html", song: song, comment_changeset: comment_changeset
@@ -14,10 +14,10 @@ defmodule Wsdjs.SongController do
   # check if the action page is authorized, then in the function according to the
   # struct check if it's authorized
   defp authenticate(conn, _opts) do
-    user = conn.assigns[:current_user]
+    current_user = conn.assigns[:current_user]
     action = conn.assigns[:action] || conn.private[:phoenix_action]
 
-    if Wcsp.Policy.can?(user, action, %Wcsp.Musics.Song{}) do
+    if Wcsp.Policy.can?(current_user, action, %Wcsp.Musics.Song{}) do
       conn
     else
       conn
