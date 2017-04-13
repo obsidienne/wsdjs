@@ -2,7 +2,10 @@ defmodule Wsdjs.SearchController do
   use Wsdjs, :controller
 
   plug :put_layout, false
-
+  
+  @doc """
+  No authZ needed, data is scoped by current_user
+  """
   def index(conn, %{"q" => q}) do
     current_user = conn.assigns[:current_user]
     songs = Wcsp.Musics.search(current_user, q)

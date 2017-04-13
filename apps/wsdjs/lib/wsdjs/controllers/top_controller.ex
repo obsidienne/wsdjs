@@ -1,6 +1,9 @@
 defmodule Wsdjs.TopController do
   use Wsdjs, :controller
 
+  @doc """
+  No authZ needed, data is scoped by current_user
+  """
   def index(conn, _params) do
     current_user = conn.assigns[:current_user]
     tops = Wcsp.Trendings.list_tops(current_user)
@@ -9,6 +12,9 @@ defmodule Wsdjs.TopController do
     render conn, "index.html", tops: tops, changeset: changeset
   end
 
+  @doc """
+  No authZ needed, data is scoped by current_user
+  """
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
 

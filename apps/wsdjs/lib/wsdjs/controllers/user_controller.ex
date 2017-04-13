@@ -7,6 +7,9 @@ defmodule Wsdjs.UserController do
     render conn, "index.html", users: users
   end
 
+  @doc """
+  No authZ needed, data is scoped by current_user
+  """
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
     user = Wcsp.Accounts.get_user!(id)

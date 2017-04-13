@@ -1,8 +1,9 @@
 defmodule Wsdjs.HottestController do
   use Wsdjs, :controller
 
-  alias Wcsp.Musics.Song
-
+  @doc """
+  No authZ needed, data is scoped by current_user
+  """
   def index(conn, _params) do
     current_user = conn.assigns[:current_user]
 
@@ -12,15 +13,14 @@ defmodule Wsdjs.HottestController do
     render conn, "index.html", songs: songs, top: top
   end
 
+  @doc """
+  No authZ needed, this function does not modify the database
+  """
   def new(conn, _params) do
-    current_user = conn.assigns[:current_user]
-
-    with true <- Wcsp.Musics.Policy.can?(:create_song, current_user),
-        changeset <- Song.changeset(%Song{})
-    do
-      render(conn, "new.html", changeset: changeset)
-    end
+    changeset = Wcsp.Musics.Song.changeset(%Wcsp.Musics.Song{})
+    render(conn, "new.html", changeset: changeset)
   end
+
 
   def create(conn, %{"song" => params}) do
     current_user = conn.assigns[:current_user]

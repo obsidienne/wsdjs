@@ -1,6 +1,9 @@
 defmodule Wsdjs.SongController do
   use Wsdjs, :controller
-
+  
+  @doc """
+  No authZ needed, data is scoped by current_user
+  """
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
     song = Wcsp.Musics.find_song!(current_user, id: id)
