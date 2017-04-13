@@ -4,37 +4,28 @@
   import Wsdjs.Router.Helpers
 
   def opinion_link(kind, _conn, _song, opinions, nil) do
-    options = [class: "song-opinion song-#{kind}"]
-
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
-    if qty > 0 do
-      options = options ++ ["data-balloon": opinions_names(kind, opinions), "data-balloon-pos": "up", "data-balloon-break": "true"]
-    end
+    default_options = [class: "song-opinion song-#{kind}"]
 
-    content_tag :span, qty, options
+    content_tag :span, qty, default_options ++ tooltip_options(kind, opinions, qty)
   end
 
   def opinion_link(kind, conn, song, opinions, current_user) do
-    my_opinion = Enum.find(opinions, fn(x) -> x.user_id == current_user.id end)
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
+    my_opinion = Enum.find(opinions, fn(x) -> x.user_id == current_user.id end)
 
-    if qty == 0 do
-      link to: opinion_url(conn, kind, song, my_opinion),
-           class: html_class(kind, my_opinion),
-           "data-method": data_method(kind, my_opinion) do
-        qty
-      end
-    else
-      link to: opinion_url(conn, kind, song, my_opinion),
-           class: html_class(kind, my_opinion),
-           "data-balloon": opinions_names(kind, opinions),
-           "data-balloon-pos": "up",
-           "data-balloon-break": "true",
-           "data-method": data_method(kind, my_opinion) do
-        qty
-      end
-    end
+    default_options = [
+      to: opinion_url(conn, kind, song, my_opinion),
+      class: html_class(kind, my_opinion),
+      "data-method": data_method(kind, my_opinion)
+    ]
+    link qty, default_options ++ tooltip_options(kind, opinions, qty)
   end
+
+  defp tooltip_options(kind, opinions, qty) when qty > 0 do
+    ["data-balloon": opinions_names(kind, opinions), "data-balloon-pos": "up", "data-balloon-break": "true"]
+  end
+  defp tooltip_options(_kind, _opinions, qty) when qty == 0, do: []
 
   defp data_method(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "DELETE"
   defp data_method(_, _), do: "POST"
