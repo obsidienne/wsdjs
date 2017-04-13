@@ -4,7 +4,7 @@
   </section>
 </main>
 
-<%= if Wcsp.Policy.can?(@conn.assigns.current_user, :create, %Wcsp.Trendings.Top{}) do %>
+<%= if Wcsp.Trendings.Policy.can?(:create_top, @conn.assigns.current_user) do %>
 <div id="fab-container">
   <a class="fab-btn" title="Create a new top" href="<%= top_path(@conn, :new) %>"></a>
 </div>

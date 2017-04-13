@@ -13,8 +13,13 @@ defmodule Wsdjs.HottestController do
   end
 
   def new(conn, _params) do
-    changeset = Song.changeset(%Song{})
-    render(conn, "new.html", changeset: changeset)
+    current_user = conn.assigns[:current_user]
+
+    with true <- Wcsp.Musics.Policy.can?(:create_song, current_user),
+        changeset <- Song.changeset(%Song{})
+    do
+      render(conn, "new.html", changeset: changeset)
+    end
   end
 
   def create(conn, %{"song" => params}) do
