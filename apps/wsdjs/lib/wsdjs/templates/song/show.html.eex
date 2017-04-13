@@ -9,7 +9,7 @@
           <h2 class="song-artist">by <%= @song.artist %></h2>
           <h4 class="text-muted"> by <%= link proposed_by_display_name(@song.user), to: user_path(@conn, :show, @song.user) %></h4>
           <div class="song-opinions">
-            <%= render "_opinions.html", conn: @conn, song: @song %>
+            <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
           </div>
         </div>
         <div class="song-header-art">
