@@ -9,7 +9,7 @@ defmodule Wsdjs.VerifyHeader do
     token = fetch_token(get_req_header(conn, "authorization"))
     case verify_token(conn, token) do
       {:ok, payload} ->
-        user = if payload, do: Wcsp.Accounts.get_user!(id: payload)
+        user = if payload, do: Wcsp.Accounts.get_user!(payload)
         assign(conn, :current_user, user)
       {:error, _} ->
         conn
