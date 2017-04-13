@@ -7,9 +7,8 @@ defmodule Wsdjs.TopController do
   def index(conn, _params) do
     current_user = conn.assigns[:current_user]
     tops = Wcsp.Trendings.list_tops(current_user)
-    changeset = Wcsp.Trendings.Top.changeset(%Wcsp.Trendings.Top{})
 
-    render conn, "index.html", tops: tops, changeset: changeset
+    render conn, "index.html", tops: tops
   end
 
   @doc """
@@ -29,6 +28,9 @@ defmodule Wsdjs.TopController do
 
   end
 
+  @doc """
+  No authZ needed, this function does not modify the database
+  """
   def new(conn, _params) do
     changeset = Wcsp.Trendings.Top.changeset(%Wcsp.Trendings.Top{})
     render(conn, "new.html", changeset: changeset)
