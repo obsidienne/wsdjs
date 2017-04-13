@@ -11,7 +11,6 @@
 }
 .cd-multi-steps li {
   display: inline-block;
-  float: left;
   margin: 0.5em 0;
 }
 .cd-multi-steps li::after {
@@ -93,4 +92,9 @@ Multi steps indicator
     color: #ffffff;
     background-color: #96c03d;
   }
+  .cd-multi-steps li.next > * {
+  /* next step */
+  background-color: #337ab7;
+  color: white;
+}
 }

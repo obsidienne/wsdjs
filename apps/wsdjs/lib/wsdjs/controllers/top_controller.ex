@@ -32,18 +32,14 @@ defmodule Wsdjs.TopController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def update(conn, %{"top" => top_params, "id" => id}, _current_user) do
-    top = Wcsp.Trendings.top(id)
-    changeset = Wcsp.Trendings.Top.changeset(top, top_params)
+  @doc """
+  Update the step of a top. You can't update anything else in this function.
+  """
+  def update(conn, %{"id" => id}) do
+    current_user = conn.assigns[:current_user]
+    top = Wcsp.Trendings.get_top(current_user, id)
 
-    case Wcsp.Repo.update(changeset) do
-      {:ok, top} ->
-        conn
-        |> put_flash(:info, "Top updated successfully.")
-        |> redirect(to: top_path(conn, :show, top))
-      {:error, changeset} ->
-        redirect(conn, to: top_path(conn, :show, top))
-    end
+    redirect(conn, to: top_path(conn, :show, top))
   end
 
   def create(conn, %{"top" => params}) do
@@ -59,11 +55,5 @@ defmodule Wsdjs.TopController do
         |> put_flash(:error, "Something went wrong !")
         |> render("new.html", changeset: changeset)
     end
-  end
-
-  def nextstep(conn, %{"top" => top_params, "id" => id}) do
-    top = Wcsp.Trendings.top(id)
-
-    redirect(conn, to: top_path(conn, :show, top))
   end
 end

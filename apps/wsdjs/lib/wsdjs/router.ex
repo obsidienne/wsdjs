@@ -30,7 +30,6 @@ defmodule Wsdjs.Router do
     resources "/song_opinions", SongOpinionController, only: [:delete]
     resources "/tops", TopController, only: [:create, :new, :update] do
       resources "/votes", VoteController, only: [:create]
-      post "/nextstep", TopController, :nextstep, as: :nextstep
     end
     resources "/sessions", SessionController, only: [:delete]
   end

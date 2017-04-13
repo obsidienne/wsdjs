@@ -47,6 +47,10 @@ defmodule Wcsp.Trendings do
     |> Repo.insert
   end
 
+  def next_step(user, top) do
+    
+  end
+
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
     top = get_top(user, top_id)
     top = Repo.preload top, rank_songs: Vote.for_user_and_top(top, user)
