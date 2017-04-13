@@ -18,14 +18,10 @@ defmodule Wsdjs.TopController do
     current_user = conn.assigns[:current_user]
 
     top = Wcsp.Trendings.get_top(current_user, id)
+    top = Wcsp.Repo.preload(top, rank_songs: Wcsp.Trendings.Vote.for_user_and_top(top, current_user))
+    changeset = Wcsp.Trendings.Top.changeset(top)
 
-    case top.status do
-      "creating" -> top_creating(conn, top)
-      "voting" -> top_voting(conn, top)
-      "counting" -> top_counting(conn, top)
-      "published" -> top_published(conn, top)
-    end
-
+    render conn, "#{top.status}.html", top: top, changeset: changeset
   end
 
   @doc """
@@ -69,28 +65,5 @@ defmodule Wsdjs.TopController do
     top = Wcsp.Trendings.top(id)
 
     redirect(conn, to: top_path(conn, :show, top))
-  end
-
-  defp top_creating(conn, top) do
-    changeset = Wcsp.Trendings.Top.changeset(top)
-    render conn, "creating.html", top: top, changeset: changeset
-  end
-
-  defp top_voting(conn, top) do
-    user = conn.assigns[:current_user]
-
-    changeset = Wcsp.Trendings.Top.changeset(top)
-    top = Wcsp.Repo.preload(top, rank_songs: Wcsp.Trendings.Vote.for_user_and_top(top, user))
-    render conn, "voting.html", top: top, changeset: changeset
-  end
-
-  defp top_counting(conn, top) do
-    changeset = Wcsp.Trendings.Top.changeset(top)
-
-    render conn, "counting.html", top: top, changeset: changeset
-  end
-
-  defp top_published(conn, top) do
-    render conn, "published.html", top: top
   end
 end
