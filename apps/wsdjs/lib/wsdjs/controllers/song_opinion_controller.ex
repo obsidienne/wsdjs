@@ -9,8 +9,10 @@ defmodule Wsdjs.SongOpinionController do
     Wcsp.Musics.upsert_opinion!(current_user, song_id, kind)
 
     song = Wcsp.Musics.find_song!(current_user, id: song_id)
+    opinions = Wcsp.Musics.list_opinions(song_id)
+    count_comments = Wcsp.Musics.count_comments(song_id)
 
-    render(conn, "_show.html", song: song)
+    render(conn, "_show.html", song: song, opinions: opinions, count_comments: count_comments)
   end
 
   def delete(conn, %{"id" => id}) do
@@ -20,7 +22,9 @@ defmodule Wsdjs.SongOpinionController do
     {:ok, opinion} = Wcsp.Musics.delete_opinion(opinion)
 
     song = Wcsp.Musics.find_song!(current_user, id: opinion.song_id)
+    opinions = Wcsp.Musics.list_opinions(opinion.song_id)
+    count_comments = Wcsp.Musics.count_comments(opinion.song_id)
 
-    render(conn, "_show.html", song: song)
+    render(conn, "_show.html", song: song, opinions: opinions, count_comments: count_comments)
   end
 end

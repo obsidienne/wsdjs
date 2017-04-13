@@ -78,6 +78,17 @@ defmodule Wcsp.Musics do
     |> Repo.preload([user: :avatar])
   end
 
+  @doc """
+  Count comments for a song
+  """
+  def count_comments(song_id) do
+    Comment
+    |> where([song_id: ^song_id])
+    |> order_by([desc: :inserted_at])
+    |> Repo.all
+    |> Enum.count
+  end
+
 
   def create_comment(user, song, params) do
     Comment.changeset(%Comment{}, params)
@@ -101,6 +112,17 @@ defmodule Wcsp.Musics do
 
   """
   def get_opinion!(id), do: Repo.get!(Opinion, id)
+
+  @doc """
+  List comments for a song order by desc
+  """
+  def list_opinions(song_id) do
+    Opinion
+    |> where([song_id: ^song_id])
+    |> order_by([desc: :inserted_at])
+    |> Repo.all
+    |> Repo.preload([user: :avatar])
+  end
 
   @doc """
   Deletes an Opinion.

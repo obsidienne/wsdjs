@@ -3,7 +3,7 @@
 
   import Wsdjs.Router.Helpers
 
-  def opinion_link(kind, _conn, song, nil) do
+  def opinion_link(kind, _conn, song, opinions, nil) do
     qty = opinions_count(kind, song.opinions)
 
     if qty == 0 do
@@ -20,7 +20,7 @@
 
   end
 
-  def opinion_link(kind, conn, song, current_user) do
+  def opinion_link(kind, conn, song, opinions, current_user) do
     my_opinion = Enum.find(song.opinions, fn(x) -> x.user_id == current_user.id end)
     qty = opinions_count(kind, song.opinions)
 
@@ -42,20 +42,20 @@
     end
   end
 
-  def opinions_count(kind, opinions), do: Enum.count(opinions, fn(x) -> x.kind == kind end)
+  defp opinions_count(kind, opinions), do: Enum.count(opinions, fn(x) -> x.kind == kind end)
 
-  def data_method(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "DELETE"
-  def data_method(_, _), do: "POST"
+  defp data_method(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "DELETE"
+  defp data_method(_, _), do: "POST"
 
-  def opinion_url(conn, kind, _song, %Wcsp.Musics.Opinion{kind: my_kind} = my_opinion) when kind == my_kind do
+  defp opinion_url(conn, kind, _song, %Wcsp.Musics.Opinion{kind: my_kind} = my_opinion) when kind == my_kind do
     api_song_opinion_path(conn, :delete, my_opinion.id)
   end
-  def opinion_url(conn, kind, song, _), do: api_song_opinion_path(conn, :create, song, kind: kind)
+  defp opinion_url(conn, kind, song, _), do: api_song_opinion_path(conn, :create, song, kind: kind)
 
-  def html_class(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "song-opinion song-#{kind} active"
-  def html_class(kind, _), do: "song-opinion song-#{kind}"
+  defp html_class(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "song-opinion song-#{kind} active"
+  defp html_class(kind, _), do: "song-opinion song-#{kind}"
 
-  def opinions_names(kind, opinions) do
+  defp opinions_names(kind, opinions) do
     kind_opinions = Enum.filter(opinions, fn(x) -> x.kind == kind end)
     names = Enum.map_join(Enum.take(kind_opinions, 4), "\u000A", &(&1.user.name))
 
