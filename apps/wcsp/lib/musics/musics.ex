@@ -61,6 +61,12 @@ defmodule Wcsp.Musics do
     |> Repo.get_by!(clauses)
   end
 
+  def get_song!(user, id) do
+    Song.scoped(user)
+    |> Repo.get!(id)
+  end
+
+
   @doc """
   List comments for a song order by desc
   """
