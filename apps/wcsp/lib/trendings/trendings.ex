@@ -47,8 +47,25 @@ defmodule Wcsp.Trendings do
     |> Repo.insert
   end
 
+  @doc """
+  Change the top status.
+
+  The steps are the following : check -> vote -> count -> publish
+  The step create does not use this function.
+
+  """
   def next_step(user, top) do
-    
+    case top.status do
+      "voting" ->
+        top_vote_to_count(user, top)
+      _ ->
+        :ok
+    end
+  end
+
+  defp top_vote_to_count(user, top) do
+
+    :ok
   end
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do

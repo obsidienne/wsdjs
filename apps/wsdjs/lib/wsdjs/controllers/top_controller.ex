@@ -37,6 +37,9 @@ defmodule Wsdjs.TopController do
   """
   def update(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
+
+    top = Wcsp.Trendings.get_top(current_user, id)
+    Wcsp.Trendings.next_step(current_user, top)
     top = Wcsp.Trendings.get_top(current_user, id)
 
     redirect(conn, to: top_path(conn, :show, top))
