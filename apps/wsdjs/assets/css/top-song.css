@@ -5,13 +5,13 @@
   border-bottom: 1px solid #DDD;
 }
 
-
 .top-song-art {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 160px;
   height: auto;
   margin-right: 15px;
+  position: relative;
 }
 
 .top-song-art img {
@@ -28,6 +28,20 @@
   justify-content: space-between;
 }
 
+.top-song-play {
+  width: 60px;
+  height: 60px;
+  max-width: 100%;
+  bottom: 15px;
+  right: 15px;
+  text-decoration: none;
+  display: inline-block;
+  background-image: var(--icon-play);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  background-color: rgba(150,150,150,.5);
+}
 
 
 .voting-container {
@@ -63,12 +77,13 @@
 
 .voting-position {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     overflow: hidden;
-    top: 8px;
-    left: 8px;
+    top: 0;
+    left: 0;
     font-size: 18px;
+    z-index: 1000;
 }
 
 .voting-position:empty {
@@ -77,7 +92,7 @@
 
 .voting-position .chart-bg {
     position: absolute;
-    top: -95px;
+    top: -80px;
     left: 0;
     width: 0;
     height: 0;

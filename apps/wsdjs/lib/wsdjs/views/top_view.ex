@@ -1,18 +1,9 @@
 defmodule Wsdjs.TopView do
   use Wsdjs, :view
 
-
-  def voting_label(top, rank) do
+  def voting_show(top, rank) do
     current_user_vote = Enum.find(top.rank_songs, fn(x) -> x.song_id == rank.song.id  end)
-
-    content_tag(:label, for: "song-#{rank.id}") do
-      [
-        tag(:img, width: "60", height: "60", src: song_art_href_default(), "data-src": song_art_href(rank.song.art)),
-        content_tag(:div, class: "voting-position charted") do
-          voting_show(current_user_vote)
-        end
-      ]
-    end
+    voting_show(current_user_vote)
   end
 
   defp voting_show(nil), do: ""

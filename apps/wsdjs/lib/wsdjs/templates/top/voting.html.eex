@@ -19,14 +19,23 @@
   <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
     <%= for rank <- @top.ranks do %>
       <article class="top-song">
-        <%= voting_label(@top, rank) %>
+        <label for="song-<%= rank.id %>" class="top-song-art">
+          <div class="voting-position charted">
+            <%= voting_show(@top, rank) %>
+          </div>
+          <div class="top-song-art">
+            <img class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.art)%>" />
+          </div>
+        </label>
         <%= voting_checkbox(f, @top, rank) %>
 
-        <a class="top-song-art" target="_blank" href="<%= rank.song.url %>">
-          <img class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.art)%>" />
-        </a>
+
+
         <div class="top-song-body">
           <div>
+            <%= if rank.song.url do %>
+            <a href="<%= rank.song.url %>" class="top-song-play" target="_blank" ></a>
+            <% end %>
             <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
             <%= rank.song.artist %>
           </div>
