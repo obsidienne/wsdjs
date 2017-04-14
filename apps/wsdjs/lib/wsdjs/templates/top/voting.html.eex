@@ -17,6 +17,7 @@
   <% end %>
 
   <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
+  <section class="top-songs-container">
     <%= for rank <- @top.ranks do %>
       <article class="top-song">
         <label for="song-<%= rank.id %>" class="top-song-art">
@@ -50,10 +51,14 @@
         </div>
       </article>
     <% end %>
-
-    <div>
-      <%= reset "Reset", class: "btn" %>
-      <%= submit "vote", class: "btn btn-primary" %>
+  </section>
+    <div class="container top-voting-footer">
+      <div class="top-voting-footer-votes">
+      </div>
+      <div class="top-voting-footer-actions">
+        <%= reset "Reset", class: "btn" %>
+        <%= submit "vote", class: "btn btn-primary" %>
+      </div>
     </div>
   <% end %>
 
