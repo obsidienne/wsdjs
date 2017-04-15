@@ -3,7 +3,7 @@ defmodule Wcsp.TopTest do
 
   alias Wcsp.Trendings.Top
 
-  @create_attrs %{status: "creating", due_date: "2012-06-30"}
+  @create_attrs %{status: "checking", due_date: "2012-06-30"}
 
   test "changeset with minimal valid attributes" do
     changeset = Top.changeset(%Top{}, @create_attrs)

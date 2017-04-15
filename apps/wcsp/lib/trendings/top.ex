@@ -20,7 +20,7 @@ defmodule Wcsp.Trendings.Top do
   end
 
   @required_fields [:due_date, :status, :user_id]
-  @valid_status ~w(creating voting counting published)
+  @valid_status ~w(checking voting counting published)
 
   def changeset(struct, params \\ %{}) do
     struct
@@ -35,22 +35,11 @@ defmodule Wcsp.Trendings.Top do
     struct
     |> cast(params, [:due_date])
     |> validate_required([:due_date])
-    |> put_change(:status, "creating")
-    |> validate_inclusion(:status, ["creating"])
+    |> put_change(:status, "checking")
+    |> validate_inclusion(:status, ["checking"])
     |> unique_constraint(:due_date)
     |> assoc_constraint(:user)
   end
-
-  def vote_changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:due_date])
-    |> validate_required([:due_date])
-    |> put_change(:status, "creating")
-    |> validate_inclusion(:status, ["creating"])
-    |> unique_constraint(:due_date)
-    |> assoc_constraint(:user)
-  end
-
 
   @doc """
   Admin sees everything

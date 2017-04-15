@@ -55,16 +55,27 @@ defmodule Wcsp.Trendings do
 
   """
   def next_step(user, top) do
-    case top.status do
+    next_step_value = case top.status do
+      "checking" ->
+        "voting"
       "voting" ->
-        top_vote_to_count(user, top)
-      _ ->
-        :ok
+        "counting"
+      "counting" ->
+        "published"
     end
+
+    go_next_step(next_step_value, user, top)
   end
 
-  defp top_vote_to_count(user, top) do
+  defp go_next_step("voting", user, top) do
+    :ok
+  end
 
+  defp go_next_step("counting", user, top) do
+    :ok
+  end
+
+  defp go_next_step("publish", user, top) do
     :ok
   end
 
