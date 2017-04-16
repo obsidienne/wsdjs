@@ -188,7 +188,7 @@ end
 |> Enum.each(&Wcsp.Seeds.store_it(:comment, &1))
 
 
-"data/rank_songs.csv"
+"data/votes.csv"
 |> Path.expand(__DIR__)
 |> File.stream!
 |> Stream.drop(1)
