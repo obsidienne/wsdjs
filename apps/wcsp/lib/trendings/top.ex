@@ -13,7 +13,7 @@ defmodule Wcsp.Trendings.Top do
 
     belongs_to :user, Accounts.User
     has_many :ranks, Trendings.Rank
-    has_many :rank_songs, Trendings.Vote, on_replace: :delete
+    has_many :votes, Trendings.Vote, on_replace: :delete
     many_to_many :songs, Musics.Song, join_through: Trendings.Rank
 
     timestamps()
@@ -39,6 +39,12 @@ defmodule Wcsp.Trendings.Top do
     |> validate_inclusion(:status, ["checking"])
     |> unique_constraint(:due_date)
     |> assoc_constraint(:user)
+  end
+
+  def next_step_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:status])
+    |> validate_inclusion(:status, @valid_status)
   end
 
   @doc """

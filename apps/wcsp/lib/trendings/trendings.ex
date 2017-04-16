@@ -68,8 +68,10 @@ defmodule Wcsp.Trendings do
   end
 
   defp go_next_step("voting", user, top) do
-    :ok
+    Top.next_step_changeset(top, %{status: "voting"})
+    |> Repo.update()
   end
+
 
   defp go_next_step("counting", user, top) do
     :ok
@@ -81,7 +83,7 @@ defmodule Wcsp.Trendings do
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
     top = get_top(user, top_id)
-    top = Repo.preload top, rank_songs: Vote.for_user_and_top(top, user)
+    top = Repo.preload top, votes: Vote.for_user_and_top(top, user)
 
     new_votes = Map.keys(votes_param)
     |> Enum.reject(fn(v) -> votes_param[v] == "0" end)
@@ -89,7 +91,7 @@ defmodule Wcsp.Trendings do
 
     top
     |> Ecto.Changeset.change
-    |> Ecto.Changeset.put_assoc(:rank_songs, new_votes)
+    |> Ecto.Changeset.put_assoc(:votes, new_votes)
     |> Repo.update()
   end
 end

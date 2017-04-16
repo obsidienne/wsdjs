@@ -18,7 +18,7 @@ defmodule Wsdjs.TopController do
     current_user = conn.assigns[:current_user]
 
     top = Wcsp.Trendings.get_top(current_user, id)
-    top = Wcsp.Repo.preload(top, rank_songs: Wcsp.Trendings.Vote.for_user_and_top(top, current_user))
+    top = Wcsp.Repo.preload(top, votes: Wcsp.Trendings.Vote.for_user_and_top(top, current_user))
     changeset = Wcsp.Trendings.Top.changeset(top)
 
     render conn, "#{top.status}.html", top: top, changeset: changeset

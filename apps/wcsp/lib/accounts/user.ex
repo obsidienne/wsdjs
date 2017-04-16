@@ -20,7 +20,7 @@ defmodule Wcsp.Accounts.User do
     has_many :comments, Musics.Comment
     has_one :avatar, Accounts.Avatar
     has_many :song_opinions, Musics.Opinion
-    has_many :rank_songs, Trendings.Vote
+    has_many :votes, Trendings.Vote
 
     timestamps()
   end
