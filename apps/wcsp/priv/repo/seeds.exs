@@ -1,12 +1,12 @@
 defmodule Wcsp.Seeds do
-  use Wcsp.Schema
+  use Ecto.Schema
 
   def store_it(:user, row) do
     row = row
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    user = %Wcsp.User{
+    user = %Wcsp.Accounts.User{
       id: row[:id],
       email: row[:email],
       admin: row[:admin] == "true",
@@ -23,7 +23,7 @@ defmodule Wcsp.Seeds do
       %{avatar_id: "wsdjs/missing_avatar"} ->
         nil
       %{avatar_id: ai, avatar_version: av} ->
-        avatar = %Wcsp.Avatar{
+        avatar = %Wcsp.Accounts.Avatar{
           cld_id: ai,
           user_id: user.id,
           version: String.to_integer(av)
@@ -40,7 +40,7 @@ defmodule Wcsp.Seeds do
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    top = %Wcsp.Top{
+    top = %Wcsp.Trendings.Top{
       id: row[:id],
       user_id: row[:user_id],
       due_date: Ecto.Date.cast!(row[:due_date]),
@@ -57,7 +57,7 @@ defmodule Wcsp.Seeds do
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    song = %Wcsp.Musics.Songs{
+    song = %Wcsp.Musics.Song{
       id: row[:id],
       user_id: row[:user_id],
       artist: row[:artist],
@@ -76,7 +76,7 @@ defmodule Wcsp.Seeds do
   end
 
   def store_it(:album_art, %{cover_public_id: cpi, cover_version: cv, user_id: ui, id: id}) when cpi != "wsdjs/missing_cover" and cpi != "" do
-    album_art = %Wcsp.Musics.Arts{
+    album_art = %Wcsp.Musics.Art{
       cld_id: cpi,
       version: String.to_integer(cv),
       song_id: id,
@@ -87,7 +87,7 @@ defmodule Wcsp.Seeds do
   def store_it(:album_art, _row) do true end
 
   def store_it(:rank, row) do
-    rank = %Wcsp.Rank{
+    rank = %Wcsp.Trendings.Rank{
       id: row[:id],
       top_id: row[:top_id],
       song_id: row[:song_id],
@@ -101,12 +101,12 @@ defmodule Wcsp.Seeds do
     Wcsp.Repo.insert! rank
   end
 
-  def store_it(:rank_user, row) do
+  def store_it(:vote, row) do
     row = row
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    rank_user = %Wcsp.RankSong{
+    rank_user = %Wcsp.Trendings.Vote{
       id: row[:id],
       user_id: row[:user_id],
       song_id: row[:song_id],
@@ -119,8 +119,8 @@ defmodule Wcsp.Seeds do
     Wcsp.Repo.insert! rank_user
   end
 
-  def store_it(:song_opinion, row) do
-    song_opinion = %Wcsp.Musics.Opinions{
+  def store_it(:opinion, row) do
+    song_opinion = %Wcsp.Musics.Opinion{
       id: row[:id],
       user_id: row[:user_id],
       song_id: row[:song_id],
@@ -131,8 +131,8 @@ defmodule Wcsp.Seeds do
     Wcsp.Repo.insert! song_opinion
   end
 
-  def store_it(:song_comment, row) do
-    song_comment = %Wcsp.Musics.Comments{
+  def store_it(:comment, row) do
+    song_comment = %Wcsp.Musics.Comment{
       id: row[:id],
       user_id: row[:user_id],
       song_id: row[:song_id],
@@ -151,32 +151,6 @@ end
 |> Stream.drop(1)
 |> CSV.decode(strip_cells: true, headers: [:id, :email, :admin, :new_song_notification, :user_country, :name, :djname, :avatar_id, :avatar_version, :inserted_at, :updated_at])
 |> Enum.each(&Wcsp.Seeds.store_it(:user, &1))
-
-
-# Historic data coming from anchorstep
-
-"data/top_anchorstep.csv"
-|> Path.expand(__DIR__)
-|> File.stream!
-|> Stream.drop(1)
-|> CSV.decode(strip_cells: true, headers: [:id, :user_id, :inserted_at, :updated_at, :due_date, :status])
-|> Enum.each(&Wcsp.Seeds.store_it(:top, &1))
-
-"data/songs_anchorstep.csv"
-|> Path.expand(__DIR__)
-|> File.stream!
-|> Stream.drop(1)
-|> CSV.decode(strip_cells: true, headers: [:id, :artist, :title, :inserted_at, :updated_at, :song_url, :cover_public_id, :cover_version, :bpm, :user_id, :genre])
-|> Enum.each(&Wcsp.Seeds.store_it(:song, &1))
-
-"data/ranks_anchorstep.csv"
-|> Path.expand(__DIR__)
-|> File.stream!
-|> Stream.drop(1)
-|> CSV.decode(strip_cells: true, headers: [:id, :top_id, :song_id, :likes, :inserted_at, :updated_at, :votes, :bonus, :points, :position])
-|> Enum.each(&Wcsp.Seeds.store_it(:rank, &1))
-
-
 
 "data/tops.csv"
 |> Path.expand(__DIR__)
@@ -204,14 +178,14 @@ end
 |> File.stream!
 |> Stream.drop(1)
 |> CSV.decode(strip_cells: true, headers: [:id, :user_id, :song_id, :kind, :inserted_at, :updated_at])
-|> Enum.each(&Wcsp.Seeds.store_it(:song_opinion, &1))
+|> Enum.each(&Wcsp.Seeds.store_it(:opinion, &1))
 
 "data/song_comments.csv"
 |> Path.expand(__DIR__)
 |> File.stream!
 |> Stream.drop(1)
 |> CSV.decode(strip_cells: true, headers: [:id, :user_id, :song_id, :text, :inserted_at, :updated_at])
-|> Enum.each(&Wcsp.Seeds.store_it(:song_comment, &1))
+|> Enum.each(&Wcsp.Seeds.store_it(:comment, &1))
 
 
 "data/rank_songs.csv"
@@ -219,4 +193,4 @@ end
 |> File.stream!
 |> Stream.drop(1)
 |> CSV.decode(strip_cells: true, headers: [:id, :user_id, :top_id, :song_id, :position, :inserted_at, :updated_at])
-|> Enum.each(&Wcsp.Seeds.store_it(:rank_user, &1))
+|> Enum.each(&Wcsp.Seeds.store_it(:vote, &1))
