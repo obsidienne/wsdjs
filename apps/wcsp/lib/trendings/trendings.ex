@@ -67,18 +67,9 @@ defmodule Wcsp.Trendings do
     go_next_step(next_step_value, user, top)
   end
 
-  defp go_next_step("voting", user, top) do
-    Top.next_step_changeset(top, %{status: "voting"})
+  defp go_next_step(step, user, top) when step in ["voting", "counting", "published"] do
+    Top.next_step_changeset(top, %{status: step})
     |> Repo.update()
-  end
-
-
-  defp go_next_step("counting", user, top) do
-    :ok
-  end
-
-  defp go_next_step("publish", user, top) do
-    :ok
   end
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
