@@ -90,61 +90,6 @@ defmodule Wcsp.Musics.Song do
     |> Enum.join(" & ")
   end
 
-
-  @doc """
-  Preload user
-  """
-  def with_users(query) do
-    from q in query,
-    preload: [user: :avatar]
-  end
-
-  @doc """
-  Preload comments and user comments
-  """
-  def with_comments(query) do
-    from q in query,
-    preload: [comments: :user]
-  end
-
-  @doc """
-  Preload album art
-  """
-  def with_art(query) do
-    from q in query,
-    preload: :art
-  end
-
-  @doc """
-  Preload song opinions ans user
-  """
-  def with_opinions(query) do
-    from q in query,
-    preload: [opinions: :user]
-  end
-
-  @doc """
-  Preload everything connected to the song
-  """
-  def with_all(query) do
-    query
-    |> Musics.Song.with_users()
-    |> Musics.Song.with_comments()
-    |> Musics.Song.with_art()
-    |> Musics.Song.with_opinions()
-  end
-
-  @doc """
-  Last month
-  """
-  def last_month(query) do
-    dt = DateTime.to_date(DateTime.utc_now)
-    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
-
-    from q in query,
-    where: q.inserted_at > date_add(^naive_dtime, -1, "month")
-  end
-
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
       case url |> String.to_char_list |> :http_uri.parse do

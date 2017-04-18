@@ -10,31 +10,32 @@ defmodule Wcsp.Musics do
 
   def search(user, q) do
     Song.scoped(user)
-    |> Song.with_users()
-    |> Song.with_art()
+    |> preload([:art, user: :avatar])
     |> Song.search(q)
     |> Repo.all()
   end
 
-
   @doc """
   Returns the list of songs.the current and previous month
   """
-  def list_songs(user) do
+  def hot_songs(user) do
+    dt = DateTime.to_date(DateTime.utc_now)
+    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
+
     Song.scoped(user)
-    |> Song.with_all()
-    |> Song.last_month()
-    |> Repo.all
+    |> where([s], s.inserted_at > date_add(^naive_dtime, -1, "month"))
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> Repo.all()
   end
 
   @doc """
   Returns the list of songs for the user scoped by current_user
   """
   def list_songs(current_user, user) do
-    Song.scoped(current_user)
+    Song.scoped(user)
     |> where([user_id: ^user.id])
-    |> Song.with_all()
-    |> Repo.all
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> Repo.all()
   end
 
   @doc """
@@ -57,7 +58,7 @@ defmodule Wcsp.Musics do
 
   def find_song!(user, clauses) do
     Song.scoped(user)
-    |> Song.with_all()
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.get_by!(clauses)
   end
 
