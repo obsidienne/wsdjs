@@ -13,7 +13,7 @@ defmodule Wcsp.Trendings.Vote do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "rank_songs" do
+  schema "votes" do
     field :votes, :integer
 
     belongs_to :song, Musics.Song

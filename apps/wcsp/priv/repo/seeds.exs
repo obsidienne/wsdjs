@@ -106,7 +106,7 @@ defmodule Wcsp.Seeds do
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    rank_user = %Wcsp.Trendings.Vote{
+    vote = %Wcsp.Trendings.Vote{
       id: row[:id],
       user_id: row[:user_id],
       song_id: row[:song_id],
@@ -116,7 +116,7 @@ defmodule Wcsp.Seeds do
       updated_at: Ecto.DateTime.cast!(row[:updated_at])
     }
 
-    Wcsp.Repo.insert! rank_user
+    Wcsp.Repo.insert! vote
   end
 
   def store_it(:opinion, row) do
