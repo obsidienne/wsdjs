@@ -67,11 +67,25 @@ defmodule Wcsp.Trendings do
     go_next_step(next_step_value, user, top)
   end
 
-  defp go_next_step(step, user, top) when step in ["voting", "counting"] do
+  @doc """
+  Need to sum the likes (top / like / down)
+  """
+  defp go_next_step(step, user, top) when step in ["voting"] do
     Top.next_step_changeset(top, %{status: step})
     |> Repo.update()
   end
 
+  @doc """
+  Need to sum the votes
+  """
+  defp go_next_step(step, user, top) when step in ["counting"] do
+    Top.next_step_changeset(top, %{status: step})
+    |> Repo.update()
+  end
+
+  @doc """
+  Need to calculate the position according to likes / votes / bonus
+  """
   defp go_next_step(step, user, top) when step in ["published"] do
     Top.next_step_changeset(top, %{status: step})
     |> Repo.update()
