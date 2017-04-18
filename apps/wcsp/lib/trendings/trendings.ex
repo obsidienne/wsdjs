@@ -91,9 +91,14 @@ defmodule Wcsp.Trendings do
     |> Repo.update()
   end
 
+  def list_votes(top, user) do
+    from r in Wcsp.Trendings.Vote,
+    where: r.user_id == ^user.id and r.top_id == ^top.id
+  end
+
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
     top = get_top(user, top_id)
-    top = Repo.preload top, votes: Vote.for_user_and_top(top, user)
+    top = Repo.preload top, votes: list_votes(top, user)
 
     new_votes = Map.keys(votes_param)
     |> Enum.reject(fn(v) -> votes_param[v] == "0" end)

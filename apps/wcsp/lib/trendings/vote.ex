@@ -33,20 +33,11 @@ defmodule Wcsp.Trendings.Vote do
     |> validate_number(:votes, less_than_or_equal_to: 10)
   end
 
-  def build(%{user_id: _user_id, song_id: _song_id, votes: _votes} = params) do
-    changeset(%Trendings.Vote{}, params)
-  end
-
   def get_or_build(top, user_id, song_id, votes) do
     struct =
       Wcsp.Repo.get_by(Trendings.Vote, user_id: user_id, top_id: top.id, song_id: song_id) ||
       Ecto.build_assoc(top, :votes, user_id: user_id, song_id: song_id)
 
     Ecto.Changeset.change(struct, votes: String.to_integer(votes))
-  end
-
-  def for_user_and_top(top, user) do
-    from r in Trendings.Vote,
-    where: r.user_id == ^user.id and r.top_id == ^top.id
   end
 end
