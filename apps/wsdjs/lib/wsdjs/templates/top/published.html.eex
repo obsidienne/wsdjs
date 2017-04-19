@@ -20,6 +20,10 @@
         </div>
 
         <aside>
+          <span class="song-opinion song-down"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "down" end) %></span>
+          <span class="song-opinion song-like"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "like" end) %></span>
+          <span class="song-opinion song-up"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "up" end) %></span>
+
           <span class="label label-default"><%= rank.song.genre %></span>
           <%= if rank.song.bpm > 0 do %>
           <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
