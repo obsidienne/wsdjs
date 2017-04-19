@@ -46,7 +46,7 @@ defmodule Wcsp.Trendings.Rank do
     from q in __MODULE__,
     where: q.top_id == ^id,
     order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
-    preload: [song: [{:art, :user}]]
+    preload: [song: [{:art, :user}, :opinions]]
   end
 
   def for_tops_with_limit(per \\ 9) do

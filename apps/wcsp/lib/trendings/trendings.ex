@@ -74,6 +74,25 @@ defmodule Wcsp.Trendings do
   After that, DJs can vote for their top 10.
   """
   defp go_next_step(next_step, user, top) when next_step in ["voting"] do
+    ranks = Rank
+    |> where(top_id: ^top.id)
+    |> preload(song: :opinions)
+    |> Repo.all()
+
+    Enum.each(ranks, fn(x) ->
+      val = Enum.reduce(x.song.opinions, 0, fn(x, acc) ->
+        case x.kind do
+          "up"   -> acc + 4
+          "like" -> acc + 2
+          "down" -> acc - 3
+          _      -> acc
+        end
+      end)
+
+      Wcsp.Trendings.Rank.changeset(x, %{likes: val})
+      |> Repo.update()
+    end)
+
     Top.next_step_changeset(top, %{status: next_step})
     |> Repo.update()
   end
