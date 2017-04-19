@@ -68,26 +68,33 @@ defmodule Wcsp.Trendings do
   end
 
   @doc """
-  Need to sum the likes (top / like / down)
+  The top creator is ok with the songs in the top. The top creator freeze the likes
+  according to this rule: (like * 2) - (down * 3) + (up * 4)
+
+  After that, DJs can vote for their top 10.
   """
-  defp go_next_step(step, user, top) when step in ["voting"] do
-    Top.next_step_changeset(top, %{status: step})
+  defp go_next_step(next_step, user, top) when next_step in ["voting"] do
+    Top.next_step_changeset(top, %{status: next_step})
     |> Repo.update()
   end
 
   @doc """
-  Need to sum the votes
+  The top creator decides it's time to publish the
+  Need to sum the votes according to this rule
+  vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
+
+  After that, the top creator can apply bonus to the top.
   """
-  defp go_next_step(step, user, top) when step in ["counting"] do
-    Top.next_step_changeset(top, %{status: step})
+  defp go_next_step(next_step, user, top) when next_step in ["counting"] do
+    Top.next_step_changeset(top, %{status: next_step})
     |> Repo.update()
   end
 
   @doc """
-  Need to calculate the position according to likes / votes / bonus
+  Need to calculate the position according to likes + votes + bonus.
   """
-  defp go_next_step(step, user, top) when step in ["published"] do
-    Top.next_step_changeset(top, %{status: step})
+  defp go_next_step(next_step, user, top) when next_step in ["published"] do
+    Top.next_step_changeset(top, %{status: next_step})
     |> Repo.update()
   end
 
