@@ -85,7 +85,6 @@ defmodule Wcsp.Musics do
   def count_comments(song_id) do
     Comment
     |> where([song_id: ^song_id])
-    |> order_by([desc: :inserted_at])
     |> Repo.all
     |> Enum.count
   end
