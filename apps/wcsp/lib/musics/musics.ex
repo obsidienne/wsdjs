@@ -114,7 +114,7 @@ defmodule Wcsp.Musics do
   def get_opinion!(id), do: Repo.get!(Opinion, id)
 
   @doc """
-  List comments for a song order by desc
+  List opinions for a song order by desc
   """
   def list_opinions(song_id) do
     Opinion
