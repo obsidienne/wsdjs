@@ -45,12 +45,43 @@
             <span class="song-opinion song-down"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "down" end) %></span>
             <span class="song-opinion song-like"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "like" end) %></span>
             <span class="song-opinion song-up"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "up" end) %></span>
-
             <span class="label label-default"><%= rank.song.genre %></span>
             <%= if rank.song.bpm > 0 do %>
             <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
             <% end %>
-            <%= rank.votes + rank.bonus + rank.likes %>
+
+            <%= if @current_user && @current_user.id == @top.user_id do %>
+            <table class="table  table-condensed">
+              <thead>
+                <tr>
+                  <th>1<sup>st</sup></th>
+                  <th>2<sup>nd</sup></th>
+                  <th>3<sup>rd</sup></th>
+                  <th>4<sup>th</sup></th>
+                  <th>5<sup>th</sup></th>
+                  <th>6<sup>th</sup></th>
+                  <th>7<sup>th</sup></th>
+                  <th>8<sup>th</sup></th>
+                  <th>9<sup>th</sup></th>
+                  <th>10<sup>th</sup></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 1 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 2 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 3 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 4 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 5 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 6 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 7 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 8 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 9 && x.song_id == rank.song_id end)%></td>
+                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 10 && x.song_id == rank.song_id end)%></td>
+                </tr>
+              </tbody>
+            </table>
+            <% end %>
           </aside>
         </div>
       </article>

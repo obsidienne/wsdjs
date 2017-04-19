@@ -19,9 +19,10 @@ defmodule Wsdjs.TopController do
 
     top = Wcsp.Trendings.get_top(current_user, id)
     top = Wcsp.Repo.preload(top, votes: Wcsp.Trendings.list_votes(top, current_user))
+    votes = Wcsp.Trendings.list_votes(top)
     changeset = Wcsp.Trendings.Top.changeset(top)
 
-    render conn, "#{top.status}.html", top: top, changeset: changeset
+    render conn, "#{top.status}.html", top: top, votes: votes, changeset: changeset
   end
 
   @doc """

@@ -117,6 +117,12 @@ defmodule Wcsp.Trendings do
     |> Repo.update()
   end
 
+  def list_votes(top) do
+    Wcsp.Trendings.Vote
+    |> where(top_id: ^top.id)
+    |> Repo.all()
+  end
+
   def list_votes(top, user) do
     from r in Wcsp.Trendings.Vote,
     where: r.user_id == ^user.id and r.top_id == ^top.id
