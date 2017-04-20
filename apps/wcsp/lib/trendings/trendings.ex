@@ -79,9 +79,9 @@ defmodule Wcsp.Trendings do
     |> preload(song: :opinions)
     |> Repo.all()
 
-    Enum.each(ranks, fn(x) ->
-      val = Enum.reduce(x.song.opinions, 0, fn(x, acc) ->
-        case x.kind do
+    Enum.each(ranks, fn(rank) ->
+      val = Enum.reduce(rank.song.opinions, 0, fn(opinion, acc) ->
+        case opinion.kind do
           "up"   -> acc + 4
           "like" -> acc + 2
           "down" -> acc - 3
@@ -89,7 +89,7 @@ defmodule Wcsp.Trendings do
         end
       end)
 
-      Wcsp.Trendings.Rank.changeset(x, %{likes: val})
+      Wcsp.Trendings.Rank.changeset(rank, %{likes: val})
       |> Repo.update()
     end)
 
@@ -105,6 +105,17 @@ defmodule Wcsp.Trendings do
   After that, the top creator can apply bonus to the top.
   """
   defp go_next_step(next_step, user, top) when next_step in ["counting"] do
+    votes = Wcsp.Trendings.Vote
+    |> where(top_id: ^top.id)
+    |> group_by(:song_id)
+    |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
+    |> Repo.all()
+    |> Enum.each(fn(vote) ->
+      val = 10 * vote[:count] - vote[:sum] + vote[:count]
+      from(p in Wcsp.Trendings.Rank, where: [top_id: ^top.id, song_id: ^vote.song_id])
+      |> Repo.update_all(set: [votes: val])
+    end)
+
     Top.next_step_changeset(top, %{status: next_step})
     |> Repo.update()
   end
