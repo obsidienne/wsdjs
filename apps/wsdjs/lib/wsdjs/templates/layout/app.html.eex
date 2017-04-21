@@ -34,7 +34,5 @@
       </div>
       <% end %>
     </div>
-
-    <footer class="global-footer">World Swing DJs</footer>
   </body>
 </html>

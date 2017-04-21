@@ -5,20 +5,12 @@
 body {
   background-color: var(--bg-color);
   padding-top: 50px;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
 }
 
 @media (max-width:480px) {
   body {
     margin-bottom: 50px;
   }
-}
-
-
-main {
-  flex: 1;
 }
 
 .logo {
