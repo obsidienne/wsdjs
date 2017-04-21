@@ -19,6 +19,8 @@
 
     <%= render @view_module, @view_template, assigns %>
 
+    <%= render "_player.html", conn: @conn %>
+
     <div id="notifier-container" class="notifier-container">
       <%= if get_flash(@conn, :info) do %>
       <div id="alert-info" class="notifier info" role="alert">
