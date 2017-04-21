@@ -11,7 +11,7 @@ defmodule Wsdjs.SongCommentController do
         |> redirect(to: song_path(conn, :show, song_id))
       {:error, changeset} ->
         conn
-        |> put_flash(:error, %{title: "Error on comment !", body: "Error"})
+        |> put_flash(:error, "Error on comment !")
         |> redirect(to: song_path(conn, :show, song_id))
     end
   end
