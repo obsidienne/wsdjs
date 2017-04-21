@@ -8,7 +8,7 @@ defmodule Wsdjs.SongOpinionController do
 
     Wcsp.Musics.upsert_opinion!(current_user, song_id, kind)
 
-    song = Wcsp.Musics.find_song!(current_user, id: song_id)
+    song = Wcsp.Musics.get_song!(current_user, song_id)
     opinions = Wcsp.Musics.list_opinions(song_id)
     count_comments = Wcsp.Musics.count_comments(song_id)
 
@@ -21,7 +21,7 @@ defmodule Wsdjs.SongOpinionController do
     opinion = Wcsp.Musics.get_opinion!(id)
     {:ok, opinion} = Wcsp.Musics.delete_opinion(opinion)
 
-    song = Wcsp.Musics.find_song!(current_user, id: opinion.song_id)
+    song = Wcsp.Musics.get_song!(current_user, opinion.song_id)
     opinions = Wcsp.Musics.list_opinions(opinion.song_id)
     count_comments = Wcsp.Musics.count_comments(opinion.song_id)
 

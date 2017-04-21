@@ -1,6 +1,6 @@
 defmodule Wcsp.Musics do
   @moduledoc """
-  The boundary for the Dj system.
+  The boundary for the Music system.
   """
 
   import Ecto.{Query, Changeset}, warn: false
@@ -8,6 +8,10 @@ defmodule Wcsp.Musics do
 
   alias Wcsp.Musics.{Song, Comment, Opinion, Art}
 
+  @doc """
+  Returns a song list according to a fulltext search.
+  The song list is scoped for user.
+  """
   def search(user, q) do
     Song.scoped(user)
     |> preload([:art, user: :avatar])
@@ -16,7 +20,7 @@ defmodule Wcsp.Musics do
   end
 
   @doc """
-  Returns the list of songs.the current and previous month
+  Returns the list of songs for the current and the previous month.
   """
   def hot_songs(user) do
     dt = DateTime.to_date(DateTime.utc_now)
@@ -29,7 +33,7 @@ defmodule Wcsp.Musics do
   end
 
   @doc """
-  Returns the list of songs for the user scoped by current_user
+  Returns the list of songs for the user scoped by current_user.
   """
   def list_songs(current_user, user) do
     Song.scoped(user)
@@ -40,15 +44,6 @@ defmodule Wcsp.Musics do
 
   @doc """
   Creates a song.
-
-  ## Examples
-
-      iex> create_song(%{email: "test@testing.com"})
-      {:ok, %Wcsp.Musics.Song{}}
-
-      iex> create_song(%{email: "dummy value"})
-      {:error, %Ecto.Changeset{}}
-
   """
   def create_song(user, params) do
     Song.changeset(%Song{}, params)
@@ -56,17 +51,11 @@ defmodule Wcsp.Musics do
     |> Repo.insert
   end
 
-  def find_song!(user, clauses) do
+  def get_song!(user, song_id) do
     Song.scoped(user)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> Repo.get_by!(clauses)
+    |> Repo.get!(song_id)
   end
-
-  def get_song!(user, id) do
-    Song.scoped(user)
-    |> Repo.get!(id)
-  end
-
 
   @doc """
   List comments for a song order by desc
@@ -90,7 +79,9 @@ defmodule Wcsp.Musics do
   end
 
 
-  def create_comment(user, song, params) do
+  def create_comment(user, song_id, params) do
+    song = Song.scoped(user) |> Repo.get!(song_id)
+
     Comment.changeset(%Comment{}, params)
     |> put_assoc(:user, user)
     |> put_assoc(:song, song)
