@@ -17,16 +17,23 @@
   <body data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
     <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-    <div class="alerts container">
-      <div class="row">
-        <div class="col-xs-12 col-md-6 col-md-offset-3">
-          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-        </div>
-      </div>
-    </div>
-
     <%= render @view_module, @view_template, assigns %>
+
+    <div id="notifier-container" class="notifier-container">
+      <%= if get_flash(@conn, :info) do %>
+      <div id="alert-info" class="notifier info" role="alert">
+        <h2 class="notifier-title"><%= get_flash(@conn, :info).title %></h2>
+        <div class="notifier-body"><%= get_flash(@conn, :info).body %></div>
+      </div>
+      <% end %>
+
+      <%= if get_flash(@conn, :error) do %>
+      <div id="alert-danger" class="notifier danger" role="alert">
+        <h2 class="notifier-title"><%= get_flash(@conn, :error).title %></h2>
+        <div class="notifier-body"><%= get_flash(@conn, :error).body %></div>
+      </div>
+      <% end %>
+    </div>
 
     <footer class="global-footer">World Swing DJs</footer>
   </body>

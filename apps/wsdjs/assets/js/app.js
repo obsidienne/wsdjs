@@ -24,6 +24,7 @@ import "phoenix_html"
 import loadView from './views/loader';
 import Turbolinks from 'turbolinks';
 import Radio from './components/radio';
+import Notifier from './components/notifier';
 
 function handleDOMContentLoaded() {
   // Get the current view name
@@ -35,10 +36,14 @@ function handleDOMContentLoaded() {
   view.mount();
 
   window.currentView = view;
+
+  var notifier = new Notifier();
+  notifier.show_all();
 }
 
 var radio = new Radio();
 radio.mount();
+
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
 Turbolinks.start()

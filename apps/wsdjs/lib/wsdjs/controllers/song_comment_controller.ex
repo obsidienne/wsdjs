@@ -8,11 +8,10 @@ defmodule Wsdjs.SongCommentController do
     case Wcsp.Musics.create_comment(current_user, song_id, params) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "Comment added !")
         |> redirect(to: song_path(conn, :show, song_id))
       {:error, changeset} ->
         conn
-        |> put_flash(:error, "Error on comment !")
+        |> put_flash(:error, %{title: "Error on comment !", body: "Error"})
         |> redirect(to: song_path(conn, :show, song_id))
     end
   end

@@ -28,7 +28,7 @@ defmodule Wsdjs.HottestController do
     case Wcsp.Musics.create_song(current_user, params) do
       {:ok, song} ->
         conn
-        |> put_flash(:info, "#{song.title} created !")
+        |> put_flash(:info, %{title: "#{song.title}", body: "song created"})
         |> redirect(to: hottest_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)

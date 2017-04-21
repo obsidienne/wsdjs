@@ -9,11 +9,11 @@ defmodule Wsdjs.SessionController do
     case login_by_email(conn, email, repo: Repo) do
       {:ok, conn} ->
         conn
-        |> put_flash(:info, "Welcome back!")
+        |> put_flash(:info, %{title: "Welcome back !", body: "connection succeded"})
         |> redirect(to: hottest_path(conn, :index))
       {:error, _reason, conn} ->
         conn
-        |> put_flash(:error, "Invalid username/password combination")
+        |> put_flash(:error, %{title: "Invalid username/password combination", body: "connection refused"})
         |> render("new.html")
     end
   end
