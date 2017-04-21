@@ -25,4 +25,8 @@
 <%= render_many  @songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>
 
 </div>
+
+<%= if @current_user do %>
+<%= link "deconnection", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+<% end %>
 </main>
