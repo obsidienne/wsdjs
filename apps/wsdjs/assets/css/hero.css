@@ -1,0 +1,12 @@
+.hero {
+  padding-top: 120px;
+  padding-bottom: 24px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eeeeee;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}

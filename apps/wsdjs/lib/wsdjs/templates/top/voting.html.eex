@@ -1,22 +1,33 @@
 <main class="container">
-  <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small></h3>
+  <header class="hero">
+    <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small></h3>
 
-  <%= if @current_user && @current_user.id == @top.user_id do %>
-    <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
-      <section>
-        <nav>
-          <ol class="cd-multi-steps text-center">
-            <li class="visited"><em>Create</em></li>
-            <li class="visited"><em>Check</em></li>
-            <li class="current"><em>Voting</em></li>
-            <li><%= submit "next step : counting", class: "btn btn-link" %></li>
-          </ol>
-        </nav>
-      </section>
+    <%= if @current_user && @current_user.id == @top.user_id do %>
+      <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
+        <section>
+          <nav>
+            <ol class="cd-multi-steps text-center">
+              <li class="visited"><em>Create</em></li>
+              <li class="visited"><em>Check</em></li>
+              <li class="current"><em>Voting</em></li>
+              <li><%= submit "next step : counting", class: "btn btn-link" %></li>
+            </ol>
+          </nav>
+        </section>
+      <% end %>
     <% end %>
-  <% end %>
+  </header>
 
   <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
+  <div class="container">
+    <div class="top-voting-footer-votes">
+    </div>
+    <div class="top-voting-footer-actions">
+      <%= reset "Reset", class: "btn" %>
+      <%= submit "vote", class: "btn btn-primary" %>
+    </div>
+  </div>
+
   <section class="top-songs-container">
     <%= for rank <- @top.ranks do %>
       <article class="top-song">
@@ -87,14 +98,6 @@
       </article>
     <% end %>
   </section>
-    <div class="container top-voting-footer">
-      <div class="top-voting-footer-votes">
-      </div>
-      <div class="top-voting-footer-actions">
-        <%= reset "Reset", class: "btn" %>
-        <%= submit "vote", class: "btn btn-primary" %>
-      </div>
-    </div>
   <% end %>
 
 </main>

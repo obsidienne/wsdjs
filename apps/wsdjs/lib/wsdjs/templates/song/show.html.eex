@@ -1,5 +1,5 @@
 <main>
-<section class="song-header">
+<section class="song-header hero">
   <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href_blured(@song.art) %>" class="cld-responsive song-header-art-background" alt="<%= song_art_alt(@song) %>"/>
   <div class="container">
     <div class="row">
