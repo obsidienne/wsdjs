@@ -152,4 +152,12 @@ defmodule Wcsp.Trendings do
     |> Ecto.Changeset.put_assoc(:votes, new_votes)
     |> Repo.update()
   end
+
+  def set_bonus(rank_id, bonus) do
+    rank = Repo.get!(Rank, rank_id)
+
+    rank
+    |> Rank.bonus_changeset(%{bonus: bonus})
+    |> Repo.update()
+  end
 end

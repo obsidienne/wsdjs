@@ -1,5 +1,7 @@
 <main class="container">
-  <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small></h3>
+  <header class="hero">
+    <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small></h3>
+  </header>
 
   <%= if @current_user && @current_user.id == @top.user_id do %>
     <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
@@ -26,6 +28,16 @@
         <div>
           <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
           <%= rank.song.artist %>
+
+          <%= form_for Wcsp.Trendings.Rank.bonus_changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
+          <div class="form-group">
+  	        <%= label f, :bonus, "Top of", class: "control-label" %>
+  	        <%= text_input f, :bonus, class: "form-control", required: "required", type: "number" %>
+  	        <%= error_tag f, :bonus %>
+  	        <span class="help-block">The date must be the <strong>first</strong> day of the month.</span>
+  	      </div>
+            <%= submit "Apply bonus", class: "btn btn-default" %>
+          <% end %>
         </div>
 
         <aside>

@@ -42,6 +42,12 @@ defmodule Wcsp.Trendings.Rank do
     |> validate_number(:position, greater_than: 0)
   end
 
+  def bonus_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:bonus])
+    |> validate_number(:bonus, greater_than: 0)
+  end
+
   def for_top(id) do
     from q in __MODULE__,
     where: q.top_id == ^id,

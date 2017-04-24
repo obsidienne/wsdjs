@@ -46,7 +46,7 @@ defmodule Wcsp.Trendings.Top do
     |> cast(params, [:status])
     |> validate_inclusion(:status, @valid_status)
   end
-
+  
   @doc """
   Admin sees everything
   """
