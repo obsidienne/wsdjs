@@ -124,6 +124,22 @@ defmodule Wcsp.Trendings do
   Need to calculate the position according to likes + votes + bonus.
   """
   defp go_next_step(next_step, user, top) when next_step in ["published"] do
+    query = from q in Rank,
+      join: p in fragment("""
+      SELECT id, top_id, row_number() OVER (
+        PARTITION BY top_id
+        ORDER BY votes + bonus + likes DESC
+      ) as rn FROM ranks
+      """),
+    where: q.top_id == ^top.id and p.id == q.id,
+    select: %{id: q.id, pos: p.rn}
+
+    Repo.all(query)
+    |> Enum.each(fn(rank) ->
+      from(p in Wcsp.Trendings.Rank, where: [id: ^rank.id])
+      |> Repo.update_all(set: [position: rank.pos])
+    end)
+
     Top.next_step_changeset(top, %{status: next_step})
     |> Repo.update()
   end
