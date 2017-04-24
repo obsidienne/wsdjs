@@ -1,4 +1,7 @@
 <main class="container">
+  <header class="hero">
+  </header>
+
   <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h3>
 
   <%= for rank <- @top.ranks do %>
