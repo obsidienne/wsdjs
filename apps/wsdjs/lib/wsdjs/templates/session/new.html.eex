@@ -1,4 +1,6 @@
 <main class="container">
+  <header class="hero">
+  </header>
   <div class="row">
     <div class="col-xs-6">
       <h1>Login</h1>
