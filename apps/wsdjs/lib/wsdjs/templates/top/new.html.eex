@@ -1,15 +1,17 @@
 <main>
-	<section class="container">
-		<nav>
-			<ol class="cd-multi-steps text-center">
-				<li class="current"><em>Create</em></li>
-				<li><em>Check</em></li>
-				<li><em>Voting</em></li>
-				<li><em>Count</em></li>
-				<li><em>Publish</em></li>
-			</ol>
-		</nav>
-	</section>
+  <header class="hero">
+  	<section class="container">
+  		<nav>
+  			<ol class="cd-multi-steps text-center">
+  				<li class="current"><em>Create</em></li>
+  				<li><em>Check</em></li>
+  				<li><em>Voting</em></li>
+  				<li><em>Count</em></li>
+  				<li><em>Publish</em></li>
+  			</ol>
+  		</nav>
+  	</section>
+  </header>
 
 	<div class="container">
 	  <div class="row">
