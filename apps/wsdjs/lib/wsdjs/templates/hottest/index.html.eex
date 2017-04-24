@@ -1,20 +1,26 @@
-<main class="container" role="main">
-  <header class="hero">
+<main role="main">
+  <header class="hero hot-hero">
+    <img src="<%= song_art_href_default()%>" data-src="http://res.cloudinary.com/don2kwaju/image/upload/e_blur:400/o_30/v1462614339/wsdjs/bg.jpg" class="cld-responsive test" />
   </header>
-  <%= for {month, songs} <- group_song_by_month(@songs) do %>
-    <h1 class="page-header">
-      <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small><%= Enum.count(songs) %> suggestions</small>
-    </h1>
 
-      <%= render_many sort_songs(songs), @view_module, "_hot_card.html", conn: @conn, as: :song %>
-  <% end %>
+  <section class="container">
+    <%= for {month, songs} <- group_song_by_month(@songs) do %>
+      <h1 class="page-header">
+        <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small><%= Enum.count(songs) %> suggestions</small>
+      </h1>
 
-  <%= if @top do %>
-  <h1 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h1>
-  <div class="song-top-container">
-    <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
-  </div>
-  <% end %>
+      <div class="row">
+        <%= render_many sort_songs(songs), @view_module, "_hot_card.html", conn: @conn, as: :song %>
+      </div>
+    <% end %>
+
+    <%= if @top do %>
+    <h1 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h1>
+    <div class="song-top-container">
+      <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
+    </div>
+    <% end %>
+  </section>
 </main>
 
 <%= if Wcsp.Musics.Policy.can?(:create_song, @conn.assigns.current_user) do %>

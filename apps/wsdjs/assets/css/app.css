@@ -10,6 +10,20 @@ body {
   }
 }
 
+.test {
+  position:absolute;
+  top:0;
+  left:0;
+  display: block;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.hot-hero {
+  min-height: 70vh;
+}
+
 .logo {
   background-image: var(--logo);
   background-repeat: no-repeat;
