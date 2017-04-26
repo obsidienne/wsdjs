@@ -4,8 +4,8 @@ defmodule WsdjsApi.Web.RankController do
   """
   use WsdjsApi.Web, :controller
 
-  alias WsdjsApi.Trendings
-  alias WsdjsApi.Trendings.Rank
+  alias Wcsp.Trendings
+  alias Wcsp.Trendings.Rank
 
   action_fallback WsdjsApi.Web.FallbackController
 

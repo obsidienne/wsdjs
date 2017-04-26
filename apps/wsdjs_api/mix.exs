@@ -35,6 +35,8 @@ defmodule WsdjsApi.Mixfile do
     [{:phoenix, "~> 1.3.0-rc"},
      {:phoenix_pubsub, "~> 1.0"},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     
+     {:wcsp, in_umbrella: true}]
   end
 end
