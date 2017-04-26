@@ -8,7 +8,7 @@ defmodule Wcsp.Accounts.User do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "users" do
+  schema "accounts_users" do
     field :email, :string
     field :admin, :boolean
     field :new_song_notification, :boolean

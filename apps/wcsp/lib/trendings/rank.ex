@@ -17,7 +17,7 @@ defmodule Wcsp.Trendings.Rank do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "ranks" do
+  schema "trendings_ranks" do
     field :likes, :integer
     field :votes, :integer
     field :bonus, :integer
@@ -51,7 +51,7 @@ defmodule Wcsp.Trendings.Rank do
   def position_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:position])
-    |> validate_number(:position, greater_than: 0)    
+    |> validate_number(:position, greater_than: 0)
   end
 
   def for_top(id) do
@@ -67,7 +67,7 @@ defmodule Wcsp.Trendings.Rank do
       SELECT id, top_id, row_number() OVER (
         PARTITION BY top_id
         ORDER BY votes + bonus + likes DESC
-      ) as rn FROM ranks
+      ) as rn FROM trendings_ranks
       """),
     where: p.rn <= ^per and p.id == q.id,
     order_by: [asc: q.position],

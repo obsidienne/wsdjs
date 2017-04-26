@@ -7,7 +7,7 @@ defmodule Wcsp.Trendings.Top do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "tops" do
+  schema "trendings_tops" do
     field :due_date, :date
     field :status, :string
 
@@ -46,7 +46,7 @@ defmodule Wcsp.Trendings.Top do
     |> cast(params, [:status])
     |> validate_inclusion(:status, @valid_status)
   end
-  
+
   @doc """
   Admin sees everything
   """

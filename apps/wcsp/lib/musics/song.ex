@@ -9,7 +9,7 @@ defmodule Wcsp.Musics.Song do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "songs" do
+  schema "musics_songs" do
     field :title, :string
     field :artist, :string
     field :url, :string
