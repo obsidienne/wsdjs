@@ -9,6 +9,7 @@ defmodule WsdjsApi.Web.Router do
     pipe_through :api
 
     resources "/ranks", RankController, except: [:index, :show, :new, :edit]
+    resources "/opinions", OpinionController, except: [:new, :edit]
 
   end
 end
