@@ -5,6 +5,8 @@ defmodule MasterProxy.Plug do
 
   def call(conn, _opts) do
     cond do
+      conn.host =~ ~r/^api\./ ->
+        WsdjsApi.Web.Endpoint.call(conn, [])
       true ->
         Wsdjs.Endpoint.call(conn, [])
     end

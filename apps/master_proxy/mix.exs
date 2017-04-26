@@ -22,7 +22,7 @@ defmodule MasterProxy.Mixfile do
   defp deps do
     [{:plug, "~> 1.2"},
      {:cowboy, "~> 1.0"},
-
+     {:wsdjs_api, in_umbrella: true},
      {:wsdjs, in_umbrella: true}]
   end
 end
