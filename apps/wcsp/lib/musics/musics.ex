@@ -139,6 +139,6 @@ defmodule Wcsp.Musics do
 
     song_opinion
     |> Opinion.changeset(%{kind: kind})
-    |> Repo.insert_or_update
+    |> Repo.insert_or_update()
   end
 end
