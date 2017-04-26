@@ -6,7 +6,7 @@ defmodule Wsdjs.SongOpinionController do
   def create(conn, %{"kind" => kind, "song_id" => song_id}) do
     current_user = conn.assigns[:current_user]
 
-    Wcsp.Musics.upsert_opinion!(current_user, song_id, kind)
+    Wcsp.Musics.upsert_opinion(current_user, song_id, kind)
 
     song = Wcsp.Musics.get_song!(current_user, song_id)
     opinions = Wcsp.Musics.list_opinions(song_id)
