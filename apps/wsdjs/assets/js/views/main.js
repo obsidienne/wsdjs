@@ -1,7 +1,5 @@
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
-import glMenubar from './shared/gl_menubar';
-import glSearch from './shared/gl_search';
-
+import searchComponent from './components/search';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class MainView {
@@ -12,8 +10,7 @@ export default class MainView {
 
   // This will be executed when the document loads...
   mount() {
-    new glMenubar().mount();
-    new glSearch().mount(this.cl);
+    new searchComponent().mount(this.cl);
     this._intlDate()
     this._loadImg();
 
