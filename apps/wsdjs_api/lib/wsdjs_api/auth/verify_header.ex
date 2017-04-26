@@ -1,4 +1,4 @@
-defmodule Wsdjs.VerifyHeader do
+defmodule WsdjsApi.Web.VerifyHeader do
   import Plug.Conn
 
   @doc false
