@@ -8,10 +8,7 @@ defmodule WsdjsApi.Web.OpinionController do
 
   def create(conn, %{"opinion" => opinion_params}) do
     with {:ok, %Opinion{} = opinion} <- Musics.upsert_opinion(opinion_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", opinion_path(conn, :show, opinion))
-      |> render("show.json", opinion: opinion)
+      send_resp(conn, :no_content, "")
     end
   end
 
