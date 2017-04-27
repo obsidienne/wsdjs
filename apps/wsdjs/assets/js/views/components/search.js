@@ -25,11 +25,9 @@ export default class search {
 
   _search(cl) {
     var query = document.getElementById("glsearch").value;
-    var token = document.querySelector("[name=channel_token]").getAttribute("content");
 
     var request = new XMLHttpRequest();
     request.open('GET', '/search?q='+query, true);
-    request.setRequestHeader('Authorization', "Bearer " + token);
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
