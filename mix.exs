@@ -7,7 +7,7 @@ defmodule WcsPlatform.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps(),
      aliases: aliases(),
-     elixir: "~> 1.4",
+     elixir: "~> 1.4.2",
 
      # docs
      name: "WCS Platform",
