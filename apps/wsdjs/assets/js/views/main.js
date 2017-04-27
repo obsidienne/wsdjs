@@ -1,5 +1,6 @@
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
-import searchComponent from './components/search';
+import searchComponent from '../components/search';
+import opinionComponent from '../components/opinion';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class MainView {
@@ -11,6 +12,7 @@ export default class MainView {
   // This will be executed when the document loads...
   mount() {
     new searchComponent().mount(this.cl);
+    new opinionComponent().mount();
     this._intlDate()
     this._loadImg();
 
