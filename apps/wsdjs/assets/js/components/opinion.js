@@ -17,7 +17,7 @@ export default class opinion {
 
     var container = elem.parentNode;
     var method = elem.dataset.method;
-    var url = elem.href;
+    var url = elem.dataset.url;
     var token = document.querySelector("[name=channel_token]").getAttribute("content");
 
     var request = new XMLHttpRequest();

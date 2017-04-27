@@ -15,11 +15,11 @@
     my_opinion = Enum.find(opinions, fn(x) -> x.user_id == current_user.id end)
 
     default_options = [
-      to: opinion_url(conn, kind, song, my_opinion),
+      "data-url": opinion_url(conn, kind, song, my_opinion),
       class: html_class(kind, my_opinion),
       "data-method": data_method(kind, my_opinion)
     ]
-    link qty, default_options ++ tooltip_options(kind, opinions, qty)
+    content_tag :button, qty, default_options ++ tooltip_options(kind, opinions, qty)
   end
 
   defp tooltip_options(kind, opinions, qty) when qty > 0 do
