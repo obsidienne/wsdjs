@@ -43,7 +43,6 @@ defmodule Wsdjs.Router do
     resources "/users", UserController, only: [:index, :show]
     resources "/hottests", HottestController, only: [:index]
     resources "/songs", SongController, only: [:show] do
-      resources "/song_opinions", SongOpinionController, only: [:create]
       resources "/comment", SongCommentController, only: [:create]
     end
     resources "/tops", TopController, only: [:index, :show]
@@ -53,14 +52,11 @@ defmodule Wsdjs.Router do
   scope "/api", as: :api, alias: :Wsdjs do
     pipe_through [:api, :api_auth]
 
-    post "/songs/:song_id/song_opinions", SongOpinionController, :create
-    resources "/song_opinions", SongOpinionController, only: [:delete]
-  end
-
-  # Other scopes may use custom stacks.
-  scope "/api", as: :api, alias: :Wsdjs do
-    pipe_through :api
-
-    resources "/songs", SongController, only: [:show]
+    scope "/v1", alias: API.V1 do
+      resources "/songs", SongController, only: [] do
+        resources "/opinions", OpinionController, only: [:create]
+      end
+      resources "/options", OpinionController, only: [:delete]
+    end
   end
 end

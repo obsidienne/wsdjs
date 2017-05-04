@@ -31,7 +31,7 @@
   defp data_method(_, _), do: "POST"
 
   defp opinion_url(conn, kind, _song, %Wcsp.Musics.Opinion{kind: my_kind} = my_opinion) when kind == my_kind do
-    api_song_opinion_path(conn, :delete, my_opinion.id)
+    api_opinion_path(conn, :delete, my_opinion.id)
   end
   defp opinion_url(conn, kind, song, _), do: api_song_opinion_path(conn, :create, song, kind: kind)
 
