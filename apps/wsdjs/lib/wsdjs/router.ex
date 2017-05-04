@@ -42,9 +42,7 @@ defmodule Wsdjs.Router do
     get "/search", SearchController, :index
     resources "/users", UserController, only: [:index, :show]
     resources "/hottests", HottestController, only: [:index]
-    resources "/songs", SongController, only: [:show] do
-      resources "/comment", SongCommentController, only: [:create]
-    end
+    resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
     resources "/sessions", SessionController, only: [:new, :create]
   end
@@ -55,6 +53,7 @@ defmodule Wsdjs.Router do
     scope "/v1", alias: API.V1 do
       resources "/songs", SongController, only: [] do
         resources "/opinions", OpinionController, only: [:create]
+        resources "/comments", CommentController, only: [:create]
       end
       resources "/options", OpinionController, only: [:delete]
     end
