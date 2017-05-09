@@ -2,8 +2,9 @@
   display: flex;
   z-index: 1000;
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   background-color: white;
   border: 1px solid transparent;
   border-color: #BDBDBD;

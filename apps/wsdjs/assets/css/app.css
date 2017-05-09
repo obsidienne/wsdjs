@@ -2,12 +2,7 @@
 
 body {
   background-color: #F8F8F8;
-}
-
-@media (max-width:480px) {
-  body {
-    margin-bottom: 50px;
-  }
+  margin-bottom: 100px;
 }
 
 .test {
