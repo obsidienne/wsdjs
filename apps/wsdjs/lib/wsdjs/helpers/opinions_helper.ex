@@ -23,7 +23,7 @@
   end
 
   defp tooltip_options(kind, opinions, qty) when qty > 0 do
-    ["title": opinions_names(kind, opinions), "data-size": "big"]
+    ["title": opinions_names(kind, opinions), "data-size": "big", "data-animateFill": "false"]
   end
   defp tooltip_options(_kind, _opinions, qty) when qty == 0, do: []
 
@@ -35,16 +35,16 @@
   end
   defp opinion_url(conn, kind, song, _), do: api_song_opinion_path(conn, :create, song, kind: kind)
 
-  defp html_class(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "song-opinion song-#{kind} active tippy"
+  defp html_class(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "song-opinion song-#{kind} active tippy "
   defp html_class(kind, _), do: "song-opinion song-#{kind} tippy"
 
   defp opinions_names(kind, opinions) do
     kind_opinions = Enum.filter(opinions, fn(x) -> x.kind == kind end)
-    names = Enum.map_join(Enum.take(kind_opinions, 3), ", ", &(&1.user.name))
+    names = Enum.map_join(Enum.take(kind_opinions, 3), "<br/>", &(&1.user.name))
 
     remaining_qty = Enum.count(opinions, fn(x) -> x.kind == kind end) - 3
     if remaining_qty > 0 do
-      names <> ", +#{remaining_qty} dj"
+      names <> "<br/> +#{remaining_qty} dj"
     else
       names
     end
