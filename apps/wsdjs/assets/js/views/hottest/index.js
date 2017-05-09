@@ -1,11 +1,9 @@
-import timeago from 'timeago.js';
 import MainView from '../main';
 
 export default class View extends MainView {
   mount() {
     super.mount();
 
-    new timeago().render(document.querySelectorAll("time.timeago"));
     this._intlDate();
 
     // Specific logic here
