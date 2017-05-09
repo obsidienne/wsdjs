@@ -1,7 +1,0 @@
-<%= opinion_link("down", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-<%= opinion_link("like", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-<%= opinion_link("up", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-
-<a class="text-muted" href="<%= song_path(@conn, :show, @song) %>">
-  <i class="<%= comment_class(@song) %>"></i>
-</a>
