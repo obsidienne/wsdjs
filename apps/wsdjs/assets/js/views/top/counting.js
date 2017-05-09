@@ -29,7 +29,6 @@ export default class View extends MainView {
   _xhr_bonus() {
     var request = new XMLHttpRequest();
     request.open("POST", "/", true);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     request.setRequestHeader('Authorization', "Bearer " + token);
     request.setRequestHeader('Accept', 'application/json');
 

@@ -28,7 +28,6 @@ export default class View extends MainView {
 
       var request = new XMLHttpRequest();
       request.open(form.method, form.action, true);
-      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
       request.setRequestHeader('Authorization', "Bearer " + token);
       request.setRequestHeader('Accept', 'application/json');
 
