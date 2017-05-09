@@ -2,6 +2,7 @@
 import searchComponent from '../components/search';
 import opinionComponent from '../components/opinion';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import Tippy from 'tippy.js/dist/tippy';
 
 export default class MainView {
   constructor() {
@@ -15,6 +16,7 @@ export default class MainView {
     new opinionComponent().mount();
     this._intlDate()
     this._loadImg();
+    new Tippy('.tippy');
 
     console.log('MainView mounted');
   }

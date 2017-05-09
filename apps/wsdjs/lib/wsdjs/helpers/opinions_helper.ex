@@ -5,7 +5,7 @@
 
   def opinion_link(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
-    default_options = [class: "song-opinion song-#{kind}"]
+    default_options = [class: "song-opinion song-#{kind} tippy"]
 
     content_tag :span, qty, default_options ++ tooltip_options(kind, opinions, qty)
   end
@@ -23,7 +23,7 @@
   end
 
   defp tooltip_options(kind, opinions, qty) when qty > 0 do
-    ["data-balloon": opinions_names(kind, opinions), "data-balloon-pos": "up", "data-balloon-break": "true"]
+    ["title": opinions_names(kind, opinions), "data-size": "big"]
   end
   defp tooltip_options(_kind, _opinions, qty) when qty == 0, do: []
 
@@ -35,16 +35,16 @@
   end
   defp opinion_url(conn, kind, song, _), do: api_song_opinion_path(conn, :create, song, kind: kind)
 
-  defp html_class(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "song-opinion song-#{kind} active"
-  defp html_class(kind, _), do: "song-opinion song-#{kind}"
+  defp html_class(kind, %Wcsp.Musics.Opinion{kind: my_kind}) when kind == my_kind, do: "song-opinion song-#{kind} active tippy"
+  defp html_class(kind, _), do: "song-opinion song-#{kind} tippy"
 
   defp opinions_names(kind, opinions) do
     kind_opinions = Enum.filter(opinions, fn(x) -> x.kind == kind end)
-    names = Enum.map_join(Enum.take(kind_opinions, 4), "\u000A", &(&1.user.name))
+    names = Enum.map_join(Enum.take(kind_opinions, 3), ", ", &(&1.user.name))
 
-    remaining_qty = Enum.count(opinions, fn(x) -> x.kind == kind end) - 4
+    remaining_qty = Enum.count(opinions, fn(x) -> x.kind == kind end) - 3
     if remaining_qty > 0 do
-      names <> "\u000A+ #{remaining_qty} dj"
+      names <> ", +#{remaining_qty} dj"
     else
       names
     end
