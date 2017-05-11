@@ -23,7 +23,7 @@
 	        <span class="help-block">The date must be the <strong>first</strong> day of the month.</span>
 	      </div>
 
-	    	<%= submit "next step : check", class: "btn btn-primary pull-right" %>
+	    	<%= submit "next step : check", class: "btn btn-primary" %>
 	    <% end %>
 	  </div>
 	</div>
