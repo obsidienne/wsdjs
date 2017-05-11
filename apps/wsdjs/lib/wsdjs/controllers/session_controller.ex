@@ -1,6 +1,8 @@
 defmodule Wsdjs.SessionController do
   use Wsdjs, :controller
 
+  plug :put_layout, "login.html"
+
   def new(conn, _) do
     render conn, "new.html"
   end
