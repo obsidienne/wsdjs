@@ -72,13 +72,11 @@ output {
   background-color: transparent;
 }
 .form-control[disabled],
-.form-control[readonly],
-fieldset[disabled] .form-control {
+.form-control[readonly] {
   background-color: #eeeeee;
   opacity: 1;
 }
-.form-control[disabled],
-fieldset[disabled] .form-control {
+.form-control[disabled] {
   cursor: not-allowed;
 }
 textarea.form-control {
@@ -143,21 +141,15 @@ input[type="search"] {
 input[type="radio"][disabled],
 input[type="checkbox"][disabled],
 input[type="radio"].disabled,
-input[type="checkbox"].disabled,
-fieldset[disabled] input[type="radio"],
-fieldset[disabled] input[type="checkbox"] {
+input[type="checkbox"].disabled {
   cursor: not-allowed;
 }
 .radio-inline.disabled,
-.checkbox-inline.disabled,
-fieldset[disabled] .radio-inline,
-fieldset[disabled] .checkbox-inline {
+.checkbox-inline.disabled {
   cursor: not-allowed;
 }
 .radio.disabled label,
-.checkbox.disabled label,
-fieldset[disabled] .radio label,
-fieldset[disabled] .checkbox label {
+.checkbox.disabled label {
   cursor: not-allowed;
 }
 .form-control-static {

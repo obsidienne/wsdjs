@@ -42,16 +42,14 @@
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .btn.disabled,
-.btn[disabled],
-fieldset[disabled] .btn {
+.btn[disabled] {
   cursor: not-allowed;
   opacity: 0.65;
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-a.btn.disabled,
-fieldset[disabled] a.btn {
+a.btn.disabled {
   pointer-events: none;
 }
 .btn-default {
@@ -92,13 +90,10 @@ fieldset[disabled] a.btn {
 }
 .btn-default.disabled:hover,
 .btn-default[disabled]:hover,
-fieldset[disabled] .btn-default:hover,
 .btn-default.disabled:focus,
 .btn-default[disabled]:focus,
-fieldset[disabled] .btn-default:focus,
 .btn-default.disabled.focus,
-.btn-default[disabled].focus,
-fieldset[disabled] .btn-default.focus {
+.btn-default[disabled].focus {
   background-color: #ffffff;
   border-color: #cccccc;
 }
@@ -144,13 +139,10 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary.disabled:hover,
 .btn-primary[disabled]:hover,
-fieldset[disabled] .btn-primary:hover,
 .btn-primary.disabled:focus,
 .btn-primary[disabled]:focus,
-fieldset[disabled] .btn-primary:focus,
 .btn-primary.disabled.focus,
-.btn-primary[disabled].focus,
-fieldset[disabled] .btn-primary.focus {
+.btn-primary[disabled].focus {
   background-color: #337ab7;
   border-color: #2e6da4;
 }
@@ -197,13 +189,10 @@ fieldset[disabled] .btn-primary.focus {
 }
 .btn-success.disabled:hover,
 .btn-success[disabled]:hover,
-fieldset[disabled] .btn-success:hover,
 .btn-success.disabled:focus,
 .btn-success[disabled]:focus,
-fieldset[disabled] .btn-success:focus,
 .btn-success.disabled.focus,
-.btn-success[disabled].focus,
-fieldset[disabled] .btn-success.focus {
+.btn-success[disabled].focus {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
@@ -249,13 +238,10 @@ fieldset[disabled] .btn-success.focus {
 }
 .btn-info.disabled:hover,
 .btn-info[disabled]:hover,
-fieldset[disabled] .btn-info:hover,
 .btn-info.disabled:focus,
 .btn-info[disabled]:focus,
-fieldset[disabled] .btn-info:focus,
 .btn-info.disabled.focus,
-.btn-info[disabled].focus,
-fieldset[disabled] .btn-info.focus {
+.btn-info[disabled].focus {
   background-color: #5bc0de;
   border-color: #46b8da;
 }
@@ -301,13 +287,10 @@ fieldset[disabled] .btn-info.focus {
 }
 .btn-warning.disabled:hover,
 .btn-warning[disabled]:hover,
-fieldset[disabled] .btn-warning:hover,
 .btn-warning.disabled:focus,
 .btn-warning[disabled]:focus,
-fieldset[disabled] .btn-warning:focus,
 .btn-warning.disabled.focus,
-.btn-warning[disabled].focus,
-fieldset[disabled] .btn-warning.focus {
+.btn-warning[disabled].focus {
   background-color: #f0ad4e;
   border-color: #eea236;
 }
@@ -353,13 +336,10 @@ fieldset[disabled] .btn-warning.focus {
 }
 .btn-danger.disabled:hover,
 .btn-danger[disabled]:hover,
-fieldset[disabled] .btn-danger:hover,
 .btn-danger.disabled:focus,
 .btn-danger[disabled]:focus,
-fieldset[disabled] .btn-danger:focus,
 .btn-danger.disabled.focus,
-.btn-danger[disabled].focus,
-fieldset[disabled] .btn-danger.focus {
+.btn-danger[disabled].focus {
   background-color: #d9534f;
   border-color: #d43f3a;
 }
@@ -375,8 +355,7 @@ fieldset[disabled] .btn-danger.focus {
 .btn-link,
 .btn-link:active,
 .btn-link.active,
-.btn-link[disabled],
-fieldset[disabled] .btn-link {
+.btn-link[disabled] {
   background-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -394,9 +373,7 @@ fieldset[disabled] .btn-link {
   background-color: transparent;
 }
 .btn-link[disabled]:hover,
-fieldset[disabled] .btn-link:hover,
-.btn-link[disabled]:focus,
-fieldset[disabled] .btn-link:focus {
+.btn-link[disabled]:focus {
   color: #777777;
   text-decoration: none;
 }
