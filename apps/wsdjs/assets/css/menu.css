@@ -1,3 +1,11 @@
+.logo {
+  background-image: var(--logo);
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 50px;
+  display: inline-block;
+}
+
 .glheader {
   box-sizing: border-box;
   display: flex;
