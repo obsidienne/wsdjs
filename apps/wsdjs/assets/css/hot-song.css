@@ -1,0 +1,68 @@
+/* HOT SONG CARD */
+
+.hot-song {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.hot-song-heading {
+  padding: 0;
+  position: relative;
+}
+
+.hot-song-heading img {
+  width: 100%;
+  height: auto;
+}
+
+.hot-song-body {
+  padding: 15px;
+}
+
+.hot-song-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.hot-song-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: inherit;
+}
+
+.hot-song .label {
+  cursor: pointer;
+}
+
+.artist-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.song-art-overlay {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+}
+
+.song-art-overlay .label {
+  user-select: none;
+  cursor: default;
+}
+
+.song-art-overlay span {
+  margin-right: 5px;
+}
