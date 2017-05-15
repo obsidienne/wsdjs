@@ -9,9 +9,7 @@
         <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small><%= Enum.count(songs) %> suggestions</small>
       </h1>
 
-      <div class="row">
-        <%= render_many sort_songs(songs), @view_module, "_hot_card.html", conn: @conn, as: :song %>
-      </div>
+      <%= render_many sort_songs(songs), @view_module, "_hot_song.html", conn: @conn, as: :song %>
     <% end %>
 
     <%= if @top do %>
