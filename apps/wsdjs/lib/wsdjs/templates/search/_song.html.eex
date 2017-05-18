@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="search-result">
   <a href="<%= song_path(@conn, :show, @song.id) %>">
     <article class="minicard-song">
       <div class="minicard-song-heading">

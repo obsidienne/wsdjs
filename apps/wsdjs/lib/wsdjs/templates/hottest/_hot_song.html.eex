@@ -1,6 +1,6 @@
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 
-<article class="hot-song" data-id="<%= @song.id %>">
+<article class="hot-song card" data-id="<%= @song.id %>">
   <a href="<%= @song.url %>" class="hot-song-heading" target="_blank" >
     <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
     <h4 class="song-art-overlay">
