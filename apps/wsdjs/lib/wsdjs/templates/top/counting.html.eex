@@ -36,7 +36,7 @@
   	        <%= error_tag f, :bonus %>
   	        <span class="help-block">The date must be the <strong>first</strong> day of the month.</span>
   	      </div>
-            <%= submit "Apply bonus", class: "btn btn-default" %>
+            <%= submit "Apply bonus", class: "btn btn-primary" %>
           <% end %>
         </div>
 
