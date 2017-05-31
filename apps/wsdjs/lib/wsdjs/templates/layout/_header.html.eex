@@ -22,7 +22,7 @@
       <img class="glheader__user__avatar img-circle cld-responsive" src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@current_user.avatar) %>">
     <% end %>
   <% else %>
-    <%= link to: session_path(@conn, :new) do %>
+    <%= link to: session_path(@conn, :new), data: [turbolinks: false] do %>
       <div class="glheader__user__signin--container">Sign in</div>
     <% end %>
   <% end %>
