@@ -24,4 +24,3 @@ iex -S mix phx.server
 * User home page
 * Create/Update/Delete song art
 * Create/Update/Delete user avatar
-* Improve login page

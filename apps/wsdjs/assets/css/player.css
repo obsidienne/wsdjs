@@ -79,8 +79,8 @@
   height: 60px;
   max-width: 100%;
   position: absolute;
-  bottom: 15px;
-  right: 15px;
+  bottom: 0;
+  right: 0;
   text-decoration: none;
   display: block;
   background-image: var(--icon-play);
@@ -91,5 +91,4 @@
 }
 .song-play:hover {
   background-color: rgba(150,150,150,1);
-  transform: scale(1.1);
 }

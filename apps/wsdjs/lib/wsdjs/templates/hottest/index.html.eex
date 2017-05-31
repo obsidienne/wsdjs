@@ -1,6 +1,5 @@
 <main role="main">
   <header class="hero hot-hero">
-    <img src="<%= song_art_href_default()%>" data-src="http://res.cloudinary.com/don2kwaju/image/upload/e_blur:400/o_30/v1462614339/wsdjs/bg.jpg" class="cld-responsive test" />
   </header>
 
   <section class="container">

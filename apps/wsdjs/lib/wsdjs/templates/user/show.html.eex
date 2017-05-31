@@ -1,4 +1,7 @@
 <main>
+  <header class="hero">
+  </header>
+
   <div class="user-view">
 
 <img class="profile-img cld-responsive" src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>">

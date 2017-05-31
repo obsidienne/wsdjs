@@ -3,7 +3,7 @@
     <header class="card-top-header">
       <h4>TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></h4>
       <%= if @top.status != "published" do %>
-        <span class="label"><%= @top.status %></span>
+        <span class="label  label-default"><%= @top.status %></span>
       <% end %>
     </header>
     <div class="card-top-body">

@@ -12,15 +12,10 @@
 }
 
 .hot-hero {
-  min-height: 70vh;
-}
+  height: 70vh;
+  background: url(http://res.cloudinary.com/don2kwaju/image/upload/e_blur:400/o_30/v1462614339/wsdjs/bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
-.test {
-  position:absolute;
-  top:0;
-  left:0;
-  display: block;
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
 }
