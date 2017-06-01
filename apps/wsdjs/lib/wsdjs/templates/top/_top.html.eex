@@ -1,11 +1,14 @@
-<a class="col-xs-12 col-sm-6 col-md-4" href="<%= top_path(@conn, :show, @top.id) %>">
-  <article class="card-top">
-    <header class="card-top-header">
-      <h4>TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></h4>
-      <%= if @top.status != "published" do %>
-        <span class="label  label-default"><%= @top.status %></span>
-      <% end %>
-    </header>
+<a href="<%= top_path(@conn, :show, @top.id) %>" href="dd" class="cd-timeline-block">
+  <div class="cd-timeline-img cd-picture">
+    <img src="<%= song_art_href_default() %>" data-src="<%= song_art_href(Enum.at(@top.ranks, 0).song.art) %>" class="cld-responsive song-art-responsive" >
+  </div> <!-- cd-timeline-img -->
+
+  <div class="cd-timeline-content">
+    <%= if @top.status != "published" do %>
+      <h2><%= @top.status %></h2>
+    <% else %>
+      <h2><%= Enum.at(@top.ranks, 0).song.title %></h2>
+    <% end %>
     <div class="card-top-body">
       <%= for rank <- @top.ranks do %>
         <div>
@@ -13,5 +16,6 @@
         </div>
       <% end %>
     </div>
-  </article>
-</a>
+    <span class="cd-date"><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></span>
+  </div> <!-- cd-timeline-content -->
+</a> <!-- cd-timeline-block -->
