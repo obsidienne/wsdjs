@@ -60,3 +60,19 @@
 .song-art-overlay span {
   margin-right: 5px;
 }
+
+.song-play {
+  width: 60px;
+  height: 60px;
+  max-width: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-decoration: none;
+  display: block;
+  background-image: var(--icon-play);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  background-color: rgba(150,150,150,.5);
+}

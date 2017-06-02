@@ -2,15 +2,12 @@
   <header class="hero hot-hero">
     <div class="container">
       <h1><%= Enum.count(@tops) %> tops</h1>
+      <%= if Wcsp.Trendings.Policy.can?(:create_top, @conn.assigns.current_user) do %>
+        <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
+      <% end %>
     </div>
   </header>
   <section class="cd-container">
     <%= render_many @tops, @view_module, "_top.html", conn: @conn %>
   </section>
 </main>
-
-<%= if Wcsp.Trendings.Policy.can?(:create_top, @conn.assigns.current_user) do %>
-<div id="fab-container">
-  <a class="fab-btn" title="Create a new top" href="<%= top_path(@conn, :new) %>"></a>
-</div>
-<% end %>

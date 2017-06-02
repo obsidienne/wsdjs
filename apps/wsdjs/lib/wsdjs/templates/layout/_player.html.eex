@@ -1,13 +1,37 @@
-<div id="miniplayer" class="miniplayer" data-turbolinks-permanent>
-  <div class="miniplayer-art">
-    <img height="50" width="50" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8//PIfwAJeAO9U/c7OgAAAABJRU5ErkJggg==" />
-  </div>
-  <div class="miniplayer-info">
-    <div class="miniplayer-title">waiting..</div>
-    <div class="miniplayer-artist"></div>
-  </div>
 
-  <div class="miniplayer-action">
-    <div class="toggle-player icon-play"></div>
-  </div>
-</div>
+
+<ul class="miniplayer" data-turbolinks-permanent>
+  <li>
+    <a href="#" class="played-song">
+      <img height="50" width="50" src="https://res.cloudinary.com/don2kwaju/image/upload/w_300/c_scale/v1482536750/covers/amyapplyrvigvn47zaki.jpg" />
+    </a>
+  </li>
+  <li>
+    <a href="#" class="played-song">
+      <img height="50" width="50" src="https://res.cloudinary.com/don2kwaju/image/upload/w_300/c_scale/v1482536750/covers/amyapplyrvigvn47zaki.jpg" />
+    </a>
+  </li>
+  <li>
+    <a href="#" class="played-song">
+      <img height="50" width="50" src="https://res.cloudinary.com/don2kwaju/image/upload/w_300/c_scale/v1482536750/covers/amyapplyrvigvn47zaki.jpg" />
+    </a>
+  </li>
+  <li>
+    <a href="#" class="played-song">
+      <img height="50" width="50" src="https://res.cloudinary.com/don2kwaju/image/upload/w_300/c_scale/v1482536750/covers/amyapplyrvigvn47zaki.jpg" />
+    </a>
+  </li>
+  <li>
+    <div id="miniplayer" class="player">
+      <div class="miniplayer-info">
+        <div class="miniplayer-title">waiting..</div>
+        <div class="miniplayer-artist"></div>
+      </div>
+
+      <div class="miniplayer-art">
+        <div class="toggle-player icon-play"></div>
+        <img height="50" width="50" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8//PIfwAJeAO9U/c7OgAAAABJRU5ErkJggg==" />
+      </div>
+    </div>
+  </li>
+</ul>
