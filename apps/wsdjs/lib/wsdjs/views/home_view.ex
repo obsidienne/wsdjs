@@ -1,4 +1,4 @@
-defmodule Wsdjs.HottestView do
+defmodule Wsdjs.HomeView do
   use Wsdjs, :view
 
   def proposed_by_link(conn, song = %Wcsp.Musics.Song{}) do

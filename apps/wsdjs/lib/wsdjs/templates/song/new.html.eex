@@ -1,5 +1,5 @@
   <main class="container">
-    <%= form_for @changeset, hottest_path(@conn, :create), [class: "row"], fn f -> %>
+    <%= form_for @changeset, song_path(@conn, :create), [class: "row"], fn f -> %>
 
       <div class="form-group">
         <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>

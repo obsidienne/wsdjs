@@ -26,8 +26,7 @@ defmodule Wsdjs.Router do
   scope "/", Wsdjs do
     pipe_through [:browser, :browser_auth]
 
-    resources "/songs", SongController, only: [:index]
-    resources "/hottests", HottestController, only: [:create, :new]
+    resources "/songs", SongController, only: [:index,:create, :new]
     resources "/song_opinions", SongOpinionController, only: [:delete]
     resources "/tops", TopController, only: [:create, :new, :update] do
       resources "/votes", VoteController, only: [:create]
@@ -39,10 +38,10 @@ defmodule Wsdjs.Router do
   scope "/", Wsdjs do
     pipe_through :browser # Use the default browser stack
 
-    get "/", HottestController, :index
+    get "/", HomeController, :index
     get "/search", SearchController, :index
     resources "/users", UserController, only: [:index, :show]
-    resources "/hottests", HottestController, only: [:index]
+    resources "/home", HomeController, only: [:index]
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
     resources "/sessions", SessionController, only: [:new, :create]

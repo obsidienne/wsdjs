@@ -22,4 +22,26 @@ defmodule Wsdjs.SongController do
 
     render conn, "index.html", songs: songs
   end
+  @doc """
+  No authZ needed, this function does not modify the database
+  """
+  def new(conn, _params) do
+    changeset = Wcsp.Musics.Song.changeset(%Wcsp.Musics.Song{})
+    render(conn, "new.html", changeset: changeset)
+  end
+
+
+  def create(conn, %{"song" => params}) do
+    current_user = conn.assigns[:current_user]
+
+    case Wcsp.Musics.create_song(current_user, params) do
+      {:ok, song} ->
+        conn
+        |> put_flash(:info, "#{song.title} created")
+        |> redirect(to: song_path(conn, :show, song.id))
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
+
 end

@@ -1,12 +1,12 @@
 import MainView    from './main';
-import HottestIndexView from './hottest/index';
+import HomeIndexView from './home/index';
 import SongShowView from './song/show';
 import TopVotingView from './top/voting';
 import TopCountingView from './top/counting';
 
 // Collection of specific view modules
 const views = {
-  HottestIndexView,
+  HomeIndexView,
   SongShowView,
   TopVotingView,
   TopCountingView

@@ -7,7 +7,7 @@ export default class View extends MainView {
     this._intlDate();
 
     // Specific logic here
-    console.log('HottestIndexView mounted');
+    console.log('HomeIndexView mounted');
   }
 
   _intlDate() {

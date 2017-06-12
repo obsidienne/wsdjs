@@ -2,7 +2,7 @@
   <header class="hero hot-hero">
     <div class="container">
       <%= if Wcsp.Musics.Policy.can?(:create_song, @conn.assigns.current_user) do %>
-        <a class="btn btn-primary" title="Suggest a song" href="<%= hottest_path(@conn, :new) %>">Suggest a song</a>
+        <a class="btn btn-primary" title="Suggest a song" href="<%= song_path(@conn, :new) %>">Suggest a song</a>
       <% end %>
     </div>
   </header>

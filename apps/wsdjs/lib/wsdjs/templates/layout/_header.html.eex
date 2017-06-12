@@ -1,7 +1,7 @@
 <div style="position:absolute;z-index:2000;width: 100%;top:0">
 <nav class="glheader container">
   <div>
-    <%= link "", to: hottest_path(@conn, :index), class: "logo" %>
+    <%= link "", to: home_path(@conn, :index), class: "logo" %>
   </div>
 
 

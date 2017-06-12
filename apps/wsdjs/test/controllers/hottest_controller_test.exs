@@ -1,4 +1,4 @@
-defmodule Wsdjs.HottestControllerTest do
+defmodule Wsdjs.HomeControllerTest do
   use Wsdjs.ConnCase
 
   test "GET /", %{conn: conn} do
