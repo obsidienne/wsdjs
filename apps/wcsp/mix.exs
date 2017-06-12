@@ -20,7 +20,7 @@ defmodule Wcsp.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [extra_applications: [:logger],
+    [extra_applications: [:logger, :httpoison],     
      mod: {Wcsp.Application, []}]
   end
 
@@ -33,7 +33,9 @@ defmodule Wcsp.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:bodyguard, "~> 0.6.0"},
      {:scrivener_ecto, "~> 1.0"},
-     {:csv, "~> 1.4.4"}]
+     {:csv, "~> 1.4.4"},
+     {:httpoison, "~> 0.11.1"},
+     {:html_sanitize_ex, "~> 1.0.0"}]
   end
 
   defp aliases do

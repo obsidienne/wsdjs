@@ -2,6 +2,7 @@ defmodule Wcsp.Musics.Song do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
+  alias Wcsp.Repo
 
   alias Wcsp.Trendings
   alias Wcsp.Accounts
@@ -80,6 +81,11 @@ defmodule Wcsp.Musics.Song do
             ) @@ to_tsquery('english', ?))
             """, ^search_query),
     limit: 5
+  end
+
+  def search_artist_title(artist, title) do
+    Repo.get_by(Wcsp.Musics.Song, artist: artist, title: title) 
+    |> Repo.preload(:user)    
   end
 
   defp ts_query_format(search_query) do
