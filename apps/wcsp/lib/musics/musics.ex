@@ -43,6 +43,15 @@ defmodule Wcsp.Musics do
   end
 
   @doc """
+  Returns the list of songs scoped by current_user.
+  """
+  def list_songs(current_user) do
+    Song.scoped(current_user)
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> Repo.all()
+  end
+
+  @doc """
   Creates a song.
   """
   def create_song(user, params) do

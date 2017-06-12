@@ -26,6 +26,7 @@ defmodule Wsdjs.Router do
   scope "/", Wsdjs do
     pipe_through [:browser, :browser_auth]
 
+    resources "/songs", SongController, only: [:index]
     resources "/hottests", HottestController, only: [:create, :new]
     resources "/song_opinions", SongOpinionController, only: [:delete]
     resources "/tops", TopController, only: [:create, :new, :update] do

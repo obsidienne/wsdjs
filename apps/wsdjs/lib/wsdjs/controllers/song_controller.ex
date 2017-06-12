@@ -12,4 +12,14 @@ defmodule Wsdjs.SongController do
 
     render conn, "show.html", song: song, comments: comments, comment_changeset: comment_changeset
   end
+
+  @doc """
+  No authZ needed, data is scoped by current_user
+  """
+  def index(conn, _params) do
+    current_user = conn.assigns[:current_user]
+    songs = Wcsp.Musics.list_songs(current_user)
+
+    render conn, "index.html", songs: songs
+  end
 end

@@ -1,0 +1,19 @@
+<main role="main">
+  <header class="hero hot-hero">
+    <div class="container">
+      <%= if Wcsp.Musics.Policy.can?(:create_song, @conn.assigns.current_user) do %>
+        <a class="btn btn-primary" title="Suggest a song" href="<%= hottest_path(@conn, :new) %>">Suggest a song</a>
+      <% end %>
+    </div>
+  </header>
+
+  <section class="container-grid">
+    <%= for {month, songs} <- group_song_by_month(@songs) do %>
+      <h1 class="page-header">
+        <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small><%= Enum.count(songs) %> suggestions</small>
+      </h1>
+
+      <%= render_many sort_songs(songs), @view_module, "_hot_song.html", conn: @conn, as: :song %>
+    <% end %>
+  </section>
+</main>
