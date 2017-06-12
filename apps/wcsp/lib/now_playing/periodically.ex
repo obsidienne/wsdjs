@@ -9,6 +9,12 @@ defmodule Wcsp.Periodically do
   end
 
   def init(state) do
+    q0 = :queue.new()
+    is_empty = :queue.is_empty q0
+    Logger.debug "1 - q0 : #{is_empty}"
+    :queue.in(1, q0)
+    is_empty = :queue.is_empty q0
+    Logger.debug "2 - q0 : #{is_empty}"
     schedule_work() # Schedule work to be performed at some point
     {:ok, state}
   end
