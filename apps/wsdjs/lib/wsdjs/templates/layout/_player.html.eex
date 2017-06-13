@@ -24,7 +24,7 @@
   <li>
     <div id="miniplayer" class="player">
       <div class="miniplayer-info">
-        <div class="miniplayer-title">waiting..</div>
+        <div class="miniplayer-title">Play Radio WCS</div>
         <div class="miniplayer-artist"></div>
       </div>
 

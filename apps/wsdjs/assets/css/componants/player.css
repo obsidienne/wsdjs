@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  z-index: 10000;
 }
 
 .player {
@@ -43,6 +44,7 @@
   flex: 0 0 150px;
   max-width: 150px;
   padding: 2px;
+  background-color: white;
 }
 .miniplayer-art {
   position: relative;
