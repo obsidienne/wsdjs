@@ -17,7 +17,7 @@ defmodule Wcsp.Trendings.Rank do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "trendings_ranks" do
+  schema "ranks" do
     field :likes, :integer
     field :votes, :integer
     field :bonus, :integer

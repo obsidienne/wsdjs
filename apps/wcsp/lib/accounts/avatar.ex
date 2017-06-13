@@ -4,7 +4,7 @@ defmodule Wcsp.Accounts.Avatar do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "accounts_avatars" do
+  schema "avatars" do
     field :cld_id, :string
     field :version, :integer
 

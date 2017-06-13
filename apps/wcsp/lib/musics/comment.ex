@@ -4,7 +4,7 @@ defmodule Wcsp.Musics.Comment do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "musics_comments" do
+  schema "comments" do
     field :text, :string
 
     belongs_to :user, Wcsp.Accounts.User

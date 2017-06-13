@@ -7,7 +7,7 @@ defmodule Wcsp.Trendings.Top do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "trendings_tops" do
+  schema "tops" do
     field :due_date, :date
     field :status, :string
 

@@ -4,7 +4,7 @@ defmodule Wcsp.Musics.Art do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "musics_arts" do
+  schema "arts" do
     field :cld_id, :string
     field :version, :integer
 
