@@ -12,4 +12,5 @@ defmodule Wsdjs.UserHelper do
   def proposed_by_display_name(%Wcsp.Accounts.User{name: name}), do: name
 
   def user_avatar_alt(user), do: "#{user.name}"
+
 end

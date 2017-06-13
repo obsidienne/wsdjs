@@ -18,8 +18,7 @@ defmodule Wcsp.Periodically do
     GenServer.call(pid, {:read})   
   end
 
-  def handle_call({:read}, from, queue) do
-    list = ["milk", "break", "cheese"]
+  def handle_call({:read}, _, queue) do
     list = :queue.to_list(queue)
     {:reply, Enum.reverse(list), queue}
   end
@@ -39,19 +38,25 @@ defmodule Wcsp.Periodically do
     artist = Enum.at(list, 0)
     title = Enum.at(list, 1)
     Logger.debug "artist: #{artist} - title: #{title}"
-    song_in_base = Wcsp.Repo.get_by(Wcsp.Musics.Song, artist: artist, title: title)
+    song_in_base = Wcsp.Musics.Song.search_artist_title(artist, title)
     #song_in_base = Wcsp.Musics.Song.search_artist_title("MAROON 5", "Don't Want To Know")
+    Logger.debug ""
     song = %{}
     if song_in_base != nil do      
       suggested_by = song_in_base.user.name
+      suggested_by_path = "/users/#{song_in_base.user.id}"
       image = Wsdjs.SongHelper.song_art_href(song_in_base.art)
       Logger.debug "from dj: #{song_in_base.user.name}"
       Logger.debug "image: #{image}"
+      host = Application.get_env(:wsdjs, Wsdjs.Endpoint)[:url][:host]
+      Logger.debug "host = #{host}"
+      Logger.debug "suggested_by_path: #{suggested_by_path}"
       song = %{
         artist: artist, 
         title: title, 
-        image: image,
+        image_uri: image,
         suggested_by: suggested_by, 
+        suggested_by_path: suggested_by_path,
         ts: :os.system_time(:seconds)
       }
     else

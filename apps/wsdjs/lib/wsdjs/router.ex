@@ -44,9 +44,7 @@ defmodule Wsdjs.Router do
     resources "/home", HomeController, only: [:index]
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
-    resources "/sessions", SessionController, only: [:new, :create]
-
-    resources "/now_playing", NowPlayingController, only: [:index]
+    resources "/sessions", SessionController, only: [:new, :create]    
   end
 
   scope "/api", as: :api, alias: :Wsdjs do
@@ -59,5 +57,12 @@ defmodule Wsdjs.Router do
       end
       resources "/options", OpinionController, only: [:delete]
     end    
-  end  
+  end
+
+  scope "/api", as: :api, alias: :Wsdjs do
+    pipe_through [:api]
+
+    resources "/now_playing", NowPlayingController, only: [:index]
+    resources "/mobile_config", MobileConfigController, only: [:index]
+  end
 end
