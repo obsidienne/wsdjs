@@ -110,8 +110,4 @@ defmodule Wcsp.Periodically do
     Process.send_after(self(), :work, 5 * 1 * 1 * 1000) # In 5 seconds
   end
 
-  def initial_queue do    
-    :queue.new()
-  end
-  
 end
