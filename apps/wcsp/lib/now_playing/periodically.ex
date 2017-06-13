@@ -50,11 +50,12 @@ defmodule Wcsp.Periodically do
         ts: :os.system_time(:seconds)
       }
       
-      song_in_base = Wcsp.Musics.search_artist_title(new_metadata)
+      song_in_base = Wcsp.Musics.search_artist_title(new_metadata)      
       if song_in_base != nil do
         song = Map.put(song, :image_uri, Wsdjs.SongHelper.song_art_href(song_in_base.art))
         song = Map.put(song, :suggested_by, song_in_base.user.name)
         song = Map.put(song, :suggested_by_path, "/users/#{song_in_base.user.id}")
+        song = Map.put(song, :path, "/songs/#{song_in_base.id}")
       end 
       
       if (:queue.len(queue) > 9) do
