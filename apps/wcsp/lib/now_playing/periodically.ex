@@ -25,58 +25,12 @@ defmodule Wcsp.Periodically do
 
   defp metadata(body) do
     text_without_tags = HtmlSanitizeEx.strip_tags(body)
-    list = String.split(text_without_tags, ",")    
-    items_from_7_index = 7 - length(list) - 1
-    items_from_7 = Enum.take(list, items_from_7_index)
-    Enum.join(items_from_7, "")   
+    list = String.split(text_without_tags, "," , parts: 7, trim: true)
+    Enum.at(list, 6)
   end
 
-  defp update_database(new_metadata, queue) do
-    Logger.debug "Update database"
-    Logger.debug "new_metadata: #{new_metadata}"
-    list = String.split(new_metadata, " - ")    
-    artist = Enum.at(list, 0)
-    title = Enum.at(list, 1)
-    Logger.debug "artist: #{artist} - title: #{title}"
-    song_in_base = Wcsp.Musics.Song.search_artist_title(artist, title)
-    #song_in_base = Wcsp.Musics.Song.search_artist_title("MAROON 5", "Don't Want To Know")
-    Logger.debug ""
-    song = %{}
-    if song_in_base != nil do      
-      suggested_by = song_in_base.user.name
-      suggested_by_path = "/users/#{song_in_base.user.id}"
-      image = Wsdjs.SongHelper.song_art_href(song_in_base.art)
-      Logger.debug "from dj: #{song_in_base.user.name}"
-      Logger.debug "image: #{image}"
-      host = Application.get_env(:wsdjs, Wsdjs.Endpoint)[:url][:host]
-      Logger.debug "host = #{host}"
-      Logger.debug "suggested_by_path: #{suggested_by_path}"
-      song = %{
-        artist: artist, 
-        title: title, 
-        image_uri: image,
-        suggested_by: suggested_by, 
-        suggested_by_path: suggested_by_path,
-        ts: :os.system_time(:seconds)
-      }
-    else
-      song = %{
-        artist: artist, 
-        title: title,         
-        ts: :os.system_time(:seconds)
-      }
-    end
-    if (:queue.len(queue) > 9) do
-        queue = :queue.drop(queue)
-      end
-      queue = :queue.in(song, queue)
-      Logger.debug "queue size : #{:queue.len queue}"   
-    queue
-  end
+  defp push_song(seven_response_html, queue) do
 
-  # http://37.58.75.166:8384/7.html
-  def handle_info(:work, queue) do
-    # Do the work you desire here
     artist = ""
     title = ""
     if (:queue.len(queue) > 0) do
@@ -85,16 +39,42 @@ defmodule Wcsp.Periodically do
       title = last_song_in_queue[:title]      
     end
 
-    current_metadata = "#{artist} - #{title}"     
-    
-    case HTTPoison.get("http://37.58.75.166:8384/7.html") do
+    current_metadata = "#{artist} - #{title}" 
+    new_metadata = metadata(seven_response_html)
+    if current_metadata != new_metadata do        
+      [artist, title] = String.split(new_metadata, " - ", parts: 2, trim: true)
+
+      song = %{
+        artist: artist, 
+        title: title,         
+        ts: :os.system_time(:seconds)
+      }
+
+      song_in_base = Wcsp.Musics.search_artist_title(new_metadata)
+      if song_in_base != nil do
+        song = Map.put(song, :image_uri, Wsdjs.SongHelper.song_art_href(song_in_base.art))
+        song = Map.put(song, :suggested_by, song_in_base.user.name)
+        song = Map.put(song, :suggested_by_path, "/users/#{song_in_base.user.id}")
+      end 
+      
+      if (:queue.len(queue) > 9) do
+        queue = :queue.drop(queue)
+      end
+      queue = :queue.in(song, queue)
+
+      IO.inspect song
+    else
+      Logger.debug "No need update for : #{current_metadata}"
+    end 
+
+    queue
+  end
+  
+  @seven_url "http://37.58.75.166:8384/7.html"
+  def handle_info(:work, queue) do
+    case HTTPoison.get(@seven_url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->               
-        new_metadata = metadata(body)
-        if current_metadata != new_metadata do        
-          queue = update_database(new_metadata, queue)                    
-        else
-          Logger.debug "No need update for : #{current_metadata}"
-        end 
+        queue = push_song(body, queue)
         schedule_work() # Reschedule once more      
         {:noreply, queue}
       {:ok, %HTTPoison.Response{status_code: 404}} ->

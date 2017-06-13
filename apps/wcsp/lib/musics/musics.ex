@@ -19,6 +19,14 @@ defmodule Wcsp.Musics do
     |> Repo.all()
   end
 
+
+  def search_artist_title(artist_title) do
+    Song
+    |> where([s], fragment("? || ' - ' || ?", s.artist, s.title) == ^artist_title)
+    |> preload([:user, :art])
+    |> Repo.one
+  end
+
   @doc """
   Returns the list of songs for the current and the previous month.
   """
