@@ -2,6 +2,7 @@ defmodule Wcsp.Musics.Song do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
+  alias Wcsp.Repo
 
   alias Wcsp.Trendings
   alias Wcsp.Accounts
