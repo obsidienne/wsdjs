@@ -11,7 +11,7 @@ defmodule Wcsp.Application do
     # Define workers and child supervisors to be supervised
     children = [
       supervisor(Wcsp.Repo, []),
-      worker(Wcsp.Periodically, [])
+      worker(Wcsp.Periodically, [Wcsp.Periodically])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
