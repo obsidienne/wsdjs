@@ -14,6 +14,12 @@ defmodule Wsdjs.LayoutView do
     |> Enum.join("")
   end
 
+  def active_class(conn, view) do
+    if view_name(conn) == view do
+      "active"
+    end
+  end
+
   # Takes the resource name of the view module and removes the
   # the ending *_view* string.
   defp view_name(conn) do
@@ -30,4 +36,6 @@ defmodule Wsdjs.LayoutView do
     |> String.split(".")
     |> Enum.at(0)
   end
+
+
 end

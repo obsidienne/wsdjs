@@ -10,12 +10,14 @@
 
       <%= render_many sort_songs(songs), @view_module, "_hot_song.html", conn: @conn, as: :song %>
     <% end %>
+  </section>
 
-    <%= if @top do %>
+  <%= if @top do %>
+  <section class="container">
     <h1 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h1>
     <div class="song-top-container">
       <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
     </div>
-    <% end %>
   </section>
+  <% end %>
 </main>

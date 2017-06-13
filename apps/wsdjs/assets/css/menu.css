@@ -27,4 +27,8 @@
 .glheader__menu_link {
   margin-left: 30px;
   font-size: 18px;
+  border-bottom: 5px solid transparent;
+}
+.glheader__menu_link.active {
+  border-bottom: 5px solid #FFC107;
 }

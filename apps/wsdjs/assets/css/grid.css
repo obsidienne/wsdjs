@@ -11,18 +11,18 @@
 }
 @media (min-width: 768px) {
   .container-grid {
-    width: 768px;
+    width: 750px;
     grid-template-columns: repeat(2, minmax(100px, auto));
   }
 }
 @media (min-width: 992px) {
   .container-grid {
-    width: 992px;
+    width: 970px;
   }
 }
 @media (min-width: 1200px) {
   .container-grid {
-    width: 1200px;
+    width: 1170px;
     grid-template-columns: repeat(4, minmax(100px, auto));
   }
 
