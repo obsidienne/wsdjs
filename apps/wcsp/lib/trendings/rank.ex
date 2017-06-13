@@ -67,7 +67,7 @@ defmodule Wcsp.Trendings.Rank do
       SELECT id, top_id, row_number() OVER (
         PARTITION BY top_id
         ORDER BY votes + bonus + likes DESC
-      ) as rn FROM trendings_ranks
+      ) as rn FROM ranks
       """),
     where: p.rn <= ^per and p.id == q.id,
     order_by: [asc: q.position],
