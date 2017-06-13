@@ -5,23 +5,24 @@
   padding-right: 15px;
 
   display: grid;
-  grid-row-gap:    .5em;
-  grid-column-gap: .5em;
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
+  overflow: hidden;
 }
 @media (min-width: 768px) {
   .container-grid {
-    width: 750px;
+    width: 768px;
     grid-template-columns: repeat(2, minmax(100px, auto));
   }
 }
 @media (min-width: 992px) {
   .container-grid {
-    width: 970px;
+    width: 992px;
   }
 }
 @media (min-width: 1200px) {
   .container-grid {
-    width: 1170px;
+    width: 1200px;
     grid-template-columns: repeat(4, minmax(100px, auto));
   }
 
