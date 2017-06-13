@@ -26,7 +26,7 @@ defmodule Wcsp.Periodically do
   defp metadata(body) do
     text_without_tags = HtmlSanitizeEx.strip_tags(body)
     list = String.split(text_without_tags, "," , parts: 7, trim: true)
-    Enum.at(list, 6)
+    Enum.at(list, 6)    
   end
 
   defp push_song(seven_response_html, queue) do
@@ -49,7 +49,7 @@ defmodule Wcsp.Periodically do
         title: title,         
         ts: :os.system_time(:seconds)
       }
-
+      
       song_in_base = Wcsp.Musics.search_artist_title(new_metadata)
       if song_in_base != nil do
         song = Map.put(song, :image_uri, Wsdjs.SongHelper.song_art_href(song_in_base.art))
@@ -63,8 +63,6 @@ defmodule Wcsp.Periodically do
       queue = :queue.in(song, queue)
 
       IO.inspect song
-    else
-      Logger.debug "No need update for : #{current_metadata}"
     end 
 
     queue
