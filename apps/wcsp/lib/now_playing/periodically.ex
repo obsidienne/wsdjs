@@ -39,18 +39,33 @@ defmodule Wcsp.Periodically do
     artist = Enum.at(list, 0)
     title = Enum.at(list, 1)
     Logger.debug "artist: #{artist} - title: #{title}"
-    #song_in_base = Wcsp.Repo.get_by(Wcsp.Musics.Song, artist: artist, title: title)
-    song_in_base = Wcsp.Musics.Song.search_artist_title("MAROON 5", "Don't Want To Know")
-    if song_in_base != nil do
+    song_in_base = Wcsp.Repo.get_by(Wcsp.Musics.Song, artist: artist, title: title)
+    #song_in_base = Wcsp.Musics.Song.search_artist_title("MAROON 5", "Don't Want To Know")
+    song = %{}
+    if song_in_base != nil do      
+      suggested_by = song_in_base.user.name
+      image = Wsdjs.SongHelper.song_art_href(song_in_base.art)
       Logger.debug "from dj: #{song_in_base.user.name}"
-      song = %{artist: artist, title: title, suggested_by: song_in_base.user.name, ts: :os.system_time(:seconds)}
-      if (:queue.len(queue) > 9) do
+      Logger.debug "image: #{image}"
+      song = %{
+        artist: artist, 
+        title: title, 
+        image: image,
+        suggested_by: suggested_by, 
+        ts: :os.system_time(:seconds)
+      }
+    else
+      song = %{
+        artist: artist, 
+        title: title,         
+        ts: :os.system_time(:seconds)
+      }
+    end
+    if (:queue.len(queue) > 9) do
         queue = :queue.drop(queue)
       end
       queue = :queue.in(song, queue)
       Logger.debug "queue size : #{:queue.len queue}"   
-    end
-
     queue
   end
 

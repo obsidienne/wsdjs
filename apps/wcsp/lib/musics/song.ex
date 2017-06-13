@@ -85,7 +85,8 @@ defmodule Wcsp.Musics.Song do
 
   def search_artist_title(artist, title) do
     Repo.get_by(Wcsp.Musics.Song, artist: artist, title: title) 
-    |> Repo.preload(:user)    
+    |> Repo.preload(:user)
+    |> Repo.preload(:art)
   end
 
   defp ts_query_format(search_query) do
