@@ -173,12 +173,12 @@ end
 |> CSV.decode(strip_cells: true, headers: [:id, :top_id, :song_id, :likes, :inserted_at, :updated_at, :votes, :bonus, :points, :position])
 |> Enum.each(&Wcsp.Seeds.store_it(:rank, &1))
 
-"data/song_opinions.csv"
-|> Path.expand(__DIR__)
-|> File.stream!
-|> Stream.drop(1)
-|> CSV.decode(strip_cells: true, headers: [:id, :user_id, :song_id, :kind, :inserted_at, :updated_at])
-|> Enum.each(&Wcsp.Seeds.store_it(:opinion, &1))
+#"data/song_opinions.csv"
+#|> Path.expand(__DIR__)
+#|> File.stream!
+#|> Stream.drop(1)
+#|> CSV.decode(strip_cells: true, headers: [:id, :user_id, :song_id, :kind, :inserted_at, :updated_at])
+#|> Enum.each(&Wcsp.Seeds.store_it(:opinion, &1))
 
 "data/song_comments.csv"
 |> Path.expand(__DIR__)
