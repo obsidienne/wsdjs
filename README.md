@@ -11,6 +11,7 @@ The following aspect will be covered:
 Use [acme_bank](https://github.com/wojtekmach/acme_bank) app as an example to create the platform.
 
 iex -S mix phx.server
+git push heroku develop:master -f
 
 # TODO
 
@@ -24,4 +25,3 @@ iex -S mix phx.server
 * User home page
 * Create/Update/Delete song art
 * Create/Update/Delete user avatar
-* tot
