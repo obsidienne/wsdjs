@@ -58,7 +58,7 @@ defmodule Wcsp.Periodically do
         song = Map.put(song, :suggested_by_path, "/users/#{song_in_base.user.id}")
         song = Map.put(song, :path, "/songs/#{song_in_base.id}")        
         inserted_ts = elem(DateTime.from_naive(song_in_base.inserted_at, "Etc/UTC"), 1) |> DateTime.to_unix                
-        song = Map.put(song, :suggested_date, inserted_ts)
+        song = Map.put(song, :suggested_ts, inserted_ts)
       end 
       
       if (:queue.len(queue) > 9) do
