@@ -18,7 +18,9 @@ defmodule Wcsp.Accounts do
 
   """
   def list_users do
-    Repo.all(Wcsp.Accounts.User)
+    User
+    |> Repo.all()
+    |> Repo.preload(:avatar)
   end
 
   @doc """
