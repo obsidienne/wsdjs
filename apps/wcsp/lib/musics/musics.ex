@@ -23,7 +23,8 @@ defmodule Wcsp.Musics do
   def search_artist_title(artist_title) do
     Song
     |> where([s], fragment("? || ' - ' || ?", s.artist, s.title) == ^artist_title)
-    |> preload([:user, :art])
+    |> preload([:user, :art, :tops])
+    |> preload([tops: :ranks])
     |> Repo.one
   end
 

@@ -30,6 +30,10 @@ defmodule Wcsp.Periodically do
     Enum.at(list, 6)    
   end
 
+  @months %{1 => "Jan", 2 => "Feb", 3 => "Mar", 4 => "Apr",
+            5 => "May", 6 => "Jun", 7 => "Jul", 8 => "Aug",
+            9 => "Sep", 10 => "Oct", 11 => "Nov", 12 => "Dec"}
+
   defp push_song(seven_response_html, queue) do
 
     artist = ""
@@ -59,6 +63,20 @@ defmodule Wcsp.Periodically do
         song = Map.put(song, :path, "/songs/#{song_in_base.id}")        
         inserted_ts = elem(DateTime.from_naive(song_in_base.inserted_at, "Etc/UTC"), 1) |> DateTime.to_unix                
         song = Map.put(song, :suggested_ts, inserted_ts)
+        tags = []
+        if length(song_in_base.tops) > 0 do
+          top_head = Enum.at(song_in_base.tops, 0)
+          if length(top_head.ranks) > 0 do
+            rank_head = Enum.at(top_head.ranks , 0)
+                    
+            if (rank_head.position < 10) do
+              date = top_head.due_date
+              top = "Top " <> @months[date.month] <> String.slice(Integer.to_string(date.year), 2..3)
+              tags = tags ++ top
+            end            
+          end
+        end
+        song = Map.put(song, :tags, tags)     
       end 
       
       if (:queue.len(queue) > 9) do
