@@ -208,7 +208,7 @@ end
 |> Path.expand(__DIR__)
 |> File.stream!
 |> Stream.drop(1)
-|> CSV.decode(strip_cells: true, headers: [:id, :artist, :title, :inserted_at, :updated_at, :song_url, :cover_public_id, :cover_version, :bpm, :user_id, :genre])
+|> CSV.decode(strip_cells: true, separator: ?;, headers: [:id, :artist, :title, :inserted_at, :updated_at, :song_url, :cover_public_id, :cover_version, :bpm, :user_id, :genre])
 |> Enum.each(&Wcsp.Seeds.store_it(:song, &1))
 
 "data/ranks_anchorstep.csv"
