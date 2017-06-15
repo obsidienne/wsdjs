@@ -1,0 +1,29 @@
+<nav class="glheader container">
+  <div>
+    <%= link "", to: home_path(@conn, :index), class: "logo" %>
+  </div>
+
+
+  <div class="glsearch">
+    <div class="glsearch__filter__wrap">
+      <i class="icon-search-quickjump"></i>
+      <input id="glsearch" placeholder="Search song by artist or title..." type="text" class="form-control glsearch__filter" autocomplete="off" spellcheck="false">
+    </div>
+
+    <div class="glsearch__results">
+    </div>
+  </div>
+
+  <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu_link text-muted" %>
+  <%= link "songs", to: song_path(@conn, :index), class: "glheader__menu_link text-muted" %>
+
+  <%= if @current_user do %>
+    <%= link to: user_path(@conn, :show, @current_user.id) do %>
+      <img class="glheader__user__avatar img-circle cld-responsive" src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@current_user.avatar) %>">
+    <% end %>
+  <% else %>
+    <%= link to: session_path(@conn, :new), data: [turbolinks: false] do %>
+      <div class="glheader__user__signin--container">Sign in</div>
+    <% end %>
+  <% end %>
+</nav>

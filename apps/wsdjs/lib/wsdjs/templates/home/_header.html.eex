@@ -1,4 +1,3 @@
-<div style="position:absolute;z-index:2000;width: 100%;top:0">
 <nav class="glheader container">
   <div>
     <%= link "", to: home_path(@conn, :index), class: "logo" %>
@@ -15,8 +14,8 @@
     </div>
   </div>
 
-  <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu_link text-muted #{active_class(@conn, "top")}" %>
-  <%= link "songs", to: song_path(@conn, :index), class: "glheader__menu_link text-muted #{active_class(@conn, "song")}" %>
+  <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu_link text-muted" %>
+  <%= link "songs", to: song_path(@conn, :index), class: "glheader__menu_link text-muted" %>
 
   <%= if @current_user do %>
     <%= link to: user_path(@conn, :show, @current_user.id) do %>
@@ -28,4 +27,3 @@
     <% end %>
   <% end %>
 </nav>
-</div>
