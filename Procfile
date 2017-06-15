@@ -1,2 +1,2 @@
 web: MIX_ENV=prod mix phx.server
-release: POOL_SIZE=1 mix ecto.heroku_init
+release: POOL_SIZE=1 mix ecto.migrate
