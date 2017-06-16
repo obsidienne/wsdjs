@@ -72,7 +72,7 @@ defmodule Wcsp.Periodically do
             if (rank_head.position < 10) do
               date = top_head.due_date
               top = "Top " <> @months[date.month] <> String.slice(Integer.to_string(date.year), 2..3)
-              tags = tags ++ top
+              tags = tags ++ [top]
             end            
           end
         end
