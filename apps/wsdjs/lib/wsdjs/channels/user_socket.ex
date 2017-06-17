@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.UserSocket do
+defmodule Wsdjs.UserSocket do
   use Phoenix.Socket
 
   ## Channels
