@@ -30,7 +30,7 @@
 
       <div class="miniplayer-art">
         <div class="toggle-player icon-play"></div>
-        <img height="50" width="50" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8//PIfwAJeAO9U/c7OgAAAABJRU5ErkJggg==" />
+        <img height="50" width="50" src="http://res.cloudinary.com/don2kwaju/image/upload/e_blur:300/o_30/v1449163830/wsdjs/brand.jpg" />
       </div>
     </div>
   </li>
