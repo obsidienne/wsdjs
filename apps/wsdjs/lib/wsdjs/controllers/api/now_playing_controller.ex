@@ -9,9 +9,9 @@ defmodule Wsdjs.NowPlayingController do
         |> send_resp(200, Poison.encode!(data, pretty: true))
     end
 
-    def index(conn, _params) do       
-        pid = Process.whereis(Wcsp.Periodically)  
-        list = Wcsp.Periodically.read(pid)
+    def index(conn, _params) do
+        pid = Process.whereis(Wcsp.NowPlaying)
+        list = Wcsp.NowPlaying.read(pid)
         pretty_json conn, list
     end
 end
