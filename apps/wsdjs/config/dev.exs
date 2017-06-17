@@ -21,8 +21,8 @@ config :wsdjs, Wsdjs.Endpoint,
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex)$}
+      ~r{lib/wsdjs/views/.*(ex)$},
+      ~r{lib/wsdjs/templates/.*(eex)$}
     ]
   ]
 
