@@ -10,7 +10,6 @@ defmodule Wcsp.Mixfile do
      lockfile: "../../mix.lock",
      elixir: "~> 1.4.2",
      elixirc_paths: elixirc_paths(Mix.env),
-     build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
      deps: deps()]
@@ -32,6 +31,7 @@ defmodule Wcsp.Mixfile do
     [{:ecto, "~> 2.0"},
      {:postgrex, ">= 0.0.0"},
      {:scrivener_ecto, "~> 1.0"},
+     {:phoenix_pubsub, "~> 1.0"},
      {:csv, "~> 1.4.4"},
      {:httpoison, "~> 0.11.1"},
      {:html_sanitize_ex, "~> 1.0.0"}]

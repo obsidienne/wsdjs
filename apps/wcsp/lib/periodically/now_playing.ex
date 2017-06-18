@@ -5,6 +5,8 @@ defmodule Wcsp.NowPlaying do
   use GenServer
   use HTTPoison.Base
 
+  alias Phoenix.PubSub
+
   def start_link(name \\ nil) do
     queue = :queue.new()
     GenServer.start_link(__MODULE__, queue, [name: name])
@@ -77,6 +79,7 @@ defmodule Wcsp.NowPlaying do
           end
         end
         song = Map.put(song, :tags, tags)
+        PubSub.broadcast Wsdjs.PubSub, "notifications:now_playing", :new_played_song
       end
 
       if (:queue.len(queue) > 9) do

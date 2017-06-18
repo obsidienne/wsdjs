@@ -2,7 +2,7 @@ defmodule Wsdjs.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", GallyUmbrella.Web.RoomChannel
+  channel "notifications:*", Wsdjs.NotificationsChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
