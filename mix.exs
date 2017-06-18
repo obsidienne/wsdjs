@@ -3,17 +3,9 @@ defmodule WcsPlatform.Mixfile do
 
   def project do
     [apps_path: "apps",
-     build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps(),
-     aliases: aliases(),
-     elixir: "~> 1.4.2",
-
-     # docs
-     name: "WCS Platform",
-     version: "0.1.0-dev",
-     source_url: "https://bitbucket.org/radiowcsteam/radiowcs-platform",
-     docs: [extras: ["README.md"]]]
+     aliases: aliases()]
   end
 
   # Dependencies can be Hex packages:
@@ -29,15 +21,12 @@ defmodule WcsPlatform.Mixfile do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps folder
   defp deps do
-    [{:ex_doc, github: "elixir-lang/ex_doc", branch: "master", only: :dev},
-     {:credo, "~> 0.5", only: [:dev, :test]}]
+    []
   end
 
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "ecto.seed"],
-     "ecto.seed": ["run apps/wcsp/priv/repo/seeds.exs"],
+    ["ecto.seed": ["run apps/wcsp/priv/repo/seeds.exs"],
      "ecto.heroku_init": ["ecto.migrate", "ecto.seed"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
-  end
+     "ecto.reset": ["ecto.drop", "ecto.create", "ecto.migrate", "ecto.seed", "ecto.seed"]]
+   end
 end

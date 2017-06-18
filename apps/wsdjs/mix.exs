@@ -11,7 +11,6 @@ defmodule Wsdjs.Mixfile do
      elixir: "~> 1.4.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
-     build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
      deps: deps()]
@@ -35,13 +34,12 @@ defmodule Wsdjs.Mixfile do
   defp deps do
     [{:phoenix, "~> 1.3.0-rc"},
      {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_ecto, "~> 3.0"},
+     {:phoenix_ecto, "~> 3.2"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.13"},
-     {:cowboy, "~> 1.0"},
-
-     {:wcsp, in_umbrella: true}]
+     {:wcsp, in_umbrella: true},
+     {:cowboy, "~> 1.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -51,6 +49,6 @@ defmodule Wsdjs.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    []
+    ["test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end
