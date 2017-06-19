@@ -1,7 +1,5 @@
 use Mix.Config
 
-config :logger, level: :info
-
 config :wcsp, Wcsp.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
