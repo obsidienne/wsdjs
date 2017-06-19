@@ -40,6 +40,7 @@ defmodule Wsdjs.Router do
     resources "/sessions", SessionController, only: [:delete]
   end
 
+
   scope "/", Wsdjs do
     pipe_through :browser # Use the default browser stack
 
@@ -50,6 +51,7 @@ defmodule Wsdjs.Router do
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
     resources "/sessions", SessionController, only: [:new, :create]
+    get "/signin/:token", SessionController, :show, as: :signin
   end
 
   scope "/api", as: :api, alias: :Wsdjs do

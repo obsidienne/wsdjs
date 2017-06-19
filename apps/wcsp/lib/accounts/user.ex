@@ -22,6 +22,7 @@ defmodule Wcsp.Accounts.User do
     has_one :avatar, Accounts.Avatar
     has_many :song_opinions, Musics.Opinion
     has_many :votes, Trendings.Vote
+    has_many :auth_tokens, Accounts.AuthToken
 
     timestamps()
   end
