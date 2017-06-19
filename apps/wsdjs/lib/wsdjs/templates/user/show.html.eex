@@ -1,6 +1,9 @@
+<%= render "_header.html", conn: @conn, current_user: @current_user %> 
+
+<br/>
+<br/>
+
 <main>
-  <header class="hero">
-  </header>
 
   <div class="user-view">
 
@@ -11,25 +14,25 @@
   <h1 class="profile-name"><%= @user.name %></h1>
 </div>
 
-
-<div class="profile-item">
-  <div class="profile-title"><strong>Email :</strong> <%= @user.email %></div>
-</div>
-
-<div class="profile-item">
-  <div class="profile-title"><strong>Dj name :</strong> <%= @user.djname %></div>
-</div>
-
-<div class="profile-item">
-  <div class="profile-title"><strong>Country :</strong> <%= @user.user_country %></div>
-</div>
-
-<h1 class="profile-name">Suggested song (<%= length(@songs) %>)</h1>
-<%= render_many  @songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>
-
-</div>
-
-<%= if @current_user do %>
-<%= link "deconnection", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+<%= if user_djname_available?(@user) do %>
+  <div class="profile-item">
+    <div class="profile-title"><strong>Dj name:</strong> <%= @user.djname %></div>
+  </div>
 <% end %>
+
+<%= if user_description_available?(@user) do %>
+  <div class="profile-item">
+    <div class="profile-title"><strong>Description:</strong> <%= @user.description %></div>
+  </div>
+<% end %>
+
+<div class="profile-item">
+  <div class="profile-title"><strong>Country:</strong> <%= @user.user_country %></div>
+</div>
+
+<%= if user_suggested_songs_available?(@songs) do %>
+  <h1 class="profile-name">Suggested song (<%= length(@songs) %>)</h1>
+  <%= render_many  @songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>
+<% end %>
+</div>
 </main>

@@ -15,6 +15,7 @@ defmodule Wcsp.Accounts.User do
     field :user_country, :string
     field :name, :string
     field :djname, :string
+    field :description, :string
 
     has_many :songs, Musics.Song
     has_many :comments, Musics.Comment
@@ -25,7 +26,7 @@ defmodule Wcsp.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname]
+  @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname, :description]
 
   def changeset(struct, params \\ %{}) do
     struct
