@@ -16,46 +16,8 @@ defmodule Wsdjs.MagicLink do
   def provide_token(nil), do: {:error, :not_found}
 
   def provide_token(email) when is_binary(email) do
-    Wcsp.Accounts.get_user_magic_link_token(email)
+    Wcsp.Accounts.get_user_by_email(email)
     |> send_token()
-  end
-
-  def provide_token(user = %Wcsp.Accounts.User{}) do
-    send_token(user)
-  end
-
-  @doc """
-    Checks the given token.
-  """
-  def verify_magic_link(value) do
-    AuthToken
-    |> where([t], t.value == ^value)
-    |> where([t], t.inserted_at > datetime_add(^Ecto.DateTime.utc, ^(@token_max_age * -1), "second"))
-    |> Repo.one()
-    |> verify_token()
-  end
-
-  # Unexpired token could not be found.
-  defp verify_token(nil), do: {:error, :invalid}
-
-  # Loads the user and deletes the token as it is now used once.
-  defp verify_token(token) do
-    token =
-      token
-      |> Repo.preload(:user)
-      |> Repo.delete!
-
-    user_id = token.user.id
-
-    # verify the token matching the user id
-    case Token.verify(Endpoint, "user", token.value, max_age: @token_max_age) do
-      {:ok, ^user_id} ->
-        {:ok, token.user}
-
-      # reason can be :invalid or :expired
-      {:error, reason} ->
-        {:error, reason}
-    end
   end
 
   # User could not be found by email.
@@ -71,10 +33,40 @@ defmodule Wsdjs.MagicLink do
     {:ok, user}
   end
 
-  # Creates a new token for the given user and returns the token value.
+  # Creates a new token, store it in the DB for the given user and returns the token value.
   defp create_token(user) do
-    changeset = Wcsp.AuthToken.changeset(%Wcsp.Accounts.AuthToken{}, user)
-    auth_token = Repo.insert!(changeset)
-    auth_token.value
+    auth_token = Phoenix.Token.sign(Endpoint, "user", user.id)
+    Wcsp.Accounts.set_magic_link_token(user, auth_token)
+    auth_token
+  end
+
+
+  @doc """
+    Checks the given token.
+  """
+  def verify_magic_link(value) do
+    Wcsp.Accounts.get_magic_link_token(value)
+    |> verify_token()
+  end
+
+  # Unexpired token could not be found.
+  defp verify_token(nil), do: {:error, :invalid}
+
+  # Loads the user and deletes the token as it is now used once.
+  defp verify_token(token) do
+    IO.inspect token
+    Wcsp.Accounts.delete_magic_link_token!(token)
+
+    user_id = token.user.id
+    IO.puts user_id
+    # verify the token matching the user id
+    case Token.verify(Endpoint, "user", token.value, max_age: @token_max_age) do
+      {:ok, ^user_id} ->
+        {:ok, token.user}
+
+      # reason can be :invalid or :expired
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 end

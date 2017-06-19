@@ -23,7 +23,7 @@ defmodule Wsdjs.SessionController do
     Sets the given user as `current_user` and updates the session.
   """
   def show(conn, %{"token" => token}) do
-    case MagicLink.verify_magic_link(token) do
+    case Wsdjs.MagicLink.verify_magic_link(token) do
       {:ok, user} ->
         conn
         |> assign(:current_user, user)
