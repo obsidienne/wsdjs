@@ -11,6 +11,16 @@ defmodule Wsdjs.NotificationsChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
+  def handle_in("played_song_list", _, socket) do
+    pid = Process.whereis(Wcsp.NowPlaying)
+    list = Wcsp.NowPlaying.read(pid)
+    json = Poison.encode!(list)
+
+    push socket, "new_played_song", %{data: json}
+
+    {:noreply, socket}
+  end
+
   def handle_info(:after_join, socket) do
     pid = Process.whereis(Wcsp.NowPlaying)
     list = Wcsp.NowPlaying.read(pid)
