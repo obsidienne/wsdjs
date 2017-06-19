@@ -67,7 +67,7 @@ defmodule Wcsp.NowPlaying do
             rank_head = Enum.at(top_head.ranks , 0)
 
             if (rank_head.position < 10) do
-              top = "Top " <> Timex.format(top_head.due_date, "%b%C", :strftime)
+              top = "Top " <> Timex.format!(top_head.due_date, "%b%y", :strftime)
               tags = tags ++ [top]
             end
           end
