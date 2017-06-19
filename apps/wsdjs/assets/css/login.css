@@ -1,20 +1,15 @@
-html.login {
-  height: 100%;
-  width: 100%;
+body.login .container {
+  height: 100vh;
 }
 
-html.login body {
-  height: 100%;
-  width: 100%;
+body.login body {
   margin: 0;
-  padding: 0;
+}
+
+body.login main {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-}
-
-html.login main {
-  width: 30%;
+  height: calc(100vh - 53px);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="login" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -13,28 +13,29 @@
         render(Wsdjs.LayoutView, "meta.html", assigns) %>
   </head>
 
-  <body data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
-    <nav class="glheader container">
-      <%= link "", to: home_path(@conn, :index), class: "logo" %>
-    </nav>
+  <body class="login" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
+    <div class="container">
+      <nav>
+        <%= link "", to: home_path(@conn, :index), class: "logo" %>
+      </nav>
 
+      <%= render @view_module, @view_template, assigns %>
 
-    <%= render @view_module, @view_template, assigns %>
+      <%= render "_player.html", conn: @conn %>
 
-    <%= render "_player.html", conn: @conn %>
+      <div id="notifier-container" class="notifier-container">
+        <%= if get_flash(@conn, :info) do %>
+        <div id="alert-info" class="notifier info" role="alert">
+          <h2 class="notifier-title"><%= get_flash(@conn, :info) %></h2>
+        </div>
+        <% end %>
 
-    <div id="notifier-container" class="notifier-container">
-      <%= if get_flash(@conn, :info) do %>
-      <div id="alert-info" class="notifier info" role="alert">
-        <h2 class="notifier-title"><%= get_flash(@conn, :info) %></h2>
+        <%= if get_flash(@conn, :error) do %>
+        <div id="alert-danger" class="notifier danger" role="alert">
+          <h2 class="notifier-title"><%= get_flash(@conn, :error) %></h2>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-
-      <%= if get_flash(@conn, :error) do %>
-      <div id="alert-danger" class="notifier danger" role="alert">
-        <h2 class="notifier-title"><%= get_flash(@conn, :error) %></h2>
-      </div>
-      <% end %>
     </div>
   </body>
 </html>
