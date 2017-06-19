@@ -1,8 +1,8 @@
 <main>
   <%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
     <div class="form-group">
-      <%= text_input f, :email, placeholder: "email", class: "form-control" %>
+      <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email" %>
     </div>
-    <%= submit "Send magic link", class: "btn btn-primary" %>
+    <%= submit "Email me a link to sign in", class: "btn btn-primary" %>
   <% end %>
 </main>

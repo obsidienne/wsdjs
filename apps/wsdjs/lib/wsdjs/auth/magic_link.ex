@@ -54,11 +54,10 @@ defmodule Wsdjs.MagicLink do
 
   # Loads the user and deletes the token as it is now used once.
   defp verify_token(token) do
-    IO.inspect token
     Wcsp.Accounts.delete_magic_link_token!(token)
 
     user_id = token.user.id
-    IO.puts user_id
+
     # verify the token matching the user id
     case Token.verify(Endpoint, "user", token.value, max_age: @token_max_age) do
       {:ok, ^user_id} ->

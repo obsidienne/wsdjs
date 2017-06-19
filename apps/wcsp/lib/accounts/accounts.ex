@@ -50,11 +50,6 @@ defmodule Wcsp.Accounts do
     |> Repo.preload(:avatar)
   end
 
-  def get_user_magic_link_token(email) do
-    User
-    |> Repo.get_by(email: email)
-  end
-
   def set_magic_link_token(user = %User{}, token) do
     %AuthToken{}
     |> AuthToken.changeset(%{value: token, user_id: user.id})

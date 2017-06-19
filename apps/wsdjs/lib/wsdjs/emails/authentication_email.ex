@@ -10,8 +10,8 @@ defmodule Wsdjs.AuthenticationEmail do
     new_email()
     |> to(user.email)
     |> from("info@myapp.com")
-    |> subject("Your login link")
+    |> subject("Sign in to World Swing Deejays")
     |> assign(:token, token_value)
-    |> render("login_link.text")
+    |> render(:login_link)
   end
 end
