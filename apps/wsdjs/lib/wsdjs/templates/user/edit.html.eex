@@ -1,0 +1,30 @@
+<%= render "_header.html", conn: @conn, current_user: @current_user %> 
+
+<br/>
+<br/>
+
+<main>
+
+
+
+  <div class="user-view">
+
+<%= form_for @changeset, user_path(@conn, :index), fn f -> %>
+
+    <div class="form-group">
+      <%= text_input f, :name, placeholder: "Name", class: "form-control", value: @user.name %>
+    </div>
+    <div class="form-group">
+      <%= text_input f, :djname, placeholder: "Dj name", class: "form-control", value: @user.djname %>
+    </div>
+    <div class="form-group">
+      <%= text_input f, :email, placeholder: "email", class: "form-control", value: @user.email %>
+    </div>
+    <div class="form-group">
+      <%= text_input f, :description, placeholder: "Description", class: "form-control", value: @user.description %>
+    </div>
+    <%= submit "Update", class: "btn btn-primary" %>
+<% end %>
+
+</div>
+</main>

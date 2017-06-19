@@ -25,4 +25,8 @@ defmodule Wsdjs.UserHelper do
     length(songs) > 0
   end
 
+  def can_edit_page?(user, current_user) do
+    current_user == user
+  end
+
 end
