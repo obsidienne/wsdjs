@@ -34,6 +34,7 @@ defmodule Wcsp.Mixfile do
      {:phoenix_pubsub, "~> 1.0"},
      {:csv, "~> 1.4.4"},
      {:httpoison, "~> 0.11.1"},
+     {:timex, "~> 3.0"},
      {:html_sanitize_ex, "~> 1.0.0"}]
   end
 

@@ -3,6 +3,7 @@ defmodule Wcsp.NowPlaying do
   require DateTime
 
   use GenServer
+  use Timex
   use HTTPoison.Base
 
   alias Phoenix.PubSub
@@ -32,12 +33,7 @@ defmodule Wcsp.NowPlaying do
     Enum.at(list, 6)
   end
 
-  @months %{1 => "Jan", 2 => "Feb", 3 => "Mar", 4 => "Apr",
-            5 => "May", 6 => "Jun", 7 => "Jul", 8 => "Aug",
-            9 => "Sep", 10 => "Oct", 11 => "Nov", 12 => "Dec"}
-
   defp push_song(seven_response_html, queue) do
-
     artist = ""
     title = ""
     if (:queue.len(queue) > 0) do
@@ -63,8 +59,7 @@ defmodule Wcsp.NowPlaying do
         song = Map.put(song, :suggested_by, song_in_base.user.name)
         song = Map.put(song, :suggested_by_path, "/users/#{song_in_base.user.id}")
         song = Map.put(song, :path, "/songs/#{song_in_base.id}")
-        inserted_ts = elem(DateTime.from_naive(song_in_base.inserted_at, "Etc/UTC"), 1) |> DateTime.to_unix
-        song = Map.put(song, :suggested_ts, inserted_ts)
+        song = Map.put(song, :suggested_ts, Timex.to_unix(song_in_base.inserted_at))
         tags = []
         if length(song_in_base.tops) > 0 do
           top_head = Enum.at(song_in_base.tops, 0)
@@ -72,8 +67,7 @@ defmodule Wcsp.NowPlaying do
             rank_head = Enum.at(top_head.ranks , 0)
 
             if (rank_head.position < 10) do
-              date = top_head.due_date
-              top = "Top " <> @months[date.month] <> String.slice(Integer.to_string(date.year), 2..3)
+              top = "Top " <> Timex.format(top_head.due_date, "%b%C", :sfrftime)
               tags = tags ++ [top]
             end
           end
