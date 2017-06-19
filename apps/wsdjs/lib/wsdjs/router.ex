@@ -23,6 +23,11 @@ defmodule Wsdjs.Router do
     plug Wsdjs.EnsureAuthenticated, handler_fn: :api_call
   end
 
+  if Mix.env == :dev do
+    # If using Phoenix
+    forward "/sent_emails", Bamboo.EmailPreviewPlug
+  end
+
   scope "/", Wsdjs do
     pipe_through [:browser, :browser_auth]
 
@@ -44,7 +49,7 @@ defmodule Wsdjs.Router do
     resources "/home", HomeController, only: [:index]
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
-    resources "/sessions", SessionController, only: [:new, :create]    
+    resources "/sessions", SessionController, only: [:new, :create]
   end
 
   scope "/api", as: :api, alias: :Wsdjs do
@@ -56,7 +61,7 @@ defmodule Wsdjs.Router do
         resources "/comments", CommentController, only: [:create]
       end
       resources "/options", OpinionController, only: [:delete]
-    end    
+    end
   end
 
   scope "/api", as: :api, alias: :Wsdjs do

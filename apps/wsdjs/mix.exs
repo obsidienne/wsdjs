@@ -38,6 +38,7 @@ defmodule Wsdjs.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.13"},
+     {:bamboo, "~> 0.8"},
      {:wcsp, in_umbrella: true},
      {:cowboy, "~> 1.0"}]
   end

@@ -14,6 +14,7 @@ config :wsdjs, Wsdjs.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../assets", __DIR__)]]
 
+config :wsdjs, Wsdjs.Mailer, adapter: Bamboo.LocalAdapter
 
 # Watch static and templates for browser reloading.
 config :wsdjs, Wsdjs.Endpoint,
