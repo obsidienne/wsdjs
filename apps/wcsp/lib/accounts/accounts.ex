@@ -7,6 +7,7 @@ defmodule Wcsp.Accounts do
   alias Wcsp.Repo
 
   alias Wcsp.Accounts.User
+  alias Wcsp.Accounts.AuthToken
 
   @doc """
   Returns the list of users.
@@ -45,7 +46,26 @@ defmodule Wcsp.Accounts do
 
   def get_user_by_email(email) do
     User
-    |> Repo.get_by(email: email)
+    |> Repo.get_by(email: String.downcase(email))
     |> Repo.preload(:avatar)
+  end
+
+  def set_magic_link_token(user = %User{}, token) do
+    %AuthToken{}
+    |> AuthToken.changeset(%{value: token, user_id: user.id})
+    |> Repo.insert!()
+  end
+
+  @token_max_age 1_800
+  def get_magic_link_token(value) do
+    AuthToken
+    |> where([t], t.value == ^value)
+    |> where([t], t.inserted_at > datetime_add(^Ecto.DateTime.utc, ^(@token_max_age * -1), "second"))
+    |> Repo.one()
+    |> Repo.preload(:user)
+  end
+
+  def delete_magic_link_token!(token) do
+    Repo.delete!(token)
   end
 end

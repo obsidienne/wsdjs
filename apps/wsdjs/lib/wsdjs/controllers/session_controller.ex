@@ -8,39 +8,43 @@ defmodule Wsdjs.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email}}) do
-    case login_by_email(conn, email, repo: Repo) do
-      {:ok, conn} ->
+    Wsdjs.MagicLink.provide_token(email)
+
+    # do not leak information about (non-)existing users.
+    # always reply with success message, even though the
+    # user might not exist.
+    conn
+    |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")
+    |> redirect(to: home_path(conn, :index))
+  end
+
+  @doc """
+    Login user via magic link token.
+    Sets the given user as `current_user` and updates the session.
+  """
+  def show(conn, %{"token" => token}) do
+    case Wsdjs.MagicLink.verify_magic_link(token) do
+      {:ok, user} ->
         conn
-        |> put_flash(:info, "Welcome back !")
+        |> assign(:current_user, user)
+        |> put_session(:user_id, user.id)
+        |> configure_session(renew: true)
+        |> put_flash(:info, "You signed in successfully.")
         |> redirect(to: home_path(conn, :index))
-      {:error, _reason, conn} ->
+
+      {:error, _reason} ->
         conn
-        |> put_flash(:error, "Invalid username/password combination")
-        |> render("new.html")
-    end
+        |> put_flash(:error, "The login token is invalid.")
+        |> redirect(to: session_path(conn, :new))
+     end
   end
 
   def delete(conn, _) do
     conn
+    |> assign(:current_user, nil)
     |> configure_session(drop: true)
-    |> redirect(to: session_path(conn, :new))
-  end
-
-  defp login(conn, user) do
-    conn
-    |> assign(:current_user, user)
-    |> put_session(:user_id, user.id)
-    |> configure_session(renew: true)
-  end
-
-  defp login_by_email(conn, email, _opts) do
-    user = if email, do: Wcsp.Accounts.get_user_by_email(email)
-
-    cond do
-      user ->
-        {:ok, login(conn, user)}
-      true ->
-        {:error, :not_found, conn}
-    end
+    |> delete_session(:user_id)
+    |> put_flash(:info, "You logged out successfully. Enjoy your day!")
+    |> redirect(to: home_path(conn, :index))
   end
 end
