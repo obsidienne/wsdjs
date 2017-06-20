@@ -5,15 +5,15 @@
 
 <main>
   <div class="user-view">
-    <%= form_for @changeset, user_path(@conn, :update, @current_user.id), [method: "put"], fn f -> %>
+    <%= form_for @changeset, user_path(@conn, :update, @current_user), fn f -> %>
         <div class="form-group">
-          <%= text_input f, :name, placeholder: "Name", class: "form-control", value: @user.name %>
+          <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= text_input f, :email, placeholder: "email", class: "form-control", value: @user.email, type: "email" %>
+          <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email" %>
         </div>
         <div class="form-group">
-          <%= text_input f, :djname, placeholder: "Dj name", class: "form-control", value: @user.djname %>
+          <%= text_input f, :djname, placeholder: "Dj name", class: "form-control" %>
         </div>
         <div class="form-group">
           <%= textarea f, :description, placeholder: "Description", class: "form-control" %>
