@@ -1,4 +1,4 @@
-<%= render "_header.html", conn: @conn, current_user: @current_user %> 
+<%= render "_header.html", conn: @conn, current_user: @current_user %>
 
 <br/>
 <br/>
@@ -38,4 +38,7 @@
   <%= render_many  @songs ,@view_module, "_suggested_song.html", as: :song, conn: @conn %>
 <% end %>
 </div>
+<%= if @current_user do %>
+<%= link "deconnection", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+<% end %>
 </main>
