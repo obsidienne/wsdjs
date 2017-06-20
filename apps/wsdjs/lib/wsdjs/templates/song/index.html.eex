@@ -5,6 +5,11 @@
     <%= if Wcsp.Musics.Policy.can?(:create_song, @conn.assigns.current_user) do %>
       <a class="btn btn-primary" title="Suggest a song" href="<%= song_path(@conn, :new) %>">Suggest a song</a>
     <% end %>
+
+    <%= form_for @conn, search_path(@conn, :index), [name: :search], fn f -> %>
+      <%= select(f, :genre, Wcsp.Musics.Song.genre) %>
+      <%= submit "Search", class: "btn btn-primary" %>
+    <% end %>
   </div>
 </header>
 
