@@ -14,6 +14,7 @@
   -webkit-user-select: none;
   z-index: 1000;
   padding-top: 5px;
+  flex-wrap: wrap;
 }
 
 .glheader__user__avatar {

@@ -13,6 +13,7 @@ Main components
 -------------------------------- */
 .cd-container {
   position: relative;
+  margin-top: -10em;
 }
 
 /*********************
@@ -28,10 +29,6 @@ Main components
   background: #d7e4ed;
 }
 @media only screen and (min-width: 1170px) {
-  .cd-container {
-    margin-top: 3em;
-    margin-bottom: 3em;
-  }
   .cd-container::before {
     left: 50%;
     margin-left: -2px;

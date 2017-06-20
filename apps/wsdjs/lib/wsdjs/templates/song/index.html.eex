@@ -9,7 +9,7 @@
 </header>
 
 <main role="main">
-  <section class="container-grid">
+  <section class="container-grid songs-container">
     <%= render_many sort_songs(@songs), @view_module, "_hot_song.html", conn: @conn, as: :song %>
   </section>
 </main>

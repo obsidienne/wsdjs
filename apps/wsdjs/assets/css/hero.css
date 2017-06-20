@@ -1,5 +1,5 @@
 .hero {
-  padding-bottom: 24px;
+  padding-bottom: 15em;
   color: inherit;
   background-color: #eeeeee;
   display: block;
@@ -12,4 +12,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.songs-container {
+  margin-top: -10em;
 }
