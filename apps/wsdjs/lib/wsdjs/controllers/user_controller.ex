@@ -17,12 +17,10 @@ defmodule Wsdjs.UserController do
     render conn, "show.html", user: user, songs: songs
   end
 
-  @countries ["EN", "FR", "US"]
-
   def edit(conn, %{"id" => id}) do
     user = Wcsp.Accounts.get_user!(id)
     changeset = Wcsp.Accounts.change_user(user)
-    render conn, "edit.html", user: user, changeset: changeset, countries: @countries
+    render conn, "edit.html", user: user, changeset: changeset
   end
 
   def update(conn, %{"id" => id, "user" => params}) do

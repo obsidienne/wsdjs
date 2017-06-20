@@ -28,9 +28,4 @@ defmodule Wsdjs.UserHelper do
   def can_edit_page?(user, current_user) do
     current_user == user
   end
-
-  def is_equal_user_country?(user_country, country) do
-    user_country == country
-  end
-
 end

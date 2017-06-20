@@ -9,6 +9,11 @@ defmodule Wcsp.Accounts do
   alias Wcsp.Accounts.User
   alias Wcsp.Accounts.AuthToken
 
+  @countries ["EN", "FR", "US"]
+
+  def countries, do: @countries
+
+
   @doc """
   Returns the list of users.
 
