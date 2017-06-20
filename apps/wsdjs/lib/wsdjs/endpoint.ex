@@ -49,11 +49,6 @@ defmodule Wsdjs.Endpoint do
   """
   def load_from_system_env(config) do
     port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
-    host = System.get_env("HOST") || raise "expected the HOST environment variable to be set"
-
-    config = Keyword.put(config, :http, [:inet6, port: port])
-    config = Keyword.put(config, :url, [host: host, port: port])
-
-    {:ok, config}
+    {:ok, Keyword.put(config, :http, [:inet6, port: port])}
   end
 end
