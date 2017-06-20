@@ -57,7 +57,8 @@ defmodule Wcsp.Musics do
   def list_songs(current_user) do
     Song.scoped(current_user)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> Repo.all()
+    |> order_by([desc: :inserted_at])
+    |> Repo.paginate()
   end
 
   @doc """
