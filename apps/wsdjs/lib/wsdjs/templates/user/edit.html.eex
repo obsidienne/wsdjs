@@ -4,27 +4,34 @@
 <br/>
 
 <main>
-
-
-
   <div class="user-view">
-
-<%= form_for @changeset, user_path(@conn, :index), fn f -> %>
-
-    <div class="form-group">
-      <%= text_input f, :name, placeholder: "Name", class: "form-control", value: @user.name %>
-    </div>
-    <div class="form-group">
-      <%= text_input f, :djname, placeholder: "Dj name", class: "form-control", value: @user.djname %>
-    </div>
-    <div class="form-group">
-      <%= text_input f, :email, placeholder: "email", class: "form-control", value: @user.email %>
-    </div>
-    <div class="form-group">
-      <%= text_input f, :description, placeholder: "Description", class: "form-control", value: @user.description %>
-    </div>
-    <%= submit "Update", class: "btn btn-primary" %>
-<% end %>
-
-</div>
+    <%= form_for @changeset, user_path(@conn, :update, @current_user.id), [method: "put"], fn f -> %>    
+        <div class="form-group">
+          <%= text_input f, :name, placeholder: "Name", class: "form-control", value: @user.name %>
+        </div>
+        <div class="form-group">
+          <%= text_input f, :email, placeholder: "email", class: "form-control", value: @user.email, type: "email" %>
+        </div>
+        <div class="form-group">
+          <%= text_input f, :djname, placeholder: "Dj name", class: "form-control", value: @user.djname %>          
+        </div>        
+        <div class="form-group">
+          <%= textarea f, :description, placeholder: "Description", class: "form-control", value: @user.description %>
+        </div>
+        <div class="form-group">
+        Country :
+        <select id="user_country" name="user[user_country]">
+        <%= for country <- @countries do %>
+          <%= if is_equal_user_country?(@user.user_country, country) do %>
+            <option value="<%= country %>" selected><%= country %></option>
+          <% else %>
+            <option value="<%= country %>"><%= country %></option>
+          <% end %>
+        <% end %>
+          
+        </select>
+        </div>
+        <%= submit "Update", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </main>

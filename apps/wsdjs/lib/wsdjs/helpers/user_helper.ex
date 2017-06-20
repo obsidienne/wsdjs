@@ -29,4 +29,8 @@ defmodule Wsdjs.UserHelper do
     current_user == user
   end
 
+  def is_equal_user_country?(user_country, country) do
+    user_country == country
+  end
+
 end

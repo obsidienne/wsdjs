@@ -55,4 +55,5 @@ defmodule Wcsp.Accounts.User do
   def scoped(nil) do
     from u in Accounts.User, where: u.admin == false
   end
+
 end

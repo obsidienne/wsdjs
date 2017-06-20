@@ -68,4 +68,5 @@ defmodule Wcsp.Accounts do
   def delete_magic_link_token!(token) do
     Repo.delete!(token)
   end
+
 end
