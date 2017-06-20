@@ -6,6 +6,12 @@
   display: inline-block;
 }
 
+@media (max-width:480px) {
+  .logo {
+    width: 50px;
+  }
+}
+
 .glheader {
   box-sizing: border-box;
   display: flex;
@@ -14,7 +20,6 @@
   -webkit-user-select: none;
   z-index: 1000;
   padding-top: 5px;
-  flex-wrap: wrap;
 }
 
 .glheader__user__avatar {
