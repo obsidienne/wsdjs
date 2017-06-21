@@ -3,7 +3,7 @@ import socket from "../socket"
 export default class Radio {
   mount() {
     var self = this;
-    var radio = new Audio("//37.58.75.166:8384/stream?icy=http");
+    var radio = new Audio("http://37.58.75.166:8384/stream?icy=http");
 
     // Now that you are connected, you can join channels with a topic:
     let channel = socket.channel("notifications:now_playing", {})
