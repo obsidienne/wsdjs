@@ -6,7 +6,7 @@
 <main>
   <div class="user-view">
     <div class="form-group">  
-      <a href="#" id="upload_widget_opener" class="btn btn-primary">Upload multiple images</a>        
+      <button id="upload_widget_opener" class="btn btn-primary">Upload avatar</button>
     </div>
     
     <%= form_for @changeset, user_path(@conn, :update, @current_user), fn f -> %>

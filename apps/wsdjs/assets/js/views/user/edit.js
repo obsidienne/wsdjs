@@ -18,7 +18,8 @@ export default class View extends MainView {
             }, 
             function(error, result) { 
                 console.log(error, result); 
-            });
+            });                    
+            return false;
         }, false);
     }
 }
