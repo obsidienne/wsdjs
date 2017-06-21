@@ -15,8 +15,8 @@ export default class View extends MainView {
     var clientHeight = document.documentElement.clientHeight;
     var scrollPos = window.pageYOffset;
 
-    var remaining = pageHeight - scrollPos + clientHeight
-    console.log(`${pageHeight} - ${scrollPos} + ${clientHeight} = ${remaining}`);
+    var remaining = pageHeight - (scrollPos + clientHeight)
+    console.log(`${pageHeight} - (${scrollPos} + ${clientHeight}) = ${remaining}`);
     if (remaining < 150) {
       console.log("scroll bottom: need refresh");
     } else {
