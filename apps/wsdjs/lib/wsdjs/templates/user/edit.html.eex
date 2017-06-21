@@ -5,6 +5,30 @@
 
 <main>
   <div class="user-view">
+  <div class="form-group">  
+    <a href="#" id="upload_widget_opener" class="btn btn-primary">Upload multiple images</a>
+    <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
+    <script type="text/javascript">  
+      document.getElementById("upload_widget_opener").addEventListener("click", function() {
+        cloudinary.openUploadWidget({ 
+          upload_preset:"music_cover_staging",
+          form:".form_song",
+          field_name:"song[cover]",
+          thumbnails:".cover-container",
+          thumbnail_transformation:"t_cover",
+          cloud_name:"don2kwaju",
+          theme:"minimal",
+          sources:["local"],
+          multiple:false,
+          cropping: 'server',
+          client_allowed_formats:["jpg"]
+        }, 
+          function(error, result) { console.log(error, result); });
+      }, false);
+    </script>
+  </div>
+    
+
     <%= form_for @changeset, user_path(@conn, :update, @current_user), fn f -> %>
         <div class="form-group">
           <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
