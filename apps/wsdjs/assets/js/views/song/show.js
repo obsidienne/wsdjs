@@ -10,7 +10,7 @@ export default class View extends MainView {
     this._intlDate();
     this._submit();
     // Specific logic here
-    console.log('SongIndexView mounted');
+    console.log('SongShowView mounted');
   }
 
   _intlDate() {

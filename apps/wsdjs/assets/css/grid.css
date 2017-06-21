@@ -29,6 +29,5 @@
   .container-grid .page-header {
     grid-column-start: 1;
     grid-column-end:   5;
-    padding-top: 50px;
   }
 }

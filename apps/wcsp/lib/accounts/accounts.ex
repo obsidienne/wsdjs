@@ -9,6 +9,11 @@ defmodule Wcsp.Accounts do
   alias Wcsp.Accounts.User
   alias Wcsp.Accounts.AuthToken
 
+  @countries ["EN", "FR", "US"]
+
+  def countries, do: @countries
+
+
   @doc """
   Returns the list of users.
 
@@ -48,6 +53,10 @@ defmodule Wcsp.Accounts do
     User
     |> Repo.get_by(email: String.downcase(email))
     |> Repo.preload(:avatar)
+  end
+
+  def change_user(%User{} = user) do
+    User.changeset(user, %{})
   end
 
   def set_magic_link_token(user = %User{}, token) do

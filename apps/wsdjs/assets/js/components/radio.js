@@ -32,6 +32,7 @@ export default class Radio {
         }
       }
     });
+    console.log('Radio component mounted');
   }
 
   refresh(payload) {

@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu_link text-muted" %>
+  <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu_link text-muted active" %>
   <%= link "songs", to: song_path(@conn, :index), class: "glheader__menu_link text-muted" %>
 
   <%= if @current_user do %>

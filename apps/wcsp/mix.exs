@@ -19,7 +19,7 @@ defmodule Wcsp.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [extra_applications: [:logger, :httpoison],
+    [extra_applications: [:logger],
      mod: {Wcsp.Application, []}]
   end
 
