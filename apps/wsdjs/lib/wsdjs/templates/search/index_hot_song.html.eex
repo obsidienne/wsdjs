@@ -1,0 +1,1 @@
+<%= render_many @songs, @view_module, "_hot_song.html", conn: @conn, as: :song %>

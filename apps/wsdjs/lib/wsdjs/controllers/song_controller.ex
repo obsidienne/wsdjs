@@ -18,9 +18,12 @@ defmodule Wsdjs.SongController do
   """
   def index(conn, _params) do
     current_user = conn.assigns[:current_user]
-    songs = Wcsp.Musics.list_songs(current_user)
+    page = Wcsp.Musics.paginate_songs(current_user)
 
-    render conn, "index.html", songs: songs
+    conn
+    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
+    |> put_resp_header("page-number", Integer.to_string(page.page_number))
+    |> render "index.html", songs: page.entries, page_number: page.page_number, total_pages: page.total_pages
   end
   @doc """
   No authZ needed, this function does not modify the database

@@ -1,0 +1,32 @@
+<article class="hot-song card" data-id="<%= @song.id %>">
+  <a href="<%= @song.url %>" class="hot-song-heading" target="_blank" >
+    <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
+    <h4 class="song-art-overlay">
+      <span class="label label-default"><%= @song.genre %></span>
+      <%= if @song.bpm > 0 do %>
+      <span class="label label-primary"><%= @song.bpm %> bpm</span>
+      <% end %>
+      <span class="song-play"> </span>
+    </h4>
+  </a>
+
+  <div class="hot-song-body">
+    <h1 class="hot-song-title"><%= link @song.title, to: song_path(@conn, :show, @song.id) %></h1>
+    <h5 class="artist-name"><%= @song.artist %></h5>
+
+    <h6 class="text-muted"><%= gettext "by" %> <%= proposed_by_link(@conn, @song) %></h6>
+  </div>
+
+  <div class="hot-song-footer text-muted">
+    <div class="opinions-container">
+      <%= opinion_link("down", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+      <%= opinion_link("like", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+      <%= opinion_link("up", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+    </div>
+
+    <a href="<%= song_path(@conn, :show, @song) %>">
+      <i class="<%= comment_class(@song) %>"></i>
+    </a>
+
+  </div>
+</article>

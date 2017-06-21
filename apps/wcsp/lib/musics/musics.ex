@@ -54,11 +54,11 @@ defmodule Wcsp.Musics do
   @doc """
   Returns the list of songs scoped by current_user.
   """
-  def list_songs(current_user) do
+  def paginate_songs(current_user, paginate_params \\ %{}) do
     Song.scoped(current_user)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by([desc: :inserted_at])
-    |> Repo.paginate()
+    |> Repo.paginate(paginate_params)
   end
 
   @doc """
