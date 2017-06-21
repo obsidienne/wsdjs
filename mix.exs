@@ -1,4 +1,4 @@
-defmodule WcsPlatform.Mixfile do
+defmodule Wsdjs.Umbrella.Mixfile do
   use Mix.Project
 
   def project do
@@ -25,7 +25,7 @@ defmodule WcsPlatform.Mixfile do
   end
 
   defp aliases do
-    ["ecto.seed": ["run apps/wcsp/priv/repo/seeds.exs"],
+    ["ecto.seed": ["run apps/wsdjs/priv/repo/seeds.exs"],
      "ecto.heroku_init": ["ecto.migrate", "ecto.seed"],
      "ecto.reset": ["ecto.drop", "ecto.create", "ecto.migrate", "ecto.seed", "ecto.seed"]]
    end

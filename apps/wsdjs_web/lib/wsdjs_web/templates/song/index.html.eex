@@ -1,0 +1,16 @@
+<header class="hero hot-hero">
+  <%= render "_header.html", conn: @conn, current_user: @current_user %>
+
+  <div class="container">
+    <%= if Wsdjs.Musics.Policy.can?(:create_song, @conn.assigns.current_user) do %>
+      <a class="btn btn-primary" title="Suggest a song" href="<%= song_path(@conn, :new) %>">Suggest a song</a>
+    <% end %>
+
+  </div>
+</header>
+
+<main role="main">
+  <section id="song-list" class="container-grid songs-container" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>">
+    <%= render_many sort_songs(@songs), @view_module, "_hot_song.html", conn: @conn, as: :song %>
+  </section>
+</main>

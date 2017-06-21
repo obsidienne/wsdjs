@@ -1,0 +1,21 @@
+<meta name="description" content="">
+<meta name="author" content="">
+
+<%= if user = @conn.assigns[:current_user] do %>
+<%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", user.id) %>
+<% end %>
+
+<title>Hello Wsdjs!</title>
+
+<meta property="og:url" content="<%= Wsdjs.Web.Endpoint.url %><%= @conn.request_path %>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="<%= @song.title %>">
+<meta property="og:image" content="<%= song_art_href(@song.art) %>">
+<meta property="og:description" content="<%= song_full_description(@song) %>">
+<meta property="og:site_name" content="worldswingdjs">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:url" content="<%= Wsdjs.Web.Endpoint.url %><%= @conn.request_path %>">
+<meta name="twitter:title" content="<%= @song.title %>">
+<meta name="twitter:description" content="<%= song_full_description(@song) %>">
+<meta name="twitter:image" content="<%= song_art_href(@song.art) %>">
