@@ -3,7 +3,7 @@ import socket from "../socket"
 export default class Radio {
   mount() {
     var self = this;
-    var radio = new Audio("http://37.58.75.166:8384/stream?icy=http");
+    var radio = new Audio("//37.58.75.166:8384/stream?icy=http");
 
     // Now that you are connected, you can join channels with a topic:
     let channel = socket.channel("notifications:now_playing", {})
@@ -21,7 +21,7 @@ export default class Radio {
           radio.pause();
           e.target.classList.add("icon-play");
           e.target.classList.remove("icon-pause");
-          document.querySelector(".miniplayer-art img").src = 'http://res.cloudinary.com/don2kwaju/image/upload/e_blur:300/o_30/v1449163830/wsdjs/brand.jpg';
+          document.querySelector(".miniplayer-art img").src = '//res.cloudinary.com/don2kwaju/image/upload/e_blur:300/o_30/v1449163830/wsdjs/brand.jpg';
           document.querySelector(".miniplayer-title").innerText = '';
           document.querySelector(".miniplayer-artist").innerText = '';
         } else { // pause to play
