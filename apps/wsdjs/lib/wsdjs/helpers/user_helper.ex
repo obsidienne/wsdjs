@@ -1,6 +1,6 @@
 defmodule Wsdjs.UserHelper do
-  @base_url "https://res.cloudinary.com/don2kwaju/image/upload/w_auto/c_scale/"
-  @missing_avatar "http://res.cloudinary.com/don2kwaju/image/upload/v1450094305/wsdjs/missing_avatar.jpg"
+  @base_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_scale/"
+  @missing_avatar "//res.cloudinary.com/don2kwaju/image/upload/v1450094305/wsdjs/missing_avatar.jpg"
 
   def avatar_href(%Wcsp.Accounts.Avatar{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @base_url <> "v#{version}/" <> "#{cld_id}.jpg"
