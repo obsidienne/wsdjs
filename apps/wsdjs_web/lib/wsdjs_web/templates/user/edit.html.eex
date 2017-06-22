@@ -15,8 +15,8 @@
    
     <%= form_for @changeset, user_path(@conn, :update, @current_user), fn f -> %>
         <div id="divToChange">
-          <%= hidden_input f, :cl_public_id, class: "form-control", value: "wsdjs/missing_avatar" %>
-          <%= hidden_input f, :cl_version, class: "form-control", value: "1450094305" %>
+          <%= hidden_input f, :cl_public_id, class: "form-control" %>
+          <%= hidden_input f, :cl_version, class: "form-control" %>
         </div>
         
         <div class="form-group">

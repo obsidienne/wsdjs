@@ -44,17 +44,17 @@ defmodule Wsdjs.Web.UserController do
       "cld_id" => cl_public_id,
       "version" => cl_version
     }
-    cl_version_integer = String.to_integer cl_version
-         
+
     changeset = Wsdjs.Accounts.User.changeset(current_user, params)
-    avatar = Ecto.Changeset.change(%Wsdjs.Accounts.Avatar{}, cld_id: cl_public_id, version: cl_version_integer)    
-    changeset = Ecto.Changeset.put_assoc(changeset, :avatar, avatar)
-
+    IO.inspect cl_version
+    cl_version_length = String.length cl_version
+    cl_public_id_length = String.length cl_public_id
+    if cl_version_length > 0 && cl_public_id_length > 0 do
+      cl_version_integer = String.to_integer cl_version
+      avatar = Ecto.Changeset.change(%Wsdjs.Accounts.Avatar{}, cld_id: cl_public_id, version: cl_version_integer)    
+      changeset = Ecto.Changeset.put_assoc(changeset, :avatar, avatar)
+    end
     
-    IO.inspect avatar
-
-    
-    IO.inspect changeset
     case Wsdjs.Repo.update(changeset) do
       {:ok, user} ->
         conn
