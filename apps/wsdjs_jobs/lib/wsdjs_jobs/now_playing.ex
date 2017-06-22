@@ -102,7 +102,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
     do
       ["Top " <> Timex.format!(top_head.due_date, "%b%y", :strftime)]
     else
-      []
+      :error -> []
     end
   end
 
