@@ -3,7 +3,7 @@ defmodule Wsdjs.Repo.Migrations.Users do
 
   def change do
     alter table(:users) do
-	  	add :description, :string
-	  end
+      add :description, :string
+    end
   end
 end

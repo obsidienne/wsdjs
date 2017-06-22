@@ -99,9 +99,12 @@ defmodule Wsdjs.Musics do
 
 
   def create_comment(user, song_id, params) do
-    song = Song.scoped(user) |> Repo.get!(song_id)
+    song = user
+           |> Song.scoped()
+           |> Repo.get!(song_id)
 
-    Comment.changeset(%Comment{}, params)
+    %Comment{}
+    |> Comment.changeset(params)
     |> put_assoc(:user, user)
     |> put_assoc(:song, song)
     |> Repo.insert

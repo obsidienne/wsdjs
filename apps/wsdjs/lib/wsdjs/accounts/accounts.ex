@@ -59,7 +59,7 @@ defmodule Wsdjs.Accounts do
     User.changeset(user, %{})
   end
 
-  def set_magic_link_token(user = %User{}, token) do
+  def set_magic_link_token(%User{} = user, token) do
     %AuthToken{}
     |> AuthToken.changeset(%{value: token, user_id: user.id})
     |> Repo.insert!()

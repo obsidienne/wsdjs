@@ -14,7 +14,8 @@ defmodule Wsdjs.Web.MagicLink do
   def provide_token(nil), do: {:error, :not_found}
 
   def provide_token(email) when is_binary(email) do
-    Wsdjs.Accounts.get_user_by_email(email)
+    email
+    |> Wsdjs.Accounts.get_user_by_email()
     |> send_token()
   end
 
@@ -43,7 +44,8 @@ defmodule Wsdjs.Web.MagicLink do
     Checks the given token.
   """
   def verify_magic_link(value) do
-    Wsdjs.Accounts.get_magic_link_token(value)
+    value
+    |> Wsdjs.Accounts.get_magic_link_token()
     |> verify_token()
   end
 

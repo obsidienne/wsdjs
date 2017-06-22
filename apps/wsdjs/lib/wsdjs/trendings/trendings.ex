@@ -93,7 +93,8 @@ defmodule Wsdjs.Trendings do
       |> Repo.update()
     end)
 
-    Top.next_step_changeset(top, %{status: next_step})
+    top
+    |> Top.next_step_changeset(%{status: next_step})
     |> Repo.update()
   end
 
@@ -116,7 +117,8 @@ defmodule Wsdjs.Trendings do
       |> Repo.update_all(set: [votes: val])
     end)
 
-    Top.next_step_changeset(top, %{status: next_step})
+    top
+    |> Top.next_step_changeset(%{status: next_step})
     |> Repo.update()
   end
 
@@ -134,13 +136,15 @@ defmodule Wsdjs.Trendings do
     where: q.top_id == ^top.id and p.id == q.id,
     select: %{id: q.id, pos: p.rn}
 
-    Repo.all(query)
+    query
+    |> Repo.all()
     |> Enum.each(fn(rank) ->
       from(p in Wsdjs.Trendings.Rank, where: [id: ^rank.id])
       |> Repo.update_all(set: [position: rank.pos])
     end)
 
-    Top.next_step_changeset(top, %{status: next_step})
+    top
+    |> Top.next_step_changeset(%{status: next_step})
     |> Repo.update()
   end
 
@@ -159,9 +163,10 @@ defmodule Wsdjs.Trendings do
     top = get_top(user, top_id)
     top = Repo.preload top, votes: list_votes(top, user)
 
-    new_votes = Map.keys(votes_param)
-    |> Enum.reject(fn(v) -> votes_param[v] == "0" end)
-    |> Enum.map(&Vote.get_or_build(top, user.id, &1, votes_param[&1]))
+    new_votes = votes_param
+                |> Map.keys()
+                |> Enum.reject(fn(v) -> votes_param[v] == "0" end)
+                |> Enum.map(&Vote.get_or_build(top, user.id, &1, votes_param[&1]))
 
     top
     |> Ecto.Changeset.change

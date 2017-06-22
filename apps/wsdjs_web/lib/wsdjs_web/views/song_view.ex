@@ -27,7 +27,7 @@ defmodule Wsdjs.Web.SongView do
     Enum.sort_by(songs, fn (dt) -> Date.to_erl(dt.inserted_at) end, &>=/2)
   end
 
-  def proposed_by_link(conn, song = %Wsdjs.Musics.Song{}) do
+  def proposed_by_link(conn, %Wsdjs.Musics.Song{} = song) do
     Phoenix.HTML.Link.link(proposed_by_display_name(song.user),
                            to: user_path(conn, :show, song.user.id),
                            title: "#{song.user.name}")
