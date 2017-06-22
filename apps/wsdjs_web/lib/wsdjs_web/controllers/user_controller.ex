@@ -12,23 +12,51 @@ defmodule Wsdjs.Web.UserController do
   """
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
-    user = Wsdjs.Accounts.get_user!(id)
+    user = Wsdjs.Accounts.get_user!(id)    
     songs = Wsdjs.Musics.list_songs(current_user, user)
     render conn, "show.html", user: user, songs: songs
   end
 
   def edit(conn, %{"id" => id}) do
     user = Wsdjs.Accounts.get_user!(id)
-    changeset = Wsdjs.Accounts.change_user(user)
+    changeset = Wsdjs.Accounts.change_user(user)    
     render conn, "edit.html", user: user, changeset: changeset
   end
 
-  def update(conn, %{"id" => id, "user" => params}) do
+  def update(conn, %{"id" => id, "user" => %{
+    "description" => description, 
+    "djname" => djname,
+    "name" => name,
+    "user_country" => user_country,
+    "email" => email,
+    "cl_version" => cl_version,
+    "cl_public_id" => cl_public_id 
+    }}) do
+    params = %{
+      "description" => description, 
+      "djname" => djname,
+      "name" => name,
+      "user_country" => user_country,
+      "email" => email
+    }
     current_user = conn.assigns[:current_user]
+    avatar_params = %{
+      "cld_id" => cl_public_id,
+      "version" => cl_version
+    }
+    cl_version_integer = String.to_integer cl_version
+         
     changeset = Wsdjs.Accounts.User.changeset(current_user, params)
+    avatar = Ecto.Changeset.change(%Wsdjs.Accounts.Avatar{}, cld_id: cl_public_id, version: cl_version_integer)    
+    changeset = Ecto.Changeset.put_assoc(changeset, :avatar, avatar)
+
+    
+    IO.inspect avatar
+
+    
+    IO.inspect changeset
     case Wsdjs.Repo.update(changeset) do
       {:ok, user} ->
-        IO.inspect user
         conn
         |> put_flash(:info, "Profile updated")
         |> redirect(to: user_path(conn, :show, current_user))

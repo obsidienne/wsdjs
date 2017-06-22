@@ -19,7 +19,7 @@ defmodule Wsdjs.Accounts.User do
 
     has_many :songs, Musics.Song
     has_many :comments, Musics.Comment
-    has_one :avatar, Accounts.Avatar
+    has_one :avatar, Accounts.Avatar, on_replace: :delete
     has_many :song_opinions, Musics.Opinion
     has_many :votes, Trendings.Vote
     has_many :auth_tokens, Accounts.AuthToken
