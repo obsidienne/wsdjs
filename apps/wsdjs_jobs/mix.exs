@@ -1,16 +1,15 @@
-defmodule Wsdjs.Web.Mixfile do
+defmodule Wsdjs.Jobs.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :wsdjs_web,
+    [app: :wsdjs_jobs,
      version: "0.0.1",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
      lockfile: "../../mix.lock",
-     elixir: "~> 1.4.2",
+     elixir: "~> 1.4",
      elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix, :gettext] ++ Mix.compilers,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
      deps: deps()]
@@ -20,7 +19,7 @@ defmodule Wsdjs.Web.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Wsdjs.Web.Application, []},
+    [mod: {Wsdjs.Jobs.Application, []},
      extra_applications: [:logger]]
   end
 
@@ -32,16 +31,11 @@ defmodule Wsdjs.Web.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_ecto, "~> 3.2"},
-     {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.13"},
-     {:bamboo, "~> 0.8"},
-     {:wsdjs, in_umbrella: true},
-     {:wsdjs_jobs, in_umbrella: true},
-     {:cowboy, "~> 1.0"}]
+    [{:phoenix_pubsub, "~> 1.0"},
+     {:httpoison, "~> 0.11.1"},
+     {:timex, "~> 3.0"},
+     {:html_sanitize_ex, "~> 1.0.0"},
+     {:wsdjs, in_umbrella: true}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -51,6 +45,8 @@ defmodule Wsdjs.Web.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

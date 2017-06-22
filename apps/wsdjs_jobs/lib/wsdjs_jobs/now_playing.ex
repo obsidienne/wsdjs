@@ -1,4 +1,4 @@
-defmodule Wsdjs.NowPlaying do
+defmodule Wsdjs.Jobs.NowPlaying do
   require Logger
   require DateTime
 

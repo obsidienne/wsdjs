@@ -10,8 +10,8 @@ defmodule Wsdjs.API.NowPlayingController do
     end
 
     def index(conn, _params) do
-        pid = Process.whereis(Wsdjs.NowPlaying)
-        list = Wsdjs.NowPlaying.read(pid)
+        pid = Process.whereis(Wsdjs.Jobs.NowPlaying)
+        list = Wsdjs.Jobs.NowPlaying.read(pid)
         pretty_json conn, list
     end
 end

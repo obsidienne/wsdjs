@@ -12,8 +12,8 @@ defmodule Wsdjs.Web.NotificationsChannel do
   end
 
   def handle_in("played_song_list", _, socket) do
-    pid = Process.whereis(Wsdjs.NowPlaying)
-    list = Wsdjs.NowPlaying.read(pid)
+    pid = Process.whereis(Wsdjs.Jobs.NowPlaying)
+    list = Wsdjs.Jobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
     push socket, "new_played_song", %{data: json}
@@ -22,8 +22,8 @@ defmodule Wsdjs.Web.NotificationsChannel do
   end
 
   def handle_info(:after_join, socket) do
-    pid = Process.whereis(Wsdjs.NowPlaying)
-    list = Wsdjs.NowPlaying.read(pid)
+    pid = Process.whereis(Wsdjs.Jobs.NowPlaying)
+    list = Wsdjs.Jobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
     push socket, "new_played_song", %{data: json}
@@ -31,8 +31,8 @@ defmodule Wsdjs.Web.NotificationsChannel do
   end
 
   def handle_info(:new_played_song, socket) do
-    pid = Process.whereis(Wsdjs.NowPlaying)
-    list = Wsdjs.NowPlaying.read(pid)
+    pid = Process.whereis(Wsdjs.Jobs.NowPlaying)
+    list = Wsdjs.Jobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
     push socket, "new_played_song", %{data: json}
