@@ -1,6 +1,6 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-<main class="container">
+<main class="song-view">
   <%= form_for @changeset, song_path(@conn, :create), [class: "row"], fn f -> %>
     <div class="form-group">
       <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
