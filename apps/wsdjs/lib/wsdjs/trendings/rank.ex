@@ -61,7 +61,7 @@ defmodule Wsdjs.Trendings.Rank do
     preload: [song: [{:art, :user}, :opinions]]
   end
 
-  def for_tops_with_limit(per \\ 9) do
+  def for_tops_with_limit(per \\ 10) do
     from q in __MODULE__,
       join: p in fragment("""
       SELECT id, top_id, row_number() OVER (
