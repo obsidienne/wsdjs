@@ -1,4 +1,5 @@
 import MainView from '../main';
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class View extends MainView {
   mount() {
@@ -48,6 +49,10 @@ export default class View extends MainView {
         container.dataset.jsPageNumber = page_number;
         container.dataset.jsTotalPages = total_pages;
         container.insertAdjacentHTML('beforeend', this.response);
+
+        var cl = cloudinary.Cloudinary.new();
+        cl.init();
+        cl.responsive();
       }
     };
 

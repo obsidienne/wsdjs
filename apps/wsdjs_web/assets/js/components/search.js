@@ -1,8 +1,8 @@
 import timeago from 'timeago.js';
-import Cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class search {
-  mount(cl) {
+  mount() {
     var self = this;
     var timer;
     document.querySelector(".glsearch").addEventListener('click', function(e) {
@@ -12,7 +12,7 @@ export default class search {
     document.getElementById("glsearch").addEventListener('keyup', function() {
       clearTimeout(timer);  //clear any running timeout on key up
       timer = setTimeout(function() { //then give it a second to see if the user is finished
-        self._search(cl);
+        self._search();
       }, 500);
     });
 
@@ -33,6 +33,8 @@ export default class search {
       if (this.status >= 200 && this.status < 400) {
         document.querySelector(".glsearch__results").innerHTML = this.response;
         new timeago().render(document.querySelectorAll(".glsearch__results time.timeago"));
+        var cl = cloudinary.Cloudinary.new();
+        cl.init();
         cl.responsive();
       } else {
         document.querySelector(".glsearch__results").innerHTML = "";

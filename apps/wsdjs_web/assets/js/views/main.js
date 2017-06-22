@@ -6,13 +6,12 @@ import Tippy from 'tippy.js/dist/tippy';
 
 export default class MainView {
   constructor() {
-    this.cl = cloudinary.Cloudinary.new();
-    this.cl.init();
+
   }
 
   // This will be executed when the document loads...
   mount() {
-    new searchComponent().mount(this.cl);
+    new searchComponent().mount();
     new opinionComponent().mount();
     this._intlDate()
     this._loadImg();
@@ -33,6 +32,8 @@ export default class MainView {
   }
 
   _loadImg() {
-    this.cl.responsive();
+    var cl = cloudinary.Cloudinary.new();
+    cl.init();
+    cl.responsive();
   }
 }
