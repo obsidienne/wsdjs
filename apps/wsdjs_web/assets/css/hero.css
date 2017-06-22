@@ -8,7 +8,7 @@
 
 .hot-hero {
   height: 70vh;
-  background: url(//res.cloudinary.com/don2kwaju/image/upload/e_blur:400/o_30/v1462614339/wsdjs/bg.jpg);
+  background: var(--hero);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

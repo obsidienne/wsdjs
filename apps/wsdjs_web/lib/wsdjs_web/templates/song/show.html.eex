@@ -1,9 +1,14 @@
 <main>
+
+<section class="hero hot-hero">
+  <style scoped>
+  :root {
+    --hero: url(<%= song_art_href_blured(@song.art) %>);
+  }
+  </style>
   <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-<section class="song-header hero">
 
-  <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href_blured(@song.art) %>" class="cld-responsive song-header-art-background" alt="<%= song_art_alt(@song) %>"/>
 
   <div class="container">
     <div class="song-header-container">
