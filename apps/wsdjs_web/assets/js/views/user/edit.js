@@ -22,10 +22,8 @@ export default class View extends MainView {
                     let firstElement = list[0];
                     let publicID = firstElement['public_id'];
                     let version = firstElement['version'];
-                    console.log("RESULT TO HANDLE = " + publicID + " - " + version);
                     let baseURL = 'http://res.cloudinary.com/don2kwaju/image/upload/w_300/c_scale/';
                     let imageUri = baseURL + 'v' + version + '/' +  publicID + '.jpg';
-                    console.log("imageUri = " + imageUri);
                     var imageElement = `
                         <img src="`+ imageUri +`" style="width:250px;height:250px;">
                     `;
@@ -35,7 +33,7 @@ export default class View extends MainView {
                         <input class="form-control" id="user_cl_public_id" name="user[cl_public_id]" type="hidden" value="`+publicID+`">
                         <input class="form-control" id="user_cl_version" name="user[cl_version]" type="hidden" value="`+version+`">
                     `;
-                    document.getElementById("divToChange").innerHTML = testHTML;
+                    document.getElementById("cloudinary_form_div").innerHTML = testHTML;
                 }
                 
                 console.log(error, result); 

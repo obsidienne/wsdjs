@@ -14,7 +14,7 @@
 
    
     <%= form_for @changeset, user_path(@conn, :update, @current_user), fn f -> %>
-        <div id="divToChange">
+        <div id="cloudinary_form_div">
           <%= hidden_input f, :cl_public_id, class: "form-control" %>
           <%= hidden_input f, :cl_version, class: "form-control" %>
         </div>
