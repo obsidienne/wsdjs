@@ -76,6 +76,10 @@ defmodule Wsdjs.Musics do
     |> Repo.get!(song_id)
   end
 
+  def change_song(%Song{} = song) do
+    Song.changeset(song, %{})
+  end
+
   @doc """
   List comments for a song order by desc
   """

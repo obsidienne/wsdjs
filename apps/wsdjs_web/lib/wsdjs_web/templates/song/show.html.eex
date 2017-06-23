@@ -8,7 +8,7 @@
   </style>
   <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-
+<h1 class="hot-song-title"><%= link "Edit song", to: song_path(@conn, :edit, @song) %></h1>
 
   <div class="container">
     <div class="song-header-container">

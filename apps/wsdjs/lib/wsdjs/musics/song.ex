@@ -18,7 +18,7 @@ defmodule Wsdjs.Musics.Song do
     field :genre, :string
 
     belongs_to :user, Accounts.User
-    has_one :art, Musics.Art
+    has_one :art, Musics.Art, on_replace: :delete
     has_many :comments, Musics.Comment
     has_many :ranks, Trendings.Rank
     has_many :opinions, Musics.Opinion

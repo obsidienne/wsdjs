@@ -48,7 +48,7 @@ defmodule Wsdjs.Web.Router do
     get "/search", SearchController, :index
     resources "/users", UserController, only: [:index, :show, :edit, :create, :update]
     resources "/home", HomeController, only: [:index]
-    resources "/songs", SongController, only: [:show]
+    resources "/songs", SongController, only: [:show, :edit, :update]
     resources "/tops", TopController, only: [:index, :show]
     resources "/sessions", SessionController, only: [:new, :create]
     get "/signin/:token", SessionController, :show, as: :signin
