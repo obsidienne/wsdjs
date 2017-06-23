@@ -38,6 +38,7 @@ defmodule Wsdjs.Musics.Song do
     |> validate_required(@required_fields)
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
+    |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)

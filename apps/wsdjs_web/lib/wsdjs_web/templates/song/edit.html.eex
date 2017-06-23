@@ -3,7 +3,7 @@
 <main>
   <div class="user-view">
     <div id="art_div">
-      <img src="<%= avatar_href(@song.art) %>" style="width:250px;height:250px;">
+      <img id="art_thumbnail" src="<%= song_art_href(@song.art) %>" style="width:250px;height:250px;">
     </div>
     <div class="form-group">
       <button id="upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload cover</button>
@@ -11,8 +11,10 @@
 
     <%= form_for @changeset, song_path(@conn, :update, @song), fn f -> %>
       <div id="cloudinary_form_div">
-        <%= hidden_input f, :cl_public_id, class: "form-control" %>
-        <%= hidden_input f, :cl_version, class: "form-control" %>
+        <%= inputs_for f, :art, fn fp -> %>
+          <%= text_input fp, :cld_id %>
+          <%= text_input fp, :version %>
+        <% end %>
       </div>
 
       <div class="form-group">

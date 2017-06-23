@@ -76,9 +76,39 @@ defmodule Wsdjs.Musics do
     |> Repo.get!(song_id)
   end
 
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking song changes.
+
+  ## Examples
+
+      iex> change_song(song)
+      %Ecto.Changeset{source: %Song{}}
+
+  """
   def change_song(%Song{} = song) do
     Song.changeset(song, %{})
   end
+
+
+  @doc """
+  Updates a song.
+
+  ## Examples
+
+      iex> update_song(song, %{field: new_value})
+      {:ok, %Song{}}
+
+      iex> update_song(song, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_song(%Song{} = song, attrs) do
+    song
+    |> Song.changeset(attrs)
+    |> Repo.update()
+  end
+
 
   @doc """
   List comments for a song order by desc
@@ -140,6 +170,7 @@ defmodule Wsdjs.Musics do
     |> Repo.all
     |> Repo.preload([user: :avatar])
   end
+
 
   @doc """
   Deletes an Opinion.

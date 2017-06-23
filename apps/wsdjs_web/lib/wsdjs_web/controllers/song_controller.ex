@@ -50,55 +50,21 @@ defmodule Wsdjs.Web.SongController do
   def edit(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
     song = Wsdjs.Musics.get_song!(current_user, id)
-    changeset = Wsdjs.Musics.change_song(song)    
+    changeset = Wsdjs.Musics.change_song(song)
     render conn, "edit.html", song: song, changeset: changeset
   end
 
-  def update(conn, %{"id" => id, "song" => %{
-    "artist" => artist, 
-    "title" => title,
-    "url" => url,
-    "bpm" => bpm,
-    "genre" => genre,
-    "cl_version" => cl_version,
-    "cl_public_id" => cl_public_id 
-    }}) do
-    params = %{
-      "artist" => artist, 
-      "title" => title,
-      "url" => url,
-      "bpm" => bpm,
-      "genre" => genre,
-    }
+  def update(conn, %{"id" => id, "song" => song_params}) do
     current_user = conn.assigns[:current_user]
     song = Wsdjs.Musics.get_song!(current_user, id)
-    art_params = %{
-      "cld_id" => cl_public_id,
-      "version" => cl_version
-    }
 
-    changeset = Wsdjs.Musics.Song.changeset(song, params)
-    cl_version_length = String.length cl_version
-    cl_public_id_length = String.length cl_public_id
-    if cl_version_length > 0 && cl_public_id_length > 0 do
-      cl_version_integer = String.to_integer cl_version
-      IO.inspect cl_public_id
-      art = Ecto.Changeset.change(%Wsdjs.Musics.Art{}, cld_id: cl_public_id, version: cl_version_integer)
-      art = Ecto.Changeset.put_assoc(art, :user, current_user)
-      changeset = Ecto.Changeset.put_assoc(changeset, :art, art)
-    end
-    
-    IO.inspect Wsdjs.Repo.update(changeset)
-
-    case Wsdjs.Repo.update(changeset) do
+    case Wsdjs.Musics.update_song(song, song_params) do
       {:ok, song} ->
         conn
         |> put_flash(:info, "Song updated")
         |> redirect(to: song_path(conn, :show, song))
-      _ ->
-        conn
-        |> put_flash(:error, "Something went wrong !")
-        |> redirect(to: song_path(conn, :edit, song))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", song: song, changeset: changeset)
     end
   end
 
