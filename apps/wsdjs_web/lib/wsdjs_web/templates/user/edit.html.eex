@@ -7,19 +7,21 @@
 <main>
   <div class="user-view">
       <div id="avatar_div">
-        <img src="<%= avatar_href(@current_user.avatar) %>" style="width:250px;height:250px;">
+        <img id="avatar_thumbnail" src="<%= avatar_href(@current_user.avatar) %>" style="width:250px;height:250px;">
       </div>
             <div class="form-group">
-      <button id="upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload avatar</button>      
+      <button id="upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload avatar</button>
     </div>
 
-   
-    <%= form_for @changeset, user_path(@conn, :update, @current_user), fn f -> %>
+
+    <%= form_for @changeset, user_path(@conn, :update, @current_user), [id: "user_edit_form"], fn f -> %>
         <div id="cloudinary_form_div">
-          <%= hidden_input f, :cl_public_id, class: "form-control" %>
-          <%= hidden_input f, :cl_version, class: "form-control" %>
+          <%= inputs_for f, :avatar, fn fp -> %>
+            <%= hidden_input fp, :cld_id %>
+            <%= hidden_input fp, :version %>
+          <% end %>
         </div>
-        
+
         <div class="form-group">
           <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
         </div>

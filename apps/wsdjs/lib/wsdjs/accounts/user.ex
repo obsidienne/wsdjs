@@ -33,6 +33,7 @@ defmodule Wsdjs.Accounts.User do
     struct
     |> cast(params, @allowed_fields)
     |> validate_required(:email)
+    |> cast_assoc(:avatar)
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
   end
