@@ -5,7 +5,7 @@ export default class View extends MainView {
         super.mount();
 
         this.cloudinary();
-
+        this.algolia();
         // Specific logic here
         console.log('UserEditView mounted');
     }
@@ -42,6 +42,16 @@ export default class View extends MainView {
             });                    
         }, false);
     }
+
+    algolia() {
+        places({
+            container: document.querySelector('#user_country'),
+            type: 'country',
+            templates: {
+                suggestion: function(suggestion) {
+                    return '<i class="flag ' + suggestion.countryCode + '"></i> ' +  suggestion.highlight.name;
+                }
+            }
+        })
+    }
 }
-
-
