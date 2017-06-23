@@ -32,10 +32,26 @@
           <%= textarea f, :description, placeholder: "Description", class: "form-control" %>
         </div>
         <div class="form-group">
-        Country :
-        <%= select f, :user_country, Wsdjs.Accounts.countries %>
+          <div class="f16">
+            <input type="search" id="user_country" name="user[user_country]" class="form-control" placeholder="Country" value="<%= @current_user.user_country %>" />
+          </div>
         </div>
         <%= submit "Update", class: "btn btn-primary" %>
     <% end %>
   </div>
 </main>
+
+<script>
+(function() {
+  var placesAutocomplete = places({
+    container: document.querySelector('#user_country'),
+    type: 'country',
+    templates: {
+      suggestion: function(suggestion) {
+        return '<i class="flag ' + suggestion.countryCode + '"></i> ' +
+          suggestion.highlight.name;
+      }
+    }
+  });
+})();
+</script>

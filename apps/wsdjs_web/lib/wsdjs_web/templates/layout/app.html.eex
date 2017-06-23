@@ -16,6 +16,9 @@
         render(Wsdjs.Web.LayoutView, "meta.html", assigns) %>
 
     <%= if Mix.env == :prod, do: render "_piwik.html" %>
+
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.4.14"></script>
+    <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css" />
   </head>
 
   <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
