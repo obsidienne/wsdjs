@@ -1,55 +1,40 @@
 import MainView from '../main';
 
 export default class View extends MainView {
-    mount() {
-        super.mount();
+  mount() {
+    super.mount();
 
-        this.cloudinary();
-        this.algolia();
-        // Specific logic here
-        console.log('UserEditView mounted');
-    }
+    this.cloudinary();
+    this.algolia();
 
-    cloudinary() {
-        document.getElementById("upload_widget_opener").addEventListener("click", function() {
-            cloudinary.openUploadWidget({ 
-                upload_preset:"music_cover_staging",
-                cloud_name:"don2kwaju"
-            }, 
-            function(error, result) { 
-                let list = result;
-                if (list.length > 0) {
-                    let firstElement = list[0];
-                    let publicID = firstElement['public_id'];
-                    let version = firstElement['version'];
-                    let baseURL = 'http://res.cloudinary.com/don2kwaju/image/upload/w_300/c_scale/';
-                    let imageUri = baseURL + 'v' + version + '/' +  publicID + '.jpg';
-                    var imageElement = `
-                        <img src="`+ imageUri +`" style="width:250px;height:250px;">
-                    `;
-                    document.getElementById("avatar_div").innerHTML = imageElement;
+    console.log('UserEditView mounted');
+  }
 
-                    var testHTML = `
-                        <input class="form-control" id="user_cl_public_id" name="user[cl_public_id]" type="hidden" value="`+publicID+`">
-                        <input class="form-control" id="user_cl_version" name="user[cl_version]" type="hidden" value="`+version+`">
-                    `;
-                    document.getElementById("cloudinary_form_div").innerHTML = testHTML;
-                }
-                
-                console.log(error, result); 
-            });                    
-        }, false);
-    }
+  cloudinary() {
+    var params = { upload_preset: "music_cover_staging",
+                   cloud_name: "don2kwaju",
+                   thumbnail_transformation: { width: 300, crop: 'scale' } };
 
-    algolia() {
-        places({
-            container: document.querySelector('#user_country'),
-            type: 'country',
-            templates: {
-                suggestion: function(suggestion) {
-                    return '<i class="flag ' + suggestion.countryCode + '"></i> ' +  suggestion.highlight.name;
-                }
-            }
-        })
-    }
+    var uploaded = function() {
+      cloudinary.openUploadWidget(params, function(error, result) {
+        document.getElementById("avatar_thumbnail").setAttribute("src", result[0]['thumbnail_url']);
+        document.getElementById("user_avatar_cld_id").value = result[0]['public_id'];
+        document.getElementById("user_avatar_version").value = result[0]['version'];
+      })
+    };
+
+    document.getElementById("upload_widget_opener").addEventListener("click", uploaded, false);
+  }
+
+  algolia() {
+    places({
+      container: document.querySelector('#user_country'),
+      type: 'country',
+      templates: {
+        suggestion: function(suggestion) {
+          return '<i class="flag ' + suggestion.countryCode + '"></i> ' +  suggestion.highlight.name;
+        }
+      }
+    })
+  }
 }
