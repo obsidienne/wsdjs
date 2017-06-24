@@ -1,5 +1,8 @@
 .comments-container {
-  padding-left: 0;
+  flex: 0 1 var(--container-comments-width);
+}
+.comments-container ul {
+    padding-left: 0;
 }
 
 .comment {

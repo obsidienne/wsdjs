@@ -1,15 +1,21 @@
-.container-grid {
+.container {
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
+  width:  var(--container-width);;
+}
 
+.container-grid {
   display: grid;
   grid-row-gap: 1em;
   grid-column-gap: 1em;
   overflow: hidden;
+}
 
-  width: var(--container-width);
+.container-flex {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .container-grid {
