@@ -29,7 +29,7 @@
       <div class="form-group">
         <%= textarea f, :description, placeholder: "Description", class: "form-control" %>
       </div>
-      <div class="form-group">
+      <div class="form-group contry-selector">
         <div class="f16">
           <input type="search" id="user_country" name="user[user_country]" class="form-control" placeholder="Country" value="<%= @current_user.user_country %>" />
         </div>

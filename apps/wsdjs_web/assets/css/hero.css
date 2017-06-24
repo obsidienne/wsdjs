@@ -3,9 +3,6 @@
   background-color: #eeeeee;
   display: block;
   position: relative;
-}
-
-.hot-hero {
   height: 70vh;
   background: var(--hero);
   background-size: cover;
@@ -14,13 +11,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 15px;
 }
 
-.SongIndexView .hot-hero {
+.SongIndexView .hero, .TopIndexView .hero {
   padding-bottom: calc(10vh + 15px);
 }
 
-.SongIndexView main {
+.HomeIndexView .hero {
+  padding-bottom: 15px;
+}
+
+.SongIndexView main, .TopIndexView main {
   margin-top: -10vh;
 }
