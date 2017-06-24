@@ -25,8 +25,6 @@ defmodule Wsdjs.Umbrella.Mixfile do
   end
 
   defp aliases do
-    ["ecto.seed": ["run apps/wsdjs/priv/repo/seeds.exs"],
-     "ecto.heroku_init": ["ecto.migrate", "ecto.seed"],
-     "ecto.reset": ["ecto.drop", "ecto.create", "ecto.migrate", "ecto.seed", "ecto.seed"]]
+    ["ecto.heroku_init": ["ecto.migrate", "ecto.seed"]]
    end
 end
