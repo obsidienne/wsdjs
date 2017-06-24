@@ -10,7 +10,7 @@
 </header>
 
 <main>
-  <section class="cd-container">
+  <section class="cd-container container">
     <%= render_many @tops, @view_module, "_top.html", conn: @conn %>
   </section>
 </main>
