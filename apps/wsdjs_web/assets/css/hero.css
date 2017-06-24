@@ -1,5 +1,4 @@
 .hero {
-  padding-bottom: 15em;
   color: inherit;
   background-color: #eeeeee;
   display: block;
@@ -12,8 +11,16 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 15px;
 }
 
-.songs-container {
-  margin-top: -10em;
+.SongIndexView .hot-hero {
+  padding-bottom: calc(10vh + 15px);
+}
+
+.SongIndexView main {
+  margin-top: -10vh;
 }
