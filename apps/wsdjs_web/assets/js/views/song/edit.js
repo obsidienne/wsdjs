@@ -12,7 +12,9 @@ export default class View extends MainView {
   cloudinary() {
     var params = { upload_preset: "music_cover_staging",
                    cloud_name: "don2kwaju",
-                   thumbnail_transformation: { width: 300, crop: 'scale' } };
+                   cropping: "server",
+                   cropping_aspect_ratio: 1,
+                   thumbnail_transformation: { width: 300, crop: 'crop', gravity: 'custom' } };
 
     var uploaded = function() {
       cloudinary.openUploadWidget(params, function(error, result) {
