@@ -1,6 +1,6 @@
 defmodule Wsdjs.Web.SongHelper do
   @base_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_scale/"
-  @base_url_blured "//res.cloudinary.com/don2kwaju/image/upload/w_auto,c_fill,h_350,g_face/e_blur:800/o_30/"
+  @base_url_blured "//res.cloudinary.com/don2kwaju/image/upload/w_auto,c_fill,h_350,g_face/e_blur:300/o_30/"
   @missing_song_art "//res.cloudinary.com/don2kwaju/image/upload/v1449164620/wsdjs/missing_cover.jpg"
 
   def song_art_href(%Wsdjs.Musics.Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
