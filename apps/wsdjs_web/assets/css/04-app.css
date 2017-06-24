@@ -24,3 +24,7 @@ a:hover {
 textarea {
   resize: vertical;
 }
+
+ul {
+  padding-left: 0;
+}

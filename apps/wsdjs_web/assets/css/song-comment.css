@@ -1,6 +1,3 @@
-.comments-container {
-  flex: 0 1 var(--container-comments-width);
-}
 .comments-container ul {
     padding-left: 0;
 }

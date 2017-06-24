@@ -8,11 +8,6 @@
   </style>
   <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-<h1 class="hot-song-title">
-  <%= link "Edit song", to: song_path(@conn, :edit, @song) %>
-  <%= link "Delete song", to: song_path(@conn, :delete, @song), method: "delete" %></h1>
-</h1>
-
   <div class="container">
     <div class="song-header-container">
       <div class="song-header-details">
@@ -34,8 +29,8 @@
 </section>
 
 
-<section class="container container-flex">
-  <div class="comments-container">
+<section class="container container-comments">
+  <div>
     <%= if @conn.assigns[:current_user] do %>
         <%= render @view_module, "_song_comment_form.html", conn: @conn, song: @song, changeset:  @comment_changeset %>
     <% end %>
@@ -43,6 +38,11 @@
     <ul>
       <%= render_many Enum.reverse(@comments), @view_module, "_song_comment.html", as: :comment, conn: @conn %>
     </ul>
+  </div>
+
+  <div>
+    <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
+    <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete" %></h1>
   </div>
 </section>
 </main>
