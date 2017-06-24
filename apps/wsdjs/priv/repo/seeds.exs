@@ -75,12 +75,11 @@ defmodule Wsdjs.Seeds do
     store_it(:album_art, row)
   end
 
-  def store_it(:album_art, %{cover_public_id: cpi, cover_version: cv, user_id: ui, id: id}) when cpi != "wsdjs/missing_cover" and cpi != "" do
+  def store_it(:album_art, %{cover_public_id: cpi, cover_version: cv, id: id}) when cpi != "wsdjs/missing_cover" and cpi != "" do
     album_art = %Wsdjs.Musics.Art{
       cld_id: cpi,
       version: String.to_integer(cv),
-      song_id: id,
-      user_id: ui
+      song_id: id
     }
     Wsdjs.Repo.insert! album_art
   end

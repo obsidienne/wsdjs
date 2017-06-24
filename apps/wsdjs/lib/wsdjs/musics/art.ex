@@ -8,7 +8,6 @@ defmodule Wsdjs.Musics.Art do
     field :cld_id, :string
     field :version, :integer
 
-    belongs_to :user, Wsdjs.Accounts.User
     belongs_to :song, Wsdjs.Musics.Song
 
     timestamps()
