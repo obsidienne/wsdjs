@@ -68,4 +68,14 @@ defmodule Wsdjs.Web.SongController do
     end
   end
 
+
+  def delete(conn, %{"id" => id}) do
+    current_user = conn.assigns[:current_user]
+    song = Wsdjs.Musics.get_song!(current_user, id)
+    {:ok, _song} = Wsdjs.Musics.delete_song(song)
+
+    conn
+    |> put_flash(:info, "Song deleted successfully.")
+    |> redirect(to: home_path(conn, :index))
+  end
 end

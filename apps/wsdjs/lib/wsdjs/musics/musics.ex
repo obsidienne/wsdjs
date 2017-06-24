@@ -111,6 +111,23 @@ defmodule Wsdjs.Musics do
 
 
   @doc """
+  Deletes a Song.
+
+  ## Examples
+
+      iex> delete_song(song)
+      {:ok, %Song{}}
+
+      iex> delete_song(song)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_song(%Song{} = song) do
+    Repo.delete(song)
+  end
+
+
+  @doc """
   List comments for a song order by desc
   """
   def list_comments(song_id) do
