@@ -33,6 +33,7 @@ defmodule Wsdjs.Jobs.Mixfile do
   defp deps do
     [{:phoenix_pubsub, "~> 1.0"},
      {:httpoison, "~> 0.11.1"},
+     {:quantum, ">= 2.0.0-beta.1"},
      {:timex, "~> 3.0"},
      {:html_sanitize_ex, "~> 1.0.0"},
      {:wsdjs, in_umbrella: true}]

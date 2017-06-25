@@ -10,7 +10,8 @@ defmodule Wsdjs.Jobs.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      worker(Wsdjs.Jobs.NowPlaying, [Wsdjs.Jobs.NowPlaying])
+      worker(Wsdjs.Jobs.NowPlaying, [Wsdjs.Jobs.NowPlaying]),
+      worker(Wsdjs.Jobs.Scheduler, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
