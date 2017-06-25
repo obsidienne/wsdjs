@@ -4,17 +4,13 @@ import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 export default class search {
   mount() {
     var self = this;
-    var timer;
+
     document.querySelector(".search-container").addEventListener('click', function(e) {
       self._show_search()
     });
 
-    document.getElementById("search-input").addEventListener('keyup', function() {
-      clearTimeout(timer);  //clear any running timeout on key up
-      timer = setTimeout(function() { //then give it a second to see if the user is finished
-        self._search();
-      }, 500);
-    });
+    var debounce = JD.debounce(function() { self._search(); }, 50);
+    document.getElementById("search-input").addEventListener('keyup', debounce);
 
     document.addEventListener("click", function(event) {
        if (event.target.closest('.search-container') == null) {
