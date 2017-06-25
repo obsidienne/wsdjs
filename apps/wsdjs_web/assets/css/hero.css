@@ -11,14 +11,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .SongIndexView .hero, .TopIndexView .hero {
   padding-bottom: calc(10vh + 15px);
-}
-
-.HomeIndexView .hero {
-  padding-bottom: 15px;
 }
 
 .SongIndexView main, .TopIndexView main {

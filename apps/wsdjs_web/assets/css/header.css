@@ -1,15 +1,9 @@
 .logo {
   background-image: var(--logo);
   background-repeat: no-repeat;
-  width: 120px;
+  width: var(--logo-width);
   height: 50px;
   display: inline-block;
-}
-
-@media (max-width:480px) {
-  .logo {
-    width: 50px;
-  }
 }
 
 .glheader {
@@ -24,14 +18,14 @@
 
 .glheader__user__avatar {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: var(--avatar-width);
+  height: var(--avatar-width);
   z-index: 2;
-  margin-left: 30px;
+  margin-left: 15px;
 }
 
 .glheader__menu_link {
-  margin-left: 30px;
+  margin-left: 15px;
   font-size: 18px;
   border-bottom: 5px solid transparent;
 }
