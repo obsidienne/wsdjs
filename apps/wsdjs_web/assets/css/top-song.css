@@ -16,12 +16,14 @@
   height: auto;
   margin-right: 15px;
   position: relative;
+  margin-bottom: 0
 }
 
 .top-song-art img {
   width: 100%;
   max-width: 100%;
   height: auto;
+  vertical-align: top;
 }
 
 .top-song-body {
