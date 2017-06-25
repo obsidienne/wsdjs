@@ -47,9 +47,7 @@
   background-color: #fff;
   border-radius: 3px;
   position: absolute;
-  top: 48px;
-  left: 0;
-  right: 0;
+  top: 58px;
   overflow: hidden;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 19px 12px rgba(0,0,0,0.22);
   pointer-events: none;
@@ -80,7 +78,7 @@
         transform: translateY(10px)
     }
     .glsearch__results {
-        top: 0;
+        top: 14px;
         padding-top: 52px;
         z-index: 1
     }
