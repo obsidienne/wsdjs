@@ -22,6 +22,7 @@ export default class View extends MainView {
   }
 
   _submit() {
+    var self = this;
     var form = document.querySelector('#song-comment-form');
     form.addEventListener('submit', function(e) {
       var token = document.querySelector("[name=channel_token]").getAttribute("content");
@@ -33,7 +34,10 @@ export default class View extends MainView {
 
       request.onload = function() {
         if (this.status >= 200 && this.status < 400) {
-          self.parentNode.innerHTML = this.response;
+          var container = document.querySelector(".container-comments ul");
+          var tpl = self._createHtmlContent(JSON.parse(this.response).data);
+          container.insertAdjacentHTML('beforeend', tpl);
+          new timeago().render(document.querySelectorAll("time.timeago"));
         } else {
           console.error("Error");
         }
@@ -45,5 +49,22 @@ export default class View extends MainView {
       e.preventDefault();
       return false;
     })
+  }
+
+  _createHtmlContent(params) {
+    return `
+    <li class="comment">
+      <div class="comment-avatar">
+        <img src="${params.commented_by_avatar}" data-src="${params.commented_by_avatar}"  class="img-comment cld-responsive">
+      </div>
+
+      <div class="comment-box">
+        <header class="comment-head">
+          <a class="comment-author" href="${params.commented_by_path}">${params.commented_by}</a>
+          <time class="timeago" title="${params.commented_at}" datetime="${params.commented_at}">${params.commented_at}</time>
+        </header>
+        <div class="comment-content">${params.text}</div>
+      </div>
+    </li>`
   }
 }
