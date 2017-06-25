@@ -68,32 +68,6 @@ defmodule Wsdjs.Musics.Song do
     where: r.position <= 10
   end
 
-  @doc """
-  Search query
-  """
-  def search(query, ""), do: from q in query, where: false
-
-  def search(query, search_query) do
-    search_query = ts_query_format(search_query)
-
-    from q in query,
-    where: fragment("""
-            (to_tsvector(
-                'english',
-                coalesce(artist, '') || ' ' ||  coalesce(title, '')
-            ) @@ to_tsquery('english', ?))
-            """, ^search_query),
-    limit: 5
-  end
-
-  defp ts_query_format(search_query) do
-    search_query
-    |> String.trim
-    |> String.split(" ")
-    |> Enum.map(&("#{&1}:*"))
-    |> Enum.join(" & ")
-  end
-
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
       case url |> String.to_char_list |> :http_uri.parse do

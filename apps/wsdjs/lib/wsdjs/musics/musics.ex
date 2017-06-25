@@ -12,13 +12,21 @@ defmodule Wsdjs.Musics do
   Returns a song list according to a fulltext search.
   The song list is scoped for user.
   """
+  def search(user, ""), do: []
   def search(user, q) do
+    q = q
+        |> String.trim
+        |> String.split(" ")
+        |> Enum.map(&("#{&1}:*"))
+        |> Enum.join(" & ")
+
     Song.scoped(user)
     |> preload([:art, user: :avatar])
-    |> Song.search(q)
+    |> where(fragment("(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))", ^q))
+    |> order_by([desc: :inserted_at])
+    |> limit(5)
     |> Repo.all()
   end
-
 
   def search_artist_title(artist_title) do
     Song
