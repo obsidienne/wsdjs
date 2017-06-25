@@ -12,8 +12,8 @@
     <%= form_for @changeset, song_path(@conn, :update, @song), fn f -> %>
       <div id="cloudinary_form_div">
         <%= inputs_for f, :art, fn fp -> %>
-          <%= text_input fp, :cld_id %>
-          <%= text_input fp, :version %>
+          <%= hidden_input fp, :cld_id %>
+          <%= hidden_input fp, :version %>
         <% end %>
       </div>
 
@@ -41,6 +41,21 @@
         <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
         <%= error_tag f, :genre %>
       </div>
+
+      <div class="checkbox">
+        <%= label f,:instant_hit do %>
+          <%= checkbox f, :instant_hit %> Instant hit
+        <% end %>
+        <%= error_tag f, :instant_hit %>
+      </div>
+
+      <div class="checkbox">
+        <%= label f,:hidden do %>
+          <%= checkbox f, :hidden %> Hidden
+        <% end %>
+        <%= error_tag f, :hidden %>
+      </div>
+      
       <%= submit "Update", class: "btn btn-primary" %>
     <% end %>
   </div>

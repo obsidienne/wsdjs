@@ -16,6 +16,8 @@ defmodule Wsdjs.Musics.Song do
     field :url, :string
     field :bpm, :integer
     field :genre, :string
+    field :instant_hit, :boolean
+    field :hidden, :boolean
 
     belongs_to :user, Accounts.User
     has_one :art, Musics.Art, on_replace: :delete
@@ -28,7 +30,7 @@ defmodule Wsdjs.Musics.Song do
     timestamps()
   end
 
-  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id]
+  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden]
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
