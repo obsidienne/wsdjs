@@ -5,11 +5,11 @@ export default class search {
   mount() {
     var self = this;
     var timer;
-    document.querySelector(".glsearch").addEventListener('click', function(e) {
+    document.querySelector(".search-container").addEventListener('click', function(e) {
       self._show_search()
     });
 
-    document.getElementById("glsearch").addEventListener('keyup', function() {
+    document.getElementById("search-input").addEventListener('keyup', function() {
       clearTimeout(timer);  //clear any running timeout on key up
       timer = setTimeout(function() { //then give it a second to see if the user is finished
         self._search();
@@ -17,27 +17,27 @@ export default class search {
     });
 
     document.addEventListener("click", function(event) {
-       if (event.target.closest('.glsearch') == null) {
+       if (event.target.closest('.search-container') == null) {
          self._hide_search();
        }
     });
   }
 
   _search(cl) {
-    var query = document.getElementById("glsearch").value;
+    var query = document.getElementById("search-input").value;
 
     var request = new XMLHttpRequest();
     request.open('GET', '/search?q='+query, true);
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        document.querySelector(".glsearch__results").innerHTML = this.response;
-        new timeago().render(document.querySelectorAll(".glsearch__results time.timeago"));
+        document.querySelector(".search-results-container").innerHTML = this.response;
+        new timeago().render(document.querySelectorAll(".search-results-container time.timeago"));
         var cl = cloudinary.Cloudinary.new();
         cl.init();
         cl.responsive();
       } else {
-        document.querySelector(".glsearch__results").innerHTML = "";
+        document.querySelector(".search-results-container").innerHTML = "";
       }
     };
 
@@ -47,24 +47,23 @@ export default class search {
   }
 
   _show_search() {
-    let search_results = document.querySelector(".glsearch__results");
-    let glsearch = document.querySelector(".glsearch");
-
-    glsearch.classList.add("glsearch--focused");
-    search_results.classList.add("glsearch--focused");
+    let glheader = document.querySelector(".glheader");
+    let search_container = document.querySelector(".search-container");
+    search_container.classList.add("focused");
+    glheader.classList.add("focused");
   }
 
   _hide_search() {
     // remove focus
-    var elements = document.querySelectorAll(".glsearch--focused");
+    var elements = document.querySelectorAll(".focused");
     Array.prototype.forEach.call(elements, function(el, i){
-      el.classList.remove("glsearch--focused");
+      el.classList.remove("focused");
     });
 
     // remove data from the result list
-    document.querySelector(".glsearch__results").innerHTML = "";
+    document.querySelector(".search-results-container").innerHTML = "";
 
     // remove searched string
-    document.getElementById("glsearch").value = "";
+    document.getElementById("search-input").value = "";
   }
 }

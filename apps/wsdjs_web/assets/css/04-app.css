@@ -26,5 +26,6 @@ textarea {
 }
 
 ul {
-  padding-left: 0;
+  padding: 0;
+  margin: 0;
 }

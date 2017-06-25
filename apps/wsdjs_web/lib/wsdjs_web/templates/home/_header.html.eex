@@ -4,13 +4,13 @@
   </div>
 
 
-  <div class="glsearch">
-    <div class="glsearch__filter__wrap">
-      <i class="icon-search-quickjump"></i>
-      <input id="glsearch" placeholder="Search song by artist or title..." type="text" class="form-control glsearch__filter" autocomplete="off" spellcheck="false">
+  <div class="search-container">
+    <div class="search__input__wrap">
+      <i class="icon-search"></i>
+      <input id="search-input" placeholder="Search song by artist or title..." type="text" class="search-input" autocomplete="off" spellcheck="false">
     </div>
 
-    <div class="glsearch__results">
+    <div class="search-results-container">
     </div>
   </div>
 

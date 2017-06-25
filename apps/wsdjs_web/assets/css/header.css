@@ -32,3 +32,17 @@
 .glheader__menu_link.active {
   border-bottom: 5px solid #FFC107;
 }
+
+.glheader.focused .logo,
+.glheader.focused .glheader__menu_link,
+.glheader.focused .glheader__user__avatar {
+  display: none;
+}
+
+@media (min-width: 414px) {
+  .glheader.focused .logo,
+  .glheader.focused .glheader__menu_link,
+  .glheader.focused .glheader__user__avatar {
+    display: flex;
+  }
+}

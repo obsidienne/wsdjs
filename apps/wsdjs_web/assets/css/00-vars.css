@@ -27,6 +27,7 @@
   --logo-width: 50px;
   --avatar-width: 40px;
   --last-top-column-width: 50%;
+  --search-width: 275px;
 }
 
 @media (min-width: 768px) {
@@ -40,6 +41,8 @@
     --logo-width: 120px;
     --avatar-width: 60px;
     --last-top-column-width: 50%;
+    --search-width: 390px;
+
   }
 }
 
