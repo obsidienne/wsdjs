@@ -42,11 +42,19 @@ export default class Radio {
 
     var playing = "";
     for (let i = 1; i < data.length && i < 5; i++) {
-      playing = `<li>
-          <a href="${data[i].path}" class="played-song">
-            <img height="50" width="50" src="${data[i].image_uri}" />
-          </a>
-        </li>` + playing;
+      if (data[i].path !== undefined) {
+        playing = `<li>
+            <a href="${data[i].path}" class="played-song">
+              <img height="50" width="50" src="${data[i].image_uri}" />
+            </a>
+          </li>` + playing;
+      } else {
+        playing = `<li>
+            <a href="#" class="played-song">
+              <img height="50" width="50" src="http://res.cloudinary.com/don2kwaju/image/upload/v1449164620/wsdjs/missing_cover.jpg" />
+            </a>
+          </li>` + playing;
+      }
     }
 
     playing += `<li>
@@ -63,6 +71,7 @@ export default class Radio {
       </div>
     </li>`
 
+    console.log(playing);
     player.innerHTML = playing;
   }
 }
