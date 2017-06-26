@@ -38,9 +38,11 @@
     </ul>
   </div>
 
-  <div>
-    <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
-    <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete" %></h1>
-  </div>
+  <%= if can_edit_song?(@current_user, @song) do %>
+    <div>
+      <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
+      <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete" %></h1>
+    </div>
+  <% end %>
 </section>
 </main>
