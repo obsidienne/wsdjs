@@ -1,8 +1,6 @@
 defmodule Wsdjs.MusicsTest do
   use Wsdjs.DataCase
 
-  doctest Wsdjs.Musics
-
   alias Wsdjs.Musics
 
   @create_attrs %{title: "song title", artist: "the artist", url: "http://song-url.com", genre: "pop"}
