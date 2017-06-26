@@ -55,17 +55,20 @@ defmodule Wsdjs.Musics.Song do
   def scoped(%Accounts.User{admin: :true}), do: Musics.Song
 
   @doc """
-  Connected user can see voting and published Top + Top he has created
+  Connected user can see songs not explicitly hidden
   """
-  def scoped(%Accounts.User{} = _user), do: Musics.Song
+  def scoped(%Accounts.User{} = user) do
+    from s in Musics.Song,
+    where: s.hidden == false or s.user_id == ^user.id
+  end
 
   @doc """
-  Not connected users see nothing
+  Not connected users see only top 10 song or instant_hit
   """
   def scoped(nil) do
     from s in Musics.Song,
     join: r in assoc(s, :ranks),
-    where: r.position <= 10
+    where: r.position <= 10 or s.instant_hit == true
   end
 
   defp validate_url(changeset, field, options \\ []) do
