@@ -1,22 +1,22 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 <main>
-   <div id="site-content" class="js-site-content">
-   <div id="profile-header-actions" class="layout-wrap js-profile-header-actions">
+   <div id="site-content">
+   <div id="profile-header-actions" class="layout-wrap">
       <%= if can_edit_page?(@user, @current_user) do %>
       <div class="header-right-wrapper">
-         <div class="form-item form-item-a js-rf-button-container rf-button__container profile-header-action form-button-wrap">
-            <a class="form-button js-rf-button js-share-button rf-button rf-button--secondary rf-button--icon-leading layout-wrap-action"
+         <div class="form-item rf-button__container profile-header-action ">
+            <a class="form-button rf-button rf-button--secondary"
                id="viral-icons" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>"><span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>
          </div>
-         <div class="form-item form-item-a js-rf-button-container rf-button__container js-view-portfolio-button profile-header-action  form-button-wrap">
-            <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" href="<%= session_path(@conn, :delete, @current_user) %>"
+         <div class="form-item   rf-button__container  profile-header-action  ">
+            <a class="form-button  rf-button rf-button--secondary " href="<%= session_path(@conn, :delete, @current_user) %>"
                target="_blank" unselectable="on" tabindex="0"><span class="rf-button__label">Logout</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>
          </div>
       </div>
       <% end %>
    </div>
-   <div id="profile" class="js-profile content-container layout-wrap">
-   <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section js-profile-info">
+   <div id="profile" class=" content-container layout-wrap">
+   <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section -info">
       <div id="profile-display-name">
          <%= @user.name %>
       </div>
@@ -31,9 +31,9 @@
             </div>
          </div>
          <div id="profile-actions" class="hide-phone show-tablet">
-            <div class="form-item form-item-a js-rf-button-container js-action-message-user rf-button__container--message rf-button__container form-button-wrap"
+            <div class="form-item   js-action-message-user rf-button__container--message rf-button__container "
                title="Message User" data-contact_name="Kuocheng Liao" data-contact_id="479117">
-               <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" unselectable="on"
+               <a class="form-button  rf-button rf-button--secondary " unselectable="on"
                   tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
                   <span class=" rf-button__icon-container rf-button__icon-container--leading">
                      <svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285">
@@ -51,9 +51,9 @@
          </div>
       </div>
       <div id="profile-actions" class="hide-tablet">
-         <div class="form-item form-item-a js-rf-button-container js-action-message-user rf-button__container--message rf-button__container form-button-wrap"
+         <div class="form-item   js-action-message-user rf-button__container--message rf-button__container "
             title="Message User">
-            <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" unselectable="on"
+            <a class="form-button  rf-button rf-button--secondary " unselectable="on"
                tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
                <span class=" rf-button__icon-container rf-button__icon-container--leading">
                   <svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285">
@@ -71,7 +71,7 @@
       </div>
    </div>
    <span class="js-nav-phone"></span>
-   <div id="profile-stats" class="profile-section content-minor-section content-mobile-first-section js-profile-stats">
+   <div id="profile-stats" class="profile-section content-minor-section content-mobile-first-section -stats">
       <div class="profile-stat">
          <div class="profile-stat-label profile-sidebar-label content-minor-secton-label beicons-pre beicons-pre-eye"> <span class="stat-text">Song suggested</span> </div>
          <div class="profile-stat-count">
@@ -82,7 +82,7 @@
    </div>
    <!-- /#profile-stats -->
    <span class="js-nav-desktop-tablet"></span>
-   <div id="profile-nav" class="content-main content-section-nav js-profile-nav">
+   <div id="profile-nav" class="content-main content-section-nav -nav">
       <div class="js-iscroll-wrap profile-nav-inner content-nav-inner" style="overflow: visible;">
          <div class="profile-section-header content-section-header js-section-header js-iscroll" data-section-header="gallery" style="transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate3d(0px, 0px, 0px); min-width: 0px;">
             <div class="profile-section-header-item content-section-nav-item js-section js-iscroll-item active" data-section="projects"
@@ -90,7 +90,7 @@
          </div>
       </div>
    </div>
-   <div id="profile-info-wrap" class="js-profile-info-wrap content-section-wrap">
+   <div id="profile-info-wrap" class="-info-wrap content-section-wrap">
       <%= if has_description?(@user) do %>
       <div class="profile-section content-minor-section">
          <h3 class="profile-sidebar-label content-minor-section-label"> About Me
@@ -104,39 +104,8 @@
    </div>
    <div id="gallery" class="content-main cfix js-gallery" data-section="projects">
       <div class="profile-gallery-content-wrap">
-         <div class="profile-gallery-content js-profile-gallery-content" data-section="projects">
-            <%= for song <- @songs do %>
-            <div class="rf-project-cover rf-project-cover--project js-item js-project-cover qa-project-cover editable " data-id="54136737">
-               <a href="<%= song_path(@conn, :show, song) %>" class="rf-project-cover__image-container js-project-cover-image-link js-project-link">
-                  <img class="rf-project-cover__image" src="<%= song_art_href(song.art) %>" data-src="<%= song_art_href(song.art) %>" alt="<%= song_art_alt(song) %>">
-                  <div class="rf-project-cover__details">
-                     <div class="rf-project-cover__title js-project-cover-title-link">
-                        <%= song.title %>
-                     </div>
-                     <div class="rf-owners ">
-                        <span class="rf-owners__list ">
-                           <div class="rf-owners__owner">
-                              <%= song.artist %>
-                           </div>
-                        </span>
-                     </div>
-                     <div class="rf-project-cover__fields">
-                        <ul class="rf-project-cover__fields-list">
-                           <li class="rf-project-cover__field">
-                              <%= song.genre %>
-                           </li>
-                        </ul>
-                        <div class="rf-project-cover__curation-stats cover-stat-wrap"></div>
-                     </div>
-                     <div class="rf-project-cover__stats">
-                        <%= opinion_link("down", @conn, song, song.opinions, @conn.assigns[:current_user]) %>
-                        <%= opinion_link("like", @conn, song, song.opinions, @conn.assigns[:current_user]) %>
-                        <%= opinion_link("up", @conn, song, song.opinions, @conn.assigns[:current_user]) %>
-                     </div>
-                  </div>
-               </a>
-            </div>
-            <% end %>
+         <div class="profile-gallery-content -gallery-content" data-section="projects">
+           <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
          </div>
       </div>
    </div>
