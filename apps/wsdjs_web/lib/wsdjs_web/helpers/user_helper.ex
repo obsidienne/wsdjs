@@ -8,8 +8,8 @@ defmodule Wsdjs.Web.UserHelper do
   def avatar_href(_), do: @missing_avatar
   def avatar_href_default(), do: @missing_avatar
 
-  def proposed_by_display_name(%Wsdjs.Accounts.User{name: name, djname: djname}) when is_binary(djname), do: "#{name} (#{djname})"
-  def proposed_by_display_name(%Wsdjs.Accounts.User{name: name}), do: name
+  def user_displayed_name(%Wsdjs.Accounts.User{name: name, djname: djname}) when is_binary(djname), do: "#{name} (#{djname})"
+  def user_displayed_name(%Wsdjs.Accounts.User{name: name}), do: name
 
   def user_avatar_alt(user), do: "#{user.name}"
 
@@ -32,14 +32,4 @@ defmodule Wsdjs.Web.UserHelper do
   def has_description?(user) do
     user.description != nil && String.length(user.description) > 0
   end
-
-  def format_djname(user) do
-    djname = String.downcase user.djname    
-    if String.starts_with? djname, "dj" do
-      String.slice(user.djname, 2..-1)
-    else
-      user.djname
-    end
-  end    
-
 end

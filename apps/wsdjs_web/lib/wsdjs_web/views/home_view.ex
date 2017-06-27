@@ -2,7 +2,7 @@ defmodule Wsdjs.Web.HomeView do
   use Wsdjs.Web, :view
 
   def proposed_by_link(conn, %Wsdjs.Musics.Song{} = song) do
-    Phoenix.HTML.Link.link(proposed_by_display_name(song.user),
+    Phoenix.HTML.Link.link(user_displayed_name(song.user),
                            to: user_path(conn, :show, song.user.id),
                            title: "#{song.user.name}")
   end

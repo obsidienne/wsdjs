@@ -6,11 +6,11 @@
       <div class="header-right-wrapper">
          <div class="form-item form-item-a js-rf-button-container rf-button__container profile-header-action form-button-wrap">
             <a class="form-button js-rf-button js-share-button rf-button rf-button--secondary rf-button--icon-leading layout-wrap-action"
-               id="viral-icons" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>"><span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>                
+               id="viral-icons" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>"><span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>
          </div>
          <div class="form-item form-item-a js-rf-button-container rf-button__container js-view-portfolio-button profile-header-action  form-button-wrap">
             <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" href="<%= session_path(@conn, :delete, @current_user) %>"
-               target="_blank" unselectable="on" tabindex="0"><span class="rf-button__label">Logout</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>                
+               target="_blank" unselectable="on" tabindex="0"><span class="rf-button__label">Logout</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>
          </div>
       </div>
       <% end %>
@@ -23,7 +23,7 @@
       <div class="rf-avatar">  <img src="<%= avatar_href(@user.avatar) %>" data-src="<%= avatar_href(@user.avatar) %>" class="rf-avatar__image js-avatar__image"></div>
       <div id="profile-details">
          <div id="profile-title" class="qa-profile-title"> DJ
-            <%= format_djname(@user) %>
+            <%= user_displayed_name(@user) %>
          </div>
          <div class="profile-location has-website">
             <div class="profile-location-link qa-profile-location-link beicons-pre beicons-pre-location">
@@ -98,7 +98,7 @@
          <%= @user.description %>
       </div>
       <% end %>
-      <div id="profile-date" class="profile-section content-minor-section"> <span class="profile-date-text">      
+      <div id="profile-date" class="profile-section content-minor-section"> <span class="profile-date-text">
          Member since: <span class="profile-date js-format-timestamp" data-timestamp="1306919518">June 1, 2011</span> </span>
       </div>
    </div>
@@ -115,7 +115,7 @@
                      </div>
                      <div class="rf-owners ">
                         <span class="rf-owners__list ">
-                           <div class="rf-owners__owner">           
+                           <div class="rf-owners__owner">
                               <%= song.artist %>
                            </div>
                         </span>
