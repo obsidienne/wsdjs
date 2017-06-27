@@ -1,748 +1,116 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-<style scoped>
+  <main>
 
 
-.activate-account-popup {
-    font-size: 16px;
-    text-align: center
-}
 
-.activate-account-popup.desktop.no-title .popup-content {
-    padding: 0
-}
 
-.activate-account-popup .user-image-container {
-    width: 97px;
-    height: 97px;
-    margin: 42px auto 25px
-}
 
-.activate-account-popup .owner-image {
-    width: 100%
-}
+    <div id="top-panel" class="slide-panel js-top-panel">
+      <a id="top-panel-blocking" class="js-top-panel-blocking"></a>
 
-.activate-account-popup .adobe-id,
-.activate-account-popup .have-account-login {
-    font-weight: bold
-}
+      <div id="site-content" class="js-site-content">
 
-.activate-account-popup .already-have-account {
-    border-top: 1px solid #e0e0e0;
-    font-size: 14px;
-    margin: 62px 0 0;
-    padding: 22px 0
-}
 
-.activate-account-popup .have-account-login {
-    color: #262626
-}
-
-.activate-account-content {
-    overflow: hidden;
-    padding: 0 30px
-}
-
-.activate-welcome-header {
-    font-size: 26px;
-    font-weight: 300;
-    line-height: 30px;
-    margin: 0 0 11px
-}
-
-.activate-login-info {
-    line-height: 25px;
-    padding: 0 0 29px
-}
-
-.activate-content-divider {
-    width: 44px;
-    height: 1px;
-    background: #e0e0e0;
-    display: inline-block;
-    margin: 0 0 32px
-}
-
-.activate-behance {
-    margin: 0 0 25px
-}
-
-@media (max-width: 603px) {
-    .activate-account-popup .user-image-container {
-    display: none
-    }
-    .activate-account-popup.popup.layover .popup-content {
-    padding-left: 0;
-    padding-right: 0
-    }
-    .activate-account-popup .already-have-account {
-    margin-top: 52px;
-    padding-bottom: 0;
-    padding-top: 13px
-    }
-    .activate-welcome-header {
-    line-height: 30px;
-    margin-bottom: 12px;
-    margin-top: 10px
-    }
-    .activate-login-info {
-    padding-bottom: 15px
-    }
-    .activate-content-divider {
-    margin-bottom: 22px
-    }
-}
-</style>
-<style type="text/css">
-.popup.mini-profile::before {
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    box-shadow: -2px -2px 4px -2px rgba(0, 0, 0, 0.4);
-    content: '';
-    position: absolute;
-    z-index: -1
-}
-
-.popup.mini-profile.top-right::before,
-.popup.mini-profile.top-left::before {
-    top: -8px;
-    transform: rotate(45deg)
-}
-
-.popup.mini-profile.bottom-right::before,
-.popup.mini-profile.bottom-left::before {
-    bottom: -8px;
-    transform: rotate(-134deg)
-}
-
-.popup.mini-profile.top-right::before,
-.popup.mini-profile.bottom-right::before {
-    right: 45px
-}
-
-.popup.mini-profile.top-left::before,
-.popup.mini-profile.bottom-left::before {
-    left: 45px
-}
-
-.mini-profile-wrap {
-    width: 331px
-}
-
-.mini-profile-wrap .gallery-projects-wrap {
-    background: #fff;
-    border: 1px solid #d9d9d9;
-    border-radius: 4px;
-    box-sizing: border-box;
-    padding: 4px 3px 4px 1px;
-    position: relative;
-    text-decoration: none;
-    width: 361px
-}
-
-.mini-profile-wrap .gallery-projects-wrap .gallery-cover-overlay {
-    background: linear-gradient(rgba(0, 156, 252, 0.75), rgba(0, 116, 238, 0.75));
-    border: 1px solid #356bca;
-    border-radius: 4px;
-    bottom: 0;
-    color: #fff;
-    font-size: 16px;
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    text-decoration: none !important;
-    text-shadow: 1px 2px 0 #0a4fb9;
-    text-transform: uppercase;
-    top: 0;
-    transition: opacity .15s ease-in
-}
-
-.ie .mini-profile-wrap .gallery-projects-wrap .gallery-cover-overlay {
-    display: none;
-    font-weight: bold
-}
-
-.mini-profile-wrap .gallery-projects-wrap:hover .gallery-cover-overlay {
-    opacity: 1
-}
-
-.ie .mini-profile-wrap .gallery-projects-wrap:hover .gallery-cover-overlay {
-    background: rgba(0, 156, 252, 0.75);
-    display: block
-}
-
-.mini-profile-wrap .gallery-projects-wrap .gallery-cover-overlay-text {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%
-}
-
-.mini-profile-wrap .gallery-projects-wrap .project-cover-wrap {
-    background: #f3f3f3;
-    border-left: 3px solid #fff;
-    box-sizing: border-box;
-    float: left;
-    height: 90px;
-    overflow: hidden;
-    width: 33.3%
-}
-
-.mini-profile-wrap .gallery-projects-wrap .project-cover-wrap:nth-child(1n+4) {
-    display: none
-}
-
-.mini-profile-wrap .gallery-projects-wrap .project-cover-wrap .project-cover {
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0;
-    vertical-align: top;
-    visibility: visible;
-    width: 100%
-}
-
-.mini-profile-wrap .gallery-projects-wrap .project-cover-wrap.empty .project-cover {
-    display: none
-}
-
-.mini-profile-wrap .gallery-projects-wrap-4 {
-    width: 479px
-}
-
-.mini-profile-wrap .gallery-projects-wrap-4 .project-cover-wrap {
-    width: 25%
-}
-
-.mini-profile-wrap .gallery-projects-wrap-4 .project-cover-wrap:nth-child(n+5) {
-    display: none
-}
-
-.mini-profile-wrap .gallery-projects-wrap-2 {
-    width: 242px
-}
-
-.mini-profile-wrap .gallery-projects-wrap-2 .project-cover-wrap {
-    width: 50%
-}
-
-.mini-profile-wrap .gallery-projects-wrap-2 .project-cover-wrap:nth-child(n+3) {
-    display: none
-}
-
-.mini-profile-wrap .rf-avatar {
-    float: left;
-    margin-right: 10px
-}
-
-.mini-profile-wrap .user-info {
-    display: inline-block;
-    width: calc(100% - 50px)
-}
-
-.mini-profile-wrap .user-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #3c3c3c;
-    display: block;
-    font-size: 14px;
-    padding-bottom: 3px
-}
-
-.mini-profile-wrap .location-link {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #6f6f6f;
-    display: block;
-    font-size: 13px
-}
-
-.mini-profile-wrap .location-link::before {
-    margin-right: 3px
-}
-
-.mini-profile-wrap .follow-button-container,
-.mini-profile-wrap .rf-button__container--follow {
-    float: right;
-    width: 80px
-}
-
-.mini-profile-wrap .gallery-projects-wrap {
-    float: left;
-    margin: 0 0 10px;
-    width: 331px
-}
-
-.mini-profile-wrap .gallery-projects-wrap .project-cover-wrap {
-    display: block !important;
-    height: 82px;
-    width: 108px
-}
-
-.mini-profile-wrap .user-stats-followed {
-    float: inherit
-}
-
-.mini-profile-wrap .user-info-container {
-    display: inline-block;
-    width: calc(100% - 85px)
-}
-
-.mini-profile-wrap .stats-wrap {
-    color: #adadad;
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: -2px
-}
-
-.mini-profile-wrap .cover-stat {
-    margin-right: 10px
-}
-
-.mini-profile-wrap .cover-stat::before {
-    margin-right: 2px
-}
-
-html.lightbox-enabled,
-html.lightbox-enabled body {
-    overflow: hidden;
-}
-
-html.lightbox-zoomed .lightbox-content {
-    cursor: zoom-out;
-    overflow: auto;
-}
-
-html.lightbox-zoomed .lightbox-content.zoomable-x {
-    justify-content: flex-start;
-}
-
-html.lightbox-zoomed .lightbox-content.zoomable-y {
-    align-items: baseline;
-}
-
-html.lightbox-zoomed #lightbox-wrap img {
-    max-width: inherit;
-    max-height: inherit;
-}
-
-html.lightbox-zoomed #lightbox-img-wrap .lightbox-extra {
-    display: none;
-}
-
-.lightbox-link,
-.lightbox-content.zoomable {
-    cursor: zoom-in;
-}
-
-#lightbox-wrap .lightbox-contents {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.lightbox-content {
-    align-items: center;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    opacity: 1;
-    position: absolute;
-    top: 0;
-    transition: opacity .4s;
-    width: 100vw;
-}
-
-#lightbox-blocking {
-    align-items: center;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 1002;
-}
-
-#lightbox-blocking .lightbox-spinner {
-    display: none;
-}
-
-#lightbox-wrap {
-    height: 100vh;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    z-index: 1001;
-}
-
-#lightbox-wrap .offscreen,
-#lightbox-wrap.offscreen {
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    -webkit-transform: translateX(-99999px);
-    -ms-transform: translateX(-99999px);
-    transform: translateX(-99999px);
-    width: 0;
-}
-
-#lightbox-wrap.loading .lightbox-spinner {
-    display: block;
-}
-
-#lightbox-wrap .hidden {
-    opacity: 0;
-}
-
-#lightbox-wrap .lightbox-contents {
-    display: inline-block;
-    max-height: 100%;
-    max-width: 100%;
-}
-
-#lightbox-wrap.single .next,
-#lightbox-wrap.single .next:hover,
-#lightbox-wrap.single .prev,
-#lightbox-wrap.single .prev:hover {
-    display: none;
-}
-
-#lightbox-wrap.extras-hidden #lightbox-img-wrap .lightbox-extra {
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-#lightbox-wrap img {
-    max-height: 100vh;
-    max-width: 100vw;
-}
-
-#lightbox-inner-wrap {
-    margin: auto;
-    position: relative;
-    z-index: 1003;
-}
-
-#lightbox-inner-wrap .control {
-    cursor: pointer;
-    position: absolute;
-    z-index: 1003;
-}
-
-#lightbox-inner-wrap svg .lightbox-icon-bg {
-    fill: #696969;
-    opacity: .2;
-}
-
-#lightbox-inner-wrap svg:hover .lightbox-icon-bg {
-    opacity: .4;
-}
-
-#lightbox-inner-wrap .next,
-#lightbox-inner-wrap .prev {
-    height: 100vh;
-    opacity: 0;
-    top: 0;
-    width: 30vw;
-}
-
-#lightbox-inner-wrap .next:hover,
-#lightbox-inner-wrap .prev:hover {
-    opacity: 1;
-}
-
-#lightbox-inner-wrap .next.hidden,
-#lightbox-inner-wrap .prev.hidden {
-    cursor: default;
-}
-
-#lightbox-inner-wrap .next.hidden svg,
-#lightbox-inner-wrap .prev.hidden svg {
-    display: none;
-}
-
-#lightbox-inner-wrap .next svg,
-#lightbox-inner-wrap .prev svg {
-    top: -webkit-calc(50% - 30px);
-    top: calc(50% - 30px);
-    position: absolute;
-}
-
-#lightbox-inner-wrap .next svg .lightbox-icon-arrow,
-#lightbox-inner-wrap .prev svg .lightbox-icon-arrow {
-    fill: #FFFFFF;
-}
-
-#lightbox-inner-wrap .next {
-    right: 0;
-}
-
-#lightbox-inner-wrap .next svg {
-    right: 20px;
-}
-
-#lightbox-inner-wrap .prev {
-    left: 0;
-}
-
-#lightbox-inner-wrap .prev svg {
-    left: 20px;
-}
-
-#lightbox-inner-wrap .close {
-    position: fixed;
-    height: 40px;
-    right: 20px;
-    top: 20px;
-    width: 40px;
-}
-
-#lightbox-inner-wrap .close:hover {
-    cursor: pointer;
-}
-
-#lightbox-inner-wrap .close .lightbox-icon-bg {
-    fill: #fff;
-}
-
-@media (max-width: 1024px) {
-    #lightbox-inner-wrap .close {
-    right: 0;
-    top: 0;
-    }
-    #lightbox-inner-wrap .close circle {
-    display: none;
-    }
-    #lightbox-inner-wrap .next:hover,
-    #lightbox-inner-wrap .prev:hover {
-    opacity: 0;
-    }
-}
-
-@media (min-width: 1024px) {
-    .lightbox-link.hover-icon-enabled {
-    position: relative;
-    }
-    .lightbox-link.hover-icon-enabled:hover::after {
-    background: rgba(105, 105, 105, 0.2) url(data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDogd2hpdGUiIHZpZXdCb3g9IjAgMCAyMSAyMSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICA8cGF0aCBkPSJNLTEuMjUyMjIyNTEsMTUuNjAzNDE5NyBDLTEuMzUyNTE5MjcsMTUuNjkzNjg2OCAtMS40MjUyMzMzMywxNS43OTg5OTY4IC0xLjQ3MDM2Njg3LDE1LjkxOTM1MjkgQy0xLjUxNTUwMDQxLDE2LjAzOTcwOSAtMS41MzgwNjY4NCwxNi4xNjAwNjMzIC0xLjUzODA2Njg0LDE2LjI4MDQxOTQgQy0xLjUzODA2Njg0LDE2LjQwMDc3NTUgLTEuNTE1NTAwNDEsMTYuNTIxMTI5OCAtMS40NzAzNjY4NywxNi42NDE0ODU5IEMtMS40MjUyMzMzMywxNi43NjE4NDIgLTEuMzUyNTE5MjcsMTYuODY3MTUyIC0xLjI1MjIyMjUxLDE2Ljk1NzQxOTEgTDMuNTYxOTk3NzEsMjEuNzcxNjM5MyBDMy43NTI1NjE1NSwyMS45NjIyMDMyIDMuOTgwNzMzMjQsMjIuMDU3NDgzNyA0LjI0NjUxOTY1LDIyLjA1NzQ4MzcgQzQuNTEyMzA2MDUsMjIuMDU3NDgzNyA0LjczNTQ2Mjk5LDIxLjk2MjIwMzIgNC45MTU5OTcxNSwyMS43NzE2MzkzIEM1LjEwNjU2MDk4LDIxLjU4MTA3NTUgNS4yMDE4NDE0NywyMS4zNTU0MTEyIDUuMjAxODQxNDcsMjEuMDk0NjM5NiBDNS4yMDE4NDE0NywyMC44MzM4NjggNS4xMDY1NjA5OCwyMC42MDgyMDM3IDQuOTE1OTk3MTUsMjAuNDE3NjM5OSBMMS43NTY2NjUxMywxNy4yNDMyNjM0IEwxMC4wMTYwNjE3LDE3LjI0MzI2MzQgQzEwLjI4Njg2MjksMTcuMjQzMjYzNCAxMC41MTUwMzQ2LDE3LjE1MDQ5MDMgMTAuNzAwNTgzNiwxNi45NjQ5NDEzIEMxMC44ODYxMzI2LDE2Ljc3OTM5MjMgMTAuOTc4OTA1NywxNi41NTEyMjA2IDEwLjk3ODkwNTcsMTYuMjgwNDE5NCBDMTAuOTc4OTA1NywxNi4wMDk2MTgyIDEwLjg4NjEzMjYsMTUuNzgxNDQ2NSAxMC43MDA1ODM2LDE1LjU5NTg5NzUgQzEwLjUxNTAzNDYsMTUuNDEwMzQ4NSAxMC4yODY4NjI5LDE1LjMxNzU3NTMgMTAuMDE2MDYxNywxNS4zMTc1NzUzIEwxLjc1NjY2NTEzLDE1LjMxNzU3NTMgTDQuOTE1OTk3MTUsMTIuMTQzMTk4OSBDNS4xMDY1NjA5OCwxMS45NTI2MzUxIDUuMjAxODQxNDcsMTEuNzI2OTcwNyA1LjIwMTg0MTQ3LDExLjQ2NjE5OTIgQzUuMjAxODQxNDcsMTEuMjA1NDI3NiA1LjEwNjU2MDk4LDEwLjk3OTc2MzMgNC45MTU5OTcxNSwxMC43ODkxOTk1IEM0LjczNTQ2Mjk5LDEwLjU5ODYzNTYgNC41MTIzMDYwNSwxMC41MDMzNTUxIDQuMjQ2NTE5NjUsMTAuNTAzMzU1MSBDMy45ODA3MzMyNCwxMC41MDMzNTUxIDMuNzUyNTYxNTUsMTAuNTk4NjM1NiAzLjU2MTk5NzcxLDEwLjc4OTE5OTUgTC0xLjI1MjIyMjUxLDE1LjYwMzQxOTcgWiIgaWQ9IngiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQuNzIwNDE5LCAxNi4yODA0MTkpIHJvdGF0ZSgtNDUuMDAwMDAwKSB0cmFuc2xhdGUoLTQuNzIwNDE5LCAtMTYuMjgwNDE5KSAiPjwvcGF0aD4KICA8cGF0aCBkPSJNMTAuMzA3Nzc3NCw0LjA0MzQxOTczIEMxMC4yMDc0ODA3LDQuMTMzNjg2ODEgMTAuMTM0NzY2Niw0LjIzODk5NjgzIDEwLjA4OTYzMzEsNC4zNTkzNTI5MyBDMTAuMDQ0NDk5NSw0LjQ3OTcwOTA0IDEwLjAyMTkzMzEsNC42MDAwNjMzNCAxMC4wMjE5MzMxLDQuNzIwNDE5NDUgQzEwLjAyMTkzMzEsNC44NDA3NzU1NiAxMC4wNDQ0OTk1LDQuOTYxMTI5ODYgMTAuMDg5NjMzMSw1LjA4MTQ4NTk3IEMxMC4xMzQ3NjY2LDUuMjAxODQyMDcgMTAuMjA3NDgwNyw1LjMwNzE1MjA5IDEwLjMwNzc3NzQsNS4zOTc0MTkxNyBMMTUuMTIxOTk3NywxMC4yMTE2Mzk0IEMxNS4zMTI1NjE1LDEwLjQwMjIwMzIgMTUuNTQwNzMzMiwxMC40OTc0ODM3IDE1LjgwNjUxOTYsMTAuNDk3NDgzNyBDMTYuMDcyMzA2LDEwLjQ5NzQ4MzcgMTYuMjk1NDYyOSwxMC40MDIyMDMyIDE2LjQ3NTk5NzEsMTAuMjExNjM5NCBDMTYuNjY2NTYwOSwxMC4wMjEwNzU2IDE2Ljc2MTg0MTQsOS43OTU0MTEyNCAxNi43NjE4NDE0LDkuNTM0NjM5NjcgQzE2Ljc2MTg0MTQsOS4yNzM4NjgxMSAxNi42NjY1NjA5LDkuMDQ4MjAzNzkgMTYuNDc1OTk3MSw4Ljg1NzYzOTk1IEwxMy4zMTY2NjUxLDUuNjgzMjYzNDkgTDIxLjU3NjA2MTYsNS42ODMyNjM0OSBDMjEuODQ2ODYyOSw1LjY4MzI2MzQ5IDIyLjA3NTAzNDYsNS41OTA0OTAzOSAyMi4yNjA1ODM2LDUuNDA0OTQxMzkgQzIyLjQ0NjEzMjYsNS4yMTkzOTIzOSAyMi41Mzg5MDU3LDQuOTkxMjIwNjkgMjIuNTM4OTA1Nyw0LjcyMDQxOTQ1IEMyMi41Mzg5MDU3LDQuNDQ5NjE4MjEgMjIuNDQ2MTMyNiw0LjIyMTQ0NjUxIDIyLjI2MDU4MzYsNC4wMzU4OTc1MSBDMjIuMDc1MDM0NiwzLjg1MDM0ODUxIDIxLjg0Njg2MjksMy43NTc1NzU0MSAyMS41NzYwNjE2LDMuNzU3NTc1NDEgTDEzLjMxNjY2NTEsMy43NTc1NzU0MSBMMTYuNDc1OTk3MSwwLjU4MzE5ODk0NyBDMTYuNjY2NTYwOSwwLjM5MjYzNTExMSAxNi43NjE4NDE0LDAuMTY2OTcwNzk0IDE2Ljc2MTg0MTQsLTAuMDkzODAwNzcxNSBDMTYuNzYxODQxNCwtMC4zNTQ1NzIzMzcgMTYuNjY2NTYwOSwtMC41ODAyMzY2NTQgMTYuNDc1OTk3MSwtMC43NzA4MDA0OSBDMTYuMjk1NDYyOSwtMC45NjEzNjQzMjcgMTYuMDcyMzA2LC0xLjA1NjY0NDgyIDE1LjgwNjUxOTYsLTEuMDU2NjQ0ODIgQzE1LjU0MDczMzIsLTEuMDU2NjQ0ODIgMTUuMzEyNTYxNSwtMC45NjEzNjQzMjcgMTUuMTIxOTk3NywtMC43NzA4MDA0OSBMMTAuMzA3Nzc3NCw0LjA0MzQxOTczIFoiIGlkPSJ4IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNi4yODA0MTksIDQuNzIwNDE5KSByb3RhdGUoLTIyNS4wMDAwMDApIHRyYW5zbGF0ZSgtMTYuMjgwNDE5LCAtNC43MjA0MTkpICI+PC9wYXRoPgo8L3N2Zz4K) no-repeat center;
-    background-size: 16px;
-    border-radius: 50%;
-    content: '';
-    display: block;
-    height: 36px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 36px;
-    z-index: 1000;
-    }
-}
-
-@media all and (-ms-high-contrast: none) {
-    .lightbox-link,
-    .lightbox-content.zoomable {
-    cursor: pointer;
-    }
-}
-</style>
-<style type="text/css">
-@-webkit-keyframes rotate-forever {
-    0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    }
-    100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-    }
-}
-
-@-moz-keyframes rotate-forever {
-    0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    }
-    100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-    }
-}
-
-@keyframes rotate-forever {
-    0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    }
-    100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-    }
-}
-
-.lightbox-spinner {
-    -webkit-animation-duration: 0.7s;
-    -moz-animation-duration: 0.7s;
-    animation-duration: 0.7s;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    -webkit-animation-name: rotate-forever;
-    -moz-animation-name: rotate-forever;
-    animation-name: rotate-forever;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-timing-function: linear;
-    animation-timing-function: linear;
-    height: 30px;
-    width: 30px;
-    border: 4px solid #fff;
-    border-right-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.7;
-}
-
-</style>
-
-
-
-
-<main>
-
-
-
-
-
-  <div id="top-panel" class="slide-panel js-top-panel">
-    <a id="top-panel-blocking" class="js-top-panel-blocking"></a>
-   
-    <div id="site-content" class="js-site-content">
-
-
-      <div id="profile-header-actions" class="layout-wrap js-profile-header-actions">
-      <%= if can_edit_page?(@user, @current_user) do %>
-        <div class="header-right-wrapper">
-          <div class="form-item form-item-a js-rf-button-container rf-button__container profile-header-action form-button-wrap">
-          <a class="form-button js-rf-button js-share-button rf-button rf-button--secondary rf-button--icon-leading layout-wrap-action"
-              id="viral-icons" data-header="Share This Profile" data-text="Check out Kuocheng Liao on @Behance: https://www.behance.net/KuoChengLiao"
-              data-image="https://mir-s3-cdn-cf.behance.net/user/276/a88c16479117.56362c926256a.jpg" data-url="https://www.behance.net/KuoChengLiao"
-              unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>"><span class=" rf-button__icon-container rf-button__icon-container--leading"><svg class="rf-icon rf-icon--share" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" d="M0 0v16h16V0H0zm7 8c0 .125-.01.247-.024.367l2.942 1.468c.54-.52 1.273-.843 2.082-.843 1.658 0 3 1.342 3 3s-1.342 3-3 3c-1.654 0-3-1.345-3-3 0-.124.01-.247.025-.366l-2.943-1.468C5.542 10.678 4.81 11 4 11 2.343 11 .997 9.658.997 8c0-1.656 1.347-3 3-3 .81 0 1.543.32 2.082.84l2.945-1.47C9.01 4.247 9 4.124 9 4 9 2.342 10.348.997 12.002.997c1.66 0 3.002 1.345 3.002 3C15.004 5.66 13.662 7 12.002 7c-.81 0-1.54-.32-2.082-.842L6.975 7.63C6.99 7.752 7 7.875 7 8z"></path><path d="M12.002 7c1.66 0 3.002-1.343 3.002-3S13.662.997 12.002.997C10.348.998 9 2.343 9 3.998c0 .126.01.25.025.37L6.08 5.842C5.54 5.32 4.808 5 4 5 2.343 5 .996 6.344.996 8c0 1.658 1.347 3 3 3 .812 0 1.545-.322 2.085-.843l2.943 1.468c-.015.12-.025.242-.025.365 0 1.656 1.346 3 3 3 1.658 0 3-1.344 3-3s-1.342-3-3-3c-.81 0-1.54.324-2.082.844L6.976 8.367C6.99 8.247 7 8.125 7 8s-.01-.248-.025-.37L9.92 6.158c.54.52 1.273.842 2.082.842z"></path></svg></span><span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>            </div>
-          <div class="form-item form-item-a js-rf-button-container rf-button__container js-view-portfolio-button profile-header-action  form-button-wrap">
-          <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" href="<%= session_path(@conn, :delete, @current_user) %>"
-              target="_blank" unselectable="on" tabindex="0"><span class=" rf-button__icon-container rf-button__icon-container--leading"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 44" width="20" height="20"><path d="M11.5,11.1c0-.1,0-.2.2-.2,1.2-.1,2.9-.1,4.7-.1,5.1,0,7.3,2.8,7.3,6.4,0,4.7-3.4,6.7-7.5,6.7H14.8V31c0,.2-.1.2-.2.2H11.8c-.2,0-.2-.1-.2-.2l-.1-19.9Zm3.3,9.8h1.5c2.1,0,4.1-.8,4.1-3.7,0-2.3-1.4-3.5-3.9-3.5a9.18,9.18,0,0,0-1.8.1l.1,7.1Z" style="fill:#66a7db"></path><path d="M25.6,19.6a.22.22,0,0,1-.2-.2V16.9c0-.2,0-.2.2-.2h1.7v-.9a6.53,6.53,0,0,1,.6-2.9,4.05,4.05,0,0,1,3.9-2.2,2.17,2.17,0,0,1,1.2.2c.2.1.2.1.2.3v2.4c0,.2-.1.2-.2.2a2.2,2.2,0,0,0-.8-.1c-1.1,0-1.6.8-1.6,2.2v.9H33c.2,0,.2,0,.2.2v2.5c0,.2,0,.2-.2.2H30.6V31c0,.1,0,.2-.2.2H27.5c-.2,0-.2-.1-.2-.2V19.6Z" style="fill:#66a7db"></path><rect x="2" y="2" width="41" height="40" style="fill:#071833"></rect><path d="M2,2H43V42H2ZM0,44H45V0H0Z" style="fill:#69abdd"></path><path d="M11.55,11.15c0-.12,0-.21.18-.21,1.18-.06,2.91-.09,4.74-.09,5.1,0,7.32,2.79,7.32,6.37,0,4.67-3.37,6.68-7.53,6.68-.7,0-.94,0-1.43,0v7.07c0,.15-.06.21-.21.21H11.76c-.15,0-.21-.06-.21-.21Zm3.28,9.77c.42,0,.76,0,1.49,0,2.16,0,4.16-.76,4.16-3.67,0-2.34-1.43-3.52-3.89-3.52-.73,0-1.43,0-1.76.06Z" style="fill:#69abdd"></path><path d="M25.75,19.62c-.12,0-.15-.06-.15-.21V16.92c0-.15,0-.18.15-.18h1.7V15.8a6.25,6.25,0,0,1,.61-2.91,3.94,3.94,0,0,1,3.89-2.25,3.46,3.46,0,0,1,1.24.15.24.24,0,0,1,.18.27v2.43c0,.15-.06.21-.21.18a3.77,3.77,0,0,0-.82-.09c-1.06,0-1.58.76-1.58,2.22v.94h2.4c.15,0,.18,0,.18.15v2.52c0,.15,0,.18-.18.21h-2.4V30.94c0,.12,0,.21-.21.21H27.67a.19.19,0,0,1-.21-.21V19.62Z" style="fill:#69abdd"></path></svg></span><span class="rf-button__label">Logout</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>            </div>
-        </div>
-        <% end %>
-      </div>
-      <div id="profile" class="js-profile content-container layout-wrap">
-        <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section js-profile-info">
-          <div id="profile-display-name"> <a href="https://www.behance.net/KuoChengLiao"><%= @user.name %></a> </div> <a target="_blank" href="https://www.behance.net/KuoChengLiao"
-            class="rf-avatar " data-id="">  <img src="<%= avatar_href(@user.avatar) %>" data-src="<%= avatar_href(@user.avatar) %>" class="rf-avatar__image js-avatar__image"></a>
-          <div id="profile-details">
-            <div id="profile-title" class="qa-profile-title"> DJ <%= @user.djname %>
+        <div id="profile-header-actions" class="layout-wrap js-profile-header-actions">
+          <%= if can_edit_page?(@user, @current_user) do %>
+            <div class="header-right-wrapper">
+              <div class="form-item form-item-a js-rf-button-container rf-button__container profile-header-action form-button-wrap">
+                <a class="form-button js-rf-button js-share-button rf-button rf-button--secondary rf-button--icon-leading layout-wrap-action"
+                  id="viral-icons" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>"><span class=" rf-button__icon-container rf-button__icon-container--leading"><svg class="rf-icon rf-icon--share" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" d="M0 0v16h16V0H0zm7 8c0 .125-.01.247-.024.367l2.942 1.468c.54-.52 1.273-.843 2.082-.843 1.658 0 3 1.342 3 3s-1.342 3-3 3c-1.654 0-3-1.345-3-3 0-.124.01-.247.025-.366l-2.943-1.468C5.542 10.678 4.81 11 4 11 2.343 11 .997 9.658.997 8c0-1.656 1.347-3 3-3 .81 0 1.543.32 2.082.84l2.945-1.47C9.01 4.247 9 4.124 9 4 9 2.342 10.348.997 12.002.997c1.66 0 3.002 1.345 3.002 3C15.004 5.66 13.662 7 12.002 7c-.81 0-1.54-.32-2.082-.842L6.975 7.63C6.99 7.752 7 7.875 7 8z"></path><path d="M12.002 7c1.66 0 3.002-1.343 3.002-3S13.662.997 12.002.997C10.348.998 9 2.343 9 3.998c0 .126.01.25.025.37L6.08 5.842C5.54 5.32 4.808 5 4 5 2.343 5 .996 6.344.996 8c0 1.658 1.347 3 3 3 .812 0 1.545-.322 2.085-.843l2.943 1.468c-.015.12-.025.242-.025.365 0 1.656 1.346 3 3 3 1.658 0 3-1.344 3-3s-1.342-3-3-3c-.81 0-1.54.324-2.082.844L6.976 8.367C6.99 8.247 7 8.125 7 8s-.01-.248-.025-.37L9.92 6.158c.54.52 1.273.842 2.082.842z"></path></svg></span><span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>                </div>
+              <div class="form-item form-item-a js-rf-button-container rf-button__container js-view-portfolio-button profile-header-action  form-button-wrap">
+                <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" href="<%= session_path(@conn, :delete, @current_user) %>"
+                  target="_blank" unselectable="on" tabindex="0"><span class=" rf-button__icon-container rf-button__icon-container--leading"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 44" width="20" height="20"><path d="M11.5,11.1c0-.1,0-.2.2-.2,1.2-.1,2.9-.1,4.7-.1,5.1,0,7.3,2.8,7.3,6.4,0,4.7-3.4,6.7-7.5,6.7H14.8V31c0,.2-.1.2-.2.2H11.8c-.2,0-.2-.1-.2-.2l-.1-19.9Zm3.3,9.8h1.5c2.1,0,4.1-.8,4.1-3.7,0-2.3-1.4-3.5-3.9-3.5a9.18,9.18,0,0,0-1.8.1l.1,7.1Z" style="fill:#66a7db"></path><path d="M25.6,19.6a.22.22,0,0,1-.2-.2V16.9c0-.2,0-.2.2-.2h1.7v-.9a6.53,6.53,0,0,1,.6-2.9,4.05,4.05,0,0,1,3.9-2.2,2.17,2.17,0,0,1,1.2.2c.2.1.2.1.2.3v2.4c0,.2-.1.2-.2.2a2.2,2.2,0,0,0-.8-.1c-1.1,0-1.6.8-1.6,2.2v.9H33c.2,0,.2,0,.2.2v2.5c0,.2,0,.2-.2.2H30.6V31c0,.1,0,.2-.2.2H27.5c-.2,0-.2-.1-.2-.2V19.6Z" style="fill:#66a7db"></path><rect x="2" y="2" width="41" height="40" style="fill:#071833"></rect><path d="M2,2H43V42H2ZM0,44H45V0H0Z" style="fill:#69abdd"></path><path d="M11.55,11.15c0-.12,0-.21.18-.21,1.18-.06,2.91-.09,4.74-.09,5.1,0,7.32,2.79,7.32,6.37,0,4.67-3.37,6.68-7.53,6.68-.7,0-.94,0-1.43,0v7.07c0,.15-.06.21-.21.21H11.76c-.15,0-.21-.06-.21-.21Zm3.28,9.77c.42,0,.76,0,1.49,0,2.16,0,4.16-.76,4.16-3.67,0-2.34-1.43-3.52-3.89-3.52-.73,0-1.43,0-1.76.06Z" style="fill:#69abdd"></path><path d="M25.75,19.62c-.12,0-.15-.06-.15-.21V16.92c0-.15,0-.18.15-.18h1.7V15.8a6.25,6.25,0,0,1,.61-2.91,3.94,3.94,0,0,1,3.89-2.25,3.46,3.46,0,0,1,1.24.15.24.24,0,0,1,.18.27v2.43c0,.15-.06.21-.21.18a3.77,3.77,0,0,0-.82-.09c-1.06,0-1.58.76-1.58,2.22v.94h2.4c.15,0,.18,0,.18.15v2.52c0,.15,0,.18-.18.21h-2.4V30.94c0,.12,0,.21-.21.21H27.67a.19.19,0,0,1-.21-.21V19.62Z" style="fill:#69abdd"></path></svg></span><span class="rf-button__label">Logout</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>                </div>
             </div>
-            <div class="profile-location has-website"> <a class="profile-location-link qa-profile-location-link beicons-pre beicons-pre-location" href="https://www.behance.net/search?content=users&amp;sort=appreciations&amp;country=CN&amp;city=Shanghai"><%= @user.user_country %></a>              </div>
-            <div id="profile-actions" class="hide-phone show-tablet">
+            <% end %>
+        </div>
+        <div id="profile" class="js-profile content-container layout-wrap">
+          <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section js-profile-info">
+            <div id="profile-display-name">
+              <%= @user.name %>
+            </div> <div class="rf-avatar">  <img src="<%= avatar_href(@user.avatar) %>" data-src="<%= avatar_href(@user.avatar) %>" class="rf-avatar__image js-avatar__image"></div>
+            <div id="profile-details">
+              <div id="profile-title" class="qa-profile-title"> DJ
+                <%= format_djname(@user) %>
+              </div>
+              <div class="profile-location has-website">
+                <div class="profile-location-link qa-profile-location-link beicons-pre beicons-pre-location">
+                  <%= @user.user_country %>
+                </div>
+              </div>
+              <div id="profile-actions" class="hide-phone show-tablet">
+                <div id="profile-action-follow" class="js-profile-action-follow profile-action">
+                  <!--<div class="user-follow js-action-follow  qa-follow-button-container form-button-wrap rf-button__container rf-button__container--follow follow-button-container"
+                  data-followee="479117" data-entity="user"> <a class="js-form-button-follow  rf-button rf-button--follow"><span class="rf-button__label">Follow</span></a>                  <a class="qa-form-button-following  rf-button rf-button--secondary rf-button--following"><span class="rf-button__label">Following</span></a>                  <a class="js-form-button-unfollow  rf-button rf-button--danger rf-button--unfollow"><span class="rf-button__label">Unfollow</span></a></div>-->
+                </div>
+                <div class="form-item form-item-a js-rf-button-container js-action-message-user rf-button__container--message rf-button__container form-button-wrap"
+                  title="Message User" data-contact_name="Kuocheng Liao" data-contact_id="479117"> <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" unselectable="on"
+                    tabindex="0" href="mailto:<%= @user.email %>"><span class=" rf-button__icon-container rf-button__icon-container--leading"><svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285"><g><path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path><path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path><path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path><path d="M5677.372 845.63l-4.372-3.205v5.618z"></path></g></svg></span><span class="rf-button__label">Message</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a></div>
+              </div>
+
+
+            </div>
+
+            <div id="profile-actions" class="hide-tablet">
               <div id="profile-action-follow" class="js-profile-action-follow profile-action">
                 <!--<div class="user-follow js-action-follow  qa-follow-button-container form-button-wrap rf-button__container rf-button__container--follow follow-button-container"
-                  data-followee="479117" data-entity="user"> <a class="js-form-button-follow  rf-button rf-button--follow"><span class="rf-button__label">Follow</span></a>                  <a class="qa-form-button-following  rf-button rf-button--secondary rf-button--following"><span class="rf-button__label">Following</span></a>                  <a class="js-form-button-unfollow  rf-button rf-button--danger rf-button--unfollow"><span class="rf-button__label">Unfollow</span></a></div>-->
+                data-followee="479117" data-entity="user"> <a class="js-form-button-follow  rf-button rf-button--follow"><span class="rf-button__label">Follow</span></a>                <a class="qa-form-button-following  rf-button rf-button--secondary rf-button--following"><span class="rf-button__label">Following</span></a>                <a class="js-form-button-unfollow  rf-button rf-button--danger rf-button--unfollow"><span class="rf-button__label">Unfollow</span></a></div>-->
               </div>
               <div class="form-item form-item-a js-rf-button-container js-action-message-user rf-button__container--message rf-button__container form-button-wrap"
                 title="Message User" data-contact_name="Kuocheng Liao" data-contact_id="479117"> <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" unselectable="on"
-                  tabindex="0"><span class=" rf-button__icon-container rf-button__icon-container--leading"><svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285"><g><path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path><path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path><path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path><path d="M5677.372 845.63l-4.372-3.205v5.618z"></path></g></svg></span><span class="rf-button__label">Message</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a></div>
+                  tabindex="0" href="mailto:<%= @user.email %>"><span class=" rf-button__icon-container rf-button__icon-container--leading"><svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285"><g><path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path><path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path><path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path><path d="M5677.372 845.63l-4.372-3.205v5.618z"></path></g></svg></span><span class="rf-button__label">Message</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a></div>
             </div>
-
-
           </div>
 
-          <div id="profile-actions" class="hide-tablet">
-            <div id="profile-action-follow" class="js-profile-action-follow profile-action">
-              <!--<div class="user-follow js-action-follow  qa-follow-button-container form-button-wrap rf-button__container rf-button__container--follow follow-button-container"
-                data-followee="479117" data-entity="user"> <a class="js-form-button-follow  rf-button rf-button--follow"><span class="rf-button__label">Follow</span></a>                <a class="qa-form-button-following  rf-button rf-button--secondary rf-button--following"><span class="rf-button__label">Following</span></a>                <a class="js-form-button-unfollow  rf-button rf-button--danger rf-button--unfollow"><span class="rf-button__label">Unfollow</span></a></div>-->
+
+          <span class="js-nav-phone"></span>
+          <div id="profile-stats" class="profile-section content-minor-section content-mobile-first-section js-profile-stats">
+            <div class="profile-stat">
+              <div class="profile-stat-label profile-sidebar-label content-minor-secton-label beicons-pre beicons-pre-eye"> <span class="stat-text">Song suggested</span> </div>
+              <div class="profile-stat-count">
+            
+                  <%= length(@songs) %>
+              
+              </div>
             </div>
-            <div class="form-item form-item-a js-rf-button-container js-action-message-user rf-button__container--message rf-button__container form-button-wrap"
-              title="Message User" data-contact_name="Kuocheng Liao" data-contact_id="479117"> <a class="form-button js-rf-button rf-button rf-button--secondary rf-button--icon-leading" unselectable="on"
-                tabindex="0"><span class=" rf-button__icon-container rf-button__icon-container--leading"><svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285"><g><path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path><path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path><path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path><path d="M5677.372 845.63l-4.372-3.205v5.618z"></path></g></svg></span><span class="rf-button__label">Message</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a></div>
+            <!-- /.profile-stat -->
           </div>
-        </div>
+          <!-- /#profile-stats -->
+          <span class="js-nav-desktop-tablet"></span>
+          <div id="profile-nav" class="content-main content-section-nav js-profile-nav">
+            <div class="js-iscroll-wrap profile-nav-inner content-nav-inner" style="overflow: visible;">
+              <div class="profile-section-header content-section-header js-section-header js-iscroll" data-section-header="gallery" style="transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate3d(0px, 0px, 0px); min-width: 0px;">
+                <div class="profile-section-header-item content-section-nav-item js-section js-iscroll-item active" data-section="projects"
+                  href="#">Suggestions</div>
+
+              </div>
 
 
-        <span class="js-nav-phone"></span>
-        <div id="profile-stats" class="profile-section content-minor-section content-mobile-first-section js-profile-stats">
-          <div class="profile-stat">
-            <div class="profile-stat-label profile-sidebar-label content-minor-secton-label beicons-pre beicons-pre-eye"> <span class="stat-text">Song suggested</span> </div>
-            <div class="profile-stat-count"> <a href="https://www.behance.net/KuoChengLiao/stats"><%= length(@songs) %></a> </div>
-          </div>
-          <!-- /.profile-stat -->
-        </div>
-        <!-- /#profile-stats -->
-        <span class="js-nav-desktop-tablet"></span>
-        <div id="profile-nav" class="content-main content-section-nav js-profile-nav">
-          <div class="js-iscroll-wrap profile-nav-inner content-nav-inner" style="overflow: visible;">
-            <div class="profile-section-header content-section-header js-section-header js-iscroll" data-section-header="gallery" style="transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate3d(0px, 0px, 0px); min-width: 0px;">
-               <a class="profile-section-header-item content-section-nav-item js-section js-iscroll-item active"
-                data-section="projects" href="https://www.behance.net/KuoChengLiao">Suggestions</a>
-
             </div>
-            <div class="profile-section-header content-section-header js-section-header js-iscroll profile-section-header-connections hide"
-              data-section-header="connections" style="min-width: 0px;"> <a class="profile-section-header-item content-section-nav-item js-section js-iscroll-item" data-section="followers"
-                href="https://www.behance.net/KuoChengLiao/followers">Followers <span class="profile-section-header-item content-section-nav-item-count">(22,321)</span></a>              <a class="profile-section-header-item content-section-nav-item js-section js-iscroll-item" data-section="following"
-                href="https://www.behance.net/KuoChengLiao/following">Following <span class="profile-section-header-item content-section-nav-item-count">(389)</span></a>
-            </div>
-            <form id="searchForm" class="js-search-form profile-search hide">
-              <div class="form-item form-item-text be-placeholder" id="search-container">
-                <input name="search" type="text" class="form-text form-search js-search-form-input validate[optional,Generic]" id="search"
-                  placeholder="Search…" data-validate="optional,Generic"> </div>
-            </form>
-          </div>
-          <div class="profile-collection-select-wrapper js-profile-collection-select  hide">
-            <div class="profile-collection-select"> <select class="js-popstate-listener form-select ui-selectmenu-light ui-selectmenu-xlarge">        <option class="form-option" value="https://www.behance.net/KuoChengLiao/collections">        
+            <div class="profile-collection-select-wrapper js-profile-collection-select  hide">
+              <div class="profile-collection-select"> <select class="js-popstate-listener form-select ui-selectmenu-light ui-selectmenu-xlarge">        <option class="form-option" value="https://www.behance.net/KuoChengLiao/collections">        
         Kuocheng Liao's Collections
         </option>        <option class="form-option" value="https://www.behance.net/KuoChengLiao/collections_following">          
           Collections Kuocheng Liao Follows
         </option>    	</select> </div>
-          </div>
-        </div>
-
-
-        <div id="profile-info-wrap" class="js-profile-info-wrap content-section-wrap">
-
-
-
-        <%= if has_description?(@user) do %>
-          <div class="profile-section content-minor-section">
-            <h3 class="profile-sidebar-label content-minor-section-label"> About Me
-
-            </h3>
-            <%= @user.description %>
-
+            </div>
           </div>
 
-        <% end %>
+
+          <div id="profile-info-wrap" class="js-profile-info-wrap content-section-wrap">
+
+
+
+            <%= if has_description?(@user) do %>
+              <div class="profile-section content-minor-section">
+                <h3 class="profile-sidebar-label content-minor-section-label"> About Me
+
+                </h3>
+                <%= @user.description %>
+
+              </div>
+
+              <% end %>
 
 
 
@@ -751,166 +119,62 @@ html.lightbox-zoomed #lightbox-img-wrap .lightbox-extra {
 
 
 
-          <div id="profile-date" class="profile-section content-minor-section"> <span class="profile-date-text">      
+                <div id="profile-date" class="profile-section content-minor-section"> <span class="profile-date-text">      
       Member since: <span class="profile-date js-format-timestamp" data-timestamp="1306919518">June 1, 2011</span> </span>
 
-          </div>
-
-        </div>
-        <div id="gallery" class="content-main cfix js-gallery" data-section="projects">
-          <div class="profile-gallery-content-wrap">
-            <div class="profile-gallery-content js-profile-gallery-content" data-section="projects">
-
-
-          <%= for song <- @songs do %>
-           
-        
-               <div class="rf-project-cover rf-project-cover--project js-item js-project-cover qa-project-cover editable " data-id="54136737">
-                <a href="<%= song_path(@conn, :show, song) %>" class="rf-project-cover__image-container js-project-cover-image-link js-project-link">    <img class="rf-project-cover__image" src="<%= song_art_href(song.art) %>" data-src="<%= song_art_href(song.art) %>" alt="<%= song_art_alt(song) %>"></a>
-                <div class="rf-project-cover__details"> <a class="rf-project-cover__title js-project-cover-title-link" href="<%= song_path(@conn, :show, song) %>"><%= song.title %></a>
-                  <div class="rf-owners "> <span class="rf-owners__list ">
-          <div class="rf-owners__owner">            <a class="rf-owners__owner-link" href="<%= song_path(@conn, :show, song) %>">              <span class="rf-owners__owner-image-container">                <img class="rf-owners__owner-image js-mini-profile" data-id="479117" src="./Kuocheng Liao on Behance_files/a88c16479117.56362c926256a(1).jpg">              </span>
-                    <span class="rf-owners__owner-name js-mini-profile" data-id="479117">                <span class="rf-owners__owner-name-by">by:</span>                    <%= song.artist %>
-                    </span>
-                    </a>
-                  </div>
-                  </span>
-                </div> <a href="<%= song_path(@conn, :show, song) %>"></a>
-                <div class="rf-project-cover__fields">
-                  <ul class="rf-project-cover__fields-list">
-                    <li class="rf-project-cover__field"> <a href="<%= song_path(@conn, :show, song) %>" title="Illustration" class="rf-project-cover__field-link"><%= song.genre %></a>                      </li>
-                  </ul>
-                  <div class="rf-project-cover__curation-stats cover-stat-wrap"></div>
                 </div>
-                <div class="rf-project-cover__stats">
-                  <div class="rf-project-cover__curation-marks js-project-cover-curation-marks"></div>
-                  <a href="<%= song_path(@conn, :show, song) %>" class="rf-project-cover__stat-link">        <span class="rf-project-cover__stat">          <span class="rf-project-cover__stat js-cover-stat-appreciations  " data-timestamp="1498328352">            <svg class="rf-icon rf-icon--appreciate" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0.5 0.5 16 16"><path fill="none" d="M.5.5h16v16H.5z"></path><path d="M.5 7.5h3v8h-3zM7.207 15.207c.193.19.425.29.677.293H12c.256 0 .512-.098.707-.293l2.5-2.5c.19-.19.288-.457.293-.707V8.5c0-.553-.445-1-1-1h-5L11 5s.5-.792.5-1.5v-1c0-.553-.447-1-1-1l-1 2-4 4v6l1.707 1.707z"></path></svg>            53
+
+          </div>
+          <div id="gallery" class="content-main cfix js-gallery" data-section="projects">
+            <div class="profile-gallery-content-wrap">
+              <div class="profile-gallery-content js-profile-gallery-content" data-section="projects">
+
+
+                <%= for song <- @songs do %>
+
+
+                  <div class="rf-project-cover rf-project-cover--project js-item js-project-cover qa-project-cover editable " data-id="54136737">
+                    <a href="<%= song_path(@conn, :show, song) %>" class="rf-project-cover__image-container js-project-cover-image-link js-project-link">    <img class="rf-project-cover__image" src="<%= song_art_href(song.art) %>" data-src="<%= song_art_href(song.art) %>" alt="<%= song_art_alt(song) %>"></a>
+                    <div class="rf-project-cover__details">
+                      <a class="rf-project-cover__title js-project-cover-title-link" href="<%= song_path(@conn, :show, song) %>">
+                        <%= song.title %>
+                      </a>
+                      <div class="rf-owners "> <span class="rf-owners__list ">
+          <div class="rf-owners__owner">            <a class="rf-owners__owner-link" href="<%= song_path(@conn, :show, song) %>">              <span class="rf-owners__owner-image-container">                <img class="rf-owners__owner-image js-mini-profile" data-id="479117" src="./Kuocheng Liao on Behance_files/a88c16479117.56362c926256a(1).jpg">              </span>
+                        <span class="rf-owners__owner-name js-mini-profile" data-id="479117">                <span class="rf-owners__owner-name-by">by:</span>
+                        <%= song.artist %>
+                          </span>
+                          </a>
+                      </div>
+                      </span>
+                    </div> <a href="<%= song_path(@conn, :show, song) %>"></a>
+                    <div class="rf-project-cover__fields">
+                      <ul class="rf-project-cover__fields-list">
+                        <li class="rf-project-cover__field">
+                          <a href="<%= song_path(@conn, :show, song) %>" title="Illustration" class="rf-project-cover__field-link">
+                            <%= song.genre %>
+                          </a>
+                        </li>
+                      </ul>
+                      <div class="rf-project-cover__curation-stats cover-stat-wrap"></div>
+                    </div>
+                    <div class="rf-project-cover__stats">
+                      <div class="rf-project-cover__curation-marks js-project-cover-curation-marks"></div>
+                      <a href="<%= song_path(@conn, :show, song) %>" class="rf-project-cover__stat-link">        <span class="rf-project-cover__stat">          <span class="rf-project-cover__stat js-cover-stat-appreciations  " data-timestamp="1498328352">            <svg class="rf-icon rf-icon--appreciate" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0.5 0.5 16 16"><path fill="none" d="M.5.5h16v16H.5z"></path><path d="M.5 7.5h3v8h-3zM7.207 15.207c.193.19.425.29.677.293H12c.256 0 .512-.098.707-.293l2.5-2.5c.19-.19.288-.457.293-.707V8.5c0-.553-.445-1-1-1h-5L11 5s.5-.792.5-1.5v-1c0-.553-.447-1-1-1l-1 2-4 4v6l1.707 1.707z"></path></svg>            53
           </span>         </span>      </a> </div>
+                  </div>
               </div>
-            </div>
-               
-             <% end %>
 
+              <% end %>
 
-              
+            </div>
 
-
-
-
-
-
-
-
-        </div>
-        <!-- .profile-gallery-content -->
-        <div class="js-spin profile-spinner js-profile-spinner" style="display: none;">
-          <div class="spinner" aria-role="progressbar" style="position: relative; width: 0px; z-index: 2000000000; left: 31px; top: 30px;">
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-0-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(0deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-1-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(12deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-2-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(24deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-3-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(36deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-4-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(48deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-5-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(60deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-6-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(72deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-7-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(84deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-8-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(96deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-9-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(108deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-10-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(120deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-11-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(132deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-12-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(144deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-13-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(156deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-14-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(168deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-15-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(180deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-16-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(192deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-17-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(204deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-18-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(216deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-19-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(228deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-20-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(240deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-21-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(252deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-22-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(264deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-23-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(276deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-24-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(288deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-25-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(300deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-26-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(312deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-27-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(324deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-28-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(336deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
-            <div style="position: absolute; top: -1px; transform: translate3d(0px, 0px, 0px); opacity: 0; animation: opacity-100-0-29-30 0.5s linear infinite;">
-              <div style="position: absolute; width: 2px; height: 2px; background: rgb(0, 140, 255); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(348deg) translate(9px, 0px); border-radius: 0px;"></div>
-            </div>
           </div>
         </div>
+        <!-- #site-content -->
+
       </div>
-    </div>
-    <!-- #gallery -->
-  </div>
-  </div>
-  <!-- #site-content -->
-
-  </div>
-  <!-- .slide-panel -->
-
-
-  <script crossorigin="" type="text/javascript" src="./Kuocheng Liao on Behance_files/jquery.min.js"></script>
-  <script crossorigin="" type="text/javascript" src="./Kuocheng Liao on Behance_files/network.js"></script>
-  <script crossorigin="" type="text/javascript" src="./Kuocheng Liao on Behance_files/user.js"></script>
+      <!-- .slide-panel -->
 
 
 
@@ -931,11 +195,12 @@ html.lightbox-zoomed #lightbox-img-wrap .lightbox-extra {
 
 
 
-  
 
 
 
 
 
 
-</main>
+
+
+  </main>

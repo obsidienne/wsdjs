@@ -33,4 +33,13 @@ defmodule Wsdjs.Web.UserHelper do
     user.description != nil && String.length(user.description) > 0
   end
 
+  def format_djname(user) do
+    djname = String.downcase user.djname    
+    if String.starts_with? djname, "dj" do
+      String.slice(user.djname, 2..-1)
+    else
+      user.djname
+    end
+  end    
+
 end

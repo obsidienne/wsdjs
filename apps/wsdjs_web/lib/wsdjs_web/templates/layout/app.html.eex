@@ -19,26 +19,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.4.14"></script>
     <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css" />
-
-  <!-- BEGIN USER PROFILE HEADER -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script type="text/javascript" async="async" src="<%= static_path(@conn, "/user/s9601660861781") %>"></script>
-    <script type="text/javascript" async="async" src="<%= static_path(@conn, "/user/s95213203565280") %>"></script>
-    <script type="text/javascript" src="<%= static_path(@conn, "/user/e7fb1b89a0") %>"></script>
-    <script type="text/javascript" async="" src="<%= static_path(@conn, "/user/nr-1039.min.js") %>"></script>
-    <script type="text/javascript" async="" src="<%= static_path(@conn, "/user/imslib.min.js") %>"></script>
-    <script type="text/javascript" async="" src="<%= static_path(@conn, "/user/satelliteLib-2b43738638f531ea196940466fee2fa1d507608c.js") %>"></script>    
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/user-networki.css") %>">
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/user-responsive.css") %>">
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/user-view.css") %>">
-        
-    <script type="text/javascript" nonce="">
-      !function () { "use strict"; function n(n, t, e) { function r(n) { i.push(n), u || (u = !0, setTimeout(function () { e(i), u = !1, i = [] }, 0)) } var o = {}, i = [], u = !1, c = n.onerror; n.onerror = function () { var n = t.apply(null, arguments), e = JSON.stringify(n); o[e] || (o[e] = !0, r(n)), c && c.apply(this, arguments) } } function t(n) { return "undefined" != typeof n } function e(n) { return "[object Event]" === String(n) ? "Event#target.src=" + (n.target && n.target.src) : n } function r(n, r, o, i, u) { var c = {}; return n && (n = String("object" == typeof n ? e(n) : n)), r && (c.file = String(r)), t(o) && (c.line = Number(o)), t(i) && (c.column = Number(i)), u && u.stack && (c.stack = String(u.stack)), { level: "ERROR", channel: "js_errors", message: n, context: c } } function o(n) { for (var t = [], e = 0; e < n.length; e++)t[e] = "logs[]=" + encodeURIComponent(JSON.stringify(n[e])); return t.join("&") } function i(n) { var t = new XMLHttpRequest; t.open("POST", "/log"), t.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"), t.send(o(n)) } n(window, r, i) }();
-    </script>
-    <script type="text/javascript" src="<%= static_path(@conn, "/user/satellite-54400420b1f6d7daf10001cd.js") %>"></script>    
-  <!-- END  -->
   </head>
 
   <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
