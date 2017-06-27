@@ -20,7 +20,7 @@
       <div id="profile-display-name">
          <%= @user.name %>
       </div>
-      <div class="rf-avatar">  <img src="<%= avatar_href(@user.avatar) %>" data-src="<%= avatar_href(@user.avatar) %>" class="rf-avatar__image js-avatar__image"></div>
+      <div class="rf-avatar">  <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="cld-responsive rf-avatar__image js-avatar__image"></div>
       <div id="profile-details">
          <div id="profile-title" class="qa-profile-title"> DJ
             <%= user_displayed_name(@user) %>
