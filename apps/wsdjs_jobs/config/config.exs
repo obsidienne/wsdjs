@@ -10,6 +10,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :wsdjs_jobs, ecto_repos: []
 
 config :wsdjs_jobs, Wsdjs.Jobs.Scheduler,
   jobs: [
