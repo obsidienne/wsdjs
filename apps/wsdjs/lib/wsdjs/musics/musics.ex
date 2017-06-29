@@ -64,6 +64,7 @@ defmodule Wsdjs.Musics do
   """
   def paginate_songs(current_user, paginate_params \\ %{}) do
     Song.scoped(current_user)
+    |> where([user_id: ^current_user.id])
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by([desc: :inserted_at])
     |> Repo.paginate(paginate_params)
