@@ -1,0 +1,28 @@
+<div class="rf-project-cover rf-project-cover--project js-item js-project-cover qa-project-cover editable " data-id="54136737">
+  <a href="<%= song_path(@conn, :show, @song) %>" class="rf-project-cover__image-container js-project-cover-image-link js-project-link">
+    <img class="rf-project-cover__image cld-responsive" src="<%= song_art_href_default() %>" data-src="<%= song_art_href(@song.art) %>" alt="<%= song_art_alt(@song) %>">
+
+
+    <div class="rf-project-cover__details">
+      <div class="rf-project-cover__title js-project-cover-title-link"><%= @song.title %></div>
+
+      <div class="rf-owners ">
+        <span class="rf-owners__list ">
+          <div class="rf-owners__owner"><%= @song.artist %></div>
+        </span>
+      </div>
+
+      <div class="rf-project-cover__fields">
+        <ul class="rf-project-cover__fields-list">
+          <li class="rf-project-cover__field"><%= @song.genre %></li>
+        </ul>
+      </div>
+
+      <div class="rf-project-cover__stats">
+        <%= opinion_link("down", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+        <%= opinion_link("like", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+        <%= opinion_link("up", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+      </div>
+    </div>
+  </a>
+</div>

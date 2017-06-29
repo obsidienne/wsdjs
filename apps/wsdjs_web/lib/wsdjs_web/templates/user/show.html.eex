@@ -110,7 +110,9 @@
    <div id="gallery" class="content-main cfix js-gallery" data-section="projects">
       <div class="profile-gallery-content-wrap">
          <div class="profile-gallery-content -gallery-content" data-section="projects">
-           <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
+          <section id="song-list" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
+             <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
+          </section>    
          </div>
       </div>
    </div>
