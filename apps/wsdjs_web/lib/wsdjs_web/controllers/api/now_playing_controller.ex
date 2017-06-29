@@ -1,4 +1,4 @@
-defmodule Wsdjs.API.NowPlayingController do
+defmodule Wsdjs.Web.Api.NowPlayingController do
   use Wsdjs.Web, :controller
 
     require Logger
