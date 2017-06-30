@@ -60,6 +60,16 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
+  Count song for a song
+  """
+  def count_songs_for_user(user) do
+    Song.scoped(user)
+    |> where([user_id: ^user.id])
+    |> Repo.all
+    |> Enum.count
+  end
+
+  @doc """
   Returns the list of songs scoped by current_user.
   """
   def paginate_songs(current_user, paginate_params \\ %{}) do

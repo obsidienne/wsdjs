@@ -80,7 +80,7 @@
       <div class="profile-stat">
          <div class="profile-stat-label profile-sidebar-label content-minor-secton-label beicons-pre beicons-pre-eye"> <span class="stat-text">Song suggested</span> </div>
          <div class="profile-stat-count">
-            <%= length(@songs) %>
+            <%= @total_songs %>
          </div>
       </div>
       <!-- /.profile-stat -->
