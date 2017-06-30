@@ -7,32 +7,28 @@ http://modularscale.com/scale/?px1=18&px2=190&ra1=1.618
 1em @ 1:1.2 (minor third)
 http://alistapart.com/articles/more-meaningful-typography/
 -----------------------------------------------
-
-656.841em
-437.894em
-291.929em
-194.62em
-129.746em
-86.498em
-57.665em
-38.443em
-25.629em
-17.086em
-11.391em
-7.594em
-5.063em
-3.375em
-2.25em
-1.5em
-1em
-0.667em
-0.444em
-0.296em
-0.198em
-0.132em
-0.088em
-
 */
+:root {
+  /* http://www.modularscale.com/?1&em&1.2 */
+  --font-size-1: 1em;
+  --font-size-2: 1.2em;
+  --font-size-3: 1.44em;
+  --font-size-4: 1.728em;
+  --font-size-5: 2.074em;
+  --font-size-6: 2.488em;
+}
+@media screen and (min-width: 768px) {
+  :root {
+    /* http://www.modularscale.com/?1&em&1.333 */
+    --font-size-1: 1em;     
+    --font-size-2: 1.33em; 
+    --font-size-3: 1.769em;
+    --font-size-4: 2.353em; 
+    --font-size-5: 3.129em;
+    --font-size-6: 4.162em;
+  }
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -88,12 +84,16 @@ h6 .small, .h6 .small {
   font-size: 75%;
 }
 
-h1, .h1 { font-size: 36px; }
-h2, .h2 { font-size: 30px; }
-h3, .h3 { font-size: 24px; }
-h4, .h4 { font-size: 18px; }
-h5, .h5 { font-size: 14px; }
-h6, .h6 { font-size: 12px; }
+h1, .h1 { font-size: var(--font-size-6); }
+h2, .h2 { font-size: var(--font-size-5); }
+h3, .h3 { font-size: var(--font-size-4); }
+h4, .h4 { font-size: var(--font-size-3); }
+h5, .h5 { font-size: var(--font-size-2); }
+h6, .h6 { font-size: var(--font-size-1); }
+
+small, .small {
+  font-size: 85%;
+}
 
 p { margin: 0 0 10px; }
 
@@ -104,10 +104,6 @@ p { margin: 0 0 10px; }
   width: 100%;
 }
 
-small,
-.small {
-  font-size: 85%;
-}
 .text-center {
   text-align: center;
 }
