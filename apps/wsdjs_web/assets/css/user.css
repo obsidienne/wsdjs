@@ -1,9 +1,9 @@
-
 @media (max-width: 1024px) {
     .rf-owners__list {
         font-size: 12px;
     }
 }
+
 .rf-owners__list:not(.rf-tooltip--container) {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -376,34 +376,7 @@ body {
     }
 }
 
-#site-content {
-    margin-left:auto;
-    margin-right:auto;
-    width:100%;
-}
-@media (min-width: 604px) and (max-width: 1024px) {
-    #site-content {
-        max-width: none;
-    }
-}
 
-#site-content {
-    position: relative;
-    z-index: 0;
-}
-body:not(.has_new_ui) #site-content {
-    padding: 38px 50px 96px;
-}
-@media (max-width: 1024px) {
-    body:not(.has_new_ui) #site-content {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-}
-#site-content,
-#site-content * {
-    box-sizing: border-box;
-}
 .layout-wrap {
     margin-left: auto;
     margin-right: auto;
@@ -521,10 +494,7 @@ a:active {
     body {
         background: #fff;
     }
-    #site-content {
-        background: #fff;
-        padding: 0;
-    }
+    
     .content-container {
         border-radius: 0;
         box-shadow: none;
@@ -579,17 +549,8 @@ a:active {
     }
 }
 @media (max-width: 603px) {
-    #site-content {
-        background: #fff;
-    }
     #profile-header-actions {
         display: none!important;
-    }
-    #site-content {
-        padding: 0;
-    }
-    #site-content::before {
-        display: none;
     }
     .content-container {
         background: none;
@@ -804,10 +765,6 @@ a:active {
     #profile-header-actions,
     .profile-stat-label .stat-text {
         display: none;
-    }
-    #site-content {
-        background: #fff;
-        padding: 0;
     }
     #profile {
         background: none;

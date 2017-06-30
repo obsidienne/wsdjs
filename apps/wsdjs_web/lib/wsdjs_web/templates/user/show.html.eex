@@ -1,6 +1,5 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
-<main>
-   <div id="site-content">
+<main class="container">
    <div id="profile-header-actions" class="layout-wrap">
       <%= if can_edit_page?(@user, @current_user) do %>
       <div class="header-right-wrapper">
@@ -115,6 +114,4 @@
           </section>    
          </div>
       </div>
-   </div>
-   <!-- #site-content -->
 </main>
