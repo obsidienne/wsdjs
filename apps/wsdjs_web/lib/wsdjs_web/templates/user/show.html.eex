@@ -1,24 +1,5 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 <main class="container">
-   <div id="profile-header-actions" class="layout-wrap">
-      <%= if can_edit_page?(@user, @current_user) do %>
-      <div class="header-right-wrapper">
-         <div class="form-item rf-button__container profile-header-action ">
-            <a class="form-button rf-button rf-button--secondary"
-               id="viral-icons" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>"><span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>
-         </div>
-         <div class="form-item   rf-button__container  profile-header-action  ">
-           <%= link to: session_path(@conn, :delete, @current_user),
-                    method: :delete,
-                    class: "form-button  rf-button rf-button--secondary",
-                    target: "_blank", unselectable: "on", tabindex: "0" do %>
-             <span class="rf-button__label">Logout</span>
-             <span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
-           <% end %>
-         </div>
-      </div>
-      <% end %>
-   </div>
    <div id="profile" class=" content-container layout-wrap">
    <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section -info">
       <div id="profile-display-name">
@@ -72,6 +53,22 @@
                <span class="rf-button__label">Message</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
             </a>
          </div>
+               <%= if can_edit_page?(@user, @current_user) do %>
+
+                  <div class="form-item rf-button__container profile-header-action ">
+            <a class="form-button rf-button rf-button--secondary"
+               id="viral-icons" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>"><span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>
+         </div>
+         <div class="form-item   rf-button__container  profile-header-action  ">
+           <%= link to: session_path(@conn, :delete, @current_user),
+                    method: :delete,
+                    class: "form-button  rf-button rf-button--secondary",
+                    target: "_blank", unselectable: "on", tabindex: "0" do %>
+             <span class="rf-button__label">Logout</span>
+             <span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
+           <% end %>
+         </div>
+<% end %>
       </div>
    </div>
    <span class="js-nav-phone"></span>

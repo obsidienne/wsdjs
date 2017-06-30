@@ -549,9 +549,6 @@ a:active {
     }
 }
 @media (max-width: 603px) {
-    #profile-header-actions {
-        display: none!important;
-    }
     .content-container {
         background: none;
         box-shadow: none;
@@ -630,25 +627,6 @@ a:active {
 }
 #profile {
     z-index: 3;
-}
-#profile-header-actions {
-    min-height: 31px;
-    position: relative;
-    z-index: 4;
-}
-#profile-header-actions .rf-button__container {
-    vertical-align: top;
-}
-#profile-header-actions .header-right-wrapper {
-    float: right;
-    margin-right: -10px;
-}
-#profile-header-actions .header-right-wrapper .profile-header-action {
-    display: inline-block;
-}
-#profile-header-actions .rf-button__container {
-    display: inline-block;
-    margin-right: 10px;
 }
 .profile-section-header {
     min-width: 100%;
@@ -762,7 +740,6 @@ a:active {
     }
 }
 @media (min-width: 604px) and (max-width: 1024px) {
-    #profile-header-actions,
     .profile-stat-label .stat-text {
         display: none;
     }
@@ -1057,31 +1034,6 @@ a:hover {
     color: #fff;
 }
 
-#profile-header-actions {
-    min-height:31px;
-    position:relative;
-    z-index:4;
-}
-#profile-header-actions .rf-button__container {
-    vertical-align:top;
-}
-#profile-header-actions .header-right-wrapper {
-    float: right;
-    margin-right: -10px;
-}
-#profile-header-actions .header-right-wrapper .profile-header-action {
-    display: inline-block;
-}
-#profile-header-actions .rf-button__container {
-    display: inline-block;
-    float: left;
-    margin-right: 10px;
-}
-@media (min-width: 604px) and (max-width: 1024px) {
-    #profile-header-actions {
-        display: none;
-    }
-}
 /*! CSS Used fontfaces */
 
 @font-face {
