@@ -279,10 +279,6 @@ ul,
 body {
     line-height:1;
 }
-ul,
-li {
-    list-style: none;
-}
 :focus {
     outline: 0;
 }
@@ -298,18 +294,6 @@ h3 {
 .form-item {
     margin: 10px 0;
     position: relative;
-}
-img {
-    border: 0;
-}
-ul {
-    margin: 0;
-    padding: 0;
-}
-ul li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 a {
     color: #0057ff;
@@ -336,9 +320,6 @@ body {
 }
 .show-tablet {
     display: none;
-}
-body {
-    background: #f9f9f9;
 }
 ::-moz-selection {
     background: #0057ff;
