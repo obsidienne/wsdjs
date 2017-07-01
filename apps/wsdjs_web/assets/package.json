@@ -12,7 +12,8 @@
     "autolink-js": "~1.0.2",
     "cloudinary-core": "2.1.9",
     "turbolinks": "~5.0.0",
-    "tippy.js": "~0.11.0"
+    "tippy.js": "~0.11.0",
+    "places.js": "~1.4.15"
   },
   "devDependencies": {
     "babel-brunch": "6.0.6",

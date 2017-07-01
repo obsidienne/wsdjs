@@ -1,4 +1,5 @@
 import MainView from '../main';
+import Places from 'places.js/dist/cdn/places.js';
 
 export default class View extends MainView {
   mount() {
@@ -29,7 +30,7 @@ export default class View extends MainView {
   }
 
   algolia() {
-    places({
+    Places({
       container: document.querySelector('#user_country'),
       type: 'country',
       templates: {
