@@ -1,16 +1,16 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 <main id="profile" class="container user-profile-container content-container">
       <section>
-            <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
-            <h4><%= @user.name %></h4>
-      
-            <div class="rf-avatar">
-                  <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="cld-responsive rf-avatar__image js-avatar__image">
-            </div>
+            <section id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
+                  <h4><%= @user.name %></h4>
+            
+                  <div class="rf-avatar">
+                        <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="cld-responsive rf-avatar__image js-avatar__image">
+                  </div>
 
-            <div id="profile-details">
-                  <div id="profile-title" class="qa-profile-title"><%= user_displayed_name(@user) %></div>
-                        <div class="beicons-pre beicons-pre-location"><%= @user.user_country %></div>
+                  <div id="profile-details">
+                        <h6><%= user_displayed_name(@user) %></h6>
+                        <span class="beicons-pre beicons-pre-location"> <%= @user.user_country %></span>
                   </div>
                   <div id="profile-actions">
                         <div class="form-item rf-button__container--message rf-button__container" title="Message User">
@@ -42,7 +42,7 @@
                               </div>
                         <% end %>
                   </div>
-            </div>
+            </section>
 
             <div id="profile-stats" class="profile-section content-minor-section content-mobile-first-section">
                   <div class="profile-stat">
@@ -57,12 +57,12 @@
             <div id="profile-info-wrap" class="content-section-wrap">
                   <%= if has_description?(@user) do %>
                   <div class="profile-section content-minor-section">
-                        <h3 class="profile-sidebar-label content-minor-section-label">About Me</h3>
+                        <h3 class="content-minor-section-label">About Me</h3>
                         <%= @user.description %>
                   </div>
                   <% end %>
                   <div id="profile-date" class="profile-section content-minor-section">
-                        <span class="profile-date-text">Member since: <span class="profile-date js-format-timestamp" data-timestamp="1306919518">June 1, 2011</span></span>
+                        <span class="profile-date-text">Member since: <time class="profile-date js-format-timestamp" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= @user.inserted_at %></time>
                   </div>
             </div>
       </section>
