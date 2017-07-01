@@ -1,21 +1,21 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
-<main class="container">
-   <div id="profile" class=" content-container layout-wrap">
-   <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
-      <div id="profile-display-name"><%= @user.name %></div>
-      <div class="rf-avatar">
-            <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="cld-responsive rf-avatar__image js-avatar__image">
-      </div>
-      <div id="profile-details">
-         <div id="profile-title" class="qa-profile-title"><%= user_displayed_name(@user) %></div>
-         <div class="profile-location has-website">
-            <div class="profile-location-link qa-profile-location-link beicons-pre beicons-pre-location">
-               <%= @user.user_country %>
+<main id="profile" class="container user-profile-container content-container">
+      <section>
+            <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
+            <h4><%= @user.name %></h4>
+      
+            <div class="rf-avatar">
+                  <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="cld-responsive rf-avatar__image js-avatar__image">
             </div>
-         </div>
-         <div id="profile-actions" class="hide-phone show-tablet">
-            <div class="form-item rf-button__container--message rf-button__container "
-               title="Message User" data-contact_name="Kuocheng Liao" data-contact_id="479117">
+
+            <div id="profile-details">
+                  <div id="profile-title" class="qa-profile-title"><%= user_displayed_name(@user) %></div>
+                        <div class="profile-location has-website">
+                              <div class="beicons-pre beicons-pre-location"><%= @user.user_country %></div>
+                        </div>
+
+                        <div id="profile-actions" class="hide-phone show-tablet">
+                              <div class="form-item rf-button__container--message rf-button__container" title="Message User">
                <a class="form-button rf-button rf-button--secondary " unselectable="on" tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
                   <span class=" rf-button__icon-container rf-button__icon-container--leading">
                      <svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285">
@@ -64,48 +64,43 @@
       </div>
    </div>
 
-   <span class="js-nav-phone"></span>
+            <div id="profile-stats" class="profile-section content-minor-section content-mobile-first-section">
+                  <div class="profile-stat">
+                        <div class="profile-stat-label profile-sidebar-label content-minor-secton-label beicons-pre beicons-pre-eye">
+                              <span class="stat-text">Song suggested</span>
+                        </div>
+                        <div class="profile-stat-count"><%= @total_songs %></div>
+                  </div>
+            </div>
 
-   <div id="profile-stats" class="profile-section content-minor-section content-mobile-first-section">
-      <div class="profile-stat">
-         <div class="profile-stat-label profile-sidebar-label content-minor-secton-label beicons-pre beicons-pre-eye">
-            <span class="stat-text">Song suggested</span>
-         </div>
-         <div class="profile-stat-count">
-            <%= @total_songs %>
-         </div>
-      </div>
-   </div>
 
-   <div id="profile-nav" class="content-main content-section-nav -nav">
-      <div class="profile-nav-inner content-nav-inner" style="overflow: visible;">
-         <div class="profile-section-header content-section-header" data-section-header="gallery" style="transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate3d(0px, 0px, 0px); min-width: 0px;">
-            <div class="content-section-nav-item active" data-section="projects">Suggestions</div>
-         </div>
-      </div>
-   </div>
+            <div id="profile-info-wrap" class="content-section-wrap">
+                  <%= if has_description?(@user) do %>
+                  <div class="profile-section content-minor-section">
+                        <h3 class="profile-sidebar-label content-minor-section-label">About Me</h3>
+                        <%= @user.description %>
+                  </div>
+                  <% end %>
+                  <div id="profile-date" class="profile-section content-minor-section">
+                        <span class="profile-date-text">Member since: <span class="profile-date js-format-timestamp" data-timestamp="1306919518">June 1, 2011</span></span>
+                  </div>
+            </div>
+      </section>
 
-   <div id="profile-info-wrap" class="content-section-wrap">
-      <%= if has_description?(@user) do %>
-      <div class="profile-section content-minor-section">
-         <h3 class="profile-sidebar-label content-minor-section-label"> About Me
-         </h3>
-         <%= @user.description %>
-      </div>
-      <% end %>
-      <div id="profile-date" class="profile-section content-minor-section">
-            <span class="profile-date-text">
-         Member since: <span class="profile-date js-format-timestamp" data-timestamp="1306919518">June 1, 2011</span>
-         </span>
-      </div>
-   </div>
 
-   <div id="gallery" class="content-main cfix js-gallery" data-section="projects">
-      <div class="profile-gallery-content-wrap">
-         <div class="profile-gallery-content -gallery-content" data-section="projects">
-          <section id="song-list" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
-             <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
-          </section>    
-         </div>
-      </div>
+      <section id="gallery" class="content-main js-gallery" data-section="projects">
+            <div id="profile-nav" class="content-main content-section-nav -nav">
+                  <div class="profile-nav-inner content-nav-inner" style="overflow: visible;">
+                        <div class="profile-section-header content-section-header" data-section-header="gallery" style="transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate3d(0px, 0px, 0px); min-width: 0px;">
+                  <div class="content-section-nav-item active" data-section="projects">Suggestions</div>
+            </div>
+  
+            <div class="profile-gallery-content-wrap">
+                  <div class="profile-gallery-content -gallery-content" data-section="projects">
+                        <section id="song-list" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
+                              <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
+                        </section>    
+                  </div>
+            </div>
+      </section>
 </main>

@@ -295,26 +295,7 @@ h3 {
     margin: 10px 0;
     position: relative;
 }
-a {
-    color: #0057ff;
-    cursor: pointer;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-.cfix {
-    zoom: 1;
-}
-.cfix::after {
-    clear: both;
-    content: '.';
-    display: block;
-    height: 0;
-    line-height: 0;
-    overflow: hidden;
-    visibility: hidden;
-}
+
 body {
     padding-top: 0!important;
 }
@@ -344,11 +325,6 @@ body {
 }
 
 
-.layout-wrap {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1364px;
-}
 .content-minor-section:last-child {
     border-bottom-width: 0;
 }
@@ -383,21 +359,7 @@ a:active {
     margin-bottom: 0;
     margin-top: 17px;
     min-height: 800px;
-    overflow: hidden;
     position: relative;
-}
-.content-container,
-.content-container * {
-    box-sizing: border-box;
-}
-.content-container::after {
-    clear: both;
-    content: ".";
-    display: block;
-    height: 0;
-    line-height: 0;
-    overflow: hidden;
-    visibility: hidden;
 }
 .content-section-header {
     border-bottom: 1px solid #e8e8e8;
@@ -431,32 +393,6 @@ a:active {
 .content-section-nav-item:last-child {
     margin-right: 0;
 }
-.content-main {
-    margin-left: 360px;
-    width: calc(100% - 360px);
-}
-.content-main::before {
-    background: #fafafa;
-    content: "";
-    display: block;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 360px;
-    z-index: 1;
-}
-.content-main::after {
-    box-shadow: inset -5px 0 5px -5px rgba(0, 0, 0, 0.25);
-    content: "";
-    display: block;
-    height: 100%;
-    left: 355px;
-    position: absolute;
-    top: 0;
-    width: 5px;
-    z-index: 3;
-}
 @media (min-width: 604px) and (max-width: 1024px) {
     body {
         background: #fff;
@@ -474,15 +410,6 @@ a:active {
     .content-section-nav-item {
         font-size: 15px;
         height: 50px;
-    }
-    .content-main {
-        clear: both;
-        margin: 0;
-        width: 100%;
-    }
-    .content-main::before,
-    .content-main::after {
-        display: none;
     }
     .content-section-nav {
         margin-bottom: 36px;
@@ -520,16 +447,6 @@ a:active {
         background: none;
         box-shadow: none;
         margin-top: 0;
-    }
-    .content-main {
-        clear: both;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
-    .content-main::before,
-    .content-main::after {
-        display: none;
     }
     .content-section-header {
         height: 43px;
@@ -581,9 +498,6 @@ a:active {
         border-top-right-radius: 4px;
     }
 }
-#profile.content-container {
-    overflow: visible;
-}
 #profile .content-section-nav-item,
 #profile .profile-section .profile-stat-label::before {
     color: #6f6f6f;
@@ -598,9 +512,6 @@ a:active {
 .profile-section-header {
     min-width: 100%;
     white-space: nowrap;
-}
-#gallery {
-    padding-left: 22px;
 }
 .profile-gallery-content-wrap {
     margin-top: 45px;
@@ -619,9 +530,8 @@ a:active {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-#profile-info {
-    padding-bottom: 25px;
-}
+
+
 #profile-info .rf-avatar {
     float: left;
     height: 94px;
@@ -629,11 +539,6 @@ a:active {
     min-height: 94px;
     min-width: 94px;
     width: 94px;
-}
-#profile-display-name {
-    font-size: 21px;
-    line-height: 24px;
-    margin-bottom: 14px;
 }
 #profile-details {
     float: left;
