@@ -1,25 +1,22 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 <main class="container">
    <div id="profile" class=" content-container layout-wrap">
-   <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section -info">
-      <div id="profile-display-name">
-         <%= @user.name %>
+   <div id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
+      <div id="profile-display-name"><%= @user.name %></div>
+      <div class="rf-avatar">
+            <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="cld-responsive rf-avatar__image js-avatar__image">
       </div>
-      <div class="rf-avatar">  <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="cld-responsive rf-avatar__image js-avatar__image"></div>
       <div id="profile-details">
-         <div id="profile-title" class="qa-profile-title"> DJ
-            <%= user_displayed_name(@user) %>
-         </div>
+         <div id="profile-title" class="qa-profile-title"><%= user_displayed_name(@user) %></div>
          <div class="profile-location has-website">
             <div class="profile-location-link qa-profile-location-link beicons-pre beicons-pre-location">
                <%= @user.user_country %>
             </div>
          </div>
          <div id="profile-actions" class="hide-phone show-tablet">
-            <div class="form-item   js-action-message-user rf-button__container--message rf-button__container "
+            <div class="form-item rf-button__container--message rf-button__container "
                title="Message User" data-contact_name="Kuocheng Liao" data-contact_id="479117">
-               <a class="form-button  rf-button rf-button--secondary " unselectable="on"
-                  tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
+               <a class="form-button rf-button rf-button--secondary " unselectable="on" tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
                   <span class=" rf-button__icon-container rf-button__icon-container--leading">
                      <svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285">
                         <g>
@@ -36,8 +33,7 @@
          </div>
       </div>
       <div id="profile-actions" class="hide-tablet">
-         <div class="form-item   js-action-message-user rf-button__container--message rf-button__container "
-            title="Message User">
+         <div class="form-item rf-button__container--message rf-button__container" title="Message User">
             <a class="form-button  rf-button rf-button--secondary " unselectable="on"
                tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
                <span class=" rf-button__icon-container rf-button__icon-container--leading">
