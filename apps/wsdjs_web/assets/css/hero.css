@@ -4,7 +4,7 @@
   display: block;
   position: relative;
   height: 70vh;
-  background: var(--hero);
+  background-image: var(--hero);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -13,6 +13,7 @@
   justify-content: space-between;
   padding-bottom: 15px;
   margin-bottom: 15px;
+  background-position: 0% 50%;
 }
 
 .SongIndexView .hero, .TopIndexView .hero {

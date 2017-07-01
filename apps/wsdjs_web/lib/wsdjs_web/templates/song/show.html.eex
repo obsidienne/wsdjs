@@ -1,7 +1,7 @@
 <main>
 
 <section class="hero">
-  <style scoped>
+  <style>
   :root {
     --hero: url(<%= song_art_href_blured(@song.art) %>);
   }
