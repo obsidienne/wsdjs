@@ -75,7 +75,7 @@
                   </ul>
             </nav>
   
-            <ul id="song-list" class="profile-gallery-content-wrap" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
+            <ul id="song-list" class="user-profile-song-container" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
                   <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
             </ul>
       </section>

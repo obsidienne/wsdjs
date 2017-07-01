@@ -11,6 +11,7 @@
   grid-row-gap: 1em;
   grid-column-gap: 1em;
   overflow: hidden;
+  grid-template-columns: repeat(var(--grid-column-number), minmax(100px, auto));
 }
 
 .container-comments {
@@ -24,7 +25,6 @@
 }
 
 .container-grid {
-  grid-template-columns: repeat(var(--grid-column-number), minmax(100px, auto));
 }
 
 .container-grid .page-header {
@@ -35,4 +35,11 @@
 .user-profile-container {
   display: flex;
   justify-content: space-between;
+}
+
+.user-profile-song-container {
+  display: grid;
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+  grid-template-columns: repeat(3, minmax(202px, auto));
 }
