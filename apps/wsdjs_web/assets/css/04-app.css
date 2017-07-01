@@ -34,3 +34,7 @@ ul {
 time {
   text-transform: capitalize;
 }
+
+table {
+  width: 100%;
+}

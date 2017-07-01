@@ -17,7 +17,7 @@
     width: 35px;
 }
 
-.rf-project-cover {
+.wsdjs-song-cover {
     border-radius: 3px;
     box-sizing: border-box;
     color: #191919;
@@ -29,7 +29,7 @@
     box-shadow: 0 1px 2px rgba(25, 25, 25, 0.2);
     cursor: pointer;
 }
-.rf-project-cover__image-container {
+.wsdjs-song-cover__image-container {
     filter: brightness(100%);
     background-color: #f9f9f9;
     border-radius: 3px 3px 0 0;
@@ -39,15 +39,15 @@
     overflow: hidden;
     position: relative;
 }
-.rf-project-cover__image-container:hover {
+.wsdjs-song-cover__image-container:hover {
     filter: brightness(80%);
 }
-.rf-project-cover__image {
+.wsdjs-song-cover__image {
     border-radius: 3px 3px 0 0;
     display: block;
     width: 100%;
 }
-.rf-project-cover__title {
+.wsdjs-song-cover__title {
     font-family: inherit;
     font-size: 13px;
     line-height: 1.3;
@@ -59,10 +59,10 @@
     margin-bottom: 9px;
     overflow: hidden;
 }
-.rf-project-cover__details {
+.wsdjs-song-cover__details {
     padding: 7px 10px 0 10px;
 }
-.rf-project-cover__fields-list {
+.wsdjs-song-cover__fields-list {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -71,13 +71,13 @@
     margin-bottom: 6px;
     margin-top: 2px;
 }
-.rf-project-cover__field {
+.wsdjs-song-cover__field {
     font-family: inherit;
     font-size: 11px;
     font-weight: bold;
     font-weight: normal;
 }
-.rf-project-cover__stats {
+.wsdjs-song-cover__stats {
     font-family: inherit;
     font-size: 11px;
     font-weight: bold;
@@ -117,15 +117,6 @@
     text-transform: uppercase;
     word-wrap: break-word;
 }
-.content-container {
-    background: #fff;
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    margin-bottom: 0;
-    margin-top: 17px;
-    min-height: 800px;
-    position: relative;
-}
 .content-section-header {
     border-bottom: 1px solid #e8e8e8;
     height: 54px;
@@ -159,11 +150,11 @@
 .content-section-nav-item:last-child {
     margin-right: 0;
 }
-#profile .content-section-nav-item,
-#profile .profile-section .profile-stat-label::before {
+.content-section-nav-item,
+.profile-section .profile-stat-label::before {
     color: #6f6f6f;
 }
-#profile .content-section-nav-item.active {
+.content-section-nav-item.active {
     border-color: #2b2b2b;
     color: #2b2b2b;
 }
@@ -183,11 +174,6 @@
 .profile-gallery-content[data-section='projects'] {
     max-width: 896px;
 }
-.content-minor-section:not(.content-mobile-major-section) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 
 #profile-info .rf-avatar {
     float: left;
@@ -208,17 +194,6 @@
 }
 #profile-stats {
     padding-top: 30px;
-}
-.profile-stat {
-    height: 16px;
-    margin-bottom: 14px;
-}
-.profile-stat-label {
-    clear: left;
-    float: left;
-    font-size: 11px;
-    font-weight: bold;
-    text-transform: uppercase;
 }
 .profile-stat-label::before {
     font-size: 20px;
@@ -244,10 +219,16 @@
 
 #profile-actions {
     clear: both;
+    display: flex;
+    justify-content: space-between;
 }
 
 
 
+.email {
+  background-image: var(--icon-email);
+  background-repeat: no-repeat;
+}
 
 
 /* Button */
@@ -281,3 +262,4 @@
 .rf-button:active {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+
