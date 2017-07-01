@@ -1,6 +1,6 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-<main>
+<main class="container">
   <div class="user-view">
     <div id="art_div">
       <img id="art_thumbnail" src="<%= song_art_href(@song.art) %>" style="width:250px;height:250px;">
