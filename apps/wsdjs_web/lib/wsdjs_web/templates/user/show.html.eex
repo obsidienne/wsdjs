@@ -13,8 +13,8 @@
                         <span class="beicons-pre beicons-pre-location"> <%= @user.user_country %></span>
                   </div>
                   <div id="profile-actions">
-                        <div class="form-item rf-button__container--message rf-button__container" title="Message User">
-                              <a class="form-button rf-button rf-button--secondary " unselectable="on" tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
+                        <div class="rf-button__container" >
+                              <a class="rf-button " unselectable="on" tabindex="0" href="mailto:<%= @user.email %>" target = "_blank" title="Message User"
                                     <span class=" rf-button__icon-container rf-button__icon-container--leading">
                                           <svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285">
                                           <g>
@@ -29,13 +29,13 @@
                               </a>
                         </div>
                         <%= if can_edit_page?(@user, @current_user) do %>
-                              <div class="form-item rf-button__container profile-header-action ">
-                                    <a class="form-button rf-button rf-button--secondary" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>">
+                              <div class="rf-button__container">
+                                    <a class="rf-button" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>">
                                           <span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
                                     </a>
                               </div>
-                              <div class="form-item rf-button__container  profile-header-action  ">
-                              <%= link to: session_path(@conn, :delete, @current_user), method: :delete, class: "form-button  rf-button rf-button--secondary", target: "_blank", unselectable: "on", tabindex: "0" do %>
+                              <div class="rf-button__container">
+                              <%= link to: session_path(@conn, :delete, @current_user), method: :delete, class: "rf-button", target: "_blank", unselectable: "on", tabindex: "0" do %>
                                     <span class="rf-button__label">Logout</span>
                                     <span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
                               <% end %>
