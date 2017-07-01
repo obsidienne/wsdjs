@@ -3,6 +3,7 @@ import searchComponent from '../components/search';
 import opinionComponent from '../components/opinion';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import Tippy from 'tippy.js/dist/tippy';
+import Plyr from 'plyr/dist/plyr';
 
 export default class MainView {
   constructor() {
