@@ -1,8 +1,3 @@
-@media (max-width: 1024px) {
-    .rf-owners__list {
-        font-size: 12px;
-    }
-}
 
 .rf-owners__list:not(.rf-tooltip--container) {
     overflow: hidden;
@@ -296,34 +291,6 @@ h3 {
     position: relative;
 }
 
-body {
-    padding-top: 0!important;
-}
-.show-tablet {
-    display: none;
-}
-::-moz-selection {
-    background: #0057ff;
-    color: #fff;
-}
-::selection {
-    background: #0057ff;
-    color: #fff;
-}
-@media (max-width: 603px) {
-    .hide-phone {
-        display: none!important;
-    }
-}
-@media (min-width: 604px) and (max-width: 1024px) {
-    .hide-tablet {
-        display: none!important;
-    }
-    .show-tablet {
-        display: inline-block;
-    }
-}
-
 
 .content-minor-section:last-child {
     border-bottom-width: 0;
@@ -347,9 +314,6 @@ body {
     padding: 0 0 5px;
     text-transform: uppercase;
     word-wrap: break-word;
-}
-a:active {
-    background-color: transparent;
 }
 .content-container {
     background: #fff;
@@ -515,7 +479,6 @@ a:active {
 }
 .profile-gallery-content-wrap {
     margin-top: 45px;
-    text-align: center;
 }
 .profile-gallery-content {
     display: inline-block;
@@ -823,9 +786,6 @@ a:active {
         position: relative;
     }
 }
-a {
-    color: #0057ff;
-}
 
 .rf-button__container .rf-button--secondary:hover {
     background-image: linear-gradient(#fff, #dedede);
@@ -864,23 +824,6 @@ a {
 }
 .rf-button__container .rf-button:not(.rf-button--icon-trailing) .rf-button__icon-container--trailing {
     display: none;
-}
-@media only screen and (min-resolution: 125dpi),
-a {
-    color:#0057ff;
-    cursor:pointer;
-    text-decoration:none;
-}
-a:hover {
-    text-decoration: underline;
-}
-::-moz-selection {
-    background: #0057ff;
-    color: #fff;
-}
-::selection {
-    background: #0057ff;
-    color: #fff;
 }
 
 /*! CSS Used fontfaces */

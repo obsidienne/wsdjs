@@ -1,4 +1,4 @@
-<div class="rf-project-cover rf-project-cover--project js-item js-project-cover qa-project-cover editable " data-id="54136737">
+<li class="rf-project-cover ">
   <a href="<%= song_path(@conn, :show, @song) %>" class="rf-project-cover__image-container js-project-cover-image-link js-project-link">
     <img class="rf-project-cover__image cld-responsive" src="<%= song_art_href_default() %>" data-src="<%= song_art_href(@song.art) %>" alt="<%= song_art_alt(@song) %>">
 
@@ -25,4 +25,4 @@
       </div>
     </div>
   </a>
-</div>
+</li>

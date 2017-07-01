@@ -10,59 +10,39 @@
 
             <div id="profile-details">
                   <div id="profile-title" class="qa-profile-title"><%= user_displayed_name(@user) %></div>
-                        <div class="profile-location has-website">
-                              <div class="beicons-pre beicons-pre-location"><%= @user.user_country %></div>
+                        <div class="beicons-pre beicons-pre-location"><%= @user.user_country %></div>
+                  </div>
+                  <div id="profile-actions">
+                        <div class="form-item rf-button__container--message rf-button__container" title="Message User">
+                              <a class="form-button rf-button rf-button--secondary " unselectable="on" tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
+                                    <span class=" rf-button__icon-container rf-button__icon-container--leading">
+                                          <svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285">
+                                          <g>
+                                          <path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path>
+                                          <path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path>
+                                          <path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path>
+                                          <path d="M5677.372 845.63l-4.372-3.205v5.618z"></path>
+                                          </g>
+                                          </svg>
+                                    </span>
+                                    <span class="rf-button__label">Message</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
+                              </a>
                         </div>
-
-                        <div id="profile-actions" class="hide-phone show-tablet">
-                              <div class="form-item rf-button__container--message rf-button__container" title="Message User">
-               <a class="form-button rf-button rf-button--secondary " unselectable="on" tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
-                  <span class=" rf-button__icon-container rf-button__icon-container--leading">
-                     <svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285">
-                        <g>
-                           <path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path>
-                           <path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path>
-                           <path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path>
-                           <path d="M5677.372 845.63l-4.372-3.205v5.618z"></path>
-                        </g>
-                     </svg>
-                  </span>
-                  <span class="rf-button__label">Message</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
-               </a>
+                        <%= if can_edit_page?(@user, @current_user) do %>
+                              <div class="form-item rf-button__container profile-header-action ">
+                                    <a class="form-button rf-button rf-button--secondary" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>">
+                                          <span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
+                                    </a>
+                              </div>
+                              <div class="form-item rf-button__container  profile-header-action  ">
+                              <%= link to: session_path(@conn, :delete, @current_user), method: :delete, class: "form-button  rf-button rf-button--secondary", target: "_blank", unselectable: "on", tabindex: "0" do %>
+                                    <span class="rf-button__label">Logout</span>
+                                    <span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
+                              <% end %>
+                              </div>
+                        <% end %>
+                  </div>
             </div>
-         </div>
-      </div>
-      <div id="profile-actions" class="hide-tablet">
-         <div class="form-item rf-button__container--message rf-button__container" title="Message User">
-            <a class="form-button  rf-button rf-button--secondary " unselectable="on"
-               tabindex="0" href="mailto:<%= @user.email %>" target = "_blank">
-               <span class=" rf-button__icon-container rf-button__icon-container--leading">
-                  <svg class="rf-icon rf-icon--mail js-icon__mail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285">
-                     <g>
-                        <path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path>
-                        <path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path>
-                        <path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path>
-                        <path d="M5677.372 845.63l-4.372-3.205v5.618z"></path>
-                     </g>
-                  </svg>
-               </span>
-               <span class="rf-button__label">Message</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
-            </a>
-         </div>
-
-         <%= if can_edit_page?(@user, @current_user) do %>
-            <div class="form-item rf-button__container profile-header-action ">
-              <a class="form-button rf-button rf-button--secondary" id="viral-icons" unselectable="on" tabindex="0" href="<%= user_path(@conn, :edit, @user) %>"><span class="rf-button__label">Edit profile</span><span class="rf-button__icon-container rf-button__icon-container--trailing"></span></a>
-            </div>
-            <div class="form-item rf-button__container  profile-header-action  ">
-            <%= link to: session_path(@conn, :delete, @current_user), method: :delete, class: "form-button  rf-button rf-button--secondary", target: "_blank", unselectable: "on", tabindex: "0" do %>
-              <span class="rf-button__label">Logout</span>
-              <span class="rf-button__icon-container rf-button__icon-container--trailing"></span>
-            <% end %>
-            </div>
-         <% end %>
-      </div>
-   </div>
 
             <div id="profile-stats" class="profile-section content-minor-section content-mobile-first-section">
                   <div class="profile-stat">
@@ -88,19 +68,15 @@
       </section>
 
 
-      <section id="gallery" class="content-main js-gallery" data-section="projects">
-            <div id="profile-nav" class="content-main content-section-nav -nav">
-                  <div class="profile-nav-inner content-nav-inner" style="overflow: visible;">
-                        <div class="profile-section-header content-section-header" data-section-header="gallery" style="transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate3d(0px, 0px, 0px); min-width: 0px;">
-                  <div class="content-section-nav-item active" data-section="projects">Suggestions</div>
-            </div>
+      <section>
+            <nav class="content-section-nav">
+                  <ul class="profile-section-header content-section-header">
+                        <li class="content-section-nav-item active">Suggestions</li>
+                  </ul>
+            </nav>
   
-            <div class="profile-gallery-content-wrap">
-                  <div class="profile-gallery-content -gallery-content" data-section="projects">
-                        <section id="song-list" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
-                              <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
-                        </section>    
-                  </div>
-            </div>
+            <ul id="song-list" class="profile-gallery-content-wrap" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
+                  <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
+            </ul>
       </section>
 </main>
