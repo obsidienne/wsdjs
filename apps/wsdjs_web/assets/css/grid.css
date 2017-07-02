@@ -42,6 +42,8 @@
 }
 
 .user-profile-song-container {
+
+  margin-top: 45px;
   display: grid;
   grid-row-gap: 15px;
   grid-column-gap: 15px;

@@ -11,11 +11,15 @@
 .song-header-container {
   display: flex;
   flex-direction: row;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .song-header-details {
-  flex: 1 1 auto;
-  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .song-header-art {
@@ -25,7 +29,7 @@
 
 @media (max-width: 767px) {
   .song-header-container {
-    flex-direction: column-reverse;;
+    flex-direction: column;
   }
 
   .song-header-details {

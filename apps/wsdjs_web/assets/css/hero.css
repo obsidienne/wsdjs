@@ -3,15 +3,13 @@
   background-color: #eeeeee;
   display: block;
   position: relative;
-  height: 70vh;
+  min-height: 40vh;
   background-image: var(--hero);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 15px;
   margin-bottom: 15px;
   background-position: 0% 50%;
 }

@@ -9,26 +9,30 @@
   <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
   <div class="container song-header-container">
-    <div class="song-header-details">
-      <h1 class="song-title"><%= @song.title %></h1>
-      <h2 class="song-artist">by <%= @song.artist %></h2>
-      <h4 class="text-muted"> by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></h4>
-      <div class="song-opinions">
-        <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
-      </div>
-    </div>
     <div class="song-header-art">
       <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
-      <%= if @song.url do %>
-      <a href="<%= @song.url %>" class="text-muted song-play" target="_blank" ></a>
-      <% end %>
+    </div>
+    <div class="song-header-details">
+      <div class="song-title"><%= @song.title %></div>
+      <div class="song-artist">by <%= @song.artist %></div>
+      <div class="text-muted"> by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></div>
+
     </div>
   </div>
+
+  <nav class="container content-section-nav-left">
+    <ul class="profile-section-header content-section-header">
+      <li class="content-section-nav-item active">Overview</li>
+    </ul>
+  </nav>
 </section>
 
 
 <section class="container container-comments">
   <div>
+        <div class="song-opinions">
+        <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
+      </div>
     <%= if @conn.assigns[:current_user] do %>
         <%= render @view_module, "_song_comment_form.html", conn: @conn, song: @song, changeset:  @comment_changeset %>
     <% end %>
