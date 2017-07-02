@@ -1,4 +1,4 @@
-<div class="wsdjs-song-cover wsdjs-song-cover--project js-item js-project-cover qa-project-cover editable " data-id="54136737">
+<li class="wsdjs-song-cover ">
   <a href="<%= song_path(@conn, :show, @song) %>" class="wsdjs-song-cover__image-container js-project-cover-image-link js-project-link">
     <img class="wsdjs-song-cover__image cld-responsive" src="<%= song_art_href_default() %>" data-src="<%= song_art_href(@song.art) %>" alt="<%= song_art_alt(@song) %>">
 
@@ -25,4 +25,4 @@
       </div>
     </div>
   </a>
-</div>
+</li>

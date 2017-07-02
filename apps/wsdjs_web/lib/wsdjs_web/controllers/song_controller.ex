@@ -16,6 +16,28 @@ defmodule Wsdjs.Web.SongController do
   @doc """
   No authZ needed, data is scoped by current_user
   """
+  def index(conn, %{"user_id" => id, "page" => page}) do
+    user = Wsdjs.Accounts.get_user!(id)
+    page = Wsdjs.Musics.paginate_songs_user(user, %{"page" => page})
+
+    conn
+    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
+    |> put_resp_header("page-number", Integer.to_string(page.page_number))
+    |> put_layout(false)
+    |> render("index_user_song.html", songs: page.entries)
+  end
+
+  def index(conn, %{"page" => page}) do
+    current_user = conn.assigns[:current_user]
+    page = Wsdjs.Musics.paginate_songs(current_user, %{"page" => page})
+
+    conn
+    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
+    |> put_resp_header("page-number", Integer.to_string(page.page_number))
+    |> put_layout(false)
+    |> render("index_hot_song.html", songs: page.entries)
+  end
+
   def index(conn, _params) do
     current_user = conn.assigns[:current_user]
     page = Wsdjs.Musics.paginate_songs(current_user)
@@ -25,6 +47,9 @@ defmodule Wsdjs.Web.SongController do
     |> put_resp_header("page-number", Integer.to_string(page.page_number))
     |> render("index.html", songs: page.entries, page_number: page.page_number, total_pages: page.total_pages)
   end
+
+
+
   @doc """
   No authZ needed, this function does not modify the database
   """

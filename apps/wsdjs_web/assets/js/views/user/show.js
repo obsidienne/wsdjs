@@ -37,7 +37,7 @@ export default class View extends MainView {
 
   _retrieve_songs(user_id, page) {    
     var request = new XMLHttpRequest();    
-    request.open('GET', `/search?type=user-song-list&user_id=${user_id}&page=${page}`, true);
+    request.open('GET', `/songs?user_id=${user_id}&page=${page}`, true);
   
     request.onload = function() {        
       if (this.status >= 200 && this.status < 400) {
