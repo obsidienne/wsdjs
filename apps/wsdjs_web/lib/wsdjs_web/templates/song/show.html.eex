@@ -8,15 +8,19 @@
   </style>
   <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-  <div class="container song-header-container">
-    <div class="song-header-art">
-      <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
-    </div>
-    <div class="song-header-details">
-      <div class="song-title"><%= @song.title %></div>
-      <div class="song-artist">by <%= @song.artist %></div>
-      <div class="text-muted"> by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></div>
-
+  <div class="song-header-container">
+    <div>
+      <div class="song-header-art">
+        <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
+      </div>
+      <div class="song-header-details">
+        <div class="song-title"><%= @song.title %></div>
+        <div class="song-artist">by <%= @song.artist %></div>
+        <div class="text-muted"> by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></div>
+        <%= if @song.url do %>
+          <a href="<%= @song.url %>" class="btn btn-primary" target="_blank" >play song</a>
+        <% end %>
+      </div>
     </div>
   </div>
 
@@ -30,9 +34,6 @@
 
 <section class="container container-comments">
   <div>
-        <div class="song-opinions">
-        <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
-      </div>
     <%= if @conn.assigns[:current_user] do %>
         <%= render @view_module, "_song_comment_form.html", conn: @conn, song: @song, changeset:  @comment_changeset %>
     <% end %>
@@ -42,11 +43,16 @@
     </ul>
   </div>
 
-  <%= if can_edit_song?(@current_user, @song) do %>
+  <div>
+    <div class="song-opinions">
+      <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
+    </div>
+    <%= if can_edit_song?(@current_user, @song) do %>
     <div>
       <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
       <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete" %></h1>
     </div>
-  <% end %>
+    <% end %>
+  </div>
 </section>
 </main>

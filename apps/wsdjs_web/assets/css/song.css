@@ -10,16 +10,22 @@
 
 .song-header-container {
   display: flex;
-  flex-direction: row;
   flex: 1 1 auto;
   justify-content: center;
   align-items: center;
+}
+.song-header-container > div {
+  display: flex;
+}
+.song-header-container .btn {
+  margin-top: auto;
 }
 
 .song-header-details {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 15px;
 }
 
 .song-header-art {
