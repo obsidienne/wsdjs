@@ -24,7 +24,7 @@
                   <tbody>
                         <tr>
                               <td class="h6 beicons-pre beicons-pre-eye">SONG SUGGESTED</td>
-                              <td class="profile-stat-count"><%= @total_songs %></td>
+                              <td class="profile-stat-count number"><%= @total_songs %></td>
                         </tr>
                   </tbody>
             </table>
