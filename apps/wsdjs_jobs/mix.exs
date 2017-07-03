@@ -10,6 +10,7 @@ defmodule Wsdjs.Jobs.Mixfile do
      lockfile: "../../mix.lock",
      elixir: "~> 1.4",
      elixirc_paths: elixirc_paths(Mix.env),
+     compilers: [:phoenix] ++ Mix.compilers,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
      deps: deps()]
@@ -32,9 +33,11 @@ defmodule Wsdjs.Jobs.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:phoenix_pubsub, "~> 1.0"},
+     {:phoenix, "~> 1.3.0-rc"},
      {:httpoison, "~> 0.11.1"},
      {:quantum, ">= 2.0.0-beta.1"},
      {:timex, "~> 3.0"},
+     {:bamboo, "~> 0.8"},
      {:html_sanitize_ex, "~> 1.0.0"},
      {:wsdjs, in_umbrella: true}]
   end
