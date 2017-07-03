@@ -1,3 +1,7 @@
+.song-opinions img {
+  margin: 2px;
+}
+
 .song-opinion {
   white-space: nowrap;
   user-select: none;

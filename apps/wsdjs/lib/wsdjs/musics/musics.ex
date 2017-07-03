@@ -95,7 +95,7 @@ defmodule Wsdjs.Musics do
 
   def get_song!(user, song_id) do
     Song.scoped(user)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> preload([:art, user: :avatar, comments: :user, opinions: [user: :avatar]])
     |> Repo.get!(song_id)
   end
 

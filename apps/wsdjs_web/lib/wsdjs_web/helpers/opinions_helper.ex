@@ -26,11 +26,12 @@
     kind_opinions = 
       opinions
       |> Enum.filter(fn(x) -> x.kind == kind end)
-      |> Enum.take(3)
 
     Enum.map(kind_opinions, fn opinion ->
       link to: user_path(conn, :show, opinion.user) do
-        opinion.user.name
+        img_tag(Wsdjs.Web.UserHelper.avatar_href_default(), 
+                'data-src': Wsdjs.Web.UserHelper.avatar_href(opinion.user.avatar),
+                class: "img-circle cld-responsive avatar-tiny")
       end
     end)
   end
