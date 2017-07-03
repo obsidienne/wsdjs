@@ -59,6 +59,13 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
+  def list_songs() do
+    yesterday = Timex.shift(Timex.now, hours: -24)
+    Song
+    |> where([s], s.inserted_at > ^yesterday)
+    |> Repo.all()
+  end
+
   @doc """
   Count song for a song
   """
