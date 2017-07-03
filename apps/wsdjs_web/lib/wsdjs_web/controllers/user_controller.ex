@@ -14,12 +14,11 @@ defmodule Wsdjs.Web.UserController do
     user = Wsdjs.Accounts.get_user!(id)
     
     page = Wsdjs.Musics.paginate_songs_user(user)
-    total_songs = Wsdjs.Musics.count_songs_for_user(user)
 
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
     |> put_resp_header("page-number", Integer.to_string(page.page_number))
-    |> render("show.html", user: user, songs: page.entries, page_number: page.page_number, total_pages: page.total_pages, total_songs: total_songs)
+    |> render("show.html", user: user, songs: page.entries, page_number: page.page_number, total_pages: page.total_pages, total_songs: page.total_entries)
   end
 
   @doc """
