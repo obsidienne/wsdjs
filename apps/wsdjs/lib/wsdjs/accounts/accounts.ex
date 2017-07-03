@@ -13,6 +13,21 @@ defmodule Wsdjs.Accounts do
 
   def countries, do: @countries
 
+  @doc """
+  Returns the list of users having a particular configuration.
+
+  ## Examples
+
+      iex> list_users_having_config({new_song_notification: true})
+      [%Accounts.User{}, ...]
+
+  """
+  def list_users(param) do
+    User
+    |> where(^param)
+    |> Repo.all()
+    |> Repo.preload(:avatar)
+  end
 
   @doc """
   Returns the list of users.
