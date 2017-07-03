@@ -41,7 +41,11 @@ export default class Radio {
     var data = JSON.parse(payload.data);
 
     var playing = "";
-    for (let i = 1; i < data.length && i < 5; i++) {
+    var max_it = 5;
+    if (document.documentElement.clientHeight <= 480) {
+      max_it = 2
+    }
+    for (let i = 1; i < data.length && i < max_it; i++) {
       if (data[i].path !== undefined) {
         playing = `<li>
             <a href="${data[i].path}" class="played-song">

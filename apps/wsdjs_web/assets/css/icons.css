@@ -1,6 +1,9 @@
 .song-opinions img {
   margin: 2px;
 }
+.song-opinions table {
+  width: auto;
+}
 
 .song-opinion {
   white-space: nowrap;

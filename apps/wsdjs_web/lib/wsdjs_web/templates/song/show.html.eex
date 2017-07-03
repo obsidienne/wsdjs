@@ -14,9 +14,9 @@
         <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
       </div>
       <div class="song-header-details">
-        <div class="song-title"><%= @song.title %></div>
-        <div class="song-artist">by <%= @song.artist %></div>
-        <div class="text-muted"> by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></div>
+        <h5 class="song-title"><%= @song.title %></h5>
+        <h6 class="song-artist"><span class="text-muted">by</span> <%= @song.artist %></h6>
+        <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></div>
         <%= if @song.url do %>
           <a href="<%= @song.url %>" class="btn btn-primary" target="_blank" >play song</a>
         <% end %>
@@ -43,7 +43,14 @@
     </ul>
   </div>
 
-  <div>
+  <aside>
+    <div class="song-tags">
+      <span class="label label-default"><%= @song.genre %></span>
+      <%= if @song.bpm > 0 do %>
+      <span class="label label-primary"><%= @song.bpm %> bpm</span>
+      <% end %>
+    </div>
+
     <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
     <%= if can_edit_song?(@current_user, @song) do %>
     <div>
@@ -51,6 +58,6 @@
       <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete" %></h1>
     </div>
     <% end %>
-  </div>
+  </aside>
 </section>
 </main>

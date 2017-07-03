@@ -5,7 +5,13 @@
   z-index: 49;
   width: var(--search-width);
   pointer-events: none;
-  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .search-container.focused {
+    margin-top: 11px;
+    margin-bottom: 5px;
+  }
 }
 
 .search__input__wrap {

@@ -10,7 +10,6 @@
 
 .song-header-container {
   display: flex;
-  flex: 1 1 auto;
   justify-content: center;
   align-items: center;
 }
@@ -26,22 +25,29 @@
   flex-direction: column;
   justify-content: space-between;
   margin-left: 15px;
+  max-width: 300px;
 }
-
+.song-tags {
+  margin-bottom: 15px;
+}
 .song-header-art {
   position: relative;
   flex: 0 0 300px;
 }
 
 @media (max-width: 767px) {
-  .song-header-container {
+  .song-header-container > div {
     flex-direction: column;
+    flex: 0 0 300px;
   }
 
   .song-header-details {
-    align-self: flex-start;
+    margin-top: 15px;
+    margin-left: 0;
   }
-
+  .song-header-details .btn {
+    margin-top: 15px;
+  }
   .song-header-art {
     flex: 0 0 300px;
     height: auto;;

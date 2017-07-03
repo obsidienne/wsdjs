@@ -1,5 +1,4 @@
 .miniplayer {
-  margin: 1em;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -9,6 +8,12 @@
   flex-direction: column;
   align-items: flex-end;
   z-index: 4;
+}
+
+@media (min-width: 768px) {
+  .miniplayer {
+    margin: 1em;
+  }
 }
 
 .player {

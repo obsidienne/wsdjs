@@ -1,7 +1,6 @@
 .hero {
   color: inherit;
   background-color: #eeeeee;
-  display: block;
   position: relative;
   min-height: 40vh;
   background-image: var(--hero);
@@ -12,6 +11,7 @@
   flex-direction: column;
   margin-bottom: 15px;
   background-position: 0% 50%;
+  justify-content: space-between;
 }
 
 .SongIndexView .hero, .TopIndexView .hero {

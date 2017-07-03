@@ -4,6 +4,7 @@
   width: var(--logo-width);
   height: 50px;
   display: inline-block;
+  vertical-align: top;
 }
 
 .glheader {
@@ -11,7 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  -webkit-user-select: none;
+  user-select: none;
   z-index: 1000;
   padding-top: 5px;
 }
@@ -22,6 +23,7 @@
   height: var(--avatar-width);
   z-index: 2;
   margin-left: 15px;
+  vertical-align: top
 }
 
 .glheader__menu_link {
@@ -33,13 +35,13 @@
   border-bottom: 5px solid #FFC107;
 }
 
-.glheader.focused .logo,
+  .glheader.focused .logo,
 .glheader.focused .glheader__menu_link,
 .glheader.focused .glheader__user__avatar {
   display: none;
 }
 
-@media (min-width: 414px) {
+@media (min-width: 768px) {
   .glheader.focused .logo,
   .glheader.focused .glheader__menu_link,
   .glheader.focused .glheader__user__avatar {
