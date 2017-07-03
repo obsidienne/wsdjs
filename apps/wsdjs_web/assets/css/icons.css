@@ -1,7 +1,7 @@
 .song-opinion {
   white-space: nowrap;
   user-select: none;
-  background: #fff;
+  background: transparent;
   border-radius: 2px;
   background-clip: padding-box;
   padding: 2px 0 2px 35px;
