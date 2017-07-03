@@ -1,3 +1,18 @@
-<%= opinion_link("down", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-<%= opinion_link("like", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-<%= opinion_link("up", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+<div class="song-opinions">
+    <table>
+        <tbody>
+            <tr>
+                <th><%= opinion_link("up", @conn, @song, @opinions, @conn.assigns[:current_user]) %></th>
+                <td><%= opinion_owners_link("up", @conn, @song, @opinions) %></td>
+            </tr>
+            <tr>
+                <th><%= opinion_link("like", @conn, @song, @opinions, @conn.assigns[:current_user]) %></th>
+                <td><%= opinion_owners_link("like", @conn, @song, @opinions) %></td>
+            </tr>
+            <tr>
+                <th><%= opinion_link("down", @conn, @song, @opinions, @conn.assigns[:current_user]) %></th>
+                <td><%= opinion_owners_link("down", @conn, @song, @opinions) %></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

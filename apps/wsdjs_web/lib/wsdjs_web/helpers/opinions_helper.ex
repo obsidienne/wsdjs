@@ -22,6 +22,19 @@
     content_tag :button, qty, default_options ++ tooltip_options(kind, opinions, qty)
   end
 
+  def opinion_owners_link(kind, conn, song, opinions) do
+    kind_opinions = 
+      opinions
+      |> Enum.filter(fn(x) -> x.kind == kind end)
+      |> Enum.take(3)
+
+    Enum.map(kind_opinions, fn opinion ->
+      link to: user_path(conn, :show, opinion.user) do
+        opinion.user.name
+      end
+    end)
+  end
+
   defp tooltip_options(kind, opinions, qty) when qty > 0 do
     ["title": opinions_names(kind, opinions), "data-size": "big", "data-animateFill": "false"]
   end

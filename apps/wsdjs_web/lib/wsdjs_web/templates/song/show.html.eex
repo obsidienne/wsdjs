@@ -44,9 +44,7 @@
   </div>
 
   <div>
-    <div class="song-opinions">
-      <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
-    </div>
+    <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
     <%= if can_edit_song?(@current_user, @song) do %>
     <div>
       <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
