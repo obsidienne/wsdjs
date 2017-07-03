@@ -42,10 +42,44 @@
 }
 
 .user-profile-song-container {
-
   margin-top: 45px;
   display: grid;
   grid-row-gap: 15px;
   grid-column-gap: 15px;
   grid-template-columns: repeat(3, minmax(202px, auto));
+}
+
+.user-profile-edit,
+.song-edit {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: column;
+}
+#avatar_div, #art_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+#avatar_div .form-group,
+#art_div .form-group {
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+.song-edit form,
+.user-profile-edit form {
+  flex: 1 1 auto;
+}
+
+@media (min-width: 768px) {
+  .user-profile-edit,
+  .song-edit {
+    flex-direction: row;
+    max-width: 768px;
+  }
+  #avatar_div,
+  #art_div {
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
 }

@@ -1,70 +1,68 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-<main class="container">
-  <div class="user-view">
-    <div id="art_div">
-      <img id="art_thumbnail" src="<%= song_art_href(@song.art) %>" style="width:250px;height:250px;">
-    </div>
+<main class="container song-edit">
+  <div id="art_div">
+    <img id="art_thumbnail" src="<%= song_art_href(@song.art) %>" style="width:250px;height:250px;">
     <div class="form-group">
       <button id="upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload cover</button>
     </div>
-
-    <%= form_for @changeset, song_path(@conn, :update, @song), fn f -> %>
-      <div id="cloudinary_form_div">
-        <%= inputs_for f, :art, fn fp -> %>
-          <%= hidden_input fp, :cld_id %>
-          <%= hidden_input fp, :version %>
-        <% end %>
-      </div>
-
-      <%= if @current_user.admin do %>
-        <div class="form-group">
-          <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
-          <%= error_tag f, :artist %>
-        </div>
-        <div class="form-group">
-          <%= text_input f, :title, placeholder: "Song title", class: "form-control" %>
-          <%= error_tag f, :title %>
-        </div>
-      <% else %>
-        <div class="form-group">
-          <%= @song.artist %>
-        </div>
-        <div class="form-group">
-          <%= @song.title %>
-        </div>
-      <% end %>
-
-      <div class="form-group">
-        <%= url_input f, :url, placeholder: "example: http://youtube.com/4543", class: "form-control" %>
-        <%= error_tag f, :url %>
-      </div>
-
-      <div class="form-group">
-        <%= number_input f, :bpm, placeholder: "bpm", min: 1, class: "form-control" %>
-        <%= error_tag f, :bpm %>
-      </div>
-
-      <div class="form-group select optional song_genre">
-        <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
-        <%= error_tag f, :genre %>
-      </div>
-
-      <div class="checkbox">
-        <%= label f,:instant_hit do %>
-          <%= checkbox f, :instant_hit %> Instant hit
-        <% end %>
-        <%= error_tag f, :instant_hit %>
-      </div>
-
-      <div class="checkbox">
-        <%= label f,:hidden do %>
-          <%= checkbox f, :hidden %> Hidden
-        <% end %>
-        <%= error_tag f, :hidden %>
-      </div>
-      
-      <%= submit "Update", class: "btn btn-primary" %>
-    <% end %>
   </div>
+
+  <%= form_for @changeset, song_path(@conn, :update, @song), fn f -> %>
+    <div id="cloudinary_form_div">
+      <%= inputs_for f, :art, fn fp -> %>
+        <%= hidden_input fp, :cld_id %>
+        <%= hidden_input fp, :version %>
+      <% end %>
+    </div>
+
+    <%= if @current_user.admin do %>
+      <div class="form-group">
+        <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
+        <%= error_tag f, :artist %>
+      </div>
+      <div class="form-group">
+        <%= text_input f, :title, placeholder: "Song title", class: "form-control" %>
+        <%= error_tag f, :title %>
+      </div>
+    <% else %>
+      <div class="form-group">
+        <%= @song.artist %>
+      </div>
+      <div class="form-group">
+        <%= @song.title %>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= url_input f, :url, placeholder: "example: http://youtube.com/4543", class: "form-control" %>
+      <%= error_tag f, :url %>
+    </div>
+
+    <div class="form-group">
+      <%= number_input f, :bpm, placeholder: "bpm", min: 1, class: "form-control" %>
+      <%= error_tag f, :bpm %>
+    </div>
+
+    <div class="form-group select optional song_genre">
+      <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
+      <%= error_tag f, :genre %>
+    </div>
+
+    <div class="checkbox">
+      <%= label f,:instant_hit do %>
+        <%= checkbox f, :instant_hit %> Instant hit
+      <% end %>
+      <%= error_tag f, :instant_hit %>
+    </div>
+
+    <div class="checkbox">
+      <%= label f,:hidden do %>
+        <%= checkbox f, :hidden %> Hidden
+      <% end %>
+      <%= error_tag f, :hidden %>
+    </div>
+    
+    <%= submit "Update", class: "btn btn-primary" %>
+  <% end %>
 </main>

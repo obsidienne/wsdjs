@@ -1,40 +1,38 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-<main>
-  <div class="user-view">
-    <div id="avatar_div">
-      <img id="avatar_thumbnail" src="<%= avatar_href(@current_user.avatar) %>" style="width:250px;height:250px;">
-    </div>
+<main class="user-profile-edit container">
+  <div id="avatar_div">
+    <img id="avatar_thumbnail" src="<%= avatar_href(@current_user.avatar) %>" style="width:250px;height:250px;">
     <div class="form-group">
       <button id="upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload avatar</button>
     </div>
-
-    <%= form_for @changeset, user_path(@conn, :update, @current_user), [id: "user_edit_form"], fn f -> %>
-      <div id="cloudinary_form_div">
-        <%= inputs_for f, :avatar, fn fp -> %>
-          <%= hidden_input fp, :cld_id %>
-          <%= hidden_input fp, :version %>
-        <% end %>
-      </div>
-
-      <div class="form-group">
-        <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email" %>
-      </div>
-      <div class="form-group">
-        <%= text_input f, :djname, placeholder: "Dj name", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= textarea f, :description, placeholder: "Description", class: "form-control" %>
-      </div>
-      <div class="form-group contry-selector">
-        <div class="f16">
-          <input type="search" id="user_country" name="user[user_country]" class="form-control" placeholder="Country" value="<%= @current_user.user_country %>" />
-        </div>
-      </div>
-      <%= submit "Update", class: "btn btn-primary" %>
-    <% end %>
   </div>
-</main>
+
+  <%= form_for @changeset, user_path(@conn, :update, @current_user), [id: "user_edit_form"], fn f -> %>
+    <div id="cloudinary_form_div">
+      <%= inputs_for f, :avatar, fn fp -> %>
+        <%= hidden_input fp, :cld_id %>
+        <%= hidden_input fp, :version %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email" %>
+    </div>
+    <div class="form-group">
+      <%= text_input f, :djname, placeholder: "Dj name", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= textarea f, :description, placeholder: "Description", class: "form-control" %>
+    </div>
+    <div class="form-group contry-selector">
+      <div class="f16">
+        <input type="search" id="user_country" name="user[user_country]" class="form-control" placeholder="Country" value="<%= @current_user.user_country %>" />
+      </div>
+    </div>
+    <%= submit "Update", class: "btn btn-primary" %>
+  <% end %>
+ </main>
