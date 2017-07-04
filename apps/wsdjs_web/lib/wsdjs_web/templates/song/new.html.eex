@@ -16,6 +16,10 @@
       <%= url_input f, :url, placeholder: "example: http://youtube.com/4543", class: "form-control" %>
       <%= error_tag f, :url %>
     </div>
+    
+    <div class="form-group">
+      <%= textarea f, :url_v, placeholder: "example: http://youtube.com/4543", class: "form-control" %>
+    </div>
 
     <div class="form-group">
       <%= number_input f, :bpm, placeholder: "bpm", min: 1, class: "form-control" %>

@@ -18,6 +18,8 @@ defmodule Wsdjs.Musics.Song do
     field :genre, :string
     field :instant_hit, :boolean
     field :hidden, :boolean
+    field :url_v, :string, virtual: true
+    timestamps()
 
     belongs_to :user, Accounts.User
     has_one :art, Musics.Art, on_replace: :delete
@@ -27,9 +29,7 @@ defmodule Wsdjs.Musics.Song do
     has_many :votes, Trendings.Vote
     many_to_many :tops, Trendings.Top, join_through: Trendings.Rank
 
-    timestamps()
-
-    embeds_many :providers, Provider, on_replace: :delete, primary_key: false do
+    embeds_many :providers, Provider, primary_key: false, on_replace: :delete do
       field :url, :string
       field :provider_type, :string
       field :provider_id, :string
@@ -50,6 +50,15 @@ defmodule Wsdjs.Musics.Song do
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
+    |> put_embed(:providers, provider_changeset(params["url_v"]))
+  end
+
+  defp provider_changeset(nil), do: nil 
+  defp provider_changeset(urls) do
+    urls
+    |> String.split(["\n", "\r", "\r\n"], trim: true)
+    |> Enum.map(&String.trim(&1))
+    |> Enum.map(&Wsdjs.Helpers.Provider.extract(&1))
   end
 
   def genre, do: @validated_genre
