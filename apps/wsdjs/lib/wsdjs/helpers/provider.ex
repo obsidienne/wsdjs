@@ -11,6 +11,13 @@ defmodule Wsdjs.Helpers.Provider do
     Kernel.apply(Wsdjs.Helpers.Provider, func, [re, url])
   end
 
+  def fn_unknown(re, url) do
+    %{
+      url: url,
+      provider_type: "unknow",
+      provider_id: nil
+    }
+  end
 
   @doc """
     Should match the following URL

@@ -18,7 +18,6 @@ defmodule Wsdjs.Musics.Song do
     field :genre, :string
     field :instant_hit, :boolean
     field :hidden, :boolean
-    field :url_v, :string, virtual: true
     timestamps()
 
     belongs_to :user, Accounts.User
@@ -49,8 +48,7 @@ defmodule Wsdjs.Musics.Song do
     |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
-    |> validate_url(:url)
-    |> put_embed(:providers, provider_changeset(params["url_v"]))
+    |> put_embed(:providers, provider_changeset(params["url"]))
   end
 
   defp provider_changeset(nil), do: nil 
