@@ -29,7 +29,7 @@ defmodule Wsdjs.Musics.Song do
 
     timestamps()
 
-    embeds_many :providers, Provider do
+    embeds_many :providers, Provider, on_replace: :delete, primary_key: false do
       field :url, :string
       field :provider_type, :string
       field :provider_id, :string
