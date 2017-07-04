@@ -15,6 +15,7 @@
 }
 .song-header-container > div {
   display: flex;
+  justify-content: center;
 }
 .song-header-container .btn {
   margin-top: auto;
