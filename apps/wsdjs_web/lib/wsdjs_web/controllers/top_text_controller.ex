@@ -8,9 +8,15 @@ defmodule Wsdjs.Web.TopTextController do
     current_user = conn.assigns[:current_user]
 
     top = Wsdjs.Trendings.get_top(current_user, id)
-    top = Wsdjs.Repo.preload(top, :songs)
-    IO.inspect top.songs
-    text conn, "Showing id #{id}"
+
+    ranks = Enum.take(top.ranks, 20)
+    response = Enum.map(ranks, fn (rank) ->
+      song = rank.song      
+      points = rank.likes + rank.bonus + rank.votes            
+      ["#{rank.position}. ", song.artist, " ", song.title, " (", song.genre, ") - ", Integer.to_string(points) ," pts suggested by ", song.user.name, " on DATE\n"]
+    end)
+
+    text conn, response
   end
 
 end
