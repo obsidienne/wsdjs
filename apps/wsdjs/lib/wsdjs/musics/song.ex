@@ -28,6 +28,12 @@ defmodule Wsdjs.Musics.Song do
     many_to_many :tops, Trendings.Top, join_through: Trendings.Rank
 
     timestamps()
+
+    embeds_many :providers, Provider do
+      field :url, :string
+      field :provider_type, :string
+      field :provider_id, :string
+    end
   end
 
   @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden]
