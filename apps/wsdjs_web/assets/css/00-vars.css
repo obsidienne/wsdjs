@@ -29,6 +29,9 @@
   --avatar-width: 40px;
   --last-top-column-width: 50%;
   --search-width: 275px;
+
+  --user-show-song-column-number: 1;
+
 }
 
 @media (min-width: 768px) {
@@ -43,7 +46,7 @@
     --avatar-width: 60px;
     --last-top-column-width: 50%;
     --search-width: 390px;
-
+    --user-show-song-column-number: 2;
   }
 }
 
@@ -53,6 +56,7 @@
     --grid-column-number: 3;
     --grid-column-span: 4;
     --last-top-column-width: 33%;
+    --user-show-song-column-number: 3;
   }
 }
 @media (min-width: 1200px) {
@@ -60,6 +64,7 @@
     --container-width: 1170px;
     --grid-column-number: 4;
     --grid-column-span: 5;
+    --user-show-song-column-number: 4;
     --last-top-column-width: 20%;
   }
 }

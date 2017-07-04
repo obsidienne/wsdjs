@@ -1,55 +1,55 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
 <main class="container user-profile-container">
-      <section>
-            <section id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
-                  <h4><%= @user.name %></h4>
-                  <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="rf-avatar cld-responsive rf-avatar__image js-avatar__image">
-                  <div id="profile-details">
-                        <h6><%= user_displayed_name(@user) %></h6>
-                        <span class="beicons-pre beicons-pre-location"> <%= @user.user_country %></span>
-                  </div>
-                  <div id="profile-actions">
-                        <a class="rf-button" href="mailto:<%= @user.email %>" target = "_blank">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285"><g><path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path><path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path><path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path><path d="M5677.372 845.63l-4.372-3.205v5.618z"></path></g></svg>
-                              Message
-                        </a>
-                        <%= if can_edit_page?(@user, @current_user) do %>
-                              <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "rf-button" %>
-                              <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "rf-button" %>
-                        <% end %>
-                  </div>
-            </section>
+  <section>
+    <section id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
+      <h4><%= @user.name %></h4>
+      <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@user.avatar) %>" class="rf-avatar cld-responsive rf-avatar__image js-avatar__image">
+      <div id="profile-details">
+        <h6><%= user_displayed_name(@user) %></h6>
+        <span class="beicons-pre beicons-pre-location"> <%= @user.user_country %></span>
+      </div>
+      <div id="profile-actions">
+        <a class="rf-button" href="mailto:<%= @user.email %>" target = "_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="5673 839.716 15.931 11.285"><g><path d="M5680.86 846.605a.18.18 0 0 0 .21 0l7.86-5.764v-.46a.7.7 0 0 0-.724-.662h-14.482a.7.7 0 0 0-.724.663v.46z"></path><path d="M5688.93 842.426l-4.378 3.21 4.38 2.41z"></path><path d="M5683.428 846.46l-1.514 1.11a1.663 1.663 0 0 1-1.9 0l-1.514-1.116-5.5 3.032v.85a.7.7 0 0 0 .724.665h14.482a.7.7 0 0 0 .724-.663v-.85z"></path><path d="M5677.372 845.63l-4.372-3.205v5.618z"></path></g></svg>
+          Message
+        </a>
+        <%= if can_edit_page?(@user, @current_user) do %>
+          <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "rf-button" %>
+          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "rf-button" %>
+        <% end %>
+      </div>
+    </section>
 
-            <table id="profile-stats" class="profile-stat profile-section content-minor-section">
-                  <tbody>
-                        <tr>
-                              <td class="h6 beicons-pre beicons-pre-eye">SONG SUGGESTED</td>
-                              <td class="profile-stat-count number"><%= @total_songs %></td>
-                        </tr>
-                  </tbody>
-            </table>
+    <table id="profile-stats" class="profile-stat profile-section content-minor-section">
+      <tbody>
+        <tr>
+          <td class="h6 beicons-pre beicons-pre-eye">SONG SUGGESTED</td>
+          <td class="profile-stat-count number"><%= @total_songs %></td>
+        </tr>
+      </tbody>
+    </table>
 
-            <div class="content-section-wrap">
-                  <%= if has_description?(@user) do %>
-                  <div class="profile-section content-minor-section">
-                        <h3 class="content-minor-section-label">About Me</h3>
-                        <%= @user.description %>
-                  </div>
-                  <% end %>
-                  <h6 id="profile-date" class="profile-section content-minor-section profile-date-text">Member since: <time class="profile-date" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= @user.inserted_at %></time></h6>
-            </div>
-      </section>
+    <div class="content-section-wrap">
+      <%= if has_description?(@user) do %>
+      <div class="profile-section content-minor-section">
+        <h3 class="content-minor-section-label">About Me</h3>
+        <%= @user.description %>
+      </div>
+      <% end %>
+      <h6 id="profile-date" class="profile-section content-minor-section profile-date-text">Member since: <time class="profile-date" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= @user.inserted_at %></time></h6>
+    </div>
+  </section>
 
 
-      <section>
-            <nav class="content-section-nav">
-                  <ul class="profile-section-header content-section-header">
-                        <li class="content-section-nav-item active">Suggestions</li>
-                  </ul>
-            </nav>
+  <section class="user-profile-container-songs">
+    <nav class="content-section-nav">
+      <ul class="profile-section-header content-section-header">
+        <li class="content-section-nav-item active">Suggestions</li>
+      </ul>
+    </nav>
   
-            <ul id="song-list" class="user-profile-song-container" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
-                  <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
-            </ul>
-      </section>
+    <ul id="song-list" class="user-profile-song-container" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
+      <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
+    </ul>
+  </section>
 </main>

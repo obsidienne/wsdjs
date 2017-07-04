@@ -114,7 +114,6 @@
     line-height: 19px;
     padding: 18px 20px;
     position: relative;
-    width: 360px;
     z-index: 3;
 }
 .content-minor-section-label {
@@ -185,6 +184,8 @@
     clear: both;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 15px;
 }
 
 
