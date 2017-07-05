@@ -1,6 +1,6 @@
 <a href="<%= top_path(@conn, :show, @top.id) %>" class="cd-timeline-block">
   <div class="cd-timeline-img cd-picture">
-    <img src="<%= art_url_default() %>" data-src="<%= art_url(Enum.at(@top.ranks, 0).song.art) %>" class="cld-responsive song-art-responsive" >
+    <img src="<%= art_url() %>" data-src="<%= art_url(Enum.at(@top.ranks, 0).song.art) %>" class="cld-responsive song-art-responsive" >
   </div> <!-- cd-timeline-img -->
 
   <div class="cd-timeline-content">
@@ -12,7 +12,7 @@
     <div class="card-top-body">
       <%= for rank <- @top.ranks do %>
         <div>
-          <img src="<%= art_url_default() %>" data-src="<%= art_url(rank.song.art) %>"  alt="<%= song_art_alt(rank.song) %>" class="cld-responsive song-art-responsive" >
+          <img src="<%= art_url() %>" data-src="<%= art_url(rank.song.art) %>"  alt="<%= song_art_alt(rank.song) %>" class="cld-responsive song-art-responsive" >
         </div>
       <% end %>
     </div>

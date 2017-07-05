@@ -3,7 +3,7 @@
   <section>
     <section id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
       <h4><%= @user.name %></h4>
-      <img src="<%= avatar_url_default() %>" data-src="<%= avatar_url(@user.avatar) %>" class="rf-avatar cld-responsive rf-avatar__image js-avatar__image">
+      <img src="<%= avatar_url() %>" data-src="<%= avatar_url(@user.avatar) %>" class="rf-avatar cld-responsive rf-avatar__image js-avatar__image">
       <div id="profile-details">
         <h6><%= user_displayed_name(@user) %></h6>
         <span class="beicons-pre beicons-pre-location"> <%= @user.user_country %></span>

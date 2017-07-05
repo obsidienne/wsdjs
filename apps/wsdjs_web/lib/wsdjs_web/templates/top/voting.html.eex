@@ -40,7 +40,7 @@
             <%= voting_show(@top, rank) %>
           </div>
           <div class="top-song-art">
-            <img class="cld-responsive" src="<%= art_url_default()%>" data-src="<%= art_url(rank.song.art)%>" />
+            <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
           </div>
         </label>
         <%= voting_checkbox(f, @top, rank) %>

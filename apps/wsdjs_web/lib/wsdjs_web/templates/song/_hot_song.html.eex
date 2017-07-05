@@ -1,6 +1,6 @@
 <article class="hot-song card" data-id="<%= @song.id %>">
   <a href="<%= url_for_provider(@song) %>" class="hot-song-heading" target="_blank" >
-    <img src="<%= art_url_default()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
+    <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
     <h4 class="song-art-overlay">
       <span class="label label-default"><%= @song.genre %></span>
       <%= if @song.bpm > 0 do %>

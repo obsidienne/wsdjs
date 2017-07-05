@@ -11,7 +11,7 @@
   <div class="song-header-container">
     <div>
       <div class="song-header-art">
-        <img src="<%= art_url_default()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
+        <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@song) %>"/>
       </div>
       <div class="song-header-details">
         <h5 class="song-title"><%= @song.title %></h5>

@@ -22,7 +22,7 @@
   <%= for rank <- @top.ranks do %>
     <article class="top-song">
       <a class="top-song-art" target="_blank" href="<%= url_for_provider(rank.song) %>">
-        <img class="cld-responsive" src="<%= art_url_default()%>" data-src="<%= art_url(rank.song.art)%>" />
+        <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
       </a>
       <div class="top-song-body">
         <div>
