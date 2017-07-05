@@ -19,7 +19,7 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= rank.position %></div>
         </div>
-        <a class="top-song-art" target="_blank" href="<%= rank.song.url %>">
+        <a class="top-song-art" target="_blank" href="<%= song_url(rank.song) %>">
           <img class="cld-responsive" src="<%= song_art_href_default()%>" data-src="<%= song_art_href(rank.song.art)%>" />
         </a>
       </label>
