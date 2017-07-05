@@ -24,15 +24,4 @@ defmodule Wsdjs.Web.SongHelper do
   def can_edit_song?(current_user, song) do
     song.user.id == current_user.id || current_user.admin 
   end
-
-  def song_url(song) do
-    cond do
-      Enum.count(song.providers) > 0 -> 
-        Enum.at(song.providers, 0).url
-      song.url != nil -> 
-        song.url
-      true -> 
-        "#"
-    end
-  end
 end

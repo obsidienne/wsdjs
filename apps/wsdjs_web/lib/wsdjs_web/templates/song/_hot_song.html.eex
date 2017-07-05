@@ -1,5 +1,5 @@
 <article class="hot-song card" data-id="<%= @song.id %>">
-  <a href="<%= song_url(@song) %>" class="hot-song-heading" target="_blank" >
+  <a href="<%= url_for_provider(@song) %>" class="hot-song-heading" target="_blank" >
     <img src="<%= song_art_href_default()%>" data-src="<%= song_art_href(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
     <h4 class="song-art-overlay">
       <span class="label label-default"><%= @song.genre %></span>
