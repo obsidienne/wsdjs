@@ -29,8 +29,8 @@
 
     Enum.map(kind_opinions, fn opinion ->
       link to: user_path(conn, :show, opinion.user) do
-        img_tag(Wsdjs.Web.UserHelper.avatar_href_default(), 
-                'data-src': Wsdjs.Web.UserHelper.avatar_href(opinion.user.avatar),
+        img_tag(Wsdjs.Web.CloudinaryHelper.avatar_href_default(), 
+                'data-src': Wsdjs.Web.CloudinaryHelper.avatar_href(opinion.user.avatar),
                 class: "img-circle cld-responsive avatar-tiny")
       end
     end)

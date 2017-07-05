@@ -1,13 +1,4 @@
 defmodule Wsdjs.Web.UserHelper do
-  @base_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_crop,g_custom/"
-  @missing_avatar "//res.cloudinary.com/don2kwaju/image/upload/v1450094305/wsdjs/missing_avatar.jpg"
-
-  def avatar_href(%Wsdjs.Accounts.Avatar{cld_id: cld_id, version: version}) when is_binary(cld_id) do
-    @base_url <> "v#{version}/" <> "#{cld_id}.jpg"
-  end
-  def avatar_href(_), do: @missing_avatar
-  def avatar_href_default(), do: @missing_avatar
-
   def user_displayed_name(%Wsdjs.Accounts.User{name: name, djname: djname}) when is_binary(djname), do: "#{name} (#{djname})"
   def user_displayed_name(%Wsdjs.Accounts.User{name: name}), do: name
 
