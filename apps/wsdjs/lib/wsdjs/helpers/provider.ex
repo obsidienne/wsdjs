@@ -1,6 +1,6 @@
 defmodule Wsdjs.Helpers.Provider do
   @provider_types [
-      {~r/youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+)/i, :youtube_01}
+      {~r/youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+)/i, :youtube}
   ]
 
   def extract(url) do
@@ -37,7 +37,7 @@ defmodule Wsdjs.Helpers.Provider do
     http://www.youtube.com/embed/nas1rJpm7wY?rel=0
     http://www.youtube.com/watch?v=peFZbP64dsU
   """
-  def youtube_01(re, url) do
+  def youtube(re, url) do
     [_, video_id] = Regex.run(re, url)
     %{
       url: url,
