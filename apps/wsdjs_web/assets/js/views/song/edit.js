@@ -21,6 +21,8 @@ export default class View extends MainView {
         document.getElementById("art_thumbnail").setAttribute("src", result[0]['thumbnail_url']);
         document.getElementById("song_art_cld_id").value = result[0]['public_id'];
         document.getElementById("song_art_version").value = result[0]['version'];
+        document.getElementById("song_art_cld_id").removeAttribute("disabled");
+        document.getElementById("song_art_version").removeAttribute("disabled");
       })
     };
 
