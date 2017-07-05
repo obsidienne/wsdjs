@@ -1,6 +1,6 @@
 <li class="comment">
   <div class="comment-avatar">
-    <img src="<%= avatar_href_default() %>" data-src="<%= avatar_href(@comment.user.avatar) %>"  class="img-comment cld-responsive"  alt="<%= user_avatar_alt(@comment.user) %>">
+    <img src="<%= avatar_url_default() %>" data-src="<%= avatar_url(@comment.user.avatar) %>"  class="img-comment cld-responsive"  alt="<%= user_avatar_alt(@comment.user) %>">
   </div>
 
   <div class="comment-box">

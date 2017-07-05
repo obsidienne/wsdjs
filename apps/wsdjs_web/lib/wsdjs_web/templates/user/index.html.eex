@@ -6,7 +6,7 @@
   <table class="table">
   <%= for user <- @users do %>
   <tr>
-    <td><img src="<%= avatar_href(user.avatar) %>" width="30px" height="30px"/><b><%= user.email %></b> (<%= user.id %>)</td>
+    <td><img src="<%= avatar_url(user.avatar) %>" width="30px" height="30px"/><b><%= user.email %></b> (<%= user.id %>)</td>
     <td><%= link "View", to: user_path(@conn, :show, user.id) %></td>
   </tr>
   <% end %>

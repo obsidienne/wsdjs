@@ -2,7 +2,7 @@
 
 <main class="user-profile-edit container">
   <div id="avatar_div">
-    <img id="avatar_thumbnail" src="<%= avatar_href(@current_user.avatar) %>" style="width:250px;height:250px;">
+    <img id="avatar_thumbnail" src="<%= avatar_url(@current_user.avatar) %>" style="width:250px;height:250px;">
     <div class="form-group">
       <button id="upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload avatar</button>
     </div>
