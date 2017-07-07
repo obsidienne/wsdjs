@@ -22,7 +22,17 @@ defmodule Wsdjs.Web.TopController do
     votes = Wsdjs.Trendings.list_votes(top)
     changeset = Wsdjs.Trendings.Top.changeset(top)
 
-    render conn, "#{top.status}.html", top: top, votes: votes, changeset: changeset
+    cond do
+      top.status == "checking" ->
+        render conn, "checking.html", top: top, votes: votes, changeset: changeset
+      top.status == "voting" ->
+        render conn, "voting.html", top: top, votes: votes, changeset: changeset
+      top.status == "counting" ->
+        render conn, "counting.html", top: top, votes: votes, changeset: changeset
+      top.status == "published" ->
+        render conn, "published.html", top: top, votes: votes, changeset: changeset
+      true -> raise ArgumentError, "The template requested does not exist. Something smelly."
+    end
   end
 
   @doc """
