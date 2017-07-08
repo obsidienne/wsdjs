@@ -1,6 +1,10 @@
-<main class="container">
-  <header class="hero">
-  <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time></h3>
+<header class="hero">
+  <%= render "_header.html", conn: @conn, current_user: @current_user %>
+
+  <div class="container">
+    <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h3>
+    <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Are you sure ?"] %>
+  </div>
 
   <%= if @current_user && @current_user.id == @top.user_id do %>
     <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
@@ -15,8 +19,10 @@
     </section>
     <% end %>
   <% end %>
-  </header>
+</header>
 
+
+<main class="container">
   <%= for rank <- @top.ranks do %>
     <article class="top-song">
       <a class="top-song-art" target="_blank" href="<%= url_for_provider(rank.song) %>">

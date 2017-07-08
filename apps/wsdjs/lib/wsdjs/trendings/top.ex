@@ -12,7 +12,7 @@ defmodule Wsdjs.Trendings.Top do
     field :status, :string
 
     belongs_to :user, Accounts.User
-    has_many :ranks, Trendings.Rank
+    has_many :ranks, Trendings.Rank, on_delete: :delete_all
     has_many :votes, Trendings.Vote, on_replace: :delete
     many_to_many :songs, Musics.Song, join_through: Trendings.Rank
 

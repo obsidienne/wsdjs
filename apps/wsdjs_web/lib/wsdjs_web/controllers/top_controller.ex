@@ -70,4 +70,14 @@ defmodule Wsdjs.Web.TopController do
         |> render("new.html", changeset: changeset)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    current_user = conn.assigns[:current_user]
+    top = Wsdjs.Trendings.get_top(current_user, id)
+    {:ok, _top} = Wsdjs.Trendings.delete_top(top)
+
+    conn
+    |> put_flash(:info, "Top deleted successfully.")
+    |> redirect(to: home_path(conn, :index))
+  end
 end

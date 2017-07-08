@@ -148,6 +148,24 @@ defmodule Wsdjs.Trendings do
     |> Repo.update()
   end
 
+
+  @doc """
+  Deletes a Top.
+
+  ## Examples
+
+      iex> delete_top(top)
+      {:ok, %Top{}}
+
+      iex> delete_top(top)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_top(%Top{} = top) do
+    Repo.delete(top)
+  end
+
+
   def list_votes(top) do
     Wsdjs.Trendings.Vote
     |> where(top_id: ^top.id)
