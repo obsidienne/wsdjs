@@ -84,7 +84,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
       song
       |> Map.put(:artist, song_in_base.artist)
       |> Map.put(:title, song_in_base.title)
-      |> Map.put(:image_uri, Wsdjs.Web.SongHelper.art_url(song_in_base.art))
+      |> Map.put(:image_uri, Wsdjs.Web.CloudinaryHelper.art_url(song_in_base.art))
       |> Map.put(:suggested_by, song_in_base.user.name)
       |> Map.put(:suggested_by_path, "/users/#{song_in_base.user.id}")
       |> Map.put(:path, "/songs/#{song_in_base.id}")
