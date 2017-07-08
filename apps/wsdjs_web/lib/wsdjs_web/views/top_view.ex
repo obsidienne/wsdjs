@@ -21,4 +21,7 @@ defmodule Wsdjs.Web.TopView do
   defp do_voting_checkbox(f, rank, current_user_vote) do
     checkbox f, :vote, name: "votes[#{rank.song.id}]", unchecked_value: 0, id: "song-#{rank.id}", class: "hidden", checked_value: current_user_vote.votes, checked: true
   end
+
+  def suggestor_name(%Wsdjs.Accounts.User{name: _, djname: djname}) when is_binary(djname), do: djname
+  def suggestor_name(%Wsdjs.Accounts.User{name: name}) when is_binary(name), do: name
 end

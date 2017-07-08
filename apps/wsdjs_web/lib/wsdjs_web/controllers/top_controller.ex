@@ -30,7 +30,7 @@ defmodule Wsdjs.Web.TopController do
       top.status == "counting" ->
         render conn, "counting.html", top: top, votes: votes, changeset: changeset
       top.status == "published" ->
-        render conn, "published.html", top: top, votes: votes, changeset: changeset
+        render conn, :published, top: top, votes: votes, changeset: changeset
       true -> raise ArgumentError, "The template requested does not exist. Something smelly."
     end
   end

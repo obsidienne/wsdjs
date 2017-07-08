@@ -2,7 +2,7 @@ defmodule Wsdjs.Web.Router do
   use Wsdjs.Web, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "text"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
@@ -35,7 +35,6 @@ defmodule Wsdjs.Web.Router do
     resources "/song_opinions", SongOpinionController, only: [:delete]
     resources "/tops", TopController, only: [:create, :new, :update] do
       resources "/votes", VoteController, only: [:create]
-      resources "/txt", TopTextController, only: [:index]
     end
     resources "/ranks", RankController, only: [:update]
     resources "/sessions", SessionController, only: [:delete]
@@ -69,7 +68,7 @@ defmodule Wsdjs.Web.Router do
 
   scope "/api", as: :api, alias: :'Wsdjs.Web' do
     pipe_through [:api]
-
+ 
     scope "/", alias: Api do
       resources "/now_playing", NowPlayingController, only: [:index]
       resources "/mobile_config", MobileConfigController, only: [:index]

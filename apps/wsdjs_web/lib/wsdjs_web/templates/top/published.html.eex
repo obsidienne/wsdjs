@@ -4,7 +4,7 @@
   <div class="container">
     <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small>
     <%= if @current_user.admin do %>
-      <a class="btn btn-primary" title="Text version" href="<%= top_top_text_path(@conn, :index, @top.id) %>" target="_blank">Text version</a>
+      <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-primary", target: "_blank" %>
     <% end %>
     </h3>
     
