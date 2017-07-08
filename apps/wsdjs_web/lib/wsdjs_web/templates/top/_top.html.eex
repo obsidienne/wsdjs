@@ -4,11 +4,7 @@
   </div> <!-- cd-timeline-img -->
 
   <div class="cd-timeline-content">
-    <%= if @top.status != "published" do %>
-      <h2><%= @top.status %></h2>
-    <% else %>
-      <h2><%= Enum.at(@top.ranks, 0).song.title %></h2>
-    <% end %>
+    <span class="cd-date"><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></span>
     <div class="card-top-body">
       <%= for rank <- @top.ranks do %>
         <div>
@@ -16,6 +12,5 @@
         </div>
       <% end %>
     </div>
-    <span class="cd-date"><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></span>
   </div> <!-- cd-timeline-content -->
 </a> <!-- cd-timeline-block -->
