@@ -4,6 +4,7 @@
 .hot-song-heading {
   padding: 0;
   position: relative;
+  display: block;
 }
 
 .hot-song-heading img {
