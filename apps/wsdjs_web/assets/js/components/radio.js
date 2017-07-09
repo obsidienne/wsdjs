@@ -1,9 +1,10 @@
 import socket from "../socket"
+import Tippy from 'tippy.js/dist/tippy';
 
 export default class Radio {
   mount() {
     var self = this;
-    var radio = new Audio("http://37.58.75.166:8384/stream?icy=http");
+    this.radio = new Audio("http://37.58.75.166:8384/stream?icy=http");
 
     // Now that you are connected, you can join channels with a topic:
     let channel = socket.channel("notifications:now_playing", {})
@@ -17,16 +18,21 @@ export default class Radio {
 
     document.addEventListener("click", function(e) {
       if (e.target && e.target.matches(".toggle-player")){
-        if (!radio.paused) { // play to pause
-          radio.pause();
+        if (!self.radio.paused) { // play to pause
+          self.radio.pause();
           e.target.classList.add("icon-play");
           e.target.classList.remove("icon-pause");
-          document.querySelector(".miniplayer-art img").src = '//res.cloudinary.com/don2kwaju/image/upload/e_blur:300/o_30/v1449163830/wsdjs/brand.jpg';
-          document.querySelector(".miniplayer-title").innerText = '';
-          document.querySelector(".miniplayer-artist").innerText = '';
+          document.querySelector(".miniplayer-art img").src = '//res.cloudinary.com/don2kwaju/image/upload/wsdjs/radiowcs_square.jpg';
+          var current_play_title = document.querySelector(".miniplayer-info h6:first-child");
+          var current_play_artist = document.querySelector(".miniplayer-info h6:nth-child(2)");
+          var current_play_suggestor = document.querySelector(".miniplayer-info h6:last-child");
+          current_play_title.innerHTML = "";
+          current_play_artist.innerHTML = "";
+          current_play_suggestor.innerHTML = "Play the radio";
+
         } else { // pause to play
           channel.push("played_song_list")
-          radio.play();
+          self.radio.play();
           e.target.classList.add("icon-pause");
           e.target.classList.remove("icon-play");
         }
@@ -36,7 +42,8 @@ export default class Radio {
   }
 
   refresh(payload) {
-    var player = document.querySelector(".miniplayer");
+    var player = document.querySelector("#radio-container");
+
 
     var data = JSON.parse(payload.data);
 
@@ -46,36 +53,22 @@ export default class Radio {
       max_it = 2
     }
     for (let i = 1; i < data.length && i < max_it; i++) {
-      if (data[i].path !== undefined) {
-        playing = `<li>
-            <a href="${data[i].path}" class="played-song">
-              <img height="50" width="50" src="${data[i].image_uri}" />
-            </a>
-          </li>` + playing;
-      } else {
-        playing = `<li>
-            <a href="#" class="played-song">
-              <img height="50" width="50" src="http://res.cloudinary.com/don2kwaju/image/upload/v1449164620/wsdjs/missing_cover.jpg" />
-            </a>
-          </li>` + playing;
-      }
+      playing += `<li class="played-song tippy" data-position="top-end" data-size="small" title="${data[i].artist} - ${data[i].title}<br/><span class='small'>Suggested by ${data[i].suggested_by}</span>"><a href="${data[i].path}"><img height="50" width="50" src="${data[i].image_uri}" /></a></li>`;
     }
 
-    playing += `<li>
-      <div id="miniplayer" class="player">
-        <a href="${data[0].path}" class="miniplayer-info">
-          <div class="miniplayer-title">${data[0].title}</div>
-          <div class="miniplayer-artist">${data[0].artist}</div>
-        </a>
+    var art = document.querySelector(".miniplayer-art img");
+    art.setAttribute("src", data[0].image_uri);
 
-        <div class="miniplayer-art">
-          <div class="toggle-player icon-pause"></div>
-          <img height="50" width="50" src="${data[0].image_uri}" />
-        </div>
-      </div>
-    </li>`
+    var current_play_title = document.querySelector(".miniplayer-info h6:first-child");
+    var current_play_artist = document.querySelector(".miniplayer-info h6:nth-child(2)");
+    var current_play_suggestor = document.querySelector(".miniplayer-info h6:last-child");
+    current_play_title.innerHTML = data[0].title;
+    current_play_artist.innerHTML = data[0].artist;
+    current_play_suggestor.innerHTML = `<span class="suggested_by">suggested by ${data[0].suggested_by}</span>`;
 
     console.log(playing);
     player.innerHTML = playing;
+    new Tippy('.tippy');
+
   }
 }
