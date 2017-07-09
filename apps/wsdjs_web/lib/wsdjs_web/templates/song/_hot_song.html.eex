@@ -1,13 +1,13 @@
 <article class="hot-song card" data-id="<%= @song.id %>">
   <a href="<%= url_for_provider(@song) %>" class="hot-song-heading" target="_blank" >
     <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
-    <h4 class="song-art-overlay">
+    <h6 class="song-art-overlay">
       <span class="label label-default"><%= @song.genre %></span>
       <%= if @song.bpm > 0 do %>
       <span class="label label-primary"><%= @song.bpm %> bpm</span>
       <% end %>
       <span class="song-play"> </span>
-    </h4>
+    </h6>
   </a>
 
   <div class="hot-song-body">
