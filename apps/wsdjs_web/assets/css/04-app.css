@@ -38,3 +38,7 @@ time {
 table {
   width: 100%;
 }
+
+img {
+  vertical-align: top;
+}
