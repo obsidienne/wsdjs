@@ -59,9 +59,12 @@ export default class Radio {
     var art = document.querySelector(".miniplayer-art img");
     art.setAttribute("src", data[0].image_uri);
 
+    var current_play = document.querySelector(".miniplayer-info");
     var current_play_title = document.querySelector(".miniplayer-info h6:first-child");
     var current_play_artist = document.querySelector(".miniplayer-info h6:nth-child(2)");
     var current_play_suggestor = document.querySelector(".miniplayer-info h6:last-child");
+
+    current_play.setAttribute("href", data[0].path);
     current_play_title.innerHTML = data[0].title;
     current_play_artist.innerHTML = data[0].artist;
     current_play_suggestor.innerHTML = `<span class="suggested_by">suggested by ${data[0].suggested_by}</span>`;
