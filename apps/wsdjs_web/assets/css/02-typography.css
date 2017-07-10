@@ -102,6 +102,7 @@ p { margin: 0 0 10px; }
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
+  display: block;
 }
 
 .text-center {
