@@ -1,7 +1,13 @@
 defmodule Wsdjs.Helpers.Provider do
+  @moduledoc """
+  This module extract the video id of a youtube url exclusively. 
+  No vimeo, or dailymotin, or anything else. Only youtube.
+  """
   @provider_types [
       {~r/youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+)/i, :youtube}
   ]
+
+  def extract(url) when is_nil(url), do: nil
 
   def extract(url) do
     {re, func} = Enum.find(@provider_types,
@@ -11,13 +17,7 @@ defmodule Wsdjs.Helpers.Provider do
     Kernel.apply(Wsdjs.Helpers.Provider, func, [re, url])
   end
 
-  def fn_unknown(re, url) do
-    %{
-      url: url,
-      provider_type: "unknow",
-      provider_id: nil
-    }
-  end
+  def fn_unknown(re, url), do: nil
 
   @doc """
     Should match the following URL
@@ -39,10 +39,6 @@ defmodule Wsdjs.Helpers.Provider do
   """
   def youtube(re, url) do
     [_, video_id] = Regex.run(re, url)
-    %{
-      url: url,
-      provider_type: "youtube",
-      provider_id: video_id
-    }
+    video_id
   end
 end

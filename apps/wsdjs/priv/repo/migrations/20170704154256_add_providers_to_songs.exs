@@ -3,7 +3,7 @@ defmodule Wsdjs.Repo.Migrations.AddProvidersToSongs do
 
   def change do
     alter table(:songs) do
-      add :providers, {:array, :map}, default: []
+      add :video_id, :string
     end
   end
 end

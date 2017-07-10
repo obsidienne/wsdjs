@@ -1,14 +1,7 @@
 defmodule Wsdjs.Web.ProviderHelper do
-  def url_for_provider(url) when is_nil(url), do: "#"
-  def url_for_provider(url) when is_binary(url), do: url  
-  def url_for_provider(%{provider_type: "unknow", url: url}), do: url
-  def url_for_provider(%{provider_type: "youtube", provider_id: video_id}), do: "http://youtu.be/#{video_id}"
+  alias Wsdjs.Musics.Song
 
-  def url_for_provider(%Wsdjs.Musics.Song{} = song) do
-    if Enum.count(song.providers) > 0 do
-      url_for_provider(Enum.at(song.providers, 0))
-    else
-      url_for_provider(song.url)
-    end
-  end
+  def url_for_provider(%Song{video_id: id}) when is_binary(id), do: "http://youtu.be/#{id}"
+  def url_for_provider(%Song{url: url}) when is_binary(url), do: url  
+  def url_for_provider(_), do: "#"
 end

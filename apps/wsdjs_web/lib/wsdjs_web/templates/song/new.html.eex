@@ -13,7 +13,7 @@
     </div>
 
     <div class="form-group">
-      <%= textarea f, :url, placeholder: "Multiple Url, one per line. First line is default.", class: "form-control" %>
+      <%= text_input f, :url, type: "url", placeholder: "An URL for the song (youtube prefered).", class: "form-control" %>
       <%= error_tag f, :url %>
     </div>
     

@@ -18,6 +18,7 @@ defmodule Wsdjs.Musics.Song do
     field :genre, :string
     field :instant_hit, :boolean
     field :hidden, :boolean
+    field :video_id, :string
     timestamps()
 
     belongs_to :user, Accounts.User
@@ -27,12 +28,6 @@ defmodule Wsdjs.Musics.Song do
     has_many :opinions, Musics.Opinion
     has_many :votes, Trendings.Vote
     many_to_many :tops, Trendings.Top, join_through: Trendings.Rank
-
-    embeds_many :providers, Provider, primary_key: false, on_replace: :delete do
-      field :url, :string
-      field :provider_type, :string
-      field :provider_id, :string
-    end
   end
 
   @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden]
@@ -48,19 +43,10 @@ defmodule Wsdjs.Musics.Song do
     |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
-    |> put_embed(:providers, provider_changeset(params["url"]))
-  end
-
-  defp provider_changeset(nil), do: nil 
-  defp provider_changeset(urls) do
-    urls
-    |> String.split(["\n", "\r", "\r\n"], trim: true)
-    |> Enum.map(&String.trim(&1))
-    |> Enum.map(&Wsdjs.Helpers.Provider.extract(&1))
+    |> put_change(:video_id, Wsdjs.Helpers.Provider.extract(params["url"]))
   end
 
   def genre, do: @validated_genre
-
 
   @doc """
   Admin sees everything
