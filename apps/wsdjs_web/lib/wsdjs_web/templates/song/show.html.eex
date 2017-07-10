@@ -52,10 +52,12 @@
     </div>
 
     <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
-    <%= if can_edit_song?(@current_user, @song) do %>
+    <%= if Wsdjs.Musics.Policy.can?(:edit_song, @current_user, @song) do %>
     <div>
       <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
-      <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete" %></h1>
+      <%= if Wsdjs.Musics.Policy.can?(:delete_song, @current_user, @song) do %>
+        <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete" %></h1>
+      <% end %>
     </div>
     <% end %>
   </aside>
