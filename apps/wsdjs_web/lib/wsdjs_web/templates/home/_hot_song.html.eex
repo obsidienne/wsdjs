@@ -1,5 +1,5 @@
 <article class="hot-song card" data-id="<%= @song.id %>">
-  <a href="<%= url_for_provider(@song) %>" class="hot-song-heading" target="_blank" >
+  <a href="<%= url_for_provider(@song) %>" class="hot-song-heading " target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %> >
     <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
     <h6 class="song-art-overlay">
       <span class="label label-default"><%= @song.genre %></span>
@@ -11,10 +11,10 @@
   </a>
 
   <div class="hot-song-body">
-    <h4><%= link @song.title, to: song_path(@conn, :show, @song.id) %></h1>
-    <h6><%= @song.artist %></h6>
+    <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "h5  text-ellipsis" %>
+    <h6 class="small text-ellipsis"><%= @song.artist %></h6>
 
-    <h6 class="text-muted"><%= gettext "by" %> <%= proposed_by_link(@conn, @song) %></h6>
+    <h6 class="text-muted small text-ellipsis"><%= gettext "by" %> <%= proposed_by_link(@conn, @song) %></h6>
   </div>
 
   <div class="hot-song-footer text-muted">
