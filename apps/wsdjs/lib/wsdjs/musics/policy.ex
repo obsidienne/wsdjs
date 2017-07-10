@@ -1,6 +1,6 @@
 defmodule Wsdjs.Musics.Policy do
   @moduledoc """
-  The Policies for the Dj system.
+  The Policies for the Dj system. Access is managed by scoped in module.
   """
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
