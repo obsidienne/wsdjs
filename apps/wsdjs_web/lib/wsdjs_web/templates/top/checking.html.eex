@@ -3,7 +3,9 @@
 
   <div class="container">
     <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h3>
-    <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Are you sure ?"] %>
+    <%= if Wsdjs.Trendings.Policy.can?(:delete_top, @current_user) do %>
+      <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Are you sure ?"] %>
+    <% end %>
   </div>
 
   <%= if @current_user && @current_user.id == @top.user_id do %>
@@ -25,13 +27,14 @@
 <main class="container">
   <%= for rank <- @top.ranks do %>
     <article class="top-song">
-      <a class="top-song-art" target="_blank" href="<%= url_for_provider(rank.song) %>">
-        <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
-      </a>
+      <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
       <div class="top-song-body">
         <div>
           <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
           <%= rank.song.artist %>
+          <%= if rank.song.url do %>
+            <a href="<%= url_for_provider(rank.song) %>" class="btn btn-link" target="_blank" >Play song</a>
+          <% end %>
         </div>
 
         <aside>

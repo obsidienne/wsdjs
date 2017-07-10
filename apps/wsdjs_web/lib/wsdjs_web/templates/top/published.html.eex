@@ -19,15 +19,16 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= rank.position %></div>
         </div>
-        <a class="top-song-art" target="_blank" href="<%= url_for_provider(rank.song) %>">
-          <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
-        </a>
+        <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
       </label>
 
       <div class="top-song-body">
         <div>
           <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
           <%= rank.song.artist %>
+          <%= if rank.song.url do %>
+            <a href="<%= url_for_provider(rank.song) %>" class="btn btn-link" target="_blank" >Play song</a>
+          <% end %>
         </div>
 
         <aside>

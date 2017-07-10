@@ -6,10 +6,14 @@ defmodule Wsdjs.Trendings.Policy do
   alias Wsdjs.Musics.Song
 
   @doc """
-  A connected user can create a song
+  Admin can create a top
   """
   def can?(:create_top, %User{admin: :true}), do: true
 
+  @doc """
+  Admin can delete a top
+  """
+  def can?(:delete_top, %User{admin: :true}), do: true
 
   @doc """
   By default everything is denied

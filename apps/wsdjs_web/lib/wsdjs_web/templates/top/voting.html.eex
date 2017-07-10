@@ -2,7 +2,7 @@
   <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
-    <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small></h3>
+    <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h3>
     <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Are you sure ?"] %>
   </div>
 
@@ -50,11 +50,11 @@
 
         <div class="top-song-body">
           <div>
-            <%= if rank.song.url do %>
-            <a href="<%= rank.song.url %>" class="top-song-play" target="_blank" ></a>
-            <% end %>
             <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
             <%= rank.song.artist %>
+            <%= if rank.song.url do %>
+            <a href="<%= rank.song.url %>" class="btn btn-link" target="_blank" >Play song</a>
+            <% end %>
           </div>
 
           <aside>
@@ -67,7 +67,7 @@
             <% end %>
 
             <%= if @current_user && @current_user.id == @top.user_id do %>
-            <table class="table  table-condensed">
+            <table>
               <thead>
                 <tr>
                   <th>1<sup>st</sup></th>
