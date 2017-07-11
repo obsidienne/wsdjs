@@ -43,6 +43,7 @@ defmodule Wsdjs.Musics.Song do
     |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
+    |> validate_url(:url)
     |> put_change(:video_id, Wsdjs.Helpers.Provider.extract(params["url"]))
   end
 
