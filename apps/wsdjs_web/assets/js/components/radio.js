@@ -4,7 +4,8 @@ import Tippy from 'tippy.js/dist/tippy';
 export default class Radio {
   mount() {
     var self = this;
-    this.radio = new Audio("http://37.58.75.166:8384/stream?icy=http");
+    this.radio = new Audio();
+
 
     // Now that you are connected, you can join channels with a topic:
     this.channel = socket.channel("notifications:now_playing", {})
@@ -41,6 +42,8 @@ export default class Radio {
 
   pause_radio(el) {
     this.radio.pause();
+    this.radio.src = "about:blank";
+    this.radio.load();
     el.classList.add("icon-play");
     el.classList.remove("icon-pause");
     document.querySelector(".miniplayer-art img").src = '//res.cloudinary.com/don2kwaju/image/upload/wsdjs/radiowcs_square.jpg';
@@ -50,6 +53,9 @@ export default class Radio {
   }
 
   play_radio(el) {
+    this.radio.src = "http://37.58.75.166:8384/stream?icy=http";
+    this.radio.load();
+
     this.channel.push("played_song_list")
     this.radio.play();
     el.classList.add("icon-pause");
