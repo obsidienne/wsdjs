@@ -14,8 +14,7 @@
 
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) ||
         render(Wsdjs.Web.LayoutView, "meta.html", assigns) %>
-
-    <%= if Mix.env == :prod, do: render "_piwik.html" %>
+    </script>
 
     <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css" />
   </head>
@@ -38,5 +37,7 @@
       </div>
       <% end %>
     </div>
+
+    <%= if Mix.env == :prod, do: render "_piwik.html" %>
   </body>
 </html>

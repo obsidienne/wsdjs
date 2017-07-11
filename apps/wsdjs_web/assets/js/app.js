@@ -39,6 +39,13 @@ function handleDOMContentLoaded() {
 
   var notifier = new Notifier();
   notifier.show_all();
+
+  /* piwik */
+  if (window._paq != null) {
+    return _paq.push(['trackPageView']);
+  } else if (window.piwikTracker != null) {
+    return piwikTracker.trackPageview();
+  }
 }
 
 var radio = new Radio();

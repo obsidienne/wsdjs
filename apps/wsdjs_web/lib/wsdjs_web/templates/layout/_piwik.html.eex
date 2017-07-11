@@ -1,6 +1,10 @@
 <!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
+
+  _paq.push(['setCustomUrl', document.location]);
+  _paq.push(['setDocumentTitle', document.title]);
+
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
