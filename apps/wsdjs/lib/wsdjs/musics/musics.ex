@@ -1,6 +1,6 @@
 defmodule Wsdjs.Musics do
   @moduledoc """
-  The boundary for the Music system.
+    The boundary for the Music system.
   """
 
   import Ecto.{Query, Changeset}, warn: false
@@ -9,18 +9,19 @@ defmodule Wsdjs.Musics do
   alias Wsdjs.Musics.{Song, Comment, Opinion, Art}
 
   @doc """
-  Returns a song list according to a fulltext search.
-  The song list is scoped for user.
+    Returns a song list according to a fulltext search.
+    The song list is scoped by current user.
   """
-  def search(user, ""), do: []
-  def search(user, q) do
+  def search(current_user, ""), do: []
+  def search(current_user, q) do
     q = q
         |> String.trim
         |> String.split(" ")
         |> Enum.map(&("#{&1}:*"))
         |> Enum.join(" & ")
 
-    Song.scoped(user)
+    user
+    |> Song.scoped()
     |> preload([:art, user: :avatar])
     |> where(fragment("(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))", ^q))
     |> order_by([desc: :inserted_at])
@@ -28,6 +29,10 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
+  @doc """
+    Get the song matching the "artist - title" pattern. 
+    The uniq index artist / title ensure the uniquenes of result. 
+  """
   def search_artist_title(artist_title) do
     Song
     |> where([s], fragment("? || ' - ' || ?", s.artist, s.title) == ^artist_title)
@@ -37,28 +42,33 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Returns the list of songs for the current and the previous month.
+    Returns the list of songs for the current and the previous month.
   """
   def hot_songs(user) do
     dt = DateTime.to_date(DateTime.utc_now)
     {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
 
-    Song.scoped(user)
+    user
+    |> Song.scoped()
     |> where([s], s.inserted_at > date_add(^naive_dtime, -1, "month"))
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
   end
 
   @doc """
-  Returns the list of songs for the user scoped by current_user.
+    Returns the list of songs for a user scoped by the current_user.
   """
   def list_songs(current_user, user) do
-    Song.scoped(user)
+    user
+    |> Song.scoped()
     |> where([user_id: ^user.id])
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
   end
 
+  @doc """
+    Returns the songs added the 24 last hours.
+  """
   def list_songs() do
     yesterday = Timex.shift(Timex.now, hours: -24)
     Song
@@ -67,17 +77,22 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Returns the list of songs scoped by current_user.
+    Paginate the songs scoped by the current_user.
   """
   def paginate_songs(current_user, paginate_params \\ %{}) do
-    Song.scoped(current_user)
+    current_user
+    |> Song.scoped()
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by([desc: :inserted_at])
     |> Repo.paginate(paginate_params)
   end
 
+  @doc """
+    Paginate the songs suggested by a user scoped by current user.
+  """
   def paginate_songs_user(current_user, paginate_params \\ %{}) do
-    Song.scoped(current_user)
+    current_user
+    |> Song.scoped()
     |> where([user_id: ^current_user.id])
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by([desc: :inserted_at])
@@ -85,16 +100,27 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Creates a song.
+    Creates a song and attach the suggestor.
   """
   def create_song(user, params) do
-    Song.changeset(%Song{}, params)
+    %Song{}
+    |> Song.changeset(params)
     |> put_assoc(:user, user)
-    |> Repo.insert
+    |> Repo.insert()
   end
 
-  def get_song!(user, song_id) do
-    Song.scoped(user)
+  @doc """
+    Get a song according to it's ID scoped by current user.
+
+    ## Examples
+
+      iex> get_song!(%User{}, "song")
+      %Song{}
+
+  """
+  def get_song!(current_user, song_id) do
+    current_user
+    |> Song.scoped()
     |> preload([:art, user: :avatar, comments: :user, opinions: [user: :avatar]])
     |> Repo.get!(song_id)
   end
@@ -151,7 +177,7 @@ defmodule Wsdjs.Musics do
 
 
   @doc """
-  List comments for a song order by desc
+    List comments for a song order by desc
   """
   def list_comments(song_id) do
     Comment
@@ -162,7 +188,7 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Count comments for a song
+    Count comments for a song
   """
   def count_comments(song_id) do
     Comment
@@ -171,15 +197,17 @@ defmodule Wsdjs.Musics do
     |> Enum.count
   end
 
-
-  def create_comment(user, song_id, params) do
-    song = user
+  @doc """
+    This function add a comment to a song for the current user.
+  """
+  def create_comment(current_user, song_id, params) do
+    song = current_user
            |> Song.scoped()
            |> Repo.get!(song_id)
 
     %Comment{}
     |> Comment.changeset(params)
-    |> put_assoc(:user, user)
+    |> put_assoc(:user, current_user)
     |> put_assoc(:song, song)
     |> Repo.insert
   end
@@ -201,7 +229,7 @@ defmodule Wsdjs.Musics do
   def get_opinion!(id), do: Repo.get!(Opinion, id)
 
   @doc """
-  List opinions for a song order by desc
+    List opinions for a song order by desc
   """
   def list_opinions(song_id) do
     Opinion
@@ -228,9 +256,12 @@ defmodule Wsdjs.Musics do
     Repo.delete(opinion)
   end
 
-  def upsert_opinion(user, song_id, kind) do
-    song_opinion = case Repo.get_by(Opinion, user_id: user.id, song_id: song_id) do
-      nil  -> Opinion.build(%{kind: kind, user_id: user.id, song_id: song_id})
+  @doc """
+    This function modify the opinion for the current user.
+  """
+  def upsert_opinion(current_user, song_id, kind) do
+    song_opinion = case Repo.get_by(Opinion, user_id: current_user.id, song_id: song_id) do
+      nil  -> Opinion.build(%{kind: kind, user_id: current_user.id, song_id: song_id})
       song_opinion -> song_opinion
     end
 
