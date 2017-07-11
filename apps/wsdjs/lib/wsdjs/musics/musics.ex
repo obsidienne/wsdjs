@@ -20,7 +20,7 @@ defmodule Wsdjs.Musics do
         |> Enum.map(&("#{&1}:*"))
         |> Enum.join(" & ")
 
-    user
+    current_user
     |> Song.scoped()
     |> preload([:art, user: :avatar])
     |> where(fragment("(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))", ^q))
