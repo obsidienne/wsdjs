@@ -1,4 +1,9 @@
 defmodule Wsdjs.Web.VerifyHeader do
+  @moduledoc """
+    This modules aims to authenticate the user in case of API call.
+    We use the authorization header to retrieve the Bearer and check
+    it's validity.
+  """
   import Plug.Conn
 
   @doc false
@@ -23,6 +28,7 @@ defmodule Wsdjs.Web.VerifyHeader do
     |> String.trim
   end
 
+  # Following documentation, a token if valid for 2 weeks.
   defp verify_token(conn, token) do
     Phoenix.Token.verify(conn, "user", token, max_age: 1_209_600)
   end

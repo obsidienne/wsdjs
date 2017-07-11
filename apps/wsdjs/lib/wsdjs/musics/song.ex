@@ -1,12 +1,12 @@
 defmodule Wsdjs.Musics.Song do
+  @moduledoc """
+    This modules represents a Song.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Wsdjs.Repo
 
-  alias Wsdjs.Trendings
-  alias Wsdjs.Accounts
-  alias Wsdjs.Musics
+  alias Wsdjs.{Trendings, Accounts, Musics, Repo}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -49,12 +49,12 @@ defmodule Wsdjs.Musics.Song do
   def genre, do: @validated_genre
 
   @doc """
-  Admin sees everything
+    Admin sees everything
   """
   def scoped(%Accounts.User{admin: :true}), do: Musics.Song
 
   @doc """
-  Connected user can see songs not explicitly hidden
+    Connected user can see songs not explicitly hidden
   """
   def scoped(%Accounts.User{} = user) do
     from s in Musics.Song,
@@ -62,7 +62,7 @@ defmodule Wsdjs.Musics.Song do
   end
 
   @doc """
-  Not connected users see only top 10 song or instant_hit
+    Not connected users see only top 10 song or instant_hit
   """
   def scoped(nil) do
     from s in Musics.Song,
@@ -70,6 +70,7 @@ defmodule Wsdjs.Musics.Song do
     where: r.position <= 10 or s.instant_hit == true
   end
 
+  # This function validates the format of an URL not it's validity.
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
       case url |> String.to_char_list |> :http_uri.parse do

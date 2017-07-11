@@ -1,4 +1,8 @@
 defmodule Wsdjs.Web.UserHelper do
+  @moduledoc """
+  This modules contains all helpers for a %User{}.
+  """
+
   def user_displayed_name(%Wsdjs.Accounts.User{name: name, djname: djname}) when is_binary(djname), do: "#{name} (#{djname})"
   def user_displayed_name(%Wsdjs.Accounts.User{name: name}), do: name
 
@@ -8,7 +12,7 @@ defmodule Wsdjs.Web.UserHelper do
     user.description != nil && String.length(user.description) > 0
   end
 
-   def user_djname_available?(user) do
+  def user_djname_available?(user) do
     user.djname != nil && String.length(user.djname) > 0
   end
 

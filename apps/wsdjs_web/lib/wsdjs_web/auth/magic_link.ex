@@ -5,7 +5,9 @@ defmodule Wsdjs.Web.MagicLink do
   alias Wsdjs.Web.{Endpoint, Mailer, AuthenticationEmail}
   alias Phoenix.Token
 
-  # token is valid for 30 minutes / 1800 seconds
+  @doc """
+    Token is valid for 30 minutes / 1800 seconds.
+  """
   @token_max_age 1_800
 
   @doc """
@@ -52,7 +54,7 @@ defmodule Wsdjs.Web.MagicLink do
   # Unexpired token could not be found.
   defp verify_token(nil), do: {:error, :invalid}
 
-  # Loads the user and deletes the token as it is now used once.
+  # Loads the user and deletes the token as it can only be used once.
   defp verify_token(token) do
     Wsdjs.Accounts.delete_magic_link_token!(token)
 

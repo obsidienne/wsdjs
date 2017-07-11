@@ -1,4 +1,8 @@
  defmodule Wsdjs.Web.OpinionsHelper do
+  @moduledoc """
+  This modules contains all helpers for a %Opinion{}. 
+  Notably the html tag helpers.
+  """
   use Phoenix.HTML
 
   import Wsdjs.Web.Router.Helpers

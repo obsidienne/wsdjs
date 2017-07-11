@@ -1,4 +1,8 @@
 defmodule Wsdjs.Web.CloudinaryHelper do
+  @moduledoc """
+  This modules contains all helpers in connection with Cloudinary.
+  Notably the html tag and url helpers.
+  """
   alias Wsdjs.Musics.Art
   alias Wsdjs.Accounts.Avatar
 

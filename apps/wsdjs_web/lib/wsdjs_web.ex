@@ -44,7 +44,6 @@ defmodule Wsdjs.Web do
       import Wsdjs.Web.OpinionsHelper
       import Wsdjs.Web.SongHelper
       import Wsdjs.Web.UserHelper
-      import Wsdjs.Web.ProviderHelper
       import Wsdjs.Web.CloudinaryHelper
     end
   end

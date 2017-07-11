@@ -1,4 +1,11 @@
 defmodule Wsdjs.Trendings.Top do
+  @moduledoc """
+    This modules represents a Top. A top can have four statuses:
+      - checking
+      - voting
+      - counting
+      - published
+  """
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
@@ -48,19 +55,19 @@ defmodule Wsdjs.Trendings.Top do
   end
 
   @doc """
-  Admin sees everything
+    Admin sees everything
   """
   def scoped(%Accounts.User{admin: :true}), do: Trendings.Top
 
   @doc """
-  Connected user can see voting and published Top + Top he has created
+    Connected user can see voting and published Top + Top he has created
   """
   def scoped(%Accounts.User{} = user) do
     from m in Trendings.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
   end
 
   @doc """
-  Not connected users see nothing
+    Not connected users see nothing
   """
   def scoped(nil), do: from m in Trendings.Top, where: false
 end
