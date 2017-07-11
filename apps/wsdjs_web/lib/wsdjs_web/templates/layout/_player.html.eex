@@ -1,6 +1,6 @@
 <div id="miniplayer-container" class="miniplayer" data-turbolinks-permanent>
   <div class="miniplayer-art">
-    <div class="toggle-player icon-pause"></div>
+    <div class="toggle-player icon-play"></div>
     <img height="200" width="200" src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/radiowcs_square.jpg">
     <a href="/songs/50a56708-75d0-48e7-bd0d-51582120f272" class="miniplayer-info">
       <h6></h6>
@@ -11,4 +11,10 @@
 
   <ul id="radio-container">
   </ul>
+
+  <div class="miniplayer-radio-toggle" hidden>
+    <div>Return to RadioWCS</div>
+    <img height="50" width="50" src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/radiowcs_square.jpg">
+  </div>
+  <div id="youtube-player" class="youtube-player" hidden></div>
 </div>

@@ -53,7 +53,7 @@
             <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
             <%= rank.song.artist %>
             <%= if rank.song.url do %>
-            <a href="<%= rank.song.url %>" class="btn btn-link" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %> >Play song</a>
+            <a href="<%= rank.song.url %>" class="btn btn-link" target="_blank" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %> >Play song</a>
             <% end %>
           </div>
 

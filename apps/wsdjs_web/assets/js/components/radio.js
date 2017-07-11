@@ -16,7 +16,6 @@ export default class Radio {
     this.channel.on("new_played_song", payload => {
       this.refresh_radio(payload)
     });
-
     document.addEventListener("click", function(e) {
       if (e.target && e.target.matches(".toggle-player")) {
         if (self.radio.paused) {
@@ -29,15 +28,38 @@ export default class Radio {
       if (e.target && e.target.matches("[data-video-id]")) {
         e.preventDefault();
         e.stopPropagation();
-        self.youtube(e.target.dataset.videoId);
+        self.play_youtube(e.target.dataset.videoId);
       }
-    }
-    );
+
+      if (e.target && (e.target.matches(".miniplayer-radio-toggle") || e.target.closest(".miniplayer-radio-toggle"))) {
+        self.pause_youtube();
+        self.play_radio(document.querySelector(".toggle-player"));
+      }
+    });
     console.log('Radio component mounted');
   }
 
-  youtube(video_id) {
-    console.log(video_id);
+  play_youtube(video_id) {
+    this.pause_radio(document.querySelector(".toggle-player"))
+    document.querySelector(".miniplayer-art").setAttribute("hidden", "hidden");
+    document.querySelector("#radio-container").setAttribute("hidden", "hidden");
+    document.getElementById("miniplayer-container").classList.add("youtube");
+    document.querySelector(".miniplayer-radio-toggle").removeAttribute("hidden");
+
+    var container = document.querySelector("#youtube-player");
+    container.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}?autoplay=1" frameborder="0" allowfullscreen="1"></iframe>`;
+    container.removeAttribute("hidden");
+  }
+
+  pause_youtube() {
+    var container = document.querySelector("#youtube-player");
+    container.setAttribute("hidden", "hidden");
+    container.innerHTML = "";
+    document.querySelector(".miniplayer-radio-toggle").setAttribute("hidden", "hidden");
+
+    document.querySelector(".miniplayer-art").removeAttribute("hidden");
+    document.querySelector("#radio-container").removeAttribute("hidden");
+    document.getElementById("miniplayer-container").classList.remove("youtube");
   }
 
   pause_radio(el) {
@@ -63,6 +85,9 @@ export default class Radio {
   }
 
   refresh_radio(payload) {
+    if (this.radio.paused) {
+      return;
+    }
     var data = JSON.parse(payload.data);
 
     document.querySelector(".miniplayer-art img").setAttribute("src", data[0].image_uri);;

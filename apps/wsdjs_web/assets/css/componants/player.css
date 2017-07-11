@@ -7,6 +7,10 @@
   width: 200px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+.miniplayer.youtube {
+  width: 100%;
+  max-width: 30vw;
+}
 
 @media (min-width: 768px) {
   .miniplayer {
@@ -16,6 +20,17 @@
 
 #radio-container{
   background-color: white;
+}
+
+.miniplayer-radio-toggle:not([hidden]) {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+  background-color: #e9f0f5;
+}
+.miniplayer-radio-toggle > div {
+  padding-right: 15px;
 }
 
 .miniplayer-info {
