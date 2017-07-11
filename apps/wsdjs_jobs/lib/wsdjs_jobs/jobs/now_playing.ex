@@ -51,9 +51,10 @@ defmodule Wsdjs.Jobs.NowPlaying do
     last_queued = last_song_queued(:queue.peek_r(queue))
 
     body
-    |> HtmlSanitizeEx.strip_tags()
+    |> HtmlSanitizeEx.strip_tags()    
     |> String.split("," , parts: 7, trim: true)
     |> Enum.at(6)
+    |> HtmlEntities.decode
     |> push_song(last_queued, queue)
   end
 

@@ -39,6 +39,7 @@ defmodule Wsdjs.Jobs.Mixfile do
      {:timex, "~> 3.0"},
      {:bamboo, "~> 0.8"},
      {:html_sanitize_ex, "~> 1.0.0"},
+     {:html_entities, "~> 0.3"},
      {:wsdjs, in_umbrella: true}]
   end
 
