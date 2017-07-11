@@ -47,13 +47,9 @@ defmodule Wsdjs.Trendings do
     |> Repo.insert
   end
 
-  @doc """
-  Change the top status.
-
-  The steps are the following : check -> vote -> count -> publish
-  The step create does not use this function.
-
-  """
+  # Change the top status.
+  # The steps are the following : check -> vote -> count -> publish
+  # The step create does not use this function.
   def next_step(user, top) do
     next_step_value = case top.status do
       "checking" ->
@@ -67,13 +63,10 @@ defmodule Wsdjs.Trendings do
     go_next_step(next_step_value, user, top)
   end
 
-  @doc """
-  The top creator is ok with the songs in the top. The top creator freeze the likes
-  according to this rule: (like * 2) - (down * 3) + (up * 4)
-
-  After that, DJs can vote for their top 10.
-  """
-  defp go_next_step(next_step, user, top) when next_step in ["voting"] do
+  # The top creator is ok with the songs in the top. The top creator freeze the likes
+  # according to this rule: (like * 2) - (down * 3) + (up * 4)
+  # After that, DJs can vote for their top 10.
+  defp go_next_step(next_step, _user, top) when next_step in ["voting"] do
     ranks = Rank
     |> where(top_id: ^top.id)
     |> preload(song: :opinions)
@@ -98,15 +91,12 @@ defmodule Wsdjs.Trendings do
     |> Repo.update()
   end
 
-  @doc """
-  The top creator decides it's time to publish the
-  Need to sum the votes according to this rule
-  vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
-
-  After that, the top creator can apply bonus to the top.
-  """
-  defp go_next_step(next_step, user, top) when next_step in ["counting"] do
-    votes = Wsdjs.Trendings.Vote
+  # The top creator decides it's time to publish the
+  # Need to sum the votes according to this rule
+  # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
+  # After that, the top creator can apply bonus to the top.
+  defp go_next_step(next_step, _user, top) when next_step in ["counting"] do
+    Wsdjs.Trendings.Vote
     |> where(top_id: ^top.id)
     |> group_by(:song_id)
     |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
@@ -122,10 +112,8 @@ defmodule Wsdjs.Trendings do
     |> Repo.update()
   end
 
-  @doc """
-  Need to calculate the position according to likes + votes + bonus.
-  """
-  defp go_next_step(next_step, user, top) when next_step in ["published"] do
+  # Need to calculate the position according to likes + votes + bonus.
+  defp go_next_step(next_step, _user, top) when next_step in ["published"] do
     query = from q in Rank,
       join: p in fragment("""
       SELECT id, top_id, row_number() OVER (

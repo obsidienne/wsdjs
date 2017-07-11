@@ -6,7 +6,7 @@ defmodule Wsdjs.Musics.Song do
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Wsdjs.{Trendings, Accounts, Musics, Repo}
+  alias Wsdjs.{Trendings, Accounts, Musics}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

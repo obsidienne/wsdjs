@@ -6,13 +6,13 @@ defmodule Wsdjs.Musics do
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Musics.{Song, Comment, Opinion, Art}
+  alias Wsdjs.Musics.{Song, Comment, Opinion}
 
   @doc """
     Returns a song list according to a fulltext search.
     The song list is scoped by current user.
   """
-  def search(current_user, ""), do: []
+  def search(_current_user, ""), do: []
   def search(current_user, q) do
     q = q
         |> String.trim
@@ -59,7 +59,7 @@ defmodule Wsdjs.Musics do
     Returns the list of songs for a user scoped by the current_user.
   """
   def list_songs(current_user, user) do
-    user
+    current_user
     |> Song.scoped()
     |> where([user_id: ^user.id])
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])

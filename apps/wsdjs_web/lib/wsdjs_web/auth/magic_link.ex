@@ -5,9 +5,7 @@ defmodule Wsdjs.Web.MagicLink do
   alias Wsdjs.Web.{Endpoint, Mailer, AuthenticationEmail}
   alias Phoenix.Token
 
-  @doc """
-    Token is valid for 30 minutes / 1800 seconds.
-  """
+  #  Token is valid for 30 minutes.
   @token_max_age 1_800
 
   @doc """

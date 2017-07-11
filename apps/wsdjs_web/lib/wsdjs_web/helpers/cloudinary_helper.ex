@@ -13,7 +13,8 @@ defmodule Wsdjs.Web.CloudinaryHelper do
   def art_url(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @art_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
-  def art_url(_ \\ nil), do: @art_missing_url
+  def art_url(_), do: @art_missing_url
+  def art_url(), do: @art_missing_url
 
   def art_url_blured(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @art_blured_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
@@ -29,5 +30,6 @@ defmodule Wsdjs.Web.CloudinaryHelper do
   def avatar_url(%Avatar{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @avatar_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
-  def avatar_url(_ \\ nil), do: @avatar_missing_url
+  def avatar_url(_), do: @avatar_missing_url
+  def avatar_url(), do: @avatar_missing_url
 end

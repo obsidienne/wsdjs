@@ -17,7 +17,7 @@ defmodule Wsdjs.Helpers.Provider do
     Kernel.apply(Wsdjs.Helpers.Provider, func, [re, url])
   end
 
-  def fn_unknown(re, url), do: nil
+  def fn_unknown(_re, _url), do: nil
 
   @doc """
     Should match the following URL

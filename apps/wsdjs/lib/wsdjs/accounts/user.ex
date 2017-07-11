@@ -3,7 +3,6 @@ defmodule Wsdjs.Accounts.User do
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Wsdjs.Repo
   alias Wsdjs.{Musics, Accounts, Trendings}
 
   @primary_key {:id, :binary_id, autogenerate: true}

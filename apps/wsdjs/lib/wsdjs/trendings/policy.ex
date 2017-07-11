@@ -3,7 +3,6 @@ defmodule Wsdjs.Trendings.Policy do
   The Policies for the Dj system.
   """
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics.Song
 
   @doc """
   Admin can create a top

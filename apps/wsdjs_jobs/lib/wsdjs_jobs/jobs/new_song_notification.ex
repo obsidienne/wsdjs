@@ -2,7 +2,7 @@ defmodule Wsdjs.Jobs.NewSongNotification do
   import Bamboo.Email
   use Bamboo.Phoenix, view: Wsdjs.Jobs.EmailView
 
-  def call(args \\ []) do
+  def call(_args \\ []) do
     IO.puts "send email"
 
     users = Wsdjs.Accounts.list_users(new_song_notification: true)
