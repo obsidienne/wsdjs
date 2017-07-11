@@ -11,10 +11,10 @@
   </a>
 
   <div class="hot-song-body">
-    <h1 class="hot-song-title"><%= link @song.title, to: song_path(@conn, :show, @song.id) %></h1>
-    <h5 class="artist-name"><%= @song.artist %></h5>
+    <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "h5  text-ellipsis" %>
+    <h6 class="small text-ellipsis"><%= @song.artist %></h6>
 
-    <h6 class="text-muted"><%= gettext "by" %> <%= proposed_by_link(@conn, @song) %></h6>
+    <h6 class="text-muted small text-ellipsis"><%= gettext "by" %> <%= proposed_by_link(@conn, @song) %></h6>
   </div>
 
   <div class="hot-song-footer text-muted">
