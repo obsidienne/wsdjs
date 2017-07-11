@@ -65,8 +65,8 @@ defmodule Wsdjs.Jobs.NowPlaying do
     [artist, title] = String.split(streamed_song, " - ", parts: 2, trim: true)
 
     queue = %{artist: artist, title: title, ts: :os.system_time(:seconds)}
-            |> filled_from_db(streamed_song)
-            |> :queue.in(queue)
+        |> filled_from_db(streamed_song)
+        |> :queue.in(queue)
 
     PubSub.broadcast Wsdjs.Web.PubSub, "notifications:now_playing", :new_played_song
 
@@ -75,20 +75,24 @@ defmodule Wsdjs.Jobs.NowPlaying do
     else
       queue
     end
-  end
+  end  
 
   defp filled_from_db(song, streamed_song) do
     song_in_base = Wsdjs.Musics.search_artist_title(streamed_song)
 
-    if song_in_base != nil do
-      song
+    if song_in_base != nil do    
+      if song_in_base.user.name == "World Swing Deejays" do
+        song
+      else
+        song
+          |> Map.put(:suggested_ts, Timex.to_unix(song_in_base.inserted_at))
+      end
       |> Map.put(:artist, song_in_base.artist)
       |> Map.put(:title, song_in_base.title)
       |> Map.put(:image_uri, Wsdjs.Web.CloudinaryHelper.art_url(song_in_base.art))
       |> Map.put(:suggested_by, song_in_base.user.name)
       |> Map.put(:suggested_by_path, "/users/#{song_in_base.user.id}")
       |> Map.put(:path, "/songs/#{song_in_base.id}")
-      |> Map.put(:suggested_ts, Timex.to_unix(song_in_base.inserted_at))
       |> Map.put(:tags, tags_for_song(song_in_base))
     else
       song
