@@ -8,7 +8,7 @@ defmodule Wsdjs.Helpers.Provider do
   ]
 
   @doc ~S"""
-  Should match the following youtube URLs
+  Extract from a youtube url the video id.
 
   ## Examples
       iex> extract("http://www.youtube.com/user/Scobleizer#p/u/1/1p3vcRhsYGo")
@@ -16,6 +16,7 @@ defmodule Wsdjs.Helpers.Provider do
       iex> extract(nil)
       nil
   """
+  @spec extract(String.t) :: String.t
   def extract(url) when is_nil(url), do: nil
 
   def extract(url) do
