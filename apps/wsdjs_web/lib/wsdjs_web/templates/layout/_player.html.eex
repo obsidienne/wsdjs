@@ -1,7 +1,7 @@
 <div id="miniplayer-container" class="miniplayer" data-turbolinks-permanent>
   <div class="miniplayer-art">
     <div class="toggle-player icon-play"></div>
-    <img height="200" width="200" src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/radiowcs_square.jpg">
+    <img class="cld-responsive current-played-art" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
     <a href="/songs/50a56708-75d0-48e7-bd0d-51582120f272" class="miniplayer-info">
       <h6></h6>
       <h6></h6>

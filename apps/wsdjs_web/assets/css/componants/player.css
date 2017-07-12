@@ -73,7 +73,10 @@
   position: relative;
 }
 
-
+.current-played-art {
+  width: 100%;
+  height: auto;
+}
 
 
 /***
@@ -81,6 +84,8 @@
 */
 .miniplayer-art {
   position: relative;
+  height: 200px;
+  width: 200px;
 }
 
 .icon-play, .icon-pause {
