@@ -16,7 +16,12 @@
   z-index: 1000;
   padding-top: 5px;
 }
-
+.glheader > div:first-child {
+  margin-right: auto;
+}
+.glheader__user__signin--container {
+  margin-left: 10px;
+}
 .glheader__user__avatar {
   position: relative;
   width: var(--avatar-width);
@@ -46,5 +51,11 @@
   .glheader.focused .glheader__menu_link,
   .glheader.focused .glheader__user__avatar {
     display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .glheader {
+    width: 100%;
   }
 }

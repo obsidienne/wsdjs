@@ -23,7 +23,7 @@
     <% end %>
   <% else %>
     <%= link to: session_path(@conn, :new), data: [turbolinks: false] do %>
-      <div class="glheader__user__signin--container">Sign in</div>
+      <div class="glheader__user__signin--container  btn btn-primary">Sign in</div>
     <% end %>
   <% end %>
 </nav>

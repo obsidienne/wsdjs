@@ -8,6 +8,12 @@
 }
 
 @media (max-width: 768px) {
+  .search-container {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
   .search-container.focused {
     margin-top: 11px;
     margin-bottom: 5px;
