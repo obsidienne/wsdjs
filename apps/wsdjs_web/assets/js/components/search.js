@@ -3,9 +3,13 @@ import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class search {
   mount() {
+    var search_container = document.querySelector(".search-container");
+    if (search_container === null)
+      return;
+
     var self = this;
 
-    document.querySelector(".search-container").addEventListener('click', function(e) {
+    search_container.addEventListener('click', function(e) {
       self._show_search()
     });
 

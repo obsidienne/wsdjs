@@ -14,7 +14,7 @@ export default class Notifier {
       notification.classList.remove("shown");
       setTimeout(function() {
         notification.parentNode.removeChild(notification);
-      }, 600);
+      }, 800);
     }, 4000);
   }
 }

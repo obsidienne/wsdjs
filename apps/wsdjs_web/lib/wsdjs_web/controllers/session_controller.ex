@@ -8,14 +8,16 @@ defmodule Wsdjs.Web.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email}}) do
-    Wsdjs.Web.MagicLink.provide_token(email)
-
-    # do not leak information about (non-)existing users.
-    # always reply with success message, even though the
-    # user might not exist.
-    conn
-    |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")
-    |> redirect(to: home_path(conn, :index))
+    case Wsdjs.Web.MagicLink.provide_token(email) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")
+        |> redirect(to: home_path(conn, :index))
+      {:error, :not_found} ->
+        conn
+        |> put_flash(:error, "Email #{email} is not registered. Send an email to worldswingdjs@gmail.com to ask for registration.")
+        |> redirect(to: session_path(conn, :new))
+    end
   end
 
   @doc """
@@ -34,7 +36,7 @@ defmodule Wsdjs.Web.SessionController do
 
       {:error, _reason} ->
         conn
-        |> put_flash(:error, "The login token is invalid.")
+        |> put_flash(:error, "The magic link is expired or already used. You should resend a magic link.")
         |> redirect(to: session_path(conn, :new))
      end
   end
