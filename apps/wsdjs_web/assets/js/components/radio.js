@@ -1,5 +1,5 @@
 import socket from "../socket"
-import Tippy from 'tippy.js/dist/tippy';
+import Tippy from 'tippy.js/dist/tippy.standalone';
 
 export default class Radio {
   mount() {
