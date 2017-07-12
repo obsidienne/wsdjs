@@ -63,6 +63,7 @@ defmodule Wsdjs.Seeds do
       artist: row[:artist],
       title: row[:title],
       url: row[:song_url],
+      video_id: Wsdjs.Helpers.Provider.extract(row[:song_url]),
       bpm: case row[:bpm] do
         nil -> nil
         _ -> String.to_integer(row[:bpm])
@@ -71,6 +72,7 @@ defmodule Wsdjs.Seeds do
       inserted_at: Ecto.DateTime.cast!(row[:inserted_at]),
       updated_at: Ecto.DateTime.cast!(row[:updated_at])
     }
+
     Wsdjs.Repo.insert! song
     store_it(:album_art, row)
   end
