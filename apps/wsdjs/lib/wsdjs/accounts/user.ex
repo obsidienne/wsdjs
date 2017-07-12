@@ -28,6 +28,7 @@ defmodule Wsdjs.Accounts.User do
 
   @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname, :description]
 
+  @doc false
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @allowed_fields)
@@ -38,28 +39,20 @@ defmodule Wsdjs.Accounts.User do
   end
 
   @doc """
-  Admin see every user
+  The function scope is used to filter the users according to the user specified.
+  - Admin see every user
+  - Connected user can see himself and not admin users
+  - Not connected users see nothing
   """
   def scoped(%Accounts.User{admin: :true}), do: Accounts.User
-
-  @doc """
-  Connected user can see himself and not admin users
-  """
   def scoped(%Accounts.User{} = user) do
     from u in Accounts.User, where: u.id == ^user.id or u.admin == false
   end
-
-  @doc """
-  Not connected users see nothing
-  """
-  def scoped(nil) do
-    from u in Accounts.User, where: u.admin == false
-  end
+  def scoped(nil), do: from u in Accounts.User, where: u.admin == false
 
 end
 
 defimpl Bamboo.Formatter, for: Wsdjs.Accounts.User do
-  # Used by `to`, `bcc`, `cc` and `from`
   def format_email_address(user, _opts) do
     {user.name, user.email}
   end
