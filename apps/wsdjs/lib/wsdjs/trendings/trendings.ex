@@ -8,9 +8,14 @@ defmodule Wsdjs.Trendings do
 
   alias Wsdjs.Trendings.{Top, Rank, Vote}
   alias Wsdjs.Musics.Song
+  alias Wsdjs.Accounts.User
 
-  def last_top(user) do
-    Top.scoped(user)
+  @doc """
+  Returns the current user's last accessible published Top.
+  """
+  def last_top(%User{} = current_user) do
+    current_user
+    |> Top.scoped()
     |> order_by([desc: :due_date])
     |> where(status: "published")
     |> limit(1)
@@ -21,15 +26,20 @@ defmodule Wsdjs.Trendings do
     |> Repo.preload(ranks: [song: :user])
   end
 
-  def list_tops(user) do
-    Top.scoped(user)
+  @doc """
+  Returns Tops accessible for the current user.
+  """
+  def list_tops(current_user) do
+    current_user
+    |> Top.scoped()
     |> order_by([desc: :due_date])
     |> Repo.all
     |> Repo.preload(ranks: Rank.for_tops_with_limit())
   end
 
-  def get_top(user, id) do
-    Top.scoped(user)
+  def get_top!(current_user, id) do
+    current_user
+    |> Top.scoped()
     |> Repo.get!(id)
     |> Repo.preload(:user)
     |> Repo.preload(ranks: Rank.for_top(id))
@@ -168,7 +178,7 @@ defmodule Wsdjs.Trendings do
   end
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
-    top = get_top(user, top_id)
+    top = get_top!(user, top_id)
     top = Repo.preload top, votes: list_votes(top, user)
 
     new_votes = votes_param

@@ -17,7 +17,7 @@ defmodule Wsdjs.Web.TopController do
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    top = Trendings.get_top(current_user, id)
+    top = Trendings.get_top!(current_user, id)
     top = Wsdjs.Repo.preload(top, votes: Trendings.list_votes(top, current_user))
     votes = Trendings.list_votes(top)
     changeset = Top.changeset(top)
@@ -41,9 +41,9 @@ defmodule Wsdjs.Web.TopController do
   end
 
   def update(conn, %{"id" => id}, current_user) do
-    top = Trendings.get_top(current_user, id)
+    top = Trendings.get_top!(current_user, id)
     Trendings.next_step(current_user, top)
-    top = Trendings.get_top(current_user, id)
+    top = Trendings.get_top!(current_user, id)
 
     redirect(conn, to: top_path(conn, :show, top))
   end
@@ -64,7 +64,7 @@ defmodule Wsdjs.Web.TopController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    top = Trendings.get_top(current_user, id)
+    top = Trendings.get_top!(current_user, id)
     {:ok, _top} = Trendings.delete_top(top)
 
     conn
