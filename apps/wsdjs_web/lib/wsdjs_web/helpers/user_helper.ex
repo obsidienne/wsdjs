@@ -2,9 +2,10 @@ defmodule Wsdjs.Web.UserHelper do
   @moduledoc """
   This modules contains all helpers for a %User{}.
   """
+  alias Wsdjs.Accounts.User
 
-  def user_displayed_name(%Wsdjs.Accounts.User{name: name, djname: djname}) when is_binary(djname), do: "#{name} (#{djname})"
-  def user_displayed_name(%Wsdjs.Accounts.User{name: name}), do: name
+  def user_displayed_name(%User{name: name, djname: djname}) when is_binary(djname), do: "#{name} (#{djname})"
+  def user_displayed_name(%User{name: name}), do: name
 
   def user_avatar_alt(user), do: "#{user.name}"
 
