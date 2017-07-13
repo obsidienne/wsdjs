@@ -6,7 +6,8 @@ defmodule Wsdjs.Trendings do
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Trendings.{Top, Rank, Vote}
+  alias Wsdjs.Trendings
+  alias Wsdjs.Trendings.{Top, Rank, Vote, Policy}
   alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
 
@@ -20,7 +21,7 @@ defmodule Wsdjs.Trendings do
     |> where(status: "published")
     |> limit(1)
     |> Repo.one
-    |> Repo.preload(ranks: Wsdjs.Trendings.Rank.for_tops_with_limit(10))
+    |> Repo.preload(ranks: Trendings.list_rank())
     |> Repo.preload(ranks: :song)
     |> Repo.preload(ranks: [song: :art])
     |> Repo.preload(ranks: [song: :user])
@@ -34,51 +35,45 @@ defmodule Wsdjs.Trendings do
     |> Top.scoped()
     |> order_by([desc: :due_date])
     |> Repo.all
-    |> Repo.preload(ranks: Rank.for_tops_with_limit())
+    |> Repo.preload(ranks: Trendings.list_rank())
   end
 
   def get_top!(current_user, id) do
-    current_user
+    top = current_user
     |> Top.scoped()
     |> Repo.get!(id)
     |> Repo.preload(:user)
-    |> Repo.preload(ranks: Rank.for_top(id))
+    
+    Repo.preload(top, ranks: list_rank(top.id))
   end
 
-  def create_top(user, %{"due_date" => due_date} = params) do
-    dt = Ecto.Date.cast!(due_date)
-    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, dt.day, 0, 0, 0)
-    query = from s in Song, where: s.inserted_at >= ^naive_dtime and s.inserted_at < date_add(^dt, 1, "month")
-    songs = Repo.all(query)
+  def create_top(current_user, %{"due_date" => due_date} = params) do
+    with :ok <- Policy.can?(:create_top, current_user) do
+      songs = Wsdjs.Musics.songs_in_month(due_date)
+      params = Map.put(params, "status", "checking")
 
-    params = Map.put(params, "status", "checking")
-
-    %Top{}
-    |> Top.changeset(params)
-    |> put_assoc(:songs, songs)
-    |> Repo.insert
+      %Top{}
+      |> Top.changeset(params)
+      |> put_assoc(:songs, songs)
+      |> Repo.insert
+    end
   end
 
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def next_step(user, top) do
-    next_step_value = case top.status do
-      "checking" ->
-        "voting"
-      "voting" ->
-        "counting"
-      "counting" ->
-        "published"
-    end
-
-    go_next_step(next_step_value, user, top)
+  def next_step(%User{} = user, top) do
+    %{checking: "voting",
+      voting: "counting",
+      counting: "published"}
+    |> Map.fetch!(String.to_atom(top.status))
+    |> go_next_step(top)
   end
 
   # The top creator is ok with the songs in the top. The top creator freeze the likes
   # according to this rule: (like * 2) - (down * 3) + (up * 4)
   # After that, DJs can vote for their top 10.
-  defp go_next_step(next_step, _user, top) when next_step in ["voting"] do
+  defp go_next_step("voting", top) do
     ranks = Rank
     |> where(top_id: ^top.id)
     |> preload(song: :opinions)
@@ -99,7 +94,7 @@ defmodule Wsdjs.Trendings do
     end)
 
     top
-    |> Top.next_step_changeset(%{status: next_step})
+    |> Top.next_step_changeset(%{status: "voting"})
     |> Repo.update()
   end
 
@@ -107,7 +102,7 @@ defmodule Wsdjs.Trendings do
   # Need to sum the votes according to this rule
   # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
   # After that, the top creator can apply bonus to the top.
-  defp go_next_step(next_step, _user, top) when next_step in ["counting"] do
+  defp go_next_step("counting", top) do
     Wsdjs.Trendings.Vote
     |> where(top_id: ^top.id)
     |> group_by(:song_id)
@@ -120,12 +115,12 @@ defmodule Wsdjs.Trendings do
     end)
 
     top
-    |> Top.next_step_changeset(%{status: next_step})
+    |> Top.next_step_changeset(%{status: "counting"})
     |> Repo.update()
   end
 
   # Need to calculate the position according to likes + votes + bonus.
-  defp go_next_step(next_step, _user, top) when next_step in ["published"] do
+  defp go_next_step("published", top) do
     query = from q in Rank,
       join: p in fragment("""
       SELECT id, top_id, row_number() OVER (
@@ -144,7 +139,7 @@ defmodule Wsdjs.Trendings do
     end)
 
     top
-    |> Top.next_step_changeset(%{status: next_step})
+    |> Top.next_step_changeset(%{status: "published"})
     |> Repo.update()
   end
 
@@ -165,14 +160,19 @@ defmodule Wsdjs.Trendings do
     Repo.delete(top)
   end
 
+  ###############################################
+  #
+  # Vote
+  #
+  ###############################################
 
-  def list_votes(top) do
-    Wsdjs.Trendings.Vote
+  def list_votes(%Top{} = top) do
+    Vote
     |> where(top_id: ^top.id)
     |> Repo.all()
   end
 
-  def list_votes(top, user) do
+  def list_votes(%Top{} = top, %User{} = user) do
     from r in Wsdjs.Trendings.Vote,
     where: r.user_id == ^user.id and r.top_id == ^top.id
   end
@@ -192,11 +192,37 @@ defmodule Wsdjs.Trendings do
     |> Repo.update()
   end
 
+  ###############################################
+  #
+  # Rank
+  #
+  ###############################################
+
   def set_bonus(rank_id, bonus) do
     rank = Repo.get!(Rank, rank_id)
 
     rank
     |> Rank.bonus_changeset(%{bonus: bonus})
     |> Repo.update()
+  end
+
+  def list_rank(id) do
+    from q in Rank,
+    where: q.top_id == ^id,
+    order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
+    preload: [song: [:art, :user, :opinions]]
+  end
+
+  def list_rank() do
+    from q in Rank,
+      join: p in fragment("""
+      SELECT id, top_id, row_number() OVER (
+        PARTITION BY top_id
+        ORDER BY votes + bonus + likes DESC
+      ) as rn FROM ranks
+      """),
+    where: p.rn <= 10 and p.id == q.id,
+    order_by: [asc: q.position],
+    preload: [song: :art]
   end
 end

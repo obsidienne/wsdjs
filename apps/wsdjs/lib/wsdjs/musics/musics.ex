@@ -77,6 +77,13 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
+  def songs_in_month(due_date) do
+    dt = Ecto.Date.cast!(due_date)
+    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, dt.day, 0, 0, 0)
+    query = from s in Song, where: s.inserted_at >= ^naive_dtime and s.inserted_at < date_add(^dt, 1, "month")
+    Repo.all(query)
+  end
+
   @doc """
   Paginate the songs scoped by the current_user.
   """
