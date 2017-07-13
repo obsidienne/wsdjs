@@ -2,7 +2,7 @@ defmodule Wsdjs.Web.TopController do
   use Wsdjs.Web, :controller
 
   def action(conn, _) do
-    args = [conn, conn.params, conn.assigns[:current_user] || :guest]
+    args = [conn, conn.params, conn.assigns[:current_user]]
     apply(__MODULE__, action_name(conn), args)
   end
 
@@ -10,7 +10,6 @@ defmodule Wsdjs.Web.TopController do
   No authZ needed, data is scoped by current_user
   """
   def index(conn, _params, current_user) do
-    current_user = conn.assigns[:current_user]
     tops = Wsdjs.Trendings.list_tops(current_user)
 
     render conn, "index.html", tops: tops
@@ -20,8 +19,6 @@ defmodule Wsdjs.Web.TopController do
   No authZ needed, data is scoped by current_user
   """
   def show(conn, %{"id" => id}, current_user) do
-    current_user = conn.assigns[:current_user]
-
     top = Wsdjs.Trendings.get_top(current_user, id)
     top = Wsdjs.Repo.preload(top, votes: Wsdjs.Trendings.list_votes(top, current_user))
     votes = Wsdjs.Trendings.list_votes(top)
