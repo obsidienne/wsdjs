@@ -1,11 +1,15 @@
 defmodule Wsdjs.Web.SongController do
   use Wsdjs.Web, :controller
 
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns[:current_user] || :guest]
+    apply(__MODULE__, action_name(conn), args)
+  end
+
   @doc """
   No authZ needed, data is scoped by current_user
   """
-  def show(conn, %{"id" => id}) do
-    current_user = conn.assigns[:current_user]
+  def show(conn, %{"id" => id}, current_user) do
     song = Wsdjs.Musics.get_song!(current_user, id)
     comments = Wsdjs.Musics.list_comments(id)
     comment_changeset = Wsdjs.Musics.Comment.changeset(%Wsdjs.Musics.Comment{})
@@ -16,7 +20,7 @@ defmodule Wsdjs.Web.SongController do
   @doc """
   No authZ needed, data is scoped by current_user
   """
-  def index(conn, %{"user_id" => id, "page" => page}) do
+  def index(conn, %{"user_id" => id, "page" => page}, _current_user) do
     user = Wsdjs.Accounts.get_user!(id)
     page = Wsdjs.Musics.paginate_songs_user(user, %{"page" => page})
 
@@ -27,8 +31,7 @@ defmodule Wsdjs.Web.SongController do
     |> render("index_user_song.html", songs: page.entries)
   end
 
-  def index(conn, %{"page" => page}) do
-    current_user = conn.assigns[:current_user]
+  def index(conn, %{"page" => page}, current_user) do
     page = Wsdjs.Musics.paginate_songs(current_user, %{"page" => page})
 
     conn
@@ -38,8 +41,7 @@ defmodule Wsdjs.Web.SongController do
     |> render("index_hot_song.html", songs: page.entries)
   end
 
-  def index(conn, _params) do
-    current_user = conn.assigns[:current_user]
+  def index(conn, _params, current_user) do
     page = Wsdjs.Musics.paginate_songs(current_user)
 
     conn
@@ -53,15 +55,13 @@ defmodule Wsdjs.Web.SongController do
   @doc """
   No authZ needed, this function does not modify the database
   """
-  def new(conn, _params) do
+  def new(conn, _params, _current_user) do
     changeset = Wsdjs.Musics.Song.changeset(%Wsdjs.Musics.Song{})
     render(conn, "new.html", changeset: changeset)
   end
 
 
-  def create(conn, %{"song" => params}) do
-    current_user = conn.assigns[:current_user]
-
+  def create(conn, %{"song" => params}, current_user) do
     case Wsdjs.Musics.create_song(current_user, params) do
       {:ok, song} ->
         conn
@@ -72,15 +72,13 @@ defmodule Wsdjs.Web.SongController do
     end
   end
 
-  def edit(conn, %{"id" => id}) do
-    current_user = conn.assigns[:current_user]
+  def edit(conn, %{"id" => id}, current_user) do
     song = Wsdjs.Musics.get_song!(current_user, id)
     changeset = Wsdjs.Musics.change_song(song)
     render conn, "edit.html", song: song, changeset: changeset
   end
 
-  def update(conn, %{"id" => id, "song" => song_params}) do
-    current_user = conn.assigns[:current_user]
+  def update(conn, %{"id" => id, "song" => song_params}, current_user) do
     song = Wsdjs.Musics.get_song!(current_user, id)
 
     case Wsdjs.Musics.update_song(song, song_params) do
@@ -94,8 +92,7 @@ defmodule Wsdjs.Web.SongController do
   end
 
 
-  def delete(conn, %{"id" => id}) do
-    current_user = conn.assigns[:current_user]
+  def delete(conn, %{"id" => id}, current_user) do
     song = Wsdjs.Musics.get_song!(current_user, id)
     {:ok, _song} = Wsdjs.Musics.delete_song(song)
 
