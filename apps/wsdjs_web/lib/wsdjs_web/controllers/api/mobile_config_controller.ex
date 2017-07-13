@@ -4,12 +4,6 @@ defmodule Wsdjs.Web.Api.MobileConfigController do
 
   require Logger
 
-  def pretty_json(conn, data) do
-    conn
-    |> put_resp_header("content-type", "application/json; charset=utf-8")
-    |> send_resp(200, Poison.encode!(data, pretty: true))
-  end
-
   def index(conn, _params) do
     list = %{
         ios_min_version_supported: "1.1.0",
@@ -22,6 +16,9 @@ defmodule Wsdjs.Web.Api.MobileConfigController do
         website_uri: "http://www.radiowcs.com/",
         stream_uri: "http://37.58.75.166:8384/",
     }
-    pretty_json conn, list
+
+    conn
+    |> put_resp_header("content-type", "application/json; charset=utf-8")
+    |> send_resp(200, Poison.encode!(list))
   end
 end
