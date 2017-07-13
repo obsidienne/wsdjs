@@ -4,7 +4,7 @@
       <span class="text-muted">Get a magic link sent to your email that'll sign you instantly !</span>
     </div>
     <div class="form-group">
-      <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email" %>
+      <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email", required: true %>
     </div>
     <div class="form-group">
       <%= submit "Email me a link to sign in", class: "btn btn-primary" %>
