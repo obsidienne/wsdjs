@@ -10,10 +10,11 @@ defmodule Wsdjs.Web.UserController do
   @doc """
   No authZ needed, data is scoped by current_user
   """
-  def show(conn, %{"id" => id}) do
-    user = Wsdjs.Accounts.get_user!(id)
+  def show(conn, %{"id" => user_id}) do
+    current_user = conn.assigns[:current_user]
+    user = Wsdjs.Accounts.get_user!(user_id)
     
-    page = Wsdjs.Musics.paginate_songs_user(user)
+    page = Wsdjs.Musics.paginate_songs_user(current_user, user_id)
 
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))

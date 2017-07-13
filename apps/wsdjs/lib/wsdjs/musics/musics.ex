@@ -6,6 +6,7 @@ defmodule Wsdjs.Musics do
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
+  alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.{Song, Comment, Opinion}
 
   @doc """
@@ -44,11 +45,11 @@ defmodule Wsdjs.Musics do
   @doc """
   Returns the list of songs for the current and the previous month.
   """
-  def hot_songs(user) do
+  def hot_songs(current_user) do
     dt = DateTime.to_date(DateTime.utc_now)
     {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
 
-    user
+    current_user
     |> Song.scoped()
     |> where([s], s.inserted_at > date_add(^naive_dtime, -1, "month"))
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
@@ -90,10 +91,10 @@ defmodule Wsdjs.Musics do
   @doc """
   Paginate the songs suggested by a user scoped by current user.
   """
-  def paginate_songs_user(current_user, paginate_params \\ %{}) do
+  def paginate_songs_user(current_user, user_id, paginate_params \\ %{}) do
     current_user
     |> Song.scoped()
-    |> where([user_id: ^current_user.id])
+    |> where([user_id: ^user_id])
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by([desc: :inserted_at])
     |> Repo.paginate(paginate_params)

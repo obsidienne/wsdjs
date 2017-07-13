@@ -24,9 +24,8 @@ defmodule Wsdjs.Web.SongController do
   @doc """
   No authZ needed, data is scoped by current_user
   """
-  def index(conn, %{"user_id" => id, "page" => page}, _current_user) do
-    user = Accounts.get_user!(id)
-    page = Musics.paginate_songs_user(user, %{"page" => page})
+  def index(conn, %{"user_id" => user_id, "page" => page}, current_user) do
+    page = Musics.paginate_songs_user(current_user, user_id, %{"page" => page})
 
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
