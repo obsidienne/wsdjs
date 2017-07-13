@@ -30,16 +30,4 @@ defmodule Wsdjs.Trendings.Rank do
     |> validate_number(:bonus, greater_than: 0)
     |> validate_number(:position, greater_than: 0)
   end
-
-  def bonus_changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:bonus])
-    |> validate_number(:bonus, greater_than: 0)
-  end
-
-  def position_changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:position])
-    |> validate_number(:position, greater_than: 0)
-  end
 end

@@ -202,7 +202,7 @@ defmodule Wsdjs.Trendings do
     rank = Repo.get!(Rank, rank_id)
 
     rank
-    |> Rank.bonus_changeset(%{bonus: bonus})
+    |> Rank.changeset(%{bonus: bonus})
     |> Repo.update()
   end
 

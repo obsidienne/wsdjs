@@ -36,7 +36,7 @@
 
 
 
-          <%= form_for Wsdjs.Trendings.Rank.bonus_changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
+          <%= form_for Wsdjs.Trendings.Rank.changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
           <div class="form-group">
   	        <%= label f, :bonus, "Top of", class: "control-label" %>
   	        <%= text_input f, :bonus, class: "form-control", required: "required", type: "number" %>
