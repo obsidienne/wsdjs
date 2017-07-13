@@ -1,4 +1,5 @@
 defmodule Wsdjs.Web.Api.V1.CommentController do
+  @moduledoc false
   use Wsdjs.Web, :controller
 
   alias Wsdjs.Musics

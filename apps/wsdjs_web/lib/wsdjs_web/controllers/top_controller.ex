@@ -1,4 +1,5 @@
 defmodule Wsdjs.Web.TopController do
+  @moduledoc false
   use Wsdjs.Web, :controller
 
   def action(conn, _) do
@@ -6,18 +7,12 @@ defmodule Wsdjs.Web.TopController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  @doc """
-  No authZ needed, data is scoped by current_user
-  """
   def index(conn, _params, current_user) do
     tops = Wsdjs.Trendings.list_tops(current_user)
 
     render conn, "index.html", tops: tops
   end
 
-  @doc """
-  No authZ needed, data is scoped by current_user
-  """
   def show(conn, %{"id" => id}, current_user) do
     top = Wsdjs.Trendings.get_top(current_user, id)
     top = Wsdjs.Repo.preload(top, votes: Wsdjs.Trendings.list_votes(top, current_user))
@@ -37,17 +32,11 @@ defmodule Wsdjs.Web.TopController do
     end
   end
 
-  @doc """
-  No authZ needed, this function does not modify the database
-  """
   def new(conn, _params, _current_user) do
     changeset = Wsdjs.Trendings.Top.changeset(%Wsdjs.Trendings.Top{})
     render(conn, "new.html", changeset: changeset)
   end
 
-  @doc """
-  Update the step of a top. You can't update anything else in this function.
-  """
   def update(conn, %{"id" => id}, current_user) do
     top = Wsdjs.Trendings.get_top(current_user, id)
     Wsdjs.Trendings.next_step(current_user, top)

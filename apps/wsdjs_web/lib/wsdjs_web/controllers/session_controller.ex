@@ -1,4 +1,5 @@
 defmodule Wsdjs.Web.SessionController do
+  @moduledoc false
   use Wsdjs.Web, :controller
 
   plug :put_layout, "login.html"
@@ -20,10 +21,6 @@ defmodule Wsdjs.Web.SessionController do
     end
   end
 
-  @doc """
-    Login user via magic link token.
-    Sets the given user as `current_user` and updates the session.
-  """
   def show(conn, %{"token" => token}) do
     case Wsdjs.Web.MagicLink.verify_magic_link(token) do
       {:ok, user} ->

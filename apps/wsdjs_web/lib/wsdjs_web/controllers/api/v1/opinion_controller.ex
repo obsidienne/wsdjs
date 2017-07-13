@@ -1,4 +1,5 @@
 defmodule Wsdjs.Web.Api.V1.OpinionController do
+  @moduledoc false
   use Wsdjs.Web, :controller
 
   plug :put_layout, false when action in [:create, :delete]

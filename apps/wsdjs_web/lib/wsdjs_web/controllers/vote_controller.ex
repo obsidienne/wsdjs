@@ -1,4 +1,5 @@
 defmodule Wsdjs.Web.VoteController do
+  @moduledoc false
   use Wsdjs.Web, :controller
 
   def create(conn, %{"votes" => votes_params, "top_id" => top_id} = params) do

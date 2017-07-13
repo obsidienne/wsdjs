@@ -1,10 +1,11 @@
 defmodule Wsdjs.Web.AuthenticationEmail do
+  @moduledoc false
   use Bamboo.Phoenix, view: Wsdjs.Web.EmailView
 
   import Bamboo.Email
 
   @doc """
-    The sign in email containing the login link.
+  The sign in email containing the login link.
   """
   def login_link(token_value, user) do
     datetime = Timex.now

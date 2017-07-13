@@ -1,8 +1,9 @@
 defmodule Wsdjs.Web.SongController do
+  @moduledoc false
+
   use Wsdjs.Web, :controller
 
-  alias Wsdjs.Musics
-  alias Wsdjs.Accounts
+  alias Wsdjs.{Musics, Accounts}
   alias Wsdjs.Musics.{Comment, Song}
 
   def action(conn, _) do
@@ -10,9 +11,6 @@ defmodule Wsdjs.Web.SongController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  @doc """
-  No authZ needed, data is scoped by current_user
-  """
   def show(conn, %{"id" => id}, current_user) do
     song = Musics.get_song!(current_user, id)
     comments = Musics.list_comments(id)
@@ -21,9 +19,6 @@ defmodule Wsdjs.Web.SongController do
     render conn, "show.html", song: song, comments: comments, comment_changeset: comment_changeset
   end
 
-  @doc """
-  No authZ needed, data is scoped by current_user
-  """
   def index(conn, %{"user_id" => user_id, "page" => page}, current_user) do
     page = Musics.paginate_songs_user(current_user, user_id, %{"page" => page})
 
@@ -53,16 +48,10 @@ defmodule Wsdjs.Web.SongController do
     |> render("index.html", songs: page.entries, page_number: page.page_number, total_pages: page.total_pages)
   end
 
-
-
-  @doc """
-  No authZ needed, this function does not modify the database
-  """
   def new(conn, _params, _current_user) do
     changeset = Musics.change_song(%Song{})
     render(conn, "new.html", changeset: changeset)
   end
-
 
   def create(conn, %{"song" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
@@ -94,7 +83,6 @@ defmodule Wsdjs.Web.SongController do
         render(conn, "edit.html", song: song, changeset: changeset)
     end
   end
-
 
   def delete(conn, %{"id" => id}, current_user) do
     song = Musics.get_song!(current_user, id)
