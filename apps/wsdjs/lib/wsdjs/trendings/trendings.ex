@@ -41,9 +41,11 @@ defmodule Wsdjs.Trendings do
     query = from s in Song, where: s.inserted_at >= ^naive_dtime and s.inserted_at < date_add(^dt, 1, "month")
     songs = Repo.all(query)
 
-    Top.create_changeset(%Top{}, params)
+    params = Map.put(params, "status", "checking")
+
+    %Top{}
+    |> Top.changeset(params)
     |> put_assoc(:songs, songs)
-    |> put_assoc(:user, user)
     |> Repo.insert
   end
 

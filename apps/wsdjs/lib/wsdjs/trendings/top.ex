@@ -38,16 +38,6 @@ defmodule Wsdjs.Trendings.Top do
     |> assoc_constraint(:user)
   end
 
-  def create_changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:due_date])
-    |> validate_required([:due_date])
-    |> put_change(:status, "checking")
-    |> validate_inclusion(:status, ["checking"])
-    |> unique_constraint(:due_date)
-    |> assoc_constraint(:user)
-  end
-
   def next_step_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:status])
