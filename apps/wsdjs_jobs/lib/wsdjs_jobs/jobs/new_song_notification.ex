@@ -5,7 +5,7 @@ defmodule Wsdjs.Jobs.NewSongNotification do
   def call(_args \\ []) do
     IO.puts "send email"
 
-    users = Wsdjs.Accounts.list_users(new_song_notification: true)
+    users = Wsdjs.Accounts.list_users_by(new_song_notification: true)
     songs = Wsdjs.Musics.list_songs()
 
     new_email()

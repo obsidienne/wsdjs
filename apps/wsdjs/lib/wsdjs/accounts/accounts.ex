@@ -14,11 +14,11 @@ defmodule Wsdjs.Accounts do
 
   ## Examples
 
-      iex> list_users_having_config({new_song_notification: true})
+      iex> list_users_by({new_song_notification: true})
       [%Accounts.User{}, ...]
 
   """
-  def list_users(param) do
+  def list_users_by(param) do
     User
     |> where(^param)
     |> Repo.all()
@@ -34,7 +34,7 @@ defmodule Wsdjs.Accounts do
       [%Accounts.User{}, ...]
 
   """
-  def list_users do
+  def list_users() do
     User
     |> Repo.all()
     |> Repo.preload(:avatar)
