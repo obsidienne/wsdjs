@@ -9,10 +9,6 @@ defmodule Wsdjs.Accounts do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Accounts.AuthToken
 
-  @countries ["EN", "FR", "US"]
-
-  def countries, do: @countries
-
   @doc """
   Returns the list of users having a particular configuration.
 

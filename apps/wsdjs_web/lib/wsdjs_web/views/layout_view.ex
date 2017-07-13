@@ -30,6 +30,4 @@ defmodule Wsdjs.Web.LayoutView do
     |> String.split(".")
     |> Enum.at(0)
   end
-
-
 end

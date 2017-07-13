@@ -12,7 +12,7 @@
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago small text-muted" datetime="<%= proposed_date(@song.inserted_at) %>"><%= proposed_date(@song.inserted_at) %></time>
+          <time class="timeago small text-muted" datetime="<%= suggested_at(@song.inserted_at) %>"><%= suggested_at(@song.inserted_at) %></time>
         </p>
       </div>
     </article>

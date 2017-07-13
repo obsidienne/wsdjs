@@ -41,7 +41,7 @@ defmodule Wsdjs.Accounts.User do
   @doc """
   The function scope is used to filter the users according to the user specified.
   - Admin see every user
-  - Connected user can see himself and not admin users
+  - Connected user can every users exceptsee himself and not admin users
   - Not connected users see nothing
   """
   def scoped(%Accounts.User{admin: :true}), do: Accounts.User
