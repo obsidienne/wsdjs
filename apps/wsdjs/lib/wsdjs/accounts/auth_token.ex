@@ -1,4 +1,5 @@
 defmodule Wsdjs.Accounts.AuthToken do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   alias Wsdjs.Accounts.AuthToken

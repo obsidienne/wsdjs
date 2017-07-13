@@ -1,8 +1,5 @@
 defmodule Wsdjs.Musics.Comment do
-  @moduledoc """
-  This module contains the comments on music mapping struct.
-  """
-
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 

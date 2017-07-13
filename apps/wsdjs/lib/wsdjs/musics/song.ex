@@ -1,7 +1,5 @@
 defmodule Wsdjs.Musics.Song do
-  @moduledoc """
-    This modules represents a Song.
-  """
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
@@ -49,22 +47,16 @@ defmodule Wsdjs.Musics.Song do
 
   def genre, do: @validated_genre
 
-  @doc """
-    Admin sees everything
-  """
+  # Admin sees everything
   def scoped(%Accounts.User{admin: :true}), do: Musics.Song
 
-  @doc """
-    Connected user can see songs not explicitly hidden
-  """
+  # Connected user can see songs not explicitly hidden
   def scoped(%Accounts.User{} = user) do
     from s in Musics.Song,
     where: s.hidden == false or s.user_id == ^user.id
   end
 
-  @doc """
-    Not connected users see only top 10 song or instant_hit
-  """
+  # Not connected users see only top 10 song or instant_hit
   def scoped(nil) do
     from s in Musics.Song,
     join: r in assoc(s, :ranks),
