@@ -3,7 +3,7 @@ defmodule Wsdjs.Web.SongController do
 
   alias Wsdjs.Musics
   alias Wsdjs.Accounts
-  alias Wsdjs.Musics.Comment
+  alias Wsdjs.Musics.{Comment, Song}
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns[:current_user]]
@@ -59,12 +59,13 @@ defmodule Wsdjs.Web.SongController do
   No authZ needed, this function does not modify the database
   """
   def new(conn, _params, _current_user) do
-    changeset = Musics.Song.changeset(%Wsdjs.Musics.Song{})
+    changeset = Musics.change_song(%Song{})
     render(conn, "new.html", changeset: changeset)
   end
 
 
   def create(conn, %{"song" => params}, current_user) do
+    params = Map.put(params, "user_id", current_user.id)
     case Musics.create_song(current_user, params) do
       {:ok, song} ->
         conn

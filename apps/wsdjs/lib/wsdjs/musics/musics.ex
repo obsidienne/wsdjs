@@ -103,10 +103,9 @@ defmodule Wsdjs.Musics do
   @doc """
   Creates a song and attach the suggestor.
   """
-  def create_song(user, params) do
+  def create_song(current_user, params) do
     %Song{}
     |> Song.changeset(params)
-    |> put_assoc(:user, user)
     |> Repo.insert()
   end
 
