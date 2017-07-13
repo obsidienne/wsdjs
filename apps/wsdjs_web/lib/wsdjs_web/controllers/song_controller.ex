@@ -1,6 +1,10 @@
 defmodule Wsdjs.Web.SongController do
   use Wsdjs.Web, :controller
 
+  alias Wsdjs.Musics
+  alias Wsdjs.Accounts
+  alias Wsdjs.Musics.Comment
+
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns[:current_user]]
     apply(__MODULE__, action_name(conn), args)
@@ -10,9 +14,9 @@ defmodule Wsdjs.Web.SongController do
   No authZ needed, data is scoped by current_user
   """
   def show(conn, %{"id" => id}, current_user) do
-    song = Wsdjs.Musics.get_song!(current_user, id)
-    comments = Wsdjs.Musics.list_comments(id)
-    comment_changeset = Wsdjs.Musics.Comment.changeset(%Wsdjs.Musics.Comment{})
+    song = Musics.get_song!(current_user, id)
+    comments = Musics.list_comments(id)
+    comment_changeset = Musics.Comment.changeset(%Comment{})
 
     render conn, "show.html", song: song, comments: comments, comment_changeset: comment_changeset
   end
@@ -21,8 +25,8 @@ defmodule Wsdjs.Web.SongController do
   No authZ needed, data is scoped by current_user
   """
   def index(conn, %{"user_id" => id, "page" => page}, _current_user) do
-    user = Wsdjs.Accounts.get_user!(id)
-    page = Wsdjs.Musics.paginate_songs_user(user, %{"page" => page})
+    user = Accounts.get_user!(id)
+    page = Musics.paginate_songs_user(user, %{"page" => page})
 
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
@@ -32,7 +36,7 @@ defmodule Wsdjs.Web.SongController do
   end
 
   def index(conn, %{"page" => page}, current_user) do
-    page = Wsdjs.Musics.paginate_songs(current_user, %{"page" => page})
+    page = Musics.paginate_songs(current_user, %{"page" => page})
 
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
@@ -42,7 +46,7 @@ defmodule Wsdjs.Web.SongController do
   end
 
   def index(conn, _params, current_user) do
-    page = Wsdjs.Musics.paginate_songs(current_user)
+    page = Musics.paginate_songs(current_user)
 
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
@@ -56,13 +60,13 @@ defmodule Wsdjs.Web.SongController do
   No authZ needed, this function does not modify the database
   """
   def new(conn, _params, _current_user) do
-    changeset = Wsdjs.Musics.Song.changeset(%Wsdjs.Musics.Song{})
+    changeset = Musics.Song.changeset(%Wsdjs.Musics.Song{})
     render(conn, "new.html", changeset: changeset)
   end
 
 
   def create(conn, %{"song" => params}, current_user) do
-    case Wsdjs.Musics.create_song(current_user, params) do
+    case Musics.create_song(current_user, params) do
       {:ok, song} ->
         conn
         |> put_flash(:info, "#{song.title} created")
@@ -73,15 +77,15 @@ defmodule Wsdjs.Web.SongController do
   end
 
   def edit(conn, %{"id" => id}, current_user) do
-    song = Wsdjs.Musics.get_song!(current_user, id)
-    changeset = Wsdjs.Musics.change_song(song)
+    song = Musics.get_song!(current_user, id)
+    changeset = Musics.change_song(song)
     render conn, "edit.html", song: song, changeset: changeset
   end
 
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
-    song = Wsdjs.Musics.get_song!(current_user, id)
+    song = Musics.get_song!(current_user, id)
 
-    case Wsdjs.Musics.update_song(song, song_params) do
+    case Musics.update_song(song, song_params) do
       {:ok, song} ->
         conn
         |> put_flash(:info, "Song updated")
@@ -93,8 +97,8 @@ defmodule Wsdjs.Web.SongController do
 
 
   def delete(conn, %{"id" => id}, current_user) do
-    song = Wsdjs.Musics.get_song!(current_user, id)
-    {:ok, _song} = Wsdjs.Musics.delete_song(song)
+    song = Musics.get_song!(current_user, id)
+    {:ok, _song} = Musics.delete_song(song)
 
     conn
     |> put_flash(:info, "Song deleted successfully.")
