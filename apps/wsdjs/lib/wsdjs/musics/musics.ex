@@ -8,6 +8,7 @@ defmodule Wsdjs.Musics do
 
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.{Song, Comment, Opinion}
+  alias Wsdjs.Musics.Policy
 
   @doc """
   Returns a song list according to a fulltext search.
@@ -33,17 +34,20 @@ defmodule Wsdjs.Musics do
   @doc """
   Get the song matching the "artist - title" pattern. 
   The uniq index artist / title ensure the uniquenes of result. 
+  This a privileged function, no song restriction access.
   """
   def search_artist_title(artist_title) do
     Song
     |> where([s], fragment("? || ' - ' || ?", s.artist, s.title) == ^artist_title)
     |> preload([:user, :art, :tops])
     |> preload([tops: :ranks])
+    |> order_by([desc: :inserted_at])    
     |> Repo.one
   end
 
   @doc """
   Returns the list of songs for the current and the previous month.
+  This function is scoped by the current user.
   """
   def hot_songs(current_user) do
     dt = DateTime.to_date(DateTime.utc_now)
@@ -53,6 +57,7 @@ defmodule Wsdjs.Musics do
     |> Song.scoped()
     |> where([s], s.inserted_at > date_add(^naive_dtime, -1, "month"))
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> order_by([desc: :inserted_at])
     |> Repo.all()
   end
 
@@ -64,6 +69,7 @@ defmodule Wsdjs.Musics do
     |> Song.scoped()
     |> where([user_id: ^user.id])
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> order_by([desc: :inserted_at])
     |> Repo.all()
   end
 
@@ -74,6 +80,7 @@ defmodule Wsdjs.Musics do
     yesterday = Timex.shift(Timex.now, hours: -24)
     Song
     |> where([s], s.inserted_at > ^yesterday)
+    |> order_by([desc: :inserted_at])
     |> Repo.all()
   end
 
@@ -111,9 +118,11 @@ defmodule Wsdjs.Musics do
   Creates a song and attach the suggestor.
   """
   def create_song(current_user, params) do
-    %Song{}
-    |> Song.changeset(params)
-    |> Repo.insert()
+    with true <- Policy.can?(:create_song, current_user) do
+      %Song{}
+      |> Song.changeset(params)
+      |> Repo.insert()
+    end
   end
 
   @doc """
