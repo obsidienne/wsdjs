@@ -1,5 +1,6 @@
 import socket from "../socket"
 import Tippy from 'tippy.js/dist/tippy.standalone';
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class Radio {
   mount() {
@@ -68,10 +69,14 @@ export default class Radio {
     this.radio.load();
     el.classList.add("icon-play");
     el.classList.remove("icon-pause");
-    document.querySelector(".miniplayer-art img").src = '//res.cloudinary.com/don2kwaju/image/upload/wsdjs/radiowcs_square.jpg';
+    document.querySelector(".miniplayer-art img").dataset.src = '///res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg';
     document.querySelector(".miniplayer-info h6:first-child").innerHTML = "";
     document.querySelector(".miniplayer-info h6:nth-child(2)").innerHTML = "";
     document.querySelector(".miniplayer-info h6:last-child").innerHTML = "Play the radio";
+
+    var cl = cloudinary.Cloudinary.new();
+    cl.init();
+    cl.responsive();
   }
 
   play_radio(el) {
@@ -98,7 +103,7 @@ export default class Radio {
 
     var playing = "";
     for (let i = 1; i < data.length && i < 5; i++) {
-      playing += `<li class="played-song tippy" data-position="top-end" data-size="small" title="${data[i].artist} - ${data[i].title}<br/><span class='small'>Suggested by ${data[i].suggested_by}</span>"><a href="${data[i].path}"><img height="50" width="50" src="${data[i].image_uri}" /></a></li>`;
+      playing += `<li class="played-song tippy" data-position="top-end" data-size="small" title="${data[i].artist} - ${data[i].title}<br/><span class='small'>Suggested by ${data[i].suggested_by}</span>"><a href="${data[i].path}"><img height="50" width="50" class="responsive cld-responsive" src="${data[i].image_uri}" /></a></li>`;
     }
     document.querySelector("#radio-container").innerHTML = playing;
 

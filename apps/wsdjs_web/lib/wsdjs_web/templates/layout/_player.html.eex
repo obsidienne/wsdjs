@@ -14,7 +14,7 @@
 
   <div class="miniplayer-radio-toggle" hidden>
     <div>Return to RadioWCS</div>
-    <img height="50" width="50" src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/radiowcs_square.jpg">
+    <img class="cld-responsive switch-radio" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
   </div>
   <div id="youtube-player" class="youtube-player" hidden></div>
 </div>
