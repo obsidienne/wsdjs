@@ -7,6 +7,28 @@
 
   import Wsdjs.Web.Router.Helpers
 
+  alias Wsdjs.Web.UserHelper
+
+  def opinion_link_no_tooltip(kind, _conn, _song, opinions, nil) do
+    qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
+    default_options = [class: "song-opinion song-#{kind}"]
+
+    content_tag :span, qty, default_options
+  end
+
+  def opinion_link_no_tooltip(kind, conn, song, opinions, current_user) do
+    qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
+    my_opinion = Enum.find(opinions, fn(x) -> x.user_id == current_user.id end)
+
+    default_options = [
+      "data-url": opinion_url(conn, kind, song, my_opinion),
+      class: html_class(kind, my_opinion),
+      "data-method": data_method(kind, my_opinion)
+    ]
+    content_tag :button, qty, default_options
+  end
+
+
   def opinion_link(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
     default_options = [class: "song-opinion song-#{kind} tippy"]
@@ -35,13 +57,15 @@
       link to: user_path(conn, :show, opinion.user) do
         img_tag(Wsdjs.Web.CloudinaryHelper.avatar_url(), 
                 'data-src': Wsdjs.Web.CloudinaryHelper.avatar_url(opinion.user.avatar),
-                class: "img-circle cld-responsive avatar-tiny")
+                class: "img-circle cld-responsive avatar-tiny tippy",
+                data: [size: "small"],
+                title: UserHelper.user_displayed_name(opinion.user))
       end
     end)
   end
 
   defp tooltip_options(kind, opinions, qty) when qty > 0 do
-    ["title": opinions_names(kind, opinions), "data-size": "big", "data-animateFill": "false"]
+    ["title": opinions_names(kind, opinions), "data-size": "small", "data-animateFill": "false"]
   end
   defp tooltip_options(_kind, _opinions, qty) when qty == 0, do: []
 
