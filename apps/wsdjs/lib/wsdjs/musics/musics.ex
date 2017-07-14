@@ -190,9 +190,14 @@ defmodule Wsdjs.Musics do
     Repo.delete(song)
   end
 
+  ###############################################
+  #
+  # Comment
+  #
+  ###############################################
 
   @doc """
-  List comments for a song order by desc
+  List comments for a song order by desc.
   """
   def list_comments(song_id) do
     Comment
@@ -213,18 +218,14 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  This function add a comment to a song for the current user.
+  This function add a comment to a song.
   """
-  def create_comment(current_user, song_id, params) do
-    song = current_user
-           |> Song.scoped()
-           |> Repo.get!(song_id)
-
-    %Comment{}
+  def create_comment(params) do
+    {:ok, comment} = %Comment{}
     |> Comment.changeset(params)
-    |> put_assoc(:user, current_user)
-    |> put_assoc(:song, song)
-    |> Repo.insert
+    |> Repo.insert()
+
+    {:ok, Repo.preload(comment, [user: :avatar])}
   end
 
   @doc """
