@@ -1,6 +1,6 @@
 <%= form_for @changeset, api_song_comment_path(@conn, :create, @song), [id: "song-comment-form"], fn f -> %>
 <div class="form-group">
-  <%= textarea f, :text, class: "form-control", placeholder: "Comment" %>
+  <%= textarea f, :text, class: "form-control", placeholder: "Comment", required: true, maxlength: 255 %>
   <%= error_tag f, :text %>
 </div>
 
