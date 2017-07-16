@@ -21,7 +21,7 @@
     
   </div>
 
-  <div class="hot-song-footer text-muted">
+  <div class="hot-song-footer text-muted song-opinions">
     <div class="opinions-container">
       <%= opinion_link("down", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
       <%= opinion_link("like", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
