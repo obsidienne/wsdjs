@@ -17,6 +17,10 @@ defmodule Wsdjs.Web.SongHelper do
     end
   end
 
-  def suggested_at(dt), do: Ecto.DateTime.to_iso8601(Ecto.DateTime.cast!(dt))
+  def utc_to_local(dt) do
+    dt 
+    |> Timex.local()
+    |> Timex.format!("{ISO:Extended}")
+  end
 end
  

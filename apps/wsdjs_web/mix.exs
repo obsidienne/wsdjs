@@ -39,6 +39,7 @@ defmodule Wsdjs.Web.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.13"},
      {:bamboo, "~> 0.8"},
+     {:timex, "~> 3.0"},
      {:hound, "~> 1.0"},
      {:wsdjs, in_umbrella: true},
      {:wsdjs_jobs, in_umbrella: true},

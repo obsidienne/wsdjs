@@ -16,7 +16,7 @@
 
     <h6 class="text-muted small text-ellipsis">
       <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>,
-      <time class="timeago small" datetime="<%= suggested_at(@song.inserted_at) %>" title="<%= Timex.format!(@song.inserted_at, "%d %b, %k:%M", :strftime) %>"><%= suggested_at(@song.inserted_at) %></time>
+      <time class="timeago small" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.local(@song.inserted_at), "%d %b, %k:%M", :strftime) %>"><%= utc_to_local(@song.inserted_at) %></time>
     </h6>
     
   </div>

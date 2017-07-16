@@ -1,8 +1,10 @@
 defmodule Wsdjs.Web.SongView do
   use Wsdjs.Web, :view
 
+
+
   def song_full_description(song) do
-    date_str = Date.to_iso8601(song.inserted_at)
+    date_str = utc_to_local(song.inserted_at)
 
     bpm_str = case song.bpm do
       0 -> "-"

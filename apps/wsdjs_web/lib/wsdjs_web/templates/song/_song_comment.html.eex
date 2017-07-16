@@ -6,7 +6,7 @@
   <div class="comment-box">
     <header class="comment-head">
       <a class="comment-author" href="<%= user_path(@conn, :show, @comment.user) %>"><%= @comment.user.name %></a>
-        <time class="timeago" title="<%= @comment.inserted_at %>" datetime="<%= DateTime.to_iso8601(DateTime.from_naive!(@comment.inserted_at, "Etc/UTC")) %>"><%= @comment.inserted_at %></time>
+        <time class="timeago" title="<%= Timex.format!(Timex.local(@comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(@comment.inserted_at) %>"><%= utc_to_local(@comment.inserted_at)   %></time>
     </header>
     <div class="comment-content">
         <%= @comment.text %>
