@@ -11,9 +11,8 @@ defmodule Wsdjs.Web.Api.V1.OpinionController do
 
     song = Wsdjs.Musics.get_song!(current_user, song_id)
     opinions = Wsdjs.Musics.list_opinions(song_id)
-    count_comments = Wsdjs.Musics.count_comments(song_id)
 
-    render(conn, "_show.html", song: song, opinions: opinions, count_comments: count_comments)
+    render(conn, "index.json", song: song, opinions: opinions, current_user: current_user)
   end
 
   def delete(conn, %{"id" => id}) do
@@ -24,8 +23,7 @@ defmodule Wsdjs.Web.Api.V1.OpinionController do
 
     song = Wsdjs.Musics.get_song!(current_user, opinion.song_id)
     opinions = Wsdjs.Musics.list_opinions(opinion.song_id)
-    count_comments = Wsdjs.Musics.count_comments(opinion.song_id)
 
-    render(conn, "_show.html", song: song, opinions: opinions, count_comments: count_comments)
+    render(conn, "index.json", song: song, opinions: opinions, current_user: current_user)
   end
 end
