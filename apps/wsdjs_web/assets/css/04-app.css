@@ -48,3 +48,7 @@ img.responsive {
   height: auto;
   overflow: hidden;
 }
+
+time {
+  cursor: help;
+}

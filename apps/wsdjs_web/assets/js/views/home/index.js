@@ -1,10 +1,12 @@
 import MainView from '../main';
+import timeago from 'timeago.js';
 
 export default class View extends MainView {
   mount() {
     super.mount();
 
     this._intlDate();
+    new timeago().render(document.querySelectorAll("time.timeago"));
 
     // Specific logic here
     console.log('HomeIndexView mounted');

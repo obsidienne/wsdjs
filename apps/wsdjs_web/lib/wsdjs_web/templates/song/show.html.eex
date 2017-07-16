@@ -17,7 +17,7 @@
         <h5 class="song-title"><%= @song.title %></h5>
         <h6 class="song-artist"><span class="text-muted">by</span> <%= @song.artist %></h6>
         <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></div>
-        <div class="text-muted"><time class="timeago" datetime="<%= suggested_at(@song.inserted_at) %>"><%= suggested_at(@song.inserted_at) %></time></div>
+        <div class="text-muted"><time class="timeago" datetime="<%= suggested_at(@song.inserted_at) %>" title="<%= Timex.format!(@song.inserted_at, "%d %b, %k:%M", :strftime) %>"><%= suggested_at(@song.inserted_at) %></time></div>
         <%= if @song.url do %>
           <a href="<%= url_for_provider(@song) %>" class="btn btn-primary" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
         <% end %>

@@ -15,7 +15,7 @@
         <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small><%= Enum.count(songs) %> suggestions</small>
       </h2>
 
-      <%= render_many sort_songs(songs), @view_module, "_hot_song.html", conn: @conn, as: :song %>
+      <%= render_many sort_songs(songs), Wsdjs.Web.SharedView, "_hot_song.html", conn: @conn, as: :song %>
     <% end %>
   </section>
 

@@ -1,5 +1,6 @@
 import MainView from '../main';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import timeago from 'timeago.js';
 
 export default class View extends MainView {
   mount() {
@@ -9,6 +10,7 @@ export default class View extends MainView {
 
     var debounce = JD.debounce(function() { self._refresh(); }, 100);
     window.addEventListener('scroll', debounce);
+    new timeago().render(document.querySelectorAll("time.timeago"));
 
     console.log('SongIndexView mounted');
   }
@@ -53,6 +55,8 @@ export default class View extends MainView {
         var cl = cloudinary.Cloudinary.new();
         cl.init();
         cl.responsive();
+        new timeago().render(document.querySelectorAll("time.timeago"));
+
       }
     };
 
