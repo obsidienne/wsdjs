@@ -65,9 +65,6 @@ export default class opinion {
     container.classList.remove("active")
     container.removeAttribute("title");
 
-    var pop = Tippy.getPopperElement(container);
-    alert(pop)
-
     if (user_opinion == kind) {
       container.classList.add("active")
     }
