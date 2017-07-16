@@ -16,7 +16,7 @@ export default class View extends MainView {
                    cloud_name: "don2kwaju",
                    cropping: "server",
                    cropping_aspect_ratio: 1,
-                   thumbnail_transformation: { width: 300, crop: 'crop', gravity: 'custom' } };
+                   thumbnail_transformation: { crop: 'crop', gravity: 'custom' } };
 
     var uploaded = function() {
       cloudinary.openUploadWidget(params, function(error, result) {
