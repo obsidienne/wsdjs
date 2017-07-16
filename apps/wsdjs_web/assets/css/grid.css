@@ -84,7 +84,6 @@
 #avatar_div, #art_div {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin-bottom: 30px;
 }
 #avatar_div .form-group,
