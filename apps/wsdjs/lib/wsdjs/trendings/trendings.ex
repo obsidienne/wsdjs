@@ -14,7 +14,7 @@ defmodule Wsdjs.Trendings do
   @doc """
   Returns the current user's last accessible published Top.
   """
-  def last_top(%User{} = current_user) do
+  def last_top(current_user) do
     current_user
     |> Top.scoped()
     |> order_by([desc: :due_date])
