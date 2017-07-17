@@ -107,6 +107,6 @@ export default class Radio {
     }
     document.querySelector("#radio-container").innerHTML = playing;
 
-    new Tippy('.tippy');
+    new Tippy('.tippy-radio');
   }
 }
