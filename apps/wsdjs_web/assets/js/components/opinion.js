@@ -6,7 +6,8 @@ export default class opinion {
     var self = this;
 
     console.log("opinion component mounted");
-    document.addEventListener("click", function(e) {
+    var main = document.querySelector("main");
+    main.addEventListener("click", function(e) {
       if (e.target && e.target.matches(".song-opinion")) {
         self._toggle_opinion(e.target);
         e.preventDefault();
