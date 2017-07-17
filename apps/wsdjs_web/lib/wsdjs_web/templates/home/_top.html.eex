@@ -7,5 +7,14 @@
     <span class="card-song-top-position"><%= @rank.position %></span>
     <span class="text-ellipsis"><%= @rank.song.title %></span>
     <span class="text-ellipsis">suggested by <%= @rank.song.user.name %></span>
+    <div>
+      <br/>
+      <%= if @rank.song.genre do %>
+        <span class="label label-default small"><%= @rank.song.genre %></span>
+      <% end %>
+      <%= if @rank.song.bpm do %>
+        <span class="label label-primary small"><%= @rank.song.bpm %> bpm</span>
+      <% end %>
+    </div>
   <% end %>
 </article>
