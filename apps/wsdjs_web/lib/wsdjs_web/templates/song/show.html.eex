@@ -18,7 +18,7 @@
         <h6 class="song-artist"><span class="text-muted">by</span> <%= @song.artist %></h6>
         <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></div>
         <div class="text-muted">
-          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.local(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
+          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
             <%= utc_to_local(@song.inserted_at) %>
           </time>
         </div>
