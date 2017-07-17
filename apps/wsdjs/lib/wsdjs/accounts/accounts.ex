@@ -57,7 +57,7 @@ defmodule Wsdjs.Accounts do
   def get_user!(id) do
     User
     |> Repo.get!(id)
-    |> Repo.preload(:avatar)
+    |> Repo.preload([:avatar, :detail])
   end
 
   def get_user_by_email(email) do

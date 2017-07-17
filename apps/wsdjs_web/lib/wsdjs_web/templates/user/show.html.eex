@@ -30,10 +30,40 @@
     </table>
 
     <div class="content-section-wrap">
-      <%= if has_description?(@user) do %>
+      <%= if @user.detail do %>
       <div class="profile-section content-minor-section">
-        <h3 class="content-minor-section-label">About Me</h3>
-        <%= @user.description %>
+        <%= if @user.detail.description do %>
+          <h3 class="content-minor-section-label">About Me</h3>
+          <p><%= @user.detail.description %></p>
+        <% end %>
+        <%= if @user.detail.tastes do %>
+          <h3 class="content-minor-section-label">Tastes</h3>
+          <p><%= @user.detail.tastes %></p>
+        <% end %>
+        <%= if @user.detail.favorite_artist do %>
+          <h3 class="content-minor-section-label">Favorite artist</h3>
+          <p><%= @user.detail.favorite_artist %></p>
+        <% end %>
+        <%= if @user.detail.favorite_color do %>
+          <h3 class="content-minor-section-label">Favorite color</h3>
+          <p><%= @user.detail.favorite_color %></p>
+        <% end %>
+        <%= if @user.detail.favorite_meal do %>
+          <h3 class="content-minor-section-label">Favorite meal</h3>
+          <p><%= @user.detail.favorite_meal %></p>
+        <% end %>
+        <%= if @user.detail.favorite_animal do %>
+          <h3 class="content-minor-section-label">Favorite animal</h3>
+          <p><%= @user.detail.favorite_animal %></p>
+        <% end %>
+        <%= if @user.detail.favorite_genre do %>
+          <h3 class="content-minor-section-label">Favotire genre</h3>
+          <p><%= @user.detail.favorite_genre %></p>
+        <% end %>
+        <%= if @user.detail.djing_start_year do %>
+          <h3 class="content-minor-section-label">Start DJing</h3>
+          <p><%= @user.detail.djing_start_year %></p>
+        <% end %>
       </div>
       <% end %>
       <h6 id="profile-date" class="profile-section content-minor-section profile-date-text">Member since: <time class="profile-date" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= @user.inserted_at %></time></h6>

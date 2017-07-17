@@ -15,11 +15,11 @@ defmodule Wsdjs.Accounts.User do
     field :user_country, :string
     field :name, :string
     field :djname, :string
-    field :description, :string
 
     has_many :songs, Musics.Song
     has_many :comments, Musics.Comment
     has_one :avatar, Accounts.Avatar, on_replace: :delete
+    has_one :detail, Accounts.UserDetail, on_replace: :delete
     has_many :song_opinions, Musics.Opinion
     has_many :votes, Trendings.Vote
     has_many :auth_tokens, Accounts.AuthToken
@@ -27,7 +27,7 @@ defmodule Wsdjs.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname, :description]
+  @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname]
 
   @doc false
   def changeset(struct, params \\ %{}) do
@@ -35,6 +35,7 @@ defmodule Wsdjs.Accounts.User do
     |> cast(params, @allowed_fields)
     |> validate_required(:email)
     |> cast_assoc(:avatar)
+    |> cast_assoc(:detail)
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
   end
