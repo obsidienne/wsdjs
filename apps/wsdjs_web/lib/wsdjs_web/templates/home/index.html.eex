@@ -21,7 +21,7 @@
 
   <%= if @top do %>
   <section class="container">
-    <h1 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h1>
+    <h2 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h2>
     <div class="song-top-container">
       <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
     </div>
