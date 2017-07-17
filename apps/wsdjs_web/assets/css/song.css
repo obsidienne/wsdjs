@@ -10,6 +10,7 @@
 .song-header-container > div {
   display: flex;
   justify-content: center;
+  flex: 1 1 auto;
 }
 .song-header-container .btn {
   margin-top: auto;
@@ -21,6 +22,7 @@
   justify-content: space-between;
   margin-left: 15px;
   max-width: 300px;
+  flex: 1 1 auto;
 }
 .song-tags {
   margin-bottom: 15px;

@@ -22,7 +22,12 @@
             <%= utc_to_local(@song.inserted_at) %>
           </time>
         </div>
-
+        <div class="song-tags">
+          <span class="label label-default"><%= @song.genre %></span>
+          <%= if @song.bpm > 0 do %>
+          <span class="label label-primary"><%= @song.bpm %> bpm</span>
+          <% end %>
+        </div>
         <%= if @song.hidden  || @song.instant_hit do %>
         <div class="song-labels">
           <%= if @song.hidden do %>
@@ -61,12 +66,7 @@
   </div>
 
   <aside>
-    <div class="song-tags">
-      <span class="label label-default"><%= @song.genre %></span>
-      <%= if @song.bpm > 0 do %>
-      <span class="label label-primary"><%= @song.bpm %> bpm</span>
-      <% end %>
-    </div>
+
 
     <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
     <%= if Wsdjs.Musics.Policy.can?(:edit_song, @current_user, @song) do %>
