@@ -126,3 +126,7 @@ label {
 .img-circle {
   border-radius: 50%;
 }
+
+.push-right {
+  float: right;
+}
