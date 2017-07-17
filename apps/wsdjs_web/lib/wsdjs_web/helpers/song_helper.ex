@@ -19,7 +19,7 @@ defmodule Wsdjs.Web.SongHelper do
 
   def utc_to_local(dt) do
     dt 
-    |> Timex.local()
+    |> Timex.to_datetime()
     |> Timex.format!("{ISO:Extended}")
   end
 end
