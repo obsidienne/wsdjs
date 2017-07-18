@@ -25,6 +25,7 @@ import loadView from './views/loader';
 import Turbolinks from 'turbolinks';
 import Radio from './components/radio';
 import Notifier from './components/notifier';
+import Search from './components/search';
 
 function handleDOMContentLoaded() {
   // Get the current view name
@@ -49,8 +50,8 @@ function handleDOMContentLoaded() {
 }
 
 var radio = new Radio();
-radio.mount();
+var search = new Search();
 
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
-Turbolinks.start()
+Turbolinks.start();

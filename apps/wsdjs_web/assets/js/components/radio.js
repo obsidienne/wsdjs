@@ -3,7 +3,7 @@ import Tippy from 'tippy.js/dist/tippy.standalone';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class Radio {
-  mount() {
+  constructor() {
     var self = this;
     this.radio = new Audio();
 
@@ -39,6 +39,7 @@ export default class Radio {
     });
     console.log('Radio component mounted');
   }
+
 
   play_youtube(video_id) {
     this.pause_radio(document.querySelector(".toggle-player"))
@@ -95,11 +96,12 @@ export default class Radio {
     }
     var data = JSON.parse(payload.data);
 
-    document.querySelector(".miniplayer-art img").setAttribute("src", data[0].image_uri);;
-    document.querySelector(".miniplayer-info").setAttribute("href", data[0].path);;
-    document.querySelector(".miniplayer-info h6:first-child").innerHTML = data[0].title;;
-    document.querySelector(".miniplayer-info h6:nth-child(2)").innerHTML = data[0].artist;;
-    document.querySelector(".miniplayer-info h6:last-child").innerHTML = `<span class="suggested_by">suggested by ${data[0].suggested_by}</span>`;;
+    document.querySelector(".miniplayer-art img").setAttribute("src", data[0].image_uri);
+    document.querySelector(".miniplayer-art img").dataset.src = data[0].image_uri;
+    document.querySelector(".miniplayer-info").setAttribute("href", data[0].path);
+    document.querySelector(".miniplayer-info h6:first-child").innerHTML = data[0].title;
+    document.querySelector(".miniplayer-info h6:nth-child(2)").innerHTML = data[0].artist;
+    document.querySelector(".miniplayer-info h6:last-child").innerHTML = `<span class="suggested_by">suggested by ${data[0].suggested_by}</span>`;
 
     var playing = "";
     for (let i = 1; i < data.length && i < 5; i++) {

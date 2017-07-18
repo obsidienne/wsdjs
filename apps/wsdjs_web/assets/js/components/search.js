@@ -2,25 +2,29 @@ import timeago from 'timeago.js';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class search {
-  mount() {
-    var search_container = document.querySelector(".search-container");
-    if (search_container === null)
-      return;
+  constructor() {
+    console.log("Search loaded.");
 
     var self = this;
 
-    search_container.addEventListener('click', function(e) {
-      self._show_search()
-    });
+    document.addEventListener("click", function(e) {
+      if (e.target && e.target.matches("#search-input")) {
+        self._show_search();
+      }
+      if (e.target && event.target.closest('.search-container') == null) {
+        self._hide_search();
+      }
+    })
 
-    var debounce = JD.debounce(function() { self._search(); }, 50);
-    document.getElementById("search-input").addEventListener('keyup', debounce);
-
-    document.addEventListener("click", function(event) {
-       if (event.target.closest('.search-container') == null) {
-         self._hide_search();
-       }
-    });
+    var timeout;
+    document.addEventListener("keyup", function(e) {
+      if (e.target && e.target.matches("#search-input")) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          self._search();
+        }, 50);
+      }      
+    })
   }
 
   _search(cl) {

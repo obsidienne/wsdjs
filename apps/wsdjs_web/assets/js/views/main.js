@@ -1,8 +1,5 @@
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
-import searchComponent from '../components/search';
-//import opinionComponent from '../components/opinion';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
-import Tippy from 'tippy.js/dist/tippy.standalone';
 
 export default class MainView {
   constructor() {
@@ -11,12 +8,9 @@ export default class MainView {
 
   // This will be executed when the document loads...
   mount() {
-    new searchComponent().mount();
- //   new opinionComponent().mount();
     this._intlDate();
     this._intlNumber();
     this._loadImg();
-//    new Tippy('.tippy');
 
     console.log('MainView mounted');
   }
