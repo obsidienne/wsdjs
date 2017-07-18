@@ -4,8 +4,6 @@ import SongIndexView from './song/index';
 import TopVotingView from './top/voting';
 import TopCountingView from './top/counting';
 import UserEditView from './user/edit';
-import SongEditView from './song/edit';
-import SongNewView from './song/new';
 
 // Collection of specific view modules
 const views = {
@@ -13,9 +11,7 @@ const views = {
   SongIndexView,
   TopVotingView,
   TopCountingView,
-  UserEditView,
-  SongEditView,
-  SongNewView
+  UserEditView
 };
 
 export default function loadView(viewName) {

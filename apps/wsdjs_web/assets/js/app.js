@@ -29,6 +29,7 @@ import Search from './components/search';
 // Views
 import User from './views/user.js';
 import Home from './views/home.js';
+import Song from './views/song.js';
 
 function handleDOMContentLoaded() {
   // Get the current view name
@@ -48,6 +49,7 @@ var search = new Search();
 // Views mounting
 var user = new User();
 var home = new Home();
+var song = new Song();
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
 Turbolinks.start();
