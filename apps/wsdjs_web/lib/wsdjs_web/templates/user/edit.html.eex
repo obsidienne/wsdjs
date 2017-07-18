@@ -41,8 +41,12 @@
       <%= textarea fd, :description, placeholder: "Description (2000 characteres max)", class: "form-control", maxlength: 2000 %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Tastes</label>
-      <%= textarea fd, :tastes, placeholder: "Likes and dislikes (2000 characteres max)", class: "form-control", maxlength: 2000 %>
+      <label class="small text-muted">Love more</label>
+      <%= textarea fd, :love_more, placeholder: "255 characteres max", class: "form-control", maxlength: 255 %>
+    </div>
+    <div class="form-group">
+      <label class="small text-muted">Hate more</label>
+      <%= textarea fd, :hate_more, placeholder: "255 characteres max", class: "form-control", maxlength: 255 %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Favorite artist</label>

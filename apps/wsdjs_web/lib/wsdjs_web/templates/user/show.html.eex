@@ -36,9 +36,13 @@
           <h3 class="content-minor-section-label">About Me</h3>
           <p><%= @user.detail.description %></p>
         <% end %>
-        <%= if @user.detail.tastes do %>
-          <h3 class="content-minor-section-label">Tastes</h3>
-          <p><%= @user.detail.tastes %></p>
+        <%= if @user.detail.love_more do %>
+          <h3 class="content-minor-section-label">Things you love more ?</h3>
+          <p><%= @user.detail.love_more %></p>
+        <% end %>
+        <%= if @user.detail.hate_more do %>
+          <h3 class="content-minor-section-label">Things you hate more ?</h3>
+          <p><%= @user.detail.hate_more %></p>
         <% end %>
         <%= if @user.detail.favorite_artist do %>
           <h3 class="content-minor-section-label">Favorite artist</h3>
