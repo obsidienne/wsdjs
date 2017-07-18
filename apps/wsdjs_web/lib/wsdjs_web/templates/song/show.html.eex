@@ -27,9 +27,6 @@
           <%= if @song.bpm > 0 do %>
           <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
-        </div>
-        <%= if @song.hidden  || @song.instant_hit do %>
-        <div class="song-labels">
           <%= if @song.hidden do %>
             <span class="label label-default small">hidden song</span>
           <% end %>
@@ -37,8 +34,6 @@
             <span class="label label-default small">instant hit</span>
           <% end %>
         </div>
-        <% end %>
-
         <%= if @song.url do %>
           <a href="<%= url_for_provider(@song) %>" class="btn btn-primary" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
         <% end %>
