@@ -26,6 +26,9 @@ import Turbolinks from 'turbolinks';
 import Radio from './components/radio';
 import Search from './components/search';
 
+// Views
+import User from './views/user.js';
+
 function handleDOMContentLoaded() {
   // Get the current view name
   const viewName = document.getElementsByTagName('body')[0].dataset.jsViewName;
@@ -40,6 +43,9 @@ function handleDOMContentLoaded() {
 
 var radio = new Radio();
 var search = new Search();
+
+// Views mounting
+var user = new User();
 
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);

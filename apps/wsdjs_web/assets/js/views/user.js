@@ -1,15 +1,25 @@
-import MainView from '../main';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
-export default class View extends MainView {
-  mount() {
-    super.mount();
-
+export default class User {
+  constructor() {
     var self = this;
 
-    var debounce = JD.debounce(function() { self._refresh(); }, 100);
-    window.addEventListener('scroll', debounce);
-
+    var timeout;
+    window.addEventListener("scroll", function(e) {
+      if (document.querySelector("#user-profile-container")) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          var ticking = false;
+          if (!ticking) {
+            window.requestAnimationFrame(function() {
+              self._refresh();
+              ticking = false;
+            });
+          }
+          ticking = true;
+        }, 100);
+      }      
+    })
     console.log('UserShowView mounted');
   }
 

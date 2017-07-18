@@ -1,5 +1,5 @@
 <%= render "_header.html", conn: @conn, current_user: @current_user %>
-<main class="container user-profile-container">
+<main id="user-profile-container" class="container user-profile-container">
   <section>
     <section id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
       <h4><%= @user.name %></h4>
