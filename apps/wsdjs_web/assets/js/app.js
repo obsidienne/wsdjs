@@ -28,6 +28,7 @@ import Search from './components/search';
 
 // Views
 import User from './views/user.js';
+import Home from './views/home.js';
 
 function handleDOMContentLoaded() {
   // Get the current view name
@@ -46,7 +47,7 @@ var search = new Search();
 
 // Views mounting
 var user = new User();
-
+var home = new Home();
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
 Turbolinks.start();

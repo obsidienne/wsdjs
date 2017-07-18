@@ -1,6 +1,7 @@
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import Notifier from '../components/notifier';
+import timeago from 'timeago.js';
 
 export default class MainView {
   // This will be executed when the document loads...
@@ -11,6 +12,8 @@ export default class MainView {
 
     var notifier = new Notifier();
     notifier.show_all();
+
+    new timeago().render(document.querySelectorAll("time.timeago"));
 
     /* piwik */
     if (window._paq != null) {

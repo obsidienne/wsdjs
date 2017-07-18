@@ -1,5 +1,4 @@
 import MainView    from './main';
-import HomeIndexView from './home/index';
 import SongShowView from './song/show';
 import SongIndexView from './song/index';
 import TopVotingView from './top/voting';
@@ -10,7 +9,6 @@ import SongNewView from './song/new';
 
 // Collection of specific view modules
 const views = {
-  HomeIndexView,
   SongShowView,
   SongIndexView,
   TopVotingView,
