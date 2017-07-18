@@ -24,7 +24,6 @@ import "phoenix_html"
 import loadView from './views/loader';
 import Turbolinks from 'turbolinks';
 import Radio from './components/radio';
-import Notifier from './components/notifier';
 import Search from './components/search';
 
 function handleDOMContentLoaded() {
@@ -37,16 +36,6 @@ function handleDOMContentLoaded() {
   view.mount();
 
   window.currentView = view;
-
-  var notifier = new Notifier();
-  notifier.show_all();
-
-  /* piwik */
-  if (window._paq != null) {
-    return _paq.push(['trackPageView']);
-  } else if (window.piwikTracker != null) {
-    return piwikTracker.trackPageview();
-  }
 }
 
 var radio = new Radio();

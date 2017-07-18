@@ -1,16 +1,23 @@
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import Notifier from '../components/notifier';
 
 export default class MainView {
-  constructor() {
-
-  }
-
   // This will be executed when the document loads...
   mount() {
     this._intlDate();
     this._intlNumber();
     this._loadImg();
+
+    var notifier = new Notifier();
+    notifier.show_all();
+
+    /* piwik */
+    if (window._paq != null) {
+      return _paq.push(['trackPageView']);
+    } else if (window.piwikTracker != null) {
+      return piwikTracker.trackPageview();
+    }
 
     console.log('MainView mounted');
   }
