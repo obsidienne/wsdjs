@@ -38,6 +38,7 @@
       <article class="top-song">
         <div class="song-art-container">
           <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
+          <div class="top-song-position-selector">Position <%= select(f, :vote, 0..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}") %></div>
           <%= if rank.song.url do %>
             <a href="<%= url_for_provider(rank.song) %>" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play</a>
           <% end %>
