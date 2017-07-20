@@ -32,6 +32,11 @@
   flex: 0 0 300px;
   box-shadow:  0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
 }
+.song-header-art img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
 
 @media (max-width: 767px) {
   .song-header-container > div {

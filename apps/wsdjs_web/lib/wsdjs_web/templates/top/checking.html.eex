@@ -46,7 +46,12 @@
           <%= if rank.song.bpm > 0 do %>
           <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
           <% end %>
-          <%= rank.votes + rank.bonus + rank.likes %>
+          <%= if rank.song.instant_hit do %>
+          <span class="label label-default">instant hit</span>
+          <% end %>
+          <%= if rank.song.hidden do %>
+          <span class="label label-default">hidden</span>
+          <% end %>
         </aside>
       </div>
     </article>
