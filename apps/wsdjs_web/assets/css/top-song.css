@@ -21,23 +21,30 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 5px;
+  padding: 15px;
+  background: rgba(150,150,150,.4);
+  margin: 7px;
+  margin-left: 10px;
+  border-radius: 5px;
 }
+.top-song-position-selector:hover {
+  background: rgb(150,150,150);
+}
+
 .song-art-container a {
   position: absolute;
   bottom: 0;
   right: 0;
   text-align: right;
   background: rgba(150,150,150,.4);
-  padding: 5px;
+  padding: 15px;
   color: black;
   cursor: pointer;
   border-radius: 5px;
-  margin: 5px;
+  margin: 7px;
 }
 .song-art-container:hover a {
   background: rgb(150,150,150);
-  transform: scale(1.1);
 }
 .top-song-info-container {
   display: flex;
@@ -206,5 +213,9 @@
   justify-content: flex-end;
 }
 
-.top-voting-footer-actions {
+.top-voting-footer-actions > .btn {
+  width: 300px;
+  position: fixed;
+  bottom: 15px;
+  z-index: 1000;
 }

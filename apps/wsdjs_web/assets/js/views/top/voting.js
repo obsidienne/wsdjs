@@ -14,8 +14,20 @@ export default class View extends MainView {
   _submit() {
     var form = document.querySelector('#voting-form');
     form.addEventListener('submit', function(e) {
-      var checked = document.querySelectorAll('input[type="checkbox"]:checked');
-      if (checked.length == 10 || checked.length == 0) {
+      var values = document.querySelectorAll('#voting-form select');
+      
+      var qty = 0;
+      var sum = 0;
+      for (var i = 0; i < values.length; ++i) {
+        if (values[i].value > 0) {
+          sum +=  parseInt(values[i].value);
+          qty += 1;
+        }
+      }
+
+      console.log(`${qty} - ${sum}`)
+      if (sum == 55 && qty == 10) {
+        console.log("Send to the server the vote.");
         return true;
       }
       e.preventDefault();
@@ -48,22 +60,6 @@ export default class View extends MainView {
         }
       });
     });
-  }
-
-  _reset() {
-    var el = document.getElementById('voting-form');
-    el.addEventListener('reset', function(e) {
-      var elems = document.querySelectorAll('input[type="checkbox"]:checked');
-      Array.prototype.forEach.call(elems, function(checkbox, i){
-        checkbox.value = 0;
-        checkbox.checked = false;
-      })
-
-      var elems = document.querySelectorAll('.voting-position');
-      Array.prototype.forEach.call(elems, function(label, i){ label.innerHTML = ""; });
-
-      e.preventDefault();
-    })
   }
 
   _dec_charts(value) {

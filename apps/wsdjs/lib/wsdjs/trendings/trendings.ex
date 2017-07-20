@@ -183,7 +183,7 @@ defmodule Wsdjs.Trendings do
 
     new_votes = votes_param
                 |> Map.keys()
-                |> Enum.reject(fn(v) -> votes_param[v] == "0" end)
+                |> Enum.reject(fn(v) -> votes_param[v] == "" end)
                 |> Enum.map(&Vote.get_or_build(top, user.id, &1, votes_param[&1]))
 
     top
