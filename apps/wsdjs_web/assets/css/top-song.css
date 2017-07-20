@@ -11,9 +11,9 @@
 }
 .song-art-container {
   position: relative;
-  min-width: 200px;
-  max-width: 200px;
-  max-height: 200px;
+  min-width: 300px;
+  max-width: 300px;
+  max-height: 300px;
   height: auto;
   align-self: center;
 }
@@ -42,7 +42,7 @@
 }
 
 .top-song img {
-  max-width: 200px;
+  max-width: 300px;
   width: 100%;
   height: auto;
 }
