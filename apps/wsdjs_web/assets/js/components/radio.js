@@ -96,16 +96,23 @@ export default class Radio {
     }
     var data = JSON.parse(payload.data);
 
-    document.querySelector(".miniplayer-art img").setAttribute("src", data[0].image_uri);
-    document.querySelector(".miniplayer-art img").dataset.src = data[0].image_uri;
-    document.querySelector(".miniplayer-info").setAttribute("href", data[0].path);
-    document.querySelector(".miniplayer-info h6:first-child").innerHTML = data[0].title;
-    document.querySelector(".miniplayer-info h6:nth-child(2)").innerHTML = data[0].artist;
-    document.querySelector(".miniplayer-info h6:last-child").innerHTML = `<span class="suggested_by">suggested by ${data[0].suggested_by}</span>`;
+    if (data[0] !== undefined) {
+      document.querySelector(".miniplayer-art img").setAttribute("src", data[0].image_uri);
+      document.querySelector(".miniplayer-art img").dataset.src = data[0].image_uri;
+      document.querySelector(".miniplayer-info").setAttribute("href", data[0].path);
+      document.querySelector(".miniplayer-info h6:first-child").innerHTML = data[0].title;
+      document.querySelector(".miniplayer-info h6:nth-child(2)").innerHTML = data[0].artist;
+      document.querySelector(".miniplayer-info h6:last-child").innerHTML = `<span class="suggested_by">suggested by ${data[0].suggested_by}</span>`;
+    }
+
 
     var playing = "";
     for (let i = 1; i < data.length && i < 5; i++) {
-      playing += `<li class="played-song tippy" data-position="top-end" data-size="small" title="${data[i].artist} - ${data[i].title}<br/><span class='small'>Suggested by ${data[i].suggested_by}</span>"><a href="${data[i].path}"><img height="50" width="50" class="responsive cld-responsive" src="${data[i].image_uri}" /></a></li>`;
+      if (data[0] !== undefined) {
+        playing += `<li class="played-song tippy" data-position="top-end" data-size="small" title="${data[i].artist} - ${data[i].title}<br/><span class='small'>Suggested by ${data[i].suggested_by}</span>"><a href="${data[i].path}"><img height="50" width="50" class="responsive cld-responsive" src="${data[i].image_uri}" /></a></li>`;
+      } else {
+        playing += `<li class="played-song tippy" data-position="top-end" data-size="small" title="${data[i].artist} - ${data[i].title}<br/><span class='small'>Suggested by ${data[i].suggested_by}</span>"><a href="${data[i].path}"><img height="50" width="50" class="responsive cld-responsive" src="//res.cloudinary.com/don2kwaju/image/upload/v1449164620/wsdjs/missing_cover.jpg" /></a></li>`;        
+      }
     }
     document.querySelector("#radio-container").innerHTML = playing;
 
