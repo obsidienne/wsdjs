@@ -7,28 +7,47 @@
       <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link push-right", target: "_blank" %>
     <% end %>
     </h3>
-    
+
+    <%= if @current_user && @current_user.id == @top.user_id do %>
+      <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
+        <section>
+          <nav>
+            <ol class="cd-multi-steps text-center">
+              <li class="visited"><em>Create</em></li>
+              <li class="visited"><em>Check</em></li>
+              <li class="visited"><em>Voting</em></li>
+              <li class="visited">
+                <%= submit "Counting", class: "btn btn-link", name: "direction", value: "previous" %>
+              </li>
+              <li class="visited"><em>Published</em></li>
+            </ol>
+          </nav>
+        </section>
+      <% end %>
+    <% end %>
+
   </div>
 </header>
 
   <main class="container">
   <%= for rank <- @top.ranks do %>
     <article class="top-song">
-      <label class="top-song-art">
+      <div class="song-art-container">
         <div class="voting-position charted">
           <div class="chart-bg"></div>
           <div class="chart-value"><%= rank.position %></div>
         </div>
         <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
-      </label>
-
+        <%= if rank.song.url do %>
+          <a href="<%= url_for_provider(rank.song) %>" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play</a>
+        <% end %>
+      </div>
       <div class="top-song-body">
-        <div>
-          <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
-          <%= rank.song.artist %>
-          <%= if rank.song.url do %>
-            <a href="<%= url_for_provider(rank.song) %>" class="btn btn-link" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play song</a>
+        <div class="top-song-body-info">
+          <%= link to: song_path(@conn, :show, rank.song), class: "h6" do %>
+            <h5><%= rank.song.title %></h5>
           <% end %>
+          <h6><%= rank.song.artist %></h6>
         </div>
 
         <aside>
@@ -40,7 +59,7 @@
           <%= if rank.song.bpm > 0 do %>
           <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
           <% end %>
-          <%= rank.votes + rank.bonus + rank.likes %>
+          <span class="label label-primary"><%= rank.votes + rank.bonus + rank.likes %> points</span>
         </aside>
       </div>
     </article>

@@ -14,7 +14,7 @@
             <li class="visited"><em>Create</em></li>
             <li class="visited"><em>Check</em></li>
             <li class="current"><em>Voting</em></li>
-            <li><%= submit "next step : counting", class: "btn btn-link" %></li>
+            <li><%= submit "next step : counting", class: "btn btn-link", name: "direction", value: "next" %></li>
           </ol>
         </nav>
       </section>

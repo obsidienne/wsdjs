@@ -67,13 +67,24 @@ defmodule Wsdjs.Trendings do
       voting: "counting",
       counting: "published"}
     |> Map.fetch!(String.to_atom(top.status))
-    |> go_next_step(top)
+    |> go_step(top)
   end
+
+  # Change the top status.
+  # The steps are the following : check -> vote -> count -> publish
+  # The step create does not use this function.
+  def previous_step(%User{} = user, top) do
+    %{published: "counting",
+      counting: "voting"}
+    |> Map.fetch!(String.to_atom(top.status))
+    |> go_step(top)
+  end
+
 
   # The top creator is ok with the songs in the top. The top creator freeze the likes
   # according to this rule: (like * 2) - (down * 3) + (up * 4)
   # After that, DJs can vote for their top 10.
-  defp go_next_step("voting", top) do
+  defp go_step("voting", top) do
     ranks = Rank
     |> where(top_id: ^top.id)
     |> preload(song: :opinions)
@@ -94,7 +105,7 @@ defmodule Wsdjs.Trendings do
     end)
 
     top
-    |> Top.next_step_changeset(%{status: "voting"})
+    |> Top.step_changeset(%{status: "voting"})
     |> Repo.update()
   end
 
@@ -102,7 +113,11 @@ defmodule Wsdjs.Trendings do
   # Need to sum the votes according to this rule
   # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
   # After that, the top creator can apply bonus to the top.
-  defp go_next_step("counting", top) do
+  defp go_step("counting", top) do
+    from(p in Wsdjs.Trendings.Rank, where: [top_id: ^top.id])
+    |> Repo.update_all(set: [votes: 0])
+
+
     Wsdjs.Trendings.Vote
     |> where(top_id: ^top.id)
     |> group_by(:song_id)
@@ -115,12 +130,12 @@ defmodule Wsdjs.Trendings do
     end)
 
     top
-    |> Top.next_step_changeset(%{status: "counting"})
+    |> Top.step_changeset(%{status: "counting"})
     |> Repo.update()
   end
 
   # Need to calculate the position according to likes + votes + bonus.
-  defp go_next_step("published", top) do
+  defp go_step("published", top) do
     query = from q in Rank,
       join: p in fragment("""
       SELECT id, top_id, row_number() OVER (
@@ -139,7 +154,7 @@ defmodule Wsdjs.Trendings do
     end)
 
     top
-    |> Top.next_step_changeset(%{status: "published"})
+    |> Top.step_changeset(%{status: "published"})
     |> Repo.update()
   end
 

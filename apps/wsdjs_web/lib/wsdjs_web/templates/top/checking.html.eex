@@ -15,7 +15,7 @@
         <ol class="cd-multi-steps text-center">
           <li class="visited"><em>Create</em></li>
           <li class="current"><em>Check</em></li>
-          <li><%= submit "next step : vote", class: "btn btn-link" %></li>
+          <li><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
         </ol>
       </nav>
     </section>

@@ -32,7 +32,7 @@ defmodule Wsdjs.Trendings.Top do
     |> assoc_constraint(:user)
   end
 
-  def next_step_changeset(struct, params \\ %{}) do
+  def step_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:status])
     |> validate_inclusion(:status, @valid_status)

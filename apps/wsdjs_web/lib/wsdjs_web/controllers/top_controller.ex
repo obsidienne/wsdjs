@@ -40,13 +40,22 @@ defmodule Wsdjs.Web.TopController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def update(conn, %{"id" => id}, current_user) do
+  def update(conn, %{"id" => id, "direction" => "next"}, current_user) do
     top = Trendings.get_top!(current_user, id)
     Trendings.next_step(current_user, top)
     top = Trendings.get_top!(current_user, id)
 
     redirect(conn, to: top_path(conn, :show, top))
   end
+
+  def update(conn, %{"id" => id, "direction" => "previous"}, current_user) do
+    top = Trendings.get_top!(current_user, id)
+    Trendings.previous_step(current_user, top)
+    top = Trendings.get_top!(current_user, id)
+
+    redirect(conn, to: top_path(conn, :show, top))
+  end
+  
 
   def create(conn, %{"top" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
