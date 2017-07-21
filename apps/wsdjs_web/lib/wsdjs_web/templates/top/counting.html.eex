@@ -25,39 +25,46 @@
 <main class="container">
   <%= for rank <- @top.ranks do %>
     <article class="top-song">
-      <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
-      <div class="top-song-body">
+      <div class="song-art-container">
+        <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
+        <%= if rank.song.url do %>
+          <a href="<%= url_for_provider(rank.song) %>" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play</a>
+        <% end %>
+      </div>
+      <div class="top-song-info-container">
+        <div class="top-song-body">
+          <div class="top-song-body-info">
+            <%= link to: song_path(@conn, :show, rank.song), class: "h6" do %>
+              <h5><%= rank.song.title %></h5>
+            <% end %>
+            <h6><%= rank.song.artist %></h6>
+          </div>
+          <aside>
+            <span class="label label-default"><%= rank.song.genre %></span>
+            <%= if rank.song.bpm > 0 do %>
+            <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
+            <% end %>
+            <%= if rank.song.instant_hit do %>
+            <span class="label label-default">instant hit</span>
+            <% end %>
+            <%= if rank.song.hidden do %>
+            <span class="label label-default">hidden</span>
+            <% end %>
+            <span class="song-opinion song-down"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "down" end) %></span>
+            <span class="song-opinion song-like"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "like" end) %></span>
+            <span class="song-opinion song-up"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "up" end) %></span> 
+          </aside>
+        </div>
         <div>
-          <%= link rank.song.title, to: song_path(@conn, :show, rank.song) %>
-          <%= rank.song.artist %>
-          <%= if rank.song.url do %>
-            <a href="<%= url_for_provider(rank.song) %>" class="btn btn-link" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play song</a>
-          <% end %>
-
-
-
           <%= form_for Wsdjs.Trendings.Rank.changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
           <div class="form-group">
   	        <%= label f, :bonus, "Top of", class: "control-label" %>
   	        <%= text_input f, :bonus, class: "form-control", required: "required", type: "number" %>
   	        <%= error_tag f, :bonus %>
-  	        <span class="help-block">The date must be the <strong>first</strong> day of the month.</span>
   	      </div>
-            <%= submit "Apply bonus", class: "btn btn-primary" %>
+          <%= submit "Apply bonus", class: "btn btn-primary" %>
           <% end %>
         </div>
-
-        <aside>
-          <span class="song-opinion song-down"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "down" end) %></span>
-          <span class="song-opinion song-like"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "like" end) %></span>
-          <span class="song-opinion song-up"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "up" end) %></span>
-
-          <span class="label label-default"><%= rank.song.genre %></span>
-          <%= if rank.song.bpm > 0 do %>
-          <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-          <% end %>
-          <%= rank.votes + rank.bonus + rank.likes %>
-        </aside>
       </div>
     </article>
   <% end %>
