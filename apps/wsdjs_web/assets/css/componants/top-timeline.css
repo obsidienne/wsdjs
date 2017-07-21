@@ -144,7 +144,7 @@ Main components
 }
 .cd-timeline-content .cd-date {
   float: left;
-  padding: .8em 0;
+  padding: 0 0 .8em 0;
   opacity: .7;
 }
 .cd-timeline-content::before {
@@ -169,6 +169,11 @@ Main components
   .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
     font-size: 14px;
     font-size: 0.875rem;
+  }
+  .cd-timeline-content .cd-date {
+    float: left;
+    padding: .8em 0;
+    opacity: .7;
   }
 }
 @media only screen and (min-width: 1170px) {
