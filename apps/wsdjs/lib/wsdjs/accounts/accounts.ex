@@ -36,6 +36,7 @@ defmodule Wsdjs.Accounts do
   """
   def list_users() do
     User
+    |> order_by([:name])
     |> Repo.all()
     |> Repo.preload(:avatar)
   end

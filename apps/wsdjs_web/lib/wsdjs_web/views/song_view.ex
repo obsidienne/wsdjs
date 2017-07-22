@@ -1,7 +1,10 @@
 defmodule Wsdjs.Web.SongView do
   use Wsdjs.Web, :view
 
-
+  def list_users() do
+    users = Wsdjs.Accounts.list_users()
+    Enum.map(users, &{user_displayed_name(&1), &1.id})
+  end
 
   def song_full_description(song) do
     date_str = utc_to_local(song.inserted_at)

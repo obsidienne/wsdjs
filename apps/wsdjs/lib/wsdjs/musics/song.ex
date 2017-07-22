@@ -28,7 +28,7 @@ defmodule Wsdjs.Musics.Song do
     many_to_many :tops, Trendings.Top, join_through: Trendings.Rank
   end
 
-  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden]
+  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden, :inserted_at]
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
