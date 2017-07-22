@@ -68,7 +68,7 @@
     <div>
       <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
       <%= if Wsdjs.Musics.Policy.can?(:delete_song, @current_user, @song) do %>
-        <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete" %></h1>
+        <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %></h1>
       <% end %>
     </div>
     <% end %>
