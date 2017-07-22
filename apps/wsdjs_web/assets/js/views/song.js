@@ -1,4 +1,5 @@
 import timeago from 'timeago.js';
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class Home {
   constructor() {
