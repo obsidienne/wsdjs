@@ -1,7 +1,7 @@
 <header class="hero hot-hero">
   <%= render "_header.html", conn: @conn, current_user: @current_user %>
 
-  <div class="container" style="text-align: center">
+  <div class="container">
     <h4>World Swing DeeJays</h4>
     <h5>Stay connected to your dance !</h5>
     <h5>Get more information on the West Coast Swing community with World Swing DeeJays.</h5>
@@ -9,4 +9,12 @@
 </header>
 
 <main role="main">
+  <div class="container">
+    <section>
+      <h4>Last suggested songs</h4>
+      <ul>
+        <%= render_many @songs, Wsdjs.Web.SharedView, "_song_minicard.html", conn: @conn, as: :song %>
+      </ul>
+    </section>
+  </div>
 </main>

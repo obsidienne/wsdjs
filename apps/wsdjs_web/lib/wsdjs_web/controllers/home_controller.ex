@@ -9,8 +9,10 @@ defmodule Wsdjs.Web.HomeController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def index(conn, _params, nil) do
-    render conn, "unauthenticated.html"
+  def index(conn, _params, current_user) when is_nil(current_user) do
+    songs = Musics.last_songs(current_user)
+
+    render conn, "unauthenticated.html", songs: songs
   end
 
 

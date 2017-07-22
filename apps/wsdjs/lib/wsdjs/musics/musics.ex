@@ -61,6 +61,14 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
+  def last_songs(current_user) do
+    Song
+    |> where(instant_hit: true)
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> order_by([desc: :inserted_at])
+    |> Repo.all()
+  end
+
   @doc """
   Returns the list of songs for a user scoped by the current_user.
   """
