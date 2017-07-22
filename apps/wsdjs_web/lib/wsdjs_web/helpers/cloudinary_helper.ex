@@ -6,8 +6,8 @@ defmodule Wsdjs.Web.CloudinaryHelper do
   alias Wsdjs.Musics.Art
   alias Wsdjs.Accounts.Avatar
 
-  @art_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_crop,g_custom/"
-  @art_blured_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto,h_350,c_crop,g_custom/e_blur:300/o_30/"
+  @art_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_limit,w_400/c_crop,g_custom,q_auto,f_auto/"
+  @art_blured_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_400,c_crop,g_custom,f_auto,q_auto/e_blur:300,o_30/"
   @art_missing_url "//res.cloudinary.com/don2kwaju/image/upload/v1449164620/wsdjs/missing_cover.jpg"
 
   def art_url(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
@@ -24,7 +24,7 @@ defmodule Wsdjs.Web.CloudinaryHelper do
 
 
 
-  @avatar_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_crop,g_custom/"
+  @avatar_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_crop,g_custom,q_auto,f_auto/"
   @avatar_missing_url "//res.cloudinary.com/don2kwaju/image/upload/v1450094305/wsdjs/avatar_missing_url.jpg"
 
   def avatar_url(%Avatar{cld_id: cld_id, version: version}) when is_binary(cld_id) do
