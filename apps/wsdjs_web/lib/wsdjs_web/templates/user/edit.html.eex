@@ -18,11 +18,11 @@
 
     <div class="form-group">
       <label class="small text-muted">Name</label>
-      <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
+      <%= text_input f, :name, placeholder: "Name", class: "form-control text-capitalized" %>
     </div>
     <div class="form-group">
       <label class="small text-muted">eMail</label>
-      <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email" %>
+      <%= text_input f, :email, placeholder: "email", class: "form-control text-lowercase", type: "email" %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Dj name</label>
