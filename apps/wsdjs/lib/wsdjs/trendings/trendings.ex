@@ -240,4 +240,25 @@ defmodule Wsdjs.Trendings do
     order_by: [asc: q.position],
     preload: [song: :art]
   end
+
+  def get_rank!(id) do
+    Rank
+    |> Repo.get!(id)
+  end
+
+  @doc """
+  Deletes a Rank.
+
+  ## Examples
+
+      iex> delete_rank(rank)
+      {:ok, %Rank{}}
+
+      iex> delete_rank(rank)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_rank(%Rank{} = rank) do
+    Repo.delete(rank)
+  end
 end

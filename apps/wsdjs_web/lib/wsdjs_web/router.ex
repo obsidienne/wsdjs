@@ -36,7 +36,7 @@ defmodule Wsdjs.Web.Router do
     resources "/tops", TopController, only: [:create, :new, :update, :delete] do
       resources "/votes", VoteController, only: [:create]
     end
-    resources "/ranks", RankController, only: [:update]
+    resources "/ranks", RankController, only: [:update, :delete]
     resources "/sessions", SessionController, only: [:delete]
   end
 
