@@ -1,0 +1,12 @@
+<header class="hero hot-hero">
+  <%= render "_header.html", conn: @conn, current_user: @current_user %>
+
+  <div class="container" style="text-align: center">
+    <h4>World Swing DeeJays</h4>
+    <h5>Stay connected to your dance !</h5>
+    <h5>Get more information on the West Coast Swing community with World Swing DeeJays.</h5>
+  </div>
+</header>
+
+<main role="main">
+</main>
