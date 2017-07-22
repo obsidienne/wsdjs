@@ -34,7 +34,6 @@ export default class Radio {
 
       if (e.target && (e.target.matches(".miniplayer-radio-toggle") || e.target.closest(".miniplayer-radio-toggle"))) {
         self.pause_youtube();
-        self.play_radio(document.querySelector(".toggle-player"));
       }
     });
     console.log('Radio component mounted');
