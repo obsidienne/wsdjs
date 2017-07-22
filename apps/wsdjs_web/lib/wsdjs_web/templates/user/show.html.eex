@@ -48,6 +48,10 @@
           <h3 class="content-minor-section-label">Favorite artist</h3>
           <p><%= @user.detail.favorite_artist %></p>
         <% end %>
+        <%= if @user.detail.favorite_genre do %>
+          <h3 class="content-minor-section-label">Favotire genre</h3>
+          <p><%= @user.detail.favorite_genre %></p>
+        <% end %>
         <%= if @user.detail.favorite_color do %>
           <h3 class="content-minor-section-label">Favorite color</h3>
           <p><%= @user.detail.favorite_color %></p>
@@ -59,10 +63,6 @@
         <%= if @user.detail.favorite_animal do %>
           <h3 class="content-minor-section-label">Favorite animal</h3>
           <p><%= @user.detail.favorite_animal %></p>
-        <% end %>
-        <%= if @user.detail.favorite_genre do %>
-          <h3 class="content-minor-section-label">Favotire genre</h3>
-          <p><%= @user.detail.favorite_genre %></p>
         <% end %>
         <%= if @user.detail.djing_start_year do %>
           <h3 class="content-minor-section-label">Start DJing</h3>

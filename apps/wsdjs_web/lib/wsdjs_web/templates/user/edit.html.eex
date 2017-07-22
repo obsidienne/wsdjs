@@ -52,6 +52,11 @@
       <label class="small text-muted">Favorite artist</label>
       <%= text_input fd, :favorite_artist, placeholder: "Favorite artist", class: "form-control", maxlength: 255 %>
     </div>
+    <div class="form-group select optional song_genre">
+      <label class="small text-muted">Favotire genre</label>
+      <%= select fd, :favorite_genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
+      <%= error_tag fd, :genre %>
+    </div>
     <div class="form-group">
       <label class="small text-muted">Favorite color</label>
       <%= text_input fd, :favorite_color, placeholder: "Favorite color", class: "form-control", maxlength: 255 %>
@@ -63,11 +68,6 @@
     <div class="form-group">
       <label class="small text-muted">Favorite animal</label>
       <%= text_input fd, :favorite_animal, placeholder: "favorite animal", class: "form-control", maxlength: 2000 %>
-    </div>
-    <div class="form-group select optional song_genre">
-      <label class="small text-muted">Favotire genre</label>
-      <%= select fd, :favorite_genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
-      <%= error_tag fd, :genre %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Start DJing</label>
