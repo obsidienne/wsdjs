@@ -70,7 +70,7 @@
               <div>Position <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", value: current_user_vote(@top, rank)) %></div>
             </div>
             <%= if @current_user && @current_user.id == @top.user_id do %>
-            <table>
+            <table class="top-voting-repartition">
               <thead>
                 <tr>
                   <th>1<sup>st</sup></th>
