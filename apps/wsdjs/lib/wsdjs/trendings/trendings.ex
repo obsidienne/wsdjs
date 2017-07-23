@@ -36,6 +36,7 @@ defmodule Wsdjs.Trendings do
     |> order_by([desc: :due_date])
     |> Repo.all
     |> Repo.preload(ranks: Trendings.list_rank())
+    |> Repo.preload(:songs)
   end
 
   def get_top!(current_user, id) do

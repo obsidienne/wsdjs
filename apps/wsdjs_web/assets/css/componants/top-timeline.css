@@ -145,7 +145,7 @@ Main components
 .cd-timeline-content .cd-date {
   float: left;
   padding: 0 0 .8em 0;
-  opacity: .7;
+  color: #777777;
 }
 .cd-timeline-content::before {
   content: '';
@@ -157,6 +157,15 @@ Main components
   border: 7px solid transparent;
   border-right: 7px solid white;
 }
+.cd-timeline-block .statistics {
+  margin-top: 15px;
+}
+.cd-timeline-block .statistics th,
+.cd-timeline-block .statistics td {
+  text-align: left;
+  color: #777777;
+}
+
 @media only screen and (min-width: 768px) {
   .cd-timeline-content h2 {
     font-size: 20px;
