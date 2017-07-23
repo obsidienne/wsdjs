@@ -2,13 +2,13 @@
 
 <main class="user-profile-edit container">
   <div id="avatar_div">
-    <img id="avatar_thumbnail" src="<%= avatar_url(@current_user.avatar) %>" style="width:250px;height:250px;">
+    <img id="avatar_thumbnail" src="<%= avatar_url(@user.avatar) %>" style="width:250px;height:250px;">
     <div class="form-group">
       <button id="user_upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload avatar</button>
     </div>
   </div>
 
-  <%= form_for @changeset, user_path(@conn, :update, @current_user), [id: "user_edit_form"], fn f -> %>
+  <%= form_for @changeset, user_path(@conn, :update, @user), [id: "user_edit_form"], fn f -> %>
     <div id="cloudinary_form_div">
       <%= inputs_for f, :avatar, fn fp -> %>
         <%= hidden_input fp, :cld_id %>
@@ -19,14 +19,17 @@
     <div class="form-group">
       <label class="small text-muted">Name</label>
       <%= text_input f, :name, placeholder: "Name", class: "form-control text-capitalized" %>
+      <%= error_tag f, :name %>
     </div>
     <div class="form-group">
       <label class="small text-muted">eMail</label>
       <%= text_input f, :email, placeholder: "email", class: "form-control text-lowercase", type: "email" %>
+      <%= error_tag f, :email %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Dj name</label>
       <%= text_input f, :djname, placeholder: "Dj name", class: "form-control" %>
+      <%= error_tag f, :djname %>
     </div>
     <div class="form-group contry-selector">
       <label class="small text-muted">Your country</label>

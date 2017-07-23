@@ -30,14 +30,22 @@ defmodule Wsdjs.Web.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Accounts.get_user!(id)
+    current_user = conn.assigns[:current_user]
 
-    case Accounts.update_user(user, user_params) do
-      {:ok, user} ->
+    with true <- Accounts.Policy.can?(:edit_user, user, current_user),
+        {:ok, user} <- Accounts.update_user(user, user_params) do
+      conn
+      |> put_flash(:info, "Profile updated.")
+      |> redirect(to: user_path(conn, :show, user))
+    else
+      false ->
         conn
-        |> put_flash(:info, "Profile updated.")
-        |> redirect(to: user_path(conn, :show, user))
+        |> put_flash(:error, "You can't update this user.")
+        |> redirect(to: home_path(conn, :index))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        conn
+        |> put_flash(:error, "Invalide modifications.")
+        |> render("edit.html", user: user, changeset: changeset)
     end
   end
 end
