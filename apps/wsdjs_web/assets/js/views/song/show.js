@@ -2,6 +2,7 @@ import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
 import MainView from '../main';
 import Tippy from 'tippy.js/dist/tippy.standalone';
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class View extends MainView {
   mount() {
@@ -13,7 +14,7 @@ export default class View extends MainView {
 
     var main = document.querySelector("main");
     main.addEventListener("click", e => {
-      if (e.target && e.target.matches(".song-opinion")) {
+      if (e.target && e.target.matches(".SongShowView .song-opinion")) {
         this._toggle_opinion(e.target);
         e.preventDefault();
       }
@@ -48,6 +49,12 @@ export default class View extends MainView {
           var tpl = self._createHtmlContent(JSON.parse(this.response).data);
           container.insertAdjacentHTML('beforeend', tpl);
           new timeago().render(document.querySelectorAll("time.timeago"));
+
+
+    var cl = cloudinary.Cloudinary.new();
+    cl.init();
+    cl.responsive();    
+
         } else {
           console.error("Error");
         }
@@ -115,6 +122,10 @@ export default class View extends MainView {
     this._refresh_kind(song_up, "up", data.data.up, data.data.user_opinion);
     this._refresh_kind(song_like, "like", data.data.like, data.data.user_opinion);
     this._refresh_kind(song_down, "down", data.data.down, data.data.user_opinion);
+
+    var cl = cloudinary.Cloudinary.new();
+    cl.init();
+    cl.responsive();
   }
 
   _refresh_kind(container, kind, data, user_opinion) {
@@ -131,7 +142,7 @@ export default class View extends MainView {
     var tmp = container.closest("tr");
     var users = "";
     for (let i = 0; i < data.users.length && i < 8; i++) {
-      users += `<a href="${data.users[i].url}"><img class="img-circle cld-responsive avatar-tiny tippy" data-size="small" src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/avatar_missing_url.jpg" data-src="${data.users[i].avatar}" title="${data.users[i].name}"></a>`;
+      users += `<a href="${data.users[i].url}"><img class="img-circle cld-responsive avatar-tiny tippy" data-size="small" src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_avatar.jpg" data-src="${data.users[i].avatar}" title="${data.users[i].name}"></a>`;
     }
     tmp.querySelector("td").innerHTML = users;
   }  

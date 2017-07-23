@@ -3,7 +3,7 @@ import timeago from 'timeago.js';
 export default class Home {
   constructor() {
     document.addEventListener("click", e => {
-      if (e.target && e.target.matches(".song-opinion")) {
+      if (e.target && e.target.matches(".HomeIndexView .song-opinion")) {
         this._toggle_opinion(e.target);
         e.preventDefault();
       }
