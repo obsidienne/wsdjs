@@ -3,7 +3,7 @@ defmodule Wsdjs.Web.SongController do
 
   use Wsdjs.Web, :controller
 
-  alias Wsdjs.{Musics, Accounts}
+  alias Wsdjs.Musics
   alias Wsdjs.Musics.{Comment, Song}
 
   def action(conn, _) do
@@ -74,9 +74,11 @@ defmodule Wsdjs.Web.SongController do
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
     song = Musics.get_song!(current_user, id)
 
-    if !current_user.admin do
-      song_params = Map.drop(song_params, ["user_id", "inserted_at", "title", "artist"])
-    end
+    song_params = if current_user.admin do
+        song_params
+      else
+        Map.drop(song_params, ["user_id", "inserted_at", "title", "artist"])
+      end
 
     case Musics.update_song(song, song_params) do
       {:ok, song} ->
