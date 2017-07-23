@@ -41,6 +41,9 @@ time {
 table {
   width: 100%;
 }
+tbody th {
+  text-align: left;
+}
 
 img {
   vertical-align: top;

@@ -17,6 +17,18 @@
   height: auto;
   align-self: center;
 }
+.top-counting .song-art-container {
+  min-width: 150px;
+  max-width: 150px;
+  max-height: 150px;
+}
+.top-counting tr {
+  height: 36px;
+}
+.top-counting td {
+  text-align: right;
+}
+
 .top-song-position-selector {
   position: absolute;
   bottom: 0;

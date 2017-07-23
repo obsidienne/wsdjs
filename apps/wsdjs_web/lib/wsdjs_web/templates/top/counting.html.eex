@@ -24,7 +24,7 @@
   <% end %>
 </header>
 
-<main class="container">
+<main class="container top-counting">
   <%= for rank <- @top.ranks do %>
     <article class="top-song">
       <div class="song-art-container">
@@ -59,12 +59,22 @@
         </div>
         <div>
           <%= form_for Wsdjs.Trendings.Rank.changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
-          <div class="form-group">
-  	        <%= label f, :bonus, "Bonus", class: "control-label" %>
-  	        <%= text_input f, :bonus, class: "form-control", required: "required", type: "number" %>
-  	        <%= error_tag f, :bonus %>
-  	      </div>
-          <%= submit "Apply bonus", class: "btn btn-primary" %>
+          <table>
+            <tbody>
+            <tr><th>likes</th><td><%= rank.likes %></td></tr>
+            <tr><th>votes</th><td><%= rank.votes %></td></tr>
+            <tr>
+              <th>bonus</th>
+              <td>
+                <%= text_input f, :bonus, class: "form-control", required: "required", type: "number" %>
+      	        <%= error_tag f, :bonus %>
+              </td>
+              <td><%= submit "Apply bonus", class: "btn btn-primary" %></td>
+            </tr>
+            <tr><th>Points</th><td><%= rank.likes + rank.votes + rank.bonus %></td></tr>
+            </tbody>
+          </table>
+          
           <% end %>
         </div>
       </div>
