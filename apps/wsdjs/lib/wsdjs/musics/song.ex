@@ -59,7 +59,7 @@ defmodule Wsdjs.Musics.Song do
   # Not connected users see only top 10 song or instant_hit
   def scoped(nil) do
     from s in Musics.Song,
-    join: r in assoc(s, :ranks),
+    left_join: r in assoc(s, :ranks),
     where: r.position <= 10 or s.instant_hit == true
   end
 
