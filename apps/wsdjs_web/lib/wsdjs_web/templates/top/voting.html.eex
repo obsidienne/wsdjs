@@ -24,7 +24,7 @@
   <% end %>
 </header>
 
-<main class="container">
+<main class="container top-voting">
   <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
   <div class="top-voting-footer-actions">
     <%= submit "vote", class: "btn btn-primary" %>
@@ -35,7 +35,6 @@
       <article class="top-song">
         <div class="song-art-container">
           <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
-          <div class="top-song-position-selector">Position <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", value: current_user_vote(@top, rank)) %></div>
           <%= if rank.song.url do %>
             <a href="<%= url_for_provider(rank.song) %>" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play</a>
           <% end %>
@@ -47,6 +46,7 @@
                 <h5><%= rank.song.title %></h5>
               <% end %>
               <h6><%= rank.song.artist %></h6>
+              <div class="text-muted small"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></div>
             </div>
             <aside>
               <span class="label label-default"><%= rank.song.genre %></span>
@@ -65,8 +65,11 @@
               
             </aside>
           </div>
-          <%= if @current_user && @current_user.id == @top.user_id do %>
           <aside>
+            <div>
+              <div>Position <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", value: current_user_vote(@top, rank)) %></div>
+            </div>
+            <%= if @current_user && @current_user.id == @top.user_id do %>
             <table>
               <thead>
                 <tr>
@@ -97,8 +100,8 @@
                 </tr>
               </tbody>
             </table>
+            <% end %>
           </aside>
-          <% end %>
         </div>
       </article>
     <% end %>

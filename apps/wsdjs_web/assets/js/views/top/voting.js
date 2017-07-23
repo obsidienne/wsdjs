@@ -5,7 +5,6 @@ export default class View extends MainView {
     super.mount();
 
     this._voting();
-    this._reset();
     this._submit();
     // Specific logic here
     console.log('TopVotingView mounted');

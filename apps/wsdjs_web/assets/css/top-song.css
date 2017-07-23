@@ -17,7 +17,8 @@
   height: auto;
   align-self: center;
 }
-.top-counting .song-art-container {
+.top-counting .song-art-container,
+.top-voting .song-art-container {
   min-width: 150px;
   max-width: 150px;
   max-height: 150px;
@@ -60,7 +61,6 @@
 }
 .top-song-info-container {
   display: flex;
-  justify-content: space-between;
   width: 100%;
   flex-direction: column;
 }
