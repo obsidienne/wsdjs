@@ -74,6 +74,8 @@ export default class Radio {
     document.querySelector(".miniplayer-info h6:nth-child(2)").innerHTML = "";
     document.querySelector(".miniplayer-info h6:last-child").innerHTML = "Play the radio";
 
+    document.querySelector(".miniplayer").classList.toggle("paused");
+    document.querySelector("#radio-container").innerHTML = "";
     var cl = cloudinary.Cloudinary.new();
     cl.init();
     cl.responsive();
@@ -87,6 +89,7 @@ export default class Radio {
     this.radio.play();
     el.classList.add("icon-pause");
     el.classList.remove("icon-play");
+    document.querySelector(".miniplayer").classList.toggle("paused");
   }
 
   refresh_radio(payload) {

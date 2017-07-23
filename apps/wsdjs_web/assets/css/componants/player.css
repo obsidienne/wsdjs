@@ -14,7 +14,7 @@
 }
 
 @media (min-width: 768px) {
-  .miniplayer {
+  .miniplayer:not(.paused) {
     margin: .5em;
     width: 200px;
   }
@@ -91,7 +91,7 @@
   background-color: whitesmoke;
 }
 @media (min-width: 768px) {
-  .miniplayer-art {
+  .miniplayer:not(.paused) .miniplayer-art {
     height: 200px;
     width: 200px;
   }
