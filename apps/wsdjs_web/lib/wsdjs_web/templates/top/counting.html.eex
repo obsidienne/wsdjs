@@ -12,10 +12,10 @@
           <ol class="cd-multi-steps text-center">
             <li class="visited"><em>Create</em></li>
             <li class="visited"><em>Check</em></li>
-            <li class="visited"><em>Voting</em></li>
-            <li class="current">
-              <%= submit "Counting", class: "btn btn-link", name: "direction", value: "previous" %>
+            <li class="visited">
+              <%= submit "Voting", class: "btn btn-link", name: "direction", value: "previous" %>
             </li>
+            <li class="current"><em>Counting</em></li>
             <li><%= submit "next step : publish", class: "btn btn-link", name: "direction", value: "next" %></li>
           </ol>
         </nav>
