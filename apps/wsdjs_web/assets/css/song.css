@@ -15,7 +15,9 @@
 .song-header-container .btn {
   margin-top: auto;
 }
-
+.song-show-actions > * {
+  display: inline-block;
+}
 .song-header-details {
   display: flex;
   flex-direction: column;

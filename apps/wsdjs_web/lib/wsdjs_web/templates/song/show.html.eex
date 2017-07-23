@@ -65,7 +65,7 @@
 
     <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
     <%= if Wsdjs.Musics.Policy.can?(:edit_song, @current_user, @song) do %>
-    <div>
+    <div class="song-show-actions">
       <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
       <%= if Wsdjs.Musics.Policy.can?(:delete_song, @current_user, @song) do %>
         <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %></h1>
