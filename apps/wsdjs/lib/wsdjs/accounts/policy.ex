@@ -6,7 +6,9 @@ defmodule Wsdjs.Accounts.Policy do
   """
   alias Wsdjs.Accounts.User
 
-  def can?(:edit_user, %User{admin: true}, _), do: true
+  def can?(:logout, %User{id: id}, %User{id: id}), do: true
+
+  def can?(:edit_user, %User{}, %User{admin: true}), do: true
   def can?(:edit_user, %User{id: id}, %User{id: id}), do: true
 
   def can?(_action, _user, _resource), do: false
