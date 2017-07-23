@@ -8,6 +8,10 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   alias Phoenix.PubSub
 
+  @expected_fields ~w(
+    title artist album cover started_at end_at duration buy_link
+  )
+
   def start_link(name \\ nil) do
     queue = :queue.new()
     GenServer.start_link(__MODULE__, queue, [name: name])
@@ -27,9 +31,10 @@ defmodule Wsdjs.Jobs.NowPlaying do
     {:reply, Enum.reverse(list), queue}
   end
 
-  @seven_url "http://37.58.75.166:8384/7.html"
+  # @seven_url "http://37.58.75.166:8384/7.html"
+  @radioking_api_uri 'https://www.radioking.com/widgets/currenttrack.php?radio=84322&format=json'
   def handle_info(:work, queue) do
-    case HTTPoison.get(@seven_url) do
+    case HTTPoison.get(@radioking_api_uri) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         queue = parse_streamed_song(body, queue)
         schedule_work() # Reschedule once more
@@ -49,12 +54,11 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   defp parse_streamed_song(body, queue) do
     last_queued = last_song_queued(:queue.peek_r(queue))
-
+          
     body
-    |> HtmlSanitizeEx.strip_tags()    
-    |> String.split("," , parts: 7, trim: true)
-    |> Enum.at(6)
-    |> HtmlEntities.decode
+    |> Poison.decode!
+    |> Map.take(@expected_fields)
+    |> Enum.map(fn({k, v}) -> {String.to_atom(k), v} end)
     |> push_song(last_queued, queue)
   end
 
@@ -62,17 +66,27 @@ defmodule Wsdjs.Jobs.NowPlaying do
   defp last_song_queued({:value, song}), do: "#{song[:artist]} - #{song[:title]}"
 
   defp push_song(song, song, queue), do: queue
-  defp push_song(streamed_song, _last_song, queue) do
-    [artist, title] = String.split(streamed_song, " - ", parts: 2, trim: true)
+  defp push_song(streamed_song, last_song, queue) do
 
-    queue = %{artist: artist, title: title, ts: :os.system_time(:seconds)}
-        |> filled_from_db(streamed_song)
-        |> :queue.in(queue)
+    artist = streamed_song[:artist]
+    title = streamed_song[:title]
+    
+    current_song = artist <> " - " <> title
 
-    PubSub.broadcast Wsdjs.Web.PubSub, "notifications:now_playing", :new_played_song
+    if last_song != current_song  do
+      IO.inspect "current_song"
+      IO.inspect current_song
+      queue = %{artist: artist, title: title, ts: :os.system_time(:seconds)}
+          |> filled_from_db(current_song)
+          |> :queue.in(queue)
 
-    if :queue.len(queue) > 9 do
-      :queue.drop(queue)
+      PubSub.broadcast Wsdjs.Web.PubSub, "notifications:now_playing", :new_played_song
+
+      if :queue.len(queue) > 9 do
+        :queue.drop(queue)
+      else
+        queue
+      end
     else
       queue
     end
