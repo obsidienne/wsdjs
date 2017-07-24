@@ -16,7 +16,7 @@ defmodule Wsdjs.Web.Api.V1.OpinionView do
       nil 
     end 
 
-    ret = %{
+    %{
       data: %{
         user_opinion: user_opinion,
         song_id: song.id,
@@ -25,8 +25,6 @@ defmodule Wsdjs.Web.Api.V1.OpinionView do
         down: render_opinion(downs, "down", song, current_opinion)
       }
     }
-    IO.inspect ret
-    ret
   end
 
   def render("opinion.json", %{opinion: opinion}) do
