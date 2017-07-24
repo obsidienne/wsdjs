@@ -82,7 +82,7 @@ export default class Radio {
   }
 
   play_radio(el) {
-    this.radio.src = "http://37.58.75.166:8384/stream?icy=http";
+    this.radio.src = "http://www.radioking.com/play/radio-wcs";
     this.radio.load();
 
     this.channel.push("played_song_list")
