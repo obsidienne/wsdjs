@@ -31,7 +31,7 @@
   </div>
 
   <section class="top-songs-container">
-    <%= for rank <- @top.ranks do %>
+    <%= for rank <- get_ranks_according_to_votes(@top) do %>
       <article class="top-song">
         <div class="song-art-container">
           <img class="cld-responsive" src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
@@ -67,7 +67,7 @@
           </div>
           <aside>
             <div>
-              <div>Position <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", value: current_user_vote(@top, rank)) %></div>
+            Position <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", value: current_user_vote(@current_user_votes, rank)) %>
             </div>
             <%= if @current_user && @current_user.id == @top.user_id do %>
             <table class="top-voting-repartition">

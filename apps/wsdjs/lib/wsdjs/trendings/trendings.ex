@@ -39,13 +39,12 @@ defmodule Wsdjs.Trendings do
     |> Repo.preload(:songs)
   end
 
-  def get_top!(current_user, id) do
-    top = current_user
+  def get_top!(current_user, top_id) do
+    current_user
     |> Top.scoped()
-    |> Repo.get!(id)
+    |> Repo.get!(top_id)
     |> Repo.preload(:user)
-    
-    Repo.preload(top, ranks: list_rank(top.id))
+    |> Repo.preload(ranks: list_rank(current_user, top_id))
   end
 
   def create_top(current_user, %{"due_date" => due_date} = params) do
@@ -188,14 +187,19 @@ defmodule Wsdjs.Trendings do
     |> Repo.all()
   end
 
-  def list_votes(%Top{} = top, %User{} = user) do
-    from r in Wsdjs.Trendings.Vote,
-    where: r.user_id == ^user.id and r.top_id == ^top.id
+  def q_list_votes(id, %User{} = user) do
+    Vote
+    |> where([user_id: ^user.id, top_id: ^id])
+  end
+
+  def list_votes(id, %User{} = user) do
+    q_list_votes(id, user)
+    |> Repo.all()
   end
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
     top = get_top!(user, top_id)
-    top = Repo.preload top, votes: list_votes(top, user)
+    top = Repo.preload top, votes: q_list_votes(top_id, user)
 
     new_votes = votes_param
                 |> Map.keys()
@@ -226,6 +230,16 @@ defmodule Wsdjs.Trendings do
     from q in Rank,
     where: q.top_id == ^id,
     order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
+    preload: [song: [:art, :user, :opinions]]
+  end
+
+  def list_rank(current_user, id) do
+    current_user_votes = from v in Vote, where: [user_id: ^current_user.id]
+
+    from q in Rank,
+    where: q.top_id == ^id,
+    left_join: v in ^current_user_votes, on: [top_id: q.top_id, song_id: q.song_id],
+    order_by: [asc: v.votes, desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
     preload: [song: [:art, :user, :opinions]]
   end
 

@@ -1,8 +1,8 @@
 defmodule Wsdjs.Web.TopView do
   use Wsdjs.Web, :view
 
-  def current_user_vote(top, rank) do
-    current_user_vote = Enum.find(top.votes, fn(x) -> x.song_id == rank.song.id  end)
+  def current_user_vote(current_user_votes, rank) do
+    current_user_vote = Enum.find(current_user_votes, fn(x) -> x.song_id == rank.song.id  end)
 
     if is_nil(current_user_vote) do
       nil
@@ -26,5 +26,9 @@ defmodule Wsdjs.Web.TopView do
     |> Enum.sort(fn({k1, v1}, {k2, v2}) -> v1 >= v2  end)
     |> Enum.take(3)
     |> Enum.map(fn({k, v}) -> {:safe, "<div>#{k} <small>(#{v})</small></div>"} end)
+  end
+
+  def get_ranks_according_to_votes(top) do
+    top.ranks
   end
 end

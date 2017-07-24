@@ -18,19 +18,22 @@ defmodule Wsdjs.Web.TopController do
 
   def show(conn, %{"id" => id}, current_user) do
     top = Trendings.get_top!(current_user, id)
-    top = Wsdjs.Repo.preload(top, votes: Trendings.list_votes(top, current_user))
-    votes = Trendings.list_votes(top)
     changeset = Top.changeset(top)
 
     cond do
       top.status == "checking" ->
-        render conn, "checking.html", top: top, votes: votes, changeset: changeset
+        render conn, "checking.html", top: top, changeset: changeset
       top.status == "voting" ->
-        render conn, "voting.html", top: top, votes: votes, changeset: changeset
+        votes = Trendings.list_votes(top)
+        current_user_votes = Trendings.list_votes(id, current_user)
+        render conn, "voting.html", top: top, 
+                                    votes: votes, 
+                                    current_user_votes: current_user_votes,
+                                    changeset: changeset
       top.status == "counting" ->
-        render conn, "counting.html", top: top, votes: votes, changeset: changeset
+        render conn, "counting.html", top: top, changeset: changeset
       top.status == "published" ->
-        render conn, :published, top: top, votes: votes, changeset: changeset
+        render conn, :published, top: top, changeset: changeset
       true -> raise ArgumentError, "The template requested does not exist. Something smelly."
     end
   end

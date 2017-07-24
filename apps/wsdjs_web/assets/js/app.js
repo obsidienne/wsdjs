@@ -30,6 +30,7 @@ import Search from './components/search';
 import User from './views/user.js';
 import Home from './views/home.js';
 import Song from './views/song.js';
+import Top from './views/top.js';
 
 function handleDOMContentLoaded() {
   // Get the current view name
@@ -50,6 +51,7 @@ var search = new Search();
 var user = new User();
 var home = new Home();
 var song = new Song();
+var top = new Top();
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
 Turbolinks.start();
