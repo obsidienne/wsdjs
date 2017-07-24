@@ -20,21 +20,23 @@ defmodule Wsdjs.Web.TopController do
     top = Trendings.get_top!(current_user, id)
     changeset = Top.changeset(top)
 
-    cond do
-      top.status == "checking" ->
+    case top.status do
+      "checking" ->
         render conn, "checking.html", top: top, changeset: changeset
-      top.status == "voting" ->
+      "voting" ->
+        top = Trendings.get_top_order_by_votes!(current_user, id)
         votes = Trendings.list_votes(top)
         current_user_votes = Trendings.list_votes(id, current_user)
         render conn, "voting.html", top: top, 
                                     votes: votes, 
                                     current_user_votes: current_user_votes,
                                     changeset: changeset
-      top.status == "counting" ->
+      "counting" ->
         render conn, "counting.html", top: top, changeset: changeset
-      top.status == "published" ->
+      "published" ->
         render conn, :published, top: top, changeset: changeset
-      true -> raise ArgumentError, "The template requested does not exist. Something smelly."
+      _ -> 
+        raise ArgumentError, "The template requested does not exist. Something smelly."
     end
   end
 
