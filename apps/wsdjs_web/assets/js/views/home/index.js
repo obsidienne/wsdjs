@@ -1,6 +1,8 @@
 import timeago from 'timeago.js';
+import Tippy from 'tippy.js/dist/tippy.standalone';
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
-export default class Home {
+export default class View {
   constructor() {
     document.addEventListener("click", e => {
       if (e.target && e.target.matches(".HomeIndexView .song-opinion")) {
@@ -8,10 +10,28 @@ export default class Home {
         e.preventDefault();
       }
     });
-
-    console.log('HomeIndexView mounted');
   }
 
+  mount() {
+    // cloudinary
+    var cl = cloudinary.Cloudinary.new();
+    cl.init();
+    cl.responsive();
+
+    // intl date
+    var options = {year: "numeric", month: "long"};
+    var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
+    var elements = document.querySelectorAll("time");
+    for (let i = 0; i < elements.length; i++) {
+      let datetime = Date.parse(elements[i].getAttribute("datetime"))
+      elements[i].textContent = dateTimeFormat.format(datetime);
+    }
+    
+    // tooltip
+    console.log(this.tip);
+    if (this.tip != undefined) this.tip.destroyAll();
+    this.tip = new Tippy(".HomeIndexView .tippy", {performance: true, size: "small", position: "top"});
+  }
 
   _toggle_opinion(elem) {
     var self = this;
@@ -30,7 +50,9 @@ export default class Home {
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
+        self.tip.destroyAll();
         self._refresh_layout(container, JSON.parse(this.response));
+        self.tip = new Tippy(".HomeIndexView .tippy", {performance: true, size: "small", position: "top"});
       } else {
         console.error("Error");
       }

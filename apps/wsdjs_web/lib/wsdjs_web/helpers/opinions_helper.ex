@@ -58,14 +58,13 @@
         img_tag(Wsdjs.Web.CloudinaryHelper.avatar_url(), 
                 'data-src': Wsdjs.Web.CloudinaryHelper.avatar_url(opinion.user.avatar),
                 class: "img-circle cld-responsive avatar-tiny tippy",
-                data: [size: "small"],
                 title: UserHelper.user_displayed_name(opinion.user))
       end
     end)
   end
 
   defp tooltip_options(kind, opinions, qty) when qty > 0 do
-    ["title": opinions_names(kind, opinions), "data-size": "small", "data-animateFill": "false"]
+    ["title": opinions_names(kind, opinions)]
   end
   defp tooltip_options(_kind, _opinions, qty) when qty == 0, do: []
 

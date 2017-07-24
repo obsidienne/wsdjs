@@ -28,7 +28,6 @@ import Search from './components/search';
 
 // Views
 import User from './views/user.js';
-import Home from './views/home.js';
 import Song from './views/song.js';
 import Top from './views/top.js';
 
@@ -49,7 +48,6 @@ var search = new Search();
 
 // Views mounting
 var user = new User();
-var home = new Home();
 var song = new Song();
 var top = new Top();
 
