@@ -5,7 +5,7 @@ export default class Top {
 
     document.addEventListener("change", function(e) {
       if (e.target && e.target.matches("#voting-form select")) {
-        self._sort_on_vote(e);
+        self._sort_on_vote();
       }      
     }, false);
 
@@ -19,7 +19,31 @@ export default class Top {
   }
 
   _sort_on_vote(e) {
-    console.log(e);
+    var parent = document.querySelector('.top-songs-container');
+
+    // create an array from a querySelector
+    Array.prototype.slice.call(parent.children)
+    .sort(function(a, b) {
+      // sort the nodes in the array
+      var va = parseInt(a.querySelector("select").value);
+      var vb = parseInt(b.querySelector("select").value);
+
+      if (isNaN(va)) va = 999;
+      if (isNaN(vb)) vb = 999;
+
+      // if they are equals change position 
+      if (va == vb) return -1;
+      return va - vb;
+    }).forEach(function(ele, i) {
+      // Use the index in the array to set the select value.
+      i += 1;
+      if (i > 10) {
+        ele.querySelector("select").value = "";
+      } else {
+        ele.querySelector("select").value = i;
+      }
+      parent.appendChild(ele);
+    })
   }
 
   _submit(e) {

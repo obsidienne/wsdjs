@@ -229,7 +229,7 @@
 }
 
 .top-voting-footer-actions > .btn {
-  width: 300px;
+  width: 200px;
   position: fixed;
   bottom: 15px;
   z-index: 1000;
