@@ -14,7 +14,7 @@ defmodule Wsdjs.Web.Api.MobileConfigController do
         current_version: "1.1.0",
         facebook_uri: "https://www.facebook.com/pages/Radio-West-Coast-Swing/244532062269363",
         website_uri: "http://www.radiowcs.com/",
-        stream_uri: "http://37.58.75.166:8384/",
+        stream_uri: "http://www.radioking.com/play/radio-wcs/122560",
     }
 
     conn
