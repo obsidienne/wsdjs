@@ -1,8 +1,8 @@
-import timeago from 'timeago.js';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import timeago from 'timeago.js';
 import Tippy from 'tippy.js/dist/tippy.standalone';
 
-export default class Home {
+export default class View {
   constructor() {
     var self = this;
     
@@ -25,6 +25,10 @@ export default class Home {
       }
 
     }, false);
+  }
+
+  mount() {
+    
   }
 
   _toggle_opinion(elem) {

@@ -1,6 +1,6 @@
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import timeago from 'timeago.js';
 import Tippy from 'tippy.js/dist/tippy.standalone';
-import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class View {
   constructor() {
@@ -26,16 +26,20 @@ export default class View {
       let datetime = Date.parse(elements[i].getAttribute("datetime"))
       elements[i].textContent = dateTimeFormat.format(datetime);
     }
-    
+
+    new timeago().render(document.querySelectorAll("time.timeago"));
+
     // tooltip
-    console.log(this.tip);
-    if (this.tip != undefined) this.tip.destroyAll();
     this.tip = new Tippy(".HomeIndexView .tippy", {performance: true, size: "small", position: "top"});
+  }
+
+  unmount() {
+    this.tip.destroyAll();
+    this.tip = undefined;
   }
 
   _toggle_opinion(elem) {
     var self = this;
-    console.log("toggle opinion")
 
     var container = elem.closest(".song-opinions");
     var method = elem.dataset.method;

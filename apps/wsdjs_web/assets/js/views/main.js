@@ -10,21 +10,10 @@ export default class MainView {
     this._intlNumber();
     this._loadImg();
 
-    var notifier = new Notifier();
-    notifier.show_all();
-
-    new timeago().render(document.querySelectorAll("time.timeago"));
-
-    /* piwik */
-    if (window._paq != null) {
-      return _paq.push(['trackPageView']);
-    } else if (window.piwikTracker != null) {
-      return piwikTracker.trackPageview();
-    }
 
     console.log('MainView mounted');
   }
-
+  
   _intlDate() {
     var options = {year: "numeric", month: "long"};
     var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);

@@ -18,6 +18,9 @@ export default class Top {
     console.log('TopVotingView mounted');
   }
 
+  unmount() {
+    
+  }
   _sort_on_vote(e) {
     var parent = document.querySelector('.top-songs-container');
 

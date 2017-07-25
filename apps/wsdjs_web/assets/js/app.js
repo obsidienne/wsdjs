@@ -25,10 +25,10 @@ import loadView from './views/loader';
 import Turbolinks from 'turbolinks';
 import Radio from './components/radio';
 import Search from './components/search';
+import Notifier from './components/notifier';
 
 // Views
 import User from './views/user.js';
-import Song from './views/song.js';
 import Top from './views/top.js';
 
 function handleDOMContentLoaded() {
@@ -41,6 +41,21 @@ function handleDOMContentLoaded() {
   view.mount();
 
   window.currentView = view;
+
+  var notifier = new Notifier();
+  notifier.show_all();
+
+  /* piwik */
+  if (window._paq != null) {
+    return _paq.push(['trackPageView']);
+  } else if (window.piwikTracker != null) {
+    return piwikTracker.trackPageview();
+  }
+}
+
+function handleUnloadContentLoaded() {
+  console.log(window.currentView);
+  window.currentView.unmount();
 }
 
 var radio = new Radio();
@@ -48,8 +63,8 @@ var search = new Search();
 
 // Views mounting
 var user = new User();
-var song = new Song();
 var top = new Top();
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
+window.addEventListener('turbolinks:before-cache', handleUnloadContentLoaded, false);
 Turbolinks.start();
