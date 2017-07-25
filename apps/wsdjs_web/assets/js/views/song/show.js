@@ -1,7 +1,7 @@
 import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
 import MainView from '../main';
-import Tippy from 'tippy.js/dist/tippy.standalone';
+import Tippy from 'tippy.js/dist/tippy';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class View extends MainView {
@@ -19,7 +19,7 @@ export default class View extends MainView {
         e.preventDefault();
       }
     });
-    this.tip = new Tippy('.tippy');
+    this.tip = new Tippy('.tippy[title]');
 
     console.log('SongShowView mounted');
   }
@@ -104,7 +104,7 @@ export default class View extends MainView {
       if (this.status >= 200 && this.status < 400) {
         self.tip.destroyAll();
         self._refresh_layout(container, JSON.parse(this.response));
-        self.tip = new Tippy(".tippy", {performance: true, size: "small"});
+        self.tip = new Tippy(".tippy[title]", {performance: true, size: "small"});
       } else {
         console.error("Error");
       }

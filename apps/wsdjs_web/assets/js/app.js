@@ -26,6 +26,7 @@ import Turbolinks from 'turbolinks';
 import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
+import Tippy from 'tippy.js/dist/tippy';
 
 // Views
 import User from './views/user.js';

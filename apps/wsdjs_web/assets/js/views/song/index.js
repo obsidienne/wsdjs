@@ -1,12 +1,10 @@
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import timeago from 'timeago.js';
-import Tippy from 'tippy.js/dist/tippy.standalone';
+import Tippy from 'tippy.js/dist/tippy';
 
 export default class View {
   constructor() {
     var self = this;
-    
-    this._cloudinary_uploader();
 
     var timeout;
     window.addEventListener("scroll", function(e) {
@@ -27,8 +25,18 @@ export default class View {
     }, false);
   }
 
-  mount() {
-    
+  mount() { 
+    // cloudinary
+    var cl = cloudinary.Cloudinary.new();
+    cl.init();
+    cl.responsive();
+
+    // tooltip
+    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
+  }
+
+  unmount() { 
+    this.tips.destroyAll();
   }
 
   _toggle_opinion(elem) {
@@ -48,7 +56,9 @@ export default class View {
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
+        self.tips.destroyAll();
         self._refresh_layout(container, JSON.parse(this.response));
+        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
       } else {
         console.error("Error");
       }
@@ -85,11 +95,11 @@ export default class View {
         users += "<br />";
       }
     }
-   
-    container.setAttribute("title", users);
+
+    if (users != "") {
+      container.setAttribute("title", users);
+    }
   }
-
-
 
   _refresh() {
     var pageHeight = document.documentElement.scrollHeight;
@@ -130,36 +140,13 @@ export default class View {
         cl.init();
         cl.responsive();
         new timeago().render(document.querySelectorAll("time.timeago"));
+        self.tips.destroyAll();
+        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
       }
     };
 
     request.onerror = function() { console.log("Error search"); };
 
     request.send();
-  }
-
-  _cloudinary_uploader() {
-    var params = { upload_preset: "music_cover_staging",
-                   cloud_name: "don2kwaju",
-                   cropping: "server",
-                   cropping_aspect_ratio: 1,
-                   thumbnail_transformation: { crop: 'crop', gravity: 'custom' } };
-
-    var uploaded = function() {
-      cloudinary.openUploadWidget(params, function(error, result) {
-      })
-    };
-
-    document.addEventListener("click", function(e) {
-      if (e.target && e.target.matches("#song_upload_widget_opener")) {
-        cloudinary.openUploadWidget(params, function(error, result) {
-          document.getElementById("art_thumbnail").setAttribute("src", result[0]['thumbnail_url']);
-          document.getElementById("song_art_cld_id").value = result[0]['public_id'];
-          document.getElementById("song_art_version").value = result[0]['version'];
-          document.getElementById("song_art_cld_id").removeAttribute("disabled");
-          document.getElementById("song_art_version").removeAttribute("disabled");
-        });
-      }
-    }, false);
   }
 }

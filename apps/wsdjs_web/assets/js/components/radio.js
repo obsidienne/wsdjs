@@ -1,5 +1,5 @@
 import socket from "../socket"
-import Tippy from 'tippy.js/dist/tippy.standalone';
+import Tippy from 'tippy.js/dist/tippy';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class Radio {

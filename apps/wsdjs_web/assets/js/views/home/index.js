@@ -1,6 +1,6 @@
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import timeago from 'timeago.js';
-import Tippy from 'tippy.js/dist/tippy.standalone';
+import Tippy from 'tippy.js/dist/tippy';
 
 export default class View {
   constructor() {
@@ -30,12 +30,11 @@ export default class View {
     new timeago().render(document.querySelectorAll("time.timeago"));
 
     // tooltip
-    this.tip = new Tippy(".HomeIndexView .tippy", {performance: true, size: "small", position: "top"});
+    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
   }
 
   unmount() {
-    this.tip.destroyAll();
-    this.tip = undefined;
+    this.tips.destroyAll();
   }
 
   _toggle_opinion(elem) {
@@ -54,9 +53,9 @@ export default class View {
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        self.tip.destroyAll();
+        self.tips.destroyAll();
         self._refresh_layout(container, JSON.parse(this.response));
-        self.tip = new Tippy(".HomeIndexView .tippy", {performance: true, size: "small", position: "top"});
+        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
       } else {
         console.error("Error");
       }
@@ -77,6 +76,8 @@ export default class View {
   }
 
   _refresh_kind(container, kind, data, user_opinion) {
+    //get popper
+
     container.innerText = data.count;
     container.dataset.method = data.method;
     container.dataset.url = data.url;
@@ -93,7 +94,8 @@ export default class View {
         users += "<br />";
       }
     }
-   
-    container.setAttribute("title", users);
+    if (users != "") {
+      container.setAttribute("title", users);
+    }
   }
 }
