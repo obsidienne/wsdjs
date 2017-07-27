@@ -28,9 +28,6 @@ import Search from './components/search';
 import Notifier from './components/notifier';
 import Tippy from 'tippy.js/dist/tippy';
 
-// Views
-import Top from './views/top.js';
-
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
   // Get the current view name
@@ -61,9 +58,6 @@ function handleUnloadContentLoaded() {
 
 var radio = new Radio();
 var search = new Search();
-
-// Views mounting
-var top = new Top();
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
 window.addEventListener('turbolinks:before-cache', handleUnloadContentLoaded, false);

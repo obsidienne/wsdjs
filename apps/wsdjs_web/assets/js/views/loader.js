@@ -4,6 +4,7 @@ import SongIndexView from './song/index';
 import SongNewView from './song/new';
 import TopIndexView from './top/index';
 import TopCountingView from './top/counting';
+import TopVotingView from './top/voting';
 import UserEditView from './user/edit';
 import UserShowView from './user/show';
 import HomeIndexView from './home/index';
@@ -15,6 +16,7 @@ const views = {
   SongNewView,
   TopIndexView,
   TopCountingView,
+  TopVotingView,
   UserEditView,
   UserShowView,
   HomeIndexView
