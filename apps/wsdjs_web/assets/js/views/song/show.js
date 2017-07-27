@@ -1,6 +1,5 @@
 import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
-import MainView from '../main';
 import Tippy from 'tippy.js/dist/tippy';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 

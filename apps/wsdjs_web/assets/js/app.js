@@ -32,6 +32,7 @@ import Tippy from 'tippy.js/dist/tippy';
 import User from './views/user.js';
 import Top from './views/top.js';
 
+//https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
   // Get the current view name
   const viewName = document.getElementsByTagName('body')[0].dataset.jsViewName;

@@ -1,6 +1,4 @@
-import MainView from '../main';
-
-export default class View extends MainView {
+export default class View {
   mount() {
     super.mount();
 

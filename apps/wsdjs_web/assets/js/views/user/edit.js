@@ -1,10 +1,7 @@
-import MainView from '../main';
 import Places from 'places.js/dist/cdn/places.js';
 
-export default class View extends MainView {
+export default class View {
   mount() {
-    super.mount();
-
     Places({
       container: document.querySelector('#user_country'),
       type: 'country',
@@ -14,7 +11,5 @@ export default class View extends MainView {
         }
       }
     })
-
-    console.log('UserEditView mounted');
   }
 }
