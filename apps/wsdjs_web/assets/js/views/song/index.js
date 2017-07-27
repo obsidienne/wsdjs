@@ -33,6 +33,8 @@ export default class View {
 
     // tooltip
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
+
+    new timeago().render(document.querySelectorAll("time.timeago"));
   }
 
   unmount() { 

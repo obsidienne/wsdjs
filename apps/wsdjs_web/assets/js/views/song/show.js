@@ -4,68 +4,69 @@ import MainView from '../main';
 import Tippy from 'tippy.js/dist/tippy';
 import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
-export default class View extends MainView {
-  mount() {
-    super.mount();
-
-    new timeago().render(document.querySelectorAll("time.timeago"));
-    this._intlDate();
-    this._submit();
-
-    var main = document.querySelector("main");
-    main.addEventListener("click", e => {
+export default class View {
+  constructor() {
+    document.addEventListener("click", e => {
       if (e.target && e.target.matches(".SongShowView .song-opinion")) {
         this._toggle_opinion(e.target);
         e.preventDefault();
       }
-    });
-    this.tip = new Tippy('.tippy[title]');
+    }, false);
 
-    console.log('SongShowView mounted');
+    document.addEventListener("submit", e => {
+      if (e.target && e.target.matches("#song-comment-form")) {
+        this._submit(e.target);
+        e.preventDefault();
+      }
+    }, false);
   }
 
-  _intlDate() {
-    var elements = document.querySelectorAll(".comment-content");
+  mount() {
+    new timeago().render(document.querySelectorAll("time.timeago"));
+    this._submit();
+    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
 
-    Array.prototype.forEach.call(elements, function(el, i) {
-        el.innerHTML = el.innerHTML.autoLink();
-    });
-  }
-
-  _submit() {
-    var self = this;
-    var form = document.querySelector('#song-comment-form');
-    form.addEventListener('submit', function(e) {
-      var token = document.querySelector("[name=channel_token]").getAttribute("content");
-
-      var request = new XMLHttpRequest();
-      request.open(form.method, form.action, true);
-      request.setRequestHeader('Authorization', "Bearer " + token);
-      request.setRequestHeader('Accept', 'application/json');
-
-      request.onload = function() {
-        if (this.status >= 200 && this.status < 400) {
-          var container = document.querySelector(".container-comments ul");
-          var tpl = self._createHtmlContent(JSON.parse(this.response).data);
-          container.insertAdjacentHTML('beforeend', tpl);
-          new timeago().render(document.querySelectorAll("time.timeago"));
-
+    // autolinks in comments
+    var els = document.querySelectorAll(".comment-content");
+    for (var i = 0; i < els.length; i++) {
+      els[i].innerHTML = els[i].innerHTML.autoLink();
+    }
 
     var cl = cloudinary.Cloudinary.new();
     cl.init();
-    cl.responsive();    
+    cl.responsive();
+  }
+  unmount() { 
+    this.tips.destroyAll();
+  }
 
-        } else {
-          console.error("Error");
-        }
-      };
+  _submit(form) {
+    if (form === undefined) return;
+    var self = this;
 
-      request.onerror = function() { console.error("Error"); };
-      request.send(new FormData(form));
+    var token = document.querySelector("[name=channel_token]").getAttribute("content");
+    var request = new XMLHttpRequest();
+    request.open(form.method, form.action, true);
+    request.setRequestHeader('Authorization', "Bearer " + token);
+    request.setRequestHeader('Accept', 'application/json');
 
-      e.preventDefault();
-      return false;
-    })
+    request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        var container = document.querySelector(".container-comments ul");
+        var tpl = self._createHtmlContent(JSON.parse(this.response).data);
+        container.insertAdjacentHTML('beforeend', tpl);
+        new timeago().render(document.querySelectorAll("time.timeago"));
+
+        var cl = cloudinary.Cloudinary.new();
+        cl.init();
+        cl.responsive();
+      } else {
+        console.error("Error");
+      }
+    };
+
+    request.onerror = function() { console.error("Error"); };
+    request.send(new FormData(form));
   }
 
   _createHtmlContent(params) {
@@ -82,12 +83,11 @@ export default class View extends MainView {
         </header>
         <div class="comment-content">${params.text}</div>
       </div>
-    </li>`
+    </li>`;
   }
 
   _toggle_opinion(elem) {
     var self = this;
-    console.log("toggle opinion")
 
     var container = elem.closest(".song-opinions");
     var method = elem.dataset.method;
@@ -102,9 +102,9 @@ export default class View extends MainView {
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        self.tip.destroyAll();
+        self.tips.destroyAll();
         self._refresh_layout(container, JSON.parse(this.response));
-        self.tip = new Tippy(".tippy[title]", {performance: true, size: "small"});
+        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
       } else {
         console.error("Error");
       }
@@ -133,7 +133,6 @@ export default class View extends MainView {
     container.dataset.method = data.method;
     container.dataset.url = data.url;
     container.classList.remove("active")
-    container.removeAttribute("title");
 
     if (user_opinion == kind) {
       container.classList.add("active")

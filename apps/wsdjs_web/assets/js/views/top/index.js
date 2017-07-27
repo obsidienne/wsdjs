@@ -12,11 +12,10 @@ export default class View {
     cl.responsive();
 
     // tooltip
-    new Tippy(".tippy[title]", {performance: true, size: "small", position: "top"});
+    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
   }
 
-  unmount() { 
- //   this.tip.destroyAll();
- //   this.tip = undefined;
+  unmount() {
+    this.tips.destroyAll();
   }
 }
