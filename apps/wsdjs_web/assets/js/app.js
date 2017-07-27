@@ -29,7 +29,6 @@ import Notifier from './components/notifier';
 import Tippy from 'tippy.js/dist/tippy';
 
 // Views
-import User from './views/user.js';
 import Top from './views/top.js';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
@@ -64,7 +63,6 @@ var radio = new Radio();
 var search = new Search();
 
 // Views mounting
-var user = new User();
 var top = new Top();
 
 window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
