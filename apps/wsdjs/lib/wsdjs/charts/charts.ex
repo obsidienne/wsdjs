@@ -1,6 +1,6 @@
 defmodule Wsdjs.Charts do
   @moduledoc """
-  The boundary for the Ranking system.
+  The boundary for the Charts system.
   """
 
   import Ecto.{Query, Changeset}, warn: false
