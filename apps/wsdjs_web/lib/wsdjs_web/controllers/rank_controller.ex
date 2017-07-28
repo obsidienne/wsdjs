@@ -1,16 +1,16 @@
 defmodule Wsdjs.Web.RankController do
   @moduledoc false
   use Wsdjs.Web, :controller
-  alias Wsdjs.Rankings
+  alias Wsdjs.Charts
 
   def update(conn, %{"id" => id, "rank" => rank_params}) do
-    case Rankings.set_bonus(id, rank_params["bonus"]) do
+    case Charts.set_bonus(id, rank_params["bonus"]) do
       {:ok, rank} ->
         conn
         |> put_flash(:info, "Bonus set")
         |> redirect(to: top_path(conn, :show, rank.top_id))
       {:error, changeset} ->
-        rank = Wsdjs.Repo.get!(Rankings.Rank, id)
+        rank = Wsdjs.Repo.get!(Charts.Rank, id)
         conn
         |> put_flash(:error, "Something went wrong")
         |> redirect(to: top_path(conn, :show, rank.top_id))
@@ -18,8 +18,8 @@ defmodule Wsdjs.Web.RankController do
   end
 
   def delete(conn, %{"id" => id}) do
-    rank = Rankings.get_rank!(id)
-    {:ok, _rank} = Rankings.delete_rank(rank)
+    rank = Charts.get_rank!(id)
+    {:ok, _rank} = Charts.delete_rank(rank)
 
     conn
     |> put_flash(:info, "Song removed successfully.")

@@ -1,7 +1,7 @@
 defmodule Wsdjs.RankTest do
   use Wsdjs.DataCase, async: true
 
-  alias Wsdjs.Rankings.Rank
+  alias Wsdjs.Charts.Rank
 
   test "rank song must exist" do
     params = %{top_id: Ecto.UUID.generate(),song_id: Ecto.UUID.generate()}

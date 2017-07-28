@@ -1,7 +1,7 @@
 defmodule Wsdjs.TopTest do
   use Wsdjs.DataCase, async: true
 
-  alias Wsdjs.Rankings.Top
+  alias Wsdjs.Charts.Top
 
   @create_attrs %{status: "checking", due_date: "2012-06-30"}
 

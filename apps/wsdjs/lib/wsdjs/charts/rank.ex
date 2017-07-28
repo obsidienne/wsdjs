@@ -1,4 +1,4 @@
-defmodule Wsdjs.Rankings.Rank do
+defmodule Wsdjs.Charts.Rank do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
@@ -12,7 +12,7 @@ defmodule Wsdjs.Rankings.Rank do
     field :position, :integer
 
     belongs_to :song, Wsdjs.Musics.Song
-    belongs_to :top, Wsdjs.Rankings.Top
+    belongs_to :top, Wsdjs.Charts.Top
 
     timestamps()
   end

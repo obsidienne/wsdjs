@@ -1,4 +1,4 @@
-defmodule Wsdjs.Rankings do
+defmodule Wsdjs.Charts do
   @moduledoc """
   The boundary for the Ranking system.
   """
@@ -6,8 +6,8 @@ defmodule Wsdjs.Rankings do
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Rankings
-  alias Wsdjs.Rankings.{Top, Rank, Vote, Policy}
+  alias Wsdjs.Charts
+  alias Wsdjs.Charts.{Top, Rank, Vote, Policy}
   alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
 
@@ -21,7 +21,7 @@ defmodule Wsdjs.Rankings do
     |> where(status: "published")
     |> limit(1)
     |> Repo.one
-    |> Repo.preload(ranks: Rankings.list_rank())
+    |> Repo.preload(ranks: Charts.list_rank())
     |> Repo.preload(ranks: :song)
     |> Repo.preload(ranks: [song: :art])
     |> Repo.preload(ranks: [song: :user])
@@ -35,7 +35,7 @@ defmodule Wsdjs.Rankings do
     |> Top.scoped()
     |> order_by([desc: :due_date])
     |> Repo.all
-    |> Repo.preload(ranks: Rankings.list_rank())
+    |> Repo.preload(ranks: Charts.list_rank())
     |> Repo.preload(:songs)
   end
 
@@ -108,7 +108,7 @@ defmodule Wsdjs.Rankings do
         end
       end)
 
-      Wsdjs.Rankings.Rank.changeset(rank, %{likes: val})
+      Wsdjs.Charts.Rank.changeset(rank, %{likes: val})
       |> Repo.update()
     end)
 
@@ -122,18 +122,18 @@ defmodule Wsdjs.Rankings do
   # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
   # After that, the top creator can apply bonus to the top.
   defp go_step("counting", top) do
-    from(p in Wsdjs.Rankings.Rank, where: [top_id: ^top.id])
+    from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id])
     |> Repo.update_all(set: [votes: 0])
 
 
-    Wsdjs.Rankings.Vote
+    Wsdjs.Charts.Vote
     |> where(top_id: ^top.id)
     |> group_by(:song_id)
     |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
     |> Repo.all()
     |> Enum.each(fn(vote) ->
       val = 10 * vote[:count] - vote[:sum] + vote[:count]
-      from(p in Wsdjs.Rankings.Rank, where: [top_id: ^top.id, song_id: ^vote.song_id])
+      from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id, song_id: ^vote.song_id])
       |> Repo.update_all(set: [votes: val])
     end)
 
@@ -157,7 +157,7 @@ defmodule Wsdjs.Rankings do
     query
     |> Repo.all()
     |> Enum.each(fn(rank) ->
-      from(p in Wsdjs.Rankings.Rank, where: [id: ^rank.id])
+      from(p in Wsdjs.Charts.Rank, where: [id: ^rank.id])
       |> Repo.update_all(set: [position: rank.pos])
     end)
 

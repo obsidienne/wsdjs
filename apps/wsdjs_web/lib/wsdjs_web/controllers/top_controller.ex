@@ -2,8 +2,8 @@ defmodule Wsdjs.Web.TopController do
   @moduledoc false
   use Wsdjs.Web, :controller
 
-  alias Wsdjs.Rankings
-  alias Wsdjs.Rankings.Top
+  alias Wsdjs.Charts
+  alias Wsdjs.Charts.Top
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns[:current_user]]
@@ -11,22 +11,22 @@ defmodule Wsdjs.Web.TopController do
   end
 
   def index(conn, _params, current_user) do
-    tops = Rankings.list_tops(current_user)
+    tops = Charts.list_tops(current_user)
 
     render conn, "index.html", tops: tops
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    top = Rankings.get_top!(current_user, id)
+    top = Charts.get_top!(current_user, id)
     changeset = Top.changeset(top)
 
     case top.status do
       "checking" ->
         render conn, "checking.html", top: top, changeset: changeset
       "voting" ->
-        top = Rankings.get_top_order_by_votes!(current_user, id)
-        votes = Rankings.list_votes(top)
-        current_user_votes = Rankings.list_votes(id, current_user)
+        top = Charts.get_top_order_by_votes!(current_user, id)
+        votes = Charts.list_votes(top)
+        current_user_votes = Charts.list_votes(id, current_user)
         render conn, "voting.html", top: top, 
                                     votes: votes, 
                                     current_user_votes: current_user_votes,
@@ -46,17 +46,17 @@ defmodule Wsdjs.Web.TopController do
   end
 
   def update(conn, %{"id" => id, "direction" => "next"}, current_user) do
-    top = Rankings.get_top!(current_user, id)
-    Rankings.next_step(current_user, top)
-    top = Rankings.get_top!(current_user, id)
+    top = Charts.get_top!(current_user, id)
+    Charts.next_step(current_user, top)
+    top = Charts.get_top!(current_user, id)
 
     redirect(conn, to: top_path(conn, :show, top))
   end
 
   def update(conn, %{"id" => id, "direction" => "previous"}, current_user) do
-    top = Rankings.get_top!(current_user, id)
-    Rankings.previous_step(current_user, top)
-    top = Rankings.get_top!(current_user, id)
+    top = Charts.get_top!(current_user, id)
+    Charts.previous_step(current_user, top)
+    top = Charts.get_top!(current_user, id)
 
     redirect(conn, to: top_path(conn, :show, top))
   end
@@ -65,7 +65,7 @@ defmodule Wsdjs.Web.TopController do
   def create(conn, %{"top" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
 
-    case Rankings.create_top(current_user, params) do
+    case Charts.create_top(current_user, params) do
       {:ok, top} ->
         conn
         |> put_flash(:info, "Top created !")
@@ -78,8 +78,8 @@ defmodule Wsdjs.Web.TopController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    top = Rankings.get_top!(current_user, id)
-    {:ok, _top} = Rankings.delete_top(top)
+    top = Charts.get_top!(current_user, id)
+    {:ok, _top} = Charts.delete_top(top)
 
     conn
     |> put_flash(:info, "Top deleted successfully.")
