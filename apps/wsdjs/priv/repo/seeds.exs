@@ -218,3 +218,11 @@ end
 |> Stream.drop(1)
 |> CSV.decode(strip_cells: true, headers: [:id, :top_id, :song_id, :likes, :inserted_at, :updated_at, :votes, :bonus, :points, :position])
 |> Enum.each(&Wsdjs.Seeds.store_it(:rank, &1))
+
+
+"data/ranks_excelfile.csv"
+|> Path.expand(__DIR__)
+|> File.stream!
+|> Stream.drop(1)
+|> CSV.decode(strip_cells: true, headers: [:id, :top_id, :song_id, :likes, :inserted_at, :updated_at, :votes, :bonus, :points, :position])
+|> Enum.each(&Wsdjs.Seeds.store_it(:rank, &1))
