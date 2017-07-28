@@ -36,7 +36,6 @@ export default class Radio {
         self.pause_youtube();
       }
     });
-    console.log('Radio component mounted');
   }
 
 

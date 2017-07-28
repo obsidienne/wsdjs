@@ -1,11 +1,6 @@
 export default class View {
   mount() {
-    super.mount();
-
     this._bonus();
-
-    // Specific logic here
-    console.log('TopCountingView mounted');
   }
 
   _bonus() {

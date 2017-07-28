@@ -43,7 +43,6 @@ export default class View {
 
   _toggle_opinion(elem) {
     var self = this;
-    console.log("toggle opinion")
 
     var container = elem.closest(".song-opinions");
     var method = elem.dataset.method;
@@ -130,7 +129,6 @@ export default class View {
         var total_pages = request.getResponseHeader("total-pages");
         var page_number = request.getResponseHeader("page-number");
 
-        console.log(`${page_number} / ${total_pages}`);
         var container = document.getElementById("song-list");
 
         container.dataset.jsPageNumber = page_number;

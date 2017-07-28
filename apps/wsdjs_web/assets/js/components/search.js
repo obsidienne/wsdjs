@@ -3,8 +3,6 @@ import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class search {
   constructor() {
-    console.log("Search loaded.");
-
     var self = this;
 
     document.addEventListener("click", function(e) {

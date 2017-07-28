@@ -52,7 +52,6 @@ function handleDOMContentLoaded() {
 }
 
 function handleUnloadContentLoaded() {
-  console.log(window.currentView);
   window.currentView.unmount();
 }
 

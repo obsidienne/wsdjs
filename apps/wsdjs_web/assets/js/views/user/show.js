@@ -21,8 +21,6 @@ export default class View {
         }, 100);
       }      
     })
-
-    console.log('UserShowView mounted');
   }
 
   mount() {
@@ -71,7 +69,6 @@ export default class View {
         var total_pages = request.getResponseHeader("total-pages");
         var page_number = request.getResponseHeader("page-number");
 
-        console.log(`${page_number} / ${total_pages}`);
         var container = document.getElementById("song-list");
 
         container.dataset.jsPageNumber = page_number;

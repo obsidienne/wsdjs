@@ -13,8 +13,6 @@ export default class View {
         self._submit(e);
       }
     }, false);
-
-    console.log('TopVotingView mounted');
   }
 
   mount() {}
