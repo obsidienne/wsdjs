@@ -7,7 +7,7 @@ defmodule Wsdjs.Musics do
   alias Wsdjs.Repo
 
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics.{Song, Comment, Opinion}
+  alias Wsdjs.Musics.Song
   alias Wsdjs.Musics.Policy
 
   @doc """
@@ -198,11 +198,15 @@ defmodule Wsdjs.Musics do
     Repo.delete(song)
   end
 
+
+
   ###############################################
   #
   # Comment
   #
   ###############################################
+
+  alias Wsdjs.Musics.Comment
 
   @doc """
   List comments for a song order by desc.
@@ -235,6 +239,16 @@ defmodule Wsdjs.Musics do
 
     {:ok, Repo.preload(comment, [user: :avatar])}
   end
+
+
+
+  ###############################################
+  #
+  # Opinion
+  #
+  ###############################################
+
+  alias Wsdjs.Musics.Opinion
 
   @doc """
   Gets a single opinion.
@@ -294,6 +308,8 @@ defmodule Wsdjs.Musics do
     |> Repo.insert_or_update()
   end
 
+
+
   ###############################################
   #
   # Playlist
@@ -301,6 +317,19 @@ defmodule Wsdjs.Musics do
   ###############################################
 
   alias Wsdjs.Musics.Playlist
+
+  @doc """
+  Returns the list of playlists.
+
+  ## Examples
+
+      iex> list_playlists()
+      [%Playlist{}, ...]
+
+  """
+  def list_playlists do
+    Repo.all(Playlist)
+  end
 
   @doc """
   Gets a single playlist.
