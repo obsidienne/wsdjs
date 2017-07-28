@@ -1,3 +1,5 @@
+import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+
 export default class View {
   constructor() {
     var self = this;
@@ -15,7 +17,12 @@ export default class View {
     }, false);
   }
 
-  mount() {}
+  mount() {
+    // cloudinary
+    var cl = cloudinary.Cloudinary.new();
+    cl.init();
+    cl.responsive();
+  }
   unmount() {}
 
   _sort_on_vote(e) {

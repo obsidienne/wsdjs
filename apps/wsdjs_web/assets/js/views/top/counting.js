@@ -1,7 +1,10 @@
 export default class View {
-  mount() {
+  constructor() {
     this._bonus();
   }
+
+  mount() { }
+  unmount() { }
 
   _bonus() {
     document.addEventListener("click", function(e) {
