@@ -40,7 +40,7 @@ defmodule Wsdjs.Seeds do
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    top = %Wsdjs.Trendings.Top{
+    top = %Wsdjs.Rankings.Top{
       id: row[:id],
       user_id: row[:user_id],
       due_date: Ecto.Date.cast!(row[:due_date]),
@@ -88,7 +88,7 @@ defmodule Wsdjs.Seeds do
   def store_it(:album_art, _row) do true end
 
   def store_it(:rank, row) do
-    rank = %Wsdjs.Trendings.Rank{
+    rank = %Wsdjs.Rankings.Rank{
       id: row[:id],
       top_id: row[:top_id],
       song_id: row[:song_id],
@@ -107,7 +107,7 @@ defmodule Wsdjs.Seeds do
     |> Enum.filter(fn {_, v} -> v != "" end)
     |> Enum.into(%{})
 
-    vote = %Wsdjs.Trendings.Vote{
+    vote = %Wsdjs.Rankings.Vote{
       id: row[:id],
       user_id: row[:user_id],
       song_id: row[:song_id],

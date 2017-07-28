@@ -1,13 +1,13 @@
-defmodule Wsdjs.Trendings do
+defmodule Wsdjs.Rankings do
   @moduledoc """
-  The boundary for the trending system.
+  The boundary for the Ranking system.
   """
 
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Trendings
-  alias Wsdjs.Trendings.{Top, Rank, Vote, Policy}
+  alias Wsdjs.Rankings
+  alias Wsdjs.Rankings.{Top, Rank, Vote, Policy}
   alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
 
@@ -21,7 +21,7 @@ defmodule Wsdjs.Trendings do
     |> where(status: "published")
     |> limit(1)
     |> Repo.one
-    |> Repo.preload(ranks: Trendings.list_rank())
+    |> Repo.preload(ranks: Rankings.list_rank())
     |> Repo.preload(ranks: :song)
     |> Repo.preload(ranks: [song: :art])
     |> Repo.preload(ranks: [song: :user])
@@ -35,7 +35,7 @@ defmodule Wsdjs.Trendings do
     |> Top.scoped()
     |> order_by([desc: :due_date])
     |> Repo.all
-    |> Repo.preload(ranks: Trendings.list_rank())
+    |> Repo.preload(ranks: Rankings.list_rank())
     |> Repo.preload(:songs)
   end
 
@@ -70,7 +70,7 @@ defmodule Wsdjs.Trendings do
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def next_step(%User{} = user, top) do
+  def next_step(%User{} = _user, top) do
     %{checking: "voting",
       voting: "counting",
       counting: "published"}
@@ -108,7 +108,7 @@ defmodule Wsdjs.Trendings do
         end
       end)
 
-      Wsdjs.Trendings.Rank.changeset(rank, %{likes: val})
+      Wsdjs.Rankings.Rank.changeset(rank, %{likes: val})
       |> Repo.update()
     end)
 
@@ -122,18 +122,18 @@ defmodule Wsdjs.Trendings do
   # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
   # After that, the top creator can apply bonus to the top.
   defp go_step("counting", top) do
-    from(p in Wsdjs.Trendings.Rank, where: [top_id: ^top.id])
+    from(p in Wsdjs.Rankings.Rank, where: [top_id: ^top.id])
     |> Repo.update_all(set: [votes: 0])
 
 
-    Wsdjs.Trendings.Vote
+    Wsdjs.Rankings.Vote
     |> where(top_id: ^top.id)
     |> group_by(:song_id)
     |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
     |> Repo.all()
     |> Enum.each(fn(vote) ->
       val = 10 * vote[:count] - vote[:sum] + vote[:count]
-      from(p in Wsdjs.Trendings.Rank, where: [top_id: ^top.id, song_id: ^vote.song_id])
+      from(p in Wsdjs.Rankings.Rank, where: [top_id: ^top.id, song_id: ^vote.song_id])
       |> Repo.update_all(set: [votes: val])
     end)
 
@@ -157,7 +157,7 @@ defmodule Wsdjs.Trendings do
     query
     |> Repo.all()
     |> Enum.each(fn(rank) ->
-      from(p in Wsdjs.Trendings.Rank, where: [id: ^rank.id])
+      from(p in Wsdjs.Rankings.Rank, where: [id: ^rank.id])
       |> Repo.update_all(set: [position: rank.pos])
     end)
 

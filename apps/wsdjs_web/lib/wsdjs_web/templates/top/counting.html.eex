@@ -58,7 +58,7 @@
           </aside>
         </div>
         <div>
-          <%= form_for Wsdjs.Trendings.Rank.changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
+          <%= form_for Wsdjs.Rankings.Rank.changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
           <table>
             <tbody>
             <tr><th>likes</th><td><%= rank.likes %></td></tr>

@@ -1,10 +1,10 @@
-defmodule Wsdjs.Trendings.Top do
+defmodule Wsdjs.Rankings.Top do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Wsdjs.{Accounts, Trendings, Musics}
+  alias Wsdjs.{Accounts, Rankings, Musics}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -13,9 +13,9 @@ defmodule Wsdjs.Trendings.Top do
     field :status, :string
 
     belongs_to :user, Accounts.User
-    has_many :ranks, Trendings.Rank, on_delete: :delete_all
-    has_many :votes, Trendings.Vote, on_replace: :delete
-    many_to_many :songs, Musics.Song, join_through: Trendings.Rank
+    has_many :ranks, Rankings.Rank, on_delete: :delete_all
+    has_many :votes, Rankings.Vote, on_replace: :delete
+    many_to_many :songs, Musics.Song, join_through: Rankings.Rank
 
     timestamps()
   end
@@ -39,13 +39,13 @@ defmodule Wsdjs.Trendings.Top do
   end
 
   # Admin sees everything
-  def scoped(%Accounts.User{admin: :true}), do: Trendings.Top
+  def scoped(%Accounts.User{admin: :true}), do: Rankings.Top
 
   # Connected user can see voting and published Top + Top he has created
   def scoped(%Accounts.User{} = user) do
-    from m in Trendings.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
+    from m in Rankings.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
   end
 
   # Not connected users see nothing
-  def scoped(nil), do: from m in Trendings.Top, where: false
+  def scoped(nil), do: from m in Rankings.Top, where: false
 end

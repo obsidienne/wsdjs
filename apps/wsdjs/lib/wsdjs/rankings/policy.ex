@@ -1,4 +1,4 @@
-defmodule Wsdjs.Trendings.Policy do
+defmodule Wsdjs.Rankings.Policy do
   @moduledoc """
   The Policies for the Dj system.
   """

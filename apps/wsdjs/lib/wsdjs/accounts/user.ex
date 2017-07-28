@@ -4,7 +4,7 @@ defmodule Wsdjs.Accounts.User do
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Wsdjs.{Musics, Accounts, Trendings}
+  alias Wsdjs.{Musics, Accounts, Rankings}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -21,7 +21,7 @@ defmodule Wsdjs.Accounts.User do
     has_one :avatar, Accounts.Avatar, on_replace: :delete
     has_one :detail, Accounts.UserDetail, on_replace: :delete
     has_many :song_opinions, Musics.Opinion
-    has_many :votes, Trendings.Vote
+    has_many :votes, Rankings.Vote
     has_many :auth_tokens, Accounts.AuthToken
 
     timestamps()

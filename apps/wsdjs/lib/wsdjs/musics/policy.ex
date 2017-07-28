@@ -12,13 +12,14 @@ defmodule Wsdjs.Musics.Policy do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
 
-  def can?(:search, %User{}), do: true
-  def can?(:list_user_suggestions, %User{}), do: true
-  def can?(:create_song, %User{}), do: true
   def can?(:edit_song, %User{admin: true}, %Song{}), do: true
   def can?(:edit_song, %User{id: id}, %Song{user_id: id}), do: true
   def can?(:delete_song, %User{admin: true}, %Song{}), do: true
   def can?(:delete_song, %User{id: id}, %Song{user_id: id}), do: true
   def can?(_, _, _), do: false
+
+  def can?(:search, %User{}), do: true
+  def can?(:list_user_suggestions, %User{}), do: true
+  def can?(:create_song, %User{}), do: true
   def can?(_, _), do: false
 end
