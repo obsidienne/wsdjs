@@ -1,6 +1,8 @@
 defmodule Wsdjs.MusicsTest do
   use Wsdjs.DataCase
 
+  doctest Wsdjs.Musics
+
   alias Wsdjs.Musics
 
   describe "songs" do
