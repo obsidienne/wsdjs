@@ -1,4 +1,4 @@
-<li class="wsdjs-song-cover ">
+<li class="card">
   <a href="<%= song_path(@conn, :show, @song) %>" class="wsdjs-song-cover__image-container js-project-cover-image-link js-project-link">
     <img class="wsdjs-song-cover__image cld-responsive" src="<%= art_url() %>" data-src="<%= art_url(@song.art) %>" alt="<%= song_art_alt(@song) %>">
 

@@ -57,7 +57,7 @@
   justify-content: center;
   grid-row-gap: 15px;
   grid-column-gap: 15px;
-  grid-template-columns: repeat(var(--user-show-song-column-number), minmax(202px, auto));
+  grid-template-columns: repeat(2, minmax(170px, auto));
 }
 @media (min-width: 768px) {
   .user-profile-song-container {

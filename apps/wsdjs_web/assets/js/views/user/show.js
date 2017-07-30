@@ -31,6 +31,15 @@ export default class View {
       els[i].textContent = numberFormat.format(els[i].textContent);
     }
 
+    // intl date
+    var options = {year: "numeric", month: "long"};
+    var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
+    var elements = document.querySelectorAll("time");
+    for (let i = 0; i < elements.length; i++) {
+      let datetime = Date.parse(elements[i].getAttribute("datetime"))
+      elements[i].textContent = dateTimeFormat.format(datetime);
+    }
+
     var cl = cloudinary.Cloudinary.new();
     cl.init();
     cl.responsive();
