@@ -4,6 +4,7 @@ defmodule Wsdjs.Charts.Vote do
   import Ecto.Changeset
 
   alias Wsdjs.{Musics, Charts, Accounts}
+  alias Wsdjs.Repo
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -29,9 +30,9 @@ defmodule Wsdjs.Charts.Vote do
 
   def get_or_build(top, user_id, song_id, votes) do
     struct =
-      Wsdjs.Repo.get_by(Charts.Vote, user_id: user_id, top_id: top.id, song_id: song_id) ||
+      Repo.get_by(Charts.Vote, user_id: user_id, top_id: top.id, song_id: song_id) ||
       Ecto.build_assoc(top, :votes, user_id: user_id, song_id: song_id)
 
-    Ecto.Changeset.change(struct, votes: String.to_integer(votes))
+    Changeset.change(struct, votes: String.to_integer(votes))
   end
 end

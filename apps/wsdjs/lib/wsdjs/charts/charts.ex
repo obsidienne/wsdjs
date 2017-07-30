@@ -215,8 +215,8 @@ defmodule Wsdjs.Charts do
                 |> Enum.map(&Vote.get_or_build(top, user.id, &1, votes_param[&1]))
 
     top
-    |> Ecto.Changeset.change
-    |> Ecto.Changeset.put_assoc(:votes, new_votes)
+    |> Changeset.change
+    |> Changeset.put_assoc(:votes, new_votes)
     |> Repo.update()
   end
 
