@@ -20,6 +20,7 @@ export default class View {
       if (e.target && e.target.matches(".SongIndexView .song-opinion")) {
         self._toggle_opinion(e.target);
         e.preventDefault();
+        e.stopPropagation();
       }
 
     }, false);

@@ -9,6 +9,7 @@ export default class View {
       if (e.target && e.target.matches(".SongShowView .song-opinion")) {
         this._toggle_opinion(e.target);
         e.preventDefault();
+        e.stopPropagation();
       }
     }, false);
 

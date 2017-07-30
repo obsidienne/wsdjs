@@ -8,6 +8,7 @@ export default class View {
       if (e.target && e.target.matches(".HomeIndexView .song-opinion")) {
         this._toggle_opinion(e.target);
         e.preventDefault();
+        e.stopPropagation();
       }
     });
   }
