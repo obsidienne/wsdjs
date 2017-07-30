@@ -5,6 +5,7 @@ defmodule Wsdjs.Charts do
 
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
+  alias Ecto.Changeset
 
   alias Wsdjs.Charts
   alias Wsdjs.Charts.{Top, Rank, Vote, Policy}

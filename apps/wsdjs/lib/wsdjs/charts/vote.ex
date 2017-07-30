@@ -5,6 +5,7 @@ defmodule Wsdjs.Charts.Vote do
 
   alias Wsdjs.{Musics, Charts, Accounts}
   alias Wsdjs.Repo
+  alias Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

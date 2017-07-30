@@ -10,6 +10,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   use HTTPoison.Base
 
   alias Phoenix.PubSub
+  alias Wsdjs.Web.CloudinaryHelper
 
   @expected_fields ~w(
     title artist album cover started_at end_at duration buy_link
@@ -91,12 +92,12 @@ defmodule Wsdjs.Jobs.NowPlaying do
     else
       queue
     end
-  end  
+  end
 
   defp filled_from_db(song, streamed_song) do
     song_in_base = Wsdjs.Musics.search_artist_title(streamed_song)
 
-    if song_in_base != nil do    
+    if song_in_base != nil do
       if song_in_base.user.name == "World Swing Deejays" do
         song
       else
@@ -105,7 +106,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
       end
       |> Map.put(:artist, song_in_base.artist)
       |> Map.put(:title, song_in_base.title)
-      |> Map.put(:image_uri, Wsdjs.Web.CloudinaryHelper.art_url(song_in_base.art))
+      |> Map.put(:image_uri, CloudinaryHelper.art_url(song_in_base.art))
       |> Map.put(:suggested_by, song_in_base.user.name)
       |> Map.put(:suggested_by_path, "/users/#{song_in_base.user.id}")
       |> Map.put(:path, "/songs/#{song_in_base.id}")
