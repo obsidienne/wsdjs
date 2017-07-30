@@ -25,4 +25,3 @@ defmodule Wsdjs.ProviderTest do
     Enum.each(@youtube_urls, fn {url, video_id} -> assert Wsdjs.Helpers.Provider.extract(url) == video_id end)
   end
 end
-

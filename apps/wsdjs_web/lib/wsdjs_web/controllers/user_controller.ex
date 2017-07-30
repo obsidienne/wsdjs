@@ -13,7 +13,6 @@ defmodule Wsdjs.Web.UserController do
   def show(conn, %{"id" => user_id}) do
     current_user = conn.assigns[:current_user]
     user = Accounts.get_user!(user_id)
-    
     page = Musics.paginate_songs_user(current_user, user_id)
 
     conn

@@ -15,7 +15,6 @@ defmodule Wsdjs.Web.HomeController do
     render conn, "unauthenticated.html", songs: songs
   end
 
-
   def index(conn, _params, current_user) do
     songs = Musics.hot_songs(current_user)
     top = Charts.last_top(current_user)

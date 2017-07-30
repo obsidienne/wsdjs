@@ -14,15 +14,12 @@ defmodule Wsdjs.Web.CloudinaryHelper do
     @art_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
   def art_url(_), do: @art_missing_url
-  def art_url(), do: @art_missing_url
+  def art_url, do: @art_missing_url
 
   def art_url_blured(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @art_blured_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
   def art_url_blured(nil), do: @art_missing_url
-
-
-
 
   @avatar_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_crop,g_custom,q_auto,f_auto/"
   @avatar_missing_url "//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_avatar.jpg"
@@ -31,5 +28,5 @@ defmodule Wsdjs.Web.CloudinaryHelper do
     @avatar_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
   def avatar_url(_), do: @avatar_missing_url
-  def avatar_url(), do: @avatar_missing_url
+  def avatar_url, do: @avatar_missing_url
 end

@@ -34,7 +34,7 @@ defmodule Wsdjs.Accounts do
       [%Accounts.User{}, ...]
 
   """
-  def list_users() do
+  def list_users do
     User
     |> order_by([:name])
     |> Repo.all()
@@ -67,7 +67,6 @@ defmodule Wsdjs.Accounts do
     |> Repo.preload(:avatar)
   end
 
-
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
@@ -80,7 +79,6 @@ defmodule Wsdjs.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
-
 
   @doc """
   Updates a user.

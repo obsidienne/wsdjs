@@ -27,15 +27,15 @@ defmodule Wsdjs.Web.TopController do
         top = Charts.get_top_order_by_votes!(current_user, id)
         votes = Charts.list_votes(top)
         current_user_votes = Charts.list_votes(id, current_user)
-        render conn, "voting.html", top: top, 
-                                    votes: votes, 
+        render conn, "voting.html", top: top,
+                                    votes: votes,
                                     current_user_votes: current_user_votes,
                                     changeset: changeset
       "counting" ->
         render conn, "counting.html", top: top, changeset: changeset
       "published" ->
         render conn, :published, top: top, changeset: changeset
-      _ -> 
+      _ ->
         raise ArgumentError, "The template requested does not exist. Something smelly."
     end
   end
@@ -60,7 +60,6 @@ defmodule Wsdjs.Web.TopController do
 
     redirect(conn, to: top_path(conn, :show, top))
   end
-  
 
   def create(conn, %{"top" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)

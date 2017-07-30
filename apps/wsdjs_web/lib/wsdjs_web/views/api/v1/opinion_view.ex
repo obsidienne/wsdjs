@@ -10,11 +10,11 @@ defmodule Wsdjs.Web.Api.V1.OpinionView do
     likes = Enum.filter(opinions, fn(x) -> x.kind == "like" end)
     downs = Enum.filter(opinions, fn(x) -> x.kind == "down" end)
 
-    user_opinion = if current_opinion do 
-      current_opinion.kind 
-    else 
-      nil 
-    end 
+    user_opinion = if current_opinion do
+      current_opinion.kind
+    else
+      nil
+    end
 
     %{
       data: %{
@@ -34,7 +34,6 @@ defmodule Wsdjs.Web.Api.V1.OpinionView do
       avatar: avatar_url(opinion.user.avatar)
     }
   end
-
 
   defp render_opinion(opinions, kind, song, nil) do
     %{
@@ -57,7 +56,7 @@ defmodule Wsdjs.Web.Api.V1.OpinionView do
     %{
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
-      url: url, 
+      url: url,
       method: method
     }
   end

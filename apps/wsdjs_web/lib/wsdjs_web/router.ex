@@ -40,7 +40,6 @@ defmodule Wsdjs.Web.Router do
     resources "/sessions", SessionController, only: [:delete]
   end
 
-
   scope "/", Wsdjs.Web do
     pipe_through :browser # Use the default browser stack
 
@@ -68,7 +67,7 @@ defmodule Wsdjs.Web.Router do
 
   scope "/api", as: :api, alias: :'Wsdjs.Web' do
     pipe_through [:api]
- 
+
     scope "/", alias: Api do
       resources "/now_playing", NowPlayingController, only: [:index]
       resources "/mobile_config", MobileConfigController, only: [:index]

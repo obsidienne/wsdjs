@@ -1,4 +1,7 @@
 defmodule Wsdjs.Jobs.NowPlaying do
+  @moduledoc """
+  Retrieves from the radioking API datas for the current played song.
+  """
   require Logger
   require DateTime
 
@@ -48,13 +51,13 @@ defmodule Wsdjs.Jobs.NowPlaying do
     end
   end
 
-  defp schedule_work() do
+  defp schedule_work do
     Process.send_after(self(), :work, 2 * 1 * 1 * 1000) # In 2 seconds
   end
 
   defp parse_streamed_song(body, queue) do
     last_queued = last_song_queued(:queue.peek_r(queue))
-          
+
     body
     |> Poison.decode!
     |> Map.take(@expected_fields)
@@ -74,8 +77,6 @@ defmodule Wsdjs.Jobs.NowPlaying do
     current_song = artist <> " - " <> title
 
     if last_song != current_song  do
-      IO.inspect "current_song"
-      IO.inspect current_song
       queue = %{artist: artist, title: title, ts: :os.system_time(:seconds)}
           |> filled_from_db(current_song)
           |> :queue.in(queue)

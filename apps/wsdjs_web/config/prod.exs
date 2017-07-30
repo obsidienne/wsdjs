@@ -20,7 +20,6 @@ config :wsdjs_web, Wsdjs.Web.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
-
 config :wsdjs_web, Wsdjs.Web.Mailer,
     adapter: Bamboo.SendgridAdapter,
     api_key: System.get_env("SENDGRID_API_KEY")

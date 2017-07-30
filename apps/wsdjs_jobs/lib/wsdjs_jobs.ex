@@ -20,7 +20,6 @@ defmodule Wsdjs.Jobs do
     end
   end
 
-
   @doc """
   When used, dispatch to the appropriate view.
   """

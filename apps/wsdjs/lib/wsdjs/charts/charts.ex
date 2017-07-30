@@ -8,6 +8,7 @@ defmodule Wsdjs.Charts do
 
   alias Wsdjs.Charts
   alias Wsdjs.Charts.{Top, Rank, Vote, Policy}
+  alias Wsdjs.Musics
   alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
 
@@ -57,7 +58,7 @@ defmodule Wsdjs.Charts do
 
   def create_top(current_user, %{"due_date" => due_date} = params) do
     with true <- Policy.can?(:create_top, current_user) do
-      songs = Wsdjs.Musics.songs_in_month(due_date)
+      songs = Musics.songs_in_month(due_date)
       params = Map.put(params, "status", "checking")
 
       %Top{}
@@ -88,7 +89,6 @@ defmodule Wsdjs.Charts do
     |> go_step(top)
   end
 
-
   # The top creator is ok with the songs in the top. The top creator freeze the likes
   # according to this rule: (like * 2) - (down * 3) + (up * 4)
   # After that, DJs can vote for their top 10.
@@ -108,7 +108,8 @@ defmodule Wsdjs.Charts do
         end
       end)
 
-      Wsdjs.Charts.Rank.changeset(rank, %{likes: val})
+      rank
+      |> Rank.changeset(%{likes: val})
       |> Repo.update()
     end)
 
@@ -124,7 +125,6 @@ defmodule Wsdjs.Charts do
   defp go_step("counting", top) do
     from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id])
     |> Repo.update_all(set: [votes: 0])
-
 
     Wsdjs.Charts.Vote
     |> where(top_id: ^top.id)
@@ -166,7 +166,6 @@ defmodule Wsdjs.Charts do
     |> Repo.update()
   end
 
-
   @doc """
   Deletes a Top.
 
@@ -201,7 +200,8 @@ defmodule Wsdjs.Charts do
   end
 
   def list_votes(id, %User{} = user) do
-    q_list_votes(id, user)
+    id
+    |> q_list_votes(user)
     |> Repo.all()
   end
 
@@ -254,8 +254,7 @@ defmodule Wsdjs.Charts do
     preload: [song: [:art, :user, :opinions]]
   end
 
-
-  def list_rank() do
+  def list_rank do
     from q in Rank,
       join: p in fragment("""
       SELECT id, top_id, row_number() OVER (

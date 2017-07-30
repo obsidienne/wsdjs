@@ -41,7 +41,7 @@ defmodule Wsdjs.Musics do
     |> where([s], fragment("? || ' - ' || ?", s.artist, s.title) == ^artist_title)
     |> preload([:user, :art, :tops])
     |> preload([tops: :ranks])
-    |> order_by([desc: :inserted_at])    
+    |> order_by([desc: :inserted_at])
     |> Repo.one
   end
 
@@ -84,7 +84,7 @@ defmodule Wsdjs.Musics do
   @doc """
   Returns the songs added the 24 last hours.
   """
-  def list_songs() do
+  def list_songs do
     yesterday = Timex.shift(Timex.now, hours: -24)
     Song
     |> where([s], s.inserted_at > ^yesterday)
@@ -148,7 +148,6 @@ defmodule Wsdjs.Musics do
     |> Repo.get!(song_id)
   end
 
-
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking song changes.
 
@@ -161,7 +160,6 @@ defmodule Wsdjs.Musics do
   def change_song(%Song{} = song) do
     Song.changeset(song, %{})
   end
-
 
   @doc """
   Updates a song.
@@ -181,7 +179,6 @@ defmodule Wsdjs.Musics do
     |> Repo.update()
   end
 
-
   @doc """
   Deletes a Song.
 
@@ -197,8 +194,6 @@ defmodule Wsdjs.Musics do
   def delete_song(%Song{} = song) do
     Repo.delete(song)
   end
-
-
 
   ###############################################
   #
@@ -240,8 +235,6 @@ defmodule Wsdjs.Musics do
     {:ok, Repo.preload(comment, [user: :avatar])}
   end
 
-
-
   ###############################################
   #
   # Opinion
@@ -277,7 +270,6 @@ defmodule Wsdjs.Musics do
     |> Repo.preload([user: :avatar])
   end
 
-
   @doc """
   Deletes an Opinion.
 
@@ -307,8 +299,6 @@ defmodule Wsdjs.Musics do
     |> Opinion.changeset(%{kind: kind})
     |> Repo.insert_or_update()
   end
-
-
 
   ###############################################
   #

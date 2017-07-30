@@ -22,7 +22,7 @@ defmodule Wsdjs.Musics.Policy do
   def can?(:edit_playlist, %User{id: id}, %Playlist{user_id: id}), do: true
   def can?(:delete_playlist, %User{admin: true}, %Playlist{}), do: true
   def can?(:delete_playlist, %User{id: id}, %Playlist{user_id: id}), do: true
-  
+
   def can?(_, _, _), do: false
 
   def can?(:search, %User{}), do: true

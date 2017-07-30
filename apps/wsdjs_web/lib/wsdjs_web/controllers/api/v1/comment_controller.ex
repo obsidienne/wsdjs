@@ -9,7 +9,7 @@ defmodule Wsdjs.Web.Api.V1.CommentController do
 
   def create(conn, %{"song_id" => song_id, "comment" => params}) do
     current_user = conn.assigns[:current_user]
-    song = Wsdjs.Musics.get_song!(current_user, song_id)
+    song = Musics.get_song!(current_user, song_id)
 
     params = params
     |> Map.put("user_id", current_user.id)

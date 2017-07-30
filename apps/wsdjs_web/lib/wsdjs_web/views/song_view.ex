@@ -1,8 +1,10 @@
 defmodule Wsdjs.Web.SongView do
   use Wsdjs.Web, :view
 
-  def list_users() do
-    users = Wsdjs.Accounts.list_users()
+  alias Wsdjs.Accounts
+
+  def list_users do
+    users = Accounts.list_users()
     Enum.map(users, &{user_displayed_name(&1), &1.id})
   end
 

@@ -7,7 +7,7 @@
 
   import Wsdjs.Web.Router.Helpers
 
-  alias Wsdjs.Web.UserHelper
+  alias Wsdjs.Web.{UserHelper, CloudinaryHelper}
 
   def opinion_link_no_tooltip(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
@@ -27,7 +27,6 @@
     ]
     content_tag :button, qty, default_options
   end
-
 
   def opinion_link(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
@@ -49,14 +48,14 @@
   end
 
   def opinion_owners_link(kind, conn, song, opinions) do
-    kind_opinions = 
+    kind_opinions =
       opinions
       |> Enum.filter(fn(x) -> x.kind == kind end)
 
     Enum.map(kind_opinions, fn opinion ->
       link to: user_path(conn, :show, opinion.user) do
-        img_tag(Wsdjs.Web.CloudinaryHelper.avatar_url(), 
-                'data-src': Wsdjs.Web.CloudinaryHelper.avatar_url(opinion.user.avatar),
+        img_tag(CloudinaryHelper.avatar_url(),
+                'data-src': CloudinaryHelper.avatar_url(opinion.user.avatar),
                 class: "img-circle cld-responsive avatar-tiny tippy",
                 title: UserHelper.user_displayed_name(opinion.user))
       end

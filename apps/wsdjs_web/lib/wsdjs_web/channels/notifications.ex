@@ -1,5 +1,10 @@
 defmodule Wsdjs.Web.NotificationsChannel do
+  @moduledoc """
+  This modules notifies all radio clients when a new song is played.
+  """
   use Phoenix.Channel
+
+  alias Wsdjs.Jobs
 
   Phoenix.Channel.intercept(["new_played_song"])
 
@@ -12,8 +17,8 @@ defmodule Wsdjs.Web.NotificationsChannel do
   end
 
   def handle_in("played_song_list", _, socket) do
-    pid = Process.whereis(Wsdjs.Jobs.NowPlaying)
-    list = Wsdjs.Jobs.NowPlaying.read(pid)
+    pid = Process.whereis(Jobs.NowPlaying)
+    list = Jobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
     push socket, "new_played_song", %{data: json}
