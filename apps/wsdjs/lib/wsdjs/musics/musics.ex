@@ -123,14 +123,21 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Creates a song and attach the suggestor.
+  Creates a song.
+
+  ## Examples
+
+      iex> create_song(%{field: value})
+      {:ok, %Song{}}
+
+      iex> create_song(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
   """
-  def create_song(current_user, params) do
-    with true <- Policy.can?(:create_song, current_user) do
-      %Song{}
-      |> Song.changeset(params)
-      |> Repo.insert()
-    end
+  def create_song(params) do
+    %Song{}
+    |> Song.changeset(params)
+    |> Repo.insert()
   end
 
   @doc """
