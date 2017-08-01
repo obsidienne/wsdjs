@@ -1,28 +1,20 @@
 <li class="card">
-  <a href="<%= song_path(@conn, :show, @song) %>" class="wsdjs-song-cover__image-container js-project-cover-image-link js-project-link">
+  <%= link to: song_path(@conn, :show, @song), class: "wsdjs-song-cover__image-container js-project-cover-image-link js-project-link" do %>
     <img class="wsdjs-song-cover__image cld-responsive" src="<%= art_url() %>" data-src="<%= art_url(@song.art) %>" alt="<%= song_art_alt(@song) %>">
 
-
     <div class="wsdjs-song-cover__details">
-      <div class="wsdjs-song-cover__title js-project-cover-title-link"><%= @song.title %></div>
+      <h6 class="text-ellipsis"><%= @song.title %></h6>
+      <h6 class="text-ellipsis"><%= @song.artist %></h6>
 
-      <div class="rf-owners ">
-        <span class="rf-owners__list ">
-          <div class="rf-owners__owner"><%= @song.artist %></div>
-        </span>
-      </div>
-
-      <div class="wsdjs-song-cover__fields">
-        <ul class="wsdjs-song-cover__fields-list">
-          <li class="wsdjs-song-cover__field"><%= @song.genre %></li>
-        </ul>
-      </div>
-
-      <div class="wsdjs-song-cover__stats">
-        <%= opinion_link("down", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
-        <%= opinion_link("like", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
-        <%= opinion_link("up", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
-      </div>
+      <span class="label label-default"><%= @song.genre %></span>
+      <%= if @song.bpm > 0 do %>
+      <span class="label label-primary"><%= @song.bpm %> bpm</span>
+      <% end %>
     </div>
-  </a>
+    <footer class="song-opinions">
+      <%= opinion_link("down", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+      <%= opinion_link("like", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+      <%= opinion_link("up", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+    </footer>
+  <% end %>
 </li>
