@@ -4,4 +4,7 @@ use Mix.Config
 # you can enable the server option below.
 config :wsdjs_web, Wsdjs.Web.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true
+
+config :wsdjs_web, :sql_sandbox, true
+config :wallaby, screenshot_on_failure: true
