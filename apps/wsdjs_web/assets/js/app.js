@@ -26,7 +26,6 @@ import Turbolinks from 'turbolinks';
 import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
-import Tippy from 'tippy.js/dist/tippy';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {

@@ -1,4 +1,4 @@
-import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import Places from 'places.js/dist/cdn/places.js';
 
 export default class View {
@@ -40,7 +40,7 @@ export default class View {
       elements[i].textContent = dateTimeFormat.format(datetime);
     }
 
-    var cl = cloudinary.Cloudinary.new();
+    var cl = CloudinaryCore.Cloudinary.new();
     cl.init();
     cl.responsive();
   }
@@ -84,7 +84,7 @@ export default class View {
         container.dataset.jsTotalPages = total_pages;
         container.insertAdjacentHTML('beforeend', this.response);
 
-        var cl = cloudinaryCore.Cloudinary.new();
+        var cl = CloudinaryCore.Cloudinary.new();
         cl.init();
         cl.responsive();
       }

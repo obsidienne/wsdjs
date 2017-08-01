@@ -1,7 +1,7 @@
 import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
 import Tippy from 'tippy.js/dist/tippy';
-import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
 
 export default class View {
   constructor() {
@@ -32,7 +32,7 @@ export default class View {
       els[i].innerHTML = els[i].innerHTML.autoLink();
     }
 
-    var cl = cloudinary.Cloudinary.new();
+    var cl = CloudinaryCore.Cloudinary.new();
     cl.init();
     cl.responsive();
   }
@@ -57,7 +57,7 @@ export default class View {
         container.insertAdjacentHTML('beforeend', tpl);
         new timeago().render(document.querySelectorAll("time.timeago"));
 
-        var cl = cloudinary.Cloudinary.new();
+        var cl = CloudinaryCore.Cloudinary.new();
         cl.init();
         cl.responsive();
       } else {
@@ -123,7 +123,7 @@ export default class View {
     this._refresh_kind(song_like, "like", data.data.like, data.data.user_opinion);
     this._refresh_kind(song_down, "down", data.data.down, data.data.user_opinion);
 
-    var cl = cloudinary.Cloudinary.new();
+    var cl = CloudinaryCore.Cloudinary.new();
     cl.init();
     cl.responsive();
   }
