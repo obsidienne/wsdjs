@@ -82,43 +82,15 @@
   font-weight: bold;
 }
 
-
-
-@font-face {
-    font-family: 'BeIcons';
-    font-style: normal;
-    font-weight: normal;
-    src: url(https://a5.behance.net/439b9f29162aa430e775bffe13adac838bb6d460/fonts/BeIcons/BeIcons.eot);
-    src: url(https://a5.behance.net/439b9f29162aa430e775bffe13adac838bb6d460/fonts/BeIcons/BeIcons.eot?#iefix) format("embedded-opentype"), url(https://a5.behance.net/439b9f29162aa430e775bffe13adac838bb6d460/fonts/BeIcons/BeIcons.woff) format("woff"), url(https://a5.behance.net/439b9f29162aa430e775bffe13adac838bb6d460/fonts/BeIcons/BeIcons.ttf) format("truetype"), url(https://a5.behance.net/439b9f29162aa430e775bffe13adac838bb6d460/fonts/BeIcons/BeIcons.svg#Behance) format("svg");
+.music-icon {
+  background-image: var(--icon-song);
+  background-repeat: no-repeat;
+  padding-left: 30px;
 }
 
-.profile-section .beicons-pre::before {
-    opacity: .5;
-}
-
-.beicons-pre::before {
-    width: 16px;
-    height: 16px;
-    display: inline-block;
-    font-family: 'BeIcons';
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    font-weight: normal!important;
-    line-height: 0;
-    margin-right: 5px;
-    position: relative;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    top: 1px;
-    user-select: none;
-}
-.beicons-pre-location::before {
-    content: 'B';
-    margin: 0 -3px 0 -2px;
-    top: 2px;
-}
-.beicons-pre-eye::before {
-    content: '@';
-    left: -1px;
-    top: 3px;
+.place-icon {
+  background-image: var(--icon-place);
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  display: inline-block;
 }
