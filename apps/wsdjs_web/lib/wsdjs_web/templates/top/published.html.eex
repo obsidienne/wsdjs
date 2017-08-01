@@ -29,7 +29,7 @@
   </div>
 </header>
 
-  <main class="container">
+  <main class="container top-published">
   <%= for rank <- @top.ranks do %>
     <article class="top-song">
       <div class="song-art-container">
