@@ -4,13 +4,14 @@ export default class View {
   constructor() {
     this._cloudinary_uploader();
   }
-  mount() {
+
+  mount() { 
     // cloudinary
     var cl = CloudinaryCore.Cloudinary.new();
     cl.init();
     cl.responsive();
   }
-  unmount() {}
+  unmount() { }
 
   _cloudinary_uploader() {
     var params = { upload_preset: "music_cover_staging",
@@ -25,7 +26,7 @@ export default class View {
     };
 
     document.addEventListener("click", function(e) {
-      if (e.target && e.target.matches("#song_upload_widget_opener")) {
+      if (e.target && e.target.matches("#song_edit_cldwidget_opener")) {
         cloudinary.openUploadWidget(params, function(error, result) {
           document.getElementById("art_thumbnail").setAttribute("src", result[0]['thumbnail_url']);
           document.getElementById("song_art_cld_id").value = result[0]['public_id'];
@@ -36,4 +37,5 @@ export default class View {
       }
     }, false);
   }
+
 }

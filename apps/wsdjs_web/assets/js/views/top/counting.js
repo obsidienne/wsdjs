@@ -1,9 +1,16 @@
+import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
+
 export default class View {
   constructor() {
     this._bonus();
   }
 
-  mount() { }
+  mount() { 
+    // cloudinary
+    var cl = CloudinaryCore.Cloudinary.new();
+    cl.init();
+    cl.responsive();    
+  }
   unmount() { }
 
   _bonus() {

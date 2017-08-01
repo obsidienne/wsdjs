@@ -9,7 +9,7 @@ export default class search {
       if (e.target && e.target.matches("#search-input")) {
         self._show_search();
       }
-      if (e.target && event.target.closest('.search-container') == null) {
+      if (e.target && e.target.closest('.search-container') == null) {
         self._hide_search();
       }
     })
