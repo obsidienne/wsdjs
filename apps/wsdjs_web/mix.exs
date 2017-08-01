@@ -42,7 +42,7 @@ defmodule Wsdjs.Web.Mixfile do
      {:gettext, "~> 0.13"},
      {:bamboo, "~> 0.8"},
      {:timex, "~> 3.0"},
-     {:hound, "~> 1.0"},
+     {:wallaby, "~> 0.18.1"},
      {:wsdjs, in_umbrella: true},
      {:wsdjs_jobs, in_umbrella: true},
      {:cowboy, "~> 1.0"}]

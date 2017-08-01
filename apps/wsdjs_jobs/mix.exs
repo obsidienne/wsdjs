@@ -34,12 +34,10 @@ defmodule Wsdjs.Jobs.Mixfile do
   defp deps do
     [{:phoenix_pubsub, "~> 1.0"},
      {:phoenix, "~> 1.3.0-rc"},
-     {:httpoison, "~> 0.11.1"},
-     {:quantum, ">= 2.0.0-beta.1"},
+     {:httpoison, "~> 0.12"},
+     {:quantum, ">= 2.0.0"},
      {:timex, "~> 3.0"},
      {:bamboo, "~> 0.8"},
-     {:html_sanitize_ex, "~> 1.0.0"},
-     {:html_entities, "~> 0.3"},
      {:wsdjs, in_umbrella: true}]
   end
 
