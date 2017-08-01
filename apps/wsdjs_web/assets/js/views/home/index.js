@@ -1,4 +1,4 @@
-import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import timeago from 'timeago.js';
 import Tippy from 'tippy.js/dist/tippy';
 
@@ -15,7 +15,7 @@ export default class View {
 
   mount() {
     // cloudinary
-    var cl = cloudinary.Cloudinary.new();
+    var cl = CloudinaryCore.Cloudinary.new();
     cl.init();
     cl.responsive();
 

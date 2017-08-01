@@ -11,6 +11,7 @@ import TopVotingView from './top/voting';
 import UserEditView from './user/edit';
 import UserShowView from './user/show';
 import HomeIndexView from './home/index';
+import HomeUnauthenticatedView from './home/index';
 
 // Collection of specific view modules
 const views = {
@@ -25,7 +26,8 @@ const views = {
   TopVotingView,
   UserEditView,
   UserShowView,
-  HomeIndexView
+  HomeIndexView,
+  HomeUnauthenticatedView
 };
 
 export default function loadView(viewName) {

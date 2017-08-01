@@ -63,9 +63,11 @@ export default class search {
     });
 
     // remove data from the result list
-    document.querySelector(".search-results-container").innerHTML = "";
+    var container = document.querySelector(".search-results-container");
+    if (container) container.innerHTML = "";
 
     // remove searched string
-    document.getElementById("search-input").value = "";
+    var search = document.getElementById("search-input");
+    if (search) search.value = "";
   }
 }
