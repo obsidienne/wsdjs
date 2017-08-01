@@ -12,9 +12,9 @@
       <% end %>
     </div>
     <footer class="song-opinions">
-      <%= opinion_link("down", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
-      <%= opinion_link("like", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
-      <%= opinion_link("up", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
+      <%= opinion_link("down", @conn, @song, @song.opinions, nil) %>
+      <%= opinion_link("like", @conn, @song, @song.opinions, nil) %>
+      <%= opinion_link("up", @conn, @song, @song.opinions, nil) %>
     </footer>
   <% end %>
 </li>

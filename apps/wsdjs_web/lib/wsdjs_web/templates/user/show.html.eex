@@ -85,7 +85,7 @@
   
     <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) do %>
     <ul id="song-list" class="user-profile-song-container" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
-      <%= render_many @songs, @view_module, "_song.html", conn: @conn, as: :song %>
+      <%= render_many @songs, Wsdjs.Web.SharedView, "_song.html", conn: @conn, as: :song %>
     </ul>
     <% end %>
   </section>

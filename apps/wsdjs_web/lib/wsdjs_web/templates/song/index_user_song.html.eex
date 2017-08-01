@@ -1,1 +1,1 @@
-<%= render_many @songs, @view_module, "_user_song.html", conn: @conn, as: :song %>
+<%= render_many @songs, Wsdjs.Web.SharedView, "_song.html", conn: @conn, as: :song %>
