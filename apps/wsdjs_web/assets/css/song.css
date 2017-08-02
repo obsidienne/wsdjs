@@ -21,7 +21,6 @@
 .song-header-details {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin-left: 15px;
   max-width: 300px;
   flex: 1 1 auto;

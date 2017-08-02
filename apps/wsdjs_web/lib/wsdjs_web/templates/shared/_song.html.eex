@@ -1,20 +1,23 @@
-<li class="card">
-  <%= link to: song_path(@conn, :show, @song), class: "wsdjs-song-cover__image-container js-project-cover-image-link js-project-link" do %>
+<li>
+  <%= link to: song_path(@conn, :show, @song), class: "card wsdjs-song-cover__image-container" do %>
     <img class="wsdjs-song-cover__image cld-responsive" src="<%= art_url() %>" data-src="<%= art_url(@song.art) %>" alt="<%= song_art_alt(@song) %>">
 
     <div class="wsdjs-song-cover__details">
       <h6 class="text-ellipsis"><%= @song.title %></h6>
       <h6 class="text-ellipsis"><%= @song.artist %></h6>
 
-      <span class="label label-default"><%= @song.genre %></span>
-      <%= if @song.bpm > 0 do %>
-      <span class="label label-primary"><%= @song.bpm %> bpm</span>
-      <% end %>
+      <div class="song-hints">
+        <span class="label label-default"><%= @song.genre %></span>
+        <%= if @song.bpm > 0 do %>
+        <span class="label label-primary"><%= @song.bpm %> bpm</span>
+        <% end %>
+      </div>
+
+      <footer class="song-opinions">
+        <%= opinion_link("down", @conn, @song, @song.opinions, nil) %>
+        <%= opinion_link("like", @conn, @song, @song.opinions, nil) %>
+        <%= opinion_link("up", @conn, @song, @song.opinions, nil) %>
+      </footer>
     </div>
-    <footer class="song-opinions">
-      <%= opinion_link("down", @conn, @song, @song.opinions, nil) %>
-      <%= opinion_link("like", @conn, @song, @song.opinions, nil) %>
-      <%= opinion_link("up", @conn, @song, @song.opinions, nil) %>
-    </footer>
   <% end %>
 </li>
