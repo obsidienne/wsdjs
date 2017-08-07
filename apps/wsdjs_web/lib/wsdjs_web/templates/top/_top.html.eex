@@ -12,7 +12,6 @@
         </div>
       <% end %>
     </div>
-    <div>
     <table class="statistics">
       <thead>
         <tr><th>Songs</th><th>Djs</th><th>Genres</th></tr>
@@ -25,6 +24,5 @@
         </tr>
       </tbody>
     </table>
-    </div>
   </div> <!-- cd-timeline-content -->
 </a> <!-- cd-timeline-block -->
