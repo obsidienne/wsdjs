@@ -1,13 +1,11 @@
 <nav class="glheader container">
-  <div>
-    <%= link "", to: home_path(@conn, :index), class: "logo" %>
-  </div>
+  <%= link "", to: home_path(@conn, :index), class: "logo" %>
 
   <%= if Wsdjs.Musics.Policy.can?(:search, @current_user) do %>
   <div class="search-container">
     <div class="search__input__wrap">
       <i class="icon-search"></i>
-      <input id="search-input" placeholder="Search song by artist or title..." type="text" class="form-control search-input" autocomplete="off" spellcheck="false">
+      <input id="search-input" placeholder="Search song by artist or title..." type="text" class="search-input" autocomplete="off" spellcheck="false">
     </div>
 
     <div class="search-results-container">
@@ -16,7 +14,7 @@
   <% end %>
 
   <%= link "tops", to: top_path(@conn, :index), class: "glheader__menu_link text-muted" %>
-  <%= link "songs", to: song_path(@conn, :index), class: "glheader__menu_link text-muted active" %>
+  <%= link "songs", to: song_path(@conn, :index), class: "glheader__menu_link text-muted" %>
 
   <%= if @current_user do %>
     <%= link to: user_path(@conn, :show, @current_user.id) do %>

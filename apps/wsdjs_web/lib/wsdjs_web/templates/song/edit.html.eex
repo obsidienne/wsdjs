@@ -1,4 +1,4 @@
-<%= render "_header.html", conn: @conn, current_user: @current_user %>
+<%= render Wsdjs.Web.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
 <main class="container song-edit">
   <div id="art_div">

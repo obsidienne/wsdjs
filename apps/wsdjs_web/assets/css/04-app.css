@@ -7,14 +7,6 @@
 *:before, *:after {
   box-sizing: border-box;
 }
-html {
-  background-color: #e9f0f5;
-}
-
-body {
-  background-color: #e9f0f5;
-  margin-bottom: 250px;
-}
 
 a {
   text-decoration: none;
