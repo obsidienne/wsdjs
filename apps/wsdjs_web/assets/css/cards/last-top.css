@@ -1,4 +1,4 @@
-.song-top-container {
+.song-top__container {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
@@ -6,15 +6,10 @@
   justify-content: space-between;
 }
 
-.card-song-top {
+.song-top__song {
   position: relative;
   flex: 0 1 143px;
   margin-bottom: 5px;
-}
-
-.song-art-responsive {
-  height: auto;
-  width: 100%;
 }
 
 .song-top__body {
