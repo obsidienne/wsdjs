@@ -15,7 +15,7 @@
     <div>
     <table class="statistics">
       <thead>
-        <tr><th>Songs</th><th>Djs</th><th>Dominante genre</th></tr>
+        <tr><th>Songs</th><th>Djs</th><th>Genres</th></tr>
       </thead>
       <tbody>
         <tr>

@@ -2,7 +2,6 @@
   <%= render Wsdjs.Web.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
-    <h1><%= Enum.count(@tops) %> tops</h1>
     <%= if Wsdjs.Charts.Policy.can?(:create_top, @conn.assigns.current_user) do %>
       <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
     <% end %>
