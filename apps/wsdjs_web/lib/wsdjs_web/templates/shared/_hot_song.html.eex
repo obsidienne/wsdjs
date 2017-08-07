@@ -1,4 +1,4 @@
-<article class="hot-song card" data-id="<%= @song.id %>">
+<li class="hot-song card" data-id="<%= @song.id %>">
   <a href="<%= url_for_provider(@song) %>" class="hot-song-heading" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
     <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
     <h6 class="song-art-overlay">
@@ -33,4 +33,4 @@
     </a>
 
   </div>
-</article>
+</li>

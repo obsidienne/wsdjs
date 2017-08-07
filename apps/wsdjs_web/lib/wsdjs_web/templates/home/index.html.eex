@@ -8,23 +8,20 @@
   </div>
 </header>
 
-<main role="main">
-  <section class="container container-grid">
-    <%= for {month, songs} <- group_song_by_month(@songs) do %>
-      <h2 class="page-header">
-        <time datetime="<%= Date.to_iso8601(month) %>"><%= month %></time> <small><%= Enum.count(songs) %> suggestions</small>
-      </h2>
-
+<main role="main" class="container">
+  <%= for {month, songs} <- group_song_by_month(@songs) do %>
+    <h4 class="page-header">
+      <time datetime="<%= Date.to_iso8601(month) %>"></time> <small><%= Enum.count(songs) %> suggestions</small>
+    </h4>
+    <ul>
       <%= render_many sort_songs(songs), Wsdjs.Web.SharedView, "_hot_song.html", conn: @conn, as: :song %>
-    <% end %>
-  </section>
+    </ul>
+  <% end %>
 
   <%= if @top do %>
-  <section class="container">
-    <h2 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h2>
-    <div class="song-top-container">
-      <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
-    </div>
-  </section>
+  <h4 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h4>
+  <div class="song-top-container">
+    <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
+  </div>
   <% end %>
 </main>

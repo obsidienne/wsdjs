@@ -1,6 +1,8 @@
 /* HOT SONG CARD */
 
-
+.hot-song {
+  margin-bottom: 15px;
+}
 .hot-song-heading {
   padding: 0;
   position: relative;
