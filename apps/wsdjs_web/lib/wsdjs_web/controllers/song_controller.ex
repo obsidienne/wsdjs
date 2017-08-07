@@ -5,6 +5,8 @@ defmodule Wsdjs.Web.SongController do
 
   alias Wsdjs.Musics
   alias Wsdjs.Musics.{Comment, Song}
+  
+  action_fallback Wsdjs.Web.FallbackController
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns[:current_user]]
@@ -56,18 +58,11 @@ defmodule Wsdjs.Web.SongController do
   def create(conn, %{"song" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
 
-    with true <- Wsdjs.Musics.Policy.can?(:create_song, current_user),
+    with :ok <- Wsdjs.Musics.Policy.can?(:create_song, current_user),
          {:ok, song} <- Musics.create_song(params) do
       conn
       |> put_flash(:info, "#{song.title} created")
       |> redirect(to: song_path(conn, :show, song.id))
-    else
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-      false ->
-        conn
-        |> put_flash(:error, "You don't have the right to suggest a song.")
-        |> redirect(to: home_path(conn, :index))
     end
   end
 

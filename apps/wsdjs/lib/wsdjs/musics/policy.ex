@@ -13,21 +13,21 @@ defmodule Wsdjs.Musics.Policy do
   alias Wsdjs.Musics.Song
   alias Wsdjs.Musics.Playlist
 
-  def can?(:edit_song, %User{admin: true}, %Song{}), do: true
-  def can?(:edit_song, %User{id: id}, %Song{user_id: id}), do: true
-  def can?(:delete_song, %User{admin: true}, %Song{}), do: true
-  def can?(:delete_song, %User{id: id}, %Song{user_id: id}), do: true
+  def can?(:edit_song, %User{admin: true}, %Song{}), do: :ok
+  def can?(:edit_song, %User{id: id}, %Song{user_id: id}), do: :ok
+  def can?(:delete_song, %User{admin: true}, %Song{}), do: :ok
+  def can?(:delete_song, %User{id: id}, %Song{user_id: id}), do: :ok
 
-  def can?(:edit_playlist, %User{admin: true}, %Playlist{}), do: true
-  def can?(:edit_playlist, %User{id: id}, %Playlist{user_id: id}), do: true
-  def can?(:delete_playlist, %User{admin: true}, %Playlist{}), do: true
-  def can?(:delete_playlist, %User{id: id}, %Playlist{user_id: id}), do: true
+  def can?(:edit_playlist, %User{admin: true}, %Playlist{}), do: :ok
+  def can?(:edit_playlist, %User{id: id}, %Playlist{user_id: id}), do: :ok
+  def can?(:delete_playlist, %User{admin: true}, %Playlist{}), do: :ok
+  def can?(:delete_playlist, %User{id: id}, %Playlist{user_id: id}), do: :ok
 
-  def can?(_, _, _), do: false
+  def can?(_, _, _), do: {:error, :unauthorized}
 
-  def can?(:search, %User{}), do: true
-  def can?(:list_user_suggestions, %User{}), do: true
-  def can?(:create_playlist, %User{}), do: true
-  def can?(:create_song, %User{}), do: true
-  def can?(_, _), do: false
+  def can?(:search, %User{}), do: :ok
+  def can?(:list_user_suggestions, %User{}), do: :ok
+  def can?(:create_playlist, %User{}), do: :ok
+  def can?(:create_song, %User{}), do: :ok
+  def can?(_, _), do: {:error, :unauthorized}
 end

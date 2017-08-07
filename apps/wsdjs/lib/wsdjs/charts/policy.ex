@@ -7,15 +7,15 @@ defmodule Wsdjs.Charts.Policy do
   @doc """
   Admin can create a top
   """
-  def can?(:create_top, %User{admin: :true}), do: true
+  def can?(:create_top, %User{admin: :true}), do: :ok
 
   @doc """
   Admin can delete a top
   """
-  def can?(:delete_top, %User{admin: :true}), do: true
+  def can?(:delete_top, %User{admin: :true}), do: :ok
 
   @doc """
   By default everything is denied
   """
-  def can?(_, _), do: false
+  def can?(_, _), do: {:error, :unauthorized}
 end
