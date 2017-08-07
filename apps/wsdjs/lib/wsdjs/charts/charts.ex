@@ -26,7 +26,7 @@ defmodule Wsdjs.Charts do
     |> Repo.preload(ranks: Charts.list_rank())
     |> Repo.preload(ranks: :song)
     |> Repo.preload(ranks: [song: :art])
-    |> Repo.preload(ranks: [song: :user])
+    |> Repo.preload(ranks: [song: [user: :avatar]])
   end
 
   @doc """

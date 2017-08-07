@@ -1,20 +1,17 @@
-<article class="card-song-top">
+<li class="card-song-top">
   <header>
     <img src="<%= art_url()%>" data-src="<%= art_url(@rank.song.art) %>" class="cld-responsive song-art-responsive" alt="<%= song_art_alt(@rank.song) %>"/>
   </header>
 
-  <%= link to: song_path(@conn, :show, @rank.song), class: "text-muted card-song-body" do %>
-    <span class="card-song-top-position"><%= @rank.position %></span>
-    <span class="text-ellipsis"><%= @rank.song.title %></span>
-    <span class="text-ellipsis">suggested by <%= @rank.song.user.name %></span>
-    <div>
-      <br/>
-      <%= if @rank.song.genre do %>
-        <span class="label label-default small"><%= @rank.song.genre %></span>
-      <% end %>
+  <%= link to: song_path(@conn, :show, @rank.song), class: "text-muted song-top__body" do %>
+    <span class="h3"><%= @rank.position %></span>
+    <span class="h6"><%= @rank.song.title %></span>
+    <footer class="small">
+      <span class="label label-default small"><%= @rank.song.genre %></span>
       <%= if @rank.song.bpm do %>
         <span class="label label-primary small"><%= @rank.song.bpm %> bpm</span>
       <% end %>
-    </div>
+      <img src="<%= avatar_url()%>" data-src="<%= avatar_url(@rank.song.user.avatar) %>" class="cld-responsive song-top__footer__avatar tippy" title="<%= user_displayed_name(@rank.song.user) %>"/> 
+    </footer>
   <% end %>
-</article>
+</li>

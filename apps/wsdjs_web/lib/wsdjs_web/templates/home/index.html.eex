@@ -20,8 +20,8 @@
 
   <%= if @top do %>
   <h4 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h4>
-  <div class="song-top-container">
+  <ol class="song-top-container">
     <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
-  </div>
+  </ol>
   <% end %>
 </main>
