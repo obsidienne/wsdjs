@@ -4,6 +4,7 @@
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
+  max-width: 414px;
 }
 
 .container-comments {
