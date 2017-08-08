@@ -8,38 +8,35 @@
   </style>
   <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
-  <div class="song-header-container">
-    <div>
-      <div class="song-header-art">
-        <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive responsive" alt="<%= song_art_alt(@song) %>"/>
-      </div>
-      <div class="song-header-details">
-        <h5 class="song-title"><%= @song.title %></h5>
-        <h6 class="song-artist"><span class="text-muted">by</span> <%= @song.artist %></h6>
-        <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %></div>
-        <div class="text-muted">
-          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>"></time>
-        </div>
-        <div class="song-tags">
-          <span class="label label-default"><%= @song.genre %></span>
-          <%= if @song.bpm > 0 do %>
-          <span class="label label-primary"><%= @song.bpm %> bpm</span>
-          <% end %>
-          <%= if @song.hidden do %>
-            <span class="label label-default small">hidden song</span>
-          <% end %>
-          <%= if @song.instant_hit do %>
-            <span class="label label-default small">instant hit</span>
-          <% end %>
-        </div>
-        <%= if @song.url do %>
-          <a href="<%= url_for_provider(@song) %>" class="btn btn-primary" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
+  <div class="song-page container">
+    <div class="song-page__art">
+      <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive responsive" alt="<%= song_art_alt(@song) %>"/>
+    </div>
+    <div class="song-page__details">
+      <h5 class="song-page__details__title"><%= @song.title %></h5>
+      <h6 class="song-page__details__artist"><span class="text-muted">by</span> <%= @song.artist %></h6>
+      <h6 class="text-muted small"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %>
+        <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>"></time>
+      </h6>
+      <div class="song-tags">
+        <span class="label label-default"><%= @song.genre %></span>
+        <%= if @song.bpm > 0 do %>
+        <span class="label label-primary"><%= @song.bpm %> bpm</span>
+        <% end %>
+        <%= if @song.hidden do %>
+          <span class="label label-default small">hidden song</span>
+        <% end %>
+        <%= if @song.instant_hit do %>
+          <span class="label label-default small">instant hit</span>
         <% end %>
       </div>
+      <%= if @song.url do %>
+        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
+      <% end %>
     </div>
   </div>
 
-  <nav class="container content-section-nav-left">
+  <nav class="container">
     <ul class="profile-section-header content-section-header">
       <li class="content-section-nav-item active">Overview</li>
     </ul>
@@ -59,8 +56,6 @@
   </div>
 
   <aside>
-
-
     <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
     <%= if Wsdjs.Musics.Policy.can?(:edit_song, @current_user, @song) do %>
     <div class="song-show-actions">
@@ -72,4 +67,5 @@
     <% end %>
   </aside>
 </section>
+
 </main>
