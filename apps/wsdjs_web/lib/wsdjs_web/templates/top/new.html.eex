@@ -2,7 +2,7 @@
   <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 	<section class="container">
 		<nav>
-			<ol class="cd-multi-steps text-center">
+			<ol class="top-steps text-center">
 				<li class="current"><em>Create</em></li>
 				<li><em>Check</em></li>
 				<li><em>Voting</em></li>

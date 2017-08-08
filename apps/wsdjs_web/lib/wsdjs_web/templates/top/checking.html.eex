@@ -12,7 +12,7 @@
     <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
     <section>
       <nav>
-        <ol class="cd-multi-steps text-center">
+        <ol class="top-steps text-center">
           <li class="visited"><em>Create</em></li>
           <li class="current"><em>Check</em></li>
           <li><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
