@@ -5,4 +5,4 @@ defmodule WsdjsWeb.UserListTest do
 
   test "users have names", %{session: session} do
   end
-end
+end 
