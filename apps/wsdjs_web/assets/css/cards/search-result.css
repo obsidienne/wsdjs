@@ -1,33 +1,7 @@
-.minicard-song {
-  border-radius: 0;
-  margin: 0;
-  display: flex;
-}
 .search-result {
   margin: 7px 0;
 }
-.search-results .search-result:first-child {
+
+.search-result:first-child {
   margin: 0;
-}
-
-.minicard-song-body {
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.minicard-footer {
-  margin-top: auto;
-  margin-bottom: 0;
-  margin-bottom: 5px;
-}
-
-.minicard-song-heading {
-  padding: 0;
-  width: 90px;
-  border: 0;
-  flex: 0 0 90px;
 }

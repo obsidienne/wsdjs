@@ -7,13 +7,11 @@
   </div>
 </header>
 
-<main role="main">
-  <div class="container">
-    <section>
-      <h4>Deejay's pick</h4>
-      <ul>
-        <%= render_many @songs, WsdjsWeb.SharedView, "_song_minicard.html", conn: @conn, as: :song %>
-      </ul>
-    </section>
-  </div>
+<main role="main" class="container">
+  <section>
+    <h4>Deejay's pick</h4>
+    <ul>
+      <%= render_many @songs, WsdjsWeb.SharedView, "_song_minicard.html", conn: @conn, as: :song %>
+    </ul>
+  </section>
 </main>
