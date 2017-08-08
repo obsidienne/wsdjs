@@ -27,7 +27,7 @@ export default class View {
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
 
     // autolinks in comments
-    var els = document.querySelectorAll(".comment-content");
+    var els = document.querySelectorAll(".comment__content");
     for (var i = 0; i < els.length; i++) {
       els[i].innerHTML = els[i].innerHTML.autoLink();
     }
@@ -52,7 +52,7 @@ export default class View {
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        var container = document.querySelector(".container-comments ul");
+        var container = document.getElementById("comments-container");
         var tpl = self._createHtmlContent(JSON.parse(this.response).data);
         container.insertAdjacentHTML('beforeend', tpl);
         new timeago().render(document.querySelectorAll("time.timeago"));
@@ -72,16 +72,16 @@ export default class View {
   _createHtmlContent(params) {
     return `
     <li class="comment">
-      <div class="comment-avatar">
-        <img src="${params.commented_by_avatar}" data-src="${params.commented_by_avatar}"  class="img-comment cld-responsive">
+      <div class="comment__avatar">
+        <img src="${params.commented_by_avatar}" data-src="${params.commented_by_avatar}"  class="cld-responsive comment__avatar__img">
       </div>
 
-      <div class="comment-box">
-        <header class="comment-head">
+      <div class="comment__body">
+        <header class="comment__header">
           <a class="comment-author" href="${params.commented_by_path}">${params.commented_by}</a>
-          <time class="timeago" title="${params.commented_at}" datetime="${params.commented_at}">${params.commented_at}</time>
+          <time class="timeago small" title="${params.commented_at}" datetime="${params.commented_at}"></time>
         </header>
-        <div class="comment-content">${params.text}</div>
+        <div class="comment__content">${params.text}</div>
       </div>
     </li>`;
   }

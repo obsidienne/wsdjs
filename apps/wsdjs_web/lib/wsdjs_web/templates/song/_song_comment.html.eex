@@ -1,15 +1,15 @@
 <li class="comment">
-  <div class="comment-avatar">
-    <img src="<%= avatar_url() %>" data-src="<%= avatar_url(@comment.user.avatar) %>"  class="img-comment cld-responsive"  alt="<%= user_avatar_alt(@comment.user) %>">
+  <div class="comment__avatar">
+    <img src="<%= avatar_url() %>" data-src="<%= avatar_url(@comment.user.avatar) %>"  class="cld-responsive comment__avatar__img" alt="<%= user_avatar_alt(@comment.user) %>">
   </div>
 
-  <div class="comment-box">
-    <header class="comment-head">
-      <a class="comment-author" href="<%= user_path(@conn, :show, @comment.user) %>"><%= @comment.user.name %></a>
-        <time class="timeago" title="<%= Timex.format!(Timex.to_datetime(@comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(@comment.inserted_at) %>"><%= utc_to_local(@comment.inserted_at)   %></time>
+  <div class="comment__body">
+    <header class="comment__header">
+      <a href="<%= user_path(@conn, :show, @comment.user) %>"><%= @comment.user.name %></a>
+      <time class="timeago small" title="<%= Timex.format!(Timex.to_datetime(@comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(@comment.inserted_at) %>"></time>
     </header>
-    <div class="comment-content">
-        <%= @comment.text %>
+    <div class="comment__content">
+      <%= @comment.text %>
     </div>
   </div>
 </li>

@@ -7,15 +7,7 @@
   max-width: 414px;
 }
 
-.container-comments {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
 
-.container-comments > * {
-  flex: 0 1 var(--container-comments-width);
-}
 
 .user-profile-container {
   display: flex;
