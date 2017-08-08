@@ -1,11 +1,11 @@
-defmodule Wsdjs.Web.Endpoint do
+defmodule WsdjsWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :wsdjs_web
 
   if Application.get_env(:wsdjs, :sql_sandbox) do
     plug Phoenix.Ecto.SQL.Sandbox
   end
 
-  socket "/socket", Wsdjs.Web.UserSocket
+  socket "/socket", WsdjsWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -42,7 +42,7 @@ defmodule Wsdjs.Web.Endpoint do
     key: "_wsdjs_web_key",
     signing_salt: "TqBKF7iB"
 
-  plug Wsdjs.Web.Router
+  plug WsdjsWeb.Router
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

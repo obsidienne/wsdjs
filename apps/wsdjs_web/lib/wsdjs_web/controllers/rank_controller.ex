@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.RankController do
+defmodule WsdjsWeb.RankController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
   alias Wsdjs.Charts
 
   def update(conn, %{"id" => id, "rank" => rank_params}) do

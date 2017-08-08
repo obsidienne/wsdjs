@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.VerifyHeader do
+defmodule WsdjsWeb.VerifyHeader do
   @moduledoc """
     This modules aims to authenticate the user in case of API call.
     We use the authorization header to retrieve the Bearer and check

@@ -7,7 +7,7 @@
 
 <title>Hello Wsdjs!</title>
 
-<meta property="og:url" content="<%= Wsdjs.Web.Endpoint.url %><%= @conn.request_path %>">
+<meta property="og:url" content="<%= WsdjsWeb.Endpoint.url %><%= @conn.request_path %>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="<%= @song.title %>">
 <meta property="og:image" content="<%= art_url(@song.art) %>">
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="worldswingdjs">
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:url" content="<%= Wsdjs.Web.Endpoint.url %><%= @conn.request_path %>">
+<meta name="twitter:url" content="<%= WsdjsWeb.Endpoint.url %><%= @conn.request_path %>">
 <meta name="twitter:title" content="<%= @song.title %>">
 <meta name="twitter:description" content="<%= song_full_description(@song) %>">
 <meta name="twitter:image" content="<%= art_url(@song.art) %>">

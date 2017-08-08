@@ -1,12 +1,12 @@
-defmodule Wsdjs.Web.SongController do
+defmodule WsdjsWeb.SongController do
   @moduledoc false
 
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   alias Wsdjs.Musics
   alias Wsdjs.Musics.{Comment, Song}
   
-  action_fallback Wsdjs.Web.FallbackController
+  action_fallback WsdjsWeb.FallbackController
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns[:current_user]]

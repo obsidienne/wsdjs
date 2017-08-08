@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.ConnCase do
+defmodule WsdjsWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,10 +19,10 @@ defmodule Wsdjs.Web.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      import Wsdjs.Web.Router.Helpers
+      import WsdjsWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Wsdjs.Web.Endpoint
+      @endpoint WsdjsWeb.Endpoint
     end
   end
 

@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.EnsureAuthenticated do
+defmodule WsdjsWeb.EnsureAuthenticated do
   @moduledoc """
     plug PhoenixTokenPlug.EnsureAuthenticated,
       handler_fn: :handle_error      # (required) Customize the handler function
@@ -13,7 +13,7 @@ defmodule Wsdjs.Web.EnsureAuthenticated do
     case conn.assigns[:current_user] do
       nil ->
         conn = conn |> halt
-        apply(Wsdjs.Web.Unauthenticated, handler_fn, [conn, conn.params])
+        apply(WsdjsWeb.Unauthenticated, handler_fn, [conn, conn.params])
       _ ->
         conn
     end

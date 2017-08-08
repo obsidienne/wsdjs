@@ -1,11 +1,11 @@
-defmodule Wsdjs.Web.Api.V1.CommentController do
+defmodule WsdjsWeb.Api.V1.CommentController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   alias Wsdjs.{Musics, Accounts}
   alias Wsdjs.Musics.Comment
 
-  action_fallback Wsdjs.Web.Api.V1.FallbackController
+  action_fallback WsdjsWeb.Api.V1.FallbackController
 
   def create(conn, %{"song_id" => song_id, "comment" => params}) do
     current_user = conn.assigns[:current_user]

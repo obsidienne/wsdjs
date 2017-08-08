@@ -1,3 +1,3 @@
-defmodule Wsdjs.Web.AccountView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.AccountView do
+  use WsdjsWeb, :view
 end

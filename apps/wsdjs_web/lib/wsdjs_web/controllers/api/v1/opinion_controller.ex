@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.Api.V1.OpinionController do
+defmodule WsdjsWeb.Api.V1.OpinionController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   plug :put_layout, false when action in [:create, :delete]
 

@@ -1,8 +1,8 @@
-defmodule Wsdjs.Web.MagicLink do
+defmodule WsdjsWeb.MagicLink do
   @moduledoc """
     Service with functions for creating and signing in with magic link tokens.
   """
-  alias Wsdjs.Web.{Endpoint, Mailer, AuthenticationEmail}
+  alias WsdjsWeb.{Endpoint, Mailer, AuthenticationEmail}
   alias Wsdjs.Accounts
   alias Phoenix.Token
 

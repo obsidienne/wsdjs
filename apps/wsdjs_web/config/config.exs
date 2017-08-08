@@ -7,15 +7,15 @@ use Mix.Config
 
 # General application configuration
 config :wsdjs_web,
-  namespace: Wsdjs.Web,
+  namespace: WsdjsWeb,
   ecto_repos: [Wsdjs.Repo]
 
 # Configures the endpoint
-config :wsdjs_web, Wsdjs.Web.Endpoint,
+config :wsdjs_web, WsdjsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "vJT1iDt6U73/4jsybB6t5FSGqEzxnzfRL4SExYeGc3yPpBSn1/U3JmfDlrsN+9n9",
-  render_errors: [view: Wsdjs.Web.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Wsdjs.Web.PubSub,
+  render_errors: [view: WsdjsWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: WsdjsWeb.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

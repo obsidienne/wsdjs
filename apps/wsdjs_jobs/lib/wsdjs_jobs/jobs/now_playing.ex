@@ -10,7 +10,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   use HTTPoison.Base
 
   alias Phoenix.PubSub
-  alias Wsdjs.Web.CloudinaryHelper
+  alias WsdjsWeb.CloudinaryHelper
 
   @expected_fields ~w(
     title artist album cover started_at end_at duration buy_link
@@ -82,7 +82,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
           |> filled_from_db(current_song)
           |> :queue.in(queue)
 
-      PubSub.broadcast Wsdjs.Web.PubSub, "notifications:now_playing", :new_played_song
+      PubSub.broadcast WsdjsWeb.PubSub, "notifications:now_playing", :new_played_song
 
       if :queue.len(queue) > 9 do
         :queue.drop(queue)

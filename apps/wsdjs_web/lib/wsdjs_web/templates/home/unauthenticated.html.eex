@@ -1,5 +1,5 @@
 <header class="hero hot-hero">
-  <%= render Wsdjs.Web.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
     <h4>World Swing DeeJays</h4>
@@ -12,7 +12,7 @@
     <section>
       <h4>Deejay's pick</h4>
       <ul>
-        <%= render_many @songs, Wsdjs.Web.SharedView, "_song_minicard.html", conn: @conn, as: :song %>
+        <%= render_many @songs, WsdjsWeb.SharedView, "_song_minicard.html", conn: @conn, as: :song %>
       </ul>
     </section>
   </div>

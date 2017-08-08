@@ -1,3 +1,3 @@
-defmodule Wsdjs.Web.SessionView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.SessionView do
+  use WsdjsWeb, :view
 end

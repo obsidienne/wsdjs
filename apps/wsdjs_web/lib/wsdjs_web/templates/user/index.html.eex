@@ -1,4 +1,4 @@
-<%= render Wsdjs.Web.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+<%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
 <main class="container">
   <h1>Listing Users</h1>

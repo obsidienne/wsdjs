@@ -1,5 +1,5 @@
 <header class="hero">
-  <%= render Wsdjs.Web.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
     <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small></h3>

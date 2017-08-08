@@ -1,5 +1,5 @@
-defmodule Wsdjs.Web.TopView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.TopView do
+  use WsdjsWeb, :view
 
   def current_user_vote(current_user_votes, rank) do
     current_user_vote = Enum.find(current_user_votes, fn(x) -> x.song_id == rank.song.id  end)

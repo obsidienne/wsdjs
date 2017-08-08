@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.UserController do
+defmodule WsdjsWeb.UserController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   alias Wsdjs.Accounts
   alias Wsdjs.Musics

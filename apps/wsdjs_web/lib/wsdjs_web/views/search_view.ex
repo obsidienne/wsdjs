@@ -1,3 +1,3 @@
-defmodule Wsdjs.Web.SearchView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.SearchView do
+  use WsdjsWeb, :view
 end

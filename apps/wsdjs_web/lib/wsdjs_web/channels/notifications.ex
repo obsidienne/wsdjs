@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.NotificationsChannel do
+defmodule WsdjsWeb.NotificationsChannel do
   @moduledoc """
   This modules notifies all radio clients when a new song is played.
   """

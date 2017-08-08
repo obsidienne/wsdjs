@@ -1,5 +1,5 @@
-defmodule Wsdjs.Web.Router do
-  use Wsdjs.Web, :router
+defmodule WsdjsWeb.Router do
+  use WsdjsWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html", "text"]
@@ -7,20 +7,20 @@ defmodule Wsdjs.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Wsdjs.Web.VerifySession
+    plug WsdjsWeb.VerifySession
   end
 
   pipeline :browser_auth do
-    plug Wsdjs.Web.EnsureAuthenticated, handler_fn: :session_call
+    plug WsdjsWeb.EnsureAuthenticated, handler_fn: :session_call
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug Wsdjs.Web.VerifyHeader
+    plug WsdjsWeb.VerifyHeader
   end
 
   pipeline :api_auth do
-    plug Wsdjs.Web.EnsureAuthenticated, handler_fn: :api_call
+    plug WsdjsWeb.EnsureAuthenticated, handler_fn: :api_call
   end
 
   if Mix.env == :dev do
@@ -28,7 +28,7 @@ defmodule Wsdjs.Web.Router do
     forward "/sent_emails", Bamboo.EmailPreviewPlug
   end
 
-  scope "/", Wsdjs.Web do
+  scope "/", WsdjsWeb do
     pipe_through [:browser, :browser_auth]
 
     resources "/songs", SongController, only: [:index, :create, :new, :delete]
@@ -40,7 +40,7 @@ defmodule Wsdjs.Web.Router do
     resources "/sessions", SessionController, only: [:delete]
   end
 
-  scope "/", Wsdjs.Web do
+  scope "/", WsdjsWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", HomeController, :index
@@ -65,7 +65,7 @@ defmodule Wsdjs.Web.Router do
     end
   end
 
-  scope "/api", as: :api, alias: :'Wsdjs.Web' do
+  scope "/api", as: :api, alias: :'WsdjsWeb' do
     pipe_through [:api]
 
     scope "/", alias: Api do

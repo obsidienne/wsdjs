@@ -1,7 +1,7 @@
-defmodule Wsdjs.Web.Api.V1.OpinionView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.Api.V1.OpinionView do
+  use WsdjsWeb, :view
 
-  alias Wsdjs.Web.Api.V1.OpinionView
+  alias WsdjsWeb.Api.V1.OpinionView
 
   def render("index.json", %{song: song, opinions: opinions, current_user: current_user}) do
     current_opinion = Enum.find(opinions, nil, fn(x) -> x.user_id == current_user.id end)
@@ -30,7 +30,7 @@ defmodule Wsdjs.Web.Api.V1.OpinionView do
   def render("opinion.json", %{opinion: opinion}) do
     %{
       name: user_displayed_name(opinion.user),
-      url: user_path(Wsdjs.Web.Endpoint, :show, opinion.user),
+      url: user_path(WsdjsWeb.Endpoint, :show, opinion.user),
       avatar: avatar_url(opinion.user.avatar)
     }
   end
@@ -40,15 +40,15 @@ defmodule Wsdjs.Web.Api.V1.OpinionView do
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "POST",
-      url: api_song_opinion_path(Wsdjs.Web.Endpoint, :create, song, kind: kind)
+      url: api_song_opinion_path(WsdjsWeb.Endpoint, :create, song, kind: kind)
     }
   end
 
   defp render_opinion(opinions, kind, song, %Wsdjs.Musics.Opinion{} = current) do
     url = if current.kind == kind do
-      api_opinion_path(Wsdjs.Web.Endpoint, :delete, current.id)
+      api_opinion_path(WsdjsWeb.Endpoint, :delete, current.id)
     else
-      api_song_opinion_path(Wsdjs.Web.Endpoint, :create, song, kind: kind)
+      api_song_opinion_path(WsdjsWeb.Endpoint, :create, song, kind: kind)
     end
 
     method = if current.kind == kind do "DELETE" else "POST" end

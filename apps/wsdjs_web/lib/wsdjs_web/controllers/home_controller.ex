@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.HomeController do
+defmodule WsdjsWeb.HomeController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   alias Wsdjs.{Musics, Charts}
 

@@ -1,5 +1,4 @@
 defmodule Wsdjs.Musics.Song do
-  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
@@ -32,9 +31,9 @@ defmodule Wsdjs.Musics.Song do
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%Song{} = song, attrs) do
+    song
+    |> cast(attrs, @allowed_fields)
     |> validate_required(@required_fields)
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
@@ -42,7 +41,7 @@ defmodule Wsdjs.Musics.Song do
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
-    |> put_change(:video_id, Wsdjs.Helpers.Provider.extract(params["url"]))
+    |> put_change(:video_id, Wsdjs.Helpers.Provider.extract(attrs["url"]))
   end
 
   def genre, do: @validated_genre

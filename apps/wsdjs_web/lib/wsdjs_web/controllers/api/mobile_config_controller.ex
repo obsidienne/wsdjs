@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.Api.MobileConfigController do
+defmodule WsdjsWeb.Api.MobileConfigController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   require Logger
 

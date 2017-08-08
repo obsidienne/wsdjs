@@ -1,5 +1,5 @@
 <header class="hero">
-  <%= render Wsdjs.Web.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
     <%= if Wsdjs.Charts.Policy.can?(:create_top, @conn.assigns.current_user) do %>

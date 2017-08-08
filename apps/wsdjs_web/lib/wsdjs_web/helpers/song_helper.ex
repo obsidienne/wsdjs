@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.SongHelper do
+defmodule WsdjsWeb.SongHelper do
   @moduledoc """
   This modules contains all helpers for a %Song{}.
   """

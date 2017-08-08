@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.CloudinaryHelper do
+defmodule WsdjsWeb.CloudinaryHelper do
   @moduledoc """
   This modules contains all helpers in connection with Cloudinary.
   Notably the html tag and url helpers.

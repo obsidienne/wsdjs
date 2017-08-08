@@ -1,5 +1,5 @@
 <header class="hero hot-hero">
-  <%= render Wsdjs.Web.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
     <%= if Wsdjs.Musics.Policy.can?(:create_song, @conn.assigns.current_user) do %>
@@ -14,7 +14,7 @@
       <time datetime="<%= Date.to_iso8601(month) %>"></time> <small><%= Enum.count(songs) %> suggestions</small>
     </h4>
     <ul>
-      <%= render_many sort_songs(songs), Wsdjs.Web.SharedView, "_hot_song.html", conn: @conn, as: :song %>
+      <%= render_many sort_songs(songs), WsdjsWeb.SharedView, "_hot_song.html", conn: @conn, as: :song %>
     </ul>
   <% end %>
 

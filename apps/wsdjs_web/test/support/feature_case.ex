@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.FeatureCase do
+defmodule WsdjsWeb.FeatureCase do
   use ExUnit.CaseTemplate
 
   using do
@@ -10,7 +10,7 @@ defmodule Wsdjs.Web.FeatureCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import Wsdjs.Web.Router.Helpers
+      import WsdjsWeb.Router.Helpers
     end
   end
 

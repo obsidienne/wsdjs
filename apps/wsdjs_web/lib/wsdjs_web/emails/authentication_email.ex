@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.AuthenticationEmail do
+defmodule WsdjsWeb.AuthenticationEmail do
   @moduledoc false
-  use Bamboo.Phoenix, view: Wsdjs.Web.EmailView
+  use Bamboo.Phoenix, view: WsdjsWeb.EmailView
 
   import Bamboo.Email
 

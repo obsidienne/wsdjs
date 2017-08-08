@@ -1,5 +1,5 @@
-defmodule Wsdjs.Web.SongControllerTest do
-  use Wsdjs.Web.ConnCase
+defmodule WsdjsWeb.SongControllerTest do
+  use WsdjsWeb.ConnCase
 
   alias Wsdjs.Musics
 

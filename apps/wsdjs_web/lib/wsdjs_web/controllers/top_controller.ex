@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.TopController do
+defmodule WsdjsWeb.TopController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   alias Wsdjs.Charts
   alias Wsdjs.Charts.Top

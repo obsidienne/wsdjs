@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.ChannelCase do
+defmodule WsdjsWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,7 +21,7 @@ defmodule Wsdjs.Web.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint Wsdjs.Web.Endpoint
+      @endpoint WsdjsWeb.Endpoint
     end
   end
 

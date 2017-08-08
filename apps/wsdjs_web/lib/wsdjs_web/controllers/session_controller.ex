@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.SessionController do
+defmodule WsdjsWeb.SessionController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   plug :put_layout, "login.html"
 
@@ -9,7 +9,7 @@ defmodule Wsdjs.Web.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email}}) do
-    case Wsdjs.Web.MagicLink.provide_token(email) do
+    case WsdjsWeb.MagicLink.provide_token(email) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")
@@ -22,7 +22,7 @@ defmodule Wsdjs.Web.SessionController do
   end
 
   def show(conn, %{"token" => token}) do
-    case Wsdjs.Web.MagicLink.verify_magic_link(token) do
+    case WsdjsWeb.MagicLink.verify_magic_link(token) do
       {:ok, user} ->
         conn
         |> assign(:current_user, user)

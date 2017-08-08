@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.Unauthenticated do
+defmodule WsdjsWeb.Unauthenticated do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   def api_call(conn, _params) do
     conn

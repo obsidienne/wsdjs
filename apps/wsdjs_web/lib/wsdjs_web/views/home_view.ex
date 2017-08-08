@@ -1,5 +1,5 @@
-defmodule Wsdjs.Web.HomeView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.HomeView do
+  use WsdjsWeb, :view
 
   def group_song_by_month(songs) do
     songs

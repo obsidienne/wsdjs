@@ -10,7 +10,7 @@
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) ||
-        render(Wsdjs.Web.LayoutView, "meta.html", assigns) %>
+        render(WsdjsWeb.LayoutView, "meta.html", assigns) %>
 
     <%= if Mix.env == :prod, do: render "_piwik.html" %>
   </head>

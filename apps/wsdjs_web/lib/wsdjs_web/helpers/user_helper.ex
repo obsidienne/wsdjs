@@ -1,8 +1,8 @@
-defmodule Wsdjs.Web.UserHelper do
+defmodule WsdjsWeb.UserHelper do
   @moduledoc """
   This modules contains all helpers for a %User{}.
   """
-  import Wsdjs.Web.Router.Helpers
+  import WsdjsWeb.Router.Helpers
   alias Wsdjs.Accounts.User
 
   def user_displayed_name(%User{name: name, djname: djname}) when is_binary(djname) and is_binary(name), do: "#{name} (#{djname})"

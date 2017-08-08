@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.VoteController do
+defmodule WsdjsWeb.VoteController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   def create(conn, %{"votes" => votes_params, "top_id" => top_id} = params) do
     current_user = conn.assigns[:current_user]

@@ -2,10 +2,12 @@ defmodule Wsdjs.Umbrella.Mixfile do
   use Mix.Project
 
   def project do
-    [apps_path: "apps",
-     start_permanent: Mix.env == :prod,
-     deps: deps(),
-     aliases: aliases()]
+    [
+      apps_path: "apps",
+      start_permanent: Mix.env == :prod,
+      deps: deps(),
+      aliases: aliases()
+    ]
   end
 
   # Dependencies can be Hex packages:

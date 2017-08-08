@@ -1,3 +1,3 @@
-defmodule Wsdjs.Web.LayoutViewTest do
-  use Wsdjs.Web.ConnCase, async: true
+defmodule WsdjsWeb.LayoutViewTest do
+  use WsdjsWeb.ConnCase, async: true
 end

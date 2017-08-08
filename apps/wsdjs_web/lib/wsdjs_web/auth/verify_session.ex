@@ -1,4 +1,4 @@
-defmodule Wsdjs.Web.VerifySession do
+defmodule WsdjsWeb.VerifySession do
   @moduledoc """
     This modules aims to authenticate the user in case of web browsing.
     We use the session to retrieve the user id and load the corresponding %User{} in conn.

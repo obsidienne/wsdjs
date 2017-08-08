@@ -1,3 +1,3 @@
-defmodule Wsdjs.Web.SharedView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.SharedView do
+  use WsdjsWeb, :view
 end

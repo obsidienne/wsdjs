@@ -1,6 +1,6 @@
-defmodule Wsdjs.Web.SearchController do
+defmodule WsdjsWeb.SearchController do
   @moduledoc false
-  use Wsdjs.Web, :controller
+  use WsdjsWeb, :controller
 
   plug :put_layout, false
 

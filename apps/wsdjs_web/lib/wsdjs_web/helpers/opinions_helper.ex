@@ -1,13 +1,13 @@
- defmodule Wsdjs.Web.OpinionsHelper do
+ defmodule WsdjsWeb.OpinionsHelper do
   @moduledoc """
   This modules contains all helpers for a %Opinion{}. 
   Notably the html tag helpers.
   """
   use Phoenix.HTML
 
-  import Wsdjs.Web.Router.Helpers
+  import WsdjsWeb.Router.Helpers
 
-  alias Wsdjs.Web.{UserHelper, CloudinaryHelper}
+  alias WsdjsWeb.{UserHelper, CloudinaryHelper}
 
   def opinion_link_no_tooltip(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)

@@ -1,12 +1,12 @@
-defmodule Wsdjs.Web do
+defmodule WsdjsWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Wsdjs.Web, :controller
-      use Wsdjs.Web, :view
+      use WsdjsWeb, :controller
+      use WsdjsWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,17 +18,17 @@ defmodule Wsdjs.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: Wsdjs.Web
+      use Phoenix.Controller, namespace: WsdjsWeb
       import Plug.Conn
-      import Wsdjs.Web.Router.Helpers
-      import Wsdjs.Web.Gettext
+      import WsdjsWeb.Router.Helpers
+      import WsdjsWeb.Gettext
     end
   end
 
   def view do
     quote do
       use Phoenix.View, root: "lib/wsdjs_web/templates",
-                        namespace: Wsdjs.Web
+                        namespace: WsdjsWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -36,15 +36,15 @@ defmodule Wsdjs.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Wsdjs.Web.Router.Helpers
-      import Wsdjs.Web.ErrorHelpers
-      import Wsdjs.Web.Gettext
+      import WsdjsWeb.Router.Helpers
+      import WsdjsWeb.ErrorHelpers
+      import WsdjsWeb.Gettext
 
       # Import custom helpers
-      import Wsdjs.Web.OpinionsHelper
-      import Wsdjs.Web.SongHelper
-      import Wsdjs.Web.UserHelper
-      import Wsdjs.Web.CloudinaryHelper
+      import WsdjsWeb.OpinionsHelper
+      import WsdjsWeb.SongHelper
+      import WsdjsWeb.UserHelper
+      import WsdjsWeb.CloudinaryHelper
     end
   end
 
@@ -59,7 +59,7 @@ defmodule Wsdjs.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import Wsdjs.Web.Gettext
+      import WsdjsWeb.Gettext
     end
   end
 

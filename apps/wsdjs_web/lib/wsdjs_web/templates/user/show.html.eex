@@ -1,4 +1,4 @@
-<%= render Wsdjs.Web.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+<%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
 <main id="user-profile-container" class="container user-profile-container">
   <section>
@@ -86,7 +86,7 @@
   
     <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) do %>
     <ul id="song-list" class="user-profile-song-container" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
-      <%= render_many @songs, Wsdjs.Web.SharedView, "_song.html", conn: @conn, as: :song %>
+      <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song %>
     </ul>
     <% end %>
   </section>

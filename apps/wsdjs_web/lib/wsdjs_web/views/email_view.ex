@@ -1,3 +1,3 @@
-defmodule Wsdjs.Web.EmailView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.EmailView do
+  use WsdjsWeb, :view
 end

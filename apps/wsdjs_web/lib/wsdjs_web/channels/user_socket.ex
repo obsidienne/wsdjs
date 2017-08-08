@@ -1,8 +1,8 @@
-defmodule Wsdjs.Web.UserSocket do
+defmodule WsdjsWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "notifications:*", Wsdjs.Web.NotificationsChannel
+  channel "notifications:*", WsdjsWeb.NotificationsChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

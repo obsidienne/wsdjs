@@ -30,5 +30,4 @@ defmodule Wsdjs.Musics.Opinion do
   def build(%{kind: _kind, user_id: _user_id, song_id: _song_id} = params) do
     changeset(%Wsdjs.Musics.Opinion{}, params)
   end
-
 end

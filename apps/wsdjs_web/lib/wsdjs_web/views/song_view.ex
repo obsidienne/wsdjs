@@ -1,5 +1,5 @@
-defmodule Wsdjs.Web.SongView do
-  use Wsdjs.Web, :view
+defmodule WsdjsWeb.SongView do
+  use WsdjsWeb, :view
 
   alias Wsdjs.Accounts
 
