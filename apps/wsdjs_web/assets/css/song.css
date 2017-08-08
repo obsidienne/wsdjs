@@ -1,3 +1,6 @@
+/****************************
+  song-page
+****************************/
 .song-page {
   display: flex;
   justify-content: center;
@@ -18,54 +21,18 @@
   display: flex;
   flex-direction: column;
 }
-
+.song-page__details .btn {
+  margin-top: 15px;
+}
 .song-page__details__artist {
   margin-top: 0;
 } 
-
-
-
-.song-page .btn {
-  margin-top: auto;
+.song-page__tags {
+  margin-top: 15px;
 }
 .song-show-actions > * {
   display: inline-block;
 }
-.song-tags {
-  margin-top: 15px;
-}
-
-@media (max-width: 767px) {
-  .song-page__details .btn {
-    margin-top: 15px;
-  }
-}
-
-.switch-radio {
-  width: 50px;
-  height: 50px;
-}
-
-.song-labels {
-  margin-top: 15px;
-}
-.song-page__art-background {
-  position:absolute;
-  top:0;
-  left:0;
-  display: block;
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-}
-
-
-.song-header .song-title {
-  font-size: 1.5em;
-  line-height: 30px;
-} 
-
-.song-header .song-artist { font-size: 1em; }
 
 /****************************
   minicard
