@@ -53,7 +53,7 @@ defmodule WsdjsWeb.Router do
     get "/signin/:token", SessionController, :show, as: :signin
   end
 
-  scope "/api", as: :api, alias: :'Wsdjs.Web' do
+  scope "/api", as: :api, alias: :'WsdjsWeb' do
     pipe_through [:api, :api_auth]
 
     scope "/v1", alias: Api.V1 do
