@@ -30,8 +30,8 @@
 .song-page__tags {
   margin-top: 15px;
 }
-.song-show-actions > * {
-  display: inline-block;
+.song-page__actions {
+  margin-top: 15px;
 }
 
 /****************************

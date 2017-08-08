@@ -43,23 +43,22 @@
   </nav>
 </section>
 
+<section class="container">
+  <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
+</section>
 
 <section class="container">
-  <div>
-    <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
-  </div>
-
-  <aside>
-    <%= render "_opinions.html", conn: @conn, song: @song, opinions: @song.opinions %>
-    <%= if Wsdjs.Musics.Policy.can?(:edit_song, @current_user, @song) do %>
-    <div class="song-show-actions">
-      <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
-      <%= if Wsdjs.Musics.Policy.can?(:delete_song, @current_user, @song) do %>
-        <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %></h1>
-      <% end %>
-    </div>
-    <% end %>
-  </aside>
+  <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
 </section>
+
+<%= if Wsdjs.Musics.Policy.can?(:edit_song, @current_user, @song) == :ok do %>
+<section class="container song-page__actions">
+  <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
+  <%= if Wsdjs.Musics.Policy.can?(:delete_song, @current_user, @song) == :ok do %>
+    <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %></h1>
+  <% end %>
+</section>
+<% end %>
+
 
 </main>
