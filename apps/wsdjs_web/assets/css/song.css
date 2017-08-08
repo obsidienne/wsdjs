@@ -42,7 +42,6 @@
   margin: 0;
   display: flex;
 }
-
 .song-minicard__heading {
   padding: 0;
   width: 90px;
@@ -50,7 +49,6 @@
   border: 0;
   flex: 0 0 90px;
 }
-
 .song-minicard__body {
   padding-top: 0;
   padding-bottom: 0;
@@ -65,7 +63,90 @@
   margin-top: 0;
   margin-bottom: 0;
 }
-
 .song-minicard__footer {
   margin-top: auto;
+}
+
+/****************************
+  card
+****************************/
+.hot-song {
+  margin-bottom: 15px;
+}
+.hot-song-heading {
+  padding: 0;
+  position: relative;
+  display: block;
+}
+
+.hot-song-heading img {
+  width: 100%;
+  height: auto;
+}
+
+.hot-song-body {
+  padding: 15px;
+}
+
+.hot-song-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.hot-song-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: inherit;
+  padding: 0 15px 0 5px;
+}
+
+.hot-song .label {
+  cursor: pointer;
+}
+
+.artist-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.song-art-overlay {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+}
+
+.song-art-overlay .label {
+  user-select: none;
+  cursor: default;
+}
+
+.song-art-overlay span {
+  margin-right: 5px;
+}
+
+.song-play {
+  width: 60px;
+  height: 60px;
+  max-width: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-decoration: none;
+  display: block;
+  background-image: var(--icon-play);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  background-color: rgba(150,150,150,.5);
 }

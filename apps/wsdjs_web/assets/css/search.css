@@ -80,3 +80,11 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+.search-result {
+  margin: 7px 0;
+}
+
+.search-result:first-child {
+  margin: 0;
+}
