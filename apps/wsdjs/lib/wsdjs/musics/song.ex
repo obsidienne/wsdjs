@@ -2,6 +2,7 @@ defmodule Wsdjs.Musics.Song do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
+  alias Wsdjs.Musics.Song
 
   alias Wsdjs.{Charts, Accounts, Musics}
 
