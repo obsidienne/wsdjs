@@ -70,54 +70,16 @@
 /****************************
   card
 ****************************/
-.hot-song {
+.song-card {
   margin-bottom: 15px;
 }
-.hot-song-heading {
+.song-card__header {
   padding: 0;
   position: relative;
   display: block;
 }
 
-.hot-song-heading img {
-  width: 100%;
-  height: auto;
-}
-
-.hot-song-body {
-  padding: 15px;
-}
-
-.hot-song-title {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 16px;
-  color: inherit;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-}
-
-.hot-song-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: inherit;
-  padding: 0 15px 0 5px;
-}
-
-.hot-song .label {
-  cursor: pointer;
-}
-
-.artist-name {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.song-art-overlay {
+.song-card__tags {
   position: absolute;
   bottom: 0;
   display: flex;
@@ -126,13 +88,20 @@
   width: 100%;
 }
 
-.song-art-overlay .label {
-  user-select: none;
-  cursor: default;
+.song-card__tags span {
+  margin-right: 5px;
 }
 
-.song-art-overlay span {
-  margin-right: 5px;
+.song-card__body {
+  padding: 15px;
+}
+
+.song-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: inherit;
+  padding: 0 15px 0 5px;
 }
 
 .song-play {

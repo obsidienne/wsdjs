@@ -1,7 +1,7 @@
-<li class="hot-song card" data-id="<%= @song.id %>">
-  <a href="<%= url_for_provider(@song) %>" class="hot-song-heading" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
-    <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive" alt="<%= song_art_alt(@song) %>"/>
-    <h6 class="song-art-overlay">
+<li class="song-card card" data-id="<%= @song.id %>">
+  <a href="<%= url_for_provider(@song) %>" class="song-card__header" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
+    <img src="<%= art_url()%>" data-src="<%= art_url(@song.art) %>" class="cld-responsive responsive" alt="<%= song_art_alt(@song) %>"/>
+    <h6 class="song-card__tags">
       <span class="label label-default"><%= @song.genre %></span>
       <%= if @song.bpm > 0 do %>
       <span class="label label-primary"><%= @song.bpm %> bpm</span>
@@ -10,7 +10,7 @@
     </h6>
   </a>
 
-  <div class="hot-song-body">
+  <div class="song-card__body">
     <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "h5  text-ellipsis" %>
     <h6 class="small text-ellipsis"><%= @song.artist %></h6>
 
@@ -21,7 +21,7 @@
     
   </div>
 
-  <div class="hot-song-footer text-muted song-opinions">
+  <div class="song-card-footer text-muted song-opinions">
     <div class="opinions-container">
       <%= opinion_link("down", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
       <%= opinion_link("like", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
