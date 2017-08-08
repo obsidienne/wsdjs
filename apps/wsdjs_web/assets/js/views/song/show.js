@@ -78,7 +78,7 @@ export default class View {
 
       <div class="comment__body">
         <header class="comment__header">
-          <a class="comment-author" href="${params.commented_by_path}">${params.commented_by}</a>
+          <a href="${params.commented_by_path}">${params.commented_by}</a>
           <time class="timeago small" title="${params.commented_at}" datetime="${params.commented_at}"></time>
         </header>
         <div class="comment__content">${params.text}</div>
