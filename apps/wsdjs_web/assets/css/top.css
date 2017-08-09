@@ -1,25 +1,6 @@
 /****************************
   ??
 ****************************/
-.card-top {
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  position: relative;
-}
-
-.card-top-header {
-  color: #333;
-  background-color: #f5f5f5;
-  padding: 10px 15px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 18px;
-}
-
 .tops__top__body {
   display: flex;
   flex-wrap: wrap;
