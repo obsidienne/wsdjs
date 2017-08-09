@@ -1,4 +1,4 @@
-<div id="player" class="player player--paused" data-turbolinks-permanent>
+<div id="player" class="player" data-turbolinks-permanent>
   <div class="player__art">
     <img class="cld-responsive responsive" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
   </div>

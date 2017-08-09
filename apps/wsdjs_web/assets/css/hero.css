@@ -11,6 +11,7 @@
   flex-direction: column;
   background-position: 0% 50%;
   justify-content: space-between;
+  padding: 5px 0 15px 0;
 }
 
 .SongIndexView .hero, .TopIndexView .hero {

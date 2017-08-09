@@ -10,14 +10,14 @@
         <span class="place-icon"> <%= @user.user_country %></span>
       </div>
       <div id="profile-actions">
-        <a class="rf-button" href="mailto:<%= @user.email %>" target = "_blank">
+        <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">
           Message
         </a>
         <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) do %>
-          <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "rf-button" %>
+          <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
         <% end %>
         <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) do %>
-          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "rf-button" %>
+          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link" %>
         <% end %>
       </div>
     </section>

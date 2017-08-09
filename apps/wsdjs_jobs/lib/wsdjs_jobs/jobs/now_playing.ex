@@ -22,7 +22,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   end
 
   def init(state) do
-    schedule_work() # Schedule work to be performed at some point
+    schedule_work(0) # Schedule work to be performed at some point
     {:ok, state}
   end
 
@@ -40,8 +40,8 @@ defmodule Wsdjs.Jobs.NowPlaying do
   def handle_info(:work, queue) do
     case HTTPoison.get(@radioking_api_uri) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        queue = parse_streamed_song(body, queue)
-        schedule_work() # Reschedule once more
+        {queue, interval} = parse_streamed_song(body, queue)
+        schedule_work(interval) # Reschedule once more
         {:noreply, queue}
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         Logger.debug "Not found :("
@@ -52,59 +52,62 @@ defmodule Wsdjs.Jobs.NowPlaying do
     end
   end
 
-  defp schedule_work do
-    Process.send_after(self(), :work, 2 * 1 * 1 * 1000) # In 2 seconds
+  defp schedule_work(interval) do
+    Process.send_after(self(), :work, interval) # 2 * 1 * 1 * 1000 In 2 seconds
   end
 
   defp parse_streamed_song(body, queue) do
-    last_queued = last_song_queued(:queue.peek_r(queue))
     body
     |> Poison.decode!
     |> Map.take(@expected_fields)
-    |> Enum.map(fn({k, v}) -> {String.to_atom(k), v} end)
-    |> push_song(last_queued, queue)
+    |> push_song(queue)
   end
 
-  defp last_song_queued(:empty), do: ""
-  defp last_song_queued({:value, song}), do: "#{song[:artist]} - #{song[:title]}"
+  defp push_song(streamed_song, queue) do
+    song = filled_from_db(streamed_song)
 
-  defp push_song(song, song, queue), do: queue
-  defp push_song(streamed_song, last_song, queue) do
-
-    artist = streamed_song[:artist]
-    title = streamed_song[:title]
-    
-    current_song = artist <> " - " <> title
-
-    if last_song != current_song  do
-      queue = %{artist: artist, title: title, ts: :os.system_time(:seconds)}
-          |> filled_from_db(current_song)
-          |> :queue.in(queue)
-
-      PubSub.broadcast WsdjsWeb.PubSub, "notifications:now_playing", :new_played_song
-
-      if :queue.len(queue) > 9 do
-        :queue.drop(queue)
-      else
+    # song already in queue ?
+    queue = if same_song?(song, streamed_song) do
         queue
+      else
+        :queue.in(song, queue)
       end
+
+    # no more than 9 elements in queue
+    queue = if :queue.len(queue) > 9 do
+      :queue.drop(queue)
     else
       queue
     end
+
+    # find the new interval adding 1 second to the expected end
+    # and then doing an abs() to manage the case where radioking is late
+    interval = song["end_at"]
+      |> Timex.parse!("{ISO:Extended}")
+      |> Timex.shift(seconds: 1)
+      |> Timex.diff(Timex.now, :seconds)
+      |> abs()
+
+    IO.puts "Next call #{interval}"
+    PubSub.broadcast WsdjsWeb.PubSub, "notifications:now_playing", :new_played_song
+
+    {queue, interval * 1000}
   end
 
-  defp filled_from_db(song, streamed_song) do
-    song_in_base = Wsdjs.Musics.search_artist_title(streamed_song)
+  defp same_song?(a, b) do
+    if a["title"] == b["title"] and a["artist"] == b["artist"] do
+      true
+    else
+      false
+    end
+  end
+
+  defp filled_from_db(song) do
+    song_in_base = Wsdjs.Musics.search_by_artist_title(song["artist"], song["title"])
 
     if song_in_base != nil do
-      if song_in_base.user.name == "World Swing Deejays" do
-        song
-      else
-        song
-          |> Map.put(:suggested_ts, Timex.to_unix(song_in_base.inserted_at))
-      end
-      |> Map.put(:artist, song_in_base.artist)
-      |> Map.put(:title, song_in_base.title)
+      song
+      |> Map.put(:suggested_ts, Timex.to_unix(song_in_base.inserted_at))
       |> Map.put(:image_uri, CloudinaryHelper.art_url(song_in_base.art))
       |> Map.put(:suggested_by, song_in_base.user.name)
       |> Map.put(:suggested_by_path, "/users/#{song_in_base.user.id}")

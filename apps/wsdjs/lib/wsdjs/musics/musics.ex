@@ -36,12 +36,11 @@ defmodule Wsdjs.Musics do
   The uniq index artist / title ensure the uniquenes of result. 
   This a privileged function, no song restriction access.
   """
-  def search_artist_title(artist_title) do
+  def search_by_artist_title(artist, title) do
     Song
-    |> where([s], fragment("? || ' - ' || ?", s.artist, s.title) == ^artist_title)
-    |> preload([:user, :art, :tops])
+    |> where(artist: ^artist, title: ^title)
+    |> preload([:user, :art])
     |> preload([tops: :ranks])
-    |> order_by([desc: :inserted_at])
     |> Repo.one
   end
 

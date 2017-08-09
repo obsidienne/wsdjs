@@ -72,6 +72,7 @@ export default class Radio {
     document.querySelector(".player__description__title").setAttribute("href", "#");
     document.querySelector(".player__description__title").innerHTML = "Radio WCS";
     document.querySelector(".player__description__sub-title").innerHTML = "by World Swing DJs";
+    document.querySelector(".player").classList.toggle("player--playing");
 
     var cl = cloudinary.Cloudinary.new();
     cl.init();
@@ -84,6 +85,7 @@ export default class Radio {
 
     this.channel.push("played_song_list")
     this.radio.play();
+    document.querySelector(".player").classList.toggle("player--playing");
   }
 
   refresh_radio(payload) {

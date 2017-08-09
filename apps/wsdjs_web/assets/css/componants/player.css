@@ -18,6 +18,7 @@
   width: 75px;
   height: 75px;
   box-shadow: 3px 0 3px 0 rgba(0, 0, 0, 0.4);
+  flex: 0 0 75px;
 }
 .player__description {
   overflow: hidden;
@@ -37,38 +38,25 @@
   flex: 0 0 75px;
   height: 100%;
 }
-.player .player__play__vinyl {
+.player__play__vinyl {
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  transform: translateY(-25px);
-  background: white;
+  margin-top: -25px;
   box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.35);
   text-align: center;
   cursor: pointer;
+  background: white;
 }
-.player .player__play__vinyl .player__play__vinyl {
+
+.player--playing .player__play__vinyl {
   transition: all 0.35s ease;
   background: url("http://i65.tinypic.com/v5wy3b.png");
   background-size: cover;
   animation: spin 1s infinite linear;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  position: absolute;
 }
-.player .player__play__vinyl i {
-  z-index: 100;
-}
-.mdi-pause {
-  z-index: 100;
-  position: absolute;
-  right: 17.5px;
-  top: 17.4px;
-  color: white;
-  font-size: 20px;
-}
-.player .player__play__vinyl:hover {
+
+.player__play__vinyl:hover {
   box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.5);
 }
 
