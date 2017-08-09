@@ -65,11 +65,13 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   defp push_song(streamed_song, queue) do
     song = filled_from_db(streamed_song)
+    last_queued = :queue.peek_r(queue)
 
     # song already in queue ?
-    queue = if same_song?(song, streamed_song) do
+    queue = if same_song?(song, last_queued) do
         queue
       else
+        IO.puts "add #{song["artist"]} #{song["title"]} " 
         :queue.in(song, queue)
       end
 
@@ -94,8 +96,9 @@ defmodule Wsdjs.Jobs.NowPlaying do
     {queue, interval * 1000}
   end
 
-  defp same_song?(a, b) do
-    if a["title"] == b["title"] and a["artist"] == b["artist"] do
+  defp same_song?(a, :empty), do: false
+  defp same_song?(a, {:value, b}) do
+    if a["title"] == b["title"] && a["artist"] == b["artist"] do
       true
     else
       false

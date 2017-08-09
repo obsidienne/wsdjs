@@ -38,7 +38,8 @@ defmodule Wsdjs.Musics do
   """
   def search_by_artist_title(artist, title) do
     Song
-    |> where(artist: ^artist, title: ^title)
+    |> where([s], fragment("lower(?)", s.title) == ^String.downcase(title))
+    |> where([s], fragment("lower(?)", s.artist) == ^String.downcase(artist))
     |> preload([:user, :art])
     |> preload([tops: :ranks])
     |> Repo.one
