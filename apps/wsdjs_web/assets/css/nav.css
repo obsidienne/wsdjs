@@ -8,16 +8,17 @@
   height: 40px;
 }
 
-.glheader {
+.glnav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   user-select: none;
   z-index: 1000;
   width: 100%;
+  max-width: 768px;
 }
 
-.glheader__user__avatar {
+.glnav__user__avatar {
   position: relative;
   width: 40px;
   height: 40px;
@@ -25,13 +26,13 @@
   vertical-align: top
 }
 
-.glheader__menu {
+.glnav__menu {
   font-size: 18px;
 }
 
-.glheader.focused .logo,
-.glheader.focused .glheader__menu,
-.glheader.focused .glheader__user__avatar {
+.glnav.focused .logo,
+.glnav.focused .glnav__menu,
+.glnav.focused .glnav__user__avatar {
   display: none;
 }
 

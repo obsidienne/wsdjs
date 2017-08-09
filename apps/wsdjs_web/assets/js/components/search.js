@@ -49,10 +49,10 @@ export default class search {
   }
 
   _show_search() {
-    let glheader = document.querySelector(".glheader");
+    let glnav = document.querySelector(".glnav");
     let search_container = document.querySelector(".search-container");
     search_container.classList.add("focused");
-    glheader.classList.add("focused");
+    glnav.classList.add("focused");
   }
 
   _hide_search() {
