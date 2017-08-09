@@ -20,18 +20,18 @@
   font-size: 18px;
 }
 
-.card-top-body {
+.tops__top__body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
 }
 
-.card-top-body > div {
+.tops__top__body > div {
   flex: 1 0 20%;
 }
 
-.card-top-body img {
+.tops__top__body img {
   width: 100%;
   vertical-align: top;
 }
@@ -39,14 +39,18 @@
 /****************************
   top timeline
 ****************************/
-.cd-container {
+@media only screen and (min-width: 768px) {
+  .TopIndexView .tops {
+    max-width: 1170px;
+  }
+}
+
+.tops {
   position: relative;
 }
 
-/*********************
-  vertical line
-*********************/
-.cd-container::before {
+.tops::before {
+  /* vertical line */
   content: '';
   position: absolute;
   top: 0;
@@ -55,42 +59,43 @@
   width: 4px;
   background: #d7e4ed;
 }
-@media only screen and (min-width: 1170px) {
-  .cd-container::before {
+@media only screen and (min-width: 768px) {
+  .tops::before {
+    /* vertical line */
     left: 50%;
     margin-left: -2px;
   }
 }
 
-.cd-timeline-block {
+.tops__top {
   position: relative;
   margin: 2em 0;
   display: block;
 }
-.cd-timeline-block:after {
+.tops__top:after {
   content: "";
   display: table;
   clear: both;
 }
-.cd-timeline-block:first-child {
+.tops__top:first-child {
   margin-top: 0;
 }
-.cd-timeline-block:last-child {
+.tops__top:last-child {
   margin-bottom: 0;
 }
-@media only screen and (min-width: 1170px) {
-  .cd-timeline-block {
+@media only screen and (min-width: 768px) {
+  .tops__top {
     margin: 4em 0;
   }
-  .cd-timeline-block:first-child {
+  .tops__top:first-child {
     margin-top: 0;
   }
-  .cd-timeline-block:last-child {
+  .tops__top:last-child {
     margin-bottom: 0;
   }
 }
 
-.cd-timeline-img {
+.tops__top__anchor {
   position: absolute;
   top: 0;
   left: 0;
@@ -99,7 +104,7 @@
   border-radius: 50%;
   box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
 }
-.cd-timeline-img img {
+.tops__top__anchor img {
   display: block;
   width: 100%;
   height: auto;
@@ -107,8 +112,8 @@
   border-radius: 50%;
 }
 
-@media only screen and (min-width: 1170px) {
-  .cd-timeline-img {
+@media only screen and (min-width: 768px) {
+  .tops__top__anchor {
     width: 60px;
     height: 60px;
     left: 50%;
@@ -119,7 +124,7 @@
   }
 }
 
-.cd-timeline-content {
+.tops__top__content {
   position: relative;
   margin-left: 60px;
   background: white;
@@ -127,41 +132,19 @@
   padding: 1em;
   box-shadow: 0 3px 0 #d7e4ed;
 }
-.cd-timeline-content:after {
+.tops__top__content:after {
   content: "";
   display: table;
   clear: both;
 }
-.cd-timeline-content h2 {
-  color: #303e49;
-}
-.cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+.tops__top__date {
   font-size: 13px;
   font-size: 0.8125rem;
-}
-.cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
-  display: inline-block;
-}
-.cd-timeline-content p {
-  margin: 1em 0;
-  line-height: 1.6;
-}
-.cd-timeline-content .cd-read-more {
-  float: right;
-  padding: .8em 1em;
-  background: #acb7c0;
-  color: white;
-  border-radius: 0.25em;
-}
-.cd-timeline-content .cd-read-more:hover {
-  background-color: #bac4cb;
-}
-.cd-timeline-content .cd-date {
   float: left;
   padding: 0 0 .8em 0;
   color: #777777;
 }
-.cd-timeline-content::before {
+.tops__top__content::before {
   content: '';
   position: absolute;
   top: 16px;
@@ -171,50 +154,37 @@
   border: 7px solid transparent;
   border-right: 7px solid white;
 }
-.cd-timeline-block .statistics {
+.tops__top__details {
   margin-top: 15px;
 }
-.cd-timeline-block .statistics th,
-.cd-timeline-block .statistics td {
+.tops__top__details th,
+.tops__top__details td {
   text-align: left;
   color: #777777;
 }
 
 @media only screen and (min-width: 768px) {
-  .cd-timeline-content h2 {
-    font-size: 20px;
-    font-size: 1.25rem;
-  }
-  .cd-timeline-content p {
-    font-size: 16px;
-    font-size: 1rem;
-  }
-  .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+  .tops__top__date {
     font-size: 14px;
     font-size: 0.875rem;
-  }
-  .cd-timeline-content .cd-date {
     float: left;
     padding: .8em 0;
     opacity: .7;
   }
 }
 
-@media only screen and (min-width: 1170px) {
-  .cd-timeline-content {
+@media only screen and (min-width: 768px) {
+  .tops__top__content {
     margin-left: 0;
     width: 45%;
   }
-  .cd-timeline-content::before {
+  .tops__top__content::before {
     top: 24px;
     left: 100%;
     border-color: transparent;
     border-left-color: white;
   }
-  .cd-timeline-content .cd-read-more {
-    float: left;
-  }
-  .cd-timeline-content .cd-date {
+  .tops__top__date {
     position: absolute;
     width: 100%;
     left: 122%;
@@ -222,20 +192,17 @@
     font-size: 16px;
     font-size: 1rem;
   }
-  .cd-timeline-block:nth-child(even) .cd-timeline-content {
+  .tops__top:nth-child(even) .tops__top__content {
     float: right;
   }
-  .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
+  .tops__top:nth-child(even) .tops__top__content::before {
     top: 24px;
     left: auto;
     right: 100%;
     border-color: transparent;
     border-right-color: white;
   }
-  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
-    float: right;
-  }
-  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
+  .tops__top:nth-child(even) .tops__top__content .tops__top__date {
     left: auto;
     right: 122%;
     text-align: right;

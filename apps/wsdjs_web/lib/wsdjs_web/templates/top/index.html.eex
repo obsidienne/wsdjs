@@ -8,23 +8,23 @@
   </div>
 </header>
 
-<main class="cd-container container">
+<main class="tops container">
   <%= for top <- @tops do %>
-    <a href="<%= top_path(@conn, :show, top.id) %>" class="cd-timeline-block">
-      <div class="cd-timeline-img cd-picture">
+    <a href="<%= top_path(@conn, :show, top.id) %>" class="tops__top">
+      <div class="tops__top__anchor">
         <img src="<%= art_url() %>" data-src="<%= art_url(Enum.at(top.ranks, 0).song.art) %>" class="cld-responsive responsive" >
       </div>
 
-      <div class="cd-timeline-content">
-        <span class="cd-date"><time datetime="<%= Date.to_iso8601(top.due_date) %>"></time> <span class="label label-default"><%= top.status %></span></span>
-        <div class="card-top-body">
+      <div class="tops__top__content">
+        <span class="tops__top__date"><time datetime="<%= Date.to_iso8601(top.due_date) %>"></time> <span class="label label-default"><%= top.status %></span></span>
+        <div class="tops__top__body">
           <%= for rank <- top.ranks do %>
             <div>
               <img src="<%= art_url() %>" data-src="<%= art_url(rank.song.art) %>"  alt="<%= song_art_alt(rank.song) %>" class="cld-responsive responsive" >
             </div>
           <% end %>
         </div>
-        <table class="statistics">
+        <table class="tops__top__details">
           <thead>
             <tr><th>Songs</th><th>Djs</th><th>Genres</th></tr>
           </thead>
