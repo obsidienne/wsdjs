@@ -18,7 +18,7 @@
   <body class="login" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
     <div class="container">
       <nav>
-        <%= link "", to: home_path(@conn, :index), class: "logo" %>
+        <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
       </nav>
 
       <%= render @view_module, @view_template, assigns %>

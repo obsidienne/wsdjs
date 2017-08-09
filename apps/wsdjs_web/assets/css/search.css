@@ -3,27 +3,38 @@
 /*******************************************/
 .search-container {
   z-index: 49;
-  width: var(--search-width);
   pointer-events: none;
+  display: inherit;
+  position: relative;
 }
 
-@media (max-width: 768px) {
-  .search-container {
-    display: none;
+.glnav__user {
+  margin-left: 15px;
+}
+
+.glnav.focused .glnav__logo,
+.glnav.focused .glnav__menu,
+.glnav.focused .glnav__user {
+  display: none;
+}
+@media (min-width: 768px) {
+
+
+  .glnav.focused .glnav__logo,
+  .glnav.focused .glnav__user {
+    display: inherit;
   }
 }
 
-@media (max-width: 768px) {
-  .search-container.focused {
-    margin-top: 11px;
-    margin-bottom: 5px;
-  }
+.glnav.focused .search-container {
+  flex-grow: 1;
 }
 
 .search__input__wrap {
   position: relative;
   z-index: 2;
   transition: transform ease .1s;
+  width: 100%;
 }
 
 /* display the search icon */
@@ -61,11 +72,9 @@
 
 /* search results container */
 .search-results-container {
-  width: var(--search-width);
   background-color: #fff;
   border-radius: 4px;
   position: absolute;
-  margin-top: 5px;
   overflow: hidden;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 19px 12px rgba(0,0,0,0.22);
   pointer-events: none;
@@ -79,6 +88,9 @@
   pointer-events: auto;
   opacity: 1;
   transform: translateY(0);
+  left: 0;
+  top: 40px;
+  width: 100%;
 }
 
 .search-result {
