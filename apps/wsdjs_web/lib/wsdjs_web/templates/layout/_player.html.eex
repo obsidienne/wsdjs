@@ -1,20 +1,14 @@
-<div id="miniplayer-container" class="miniplayer paused" data-turbolinks-permanent>
-   <div class="miniplayer-art">
-    <div class="toggle-player icon-play"></div>
-    <img class="cld-responsive current-played-art" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
-    <a href="/songs/50a56708-75d0-48e7-bd0d-51582120f272" class="miniplayer-info">
-      <h6></h6>
-      <h6></h6>
-      <h6>Play the radio</h6>
-    </a>
+<div id="player" class="player player--paused" data-turbolinks-permanent>
+  <div class="player__art">
+    <img class="cld-responsive responsive" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
   </div>
 
-  <ul id="radio-container">
-  </ul>
-
-  <div class="miniplayer-radio-toggle" hidden>
-    <div>Return to RadioWCS</div>
-    <img class="cld-responsive switch-radio" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
+  <div class="player__description">
+    <a href="dd" class="h6 player__description__title">Radio WCS  </a>
+    <h6 class="small player__description__sub-title">by World Swing DJs</h6>
   </div>
-  <div id="youtube-player" class="youtube-player" hidden></div>
+
+  <div class="player__play">
+    <div class="player__play__vinyl"> </div>
+  </div>
 </div>

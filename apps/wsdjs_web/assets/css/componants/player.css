@@ -1,176 +1,82 @@
-.miniplayer {
+.player {
+  margin-top: 50px;
+  width: 100%;
+  height: 75px;
+  background: #EEE;
+  display: flex;
+  align-items: center;
+  max-width: 768px;
+
   position: fixed;
   bottom: 0;
   right: 0;
-  padding: 0;
-  z-index: 4;
-  width: 100px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-
-.miniplayer.youtube {
-  width: 100%;
-  max-width: 50vw;
-}
-
-.switch-radio {
-  width: 50px;
-  height: 50px;
-}
-@media (min-width: 768px) {
-  .miniplayer:not(.paused) {
-    margin: .5em;
-    width: 200px;
-  }
-}
-
-#radio-container{
-  background-color: white;
-}
-
-.miniplayer-radio-toggle:not([hidden]) {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  cursor: pointer;
-  background-color: #e9f0f5;
-}
-.miniplayer-radio-toggle > div {
-  padding-right: 15px;
-}
-
-.miniplayer-info {
-  position: absolute;
-  bottom: 0;
   left: 0;
-  width: 100%;
-  background: rgba(33,33,33, .9);
-  color:  white;
-  padding: 5px;
+  margin-right: auto;
+  margin-left: auto;
 }
-.miniplayer-info h6 {
+.player__art {
+  width: 75px;
+  height: 75px;
+  box-shadow: 3px 0 3px 0 rgba(0, 0, 0, 0.4);
+}
+.player__description {
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 0;
-  margin-top: 0;
-  font-size: 75%;
+  flex: 1 1 auto;
+  padding: 5px 5px 5px 15px;
 }
-.miniplayer-info .suggested_by {
-  line-height: 1;
-  color: #777777;
-  font-size: 75%;
-}
-
-.player {
-  display: flex;
-  width: 200px;
-  height: 50px;
-  margin: 20px auto 0;
+.player__description__title {
+  color: black;
+  font-weight: 100;
   text-decoration: none;
-  position: relative;
+  border-bottom: 1px dashed rgba(155, 155, 155, 0.5);
 }
-
-.played-song {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  text-decoration: none;
-  position: relative;
+.player__description__title:hover {
+  text-shadow: 1px 1px 5px #000000;
 }
-
-.current-played-art {
-  width: 100%;
-  height: auto;
+.player__play {
+  flex: 0 0 75px;
+  height: 100%;
 }
-
-
-/***
-
-*/
-.miniplayer-art {
-  position: relative;
-  height: 100px;
-  width: 100px;
-  background-color: whitesmoke;
+.player .player__play__vinyl {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  transform: translateY(-25px);
+  background: white;
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.35);
+  text-align: center;
+  cursor: pointer;
 }
-@media (min-width: 768px) {
-  .miniplayer:not(.paused) .miniplayer-art {
-    height: 200px;
-    width: 200px;
-  }
-}
-
-.icon-play, .icon-pause {
-  background-size: 40px 40px;
-  background-repeat: no-repeat;
-  background-position: center center;
+.player .player__play__vinyl .player__play__vinyl {
+  transition: all 0.35s ease;
+  background: url("http://i65.tinypic.com/v5wy3b.png");
+  background-size: cover;
+  animation: spin 1s infinite linear;
   width: 100%;
   height: 100%;
-  display: inline-block;
-  cursor: pointer;
+  z-index: 1;
   position: absolute;
 }
-.icon-play { background-image: var(--icon-play); }
-.icon-pause { background-image: var(--icon-pause); }
-
-.miniplayer-title, .miniplayer-artist {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+.player .player__play__vinyl i {
+  z-index: 100;
+}
+.mdi-pause {
+  z-index: 100;
+  position: absolute;
+  right: 17.5px;
+  top: 17.4px;
+  color: white;
+  font-size: 20px;
+}
+.player .player__play__vinyl:hover {
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.5);
 }
 
-
-
-.youtube-player {
-    position: relative;
-    padding-bottom: 56.23%;
-    /* Use 75% for 4:3 videos */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    min-width: 100%;
-    background: #000;
-}
-
-.youtube-player iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    background: transparent;
-}
-
-.youtube-player img {
-    bottom: 0;
-    display: block;
-    left: 0;
-    margin: auto;
-    max-width: 100%;
-    width: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    border: none;
-    height: auto;
-    cursor: pointer;
-    transition: .4s all;
-}
-
-.youtube-player img:hover {
-    filter: brightness(75%);
-}
-
-.youtube-player .play {
-    height: 72px;
-    width: 72px;
-    left: 50%;
-    top: 50%;
-    margin-left: -36px;
-    margin-top: -36px;
-    position: absolute;
-    background: url("//i.imgur.com/TxzC70f.png") no-repeat;
-    cursor: pointer;
+@keyframes spin {
+  0% {
+  transform: rotate(0deg);
+  }
+  100% {
+  transform: rotate(360deg);
+  }
 }

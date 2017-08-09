@@ -15,10 +15,11 @@ export default class Radio {
       .receive("error", resp => { console.log("Unable to join", resp) })
 
     this.channel.on("new_played_song", payload => {
+      console.log("broadcasted");
       this.refresh_radio(payload)
     });
     document.addEventListener("click", function(e) {
-      if (e.target && e.target.matches(".toggle-player")) {
+      if (e.target && e.target.matches(".player__play__vinyl")) {
         if (self.radio.paused) {
           self.play_radio(e.target)
         } else {
@@ -66,15 +67,12 @@ export default class Radio {
     this.radio.pause();
     this.radio.src = "about:blank";
     this.radio.load();
-    el.classList.add("icon-play");
-    el.classList.remove("icon-pause");
-    document.querySelector(".miniplayer-art img").dataset.src = '///res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg';
-    document.querySelector(".miniplayer-info h6:first-child").innerHTML = "";
-    document.querySelector(".miniplayer-info h6:nth-child(2)").innerHTML = "";
-    document.querySelector(".miniplayer-info h6:last-child").innerHTML = "Play the radio";
 
-    document.querySelector(".miniplayer").classList.toggle("paused");
-    document.querySelector("#radio-container").innerHTML = "";
+    document.querySelector(".player__art img").dataset.src = "//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg";
+    document.querySelector(".player__description__title").setAttribute("href", "#");
+    document.querySelector(".player__description__title").innerHTML = "Radio WCS";
+    document.querySelector(".player__description__sub-title").innerHTML = "by World Swing DJs";
+
     var cl = cloudinary.Cloudinary.new();
     cl.init();
     cl.responsive();
@@ -86,9 +84,6 @@ export default class Radio {
 
     this.channel.push("played_song_list")
     this.radio.play();
-    el.classList.add("icon-pause");
-    el.classList.remove("icon-play");
-    document.querySelector(".miniplayer").classList.toggle("paused");
   }
 
   refresh_radio(payload) {
@@ -98,25 +93,11 @@ export default class Radio {
     var data = JSON.parse(payload.data);
 
     if (data[0] !== undefined) {
-      document.querySelector(".miniplayer-art img").setAttribute("src", data[0].image_uri);
-      document.querySelector(".miniplayer-art img").dataset.src = data[0].image_uri;
-      document.querySelector(".miniplayer-info").setAttribute("href", data[0].path);
-      document.querySelector(".miniplayer-info h6:first-child").innerHTML = data[0].title;
-      document.querySelector(".miniplayer-info h6:nth-child(2)").innerHTML = data[0].artist;
-      document.querySelector(".miniplayer-info h6:last-child").innerHTML = `<span class="suggested_by">suggested by ${data[0].suggested_by}</span>`;
+      document.querySelector(".player__art img").setAttribute("src", data[0].image_uri);
+      document.querySelector(".player__art img").dataset.src = data[0].image_uri;
+      document.querySelector(".player__description__title").setAttribute("href", data[0].path);
+      document.querySelector(".player__description__title").innerHTML = data[0].title;
+      document.querySelector(".player__description__sub-title").innerHTML = "by " + data[0].artist + ", " + data[0].suggested_by;
     }
-
-
-    var playing = "";
-    for (let i = 1; i < data.length && i < 5; i++) {
-      if (data[0] !== undefined) {
-        playing += `<li class="played-song tippy" data-position="top-end" data-size="small" title="${data[i].artist} - ${data[i].title}<br/><span class='small'>Suggested by ${data[i].suggested_by}</span>"><a href="${data[i].path}"><img height="50" width="50" class="responsive cld-responsive" src="${data[i].image_uri}" /></a></li>`;
-      } else {
-        playing += `<li class="played-song tippy" data-position="top-end" data-size="small" title="${data[i].artist} - ${data[i].title}<br/><span class='small'>Suggested by ${data[i].suggested_by}</span>"><a href="${data[i].path}"><img height="50" width="50" class="responsive cld-responsive" src="//res.cloudinary.com/don2kwaju/image/upload/v1449164620/wsdjs/missing_cover.jpg" /></a></li>`;        
-      }
-    }
-    document.querySelector("#radio-container").innerHTML = playing;
-
-    new Tippy('.tippy-radio');
   }
 }

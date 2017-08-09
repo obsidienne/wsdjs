@@ -7,6 +7,9 @@
 *:before, *:after {
   box-sizing: border-box;
 }
+body {
+  padding-bottom: 85px;
+}
 
 a {
   text-decoration: none;

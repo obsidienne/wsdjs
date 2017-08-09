@@ -58,7 +58,6 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   defp parse_streamed_song(body, queue) do
     last_queued = last_song_queued(:queue.peek_r(queue))
-
     body
     |> Poison.decode!
     |> Map.take(@expected_fields)
