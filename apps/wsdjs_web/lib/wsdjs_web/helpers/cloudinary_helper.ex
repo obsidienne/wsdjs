@@ -7,7 +7,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   alias Wsdjs.Accounts.Avatar
 
   @art_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_auto/c_limit,w_400/c_crop,g_custom,q_auto,f_auto/"
-  @art_blured_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_400,c_crop,g_custom,f_auto,q_auto/e_blur:300,o_30/"
+  @art_blured_root_url "//res.cloudinary.com/don2kwaju/image/upload/w_400,c_crop,g_custom,f_auto,q_auto/o_30/"
   @art_missing_url "//res.cloudinary.com/don2kwaju/image/upload/v1449164620/wsdjs/missing_cover.jpg"
 
   def art_url(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
