@@ -152,6 +152,9 @@
   color: white;
   padding: 5px;
 }
+.song-top__title {
+  width: 100%;
+}
 
 .song-top__body .small {
   color: white;
