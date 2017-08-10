@@ -123,7 +123,7 @@
   right: 15px;
   text-decoration: none;
   display: inline-block;
-  background-image: var(--icon-play);
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23FFC107' height='72' viewBox='0 0 24 24' width='72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E ");
   background-repeat: no-repeat;
   background-size: contain;
   border-radius: 100%;
@@ -201,7 +201,7 @@
 }
 
 .voting-container .song-play {
-  background-image: var(--icon-play);
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23FFC107' height='72' viewBox='0 0 24 24' width='72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E ");
   background-size: contain;
   background-repeat: no-repeat;
   height: 50px;
