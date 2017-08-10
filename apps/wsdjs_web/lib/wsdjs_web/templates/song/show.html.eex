@@ -2,9 +2,9 @@
 
 <section class="hero">
   <style>
-  :root {
-    --hero: url(<%= art_url_blured(@song.art) %>);
-  }
+    .hero {
+      background-image: linear-gradient(transparent, #fff), url(<%= art_url_blured(@song.art) %>);
+    }
   </style>
   <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
