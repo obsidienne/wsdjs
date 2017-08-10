@@ -21,7 +21,7 @@
       <img class="glnav__user__avatar img-circle cld-responsive" src="<%= avatar_url() %>" data-src="<%= avatar_url(@current_user.avatar) %>">
     <% end %>
   <% else %>
-    <%= link to: session_path(@conn, :new), data: [turbolinks: false] do %>
+    <%= link to: session_path(@conn, :new), data: [turbolinks: false], class: "glnav__user" do %>
       <div class="glnav__user__signin--container  btn btn-primary">Sign in</div>
     <% end %>
   <% end %>

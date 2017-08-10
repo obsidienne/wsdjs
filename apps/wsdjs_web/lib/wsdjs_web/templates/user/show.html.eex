@@ -17,7 +17,7 @@
           <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
         <% end %>
         <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) do %>
-          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link" %>
+          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link",  data: [turbolinks: "false"] %>
         <% end %>
       </div>
     </section>

@@ -36,6 +36,12 @@ export default class Radio {
       if (e.target && (e.target.matches(".miniplayer-radio-toggle") || e.target.closest(".miniplayer-radio-toggle"))) {
         self.pause_youtube();
       }
+
+      if (e.target && e.target.matches(".player__expand")) {
+        document.querySelector(".player__expand").classList.toggle("player__expand--open");
+        document.querySelector(".already-played").classList.toggle("already-played--open");
+
+      }
     });
   }
 
@@ -89,17 +95,22 @@ export default class Radio {
   }
 
   refresh_radio(payload) {
-    if (this.radio.paused) {
-      return;
-    }
     var data = JSON.parse(payload.data);
 
-    if (data[0] !== undefined) {
+    if (this.radio.paused == false) {
       document.querySelector(".player__art img").setAttribute("src", data[0].image_uri);
       document.querySelector(".player__art img").dataset.src = data[0].image_uri;
       document.querySelector(".player__description__title").setAttribute("href", data[0].path);
       document.querySelector(".player__description__title").innerHTML = data[0].title;
       document.querySelector(".player__description__sub-title").innerHTML = "by " + data[0].artist + ", " + data[0].suggested_by;
     }
+
+    var played = ""
+    for (var i = 1; i < data.length; i++) {
+      played += `<tr><td class="small">${data[i].artist}</td><td class="small">${data[i].title}</td></tr>`;
+    }
+    var table = document.getElementById("already-played");
+    if (table)
+      table.innerHTML = played;
   }
 }
