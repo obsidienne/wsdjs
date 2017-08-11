@@ -13,10 +13,10 @@
         <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">
           Message
         </a>
-        <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) do %>
+        <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) == :ok do %>
           <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
         <% end %>
-        <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) do %>
+        <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
           <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link",  data: [turbolinks: "false"] %>
         <% end %>
       </div>
@@ -84,7 +84,7 @@
       </ul>
     </nav>
   
-    <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) do %>
+    <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) == :ok do %>
     <ul id="song-list" class="user-profile-song-container" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
       <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song %>
     </ul>
