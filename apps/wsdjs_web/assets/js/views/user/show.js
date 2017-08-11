@@ -44,8 +44,6 @@ export default class View extends MainView {
     super.mount();
   }
 
-  unmount() {}
-
   _refresh() {
     // stop there if we are not in the song index page
     var body = document.querySelector("body")

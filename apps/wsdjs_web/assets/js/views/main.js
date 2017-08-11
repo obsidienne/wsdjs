@@ -4,5 +4,7 @@ export default class MainView {
   mount() {
     MyCloudinary.refresh();
   }
-  umount() {}
+  umount() {
+    MyCloudinary.disconnect();
+  }
 }

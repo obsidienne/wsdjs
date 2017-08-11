@@ -21,7 +21,6 @@ export default class View extends MainView {
   mount() {
     super.mount();
   }
-  unmount() {}
 
   _sort_on_vote(e) {
     var parent = document.querySelector('.top-songs-container');

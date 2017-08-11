@@ -9,7 +9,6 @@ export default class View extends MainView {
   mount() { 
     super.mount();
   }
-  unmount() { }
 
   _cloudinary_uploader() {
     var params = { upload_preset: "music_cover_staging",

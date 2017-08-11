@@ -34,6 +34,7 @@ export default class View extends MainView {
   }
 
   unmount() {
+    super.umount();
     this.tips.destroyAll();
   }
 

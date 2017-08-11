@@ -37,7 +37,8 @@ export default class View extends MainView {
     new timeago().render(document.querySelectorAll("time.timeago"));
   }
 
-  unmount() { 
+  unmount() {
+    super.umount();
     this.tips.destroyAll();
   }
 

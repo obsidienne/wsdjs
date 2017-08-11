@@ -9,7 +9,6 @@ export default class View extends MainView {
   mount() { 
     super.mount();
   }
-  unmount() { }
 
   _bonus() {
     document.addEventListener("click", function(e) {

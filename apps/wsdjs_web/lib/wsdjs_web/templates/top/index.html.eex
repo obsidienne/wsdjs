@@ -20,7 +20,7 @@
         <div class="tops__top__body">
           <%= for rank <- top.ranks do %>
             <div>
-              <img data-src="<%= art_url(rank.song.art) %>"  alt="<%= song_art_alt(rank.song) %>" class="responsive" >
+              <img src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_cover.jpg" data-src="<%= art_url(rank.song.art) %>" class="responsive" >
             </div>
           <% end %>
         </div>

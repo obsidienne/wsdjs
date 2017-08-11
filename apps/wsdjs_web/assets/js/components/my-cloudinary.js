@@ -23,6 +23,13 @@ class MyCloudinary {
       for (i = 0; i < els.length; i++) {
         this.observer.observe(els[i]);
       }
+      console.log(`IntersectionObserver monitors ${els.length} images.`);
+    }
+  }
+  disconnect() {
+    if ('IntersectionObserver' in window) {
+      console.log("IntersectionObserver disconnected.");
+      this.observer.disconnect();
     }
   }
 
@@ -30,12 +37,15 @@ class MyCloudinary {
     if ('IntersectionObserver' in window) {
       let self = this;
       this.observer = new IntersectionObserver(function(entries) {
+        var count = 0;
         for (var i = 0; i < entries.length; i++) {
-          if (entries[i].intersectionRatio > 0) {
+          if (entries[i].isIntersecting) {
             self.observer.unobserve(entries[i].target);
             entries[i].target.classList.add("cld-responsive");
+            count = count + 1;
           }
         }
+        console.log(`Intersection for ${count} images.`);
         self.cl.responsive();
       });
     } else {

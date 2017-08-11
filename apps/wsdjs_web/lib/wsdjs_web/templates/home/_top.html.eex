@@ -1,6 +1,6 @@
 <li class="song-top__song">
   <header>
-    <img data-src="<%= art_url(@rank.song.art) %>" class="responsive" alt="<%= song_art_alt(@rank.song) %>"/>
+    <img data-src="<%= art_url(@rank.song.art) %>" class="responsive" />
   </header>
 
   <%= link to: song_path(@conn, :show, @rank.song), class: "text-muted song-top__body" do %>

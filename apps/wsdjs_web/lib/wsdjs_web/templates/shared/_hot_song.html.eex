@@ -1,6 +1,6 @@
 <li class="song-card card" data-id="<%= @song.id %>">
   <a href="<%= url_for_provider(@song) %>" class="song-card__header" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
-    <img data-src="<%= art_url(@song.art) %>" class="responsive" alt="<%= song_art_alt(@song) %>"/>
+    <img src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_cover.jpg" data-src="<%= art_url(@song.art) %>" class="responsive" />
     <h6 class="song-card__tags">
       <span class="label label-default"><%= @song.genre %></span>
       <%= if @song.bpm > 0 do %>
