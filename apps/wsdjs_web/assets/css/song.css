@@ -58,14 +58,22 @@
   flex-direction: column;
   justify-content: space-between;
   margin: 5px;
+  min-width: 0;
 }
 .song-minicard__body h5, 
 .song-minicard__body h6 {
   margin-top: 0;
   margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .song-minicard__footer {
   margin-top: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-bottom: 5px;
 }
 
 /****************************
