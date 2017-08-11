@@ -70,7 +70,7 @@ export default class View extends MainView {
     return `
     <li class="comment">
       <div class="comment__avatar">
-        <img data-src="${params.commented_by_avatar}"  class="cld-responsive comment__avatar__img">
+        <img data-src="${params.commented_by_avatar}"  class="comment__avatar__img">
       </div>
 
       <div class="comment__body">
@@ -136,7 +136,7 @@ export default class View extends MainView {
     var tmp = container.closest("tr");
     var users = "";
     for (let i = 0; i < data.users.length && i < 8; i++) {
-      users += `<a href="${data.users[i].url}"><img class="img-circle cld-responsive avatar-tiny tippy" data-size="small" data-src="${data.users[i].avatar}" title="${data.users[i].name}"></a>`;
+      users += `<a href="${data.users[i].url}"><img class="img-circle avatar-tiny tippy" data-size="small" data-src="${data.users[i].avatar}" title="${data.users[i].name}"></a>`;
     }
     tmp.querySelector("td").innerHTML = users;
   }  

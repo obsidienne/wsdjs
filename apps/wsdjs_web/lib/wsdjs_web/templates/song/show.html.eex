@@ -10,7 +10,7 @@
 
   <div class="song-page container">
     <div class="song-page__art">
-      <img data-src="<%= art_url(@song.art) %>" class="cld-responsive responsive" alt="<%= song_art_alt(@song) %>"/>
+      <img data-src="<%= art_url(@song.art) %>" class="responsive" alt="<%= song_art_alt(@song) %>"/>
     </div>
     <div class="song-page__details">
       <h5 class="song-page__details__title"><%= @song.title %></h5>

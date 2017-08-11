@@ -12,7 +12,7 @@
   <%= for top <- @tops do %>
     <a href="<%= top_path(@conn, :show, top.id) %>" class="tops__top">
       <div class="tops__top__anchor">
-        <img data-src="<%= art_url(Enum.at(top.ranks, 0).song.art) %>" class="cld-responsive responsive" >
+        <img data-src="<%= art_url(Enum.at(top.ranks, 0).song.art) %>" class="responsive" >
       </div>
 
       <div class="tops__top__content">
@@ -20,7 +20,7 @@
         <div class="tops__top__body">
           <%= for rank <- top.ranks do %>
             <div>
-              <img data-src="<%= art_url(rank.song.art) %>"  alt="<%= song_art_alt(rank.song) %>" class="cld-responsive responsive" >
+              <img data-src="<%= art_url(rank.song.art) %>"  alt="<%= song_art_alt(rank.song) %>" class="responsive" >
             </div>
           <% end %>
         </div>

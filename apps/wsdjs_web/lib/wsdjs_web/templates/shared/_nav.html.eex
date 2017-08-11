@@ -18,7 +18,7 @@
 
   <%= if @current_user do %>
     <%= link to: user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>
-      <img class="glnav__user__avatar img-circle cld-responsive" data-src="<%= avatar_url(@current_user.avatar) %>">
+      <img class="glnav__user__avatar img-circle" data-src="<%= avatar_url(@current_user.avatar) %>">
     <% end %>
   <% else %>
     <%= link to: session_path(@conn, :new), data: [turbolinks: false], class: "glnav__user" do %>

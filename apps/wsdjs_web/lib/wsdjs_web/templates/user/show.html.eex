@@ -4,7 +4,7 @@
   <section>
     <section id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
       <h4><%= @user.name %></h4>
-      <img data-src="<%= avatar_url(@user.avatar) %>" class="rf-avatar cld-responsive rf-avatar__image js-avatar__image">
+      <img data-src="<%= avatar_url(@user.avatar) %>" class="rf-avatar rf-avatar__image js-avatar__image">
       <div id="profile-details">
         <h6><%= user_displayed_name(@user) %></h6>
         <span class="place-icon"> <%= @user.user_country %></span>
