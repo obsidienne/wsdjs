@@ -1,6 +1,6 @@
 import socket from "../socket"
 import Tippy from 'tippy.js/dist/tippy';
-import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import MyCloudinary from './my-cloudinary';
 
 export default class Radio {
   constructor() {
@@ -80,9 +80,7 @@ export default class Radio {
     document.querySelector(".player__description__sub-title").innerHTML = "by World Swing DJs";
     document.querySelector(".player").classList.toggle("player--playing");
 
-    var cl = cloudinary.Cloudinary.new();
-    cl.init();
-    cl.responsive();
+    MyCloudinary.refresh();
   }
 
   play_radio(el) {

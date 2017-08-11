@@ -1,5 +1,5 @@
 import timeago from 'timeago.js';
-import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import MyCloudinary from './my-cloudinary';
 
 export default class search {
   constructor() {
@@ -35,9 +35,7 @@ export default class search {
       if (this.status >= 200 && this.status < 400) {
         document.querySelector(".search-results-container").innerHTML = this.response;
         new timeago().render(document.querySelectorAll(".search-results-container time.timeago"));
-        var cl = cloudinary.Cloudinary.new();
-        cl.init();
-        cl.responsive();
+        MyCloudinary.refresh();
       } else {
         document.querySelector(".search-results-container").innerHTML = "";
       }

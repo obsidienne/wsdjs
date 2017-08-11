@@ -1,11 +1,14 @@
 import Places from 'places.js/dist/cdn/places.js';
+import MainView from '../main';
 
-export default class View {
+export default class View extends MainView {
   constructor() {
+    super();
     this._cloudinary();
   }
 
   mount() {
+    super.mount();
     Places({
       container: document.querySelector('#user_country'),
       type: 'country',

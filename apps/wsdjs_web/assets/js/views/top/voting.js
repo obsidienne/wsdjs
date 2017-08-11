@@ -1,7 +1,8 @@
-import cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import MainView from '../main';
 
-export default class View {
+export default class View extends MainView {
   constructor() {
+    super();
     var self = this;
 
     document.addEventListener("change", function(e) {
@@ -18,10 +19,7 @@ export default class View {
   }
 
   mount() {
-    // cloudinary
-    var cl = cloudinary.Cloudinary.new();
-    cl.init();
-    cl.responsive();
+    super.mount();
   }
   unmount() {}
 

@@ -1,10 +1,12 @@
 import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
 import Tippy from 'tippy.js/dist/tippy';
-import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import MainView from '../main';
+import MyCloudinary from '../../components/my-cloudinary';
 
-export default class View {
+export default class View extends MainView {
   constructor() {
+    super();
     document.addEventListener("click", e => {
       if (e.target && e.target.matches(".SongShowView .song-opinion")) {
         this._toggle_opinion(e.target);
@@ -22,6 +24,7 @@ export default class View {
   }
 
   mount() {
+    super.mount();
     new timeago().render(document.querySelectorAll("time.timeago"));
     this._submit();
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
@@ -31,10 +34,6 @@ export default class View {
     for (var i = 0; i < els.length; i++) {
       els[i].innerHTML = els[i].innerHTML.autoLink();
     }
-
-    var cl = CloudinaryCore.Cloudinary.new();
-    cl.init();
-    cl.responsive();
   }
   unmount() { 
     this.tips.destroyAll();
@@ -57,9 +56,7 @@ export default class View {
         container.insertAdjacentHTML('beforeend', tpl);
         new timeago().render(document.querySelectorAll("time.timeago"));
 
-        var cl = CloudinaryCore.Cloudinary.new();
-        cl.init();
-        cl.responsive();
+        MyCloudinary.refresh();
       } else {
         console.error("Error");
       }
@@ -123,9 +120,7 @@ export default class View {
     this._refresh_kind(song_like, "like", data.data.like, data.data.user_opinion);
     this._refresh_kind(song_down, "down", data.data.down, data.data.user_opinion);
 
-    var cl = CloudinaryCore.Cloudinary.new();
-    cl.init();
-    cl.responsive();
+    MyCloudinary.refresh();
   }
 
   _refresh_kind(container, kind, data, user_opinion) {

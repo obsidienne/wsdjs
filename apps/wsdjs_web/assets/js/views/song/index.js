@@ -1,9 +1,11 @@
-import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import timeago from 'timeago.js';
 import Tippy from 'tippy.js/dist/tippy';
+import MainView from '../main';
+import MyCloudinary from '../../components/my-cloudinary';
 
-export default class View {
+export default class View extends MainView {
   constructor() {
+    super();
     var self = this;
 
     var timeout;
@@ -26,11 +28,8 @@ export default class View {
     }, false);
   }
 
-  mount() { 
-    // cloudinary
-    var cl = CloudinaryCore.Cloudinary.new();
-    cl.init();
-    cl.responsive();
+  mount() {
+    super.mount();
 
     // tooltip
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
@@ -137,9 +136,7 @@ export default class View {
 
         container.insertAdjacentHTML('beforeend', this.response);
 
-        var cl = CloudinaryCore.Cloudinary.new();
-        cl.init();
-        cl.responsive();
+        MyCloudinary.refresh();
         new timeago().render(document.querySelectorAll("time.timeago"));
         self.tips.destroyAll();
         self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});

@@ -1,15 +1,13 @@
-import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import MainView from '../main';
 import Tippy from 'tippy.js/dist/tippy';
 
-export default class View {
+export default class View extends MainView {
   constructor() {
+    super();
   }
 
   mount() { 
-    // cloudinary
-    var cl = CloudinaryCore.Cloudinary.new();
-    cl.init();
-    cl.responsive();
+    super.mount();
 
     // tooltip
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});

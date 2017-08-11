@@ -1,4 +1,8 @@
+import MyCloudinary from '../components/my-cloudinary';
+
 export default class MainView {
-  mount() {}
+  mount() {
+    MyCloudinary.refresh();
+  }
   umount() {}
 }

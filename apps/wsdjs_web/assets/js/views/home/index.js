@@ -1,9 +1,11 @@
-import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import timeago from 'timeago.js';
 import Tippy from 'tippy.js/dist/tippy';
+import MainView from '../main';
 
-export default class View {
+export default class View extends MainView {
   constructor() {
+    super();
+
     document.addEventListener("click", e => {
       if (e.target && e.target.matches(".HomeIndexView .song-opinion")) {
         this._toggle_opinion(e.target);
@@ -14,11 +16,8 @@ export default class View {
   }
 
   mount() {
-    // cloudinary
-    var cl = CloudinaryCore.Cloudinary.new();
-    cl.init();
-    cl.responsive();
-
+    super.mount();
+   
     // intl date
     var options = {year: "numeric", month: "long"};
     var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);

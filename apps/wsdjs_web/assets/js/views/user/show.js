@@ -1,8 +1,10 @@
-import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
 import Places from 'places.js/dist/cdn/places.js';
+import MainView from '../main';
+import MyCloudinary from '../../components/my-cloudinary';
 
-export default class View {
+export default class View extends MainView {
   constructor() {
+    super();
     var self = this;
 
     var timeout;
@@ -39,10 +41,7 @@ export default class View {
       let datetime = Date.parse(elements[i].getAttribute("datetime"))
       elements[i].textContent = dateTimeFormat.format(datetime);
     }
-
-    var cl = CloudinaryCore.Cloudinary.new();
-    cl.init();
-    cl.responsive();
+    super.mount();
   }
 
   unmount() {}
@@ -84,9 +83,7 @@ export default class View {
         container.dataset.jsTotalPages = total_pages;
         container.insertAdjacentHTML('beforeend', this.response);
 
-        var cl = CloudinaryCore.Cloudinary.new();
-        cl.init();
-        cl.responsive();
+        MyCloudinary.refresh();
       }
     };
 

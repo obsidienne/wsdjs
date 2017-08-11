@@ -1,16 +1,13 @@
-import CloudinaryCore from 'cloudinary-core/cloudinary-core-shrinkwrap';
+import MainView from '../main';
 
-export default class View {
+export default class View extends MainView {
   constructor() {
+    super();
     this._cloudinary_uploader();
   }
   mount() {
-    // cloudinary
-    var cl = CloudinaryCore.Cloudinary.new();
-    cl.init();
-    cl.responsive();
+    super.mount();
   }
-  unmount() {}
 
   _cloudinary_uploader() {
     var params = { upload_preset: "music_cover_staging",
