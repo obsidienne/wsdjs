@@ -13,8 +13,6 @@
         <section>
           <nav>
             <ol class="top-steps text-center">
-              <li class="visited"><em>Create</em></li>
-              <li class="visited"><em>Check</em></li>
               <li class="visited"><em>Voting</em></li>
               <li class="visited">
                 <%= submit "Counting", class: "btn btn-link", name: "direction", value: "previous" %>
