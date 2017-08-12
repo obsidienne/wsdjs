@@ -6,23 +6,15 @@
   background: #fff;
   border-radius: 3px;
 }
-
 .user-page__songs {
   margin-top: 45px;
-  display: grid;
-  justify-content: center;
-  grid-row-gap: 15px;
-  grid-column-gap: 15px;
-  grid-template-columns: repeat(2, minmax(170px, auto));
 }
-
 .user-page__avatar {
   height: 94px;
   min-height: 94px;
   min-width: 94px;
   width: 94px;
 }
-
 .user-page__profile__label {
     font-size: 11px;
     font-weight: bold;
@@ -38,26 +30,30 @@
   font-size: 18px;
   font-weight: normal;
 }
-
 .user-profile-edit {
   display: flex;
   margin-top: 15px;
   flex-direction: column;
 }
-
-
-
-
-.content-minor-section:last-child {
+.user-page__profile__section:last-child {
     border-bottom-width: 0;
 }
-.content-minor-section {
+.user-page__profile__section {
     border-bottom: 1px solid #e8e8e8;
     font-size: 13px;
     line-height: 19px;
     padding: 18px 15px;
     position: relative;
     z-index: 3;
+}
+.profile-details__place {
+  padding-top: 8px;
+}
+.user-page__details {
+  color: #6f6f6f;
+}
+.user-page__logout {
+  padding-left: 0;
 }
 
 
@@ -72,15 +68,6 @@
 }
 .profile-gallery-content[data-section='projects'] {
   max-width: 896px;
-}
-.profile-details__place {
-  padding-top: 8px;
-}
-.user-page__details {
-  color: #6f6f6f;
-}
-.user-page__logout {
-  padding-left: 0;
 }
 #user-page__actions {
   clear: both;

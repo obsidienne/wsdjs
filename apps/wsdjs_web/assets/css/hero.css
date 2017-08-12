@@ -1,6 +1,6 @@
 .hero {
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #fff;
   position: relative;
   min-height: 40vh;
   background-image: linear-gradient(transparent, #fff), url(//res.cloudinary.com/don2kwaju/image/upload/e_blur:400/o_30/v1462614339/wsdjs/bg.jpg);
