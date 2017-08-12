@@ -56,6 +56,9 @@ export default class View extends MainView {
 
     if (pageHeight - (scrollPos + clientHeight) < 50) {   
       var container = document.getElementById("song-list");
+      if (!container) {
+        return;
+      }
       var page_number = parseInt(container.dataset.jsPageNumber);
       var page_total = parseInt(container.dataset.jsTotalPages);
       var user_id = container.getAttribute("user-id");
