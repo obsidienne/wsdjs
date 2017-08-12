@@ -1,18 +1,18 @@
 /****************************
   ??
 ****************************/
-.tops__top__body {
+.tops__top__art {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
 }
 
-.tops__top__body > div {
+.tops__top__art > div {
   flex: 1 0 20%;
 }
 
-.tops__top__body img {
+.tops__top__art img {
   width: 100%;
   vertical-align: top;
 }
