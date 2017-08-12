@@ -75,8 +75,11 @@
 .tops__top__date {
   font-size: 0.8125rem;
   padding: 0 0 .8em 0;
-  display: block;
+  display: flex;
   color: #777777;
+}
+.tops__top__date time {
+  padding-right: 15px;
 }
 .tops__top__details {
   margin-top: 15px;
@@ -93,6 +96,13 @@
   }
   .tops :nth-child(even) {
     justify-content: flex-end;
+  }
+  .tops :nth-child(odd) .tops__top__date {
+    flex-direction: row-reverse;
+  }
+  .tops :nth-child(odd) .tops__top__date time {
+    padding-right: 0;
+    padding-left: 15px;
   }
   .tops__top__anchor {
     width: 60px;
