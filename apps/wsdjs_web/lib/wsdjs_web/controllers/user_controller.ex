@@ -31,7 +31,7 @@ defmodule WsdjsWeb.UserController do
     user = Accounts.get_user!(id)
     current_user = conn.assigns[:current_user]
 
-    with true <- Accounts.Policy.can?(:edit_user, user, current_user),
+    with :ok <- Accounts.Policy.can?(:edit_user, user, current_user),
         {:ok, user} <- Accounts.update_user(user, user_params) do
       conn
       |> put_flash(:info, "Profile updated.")
