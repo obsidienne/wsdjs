@@ -87,9 +87,7 @@
 }
 
 .avatar-tiny {
-    height: 35px;
-    min-height: 35px;
-    min-width: 35px;
-    width: 35px;
+    height: auto;
+    width: 30px;
     border-radius: 50%;
 }
