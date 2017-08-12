@@ -28,10 +28,9 @@
       </tbody>
     </table>
 
-    <dl id="profile-date" class="content-minor-section profile-date-text">
+    <dl class="content-minor-section user-page__details">
       <dt>Member since</dt>
       <dd><time datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></dd>
-
       <%= if @user.detail.description do %>
       <dt>About Me</dt>
       <dd><%= @user.detail.description %></dd>
@@ -71,6 +70,7 @@
     </dl>
   </section>
 
+  <%= if Enum.count(@songs) > 0 do %>
   <section>
     <nav>
       <ul class="tabs-navigation__items">
@@ -84,10 +84,11 @@
     </ul>
     <% end %>
   </section>
+  <% end %>
 
-  <footer>
+  <footer class="container">
     <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
-      <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link",  data: [turbolinks: "false"] %>
+      <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
     <% end %>
   </footer>
 </main>

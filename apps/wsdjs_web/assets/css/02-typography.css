@@ -80,6 +80,9 @@ p { margin: 0 0 10px; }
 .text-muted {
   color: #777777;
 }
+.text-danger {
+  color: #dc3545 !important;
+}
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0 20px;

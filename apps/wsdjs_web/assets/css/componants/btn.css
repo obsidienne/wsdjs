@@ -164,10 +164,6 @@ a.btn.disabled {
   border-color: #d43f3a;
 }
 
-
-
-
-
 [data-toggle="buttons"] > .btn input[type="radio"],
 [data-toggle="buttons"] > .btn input[type="checkbox"] {
   position: absolute;

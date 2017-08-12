@@ -55,7 +55,7 @@
     border-bottom: 1px solid #e8e8e8;
     font-size: 13px;
     line-height: 19px;
-    padding: 18px 20px;
+    padding: 18px 15px;
     position: relative;
     z-index: 3;
 }
@@ -65,34 +65,29 @@
     margin-top: 45px;
 }
 .profile-gallery-content {
-    display: inline-block;
-    margin: 0 auto;
-    padding-bottom: 80px;
-    text-align: left;
+  display: inline-block;
+  margin: 0 auto;
+  padding-bottom: 80px;
+  text-align: left;
 }
 .profile-gallery-content[data-section='projects'] {
-    max-width: 896px;
+  max-width: 896px;
 }
 .profile-details__place {
-    padding-top: 8px;
+  padding-top: 8px;
 }
-#profile-date {
-    color: #6f6f6f;
-    font-size: 11px;
+.user-page__details {
+  color: #6f6f6f;
 }
-.profile-date-text {
-    text-transform: uppercase;
+.user-page__logout {
+  padding-left: 0;
 }
-.profile-date {
-    color: #3c3c3c;
-}
-
 #user-page__actions {
-    clear: both;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 15px;
+  clear: both;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 15px;
 }
 .contry-selector {
   text-align: left;
