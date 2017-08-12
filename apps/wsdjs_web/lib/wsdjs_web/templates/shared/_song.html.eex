@@ -1,23 +1,25 @@
 <li class="card">
-  <%= link to: song_path(@conn, :show, @song), class: "wsdjs-song-cover__image-container" do %>
-    <img class="wsdjs-song-cover__image" data-src="<%= art_url(@song.art) %>">
-
-    <div class="wsdjs-song-cover__details">
-      <h6 class="text-ellipsis"><%= @song.title %></h6>
-      <h6 class="text-ellipsis"><%= @song.artist %></h6>
-
-      <div class="song-hints">
-        <span class="label label-default"><%= @song.genre %></span>
-        <%= if @song.bpm > 0 do %>
-        <span class="label label-primary"><%= @song.bpm %> bpm</span>
-        <% end %>
+  <a href="<%= song_path(@conn, :show, @song.id) %>">
+    <article class="song-minicard">
+      <div class="song-minicard__heading">
+        <img data-src="<%= art_url(@song.art) %>" class="responsive" />
       </div>
+      <div class="song-minicard__body">
+        <h5 class="text-muted"><%= @song.title %></h5>
+        <h6 class="text-muted"><%= @song.artist %></h6>
 
-      <footer class="song-opinions">
-        <%= opinion_link("down", @conn, @song, @song.opinions, nil) %>
-        <%= opinion_link("like", @conn, @song, @song.opinions, nil) %>
-        <%= opinion_link("up", @conn, @song, @song.opinions, nil) %>
-      </footer>
-    </div>
-  <% end %>
+        <footer class="song-minicard__footer">
+          <span class="label label-default"><%= @song.genre %></span>
+          <%= if @song.bpm > 0 do %>
+            <span class="label label-primary"><%= @song.bpm %> bpm</span>
+          <% end %>
+
+          <%= opinion_link_not_empty("down", @conn, @song, @song.opinions, nil) %>
+          <%= opinion_link_not_empty("like", @conn, @song, @song.opinions, nil) %>
+          <%= opinion_link_not_empty("up", @conn, @song, @song.opinions, nil) %>
+
+        </footer>
+      </div>
+    </article>
+  </a>
 </li>

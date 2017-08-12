@@ -6,8 +6,8 @@
   background: #fff;
   border-radius: 3px;
 }
-.user-page__songs {
-  margin-top: 45px;
+.user-page .hero {
+  padding-bottom: 0;
 }
 .user-page__avatar {
   height: 94px;
@@ -51,33 +51,23 @@
 }
 .user-page__details {
   color: #6f6f6f;
+  margin: 0;
 }
 .user-page__logout {
   padding-left: 0;
 }
-
-
-.profile-gallery-content-wrap {
-    margin-top: 45px;
+.user-page__songs {
+  margin-top: 45px;
 }
-.profile-gallery-content {
-  display: inline-block;
-  margin: 0 auto;
-  padding-bottom: 80px;
-  text-align: left;
+.user-page__songs li {
+  margin-bottom: 10px;
 }
-.profile-gallery-content[data-section='projects'] {
-  max-width: 896px;
-}
-#user-page__actions {
+.user-page__actions {
   clear: both;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 15px;
-}
-.contry-selector {
-  text-align: left;
 }
 
 .avatar-tiny {

@@ -28,6 +28,13 @@
     content_tag :button, qty, default_options
   end
 
+  def opinion_link_not_empty(kind, conn, song, opinions, current_user) do
+    qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
+    if (qty > 0) do
+      opinion_link(kind, conn, song, opinions, current_user)
+    end
+  end
+
   def opinion_link(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
     default_options = [class: "song-opinion song-#{kind} tippy"]
@@ -37,6 +44,7 @@
 
   def opinion_link(kind, conn, song, opinions, current_user) do
     qty = Enum.count(opinions, fn(x) -> x.kind == kind end)
+    
     my_opinion = Enum.find(opinions, fn(x) -> x.user_id == current_user.id end)
 
     default_options = [

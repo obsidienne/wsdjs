@@ -1,6 +1,5 @@
-
 <main id="user-page" class="user-page">
-  <section class="hero ">
+  <section class="hero">
     <style>
       .hero {
         background-image: none;
@@ -9,45 +8,46 @@
     <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
     <div class="container">
-    <section class="user-page__profile__section">
-      <img data-src="<%= avatar_url(@user.avatar) %>" class="user-page__avatar">
-      <div>
-        <h4><%= @user.name %></h4>
-        <%= if @user.djname do %>
-          <h6 class="text-muted"><%= @user.djname %></h6>
-        <% end %>
-        <span class="place-icon profile-details__place"> <%= @user.user_country %></span>
-      </div>
-      <footer id="user-page__actions">
-        <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
-        <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) == :ok do %>
-          <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
-        <% end %>
-      </footer>
-    </section>
+      <section class="user-page__profile__section">
+        <img data-src="<%= avatar_url(@user.avatar) %>" class="user-page__avatar">
+        <div>
+          <h4><%= @user.name %></h4>
+          <%= if @user.djname do %>
+            <h6 class="text-muted"><%= @user.djname %></h6>
+          <% end %>
+          <span class="place-icon profile-details__place"> <%= @user.user_country %></span>
+        </div>
+        <footer class="user-page__actions">
+          <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
+          <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) == :ok do %>
+            <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
+          <% end %>
+        </footer>
+      </section>
 
-    <table class="user-page__stats user-page__profile__section">
-      <tbody>
-        <tr>
-          <th class="h6 music-icon">SONG SUGGESTED</th>
-          <td class="number"><%= @total_songs %></td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="user-page__stats user-page__profile__section">
+        <tbody>
+          <tr>
+            <th class="h6 music-icon">SONG SUGGESTED</th>
+            <td class="number"><%= @total_songs %></td>
+          </tr>
+        </tbody>
+      </table>
 
-    <%= render "_user_details.html", user: @user %>
-
+      <%= render "_user_details.html", user: @user %>
     </div>
   </section>
 
-  <%= if Enum.count(@songs) > 0 do %>
-  <section>
+  <%= if @current_user do %>
+  <section class="container">
+    <%= if Enum.count(@songs) > 0 do %>
     <nav>
       <ul class="tabs-navigation__items">
         <li class="tabs-navigation__item active">Suggestions</li>
       </ul>
     </nav>
-  
+    <% end %>
+
     <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) == :ok do %>
     <ul id="song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
       <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song %>
