@@ -31,12 +31,16 @@
 }
 .player__description > h6 {
   padding-bottom: 1px;
+  margin-bottom: 0;
 }
 .player__description__title {
   color: black;
   font-weight: 100;
   text-decoration: none;
   border-bottom: 1px dashed rgba(155, 155, 155, 0.5);
+}
+.player__description__sub-title {
+  margin-top: 0;
 }
 .player__description__title:hover {
   text-shadow: 1px 1px 5px #000000;
@@ -82,7 +86,6 @@
   background-size: cover;
   animation: spin 1s infinite linear;
 }
-
 .player__play__vinyl:hover {
   box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.5);
 }

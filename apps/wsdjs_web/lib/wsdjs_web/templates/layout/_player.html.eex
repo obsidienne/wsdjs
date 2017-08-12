@@ -9,6 +9,7 @@
         <a href="#" class="player__description__title">Radio WCS</a>
       </h6>
       <h6 class="small text-ellipsis player__description__sub-title">by World Swing DJs</h6>
+      <input type="range" id="player__volume" min="0" max="100" step="10"> </input>
     </div>
 
     <div class="player__play">

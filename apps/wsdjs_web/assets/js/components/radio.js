@@ -7,7 +7,7 @@ export default class Radio {
     var self = this;
     this.radio = new Audio();
 
-
+     
     // Now that you are connected, you can join channels with a topic:
     this.channel = socket.channel("notifications:now_playing", {})
     this.channel.join()
@@ -43,8 +43,18 @@ export default class Radio {
 
       }
     });
+    document.addEventListener("change", function(e) {
+      if (e.target && e.target.matches("#player__volume")) {
+        var volumeElement = document.getElementById("player__volume");
+        var volume = volumeElement.value;
+        self.radio.volume = volume / 100;
+      }
+    });
   }
 
+  setVolume(vol) {
+    this.radio.volume = vol;
+  }
 
   play_youtube(video_id) {
     this.pause_radio(document.querySelector(".toggle-player"))
