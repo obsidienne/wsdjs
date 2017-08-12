@@ -1,89 +1,49 @@
-.avatar-tiny {
-    height: 35px;
-    min-height: 35px;
-    min-width: 35px;
-    width: 35px;
-    border-radius: 50%;
+.user-page {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  
+  background: #fff;
+  border-radius: 3px;
 }
 
-
-.rf-owners__owner {
-    display: block;
-    float: left;
-    line-height: 18px;
-    margin-bottom: 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-}
-.rf-avatar {
-    background-color: #e8e8e8;
-    display: block;
-    height: 35px;
-    min-height: 35px;
-    min-width: 35px;
-    overflow: hidden;
-    width: 35px;
+.user-page__songs {
+  margin-top: 45px;
+  display: grid;
+  justify-content: center;
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+  grid-template-columns: repeat(2, minmax(170px, auto));
 }
 
-.wsdjs-song-cover {
-    border-radius: 3px;
-    position: relative;
-    width: 100%;
-    cursor: pointer;
+.user-page__avatar {
+  height: 94px;
+  min-height: 94px;
+  min-width: 94px;
+  width: 94px;
 }
 
-
-.wsdjs-song-cover__image {
-    border-radius: 3px 3px 0 0;
-    display: block;
-    width: 100%;
-}
-.wsdjs-song-cover__title {
-    font-family: inherit;
-    font-size: 13px;
-    line-height: 1.3;
-    color: #191919;
-    display: block;
-    font-weight: bold;
-    height: 36px;
-    line-height: 1.35;
-    margin-bottom: 9px;
-    overflow: hidden;
-}
-.wsdjs-song-cover__details {
-    padding: 10px;
-}
-.wsdjs-song-cover__fields-list {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    height: 14px;
-    margin-bottom: 6px;
-    margin-top: 2px;
-}
-.wsdjs-song-cover__field {
-    font-family: inherit;
+.user-page__profile__label {
     font-size: 11px;
     font-weight: bold;
-    font-weight: normal;
+    line-height: 22px;
+    max-width: 100%;
+    padding: 0 0 5px;
+    text-transform: uppercase;
+    word-wrap: break-word;
 }
-.wsdjs-song-cover__stats {
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: bold;
-    -ms-flex-align: center;
-    align-items: center;
-    border-top: 1px #f2f2f2 solid;
-    box-sizing: border-box;
-    display: -ms-flexbox;
-    display: flex;
-    font-weight: normal;
-    padding: 7px 0;
+.user-page__stats td {
+  color: #3c3c3c;
+  float: right;
+  font-size: 18px;
+  font-weight: normal;
 }
 
-
+.user-profile-edit {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: column;
+}
 
 
 
@@ -99,15 +59,8 @@
     position: relative;
     z-index: 3;
 }
-.content-minor-section-label {
-    font-size: 11px;
-    font-weight: bold;
-    line-height: 22px;
-    max-width: 100%;
-    padding: 0 0 5px;
-    text-transform: uppercase;
-    word-wrap: break-word;
-}
+
+
 .profile-gallery-content-wrap {
     margin-top: 45px;
 }
@@ -120,37 +73,8 @@
 .profile-gallery-content[data-section='projects'] {
     max-width: 896px;
 }
-
-#profile-info .rf-avatar {
-    float: left;
-    height: 94px;
-    margin: 0 17px 0 0;
-    min-height: 94px;
-    min-width: 94px;
-    width: 94px;
-}
-#profile-details {
-    float: left;
-    line-height: 23px;
-    margin: -4px 0 0;
-    width: 209px;
-}
-#profile-details .profile-location {
+.profile-details__place {
     padding-top: 8px;
-}
-#profile-stats {
-    padding-top: 30px;
-}
-.profile-stat-label::before {
-    font-size: 20px;
-    margin-right: 10px;
-    top: 4px;
-}
-.profile-stat-count {
-    color: #3c3c3c;
-    float: right;
-    font-size: 18px;
-    font-weight: normal;
 }
 #profile-date {
     color: #6f6f6f;
@@ -163,24 +87,21 @@
     color: #3c3c3c;
 }
 
-#profile-actions {
+#user-page__actions {
     clear: both;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     margin-top: 15px;
 }
-
-
-
-.email {
-  background-image: var(--icon-email);
-  background-repeat: no-repeat;
-}
-
-.profile-section:blank {
-    display: none;
-}
 .contry-selector {
   text-align: left;
+}
+
+.avatar-tiny {
+    height: 35px;
+    min-height: 35px;
+    min-width: 35px;
+    width: 35px;
+    border-radius: 50%;
 }

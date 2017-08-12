@@ -36,9 +36,9 @@
     </div>
   </div>
 
-  <nav class="container">
-    <ul class="profile-section-header content-section-header">
-      <li class="content-section-nav-item active">Overview</li>
+  <nav class="tabs-navigation container">
+    <ul class="tabs-navigation__items">
+      <li class="tabs-navigation__item active">Overview</li>
     </ul>
   </nav>
 </section>

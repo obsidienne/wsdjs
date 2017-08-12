@@ -9,7 +9,7 @@ export default class View extends MainView {
 
     var timeout;
     window.addEventListener("scroll", function(e) {
-      if (document.querySelector("#user-profile-container")) {
+      if (document.querySelector("#user-page")) {
         clearTimeout(timeout);
         timeout = setTimeout(function() {
           var ticking = false;

@@ -60,6 +60,14 @@ p {
   word-wrap: break-word;
 }
 
+dd {
+  margin-bottom: .5rem;
+  margin-left: 0;
+}
+dt {
+  font-weight: bold;
+}
+
 .card {
   display: block;
   border-radius: 2px;

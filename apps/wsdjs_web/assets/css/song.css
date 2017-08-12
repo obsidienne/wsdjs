@@ -175,3 +175,63 @@
   height: 20px;
   vertical-align: middle;
 }
+
+/****************************
+  ???
+****************************/
+.wsdjs-song-cover {
+    border-radius: 3px;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+}
+
+
+.wsdjs-song-cover__image {
+    border-radius: 3px 3px 0 0;
+    display: block;
+    width: 100%;
+}
+.wsdjs-song-cover__title {
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.3;
+    color: #191919;
+    display: block;
+    font-weight: bold;
+    height: 36px;
+    line-height: 1.35;
+    margin-bottom: 9px;
+    overflow: hidden;
+}
+.wsdjs-song-cover__details {
+    padding: 10px;
+}
+.wsdjs-song-cover__fields-list {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    height: 14px;
+    margin-bottom: 6px;
+    margin-top: 2px;
+}
+.wsdjs-song-cover__field {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+    font-weight: normal;
+}
+.wsdjs-song-cover__stats {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+    -ms-flex-align: center;
+    align-items: center;
+    border-top: 1px #f2f2f2 solid;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-weight: normal;
+    padding: 7px 0;
+}

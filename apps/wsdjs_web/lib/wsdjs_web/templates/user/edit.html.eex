@@ -11,8 +11,8 @@
   <%= form_for @changeset, user_path(@conn, :update, @user), [id: "user_edit_form"], fn f -> %>
     <div id="cloudinary_form_div">
       <%= inputs_for f, :avatar, fn fp -> %>
-        <%= hidden_input fp, :cld_id %>
-        <%= hidden_input fp, :version %>
+        <%= hidden_input fp, :cld_id, disabled: :disabled %>
+        <%= hidden_input fp, :version, disabled: :disabled %>
       <% end %>
     </div>
 

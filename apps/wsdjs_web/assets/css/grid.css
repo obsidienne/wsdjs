@@ -7,32 +7,6 @@
   max-width: 414px;
 }
 
-
-
-.user-profile-container {
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  
-  background: #fff;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-.user-profile-container > section {
-  flex: 1 1 300px;
-}
-
-.user-profile-song-container {
-  margin-top: 45px;
-  display: grid;
-  justify-content: center;
-  grid-row-gap: 15px;
-  grid-column-gap: 15px;
-  grid-template-columns: repeat(2, minmax(170px, auto));
-}
-
-
-.user-profile-edit,
 .song-edit,
 .song-new {
   display: flex;

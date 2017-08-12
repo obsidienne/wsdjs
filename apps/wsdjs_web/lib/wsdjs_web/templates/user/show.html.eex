@@ -1,93 +1,93 @@
 <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
-<main id="user-profile-container" class="container user-profile-container">
+<main id="user-page" class="container user-page">
   <section>
-    <section id="profile-info" class="profile-section content-minor-section content-mobile-major-section">
-      <h4><%= @user.name %></h4>
-      <img data-src="<%= avatar_url(@user.avatar) %>" class="rf-avatar rf-avatar__image js-avatar__image">
-      <div id="profile-details">
-        <h6><%= user_displayed_name(@user) %></h6>
-        <span class="place-icon"> <%= @user.user_country %></span>
+    <section class="content-minor-section">
+      <img data-src="<%= avatar_url(@user.avatar) %>" class="user-page__avatar">
+      <div>
+        <h4><%= @user.name %></h4>
+        <%= if @user.djname do %>
+          <h6><%= user_displayed_name(@user) %></h6>
+        <% end %>
+        <span class="place-icon profile-details__place"> <%= @user.user_country %></span>
       </div>
-      <div id="profile-actions">
-        <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">
-          Message
-        </a>
+      <footer id="user-page__actions">
+        <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
         <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) == :ok do %>
           <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
         <% end %>
-        <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
-          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link",  data: [turbolinks: "false"] %>
-        <% end %>
-      </div>
+      </footer>
     </section>
 
-    <table id="profile-stats" class="profile-stat profile-section content-minor-section">
+    <table class="user-page__stats content-minor-section">
       <tbody>
         <tr>
-          <td class="h6 music-icon">SONG SUGGESTED</td>
-          <td class="profile-stat-count number"><%= @total_songs %></td>
+          <th class="h6 music-icon">SONG SUGGESTED</th>
+          <td class="number"><%= @total_songs %></td>
         </tr>
       </tbody>
     </table>
 
-    <div class="content-section-wrap">
-      <%= if @user.detail do %>
-      <div class="profile-section content-minor-section">
-        <%= if @user.detail.description do %>
-          <h3 class="content-minor-section-label">About Me</h3>
-          <p><%= @user.detail.description %></p>
-        <% end %>
-        <%= if @user.detail.love_more do %>
-          <h3 class="content-minor-section-label">Things you love more ?</h3>
-          <p><%= @user.detail.love_more %></p>
-        <% end %>
-        <%= if @user.detail.hate_more do %>
-          <h3 class="content-minor-section-label">Things you hate more ?</h3>
-          <p><%= @user.detail.hate_more %></p>
-        <% end %>
-        <%= if @user.detail.favorite_artist do %>
-          <h3 class="content-minor-section-label">Favorite artist</h3>
-          <p><%= @user.detail.favorite_artist %></p>
-        <% end %>
-        <%= if @user.detail.favorite_genre do %>
-          <h3 class="content-minor-section-label">Favotire genre</h3>
-          <p><%= @user.detail.favorite_genre %></p>
-        <% end %>
-        <%= if @user.detail.favorite_color do %>
-          <h3 class="content-minor-section-label">Favorite color</h3>
-          <p><%= @user.detail.favorite_color %></p>
-        <% end %>
-        <%= if @user.detail.favorite_meal do %>
-          <h3 class="content-minor-section-label">Favorite meal</h3>
-          <p><%= @user.detail.favorite_meal %></p>
-        <% end %>
-        <%= if @user.detail.favorite_animal do %>
-          <h3 class="content-minor-section-label">Favorite animal</h3>
-          <p><%= @user.detail.favorite_animal %></p>
-        <% end %>
-        <%= if @user.detail.djing_start_year do %>
-          <h3 class="content-minor-section-label">Start DJing</h3>
-          <p><%= @user.detail.djing_start_year %></p>
-        <% end %>
-      </div>
+    <dl id="profile-date" class="content-minor-section profile-date-text">
+      <dt>Member since</dt>
+      <dd><time datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></dd>
+
+      <%= if @user.detail.description do %>
+      <dt>About Me</dt>
+      <dd><%= @user.detail.description %></dd>
       <% end %>
-      <h6 id="profile-date" class="profile-section content-minor-section profile-date-text">Member since: <time class="profile-date" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= @user.inserted_at %></time></h6>
-    </div>
+      <%= if @user.detail.love_more do %>
+      <dt>Things you love more ?</dt>
+      <dd><%= @user.detail.love_more %></dd>
+      <% end %>
+      <%= if @user.detail.hate_more do %>
+      <dt>Things you hate more ?</dt>
+      <dd><%= @user.detail.hate_more %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_artist do %>
+      <dt>Favorite artist</dt>
+      <dd><%= @user.detail.favorite_artist %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_genre do %>
+      <dt>Favotire genre</dt>
+      <dd><%= @user.detail.favorite_genre %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_color do %>
+      <dt>Favorite color</dt>
+      <dd><%= @user.detail.favorite_color %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_meal do %>
+      <dt>Favorite meal</dt>
+      <dd><%= @user.detail.favorite_meal %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_animal do %>
+      <dt>Favorite animal</dt>
+      <dd><%= @user.detail.favorite_animal %></dd>
+      <% end %>
+      <%= if @user.detail.djing_start_year do %>
+      <dt>Start DJing</dt>
+      <dd><%= @user.detail.djing_start_year %></dd>
+      <% end %>
+    </dl>
   </section>
 
-
-  <section class="user-profile-container-songs">
-    <nav class="content-section-nav">
-      <ul class="profile-section-header content-section-header">
-        <li class="content-section-nav-item active">Suggestions</li>
+  <section>
+    <nav>
+      <ul class="tabs-navigation__items">
+        <li class="tabs-navigation__item active">Suggestions</li>
       </ul>
     </nav>
   
     <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) == :ok do %>
-    <ul id="song-list" class="user-profile-song-container" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
+    <ul id="song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
       <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song %>
     </ul>
     <% end %>
   </section>
+
+  <footer>
+    <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
+      <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link",  data: [turbolinks: "false"] %>
+    <% end %>
+  </footer>
 </main>
