@@ -1,4 +1,11 @@
 /****************************
+  Checking top
+****************************/
+.TopCheckingView .container {
+  max-width: 768px;
+}
+
+/****************************
   Voting top
 ****************************/
 .TopVotingView .container {
@@ -110,6 +117,14 @@
   position: fixed;
   bottom: 15px;
   z-index: 1000;
+}
+
+
+/****************************
+  Counting
+****************************/
+.TopCountingView .container {
+  max-width: 768px;
 }
 
 /****************************

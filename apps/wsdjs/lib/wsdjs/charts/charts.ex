@@ -58,7 +58,7 @@ defmodule Wsdjs.Charts do
   end
 
   def create_top(current_user, %{"due_date" => due_date} = params) do
-    with true <- Policy.can?(:create_top, current_user) do
+    with :ok <- Policy.can?(:create_top, current_user) do
       songs = Musics.songs_in_month(due_date)
       params = Map.put(params, "status", "checking")
 
