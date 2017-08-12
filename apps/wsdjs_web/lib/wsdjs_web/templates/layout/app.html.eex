@@ -15,7 +15,6 @@
         render(WsdjsWeb.LayoutView, "meta.html", assigns) %>
     </script>
 
-    <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css" />
   </head>
 
   <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
