@@ -1,213 +1,252 @@
 /****************************
-  ??
+  Voting top
 ****************************/
-.tops__top__art {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
+.TopVotingView .container {
+  max-width: 768px;
 }
 
-.tops__top__art > div {
-  flex: 1 0 20%;
+.top-voting-repartition {
+  margin-top: 15px;
 }
 
-.tops__top__art img {
+.voting-container {
+  margin-bottom: 5px;
+}
+
+.voting-container label {
   width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.voting-container .album-art {
   vertical-align: top;
 }
 
-/****************************
-  top timeline vertical line
-****************************/
-.tops::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 33px;
-  height: 100%;
-  width: 4px;
-  background: #d7e4ed;
+.voting-song {
+  position: relative;
 }
-@media only screen and (min-width: 768px) {
-  .tops::before {
-    left: 50%;
-    margin-left: -2px;
-  }
+.counting-points {
+  white-space: nowrap;
+}
+
+.voting-song-title, .voting-song-artist {
+  display: block;
+}
+
+.voting-song-artist {
+  font-weight: normal;
+}
+
+.voting-position {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    z-index: 1000;
+}
+
+.voting-position:empty {
+    display: none;
+}
+
+.voting-position .chart-bg {
+    position: absolute;
+    top: -80px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 72px solid transparent;
+    border-bottom: 72px solid transparent;
+    border-left: 72px solid #FFF;
+}
+
+.voting-position .chart-value {
+    position: absolute;
+    top: -7px;
+    left: -10px;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    font-weight: 600;
+    color: #49596a;
+}
+
+.voting-container .song-play {
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23FFC107' height='72' viewBox='0 0 24 24' width='72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E ");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 50px;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-decoration: none;
+  border-radius: 100%;
+  background-color: rgba(180,180,180,.5);
+}
+
+
+.top-voting-footer {
+  position: fixed;
+  bottom: 55px;
+  display: flex;
+  padding: 10px;
+  background-color: grey;
+  z-index: 2000;
+  justify-content: flex-end;
+}
+
+.top-voting-footer-actions > .btn {
+  width: 200px;
+  position: fixed;
+  bottom: 15px;
+  z-index: 1000;
 }
 
 /****************************
-  top timeline
+  Published top
 ****************************/
-.tops {
-  position: relative;
+.TopPublishedView .container {
+  max-width: 768px;
 }
-.tops__top {
+
+
+.top-songs-container {
+  margin-bottom: 50px;
+}
+
+.top-song {
   display: flex;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  border-bottom: 1px solid #DDD;
+  flex-direction: column;
+}
+.song-art-container {
   position: relative;
-  margin: 2em 0;
+  min-width: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  height: auto;
+  align-self: center;
 }
-.tops__top:first-child {
-  margin-top: 0;
+.top-published .song-art-container,
+.top-counting .song-art-container,
+.top-voting .song-art-container {
+  min-width: 150px;
+  max-width: 150px;
+  max-height: 150px;
 }
-.tops__top:last-child {
-  margin-bottom: 0;
+.top-counting tr {
+  height: 36px;
 }
-.tops__top__anchor {
+.top-counting td {
+  text-align: right;
+}
+
+.top-song-position-selector {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  padding: 15px;
+  background: rgba(150,150,150,.4);
+  margin: 7px;
+  margin-left: 10px;
+  border-radius: 5px;
 }
-.tops__top__anchor img {
+.top-song-position-selector:hover {
+  background: rgb(150,150,150);
+}
+
+.song-art-container a {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  background: rgba(150,150,150,.4);
+  padding: 15px;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 7px;
+}
+.song-art-container:hover a {
+  background: rgb(150,150,150);
+}
+.top-song-info-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.top-song img {
+  max-width: 300px;
   width: 100%;
   height: auto;
-  border-radius: 50%;
 }
-.tops__top__content {
-  position: relative;
-  margin-left: 60px;
-  padding: 15px;
-  border-radius: 10px;
-}
-.tops__top__date {
-  font-size: 0.8125rem;
-  padding: 0 0 .8em 0;
-  display: flex;
-  color: #777777;
-}
-.tops__top__date time {
-  padding-right: 15px;
-}
-.tops__top__details {
-  margin-top: 15px;
-}
-.tops__top__details th,
-.tops__top__details td {
-  text-align: left;
-  color: #777777;
-}
-
-@media only screen and (min-width: 768px) {
-  .TopIndexView .tops {
-    max-width: 1170px;
+@media (min-width: 767px) {
+  .top-song {
+    flex-direction: row;
   }
-  .tops :nth-child(even) {
-    justify-content: flex-end;
-  }
-  .tops :nth-child(odd) .tops__top__date {
-    flex-direction: row-reverse;
-  }
-  .tops :nth-child(odd) .tops__top__date time {
-    padding-right: 0;
+  .top-song-body-info {
     padding-left: 15px;
   }
-  .tops__top__anchor {
-    width: 60px;
-    height: 60px;
-    left: 50%;
-    margin-left: -30px;
+  .top-song-body aside {
+    padding-left: 15px;
   }
-  .tops__top__content {
-    margin-left: 0;
-    width: 45%;
+  .top-song-info-container {
+    flex-direction: row;
   }
 }
 
 
-/****************************
-  step
-****************************/
-.top-steps {
-  padding: 0.5em 1em;
-  margin: 1em auto;
-  background-color: #edeff0;
-  border-radius: .25em;
+.top-song-art {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 160px;
+  height: auto;
+  margin-right: 15px;
+  position: relative;
+  margin-bottom: 0
 }
-.top-steps::after {
-  clear: both;
-  content: "";
-  display: table;
+
+.top-song-art img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
-.top-steps li {
+
+.top-song-body {
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.top-song-play {
+  width: 60px;
+  height: 60px;
+  max-width: 100%;
+  bottom: 15px;
+  right: 15px;
+  text-decoration: none;
   display: inline-block;
-  margin: 0.5em 0;
-}
-.top-steps li::after {
-  display: inline-block;
-  content: '\00bb';
-  margin: 0 .6em;
-  color: #959fa5;
-}
-.top-steps li:last-of-type::after {
-  display: none;
-}
-.top-steps li > * {
-  display: inline-block;
-  font-size: 1.4rem;
-  color: #2c3f4c;
-}
-.top-steps li.current > * {
-  color: #96c03d;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23FFC107' height='72' viewBox='0 0 24 24' width='72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E ");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  background-color: rgba(150,150,150,.5);
 }
 
 
-@media only screen and (min-width: 768px) {
-  .top-steps {
-    /* reset style */
-    background-color: transparent;
-    padding: 0;
-    text-align: center;
-  }
-
-  .top-steps li {
-    position: relative;
-    float: none;
-    margin: 0.4em 40px 0.4em 0;
-  }
-  .top-steps li:last-of-type {
-    margin-right: 0;
-  }
-  .top-steps li::after {
-    /* this is the line connecting 2 adjacent items */
-    position: absolute;
-    content: '';
-    height: 4px;
-    background: #edeff0;
-    margin: 0;
-  }
-  .top-steps li.visited::after {
-    background-color: #96c03d;
-  }
-  .top-steps li > *,
-  .top-steps li.current > * {
-    position: relative;
-    color: #2c3f4c;
-  }
-
-  .top-steps.text-center li::after {
-    width: 100%;
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%) translateX(-1px);
-  }
-  .top-steps.text-center li > * {
-    z-index: 1;
-    padding: .6em 1em;
-    border-radius: .25em;
-    background-color: #edeff0;
-  }
-
-  .top-steps.text-center li.current > *,
-  .top-steps.text-center li.visited > * {
-    color: #ffffff;
-    background-color: #96c03d;
-  }
-  .top-steps li.next > * {
-    /* next step */
-    background-color: #337ab7;
-    color: white;
-  }
-}
