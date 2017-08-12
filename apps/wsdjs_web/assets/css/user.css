@@ -10,6 +10,7 @@
   padding-bottom: 0;
 }
 .user-page__avatar {
+  flex: 0 0 94px;
   height: 94px;
   min-height: 94px;
   min-width: 94px;
@@ -35,6 +36,21 @@
   margin-top: 15px;
   flex-direction: column;
 }
+.user-page__profile__header {
+  display: flex;
+}
+.user-page__profile-details {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  padding: 5px;
+}
+.user-page__profile-details > h4 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 0;
+}
 .user-page__profile__section:last-child {
     border-bottom-width: 0;
 }
@@ -46,7 +62,7 @@
     position: relative;
     z-index: 3;
 }
-.profile-details__place {
+.user-page__profile-details__place {
   padding-top: 8px;
 }
 .user-page__details {

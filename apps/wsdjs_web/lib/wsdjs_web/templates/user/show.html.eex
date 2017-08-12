@@ -9,14 +9,17 @@
 
     <div class="container">
       <section class="user-page__profile__section">
-        <img data-src="<%= avatar_url(@user.avatar) %>" class="user-page__avatar">
-        <div>
-          <h4><%= @user.name %></h4>
-          <%= if @user.djname do %>
-            <h6 class="text-muted"><%= @user.djname %></h6>
-          <% end %>
-          <span class="place-icon profile-details__place"> <%= @user.user_country %></span>
-        </div>
+        <header class="user-page__profile__header">
+          <img data-src="<%= avatar_url(@user.avatar) %>" class="user-page__avatar">
+          <div class="user-page__profile-details">
+            <h4><%= @user.name %></h4>
+            <%= if @user.djname do %>
+              <h6 class="text-muted"><%= @user.djname %></h6>
+            <% end %>
+            <span class="place-icon user-page__profile-details__place"> <%= @user.user_country %></span>
+          </div>
+        </header>
+
         <footer class="user-page__actions">
           <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
           <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) == :ok do %>
