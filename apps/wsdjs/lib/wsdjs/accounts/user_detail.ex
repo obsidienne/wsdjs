@@ -32,6 +32,6 @@ defmodule Wsdjs.Accounts.UserDetail do
     |> validate_length(:favorite_meal, max: 2000)
     |> validate_length(:love_more, max: 255)
     |> validate_length(:hate_more, max: 255)
-    |> validate_number(:djing_start_year, greater_than: 1950, less_than: 2017)
+    |> validate_number(:djing_start_year, greater_than_or_equal_to: 1950, less_than_or_equal_to: 2017)
   end
 end
