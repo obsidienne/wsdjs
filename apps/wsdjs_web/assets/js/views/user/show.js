@@ -55,7 +55,7 @@ export default class View extends MainView {
     var scrollPos = window.pageYOffset;
 
     if (pageHeight - (scrollPos + clientHeight) < 50) {   
-      var container = document.getElementById("song-list");
+      var container = document.getElementById("user-page__song-list");
       if (!container) {
         return;
       }
@@ -78,7 +78,7 @@ export default class View extends MainView {
         var total_pages = request.getResponseHeader("total-pages");
         var page_number = request.getResponseHeader("page-number");
 
-        var container = document.getElementById("song-list");
+        var container = document.getElementById("user-page__song-list");
 
         container.dataset.jsPageNumber = page_number;
         container.dataset.jsTotalPages = total_pages;
