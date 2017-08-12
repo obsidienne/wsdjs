@@ -10,10 +10,23 @@ defmodule WsdjsWeb.TopController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def index(conn, _params, current_user) do
-    tops = Charts.list_tops(current_user)
+  def index(conn, %{"page" => page}, current_user) do
+    page = Charts.paginate_tops(current_user, %{"page" => page, "page_size" => 3})
+    
+    conn
+    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
+    |> put_resp_header("page-number", Integer.to_string(page.page_number))
+    |> put_layout(false)
+    |> render("_index_top.html", tops: page.entries)
+  end
 
-    render conn, "index.html", tops: tops
+  def index(conn, _params, current_user) do
+    page = Charts.paginate_tops(current_user, %{"page_size" => 3})
+    
+    conn
+    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
+    |> put_resp_header("page-number", Integer.to_string(page.page_number))
+    |> render("index.html", tops: page.entries, page_number: page.page_number, total_pages: page.total_pages)
   end
 
   def show(conn, %{"id" => id}, current_user) do

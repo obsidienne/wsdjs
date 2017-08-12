@@ -32,13 +32,21 @@ defmodule Wsdjs.Charts do
   @doc """
   Returns Tops accessible for the current user.
   """
-  def list_tops(current_user) do
-    current_user
+  def paginate_tops(current_user, paginate_params \\ %{}) do
+    tops = current_user
     |> Top.scoped()
     |> order_by([desc: :due_date])
-    |> Repo.all
+    |> Repo.paginate(paginate_params)
+
+    entries = tops.entries
     |> Repo.preload(ranks: Charts.list_rank())
     |> Repo.preload(:songs)
+
+    %{
+      "entries": entries,
+      "total_pages": tops.total_pages,
+      "page_number": tops.page_number
+    }
   end
 
   def get_top_order_by_votes!(current_user, top_id) do

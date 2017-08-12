@@ -1,0 +1,1 @@
+<%= render_many @tops, @view_module, "_top.html", conn: @conn, as: :top %>
