@@ -8,7 +8,7 @@ defmodule WsdjsWeb.UserController do
   def index(conn, _params) do
     current_user = conn.assigns[:current_user]
 
-    if current_user do
+    if current_user && current_user.admin do
       users = Accounts.list_users()
       render conn, "index.html", users: users
     else

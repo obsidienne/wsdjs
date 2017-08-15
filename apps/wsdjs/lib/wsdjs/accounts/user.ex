@@ -15,6 +15,7 @@ defmodule Wsdjs.Accounts.User do
     field :user_country, :string
     field :name, :string
     field :djname, :string
+    field :profils, {:array, :string}
 
     has_many :songs, Musics.Song
     has_many :comments, Musics.Comment
@@ -27,7 +28,7 @@ defmodule Wsdjs.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname]
+  @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname, :profils]
 
   @doc false
   def changeset(struct, params \\ %{}) do

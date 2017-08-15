@@ -16,6 +16,14 @@
       <% end %>
     </div>
 
+    <%= if @current_user.admin do %>
+    <div class="form-group">
+      <label class="small text-muted">Profils</label>
+      <%= multiple_select(f, :profils, ["DJ", "Pro"], prompt: "Set a profil", class: "form-control") %>
+      <%= error_tag f, :name %>
+    </div>
+    <% end %>
+
     <div class="form-group">
       <label class="small text-muted">Name</label>
       <%= text_input f, :name, placeholder: "Name", class: "form-control text-capitalized" %>

@@ -17,6 +17,11 @@
               <h6 class="text-muted"><%= @user.djname %></h6>
             <% end %>
             <span class="place-icon user-page__profile-details__place"> <%= @user.user_country %></span>
+            <div class="user-page__profils">
+              <%= for profil <- @user.profils do %>
+                <span class="label label-primary"><%= profil %></span>
+              <% end %>
+            </div>
           </div>
         </header>
 
@@ -28,7 +33,7 @@
           <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
             <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
           <% end %>
-          <%= if @current_user.admin do %>
+          <%= if @user.admin == true do %>
             <%= link "User list", to: user_path(@conn, :index), class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
           <% end %>
         </footer>
