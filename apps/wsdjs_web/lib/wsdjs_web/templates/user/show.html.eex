@@ -46,16 +46,21 @@
     <%= if Enum.count(@songs) > 0 do %>
     <nav>
       <ul class="tabs-navigation__items">
-        <li class="tabs-navigation__item active">Suggestions</li>
+        <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#suggestions-section">suggestions</a></li>
+        <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#playlists-section">playlists</a></li>
       </ul>
     </nav>
     <% end %>
 
     <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) == :ok do %>
-    <ul id="user-page__song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
-      <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song %>
-    </ul>
+    <section id="suggestions-section" class="container tabs-pane active">
+      <ul id="user-page__song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
+        <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song %>
+      </ul>
+    </section>
     <% end %>
+    <section id="playlists-section" class="container tabs-pane">
+    </section>
   </section>
   <% end %>
 

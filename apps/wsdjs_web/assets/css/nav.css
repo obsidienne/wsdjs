@@ -43,6 +43,13 @@
 /****************************
   local tabs navigation
 ****************************/
+.tabs-pane {
+  display: none;
+}
+.tabs-pane.active {
+  display: block;
+}
+
 .tabs-navigation__items {
     min-width: 100%;
     white-space: nowrap;
@@ -76,4 +83,8 @@
 }
 .tabs-navigation__item:last-child {
     margin-right: 0;
+}
+.tabs-navigation__item a {
+  color: inherit;
+  font-size: inherit;
 }
