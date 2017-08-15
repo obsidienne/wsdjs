@@ -13,10 +13,19 @@
     </div>
 
     <div class="player__play">
-      <div class="player__play__vinyl"> </div>
+      <div class="player__play__vinyl"></div>
       <div class="player__expand"></div>
     </div>
   </div>
+
+  <div class="player__toggle" hidden>
+    <div class="player__toggle__art">
+      <img class="responsive" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
+    </div>
+    <h3>Return to RadioWCS</h3>
+   </div>
+
+  <div id="player__youtube" class="player__youtube" hidden></div>
 
   <div class="already-played">
     <table id="already-played" class="already-played__data"></table>

@@ -33,7 +33,7 @@ export default class Radio {
         self.play_youtube(e.target.dataset.videoId);
       }
 
-      if (e.target && (e.target.matches(".miniplayer-radio-toggle") || e.target.closest(".miniplayer-radio-toggle"))) {
+      if (e.target && (e.target.matches(".player__toggle") || e.target.closest(".player__toggle"))) {
         self.pause_youtube();
       }
 
@@ -57,26 +57,22 @@ export default class Radio {
   }
 
   play_youtube(video_id) {
-    this.pause_radio(document.querySelector(".toggle-player"))
-    document.querySelector(".miniplayer-art").setAttribute("hidden", "hidden");
-    document.querySelector("#radio-container").setAttribute("hidden", "hidden");
-    document.getElementById("miniplayer-container").classList.add("youtube");
-    document.querySelector(".miniplayer-radio-toggle").removeAttribute("hidden");
-
-    var container = document.querySelector("#youtube-player");
+    this.pause_radio()
+    document.querySelector(".current-played").setAttribute("hidden", "hidden");
+    
+    document.querySelector(".player__toggle").removeAttribute("hidden", "hidden");    
+    var container = document.querySelector("#player__youtube");
     container.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}?autoplay=1" frameborder="0" allowfullscreen="1"></iframe>`;
     container.removeAttribute("hidden");
   }
 
   pause_youtube() {
-    var container = document.querySelector("#youtube-player");
+    var container = document.querySelector("#player__youtube");
     container.setAttribute("hidden", "hidden");
     container.innerHTML = "";
-    document.querySelector(".miniplayer-radio-toggle").setAttribute("hidden", "hidden");
+    document.querySelector(".player__toggle").setAttribute("hidden", "hidden");
 
-    document.querySelector(".miniplayer-art").removeAttribute("hidden");
-    document.querySelector("#radio-container").removeAttribute("hidden");
-    document.getElementById("miniplayer-container").classList.remove("youtube");
+    document.querySelector(".current-played").removeAttribute("hidden", "hidden");
   }
 
   pause_radio(el) {
@@ -88,7 +84,7 @@ export default class Radio {
     document.querySelector(".player__description__title").setAttribute("href", "#");
     document.querySelector(".player__description__title").innerHTML = "Radio WCS";
     document.querySelector(".player__description__sub-title").innerHTML = "by World Swing DJs";
-    document.querySelector(".player").classList.toggle("player--playing");
+    document.querySelector(".player").classList.remove("player--playing");
 
     MyCloudinary.refresh();
   }
@@ -99,7 +95,7 @@ export default class Radio {
 
     this.channel.push("played_song_list")
     this.radio.play();
-    document.querySelector(".player").classList.toggle("player--playing");
+    document.querySelector(".player").classList.add("player--playing");
   }
 
   refresh_radio(payload) {

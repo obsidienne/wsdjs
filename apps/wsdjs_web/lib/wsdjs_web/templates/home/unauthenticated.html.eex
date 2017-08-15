@@ -9,7 +9,7 @@
 
 <main role="main" class="container">
   <section>
-    <h4>Deejay's pick</h4>
+    <h4>Deejays' pick</h4>
     <ul>
       <%= render_many @songs, WsdjsWeb.SharedView, "_song_minicard.html", conn: @conn, as: :song %>
     </ul>
