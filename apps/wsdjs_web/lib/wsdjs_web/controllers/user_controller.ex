@@ -6,8 +6,16 @@ defmodule WsdjsWeb.UserController do
   alias Wsdjs.Musics
 
   def index(conn, _params) do
-    users = Accounts.list_users()
-    render conn, "index.html", users: users
+    current_user = conn.assigns[:current_user]
+
+    if current_user do
+      users = Accounts.list_users()
+      render conn, "index.html", users: users
+    else
+      conn
+      |> put_flash(:error, "Unauthorized.")
+      |> redirect(to: home_path(conn, :index))
+    end
   end
 
   def show(conn, %{"id" => user_id}) do

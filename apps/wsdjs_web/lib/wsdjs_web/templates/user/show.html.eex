@@ -25,6 +25,12 @@
           <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) == :ok do %>
             <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
           <% end %>
+          <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
+            <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
+          <% end %>
+          <%= if @current_user.admin do %>
+            <%= link "User list", to: user_path(@conn, :index), class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
+          <% end %>
         </footer>
       </section>
 
@@ -63,10 +69,4 @@
     </section>
   </section>
   <% end %>
-
-  <footer class="container">
-    <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
-      <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
-    <% end %>
-  </footer>
 </main>
