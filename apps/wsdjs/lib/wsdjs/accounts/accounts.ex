@@ -38,7 +38,7 @@ defmodule Wsdjs.Accounts do
     User
     |> order_by([:name])
     |> Repo.all()
-    |> Repo.preload(:avatar)
+    |> Repo.preload([:avatar, :songs, :comments])
   end
 
   @doc """

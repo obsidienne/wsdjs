@@ -4,13 +4,28 @@
   <h1>Listing Users</h1>
 
   <table class="table">
+  <thead>
+    <tr><th>Name</th><th>Email</th><th>proposed</th></tr>
+  </thead>
+  <tbody>
   <%= for user <- @users do %>
   <tr>
+    <td><img src="<%= avatar_url(user.avatar) %>" width="50px" height="50px"/></td>
     <td>
-    <img src="<%= avatar_url(user.avatar) %>" width="30px" height="30px"/><b>
     <%= link user.email, to: user_path(@conn, :show, user.id) %>
+    <h6 class="small"><%= user.user_country %>, DJ since <time datetime="<%= Date.to_iso8601(user.inserted_at) %>"></time></h6>
+    </td>
+    <td>
+    <%= if Enum.count(user.songs) > 0 do %>
+    <span class="label label-primary"><%= Enum.count(user.songs) %> songs</span>
+    <% end %>
+    <%= if Enum.count(user.comments) > 0 do %>
+    <br>
+    <span class="label label-default"><%= Enum.count(user.comments) %> comments</span>
+    <% end %>
     </td>
   </tr>
   <% end %>
+  </tbody>
   </table>
 </main>

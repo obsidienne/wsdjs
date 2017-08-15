@@ -59,7 +59,9 @@ function handleDOMContentLoaded() {
 }
 
 function handleUnloadContentLoaded() {
-  window.currentView.unmount();
+  if (window.currentView.unmount) {
+    window.currentView.unmount();
+  }
 }
 
 var radio = new Radio();
