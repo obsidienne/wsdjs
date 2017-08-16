@@ -42,6 +42,7 @@
   border-radius: 0;
   margin: 0;
   display: flex;
+  height: 100%;
 }
 .song-minicard__heading {
   padding: 0;
@@ -56,9 +57,9 @@
   padding-left: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 5px;
   min-width: 0;
+  flex: 1 1 auto;
 }
 .song-minicard__body h5, 
 .song-minicard__body h6 {
@@ -70,10 +71,9 @@
 }
 .song-minicard__footer {
   margin-top: auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   padding-bottom: 5px;
+  line-height: 29px;
+  height: 29px;
 }
 
 /****************************
@@ -81,6 +81,8 @@
 ****************************/
 .song-card {
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 .song-card__header {
   padding: 0;
@@ -111,6 +113,7 @@
   align-items: center;
   background-color: inherit;
   padding: 0 15px 0 5px;
+  margin-top: auto;
 }
 
 .song-play {
@@ -160,6 +163,12 @@
   text-align: center;
   color: white;
   padding: 5px;
+}
+.song-card__body__suggested-by {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
 }
 .song-top__title {
   width: 100%;

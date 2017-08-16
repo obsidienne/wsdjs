@@ -91,9 +91,6 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .TopIndexView .tops {
-    max-width: 1170px;
-  }
   .tops :nth-child(even) {
     justify-content: flex-end;
   }

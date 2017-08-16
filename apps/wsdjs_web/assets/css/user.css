@@ -1,7 +1,3 @@
-.UserIndexView .container {
-  max-width: 768px;
-} 
-
 .user-page {
   display: flex;
   justify-content: flex-start;

@@ -8,7 +8,7 @@
         <h5 class="text-muted"><%= @song.title %></h5>
         <h6 class="text-muted"><%= @song.artist %></h6>
 
-        <footer class="song-minicard__footer">
+        <footer class="song-minicard__footer small">
           <span class="label label-default"><%= @song.genre %></span>
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>

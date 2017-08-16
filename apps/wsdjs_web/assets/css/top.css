@@ -1,17 +1,10 @@
 /****************************
   Checking top
 ****************************/
-.TopCheckingView .container {
-  max-width: 768px;
-}
 
 /****************************
   Voting top
 ****************************/
-.TopVotingView .container {
-  max-width: 768px;
-}
-
 .top-voting-repartition {
   margin-top: 15px;
 }
@@ -123,18 +116,11 @@
 /****************************
   Counting
 ****************************/
-.TopCountingView .container {
-  max-width: 768px;
-}
+
 
 /****************************
   Published top
 ****************************/
-.TopPublishedView .container {
-  max-width: 768px;
-}
-
-
 .top-songs-container {
   margin-bottom: 50px;
 }

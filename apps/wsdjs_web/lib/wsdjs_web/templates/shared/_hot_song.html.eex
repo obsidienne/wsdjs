@@ -14,14 +14,14 @@
     <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "h5  text-ellipsis" %>
     <h6 class="small text-ellipsis"><%= @song.artist %></h6>
 
-    <h6 class="text-muted small text-ellipsis">
+    <h6 class="song-card__body__suggested-by text-muted small">
       <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>,
       <time class="timeago small" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b, %k:%M", :strftime) %>"><%= utc_to_local(@song.inserted_at) %></time>
     </h6>
     
   </div>
 
-  <div class="song-card-footer text-muted song-opinions">
+  <footer class="song-card-footer text-muted song-opinions">
     <div class="opinions-container">
       <%= opinion_link("down", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
       <%= opinion_link("like", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
@@ -32,5 +32,5 @@
       <i class="<%= comment_class(@song) %>"></i>
     </a>
 
-  </div>
+  </footer>
 </li>

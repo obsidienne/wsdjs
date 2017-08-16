@@ -1,0 +1,59 @@
+
+@supports(grid-gap: 0) {
+  .songs-container, .hot-songs {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 15px;
+  }
+  .song-top__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+  }
+  .song-top__song {
+    margin: 0;
+  }
+  .user-page__songs {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 5px;
+  }
+  @media (min-width: 768px) {
+    .songs-container, .hot-songs, . { 
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .song-top__container {
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 5px;
+    }
+    .user-page__songs {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 5px;
+    }
+    .user-page__songs .song-minicard {
+      flex-direction: column;
+    }
+    .user-page__songs .song-minicard__heading {
+      width: 100%;
+      height: auto;
+      flex: 0 0 auto;
+    }
+    .user-page__songs .song-minicard__body {
+      padding-left: 0;
+    }
+  }
+  @media (min-width: 992px) {
+    .songs-container, .hot-songs { 
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .user-page__songs {
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 5px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .songs-container, .hot-songs { 
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}
