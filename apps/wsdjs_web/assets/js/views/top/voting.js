@@ -23,44 +23,21 @@ export default class View extends MainView {
   }
 
   _sort_on_vote(e) {
-    var parent = document.querySelector('.top-songs-container');
+    let parent = document.querySelector('.top-songs-container');
+    let song = e.target.closest(".top-song");
+    let position = parseInt(e.target.value);
+    
+    let elem = parent.removeChild(song);
+
+    parent.insertBefore(elem, parent.children[position - 1])
 
     /* set the position in a data */
-    let switchPosition = parseInt(e.target.value);
-    console.log(switchPosition);
     for(let i = 0; i < parent.children.length; i++) {
-      let currentPosition = parseInt(parent.children[i].querySelector("select").value);
-      console.log(`curr position for ${i}: ${currentPosition}`);
-      if (!isNaN(currentPosition) && switchPosition >= currentPosition) {
-        currentPosition += 1;
+      if (i + 1 > 10) {
+        parent.children[i].querySelector("select").value = '';
       }
-      console.log(`new curr position for ${i}: ${currentPosition}`);
-      parent.children[i].querySelector("select").value = currentPosition;
+      parent.children[i].querySelector("select").value = i + 1;
     }
-    e.target.value = switchPosition;
-
-    // create an array from a querySelector
-    Array.prototype.slice.call(parent.children)
-    .sort(function(a, b) {
-      // sort the nodes in the array
-      var va = parseInt(a.querySelector("select").value);
-      var vb = parseInt(b.querySelector("select").value);
-
-      if (isNaN(va)) va = 999;
-      if (isNaN(vb)) vb = 999;
-
-      // if they are equals change position 
-      return va - vb;
-    }).forEach(function(ele, i) {
-      // Use the index in the array to set the select value.
-      i += 1;
-      if (i > 10) {
-        ele.querySelector("select").value = "";
-      } else {
-        ele.querySelector("select").value = i;
-      }
-      parent.appendChild(ele);
-    })
   }
 
   _submit(e) {
