@@ -11,6 +11,9 @@
   appearance: none;
   border: none;
 }
+.voting-position__selector::-ms-expand { 
+  display: none; /* hide the default arrow in ie10 and ie11 */
+}
 .top-voting-repartition {
   margin-top: 15px;
 }
