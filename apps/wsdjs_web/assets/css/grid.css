@@ -43,16 +43,3 @@
     margin-right: 15px;
   }
 }
-
-
-@media (min-width: 768px) {
-  .songs-container, .container { max-width: 720px; }
-}
-@media (min-width: 992px) {
-  .songs-container, .container { max-width: 960px; }
-}
-@media (min-width: 1200px) {
-  .songs-container, .container {
-    max-width: 1140px;
-  }
-}
