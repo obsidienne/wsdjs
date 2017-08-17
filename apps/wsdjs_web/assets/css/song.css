@@ -60,6 +60,7 @@
   margin: 5px;
   min-width: 0;
   flex: 1 1 auto;
+  overflow: hidden;
 }
 .song-minicard__body h5, 
 .song-minicard__body h6 {

@@ -1,29 +1,24 @@
 
 @supports(grid-gap: 0) {
-  .songs-container, .hot-songs {
+  .songs-container, .hot-songs, .song-top__container,.user-page__songs,.top-songs-container {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 15px;
-  }
-  .song-top__container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-gap: 5px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .song-top__container {
+    grid-template-columns: repeat(2, 1fr);
   }
   .song-top__song {
     margin: 0;
   }
-  .user-page__songs {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 5px;
-  }
-  .top-songs-container {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 5px;    
-  }
   @media (min-width: 768px) {
+    .user-page {
+      display: grid;
+      grid-gap: 5px;
+      grid-template-columns: 300px 1fr;
+    }
+      
     .songs-container, .hot-songs, . { 
       grid-template-columns: repeat(3, 1fr);
     }
@@ -32,7 +27,7 @@
       grid-gap: 5px;
     }
     .user-page__songs {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       grid-gap: 5px;
     }
     .user-page__songs .song-minicard {
@@ -55,7 +50,7 @@
       grid-template-columns: repeat(4, 1fr);
     }
     .user-page__songs {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       grid-gap: 5px;
     }
     .top-songs-container {
@@ -63,6 +58,9 @@
     }
   }
   @media (min-width: 1200px) {
+    .user-page__songs {
+      grid-template-columns: repeat(4, 1fr);
+    }
     .songs-container, .hot-songs { 
       grid-template-columns: repeat(5, 1fr);
     }

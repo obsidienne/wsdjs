@@ -132,6 +132,24 @@ defmodule Wsdjs.Seeds do
     Wsdjs.Repo.insert! song_opinion
   end
 
+  def store_it(:user_details, row) do
+    user_details = %Wsdjs.Accounts.UserDetail{
+      id: String.to_integer(row[:id]),
+      user_id: row[:user_id],
+      description: row[:description],
+      favorite_genre: row[:favorite_genre],
+      favorite_artist: row[:favorite_artist],
+      favorite_color: row[:favorite_color],
+      favorite_meal: row[:favorite_meal],
+      favorite_animal: row[:favorite_animal],
+      djing_start_year: String.to_integer(row[:djing_start_year]),
+      love_more: row[:love_more],
+      hate_more: row[:hate_more]
+    }
+    Wsdjs.Repo.insert! user_details
+  end
+
+
   def store_it(:comment, row) do
     song_comment = %Wsdjs.Musics.Comment{
       id: row[:id],
@@ -226,3 +244,11 @@ end
 |> Stream.drop(1)
 |> CSV.decode(strip_cells: true, headers: [:id, :top_id, :song_id, :likes, :inserted_at, :updated_at, :votes, :bonus, :points, :position])
 |> Enum.each(&Wsdjs.Seeds.store_it(:rank, &1))
+
+
+"data/user_details.csv"
+|> Path.expand(__DIR__)
+|> File.stream!
+|> Stream.drop(1)
+|> CSV.decode(strip_cells: true, separator: ?;, headers: [:id, :user_id, :description, :favorite_genre, :favorite_artist, :favorite_color, :favorite_meal, :favorite_animal, :djing_start_year, :love_more, :hate_more])
+|> Enum.each(&Wsdjs.Seeds.store_it(:user_details, &1))
