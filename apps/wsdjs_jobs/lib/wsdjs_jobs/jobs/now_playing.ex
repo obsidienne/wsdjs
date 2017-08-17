@@ -35,7 +35,6 @@ defmodule Wsdjs.Jobs.NowPlaying do
     {:reply, Enum.reverse(list), queue}
   end
 
-  # @seven_url "http://37.58.75.166:8384/7.html"
   @radioking_api_uri 'https://www.radioking.com/widgets/currenttrack.php?radio=84322&format=json'
   def handle_info(:work, queue) do
     case HTTPoison.get(@radioking_api_uri) do
