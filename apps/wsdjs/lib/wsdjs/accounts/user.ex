@@ -29,7 +29,8 @@ defmodule Wsdjs.Accounts.User do
   end
 
   @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname, :profils]
-
+  @valid_profils ~w(DJ DJ_VIP)
+  
   @doc false
   def changeset(struct, params \\ %{}) do
     struct
@@ -40,6 +41,8 @@ defmodule Wsdjs.Accounts.User do
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
   end
+
+  def profils, do: @valid_profils  
 
   @doc """
   The function scope is used to filter the users according to the user specified.
