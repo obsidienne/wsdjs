@@ -5,6 +5,12 @@
 /****************************
   Voting top
 ****************************/
+.voting-position__selector {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+}
 .top-voting-repartition {
   margin-top: 15px;
 }
@@ -227,12 +233,12 @@
 }
 
 .top-song-body {
-  flex-grow: 1;
-  flex-shrink: 1;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 15px;
+  min-width: 0;
 }
 
 .top-song-play {

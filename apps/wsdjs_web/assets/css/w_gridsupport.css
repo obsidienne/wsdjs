@@ -18,6 +18,11 @@
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 5px;
   }
+  .top-songs-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 5px;    
+  }
   @media (min-width: 768px) {
     .songs-container, .hot-songs, . { 
       grid-template-columns: repeat(3, 1fr);
@@ -41,6 +46,9 @@
     .user-page__songs .song-minicard__body {
       padding-left: 0;
     }
+    .top-songs-container {
+      grid-template-columns: repeat(2, 1fr);
+    }  
   }
   @media (min-width: 992px) {
     .songs-container, .hot-songs { 
@@ -49,6 +57,9 @@
     .user-page__songs {
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 5px;
+    }
+    .top-songs-container {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   @media (min-width: 1200px) {

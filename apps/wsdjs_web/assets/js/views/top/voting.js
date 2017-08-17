@@ -7,7 +7,7 @@ export default class View extends MainView {
 
     document.addEventListener("change", function(e) {
       if (e.target && e.target.matches("#voting-form select")) {
-        self._sort_on_vote();
+        self._sort_on_vote(e);
       }      
     }, false);
 
@@ -25,6 +25,20 @@ export default class View extends MainView {
   _sort_on_vote(e) {
     var parent = document.querySelector('.top-songs-container');
 
+    /* set the position in a data */
+    let switchPosition = parseInt(e.target.value);
+    console.log(switchPosition);
+    for(let i = 0; i < parent.children.length; i++) {
+      let currentPosition = parseInt(parent.children[i].querySelector("select").value);
+      console.log(`curr position for ${i}: ${currentPosition}`);
+      if (!isNaN(currentPosition) && switchPosition >= currentPosition) {
+        currentPosition += 1;
+      }
+      console.log(`new curr position for ${i}: ${currentPosition}`);
+      parent.children[i].querySelector("select").value = currentPosition;
+    }
+    e.target.value = switchPosition;
+
     // create an array from a querySelector
     Array.prototype.slice.call(parent.children)
     .sort(function(a, b) {
@@ -36,7 +50,6 @@ export default class View extends MainView {
       if (isNaN(vb)) vb = 999;
 
       // if they are equals change position 
-      if (va == vb) return -1;
       return va - vb;
     }).forEach(function(ele, i) {
       // Use the index in the array to set the select value.

@@ -33,6 +33,12 @@
     <%= for rank <- get_ranks_according_to_votes(@top) do %>
       <article class="top-song">
         <div class="song-art-container">
+          <div class="voting-position charted">
+            <div class="chart-bg"></div>
+            <div class="chart-value">
+              <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", class: "voting-position__selector", value: current_user_vote(@current_user_votes, rank)) %>
+            </div>
+          </div>
           <img src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
           <%= if rank.song.url do %>
             <a href="<%= url_for_provider(rank.song) %>" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play</a>
@@ -41,8 +47,8 @@
         <div class="top-song-info-container">
           <div class="top-song-body">
             <div class="top-song-body-info">
-              <%= link to: song_path(@conn, :show, rank.song), class: "h6" do %>
-                <h5><%= rank.song.title %></h5>
+              <%= link to: song_path(@conn, :show, rank.song), class: "h5 top-song__title" do %>
+                <%= rank.song.title %>
               <% end %>
               <h6><%= rank.song.artist %></h6>
               <div class="text-muted small"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></div>
@@ -64,43 +70,6 @@
               
             </aside>
           </div>
-          <aside>
-            <div>
-            Position <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", value: current_user_vote(@current_user_votes, rank)) %>
-            </div>
-            <%= if @current_user && @current_user.id == @top.user_id do %>
-            <table class="top-voting-repartition">
-              <thead>
-                <tr>
-                  <th>1<sup>st</sup></th>
-                  <th>2<sup>nd</sup></th>
-                  <th>3<sup>rd</sup></th>
-                  <th>4<sup>th</sup></th>
-                  <th>5<sup>th</sup></th>
-                  <th>6<sup>th</sup></th>
-                  <th>7<sup>th</sup></th>
-                  <th>8<sup>th</sup></th>
-                  <th>9<sup>th</sup></th>
-                  <th>10<sup>th</sup></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 1 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 2 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 3 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 4 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 5 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 6 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 7 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 8 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 9 && x.song_id == rank.song_id end)%></td>
-                  <td><%=Enum.count(@votes, fn(x) -> x.votes == 10 && x.song_id == rank.song_id end)%></td>
-                </tr>
-              </tbody>
-            </table>
-            <% end %>
-          </aside>
         </div>
       </article>
     <% end %>
