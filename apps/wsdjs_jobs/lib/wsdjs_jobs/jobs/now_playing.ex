@@ -88,9 +88,9 @@ defmodule Wsdjs.Jobs.NowPlaying do
       |> Timex.parse!("{ISO:Extended}")
       |> Timex.shift(seconds: 1)
       |> Timex.diff(Timex.now, :seconds)
-      |> abs()
 
-    IO.puts "Next call #{interval}"
+    interval = if interval <= 0 do 2 else interval end
+
     PubSub.broadcast WsdjsWeb.PubSub, "notifications:now_playing", :new_played_song
 
     {queue, interval * 1000}
