@@ -52,7 +52,9 @@ defmodule Wsdjs.Jobs.NowPlaying do
   end
 
   defp schedule_work(interval) do
-    Process.send_after(self(), :work, interval) # 2 * 1 * 1 * 1000 In 2 seconds
+    if Mix.env !== :test do
+      Process.send_after(self(), :work, interval)
+    end
   end
 
   defp parse_streamed_song(body, queue) do
