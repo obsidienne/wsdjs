@@ -163,6 +163,8 @@ defmodule Wsdjs.Seeds do
   end
 end
 
+Ecto.Adapters.SQL.query(Wsdjs.Repo, "Truncate users cascade;")
+
 #import users
 "data/users.csv"
 |> Path.expand(__DIR__)
