@@ -35,6 +35,19 @@
   margin-top: 15px;
 }
 
+@media (min-width: 768px) {
+  .song-page {
+    flex-direction: row;
+  }
+  .song-page__details {
+    padding: 15px;
+  }
+  .song-page__art {
+    flex: 0 0 300px;
+  }
+}
+
+
 /****************************
   minicard
 ****************************/
