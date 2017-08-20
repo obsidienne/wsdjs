@@ -23,8 +23,11 @@
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
         <% end %>
-        <%= if @song.hidden do %>
-          <span class="label label-default small">hidden song</span>
+        <%= if @song.hidden_track do %>
+          <span class="label label-default small">hidden track</span>
+        <% end %>
+        <%= if @song.public_track do %>
+          <span class="label label-default small">public track</span>
         <% end %>
         <%= if @song.instant_hit do %>
           <span class="label label-default small">instant hit</span>

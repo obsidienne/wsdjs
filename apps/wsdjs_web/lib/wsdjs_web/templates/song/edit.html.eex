@@ -61,12 +61,19 @@
     </div>
 
     <div class="checkbox">
-      <%= label f,:hidden do %>
-        <%= checkbox f, :hidden %> Hidden
+      <%= label f,:hidden_track do %>
+        <%= checkbox f, :hidden_track %> Hidden track
       <% end %>
-      <%= error_tag f, :hidden %>
+      <%= error_tag f, :hidden_track %>
     </div>
     
+    <div class="checkbox">
+      <%= label f,:public_track do %>
+        <%= checkbox f, :public_track %> Public track
+      <% end %>
+      <%= error_tag f, :public_track %>
+    </div>
+
     <%= if @current_user.admin do %>
     <div class="form-group">
       <label class="small text-muted">Suggestor</label>

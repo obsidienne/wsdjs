@@ -50,8 +50,11 @@
               <%= if rank.song.instant_hit do %>
               <span class="label label-default">instant hit</span>
               <% end %>
-              <%= if rank.song.hidden do %>
-              <span class="label label-default">hidden</span>
+              <%= if rank.song.hidden_track do %>
+              <span class="label label-default">hidden track</span>
+              <% end %>
+              <%= if rank.song.public_track do %>
+              <span class="label label-default">public track</span>
               <% end %>
               <span class="song-opinion song-down"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "down" end) %></span>
               <span class="song-opinion song-like"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "like" end) %></span>

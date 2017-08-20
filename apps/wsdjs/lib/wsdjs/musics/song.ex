@@ -15,8 +15,9 @@ defmodule Wsdjs.Musics.Song do
     field :bpm, :integer
     field :genre, :string
     field :instant_hit, :boolean
-    field :hidden, :boolean
+    field :hidden_track, :boolean
     field :video_id, :string
+    field :public_track, :boolean
     timestamps()
 
     belongs_to :user, Accounts.User
@@ -28,7 +29,7 @@ defmodule Wsdjs.Musics.Song do
     many_to_many :tops, Charts.Top, join_through: Charts.Rank
   end
 
-  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden, :inserted_at]
+  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track]
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
@@ -50,10 +51,10 @@ defmodule Wsdjs.Musics.Song do
   # Admin sees everything
   def scoped(%Accounts.User{admin: :true}), do: Musics.Song
 
-  # Connected user can see songs not explicitly hidden
+  # Connected user can see songs not explicitly track
   def scoped(%Accounts.User{} = user) do
     from s in Musics.Song,
-    where: s.hidden == false or s.user_id == ^user.id
+    where: s.hidden_track == false or s.user_id == ^user.id
   end
 
   # Not connected users see only top 10 song or instant_hit
