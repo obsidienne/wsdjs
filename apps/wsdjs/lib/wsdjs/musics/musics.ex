@@ -70,18 +70,6 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Returns the list of songs for a user scoped by the current_user.
-  """
-  def list_songs(current_user, user) do
-    current_user
-    |> Song.scoped()
-    |> where([user_id: ^user.id])
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by([desc: :inserted_at])
-    |> Repo.all()
-  end
-
-  @doc """
   Returns the songs added the 24 last hours.
   """
   def list_songs do
