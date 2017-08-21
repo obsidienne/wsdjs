@@ -43,9 +43,22 @@ defmodule Wsdjs.Charts.Top do
 
   # Connected user can see voting and published Top + Top he has created
   def scoped(%Accounts.User{} = user) do
-    from m in Charts.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
+    if Enum.member?(user.profils, "DJ_VIP") do
+      from m in Charts.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
+    else
+      Charts.Top
+      |> where(status: "published")
+      |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -27))
+      |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
+      |> or_where(user_id: ^user.id)
+    end
   end
 
   # Not connected users see nothing
-  def scoped(nil), do: from m in Charts.Top, where: false
+  def scoped(nil) do
+    Charts.Top
+    |> where(status: "published")
+    |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -6))
+    |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
+  end
 end
