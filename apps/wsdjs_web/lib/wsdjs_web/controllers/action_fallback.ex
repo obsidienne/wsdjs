@@ -19,7 +19,6 @@ defmodule WsdjsWeb.FallbackController do
   end
 
   def call(conn, {:error, changeset}) do
-    IO.inspect conn
     render(conn, "new.html", changeset: changeset)
   end
 end
