@@ -14,7 +14,7 @@ defmodule WsdjsWeb.VerifyHeader do
     token = fetch_token(get_req_header(conn, "authorization"))
     case verify_token(conn, token) do
       {:ok, payload} ->
-        user = if payload, do: Wsdjs.Accounts.get_user!(payload)
+        user = if payload, do: Wsdjs.Accounts.get_user(payload)
         assign(conn, :current_user, user)
       {:error, _} ->
         conn

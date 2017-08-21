@@ -48,23 +48,16 @@ defmodule Wsdjs.Accounts do
 
   ## Examples
 
-      iex> get_user!(123)
+      iex> get_user(UUID)
       %User{}
 
-      iex> get_user!(456)
-      ** (Ecto.NoResultsError)
+      iex> get_user(unknow UUID)
+      nil
 
   """
-  def get_user!(id) do
+  def get_user(id) do
     User
-    |> Repo.get!(id)
-    |> Repo.preload([:avatar, :detail])
-  end
-
-  def get_user!(id, current_user) do
-    current_user
-    |> User.scoped()
-    |> Repo.get!(id)
+    |> Repo.get(id)
     |> Repo.preload([:avatar, :detail])
   end
 

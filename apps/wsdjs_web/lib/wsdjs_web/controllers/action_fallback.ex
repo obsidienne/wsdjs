@@ -12,6 +12,12 @@ defmodule WsdjsWeb.FallbackController do
     |> render(WsdjsWeb.ErrorView, :"404")
   end
 
+  def call(conn, {:error, :NoResultsError}) do
+    conn
+    |> put_flash(:error, "Not found.")
+    |> redirect(to: home_path(conn, :index))
+  end
+
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_flash(:error, "Unauthorized action.")

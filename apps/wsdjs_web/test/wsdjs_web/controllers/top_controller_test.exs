@@ -22,12 +22,11 @@ defmodule WsdjsWeb.TopControllerTest do
       assign(conn, :current_user, insert!(:user, %{admin: true})),
       assign(conn, :current_user, insert!(:user, %{profils: ["DJ_VIP"]})),
       assign(conn, :current_user, insert!(:user, %{profils: ["DJ"]})),
-      assign(conn, :current_user, insert!(:user)),
+      assign(conn, :current_user, insert!(:user, %{profils: []})),
       assign(conn, :current_user, nil)
     ], fn conn ->
       conn = get conn, top_path(conn, :index)
       assert html_response(conn, 200) =~ "Tops - WSDJs"
     end)
   end
-
 end

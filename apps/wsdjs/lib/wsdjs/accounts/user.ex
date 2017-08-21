@@ -42,7 +42,7 @@ defmodule Wsdjs.Accounts.User do
     |> validate_format(:email, ~r/.*@.*/)
   end
 
-  def profils, do: @valid_profils  
+  def profils, do: @valid_profils
 
   @doc """
   The function scope is used to filter the users according to the user specified.
