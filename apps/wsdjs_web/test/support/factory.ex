@@ -8,7 +8,8 @@ defmodule WsdjsWeb.Factory do
   # Factories
   def build(:user) do
     %Wsdjs.Accounts.User{
-      email: "user-#{System.unique_integer([:positive])}@wsdjs.com"
+      email: "user-#{System.unique_integer([:positive])}@wsdjs.com",
+      name: "John Doe-#{System.unique_integer([:positive])}"
     }
   end
 
