@@ -15,5 +15,4 @@ defmodule Wsdjs.Accounts.Policy do
   def can?(:edit_user, %User{id: id}, %User{id: id}), do: :ok
 
   def can?(_, _, _), do: {:error, :unauthorized}
-  def can?(_, _), do: {:error, :unauthorized}
 end
