@@ -5,6 +5,8 @@ defmodule WsdjsWeb.UserController do
   alias Wsdjs.Accounts
   alias Wsdjs.Musics
 
+  action_fallback WsdjsWeb.FallbackController
+
   def index(conn, _params) do
     current_user = conn.assigns[:current_user]
 
@@ -31,8 +33,12 @@ defmodule WsdjsWeb.UserController do
 
   def edit(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    changeset = Accounts.change_user(user)
-    render conn, "edit.html", user: user, changeset: changeset
+    current_user = conn.assigns[:current_user]
+    
+    with :ok <- Accounts.Policy.can?(:edit_user, user, current_user) do
+      changeset = Accounts.change_user(user)
+      render conn, "edit.html", user: user, changeset: changeset
+    end
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
