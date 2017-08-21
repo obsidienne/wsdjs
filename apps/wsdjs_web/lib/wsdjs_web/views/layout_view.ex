@@ -47,7 +47,10 @@ defmodule WsdjsWeb.LayoutView do
 
   defp get("home", :index), do: "Home page"
   defp get("song", :index), do: "Songs"
+  defp get("song", :show), do: "Song"
   defp get("user", :index), do: "Users"
+  defp get("user", :show), do: "User"
+  defp get("user", :edit), do: "Edit user"
   defp get("top", :index), do: "Tops"
   
   defp get(_, _), do: nil

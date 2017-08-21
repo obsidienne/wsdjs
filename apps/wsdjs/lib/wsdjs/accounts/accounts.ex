@@ -61,6 +61,13 @@ defmodule Wsdjs.Accounts do
     |> Repo.preload([:avatar, :detail])
   end
 
+  def get_user!(id, current_user) do
+    current_user
+    |> User.scoped()
+    |> Repo.get!(id)
+    |> Repo.preload([:avatar, :detail])
+  end
+
   def get_user_by_email(email) do
     User
     |> Repo.get_by(email: String.downcase(email))

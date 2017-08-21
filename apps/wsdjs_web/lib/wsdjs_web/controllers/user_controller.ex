@@ -22,7 +22,7 @@ defmodule WsdjsWeb.UserController do
 
   def show(conn, %{"id" => user_id}) do
     current_user = conn.assigns[:current_user]
-    user = Accounts.get_user!(user_id)
+    user = Accounts.get_user!(user_id, current_user)
     page = Musics.paginate_songs_user(current_user, user_id)
 
     conn
@@ -32,21 +32,21 @@ defmodule WsdjsWeb.UserController do
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
     current_user = conn.assigns[:current_user]
-    
-    with :ok <- Accounts.Policy.can?(:edit_user, user, current_user) do
+
+    with user = Accounts.get_user!(id, current_user),
+         :ok <- Accounts.Policy.can?(:edit_user, user, current_user) do
       changeset = Accounts.change_user(user)
       render conn, "edit.html", user: user, changeset: changeset
     end
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Accounts.get_user!(id)
     current_user = conn.assigns[:current_user]
+    user = Accounts.get_user!(id, current_user)
 
     with :ok <- Accounts.Policy.can?(:edit_user, user, current_user),
-        {:ok, user} <- Accounts.update_user(user, user_params) do
+         {:ok, user} <- Accounts.update_user(user, user_params) do
       conn
       |> put_flash(:info, "Profile updated.")
       |> redirect(to: user_path(conn, :show, user))
