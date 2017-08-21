@@ -5,6 +5,3 @@ use Mix.Config
 config :wsdjs_web, WsdjsWeb.Endpoint,
   http: [port: 4001],
   server: true
-
-config :wsdjs_web, :sql_sandbox, true
-config :wallaby, screenshot_on_failure: true
