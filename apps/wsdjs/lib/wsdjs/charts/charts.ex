@@ -265,13 +265,7 @@ defmodule Wsdjs.Charts do
 
   def list_rank do
     from q in Rank,
-      join: p in fragment("""
-      SELECT id, top_id, row_number() OVER (
-        PARTITION BY top_id
-        ORDER BY votes + bonus + likes DESC
-      ) as rn FROM ranks
-      """),
-    where: p.rn <= 10 and p.id == q.id,
+    where: q.position <= 10,
     order_by: [asc: q.position],
     preload: [song: :art]
   end
