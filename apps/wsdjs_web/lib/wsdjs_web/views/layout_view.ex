@@ -30,4 +30,25 @@ defmodule WsdjsWeb.LayoutView do
     |> String.split(".")
     |> Enum.at(0)
   end
+
+
+  @suffix "WSDJs"
+
+  def page_title(conn) do
+    controller = view_name(conn)
+    action = action_name(conn)
+
+    title = get(controller, action)
+    put_suffix(title)
+  end
+
+  defp put_suffix(nil), do: @suffix
+  defp put_suffix(title), do: title <> " - " <> @suffix
+
+  defp get("home", :index), do: "Home page"
+  defp get("song", :index), do: "Songs"
+  defp get("user", :index), do: "Users"
+  defp get("top", :index), do: "Tops"
+  
+  defp get(_, _), do: nil
 end
