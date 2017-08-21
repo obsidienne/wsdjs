@@ -22,7 +22,8 @@ defmodule WsdjsWeb.UserControllerTest do
         assign(conn, :current_user, users[:admin])
       ], fn conn ->
         conn = get conn, user_path(conn, :index)
-        assert html_response(conn, 200) =~ "@wsdjs.com"
+        assert html_response(conn, 200) =~ "Users - WSDJs"
+        assert String.contains?(conn.resp_body, users[:user].email)        
       end)
 
       # cannot list
