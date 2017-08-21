@@ -1,23 +1,8 @@
 defmodule Wsdjs.MusicsTest do
   use Wsdjs.DataCase
 
-  #doctest Wsdjs.Musics
-
-  alias Wsdjs.Musics
 
   describe "songs" do
-    @valid_attrs %{artist: "some artist", title: "some title"}
-#    @update_attrs %{artist: "some updated artist", title: "some updated title"}
-    @invalid_attrs %{artist: nil, title: nil}
-
-    def song_fixture(attrs \\ %{}) do
-      {:ok, song} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Musics.create_song()
-
-      song
-    end
 
 #    test "list_songs/0 returns all songs" do
 #      song = song_fixture()
@@ -35,9 +20,9 @@ defmodule Wsdjs.MusicsTest do
 #      assert song.title == "some title"
 #    end
 
-    test "create_song/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Musics.create_song(@invalid_attrs)
-    end
+#    test "create_song/1 with invalid data returns error changeset" do
+ #     assert {:error, %Ecto.Changeset{}} = Musics.create_song(@invalid_attrs)
+  #  end
 
 #    test "update_song/2 with valid data updates the song" do
 #      song = song_fixture()

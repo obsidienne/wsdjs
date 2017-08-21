@@ -20,6 +20,13 @@ defmodule WsdjsWeb.Factory do
     }
   end
   
+  def build(:top) do
+    %Wsdjs.Charts.Top{
+      due_date: Timex.beginning_of_month(Timex.today),
+      status: "checking"
+    }
+  end
+
   def build(:comment) do
     %Wsdjs.Musics.Comment{
       text: "comment #{System.unique_integer([:positive])}"

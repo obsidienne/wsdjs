@@ -17,7 +17,6 @@ defmodule Wsdjs.SongTest do
     {:error, changeset} = Repo.insert(song)
 
     assert "does not exist" in errors_on(changeset).user
-
   end
 
   test "artist / title is unique" do
