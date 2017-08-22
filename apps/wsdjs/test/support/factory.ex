@@ -18,10 +18,13 @@ defmodule Wsdjs.Factory do
     %Wsdjs.Musics.Song{
       title: "title-#{System.unique_integer([:positive])}",
       artist: "artist-#{System.unique_integer([:positive])}",
-      genre: Enum.random(Wsdjs.Musics.Song.genre())
+      genre: Enum.random(Wsdjs.Musics.Song.genre()),
+      bpm: 0,
+      hidden_track: false,
+      public_track: false
     }
   end
-  
+
   def build(:top) do
     %Wsdjs.Charts.Top{
       due_date: Timex.beginning_of_month(Timex.today),
