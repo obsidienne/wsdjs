@@ -25,6 +25,8 @@ defmodule WsdjsWeb.FallbackController do
   end
 
   def call(conn, {:error, changeset}) do
-    render(conn, "new.html", changeset: changeset)
+    conn
+    |> put_flash(:error, "Something went wrong !")
+    |> render("new.html", changeset: changeset)
   end
 end

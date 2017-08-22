@@ -5,6 +5,8 @@ defmodule WsdjsWeb.TopController do
   alias Wsdjs.Charts
   alias Wsdjs.Charts.Top
 
+  action_fallback WsdjsWeb.FallbackController
+  
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns[:current_user]]
     apply(__MODULE__, action_name(conn), args)
@@ -75,15 +77,12 @@ defmodule WsdjsWeb.TopController do
   def create(conn, %{"top" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
 
-    case Charts.create_top(current_user, params) do
-      {:ok, top} ->
+    with :ok <- Charts.Policy.can?(:create_top, current_user),
+         {:ok, top} <- Charts.create_top(current_user, params) do
+
         conn
         |> put_flash(:info, "Top created !")
         |> redirect(to: top_path(conn, :show, top.id))
-      {:error, changeset} ->
-        conn
-        |> put_flash(:error, "Something went wrong !")
-        |> render("new.html", changeset: changeset)
     end
   end
 

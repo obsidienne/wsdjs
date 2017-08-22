@@ -66,15 +66,14 @@ defmodule Wsdjs.Charts do
   end
 
   def create_top(current_user, %{"due_date" => due_date} = params) do
-    with :ok <- Policy.can?(:create_top, current_user) do
-      songs = Musics.songs_in_month(due_date)
-      params = Map.put(params, "status", "checking")
+    due_date = Timex.beginning_of_month(due_date)
+    songs = Musics.songs_in_month(due_date)
+    params = Map.put(params, "status", "checking")
 
-      %Top{}
-      |> Top.changeset(params)
-      |> put_assoc(:songs, songs)
-      |> Repo.insert
-    end
+    %Top{}
+    |> Top.changeset(params)
+    |> put_assoc(:songs, songs)
+    |> Repo.insert
   end
 
   # Change the top status.
