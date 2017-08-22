@@ -68,7 +68,6 @@ defmodule Wsdjs.Charts do
   def create_top(current_user, %{"due_date" => due_date} = params) do
     due_date = Timex.beginning_of_month(due_date)
     songs = Musics.songs_in_month(due_date)
-    params = Map.put(params, "status", "checking")
 
     %Top{}
     |> Top.changeset(params)
