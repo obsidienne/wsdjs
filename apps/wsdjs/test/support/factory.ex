@@ -2,7 +2,7 @@
 # user = insert!(:user)
 # song = insert!(:song, %{user: user})
 
-defmodule WsdjsWeb.Factory do
+defmodule Wsdjs.Factory do
   alias Wsdjs.Repo
 
   # Factories

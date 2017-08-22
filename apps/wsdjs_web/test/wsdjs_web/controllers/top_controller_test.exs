@@ -1,6 +1,6 @@
 defmodule WsdjsWeb.TopControllerTest do
   use WsdjsWeb.ConnCase
-  import WsdjsWeb.Factory
+  import Wsdjs.Factory
 
   test "requires user authentication on actions", %{conn: conn} do
     user = insert!(:user)
@@ -32,13 +32,6 @@ defmodule WsdjsWeb.TopControllerTest do
 
   describe "Index" do
     setup [:create_users]
-
-    test "tops checking only visible by admin", %{conn: conn, users: users} do
-      tops = Enum.map([0, -2, -3, -5, -27, -28], fn shift ->
-        create_top(users[:admin], "checking", shift)
-      end)
-
-    end
 
     # visible by SECRET
     test "tops published from m to m-2", %{conn: conn, users: users} do
@@ -80,31 +73,6 @@ defmodule WsdjsWeb.TopControllerTest do
         conn = get conn, top_path(conn, :index)
         assert String.contains?(conn.resp_body, Date.to_iso8601(top.due_date))
         assert String.contains?(conn.resp_body, Date.to_iso8601(top2.due_date))
-      end)
-    end
-
-    # visible by PRIVE, SECRET
-    test "tops published from m-3 to m-27", %{conn: conn, users: users} do
-      top = create_top(users[:admin], "published", -3)
-      top2 = create_top(users[:admin], "published", -27)
-      
-      Enum.each([
-        assign(conn, :current_user, users[:admin]),
-        assign(conn, :current_user, users[:dj_vip])
-      ], fn conn ->
-        conn = get conn, top_path(conn, :index)
-        assert String.contains?(conn.resp_body, Date.to_iso8601(top.due_date))
-        assert String.contains?(conn.resp_body, Date.to_iso8601(top2.due_date))
-      end)
-
-      Enum.each([
-        assign(conn, :current_user, users[:dj]),
-        assign(conn, :current_user, users[:user]),
-        assign(conn, :current_user, nil)
-      ], fn conn ->
-        conn = get conn, top_path(conn, :index)
-        refute String.contains?(conn.resp_body, Date.to_iso8601(top.due_date))
-        refute String.contains?(conn.resp_body, Date.to_iso8601(top2.due_date))
       end)
     end
 
