@@ -75,14 +75,15 @@ defmodule WsdjsWeb.TopController do
   end
 
   def create(conn, %{"top" => params}, current_user) do
-    params = Map.put(params, "user_id", current_user.id)
+    params = params
+    |> Map.put("user_id", current_user.id)
+    |> Map.put("due_date", Timex.beginning_of_month(params["due_date"]))
 
     with :ok <- Charts.Policy.can?(:create_top, current_user),
-         {:ok, top} <- Charts.create_top(current_user, params) do
-
-        conn
-        |> put_flash(:info, "Top created !")
-        |> redirect(to: top_path(conn, :show, top.id))
+         {:ok, top} <- Charts.create_top(params) do
+      conn
+      |> put_flash(:info, "Top created !")
+      |> redirect(to: top_path(conn, :show, top.id))
     end
   end
 

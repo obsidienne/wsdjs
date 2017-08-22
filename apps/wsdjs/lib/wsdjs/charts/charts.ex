@@ -65,14 +65,16 @@ defmodule Wsdjs.Charts do
     |> Repo.preload(ranks: list_rank(current_user, top_id))
   end
 
-  def create_top(current_user, %{"due_date" => due_date} = params) do
-    due_date = Timex.beginning_of_month(due_date)
-    songs = Musics.songs_in_month(due_date)
+  def create_top(%{"due_date" => due_date} = params) do
+    start_period = Timex.to_datetime(Timex.beginning_of_month(due_date))
+    end_period = Timex.to_datetime(Timex.end_of_month(due_date))
+    query = from s in Song, where: s.inserted_at >= ^start_period and s.inserted_at <= ^end_period
+    songs = Repo.all(query)
 
     %Top{}
     |> Top.changeset(params)
     |> put_assoc(:songs, songs)
-    |> Repo.insert
+    |> Repo.insert()
   end
 
   # Change the top status.

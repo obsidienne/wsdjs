@@ -26,7 +26,7 @@ defmodule Wsdjs.Charts.Top do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @required_fields)
-    |> validate_required(~w(due_date status)a)
+    |> validate_required(:due_date)
     |> validate_inclusion(:status, @valid_status)
     |> unique_constraint(:due_date)
     |> assoc_constraint(:user)
