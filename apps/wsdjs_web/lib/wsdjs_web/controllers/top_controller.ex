@@ -39,7 +39,6 @@ defmodule WsdjsWeb.TopController do
       "checking" ->
         render conn, "checking.html", top: top, changeset: changeset
       "voting" ->
-        top = Charts.get_top_order_by_votes!(current_user, id)
         current_user_votes = Charts.list_votes(id, current_user)
         render conn, "voting.html", top: top,
                                     current_user_votes: current_user_votes,

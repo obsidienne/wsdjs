@@ -49,14 +49,6 @@ defmodule Wsdjs.Charts do
     }
   end
 
-  def get_top_order_by_votes!(current_user, top_id) do
-    current_user
-    |> Top.scoped()
-    |> Repo.get!(top_id)
-    |> Repo.preload(:user)
-    |> Repo.preload(ranks: list_rank_order_by_votes(current_user, top_id))
-  end
-
   def get_top!(current_user, top_id) do
     current_user
     |> Top.scoped()
@@ -278,24 +270,13 @@ defmodule Wsdjs.Charts do
     Repo.delete(rank)
   end
 
-
-  defp list_rank_order_by_votes(current_user, top_id) do
-    current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
-
-    from q in Rank,
-    where: q.top_id == ^top_id,
-    left_join: v in ^current_user_votes, on: [song_id: q.song_id],
-    order_by: [asc: v.votes, desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
-    preload: [song: [:art, :user, :opinions]]
-  end
-
   defp list_rank(current_user, top_id) do
     current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
 
-    from q in Rank,
-    where: q.top_id == ^top_id,
-    left_join: v in ^current_user_votes, on: [song_id: q.song_id],
-    order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
+    from r in Rank,
+    where: r.top_id == ^top_id,
+    left_join: v in ^current_user_votes, on: [song_id: r.song_id],
+    order_by: [asc: r.position, asc: v.votes, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
     preload: [song: [:art, :user, :opinions]]
   end
 
