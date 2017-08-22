@@ -23,7 +23,7 @@ defmodule Wsdjs.Charts do
     |> where(status: "published")
     |> limit(1)
     |> Repo.one
-    |> Repo.preload(ranks: Charts.list_rank())
+    |> Repo.preload(ranks: list_rank())
     |> Repo.preload(ranks: :song)
     |> Repo.preload(ranks: [song: :art])
     |> Repo.preload(ranks: [song: [user: :avatar]])
@@ -39,7 +39,7 @@ defmodule Wsdjs.Charts do
     |> Repo.paginate(paginate_params)
 
     entries = tops.entries
-    |> Repo.preload(ranks: Charts.list_rank())
+    |> Repo.preload(ranks: list_rank())
     |> Repo.preload(:songs)
 
     %{
@@ -203,7 +203,7 @@ defmodule Wsdjs.Charts do
     |> Repo.all()
   end
 
-  def q_list_votes(id, %User{} = user) do
+  defp q_list_votes(id, %User{} = user) do
     Vote
     |> where([user_id: ^user.id, top_id: ^id])
   end
@@ -243,33 +243,20 @@ defmodule Wsdjs.Charts do
     |> Repo.update()
   end
 
-  def list_rank(current_user, top_id) do
-    current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
+  @doc """
+  Gets a single rank.
 
-    from q in Rank,
-    where: q.top_id == ^top_id,
-    left_join: v in ^current_user_votes, on: [song_id: q.song_id],
-    order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
-    preload: [song: [:art, :user, :opinions]]
-  end
+  Raises `Ecto.NoResultsError` if the Rank does not exist.
 
-  def list_rank_order_by_votes(current_user, top_id) do
-    current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
+  ## Examples
 
-    from q in Rank,
-    where: q.top_id == ^top_id,
-    left_join: v in ^current_user_votes, on: [song_id: q.song_id],
-    order_by: [asc: v.votes, desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
-    preload: [song: [:art, :user, :opinions]]
-  end
+      iex> get_rank!("0f47da03-0a18-421d-b614-a84861c28f45")
+      %Rank{}
 
-  def list_rank do
-    from q in Rank,
-    where: q.position <= 10,
-    order_by: [asc: q.position],
-    preload: [song: :art]
-  end
+      iex> get_rank!("8dfbdd61-4464-4e43-863b-52f13c44326b")
+      ** (Ecto.NoResultsError)
 
+  """
   def get_rank!(id) do
     Rank
     |> Repo.get!(id)
@@ -289,5 +276,33 @@ defmodule Wsdjs.Charts do
   """
   def delete_rank(%Rank{} = rank) do
     Repo.delete(rank)
+  end
+
+
+  defp list_rank_order_by_votes(current_user, top_id) do
+    current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
+
+    from q in Rank,
+    where: q.top_id == ^top_id,
+    left_join: v in ^current_user_votes, on: [song_id: q.song_id],
+    order_by: [asc: v.votes, desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
+    preload: [song: [:art, :user, :opinions]]
+  end
+
+  defp list_rank(current_user, top_id) do
+    current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
+
+    from q in Rank,
+    where: q.top_id == ^top_id,
+    left_join: v in ^current_user_votes, on: [song_id: q.song_id],
+    order_by: [desc: fragment("? + ? + ?", q.votes, q.bonus, q.likes)],
+    preload: [song: [:art, :user, :opinions]]
+  end
+
+  defp list_rank do
+    from q in Rank,
+    where: q.position <= 10,
+    order_by: [asc: q.position],
+    preload: [song: :art]
   end
 end
