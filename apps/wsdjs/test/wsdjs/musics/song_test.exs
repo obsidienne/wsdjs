@@ -56,6 +56,101 @@ defmodule Wsdjs.SongTest do
   # public track: always visible
 
 
+  describe "Top.scoped(%User{admin: true})" do
+    # instant hits are visible
+    test "instant hit" do
+      admin = insert!(:user, %{admin: true})
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(admin) |> Repo.all()
+      assert scoped == [song]
+    end
+
+    # public tracks are visible
+    test "public track" do
+      admin = insert!(:user, %{admin: true})
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(admin) |> Repo.all()
+      assert scoped == [song]
+    end
+
+    # hidden tracks are invisible
+    test "hidden track" do
+      admin = insert!(:user, %{admin: true})
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(admin) |> Repo.all()
+      assert scoped == [song]
+    end
+  end
+
+  describe "Top.scoped(%User{profils: [DJ_VIP]})" do
+    # instant hits are visible
+    test "instant hit" do
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      user2 = insert!(:user, %{profils: ["DJ_VIP"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(user2) |> Repo.all()
+      assert scoped == [song]
+    end
+
+    # public tracks are visible
+    test "public track" do
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      user2 = insert!(:user, %{profils: ["DJ_VIP"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(user2) |> Repo.all()
+      assert scoped == [song]
+    end
+
+    # hidden tracks are invisible
+    test "hidden track" do
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      user2 = insert!(:user, %{profils: ["DJ_VIP"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(user2) |> Repo.all()
+      assert scoped == [song]
+    end
+  end
+
+  describe "Top.scoped(%User{profils: [DJ]})" do
+    # instant hits are visible
+    test "instant hit" do
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      user2 = insert!(:user, %{profils: ["DJ"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(user2) |> Repo.all()
+      assert scoped == [song]
+    end
+
+    # public tracks are visible
+    test "public track" do
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      user2 = insert!(:user, %{profils: ["DJ"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(user2) |> Repo.all()
+      assert scoped == [song]
+    end
+
+    # hidden tracks are invisible
+    test "hidden track" do
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      user2 = insert!(:user, %{profils: ["DJ"]})
+      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+
+      scoped = Song.scoped(user2) |> Repo.all()
+      assert Enum.count(scoped) == 0
+    end
+  end
 
   describe "Song.scoped(nil)" do
     # instant hits are visible
