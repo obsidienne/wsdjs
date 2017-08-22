@@ -203,16 +203,6 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Count comments for a song
-  """
-  def count_comments(song_id) do
-    Comment
-    |> where([song_id: ^song_id])
-    |> Repo.all
-    |> Enum.count
-  end
-
-  @doc """
   This function add a comment to a song.
   """
   def create_comment(params) do
