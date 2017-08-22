@@ -14,18 +14,6 @@ defmodule WsdjsWeb.Factory do
     }
   end
 
-  def build(:all_users_type) do
-    users = %{
-      user: insert!(:user),
-      user2: insert!(:user),
-      dj: insert!(:user, profils: ["DJ"]),
-      dj2: insert!(:user, profils: ["DJ"]),
-      dj_vip: insert!(:user, profils: ["DJ_VIP"]),
-      dj_vip2: insert!(:user, profils: ["DJ_VIP"]),
-      admin: insert!(:user, %{admin: true})
-    }
-  end
-
   def build(:song) do
     %Wsdjs.Musics.Song{
       title: "title-#{System.unique_integer([:positive])}",

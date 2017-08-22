@@ -1,6 +1,6 @@
 defmodule Wsdjs.SongTest do
   use Wsdjs.DataCase, async: true
-  import Wsdjs.Factory
+  import WsdjsWeb.Factory
 
   alias Wsdjs.Musics.Song
 
