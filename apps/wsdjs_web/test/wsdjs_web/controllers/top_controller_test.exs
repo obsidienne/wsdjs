@@ -96,7 +96,7 @@ defmodule WsdjsWeb.TopControllerTest do
         conn = get conn, top_path(conn, :index)
         refute String.contains?(conn.resp_body, Date.to_iso8601(top.due_date))
       end)
-    end    
+    end
   end
 
   defp create_top(user, status, shift) do
