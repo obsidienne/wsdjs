@@ -69,6 +69,27 @@ defmodule Wsdjs.Charts do
     |> Repo.insert()
   end
 
+  @doc """
+  Deletes a Top.
+
+  ## Examples
+
+      iex> delete_top(top)
+      {:ok, %Top{}}
+
+      iex> delete_top(top)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_top(%Top{} = top) do
+    Repo.delete(top)
+  end
+
+  ###############################################
+  #
+  # Change TOP step
+  #
+  ###############################################
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
@@ -165,22 +186,6 @@ defmodule Wsdjs.Charts do
     top
     |> Top.step_changeset(%{status: "published"})
     |> Repo.update()
-  end
-
-  @doc """
-  Deletes a Top.
-
-  ## Examples
-
-      iex> delete_top(top)
-      {:ok, %Top{}}
-
-      iex> delete_top(top)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_top(%Top{} = top) do
-    Repo.delete(top)
   end
 
   ###############################################
