@@ -58,7 +58,6 @@
     <nav>
       <ul class="tabs-navigation__items">
         <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#suggestions-section">suggestions</a></li>
-        <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#playlists-section">playlists</a></li>
       </ul>
     </nav>
     <% end %>
@@ -70,8 +69,6 @@
       </ul>
     </section>
     <% end %>
-    <section id="playlists-section" class="container tabs-pane">
-    </section>
   </section>
   <% end %>
 </main>
