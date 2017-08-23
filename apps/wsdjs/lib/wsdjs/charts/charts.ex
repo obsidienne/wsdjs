@@ -275,6 +275,14 @@ defmodule Wsdjs.Charts do
     Repo.delete(rank)
   end
 
+  defp list_rank(current_user, top_id) when is_nil(current_user) do
+    from r in Rank,
+    where: r.top_id == ^top_id,
+    order_by: [asc: r.position, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
+    limit: 10,
+    preload: [song: [:art, :user, :opinions]]
+  end
+
   defp list_rank(current_user, top_id) do
     current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
 
