@@ -20,7 +20,10 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+        "css/critical.css": /^css\/critical/,
+        "css/defered.css": /^css\/defered/
+      }
     },
     templates: {
       joinTo: "js/app.js"
