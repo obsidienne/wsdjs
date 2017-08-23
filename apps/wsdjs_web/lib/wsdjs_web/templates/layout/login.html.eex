@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
 
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/critical.css") %>">
-    <link rel="preload" href="<%= static_path(@conn, "/css/defered.css") %>" as="style" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
