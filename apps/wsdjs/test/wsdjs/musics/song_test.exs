@@ -86,6 +86,24 @@ defmodule Wsdjs.SongTest do
       scoped = Song.scoped(admin) |> Repo.all()
       assert scoped == [song]
     end
+
+    test "top 10" do
+      admin = insert!(:user, %{admin: true})
+      Enum.each(0..-27, fn shift ->
+        create_filled_top(shift)
+      end)
+
+      scoped = Song.scoped(admin) |> Repo.all()
+      assert Enum.count(scoped) == 28 * 21
+    end
+
+    test "top 10 not published" do
+      admin = insert!(:user, %{admin: true})
+      Enum.each(0..-27, &create_filled_top(&1, false))
+
+      scoped = Song.scoped(admin) |> Repo.all()
+      assert Enum.count(scoped) == 28 * 21
+    end
   end
 
   describe "Top.scoped(%User{profils: [DJ_VIP]})" do
@@ -118,6 +136,24 @@ defmodule Wsdjs.SongTest do
       scoped = Song.scoped(user2) |> Repo.all()
       assert scoped == [song]
     end
+
+    test "top 10" do
+      admin = insert!(:user, %{admin: true})
+      Enum.each(0..-27, fn shift ->
+        create_filled_top(shift)
+      end)
+
+      scoped = Song.scoped(admin) |> Repo.all()
+      assert Enum.count(scoped) == 28 * 21
+    end
+
+    test "top 10 not published" do
+      admin = insert!(:user, %{admin: true})
+      Enum.each(0..-27, &create_filled_top(&1, false))
+
+      scoped = Song.scoped(admin) |> Repo.all()
+      assert Enum.count(scoped) == 28 * 21
+    end
   end
 
   describe "Top.scoped(%User{profils: [DJ]})" do
@@ -145,9 +181,28 @@ defmodule Wsdjs.SongTest do
     test "hidden track" do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
       user2 = insert!(:user, %{profils: ["DJ"]})
-      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+      insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(user2) |> Repo.all()
+      assert Enum.count(scoped) == 0
+    end
+
+
+    test "top 10" do
+      admin = insert!(:user, %{admin: true})
+      Enum.each(0..-27, fn shift ->
+        create_filled_top(shift)
+      end)
+
+      scoped = Song.scoped(admin) |> Repo.all()
+      assert Enum.count(scoped) == 30
+    end
+
+    test "top 10 not published" do
+      admin = insert!(:user, %{admin: true})
+      Enum.each(0..-27, &create_filled_top(&1, false))
+
+      scoped = Song.scoped(admin) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
   end
@@ -174,7 +229,7 @@ defmodule Wsdjs.SongTest do
     # hidden tracks are invisible
     test "hidden track" do
       user = insert!(:user)
-      song = insert!(:song, %{hidden_track: true, user_id: user.id})
+      insert!(:song, %{hidden_track: true, user_id: user.id})
 
       scoped = Song.scoped(nil) |> Repo.all()
       assert Enum.count(scoped) == 0
@@ -182,21 +237,24 @@ defmodule Wsdjs.SongTest do
 
     # top, first 10 songs are visible if top in [m-3, m-6]
     test "top 10" do
-      top = create_filled_top(0)
-      
+      Enum.each(0..-27, fn shift ->
+        create_filled_top(shift)
+      end)
+
+      scoped = Song.scoped(nil) |> Repo.all()
+      assert Enum.count(scoped) == 30
+    end
+
+    # top, first 10 songs are visible if top in [m-3, m-6]
+    test "top 10 not published" do
+      Enum.each(0..-27, &create_filled_top(&1, false))
+
+      scoped = Song.scoped(nil) |> Repo.all()
+      assert Enum.count(scoped) == 0
     end
   end
 
-  defp create_top(status, shift) do
-    admin = insert!(:user, %{admin: true})
-
-    dt = Timex.today
-    |> Timex.beginning_of_month()
-    |> Timex.shift(months: shift)
-    insert!(:top, %{user_id: admin.id, status: status, due_date: dt})
-  end
-
-  defp create_filled_top(shift) do
+  defp create_filled_top(shift, with_position \\ true) do
     admin = insert!(:user, %{admin: true})
     user = insert!(:user, %{profils: ["DJ_VIP"]})
 
@@ -206,9 +264,16 @@ defmodule Wsdjs.SongTest do
 
     top = insert!(:top, %{user_id: admin.id, status: "published", due_date: dt})
 
-    Enum.each(1..21, fn pos ->
+    songs = Enum.map(1..21, fn pos ->
       song = insert!(:song, %{user_id: user.id})
-      Repo.insert!(%Rank{position: pos, song: song, top: top})
+      if with_position do
+        Repo.insert!(%Rank{position: pos, song: song, top: top})
+      else
+        Repo.insert!(%Rank{song: song, top: top})
+      end
+      song
     end)
+
+    %{top: top, songs: songs}
   end
 end
