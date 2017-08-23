@@ -11,6 +11,11 @@
 
     <title><%= page_title(@conn) %></title>
 
+    <link rel="icon" type="image/png" sizes="16x16" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+
+
     <link defer rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
     <script defer src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script defer src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
