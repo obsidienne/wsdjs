@@ -11,8 +11,9 @@ defmodule WsdjsWeb.HomeController do
 
   def index(conn, _params, current_user) when is_nil(current_user) do
     songs = Musics.last_songs(current_user)
-
-    render conn, "unauthenticated.html", songs: songs
+    top = Charts.last_top(current_user)
+    
+    render conn, "unauthenticated.html", songs: songs, top: top
   end
 
   def index(conn, _params, current_user) do
