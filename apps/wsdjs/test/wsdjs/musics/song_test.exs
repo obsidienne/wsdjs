@@ -64,6 +64,7 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(admin) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
@@ -74,6 +75,7 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(admin) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
@@ -84,14 +86,13 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(admin) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
     test "top 10" do
       admin = insert!(:user, %{admin: true})
-      Enum.each(0..-27, fn shift ->
-        create_filled_top(shift)
-      end)
+      Enum.each(0..-27, &create_filled_top(&1))
 
       scoped = Song.scoped(admin) |> Repo.all()
       assert Enum.count(scoped) == 28 * 21
@@ -114,6 +115,7 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(user2) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
@@ -124,6 +126,7 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(user2) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
@@ -134,14 +137,13 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(user2) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
     test "top 10" do
       admin = insert!(:user, %{admin: true})
-      Enum.each(0..-27, fn shift ->
-        create_filled_top(shift)
-      end)
+      Enum.each(0..-27, &create_filled_top(&1))
 
       scoped = Song.scoped(admin) |> Repo.all()
       assert Enum.count(scoped) == 28 * 21
@@ -164,6 +166,7 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(user2) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
@@ -174,6 +177,7 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(user2) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
@@ -190,9 +194,7 @@ defmodule Wsdjs.SongTest do
 
     test "top 10" do
       admin = insert!(:user, %{admin: true})
-      Enum.each(0..-27, fn shift ->
-        create_filled_top(shift)
-      end)
+      Enum.each(0..-27, &create_filled_top(&1))
 
       scoped = Song.scoped(admin) |> Repo.all()
       assert Enum.count(scoped) == 30
@@ -214,6 +216,7 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{instant_hit: true, user_id: user.id})
 
       scoped = Song.scoped(nil) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
@@ -223,6 +226,7 @@ defmodule Wsdjs.SongTest do
       song = insert!(:song, %{public_track: true, user_id: user.id})
 
       scoped = Song.scoped(nil) |> Repo.all()
+      assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
 
@@ -237,9 +241,7 @@ defmodule Wsdjs.SongTest do
 
     # top, first 10 songs are visible if top in [m-3, m-6]
     test "top 10" do
-      Enum.each(0..-27, fn shift ->
-        create_filled_top(shift)
-      end)
+      Enum.each(0..-27, &create_filled_top(&1))
 
       scoped = Song.scoped(nil) |> Repo.all()
       assert Enum.count(scoped) == 30

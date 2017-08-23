@@ -24,7 +24,8 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{admin: true})
       tops = Enum.map(-1..-28, &create_top("published", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
+      assert Enum.count(scoped) == 28
       assert scoped == tops
     end
 
@@ -32,7 +33,8 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{admin: true})
       tops = Enum.map(-1..-28, &create_top("counting", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
+      assert Enum.count(scoped) == 28
       assert scoped == tops
     end
 
@@ -40,7 +42,8 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{admin: true})
       tops = Enum.map(-1..-28, &create_top("voting", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
+      assert Enum.count(scoped) == 28
       assert scoped == tops
     end
 
@@ -48,7 +51,8 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{admin: true})
       tops = Enum.map(-1..-28, &create_top("checking", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
+      assert Enum.count(scoped) == 28
       assert scoped == tops
     end
   end
@@ -58,7 +62,8 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
       tops = Enum.map(-1..-28, &create_top("published", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
+      assert Enum.count(scoped) == 28
       assert scoped == tops
     end
 
@@ -66,7 +71,7 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
       Enum.each(-1..-28, &create_top("counting", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
 
@@ -74,7 +79,8 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
       tops = Enum.map(-1..-28, &create_top("voting", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
+      assert Enum.count(scoped) == 28
       assert scoped == tops
     end
 
@@ -82,7 +88,7 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
       Enum.each(-1..-28, &create_top("checking", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
   end
@@ -92,7 +98,8 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{profils: ["DJ"]})
       tops = Enum.map(-1..-28, &create_top("published", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
+      assert Enum.count(scoped) == 24
       assert scoped == Enum.slice(tops, 2, 24)
     end
 
@@ -100,7 +107,7 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{profils: ["DJ"]})
       Enum.each(-1..-28, &create_top("counting", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
 
@@ -108,7 +115,7 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{profils: ["DJ"]})
       Enum.each(-1..-28, &create_top("voting", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
 
@@ -116,7 +123,7 @@ defmodule Wsdjs.TopTest do
       user = insert!(:user, %{profils: ["DJ"]})
       Enum.each(-1..-28, &create_top("checking", &1))
 
-      scoped = Top.scoped(user) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(user) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
   end
@@ -125,28 +132,29 @@ defmodule Wsdjs.TopTest do
     test "published" do
       tops = Enum.map(-1..-28, &create_top("published", &1))
 
-      scoped = Top.scoped(nil) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(nil) |> Repo.all()
+      assert Enum.count(scoped) == 3      
       assert scoped == Enum.slice(tops, 2, 3)
     end
 
     test "counting" do
       Enum.each(-1..-28, &create_top("counting", &1))
 
-      scoped = Top.scoped(nil) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(nil) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
 
     test "voting" do
       Enum.each(-1..-28, &create_top("voting", &1))
 
-      scoped = Top.scoped(nil) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(nil) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
 
     test "checking" do
       Enum.each(-1..-28, &create_top("checking", &1))
 
-      scoped = Top.scoped(nil) |> order_by(asc: :inserted_at) |> Repo.all()
+      scoped = Top.scoped(nil) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
   end
