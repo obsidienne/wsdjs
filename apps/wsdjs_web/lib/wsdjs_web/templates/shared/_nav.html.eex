@@ -1,0 +1,30 @@
+<nav class="glnav container">
+  <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
+
+  <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu text-muted" %>
+  <%= if @current_user do %>
+    <%= link "songs", to: song_path(@conn, :index), class: "glnav__menu text-muted" %>
+  <% end %>
+  
+  <%= if Wsdjs.Musics.Policy.can?(:search, @current_user) == :ok do %>
+  <div class="search-container">
+    <div class="search__input__wrap">
+      <i class="icon-search"></i>
+      <input id="search-input" placeholder="Search song ..." type="text" class="search-input" autocomplete="off" spellcheck="false">
+    </div>
+
+    <div class="search-results-container">
+    </div>
+  </div>
+  <% end %>
+
+  <%= if @current_user do %>
+    <%= link to: user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>
+      <img class="glnav__user__avatar img-circle" data-src="<%= avatar_url(@current_user.avatar) %>">
+    <% end %>
+  <% else %>
+    <%= link to: session_path(@conn, :new), data: [turbolinks: false], class: "glnav__user" do %>
+      <div class="glnav__user__signin--container  btn btn-primary">Sign in</div>
+    <% end %>
+  <% end %>
+</nav>

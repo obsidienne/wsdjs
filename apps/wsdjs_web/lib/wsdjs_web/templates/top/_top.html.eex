@@ -1,0 +1,30 @@
+ <article class="tops__top">
+      <a href="<%= top_path(@conn, :show, @top.id) %>">
+        <%= if Enum.count(@top.ranks) > 0 do %>
+        <img data-src="<%= art_url(Enum.at(@top.ranks, 0).song.art) %>" class="tops__top__anchor card" >
+        <% end %>
+      </a>
+
+      <a href="<%= top_path(@conn, :show, @top.id) %>" class="card tops__top__content">
+        <span class="tops__top__date"><time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <span class="label label-default"><%= @top.status %></span></span>
+        <div class="tops__top__art">
+          <%= for rank <- @top.ranks do %>
+            <div>
+              <img src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_cover.jpg" data-src="<%= art_url(rank.song.art) %>" class="responsive" >
+            </div>
+          <% end %>
+        </div>
+        <table class="tops__top__details">
+          <thead>
+            <tr><th>Songs</th><th>Djs</th><th>Genres</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= Enum.count(@top.songs) %></td>
+              <td><%= count_dj(@top.songs) %></td>
+              <td><%= dominante_genre(@top.songs) %></td>
+            </tr>
+          </tbody>
+        </table>
+      </a>
+</article>

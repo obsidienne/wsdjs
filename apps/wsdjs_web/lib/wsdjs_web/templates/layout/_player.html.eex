@@ -1,0 +1,33 @@
+<div id="player" class="player" data-turbolinks-permanent>
+  <div class="current-played">
+    <div class="player__art">
+      <img class="responsive" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
+    </div>
+
+    <div class="player__description">
+      <h6 class="text-ellipsis">
+        <a href="#" class="player__description__title">Radio WCS</a>
+      </h6>
+      <h6 class="small text-ellipsis player__description__sub-title">by World Swing DJs</h6>
+      <input type="range" id="player__volume" min="0" max="100" step="10"> </input>
+    </div>
+
+    <div class="player__play">
+      <div class="player__play__vinyl"></div>
+      <div class="player__expand"></div>
+    </div>
+  </div>
+
+  <div class="player__toggle" hidden>
+    <div class="player__toggle__art">
+      <img class="responsive" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
+    </div>
+    <h3>Return to RadioWCS</h3>
+   </div>
+
+  <div id="player__youtube" class="player__youtube" hidden></div>
+
+  <div class="already-played">
+    <table id="already-played" class="already-played__data"></table>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<section class="hero">
+  <style>
+    .hero {
+      background-image: none;
+    }
+  </style>
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+</section>
+<main id="user-page" class="user-page container">
+
+  <div>
+    <section class="user-page__profile__section">
+      <header class="user-page__profile__header">
+        <img data-src="<%= avatar_url(@user.avatar) %>" class="user-page__avatar">
+        <div class="user-page__profile-details">
+          <h4><%= @user.name %></h4>
+          <%= if @user.djname do %>
+            <h6 class="text-muted"><%= @user.djname %></h6>
+          <% end %>
+          <span class="place-icon user-page__profile-details__place"> <%= @user.user_country %></span>
+          <div class="user-page__profils">
+            <%= for profil <- @user.profils do %>
+              <span class="label label-primary"><%= profil %></span>
+            <% end %>
+          </div>
+        </div>
+      </header>
+
+      <footer class="user-page__actions">
+        <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
+        <%= if Wsdjs.Accounts.Policy.can?(:edit_user, @user, @current_user) == :ok do %>
+          <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
+        <% end %>
+        <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
+          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
+        <% end %>
+        <%= if @user.admin == true do %>
+          <%= link "User list", to: user_path(@conn, :index), class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
+        <% end %>
+      </footer>
+    </section>
+
+    <table class="user-page__stats user-page__profile__section">
+      <tbody>
+        <tr>
+          <th class="h6 music-icon">SONG SUGGESTED</th>
+          <td class="number"><%= @total_songs %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <%= render "_user_details.html", user: @user %>
+  </div>
+
+  <%= if @current_user do %>
+  <section>
+    <%= if Enum.count(@songs) > 0 do %>
+    <nav>
+      <ul class="tabs-navigation__items">
+        <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#suggestions-section">suggestions</a></li>
+      </ul>
+    </nav>
+    <% end %>
+
+    <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) == :ok do %>
+    <section id="suggestions-section" class="container tabs-pane active">
+      <ul id="user-page__song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
+        <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song %>
+      </ul>
+    </section>
+    <% end %>
+  </section>
+  <% end %>
+</main>

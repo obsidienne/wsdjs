@@ -1,0 +1,27 @@
+<header class="hero hot-hero">
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+
+  <div class="container">
+    <%= if Wsdjs.Musics.Policy.can?(:create_song, @conn.assigns.current_user) == :ok do %>
+      <a class="btn btn-primary" title="Suggest a song" href="<%= song_path(@conn, :new) %>">Suggest a song</a>
+    <% end %>
+  </div>
+</header>
+
+<main role="main" class="container">
+  <%= for {month, songs} <- group_song_by_month(@songs) do %>
+    <h4 class="page-header">
+      <time datetime="<%= Date.to_iso8601(month) %>"></time> <small><%= Enum.count(songs) %> suggestions</small>
+    </h4>
+    <ul class="hot-songs">
+      <%= render_many sort_songs(songs), WsdjsWeb.SharedView, "_hot_song.html", conn: @conn, as: :song %>
+    </ul>
+  <% end %>
+
+  <%= if @top do %>
+  <h4 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h4>
+  <ol class="song-top__container">
+    <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
+  </ol>
+  <% end %>
+</main>

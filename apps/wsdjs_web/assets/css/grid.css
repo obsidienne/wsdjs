@@ -1,0 +1,45 @@
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  max-width: 414px;
+}
+
+.song-edit,
+.song-new {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: column;
+}
+#avatar_div, #art_div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+#avatar_div .form-group,
+#art_div .form-group {
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+
+.song-new form,
+.song-edit form,
+.user-profile-edit form {
+  flex: 1 1 auto;
+}
+
+@media (min-width: 768px) {
+  .user-profile-edit,
+  .song-edit,
+  .song-new {
+    flex-direction: row;
+    max-width: 768px;
+  }
+  #avatar_div,
+  #art_div {
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
+}

@@ -1,0 +1,15 @@
+<header class="hero">
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+
+  <div class="container">
+    <%= if Wsdjs.Charts.Policy.can?(:create_top, @conn.assigns.current_user) == :ok do %>
+      <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
+    <% end %>
+  </div>
+</header>
+
+<main id="top-list" class="tops container" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>">
+  <%= for top <- @tops do %>
+    <%= render "_top.html", conn: @conn, top: top %>
+  <% end %>
+</main>

@@ -1,0 +1,46 @@
+<%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+
+<main class="container song-new">
+  <div id="art_div">
+    <img id="art_thumbnail" src="<%= art_url() %>" style="width:250px;height:250px;">
+    <div class="form-group">
+      <button id="song_upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload cover</button>
+    </div>
+  </div>
+
+  <%= form_for @changeset, song_path(@conn, :create), [class: "row"], fn f -> %>
+    <div id="cloudinary_form_div">
+      <%= inputs_for f, :art, fn fp -> %>
+        <%= hidden_input fp, :cld_id, disabled: :disabled %>
+        <%= hidden_input fp, :version, disabled: :disabled %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
+      <%= error_tag f, :artist %>
+    </div>
+
+    <div class="form-group">
+      <%= text_input f, :title, placeholder: "Song title", class: "form-control" %>
+      <%= error_tag f, :title %>
+    </div>
+
+    <div class="form-group">
+      <%= text_input f, :url, type: "url", placeholder: "An URL for the song (youtube prefered).", class: "form-control" %>
+      <%= error_tag f, :url %>
+    </div>
+    
+    <div class="form-group">
+      <%= number_input f, :bpm, placeholder: "bpm", min: 1, class: "form-control" %>
+      <%= error_tag f, :bpm %>
+    </div>
+
+    <div class="form-group select optional song_genre">
+      <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
+      <%= error_tag f, :genre %>
+    </div>
+
+    <%= submit "Suggest song", class: "btn btn-primary " %>
+  <% end %>
+</main><!-- /.modal-dialog -->

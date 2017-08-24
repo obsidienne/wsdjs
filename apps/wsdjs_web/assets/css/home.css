@@ -1,0 +1,23 @@
+body.login .container {
+  height: 100vh;
+}
+
+body.login body {
+  margin: 0;
+}
+
+body.login main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 53px);
+}
+
+.HomeUnauthenticatedView main {
+  display: flex;
+  justify-content: space-between;
+}
+.home-page__top__song li {
+  margin-bottom: 15px;
+}

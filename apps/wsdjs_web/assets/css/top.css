@@ -1,0 +1,259 @@
+/****************************
+  Checking top
+****************************/
+
+/****************************
+  Voting top
+****************************/
+.voting-position__selector {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+}
+.voting-position__selector::-ms-expand { 
+  display: none; /* hide the default arrow in ie10 and ie11 */
+}
+.top-voting-repartition {
+  margin-top: 15px;
+}
+
+.voting-container {
+  margin-bottom: 5px;
+}
+
+.voting-container label {
+  width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.voting-container .album-art {
+  vertical-align: top;
+}
+
+.voting-song {
+  position: relative;
+}
+.counting-points {
+  white-space: nowrap;
+}
+
+.voting-song-title, .voting-song-artist {
+  display: block;
+}
+
+.voting-song-artist {
+  font-weight: normal;
+}
+
+.voting-position {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    z-index: 1000;
+}
+
+.voting-position:empty {
+    display: none;
+}
+
+.voting-position .chart-bg {
+    position: absolute;
+    top: -80px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 72px solid transparent;
+    border-bottom: 72px solid transparent;
+    border-left: 72px solid #FFF;
+}
+
+.voting-position .chart-value {
+    position: absolute;
+    top: -7px;
+    left: -10px;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    font-weight: 600;
+    color: #49596a;
+}
+
+.voting-container .song-play {
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23FFC107' height='72' viewBox='0 0 24 24' width='72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E ");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 50px;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-decoration: none;
+  border-radius: 100%;
+  background-color: rgba(180,180,180,.5);
+}
+
+
+.top-voting-footer {
+  position: fixed;
+  bottom: 55px;
+  display: flex;
+  padding: 10px;
+  background-color: grey;
+  z-index: 2000;
+  justify-content: flex-end;
+}
+
+.top-voting-footer-actions > .btn {
+  width: 200px;
+}
+
+
+/****************************
+  Counting
+****************************/
+
+
+/****************************
+  Published top
+****************************/
+.top-songs-container {
+  margin-bottom: 50px;
+}
+
+.top-song {
+  display: flex;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  border-bottom: 1px solid #DDD;
+  flex-direction: column;
+}
+.song-art-container {
+  position: relative;
+  min-width: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  height: auto;
+  align-self: center;
+}
+.top-published .song-art-container,
+.top-counting .song-art-container,
+.top-voting .song-art-container {
+  min-width: 150px;
+  max-width: 150px;
+  max-height: 150px;
+}
+.top-counting tr {
+  height: 36px;
+}
+.top-counting td {
+  text-align: right;
+}
+
+.top-song-position-selector {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 15px;
+  background: rgba(150,150,150,.4);
+  margin: 7px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+.top-song-position-selector:hover {
+  background: rgb(150,150,150);
+}
+
+.song-art-container a {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  background: rgba(150,150,150,.4);
+  padding: 15px;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 7px;
+}
+.song-art-container:hover a {
+  background: rgb(150,150,150);
+}
+.top-song-info-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.top-song img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
+@media (min-width: 767px) {
+  .top-song {
+    flex-direction: row;
+  }
+  .top-song-body-info {
+    padding-left: 15px;
+  }
+  .top-song-body aside {
+    padding-left: 15px;
+  }
+  .top-song-info-container {
+    flex-direction: row;
+  }
+}
+
+
+.top-song-art {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 160px;
+  height: auto;
+  margin-right: 15px;
+  position: relative;
+  margin-bottom: 0
+}
+
+.top-song-art img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.top-song-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  min-width: 0;
+}
+
+.top-song-play {
+  width: 60px;
+  height: 60px;
+  max-width: 100%;
+  bottom: 15px;
+  right: 15px;
+  text-decoration: none;
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23FFC107' height='72' viewBox='0 0 24 24' width='72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E ");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  background-color: rgba(150,150,150,.5);
+}
+
+

@@ -1,0 +1,22 @@
+<table style="width:600px;margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px;padding-bottom:20px;color:#333332;line-height:1.4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Ubuntu','Open Sans','Helvetica Neue',sans-serif">
+  <tbody>
+    <tr>
+      <td>
+        <div>
+          <p style="margin-top:0;margin-bottom:20px">Click and confirm that you want to sign in to WorldSwingDjs. This link will expire in fifteen minutes and can only be used once.</p>
+          <p style="margin-top:0;margin-bottom:20px">
+            <a href="<%= signin_url(WsdjsWeb.Endpoint, :show, @token) %>" style="color:#ffffff;text-decoration:none;display:inline-block;height:38px;line-height:38px;padding-top:0;padding-right:16px;padding-bottom:0;padding-left:16px;border:0;outline:0;background-color:#02b875;font-size:14px;font-style:normal;font-weight:400;text-align:center;white-space:nowrap;border-radius:999em" target="_blank">Sign in to WorldSwingDjs</a>
+          </p>
+
+          <div style="color:#b3b3b1;font-size:14px;text-align:center;margin-top:50px;margin-right:0;margin-bottom:50px;margin-left:0">If you did not make this request, please contact us at <a href="mailto:worldswingdeejays@gmail.com" style="color:#b3b3b1;text-decoration:underline" target="_blank">worldswingdeejays@gmail.com</a></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div style="padding-top:15px;padding-right:0;padding-bottom:0;padding-left:0;margin-top:30px;color:#b3b3b1;font-size:12px;text-align:center;border-top:1px solid #e5e5e5">Sent by <a href="https://worldswingdeejays.com/" style="color:#8e8e8e;text-decoration:underline" target="_blank">WordSwingDJs</a> · somewhere on the dance floor
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

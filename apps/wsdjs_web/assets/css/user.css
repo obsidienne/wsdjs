@@ -1,0 +1,93 @@
+.user-page {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  
+  background: #fff;
+  border-radius: 3px;
+}
+.user-page .hero {
+  padding-bottom: 0;
+}
+.user-page__avatar {
+  flex: 0 0 94px;
+  height: 94px;
+  min-height: 94px;
+  min-width: 94px;
+  width: 94px;
+}
+.user-page__profile__label {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 22px;
+    max-width: 100%;
+    padding: 0 0 5px;
+    text-transform: uppercase;
+    word-wrap: break-word;
+}
+.user-page__stats td {
+  color: #3c3c3c;
+  float: right;
+  font-size: 18px;
+  font-weight: normal;
+}
+.user-profile-edit {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: column;
+}
+.user-page__profile__header {
+  display: flex;
+}
+.user-page__profile-details {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  padding: 5px;
+}
+.user-page__profile-details > h4 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 0;
+}
+.user-page__profile__section:last-child {
+    border-bottom-width: 0;
+}
+.user-page__profile__section {
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 13px;
+    line-height: 19px;
+    padding: 18px 15px;
+    position: relative;
+    z-index: 3;
+}
+.user-page__profile-details__place {
+  padding-top: 8px;
+}
+.user-page__details {
+  color: #6f6f6f;
+  margin: 0;
+}
+.user-page__logout {
+  padding-left: 0;
+}
+.user-page__songs {
+  margin-top: 45px;
+}
+.user-page__songs li {
+  margin-bottom: 10px;
+}
+.user-page__actions {
+  clear: both;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.avatar-tiny {
+    height: auto;
+    width: 30px;
+    border-radius: 50%;
+}

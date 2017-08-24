@@ -1,0 +1,4 @@
+<%= for rank <- Enum.take(@top.ranks, 20) do %>
+<%= "#{rank.position}. #{rank.song.artist} - #{rank.song.title} (#{rank.song.genre}) - #{rank.bonus + rank.likes + rank.votes} pts" %>
+<%= "suggested by #{user_displayed_name(rank.song.user)} on #{ Timex.format!(rank.song.inserted_at, "%e %b", :strftime) }\n" %>
+<% end %>

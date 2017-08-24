@@ -9,3 +9,7 @@ The following aspect will be covered:
 
 
 Use [acme_bank](https://github.com/wojtekmach/acme_bank) app as an example to create the platform.
+
+iex -S mix phx.server
+
+CC_PRE_RUN_HOOK	mix ecto.seed
