@@ -56,7 +56,7 @@ defmodule Wsdjs.SongTest do
   # public track: always visible
 
 
-  describe "Top.scoped(%User{admin: true})" do
+  describe "Song.scoped(%User{admin: true})" do
     # instant hits are visible
     test "instant hit" do
       admin = insert!(:user, %{admin: true})
@@ -96,7 +96,7 @@ defmodule Wsdjs.SongTest do
     end
   end
 
-  describe "Top.scoped(%User{profils: [DJ_VIP]})" do
+  describe "Song.scoped(%User{profils: [DJ_VIP]})" do
     # instant hits are visible
     test "instant hit" do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
@@ -136,7 +136,7 @@ defmodule Wsdjs.SongTest do
     end
   end
 
-  describe "Top.scoped(%User{profils: [DJ]})" do
+  describe "Song.scoped(%User{profils: [DJ]})" do
     # instant hits are visible
     test "instant hit" do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
