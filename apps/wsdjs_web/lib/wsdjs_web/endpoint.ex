@@ -5,6 +5,13 @@ defmodule WsdjsWeb.Endpoint do
     plug Phoenix.Ecto.SQL.Sandbox
   end
 
+
+  plug Corsica, origins: ["http://radiowcs.com"], 
+                allow_headers: ["Authorization", "Origin", "user-token", "Content-Type", "X-Requested-With"], 
+                allow_methods: ["GET"], 
+                allow_credentials: true
+
+
   socket "/socket", WsdjsWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
