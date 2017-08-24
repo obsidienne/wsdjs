@@ -97,6 +97,16 @@ defmodule Wsdjs.SongTest do
   end
 
   describe "Song.scoped(%User{profils: [DJ_VIP]})" do
+    test "simple suggestion" do
+      user = insert!(:user, %{profils: ["DJ_VIP"]})
+      user2 = insert!(:user, %{profils: ["DJ_VIP"]})
+      song = insert!(:song, %{user_id: user.id})
+
+      scoped = Song.scoped(user2) |> Repo.all()
+      assert Enum.count(scoped) == 1
+      assert scoped == [song]
+    end
+
     # instant hits are visible
     test "instant hit" do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
@@ -160,18 +170,18 @@ defmodule Wsdjs.SongTest do
     end
 
     test "top 10" do
-      admin = insert!(:user, %{admin: true})
+      user = insert!(:user, %{profils: ["DJ"]})
       Enum.each(0..-27, &create_filled_top(&1))
 
-      scoped = Song.scoped(admin) |> Repo.all()
+      scoped = Song.scoped(user) |> Repo.all()
       assert Enum.count(scoped) == 30
     end
 
     test "top 10 not published" do
-      admin = insert!(:user, %{admin: true})
+      user = insert!(:user, %{profils: ["DJ"]})
       Enum.each(0..-27, &create_filled_top(&1, false))
 
-      scoped = Song.scoped(admin) |> Repo.all()
+      scoped = Song.scoped(user) |> Repo.all()
       assert Enum.count(scoped) == 0
     end
   end
