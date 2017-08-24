@@ -133,7 +133,7 @@ defmodule Wsdjs.TopTest do
       tops = Enum.map(-1..-28, &create_top("published", &1))
 
       scoped = Top.scoped(nil) |> Repo.all()
-      assert Enum.count(scoped) == 3      
+      assert Enum.count(scoped) == 3
       assert scoped == Enum.slice(tops, 2, 3)
     end
 

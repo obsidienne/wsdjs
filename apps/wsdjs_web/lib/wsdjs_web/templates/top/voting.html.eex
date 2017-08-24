@@ -9,7 +9,7 @@
   </div>
 
   <%= if @current_user && @current_user.id == @top.user_id do %>
-    <%= form_for @changeset, top_path(@conn, :update, @top.id), fn f -> %>
+    <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
       <section>
         <nav>
           <ol class="top-steps text-center">

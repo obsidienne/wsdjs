@@ -21,7 +21,8 @@ defmodule Wsdjs.Factory do
       genre: Enum.random(Wsdjs.Musics.Song.genre()),
       bpm: 0,
       hidden_track: false,
-      public_track: false
+      public_track: false,
+      instant_hit: false
     }
   end
 

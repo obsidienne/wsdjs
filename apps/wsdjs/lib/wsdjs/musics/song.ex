@@ -53,15 +53,20 @@ defmodule Wsdjs.Musics.Song do
 
   # Connected user can see songs not explicitly track
   def scoped(%Accounts.User{} = user) do
-    from s in Musics.Song,
-    where: s.hidden_track == false or s.user_id == ^user.id
+    if Enum.member?(user.profils, "DJ_VIP") do
+      from s in Musics.Song,
+      where: s.user_id == ^user.id or s.public_track == true
+    else
+      from s in Musics.Song,
+      where: s.user_id == ^user.id or s.public_track == true
+    end
   end
 
   # Not connected users see only top 10 song or instant_hit
   def scoped(nil) do
     from s in Musics.Song,
     left_join: r in assoc(s, :ranks),
-    where: r.position <= 10 or s.instant_hit == true
+    where: (r.position <= 10 or s.instant_hit == true or s.public_track == true)
   end
 
   # This function validates the format of an URL not it's validity.

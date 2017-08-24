@@ -72,18 +72,7 @@ defmodule Wsdjs.SongTest do
     test "public track" do
       admin = insert!(:user, %{admin: true})
       user = insert!(:user, %{profils: ["DJ_VIP"]})
-      song = insert!(:song, %{instant_hit: true, user_id: user.id})
-
-      scoped = Song.scoped(admin) |> Repo.all()
-      assert Enum.count(scoped) == 1
-      assert scoped == [song]
-    end
-
-    # hidden tracks are invisible
-    test "hidden track" do
-      admin = insert!(:user, %{admin: true})
-      user = insert!(:user, %{profils: ["DJ_VIP"]})
-      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+      song = insert!(:song, %{public_track: true, user_id: user.id})
 
       scoped = Song.scoped(admin) |> Repo.all()
       assert Enum.count(scoped) == 1
@@ -123,18 +112,7 @@ defmodule Wsdjs.SongTest do
     test "public track" do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
       user2 = insert!(:user, %{profils: ["DJ_VIP"]})
-      song = insert!(:song, %{instant_hit: true, user_id: user.id})
-
-      scoped = Song.scoped(user2) |> Repo.all()
-      assert Enum.count(scoped) == 1
-      assert scoped == [song]
-    end
-
-    # hidden tracks are invisible
-    test "hidden track" do
-      user = insert!(:user, %{profils: ["DJ_VIP"]})
-      user2 = insert!(:user, %{profils: ["DJ_VIP"]})
-      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+      song = insert!(:song, %{public_track: true, user_id: user.id})
 
       scoped = Song.scoped(user2) |> Repo.all()
       assert Enum.count(scoped) == 1
@@ -174,23 +152,12 @@ defmodule Wsdjs.SongTest do
     test "public track" do
       user = insert!(:user, %{profils: ["DJ_VIP"]})
       user2 = insert!(:user, %{profils: ["DJ"]})
-      song = insert!(:song, %{instant_hit: true, user_id: user.id})
+      song = insert!(:song, %{public_track: true, user_id: user.id})
 
       scoped = Song.scoped(user2) |> Repo.all()
       assert Enum.count(scoped) == 1
       assert scoped == [song]
     end
-
-    # hidden tracks are invisible
-    test "hidden track" do
-      user = insert!(:user, %{profils: ["DJ_VIP"]})
-      user2 = insert!(:user, %{profils: ["DJ"]})
-      insert!(:song, %{instant_hit: true, user_id: user.id})
-
-      scoped = Song.scoped(user2) |> Repo.all()
-      assert Enum.count(scoped) == 0
-    end
-
 
     test "top 10" do
       admin = insert!(:user, %{admin: true})
@@ -228,15 +195,6 @@ defmodule Wsdjs.SongTest do
       scoped = Song.scoped(nil) |> Repo.all()
       assert Enum.count(scoped) == 1
       assert scoped == [song]
-    end
-
-    # hidden tracks are invisible
-    test "hidden track" do
-      user = insert!(:user)
-      insert!(:song, %{hidden_track: true, user_id: user.id})
-
-      scoped = Song.scoped(nil) |> Repo.all()
-      assert Enum.count(scoped) == 0
     end
 
     # top, first 10 songs are visible if top in [m-3, m-6]
