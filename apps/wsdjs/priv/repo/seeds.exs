@@ -12,6 +12,7 @@ defmodule Wsdjs.Seeds do
       admin: row[:admin] == "true",
       djname: row[:djname],
       name: row[:name],
+      profils: [row[:profil]],
       user_country: row[:user_country],
       new_song_notification: row[:new_song_notification] == "true",
       inserted_at: Ecto.DateTime.cast!(row[:inserted_at]),
@@ -170,7 +171,7 @@ Ecto.Adapters.SQL.query(Wsdjs.Repo, "Truncate users cascade;")
 |> Path.expand(__DIR__)
 |> File.stream!
 |> Stream.drop(1)
-|> CSV.decode(strip_cells: true, headers: [:id, :email, :admin, :new_song_notification, :user_country, :name, :djname, :avatar_id, :avatar_version, :inserted_at, :updated_at])
+|> CSV.decode(strip_cells: true, headers: [:id, :email, :admin, :new_song_notification, :user_country, :name, :djname, :avatar_id, :avatar_version, :inserted_at, :updated_at, :profil])
 |> Enum.each(&Wsdjs.Seeds.store_it(:user, &1))
 
 "data/tops.csv"
