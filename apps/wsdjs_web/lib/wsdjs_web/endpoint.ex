@@ -6,7 +6,7 @@ defmodule WsdjsWeb.Endpoint do
   end
 
 
-  plug Corsica, origins: ["http://radiowcs.com", "http://localhost:4000"],
+  plug Corsica, origins: ["http://radiowcs.com", "http://www.radiowcs.com"],
                 allow_headers: ["Authorization", "Origin", "user-token", "Content-Type", "X-Requested-With"],
                 allow_methods: ["GET"],
                 allow_credentials: true
