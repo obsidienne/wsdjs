@@ -3,11 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
     <meta name="cloudinary_cloud_name" content="don2kwaju">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="World Swing DeeJays. The best West Coast Swing music from all around the world !">
+
+    <!-- Control the behavior of search engine crawling and indexing -->
+    <meta name="robots" content="index,follow"><!-- All Search Engines -->
+    <meta name="googlebot" content="index,follow"><!-- Google Specific -->
+    <!-- Tells Google not to show the sitelinks search box -->
+    <meta name="google" content="nositelinkssearchbox">
+    <!-- Tells Google not to provide a translation for this page -->
+    <meta name="google" content="notranslate">
 
     <title><%= page_title(@conn) %></title>
 
