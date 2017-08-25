@@ -12,7 +12,7 @@
   <section>
     <h4>Deejays' pick</h4>
     <ul>
-      <%= render_many @songs, WsdjsWeb.SharedView, "_song_minicard.html", conn: @conn, as: :song %>
+      <%= render_many @songs, WsdjsWeb.SharedView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
   </section>
 <% end %>
