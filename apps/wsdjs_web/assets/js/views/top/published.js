@@ -7,7 +7,7 @@ export default class View extends MainView {
   }
 
   mount() {
-    this.mount();
+    super.mount();
     new timeago().render(document.querySelectorAll("time.timeago"));
     this._intlTopDate();
   }
