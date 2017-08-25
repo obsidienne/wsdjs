@@ -191,7 +191,7 @@
   width: 100%;
   white-space: nowrap;
 }
-.song-top__title {
+.song-top__title, .song-top__artist {
   width: 100%;
 }
 
