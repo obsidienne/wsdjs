@@ -127,6 +127,9 @@
 /****************************
   Published top
 ****************************/
+.tops__top__art > div {
+  overflow: hidden;
+}
 .top-songs-container {
   margin-bottom: 50px;
 }
@@ -145,6 +148,7 @@
   max-height: 300px;
   height: auto;
   align-self: center;
+  overflow: hidden;
 }
 .top-published .song-art-container,
 .top-counting .song-art-container,

@@ -174,7 +174,7 @@ defmodule Wsdjs.SongTest do
       Enum.each(0..-27, &create_filled_top(&1))
 
       scoped = Song.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 30
+      assert Enum.count(scoped) == 240
     end
 
     test "top 10 not published" do

@@ -13,6 +13,7 @@
   flex: 1 1 auto;
   min-width: 0;
   box-shadow:  0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+  overflow: hidden;
 }
 .song-page__art img {
   width: 100%;
@@ -64,6 +65,7 @@
   border: 0;
   flex: 0 0 90px;
   position: relative;
+  overflow: hidden;
 }
 .song-minicard__body {
   padding-top: 0;
@@ -103,6 +105,7 @@
   padding: 0;
   position: relative;
   display: block;
+  overflow: hidden;
 }
 
 .song-card__tags {
@@ -162,6 +165,9 @@
   position: relative;
   flex: 0 1 143px;
   margin-bottom: 5px;
+}
+.song-top__song > header {
+  overflow: hidden;
 }
 
 .song-top__body {

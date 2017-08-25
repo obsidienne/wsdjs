@@ -20,4 +20,20 @@ defmodule WsdjsWeb.SongHelper do
     |> Timex.to_datetime()
     |> Timex.format!("{ISO:Extended}")
   end
+
+  def blur_track(%Wsdjs.Musics.Song{hidden_track: false}, _), do: ""
+  def blur_track(%Wsdjs.Musics.Song{} = song, current_user) do
+    cond do
+      is_nil(current_user) ->
+        "blur_track"
+      current_user.admin == true ->
+        ""
+      Enum.member?(current_user.profils, "DJ_VIP") ->
+        ""
+      song.user_id == current_user.id ->
+        ""
+      true ->
+        "blur_track"
+    end
+  end
 end

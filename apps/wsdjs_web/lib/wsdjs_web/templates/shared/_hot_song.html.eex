@@ -1,6 +1,6 @@
 <li class="song-card card" data-id="<%= @song.id %>">
   <a href="<%= url_for_provider(@song) %>" class="song-card__header" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
-    <img src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_cover.jpg" data-src="<%= art_url(@song.art) %>" class="responsive" />
+    <img src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_cover.jpg" data-src="<%= art_url(@song.art) %>" class="responsive <%= blur_track(@song, @current_user) %>" />
     <h6 class="song-card__tags">
       <span class="label label-default"><%= @song.genre %></span>
       <%= if @song.bpm > 0 do %>
@@ -11,8 +11,8 @@
   </a>
 
   <div class="song-card__body">
-    <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "h5  text-ellipsis" %>
-    <h6 class="small text-ellipsis"><%= @song.artist %></h6>
+    <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "h5  text-ellipsis #{blur_track(@song, @current_user)}" %>
+    <h6 class="small text-ellipsis <%= blur_track(@song, @current_user) %>"><%= @song.artist %></h6>
 
     <h6 class="song-card__body__suggested-by text-muted small">
       <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>,

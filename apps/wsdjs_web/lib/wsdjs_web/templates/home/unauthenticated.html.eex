@@ -31,13 +31,13 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= rank.position %></div>
         </div>
-        <img data-src="<%= art_url(rank.song.art) %>" class="responsive" />
+        <img data-src="<%= art_url(rank.song.art) %>" class="responsive <%= blur_track(rank.song, @current_user) %>" />
       </div>
 
 
       <div class="song-minicard__body">
-        <h5 class="text-muted"><%= rank.song.title %></h5>
-        <h6 class="text-muted"><%= rank.song.artist %></h6>
+        <h5 class="text-muted <%= blur_track(rank.song, @current_user) %>"><%= rank.song.title %></h5>
+        <h6 class="text-muted <%= blur_track(rank.song, @current_user) %>"><%= rank.song.artist %></h6>
         <h6 class="text-muted small"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></h6>
 
         <footer class="song-minicard__footer">
