@@ -35,7 +35,7 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= rank.position %></div>
         </div>
-        <img data-src="<%= art_url(rank.song.art)%>" />
+        <img data-src="<%= art_url(rank.song.art)%>" class="<%= blur_track(rank.song, @current_user) %>" />
         <%= if rank.song.url do %>
           <a href="<%= url_for_provider(rank.song) %>" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play</a>
         <% end %>
@@ -43,9 +43,9 @@
       <div class="top-song-body">
         <div class="top-song-body-info">
           <%= link to: song_path(@conn, :show, rank.song), class: "h6" do %>
-            <h5><%= rank.song.title %></h5>
+            <h5 class="<%= blur_track(rank.song, @current_user) %>"><%= rank.song.title %></h5>
           <% end %>
-          <h6><%= rank.song.artist %></h6>
+          <h6 class="<%= blur_track(rank.song, @current_user) %>"><%= rank.song.artist %></h6>
         </div>
 
         <aside>

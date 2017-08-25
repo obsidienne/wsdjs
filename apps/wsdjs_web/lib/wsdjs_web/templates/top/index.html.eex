@@ -10,6 +10,6 @@
 
 <main id="top-list" class="tops container" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>">
   <%= for top <- @tops do %>
-    <%= render "_top.html", conn: @conn, top: top %>
+    <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
 </main>

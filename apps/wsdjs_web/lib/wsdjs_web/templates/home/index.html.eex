@@ -14,14 +14,14 @@
       <time datetime="<%= Date.to_iso8601(month) %>"></time> <small><%= Enum.count(songs) %> suggestions</small>
     </h4>
     <ul class="hot-songs">
-      <%= render_many sort_songs(songs), WsdjsWeb.SharedView, "_hot_song.html", conn: @conn, as: :song %>
+      <%= render_many sort_songs(songs), WsdjsWeb.SharedView, "_hot_song.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
   <% end %>
 
   <%= if @top do %>
   <h4 class="page-header">Last TOP 10 <small><time datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= @top.due_date %></time></small></h4>
   <ol class="song-top__container">
-    <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank %>
+    <%= render_many @top.ranks, @view_module, "_top.html", conn: @conn, as: :rank, current_user: @current_user %>
   </ol>
   <% end %>
 </main>

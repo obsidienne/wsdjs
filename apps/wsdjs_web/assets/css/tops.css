@@ -47,6 +47,9 @@
   position: relative;
   margin: 2em 0;
 }
+.tops__top > a {
+  overflow: hidden;
+}
 .tops__top:first-child {
   margin-top: 0;
 }
