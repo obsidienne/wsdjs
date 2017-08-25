@@ -46,6 +46,10 @@
             <h5 class="<%= blur_track(rank.song, @current_user) %>"><%= rank.song.title %></h5>
           <% end %>
           <h6 class="<%= blur_track(rank.song, @current_user) %>"><%= rank.song.artist %></h6>
+          <div class="text-muted small">
+            <%= gettext "by" %> <%= user_displayed_name(rank.song.user) %>
+            <time class="timeago small" datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>"></time>
+          </div>
         </div>
 
         <aside>

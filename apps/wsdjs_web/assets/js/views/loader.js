@@ -6,6 +6,7 @@ import SongNewView from './song/new';
 import TopIndexView from './top/index';
 import TopCountingView from './top/counting';
 import TopVotingView from './top/voting';
+import TopPublishedView from './top/published';
 import UserEditView from './user/edit';
 import UserShowView from './user/show';
 import UserIndexView from './user/index';
@@ -21,6 +22,7 @@ const views = {
   TopIndexView,
   TopCountingView,
   TopVotingView,
+  TopPublishedView,
   UserEditView,
   UserIndexView,
   UserShowView,
