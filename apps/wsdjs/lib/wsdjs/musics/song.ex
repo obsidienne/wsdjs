@@ -56,14 +56,14 @@ defmodule Wsdjs.Musics.Song do
     if Enum.member?(user.profils, "DJ_VIP") do
       Musics.Song
     else
-      start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -5)
-      end_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+      start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+      end_period = Timex.shift(start_period, months: -23)
 
       from s in Musics.Song,
       left_join: r in assoc(s, :ranks),
       left_join: t in assoc(r, :top),
       where: s.user_id == ^user.id or s.public_track == true or s.instant_hit == true or
-             (t.status == "published" and r.position <= 10 and t.due_date <= ^end_period and t.due_date >= ^start_period)
+             (t.status == "published" and r.position <= 10 and t.due_date <= ^start_period and t.due_date >= ^end_period)
     end
   end
 
