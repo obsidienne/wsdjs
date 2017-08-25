@@ -285,11 +285,13 @@ defmodule Wsdjs.Charts do
 
   defp list_rank(current_user, top_id) do
     current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
+    limit = if Enum.member?(current_user.profils, "DJ_VIP") or current_user.admin == true do 999 else 10 end
 
     from r in Rank,
     where: r.top_id == ^top_id,
     left_join: v in ^current_user_votes, on: [song_id: r.song_id],
     order_by: [asc: r.position, asc: v.votes, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
+    limit: ^limit,
     preload: [song: [:art, :user, :opinions]]
   end
 
