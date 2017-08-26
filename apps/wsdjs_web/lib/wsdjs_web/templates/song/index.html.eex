@@ -9,6 +9,6 @@
   </div>
 </header>
 
-<main id="song-list" data-next-month="<%= @next_month %>">
+<main id="song-list">
   <%= render "index_hot_song.html", conn: @conn, current_user: @current_user, month: @month, songs: @songs %>
 </main>

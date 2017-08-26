@@ -120,7 +120,8 @@ export default class View extends MainView {
     var scrollPos = window.pageYOffset;
 
     var correctPage = document.querySelector(".SongIndexView");      
-
+    console.log(pageHeight - (scrollPos + clientHeight));
+    
     if (pageHeight - (scrollPos + clientHeight) < 50 && correctPage) {
       return true;
     }
@@ -128,21 +129,18 @@ export default class View extends MainView {
   }
 
   _fetchSongs() {
-    var container = document.getElementById("song-list");
-    var month = container.dataset.nextMonth;
+    var lastSongContainer = document.querySelector("#song-list section:last-child");
+    var month = new Date(lastSongContainer.dataset.month);
+    month.setMonth(month.getMonth(), -1);
 
-    if (month == "") return;
-
+    var previousMonth = month.toISOString().split('T')[0];
     var self = this;
     var request = new XMLHttpRequest();
-    request.open('GET', `/songs?month=${month}`, true);
+    request.open('GET', `/songs?month=${previousMonth}`, true);
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        var next_month = request.getResponseHeader("next-month");
         var container = document.getElementById("song-list");
-
-        container.dataset.nextMonth = next_month;
 
         container.insertAdjacentHTML('beforeend', this.response);
 

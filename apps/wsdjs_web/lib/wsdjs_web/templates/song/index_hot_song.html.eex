@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container" data-month="<%= @month %>">
     <h4 class="page-header">
         <time datetime="<%= @month %>"></time> <small><%= Enum.count(@songs) %> suggestions</small>
     </h4>
