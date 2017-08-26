@@ -81,7 +81,6 @@
 .user-page__actions {
   clear: both;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 15px;
 }

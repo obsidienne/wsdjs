@@ -39,6 +39,7 @@ defmodule WsdjsWeb.Router do
     resources "/ranks", RankController, only: [:update, :delete]
     resources "/sessions", SessionController, only: [:delete]
     resources "/users", UserController, only: [:index, :edit, :update]
+    resources "/invitations", InvitationController, only: [:index]
   end
 
   scope "/", WsdjsWeb do
@@ -52,6 +53,7 @@ defmodule WsdjsWeb.Router do
     resources "/tops", TopController, only: [:index, :show]
     resources "/sessions", SessionController, only: [:new, :create]
     get "/signin/:token", SessionController, :show, as: :signin
+    resources "/invitations", InvitationController, only: [:new, :create]
   end
 
   scope "/api", as: :api, alias: :'WsdjsWeb' do

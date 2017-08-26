@@ -24,9 +24,9 @@
     <%= if Mix.env == :prod, do: render "_piwik.html" %>
   </head>
 
-  <body class="login" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
-    <div class="container">
-      <nav>
+  <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
+    <section class="hero">
+      <nav class="glnav container">
         <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
       </nav>
 
@@ -47,6 +47,6 @@
         </div>
         <% end %>
       </div>
-    </div>
+    </section>
   </body>
 </html>
