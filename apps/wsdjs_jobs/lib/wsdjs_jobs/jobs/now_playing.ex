@@ -17,7 +17,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   )
 
   def start_link(name \\ nil) do
-    queue = :queue.new()
+    queue = list_broadcasted(:queue.new())
     GenServer.start_link(__MODULE__, queue, [name: name])
   end
 
@@ -51,6 +51,27 @@ defmodule Wsdjs.Jobs.NowPlaying do
     end
   end
 
+  @radioking_api_uri_list 'https://www.radioking.com/widgets/api/v1/radio/84322/track/ckoi?limit=10'
+  defp list_broadcasted(queue) do
+    case HTTPoison.get(@radioking_api_uri_list) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        json = Poison.decode!(body)
+
+        json
+        |> Enum.reverse()
+        |> Enum.reduce(queue, fn(song, queue) ->
+          song
+          |> Map.take(@expected_fields)
+          |> filled_from_db()
+          |> :queue.in(queue)
+        end)
+      {:ok, %HTTPoison.Response{status_code: 404}} ->
+        IO.puts "Not found :("
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        IO.puts reason
+    end
+  end
+
   defp schedule_work(interval) do
     Process.send_after(self(), :work, interval)
   end
@@ -70,7 +91,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
     queue = if same_song?(song, last_queued) do
         queue
       else
-        IO.puts "add #{song["artist"]} #{song["title"]} " 
+        IO.puts "add #{song["artist"]} #{song["title"]} "
         :queue.in(song, queue)
       end
 
