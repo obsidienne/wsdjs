@@ -45,17 +45,9 @@ defmodule Wsdjs.Musics do
     |> Repo.one
   end
 
-  @doc """
-  Returns the list of songs for the current and the previous month.
-  This function is scoped by the current user.
-  """
-  def hot_songs(current_user) do
-    dt = DateTime.to_date(DateTime.utc_now)
-    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
-
-    current_user
-    |> Song.scoped()
-    |> where([s], s.inserted_at > date_add(^naive_dtime, -1, "month"))
+  def instant_hits() do
+    Song
+    |> where(instant_hit: true)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by([desc: :inserted_at])
     |> Repo.all()

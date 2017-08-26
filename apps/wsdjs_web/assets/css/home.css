@@ -15,7 +15,7 @@ body.SessionNewView main {
   height: calc(100vh - 53px);
 }
 
-.HomeUnauthenticatedView main {
+.HomeIndexView main {
   display: flex;
   justify-content: space-between;
 }

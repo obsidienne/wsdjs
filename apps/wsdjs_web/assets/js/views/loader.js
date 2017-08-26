@@ -12,7 +12,6 @@ import UserEditView from './user/edit';
 import UserShowView from './user/show';
 import UserIndexView from './user/index';
 import HomeIndexView from './home/index';
-import HomeUnauthenticatedView from './home/index';
 
 // Collection of specific view modules
 const views = {
@@ -28,8 +27,7 @@ const views = {
   UserEditView,
   UserIndexView,
   UserShowView,
-  HomeIndexView,
-  HomeUnauthenticatedView
+  HomeIndexView
 };
 
 export default function loadView(viewName) {
