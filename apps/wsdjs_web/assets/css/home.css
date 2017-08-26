@@ -17,8 +17,15 @@ body.SessionNewView main {
 
 .HomeIndexView main {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 .home-page__top__song li {
   margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .HomeIndexView main {
+    flex-direction: row;
+  }
 }
