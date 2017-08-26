@@ -10,12 +10,12 @@ export default class View extends MainView {
 
     var timeout;
     window.addEventListener("scroll", function(e) {
-      if (self._needToFetchSongs()) {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        if (self._needToFetchSongs()) {
           self._fetchSongs();
-        }, 100);
-      }
+        }
+      }, 100);
     })
 
     document.addEventListener("click", function(e) {

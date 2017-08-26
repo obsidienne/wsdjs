@@ -9,19 +9,12 @@ export default class View extends MainView {
 
     var timeout;
     window.addEventListener("scroll", function(e) {
-      if (document.querySelector("#user-page")) {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-          var ticking = false;
-          if (!ticking) {
-            window.requestAnimationFrame(function() {
-              self._refresh();
-              ticking = false;
-            });
-          }
-          ticking = true;
-        }, 100);
-      }      
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        if (self._needToFetchSongs()) {
+          self._fetchSongs();
+        }
+      }, 100);
     })
   }
 
@@ -44,32 +37,30 @@ export default class View extends MainView {
     super.mount();
   }
 
-  _refresh() {
-    // stop there if we are not in the song index page
-    var body = document.querySelector("body")
-    if (! body.classList.contains("UserShowView"))
-      return;
-  
+  _needToFetchSongs() {
+    var correctPage = document.querySelector(".UserShowView");   
+    if (!correctPage) return false;
+
     var pageHeight = document.documentElement.scrollHeight;
     var clientHeight = document.documentElement.clientHeight;
     var scrollPos = window.pageYOffset;
+   
 
-    if (pageHeight - (scrollPos + clientHeight) < 50) {   
-      var container = document.getElementById("user-page__song-list");
-      if (!container) {
-        return;
-      }
-      var page_number = parseInt(container.dataset.jsPageNumber);
-      var page_total = parseInt(container.dataset.jsTotalPages);
-      var user_id = container.getAttribute("user-id");
-        
-      if (page_number < page_total) {
-        this._retrieve_songs(user_id, page_number + 1);
-      }      
+    var container = document.getElementById("user-page__song-list");    
+    var page_number = parseInt(container.dataset.jsPageNumber);
+    var page_total = parseInt(container.dataset.jsTotalPages);
+
+    if (pageHeight - (scrollPos + clientHeight) < 50 && correctPage && page_number < page_total) {
+      return true;
     }
+    return false;
   }
 
-  _retrieve_songs(user_id, page) {
+  _fetchSongs() {
+    var container = document.getElementById("user-page__song-list");    
+    var user_id = container.getAttribute("user-id");
+    var page = parseInt(container.dataset.jsPageNumber) + 1;    
+
     var request = new XMLHttpRequest();
     request.open('GET', `/songs?user_id=${user_id}&page=${page}`, true);
   
@@ -79,7 +70,6 @@ export default class View extends MainView {
         var page_number = request.getResponseHeader("page-number");
 
         var container = document.getElementById("user-page__song-list");
-
         container.dataset.jsPageNumber = page_number;
         container.dataset.jsTotalPages = total_pages;
         container.insertAdjacentHTML('beforeend', this.response);
