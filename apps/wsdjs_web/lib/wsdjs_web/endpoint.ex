@@ -42,7 +42,9 @@ defmodule WsdjsWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_wsdjs_web_key",
-    signing_salt: "TqBKF7iB"
+    signing_salt: "TqBKF7iB",
+    encryption_salt: "fVT6E68C",
+    max_age: 2_592_000 # 60*60*24*30
 
   plug WsdjsWeb.Router
 
