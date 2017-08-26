@@ -10,12 +10,12 @@ export default class View extends MainView {
 
     var timeout;
     window.addEventListener("scroll", function(e) {
-      if (document.querySelector("#song-list")) {
+      if (self._needToFetchSongs()) {
         clearTimeout(timeout);
         timeout = setTimeout(function() {
-          self._refresh();
+          self._fetchSongs();
         }, 100);
-      }      
+      }
     })
 
     document.addEventListener("click", function(e) {
@@ -114,23 +114,23 @@ export default class View extends MainView {
     }
   }
 
-  _refresh() {
+  _needToFetchSongs() {
     var pageHeight = document.documentElement.scrollHeight;
     var clientHeight = document.documentElement.clientHeight;
     var scrollPos = window.pageYOffset;
 
     if (pageHeight - (scrollPos + clientHeight) < 50) {
-      var container = document.getElementById("song-list");
-      var next_month = container.dataset.nextMonth;
-
-      if (next_month != "") {
-        this._retrieve_songs(next_month);
-        new timeago().render(document.querySelectorAll("time.timeago"));
-      }
+      return true;
     }
+    return false;
   }
 
-  _retrieve_songs(month) {
+  _fetchSongs() {
+    var container = document.getElementById("song-list");
+    var month = container.dataset.nextMonth;
+
+    if (month == "") return;
+
     var self = this;
     var request = new XMLHttpRequest();
     request.open('GET', `/songs?month=${month}`, true);
@@ -148,8 +148,8 @@ export default class View extends MainView {
         new timeago().render(document.querySelectorAll("time.timeago"));
         self.tips.destroyAll();
         self._format_date();
-        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
-      }
+        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});      
+       }
     };
 
     request.onerror = function() { console.log("Error search"); };
