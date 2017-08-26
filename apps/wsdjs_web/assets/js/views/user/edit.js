@@ -33,6 +33,8 @@ export default class View extends MainView {
                 document.getElementById("avatar_thumbnail").setAttribute("src", result[0]['thumbnail_url']);
                 document.getElementById("user_avatar_cld_id").value = result[0]['public_id'];
                 document.getElementById("user_avatar_version").value = result[0]['version'];
+                document.getElementById("user_avatar_cld_id").removeAttribute("disabled");
+                document.getElementById("user_avatar_version").removeAttribute("disabled");
             })
         }
     }, false);
