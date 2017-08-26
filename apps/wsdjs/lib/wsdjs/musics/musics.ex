@@ -61,6 +61,17 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
+  def songs_interval(%User{} = user) do
+    songs = user
+    |> Song.scoped()
+    |> select([s], %{max: max(s.inserted_at), min: min(s.inserted_at)})
+    |> Repo.one()
+
+    %{
+      min: Timex.to_date(Timex.beginning_of_month(songs[:min])),
+      max: Timex.to_date(Timex.beginning_of_month(songs[:max]))
+    }
+  end
 
   @doc """
   Returns the songs added the 24 last hours.

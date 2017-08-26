@@ -34,17 +34,19 @@ defmodule WsdjsWeb.SongController do
   def index(conn, %{"month" => month}, current_user) do
     month = Timex.beginning_of_month(Timex.to_date(Timex.parse!(month, "%Y-%m-%d", :strftime)))
     songs = Musics.list_songs(current_user, :month, month)
+    interval = Musics.songs_interval(current_user)
 
     conn
     |> put_layout(false)
-    |> render("index_hot_song.html", songs: songs, month: month)
+    |> render("index_hot_song.html", songs: songs, month: month, last: Timex.before?(month, interval[:min]))
   end
 
   def index(conn, _params, current_user) do
-    month = Timex.beginning_of_month(Timex.today())
-    songs = Musics.list_songs(current_user, :month, month)
-
-    render(conn, "index.html", songs: songs, month: month)
+    month_interval = Musics.songs_interval(current_user)
+    songs = Musics.list_songs(current_user, :month, month_interval[:max])
+    interval = Musics.songs_interval(current_user)
+    
+    render(conn, "index.html", songs: songs, month: month_interval[:max], last: Timex.before?(month_interval[:max], interval[:min]))
   end
 
   def new(conn, _params, _current_user) do

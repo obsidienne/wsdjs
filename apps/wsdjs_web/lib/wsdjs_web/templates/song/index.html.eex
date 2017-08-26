@@ -10,5 +10,5 @@
 </header>
 
 <main id="song-list">
-  <%= render "index_hot_song.html", conn: @conn, current_user: @current_user, month: @month, songs: @songs %>
+  <%= render "index_hot_song.html", conn: @conn, current_user: @current_user, month: @month, songs: @songs, last: @last %>
 </main>

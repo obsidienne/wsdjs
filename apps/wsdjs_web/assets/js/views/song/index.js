@@ -13,6 +13,8 @@ export default class View extends MainView {
       clearTimeout(timeout);
       timeout = setTimeout(function() {
         if (self._needToFetchSongs()) {
+          var sentinel = document.querySelector("#song-list section:last-child .sentinel");
+          sentinel.parentNode.removeChild(sentinel);    
           self._fetchSongs();
         }
       }, 100);
@@ -30,6 +32,12 @@ export default class View extends MainView {
 
   mount() {
     super.mount();
+
+    if(this._needToFetchSongs()) {
+      var sentinel = document.querySelector("#song-list section:last-child .sentinel");
+      sentinel.parentNode.removeChild(sentinel);    
+      this._fetchSongs();
+    }
 
     // tooltip
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
@@ -115,17 +123,19 @@ export default class View extends MainView {
   }
 
   _needToFetchSongs() {
-    var pageHeight = document.documentElement.scrollHeight;
-    var clientHeight = document.documentElement.clientHeight;
-    var scrollPos = window.pageYOffset;
+    var correctPage = document.querySelector(".SongIndexView");          
+    var sentinel = document.querySelector("#song-list section:last-child .sentinel");
 
-    var correctPage = document.querySelector(".SongIndexView");      
-    console.log(pageHeight - (scrollPos + clientHeight));
-    
-    if (pageHeight - (scrollPos + clientHeight) < 50 && correctPage) {
-      return true;
-    }
-    return false;
+    if (!sentinel) return false;
+
+    var rect = sentinel.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document. documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document. documentElement.clientWidth) &&
+      correctPage
+    );
   }
 
   _fetchSongs() {
@@ -143,6 +153,12 @@ export default class View extends MainView {
         var container = document.getElementById("song-list");
 
         container.insertAdjacentHTML('beforeend', this.response);
+
+        if (self._needToFetchSongs()) {
+          var sentinel = document.querySelector("#song-list section:last-child .sentinel");
+          sentinel.parentNode.removeChild(sentinel);    
+          self._fetchSongs();
+        }
 
         MyCloudinary.refresh();
         new timeago().render(document.querySelectorAll("time.timeago"));
