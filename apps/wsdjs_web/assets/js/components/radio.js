@@ -66,7 +66,10 @@ export default class Radio {
   }
 
   play_youtube(video_id) {
-    this.pause_radio()
+    document.querySelector(".player__expand").classList.remove("player__expand--open");
+    document.querySelector(".already-played").classList.remove("already-played--open");
+
+    this.pause_radio();
     document.querySelector(".current-played").setAttribute("hidden", "hidden");
     
     document.querySelector(".player__toggle").removeAttribute("hidden", "hidden");    
