@@ -1,5 +1,5 @@
-<main>
-  <%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
+<main class="container">
+    <%= form_for @conn, session_path(@conn, :create), [as: :session, class: "container-form"], fn f -> %>
     <div class="form-group">
       <span class="text-muted">Get a magic link sent to your email that'll sign you instantly !</span>
     </div>
@@ -8,6 +8,21 @@
     </div>
     <div class="form-group">
       <%= submit "Email me a link to sign in", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <h1 class="line-through text-muted">OR</h1>
+
+  <%= form_for @changeset, invitation_path(@conn, :create), [class: "container-form"], fn f -> %>
+    <div class="form-group">
+      <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email", required: true %>
+      <%= error_tag f, :email %>
+    </div>
+    <div class="form-group">
+      <%= text_input f, :name, placeholder: "name", class: "form-control", required: true %>
+    </div>
+    <div class="form-group">
+      <%= submit "Request an invitation", class: "btn btn-default" %>
     </div>
   <% end %>
 </main>

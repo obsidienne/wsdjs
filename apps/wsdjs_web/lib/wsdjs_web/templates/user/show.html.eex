@@ -35,7 +35,8 @@
           <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
         <% end %>
         <%= if @user.admin == true do %>
-          <%= link "User list", to: user_path(@conn, :index), class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
+          <%= link "User list", to: user_path(@conn, :index), class: "btn btn-link text-muted user-page__logout",  data: [turbolinks: "false"] %>
+          <%= link "Invitations", to: invitation_path(@conn, :index), class: "btn btn-link text-muted user-page__logout",  data: [turbolinks: "false"] %>          
         <% end %>
       </footer>
     </section>

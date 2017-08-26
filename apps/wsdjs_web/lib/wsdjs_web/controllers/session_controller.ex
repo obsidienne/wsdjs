@@ -4,8 +4,12 @@ defmodule WsdjsWeb.SessionController do
 
   plug :put_layout, "login.html"
 
+  alias Wsdjs.Accounts
+  alias Wsdjs.Accounts.Invitation
+
   def new(conn, _) do
-    render conn, "new.html"
+    changeset = Accounts.change_invitation(%Invitation{})
+    render conn, "new.html", changeset: changeset
   end
 
   def create(conn, %{"session" => %{"email" => email}}) do

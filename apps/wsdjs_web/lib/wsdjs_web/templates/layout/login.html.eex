@@ -24,9 +24,9 @@
     <%= if Mix.env == :prod, do: render "_piwik.html" %>
   </head>
 
-  <body class="login" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
-    <div class="container">
-      <nav>
+  <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
+    <section class="hero">
+      <nav class="glnav container">
         <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
       </nav>
 
@@ -42,11 +42,11 @@
         <% end %>
 
         <%= if get_flash(@conn, :error) do %>
-        <div id="error-notification" class="notifier danger" role="alert">
+        <div id="error-notification" class="notifier danger notifier-container-sticky" role="alert">
           <h2 class="notifier-title"><%= get_flash(@conn, :error) %></h2>
         </div>
         <% end %>
       </div>
-    </div>
+    </section>
   </body>
 </html>

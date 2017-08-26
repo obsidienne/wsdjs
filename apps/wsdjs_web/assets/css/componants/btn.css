@@ -121,6 +121,9 @@ a.btn.disabled {
   color: #777777;
   text-decoration: none;
 }
+.btn-link.text-muted {
+  color: #777;
+}
 
 .btn-danger {
   color: #fff;

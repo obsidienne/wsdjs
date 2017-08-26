@@ -20,6 +20,7 @@ export default class View extends MainView {
 
   mount() {
     super.mount();
+    this._intlTopDate();
   }
 
   _sort_on_vote(e) {
@@ -37,6 +38,17 @@ export default class View extends MainView {
         parent.children[i].querySelector("select").value = '';
       }
       parent.children[i].querySelector("select").value = i + 1;
+    }
+  }
+
+  _intlTopDate() {
+    // intl date
+    var options = {year: "numeric", month: "long"};
+    var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
+    var elements = document.querySelectorAll("time");
+    for (let i = 0; i < elements.length; i++) {
+      let datetime = Date.parse(elements[i].getAttribute("datetime"))
+      elements[i].textContent = dateTimeFormat.format(datetime);
     }
   }
 

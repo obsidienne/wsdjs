@@ -7,6 +7,12 @@
   max-width: 414px;
 }
 
+
+.SessionNewView .container-form {
+  width: 100%;
+  max-width: 414px;
+}
+
 .song-edit,
 .song-new {
   display: flex;

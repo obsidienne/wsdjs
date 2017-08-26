@@ -99,11 +99,26 @@ label {
   border-radius: 50%;
 }
 
-.blur_track
-{
-  color: transparent;
-  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+.line-through {
+  overflow: hidden;
+  text-align: center;
+  width: 400px;
 }
-img.blur_track {
-  filter: blur(20px);
+.line-through:before,
+.line-through:after {
+  background-color: #777;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+.line-through:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+.line-through:after {
+  left: 0.5em;
+  margin-right: -50%;
 }

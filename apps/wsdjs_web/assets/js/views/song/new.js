@@ -10,7 +10,7 @@ export default class View extends MainView {
   }
 
   _cloudinary_uploader() {
-    var params = { upload_preset: "music_cover_staging",
+    var params = { upload_preset: "music_cover",
                    cloud_name: "don2kwaju",
                    cropping: "server",
                    cropping_aspect_ratio: 1,
