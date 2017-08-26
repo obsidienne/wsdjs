@@ -44,7 +44,7 @@ defmodule WsdjsWeb.Endpoint do
     key: "_wsdjs_web_key",
     signing_salt: "TqBKF7iB",
     encryption_salt: "fVT6E68C",
-    max_age: 2_592_000 # 60*60*24*30
+    max_age: 94_608_000  # 60*60*24*365*3 => 3 years
 
   plug WsdjsWeb.Router
 
