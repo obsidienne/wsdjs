@@ -119,7 +119,9 @@ export default class View extends MainView {
     var clientHeight = document.documentElement.clientHeight;
     var scrollPos = window.pageYOffset;
 
-    if (pageHeight - (scrollPos + clientHeight) < 50) {
+    var correctPage = document.querySelector(".SongIndexView");      
+
+    if (pageHeight - (scrollPos + clientHeight) < 50 && correctPage) {
       return true;
     }
     return false;
