@@ -48,5 +48,13 @@
         <% end %>
       </div>
     </section>
+
+    <%= if Mix.env != :prod do %>
+    <div class="plug-ribbon-wrapper right">
+      <div class="plug-ribbon">
+        <a href="/"><%= Mix.env |> Atom.to_string |> String.upcase %></a>
+      </div>
+    </div>
+    <% end %>
   </body>
 </html>
