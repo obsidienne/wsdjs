@@ -9,8 +9,6 @@
   </div>
 </header>
 
-<main role="main">
-  <ul id="song-list" class="container songs-container" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>">
-    <%= render_many @songs, WsdjsWeb.SharedView, "_hot_song.html", conn: @conn, as: :song, current_user: @current_user %>
-  </ul>
+<main id="song-list" data-next-month="<%= @next_month %>">
+  <%= render "index_hot_song.html", conn: @conn, current_user: @current_user, month: @month, songs: @songs %>
 </main>

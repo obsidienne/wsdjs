@@ -61,6 +61,22 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
+
+  @doc """
+  Returns the songs added the 24 last hours.
+  """
+  def list_songs(%User{} = user, :month, %Date{} = month) do
+    begin_period = Timex.to_datetime(Timex.beginning_of_month(month))
+    end_period = Timex.to_datetime(Timex.end_of_month(month))
+
+    user
+    |> Song.scoped()
+    |> where([s], s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period)
+    |> order_by([desc: :inserted_at])
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> Repo.all()
+  end
+
   @doc """
   Returns the songs added the 24 last hours.
   """

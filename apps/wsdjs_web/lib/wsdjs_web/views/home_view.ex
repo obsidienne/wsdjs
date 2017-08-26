@@ -11,8 +11,4 @@ defmodule WsdjsWeb.HomeView do
     {:ok, month} = Date.new(date.year, date.month, 1)
     month
   end
-
-  def sort_songs(songs) do
-    Enum.sort_by(songs, fn (dt) -> Date.to_erl(dt.inserted_at) end, &>=/2)
-  end
 end

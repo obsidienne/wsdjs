@@ -33,13 +33,24 @@ export default class View extends MainView {
 
     // tooltip
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
-
     new timeago().render(document.querySelectorAll("time.timeago"));
+    this._format_date();
   }
 
   unmount() {
     super.umount();
     this.tips.destroyAll();
+  }
+  
+  _format_date() {
+    // intl date
+    var options = {year: "numeric", month: "long"};
+    var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
+    var elements = document.querySelectorAll("time");
+    for (let i = 0; i < elements.length; i++) {
+      let datetime = Date.parse(elements[i].getAttribute("datetime"))
+      elements[i].textContent = dateTimeFormat.format(datetime);
+    }
   }
 
   _toggle_opinion(elem) {
@@ -110,36 +121,33 @@ export default class View extends MainView {
 
     if (pageHeight - (scrollPos + clientHeight) < 50) {
       var container = document.getElementById("song-list");
-      var page_number = parseInt(container.dataset.jsPageNumber);
-      var page_total = parseInt(container.dataset.jsTotalPages);
+      var next_month = container.dataset.nextMonth;
 
-      if (page_number < page_total) {
-        this._retrieve_songs(page_number + 1);
+      if (next_month != "") {
+        this._retrieve_songs(next_month);
         new timeago().render(document.querySelectorAll("time.timeago"));
       }
     }
   }
 
-  _retrieve_songs(page) {
+  _retrieve_songs(month) {
     var self = this;
     var request = new XMLHttpRequest();
-    request.open('GET', `/songs?page=${page}`, true);
+    request.open('GET', `/songs?month=${month}`, true);
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        var total_pages = request.getResponseHeader("total-pages");
-        var page_number = request.getResponseHeader("page-number");
-
+        var next_month = request.getResponseHeader("next-month");
         var container = document.getElementById("song-list");
 
-        container.dataset.jsPageNumber = page_number;
-        container.dataset.jsTotalPages = total_pages;
+        container.dataset.nextMonth = next_month;
 
         container.insertAdjacentHTML('beforeend', this.response);
 
         MyCloudinary.refresh();
         new timeago().render(document.querySelectorAll("time.timeago"));
         self.tips.destroyAll();
+        self._format_date();
         self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
       }
     };
