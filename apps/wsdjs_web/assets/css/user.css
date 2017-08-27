@@ -10,11 +10,9 @@
   padding-bottom: 0;
 }
 .user-page__avatar {
-  flex: 0 0 94px;
-  height: 94px;
-  min-height: 94px;
-  min-width: 94px;
-  width: 94px;
+  flex: 0 0 100px;
+  height: 100px;
+  width: 100px;
 }
 .user-page__profile__label {
     font-size: 11px;

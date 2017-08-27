@@ -11,7 +11,9 @@
   <div>
     <section class="user-page__profile__section">
       <header class="user-page__profile__header">
-        <img data-src="<%= avatar_url(@user.avatar) %>" class="user-page__avatar">
+        <div class="user-page__avatar">
+          <img data-src="<%= avatar_url(@user.avatar) %>">
+        </div>
         <div class="user-page__profile-details">
           <h4><%= @user.name %></h4>
           <%= if @user.djname do %>
