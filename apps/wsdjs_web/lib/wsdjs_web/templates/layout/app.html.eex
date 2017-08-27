@@ -52,7 +52,7 @@
       <% end %>
     </div>
 
-    <%= if Mix.env == :prod, do: render "_piwik.html" %>
+    <%= if Mix.env == :prod, do: render "_piwik.html", current_user: @current_user %>
     <%= if Mix.env != :prod do %>
     <div class="plug-ribbon-wrapper">
       <div class="plug-ribbon">
