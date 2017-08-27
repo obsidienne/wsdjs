@@ -1,8 +1,3 @@
-
-body.SessionNewView {
-  margin: 0;
-  padding: 0;
-}
 .SessionNewView .hero {
   padding: 0;
 }
@@ -15,10 +10,17 @@ body.SessionNewView main {
   height: calc(100vh - 53px);
 }
 
-.HomeUnauthenticatedView main {
+.HomeIndexView main {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 .home-page__top__song li {
   margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .HomeIndexView main {
+    flex-direction: row;
+  }
 }

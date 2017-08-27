@@ -4,7 +4,7 @@
   min-height: 75px;
   background: #EEE;
 
-  max-width: 768px;
+  max-width: 468px;
 
   position: fixed;
   bottom: 0;
@@ -116,11 +116,12 @@
 .player__toggle {
   display: flex;
   cursor: pointer;
+  align-items: center;
 }
 .player__toggle[hidden] {
   display: none;
 }
-.player__toggle h3 {
+.player__toggle h4 {
   margin-left: 15px;
 }
 

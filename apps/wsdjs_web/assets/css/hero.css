@@ -17,7 +17,6 @@
 .SongIndexView .hero, .TopIndexView .hero {
   padding-bottom: calc(10vh + 15px);
 }
-
-.SongIndexView main, .TopIndexView main {
+.TopIndexView main {
   margin-top: -10vh;
 }

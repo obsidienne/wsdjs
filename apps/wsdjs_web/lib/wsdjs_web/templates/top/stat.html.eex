@@ -1,0 +1,45 @@
+<header class="hero">
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+
+  <div class="container">
+    <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small> Statistics</small>
+      <%= link "go back to top", to: top_path(@conn, :show, @top.id), class: "btn btn-link push-right" %>
+    </h3>
+  </div>
+</header>
+
+<main class="container top-stat">
+  <table class="table">
+    <tbody>
+      <tr><th>Top status</th><td><%= @top.status %></td></tr>
+      <tr><th>Songs suggested</th><td><%= Enum.count(@top.ranks) %></td></tr>
+      <tr><th>DJs</th><td><%= count_dj(@top.songs) %></td></tr>
+      <tr><th>Genres</th><td><%= all_genre(@top.songs) %></td></tr>
+ 
+    </tbody>
+  </table>
+
+  <h2 class="page-header">Votes</h2>
+
+  <ul class="top-stat__votes">
+    <%= for user <- Wsdjs.Accounts.list_users() do %>
+      <%= if Enum.member?(user.profils, "DJ_VIP") do %>
+        <li class="song-card card" >
+          <article>
+          <h4><%= user.name %></h4>
+          <div class="text-overflow"><%= get_song_by(@top, user, 1) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 2) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 3) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 4) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 5) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 6) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 7) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 8) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 9) %></div>
+          <div class="text-overflow"><%= get_song_by(@top, user, 10) %></div>
+          </article>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</main>

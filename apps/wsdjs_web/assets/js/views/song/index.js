@@ -10,12 +10,14 @@ export default class View extends MainView {
 
     var timeout;
     window.addEventListener("scroll", function(e) {
-      if (document.querySelector("#song-list")) {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-          self._refresh();
-        }, 100);
-      }      
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        if (self._needToFetchSongs()) {
+          var sentinel = document.querySelector("#song-list section:last-child .sentinel");
+          sentinel.parentNode.removeChild(sentinel);    
+          self._fetchSongs();
+        }
+      }, 100);
     })
 
     document.addEventListener("click", function(e) {
@@ -31,15 +33,32 @@ export default class View extends MainView {
   mount() {
     super.mount();
 
+    if(this._needToFetchSongs()) {
+      var sentinel = document.querySelector("#song-list section:last-child .sentinel");
+      sentinel.parentNode.removeChild(sentinel);    
+      this._fetchSongs();
+    }
+
     // tooltip
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
-
     new timeago().render(document.querySelectorAll("time.timeago"));
+    this._format_date();
   }
 
   unmount() {
     super.umount();
     this.tips.destroyAll();
+  }
+  
+  _format_date() {
+    // intl date
+    var options = {year: "numeric", month: "long"};
+    var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
+    var elements = document.querySelectorAll("time");
+    for (let i = 0; i < elements.length; i++) {
+      let datetime = Date.parse(elements[i].getAttribute("datetime"))
+      elements[i].textContent = dateTimeFormat.format(datetime);
+    }
   }
 
   _toggle_opinion(elem) {
@@ -103,45 +122,50 @@ export default class View extends MainView {
     }
   }
 
-  _refresh() {
-    var pageHeight = document.documentElement.scrollHeight;
-    var clientHeight = document.documentElement.clientHeight;
-    var scrollPos = window.pageYOffset;
+  _needToFetchSongs() {
+    var correctPage = document.querySelector(".SongIndexView");          
+    var sentinel = document.querySelector("#song-list section:last-child .sentinel");
 
-    if (pageHeight - (scrollPos + clientHeight) < 50) {
-      var container = document.getElementById("song-list");
-      var page_number = parseInt(container.dataset.jsPageNumber);
-      var page_total = parseInt(container.dataset.jsTotalPages);
+    if (!sentinel) return false;
 
-      if (page_number < page_total) {
-        this._retrieve_songs(page_number + 1);
-        new timeago().render(document.querySelectorAll("time.timeago"));
-      }
-    }
+    var rect = sentinel.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document. documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document. documentElement.clientWidth) &&
+      correctPage
+    );
   }
 
-  _retrieve_songs(page) {
+  _fetchSongs() {
+    var lastSongContainer = document.querySelector("#song-list section:last-child");
+    var month = new Date(lastSongContainer.dataset.month);
+    month.setMonth(month.getMonth(), -1);
+
+    var previousMonth = month.toISOString().split('T')[0];
     var self = this;
     var request = new XMLHttpRequest();
-    request.open('GET', `/songs?page=${page}`, true);
+    request.open('GET', `/songs?month=${previousMonth}`, true);
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        var total_pages = request.getResponseHeader("total-pages");
-        var page_number = request.getResponseHeader("page-number");
-
         var container = document.getElementById("song-list");
 
-        container.dataset.jsPageNumber = page_number;
-        container.dataset.jsTotalPages = total_pages;
-
         container.insertAdjacentHTML('beforeend', this.response);
+
+        if (self._needToFetchSongs()) {
+          var sentinel = document.querySelector("#song-list section:last-child .sentinel");
+          sentinel.parentNode.removeChild(sentinel);    
+          self._fetchSongs();
+        }
 
         MyCloudinary.refresh();
         new timeago().render(document.querySelectorAll("time.timeago"));
         self.tips.destroyAll();
-        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
-      }
+        self._format_date();
+        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});      
+       }
     };
 
     request.onerror = function() { console.log("Error search"); };

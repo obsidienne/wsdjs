@@ -45,17 +45,9 @@ defmodule Wsdjs.Musics do
     |> Repo.one
   end
 
-  @doc """
-  Returns the list of songs for the current and the previous month.
-  This function is scoped by the current user.
-  """
-  def hot_songs(current_user) do
-    dt = DateTime.to_date(DateTime.utc_now)
-    {:ok, naive_dtime} = NaiveDateTime.new(dt.year, dt.month, 1, 0, 0, 0)
-
-    current_user
-    |> Song.scoped()
-    |> where([s], s.inserted_at > date_add(^naive_dtime, -1, "month"))
+  def instant_hits() do
+    Song
+    |> where(instant_hit: true)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by([desc: :inserted_at])
     |> Repo.all()
@@ -66,6 +58,33 @@ defmodule Wsdjs.Musics do
     |> where(instant_hit: true)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by([desc: :inserted_at])
+    |> Repo.all()
+  end
+
+  def songs_interval(%User{} = user) do
+    songs = user
+    |> Song.scoped()
+    |> select([s], %{max: max(s.inserted_at), min: min(s.inserted_at)})
+    |> Repo.one()
+
+    %{
+      min: Timex.to_date(Timex.beginning_of_month(songs[:min])),
+      max: Timex.to_date(Timex.beginning_of_month(songs[:max]))
+    }
+  end
+
+  @doc """
+  Returns the songs added the 24 last hours.
+  """
+  def list_songs(%User{} = user, :month, %Date{} = month) do
+    begin_period = Timex.to_datetime(Timex.beginning_of_month(month))
+    end_period = Timex.to_datetime(Timex.end_of_month(month))
+
+    user
+    |> Song.scoped()
+    |> where([s], s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period)
+    |> order_by([desc: :inserted_at])
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
   end
 

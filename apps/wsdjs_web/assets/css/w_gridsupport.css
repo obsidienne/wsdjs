@@ -15,7 +15,7 @@
   }
   
 
-  .songs-container, .hot-songs, .song-top__container,.user-page__songs,.top-songs-container {
+  .songs-container, .hot-songs, .song-top__container,.user-page__songs,.top-songs-container, .top-stat__votes {
     display: grid;
     grid-gap: 5px;
     grid-template-columns: repeat(1, 1fr);
@@ -33,7 +33,11 @@
       grid-gap: 5px;
       grid-template-columns: 300px 1fr;
     }
-      
+    
+    .top-stat__votes {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     .songs-container, .hot-songs, . { 
       grid-template-columns: repeat(3, 1fr);
     }

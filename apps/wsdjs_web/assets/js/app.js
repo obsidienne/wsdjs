@@ -46,7 +46,7 @@ function handleDOMContentLoaded() {
   /* set the current volume radio */
   var volumeElement = document.getElementById("player__volume");
   if (volumeElement.getAttribute("value") == null) {
-    volumeElement.setAttribute("value", 0.5);    
+    volumeElement.setAttribute("value", 50);    
     radio.setVolume(0.5);
   }
 

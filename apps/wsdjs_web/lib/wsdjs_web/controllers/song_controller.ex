@@ -31,23 +31,22 @@ defmodule WsdjsWeb.SongController do
     |> render("index_user_song.html", songs: page.entries)
   end
 
-  def index(conn, %{"page" => page}, current_user) do
-    page = Musics.paginate_songs(current_user, %{"page" => page})
+  def index(conn, %{"month" => month}, current_user) do
+    month = Timex.beginning_of_month(Timex.to_date(Timex.parse!(month, "%Y-%m-%d", :strftime)))
+    songs = Musics.list_songs(current_user, :month, month)
+    interval = Musics.songs_interval(current_user)
 
     conn
-    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
-    |> put_resp_header("page-number", Integer.to_string(page.page_number))
     |> put_layout(false)
-    |> render("index_hot_song.html", songs: page.entries)
+    |> render("index_hot_song.html", songs: songs, month: month, last: Timex.before?(month, interval[:min]))
   end
 
   def index(conn, _params, current_user) do
-    page = Musics.paginate_songs(current_user)
-
-    conn
-    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
-    |> put_resp_header("page-number", Integer.to_string(page.page_number))
-    |> render("index.html", songs: page.entries, page_number: page.page_number, total_pages: page.total_pages)
+    month_interval = Musics.songs_interval(current_user)
+    songs = Musics.list_songs(current_user, :month, month_interval[:max])
+    interval = Musics.songs_interval(current_user)
+    
+    render(conn, "index.html", songs: songs, month: month_interval[:max], last: Timex.before?(month_interval[:max], interval[:min]))
   end
 
   def new(conn, _params, _current_user) do

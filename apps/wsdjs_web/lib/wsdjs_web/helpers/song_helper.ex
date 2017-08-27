@@ -31,4 +31,8 @@ defmodule WsdjsWeb.SongHelper do
       true -> true
     end
   end
+
+  def sort_songs(songs) do
+    Enum.sort_by(songs, fn (dt) -> Date.to_erl(dt.inserted_at) end, &>=/2)
+  end
 end

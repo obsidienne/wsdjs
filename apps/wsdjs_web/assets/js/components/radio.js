@@ -19,7 +19,9 @@ export default class Radio {
       this.refresh_radio(payload)
     });
     document.addEventListener("click", function(e) {
-      if (e.target && e.target.matches(".player__play__vinyl")) {
+      if (!e.target) return;
+
+      if (e.target.matches(".player__play__vinyl")) {
         if (self.radio.paused) {
           self.play_radio(e.target)
         } else {
@@ -27,20 +29,27 @@ export default class Radio {
         }
       }
 
-      if (e.target && e.target.matches("[data-video-id]")) {
+      if (e.target.matches("[data-video-id]")) {
         e.preventDefault();
         e.stopPropagation();
         self.play_youtube(e.target.dataset.videoId);
       }
 
-      if (e.target && (e.target.matches(".player__toggle") || e.target.closest(".player__toggle"))) {
+      if (e.target.closest("a")) {
+        if (e.target.closest("a").matches("[data-video-id]")) {
+          e.preventDefault();
+          e.stopPropagation();
+          self.play_youtube(e.target.closest("a").dataset.videoId);
+        }
+      }
+
+      if (e.target.matches(".player__toggle") || e.target.closest(".player__toggle")) {
         self.pause_youtube();
       }
 
-      if (e.target && e.target.matches(".player__expand")) {
+      if (e.target.matches(".player__expand")) {
         document.querySelector(".player__expand").classList.toggle("player__expand--open");
         document.querySelector(".already-played").classList.toggle("already-played--open");
-
       }
     });
     document.addEventListener("change", function(e) {
@@ -57,12 +66,15 @@ export default class Radio {
   }
 
   play_youtube(video_id) {
-    this.pause_radio()
+    document.querySelector(".player__expand").classList.remove("player__expand--open");
+    document.querySelector(".already-played").classList.remove("already-played--open");
+
+    this.pause_radio();
     document.querySelector(".current-played").setAttribute("hidden", "hidden");
     
     document.querySelector(".player__toggle").removeAttribute("hidden", "hidden");    
     var container = document.querySelector("#player__youtube");
-    container.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}?autoplay=1" frameborder="0" allowfullscreen="1"></iframe>`;
+    container.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}" frameborder="0" allowfullscreen="1"></iframe>`;
     container.removeAttribute("hidden");
   }
 

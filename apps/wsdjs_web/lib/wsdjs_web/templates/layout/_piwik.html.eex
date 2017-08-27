@@ -1,11 +1,10 @@
-<!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
 
   _paq.push(['setCustomUrl', document.location]);
   _paq.push(['setDocumentTitle', document.title]);
+  <%= if not is_nil(@current_user) do %>_paq.push(['setUserId', '<%= @current_user.email %>']);<% end %>
 
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
@@ -16,4 +15,3 @@
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<!-- End Piwik Code -->
