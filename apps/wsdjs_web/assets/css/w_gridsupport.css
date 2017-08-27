@@ -1,6 +1,12 @@
 
 @supports(grid-gap: 0) {
 
+  .user-page__songs li {
+    margin-bottom: 0;
+  }
+  .song-card {
+    margin-bottom: 0;
+  }
 
   @media (min-width: 768px) {
     .songs-container, .container { max-width: 720px; }
