@@ -23,6 +23,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     ```
 
 
+To restore a database from a clever app dump: pg_restore -h localhost -p 5432 -U claudio -d wsdjs_dev --format=c -c {YOUR_BACKUP_FILE}
 
 
 ## Définitions
