@@ -18,6 +18,11 @@
   width: 100%;
 }
 
+.glnav__user {
+  width: 40px;
+  height: 40px;
+}
+
 .glnav__user__avatar {
   position: relative;
   width: 40px;
