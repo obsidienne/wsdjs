@@ -19,9 +19,12 @@
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
-    <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
+    <title>WSDJs sign in - sign up</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/v1503520190/wsdjs/worldswingdjs_single_flat.png">
 
-    <%= if Mix.env == :prod, do: render "_piwik.html" %>
+    <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
   </head>
 
   <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
