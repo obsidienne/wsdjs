@@ -34,8 +34,8 @@
         <img data-src="<%= art_url(@song.art) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
-        <h5 class="text-muted"><%= @song.title %></h5>
-        <h6 class="text-muted"><%= @song.artist %></h6>
+        <span class="text-muted h6"><%= @song.title %></span>
+        <span class="text-muted h6 small"><%= @song.artist %></span>
 
         <footer class="song-minicard__footer small">
           <span class="label label-default"><%= @song.genre %></span>
