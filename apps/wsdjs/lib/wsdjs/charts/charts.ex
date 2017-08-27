@@ -49,6 +49,17 @@ defmodule Wsdjs.Charts do
     }
   end
 
+  def stat_top!(current_user, top_id) do
+    current_user
+    |> Top.scoped()
+    |> Repo.get(top_id)
+    |> Repo.preload([:songs, :votes])
+    |> Repo.preload(ranks: list_rank())
+    |> Repo.preload(ranks: :song)
+    |> Repo.preload(ranks: [song: :art])
+    |> Repo.preload(ranks: [song: [user: :avatar]])
+  end
+
   def get_top!(current_user, top_id) do
     current_user
     |> Top.scoped()

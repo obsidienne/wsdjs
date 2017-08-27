@@ -8,6 +8,7 @@ import TopCheckingView from './top/checking';
 import TopCountingView from './top/counting';
 import TopVotingView from './top/voting';
 import TopPublishedView from './top/published';
+import TopStatView from './top/stat';
 import UserEditView from './user/edit';
 import UserShowView from './user/show';
 import UserIndexView from './user/index';
@@ -22,6 +23,7 @@ const views = {
   TopIndexView,
   TopCheckingView,
   TopCountingView,
+  TopStatView,
   TopVotingView,
   TopPublishedView,
   UserEditView,

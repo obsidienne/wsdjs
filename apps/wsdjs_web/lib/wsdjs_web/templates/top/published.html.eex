@@ -5,6 +5,7 @@
     <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small>
     <%= if @current_user && @current_user.admin do %>
       <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link push-right", target: "_blank" %>
+      <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link push-right" %>
     <% end %>
     </h3>
 

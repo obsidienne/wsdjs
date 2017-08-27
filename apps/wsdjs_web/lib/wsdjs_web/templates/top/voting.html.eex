@@ -6,6 +6,9 @@
     <%= if Wsdjs.Charts.Policy.can?(:delete_top, @current_user) == :ok do %>
     <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
     <% end %>
+    <%= if @current_user && @current_user.admin do %>
+      <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link push-right" %>
+    <% end %>
   </div>
 
   <%= if @current_user && @current_user.id == @top.user_id do %>

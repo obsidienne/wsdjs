@@ -6,7 +6,7 @@ defmodule WsdjsWeb.TopController do
   alias Wsdjs.Charts.Top
 
   action_fallback WsdjsWeb.FallbackController
-  
+
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns[:current_user]]
     apply(__MODULE__, action_name(conn), args)
@@ -14,7 +14,7 @@ defmodule WsdjsWeb.TopController do
 
   def index(conn, %{"page" => page}, current_user) do
     page = Charts.paginate_tops(current_user, %{"page" => page, "page_size" => 3})
-    
+
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
     |> put_resp_header("page-number", Integer.to_string(page.page_number))
@@ -24,11 +24,19 @@ defmodule WsdjsWeb.TopController do
 
   def index(conn, _params, current_user) do
     page = Charts.paginate_tops(current_user, %{"page_size" => 3})
-    
+
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
     |> put_resp_header("page-number", Integer.to_string(page.page_number))
     |> render("index.html", tops: page.entries, page_number: page.page_number, total_pages: page.total_pages)
+  end
+
+  def stat(conn, %{"id" => id}, current_user) do
+    with :ok <- Charts.Policy.can?(:stats_top, current_user) do
+      top = Charts.stat_top!(current_user, id)
+
+      render conn, :stat, top: top
+    end
   end
 
   def show(conn, %{"id" => id}, current_user) do

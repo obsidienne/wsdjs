@@ -15,6 +15,12 @@ defmodule Wsdjs.Charts.Policy do
   def can?(:delete_top, %User{admin: :true}), do: :ok
 
   @doc """
+  Admin can delete a top
+  """
+  def can?(:stats_top, %User{admin: :true}), do: :ok
+  
+
+  @doc """
   By default everything is denied
   """
   def can?(_, _), do: {:error, :unauthorized}
