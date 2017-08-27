@@ -64,10 +64,9 @@
   height: 40px;
   border-radius: 50%;
 }
-.tops__top__anchor img {
+.tops__top__anchor__img {
   width: 100%;
   height: auto;
-  border-radius: 50%;
 }
 .tops__top__content {
   position: relative;
