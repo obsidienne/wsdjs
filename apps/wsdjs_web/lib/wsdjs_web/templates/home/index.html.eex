@@ -5,6 +5,12 @@
     <h4>World Swing DeeJays</h4>
     <h5>The best West Coast Swing music from all around the world !</h5>
   </div>
+
+  <div class="container">
+    <%= if Wsdjs.Musics.Policy.can?(:create_song, @conn.assigns.current_user) == :ok do %>
+      <a class="btn btn-primary" title="Suggest a song" href="<%= song_path(@conn, :new) %>">Suggest a song</a>
+    <% end %>
+  </div>
 </header>
 
 <main class="container">
