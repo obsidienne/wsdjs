@@ -26,7 +26,7 @@
       <%= text_input f, :name, placeholder: "name", class: "form-control", required: true %>
     </div>
     <div class="form-group">
-      <%= submit "Request an invitation", class: "btn btn-default" %>
+      <%= submit "Request an invitation", class: "btn btn-primary" %>
     </div>
   <% end %>
 </main>
