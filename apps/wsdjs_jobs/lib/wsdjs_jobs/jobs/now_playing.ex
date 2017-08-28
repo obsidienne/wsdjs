@@ -17,7 +17,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   )
 
   def start_link(name \\ nil) do
-    queue = list_broadcasted(:queue.new())
+    queue = :queue.new()
     GenServer.start_link(__MODULE__, queue, [name: name])
   end
 
@@ -37,6 +37,12 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   @radioking_api_uri 'https://www.radioking.com/widgets/currenttrack.php?radio=84322&format=json'
   def handle_info(:work, queue) do
+    queue = if :queue.len(queue) < 9 do
+      list_broadcasted(queue)
+    else
+      queue
+    end
+
     case HTTPoison.get(@radioking_api_uri) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {queue, interval} = parse_streamed_song(body, queue)
