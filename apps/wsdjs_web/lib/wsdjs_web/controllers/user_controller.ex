@@ -7,19 +7,6 @@ defmodule WsdjsWeb.UserController do
 
   action_fallback WsdjsWeb.FallbackController
 
-  def index(conn, _params) do
-    current_user = conn.assigns[:current_user]
-
-    if current_user && current_user.admin do
-      users = Accounts.list_users()
-      render conn, "index.html", users: users
-    else
-      conn
-      |> put_flash(:error, "Unauthorized.")
-      |> redirect(to: home_path(conn, :index))
-    end
-  end
-
   def show(conn, %{"id" => user_id}) do
     current_user = conn.assigns[:current_user]
     user = Accounts.get_user(user_id)
