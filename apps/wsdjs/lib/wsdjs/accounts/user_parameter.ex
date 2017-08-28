@@ -2,7 +2,6 @@ defmodule Wsdjs.Accounts.UserParameter do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
 
   @foreign_key_type :binary_id
   schema "user_parameters" do

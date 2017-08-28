@@ -7,9 +7,7 @@ defmodule Wsdjs.Charts do
   alias Wsdjs.Repo
   alias Ecto.Changeset
 
-  alias Wsdjs.Charts
-  alias Wsdjs.Charts.{Top, Rank, Vote, Policy}
-  alias Wsdjs.Musics
+  alias Wsdjs.Charts.{Top, Rank, Vote}
   alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
 
@@ -115,7 +113,7 @@ defmodule Wsdjs.Charts do
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def previous_step(%User{} = user, top) do
+  def previous_step(%User{}, top) do
     %{published: "counting",
       counting: "voting"}
     |> Map.fetch!(String.to_atom(top.status))

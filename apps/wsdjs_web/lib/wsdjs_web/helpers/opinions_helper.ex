@@ -55,7 +55,7 @@
     content_tag :button, qty, default_options ++ tooltip_options(kind, opinions, qty)
   end
 
-  def opinion_owners_link(kind, conn, song, opinions) do
+  def opinion_owners_link(kind, conn, _song, opinions) do
     kind_opinions =
       opinions
       |> Enum.filter(fn(x) -> x.kind == kind end)

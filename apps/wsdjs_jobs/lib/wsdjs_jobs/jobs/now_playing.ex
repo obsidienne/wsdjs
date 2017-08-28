@@ -116,7 +116,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
     {queue, interval * 1000}
   end
 
-  defp same_song?(a, :empty), do: false
+  defp same_song?(_, :empty), do: false
   defp same_song?(a, {:value, b}) do
     if a["title"] == b["title"] && a["artist"] == b["artist"] do
       true

@@ -29,7 +29,7 @@ defmodule WsdjsWeb.InvitationController do
         conn
         |> put_flash(:info, "Invitation requested.")
         |> redirect(to: home_path(conn, :index))
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, %Ecto.Changeset{} = _changeset} ->
         conn
         |> put_flash(:error, "Invitation already requested.")
         |> redirect(to: session_path(conn, :new))

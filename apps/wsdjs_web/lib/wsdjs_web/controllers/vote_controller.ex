@@ -2,7 +2,7 @@ defmodule WsdjsWeb.VoteController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  def create(conn, %{"votes" => votes_params, "top_id" => top_id} = params) do
+  def create(conn, %{"votes" => _votes_params, "top_id" => top_id} = params) do
     current_user = conn.assigns[:current_user]
 
     case Wsdjs.Charts.vote(current_user, params) do
