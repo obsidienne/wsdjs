@@ -61,6 +61,7 @@
     <nav>
       <ul class="tabs-navigation__items">
         <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#suggestions-section">suggestions</a></li>
+        <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#parameters-section">parameters</a></li>
       </ul>
     </nav>
     <% end %>
@@ -70,6 +71,10 @@
       <ul id="user-page__song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
         <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song, current_user: @current_user %>
       </ul>
+    </section>
+
+    <section id="parameters-section" class="tabs-pane">
+      <%= render "_user_parameters.html", user: @user %>
     </section>
     <% end %>
   </section>

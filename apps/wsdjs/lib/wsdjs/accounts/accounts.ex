@@ -18,9 +18,10 @@ defmodule Wsdjs.Accounts do
       [%Accounts.User{}, ...]
 
   """
-  def list_users_by(param) do
+  def list_users_to_notify do
     User
-    |> where(^param)
+    |> join(:left, [u], p in assoc(u, :user_parameters))
+    |> where([u], u.new_song_notification == true)
     |> Repo.all()
     |> Repo.preload(:avatar)
   end
@@ -58,7 +59,7 @@ defmodule Wsdjs.Accounts do
   def get_user(id) do
     User
     |> Repo.get(id)
-    |> Repo.preload([:avatar, :detail])
+    |> Repo.preload([:avatar, :detail, :parameter])
   end
 
   def get_user_by_email(email) do

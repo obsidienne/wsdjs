@@ -5,7 +5,7 @@ defmodule Wsdjs.Jobs.NewSongNotification do
   @text_mail_template Path.expand("./lib/wsdjs_jobs/priv/static/email/new_song_notification.text.eex")
   
   def call(_args \\ []) do
-    users = Wsdjs.Accounts.list_users_by(new_song_notification: true)
+    users = Wsdjs.Accounts.list_users_to_notify()
     songs = Wsdjs.Musics.list_songs()
 
     if Enum.count(users) > 0 do
