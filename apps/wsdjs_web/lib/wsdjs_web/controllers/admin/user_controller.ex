@@ -8,6 +8,7 @@ defmodule WsdjsWeb.Admin.UserController do
     current_user = conn.assigns[:current_user]
 
     users = Accounts.list_users()
-    render conn, "index.html", users: users
+    invitations = Accounts.list_invitations(current_user)
+    render conn, "index.html", users: users, invitations: invitations
   end
 end

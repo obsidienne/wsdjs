@@ -38,7 +38,6 @@
         <% end %>
         <%= if @user.admin == true do %>
           <%= link "Administration", to: admin_user_path(@conn, :index), class: "btn btn-link text-muted user-page__logout",  data: [turbolinks: "false"] %>
-          <%= link "Invitations", to: invitation_path(@conn, :index), class: "btn btn-link text-muted user-page__logout",  data: [turbolinks: "false"] %>          
         <% end %>
       </footer>
     </section>
