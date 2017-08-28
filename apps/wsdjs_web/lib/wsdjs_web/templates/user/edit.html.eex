@@ -46,24 +46,6 @@
       </div>
     </div>
 
-    <%= inputs_for f, :parameter, fn fp -> %>
-
-    <div class="checkbox">
-      <%= label fp,:new_song_notification do %>
-        <%= checkbox fp, :new_song_notification %> New song notification
-      <% end %>
-      <%= error_tag fp, :new_song_notification %>
-    </div>
-
-    <div class="checkbox">
-      <%= label fp,:userback do %>
-        <%= checkbox fp, :userback %> Userback
-      <% end %>
-      <%= error_tag fp, :userback %>
-    </div>
-
-    <% end %>
-
     <%= inputs_for f, :detail, fn fd -> %>
     <div class="form-group">
       <label class="small text-muted">Description</label>
@@ -105,6 +87,24 @@
     <% end %>
 
 
+    <%= inputs_for f, :parameter, fn fp -> %>
+      <div class="checkbox">
+        <%= label fp,:new_song_notification do %>
+          <%= checkbox fp, :new_song_notification %> New song notification
+        <% end %>
+        <%= error_tag fp, :new_song_notification %>
+      </div>
+
+      <%= if @current_user.admin do %>
+        <div class="checkbox">
+          <%= label fp,:userback do %>
+            <%= checkbox fp, :userback %> Userback
+          <% end %>
+          <%= error_tag fp, :userback %>
+        </div>
+      <% end %>
+    <% end %>
+  
     <%= submit "Update", class: "btn btn-primary" %>
   <% end %>
  </main>
