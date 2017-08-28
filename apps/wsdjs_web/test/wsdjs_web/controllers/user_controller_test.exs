@@ -4,7 +4,6 @@ defmodule WsdjsWeb.UserControllerTest do
 
   test "requires user authentication on actions", %{conn: conn} do
     Enum.each([
-      get(conn, user_path(conn, :index)),
       get(conn, user_path(conn, :edit, Ecto.UUID.generate())),
       put(conn, user_path(conn, :update, Ecto.UUID.generate(), %{}))
     ], fn conn ->
@@ -21,7 +20,7 @@ defmodule WsdjsWeb.UserControllerTest do
       Enum.each([
         assign(conn, :current_user, users[:admin])
       ], fn conn ->
-        conn = get conn, user_path(conn, :index)
+        conn = get conn, admin_user_path(conn, :index)
         assert html_response(conn, 200) =~ "Users - WSDJs"
         assert String.contains?(conn.resp_body, users[:user].email)
       end)
@@ -32,7 +31,7 @@ defmodule WsdjsWeb.UserControllerTest do
         assign(conn, :current_user, users[:dj]),
         assign(conn, :current_user, users[:dj_vip])
       ], fn conn ->
-        conn = get conn, user_path(conn, :index)
+        conn = get conn, admin_user_path(conn, :index)
         assert html_response(conn, 302)
       end)
     end
