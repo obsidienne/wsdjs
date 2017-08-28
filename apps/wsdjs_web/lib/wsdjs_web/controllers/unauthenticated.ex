@@ -15,4 +15,11 @@ defmodule WsdjsWeb.Unauthenticated do
     |> redirect(to: session_path(conn, :new))
     |> halt()
   end
+
+  def admin_call(conn, _params) do
+    conn
+    |> put_flash(:error, "You must be an admin to access that page")
+    |> redirect(to: home_path(conn, :index))
+    |> halt()
+  end
 end

@@ -14,6 +14,10 @@ defmodule WsdjsWeb.Router do
     plug WsdjsWeb.EnsureAuthenticated, handler_fn: :session_call
   end
 
+  pipeline :ensure_admin do
+    plug WsdjsWeb.EnsureAdmin, handler_fn: :admin_call
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
     plug WsdjsWeb.VerifyHeader
@@ -56,6 +60,12 @@ defmodule WsdjsWeb.Router do
     resources "/sessions", SessionController, only: [:new, :create]
     get "/signin/:token", SessionController, :show, as: :signin
     resources "/invitations", InvitationController, only: [:new, :create]
+  end
+
+  scope "/admin", as: :admin, alias: :'WsdjsWeb' do
+    pipe_through [:browser, :browser_auth, :ensure_admin]
+
+    resources "/users", UserController
   end
 
   scope "/api", as: :api, alias: :'WsdjsWeb' do
