@@ -16,6 +16,7 @@ defmodule WsdjsWeb.Router do
 
   pipeline :ensure_admin do
     plug WsdjsWeb.EnsureAdmin, handler_fn: :admin_call
+    plug :put_layout, {WsdjsWeb.LayoutView, :admin}
   end
 
   pipeline :api do
@@ -62,7 +63,7 @@ defmodule WsdjsWeb.Router do
     resources "/invitations", InvitationController, only: [:new, :create]
   end
 
-  scope "/admin", as: :admin, alias: :'WsdjsWeb' do
+  scope "/admin", as: :admin, alias: :'WsdjsWeb.Admin' do
     pipe_through [:browser, :browser_auth, :ensure_admin]
 
     resources "/users", UserController

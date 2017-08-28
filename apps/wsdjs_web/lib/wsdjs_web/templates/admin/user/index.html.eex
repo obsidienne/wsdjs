@@ -1,0 +1,3 @@
+<header class="hero admin">
+  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+</header>
