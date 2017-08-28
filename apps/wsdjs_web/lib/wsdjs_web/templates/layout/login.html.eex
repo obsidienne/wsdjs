@@ -20,9 +20,9 @@
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
     <title>WSDJs sign in - sign up</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/v1503520190/wsdjs/worldswingdjs_single_flat.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/v1503520190/wsdjs/worldswingdjs_single_flat.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
 
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
   </head>
@@ -53,6 +53,9 @@
     </section>
 
     <%= if Mix.env == :prod, do: render "_piwik.html", current_user: @current_user %>
+    <%= if @current_user 
+           && @current_user.parameter 
+           && @current_user.parameter.userback, do: render "_userback.html" %>
     <%= if Mix.env != :prod do %>
     <div class="plug-ribbon-wrapper right">
       <div class="plug-ribbon">

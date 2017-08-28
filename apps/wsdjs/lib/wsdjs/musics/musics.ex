@@ -45,7 +45,7 @@ defmodule Wsdjs.Musics do
     |> Repo.one
   end
 
-  def instant_hits() do
+  def instant_hits do
     Song
     |> where(instant_hit: true)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
@@ -53,7 +53,7 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
-  def last_songs(current_user) do
+  def last_songs do
     Song
     |> where(instant_hit: true)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])

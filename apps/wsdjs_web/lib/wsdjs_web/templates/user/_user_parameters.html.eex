@@ -1,0 +1,6 @@
+<%= if @user.parameter do %>
+<%= @user.parameter.userback %>
+<%= @user.parameter.new_song_notification %>
+
+<% end %>
+  

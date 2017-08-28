@@ -1,10 +1,10 @@
  <article class="tops__top">
-      <a href="<%= top_path(@conn, :show, @top.id) %>">
+      <a href="<%= top_path(@conn, :show, @top.id) %>" class="tops__top__anchor">
         <%= if Enum.count(@top.ranks) > 0 do %>
           <%= if blur_track(Enum.at(@top.ranks, 0).song, @current_user) == true do %>
-            <img data-src="<%= art_url() %>" class="tops__top__anchor card" >
+            <img data-src="<%= art_url() %>" class="tops__top__anchor__img card" >
           <% else %>
-            <img data-src="<%= art_url(Enum.at(@top.ranks, 0).song.art) %>" class="tops__top__anchor card" >
+            <img data-src="<%= art_url(Enum.at(@top.ranks, 0).song.art) %>" class="tops__top__anchor__img card" >
           <% end %>
         <% end %>
       </a>

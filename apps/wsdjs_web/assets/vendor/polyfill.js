@@ -28,19 +28,3 @@ if (window.Element && !Element.prototype.closest) {
         return el;
     };
 }
-
-if ('IntersectionObserver' in window &&
-    'IntersectionObserverEntry' in window &&
-    'intersectionRatio' in IntersectionObserverEntry.prototype) {
-
-    // Minimal polyfill for Edge 15's lack of `isIntersecting`
-    // See: https://github.com/WICG/IntersectionObserver/issues/211
-    if (!('isIntersecting' in IntersectionObserverEntry.prototype)) {
-        Object.defineProperty(IntersectionObserverEntry.prototype,
-            'isIntersecting', {
-                get: function () {
-                    return this.intersectionRatio > 0;
-                }
-            });
-    }
-}

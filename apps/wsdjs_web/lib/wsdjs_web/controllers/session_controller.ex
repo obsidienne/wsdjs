@@ -14,7 +14,7 @@ defmodule WsdjsWeb.SessionController do
 
   def create(conn, %{"session" => %{"email" => email}}) do
     case WsdjsWeb.MagicLink.provide_token(email) do
-      {:ok, user} ->
+      {:ok, _user} ->
         conn
         |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")
         |> redirect(to: home_path(conn, :index))

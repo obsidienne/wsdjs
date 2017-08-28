@@ -15,6 +15,7 @@ defmodule WsdjsWeb.Api.MobileConfigController do
         facebook_uri: "https://www.facebook.com/pages/Radio-West-Coast-Swing/244532062269363",
         website_uri: "http://www.radiowcs.com/",
         stream_uri: "http://www.radioking.com/play/radio-wcs/122560",
+        stream_uri_hd: "http://www.radioking.com/play/radio-wcs/122563"
     }
 
     conn

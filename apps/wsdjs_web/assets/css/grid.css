@@ -6,7 +6,17 @@
   width: 100%;
   max-width: 720px;
 }
-
+@media (min-width: 768px) {
+  .songs-container, .container { max-width: 720px; }
+}
+@media (min-width: 992px) {
+  .songs-container, .container { max-width: 960px; }
+}
+@media (min-width: 1200px) {
+  .songs-container, .container {
+    max-width: 1140px;
+  }
+}
 .SessionNewView .container-form {
   width: 100%;
   max-width: 414px;
@@ -46,5 +56,41 @@
   #art_div {
     margin-bottom: 0;
     margin-right: 15px;
+  }
+}
+
+.hot-songs {
+  display: flex;
+  margin: 0 0 5px 0;
+  flex-wrap: wrap;
+}
+
+.hot-songs__song {
+  flex: 0 0 100%;
+  padding: 0 0 5px 0;
+  min-width: 0;
+}
+
+
+@media (min-width: 768px) {
+  .hot-songs {
+    margin: -5px 0 0 -5px;
+  }
+  
+  .hot-songs__song {
+    padding: 5px 0 0 5px;
+  }
+  .hot-songs__song {
+    flex: 0 0 33.3333%;
+  }
+}
+@media (min-width: 992px) {
+  .hot-songs__song {
+    flex: 0 0 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .hot-songs__song {
+    flex: 0 0 20%;
   }
 }

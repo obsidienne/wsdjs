@@ -97,9 +97,9 @@
   card
 ****************************/
 .song-card {
-  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
+  height: 360px; /* safari bug */
 }
 .song-card__header {
   padding: 0;

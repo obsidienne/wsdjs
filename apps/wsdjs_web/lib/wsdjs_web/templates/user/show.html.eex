@@ -11,7 +11,9 @@
   <div>
     <section class="user-page__profile__section">
       <header class="user-page__profile__header">
-        <img data-src="<%= avatar_url(@user.avatar) %>" class="user-page__avatar">
+        <div class="user-page__avatar">
+          <img data-src="<%= avatar_url(@user.avatar) %>">
+        </div>
         <div class="user-page__profile-details">
           <h4><%= @user.name %></h4>
           <%= if @user.djname do %>
@@ -35,8 +37,7 @@
           <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
         <% end %>
         <%= if @user.admin == true do %>
-          <%= link "User list", to: user_path(@conn, :index), class: "btn btn-link text-muted user-page__logout",  data: [turbolinks: "false"] %>
-          <%= link "Invitations", to: invitation_path(@conn, :index), class: "btn btn-link text-muted user-page__logout",  data: [turbolinks: "false"] %>          
+          <%= link "Administration", to: admin_user_path(@conn, :index), class: "btn btn-link text-muted user-page__logout",  data: [turbolinks: "false"] %>
         <% end %>
       </footer>
     </section>
@@ -59,15 +60,20 @@
     <nav>
       <ul class="tabs-navigation__items">
         <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#suggestions-section">suggestions</a></li>
+        <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#parameters-section">parameters</a></li>
       </ul>
     </nav>
     <% end %>
 
     <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) == :ok do %>
-    <section id="suggestions-section" class="container tabs-pane active">
+    <section id="suggestions-section" class="tabs-pane active">
       <ul id="user-page__song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
         <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song, current_user: @current_user %>
       </ul>
+    </section>
+
+    <section id="parameters-section" class="tabs-pane">
+      <%= render "_user_parameters.html", user: @user %>
     </section>
     <% end %>
   </section>

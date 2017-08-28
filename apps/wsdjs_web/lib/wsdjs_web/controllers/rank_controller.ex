@@ -9,7 +9,7 @@ defmodule WsdjsWeb.RankController do
         conn
         |> put_flash(:info, "Bonus set")
         |> redirect(to: top_path(conn, :show, rank.top_id))
-      {:error, changeset} ->
+      {:error, _changeset} ->
         rank = Wsdjs.Repo.get!(Charts.Rank, id)
         conn
         |> put_flash(:error, "Something went wrong")

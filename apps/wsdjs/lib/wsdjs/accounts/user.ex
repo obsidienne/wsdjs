@@ -11,7 +11,6 @@ defmodule Wsdjs.Accounts.User do
   schema "users" do
     field :email, :string
     field :admin, :boolean
-    field :new_song_notification, :boolean
     field :user_country, :string
     field :name, :string
     field :djname, :string
@@ -21,6 +20,7 @@ defmodule Wsdjs.Accounts.User do
     has_many :comments, Musics.Comment
     has_one :avatar, Accounts.Avatar, on_replace: :delete
     has_one :detail, Accounts.UserDetail, on_replace: :delete
+    has_one :parameter, Accounts.UserParameter, on_replace: :delete
     has_many :song_opinions, Musics.Opinion
     has_many :votes, Charts.Vote
     has_many :auth_tokens, Accounts.AuthToken
@@ -28,7 +28,7 @@ defmodule Wsdjs.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:email, :new_song_notification, :user_country, :name, :djname, :profils]
+  @allowed_fields [:email, :user_country, :name, :djname, :profils]
   @valid_profils ~w(DJ DJ_VIP)
   
   @doc false
@@ -38,6 +38,7 @@ defmodule Wsdjs.Accounts.User do
     |> validate_required(:email)
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
+    |> cast_assoc(:parameter)
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
   end

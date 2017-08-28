@@ -1,21 +1,13 @@
-
 @supports(grid-gap: 0) {
 
+  .user-page__songs li {
+    margin-bottom: 0;
+  }
+  .song-card {
+    margin-bottom: 0;
+  }
 
-  @media (min-width: 768px) {
-    .songs-container, .container { max-width: 720px; }
-  }
-  @media (min-width: 992px) {
-    .songs-container, .container { max-width: 960px; }
-  }
-  @media (min-width: 1200px) {
-    .songs-container, .container {
-      max-width: 1140px;
-    }
-  }
-  
-
-  .songs-container, .hot-songs, .song-top__container,.user-page__songs,.top-songs-container, .top-stat__votes {
+  .songs-container, .song-top__container,.user-page__songs,.top-songs-container, .top-stat__votes {
     display: grid;
     grid-gap: 5px;
     grid-template-columns: repeat(1, 1fr);
@@ -38,7 +30,7 @@
       grid-template-columns: repeat(3, 1fr);
     }
 
-    .songs-container, .hot-songs, . { 
+    .songs-container,  { 
       grid-template-columns: repeat(3, 1fr);
     }
     .song-top__container {
@@ -65,7 +57,7 @@
     }  
   }
   @media (min-width: 992px) {
-    .songs-container, .hot-songs { 
+    .songs-container { 
       grid-template-columns: repeat(4, 1fr);
     }
     .user-page__songs {
@@ -80,7 +72,7 @@
     .user-page__songs {
       grid-template-columns: repeat(4, 1fr);
     }
-    .songs-container, .hot-songs { 
+    .songs-container { 
       grid-template-columns: repeat(5, 1fr);
     }
   }

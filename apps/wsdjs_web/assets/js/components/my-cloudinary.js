@@ -14,7 +14,7 @@ class MyCloudinary {
     var els = document.querySelectorAll('img:not(.cld-responsive)');
     // If we don't have support for intersection observer, loads the images immediately
   
-    if (!('IntersectionObserver' in window)) {
+    if (!this._intersectionObserverSupported()) {
       for (var i = 0; i < els.length; i++) {
         els[i].classList.add("cld-responsive");
       }
@@ -27,14 +27,14 @@ class MyCloudinary {
     }
   }
   disconnect() {
-    if ('IntersectionObserver' in window) {
+    if (this._intersectionObserverSupported()) {
       console.log("IntersectionObserver disconnected.");
       this.observer.disconnect();
     }
   }
 
   _initIntersectionObserver() {
-    if ('IntersectionObserver' in window) {
+    if (this._intersectionObserverSupported()) {
       let self = this;
       this.observer = new IntersectionObserver(function(entries) {
         var count = 0;
@@ -51,6 +51,13 @@ class MyCloudinary {
     } else {
       console.log("IntersectionObserver not supported.");
     }
+  }
+
+  _intersectionObserverSupported() {
+    return 'IntersectionObserver' in window &&
+    'IntersectionObserverEntry' in window &&
+    'intersectionRatio' in window.IntersectionObserverEntry.prototype &&
+    'isIntersecting' in window.IntersectionObserverEntry.prototype
   }
 }
 
