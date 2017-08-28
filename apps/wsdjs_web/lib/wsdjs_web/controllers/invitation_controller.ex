@@ -17,7 +17,7 @@ defmodule WsdjsWeb.InvitationController do
     case Accounts.create_invitation(params) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "Invitation requested.")
+        |> put_flash(:info, "Your request has been sent to our administrator who will reply soon.")
         |> redirect(to: home_path(conn, :index))
       {:error, %Ecto.Changeset{} = _changeset} ->
         conn
