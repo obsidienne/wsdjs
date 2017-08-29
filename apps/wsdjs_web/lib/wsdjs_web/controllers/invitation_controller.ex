@@ -6,8 +6,6 @@ defmodule WsdjsWeb.InvitationController do
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.Invitation
 
-  action_fallback WsdjsWeb.FallbackController
-
   def new(conn, _params) do
     changeset = Accounts.change_invitation(%Invitation{})
     render(conn, "new.html", changeset: changeset)
@@ -18,8 +16,8 @@ defmodule WsdjsWeb.InvitationController do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Your request has been sent to our administrator who will reply soon.")
-        |> redirect(to: home_path(conn, :index))
-      {:error, %Ecto.Changeset{} = _changeset} ->
+        |> redirect(to: session_path(conn, :new))
+      {:error, %Ecto.Changeset{}} ->
         conn
         |> put_flash(:error, "Invitation already requested.")
         |> redirect(to: session_path(conn, :new))
