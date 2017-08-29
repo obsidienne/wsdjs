@@ -19,7 +19,9 @@
           <%= if @user.djname do %>
             <h6 class="text-muted"><%= @user.djname %></h6>
           <% end %>
+          <%= if @user.user_country do %>
           <span class="place-icon user-page__profile-details__place"> <%= @user.user_country %></span>
+          <% end %>
           <div class="user-page__profils">
             <%= for profil <- @user.profils do %>
               <span class="label label-primary"><%= profil %></span>
