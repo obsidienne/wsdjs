@@ -105,3 +105,13 @@
   margin-top: 15px;
   text-align: right;
 }
+@media (min-width: 768px) {
+  .invitations { 
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .invitations { 
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
