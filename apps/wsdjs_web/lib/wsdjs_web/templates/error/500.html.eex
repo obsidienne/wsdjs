@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+    <meta name="cloudinary_cloud_name" content="don2kwaju">
+    <meta name="description" content="World Swing DeeJays. The best West Coast Swing music from all around the world !">
+
+    <!-- Control the behavior of search engine crawling and indexing -->
+    <meta name="robots" content="index,follow"><!-- All Search Engines -->
+    <meta name="googlebot" content="index,follow"><!-- Google Specific -->
+    <!-- Tells Google not to show the sitelinks search box -->
+    <meta name="google" content="nositelinkssearchbox">
+    <!-- Tells Google not to provide a translation for this page -->
+    <meta name="google" content="notranslate">
+
+    <title>505 error page</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+
+
+    <link defer rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script defer src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </head>
+
+  <body>
+    <%= render "_nav.html", assigns %>
+
+    <section class="container">
+      <h1 class="page-header text-center">Sorry something went <u>REALLY</u> wrong !</h1>
+      <p class="text-center">
+        <%= link "Go to the home page", to: home_path(@conn, :index), class: "btn btn-link", data: [turbolinks: false] %>
+        or 
+        <%= link "Sign in", to: session_path(@conn, :new), class: "btn btn-link", data: [turbolinks: false] %>
+      </p>
+    </section>
+  </body>
+</html>
