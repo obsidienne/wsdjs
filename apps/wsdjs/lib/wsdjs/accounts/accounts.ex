@@ -43,6 +43,24 @@ defmodule Wsdjs.Accounts do
   end
 
   @doc """
+  Creates a user.
+
+  ## Examples
+
+      iex> create_user(%{field: value})
+      {:ok, %User{}}
+
+      iex> create_user(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_user(attrs \\ %{}) do
+    %User{}
+    |> User.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
   Gets a single user.
 
   Raises `Ecto.NoResultsError` if the User does not exist.
@@ -127,6 +145,24 @@ defmodule Wsdjs.Accounts do
   alias Wsdjs.Accounts.Invitation
 
   @doc """
+  Gets a single invitation.
+
+  Raises `Ecto.NoResultsError` if the Invitation does not exist.
+
+  ## Examples
+
+      iex> get_invitation!(123)
+      %Invitation{}
+
+      iex> get_invitation!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_invitation!(id), do: Repo.get!(Invitation, id)
+  
+  
+
+  @doc """
   Returns the list of invitations.
 
   ## Examples
@@ -174,5 +210,31 @@ defmodule Wsdjs.Accounts do
   """
   def change_invitation(%Invitation{} = invitation) do
     Invitation.changeset(invitation, %{})
+  end
+
+  @doc """
+  """
+  def accept_invitation(%Invitation{} = invitation) do
+    {:ok, user} = create_user(%{email: invitation.email, name: invitation.name})
+
+    invitation
+    |> Invitation.changeset(%{user_id: user.id})
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes an Invitation.
+
+  ## Examples
+
+      iex> delete_invitation(invitation)
+      {:ok, %Invitation{}}
+
+      iex> delete_invitation(invitation)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_invitation(%Invitation{} = invitation) do
+    Repo.delete(invitation)
   end
 end

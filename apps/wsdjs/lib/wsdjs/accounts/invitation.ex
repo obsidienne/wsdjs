@@ -12,11 +12,12 @@ defmodule Wsdjs.Accounts.Invitation do
   schema "invitations" do
     field :email, :string
     field :name, :string
-
+    belongs_to :user, Wsdjs.Accounts.User
+    
     timestamps()
   end
 
-  @allowed_fields [:email, :name]
+  @allowed_fields [:email, :name, :user_id]
 
   @doc false
   def changeset(struct, params \\ %{}) do

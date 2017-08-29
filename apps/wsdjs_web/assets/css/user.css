@@ -88,3 +88,20 @@
     width: 30px;
     border-radius: 50%;
 }
+
+/****************************
+  invitation
+****************************/
+.invitations {
+  display: grid;
+  grid-gap: 10px;
+}
+.invitation__request {
+  padding: 15px;
+}
+.invitation__actions {
+  border-top: 1px solid #e8e8e8;
+  padding: 15px;
+  margin-top: 15px;
+  text-align: right;
+}

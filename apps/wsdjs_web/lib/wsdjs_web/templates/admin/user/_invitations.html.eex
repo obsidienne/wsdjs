@@ -1,14 +1,21 @@
-<table class="table">
-    <thead>
-    <tr><th>Name</th><th>email</th><th>Requested when</th></tr>
-    </thead>
-    <tbody>
-    <%= for invitation <- @invitations do %>
-    <tr>
-    <td><%= invitation.name %></td>
-    <td><%= invitation.email %></td>
-    <td><%= Timex.format!(Timex.to_datetime(invitation.inserted_at), "%d %b, %k:%M", :strftime) %></td>
-    </tr>
-    <% end %>
-    </tbody>
-</table>
+<ul class="invitations">
+<%= for invitation <- @invitations do %>
+  <li class="card">
+    <article class="invitation__request">
+      <h5>
+        <%= invitation.name %> 
+        <%= if ! is_nil(invitation.user_id) do %>
+          <span class="label label-default">request accepted</span>
+        <% end %>
+      </h5>
+      <h6 class="text-muted"><%= invitation.email %>
+        <small>requested at <%= Timex.format!(Timex.to_datetime(invitation.inserted_at), "%d %b, %k:%M", :strftime) %></small>
+      </h6>
+      <footer class="invitation__actions">
+        <%= link "Accept invitation", to: admin_invitation_path(@conn, :update, invitation), class: "btn btn-link", method: "put", data: [confirm: "Accept #{invitation.name} request.\n\nAre you sure ?"] %> 
+        <%= link "Delete", to: admin_invitation_path(@conn, :delete, invitation), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{invitation.name} request.\n\nAre you sure ?"] %></h1>
+      </footer>
+    </article>
+  </li>
+<% end %>
+</ul>
