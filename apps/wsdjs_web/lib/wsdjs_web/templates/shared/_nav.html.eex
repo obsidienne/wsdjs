@@ -5,6 +5,10 @@
   <%= if @current_user do %>
     <%= link "songs", to: song_path(@conn, :index), class: "glnav__menu text-muted" %>
   <% end %>
+  <%= if @current_user && @current_user.admin == true do %>
+    <%= link "admin", to: admin_user_path(@conn, :index), class: "glnav__menu text-muted" %>
+  <% end %>
+
   
   <%= if Wsdjs.Musics.Policy.can?(:search, @current_user) == :ok do %>
   <div class="search-container">

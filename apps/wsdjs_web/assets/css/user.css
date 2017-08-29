@@ -88,3 +88,30 @@
     width: 30px;
     border-radius: 50%;
 }
+
+/****************************
+  invitation
+****************************/
+.invitations {
+  display: grid;
+  grid-gap: 10px;
+}
+.invitation__request {
+  padding: 15px;
+}
+.invitation__actions {
+  border-top: 1px solid #e8e8e8;
+  padding: 15px;
+  margin-top: 15px;
+  text-align: right;
+}
+@media (min-width: 768px) {
+  .invitations { 
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .invitations { 
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

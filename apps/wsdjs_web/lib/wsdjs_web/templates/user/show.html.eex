@@ -12,14 +12,16 @@
     <section class="user-page__profile__section">
       <header class="user-page__profile__header">
         <div class="user-page__avatar">
-          <img data-src="<%= avatar_url(@user.avatar) %>">
+          <img data-src="<%= avatar_url(@user.avatar) %>" class="responsive">
         </div>
         <div class="user-page__profile-details">
           <h4><%= @user.name %></h4>
           <%= if @user.djname do %>
             <h6 class="text-muted"><%= @user.djname %></h6>
           <% end %>
+          <%= if @user.user_country do %>
           <span class="place-icon user-page__profile-details__place"> <%= @user.user_country %></span>
+          <% end %>
           <div class="user-page__profils">
             <%= for profil <- @user.profils do %>
               <span class="label label-primary"><%= profil %></span>
@@ -35,9 +37,6 @@
         <% end %>
         <%= if Wsdjs.Accounts.Policy.can?(:logout, @user, @current_user) == :ok do %>
           <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
-        <% end %>
-        <%= if @user.admin == true do %>
-          <%= link "Administration", to: admin_user_path(@conn, :index), class: "btn btn-link text-muted user-page__logout",  data: [turbolinks: "false"] %>
         <% end %>
       </footer>
     </section>

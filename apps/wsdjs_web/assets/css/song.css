@@ -99,7 +99,7 @@
 .song-card {
   display: flex;
   flex-direction: column;
-  height: 360px; /* safari bug */
+  height: 100%; /* safari bug */
 }
 .song-card__header {
   padding: 0;

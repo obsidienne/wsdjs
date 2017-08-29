@@ -66,6 +66,7 @@ defmodule WsdjsWeb.Router do
     pipe_through [:browser, :browser_auth, :ensure_admin]
 
     resources "/users", UserController
+    resources "/invitations", InvitationController, only: [:delete, :update]
   end
 
   scope "/api", as: :api, alias: :'WsdjsWeb' do
