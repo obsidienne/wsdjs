@@ -61,24 +61,24 @@
 
 .hot-songs {
   display: flex;
-  margin: 0 0 5px 0;
+  margin: 0 0 10px 0;
   flex-wrap: wrap;
 }
 
 .hot-songs__song {
   flex: 0 0 100%;
-  padding: 0 0 5px 0;
+  padding: 0 0 10px 0;
   min-width: 0;
 }
 
 
 @media (min-width: 768px) {
   .hot-songs {
-    margin: -5px 0 0 -5px;
+    margin: -10px 0 0 -10px;
   }
   
   .hot-songs__song {
-    padding: 5px 0 0 5px;
+    padding: 10px 0 0 10px;
   }
   .hot-songs__song {
     flex: 0 0 33.3333%;
