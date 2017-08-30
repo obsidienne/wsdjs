@@ -65,6 +65,7 @@ export default class View extends MainView {
 
     request.onerror = function() { console.error("Error"); };
     request.send(new FormData(form));
+    form.reset();
   }
 
   _createHtmlContent(params) {

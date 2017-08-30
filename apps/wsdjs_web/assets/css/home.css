@@ -18,6 +18,9 @@ body.SessionNewView main {
 .home-page__top__song li {
   margin-bottom: 15px;
 }
+.home-page__instant__hit li {
+  margin-bottom: 15px;  
+}
 
 @media (min-width: 768px) {
   .HomeIndexView main {
