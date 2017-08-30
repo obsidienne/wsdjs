@@ -13,7 +13,6 @@ export default class View extends MainView {
       timeout = setTimeout(function() {
         if (self._needToFetchTops()) {
           var sentinel = document.querySelector("#top-list .sentinel");
-          sentinel.parentNode.removeChild(sentinel);    
           self._fetchTops();
         }
       }, 100);
@@ -85,6 +84,9 @@ export default class View extends MainView {
 
         container.insertAdjacentHTML('beforeend', this.response);
 
+        var sentinel = document.querySelector("#top-list .sentinel");
+        sentinel.parentNode.removeChild(sentinel);    
+        
         MyCloudinary.refresh();
         self._intlTopDate();
       }

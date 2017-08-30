@@ -9,6 +9,6 @@
     </ul>
     <% end %>
 
-    <div class="sentinel"></div>
+    <div class="sentinel"><div class="throbber-loader"></div></div>
 </section>
 <% end %>
