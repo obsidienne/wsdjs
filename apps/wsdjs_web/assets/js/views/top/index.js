@@ -9,12 +9,14 @@ export default class View extends MainView {
     var self = this;
     var timeout;
     window.addEventListener("scroll", function(e) {
-      if (document.querySelector("#top-list")) {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-          self._fetch();
-        }, 100);
-      }      
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        if (self._needToFetchTops()) {
+          var sentinel = document.querySelector("#top-list .sentinel");
+          sentinel.parentNode.removeChild(sentinel);    
+          self._fetchTops();
+        }
+      }, 100);
     })
   }
 
@@ -42,40 +44,54 @@ export default class View extends MainView {
     }
   }
 
-  _fetch() {
-    var pageHeight = document.documentElement.scrollHeight;
-    var clientHeight = document.documentElement.clientHeight;
-    var scrollPos = window.pageYOffset;
+  _needToFetchTops() {
+    /* check nb pages already fetched */
+    var container = document.getElementById("top-list");
+    var page_number = parseInt(container.dataset.jsPageNumber);
+    var page_total = parseInt(container.dataset.jsTotalPages);
+    if (page_number >= page_total) return false;
 
-    if (pageHeight - (scrollPos + clientHeight) < 50) {
-      var container = document.getElementById("top-list");
-      var page_number = parseInt(container.dataset.jsPageNumber);
-      var page_total = parseInt(container.dataset.jsTotalPages);
+    /* check the sentinel is in DOM */
+    var correctPage = document.querySelector(".TopIndexView");
+    var sentinel = document.querySelector("#top-list .sentinel");
+    if (!sentinel) return false;
+    
+    /* check sentinel is in viewport*/
+    var rect = sentinel.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document. documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document. documentElement.clientWidth) &&
+      correctPage
+    );
+  }
 
-      if (page_number < page_total) {
-        var self = this;
-        var request = new XMLHttpRequest();
-        request.open('GET', `/tops?page=${page_number + 1}`, true);
+  _fetchTops() {
+    var container = document.getElementById("top-list");    
+    var page_number = parseInt(container.dataset.jsPageNumber);
     
-        request.onload = function() {
-          if (this.status >= 200 && this.status < 400) {
-            var total_pages = request.getResponseHeader("total-pages");
-            var page_number = request.getResponseHeader("page-number");
-    
-            container.dataset.jsPageNumber = page_number;
-            container.dataset.jsTotalPages = total_pages;
-    
-            container.insertAdjacentHTML('beforeend', this.response);
-    
-            MyCloudinary.refresh();
-            self._intlTopDate();
-          }
-        };
-    
-        request.onerror = function() { console.log("Error search"); };
-    
-        request.send();    
+    var self = this;
+    var request = new XMLHttpRequest();
+    request.open('GET', `/tops?page=${page_number + 1}`, true);
+
+    request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        var total_pages = request.getResponseHeader("total-pages");
+        var page_number = request.getResponseHeader("page-number");
+
+        container.dataset.jsPageNumber = page_number;
+        container.dataset.jsTotalPages = total_pages;
+
+        container.insertAdjacentHTML('beforeend', this.response);
+
+        MyCloudinary.refresh();
+        self._intlTopDate();
       }
-    }
+    };
+
+    request.onerror = function() { console.log("Error search"); };
+
+    request.send();    
   }
 }

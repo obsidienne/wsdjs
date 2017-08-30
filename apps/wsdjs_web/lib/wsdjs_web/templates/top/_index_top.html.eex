@@ -1,1 +1,2 @@
 <%= render_many @tops, @view_module, "_top.html", conn: @conn, as: :top, current_user: @current_user %>
+<div class="sentinel"></div>
