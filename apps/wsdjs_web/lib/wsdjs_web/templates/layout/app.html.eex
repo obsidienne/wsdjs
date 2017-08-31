@@ -53,9 +53,6 @@
     </div>
 
     <%= if Mix.env == :prod, do: render "_piwik.html", current_user: @current_user %>
-    <%= if @current_user 
-           && @current_user.parameter 
-           && @current_user.parameter.userback, do: render "_userback.html" %>
     <%= if Mix.env != :prod do %>
     <div class="plug-ribbon-wrapper">
       <div class="plug-ribbon">

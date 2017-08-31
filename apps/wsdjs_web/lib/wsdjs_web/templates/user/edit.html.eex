@@ -96,15 +96,6 @@
         <% end %>
         <%= error_tag fp, :new_song_notification %>
       </div>
-
-      <%= if @current_user.admin do %>
-        <div class="checkbox">
-          <%= label fp,:userback do %>
-            <%= checkbox fp, :userback %> Userback
-          <% end %>
-          <%= error_tag fp, :userback %>
-        </div>
-      <% end %>
     <% end %>
   
     <%= submit "Update", class: "btn btn-primary" %>
