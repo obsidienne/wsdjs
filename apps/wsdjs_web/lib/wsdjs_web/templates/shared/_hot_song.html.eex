@@ -23,7 +23,7 @@
         <%= opinion_link("up", @conn, @song, @song.opinions, @conn.assigns[:current_user]) %>
       </div>
 
-      <a href="<%= song_path(@conn, :show, @song) %>">
+      <a>
         <i class="<%= comment_class(@song) %>"></i>
       </a>
     </footer>
