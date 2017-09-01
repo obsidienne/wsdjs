@@ -60,6 +60,9 @@
       <ul class="tabs-navigation__items">
         <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#suggestions-section">suggestions</a></li>
         <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#parameters-section">parameters</a></li>
+        <%= if @current_user && @current_user.admin do %>
+        <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#features-section">features</a></li>
+        <% end %>
       </ul>
     </nav>
     <% end %>
@@ -74,6 +77,12 @@
     <section id="parameters-section" class="tabs-pane">
       <%= render "_user_parameters.html", user: @user %>
     </section>
+
+    <%= if @current_user && @current_user.admin do %>
+    <section id="features-section" class="tabs-pane">
+      <%= render "_user_feature.html", user: @user %>
+    </section>
+    <% end %>
     <% end %>
   </section>
   <% end %>
