@@ -10,3 +10,9 @@
   </div>
 </div>
 <% end %>
+
+<div id="outdated" hidden>
+  <h6>Your browser is out-of-date!</h6>
+  <p>Update your browser to view this website correctly.</p>
+  <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
