@@ -1,6 +1,10 @@
 <%= if @user.parameter do %>
-notification : <%= @user.parameter.new_song_notification %>
-
-piwik: <%= @user.parameter.piwik %>
+<div class="user__parameter">
+  <h4 class="page-header">Notification</h4>
+  <p>Receive an email everyday if new songs have been suggeted.</p>
+  <footer>
+    <%= @user.parameter.new_song_notification %>
+  </footer>
+</div>
 <% end %>
   

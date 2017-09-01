@@ -1,8 +1,6 @@
 
-<%= if @current_user.parameter do %>
-
+<%= if @current_user && @current_user.parameter do %>
   <%= if @current_user.parameter.piwik, do: render "_piwik.html", current_user: @current_user %>
-
 <% end %>
 
 <%= if Mix.env != :prod do %>
