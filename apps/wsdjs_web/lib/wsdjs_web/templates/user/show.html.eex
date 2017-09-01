@@ -72,6 +72,9 @@
       <ul id="user-page__song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
         <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song, current_user: @current_user %>
       </ul>
+      <%= if @page_number < @total_pages do %>
+      <div class="sentinel"><div class="throbber-loader"></div></div>
+      <% end %>
     </section>
 
     <section id="parameters-section" class="tabs-pane">
