@@ -1,4 +1,6 @@
 <%= if @user.parameter do %>
-<%= @user.parameter.new_song_notification %>
+notification : <%= @user.parameter.new_song_notification %>
+
+piwik: <%= @user.parameter.piwik %>
 <% end %>
   

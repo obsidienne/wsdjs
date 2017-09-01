@@ -18,14 +18,6 @@
   </div>
 
   <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
-    <%= if @current_user.admin do %>
-    <div class="form-group">
-      <label class="small text-muted">Profils</label>
-      <%= multiple_select(f, :profils, Wsdjs.Accounts.User.profils, prompt: "Set a profil", class: "form-control") %>
-      <%= error_tag f, :name %>
-    </div>
-    <% end %>
-
     <div class="form-group">
       <label class="small text-muted">Name</label>
       <%= text_input f, :name, placeholder: "Name", class: "form-control text-capitalized" %>
@@ -99,6 +91,27 @@
     <% end %>
   
     <%= submit "Update", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= if @current_user.admin do %>
+  <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
+    <div class="form-group">
+      <label class="small text-muted">Profils</label>
+      <%= multiple_select(f, :profils, Wsdjs.Accounts.User.profils, prompt: "Set a profil", class: "form-control") %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <%= inputs_for f, :parameter, fn fp -> %>
+      <div class="checkbox">
+        <%= label fp,:piwik do %>
+          <%= checkbox fp, :piwik %> Activate piwik
+        <% end %>
+        <%= error_tag fp, :piwik %>
+      </div>
+    <% end %>
+
+    <%= submit "Update admin", class: "btn btn-primary" %>
+  <% end %>
   <% end %>
  </main>
  
