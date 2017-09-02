@@ -78,6 +78,18 @@
       <label class="small text-muted">Start DJing</label>
       <%= text_input fd, :djing_start_year, placeholder: "djing start year", class: "form-control", type: "number", max: 2017, min: 1950 %>
     </div>
+    <div class="form-group">
+      <label class="small text-muted">Facebook</label>
+      <%= text_input fd, :facebook, placeholder: "https://www.facebook.com/", class: "form-control", type: "url" %>
+    </div>
+    <div class="form-group">
+      <label class="small text-muted">Youtube</label>
+      <%= text_input fd, :youtube, placeholder: "https://www.youtube.com/", class: "form-control", type: "url" %>
+    </div>
+    <div class="form-group">
+      <label class="small text-muted">Soundcloud</label>
+      <%= text_input fd, :soundcloud, placeholder: "https://soundcloud.com", class: "form-control", type: "url" %>
+    </div>
     <% end %>
 
 
