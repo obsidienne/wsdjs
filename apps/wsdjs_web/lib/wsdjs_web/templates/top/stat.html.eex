@@ -2,7 +2,7 @@
   <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
-    <h3 class="page-header">TOP 10, <time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small> Statistics</small>
+    <h3 class="page-header">TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small> Statistics</small>
       <%= link "go back to top", to: top_path(@conn, :show, @top.id), class: "btn btn-link push-right" %>
     </h3>
   </div>

@@ -13,9 +13,8 @@ export default class View extends MainView {
       clearTimeout(timeout);
       timeout = setTimeout(function() {
         if (self._needToFetchSongs()) {
-          var sentinel = document.querySelector("#song-list section:last-child .sentinel");
-          sentinel.parentNode.removeChild(sentinel);    
-          self._fetchSongs();
+          var sentinel = document.querySelector("#song-list section:last-child .sentinel");        
+          self._fetchSongs(sentinel);
         }
       }, 100);
     })
@@ -33,32 +32,22 @@ export default class View extends MainView {
   mount() {
     super.mount();
 
-    if(this._needToFetchSongs()) {
+    if (this._needToFetchSongs()) {
       var sentinel = document.querySelector("#song-list section:last-child .sentinel");
-      sentinel.parentNode.removeChild(sentinel);    
-      this._fetchSongs();
+      this._fetchSongs(sentinel);
     }
 
     // tooltip
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
-    new timeago().render(document.querySelectorAll("time.timeago"));
-    this._format_date();
   }
 
   unmount() {
     super.umount();
     this.tips.destroyAll();
   }
-  
-  _format_date() {
-    // intl date
-    var options = {year: "numeric", month: "long"};
-    var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
-    var elements = document.querySelectorAll("time");
-    for (let i = 0; i < elements.length; i++) {
-      let datetime = Date.parse(elements[i].getAttribute("datetime"))
-      elements[i].textContent = dateTimeFormat.format(datetime);
-    }
+ 
+  _formatDate() {
+    super.formatDate("time.date-format", {year: "numeric", month: "long"});
   }
 
   _toggle_opinion(elem) {
@@ -138,24 +127,20 @@ export default class View extends MainView {
     );
   }
 
-  _fetchSongs() {
-    var lastSongContainer = document.querySelector("#song-list section:last-child");
-    var month = new Date(lastSongContainer.dataset.month);
-    month.setMonth(month.getMonth(), -1);
-
-    var previousMonth = month.toISOString().split('T')[0];
+  _fetchSongs(sentinel) {
     var self = this;
     var request = new XMLHttpRequest();
-    request.open('GET', `/songs?month=${previousMonth}`, true);
+    request.open('GET', `/songs?month=${sentinel.dataset.nextMonth}`, true);
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
         var container = document.getElementById("song-list");
 
+        sentinel.parentNode.removeChild(sentinel);    
         container.insertAdjacentHTML('beforeend', this.response);
-
+        
         if (self._needToFetchSongs()) {
-          var sentinel = document.querySelector("#song-list section:last-child .sentinel");
+          let sentinel = document.querySelector("#song-list section:last-child .sentinel");
           sentinel.parentNode.removeChild(sentinel);    
           self._fetchSongs();
         }
@@ -163,7 +148,7 @@ export default class View extends MainView {
         MyCloudinary.refresh();
         new timeago().render(document.querySelectorAll("time.timeago"));
         self.tips.destroyAll();
-        self._format_date();
+        self._formatDate();
         self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});      
        }
     };

@@ -25,7 +25,7 @@
 
 <%= if Enum.count(@top.ranks) > 0 do %>
   <section>
-    <h4 class="page-header"><time datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> Top</h4>
+    <h4 class="page-header"><time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> Top</h4>
     <ul class="home-page__top__song">
       <%= for rank <- @top.ranks do %>
         <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>

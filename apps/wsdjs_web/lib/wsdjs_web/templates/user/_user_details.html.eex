@@ -12,7 +12,7 @@
 
 <dl class="user-page__profile__section user-page__details">
 <dt>Member since</dt>
-<dd><time datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></dd>
+<dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></dd>
 
 <%= if @user.detail do %>
   <%= if @user.detail.description do %>

@@ -10,7 +10,7 @@
         <td>
         <%= link user.name, to: user_path(@conn, :show, user.id) %>
         <h6 class="small"><%= user.email %></h6>
-        <h6 class="small"><%= user.user_country %>, member since <time datetime="<%= Date.to_iso8601(user.inserted_at) %>"></time></h6>
+        <h6 class="small"><%= user.user_country %>, member since <time class="date-format" datetime="<%= Date.to_iso8601(user.inserted_at) %>"></time></h6>
         </td>
         <td>
         <%= for profil <- user.profils do %>

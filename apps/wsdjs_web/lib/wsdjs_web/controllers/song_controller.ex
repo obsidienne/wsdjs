@@ -5,7 +5,7 @@ defmodule WsdjsWeb.SongController do
 
   alias Wsdjs.Musics
   alias Wsdjs.Musics.{Comment, Song}
-  
+
   action_fallback WsdjsWeb.FallbackController
 
   def action(conn, _) do
@@ -45,7 +45,7 @@ defmodule WsdjsWeb.SongController do
     month_interval = Musics.songs_interval(current_user)
     songs = Musics.list_songs(current_user, :month, month_interval[:max])
     interval = Musics.songs_interval(current_user)
-    
+
     render(conn, "index.html", songs: songs, month: month_interval[:max], last: Timex.before?(month_interval[:max], interval[:min]))
   end
 
