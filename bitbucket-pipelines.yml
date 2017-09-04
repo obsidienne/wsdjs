@@ -1,0 +1,19 @@
+image: bitwalker/alpine-elixir-phoenix:latest
+pipelines:
+  branches:
+    develop:
+      - step:
+          script:
+            - MIX_ENV=test mix deps.get
+            - MIX_ENV=test mix ecto.create
+            - MIX_ENV=test mix ecto.migrate
+            - mix test
+          services:
+            - database
+
+definitions:
+  services:
+    database:
+      image: postgres:9.6
+      environment:
+        POSTGRES_PASSWORD: postgres
