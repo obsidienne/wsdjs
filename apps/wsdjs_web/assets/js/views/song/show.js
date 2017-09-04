@@ -25,7 +25,6 @@ export default class View extends MainView {
 
   mount() {
     super.mount();
-    new timeago().render(document.querySelectorAll("time.timeago"));
     this._submit();
     this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
 

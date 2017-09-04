@@ -27,6 +27,7 @@ import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
 import Tabs from './components/tabs';
+import Outdated from './components/outdated';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
@@ -50,6 +51,9 @@ function handleDOMContentLoaded() {
     radio.setVolume(0.5);
   }
 
+  /* outdated */
+  Outdated.check();
+  
   /* piwik */
   if (window._paq != null) {
     return _paq.push(['trackPageView']);

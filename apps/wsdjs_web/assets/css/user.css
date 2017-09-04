@@ -60,6 +60,9 @@
     position: relative;
     z-index: 3;
 }
+.user-page__profile__section:empty {
+  display: none;
+}
 .user-page__profile-details__place {
   padding-top: 8px;
 }

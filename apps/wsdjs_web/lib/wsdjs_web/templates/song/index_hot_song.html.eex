@@ -1,14 +1,16 @@
 <%= if @last == false do %>
-<section class="container" data-month="<%= @month %>">
+<section class="container">
     <%= if Enum.count(@songs) > 0 do %>
     <h4 class="page-header">
-        <time datetime="<%= @month %>"></time> <small><%= Enum.count(@songs) %> suggestions</small>
+        <time class="date-format" datetime="<%= @month %>"></time> <small><%= Enum.count(@songs) %> suggestions</small>
     </h4>
     <ul class="hot-songs grid">
         <%= render_many @songs, WsdjsWeb.SharedView, "_hot_song.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
     <% end %>
 
-    <div class="sentinel"><div class="throbber-loader"></div></div>
+    <div class="sentinel" data-next-month="<%= Timex.shift(@month, months: -1) %>"><div class="throbber-loader"></div></div>
 </section>
 <% end %>
+
+

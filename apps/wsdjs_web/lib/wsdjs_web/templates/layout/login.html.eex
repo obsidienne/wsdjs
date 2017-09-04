@@ -52,16 +52,6 @@
       </div>
     </section>
 
-    <%= if Mix.env == :prod, do: render "_piwik.html", current_user: @current_user %>
-    <%= if @current_user 
-           && @current_user.parameter 
-           && @current_user.parameter.userback, do: render "_userback.html" %>
-    <%= if Mix.env != :prod do %>
-    <div class="plug-ribbon-wrapper right">
-      <div class="plug-ribbon">
-        <a href="/"><%= Mix.env |> Atom.to_string |> String.upcase %></a>
-      </div>
-    </div>
-    <% end %>
+    <%= render "_outside.html", current_user: @current_user %>
   </body>
 </html>

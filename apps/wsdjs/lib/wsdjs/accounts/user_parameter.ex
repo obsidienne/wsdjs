@@ -6,14 +6,14 @@ defmodule Wsdjs.Accounts.UserParameter do
   @foreign_key_type :binary_id
   schema "user_parameters" do
     field :new_song_notification, :boolean
-    field :userback, :boolean
+    field :piwik, :boolean
 
     belongs_to :user, Wsdjs.Accounts.User
-    
+
     timestamps()
   end
 
-  @allowed_fields [:new_song_notification, :userback, :user_id]
+  @allowed_fields [:new_song_notification, :user_id, :piwik]
 
   @doc false
   def changeset(struct, params \\ %{}) do
@@ -22,4 +22,3 @@ defmodule Wsdjs.Accounts.UserParameter do
     |> assoc_constraint(:user)
   end
 end
-  

@@ -19,7 +19,7 @@ defmodule WsdjsWeb.TopController do
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
     |> put_resp_header("page-number", Integer.to_string(page.page_number))
     |> put_layout(false)
-    |> render("_index_top.html", tops: page.entries)
+    |> render("_index_top.html", tops: page.entries, page_number: page.page_number, total_pages: page.total_pages)
   end
 
   def index(conn, _params, current_user) do

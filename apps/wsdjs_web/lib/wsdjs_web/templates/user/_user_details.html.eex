@@ -1,6 +1,16 @@
+<%= unless is_nil(@user.detail) do %>
+<div class="user-page__profile__section"><%= unless is_nil(@user.detail.facebook) do %>
+<%= link "", to: @user.detail.facebook, class: "fb-icon", target: "_blank" %>
+<% end %><%= unless is_nil(@user.detail.youtube) do %>
+<%= link "", to: @user.detail.youtube, class: "youtube-icon", target: "_blank" %>
+<% end %><%= unless is_nil(@user.detail.soundcloud) do %>
+<%= link "", to: @user.detail.soundcloud, class: "soundcloud-icon", target: "_blank" %>
+<% end %></div>
+<% end %>
+
 <dl class="user-page__profile__section user-page__details">
 <dt>Member since</dt>
-<dd><time datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></dd>
+<dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></dd>
 
 <%= if @user.detail do %>
   <%= if @user.detail.description do %>
