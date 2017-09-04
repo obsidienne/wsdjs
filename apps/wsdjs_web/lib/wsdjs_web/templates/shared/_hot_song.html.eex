@@ -1,7 +1,7 @@
 <%= if blur_track(@song, @current_user) == true do %>
 
-<li class="song-card card hot-songs__song" data-id="<%= @song.id %>">
-  <article>
+<li class="hot-songs__song" data-id="<%= @song.id %>">
+  <article class="song-card card">
     <a class="song-card__header">
       <img src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_cover.jpg" data-src="<%= art_url() %>" class="responsive" />
       <h6 class="song-card__tags">

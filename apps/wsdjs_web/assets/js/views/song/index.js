@@ -141,8 +141,7 @@ export default class View extends MainView {
         
         if (self._needToFetchSongs()) {
           let sentinel = document.querySelector("#song-list section:last-child .sentinel");
-          sentinel.parentNode.removeChild(sentinel);    
-          self._fetchSongs();
+          self._fetchSongs(sentinel);
         }
 
         MyCloudinary.refresh();

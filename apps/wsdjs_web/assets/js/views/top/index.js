@@ -29,17 +29,21 @@ export default class View extends MainView {
     this.tips.destroyAll();
   }
 
+  _formatDate() {
+    super.formatDate("time.date-format", {year: "numeric", month: "long"});
+  }
+
   _needToFetchTops() {
+    /* check the sentinel is in DOM */
+    var correctPage = document.querySelector(".TopIndexView");
+    var sentinel = document.querySelector("#top-list .sentinel");
+    if (!sentinel) return false;
+    
     /* check nb pages already fetched */
     var container = document.getElementById("top-list");
     var page_number = parseInt(container.dataset.jsPageNumber);
     var page_total = parseInt(container.dataset.jsTotalPages);
     if (page_number >= page_total) return false;
-
-    /* check the sentinel is in DOM */
-    var correctPage = document.querySelector(".TopIndexView");
-    var sentinel = document.querySelector("#top-list .sentinel");
-    if (!sentinel) return false;
     
     /* check sentinel is in viewport*/
     var rect = sentinel.getBoundingClientRect();
@@ -74,7 +78,7 @@ export default class View extends MainView {
         sentinel.parentNode.removeChild(sentinel);    
         
         MyCloudinary.refresh();
-        self._intlTopDate();
+        self._formatDate();
       }
     };
 

@@ -55,17 +55,19 @@
 
   <%= if @current_user do %>
   <section>
-    <%= if Enum.count(@songs) > 0 do %>
     <nav>
       <ul class="tabs-navigation__items">
+        <%= if Enum.count(@songs) > 0 do %>
         <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#suggestions-section">suggestions</a></li>
+        <% end %>
+        <%= if @current_user && @current_user.id == @user.id do %>
         <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#parameters-section">parameters</a></li>
+        <% end %>
         <%= if @current_user && @current_user.admin do %>
         <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#features-section">features</a></li>
         <% end %>
       </ul>
     </nav>
-    <% end %>
 
     <%= if Wsdjs.Musics.Policy.can?(:list_user_suggestions, @current_user) == :ok do %>
     <section id="suggestions-section" class="tabs-pane active">
@@ -77,9 +79,11 @@
       <% end %>
     </section>
 
+    <%= if @current_user && @current_user.id == @user.id do %>
     <section id="parameters-section" class="tabs-pane">
       <%= render "_user_parameters.html", user: @user %>
     </section>
+    <% end %>
 
     <%= if @current_user && @current_user.admin do %>
     <section id="features-section" class="tabs-pane">
