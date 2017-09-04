@@ -56,4 +56,13 @@ defmodule WsdjsWeb.TopView do
       ""
     end
   end
+
+
+  def top_full_description(song) do
+    date_str = song.inserted_at
+    |> Timex.to_date()
+    |> Timex.format!("%b %Y", :strftime)
+
+    "TOP 10 #{date_str}"
+  end
 end

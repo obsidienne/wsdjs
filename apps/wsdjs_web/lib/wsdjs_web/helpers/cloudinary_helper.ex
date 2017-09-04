@@ -29,4 +29,31 @@ defmodule WsdjsWeb.CloudinaryHelper do
   end
   def avatar_url(_), do: @avatar_missing_url
   def avatar_url, do: @avatar_missing_url
+
+  def top_art(top) do
+    "http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_400/"
+    <> "l_covers:#{top_rank_art(top, 1)},w_100,x_250,y_-150,o_60/"
+    <> "l_covers:#{top_rank_art(top, 2)},w_100,x_200,y_-50,o_60/"
+    <> "l_covers:#{top_rank_art(top, 3)},w_100,x_200,y_50,o_60/"
+    <> "l_covers:#{top_rank_art(top, 4)},w_100,x_200,y_150,o_60/"
+    <> "l_covers:#{top_rank_art(top, 5)},w_100,x_-200,y_250,o_60/"
+    <> "l_covers:#{top_rank_art(top, 6)},w_100,x_-100,y_200,o_60/"
+    <> "l_covers:#{top_rank_art(top, 7)},w_100,y_200,o_60/"
+    <> "l_covers:#{top_rank_art(top, 8)},w_100,x_100,y_200,o_60/"
+    <> "l_covers:#{top_rank_art(top, 9)},w_100,x_200,y_200,o_60/"
+    <> top_rank_art(top, 0)
+  end
+
+  defp top_rank_art(top, 0) do
+    rank = Enum.at(top.ranks, 0)
+    art = rank.song.art
+    "v#{art.version}/#{art.cld_id}.jpg"
+  end
+
+  defp top_rank_art(top, i) do
+    rank = Enum.at(top.ranks, i)
+    art = rank.song.art
+    [head | tail] = String.split(art.cld_id, "/")
+    tail
+  end
 end

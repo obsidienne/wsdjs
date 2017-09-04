@@ -13,7 +13,6 @@ defmodule WsdjsWeb.SongView do
     |> Timex.to_date()
     |> Timex.format!("%d %b %Y", :strftime)
 
-    
     bpm_str = case song.bpm do
       0 -> "-"
       _ -> "- #{song.bpm} bpm -"
