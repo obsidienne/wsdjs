@@ -1,14 +1,15 @@
 image: bitwalker/alpine-elixir-phoenix:latest
 pipelines:
-  default:
-    - step:
-        script:
-          - MIX_ENV=test mix deps.get
-          - MIX_ENV=test mix ecto.create
-          - MIX_ENV=test mix ecto.migrate
-          - mix test
-        services:
-          - database
+  branches:
+    develop:
+      - step:
+          script:
+            - MIX_ENV=test mix deps.get
+            - MIX_ENV=test mix ecto.create
+            - MIX_ENV=test mix ecto.migrate
+            - mix test
+          services:
+            - database
 
 definitions:
   services:
