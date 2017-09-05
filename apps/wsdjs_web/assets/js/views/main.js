@@ -29,7 +29,7 @@ export default class MainView {
     for (let i = 0; i < elements.length; i++) {
       let dateParts = elements[i].getAttribute("datetime").split("-");
       // month is 0 based...
-      let datetime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+      let datetime = new Date(Date.UTC(dateParts[0], dateParts[1] - 1, dateParts[2], 0, 0, 0));
       elements[i].textContent = dateTimeFormat.format(datetime);
     }
   }
