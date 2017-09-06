@@ -3,7 +3,7 @@
     <tr>
       <td>
         <div>
-          <p style="margin-top:0;margin-bottom:20px">Your request has been sent to our administrator who will reply soon.</p>
+          <p style="margin-top:0;margin-bottom:20px"><%= @invitation.name %>, your request has been sent to our administrator who will reply soon.</p>
           <div style="color:#b3b3b1;font-size:14px;text-align:center;margin-top:50px;margin-right:0;margin-bottom:50px;margin-left:0">If you did not make this request, please contact us at <a href="mailto:worldswingdeejays@gmail.com" style="color:#b3b3b1;text-decoration:underline" target="_blank">worldswingdeejays@gmail.com</a></div>
         </div>
       </td>
