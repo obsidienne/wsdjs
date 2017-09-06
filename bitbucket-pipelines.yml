@@ -3,6 +3,9 @@ pipelines:
   branches:
     develop:
       - step:
+          caches:
+            - deps
+            - nodewrapper
           script:
             - MIX_ENV=test mix deps.get
             - MIX_ENV=test mix ecto.create
@@ -12,6 +15,9 @@ pipelines:
             - database
 
 definitions:
+  caches:
+    deps: deps
+    nodewrapper: apps/wsdjs_web/assets/node_modules
   services:
     database:
       image: postgres:9.6
