@@ -22,6 +22,7 @@ export default class MainView {
 
   formatDate(selector, options) {
     // when undefined used the javascript local
+    options.timeZone = "UTC";
     var dateTimeFormat = new Intl.DateTimeFormat(undefined, options);
     var elements = document.querySelectorAll(selector);
 
