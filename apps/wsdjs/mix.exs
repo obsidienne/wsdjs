@@ -39,6 +39,7 @@ defmodule Wsdjs.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:csv, "~> 1.4.4"},
       {:bamboo, "~> 0.8"},
+      {:ex_machina, "~> 2.1", only: :test},
       {:httpoison, "~> 0.12"},
       {:timex, "~> 3.0"}
     ]

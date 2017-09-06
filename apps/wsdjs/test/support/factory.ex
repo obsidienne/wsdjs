@@ -1,50 +1,28 @@
-# How to use it
-# user = insert!(:user)
-# song = insert!(:song, %{user: user})
-
 defmodule Wsdjs.Factory do
-  alias Wsdjs.Repo
+  use ExMachina.Ecto, repo: Wsdjs.Repo
 
-  # Factories
-  def build(:user) do
+  def user_factory do
     %Wsdjs.Accounts.User{
-      email: "user-#{System.unique_integer([:positive])}@wsdjs.com",
-      name: "John Doe-#{System.unique_integer([:positive])}",
+      name: "Jane Smith",
+      email: sequence(:email, &"email-#{&1}@example.com"),
       profils: [],
-      parameter: %Wsdjs.Accounts.UserParameter{}
     }
   end
 
-  def build(:song) do
-    %Wsdjs.Musics.Song{
-      title: "title-#{System.unique_integer([:positive])}",
-      artist: "artist-#{System.unique_integer([:positive])}",
+  def song_factory do
+    %Wsdjs.Musics.Song {
+      title: sequence(:title, &"title-#{&1}"),
+      artist: sequence(:artist, &"artist-#{&1}"),
       genre: Enum.random(Wsdjs.Musics.Song.genre()),
-      bpm: 0,
-      hidden_track: false,
-      public_track: false,
-      instant_hit: false
+      user: build(:user),
     }
   end
 
-  def build(:top) do
-    %Wsdjs.Charts.Top{
+  def top_factory do
+    %Wsdjs.Charts.Top {
       due_date: Timex.beginning_of_month(Timex.today),
-      status: "checking"
+      status: "checking",
+      user: build(:user),
     }
-  end
-
-  def build(:comment) do
-    %Wsdjs.Musics.Comment{
-      text: "comment #{System.unique_integer([:positive])}"
-    }
-  end
-
-  def build(factory_name, attributes) do
-    factory_name |> build() |> struct(attributes)
-  end
-
-  def insert!(factory_name, attributes \\ []) do
-    Repo.insert! build(factory_name, attributes)
   end
 end
