@@ -5,6 +5,7 @@ defmodule WsdjsWeb.InvitationController do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.Invitation
+  alias WsdjsWeb.{InvitationEmail, Mailer}
 
   def new(conn, _params) do
     changeset = Accounts.change_invitation(%Invitation{})
@@ -13,7 +14,11 @@ defmodule WsdjsWeb.InvitationController do
 
   def create(conn, %{"invitation" => params}) do
     case Accounts.create_invitation(params) do
-      {:ok, _} ->
+      {:ok, invitation} ->
+        invitation
+        |> InvitationEmail.invitation_registered()
+        |> Mailer.deliver_later()
+
         conn
         |> put_flash(:info, "Your request has been sent to our administrator who will reply soon.")
         |> redirect(to: session_path(conn, :new))
