@@ -6,6 +6,7 @@ defmodule Wsdjs.Factory do
       name: "Jane Smith",
       email: sequence(:email, &"email-#{&1}@example.com"),
       profils: [],
+      admin: false,
     }
   end
 
@@ -14,7 +15,11 @@ defmodule Wsdjs.Factory do
       title: sequence(:title, &"title-#{&1}"),
       artist: sequence(:artist, &"artist-#{&1}"),
       genre: Enum.random(Wsdjs.Musics.Song.genre()),
+      instant_hit: false,
+      public_track: false,
+      hidden_track: false,
       user: build(:user),
+      bpm: 0,
     }
   end
 

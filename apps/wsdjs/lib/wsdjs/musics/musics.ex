@@ -53,14 +53,6 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
-  def last_songs do
-    Song
-    |> where(instant_hit: true)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by([desc: :inserted_at])
-    |> Repo.all()
-  end
-
   def songs_interval(%User{} = user) do
     songs = user
     |> Song.scoped()

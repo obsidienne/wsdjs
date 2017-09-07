@@ -1,8 +1,16 @@
 defmodule Wsdjs.MusicsTest do
   use Wsdjs.DataCase
-
-
+  import Wsdjs.Factory
+  alias Wsdjs.Musics
+  alias Wsdjs.Repo
+  
   describe "songs" do
+
+    test "instant_hits/0 returns all instant hit" do
+      song = insert(:song, %{instant_hit: true})
+      song = song |> Repo.preload([:art, :comments, :opinions, user: :avatar])
+      assert Musics.instant_hits() == [song]
+    end
 
 #    test "list_songs/0 returns all songs" do
 #      song = song_fixture()
