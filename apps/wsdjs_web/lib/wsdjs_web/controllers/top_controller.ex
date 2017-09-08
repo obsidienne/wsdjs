@@ -66,19 +66,21 @@ defmodule WsdjsWeb.TopController do
   end
 
   def update(conn, %{"id" => id, "direction" => "next"}, current_user) do
-    top = Charts.get_top!(current_user, id)
-    Charts.next_step(current_user, top)
-    top = Charts.get_top!(current_user, id)
-
-    redirect(conn, to: top_path(conn, :show, top))
+    with top = Charts.get_top!(id),
+         :ok <- Charts.Policy.can?(:update_top, current_user, top),
+         {:ok, _top} = Charts.next_step(top) do
+      
+      redirect(conn, to: top_path(conn, :show, top))
+    end
   end
 
   def update(conn, %{"id" => id, "direction" => "previous"}, current_user) do
-    top = Charts.get_top!(current_user, id)
-    Charts.previous_step(current_user, top)
-    top = Charts.get_top!(current_user, id)
+    with top = Charts.get_top!(id),
+         :ok <- Charts.Policy.can?(:update_top, current_user, top),
+         {:ok, _top} = Charts.previous_step(top) do
 
-    redirect(conn, to: top_path(conn, :show, top))
+      redirect(conn, to: top_path(conn, :show, top))
+    end
   end
 
   def create(conn, %{"top" => params}, current_user) do

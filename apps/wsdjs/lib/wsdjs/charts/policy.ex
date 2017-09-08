@@ -11,5 +11,6 @@ defmodule Wsdjs.Charts.Policy do
   def can?(_, _), do: {:error, :unauthorized}
 
   def can?(:delete_top, %User{admin: :true}, %Top{} = top), do: :ok
+  def can?(:update_top, %User{admin: :true}, %Top{} = top), do: :ok
   def can?(_, _, _), do: {:error, :unauthorized}
 end

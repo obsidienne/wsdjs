@@ -118,7 +118,7 @@ defmodule Wsdjs.Charts do
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def next_step(%User{} = _user, top) do
+  def next_step(top) do
     %{checking: "voting",
       voting: "counting",
       counting: "published"}
@@ -129,7 +129,7 @@ defmodule Wsdjs.Charts do
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def previous_step(%User{}, top) do
+  def previous_step(top) do
     %{published: "counting",
       counting: "voting"}
     |> Map.fetch!(String.to_atom(top.status))
