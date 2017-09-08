@@ -30,4 +30,11 @@ defmodule Wsdjs.Factory do
       user: build(:user),
     }
   end
+
+  def rank_factory do
+    %Wsdjs.Charts.Rank {
+      song: build(:song),
+      top: build(:top)
+    }
+  end
 end
