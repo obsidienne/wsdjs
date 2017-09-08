@@ -3,25 +3,13 @@ defmodule Wsdjs.Charts.Policy do
   The Policies for the Dj system.
   """
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Charts.Top
 
-  @doc """
-  Admin can create a top
-  """
   def can?(:create_top, %User{admin: :true}), do: :ok
-
-  @doc """
-  Admin can delete a top
-  """
   def can?(:delete_top, %User{admin: :true}), do: :ok
-
-  @doc """
-  Admin can delete a top
-  """
   def can?(:stats_top, %User{admin: :true}), do: :ok
-  
-
-  @doc """
-  By default everything is denied
-  """
   def can?(_, _), do: {:error, :unauthorized}
+
+  def can?(:delete_top, %User{admin: :true}, %Top{} = top), do: :ok
+  def can?(_, _, _), do: {:error, :unauthorized}
 end

@@ -95,11 +95,13 @@ defmodule WsdjsWeb.TopController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    top = Charts.get_top!(current_user, id)
-    {:ok, _top} = Charts.delete_top(top)
+    with top = Charts.get_top!(current_user, id),
+        :ok <- Charts.Policy.can?(:delete_top, current_user, top),
+        {:ok, _top} = Charts.delete_top(top) do
 
-    conn
-    |> put_flash(:info, "Top deleted successfully.")
-    |> redirect(to: home_path(conn, :index))
+      conn
+      |> put_flash(:info, "Top deleted successfully.")
+      |> redirect(to: top_path(conn, :index))
+    end
   end
 end

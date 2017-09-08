@@ -58,6 +58,22 @@ defmodule Wsdjs.Charts do
     |> Repo.preload(ranks: [song: [user: :avatar]])
   end
 
+  @doc """
+  Gets a single top.
+
+  Raises `Ecto.NoResultsError` if the Top does not exist.
+
+  ## Examples
+
+      iex> get_top!(123)
+      %Top{}
+
+      iex> get_top!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_top!(id), do: Repo.get!(Top, id)
+
   def get_top!(current_user, top_id) do
     current_user
     |> Top.scoped()
