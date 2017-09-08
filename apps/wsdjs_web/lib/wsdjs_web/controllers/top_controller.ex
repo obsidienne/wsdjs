@@ -95,7 +95,7 @@ defmodule WsdjsWeb.TopController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    with top = Charts.get_top!(current_user, id),
+    with top = Charts.get_top!(id),
         :ok <- Charts.Policy.can?(:delete_top, current_user, top),
         {:ok, _top} = Charts.delete_top(top) do
 
