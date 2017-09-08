@@ -36,6 +36,7 @@ defmodule Wsdjs.Accounts.User do
     struct
     |> cast(params, @allowed_fields)
     |> validate_required(:email)
+    |> put_change(:email, String.downcase(params[:email] || ""))
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
     |> cast_assoc(:parameter)

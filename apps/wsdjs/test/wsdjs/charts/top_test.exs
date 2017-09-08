@@ -3,170 +3,159 @@ defmodule Wsdjs.TopTest do
 
   alias Wsdjs.Charts.Top
   import Wsdjs.Factory
+  alias Wsdjs.Repo
 
   describe "changeset" do
-    @create_attrs %{status: "checking", due_date: "2012-06-30"}
-
     test "changeset with minimal valid attributes" do
-      changeset = Top.changeset(%Top{}, @create_attrs)
+      changeset = Top.changeset(%Top{}, params_for(:top))
       assert changeset.valid?
     end
 
     test "top owner accout must exist" do
-      params = Map.put(@create_attrs, :user_id, Ecto.UUID.generate())
-      top = Top.changeset(%Top{}, params)
+      top = Top.changeset(%Top{}, params_for(:top, %{user_id: Ecto.UUID.generate()}))
       assert {:error, %{errors: [user: {"does not exist", _}]}} = Repo.insert(top)
     end
   end
 
-  describe "Top.scoped(%User{admin: true})" do
-    test "published" do
-      user = insert!(:user, %{admin: true})
-      tops = Enum.map(-1..-28, &create_top("published", &1))
-
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 28
-      assert scoped == tops
+  describe "Published top" do
+    setup do
+      [
+        admin: insert(:user, %{admin: true}),
+        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
+        dj: insert(:user, %{profils: ["DJ"]}),
+        dt: Timex.beginning_of_month(Timex.today)
+      ]
     end
 
-    test "counting" do
-      user = insert!(:user, %{admin: true})
-      tops = Enum.map(-1..-28, &create_top("counting", &1))
-
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 28
-      assert scoped == tops
+    test "current month to n-3", context do
+      tops = [
+        insert(:top, %{user: context[:admin], status: "published", due_date: context[:dt]}),
+        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -2)}),
+      ]
+      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
+      assert tops == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
 
-    test "voting" do
-      user = insert!(:user, %{admin: true})
-      tops = Enum.map(-1..-28, &create_top("voting", &1))
+    test "current month -3 to -6", context do
+      tops = [
+        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -3)}),
+        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -5)}),
+      ]
 
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 28
-      assert scoped == tops
+      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
+      assert tops == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
+      assert tops == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
+      assert tops == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
 
-    test "checking" do
-      user = insert!(:user, %{admin: true})
-      tops = Enum.map(-1..-28, &create_top("checking", &1))
+    test "current month -6 to n-26", context do
+      tops = [
+        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -6)}),
+        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -26)})
+      ]
 
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 28
-      assert scoped == tops
-    end
-  end
-
-  describe "Top.scoped(%User{profils: DJ_VIP})" do
-    test "published" do
-      user = insert!(:user, %{profils: ["DJ_VIP"]})
-      tops = Enum.map(-1..-28, &create_top("published", &1))
-
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 28
-      assert scoped == tops
+      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
+      assert tops == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
+      assert tops == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
 
-    test "counting" do
-      user = insert!(:user, %{profils: ["DJ_VIP"]})
-      Enum.each(-1..-28, &create_top("counting", &1))
+    test "current month -27", context do
+      top = insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -27)})
 
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 0
-    end
-
-    test "voting" do
-      user = insert!(:user, %{profils: ["DJ_VIP"]})
-      tops = Enum.map(-1..-28, &create_top("voting", &1))
-
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 28
-      assert scoped == tops
-    end
-
-    test "checking" do
-      user = insert!(:user, %{profils: ["DJ_VIP"]})
-      Enum.each(-1..-28, &create_top("checking", &1))
-
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 0
+      assert [top] == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
+      assert [top] == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
   end
 
-  describe "Top.scoped(%User{profils: DJ})" do
-    test "published" do
-      user = insert!(:user, %{profils: ["DJ"]})
-      tops = Enum.map(-1..-28, &create_top("published", &1))
-
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 24
-      assert scoped == Enum.slice(tops, 2, 24)
+  describe "Counting top" do
+    setup do
+      [
+        admin: insert(:user, %{admin: true}),
+        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
+        dj: insert(:user, %{profils: ["DJ"]}),
+        dt: Timex.beginning_of_month(Timex.today)
+      ]
     end
 
-    test "counting" do
-      user = insert!(:user, %{profils: ["DJ"]})
-      Enum.each(-1..-28, &create_top("counting", &1))
+    test "current month to n-27", context do
+      tops = [
+        insert(:top, %{user: context[:admin], status: "counting", due_date: context[:dt]}),
+        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -2)}),
+        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -3)}),
+        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -5)}),
+        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -6)}),
+        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -26)}),
+        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -27)})
+      ]
 
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 0
-    end
-
-    test "voting" do
-      user = insert!(:user, %{profils: ["DJ"]})
-      Enum.each(-1..-28, &create_top("voting", &1))
-
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 0
-    end
-
-    test "checking" do
-      user = insert!(:user, %{profils: ["DJ"]})
-      Enum.each(-1..-28, &create_top("checking", &1))
-
-      scoped = Top.scoped(user) |> Repo.all()
-      assert Enum.count(scoped) == 0
+      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
   end
 
-  describe "Top.scoped(nil)" do
-    test "published" do
-      tops = Enum.map(-1..-28, &create_top("published", &1))
-
-      scoped = Top.scoped(nil) |> Repo.all()
-      assert Enum.count(scoped) == 3
-      assert scoped == Enum.slice(tops, 2, 3)
+  describe "Voting top" do
+    setup do
+      [
+        admin: insert(:user, %{admin: true}),
+        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
+        dj: insert(:user, %{profils: ["DJ"]}),
+        dt: Timex.beginning_of_month(Timex.today)
+      ]
     end
 
-    test "counting" do
-      Enum.each(-1..-28, &create_top("counting", &1))
+    test "current month to n-27", context do
+      tops = [
+        insert(:top, %{user: context[:admin], status: "voting", due_date: context[:dt]}),
+        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -2)}),
+        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -3)}),
+        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -5)}),
+        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -6)}),
+        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -26)}),
+        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -27)})
+      ]
 
-      scoped = Top.scoped(nil) |> Repo.all()
-      assert Enum.count(scoped) == 0
-    end
-
-    test "voting" do
-      Enum.each(-1..-28, &create_top("voting", &1))
-
-      scoped = Top.scoped(nil) |> Repo.all()
-      assert Enum.count(scoped) == 0
-    end
-
-    test "checking" do
-      Enum.each(-1..-28, &create_top("checking", &1))
-
-      scoped = Top.scoped(nil) |> Repo.all()
-      assert Enum.count(scoped) == 0
+      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
+      assert tops == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
   end
 
-  defp create_top(status, shift) do
-    admin = insert!(:user, %{admin: true})
+  describe "Checking top" do
+    setup do
+      [
+        admin: insert(:user, %{admin: true}),
+        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
+        dj: insert(:user, %{profils: ["DJ"]}),
+        dt: Timex.beginning_of_month(Timex.today)
+      ]
+    end
 
-    dt = Timex.today
-    |> Timex.beginning_of_month()
-    |> Timex.shift(months: shift)
-    insert!(:top, %{user_id: admin.id, status: status, due_date: dt})
+    test "current month to n-27", context do
+      tops = [
+        insert(:top, %{user: context[:admin], status: "checking", due_date: context[:dt]}),
+        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -2)}),
+        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -3)}),
+        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -5)}),
+        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -6)}),
+        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -26)}),
+        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -27)})
+      ]
+
+      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
+      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
+    end
   end
+
 
 #    test "list_songs/0 returns all songs" do
 #      song = song_fixture()

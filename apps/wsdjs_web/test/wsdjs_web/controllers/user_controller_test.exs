@@ -39,7 +39,7 @@ defmodule WsdjsWeb.UserControllerTest do
 
   describe "show user" do
     setup [:create_users]
-    
+
     test "only admin can access show admin user", %{conn: conn, users: users} do
       Enum.each([
         assign(conn, :current_user, users[:dj_vip]),
@@ -82,7 +82,7 @@ defmodule WsdjsWeb.UserControllerTest do
 
   describe "edit user" do
     setup [:create_users]
-    
+
     test "renders form for editing user", %{conn: conn, users: users} do
       # can edit
       Enum.each([
@@ -108,13 +108,13 @@ defmodule WsdjsWeb.UserControllerTest do
 
   defp create_users(_) do
     users = %{
-      user: insert!(:user),
-      user2: insert!(:user),
-      dj: insert!(:user, profils: ["DJ"]),
-      dj2: insert!(:user, profils: ["DJ"]),
-      dj_vip: insert!(:user, profils: ["DJ_VIP"]),
-      dj_vip2: insert!(:user, profils: ["DJ_VIP"]),
-      admin: insert!(:user, %{admin: true})
+      user: insert(:user),
+      user2: insert(:user),
+      dj: insert(:user, profils: ["DJ"]),
+      dj2: insert(:user, profils: ["DJ"]),
+      dj_vip: insert(:user, profils: ["DJ_VIP"]),
+      dj_vip2: insert(:user, profils: ["DJ_VIP"]),
+      admin: insert(:user, %{admin: true})
     }
 
     {:ok, users: users}
