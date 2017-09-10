@@ -17,6 +17,15 @@ defmodule Wsdjs.Musics.Policy do
   def can?(:delete_song, %User{admin: true}, %Song{}), do: :ok
   def can?(:delete_song, %User{id: id}, %Song{user_id: id}), do: :ok
 
+  def can?(:create_comment, %User{admin: true}), do: :ok
+  def can?(:create_comment, %User{profils: profils}) do
+    if Enum.member?(profils, "DJ_VIP") do
+      :ok
+    else
+      {:error, :unauthorized}
+    end
+  end
+
   def can?(_, _, _), do: {:error, :unauthorized}
 
   def can?(:search, %User{}), do: :ok

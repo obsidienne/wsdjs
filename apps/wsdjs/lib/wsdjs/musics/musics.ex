@@ -148,6 +148,22 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
+  Gets a single song.
+
+  Raises `Ecto.NoResultsError` if the Song does not exist.
+
+  ## Examples
+
+      iex> get_song!(123)
+      %Song{}
+
+      iex> get_song!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_song!(id), do: Repo.get!(Song, id)
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking song changes.
 
   ## Examples
