@@ -19,7 +19,8 @@ defmodule Wsdjs.Factory do
       public_track: false,
       hidden_track: false,
       user: build(:user),
-      bpm: 0,
+      url: "http://youtu.be/toto",
+      bpm: 1,
     }
   end
 
