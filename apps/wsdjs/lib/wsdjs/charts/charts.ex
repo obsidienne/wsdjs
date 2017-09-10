@@ -272,17 +272,14 @@ defmodule Wsdjs.Charts do
 
   ## Examples
 
-      iex> get_rank!("0f47da03-0a18-421d-b614-a84861c28f45")
+      iex> get_rank!(123)
       %Rank{}
 
-      iex> get_rank!("8dfbdd61-4464-4e43-863b-52f13c44326b")
+      iex> get_rank!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_rank!(id) do
-    Rank
-    |> Repo.get!(id)
-  end
+  def get_rank!(id), do: Repo.get!(Rank, id)
 
   @doc """
   Deletes a Rank.
