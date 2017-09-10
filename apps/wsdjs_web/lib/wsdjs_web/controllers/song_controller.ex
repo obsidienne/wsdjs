@@ -15,10 +15,12 @@ defmodule WsdjsWeb.SongController do
 
   def show(conn, %{"id" => id}, current_user) do
     song = Musics.get_song!(current_user, id)
+    
     comments = Musics.list_comments(id)
+    opinions = Musics.list_opinions(id)
     comment_changeset = Musics.Comment.changeset(%Comment{})
 
-    render conn, "show.html", song: song, comments: comments, comment_changeset: comment_changeset
+    render conn, "show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
   end
 
   def index(conn, %{"user_id" => user_id, "page" => page}, current_user) do

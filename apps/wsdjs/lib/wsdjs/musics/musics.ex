@@ -143,7 +143,7 @@ defmodule Wsdjs.Musics do
   def get_song!(current_user, song_id) do
     current_user
     |> Song.scoped()
-    |> preload([:art, user: :avatar, comments: :user, opinions: [user: :avatar]])
+    |> preload([:art, :user])
     |> Repo.get!(song_id)
   end
 
@@ -161,7 +161,11 @@ defmodule Wsdjs.Musics do
       ** (Ecto.NoResultsError)
 
   """
-  def get_song!(id), do: Repo.get!(Song, id)
+  def get_song!(id, to_preload \\ [:art, :user]) do
+    Song
+    |> Repo.preload(to_preload)
+    |> Repo.get!(id)
+  end
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking song changes.
