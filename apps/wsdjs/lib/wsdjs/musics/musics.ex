@@ -140,7 +140,7 @@ defmodule Wsdjs.Musics do
       iex> get_song!(%User{}, "song")
       %Song{}
   """
-  def get_song!(current_user, song_id) do
+  def get_song!(%User{} = current_user, song_id) do
     current_user
     |> Song.scoped()
     |> preload([:art, :user])
@@ -163,8 +163,8 @@ defmodule Wsdjs.Musics do
   """
   def get_song!(id, to_preload \\ [:art, :user]) do
     Song
-    |> Repo.preload(to_preload)
     |> Repo.get!(id)
+    |> Repo.preload(to_preload)
   end
 
   @doc """

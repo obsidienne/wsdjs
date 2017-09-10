@@ -14,13 +14,14 @@ defmodule WsdjsWeb.SongController do
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(current_user, id)
-    
-    comments = Musics.list_comments(id)
-    opinions = Musics.list_opinions(id)
-    comment_changeset = Musics.Comment.changeset(%Comment{})
+    with song <- Musics.get_song!(id),
+         :ok <- Musics.Policy.can?(:show, song, current_user) do
+      comments = Musics.list_comments(id)
+      opinions = Musics.list_opinions(id)
+      comment_changeset = Musics.Comment.changeset(%Comment{})
 
-    render conn, "show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
+      render conn, "show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
+    end
   end
 
   def index(conn, %{"user_id" => user_id, "page" => page}, current_user) do
@@ -68,13 +69,13 @@ defmodule WsdjsWeb.SongController do
   end
 
   def edit(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(current_user, id)
+    song = Musics.get_song!(id)
     changeset = Musics.change_song(song)
     render conn, "edit.html", song: song, changeset: changeset
   end
 
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
-    song = Musics.get_song!(current_user, id)
+    song = Musics.get_song!(id)
 
     song_params = if current_user.admin do
         song_params
