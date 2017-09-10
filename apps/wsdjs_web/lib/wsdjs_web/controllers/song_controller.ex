@@ -91,11 +91,13 @@ defmodule WsdjsWeb.SongController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(current_user, id)
-    {:ok, _song} = Musics.delete_song(song)
+    with song <- Musics.get_song!(id),
+         :ok <- Musics.Policy.can?(:delete_song, current_user, song),
+         {:ok, _song} = Musics.delete_song(song) do
 
-    conn
-    |> put_flash(:info, "Song deleted successfully.")
-    |> redirect(to: home_path(conn, :index))
+      conn
+      |> put_flash(:info, "Song deleted successfully.")
+      |> redirect(to: home_path(conn, :index))
+    end
   end
 end
