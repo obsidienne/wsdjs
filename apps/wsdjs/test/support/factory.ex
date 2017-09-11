@@ -7,6 +7,8 @@ defmodule Wsdjs.Factory do
       email: sequence(:email, &"email-#{&1}@example.com"),
       profils: [],
       admin: false,
+      profil_djvip: false,
+      profil_dj: false,
     }
   end
 

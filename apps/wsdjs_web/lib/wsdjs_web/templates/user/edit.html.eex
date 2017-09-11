@@ -113,6 +113,21 @@
       <%= error_tag f, :name %>
     </div>
 
+    <div class="checkbox">
+      <%= label f,:profil_djvip do %>
+        <%= checkbox f, :profil_djvip %> Profil DJ VIP
+      <% end %>
+      <%= error_tag f, :profil_djvip %>
+    </div>
+    
+    <div class="checkbox">
+      <%= label f,:profil_dj do %>
+        <%= checkbox f, :profil_dj %> Profil DJ
+      <% end %>
+      <%= error_tag f, :profil_dj %>
+    </div>
+
+
     <%= inputs_for f, :parameter, fn fp -> %>
       <div class="checkbox">
         <%= label fp,:piwik do %>
