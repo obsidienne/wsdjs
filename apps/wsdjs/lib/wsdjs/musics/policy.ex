@@ -5,8 +5,8 @@ defmodule Wsdjs.Musics.Policy do
   def can?(_, %User{admin: true}, _), do: :ok
   def can?(_, %User{id: id}, %Song{user_id: id}), do: :ok
 
-  def can?(:show, %Song{public_track: true}, %User{}), do: :ok
-  def can?(:show, %Song{instant_hit: true}, %User{}), do: :ok
+  def can?(:show, %Song{public_track: true}, _), do: :ok
+  def can?(:show, %Song{instant_hit: true}, _), do: :ok
   def can?(:show, %Song{} = song, user), do: :ok
 
   def can?(_, _, _), do: {:error, :unauthorized}
