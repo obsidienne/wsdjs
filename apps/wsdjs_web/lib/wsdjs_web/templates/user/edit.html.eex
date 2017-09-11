@@ -113,29 +113,46 @@
       <%= error_tag f, :name %>
     </div>
 
-    <div class="checkbox">
-      <%= label f,:profil_djvip do %>
-        <%= checkbox f, :profil_djvip %> Profil DJ VIP
-      <% end %>
-      <%= error_tag f, :profil_djvip %>
-    </div>
-    
-    <div class="checkbox">
-      <%= label f,:profil_dj do %>
-        <%= checkbox f, :profil_dj %> Profil DJ
-      <% end %>
-      <%= error_tag f, :profil_dj %>
-    </div>
-
-
-    <%= inputs_for f, :parameter, fn fp -> %>
-      <div class="checkbox">
-        <%= label fp,:piwik do %>
-          <%= checkbox fp, :piwik %> Activate piwik
-        <% end %>
-        <%= error_tag fp, :piwik %>
-      </div>
-    <% end %>
+    <table class="table">
+      <tr>
+        <td>Profil admin</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :admin %>
+            <%= label f,:admin do %><% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Profil DJ VIP</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :profil_djvip %>
+            <%= label f,:profil_djvip do %><% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Profil DJ</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :profil_dj %>
+            <%= label f,:profil_dj do %><% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Activate piwik</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= inputs_for f, :parameter, fn fp -> %>
+              <%= checkbox fp, :piwik %>
+              <%= label fp, :piwik do %><% end %>
+            <% end %>
+          </div>
+        </td>
+      </tr> 
+    </table>
 
     <%= submit "Update admin", class: "btn btn-primary" %>
   <% end %>
