@@ -20,31 +20,60 @@ defmodule WsdjsWeb.SongControllerTest do
     end)
   end
 
-
-  describe "index" do
-  #  test "instant hits are listed", %{conn: conn, users: users, songs: songs} do
-  #  end
-  #  test "public tracks are listed", %{conn: conn, users: users, songs: songs} do
-  #  end
-  #  test "hidden tracks are not listed", %{conn: conn, users: users, songs: songs} do
-  #  end
-  #  test "top 10 song are listed", %{conn: conn, users: users, songs: songs} do
-  #  end
-  #  test "top 20 song are listed", %{conn: conn, users: users, songs: songs} do
-  #  end
-  #  test "all songs are listed", %{conn: conn, users: users, songs: songs} do
-  #  end
-
-  end
-
-
   describe "show" do
-   # test "instant hit is visible", %{conn: conn, users: users, songs: songs} do
-   # end
-   # test "public track is visible", %{conn: conn, users: users, songs: songs} do
-   # end
-   # test "hidden track is hidden", %{conn: conn, users: users, songs: songs} do
-   # end
+    test "instant hit is visible", %{conn: conn} do
+      song = insert(:song, %{instant_hit: true})
+
+      Enum.each([
+        assign(conn, :current_user, nil),
+        assign(conn, :current_user, insert(:user, %{profils: ["DJ"]})),
+        assign(conn, :current_user, insert(:user, %{profils: ["DJ_VIP"]})),
+        assign(conn, :current_user, insert(:user, %{admin: true}))
+      ], fn conn ->
+        conn = get conn, song_path(conn, :show, song.id)
+        assert html_response(conn, 200) =~ "Song - WSDJs"
+        assert String.contains?(conn.resp_body, song.title)
+      end)
+    end
+
+    test "public track is visible", %{conn: conn} do
+      song = insert(:song, %{public_track: true})
+
+      Enum.each([
+        assign(conn, :current_user, nil),
+        assign(conn, :current_user, insert(:user, %{profils: ["DJ"]})),
+        assign(conn, :current_user, insert(:user, %{profils: ["DJ_VIP"]})),
+        assign(conn, :current_user, insert(:user, %{admin: true}))
+      ], fn conn ->
+        conn = get conn, song_path(conn, :show, song.id)
+        assert html_response(conn, 200) =~ "Song - WSDJs"
+        assert String.contains?(conn.resp_body, song.title)
+      end)
+    end
+
+    test "hidden track is hidden", %{conn: conn} do
+      song = insert(:song, %{hidden_track: true})
+
+      Enum.each([
+        assign(conn, :current_user, song.user),
+        assign(conn, :current_user, insert(:user, %{profils: ["DJ_VIP"]})),
+        assign(conn, :current_user, insert(:user, %{admin: true}))
+      ], fn conn ->
+        conn = get conn, song_path(conn, :show, song.id)
+        assert html_response(conn, 200) =~ "Song - WSDJs"
+        assert String.contains?(conn.resp_body, song.title)
+      end)
+
+      Enum.each([
+        assign(conn, :current_user, nil),
+        assign(conn, :current_user, insert(:user, %{profils: ["DJ"]})),
+      ], fn conn ->
+        conn = get conn, song_path(conn, :show, song.id)
+        assert html_response(conn, 302)
+        assert conn.halted
+      end)
+    end
+
    # test "top 10 song is visible", %{conn: conn, users: users, songs: songs} do
    # end
    # test "top 20 song is visible", %{conn: conn, users: users, songs: songs} do
