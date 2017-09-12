@@ -50,28 +50,25 @@ defmodule Wsdjs.Musics.Song do
 
   # Admin sees everything
   def scoped(%Accounts.User{admin: :true}), do: Musics.Song
-
+  def scoped(%Accounts.User{profil_djvip: :true}), do: Musics.Song
+  
   # Connected user can see songs not explicitly track
   def scoped(%Accounts.User{} = user) do
-    if Enum.member?(user.profils, "DJ_VIP") do
-      Musics.Song
-    else
-      start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
-      end_period = Timex.shift(start_period, months: -23)
+    start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+    end_period = Timex.shift(start_period, months: -23)
 
-      from s in Musics.Song,
-      left_join: r in assoc(s, :ranks),
-      left_join: t in assoc(r, :top),
-      where: s.user_id == ^user.id or s.public_track == true or s.instant_hit == true or
-             (t.status == "published" and r.position <= 10 and t.due_date <= ^start_period and t.due_date >= ^end_period)
-    end
+    from s in Musics.Song,
+    left_join: r in assoc(s, :ranks),
+    left_join: t in assoc(r, :top),
+    where: s.user_id == ^user.id or s.public_track == true or s.instant_hit == true or
+            (t.status == "published" and r.position <= 10 and t.due_date <= ^start_period and t.due_date >= ^end_period)
   end
 
   # Not connected users see only top 10 song or instant_hit
   def scoped(nil) do
     start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -5)
     end_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
-  
+
     from s in Musics.Song,
     left_join: r in assoc(s, :ranks),
     left_join: t in assoc(r, :top),

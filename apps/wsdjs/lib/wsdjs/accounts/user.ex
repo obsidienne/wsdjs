@@ -14,7 +14,8 @@ defmodule Wsdjs.Accounts.User do
     field :user_country, :string
     field :name, :string
     field :djname, :string
-    field :profils, {:array, :string}
+    field :profil_djvip, :boolean
+    field :profil_dj, :boolean
 
     has_many :songs, Musics.Song
     has_many :comments, Musics.Comment
@@ -28,23 +29,24 @@ defmodule Wsdjs.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:email, :user_country, :name, :djname, :profils]
-  @valid_profils ~w(DJ DJ_VIP)
+  @allowed_fields [:email, :user_country, :name, :djname, :profil_djvip, :profil_dj]
   
   @doc false
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @allowed_fields)
     |> validate_required(:email)
-    |> put_change(:email, String.downcase(params[:email] || ""))
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
     |> cast_assoc(:parameter)
+    |> downcase_value()
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
   end
 
-  def profils, do: @valid_profils
+  defp downcase_value(changeset) do
+    update_change(changeset, :email, &String.downcase/1)
+  end
 
   @doc """
   The function scope is used to filter the users according to the user specified.

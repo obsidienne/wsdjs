@@ -107,20 +107,46 @@
 
   <%= if @current_user.admin do %>
   <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
-    <div class="form-group">
-      <label class="small text-muted">Profils</label>
-      <%= multiple_select(f, :profils, Wsdjs.Accounts.User.profils, prompt: "Set a profil", class: "form-control") %>
-      <%= error_tag f, :name %>
-    </div>
-
-    <%= inputs_for f, :parameter, fn fp -> %>
-      <div class="checkbox">
-        <%= label fp,:piwik do %>
-          <%= checkbox fp, :piwik %> Activate piwik
-        <% end %>
-        <%= error_tag fp, :piwik %>
-      </div>
-    <% end %>
+    <table class="table">
+      <tr>
+        <td>Profil admin</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :admin %>
+            <%= label f,:admin do %><% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Profil DJ VIP</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :profil_djvip %>
+            <%= label f,:profil_djvip do %><% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Profil DJ</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :profil_dj %>
+            <%= label f,:profil_dj do %><% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Activate piwik</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= inputs_for f, :parameter, fn fp -> %>
+              <%= checkbox fp, :piwik %>
+              <%= label fp, :piwik do %><% end %>
+            <% end %>
+          </div>
+        </td>
+      </tr> 
+    </table>
 
     <%= submit "Update admin", class: "btn btn-primary" %>
   <% end %>

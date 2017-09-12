@@ -14,11 +14,14 @@ defmodule WsdjsWeb.SongController do
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(current_user, id)
-    comments = Musics.list_comments(id)
-    comment_changeset = Musics.Comment.changeset(%Comment{})
+    with song <- Musics.get_song!(id),
+         :ok <- Musics.Policy.can?(current_user, :show, song) do
+      comments = Musics.list_comments(id)
+      opinions = Musics.list_opinions(id)
+      comment_changeset = Musics.Comment.changeset(%Comment{})
 
-    render conn, "show.html", song: song, comments: comments, comment_changeset: comment_changeset
+      render conn, "show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
+    end
   end
 
   def index(conn, %{"user_id" => user_id, "page" => page}, current_user) do
@@ -57,7 +60,7 @@ defmodule WsdjsWeb.SongController do
   def create(conn, %{"song" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
 
-    with :ok <- Wsdjs.Musics.Policy.can?(:create_song, current_user),
+    with :ok <- Wsdjs.Musics.Policy.can?(current_user, :create_song),
          {:ok, song} <- Musics.create_song(params) do
       conn
       |> put_flash(:info, "#{song.title} created")
@@ -66,13 +69,13 @@ defmodule WsdjsWeb.SongController do
   end
 
   def edit(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(current_user, id)
+    song = Musics.get_song!(id)
     changeset = Musics.change_song(song)
     render conn, "edit.html", song: song, changeset: changeset
   end
 
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
-    song = Musics.get_song!(current_user, id)
+    song = Musics.get_song!(id)
 
     song_params = if current_user.admin do
         song_params
@@ -91,11 +94,13 @@ defmodule WsdjsWeb.SongController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(current_user, id)
-    {:ok, _song} = Musics.delete_song(song)
+    with song <- Musics.get_song!(id),
+         :ok <- Musics.Policy.can?(current_user, :delete_song, song),
+         {:ok, _song} = Musics.delete_song(song) do
 
-    conn
-    |> put_flash(:info, "Song deleted successfully.")
-    |> redirect(to: home_path(conn, :index))
+      conn
+      |> put_flash(:info, "Song deleted successfully.")
+      |> redirect(to: home_path(conn, :index))
+    end
   end
 end

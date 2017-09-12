@@ -2,7 +2,7 @@
   <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
-    <%= if Wsdjs.Charts.Policy.can?(:create_top, @conn.assigns.current_user) == :ok do %>
+    <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
       <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
     <% end %>
   </div>

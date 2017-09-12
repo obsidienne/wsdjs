@@ -171,10 +171,8 @@ defmodule Wsdjs.Accounts do
       [%Invitation{}, ...]
 
   """
-  def list_invitations(current_user) do
-    current_user
-    |> Invitation.scoped()
-    |> Repo.all()
+  def list_invitations do
+    Repo.all(Invitation)
   end
 
   @doc """

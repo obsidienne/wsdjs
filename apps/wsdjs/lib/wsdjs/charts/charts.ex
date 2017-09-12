@@ -58,6 +58,22 @@ defmodule Wsdjs.Charts do
     |> Repo.preload(ranks: [song: [user: :avatar]])
   end
 
+  @doc """
+  Gets a single top.
+
+  Raises `Ecto.NoResultsError` if the Top does not exist.
+
+  ## Examples
+
+      iex> get_top!(123)
+      %Top{}
+
+      iex> get_top!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_top!(id), do: Repo.get!(Top, id)
+
   def get_top!(current_user, top_id) do
     current_user
     |> Top.scoped()
@@ -66,7 +82,7 @@ defmodule Wsdjs.Charts do
     |> Repo.preload(ranks: list_rank(current_user, top_id))
   end
 
-  def create_top(%{"due_date" => due_date} = params) do
+  def create_top(%{"due_date": due_date} = params) do
     start_period = Timex.to_datetime(Timex.beginning_of_month(due_date))
     end_period = Timex.to_datetime(Timex.end_of_month(due_date))
     query = from s in Song, where: s.inserted_at >= ^start_period and s.inserted_at <= ^end_period
@@ -102,7 +118,7 @@ defmodule Wsdjs.Charts do
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def next_step(%User{} = _user, top) do
+  def next_step(top) do
     %{checking: "voting",
       voting: "counting",
       counting: "published"}
@@ -113,7 +129,7 @@ defmodule Wsdjs.Charts do
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def previous_step(%User{}, top) do
+  def previous_step(top) do
     %{published: "counting",
       counting: "voting"}
     |> Map.fetch!(String.to_atom(top.status))
@@ -256,17 +272,14 @@ defmodule Wsdjs.Charts do
 
   ## Examples
 
-      iex> get_rank!("0f47da03-0a18-421d-b614-a84861c28f45")
+      iex> get_rank!(123)
       %Rank{}
 
-      iex> get_rank!("8dfbdd61-4464-4e43-863b-52f13c44326b")
+      iex> get_rank!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_rank!(id) do
-    Rank
-    |> Repo.get!(id)
-  end
+  def get_rank!(id), do: Repo.get!(Rank, id)
 
   @doc """
   Deletes a Rank.
@@ -294,7 +307,7 @@ defmodule Wsdjs.Charts do
 
   defp list_rank(current_user, top_id) do
     current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
-    limit = if Enum.member?(current_user.profils, "DJ_VIP") or current_user.admin == true do 999 else 10 end
+    limit = if current_user.profil_djvip or current_user.admin == true do 999 else 10 end
 
     from r in Rank,
     where: r.top_id == ^top_id,

@@ -28,7 +28,4 @@ defmodule Wsdjs.Accounts.Invitation do
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
   end
-
-  def scoped(%User{admin: true}), do: Invitation
-  def scoped(_), do: from u in Invitation, where: false
 end

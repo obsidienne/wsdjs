@@ -2,6 +2,7 @@ defmodule Wsdjs.TopTest do
   use Wsdjs.DataCase, async: true
 
   alias Wsdjs.Charts.Top
+  alias Wsdjs.Charts
   import Wsdjs.Factory
   alias Wsdjs.Repo
 
@@ -21,8 +22,8 @@ defmodule Wsdjs.TopTest do
     setup do
       [
         admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
-        dj: insert(:user, %{profils: ["DJ"]}),
+        dj_vip: insert(:user, %{profil_djvip: true}),
+        dj: insert(:user, %{profil_dj: true}),
         dt: Timex.beginning_of_month(Timex.today)
       ]
     end
@@ -76,8 +77,8 @@ defmodule Wsdjs.TopTest do
     setup do
       [
         admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
-        dj: insert(:user, %{profils: ["DJ"]}),
+        dj_vip: insert(:user, %{profil_djvip: true}),
+        dj: insert(:user, %{profil_dj: true}),
         dt: Timex.beginning_of_month(Timex.today)
       ]
     end
@@ -104,8 +105,8 @@ defmodule Wsdjs.TopTest do
     setup do
       [
         admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
-        dj: insert(:user, %{profils: ["DJ"]}),
+        dj_vip: insert(:user, %{profil_djvip: true}),
+        dj: insert(:user, %{profil_dj: true}),
         dt: Timex.beginning_of_month(Timex.today)
       ]
     end
@@ -132,8 +133,8 @@ defmodule Wsdjs.TopTest do
     setup do
       [
         admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
-        dj: insert(:user, %{profils: ["DJ"]}),
+        dj_vip: insert(:user, %{profil_djvip: true}),
+        dj: insert(:user, %{profil_dj: true}),
         dt: Timex.beginning_of_month(Timex.today)
       ]
     end
@@ -162,28 +163,29 @@ defmodule Wsdjs.TopTest do
 #      assert Musics.list_songs() == [song]
 #    end
 
-#    test "get_song!/1 returns the song with given id" do
-#      song = song_fixture()
-#      assert Musics.get_song!(song.id) == song
-#    end
+  test "get_top!/1 returns the top with given id" do
+    top = insert(:top)
+    assert top == Charts.get_top!(top.id) |> Repo.preload(:user)
+  end
 
-#    test "create_song/1 with valid data creates a song" do
-#      assert {:ok, %Song{} = song} = Musics.create_song(@valid_attrs)
-#      assert song.artist == "some artist"
-#      assert song.title == "some title"
-#    end
+  test "create_top/1 with valid data creates a top" do
+    user = insert(:user)
+    params = params_for(:top, %{user_id: user.id})
+    assert {:ok, %Top{} = top} = Charts.create_top(params)
+    assert top.due_date == params[:due_date]
+  end
 
 #    test "create_song/1 with invalid data returns error changeset" do
  #     assert {:error, %Ecto.Changeset{}} = Musics.create_song(@invalid_attrs)
   #  end
 
-#    test "update_song/2 with valid data updates the song" do
-#      song = song_fixture()
-#      assert {:ok, song} = Musics.update_song(song, @update_attrs)
-#      assert %Song{} = song
-#      assert song.artist == "some updated artist"
-#      assert song.title == "some updated title"
-#    end
+  # test "update_top/2 with valid data updates the top" do
+  #   top = insert(:top)
+  #   assert {:ok, top} = Charts.update_top(top, %{})
+  #   assert %Song{} = song
+  #   assert song.artist == "some updated artist"
+  #   assert song.title == "some updated title"
+  # end
 
 #    test "update_song/2 with invalid data returns error changeset" do
 #      song = song_fixture()
@@ -191,11 +193,11 @@ defmodule Wsdjs.TopTest do
 #      assert song == Musics.get_song!(song.id)
 #    end
 
-#    test "delete_song/1 deletes the song" do
-#      song = song_fixture()
-#      assert {:ok, %Song{}} = Musics.delete_song(song)
-#      assert_raise Ecto.NoResultsError, fn -> Musics.get_song!(song.id) end
-#    end
+  test "delete_top/1 deletes the top" do
+    top = insert(:top)
+    assert {:ok, %Top{}} = Charts.delete_top(top)
+    assert_raise Ecto.NoResultsError, fn -> Charts.get_top!(top.id) end
+  end
 
 #    test "change_song/1 returns a song changeset" do
 #      song = song_fixture()

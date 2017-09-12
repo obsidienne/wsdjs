@@ -133,18 +133,23 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Get a song according to it's ID scoped by current user.
+  Gets a single song.
+
+  Raises `Ecto.NoResultsError` if the Song does not exist.
 
   ## Examples
 
-      iex> get_song!(%User{}, "song")
+      iex> get_song!(123)
       %Song{}
+
+      iex> get_song!(456)
+      ** (Ecto.NoResultsError)
+
   """
-  def get_song!(current_user, song_id) do
-    current_user
-    |> Song.scoped()
-    |> preload([:art, user: :avatar, comments: :user, opinions: [user: :avatar]])
-    |> Repo.get!(song_id)
+  def get_song!(id, to_preload \\ [:art, :user]) do
+    Song
+    |> Repo.get!(id)
+    |> Repo.preload(to_preload)
   end
 
   @doc """

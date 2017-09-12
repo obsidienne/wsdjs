@@ -5,8 +5,9 @@ defmodule Wsdjs.Factory do
     %Wsdjs.Accounts.User{
       name: "Jane Smith",
       email: sequence(:email, &"email-#{&1}@example.com"),
-      profils: [],
       admin: false,
+      profil_djvip: false,
+      profil_dj: false,
     }
   end
 
@@ -19,7 +20,8 @@ defmodule Wsdjs.Factory do
       public_track: false,
       hidden_track: false,
       user: build(:user),
-      bpm: 0,
+      url: "http://youtu.be/toto",
+      bpm: 1,
     }
   end
 
