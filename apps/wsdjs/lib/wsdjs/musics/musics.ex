@@ -8,7 +8,6 @@ defmodule Wsdjs.Musics do
 
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
-  alias Wsdjs.Musics.Policy
 
   @doc """
   Returns a song list according to a fulltext search.

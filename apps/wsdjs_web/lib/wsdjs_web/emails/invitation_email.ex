@@ -8,8 +8,6 @@ defmodule WsdjsWeb.InvitationEmail do
     The request for invitation registration email.
     """
     def invitation_registered(user) do
-      datetime = Timex.now
-
       new_email()
       |> to(user.email)
       |> from("no-reply@worldswingdjs.com")

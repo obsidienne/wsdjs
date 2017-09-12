@@ -10,7 +10,6 @@ defmodule Wsdjs.Jobs.NowPlaying do
   use HTTPoison.Base
 
   alias Phoenix.PubSub
-  alias WsdjsWeb.CloudinaryHelper
 
   @expected_fields ~w(
     title artist album cover started_at end_at duration buy_link
@@ -137,7 +136,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
     if song_in_base != nil do
       song
       |> Map.put(:suggested_ts, Timex.to_unix(song_in_base.inserted_at))
-      |> Map.put(:image_uri, CloudinaryHelper.art_url(song_in_base.art))
+      |> Map.put(:image_uri, WsdjsWeb.CloudinaryHelper.art_url(song_in_base.art))
       |> Map.put(:suggested_by, song_in_base.user.name)
       |> Map.put(:suggested_by_path, "/users/#{song_in_base.user.id}")
       |> Map.put(:path, "/songs/#{song_in_base.id}")

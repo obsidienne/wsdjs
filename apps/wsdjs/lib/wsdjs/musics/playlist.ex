@@ -10,7 +10,7 @@ defmodule Wsdjs.Musics.Playlist do
     field :name, :string
     timestamps()
 
-    belongs_to :user, Accounts.User
+    belongs_to :user, Wsdjs.Accounts.User
   end
 
   @allowed_fields [:name, :user_id]

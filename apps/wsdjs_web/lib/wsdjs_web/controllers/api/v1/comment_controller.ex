@@ -3,7 +3,7 @@ defmodule WsdjsWeb.Api.V1.CommentController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Musics
-  alias Wsdjs.Musics.Comment
+  alias Wsdjs.Musics.{Comment, Song}
 
   action_fallback WsdjsWeb.Api.V1.FallbackController
 
@@ -14,7 +14,7 @@ defmodule WsdjsWeb.Api.V1.CommentController do
     |> Map.put("user_id", current_user.id)
     |> Map.put("song_id", song_id)
 
-    with song <- Musics.get_song!(song_id),
+    with %Song{} <- Musics.get_song!(song_id),
          :ok <- Musics.Policy.can?(current_user, :create_comment),
          {:ok, %Comment{} = comment} <- Musics.create_comment(params) do
     

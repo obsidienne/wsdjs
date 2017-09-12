@@ -9,7 +9,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   @art_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
   @art_blured_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_900,o_30/f_auto,q_auto,dpr_auto/fl_immutable_cache/"
   @art_missing_url "//res.cloudinary.com/don2kwaju/image/upload/fl_immutable_cache/v1449164620/wsdjs/missing_cover.jpg"
-  
+
   def art_url(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @art_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
@@ -53,7 +53,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   defp top_rank_art(top, i) do
     rank = Enum.at(top.ranks, i)
     art = rank.song.art
-    [head | tail] = String.split(art.cld_id, "/")
+    [_ | tail] = String.split(art.cld_id, "/")
     tail
   end
 end

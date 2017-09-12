@@ -68,7 +68,7 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  def edit(conn, %{"id" => id}, current_user) do
+  def edit(conn, %{"id" => id}, _) do
     song = Musics.get_song!(id)
     changeset = Musics.change_song(song)
     render conn, "edit.html", song: song, changeset: changeset
