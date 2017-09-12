@@ -39,10 +39,14 @@ defmodule Wsdjs.Accounts.User do
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
     |> cast_assoc(:parameter)
+    |> downcase_value()
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
   end
 
+  defp downcase_value(changeset) do
+    update_change(changeset, :email, &String.downcase/1)
+  end
 
   @doc """
   The function scope is used to filter the users according to the user specified.

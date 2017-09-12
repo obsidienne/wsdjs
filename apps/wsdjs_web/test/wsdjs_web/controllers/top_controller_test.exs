@@ -3,8 +3,7 @@ defmodule WsdjsWeb.TopControllerTest do
   import Wsdjs.Factory
 
   test "requires user authentication on actions", %{conn: conn} do
-    user = insert(:user)
-    top = insert(:top, %{user: user})
+    top = insert(:top)
 
     Enum.each([
       get(conn, top_path(conn, :new)),
