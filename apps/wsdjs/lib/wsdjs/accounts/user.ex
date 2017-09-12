@@ -14,7 +14,6 @@ defmodule Wsdjs.Accounts.User do
     field :user_country, :string
     field :name, :string
     field :djname, :string
-    field :profils, {:array, :string}
     field :profil_djvip, :boolean
     field :profil_dj, :boolean
 
@@ -30,8 +29,7 @@ defmodule Wsdjs.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:email, :user_country, :name, :djname, :profils, :profil_djvip, :profil_dj]
-  @valid_profils ~w(DJ DJ_VIP)
+  @allowed_fields [:email, :user_country, :name, :djname, :profil_djvip, :profil_dj]
   
   @doc false
   def changeset(struct, params \\ %{}) do
@@ -45,7 +43,6 @@ defmodule Wsdjs.Accounts.User do
     |> validate_format(:email, ~r/.*@.*/)
   end
 
-  def profils, do: @valid_profils
 
   @doc """
   The function scope is used to filter the users according to the user specified.

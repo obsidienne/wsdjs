@@ -11,8 +11,8 @@ defmodule Wsdjs.Musics.Policy do
 
   def can?(_, _, _), do: {:error, :unauthorized}
 
-  def can?(:create_comment, %User{profils: profils}) do
-    if Enum.member?(profils, "DJ_VIP") do
+  def can?(:create_comment, %User{} = user) do
+    if user.profil_djvip do
       :ok
     else
       {:error, :unauthorized}
@@ -22,8 +22,8 @@ defmodule Wsdjs.Musics.Policy do
   def can?(:search, %User{}), do: :ok
   def can?(:list_user_suggestions, %User{}), do: :ok
 
-  def can?(:create_song, %User{profils: profils}) do
-    if Enum.member?(profils, "DJ_VIP") do
+  def can?(:create_comment, %User{} = user) do
+    if user.profil_djvip do
       :ok
     else
       {:error, :unauthorized}

@@ -13,9 +13,8 @@
         <h6 class="small"><%= user.user_country %>, member since <time class="date-format" datetime="<%= Date.to_iso8601(user.inserted_at) %>"></time></h6>
         </td>
         <td>
-        <%= for profil <- user.profils do %>
-        <span class="label label-default"><%= profil %></span>
-        <% end %>
+          <%= if user.profil_djvip do %><span class="label label-default">DJ VIP</span><% end %>
+          <%= if user.profil_dj do %><span class="label label-default">DJ</span><% end %>
         </td>
         <td>
         <%= if Enum.count(user.songs) > 0 do %>

@@ -53,7 +53,7 @@ defmodule Wsdjs.Musics.Song do
 
   # Connected user can see songs not explicitly track
   def scoped(%Accounts.User{} = user) do
-    if Enum.member?(user.profils, "DJ_VIP") do
+    if user.profil_djvip do
       Musics.Song
     else
       start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)

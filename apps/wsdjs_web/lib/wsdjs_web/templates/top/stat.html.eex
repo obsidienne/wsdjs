@@ -23,7 +23,7 @@
 
   <ul class="top-stat__votes">
     <%= for user <- Wsdjs.Accounts.list_users() do %>
-      <%= if Enum.member?(user.profils, "DJ_VIP") do %>
+      <%= if user.profil_djvip do %>
         <li class="song-card card" >
           <article>
           <h4><%= user.name %></h4>

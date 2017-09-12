@@ -110,10 +110,10 @@ defmodule WsdjsWeb.UserControllerTest do
     users = %{
       user: insert(:user),
       user2: insert(:user),
-      dj: insert(:user, profils: ["DJ"]),
-      dj2: insert(:user, profils: ["DJ"]),
-      dj_vip: insert(:user, profils: ["DJ_VIP"]),
-      dj_vip2: insert(:user, profils: ["DJ_VIP"]),
+      dj: insert(:user, profil_dj: true),
+      dj2: insert(:user, profil_dj: true),
+      dj_vip: insert(:user, profil_djvip: true),
+      dj_vip2: insert(:user, profil_djvip: true),
       admin: insert(:user, %{admin: true})
     }
 

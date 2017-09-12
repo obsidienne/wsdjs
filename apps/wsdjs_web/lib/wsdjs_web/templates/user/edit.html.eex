@@ -107,12 +107,6 @@
 
   <%= if @current_user.admin do %>
   <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
-    <div class="form-group">
-      <label class="small text-muted">Profils</label>
-      <%= multiple_select(f, :profils, Wsdjs.Accounts.User.profils, prompt: "Set a profil", class: "form-control") %>
-      <%= error_tag f, :name %>
-    </div>
-
     <table class="table">
       <tr>
         <td>Profil admin</td>

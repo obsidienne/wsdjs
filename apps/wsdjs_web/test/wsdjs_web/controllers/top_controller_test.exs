@@ -20,9 +20,8 @@ defmodule WsdjsWeb.TopControllerTest do
   test "all user can access index", %{conn: conn} do
     Enum.each([
       assign(conn, :current_user, insert(:user, %{admin: true})),
-      assign(conn, :current_user, insert(:user, %{profils: ["DJ_VIP"]})),
-      assign(conn, :current_user, insert(:user, %{profils: ["DJ"]})),
-      assign(conn, :current_user, insert(:user, %{profils: []})),
+      assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+      assign(conn, :current_user, insert(:user, %{profil_dj: true})),
       assign(conn, :current_user, nil)
     ], fn conn ->
       conn = get conn, top_path(conn, :index)

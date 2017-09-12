@@ -26,8 +26,8 @@ defmodule WsdjsWeb.SongControllerTest do
 
       Enum.each([
         assign(conn, :current_user, nil),
-        assign(conn, :current_user, insert(:user, %{profils: ["DJ"]})),
-        assign(conn, :current_user, insert(:user, %{profils: ["DJ_VIP"]})),
+        assign(conn, :current_user, insert(:user, %{profil_dj: true})),
+        assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
         assign(conn, :current_user, insert(:user, %{admin: true}))
       ], fn conn ->
         conn = get conn, song_path(conn, :show, song.id)
@@ -41,8 +41,8 @@ defmodule WsdjsWeb.SongControllerTest do
 
       Enum.each([
         assign(conn, :current_user, nil),
-        assign(conn, :current_user, insert(:user, %{profils: ["DJ"]})),
-        assign(conn, :current_user, insert(:user, %{profils: ["DJ_VIP"]})),
+        assign(conn, :current_user, insert(:user, %{profil_dj: true})),
+        assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
         assign(conn, :current_user, insert(:user, %{admin: true}))
       ], fn conn ->
         conn = get conn, song_path(conn, :show, song.id)
@@ -56,7 +56,7 @@ defmodule WsdjsWeb.SongControllerTest do
 
       Enum.each([
         assign(conn, :current_user, song.user),
-        assign(conn, :current_user, insert(:user, %{profils: ["DJ_VIP"]})),
+        assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
         assign(conn, :current_user, insert(:user, %{admin: true}))
       ], fn conn ->
         conn = get conn, song_path(conn, :show, song.id)
@@ -66,7 +66,7 @@ defmodule WsdjsWeb.SongControllerTest do
 
       Enum.each([
         assign(conn, :current_user, nil),
-        assign(conn, :current_user, insert(:user, %{profils: ["DJ"]})),
+        assign(conn, :current_user, insert(:user, %{profil_dj: true})),
       ], fn conn ->
         conn = get conn, song_path(conn, :show, song.id)
         assert html_response(conn, 302)

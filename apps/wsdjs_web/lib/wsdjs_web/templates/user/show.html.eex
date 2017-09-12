@@ -23,9 +23,8 @@
           <span class="place-icon user-page__profile-details__place"> <%= @user.user_country %></span>
           <% end %>
           <div class="user-page__profils">
-            <%= for profil <- @user.profils do %>
-              <span class="label label-primary"><%= profil %></span>
-            <% end %>
+            <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
+            <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
           </div>
         </div>
       </header>

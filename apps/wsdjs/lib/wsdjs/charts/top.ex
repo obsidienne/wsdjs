@@ -43,7 +43,7 @@ defmodule Wsdjs.Charts.Top do
 
   # Connected user can see voting and published Top + Top he has created
   def scoped(%Accounts.User{} = user) do
-    if Enum.member?(user.profils, "DJ_VIP") do
+    if user.profil_djvip do
       from m in Charts.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
     else
       Charts.Top

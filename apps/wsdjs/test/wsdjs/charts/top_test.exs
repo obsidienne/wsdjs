@@ -22,8 +22,8 @@ defmodule Wsdjs.TopTest do
     setup do
       [
         admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
-        dj: insert(:user, %{profils: ["DJ"]}),
+        dj_vip: insert(:user, %{profil_djvip: true}),
+        dj: insert(:user, %{profil_dj: true}),
         dt: Timex.beginning_of_month(Timex.today)
       ]
     end
@@ -77,8 +77,8 @@ defmodule Wsdjs.TopTest do
     setup do
       [
         admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
-        dj: insert(:user, %{profils: ["DJ"]}),
+        dj_vip: insert(:user, %{profil_djvip: true}),
+        dj: insert(:user, %{profil_dj: true}),
         dt: Timex.beginning_of_month(Timex.today)
       ]
     end
@@ -105,8 +105,8 @@ defmodule Wsdjs.TopTest do
     setup do
       [
         admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
-        dj: insert(:user, %{profils: ["DJ"]}),
+        dj_vip: insert(:user, %{profil_djvip: true}),
+        dj: insert(:user, %{profil_dj: true}),
         dt: Timex.beginning_of_month(Timex.today)
       ]
     end
@@ -133,8 +133,8 @@ defmodule Wsdjs.TopTest do
     setup do
       [
         admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profils: ["DJ_VIP"]}),
-        dj: insert(:user, %{profils: ["DJ"]}),
+        dj_vip: insert(:user, %{profil_djvip: true}),
+        dj: insert(:user, %{profil_dj: true}),
         dt: Timex.beginning_of_month(Timex.today)
       ]
     end
