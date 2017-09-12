@@ -51,10 +51,10 @@
   <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
 </section>
 
-<%= if Wsdjs.Musics.Policy.can?(:edit_song, @current_user, @song) == :ok do %>
+<%= if Wsdjs.Musics.Policy.can?(@current_user, :edit_song, @song) == :ok do %>
 <section class="container song-page__actions">
   <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
-  <%= if Wsdjs.Musics.Policy.can?(:delete_song, @current_user, @song) == :ok do %>
+  <%= if Wsdjs.Musics.Policy.can?(@current_user, :delete_song,  @song) == :ok do %>
     <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %></h1>
   <% end %>
 </section>

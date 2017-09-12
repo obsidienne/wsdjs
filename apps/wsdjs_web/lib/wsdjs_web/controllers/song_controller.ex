@@ -15,7 +15,7 @@ defmodule WsdjsWeb.SongController do
 
   def show(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
-         :ok <- Musics.Policy.can?(:show, song, current_user) do
+         :ok <- Musics.Policy.can?(current_user, :show, song) do
       comments = Musics.list_comments(id)
       opinions = Musics.list_opinions(id)
       comment_changeset = Musics.Comment.changeset(%Comment{})
@@ -60,7 +60,7 @@ defmodule WsdjsWeb.SongController do
   def create(conn, %{"song" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
 
-    with :ok <- Wsdjs.Musics.Policy.can?(:create_song, current_user),
+    with :ok <- Wsdjs.Musics.Policy.can?(current_user, :create_song),
          {:ok, song} <- Musics.create_song(params) do
       conn
       |> put_flash(:info, "#{song.title} created")
@@ -95,7 +95,7 @@ defmodule WsdjsWeb.SongController do
 
   def delete(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
-         :ok <- Musics.Policy.can?(:delete_song, current_user, song),
+         :ok <- Musics.Policy.can?(current_user, :delete_song, song),
          {:ok, _song} = Musics.delete_song(song) do
 
       conn

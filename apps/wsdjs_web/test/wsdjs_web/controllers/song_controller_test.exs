@@ -69,8 +69,10 @@ defmodule WsdjsWeb.SongControllerTest do
         assign(conn, :current_user, insert(:user, %{profil_dj: true})),
       ], fn conn ->
         conn = get conn, song_path(conn, :show, song.id)
-        assert html_response(conn, 302)
-        assert conn.halted
+        assert html_response(conn, 200) =~ "Song - WSDJs"
+        assert String.contains?(conn.resp_body, "hidden track")
+        refute String.contains?(conn.resp_body, song.title)
+        refute String.contains?(conn.resp_body, song.artist)
       end)
     end
 

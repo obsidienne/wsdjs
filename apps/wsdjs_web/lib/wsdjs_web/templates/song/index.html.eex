@@ -2,7 +2,7 @@
   <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="container">
-    <%= if Wsdjs.Musics.Policy.can?(:create_song, @conn.assigns.current_user) == :ok do %>
+    <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
       <a class="btn btn-primary" title="Suggest a song" href="<%= song_path(@conn, :new) %>">Suggest a song</a>
     <% end %>
 

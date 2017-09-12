@@ -2,20 +2,16 @@ defmodule Wsdjs.Musics.Policy do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
 
-  def can?(_, %User{admin: true}, _), do: :ok
-  def can?(_, %User{id: id}, %Song{user_id: id}), do: :ok
-
-  def can?(:show, %Song{public_track: true}, _), do: :ok
-  def can?(:show, %Song{instant_hit: true}, _), do: :ok
-  def can?(:show, %Song{hidden_track: true}, %User{admin: true}), do: :ok
-  def can?(:show, %Song{hidden_track: true}, %User{profil_djvip: true}), do: :ok
-
+  def can?(%User{admin: true}, _, _), do: :ok
+  def can?(%User{id: id}, _, %Song{user_id: id}), do: :ok
+  def can?(_, :show, %Song{public_track: true}), do: :ok
+  def can?(_, :show, %Song{instant_hit: true}), do: :ok
+  def can?(%User{profil_djvip: true}, :show, %Song{hidden_track: true}), do: :ok
   def can?(_, _, _), do: {:error, :unauthorized}
 
-  def can?(:create_comment, %User{profil_djvip: true}), do: :ok
-
-  def can?(:search, %User{}), do: :ok
-  def can?(:list_user_suggestions, %User{}), do: :ok
+  def can?(%User{profil_djvip: true}, :create_comment), do: :ok
+  def can?(%User{}, :search), do: :ok
+  def can?(%User{}, :list_user_suggestions), do: :ok
 
   def can?(_, _), do: {:error, :unauthorized}
 end

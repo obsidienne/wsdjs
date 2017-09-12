@@ -11,7 +11,7 @@ defmodule WsdjsWeb.UserController do
     current_user = conn.assigns[:current_user]
     user = Accounts.get_user(user_id)
 
-    with :ok <- Accounts.Policy.can?(:show_user, user, current_user) do
+    with :ok <- Accounts.Policy.can?(current_user, :show, user) do
       page = Musics.paginate_songs_user(current_user, user_id)
 
       conn
@@ -25,7 +25,7 @@ defmodule WsdjsWeb.UserController do
     current_user = conn.assigns[:current_user]
 
     with user = Accounts.get_user(id),
-         :ok <- Accounts.Policy.can?(:edit_user, user, current_user) do
+         :ok <- Accounts.Policy.can?(current_user, :edit_user, user) do
       changeset = Accounts.change_user(user)
       render conn, "edit.html", user: user, changeset: changeset
     end
@@ -35,7 +35,7 @@ defmodule WsdjsWeb.UserController do
     current_user = conn.assigns[:current_user]
     user = Accounts.get_user(id)
 
-    with :ok <- Accounts.Policy.can?(:edit_user, user, current_user),
+    with :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
          {:ok, user} <- Accounts.update_user(user, user_params) do
       conn
       |> put_flash(:info, "Profile updated.")
