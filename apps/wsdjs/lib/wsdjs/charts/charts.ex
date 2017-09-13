@@ -83,8 +83,9 @@ defmodule Wsdjs.Charts do
   end
 
   def create_top(%{"due_date": due_date} = params) do
-    start_period = Timex.to_datetime(Timex.beginning_of_month(due_date))
-    end_period = Timex.to_datetime(Timex.end_of_month(due_date))
+    due_date = Timex.to_datetime(due_date)
+    start_period = Timex.beginning_of_month(due_date)
+    end_period = Timex.end_of_month(due_date)
     query = from s in Song, where: s.inserted_at >= ^start_period and s.inserted_at <= ^end_period
     songs = Repo.all(query)
 
