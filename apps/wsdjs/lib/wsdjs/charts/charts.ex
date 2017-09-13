@@ -90,7 +90,7 @@ defmodule Wsdjs.Charts do
     songs = Repo.all(query)
 
     %Top{}
-    |> Top.changeset(params)
+    |> Top.changeset(Map.put(params, :status, "checking"))
     |> put_assoc(:songs, songs)
     |> Repo.insert()
   end

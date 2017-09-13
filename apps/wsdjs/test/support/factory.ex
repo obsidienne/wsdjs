@@ -39,4 +39,12 @@ defmodule Wsdjs.Factory do
       top: build(:top)
     }
   end
+
+  def opinion_factory do
+    %Wsdjs.Musics.Opinion {
+      kind: "like",
+      user: build(:user),
+      song: build(:song)
+    }
+  end
 end
