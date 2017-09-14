@@ -214,6 +214,7 @@ defmodule WsdjsWeb.SongControllerTest do
       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
       assign(conn, :current_user, insert(:user, %{profil_dj: true})),
       assign(conn, :current_user, insert(:user)),
+      assign(conn, :current_user, nil),
       ], fn conn ->
       Enum.each([rank1, rank10], fn rank ->
         conn = get conn, song_path(conn, :show, rank.song.id)
@@ -221,21 +222,12 @@ defmodule WsdjsWeb.SongControllerTest do
         assert String.contains?(conn.resp_body, rank.song.title)
       end)
     end)
-
-    Enum.each([
-      assign(conn, :current_user, nil),
-    ], fn conn ->
-      Enum.each([rank1, rank10, rank11], fn rank ->
-        conn = get conn, song_path(conn, :show, rank.song.id)
-        assert html_response(conn, 302)
-      end)
-    end)
   end
 
-  test "show song TOP current month -23", %{conn: conn} do
+  test "show song TOP current month -27", %{conn: conn} do
     dt = Timex.today
     |> Timex.beginning_of_month()
-    |> Timex.shift(months: -23)
+    |> Timex.shift(months: -27)
 
     top = insert(:top, %{due_date: dt, status: "published"})
     rank1 = insert(:rank, position: 1, top: top)
@@ -276,10 +268,10 @@ defmodule WsdjsWeb.SongControllerTest do
     end)
   end
 
-  test "show song TOP current month -27", %{conn: conn} do
+  test "show song TOP current month -28", %{conn: conn} do
     dt = Timex.today
     |> Timex.beginning_of_month()
-    |> Timex.shift(months: -27)
+    |> Timex.shift(months: -28)
 
     top = insert(:top, %{due_date: dt, status: "published"})
     rank1 = insert(:rank, position: 1, top: top)

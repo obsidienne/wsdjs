@@ -5,6 +5,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   """
   alias Wsdjs.Musics.Art
   alias Wsdjs.Accounts.Avatar
+  alias Wsdjs.Charts.Top
 
   @art_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
   @art_blured_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_900,o_30/f_auto,q_auto,dpr_auto/fl_immutable_cache/"
@@ -30,17 +31,21 @@ defmodule WsdjsWeb.CloudinaryHelper do
   def avatar_url(_), do: @avatar_missing_url
   def avatar_url, do: @avatar_missing_url
 
-  def top_art(top) do
+  def top_art(%Top{status: "voting"}) do
+    "http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_400/wsdjs/worldswingdjs_single_flat.jpg"
+  end
+
+  def top_art(%Top{status: "published"} = top) do
     "http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_400/"
-    <> "l_covers:#{top_rank_art(top, 1)},w_100,x_250,y_-150,o_60/"
-    <> "l_covers:#{top_rank_art(top, 2)},w_100,x_200,y_-50,o_60/"
-    <> "l_covers:#{top_rank_art(top, 3)},w_100,x_200,y_50,o_60/"
-    <> "l_covers:#{top_rank_art(top, 4)},w_100,x_200,y_150,o_60/"
-    <> "l_covers:#{top_rank_art(top, 5)},w_100,x_-200,y_250,o_60/"
-    <> "l_covers:#{top_rank_art(top, 6)},w_100,x_-100,y_200,o_60/"
-    <> "l_covers:#{top_rank_art(top, 7)},w_100,y_200,o_60/"
-    <> "l_covers:#{top_rank_art(top, 8)},w_100,x_100,y_200,o_60/"
-    <> "l_covers:#{top_rank_art(top, 9)},w_100,x_200,y_200,o_60/"
+    <> "l_covers:#{top_rank_art(top, 1)},w_100,x_250,y_-150/"
+    <> "l_covers:#{top_rank_art(top, 2)},w_100,x_200,y_-50/"
+    <> "l_covers:#{top_rank_art(top, 3)},w_100,x_200,y_50/"
+    <> "l_covers:#{top_rank_art(top, 4)},w_100,x_200,y_150/"
+    <> "l_covers:#{top_rank_art(top, 5)},w_100,x_-200,y_250/"
+    <> "l_covers:#{top_rank_art(top, 6)},w_100,x_-100,y_200/"
+    <> "l_covers:#{top_rank_art(top, 7)},w_100,y_200/"
+    <> "l_covers:#{top_rank_art(top, 8)},w_100,x_100,y_200/"
+    <> "l_covers:#{top_rank_art(top, 9)},w_100,x_200,y_200/"
     <> top_rank_art(top, 0)
   end
 

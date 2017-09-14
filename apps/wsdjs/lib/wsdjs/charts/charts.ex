@@ -82,14 +82,15 @@ defmodule Wsdjs.Charts do
     |> Repo.preload(ranks: list_rank(current_user, top_id))
   end
 
-  def create_top(%{"due_date": due_date} = params) do
-    start_period = Timex.to_datetime(Timex.beginning_of_month(due_date))
-    end_period = Timex.to_datetime(Timex.end_of_month(due_date))
+  def create_top(params) do
+    due_date = Timex.to_datetime(Map.fetch!(params, :due_date))
+    start_period = Timex.beginning_of_month(due_date)
+    end_period = Timex.end_of_month(due_date)
     query = from s in Song, where: s.inserted_at >= ^start_period and s.inserted_at <= ^end_period
     songs = Repo.all(query)
 
     %Top{}
-    |> Top.changeset(params)
+    |> Top.changeset(Map.put(params, :status, "checking"))
     |> put_assoc(:songs, songs)
     |> Repo.insert()
   end
@@ -140,49 +141,22 @@ defmodule Wsdjs.Charts do
   # according to this rule: (like * 2) - (down * 3) + (up * 4)
   # After that, DJs can vote for their top 10.
   defp go_step("voting", top) do
-    ranks = Rank
-    |> where(top_id: ^top.id)
-    |> preload(song: :opinions)
-    |> Repo.all()
-
-    Enum.each(ranks, fn(rank) ->
-      val = Enum.reduce(rank.song.opinions, 0, fn(opinion, acc) ->
-        case opinion.kind do
-          "up"   -> acc + 4
-          "like" -> acc + 2
-          "down" -> acc - 3
-          _      -> acc
-        end
-      end)
-
-      rank
-      |> Rank.changeset(%{likes: val})
-      |> Repo.update()
-    end)
-
     top
     |> Top.step_changeset(%{status: "voting"})
     |> Repo.update()
   end
 
-  # The top creator decides it's time to publish the
+  # The top creator decides it's time to stop voting
+  # we reinitialize the total votes and likes (admin can return from published)
   # Need to sum the votes according to this rule
   # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
   # After that, the top creator can apply bonus to the top.
   defp go_step("counting", top) do
     from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id])
-    |> Repo.update_all(set: [votes: 0])
+    |> Repo.update_all(set: [votes: 0, likes: 0, position: nil])
 
-    Wsdjs.Charts.Vote
-    |> where(top_id: ^top.id)
-    |> group_by(:song_id)
-    |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
-    |> Repo.all()
-    |> Enum.each(fn(vote) ->
-      val = 10 * vote[:count] - vote[:sum] + vote[:count]
-      from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id, song_id: ^vote.song_id])
-      |> Repo.update_all(set: [votes: val])
-    end)
+    set_likes(top)
+    set_votes(top)
 
     top
     |> Top.step_changeset(%{status: "counting"})
@@ -263,6 +237,33 @@ defmodule Wsdjs.Charts do
     rank
     |> Rank.changeset(%{bonus: bonus})
     |> Repo.update()
+  end
+
+  def set_likes(%Top{id: id}) do
+    ranks = Rank
+    |> where(top_id: ^id)
+    |> preload(song: :opinions)
+    |> Repo.all()
+
+    Enum.each(ranks, fn(rank) ->
+      val = Wsdjs.Musics.opinions_value(rank.song.opinions)
+      rank
+      |> Rank.changeset(%{likes: val})
+      |> Repo.update()
+    end)
+  end
+
+  def set_votes(%Top{id: id}) do
+    Wsdjs.Charts.Vote
+    |> where(top_id: ^id)
+    |> group_by(:song_id)
+    |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
+    |> Repo.all()
+    |> Enum.each(fn(vote) ->
+      val = 10 * vote[:count] - vote[:sum] + vote[:count]
+      from(p in Wsdjs.Charts.Rank, where: [top_id: ^id, song_id: ^vote.song_id])
+      |> Repo.update_all(set: [votes: val])
+    end)
   end
 
   @doc """
