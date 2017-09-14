@@ -55,7 +55,7 @@ defmodule Wsdjs.Musics.Song do
   # Connected user can see songs not explicitly track
   def scoped(%Accounts.User{} = user) do
     start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
-    end_period = Timex.shift(start_period, months: -23)
+    end_period = Timex.shift(start_period, months: -24)
 
     from s in Musics.Song,
     left_join: r in assoc(s, :ranks),
@@ -66,7 +66,7 @@ defmodule Wsdjs.Musics.Song do
 
   # Not connected users see only top 10 song or instant_hit
   def scoped(nil) do
-    start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -5)
+    start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -6)
     end_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
 
     from s in Musics.Song,
