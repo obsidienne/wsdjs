@@ -1,5 +1,5 @@
 defmodule Wsdjs.ChartsTest do
-  use Wsdjs.DataCase, async: true
+  use Wsdjs.DataCase
   import Wsdjs.Factory
 
   alias Wsdjs.Charts
@@ -70,10 +70,34 @@ defmodule Wsdjs.ChartsTest do
         assert is_nil(rank.position)
       end)
     end
-  end
 
-  test "Votes are correctly summed" do
-    assert false
+    test "in published: Ranks has the correct position", %{top: top, positions: positions} do
+      {:ok, top} = Charts.next_step(top)
+      {:ok, top} = Charts.next_step(top)
+      {:ok, top} = Charts.next_step(top)
+      assert top.status == "published"
+
+      ranks = Repo.all Ecto.assoc(top, :ranks)
+      assert Enum.count(ranks) == 3
+      Enum.each(ranks, fn rank ->
+        position = Map.fetch!(positions, rank.song_id)
+        assert rank.position == position
+      end)
+    end
+
+    test "in counting from published: Ranks has no position", %{top: top} do
+      {:ok, top} = Charts.next_step(top)
+      {:ok, top} = Charts.next_step(top)
+      {:ok, top} = Charts.next_step(top)
+      {:ok, top} = Charts.previous_step(top)
+      assert top.status == "counting"
+
+      ranks = Repo.all Ecto.assoc(top, :ranks)
+      assert Enum.count(ranks) == 3
+      Enum.each(ranks, fn rank ->
+        assert is_nil(rank.position)
+      end)
+    end
   end
 
   defp create_top(_) do
@@ -88,6 +112,15 @@ defmodule Wsdjs.ChartsTest do
     insert(:opinion, song: song2, kind: "up")
     insert(:opinion, song: song3, kind: "down")
 
+    # vote = 10 * vote[:count] - vote[:sum] + vote[:count]
+    # opinion = "up"-> 4, "like" -> 2, "down" -> 3
+
+    positions = %{
+      "#{song1.id}" => 2,
+      "#{song2.id}" => 1,
+      "#{song3.id}" => 3,
+    }
+
     user = insert(:user, %{admin: true})
     {:ok, %Top{} = top} = Charts.create_top(%{"due_date": Timex.today, user_id: user.id})
 
@@ -95,6 +128,6 @@ defmodule Wsdjs.ChartsTest do
     insert(:vote, votes: 2, song: song2, top: top)
     insert(:vote, votes: 3, song: song3, top: top)
 
-    %{top: top}
+    %{top: top, positions: positions}
   end
 end
