@@ -47,4 +47,13 @@ defmodule Wsdjs.Factory do
       song: build(:song)
     }
   end
+
+  def vote_factory do
+    %Wsdjs.Charts.Vote {
+      votes: System.unique_integer([:positive]),
+      song: build(:song),
+      top: build(:top),
+      user: build(:user)
+    }
+  end
 end

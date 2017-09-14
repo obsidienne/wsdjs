@@ -252,6 +252,17 @@ defmodule Wsdjs.Musics do
   """
   def get_opinion!(id), do: Repo.get!(Opinion, id)
 
+  def opinions_value(opinions) when is_list(opinions) do
+    Enum.reduce(opinions, 0, fn(opinion, acc) ->
+      case opinion.kind do
+        "up"   -> acc + 4
+        "like" -> acc + 2
+        "down" -> acc - 3
+        _      -> acc
+      end
+    end)
+  end
+
   @doc """
   List opinions for a song order by desc
   """
