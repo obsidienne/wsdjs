@@ -93,15 +93,17 @@
     <% end %>
 
 
-    <%= inputs_for f, :parameter, fn fp -> %>
-      <div class="checkbox">
-        <%= label fp,:new_song_notification do %>
-          <%= checkbox fp, :new_song_notification %> New song notification
-        <% end %>
-        <%= error_tag fp, :new_song_notification %>
-      </div>
-    <% end %>
-  
+    <table class="table">
+      <tr>
+        <td>New song notification <h6 class="small">Receive an email everyday if new songs have been suggeted.</h6></td>
+        <td>
+          <div class="ckbx-style-11 ">
+            <%= checkbox f, :new_song_notification %>
+            <%= label f,:new_song_notification do %><% end %>
+          </div>
+        </td>
+      </tr>
+    </table>
     <%= submit "Update", class: "btn btn-primary" %>
   <% end %>
 
