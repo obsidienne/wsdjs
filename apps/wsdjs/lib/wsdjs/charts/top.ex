@@ -45,18 +45,17 @@ defmodule Wsdjs.Charts.Top do
   end
 
   # Connected user can see voting and published Top + Top he has created
-  def scoped(%Accounts.User{} = user) do
-    Charts.Top
-    |> where(status: "published")
-    |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -27))
-    |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
-  end
+  def scoped(%Accounts.User{}), do: scoped(-24, -3)
+  def scoped(nil), do: scoped(-5, -3)
 
-  # Not connected users see nothing
-  def scoped(nil) do
+  defp scoped(lower, upper) when is_integer(lower) and is_integer(upper) do
+    dt = Timex.beginning_of_month(Timex.today)
+    lower_date = Timex.shift(dt, months: lower)
+    upper_date = Timex.shift(dt, months: upper)
+
     Charts.Top
     |> where(status: "published")
-    |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -6))
-    |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
+    |> where([t], t.due_date >= ^lower_date)
+    |> where([t], t.due_date <= ^upper_date)
   end
 end

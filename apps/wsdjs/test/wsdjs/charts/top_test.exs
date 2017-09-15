@@ -28,7 +28,7 @@ defmodule Wsdjs.TopTest do
       ]
     end
 
-    test "current month to n-3", context do
+    test "[current month, n-2]", context do
       tops = [
         insert(:top, %{user: context[:admin], status: "published", due_date: context[:dt]}),
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -2)}),
@@ -39,7 +39,7 @@ defmodule Wsdjs.TopTest do
       assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
 
-    test "current month -3 to -6", context do
+    test "[current month -3 to -5]", context do
       tops = [
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -3)}),
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -5)}),
@@ -51,10 +51,10 @@ defmodule Wsdjs.TopTest do
       assert tops == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
 
-    test "current month -6 to n-26", context do
+    test "[current month -6 to n-24]", context do
       tops = [
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -6)}),
-        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -26)})
+        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -24)})
       ]
 
       assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
@@ -63,8 +63,8 @@ defmodule Wsdjs.TopTest do
       assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
 
-    test "current month -27", context do
-      top = insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -27)})
+    test "current month -25", context do
+      top = insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -25)})
 
       assert [top] == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
       assert [top] == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
