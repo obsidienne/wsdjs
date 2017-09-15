@@ -42,22 +42,9 @@ defmodule WsdjsWeb.TopController do
   def show(conn, %{"id" => id}, current_user) do
     top = Charts.get_top!(current_user, id)
     changeset = Top.changeset(top)
+    current_user_votes = Charts.list_votes(id, current_user)
 
-    case top.status do
-      "checking" ->
-        render conn, "checking.html", top: top, changeset: changeset
-      "voting" ->
-        current_user_votes = Charts.list_votes(id, current_user)
-        render conn, "voting.html", top: top,
-                                    current_user_votes: current_user_votes,
-                                    changeset: changeset
-      "counting" ->
-        render conn, "counting.html", top: top, changeset: changeset
-      "published" ->
-        render conn, :published, top: top, changeset: changeset
-      _ ->
-        raise ArgumentError, "The template requested does not exist. Something smelly."
-    end
+    render(conn, :show, top: top, current_user_votes: current_user_votes, changeset: changeset)
   end
 
   def new(conn, _params, _current_user) do

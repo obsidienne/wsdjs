@@ -1,6 +1,27 @@
 defmodule WsdjsWeb.TopView do
   use WsdjsWeb, :view
 
+  def render("show.html", %{top: top} = assigns) do
+    template =
+      case top.status do
+        "checking" -> "checking.html"
+        "voting" -> "voting.html"
+        "counting" -> "counting.html"
+        "published" -> "published.html"
+      end
+
+    render_template template, assigns
+  end
+
+  def render("show.text", %{top: top} = assigns) do
+    template =
+      case top.status do
+        "published" -> "published.text"
+      end
+
+    render_template template, assigns
+  end
+
   def current_user_vote(current_user_votes, rank) do
     current_user_vote = Enum.find(current_user_votes, fn(x) -> x.song_id == rank.song.id  end)
 
