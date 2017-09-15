@@ -9,5 +9,6 @@ defmodule Wsdjs.Charts.Policy do
   def can?(_, _), do: {:error, :unauthorized}
 
   def can?(%User{admin: :true}, _, %Top{}), do: :ok
+  def can?(nil, :show, %Top{status: "published"} = top), do: :ok
   def can?(_, _, _), do: {:error, :unauthorized}
 end

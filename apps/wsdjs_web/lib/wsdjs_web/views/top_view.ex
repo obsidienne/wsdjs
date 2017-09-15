@@ -60,11 +60,6 @@ defmodule WsdjsWeb.TopView do
     }
   end
 
-
-  def get_ranks_according_to_votes(top) do
-    top.ranks
-  end
-
   def get_song_by(top, user, position) do
     vote = Enum.find(top.votes, fn vote ->
       vote.votes == position && vote.user_id == user.id

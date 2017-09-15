@@ -33,7 +33,7 @@
   </div>
 
   <section class="top-songs-container">
-    <%= for rank <- get_ranks_according_to_votes(@top) do %>
+    <%= for rank <- @ranks do %>
       <article class="top-song">
         <div class="song-art-container">
           <div class="voting-position charted">

@@ -74,14 +74,6 @@ defmodule Wsdjs.Charts do
   """
   def get_top!(id), do: Repo.get!(Top, id)
 
-  def get_top!(current_user, top_id) do
-    current_user
-    |> Top.scoped()
-    |> Repo.get!(top_id)
-    |> Repo.preload(:user)
-    |> Repo.preload(ranks: list_rank(current_user, top_id))
-  end
-
   def create_top(params) do
     due_date = Timex.to_datetime(Map.fetch!(params, :due_date))
     start_period = Timex.beginning_of_month(due_date)
@@ -204,14 +196,15 @@ defmodule Wsdjs.Charts do
     |> where([user_id: ^user.id, top_id: ^id])
   end
 
-  def list_votes(id, %User{} = user) do
+  def list_votes(%Top{}, nil), do: []
+  def list_votes(%Top{id: id}, %User{} = user) do
     id
     |> q_list_votes(user)
     |> Repo.all()
   end
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
-    top = get_top!(user, top_id)
+    top = get_top!(top_id)
     top = Repo.preload top, votes: q_list_votes(top_id, user)
 
     new_votes = votes_param
@@ -298,27 +291,31 @@ defmodule Wsdjs.Charts do
     Repo.delete(rank)
   end
 
-  defp list_rank(current_user, top_id) when is_nil(current_user) do
-    from r in Rank,
+  def list_rank(nil, %Top{id: top_id}) do
+    query = from r in Rank,
     where: r.top_id == ^top_id,
     order_by: [asc: r.position, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
     limit: 10,
     preload: [song: [:art, :user, :opinions]]
+
+    Repo.all query
   end
 
-  defp list_rank(current_user, top_id) do
+  def list_rank(%User{} = current_user, %Top{id: top_id}) do
     current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
     limit = if current_user.profil_djvip or current_user.admin == true do 999 else 10 end
 
-    from r in Rank,
+    query = from r in Rank,
     where: r.top_id == ^top_id,
     left_join: v in ^current_user_votes, on: [song_id: r.song_id],
     order_by: [asc: r.position, asc: v.votes, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
     limit: ^limit,
     preload: [song: [:art, :user, :opinions]]
+
+    Repo.all query
   end
 
-  defp list_rank do
+  def list_rank do
     from q in Rank,
     where: q.position <= 10,
     order_by: [asc: q.position],

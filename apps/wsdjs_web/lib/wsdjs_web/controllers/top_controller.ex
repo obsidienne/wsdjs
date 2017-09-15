@@ -40,11 +40,23 @@ defmodule WsdjsWeb.TopController do
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    top = Charts.get_top!(current_user, id)
-    changeset = Top.changeset(top)
-    current_user_votes = Charts.list_votes(id, current_user)
 
-    render(conn, :show, top: top, current_user_votes: current_user_votes, changeset: changeset)
+    with top <- Charts.get_top!(id),
+         :ok <- Charts.Policy.can?(current_user, :show, top) do
+
+      changeset = Top.changeset(top)
+      current_user_votes = Charts.list_votes(top, current_user)
+      # current_user
+      # |> Top.scoped()
+      # |> Repo.get!(top_id)
+      # |> Repo.preload(:user)
+      # |> Repo.preload(ranks: list_rank(current_user, top_id))
+  
+      render(conn, :show, top: top,
+                          current_user_votes: current_user_votes,
+                          ranks: Charts.list_rank(current_user, top),
+                          changeset: changeset)
+    end
   end
 
   def new(conn, _params, _current_user) do

@@ -29,7 +29,7 @@
 </header>
 
   <main class="container top-published">
-  <%= for rank <- @top.ranks do %>
+  <%= for rank <- @ranks do %>
   <%= if blur_track(rank.song, @current_user) == true do %>
 
     <article class="top-song">

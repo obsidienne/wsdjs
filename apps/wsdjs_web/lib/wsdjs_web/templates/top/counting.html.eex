@@ -27,7 +27,7 @@
 </header>
 
 <main class="container top-counting">
-  <%= for rank <- @top.ranks do %>
+  <%= for rank <- @ranks do %>
     <article class="top-song">
       <div class="song-art-container">
         <img data-src="<%= art_url(rank.song.art)%>" />
