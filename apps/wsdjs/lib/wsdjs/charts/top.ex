@@ -41,7 +41,7 @@ defmodule Wsdjs.Charts.Top do
   # Admin sees everything
   def scoped(%Accounts.User{admin: :true}), do: Charts.Top
   def scoped(%Accounts.User{profil_djvip: true}) do
-    from m in Charts.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
+    from m in Charts.Top, where: m.status in ["voting", "published"]
   end
 
   # Connected user can see voting and published Top + Top he has created
