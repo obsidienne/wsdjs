@@ -50,7 +50,6 @@ defmodule Wsdjs.Charts.Top do
     |> where(status: "published")
     |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -27))
     |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
-    |> or_where(user_id: ^user.id)
   end
 
   # Not connected users see nothing
