@@ -3,8 +3,9 @@ defmodule Wsdjs.TopTest do
 
   alias Wsdjs.Charts.Top
   alias Wsdjs.Charts
-  import Wsdjs.Factory
   alias Wsdjs.Repo
+
+  import Wsdjs.Factory
 
   describe "changeset" do
     test "changeset with minimal valid attributes" do
@@ -156,12 +157,6 @@ defmodule Wsdjs.TopTest do
       assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
     end
   end
-
-
-#    test "list_songs/0 returns all songs" do
-#      song = song_fixture()
-#      assert Musics.list_songs() == [song]
-#    end
 
   test "get_top!/1 returns the top with given id" do
     top = insert(:top)
