@@ -40,18 +40,17 @@ defmodule Wsdjs.Charts.Top do
 
   # Admin sees everything
   def scoped(%Accounts.User{admin: :true}), do: Charts.Top
+  def scoped(%Accounts.User{profil_djvip: true}) do
+    from m in Charts.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
+  end
 
   # Connected user can see voting and published Top + Top he has created
   def scoped(%Accounts.User{} = user) do
-    if user.profil_djvip do
-      from m in Charts.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
-    else
-      Charts.Top
-      |> where(status: "published")
-      |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -27))
-      |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
-      |> or_where(user_id: ^user.id)
-    end
+    Charts.Top
+    |> where(status: "published")
+    |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -27))
+    |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
+    |> or_where(user_id: ^user.id)
   end
 
   # Not connected users see nothing
