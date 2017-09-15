@@ -14,7 +14,24 @@ defmodule Wsdjs.PolicyTest do
       assert :ok == Policy.can?(%User{admin: :true}, :show, top)
       assert :ok == Policy.can?(%User{profil_djvip: true}, :show, top)
       refute :ok == Policy.can?(%User{profil_dj: true}, :show, top)
-      refute :ok == Policy.can?(%User{}, :show, top)
+      refute :ok == Policy.can?(nil, :show, top)
+
+      top = insert(:top, %{status: "published", due_date: Timex.shift(dt, months: -2)})
+      assert :ok == Policy.can?(%User{admin: :true}, :show, top)
+      assert :ok == Policy.can?(%User{profil_djvip: true}, :show, top)
+      refute :ok == Policy.can?(%User{profil_dj: true}, :show, top)
+      refute :ok == Policy.can?(nil, :show, top)
+
+      top = insert(:top, %{status: "published", due_date: Timex.shift(dt, months: -5)})
+      assert :ok == Policy.can?(%User{admin: :true}, :show, top)
+      assert :ok == Policy.can?(%User{profil_djvip: true}, :show, top)
+      assert :ok == Policy.can?(%User{profil_dj: true}, :show, top)
+      assert :ok == Policy.can?(nil, :show, top)
+
+      top = insert(:top, %{status: "published", due_date: Timex.shift(dt, months: -6)})
+      assert :ok == Policy.can?(%User{admin: :true}, :show, top)
+      assert :ok == Policy.can?(%User{profil_djvip: true}, :show, top)
+      assert :ok == Policy.can?(%User{profil_dj: true}, :show, top)
       refute :ok == Policy.can?(nil, :show, top)
     end
   end
