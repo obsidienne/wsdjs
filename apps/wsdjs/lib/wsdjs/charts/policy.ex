@@ -6,6 +6,8 @@ defmodule Wsdjs.Charts.Policy do
   alias Wsdjs.Charts.Top
   alias Wsdjs.Repo
 
+  def can?(%User{admin: :true}, :vote), do: {:error, :unauthorized}
+  def can?(%User{profil_djvip: true}, :vote), do: :ok
   def can?(%User{admin: :true}, _), do: :ok
   def can?(_, _), do: {:error, :unauthorized}
 

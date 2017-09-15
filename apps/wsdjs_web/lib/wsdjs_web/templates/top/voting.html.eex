@@ -27,6 +27,8 @@
 </header>
 
 <main class="container top-voting">
+  <%= if Wsdjs.Charts.Policy.can?(@current_user, :vote) == :ok do %>
+
   <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
   <div class="top-voting-footer-actions">
     <%= submit "vote", class: "btn btn-primary" %>
@@ -39,7 +41,7 @@
           <div class="voting-position charted">
             <div class="chart-bg"></div>
             <div class="chart-value">
-              <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", class: "voting-position__selector", value: current_user_vote(@current_user_votes, rank)) %>
+              <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", class: "voting-position__selector", value: current_user_vote(@votes, rank)) %>
             </div>
           </div>
           <img src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
@@ -81,5 +83,7 @@
     <% end %>
   </section>
   <% end %>
-
+  <% else %>
+  Admin does not vote !
+  <% end %>
 </main>

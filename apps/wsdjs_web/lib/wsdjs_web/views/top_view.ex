@@ -22,13 +22,13 @@ defmodule WsdjsWeb.TopView do
     render_template template, assigns
   end
 
-  def current_user_vote(current_user_votes, rank) do
-    current_user_vote = Enum.find(current_user_votes, fn(x) -> x.song_id == rank.song.id  end)
+  def current_user_vote(votes, rank) do
+    vote = Enum.find(votes, fn(x) -> x.song_id == rank.song.id  end)
 
-    if is_nil(current_user_vote) do
+    if is_nil(vote) do
       nil
     else
-      current_user_vote.votes
+      vote.votes
     end
   end
 
