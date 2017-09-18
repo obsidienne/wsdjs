@@ -295,29 +295,29 @@ defmodule Wsdjs.Charts do
   When a nil user can only access published top with a limit of 10 songs order by position.
   A published top always contains position.
   """
-  def list_rank(nil, %Top{id: top_id, status: "published"}) do
-    query = from r in Rank,
-    where: r.top_id == ^top_id,
-    order_by: [asc: r.position],
-    limit: 10,
-    preload: [song: [:art, :user, :opinions]]
-
-    Repo.all query
+  def list_rank(nil, %Top{status: "published"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], asc: r.position)
+    |> limit(10)
+    |> Repo.all()
   end
-
-  def list_rank(%User{}, %Top{id: top_id, status: "published"}) do
-    query = from r in Rank,
-    where: r.top_id == ^top_id,
-    order_by: [asc: r.position],
-    preload: [song: [:art, :user, :opinions]]
-
-    Repo.all query
+  def list_rank(%User{}, %Top{status: "published"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
+    |> Repo.all()
   end
-
   def list_rank(%User{admin: true}, %Top{status: "counting"} = top) do
     top
     |> list_rank()
     |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
+    |> Repo.all()
+  end
+  def list_rank(%User{admin: true}, %Top{status: "checking"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], desc: :inserted_at)
     |> Repo.all()
   end
 
@@ -332,12 +332,7 @@ defmodule Wsdjs.Charts do
 
     Repo.all query
   end
-  def list_rank(%User{admin: true}, %Top{status: "checking"} = top) do
-    top
-    |> list_rank()
-    |> order_by([r], desc: :inserted_at)
-    |> Repo.all()
-  end
+
   defp list_rank(%Top{id: id}) do
     from r in Rank,
     where: r.top_id == ^id,
