@@ -51,9 +51,11 @@ defmodule WsdjsWeb.TopController do
     end
   end
 
-  def new(conn, _params, _current_user) do
-    changeset = Top.changeset(%Top{})
-    render(conn, "new.html", changeset: changeset)
+  def new(conn, _params, current_user) do
+    with :ok <- Charts.Policy.can?(current_user, :create_top) do
+      changeset = Top.changeset(%Top{})
+      render(conn, "new.html", changeset: changeset)
+    end
   end
 
   def update(conn, %{"id" => id, "direction" => "next"}, current_user) do
