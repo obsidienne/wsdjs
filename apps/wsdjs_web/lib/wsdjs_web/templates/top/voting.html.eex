@@ -27,8 +27,6 @@
 </header>
 
 <main class="container top-voting">
-  <%= if Wsdjs.Charts.Policy.can?(@current_user, :vote) == :ok do %>
-
   <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
   <div class="top-voting-footer-actions">
     <%= submit "vote", class: "btn btn-primary" %>
@@ -82,8 +80,5 @@
       </article>
     <% end %>
   </section>
-  <% end %>
-  <% else %>
-  Admin does not vote !
   <% end %>
 </main>

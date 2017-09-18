@@ -291,28 +291,57 @@ defmodule Wsdjs.Charts do
     Repo.delete(rank)
   end
 
-  def list_rank(nil, %Top{id: top_id}) do
+  @doc """
+  When a nil user can only access published top with a limit of 10 songs order by position.
+  A published top always contains position.
+  """
+  def list_rank(nil, %Top{id: top_id, status: "published"}) do
     query = from r in Rank,
     where: r.top_id == ^top_id,
-    order_by: [asc: r.position, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
+    order_by: [asc: r.position],
     limit: 10,
     preload: [song: [:art, :user, :opinions]]
 
     Repo.all query
   end
 
-  def list_rank(%User{} = current_user, %Top{id: top_id}) do
+  def list_rank(%User{}, %Top{id: top_id, status: "published"}) do
+    query = from r in Rank,
+    where: r.top_id == ^top_id,
+    order_by: [asc: r.position],
+    preload: [song: [:art, :user, :opinions]]
+
+    Repo.all query
+  end
+
+  def list_rank(%User{admin: true}, %Top{status: "counting"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
+    |> Repo.all()
+  end
+
+  def list_rank(%User{} = current_user, %Top{id: top_id, status: "voting"}) do
     votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
-    limit = if current_user.profil_djvip or current_user.admin == true do 999 else 10 end
 
     query = from r in Rank,
     where: r.top_id == ^top_id,
     left_join: v in ^votes, on: [song_id: r.song_id],
-    order_by: [asc: r.position, asc: v.votes, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
-    limit: ^limit,
+    order_by: [asc: v.votes, desc: :inserted_at],
     preload: [song: [:art, :user, :opinions]]
 
     Repo.all query
+  end
+  def list_rank(%User{admin: true}, %Top{status: "checking"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], desc: :inserted_at)
+    |> Repo.all()
+  end
+  defp list_rank(%Top{id: id}) do
+    from r in Rank,
+    where: r.top_id == ^id,
+    preload: [song: [:art, :user, :opinions]]
   end
 
   def list_rank do
