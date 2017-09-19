@@ -207,7 +207,12 @@ defmodule Wsdjs.Musics do
   alias Wsdjs.Musics.Comment
 
   @doc """
-  List comments for a song order by desc.
+  Returns the list of comments.
+
+  ## Examples
+
+      iex> list_comments(%Song{})
+      [%Comment{}, ...]
   """
   def list_comments(%Song{id: id}) do
     Comment
@@ -218,7 +223,16 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  This function add a comment to a song.
+  Creates a comment.
+
+  ## Examples
+
+      iex> create_comment(%{field: value})
+      {:ok, %Comment{}}
+
+      iex> create_comment(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
   """
   def create_comment(params) do
     {:ok, comment} = %Comment{}
@@ -251,6 +265,22 @@ defmodule Wsdjs.Musics do
 
   """
   def get_opinion!(id), do: Repo.get!(Opinion, id)
+
+  @doc """
+  Gets a single opinion by parameters.
+
+  Raises `Ecto.NoResultsError` if the Opinion does not exist.
+
+  ## Examples
+
+      iex> get_opinion!(params)
+      %Opinion{}
+
+      iex> get_opinion!(not_matching_params)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_opinion_by(params), do: Repo.get_by(Opinion, params)
 
   @doc """
   Gets the opinion total value of opinions list.
@@ -305,16 +335,27 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Deletes update or create an opinion.
+  Returns an `%Ecto.Changeset{}` for tracking opinion changes.
+
+  ## Examples
+
+      iex> change_opinion(opinion)
+      %Ecto.Changeset{source: %Opinion{}}
+
+  """
+  def change_opinion(%Opinion{} = opinion) do
+    Opinion.changeset(opinion, %{})
+  end
+
+  @doc """
+  Update or create an opinion.
 
   """
   def upsert_opinion(%User{id: user_id} = current_user, %Song{id: song_id}, kind) do
-    song_opinion = case Repo.get_by(Opinion, user_id: user_id, song_id: song_id) do
-      nil  -> Opinion.build(%{kind: kind, user_id: user_id, song_id: song_id})
+    case get_opinion_by(user_id: user_id, song_id: song_id) do
+      nil  -> change_opinion(%Opinion{kind: kind, user_id: user_id, song_id: song_id})
       song_opinion -> song_opinion
     end
-
-    song_opinion
     |> Opinion.changeset(%{kind: kind})
     |> Repo.insert_or_update()
   end

@@ -26,8 +26,4 @@ defmodule Wsdjs.Musics.Opinion do
     |> assoc_constraint(:user)
     |> assoc_constraint(:song)
   end
-
-  def build(%{kind: _kind, user_id: _user_id, song_id: _song_id} = params) do
-    changeset(%Wsdjs.Musics.Opinion{}, params)
-  end
 end
