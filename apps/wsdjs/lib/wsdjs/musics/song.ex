@@ -48,31 +48,29 @@ defmodule Wsdjs.Musics.Song do
 
   def genre, do: @validated_genre
 
-  # Admin sees everything
   def scoped(%Accounts.User{admin: :true}), do: Musics.Song
   def scoped(%Accounts.User{profil_djvip: :true}), do: Musics.Song
-  
-  # Connected user can see songs not explicitly track
-  def scoped(%Accounts.User{} = user) do
-    start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
-    end_period = Timex.shift(start_period, months: -24)
 
-    from s in Musics.Song,
-    left_join: r in assoc(s, :ranks),
-    left_join: t in assoc(r, :top),
-    where: s.user_id == ^user.id or s.public_track == true or s.instant_hit == true or
-            (t.status == "published" and r.position <= 10 and t.due_date <= ^start_period and t.due_date >= ^end_period)
+  def scoped(%Accounts.User{} = user) do
+    upper = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+    lower = Timex.shift(upper, months: -24)
+
+    scoped(lower, upper)
+    |> or_where([s], s.user_id == ^user.id)
   end
 
-  # Not connected users see only top 10 song or instant_hit
   def scoped(nil) do
-    start_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -6)
-    end_period = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+    lower = Timex.shift(Timex.beginning_of_month(Timex.now), months: -6)
+    upper = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
 
+    scoped(lower, upper)
+  end
+
+  defp scoped(%DateTime{} = lower, %DateTime{} = upper) do
     from s in Musics.Song,
     left_join: r in assoc(s, :ranks),
     left_join: t in assoc(r, :top),
-    where: (t.status == "published" and r.position <= 10 and t.due_date <= ^end_period and t.due_date >= ^start_period)
+    where: (t.status == "published" and r.position <= 10 and t.due_date >= ^lower and t.due_date <= ^upper)
         or s.instant_hit == true or s.public_track == true
   end
 

@@ -252,6 +252,15 @@ defmodule Wsdjs.Musics do
   """
   def get_opinion!(id), do: Repo.get!(Opinion, id)
 
+  @doc """
+  Gets the opinion total value of opinions list.
+
+  ## Examples
+
+      iex> opinions_value([%{kind: "up"}, %{kind: "down"}, %{kind: "like"}])
+      3
+
+  """
   def opinions_value(opinions) when is_list(opinions) do
     Enum.reduce(opinions, 0, fn(opinion, acc) ->
       case opinion.kind do
@@ -264,11 +273,16 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  List opinions for a song order by desc
+  List opinions for a song
+
+    ## Examples
+
+      iex> list_opinions(%Song{})
+      [%Opinion{}, ...]
   """
-  def list_opinions(song_id) do
+  def list_opinions(%Song{id: id}) do
     Opinion
-    |> where([song_id: ^song_id])
+    |> where([song_id: ^id])
     |> order_by([desc: :inserted_at])
     |> Repo.all
     |> Repo.preload([user: :avatar])
@@ -291,11 +305,12 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  This function modify the opinion for the current user.
+  Deletes update or create an opinion.
+
   """
-  def upsert_opinion(current_user, song_id, kind) do
-    song_opinion = case Repo.get_by(Opinion, user_id: current_user.id, song_id: song_id) do
-      nil  -> Opinion.build(%{kind: kind, user_id: current_user.id, song_id: song_id})
+  def upsert_opinion(%User{id: user_id} = current_user, %Song{id: song_id}, kind) do
+    song_opinion = case Repo.get_by(Opinion, user_id: user_id, song_id: song_id) do
+      nil  -> Opinion.build(%{kind: kind, user_id: user_id, song_id: song_id})
       song_opinion -> song_opinion
     end
 

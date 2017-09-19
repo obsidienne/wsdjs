@@ -4,7 +4,7 @@ defmodule Wsdjs.MusicsTest do
   alias Wsdjs.Musics
   alias Wsdjs.Musics.Song
   alias Wsdjs.Repo
-  
+
   describe "songs" do
 
     test "instant_hits/0 returns all instant hit" do
@@ -12,11 +12,6 @@ defmodule Wsdjs.MusicsTest do
       song = song |> Repo.preload([:art, :comments, :opinions, user: :avatar])
       assert Musics.instant_hits() == [song]
     end
-
-#    test "list_songs/0 returns all songs" do
-#      song = song_fixture()
-#      assert Musics.list_songs() == [song]
-#    end
 
     test "get_song!/1 returns the song with given id" do
       song = insert(:song)
