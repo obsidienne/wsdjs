@@ -15,6 +15,6 @@ defmodule WsdjsWeb.Api.V1.FallbackController do
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> render(GWsdjs.API.V1.ErrorView, :"404")
+    |> render(Wsdjs.API.V1.ErrorView, :"404")
   end
 end
