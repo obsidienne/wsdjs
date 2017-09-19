@@ -14,8 +14,7 @@ defmodule WsdjsWeb.Api.V1.CommentController do
     |> Map.put("user_id", current_user.id)
     |> Map.put("song_id", song_id)
 
-    with %Song{} <- Musics.get_song!(song_id),
-         :ok <- Musics.Policy.can?(current_user, :create_comment),
+    with :ok <- Musics.Policy.can?(current_user, :create_comment),
          {:ok, %Comment{} = comment} <- Musics.create_comment(params) do
     
       conn
