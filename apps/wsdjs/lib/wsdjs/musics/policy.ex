@@ -17,7 +17,7 @@ defmodule Wsdjs.Musics.Policy do
   end
   def can?(_, _, _), do: {:error, :unauthorized}
 
-  def can?(%User{profil_djvip: true}, :create_comment), do: :ok
+  def can?(%User{}, :create_comment), do: :ok
   def can?(%User{profil_djvip: true}, :create_song), do: :ok
   def can?(%User{}, :search), do: :ok
   def can?(%User{}, :list_user_suggestions), do: :ok
