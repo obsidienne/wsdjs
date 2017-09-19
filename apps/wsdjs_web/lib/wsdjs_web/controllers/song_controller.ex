@@ -16,7 +16,8 @@ defmodule WsdjsWeb.SongController do
   def show(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :show, song) do
-      comments = Musics.list_comments(id)
+
+      comments = Musics.list_comments(song)
       opinions = Musics.list_opinions(song)
       comment_changeset = Musics.Comment.changeset(%Comment{})
 

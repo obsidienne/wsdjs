@@ -209,9 +209,9 @@ defmodule Wsdjs.Musics do
   @doc """
   List comments for a song order by desc.
   """
-  def list_comments(song_id) do
+  def list_comments(%Song{id: id}) do
     Comment
-    |> where([song_id: ^song_id])
+    |> where([song_id: ^id])
     |> order_by([desc: :inserted_at])
     |> Repo.all
     |> Repo.preload([user: :avatar])
