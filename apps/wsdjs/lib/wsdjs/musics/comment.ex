@@ -2,6 +2,7 @@ defmodule Wsdjs.Musics.Comment do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Wsdjs.Musics.Comment
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -15,9 +16,9 @@ defmodule Wsdjs.Musics.Comment do
 
   @allowed_fields [:text, :user_id, :song_id]
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%Comment{} = comment, attrs) do
+    comment
+    |> cast(attrs, @allowed_fields)
     |> validate_required(:text)
     |> validate_length(:text, min: 1)
     |> assoc_constraint(:user)

@@ -19,7 +19,7 @@ defmodule WsdjsWeb.SongController do
 
       comments = Musics.list_comments(song)
       opinions = Musics.list_opinions(song)
-      comment_changeset = Musics.Comment.changeset(%Comment{})
+      comment_changeset = Musics.change_comment(%Comment{})
 
       render conn, "show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
     end

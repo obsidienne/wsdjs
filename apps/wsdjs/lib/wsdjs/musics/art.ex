@@ -2,6 +2,7 @@ defmodule Wsdjs.Musics.Art do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Wsdjs.Musics.Art
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -16,9 +17,9 @@ defmodule Wsdjs.Musics.Art do
 
   @allowed_fields [:cld_id, :version]
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%Art{} = art, attrs) do
+    art
+    |> cast(attrs, @allowed_fields)
     |> validate_required(~w(cld_id version)a)
     |> unique_constraint(:cld_id)
   end
