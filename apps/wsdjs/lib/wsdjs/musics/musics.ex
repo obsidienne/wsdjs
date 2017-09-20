@@ -366,7 +366,7 @@ defmodule Wsdjs.Musics do
   """
   def upsert_opinion(%User{id: user_id} = current_user, %Song{id: song_id}, kind) do
     case get_opinion_by(user_id: user_id, song_id: song_id) do
-      nil  -> change_opinion(%Opinion{kind: kind, user_id: user_id, song_id: song_id})
+      nil  -> %Opinion{kind: kind, user_id: user_id, song_id: song_id}
       song_opinion -> song_opinion
     end
     |> Opinion.changeset(%{kind: kind})
