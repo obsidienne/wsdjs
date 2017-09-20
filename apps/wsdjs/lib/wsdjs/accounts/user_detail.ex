@@ -48,7 +48,7 @@ defmodule Wsdjs.Accounts.UserDetail do
   # This function validates the format of an URL not it's validity.
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
-      case url |> String.to_char_list |> :http_uri.parse do
+      case url |> String.to_charlist |> :http_uri.parse do
         {:ok, _} -> []
         {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect msg}"}]
       end
