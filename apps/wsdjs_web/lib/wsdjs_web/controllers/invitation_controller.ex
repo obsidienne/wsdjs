@@ -29,4 +29,3 @@ defmodule WsdjsWeb.InvitationController do
     end
   end
 end
-

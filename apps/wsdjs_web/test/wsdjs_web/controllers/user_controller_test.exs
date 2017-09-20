@@ -137,7 +137,7 @@ defmodule WsdjsWeb.UserControllerTest do
     conn
     |> assign(:current_user, admin)
     |> put(user_path(conn, :update, user.id, %{"user" => params}))
-    
+
     user_updated = Wsdjs.Accounts.get_user(user.id)
     assert user_updated.profil_djvip
     assert user_updated.profil_dj

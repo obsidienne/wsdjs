@@ -31,7 +31,6 @@ defmodule WsdjsWeb.LayoutView do
     |> Enum.at(0)
   end
 
-
   @suffix "WSDJs"
 
   def page_title(conn) do
@@ -52,6 +51,6 @@ defmodule WsdjsWeb.LayoutView do
   defp get("user", :show), do: "User"
   defp get("user", :edit), do: "Edit user"
   defp get("top", :index), do: "Tops"
-  
+
   defp get(_, _), do: nil
 end

@@ -34,10 +34,10 @@ defmodule Wsdjs.TopTest do
         insert(:top, %{user: context[:admin], status: "published", due_date: context[:dt]}),
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -2)}),
       ]
-      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
-      assert tops == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
     end
 
     test "[current month -3 to -5]", context do
@@ -46,10 +46,10 @@ defmodule Wsdjs.TopTest do
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -5)}),
       ]
 
-      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
-      assert tops == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
-      assert tops == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
-      assert tops == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
     end
 
     test "[current month -6 to n-24]", context do
@@ -58,19 +58,19 @@ defmodule Wsdjs.TopTest do
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -24)})
       ]
 
-      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
-      assert tops == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
-      assert tops == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
     end
 
     test "current month -25", context do
       top = insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -25)})
 
-      assert [top] == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
-      assert [top] == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
+      assert [top] == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [top] == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
     end
   end
 
@@ -95,10 +95,10 @@ defmodule Wsdjs.TopTest do
         insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -27)})
       ]
 
-      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
     end
   end
 
@@ -123,10 +123,10 @@ defmodule Wsdjs.TopTest do
         insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -27)})
       ]
 
-      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
-      assert tops == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
     end
   end
 
@@ -151,16 +151,16 @@ defmodule Wsdjs.TopTest do
         insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -27)})
       ]
 
-      assert tops == Top.scoped(context[:admin]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(context[:dj_vip]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(context[:dj]) |> Repo.all() |> Repo.preload(:user)
-      assert [] == Top.scoped(nil) |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
     end
   end
 
   test "get_top!/1 returns the top with given id" do
     top = insert(:top)
-    assert top == Charts.get_top!(top.id) |> Repo.preload(:user)
+    assert top == top.id |> Charts.get_top!() |> Repo.preload(:user)
   end
 
   test "create_top/1 with valid data creates a top" do

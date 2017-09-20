@@ -62,7 +62,7 @@ defmodule WsdjsWeb.TopController do
     with top = Charts.get_top!(id),
          :ok <- Charts.Policy.can?(current_user, :update_top, top),
          {:ok, _top} = Charts.next_step(top) do
-      
+
       redirect(conn, to: top_path(conn, :show, top))
     end
   end

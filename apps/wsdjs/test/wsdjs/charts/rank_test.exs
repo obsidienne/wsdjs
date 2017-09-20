@@ -4,7 +4,7 @@ defmodule Wsdjs.RankTest do
   alias Wsdjs.Charts.Rank
   import Wsdjs.Factory
   alias Wsdjs.Repo
-  
+
   test "rank song must exist" do
     top = insert(:top)
     params = %{top_id: top.id, song_id: Ecto.UUID.generate()}

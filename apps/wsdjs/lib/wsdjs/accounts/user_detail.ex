@@ -18,7 +18,7 @@ defmodule Wsdjs.Accounts.UserDetail do
     field :youtube, :string
     field :facebook, :string
     field :soundcloud, :string
-    
+
     belongs_to :user, Wsdjs.Accounts.User
     timestamps()
   end
@@ -44,7 +44,6 @@ defmodule Wsdjs.Accounts.UserDetail do
     |> validate_url(:facebook)
     |> validate_url(:soundcloud)
   end
-
 
   # This function validates the format of an URL not it's validity.
   defp validate_url(changeset, field, options \\ []) do

@@ -31,7 +31,7 @@ defmodule Wsdjs.Accounts.User do
   end
 
   @allowed_fields [:email, :user_country, :name, :djname, :profil_djvip, :profil_dj]
-  
+
   @doc false
   def changeset(%User{} = user, attrs) do
     user
@@ -60,7 +60,6 @@ defmodule Wsdjs.Accounts.User do
     from u in Accounts.User, where: u.id == ^user.id or u.admin == false
   end
   def scoped(nil), do: from u in Accounts.User, where: u.admin == false
-
 end
 
 defimpl Bamboo.Formatter, for: Wsdjs.Accounts.User do

@@ -73,7 +73,6 @@ defmodule WsdjsWeb.TopView do
     end
   end
 
-
   def top_full_description(song) do
     date_str = song.inserted_at
     |> Timex.to_date()

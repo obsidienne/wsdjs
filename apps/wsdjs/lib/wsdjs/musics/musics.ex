@@ -364,11 +364,13 @@ defmodule Wsdjs.Musics do
   Update or create an opinion.
 
   """
-  def upsert_opinion(%User{id: user_id} = current_user, %Song{id: song_id}, kind) do
-    case get_opinion_by(user_id: user_id, song_id: song_id) do
+  def upsert_opinion(%User{id: user_id}, %Song{id: song_id}, kind) do
+    opinion = case get_opinion_by(user_id: user_id, song_id: song_id) do
       nil  -> %Opinion{kind: kind, user_id: user_id, song_id: song_id}
       song_opinion -> song_opinion
     end
+
+    opinion
     |> Opinion.changeset(%{kind: kind})
     |> Repo.insert_or_update()
   end

@@ -136,7 +136,6 @@ defmodule Wsdjs.Accounts do
     Repo.delete!(token)
   end
 
-
   ###############################################
   #
   # Invitation
@@ -159,8 +158,6 @@ defmodule Wsdjs.Accounts do
 
   """
   def get_invitation!(id), do: Repo.get!(Invitation, id)
-  
-  
 
   @doc """
   Returns the list of invitations.

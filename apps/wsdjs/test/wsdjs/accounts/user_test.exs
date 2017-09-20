@@ -22,7 +22,7 @@ defmodule Wsdjs.UserTest do
     changeset = User.changeset(%User{}, %{email: "alice@example.com"})
     Repo.insert(changeset)
     changeset = User.changeset(%User{}, %{email: "AlIcE@eXaMpLe.CoM"})
-    
+
     {:error, changeset} = Repo.insert(changeset)
     assert "has already been taken" in errors_on(changeset).email
   end

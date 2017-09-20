@@ -16,7 +16,7 @@ defmodule WsdjsWeb.Api.V1.CommentController do
 
     with :ok <- Musics.Policy.can?(current_user, :create_comment),
          {:ok, %Comment{} = comment} <- Musics.create_comment(params) do
-    
+
       conn
       |> put_status(:created)
       |> render("show.json", comment: comment)
