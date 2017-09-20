@@ -2,6 +2,7 @@ defmodule Wsdjs.Charts.Vote do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Wsdjs.Charts.Vote
 
   alias Wsdjs.{Musics, Charts, Accounts}
   alias Wsdjs.Repo
@@ -19,9 +20,9 @@ defmodule Wsdjs.Charts.Vote do
     timestamps()
   end
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:votes, :user_id, :song_id])
+  def changeset(%Vote{} = vote, attrs) do
+    vote
+    |> cast(attrs, [:votes, :user_id, :song_id])
     |> assoc_constraint(:song)
     |> assoc_constraint(:user)
     |> assoc_constraint(:top)

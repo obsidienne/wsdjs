@@ -103,6 +103,19 @@ defmodule Wsdjs.Charts do
     Repo.delete(top)
   end
 
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking top changes.
+
+  ## Examples
+
+      iex> change_top(top)
+      %Ecto.Changeset{source: %Top{}}
+
+  """
+  def change_top(%Top{} = top) do
+    Top.changeset(top, %{})
+  end
+
   ###############################################
   #
   # Change TOP step
@@ -289,6 +302,19 @@ defmodule Wsdjs.Charts do
   """
   def delete_rank(%Rank{} = rank) do
     Repo.delete(rank)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking rank changes.
+
+  ## Examples
+
+      iex> change_rank(rank)
+      %Ecto.Changeset{source: %Rank{}}
+
+  """
+  def change_rank(%Rank{} = rank) do
+    Rank.changeset(rank, %{})
   end
 
   @doc """

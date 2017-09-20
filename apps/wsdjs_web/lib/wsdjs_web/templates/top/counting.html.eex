@@ -63,7 +63,7 @@
           </aside>
         </div>
         <div>
-          <%= form_for Wsdjs.Charts.Rank.changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
+          <%= form_for Wsdjs.Charts.change_rank(rank), rank_path(@conn, :update, rank.id), fn f -> %>
           <table>
             <tbody>
             <tr><th>likes</th><td><%= rank.likes %></td></tr>

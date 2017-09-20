@@ -47,13 +47,13 @@ defmodule WsdjsWeb.TopController do
       render(conn, :show, top: top,
                           votes: Charts.list_votes(top, current_user),
                           ranks: Charts.list_rank(current_user, top),
-                          changeset: Top.changeset(top))
+                          changeset: Charts.change_top(top))
     end
   end
 
   def new(conn, _params, current_user) do
     with :ok <- Charts.Policy.can?(current_user, :create_top) do
-      changeset = Top.changeset(%Top{})
+      changeset = Charts.change_top(%Top{})
       render(conn, "new.html", changeset: changeset)
     end
   end

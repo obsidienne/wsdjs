@@ -3,7 +3,7 @@ defmodule Wsdjs.Charts.Top do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-
+  alias Wsdjs.Charts.Top
   alias Wsdjs.{Accounts, Charts, Musics}
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -23,18 +23,18 @@ defmodule Wsdjs.Charts.Top do
   @required_fields [:due_date, :status, :user_id]
   @valid_status ~w(checking voting counting published)
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @required_fields)
+  def changeset(%Top{} = top, attrs) do
+    top
+    |> cast(attrs, @required_fields)
     |> validate_required(:due_date)
     |> validate_inclusion(:status, @valid_status)
     |> unique_constraint(:due_date)
     |> assoc_constraint(:user)
   end
 
-  def step_changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:status])
+  def step_changeset(%Top{} = top, attrs) do
+    top
+    |> cast(attrs, [:status])
     |> validate_inclusion(:status, @valid_status)
   end
 

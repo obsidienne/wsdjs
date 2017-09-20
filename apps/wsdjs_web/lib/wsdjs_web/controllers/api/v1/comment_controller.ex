@@ -3,7 +3,7 @@ defmodule WsdjsWeb.Api.V1.CommentController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Musics
-  alias Wsdjs.Musics.{Comment, Song}
+  alias Wsdjs.Musics.Comment
 
   action_fallback WsdjsWeb.Api.V1.FallbackController
 
