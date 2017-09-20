@@ -2,6 +2,7 @@ defmodule Wsdjs.Accounts.UserDetail do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Wsdjs.Accounts.UserDetail
 
   @foreign_key_type :binary_id
   schema "user_details" do
@@ -27,9 +28,9 @@ defmodule Wsdjs.Accounts.UserDetail do
                     :favorite_animal, :djing_start_year, :love_more, :hate_more, :youtube, :facebook, :soundcloud
                   ]
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%UserDetail{} = user_detail, attrs) do
+    user_detail
+    |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:user)
     |> validate_length(:description, max: 2000)
     |> validate_length(:favorite_genre, max: 2000)

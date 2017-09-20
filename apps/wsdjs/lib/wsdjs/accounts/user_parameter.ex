@@ -2,6 +2,7 @@ defmodule Wsdjs.Accounts.UserParameter do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Wsdjs.Accounts.UserParameter
 
   @foreign_key_type :binary_id
   schema "user_parameters" do
@@ -16,9 +17,9 @@ defmodule Wsdjs.Accounts.UserParameter do
   @allowed_fields [:new_song_notification, :user_id, :piwik]
 
   @doc false
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%UserParameter{} = user_parameter, attrs) do
+    user_parameter
+    |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:user)
   end
 end

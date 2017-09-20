@@ -3,6 +3,7 @@ defmodule Wsdjs.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
+  alias Wsdjs.Accounts.User
 
   alias Wsdjs.{Musics, Accounts, Charts}
 
@@ -32,9 +33,9 @@ defmodule Wsdjs.Accounts.User do
   @allowed_fields [:email, :user_country, :name, :djname, :profil_djvip, :profil_dj]
   
   @doc false
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%User{} = user, attrs) do
+    user
+    |> cast(attrs, @allowed_fields)
     |> validate_required(:email)
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)

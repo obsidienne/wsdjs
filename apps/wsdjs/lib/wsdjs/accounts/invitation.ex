@@ -2,6 +2,7 @@ defmodule Wsdjs.Accounts.Invitation do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Wsdjs.Accounts.Invitation
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -16,9 +17,9 @@ defmodule Wsdjs.Accounts.Invitation do
   @allowed_fields [:email, :name, :user_id]
 
   @doc false
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%Invitation{} = invitation, attrs) do
+    invitation
+    |> cast(attrs, @allowed_fields)
     |> validate_required(:email)
     |> validate_required(:name)
     |> unique_constraint(:email)
