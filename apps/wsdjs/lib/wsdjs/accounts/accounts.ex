@@ -10,11 +10,11 @@ defmodule Wsdjs.Accounts do
   alias Wsdjs.Accounts.AuthToken
 
   @doc """
-  Returns the list of users having a particular configuration.
+  Returns the list of users having new_song_notification: true
 
   ## Examples
 
-      iex> list_users_by({new_song_notification: true})
+      iex> list_users_to_notify()
       [%Accounts.User{}, ...]
 
   """
