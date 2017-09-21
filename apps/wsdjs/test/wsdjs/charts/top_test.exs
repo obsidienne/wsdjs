@@ -9,12 +9,12 @@ defmodule Wsdjs.TopTest do
 
   describe "changeset" do
     test "changeset with minimal valid attributes" do
-      changeset = Top.changeset(%Top{}, params_for(:top))
+      changeset = Top.create_changeset(%Top{}, params_for(:top))
       assert changeset.valid?
     end
 
     test "top owner accout must exist" do
-      top = Top.changeset(%Top{}, params_for(:top, %{user_id: Ecto.UUID.generate()}))
+      top = Top.create_changeset(%Top{}, params_for(:top, %{user_id: Ecto.UUID.generate()}))
       assert {:error, %{errors: [user: {"does not exist", _}]}} = Repo.insert(top)
     end
   end

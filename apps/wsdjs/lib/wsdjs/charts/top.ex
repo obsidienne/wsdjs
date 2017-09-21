@@ -20,13 +20,13 @@ defmodule Wsdjs.Charts.Top do
     timestamps()
   end
 
-  @required_fields [:due_date, :status, :user_id]
   @valid_status ~w(checking voting counting published)
 
-  def changeset(%Top{} = top, attrs) do
+  def create_changeset(%Top{} = top, attrs) do
     top
-    |> cast(attrs, @required_fields)
+    |> cast(attrs, [:due_date, :user_id])
     |> validate_required(:due_date)
+    |> change(status: "checking")
     |> validate_inclusion(:status, @valid_status)
     |> unique_constraint(:due_date)
     |> assoc_constraint(:user)

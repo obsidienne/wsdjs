@@ -8,7 +8,7 @@ defmodule Wsdjs.Charts do
   alias Ecto.Changeset
 
   alias Wsdjs.Charts.{Top, Rank, Vote}
-  alias Wsdjs.Musics.Song
+  alias Wsdjs.Musics
   alias Wsdjs.Accounts.User
 
   @doc """
@@ -75,14 +75,12 @@ defmodule Wsdjs.Charts do
   def get_top!(id), do: Repo.get!(Top, id)
 
   def create_top(params) do
-    due_date = Timex.to_datetime(Map.fetch!(params, :due_date))
-    start_period = Timex.beginning_of_month(due_date)
-    end_period = Timex.end_of_month(due_date)
-    query = from s in Song, where: s.inserted_at >= ^start_period and s.inserted_at <= ^end_period
-    songs = Repo.all(query)
+    top_changeset = Top.create_changeset(%Top{}, params)
 
-    %Top{}
-    |> Top.changeset(Map.put(params, :status, "checking"))
+    month = top_changeset.changes.due_date
+    songs = Musics.list_songs_for_month(month)
+
+    top_changeset
     |> put_assoc(:songs, songs)
     |> Repo.insert()
   end
@@ -104,18 +102,31 @@ defmodule Wsdjs.Charts do
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking top changes.
+  Returns an `%Ecto.Changeset{}` for tracking top creation changes.
 
   ## Examples
 
-      iex> change_top(top)
+      iex> change_top_creation(top)
       %Ecto.Changeset{source: %Top{}}
 
   """
-  def change_top(%Top{} = top) do
-    Top.changeset(top, %{})
+  def change_top_creation(%Top{} = top) do
+    Top.create_changeset(top, %{})
   end
 
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking top step changes.
+
+  ## Examples
+
+      iex> change_top_step(top)
+      %Ecto.Changeset{source: %Top{}}
+
+  """
+  def change_top_step(%Top{} = top) do
+    Top.step_changeset(top, %{})
+  end
+  
   ###############################################
   #
   # Change TOP step

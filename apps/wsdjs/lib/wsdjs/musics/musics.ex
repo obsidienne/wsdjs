@@ -90,6 +90,14 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
+  def list_songs_for_month(%Date{} = month) do
+    lower = Timex.beginning_of_month(Timex.to_datetime(month))
+    upper = Timex.end_of_month(Timex.to_datetime(month))
+    query = from s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper
+
+    Repo.all(query)
+  end
+
   @doc """
   Paginate the songs scoped by the current_user.
   """
