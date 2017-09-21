@@ -3,7 +3,7 @@ defmodule Wsdjs.Charts.Top do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-
+  alias Wsdjs.Charts.Top
   alias Wsdjs.{Accounts, Charts, Musics}
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -20,45 +20,42 @@ defmodule Wsdjs.Charts.Top do
     timestamps()
   end
 
-  @required_fields [:due_date, :status, :user_id]
   @valid_status ~w(checking voting counting published)
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @required_fields)
+  def create_changeset(%Top{} = top, attrs) do
+    top
+    |> cast(attrs, [:due_date, :user_id])
     |> validate_required(:due_date)
+    |> change(status: "checking")
     |> validate_inclusion(:status, @valid_status)
     |> unique_constraint(:due_date)
     |> assoc_constraint(:user)
   end
 
-  def step_changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:status])
+  def step_changeset(%Top{} = top, attrs) do
+    top
+    |> cast(attrs, [:status])
     |> validate_inclusion(:status, @valid_status)
   end
 
   # Admin sees everything
   def scoped(%Accounts.User{admin: :true}), do: Charts.Top
-
-  # Connected user can see voting and published Top + Top he has created
-  def scoped(%Accounts.User{} = user) do
-    if Enum.member?(user.profils, "DJ_VIP") do
-      from m in Charts.Top, where: m.user_id == ^user.id or m.status in ["voting", "published"]
-    else
-      Charts.Top
-      |> where(status: "published")
-      |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -27))
-      |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
-      |> or_where(user_id: ^user.id)
-    end
+  def scoped(%Accounts.User{profil_djvip: true}) do
+    from m in Charts.Top, where: m.status in ["voting", "published"]
   end
 
-  # Not connected users see nothing
-  def scoped(nil) do
+  # Connected user can see voting and published Top + Top he has created
+  def scoped(%Accounts.User{}), do: scoped(-24, -3)
+  def scoped(nil), do: scoped(-5, -3)
+
+  defp scoped(lower, upper) when is_integer(lower) and is_integer(upper) do
+    dt = Timex.beginning_of_month(Timex.today)
+    lower_date = Timex.shift(dt, months: lower)
+    upper_date = Timex.shift(dt, months: upper)
+
     Charts.Top
     |> where(status: "published")
-    |> where([t], t.due_date >= ^Timex.shift(Timex.now, months: -6))
-    |> where([t], t.due_date <= ^Timex.shift(Timex.now, months: -3))
+    |> where([t], t.due_date >= ^lower_date)
+    |> where([t], t.due_date <= ^upper_date)
   end
 end

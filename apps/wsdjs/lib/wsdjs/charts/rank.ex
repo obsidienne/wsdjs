@@ -2,6 +2,7 @@ defmodule Wsdjs.Charts.Rank do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Wsdjs.Charts.Rank
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -19,14 +20,13 @@ defmodule Wsdjs.Charts.Rank do
 
   @allowed_fields [:likes, :votes, :bonus, :song_id, :top_id]
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%Rank{} = rank, attrs) do
+    rank
+    |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:song)
     |> assoc_constraint(:top)
     |> unique_constraint(:song_id, name: :ranks_song_id_top_id_index)
-    |> validate_number(:votes, greater_than: 0)
-    |> validate_number(:bonus, greater_than: 0)
-    |> validate_number(:position, greater_than: 0)
+    |> validate_number(:votes, greater_than_or_equal_to: 0)
+    |> validate_number(:bonus, greater_than_or_equal_to: 0)
   end
 end

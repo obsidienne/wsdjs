@@ -2,6 +2,7 @@ defmodule Wsdjs.Accounts.UserDetail do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Wsdjs.Accounts.UserDetail
 
   @foreign_key_type :binary_id
   schema "user_details" do
@@ -17,7 +18,7 @@ defmodule Wsdjs.Accounts.UserDetail do
     field :youtube, :string
     field :facebook, :string
     field :soundcloud, :string
-    
+
     belongs_to :user, Wsdjs.Accounts.User
     timestamps()
   end
@@ -27,9 +28,9 @@ defmodule Wsdjs.Accounts.UserDetail do
                     :favorite_animal, :djing_start_year, :love_more, :hate_more, :youtube, :facebook, :soundcloud
                   ]
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, @allowed_fields)
+  def changeset(%UserDetail{} = user_detail, attrs) do
+    user_detail
+    |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:user)
     |> validate_length(:description, max: 2000)
     |> validate_length(:favorite_genre, max: 2000)
@@ -44,11 +45,10 @@ defmodule Wsdjs.Accounts.UserDetail do
     |> validate_url(:soundcloud)
   end
 
-
   # This function validates the format of an URL not it's validity.
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
-      case url |> String.to_char_list |> :http_uri.parse do
+      case url |> String.to_charlist |> :http_uri.parse do
         {:ok, _} -> []
         {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect msg}"}]
       end

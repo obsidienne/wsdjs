@@ -1,13 +1,34 @@
 defmodule WsdjsWeb.TopView do
   use WsdjsWeb, :view
 
-  def current_user_vote(current_user_votes, rank) do
-    current_user_vote = Enum.find(current_user_votes, fn(x) -> x.song_id == rank.song.id  end)
+  def render("show.html", %{top: top} = assigns) do
+    template =
+      case top.status do
+        "checking" -> "checking.html"
+        "voting" -> "voting.html"
+        "counting" -> "counting.html"
+        "published" -> "published.html"
+      end
 
-    if is_nil(current_user_vote) do
+    render_template template, assigns
+  end
+
+  def render("show.text", %{top: top} = assigns) do
+    template =
+      case top.status do
+        "published" -> "published.text"
+      end
+
+    render_template template, assigns
+  end
+
+  def current_user_vote(votes, rank) do
+    vote = Enum.find(votes, fn(x) -> x.song_id == rank.song.id  end)
+
+    if is_nil(vote) do
       nil
     else
-      current_user_vote.votes
+      vote.votes
     end
   end
 
@@ -39,11 +60,6 @@ defmodule WsdjsWeb.TopView do
     }
   end
 
-
-  def get_ranks_according_to_votes(top) do
-    top.ranks
-  end
-
   def get_song_by(top, user, position) do
     vote = Enum.find(top.votes, fn vote ->
       vote.votes == position && vote.user_id == user.id
@@ -56,7 +72,6 @@ defmodule WsdjsWeb.TopView do
       ""
     end
   end
-
 
   def top_full_description(song) do
     date_str = song.inserted_at

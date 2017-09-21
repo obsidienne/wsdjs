@@ -7,8 +7,6 @@ defmodule WsdjsWeb.Admin.InvitationController do
   alias Wsdjs.Accounts
 
   def update(conn, %{"id" => id}) do
-    current_user = conn.assigns[:current_user]
-
     with invitation <- Accounts.get_invitation!(id),
          {:ok, invitation} <- Accounts.accept_invitation(invitation) do
 
@@ -19,8 +17,6 @@ defmodule WsdjsWeb.Admin.InvitationController do
   end
 
   def delete(conn, %{"id" => id}) do
-    current_user = conn.assigns[:current_user]
-
     invitation = Accounts.get_invitation!(id)
     {:ok, _} = Accounts.delete_invitation(invitation)
 

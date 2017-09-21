@@ -3,7 +3,7 @@
 
   <div class="container">
     <h3 class="page-header">TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h3>
-    <%= if Wsdjs.Charts.Policy.can?(:delete_top, @current_user) == :ok do %>
+    <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
       <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
     <% end %>
   </div>
@@ -25,7 +25,7 @@
 
 
 <main class="container">
-  <%= for rank <- @top.ranks do %>
+  <%= for rank <- @ranks do %>
     <article class="top-song">
       <div class="song-art-container">
         <img data-src="<%= art_url(rank.song.art)%>" />

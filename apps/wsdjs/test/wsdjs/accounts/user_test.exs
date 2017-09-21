@@ -11,8 +11,17 @@ defmodule Wsdjs.UserTest do
   end
 
   test "email is unique" do
-    changeset = User.changeset(%User{}, @create_attrs)
+    changeset = User.changeset(%User{}, %{email: "alice@example.com"})
     Repo.insert(changeset)
+
+    {:error, changeset} = Repo.insert(changeset)
+    assert "has already been taken" in errors_on(changeset).email
+  end
+
+  test "uppcase and lowercase are equals for email" do
+    changeset = User.changeset(%User{}, %{email: "alice@example.com"})
+    Repo.insert(changeset)
+    changeset = User.changeset(%User{}, %{email: "AlIcE@eXaMpLe.CoM"})
 
     {:error, changeset} = Repo.insert(changeset)
     assert "has already been taken" in errors_on(changeset).email

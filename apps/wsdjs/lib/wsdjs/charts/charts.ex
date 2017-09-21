@@ -8,7 +8,7 @@ defmodule Wsdjs.Charts do
   alias Ecto.Changeset
 
   alias Wsdjs.Charts.{Top, Rank, Vote}
-  alias Wsdjs.Musics.Song
+  alias Wsdjs.Musics
   alias Wsdjs.Accounts.User
 
   @doc """
@@ -58,22 +58,29 @@ defmodule Wsdjs.Charts do
     |> Repo.preload(ranks: [song: [user: :avatar]])
   end
 
-  def get_top!(current_user, top_id) do
-    current_user
-    |> Top.scoped()
-    |> Repo.get!(top_id)
-    |> Repo.preload(:user)
-    |> Repo.preload(ranks: list_rank(current_user, top_id))
-  end
+  @doc """
+  Gets a single top.
 
-  def create_top(%{"due_date" => due_date} = params) do
-    start_period = Timex.to_datetime(Timex.beginning_of_month(due_date))
-    end_period = Timex.to_datetime(Timex.end_of_month(due_date))
-    query = from s in Song, where: s.inserted_at >= ^start_period and s.inserted_at <= ^end_period
-    songs = Repo.all(query)
+  Raises `Ecto.NoResultsError` if the Top does not exist.
 
-    %Top{}
-    |> Top.changeset(params)
+  ## Examples
+
+      iex> get_top!(123)
+      %Top{}
+
+      iex> get_top!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_top!(id), do: Repo.get!(Top, id)
+
+  def create_top(params) do
+    top_changeset = Top.create_changeset(%Top{}, params)
+
+    month = top_changeset.changes.due_date
+    songs = Musics.list_songs_for_month(month)
+
+    top_changeset
     |> put_assoc(:songs, songs)
     |> Repo.insert()
   end
@@ -94,6 +101,32 @@ defmodule Wsdjs.Charts do
     Repo.delete(top)
   end
 
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking top creation changes.
+
+  ## Examples
+
+      iex> change_top_creation(top)
+      %Ecto.Changeset{source: %Top{}}
+
+  """
+  def change_top_creation(%Top{} = top) do
+    Top.create_changeset(top, %{})
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking top step changes.
+
+  ## Examples
+
+      iex> change_top_step(top)
+      %Ecto.Changeset{source: %Top{}}
+
+  """
+  def change_top_step(%Top{} = top) do
+    Top.step_changeset(top, %{})
+  end
+  
   ###############################################
   #
   # Change TOP step
@@ -102,7 +135,7 @@ defmodule Wsdjs.Charts do
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def next_step(%User{} = _user, top) do
+  def next_step(top) do
     %{checking: "voting",
       voting: "counting",
       counting: "published"}
@@ -113,7 +146,7 @@ defmodule Wsdjs.Charts do
   # Change the top status.
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
-  def previous_step(%User{}, top) do
+  def previous_step(top) do
     %{published: "counting",
       counting: "voting"}
     |> Map.fetch!(String.to_atom(top.status))
@@ -124,49 +157,22 @@ defmodule Wsdjs.Charts do
   # according to this rule: (like * 2) - (down * 3) + (up * 4)
   # After that, DJs can vote for their top 10.
   defp go_step("voting", top) do
-    ranks = Rank
-    |> where(top_id: ^top.id)
-    |> preload(song: :opinions)
-    |> Repo.all()
-
-    Enum.each(ranks, fn(rank) ->
-      val = Enum.reduce(rank.song.opinions, 0, fn(opinion, acc) ->
-        case opinion.kind do
-          "up"   -> acc + 4
-          "like" -> acc + 2
-          "down" -> acc - 3
-          _      -> acc
-        end
-      end)
-
-      rank
-      |> Rank.changeset(%{likes: val})
-      |> Repo.update()
-    end)
-
     top
     |> Top.step_changeset(%{status: "voting"})
     |> Repo.update()
   end
 
-  # The top creator decides it's time to publish the
+  # The top creator decides it's time to stop voting
+  # we reinitialize the total votes and likes (admin can return from published)
   # Need to sum the votes according to this rule
   # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
   # After that, the top creator can apply bonus to the top.
   defp go_step("counting", top) do
     from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id])
-    |> Repo.update_all(set: [votes: 0])
+    |> Repo.update_all(set: [votes: 0, likes: 0, position: nil])
 
-    Wsdjs.Charts.Vote
-    |> where(top_id: ^top.id)
-    |> group_by(:song_id)
-    |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
-    |> Repo.all()
-    |> Enum.each(fn(vote) ->
-      val = 10 * vote[:count] - vote[:sum] + vote[:count]
-      from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id, song_id: ^vote.song_id])
-      |> Repo.update_all(set: [votes: val])
-    end)
+    set_likes(top)
+    set_votes(top)
 
     top
     |> Top.step_changeset(%{status: "counting"})
@@ -214,14 +220,15 @@ defmodule Wsdjs.Charts do
     |> where([user_id: ^user.id, top_id: ^id])
   end
 
-  def list_votes(id, %User{} = user) do
+  def list_votes(%Top{}, nil), do: []
+  def list_votes(%Top{id: id}, %User{} = user) do
     id
     |> q_list_votes(user)
     |> Repo.all()
   end
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
-    top = get_top!(user, top_id)
+    top = get_top!(top_id)
     top = Repo.preload top, votes: q_list_votes(top_id, user)
 
     new_votes = votes_param
@@ -249,6 +256,33 @@ defmodule Wsdjs.Charts do
     |> Repo.update()
   end
 
+  def set_likes(%Top{id: id}) do
+    ranks = Rank
+    |> where(top_id: ^id)
+    |> preload(song: :opinions)
+    |> Repo.all()
+
+    Enum.each(ranks, fn(rank) ->
+      val = Wsdjs.Musics.opinions_value(rank.song.opinions)
+      rank
+      |> Rank.changeset(%{likes: val})
+      |> Repo.update()
+    end)
+  end
+
+  def set_votes(%Top{id: id}) do
+    Wsdjs.Charts.Vote
+    |> where(top_id: ^id)
+    |> group_by(:song_id)
+    |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
+    |> Repo.all()
+    |> Enum.each(fn(vote) ->
+      val = 10 * vote[:count] - vote[:sum] + vote[:count]
+      from(p in Wsdjs.Charts.Rank, where: [top_id: ^id, song_id: ^vote.song_id])
+      |> Repo.update_all(set: [votes: val])
+    end)
+  end
+
   @doc """
   Gets a single rank.
 
@@ -256,17 +290,14 @@ defmodule Wsdjs.Charts do
 
   ## Examples
 
-      iex> get_rank!("0f47da03-0a18-421d-b614-a84861c28f45")
+      iex> get_rank!(123)
       %Rank{}
 
-      iex> get_rank!("8dfbdd61-4464-4e43-863b-52f13c44326b")
+      iex> get_rank!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_rank!(id) do
-    Rank
-    |> Repo.get!(id)
-  end
+  def get_rank!(id), do: Repo.get!(Rank, id)
 
   @doc """
   Deletes a Rank.
@@ -284,27 +315,68 @@ defmodule Wsdjs.Charts do
     Repo.delete(rank)
   end
 
-  defp list_rank(current_user, top_id) when is_nil(current_user) do
-    from r in Rank,
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking rank changes.
+
+  ## Examples
+
+      iex> change_rank(rank)
+      %Ecto.Changeset{source: %Rank{}}
+
+  """
+  def change_rank(%Rank{} = rank) do
+    Rank.changeset(rank, %{})
+  end
+
+  @doc """
+  When a nil user can only access published top with a limit of 10 songs order by position.
+  A published top always contains position.
+  """
+  def list_rank(nil, %Top{status: "published"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], asc: r.position)
+    |> limit(10)
+    |> Repo.all()
+  end
+  def list_rank(%User{}, %Top{status: "published"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
+    |> Repo.all()
+  end
+  def list_rank(%User{admin: true}, %Top{status: "counting"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
+    |> Repo.all()
+  end
+  def list_rank(%User{admin: true}, %Top{status: "checking"} = top) do
+    top
+    |> list_rank()
+    |> order_by([r], desc: :inserted_at)
+    |> Repo.all()
+  end
+
+  def list_rank(%User{} = current_user, %Top{id: top_id, status: "voting"}) do
+    votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
+
+    query = from r in Rank,
     where: r.top_id == ^top_id,
-    order_by: [asc: r.position, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
-    limit: 10,
+    left_join: v in ^votes, on: [song_id: r.song_id],
+    order_by: [asc: v.votes, desc: :inserted_at],
+    preload: [song: [:art, :user, :opinions]]
+
+    Repo.all query
+  end
+
+  defp list_rank(%Top{id: id}) do
+    from r in Rank,
+    where: r.top_id == ^id,
     preload: [song: [:art, :user, :opinions]]
   end
 
-  defp list_rank(current_user, top_id) do
-    current_user_votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
-    limit = if Enum.member?(current_user.profils, "DJ_VIP") or current_user.admin == true do 999 else 10 end
-
-    from r in Rank,
-    where: r.top_id == ^top_id,
-    left_join: v in ^current_user_votes, on: [song_id: r.song_id],
-    order_by: [asc: r.position, asc: v.votes, desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes)],
-    limit: ^limit,
-    preload: [song: [:art, :user, :opinions]]
-  end
-
-  defp list_rank do
+  def list_rank do
     from q in Rank,
     where: q.position <= 10,
     order_by: [asc: q.position],

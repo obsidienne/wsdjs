@@ -23,7 +23,7 @@
           <% end %>
         </div>
 
-        <%= if !is_nil(@current_user) && (Enum.member?(@current_user.profils, "DJ_VIP") || @current_user.admin) do %>
+        <%= if !is_nil(@current_user) && (@current_user.profil_djvip || @current_user.admin) do %>
         <table class="tops__top__details">
           <thead>
             <tr><th>Songs</th><th>Djs</th><th>Genres</th></tr>

@@ -6,7 +6,6 @@ defmodule WsdjsWeb.Endpoint do
                 allow_methods: ["GET"],
                 allow_credentials: true
 
-
   socket "/socket", WsdjsWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.

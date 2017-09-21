@@ -27,7 +27,7 @@
 </header>
 
 <main class="container top-counting">
-  <%= for rank <- @top.ranks do %>
+  <%= for rank <- @ranks do %>
     <article class="top-song">
       <div class="song-art-container">
         <img data-src="<%= art_url(rank.song.art)%>" />
@@ -63,7 +63,7 @@
           </aside>
         </div>
         <div>
-          <%= form_for Wsdjs.Charts.Rank.changeset(rank), rank_path(@conn, :update, rank.id), fn f -> %>
+          <%= form_for Wsdjs.Charts.change_rank(rank), rank_path(@conn, :update, rank.id), fn f -> %>
           <table>
             <tbody>
             <tr><th>likes</th><td><%= rank.likes %></td></tr>

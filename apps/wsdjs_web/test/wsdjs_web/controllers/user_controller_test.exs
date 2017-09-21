@@ -13,23 +13,29 @@ defmodule WsdjsWeb.UserControllerTest do
   end
 
   describe "index" do
-    setup [:create_users]
+    test "lists all users", %{conn: conn} do
+      user = insert(:user)
+      dj = insert(:user, profil_dj: true)
+      dj_vip = insert(:user, profil_djvip: true)
+      admin = insert(:user, %{admin: true})
 
-    test "lists all users", %{conn: conn, users: users} do
       # can list
       Enum.each([
-        assign(conn, :current_user, users[:admin])
+        assign(conn, :current_user, admin)
       ], fn conn ->
         conn = get conn, admin_user_path(conn, :index)
         assert html_response(conn, 200) =~ "Users - WSDJs"
-        assert String.contains?(conn.resp_body, users[:user].email)
+        assert String.contains?(conn.resp_body, user.email)
+        assert String.contains?(conn.resp_body, dj.email)
+        assert String.contains?(conn.resp_body, dj_vip.email)
+        assert String.contains?(conn.resp_body, admin.email)
       end)
 
       # cannot list
       Enum.each([
-        assign(conn, :current_user, users[:user]),
-        assign(conn, :current_user, users[:dj]),
-        assign(conn, :current_user, users[:dj_vip])
+        assign(conn, :current_user, user),
+        assign(conn, :current_user, dj),
+        assign(conn, :current_user, dj_vip)
       ], fn conn ->
         conn = get conn, admin_user_path(conn, :index)
         assert html_response(conn, 302)
@@ -38,85 +44,121 @@ defmodule WsdjsWeb.UserControllerTest do
   end
 
   describe "show user" do
-    setup [:create_users]
-    
-    test "only admin can access show admin user", %{conn: conn, users: users} do
+    test "only admin can access show admin user", %{conn: conn} do
+      user = insert(:user)
+      dj = insert(:user, profil_dj: true)
+      dj_vip = insert(:user, profil_djvip: true)
+      admin = insert(:user, %{admin: true})
+
       Enum.each([
-        assign(conn, :current_user, users[:dj_vip]),
-        assign(conn, :current_user, users[:dj]),
-        assign(conn, :current_user, users[:user]),
+        assign(conn, :current_user, user),
+        assign(conn, :current_user, dj),
+        assign(conn, :current_user, dj_vip),
         assign(conn, :current_user, nil)
       ], fn conn ->
-        conn = get conn, user_path(conn, :show, users[:admin].id)
+        conn = get conn, user_path(conn, :show, admin.id)
         assert html_response(conn, 302)
       end)
 
-      conn = assign(conn, :current_user, users[:admin])
-      conn = get conn, user_path(conn, :show, users[:admin].id)
+      conn = assign(conn, :current_user, admin)
+      conn = get conn, user_path(conn, :show, admin.id)
       assert html_response(conn, 200) =~ "User - WSDJs"
-      assert String.contains?(conn.resp_body, users[:admin].email)
+      assert String.contains?(conn.resp_body, admin.email)
     end
 
-    test "all user can access show std user", %{conn: conn, users: users} do
+    test "all user can access show std user", %{conn: conn} do
+      user = insert(:user)
+      dj = insert(:user, profil_dj: true)
+      dj_vip = insert(:user, profil_djvip: true)
+      admin = insert(:user, %{admin: true})
+
       Enum.each([
-        assign(conn, :current_user, users[:admin]),
-        assign(conn, :current_user, users[:dj_vip]),
-        assign(conn, :current_user, users[:dj]),
-        assign(conn, :current_user, users[:user]),
+        assign(conn, :current_user, admin),
+        assign(conn, :current_user, dj_vip),
+        assign(conn, :current_user, dj),
+        assign(conn, :current_user, user),
         assign(conn, :current_user, nil)
       ], fn conn ->
-        conn_done = get conn, user_path(conn, :show, users[:dj_vip].id)
+        conn_done = get conn, user_path(conn, :show, dj_vip.id)
         assert html_response(conn_done, 200) =~ "User - WSDJs"
-        assert String.contains?(conn_done.resp_body, users[:dj_vip].email)
+        assert String.contains?(conn_done.resp_body, dj_vip.email)
 
-        conn_done = get conn, user_path(conn, :show, users[:dj].id)
+        conn_done = get conn, user_path(conn, :show, dj.id)
         assert html_response(conn_done, 200) =~ "User - WSDJs"
-        assert String.contains?(conn_done.resp_body, users[:dj].email)
+        assert String.contains?(conn_done.resp_body, dj.email)
 
-        conn_done = get conn, user_path(conn, :show, users[:user].id)
+        conn_done = get conn, user_path(conn, :show, user.id)
         assert html_response(conn_done, 200) =~ "User - WSDJs"
-        assert String.contains?(conn_done.resp_body, users[:user].email)
+        assert String.contains?(conn_done.resp_body, user.email)
       end)
     end
   end
 
   describe "edit user" do
-    setup [:create_users]
-    
-    test "renders form for editing user", %{conn: conn, users: users} do
+    test "renders form for editing user", %{conn: conn} do
+      user = insert(:user)
+      user2 = insert(:user)
+      dj = insert(:user, profil_dj: true)
+      dj_vip = insert(:user, profil_djvip: true)
+      admin = insert(:user, %{admin: true})
+
       # can edit
       Enum.each([
-        assign(conn, :current_user, users[:user]),
-        assign(conn, :current_user, users[:admin])
+        assign(conn, :current_user, user),
+        assign(conn, :current_user, admin)
       ], fn conn ->
-        conn = get conn, user_path(conn, :edit, users[:user].id)
+        conn = get conn, user_path(conn, :edit, user.id)
         assert html_response(conn, 200) =~ "Edit user - WSDJs"
-        assert String.contains?(conn.resp_body, users[:user].name)
+        assert String.contains?(conn.resp_body, user.name)
       end)
 
       # cannot edit
       Enum.each([
-        assign(conn, :current_user, users[:user2]),
-        assign(conn, :current_user, users[:dj]),
-        assign(conn, :current_user, users[:dj_vip])
+        assign(conn, :current_user, user2),
+        assign(conn, :current_user, dj),
+        assign(conn, :current_user, dj_vip)
       ], fn conn ->
-        conn = get conn, user_path(conn, :edit, users[:user].id)
+        conn = get conn, user_path(conn, :edit, user.id)
         assert html_response(conn, 302)
       end)
     end
   end
 
-  defp create_users(_) do
-    users = %{
-      user: insert!(:user),
-      user2: insert!(:user),
-      dj: insert!(:user, profils: ["DJ"]),
-      dj2: insert!(:user, profils: ["DJ"]),
-      dj_vip: insert!(:user, profils: ["DJ_VIP"]),
-      dj_vip2: insert!(:user, profils: ["DJ_VIP"]),
-      admin: insert!(:user, %{admin: true})
-    }
+  test "admin can edit admin fields", %{conn: conn} do
+    user = insert(:user)
+    admin = insert(:user, %{admin: true})
+    refute user.profil_djvip
+    refute user.profil_dj
+    refute user.admin
 
-    {:ok, users: users}
+    params = %{profil_djvip: true, profil_dj: true, admin: true}
+
+    # change values
+    conn
+    |> assign(:current_user, admin)
+    |> put(user_path(conn, :update, user.id, %{"user" => params}))
+
+    user_updated = Wsdjs.Accounts.get_user(user.id)
+    assert user_updated.profil_djvip
+    assert user_updated.profil_dj
+    refute user_updated.admin
+  end
+
+  test "user can edit himself", %{conn: conn} do
+    user = insert(:user)
+    params = %{profil_djvip: true, profil_dj: true, admin: true, djname: "DJ has been",
+               detail: %{description: "J'aurai voulu être un artist"}}
+
+    # change values
+    conn
+    |> assign(:current_user, user)
+    |> put(user_path(conn, :update, user.id, %{"user" => params}))
+
+    user_updated = Wsdjs.Accounts.get_user(user.id)
+    assert user_updated.djname == "DJ has been"
+    assert user_updated.detail.description == "J'aurai voulu être un artist"
+    # refute user_updated.profil_djvip
+    # refute user_updated.profil_dj
+    # refute user_updated.admin
   end
 end

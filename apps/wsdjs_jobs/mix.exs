@@ -4,12 +4,12 @@ defmodule Wsdjs.Jobs.Mixfile do
   def project do
     [
       app: :wsdjs_jobs,
-      version: "1.4.2",
+      version: "1.4.3",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "~> 1.4",
+      elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env),
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
