@@ -62,9 +62,6 @@
         <%= if @current_user && @current_user.id == @user.id do %>
         <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#parameters-section">parameters</a></li>
         <% end %>
-        <%= if @current_user && @current_user.admin do %>
-        <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#features-section">features</a></li>
-        <% end %>
       </ul>
     </nav>
 
@@ -84,11 +81,6 @@
     </section>
     <% end %>
 
-    <%= if @current_user && @current_user.admin do %>
-    <section id="features-section" class="tabs-pane">
-      <%= render "_user_feature.html", user: @user %>
-    </section>
-    <% end %>
     <% end %>
   </section>
   <% end %>
