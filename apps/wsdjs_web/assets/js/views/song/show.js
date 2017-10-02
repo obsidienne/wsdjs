@@ -71,7 +71,7 @@ export default class View extends MainView {
     return `
     <li class="comment">
       <div class="comment__avatar">
-        <img data-src="${params.user.avatar_uri}"  class="comment__avatar__img">
+        <img data-src="${params.user.avatars.avatar_uri}"  class="comment__avatar__img">
       </div>
 
       <div class="comment__body">
