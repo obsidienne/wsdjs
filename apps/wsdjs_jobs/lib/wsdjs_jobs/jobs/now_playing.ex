@@ -141,6 +141,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
       |> Map.put(:suggested_by_path, "/users/#{song_in_base.user.id}")
       |> Map.put(:path, "/songs/#{song_in_base.id}")
       |> Map.put(:tags, tags_for_song(song_in_base))
+      |> Map.put(:song_id, song_in_base.id)
     else
       song
     end
