@@ -87,6 +87,9 @@ defmodule WsdjsWeb.Router do
     scope "/", alias: Api do
       resources "/now_playing", NowPlayingController, only: [:index]
       resources "/mobile_config", MobileConfigController, only: [:index]
+    end
+
+    scope "/v1", alias: Api.V1 do
       resources "/songs", SongController, only: [] do
         resources "/comments", CommentController, only: [:index]
       end

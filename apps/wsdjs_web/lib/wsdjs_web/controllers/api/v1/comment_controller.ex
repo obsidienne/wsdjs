@@ -7,6 +7,14 @@ defmodule WsdjsWeb.Api.V1.CommentController do
 
   action_fallback WsdjsWeb.Api.V1.FallbackController
 
+  def index(conn, %{"song_id" => song_id}) do
+    with song <- Musics.get_song!(song_id) do
+      comments = Musics.list_comments(song)
+
+      render(conn, "index.json", comments: comments)
+    end
+  end
+
   def create(conn, %{"song_id" => song_id, "comment" => params}) do
     current_user = conn.assigns[:current_user]
 

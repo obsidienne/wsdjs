@@ -16,14 +16,18 @@ defmodule WsdjsWeb.Api.V1.CommentView do
     }
   end
 
+  #1506925999
   def render("comment.json", %{comment: comment}) do
     %{
       id: comment.id,
       text: comment.text,
-      commented_by_path: user_path(WsdjsWeb.Endpoint, :show, comment.user),
-      commented_by: comment.user.name,
-      commented_by_avatar: CloudinaryHelper.avatar_url(comment.user.avatar),
-      commented_at: DateTime.to_iso8601(DateTime.from_naive!(comment.inserted_at, "Etc/UTC"))
+      user: %{
+        name: comment.user.name,
+        path: user_path(WsdjsWeb.Endpoint, :show, comment.user),
+        avatar_uri: CloudinaryHelper.avatar_url(comment.user.avatar),
+      },
+      commented_at: DateTime.to_iso8601(DateTime.from_naive!(comment.inserted_at, "Etc/UTC")),
+      timestamp: Timex.to_unix(comment.inserted_at)
     }
   end
 end

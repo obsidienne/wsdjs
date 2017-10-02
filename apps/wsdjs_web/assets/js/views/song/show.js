@@ -71,12 +71,12 @@ export default class View extends MainView {
     return `
     <li class="comment">
       <div class="comment__avatar">
-        <img data-src="${params.commented_by_avatar}"  class="comment__avatar__img">
+        <img data-src="${params.user.avatar_uri}"  class="comment__avatar__img">
       </div>
 
       <div class="comment__body">
         <header class="comment__header">
-          <a href="${params.commented_by_path}">${params.commented_by}</a>
+          <a href="${params.user.path}">${params.user.name}</a>
           <time class="timeago small" title="${params.commented_at}" datetime="${params.commented_at}"></time>
         </header>
         <div class="comment__content">${params.text}</div>
