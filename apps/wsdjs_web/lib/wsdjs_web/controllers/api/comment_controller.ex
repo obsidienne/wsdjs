@@ -3,7 +3,6 @@ defmodule WsdjsWeb.Api.CommentController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Musics
-  alias Wsdjs.Musics.{Comment, Song}
 
   def index(conn, %{"song_id" => song_id}) do
     with song <- Musics.get_song!(song_id) do
