@@ -1,0 +1,17 @@
+<%= unless is_nil(@conn.assigns[:current_user]) do %>
+  <%= form_for @changeset, api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
+  <div class="form-group">
+    <%= text_input f, :url, type: "url", class: "form-control", placeholder: "Video url", required: true, maxlength: 255 %>
+    <%= error_tag f, :url %>
+  </div>
+
+  <%= submit "Add video", class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<ul id="videos-container">
+  <%= for video <- @videos do %>
+    <li class="video">
+    </li>
+  <% end %>
+</ul>

@@ -6,5 +6,12 @@
     <%= @user.parameter.piwik %>
   </footer>
 </div>
+<div class="user__parameter">
+  <h1 class="page-header">Video <small>opt-in</small></h1>
+  <p>Attach videos to song.</p>
+  <footer>
+    <%= @user.parameter.video %>
+  </footer>
+</div>
 <% end %>
   
