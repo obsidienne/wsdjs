@@ -8,13 +8,14 @@ defmodule Wsdjs.Accounts.UserParameter do
   schema "user_parameters" do
     field :new_song_notification, :boolean
     field :piwik, :boolean
+    field :video, :boolean
 
     belongs_to :user, Wsdjs.Accounts.User
 
     timestamps()
   end
 
-  @allowed_fields [:new_song_notification, :user_id, :piwik]
+  @allowed_fields [:new_song_notification, :user_id, :piwik, :video]
 
   @doc false
   def changeset(%UserParameter{} = user_parameter, attrs) do

@@ -148,6 +148,17 @@
           </div>
         </td>
       </tr> 
+      <tr>
+        <td>Activate video</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= inputs_for f, :parameter, fn fp -> %>
+              <%= checkbox fp, :video %>
+              <%= label fp, :video do %><% end %>
+            <% end %>
+          </div>
+        </td>
+      </tr> 
     </table>
 
     <%= submit "Update admin", class: "btn btn-primary" %>
