@@ -9,9 +9,7 @@ defmodule WsdjsWeb.Api.CommentController do
     with song <- Musics.get_song!(song_id) do
       comments = Musics.list_comments(song)
 
-      conn
-      |> put_status(:created)
-      |> render("index.json", comments: comments)
+      render(conn, "index.json", comments: comments)
     end
   end
 end
