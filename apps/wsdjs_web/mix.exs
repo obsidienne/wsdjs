@@ -43,6 +43,7 @@ defmodule WsdjsWeb.Mixfile do
      {:bamboo, "~> 0.8"},
      {:timex, "~> 3.0"},
      {:corsica, "~> 1.0"},
+     {:ua_inspector, "~> 0.14"},
      {:wsdjs, in_umbrella: true},
      {:wsdjs_jobs, in_umbrella: true},
      {:cowboy, "~> 1.0"}]
