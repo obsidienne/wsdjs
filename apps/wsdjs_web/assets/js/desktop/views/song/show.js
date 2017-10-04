@@ -20,6 +20,11 @@ export default class View extends MainView {
         this._submit(e.target);
         e.preventDefault();
       }
+
+      if (e.target && e.target.matches("#song-video-form")) {
+        this._submit_video(e.target);
+        e.preventDefault();
+      }
     }, false);
   }
 
@@ -67,6 +72,31 @@ export default class View extends MainView {
     form.reset();
   }
 
+  _submit_video(form) {
+    if (form === undefined) return;
+    var self = this;
+
+    var token = document.querySelector("[name=channel_token]").getAttribute("content");
+    var request = new XMLHttpRequest();
+    request.open(form.method, form.action, true);
+    request.setRequestHeader('Authorization', "Bearer " + token);
+    request.setRequestHeader('Accept', 'application/json');
+
+    request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        var container = document.getElementById("videos-container");
+        var tpl = self._createHtmlVideoContent(JSON.parse(this.response).data);
+        container.insertAdjacentHTML('beforeend', tpl);
+      } else {
+        console.error("Error");
+      }
+    };
+
+    request.onerror = function() { console.error("Error"); };
+    request.send(new FormData(form));
+    form.reset();
+  }
+
   _createHtmlContent(params) {
     return `
     <li class="comment">
@@ -83,6 +113,13 @@ export default class View extends MainView {
       </div>
     </li>`;
   }
+
+  _createHtmlVideoContent(params) {
+    return `
+    <li class="video">
+    </li>`;
+  }
+
 
   _toggle_opinion(elem) {
     var self = this;

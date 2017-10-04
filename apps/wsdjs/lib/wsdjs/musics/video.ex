@@ -17,7 +17,7 @@ defmodule Wsdjs.Musics.Video do
 
   def changeset(%Video{} = video, attrs) do
     video
-    |> cast(attrs, [:url])
+    |> cast(attrs, [:url, :user_id, :song_id])
     |> validate_required(:url)
     |> assoc_constraint(:user)
     |> validate_url(:url)
