@@ -18,38 +18,18 @@ defmodule WsdjsWeb.Api.V1.SessionController do
   end
 
   def show(conn, %{"token" => token}) do
-    case WsdjsWeb.MagicLink.verify_magic_link(token) do
-      {:ok, user} ->
-        list = %{
-          user: %{
-            name: user.name,
-            id: user.id        
-          },
-          bearer: Phoenix.Token.sign(conn, "user", user.id)
-        }
-        conn
-        |> put_resp_header("content-type", "application/json; charset=utf-8")
-        |> send_resp(200, Poison.encode!(list))
+    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.verify_magic_link(token) do
+      bearer = Phoenix.Token.sign(conn, "user", user.id)
 
-      {:error, _reason} ->
-        list = %{
-          error: "The magic link is expired or already used. You should resend a magic link."
-        }
-        conn
-        |> put_resp_header("content-type", "application/json; charset=utf-8")
-        |> send_resp(400, Poison.encode!(list))
-     end
+      [avatar] = Accounts.get_avatar(user)
+      render(conn, "show.json", user: user, avatar: avatar, bearer: bearer)
+    end
   end
 
   def delete(conn, %{"id" => id}) do
     list = %{
       message: "You logged out successfully. Enjoy your day!"
     }
-
-    #conn
-    #|> assign(:current_user, nil)
-    #|> configure_session(drop: true)
-    #|> delete_session(id)
 
     conn
     |> put_resp_header("content-type", "application/json; charset=utf-8")

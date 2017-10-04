@@ -12,6 +12,12 @@ defmodule WsdjsWeb.Api.V1.FallbackController do
     |> render(WsdjsWeb.Api.V1.ChangesetView, "error.json", changeset: changeset)
   end
 
+  def call(conn, {:error, :invalid}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> render(WsdjsWeb.Api.V1.ErrorView, :"422")
+  end
+
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
