@@ -10,7 +10,7 @@ defmodule WsdjsWeb.Api.V1.SessionController do
   action_fallback WsdjsWeb.Api.V1.FallbackController
 
   def create(conn, %{"email" => email}) do
-    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.provide_token(email) do
+    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.provide_token(email, "api") do
       conn
       |> put_status(:created)
       |> send_resp(:no_content, "")
