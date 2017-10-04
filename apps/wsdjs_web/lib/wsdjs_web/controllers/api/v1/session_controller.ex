@@ -5,30 +5,15 @@ defmodule WsdjsWeb.Api.V1.SessionController do
   plug :put_layout, "login.html"
 
   alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.Invitation
+  alias Wsdjs.Accounts.User
 
   action_fallback WsdjsWeb.Api.V1.FallbackController
 
   def create(conn, %{"email" => email}) do
-    case WsdjsWeb.MagicLink.provide_token(email) do
-      {:ok, user} ->
-        list = %{
-          user: %{
-            name: user.name
-          }
-        }
-    
-        conn
-        |> put_resp_header("content-type", "application/json; charset=utf-8")
-        |> send_resp(200, Poison.encode!(list))
-
-      {:error, :not_found} ->
-        list = %{
-          error: "User does not exist"
-        }
-        conn
-        |> put_resp_header("content-type", "application/json; charset=utf-8")
-        |> send_resp(400, Poison.encode!(list))
+    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.provide_token(email) do
+      conn
+      |> put_status(:created)
+      |> send_resp(:no_content, "")
     end
   end
 
