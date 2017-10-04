@@ -27,7 +27,7 @@ defmodule WsdjsWeb.MagicLink do
   defp send_token(user, "browser") do
     user
     |> create_token()
-    |> AuthenticationEmail.login_link(user)
+    |> AuthenticationEmail.browser_login(user)
     |> Mailer.deliver_now()
 
     {:ok, user}
