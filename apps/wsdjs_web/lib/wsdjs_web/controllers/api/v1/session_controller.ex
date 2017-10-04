@@ -25,14 +25,4 @@ defmodule WsdjsWeb.Api.V1.SessionController do
       render(conn, "show.json", user: user, avatar: avatar, bearer: bearer)
     end
   end
-
-  def delete(conn, %{"id" => id}) do
-    list = %{
-      message: "You logged out successfully. Enjoy your day!"
-    }
-
-    conn
-    |> put_resp_header("content-type", "application/json; charset=utf-8")
-    |> send_resp(200, Poison.encode!(list))
-  end
 end

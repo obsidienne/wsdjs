@@ -78,7 +78,6 @@ defmodule WsdjsWeb.Router do
         resources "/comments", CommentController, only: [:create]
       end
       resources "/opinions", OpinionController, only: [:delete]
-      resources "/sessions", SessionController, only: [:delete]
     end
   end
 
