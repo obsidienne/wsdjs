@@ -2,7 +2,12 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js"
+      joinTo: {
+        "js/app.js": /^(js\/desktop)/,
+        "js/vendor.js": /^(vendor\/desktop)|(deps)/,
+        "js/app-mobile.js": /^(js\/mobile)/,
+        "js/vendor-mobile.js": /^(vendor\/mobile)|(deps)/,
+      }
 
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
@@ -20,7 +25,10 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+        "css/app.css": /^(css\/desktop)/,
+        "css/app-mobile.css": /^(css\/mobile)/,
+      }
     },
     templates: {
       joinTo: "js/app.js"
