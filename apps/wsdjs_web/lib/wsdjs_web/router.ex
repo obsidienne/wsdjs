@@ -75,7 +75,7 @@ defmodule WsdjsWeb.Router do
     scope "/v1", alias: Api.V1 do
       resources "/songs", SongController, only: [] do
         resources "/opinions", OpinionController, only: [:create]
-        resources "/comments", CommentController, only: [:create, :index]
+        resources "/comments", CommentController, only: [:create]
       end
       resources "/opinions", OpinionController, only: [:delete]
     end
@@ -93,6 +93,9 @@ defmodule WsdjsWeb.Router do
       resources "/now_playing", NowPlayingController, only: [:index]
       resources "/mobile_config", MobileConfigController, only: [:index]
       resources "/sessions", SessionController, only: [:new, :create, :show, :delete]
+      resources "/songs", SongController, only: [] do
+        resources "/comments", CommentController, only: [:index]
+      end
     end
   end
 
