@@ -6,7 +6,17 @@ defmodule WsdjsWeb.IdentifyUa do
 
   @doc false
   def call(conn, _repo) do
-    assign(conn, :layout_type, (conn))
+    conn
+    |> assign(:layout_type, is_mobile(conn))
+    |> Phoenix.Controller.put_layout(layout_type(conn))
+  end
+
+  def layout_type(%Plug.Conn{} = conn) do
+    if is_mobile(conn) == "mobile" do
+      {WsdjsWeb.LayoutView, :"mobile-app"}
+    else
+      {WsdjsWeb.LayoutView, :app}
+    end
   end
 
   def is_mobile(%Plug.Conn{} = conn) do

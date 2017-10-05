@@ -21,9 +21,7 @@ defmodule WsdjsWeb.SongController do
       opinions = Musics.list_opinions(song)
       comment_changeset = Musics.change_comment(%Comment{})
 
-      conn
-      |> put_layout(:"mobile-app")
-      |> render "mobile-show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
+      render conn, "mobile-show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
     end
   end
 
