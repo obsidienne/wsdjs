@@ -138,6 +138,29 @@ defmodule Wsdjs.Accounts do
 
   ###############################################
   #
+  # Avatar
+  #
+  ###############################################
+  alias Wsdjs.Accounts.Avatar
+ 
+  @doc """
+  Returns the user avatar.
+
+  ## Examples
+
+      iex> get_avatar(%User{})
+      %Avatar{}
+  """
+  def get_avatar(%User{id: id}) do
+    Avatar
+    |> where([user_id: ^id])
+    |> order_by([desc: :inserted_at])
+    |> limit(1)
+    |> Repo.all
+  end
+
+  ###############################################
+  #
   # Invitation
   #
   ###############################################
