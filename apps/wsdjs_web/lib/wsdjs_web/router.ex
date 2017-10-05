@@ -17,7 +17,6 @@ defmodule WsdjsWeb.Router do
 
   pipeline :ensure_admin do
     plug WsdjsWeb.EnsureAdmin, handler_fn: :admin_call
-    plug :put_layout, {WsdjsWeb.LayoutView, :admin}
   end
 
   pipeline :api do

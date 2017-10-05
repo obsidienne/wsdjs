@@ -2,8 +2,6 @@ defmodule WsdjsWeb.SessionController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  plug :put_layout, "login.html"
-
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.Invitation
 
