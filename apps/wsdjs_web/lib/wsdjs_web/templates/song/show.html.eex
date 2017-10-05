@@ -42,6 +42,7 @@
   <nav class="tabs-navigation container">
     <ul class="tabs-navigation__items">
       <li class="tabs-navigation__item active"><a data-turbolinks="false" href="#overview-section">overview</a></li>
+      <li class="tabs-navigation__item"><a data-turbolinks="false" href="#overview-video">videos</a></li>
     </ul>
   </nav>
 </section>
@@ -49,6 +50,10 @@
 <section id="overview-section" class="container tabs-pane active">
   <%= render "_opinions.html", conn: @conn, song: @song, opinions: @opinions %>
   <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
+</section>
+
+<section id="overview-video" class="container tabs-pane">
+  <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
 </section>
 
 <%= if Wsdjs.Musics.Policy.can?(@current_user, :edit_song, @song) == :ok do %>
