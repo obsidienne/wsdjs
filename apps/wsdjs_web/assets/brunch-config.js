@@ -3,9 +3,9 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: {
-        "js/app.js": /^(js\/desktop)/,
+        "js/app.js": /^(js\/desktop)|(node_modules)/,
         "js/vendor.js": /^(vendor\/desktop)|(deps)/,
-        "js/app-mobile.js": /^(js\/mobile)/,
+        "js/app-mobile.js": /^(js\/mobile)|(node_modules)/,
         "js/vendor-mobile.js": /^(vendor\/mobile)|(deps)/,
       }
 
@@ -26,13 +26,14 @@ exports.config = {
     },
     stylesheets: {
       joinTo: {
-        "css/app.css": /^(css\/desktop)/,
-        "css/app-mobile.css": /^(css\/mobile)/,
+        "css/app.css": /^(css\/desktop)|(node_modules)/,
+        "css/app-mobile.css": /^(css\/mobile)|(node_modules)/,
       }
-    },
-    templates: {
-      joinTo: "js/app.js"
     }
+    //,
+    //templates: {
+    //  joinTo: "js/app.js"
+    //}
   },
 
   conventions: {
@@ -60,7 +61,8 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["js/app"]
+      "js/app.js": ["js/desktop/app"],
+      "js/app-mobile.js": ["js/mobile/app"],
     }
   },
 
