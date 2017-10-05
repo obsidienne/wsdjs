@@ -6,7 +6,7 @@
 <%= if Mix.env != :prod do %>
 <div class="plug-ribbon-wrapper">
   <div class="plug-ribbon">
-    <a href="/"><%= Mix.env |> Atom.to_string |> String.upcase %></a>
+    <a>Desktop - <%= Mix.env |> Atom.to_string |> String.upcase %></a>
   </div>
 </div>
 <% end %>

@@ -53,6 +53,6 @@
       <% end %>
     </div>
 
-    <%= render "_desktop-outside.html", current_user: @current_user %>
+    <%= render "_mobile-outside.html", current_user: @current_user %>
   </body>
 </html>

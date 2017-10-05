@@ -8,6 +8,7 @@ defmodule WsdjsWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug WsdjsWeb.VerifySession
+    plug WsdjsWeb.IdentifyUa
   end
 
   pipeline :browser_auth do
