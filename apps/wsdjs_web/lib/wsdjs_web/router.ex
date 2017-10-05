@@ -97,6 +97,7 @@ defmodule WsdjsWeb.Router do
       resources "/sessions", SessionController, only: [:create]
       resources "/songs", SongController, only: [] do
         resources "/comments", CommentController, only: [:index]
+        resources "/videos", VideoController, only: [:index]
       end
     end
   end

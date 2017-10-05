@@ -9,7 +9,7 @@ defmodule WsdjsWeb.Api.V1.VideoController do
 
   def index(conn, %{"song_id" => song_id}) do
     with song <- Musics.get_song!(song_id) do
-      comments = Musics.list_videos(song)
+      videos = Musics.list_videos(song)
 
       render(conn, "index.json", videos: videos)
     end
