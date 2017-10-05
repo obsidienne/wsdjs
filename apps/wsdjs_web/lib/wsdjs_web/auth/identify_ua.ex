@@ -6,14 +6,16 @@ defmodule WsdjsWeb.IdentifyUa do
 
   @doc false
   def call(conn, _repo) do
+    assign(conn, :layout_type, (conn))
+  end
+
+  def is_mobile(%Plug.Conn{} = conn) do
     [ua] = get_req_header(conn, "user-agent")
     parsed = UAInspector.parse(ua)
-
+    IO.inspect parsed
     case parsed.device do
-      %{type: "smartphone"} ->
-        assign(conn, :layout_type, "mobile")
-      _ ->
-        assign(conn, :layout_type, "desktop")
+      %{type: "smartphone"} -> "mobile"
+      _ -> "desktop"
     end
   end
 end
