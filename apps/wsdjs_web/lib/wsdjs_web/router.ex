@@ -97,4 +97,12 @@ defmodule WsdjsWeb.Router do
       end
     end
   end
+
+  scope "/", as: :api, alias: :'WsdjsWeb' do
+    pipe_through [:api]
+
+    scope "/", alias: Api do
+      get "/.well-known/:page", StaticController, :show
+    end
+  end
 end
