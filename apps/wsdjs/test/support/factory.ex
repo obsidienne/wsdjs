@@ -25,6 +25,14 @@ defmodule Wsdjs.Factory do
     }
   end
 
+  def video_factory do
+    %Wsdjs.Musics.Video {
+      url: sequence(:url, &"http://www.youtube.com/#{&1}"),
+      user: build(:user),
+      song: build(:song)
+    }
+  end
+
   def top_factory do
     %Wsdjs.Charts.Top {
       due_date: Timex.beginning_of_month(Timex.today),

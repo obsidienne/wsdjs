@@ -18,6 +18,12 @@ defmodule WsdjsWeb.Api.V1.FallbackController do
     |> render(WsdjsWeb.Api.V1.ErrorView, :"422")
   end
 
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(WsdjsWeb.Api.V1.ErrorView, :"401")
+  end
+
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
