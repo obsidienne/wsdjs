@@ -44,24 +44,24 @@ defmodule Wsdjs.TopTest do
       tops = [
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -3)}),
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -5)}),
-      ]
+      ] |> Enum.sort()
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
     end
 
     test "[current month -6 to n-24]", context do
       tops = [
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -6)}),
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -24)})
-      ]
+      ] |> Enum.sort()
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
     end
 
     test "current month -25", context do
