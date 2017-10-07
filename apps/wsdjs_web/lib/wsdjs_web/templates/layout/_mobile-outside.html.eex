@@ -16,10 +16,10 @@
   <%= if @current_user.parameter && @current_user.parameter.piwik, do: render "_piwik.html", current_user: @current_user %>
 <% end %>
 
-<%= if Mix.env != :prod do %>
+<%= if Mix.env != :prod || System.get_env["WSDJS_ENV"] == "staging" do %>
 <div class="plug-ribbon-wrapper">
   <div class="plug-ribbon">
-    <a>Mobile - <%= Mix.env |> Atom.to_string |> String.upcase %></a>
+    <a>Mobile - <%= System.get_env["WSDJS_ENV"] || Mix.env |> Atom.to_string |> String.upcase %></a>
   </div>
 </div>
 <% end %>
