@@ -1,21 +1,29 @@
-FROM trenpixster/elixir:latest
+# base image elixer to start with
+FROM elixir:1.5.2
 
-RUN mkdir phoenixapp
+# install hex package manager
+RUN mix local.hex --force
 
-WORKDIR phoenixapp
+# install the latest phoenix 
+RUN mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez --force
 
-COPY ./mix.exs /phoenixapp/mix.exs
-COPY ./mix.lock /phoenixapp/mix.lock
+# install node
+RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh  
+RUN bash nodesource_setup.sh  
+RUN apt-get install nodejs
 
-RUN mix do deps.get
+# create app folder
+RUN mkdir /app
+COPY . /app
+WORKDIR /app
 
-COPY ./ /phoenixapp
+# install dependencies
+RUN mix deps.get --only prod
+RUN mix compile
 
-ENV PORT 8080
-ENV MIX_ENV prod
+# install node dependencies
+#RUN cd /app/apps/wsdjs_web/assets && npm install
+#RUN node node_modules/brunch/bin/brunch build
 
-RUN mix do compile
-
-EXPOSE 8080
-
-ENTRYPOINT ["mix", "phx.server"]
+# run phoenix in *dev* mode on port 4000
+CMD mix phx.server  
