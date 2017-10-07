@@ -39,20 +39,6 @@
 
     <%= render "_player.html", conn: @conn %>
 
-    <div id="notifier-container" class="notifier-container">
-      <%= if get_flash(@conn, :info) do %>
-      <div id="info-notification" class="notifier info" role="alert">
-        <h2 class="notifier-title"><%= get_flash(@conn, :info) %></h2>
-      </div>
-      <% end %>
-
-      <%= if get_flash(@conn, :error) do %>
-      <div id="error-notification" class="notifier danger" role="alert">
-        <h2 class="notifier-title"><%= get_flash(@conn, :error) %></h2>
-      </div>
-      <% end %>
-    </div>
-
-    <%= render "_mobile-outside.html", current_user: @current_user %>
+    <%= render "_mobile-outside.html", conn: @conn, current_user: @current_user %>
   </body>
 </html>
