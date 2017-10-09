@@ -4,8 +4,13 @@ FROM bitwalker/alpine-elixir-phoenix:latest
 # install the latest phoenix 
 RUN mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new-1.3.0.ez --force
 
-EXPOSE 8080
-ENV PORT=8080 MIX_ENV=prod 
+ENV PORT ${PORT:-8080} 
+ENV MIX_ENV prod
+ENV NODE_ENV "production"
+ENV CC_PHOENIX_ASSETS_DIR ${CC_PHOENIX_ASSETS_DIR}
+ENV CC_PHOENIX_APP_DIR ${CC_PHOENIX_APP_DIR}
+ENV DATABASE_URL ${POSTGRESQL_ADDON_URI}
+EXPOSE ${PORT}
 
 # create app folder
 RUN mkdir /app
@@ -16,11 +21,18 @@ WORKDIR /app
 RUN mix deps.get --only prod
 
 # install node dependencies
-RUN npm install
-
 # Run frontend build, compile, and digest assets
-RUN brunch build --production && mix do compile, phx.digest
+WORKDIR ${CC_PHOENIX_ASSETS_DIR}
+RUN npm install
+RUN brunch build --production
+
+WORKDIR ${CC_PHOENIX_APP_DIR}
+RUN mix ecto.migrate
+
+WORKDIR /app
+RUN mix compile
+RUN phx.digest
 
 USER default
 
-CMD ["mix", "phx.server"]
+CMD mix phx.server
