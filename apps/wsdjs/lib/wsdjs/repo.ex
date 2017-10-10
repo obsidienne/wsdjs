@@ -7,8 +7,11 @@ defmodule Wsdjs.Repo do
   @doc """
   Dynamically loads the repository url from the
   DATABASE_URL environment variable.
+  POSTGRESQL_ADDON_URI is used by clever-cloud
   """
   def init(_, opts) do
-    {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}
+    url = System.get_env("POSTGRESQL_ADDON_URI") || raise "expected the POSTGRESQL_ADDON_URI environment variable to be set (postgresql://user:password@host:5432/database)"
+
+    {:ok, Keyword.put(opts, :url, url)}
   end
 end

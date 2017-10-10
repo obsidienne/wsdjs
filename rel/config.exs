@@ -37,6 +37,7 @@ environment :prod do
   set include_erts: true
   set include_src: false
   set cookie: :"b(v4Lcx>8MpPQ7lS}rq(xz71yUtk7d?Y4/3)WKO[Gpu=zW,[7n,Fg^)SgYy2M7?f"
+  set post_start_hook: "rel/hooks/migrate"
 end
 
 # You may define one or more releases in this file.
@@ -51,6 +52,9 @@ release :radiowcs_platform do
     wsdjs: :permanent,
     wsdjs_jobs: :permanent,
     wsdjs_web: :permanent
+  ]
+  set commands: [
+    "migrate": "rel/hooks/migrate"
   ]
 end
 

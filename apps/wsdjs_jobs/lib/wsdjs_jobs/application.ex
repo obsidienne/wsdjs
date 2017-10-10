@@ -9,13 +9,10 @@ defmodule Wsdjs.Jobs.Application do
     import Supervisor.Spec, warn: false
 
     # Define workers and child supervisors to be supervised
-    children = case Mix.env do
-      :test -> [worker(Wsdjs.Jobs.Scheduler, [])]
-      _ -> [
-        worker(Wsdjs.Jobs.NowPlaying, [Wsdjs.Jobs.NowPlaying]),
-        worker(Wsdjs.Jobs.Scheduler, [])
-      ]
-    end
+    children = [
+      worker(Wsdjs.Jobs.NowPlaying, [Wsdjs.Jobs.NowPlaying]),
+      worker(Wsdjs.Jobs.Scheduler, [])
+    ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options

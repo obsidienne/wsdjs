@@ -55,7 +55,7 @@ COPY apps/wsdjs_web/mix.exs $HOME/apps/wsdjs_web/
 COPY apps/wsdjs_web/config/ $HOME/apps/wsdjs_web/config/
 
 ENV MIX_ENV=prod
-RUN mix do deps.get --only $MIX_ENV, deps.compile
+RUN mix do deps.get --only $MIX_ENV, deps.compile, ua_inspector.download.databases --force, ua_inspector.download.short_code_maps --force
 
 COPY . $HOME/
 
@@ -78,7 +78,7 @@ ENV LANG=en_US.UTF-8 \
 
 ENV RADIOWCS_PLATFORM_VERSION=0.1.0
 
-RUN apk add --no-cache ncurses-libs openssl
+RUN apk add --no-cache ncurses-libs openssl bash
 
 EXPOSE 8080
 ENV PORT=8080 \
