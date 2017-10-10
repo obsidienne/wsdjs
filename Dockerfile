@@ -1,5 +1,5 @@
 # from https://gist.github.com/bsedat/16cb74ebc8ab0ed61ac598a129b0a7ea
-FROM elixir:1.5.2 as asset-builder-mix-getter
+FROM elixir:1.5.1 as asset-builder-mix-getter
 
 ENV HOME=/opt/app
 
