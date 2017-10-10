@@ -76,7 +76,7 @@ ENV LANG=en_US.UTF-8 \
     HOME=/opt/app/ \
     TERM=xterm
 
-ENV MYPROJECT_VERSION=0.1.0
+ENV RADIOWCS_PLATFORM_VERSION=0.1.0
 
 RUN apk add --no-cache ncurses-libs openssl
 
@@ -86,9 +86,9 @@ ENV PORT=8080 \
     REPLACE_OS_VARS=true \
     SHELL=/bin/sh
 
-COPY --from=releaser $HOME/_build/prod/rel/myproject/releases/$MYPROJECT_VERSION/myproject.tar.gz $HOME
+COPY --from=releaser $HOME/_build/prod/rel/radiowcs_platform/releases/$RADIOWCS_PLATFORM_VERSION/radiowcs_platform.tar.gz $HOME
 WORKDIR $HOME
-RUN tar -xzf myproject.tar.gz
+RUN tar -xzf radiowcs_platform.tar.gz
 
-ENTRYPOINT ["/opt/app/bin/myproject"]
+ENTRYPOINT ["/opt/app/bin/radiowcs_platform"]
 CMD ["foreground"]
