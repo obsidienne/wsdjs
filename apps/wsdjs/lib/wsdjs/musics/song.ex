@@ -4,7 +4,7 @@ defmodule Wsdjs.Musics.Song do
   import Ecto.Query
   alias Wsdjs.Musics.Song
 
-  alias Wsdjs.{Charts, Accounts, Musics}
+  alias Wsdjs.{Charts, Accounts, Musics, Reactions}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -22,9 +22,9 @@ defmodule Wsdjs.Musics.Song do
 
     belongs_to :user, Accounts.User
     has_one :art, Musics.Art, on_replace: :delete
-    has_many :comments, Musics.Comment
+    has_many :comments, Reactions.Comment
     has_many :ranks, Charts.Rank
-    has_many :opinions, Musics.Opinion
+    has_many :opinions, Reactions.Opinion
     has_many :votes, Charts.Vote
     many_to_many :tops, Charts.Top, join_through: Charts.Rank
   end

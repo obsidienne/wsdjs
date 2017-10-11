@@ -44,7 +44,7 @@ defmodule WsdjsWeb.Api.V1.OpinionView do
     }
   end
 
-  defp render_opinion(opinions, kind, song, %Wsdjs.Musics.Opinion{} = current) do
+  defp render_opinion(opinions, kind, song, %Wsdjs.Reactions.Opinion{} = current) do
     url = if current.kind == kind do
       api_opinion_path(WsdjsWeb.Endpoint, :delete, current.id)
     else

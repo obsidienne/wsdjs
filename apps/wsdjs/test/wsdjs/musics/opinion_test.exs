@@ -2,7 +2,7 @@ defmodule Wsdjs.OpinionTest do
   use Wsdjs.DataCase, async: true
   import Wsdjs.Factory
 
-  alias Wsdjs.Musics
+  alias Wsdjs.Reactions
 
   test "Opinions are correctly summed" do
     opinions = [
@@ -14,6 +14,6 @@ defmodule Wsdjs.OpinionTest do
       insert(:opinion, kind: "down"),
     ]
 
-    assert Musics.opinions_value(opinions) == 6
+    assert Reactions.opinions_value(opinions) == 6
   end
 end

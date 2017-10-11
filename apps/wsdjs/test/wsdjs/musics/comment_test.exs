@@ -1,7 +1,7 @@
 defmodule Wsdjs.CommentsTest do
   use Wsdjs.DataCase, async: true
 
-  alias Wsdjs.Musics.Comment
+  alias Wsdjs.Reactions.Comment
 
   @create_attrs %{text: "song title"}
 

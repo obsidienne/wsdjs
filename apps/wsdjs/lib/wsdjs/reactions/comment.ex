@@ -1,8 +1,8 @@
-defmodule Wsdjs.Musics.Comment do
+defmodule Wsdjs.Reactions.Comment do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Musics.Comment
+  alias Wsdjs.Reactions.Comment
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

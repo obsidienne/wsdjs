@@ -263,7 +263,7 @@ defmodule Wsdjs.Charts do
     |> Repo.all()
 
     Enum.each(ranks, fn(rank) ->
-      val = Wsdjs.Musics.opinions_value(rank.song.opinions)
+      val = Wsdjs.Reactions.opinions_value(rank.song.opinions)
       rank
       |> Rank.changeset(%{likes: val})
       |> Repo.update()

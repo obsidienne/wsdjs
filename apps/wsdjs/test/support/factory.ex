@@ -49,7 +49,7 @@ defmodule Wsdjs.Factory do
   end
 
   def opinion_factory do
-    %Wsdjs.Musics.Opinion {
+    %Wsdjs.Reactions.Opinion {
       kind: "like",
       user: build(:user),
       song: build(:song)

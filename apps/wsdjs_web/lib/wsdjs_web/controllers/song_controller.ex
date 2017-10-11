@@ -4,7 +4,9 @@ defmodule WsdjsWeb.SongController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Musics
-  alias Wsdjs.Musics.{Comment, Song, Video}
+  alias Wsdjs.Reactions
+  alias Wsdjs.Reactions.Comment
+  alias Wsdjs.Musics.{Song, Video}
 
   action_fallback WsdjsWeb.FallbackController
 
@@ -17,9 +19,9 @@ defmodule WsdjsWeb.SongController do
     with song <- Musics.get_song!(id),
           :ok <- Musics.Policy.can?(current_user, :show, song) do
 
-      comments = Musics.list_comments(song)
-      opinions = Musics.list_opinions(song)
-      comment_changeset = Musics.change_comment(%Comment{})
+      comments = Reactions.list_comments(song)
+      opinions = Reactions.list_opinions(song)
+      comment_changeset = Reactions.change_comment(%Comment{})
 
       render conn, "mobile-show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
     end
@@ -29,11 +31,11 @@ defmodule WsdjsWeb.SongController do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :show, song) do
 
-      comments = Musics.list_comments(song)
-      opinions = Musics.list_opinions(song)
+      comments = Reactions.list_comments(song)
+      opinions = Reactions.list_opinions(song)
       videos = Musics.list_videos(song)
       video_changeset = Musics.change_video(%Video{})
-      comment_changeset = Musics.change_comment(%Comment{})
+      comment_changeset = Reactions.change_comment(%Comment{})
 
       render conn, "show.html", song: song,
                                 comments: comments,
