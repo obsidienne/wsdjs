@@ -59,10 +59,12 @@ defmodule WsdjsWeb.Endpoint do
       secret_key_base = System.get_env("SECRET_KEY_BASE") || raise "expected the SECRET_KEY_BASE environment variable to be set"
       host = System.get_env("WSDJS_URL") || "www.worldswingdjs.com"
 
-      config = config 
+      config = config
       |> Keyword.put(:http, [:inet6, port: port])
       |> Keyword.put(:secret_key_base, secret_key_base)
       |> Keyword.put(:url, [host: host, port: 443, scheme: "https"])
+
+      IO.inspect config
 
       {:ok, config}
     else
