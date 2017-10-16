@@ -64,8 +64,6 @@ defmodule WsdjsWeb.Endpoint do
       |> Keyword.put(:secret_key_base, secret_key_base)
       |> Keyword.put(:url, [host: host, port: 443, scheme: "https"])
 
-      IO.inspect config
-
       {:ok, config}
     else
       {:ok, config}
