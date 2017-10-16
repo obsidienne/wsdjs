@@ -21,7 +21,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   end
 
   def init(state) do
-    schedule_work(0) # Schedule work to be performed at some point
+    schedule_work(5000) # Schedule work to be performed at some point
     {:ok, state}
   end
 
