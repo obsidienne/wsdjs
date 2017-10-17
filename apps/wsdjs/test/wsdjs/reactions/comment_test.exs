@@ -1,4 +1,4 @@
-defmodule Wsdjs.CommentsTest do
+defmodule Wsdjs.Reactions.CommentsTest do
   use Wsdjs.DataCase, async: true
 
   alias Wsdjs.Reactions.Comment

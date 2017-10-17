@@ -1,4 +1,4 @@
-defmodule Wsdjs.RankTest do
+defmodule Wsdjs.Charts.RankTest do
   use Wsdjs.DataCase, async: true
 
   alias Wsdjs.Charts.Rank

@@ -1,4 +1,4 @@
-defmodule Wsdjs.OpinionTest do
+defmodule Wsdjs.Reactions.OpinionTest do
   use Wsdjs.DataCase, async: true
   import Wsdjs.Factory
 

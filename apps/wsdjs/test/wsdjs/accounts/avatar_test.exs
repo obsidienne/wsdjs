@@ -1,4 +1,4 @@
-defmodule Wsdjs.AvatarTest do
+defmodule Wsdjs.Accounts.AvatarTest do
   use Wsdjs.DataCase
 
   alias Wsdjs.Accounts.Avatar

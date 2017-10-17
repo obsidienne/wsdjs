@@ -1,4 +1,4 @@
-defmodule Wsdjs.TopTest do
+defmodule Wsdjs.Charts.TopTest do
   use Wsdjs.DataCase, async: true
 
   alias Wsdjs.Charts.Top
