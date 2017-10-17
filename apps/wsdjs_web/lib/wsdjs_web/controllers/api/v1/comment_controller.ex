@@ -31,4 +31,14 @@ defmodule WsdjsWeb.Api.V1.CommentController do
       |> render("show.json", comment: comment)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    current_user = conn.assigns[:current_user]
+
+    comment = Reactions.get_comment!(id)
+    with :ok <- Reactions.Policy.can?(current_user, :delete, comment),
+         {:ok, %Comment{}} <- Reactions.delete_comment(comment) do
+      send_resp(conn, :no_content, "")
+    end
+  end
 end

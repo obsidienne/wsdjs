@@ -64,4 +64,12 @@ defmodule Wsdjs.Factory do
       user: build(:user)
     }
   end
+
+  def comment_factory do
+    %Wsdjs.Reactions.Comment {
+      text: "dummy text",
+      user: build(:user),
+      song: build(:song)
+    }
+  end
 end
