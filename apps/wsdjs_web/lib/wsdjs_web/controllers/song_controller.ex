@@ -6,7 +6,9 @@ defmodule WsdjsWeb.SongController do
   alias Wsdjs.Musics
   alias Wsdjs.Reactions
   alias Wsdjs.Reactions.Comment
-  alias Wsdjs.Musics.{Song, Video}
+  alias Wsdjs.Musics.Song
+  alias Wsdjs.Attachments
+  alias Wsdjs.Attachments.Video
 
   action_fallback WsdjsWeb.FallbackController
 
@@ -33,8 +35,8 @@ defmodule WsdjsWeb.SongController do
 
       comments = Reactions.list_comments(song)
       opinions = Reactions.list_opinions(song)
-      videos = Musics.list_videos(song)
-      video_changeset = Musics.change_video(%Video{})
+      videos = Attachments.list_videos(song)
+      video_changeset = Attachments.change_video(%Video{})
       comment_changeset = Reactions.change_comment(%Comment{})
 
       render conn, "show.html", song: song,

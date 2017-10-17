@@ -2,7 +2,6 @@ defmodule Wsdjs.ReactionsTest do
   use Wsdjs.DataCase
   import Wsdjs.Factory
   alias Wsdjs.Reactions
-  alias Wsdjs.Reactions.{Comment, Opinion}
   alias Wsdjs.Repo
 
   describe "comments" do

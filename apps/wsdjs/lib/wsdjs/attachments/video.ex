@@ -1,8 +1,8 @@
-defmodule Wsdjs.Musics.Video do
+defmodule Wsdjs.Attachments.Video do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Musics.Video
+  alias Wsdjs.Attachments.Video
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

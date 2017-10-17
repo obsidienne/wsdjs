@@ -26,7 +26,7 @@ defmodule Wsdjs.Factory do
   end
 
   def video_factory do
-    %Wsdjs.Musics.Video {
+    %Wsdjs.Attachments.Video {
       url: sequence(:url, &"http://www.youtube.com/#{&1}"),
       user: build(:user),
       song: build(:song)
