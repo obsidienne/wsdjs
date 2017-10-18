@@ -35,8 +35,6 @@ defmodule WsdjsWeb.UserController do
     current_user = conn.assigns[:current_user]
     user = Accounts.get_user(id)
 
-    IO.inspect user_params
-
     with :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
          {:ok, user} <- Accounts.update_user(user, user_params) do
       conn

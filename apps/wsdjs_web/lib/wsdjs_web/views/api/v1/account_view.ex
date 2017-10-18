@@ -12,7 +12,7 @@ defmodule WsdjsWeb.Api.V1.AccountView do
         country: user.user_country,
         djname: user.djname,
         profil_dj: user.profil_dj,
-        details: %{
+        detail: %{
             description: user.detail.description,
             favorite_genre: user.detail.favorite_genre,
             favorite_artist: user.detail.favorite_artist,
@@ -33,11 +33,10 @@ defmodule WsdjsWeb.Api.V1.AccountView do
       }
     end
 
-    def render("update.json", %{user: user, avatar: avatar}) do
+    def render("error.json", %{}) do
        %{
-        test: "ok"
-       } 
-        
+          error: "error"
+        }         
     end
   end
   

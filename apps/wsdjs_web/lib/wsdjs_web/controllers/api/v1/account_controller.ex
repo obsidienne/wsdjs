@@ -18,17 +18,13 @@ defmodule WsdjsWeb.Api.V1.AccountController do
     def update(conn, %{"id" => id, "user" => user_params}) do
         current_user = conn.assigns[:current_user]            
         user = Accounts.get_user(id)
-        test_params = %{
-            
-        }
         with :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
-         {:ok, user} <- Accounts.update_user(user, test_params) do
+         {:ok, user} <- Accounts.update_user(user, user_params) do
             [avatar] = Accounts.get_avatar(user)  
             render(conn, "show.json", user: user, avatar: avatar)
         else
             false ->
-            [avatar] = Accounts.get_avatar(current_user)  
-            render(conn, "show.json", user: current_user, avatar: avatar) 
+            render(conn, "error.json") 
         end
     end
   end
