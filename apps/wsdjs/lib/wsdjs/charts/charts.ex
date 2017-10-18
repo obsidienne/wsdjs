@@ -78,7 +78,7 @@ defmodule Wsdjs.Charts do
     top_changeset = Top.create_changeset(%Top{}, params)
 
     month = top_changeset.changes.due_date
-    songs = Musics.list_songs_for_month(month)
+    songs = Musics.list_songs(month)
 
     top_changeset
     |> put_assoc(:songs, songs)

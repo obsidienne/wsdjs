@@ -18,6 +18,7 @@ defmodule Wsdjs.Musics.Song do
     field :hidden_track, :boolean
     field :video_id, :string
     field :public_track, :boolean
+    field :suggestion, :boolean
     timestamps()
 
     belongs_to :user, Accounts.User
@@ -29,7 +30,7 @@ defmodule Wsdjs.Musics.Song do
     many_to_many :tops, Charts.Top, join_through: Charts.Rank
   end
 
-  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track]
+  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track, :suggestion]
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 

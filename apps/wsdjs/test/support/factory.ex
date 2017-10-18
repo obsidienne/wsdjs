@@ -22,6 +22,7 @@ defmodule Wsdjs.Factory do
       user: build(:user),
       url: "http://youtu.be/toto",
       bpm: 1,
+      suggestion: true
     }
   end
 

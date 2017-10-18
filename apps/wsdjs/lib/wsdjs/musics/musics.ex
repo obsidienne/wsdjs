@@ -90,10 +90,10 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
-  def list_songs_for_month(%Date{} = month) do
+  def list_songs(%Date{} = month) do
     lower = Timex.beginning_of_month(Timex.to_datetime(month))
     upper = Timex.end_of_month(Timex.to_datetime(month))
-    query = from s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper
+    query = from s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
 
     Repo.all(query)
   end
