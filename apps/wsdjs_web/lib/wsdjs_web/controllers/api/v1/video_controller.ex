@@ -31,4 +31,14 @@ defmodule WsdjsWeb.Api.V1.VideoController do
       |> render("show.json", video: video)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    current_user = conn.assigns[:current_user]
+
+    video = Attachments.get_video!(id)
+    with :ok <- Attachments.Policy.can?(current_user, :delete, video),
+         {:ok, %Video{}} <- Attachments.delete_video(video) do
+      send_resp(conn, :no_content, "")
+    end
+  end
 end

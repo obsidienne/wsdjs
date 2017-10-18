@@ -6,9 +6,24 @@ defmodule Wsdjs.Attachments do
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
   alias Wsdjs.Attachments.Video
+
+  @doc """
+  Gets a single video.
+
+  Raises `Ecto.NoResultsError` if the Videox@x@ does not exist.
+
+  ## Examples
+
+      iex> get_video!(123)
+      %Comment{}
+
+      iex> get_video!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_video!(id), do: Repo.get!(Video, id)
 
   @doc """
   Returns the list of videos.
