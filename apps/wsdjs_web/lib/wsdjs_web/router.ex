@@ -79,6 +79,7 @@ defmodule WsdjsWeb.Router do
         resources "/videos", VideoController, only: [:create]
       end
       resources "/opinions", OpinionController, only: [:delete]
+      resources "/account", AccountController, only: [:show, :update]
     end
   end
 
@@ -99,6 +100,7 @@ defmodule WsdjsWeb.Router do
         resources "/comments", CommentController, only: [:index]
         resources "/videos", VideoController, only: [:index]
       end
+     
     end
   end
 
