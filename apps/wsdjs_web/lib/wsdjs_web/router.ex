@@ -79,7 +79,8 @@ defmodule WsdjsWeb.Router do
         resources "/videos", VideoController, only: [:create]
       end
       resources "/opinions", OpinionController, only: [:delete]
-      resources "/account", AccountController, only: [:show, :update]
+      resources "/accounts", AccountController, only: [:show, :update]
+      get "/me", AccountController, :show, as: :me
     end
   end
 

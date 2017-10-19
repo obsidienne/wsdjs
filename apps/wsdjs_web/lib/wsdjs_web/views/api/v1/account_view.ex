@@ -3,7 +3,7 @@ defmodule WsdjsWeb.Api.V1.AccountView do
 
   alias WsdjsWeb.CloudinaryHelper
 
-  def render("show.json", %{user: user, avatar: avatar}) do
+  def render("show.json", %{user: user}) do
     %{
       id: user.id,
       admin: user.admin,
@@ -27,8 +27,8 @@ defmodule WsdjsWeb.Api.V1.AccountView do
         soundcloud: user.detail.soundcloud,
       },
       avatar: %{
-        avatar_uri_200: CloudinaryHelper.avatar_url_with_resolution(avatar, 200),
-        avatar_uri: CloudinaryHelper.avatar_url(avatar)
+        avatar_uri_200: CloudinaryHelper.avatar_url_with_resolution(user.avatar, 200),
+        avatar_uri: CloudinaryHelper.avatar_url(user.avatar)
       }
     }
   end
