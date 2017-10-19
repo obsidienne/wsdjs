@@ -131,7 +131,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   end
 
   defp filled_from_db(song) do
-    song_in_base = Wsdjs.Musics.search_by_artist_title(song["artist"], song["title"])
+    song_in_base = Wsdjs.Musics.search(song["artist"], song["title"])
 
     if song_in_base != nil do
       song

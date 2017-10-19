@@ -35,7 +35,7 @@ defmodule Wsdjs.Musics do
   The uniq index artist / title ensure the uniquenes of result. 
   This a privileged function, no song restriction access.
   """
-  def search_by_artist_title(artist, title) do
+  def search(artist, title) when is_binary(artist) and is_binary(title) do
     Song
     |> where([s], fragment("lower(?)", s.title) == ^String.downcase(title))
     |> where([s], fragment("lower(?)", s.artist) == ^String.downcase(artist))
