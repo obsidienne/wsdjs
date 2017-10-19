@@ -13,8 +13,8 @@ defmodule Wsdjs.Musics do
   Returns a song list according to a fulltext search.
   The song list is scoped by current user.
   """
-  def search(_current_user, ""), do: []
-  def search(current_user, q) do
+  def search(%User{}, ""), do: []
+  def search(%User{} = current_user, q) do
     q = q
         |> String.trim
         |> String.split(" ")
