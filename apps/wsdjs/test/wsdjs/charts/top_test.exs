@@ -170,32 +170,9 @@ defmodule Wsdjs.Charts.TopTest do
     assert top.due_date == params[:due_date]
   end
 
-#    test "create_song/1 with invalid data returns error changeset" do
- #     assert {:error, %Ecto.Changeset{}} = Musics.create_song(@invalid_attrs)
-  #  end
-
-  # test "update_top/2 with valid data updates the top" do
-  #   top = insert(:top)
-  #   assert {:ok, top} = Charts.update_top(top, %{})
-  #   assert %Song{} = song
-  #   assert song.artist == "some updated artist"
-  #   assert song.title == "some updated title"
-  # end
-
-#    test "update_song/2 with invalid data returns error changeset" do
-#      song = song_fixture()
-#      assert {:error, %Ecto.Changeset{}} = Musics.update_song(song, @invalid_attrs)
-#      assert song == Musics.get_song!(song.id)
-#    end
-
   test "delete_top/1 deletes the top" do
     top = insert(:top)
     assert {:ok, %Top{}} = Charts.delete_top(top)
     assert_raise Ecto.NoResultsError, fn -> Charts.get_top!(top.id) end
   end
-
-#    test "change_song/1 returns a song changeset" do
-#      song = song_fixture()
-#      assert %Ecto.Changeset{} = Musics.change_song(song)
-#    end
 end
