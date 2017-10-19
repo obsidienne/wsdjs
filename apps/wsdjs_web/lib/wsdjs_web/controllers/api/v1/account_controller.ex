@@ -8,7 +8,10 @@ defmodule WsdjsWeb.Api.V1.AccountController do
   action_fallback WsdjsWeb.Api.V1.FallbackController
 
   def show(conn, %{"id" => id}) do
-    with %User{} = user <- Accounts.get_user!(id) do
+    current_user = conn.assigns[:current_user]
+
+    with %User{} = user <- Accounts.get_user!(id),
+         :ok <- Accounts.Policy.can?(current_user, :show, user) do
       render(conn, "show.json", user: user)
     end
   end
@@ -16,7 +19,9 @@ defmodule WsdjsWeb.Api.V1.AccountController do
   def show(conn, %{}) do
     current_user = conn.assigns[:current_user]
 
-    with %User{} = user <- Accounts.get_user!(current_user.id) do
+    with %User{} = user <- Accounts.get_user!(current_user.id),
+         :ok <- Accounts.Policy.can?(current_user, :show, user) do
+
       render(conn, "show.json", user: user)
     end
   end
