@@ -21,7 +21,7 @@ defmodule Wsdjs.Accounts.User do
     has_many :songs, Musics.Song
     has_many :comments, Reactions.Comment
     has_one :avatar, Accounts.Avatar, on_replace: :delete
-    has_one :detail, Accounts.UserDetail, on_replace: :delete
+    has_one :detail, Accounts.UserDetail, on_replace: :update
     has_one :parameter, Accounts.UserParameter, on_replace: :delete
     has_many :song_opinions, Reactions.Opinion
     has_many :votes, Charts.Vote
