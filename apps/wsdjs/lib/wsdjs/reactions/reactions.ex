@@ -5,7 +5,6 @@ defmodule Wsdjs.Reactions do
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
-
   ###############################################
   #
   # Comment

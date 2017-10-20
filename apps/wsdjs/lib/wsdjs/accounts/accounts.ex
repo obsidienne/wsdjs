@@ -147,7 +147,7 @@ defmodule Wsdjs.Accounts do
   #
   ###############################################
   alias Wsdjs.Accounts.Avatar
- 
+
   @doc """
   Returns the user avatar.
 

@@ -18,7 +18,6 @@ defmodule Wsdjs.AttachmentsTest do
       assert Attachments.get_video!(video.id) |> Repo.preload([:user, song: :user]) == video
     end
 
-
     test "create_video/1 with valid data creates a videos" do
       song = insert(:song)
       params = %{url: "http://youtu.be/dummy", user_id: song.user.id, song_id: song.id}

@@ -126,7 +126,7 @@ defmodule Wsdjs.Charts do
   def change_top_step(%Top{} = top) do
     Top.step_changeset(top, %{})
   end
-  
+
   ###############################################
   #
   # Change TOP step

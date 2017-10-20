@@ -27,7 +27,7 @@ defmodule WsdjsWeb.Api.V1.CommentView do
         path: user_path(WsdjsWeb.Endpoint, :show, comment.user),
         avatars: %{
           avatar_uri_200: CloudinaryHelper.avatar_url_with_resolution(comment.user.avatar, 200),
-          avatar_uri: CloudinaryHelper.avatar_url(comment.user.avatar)          
+          avatar_uri: CloudinaryHelper.avatar_url(comment.user.avatar)
         }
       },
       commented_at: DateTime.to_iso8601(DateTime.from_naive!(comment.inserted_at, "Etc/UTC")),

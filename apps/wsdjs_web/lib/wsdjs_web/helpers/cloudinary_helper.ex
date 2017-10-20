@@ -26,7 +26,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   @avatar_missing_url "//res.cloudinary.com/don2kwaju/image/upload/w_400/fl_immutable_cache/wsdjs/missing_avatar.jpg"
   @avatar_base_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
 
-  def avatar_url_with_resolution(%Avatar{cld_id: cld_id, version: version}, resolution) when is_binary(cld_id) do      
+  def avatar_url_with_resolution(%Avatar{cld_id: cld_id, version: version}, resolution) when is_binary(cld_id) do
     @avatar_base_url <> "w_#{resolution},h_#{resolution}/" <> "v#{version}/" <> "#{cld_id}.jpg"
   end
   def avatar_url(%Avatar{cld_id: cld_id, version: version}) when is_binary(cld_id) do
