@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.VideosControllerTest do
+defmodule WsdjsWeb.VideoControllerTest do
   use WsdjsWeb.ConnCase
   import Wsdjs.Factory
 
