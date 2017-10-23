@@ -4,38 +4,48 @@ defmodule WsdjsWeb.Api.V1.AccountView do
   alias WsdjsWeb.CloudinaryHelper
 
   def render("show.json", %{user: user}) do
-    %{
-      id: user.id,
-      admin: user.admin,
-      email: user.email,
-      name: user.name,
-      country: user.user_country,
-      djname: user.djname,
-      profil_dj: user.profil_dj,
-      detail: %{
-        description: user.detail.description,
-        favorite_genre: user.detail.favorite_genre,
-        favorite_artist: user.detail.favorite_artist,
-        favorite_color: user.detail.favorite_color,
-        favorite_meal: user.detail.favorite_meal,
-        favorite_animal: user.detail.favorite_animal,
-        djing_start_year: user.detail.djing_start_year,
-        love_more: user.detail.love_more,
-        hate_more: user.detail.hate_more,
-        youtube: user.detail.youtube,
-        facebook: user.detail.facebook,
-        soundcloud: user.detail.soundcloud,
-      },
-      avatar: %{
-        avatar_uri_200: CloudinaryHelper.avatar_url_with_resolution(user.avatar, 200),
-        avatar_uri: CloudinaryHelper.avatar_url(user.avatar)
+    user = %{
+      data: %{
+        id: user.id,
+        admin: user.admin,
+        email: user.email,
+        name: user.name,
+        country: user.user_country,
+        djname: user.djname,
+        profil_dj: user.profil_dj,
       }
     }
+    |> add_details(user.detail)
+    |> add_avatar(user.avatar)
   end
 
-  def render("error.json", %{}) do
-    %{
-      error: "error"
+  defp add_avatar(user, nil), do: user
+  defp add_avatar(user, avatar) do
+    avatars = %{
+      avatar_uri_200: CloudinaryHelper.avatar_url_with_resolution(avatar, 200),
+      avatar_uri: CloudinaryHelper.avatar_url(avatar)
     }
+
+    Map.put(user, :avatar, avatars)
+  end
+
+  defp add_details(user, nil), do: user
+  defp add_details(user, detail) do
+    details = %{
+      description: detail.description,
+      favorite_genre: detail.favorite_genre,
+      favorite_artist: detail.favorite_artist,
+      favorite_color: detail.favorite_color,
+      favorite_meal: detail.favorite_meal,
+      favorite_animal: detail.favorite_animal,
+      djing_start_year: detail.djing_start_year,
+      love_more: detail.love_more,
+      hate_more: detail.hate_more,
+      youtube: detail.youtube,
+      facebook: detail.facebook,
+      soundcloud: detail.soundcloud
+    }
+
+    Map.put(user, :detail, details)
   end
 end
