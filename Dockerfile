@@ -34,9 +34,6 @@ ENV HOME=/opt/app
 ARG ERLANG_COOKIE
 ENV ERLANG_COOKIE $ERLANG_COOKIE
 
-# dependencies for comeonin
-RUN apk add --no-cache build-base cmake
-
 # Install Hex + Rebar
 RUN mix do local.hex --force, local.rebar --force
 
