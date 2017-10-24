@@ -4,19 +4,21 @@ defmodule WsdjsWeb.Api.V1.AccountView do
   alias WsdjsWeb.CloudinaryHelper
 
   def render("show.json", %{user: user}) do
-    user = %{
-      data: %{
-        id: user.id,
-        admin: user.admin,
-        email: user.email,
-        name: user.name,
-        country: user.user_country,
-        djname: user.djname,
-        profil_dj: user.profil_dj,
-      }
+    %{
+      data: user |> user_details() |> add_avatar(user.avatar) |> add_details(user.detail)
     }
-    |> add_details(user.detail)
-    |> add_avatar(user.avatar)
+  end
+
+  defp user_details(user) do
+    %{
+      id: user.id,
+      admin: user.admin,
+      email: user.email,
+      name: user.name,
+      country: user.user_country,
+      djname: user.djname,
+      profil_dj: user.profil_dj,
+    }
   end
 
   defp add_avatar(user, nil), do: user
