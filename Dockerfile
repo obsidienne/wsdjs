@@ -52,7 +52,9 @@ COPY apps/wsdjs_web/mix.exs $HOME/apps/wsdjs_web/
 COPY apps/wsdjs_web/config/ $HOME/apps/wsdjs_web/config/
 
 ENV MIX_ENV=prod
-RUN mix do deps.get --only $MIX_ENV, deps.compile, ua_inspector.download.databases --force, ua_inspector.download.short_code_maps --force
+RUN mix do deps.get --only $MIX_ENV, deps.compile
+RUN mix ua_inspector.download.databases --force
+RUN mix ua_inspector.download.short_code_maps --force
 
 COPY . $HOME/
 
