@@ -21,7 +21,7 @@ export default class View extends MainView {
 
   mount() { 
     super.mount();
-    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
+    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
   }
 
   unmount() {

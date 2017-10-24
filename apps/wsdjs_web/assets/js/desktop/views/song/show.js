@@ -31,7 +31,7 @@ export default class View extends MainView {
   mount() {
     super.mount();
     this._submit();
-    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
+    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
 
     // autolinks in comments
     var els = document.querySelectorAll(".comment__content");
@@ -139,7 +139,7 @@ export default class View extends MainView {
       if (this.status >= 200 && this.status < 400) {
         self.tips.destroyAll();
         self._refresh_layout(container, JSON.parse(this.response));
-        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small", position: "top", appendTo: document.body});
+        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
       } else {
         console.error("Error");
       }
