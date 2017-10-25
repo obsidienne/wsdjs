@@ -53,13 +53,16 @@ COPY apps/wsdjs_web/config/ $HOME/apps/wsdjs_web/config/
 
 ENV MIX_ENV=prod
 RUN mix do deps.get --only $MIX_ENV, deps.compile
-RUN mix ua_inspector.download.databases --force
-RUN mix ua_inspector.download.short_code_maps --force
 
 COPY . $HOME/
 
 # Digest precompiled assets
 COPY --from=asset-builder $HOME/apps/wsdjs_web/priv/static/ $HOME/apps/wsdjs_web/priv/static/
+
+# download ua inspector conf files
+RUN mix ua_inspector.download.databases --force
+RUN mix ua_inspector.download.short_code_maps --force
+
 
 WORKDIR $HOME/apps/wsdjs_web
 RUN mix phx.digest
