@@ -62,7 +62,7 @@ COPY --from=asset-builder $HOME/apps/wsdjs_web/priv/static/ $HOME/apps/wsdjs_web
 # download ua inspector conf files
 RUN mix ua_inspector.download.databases --force
 RUN mix ua_inspector.download.short_code_maps --force
-
+COPY apps/wsdjs_web/priv/static/ua_inspector/ $HOME/apps/wsdjs_web/priv/static/ua_inspector/
 
 WORKDIR $HOME/apps/wsdjs_web
 RUN mix phx.digest
