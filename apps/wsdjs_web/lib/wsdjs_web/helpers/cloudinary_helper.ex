@@ -29,6 +29,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   def avatar_url_with_resolution(%Avatar{cld_id: cld_id, version: version}, resolution) when is_binary(cld_id) do
     @avatar_base_url <> "w_#{resolution},h_#{resolution}/" <> "v#{version}/" <> "#{cld_id}.jpg"
   end
+  def avatar_url_with_resolution(nil, resolution), do: @avatar_missing_url
   def avatar_url(%Avatar{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @avatar_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
