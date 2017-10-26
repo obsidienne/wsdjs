@@ -16,8 +16,7 @@ defmodule WsdjsWeb.VerifyHeader do
       {:ok, payload} ->
         user = if payload, do: Wsdjs.Accounts.get_user(payload)
         assign(conn, :current_user, user)
-      {:error, msg} ->
-        IO.warn msg
+      {:error, _} ->
         conn
     end
   end
