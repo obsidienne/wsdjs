@@ -14,6 +14,8 @@
   min-width: 0;
   box-shadow:  0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
   overflow: hidden;
+  min-width: 300px;
+  min-height: 300px;
 }
 .song-page__art img {
   width: 100%;
@@ -28,10 +30,14 @@
 }
 .song-page__details__artist {
   margin-top: 0;
-} 
-.song-page__tags {
-  margin-top: 15px;
 }
+.song-page__tags {
+  margin-bottom: 10px;
+}
+.song-page__tags .label {
+  margin-bottom: 3px;
+}
+
 .song-page__actions {
   margin-top: 15px;
 }

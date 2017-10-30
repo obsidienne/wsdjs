@@ -14,14 +14,16 @@ class Outdated {
 
   check() {
     var outdated = document.getElementById("outdated");
-    
+
     if (this._verifyValidaty()) {
-        outdated.parentNode.removeChild(outdated);
-        console.log("valid browser");
-      } else {
+      outdated.parentNode.removeChild(outdated);
+      console.log("valid browser");
+    } else {
+      if (outdated) {
         outdated.removeAttribute("hidden");
-        console.log("outdated browser");
+        console.log("outdated browser");  
       }
+    }
   }
 
   _verifyValidaty() {

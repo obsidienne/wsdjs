@@ -170,12 +170,5 @@ export default class View extends MainView {
     if (user_opinion == kind) {
       container.classList.add("active")
     }
-
-    var tmp = container.closest("tr");
-    var users = "";
-    for (let i = 0; i < data.users.length && i < 8; i++) {
-      users += `<a href="${data.users[i].url}"><img class="img-circle avatar-tiny tippy" data-size="small" data-src="${data.users[i].avatar}" title="${data.users[i].name}"></a>`;
-    }
-    tmp.querySelector("td").innerHTML = users;
   }  
 }
