@@ -49,9 +49,11 @@ defmodule Wsdjs.Jobs.NowPlaying do
         {:noreply, queue}
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         Logger.debug "Not found :("
+        schedule_work(60000) # Reschedule once more
         {:noreply, queue}
       {:error, %HTTPoison.Error{reason: reason}} ->
         Logger.error reason
+        schedule_work(60000) # Reschedule once more
         {:noreply, queue}
     end
   end
