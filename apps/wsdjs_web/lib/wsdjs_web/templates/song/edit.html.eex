@@ -53,26 +53,35 @@
       <%= error_tag f, :genre %>
     </div>
 
-    <div class="checkbox">
-      <%= label f,:instant_hit do %>
-        <%= checkbox f, :instant_hit %> Instant hit
-      <% end %>
-      <%= error_tag f, :instant_hit %>
-    </div>
-
-    <div class="checkbox">
-      <%= label f,:hidden_track do %>
-        <%= checkbox f, :hidden_track %> Hidden track
-      <% end %>
-      <%= error_tag f, :hidden_track %>
-    </div>
-    
-    <div class="checkbox">
-      <%= label f,:public_track do %>
-        <%= checkbox f, :public_track %> Public track
-      <% end %>
-      <%= error_tag f, :public_track %>
-    </div>
+    <table class="table">
+      <tr>
+        <td>Instant hit</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :instant_hit %>
+            <%= label f,:instant_hit do %><% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Hidden track</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :hidden_track %>
+            <%= label f,:hidden_track do %><% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Public track</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :public_track %>
+            <%= label f,:public_track do %><% end %>
+          </div>
+        </td>
+      </tr>
+    </table>
 
     <%= if @current_user.admin do %>
     <div class="form-group">
