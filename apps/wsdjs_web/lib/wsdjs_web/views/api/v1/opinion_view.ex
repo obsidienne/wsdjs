@@ -50,29 +50,22 @@ defmodule WsdjsWeb.Api.V1.OpinionView do
     }
   end
 
-  defp render_opinion(opinions, kind, song, nil) do
+  # if the kind in current_user opinion equals the kind retrieved
+  defp render_opinion(opinions, kind, song, %Wsdjs.Reactions.Opinion{kind: kind} = current) do
+    %{
+      count: Enum.count(opinions),
+      users: render_many(opinions, OpinionView, "opinion.json"),
+      method: "DELETE",
+      url: api_opinion_path(WsdjsWeb.Endpoint, :delete, current.id)
+    }
+  end
+
+  defp render_opinion(opinions, kind, song, _current) do
     %{
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "POST",
       url: api_song_opinion_path(WsdjsWeb.Endpoint, :create, song, kind: kind)
-    }
-  end
-
-  defp render_opinion(opinions, kind, song, %Wsdjs.Reactions.Opinion{} = current) do
-    url = if current.kind == kind do
-      api_opinion_path(WsdjsWeb.Endpoint, :delete, current.id)
-    else
-      api_song_opinion_path(WsdjsWeb.Endpoint, :create, song, kind: kind)
-    end
-
-    method = if current.kind == kind do "DELETE" else "POST" end
-
-    %{
-      count: Enum.count(opinions),
-      users: render_many(opinions, OpinionView, "opinion.json"),
-      url: url,
-      method: method
     }
   end
 end
