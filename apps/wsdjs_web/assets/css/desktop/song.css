@@ -55,6 +55,15 @@
   }
 }
 
+.overview-video {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+.overview-video form {
+  margin-left: auto;
+}
+
 
 /****************************
   minicard

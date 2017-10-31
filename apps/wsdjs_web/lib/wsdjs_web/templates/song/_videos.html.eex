@@ -1,4 +1,8 @@
 <%= for video <- @videos do %>
+<article>
+  <%= video.title %>
+  <%= video.event %>
   <%= link "link", to: video.url %>
+</article>
 <% end %>
 
