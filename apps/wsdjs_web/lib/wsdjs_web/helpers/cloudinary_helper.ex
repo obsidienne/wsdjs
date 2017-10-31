@@ -3,9 +3,13 @@ defmodule WsdjsWeb.CloudinaryHelper do
   This modules contains all helpers in connection with Cloudinary.
   Notably the html tag and url helpers.
   """
+
+  ###############################################
+  #
+  # SONG ART
+  #
+  ###############################################
   alias Wsdjs.Musics.Art
-  alias Wsdjs.Accounts.Avatar
-  alias Wsdjs.Charts.Top
 
   @art_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
   @art_blured_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_900,o_30/f_auto,q_auto,dpr_auto/fl_immutable_cache/"
@@ -22,6 +26,13 @@ defmodule WsdjsWeb.CloudinaryHelper do
   end
   def art_url_blured(nil), do: @art_missing_url
 
+  ###############################################
+  #
+  # AVATAR
+  #
+  ###############################################
+  alias Wsdjs.Accounts.Avatar
+
   @avatar_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
   @avatar_missing_url "//res.cloudinary.com/don2kwaju/image/upload/w_400/fl_immutable_cache/wsdjs/missing_avatar.jpg"
   @avatar_base_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
@@ -36,10 +47,24 @@ defmodule WsdjsWeb.CloudinaryHelper do
   def avatar_url(_), do: @avatar_missing_url
   def avatar_url, do: @avatar_missing_url
 
+  ###############################################
+  #
+  # TOP
+  #
+  ###############################################
+  alias Wsdjs.Charts.Top
+  
+  @doc """
+  Retrieve the image URL corresping to a top in voting status
+  """
   def top_art(%Top{status: "voting"}) do
     "http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_400/wsdjs/worldswingdjs_single_flat.jpg"
   end
 
+  @doc """
+  Retrieve the image URL corresping to a top in published status. 
+  It creates a sprite of the 10 first ranked song.
+  """
   def top_art(%Top{status: "published"} = top) do
     "http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_400/"
     <> "l_covers:#{top_rank_art(top, 1)},w_100,x_250,y_-150/"
