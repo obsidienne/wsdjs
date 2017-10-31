@@ -3,6 +3,21 @@ defmodule WsdjsWeb.Api.V1.OpinionView do
 
   alias WsdjsWeb.Api.V1.OpinionView
 
+  def render("index.json", %{song: song, opinions: opinions, current_user: nil}) do
+    ups = Enum.filter(opinions, fn(x) -> x.kind == "up" end)
+    likes = Enum.filter(opinions, fn(x) -> x.kind == "like" end)
+    downs = Enum.filter(opinions, fn(x) -> x.kind == "down" end)
+    
+    %{
+      data: %{
+        song_id: song.id,
+        up: render_opinion(ups, "up", song, nil),
+        like: render_opinion(likes, "like", song, nil),
+        down: render_opinion(downs, "down", song, nil)
+      }
+    }
+  end
+
   def render("index.json", %{song: song, opinions: opinions, current_user: current_user}) do
     current_opinion = Enum.find(opinions, nil, fn(x) -> x.user_id == current_user.id end)
 

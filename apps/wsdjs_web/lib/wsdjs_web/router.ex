@@ -100,6 +100,7 @@ defmodule WsdjsWeb.Router do
       resources "/songs", SongController, only: [] do
         resources "/comments", CommentController, only: [:index]
         resources "/videos", VideoController, only: [:index]
+        resources "/opinions", OpinionController, only: [:index]
       end
       resources "/accounts", AccountController, only: [:show]
     end
