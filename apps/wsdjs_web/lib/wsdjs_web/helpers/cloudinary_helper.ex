@@ -16,18 +16,36 @@ defmodule WsdjsWeb.CloudinaryHelper do
 
   @art_root_url "c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
   @art_blured_root_url "c_crop,g_custom/w_900,o_30/f_auto,q_auto,dpr_auto/fl_immutable_cache/"
-  @art_missing_url "fl_immutable_cache/v1449164620/wsdjs/missing_cover.jpg"
+  @art_missing "fl_immutable_cache/v1449164620/wsdjs/missing_cover.jpg"
+
+  def art_urls(%Art{cld_id: cld_id, version: version}) do
+    [50, 100, 200, 300, 400]
+    |> Enum.map(fn(x) ->
+      [
+        width: x,
+        url: @cld <> "c_crop,g_custom/#{x}/q_auto,f_auto/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
+      ]
+    end)
+  end
 
   def art_url(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @cld <> @art_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
-  def art_url(_), do: @cld <> @art_missing_url
-  def art_url, do: @cld <> @art_missing_url
+  def art_url(_), do: @cld <> @art_missing
+  def art_url, do: @cld <> @art_missing
 
   def art_url_blured(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
     @cld <> @art_blured_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
   end
-  def art_url_blured(nil), do: @cld <> @art_missing_url
+  def art_url_blured(nil), do: @cld <> @art_missing
+
+  def art_srcset(%Art{cld_id: cld_id, version: version}) do
+    
+  end
+
+  def art_srcset(nil) do
+    
+  end
 
   ###############################################
   #
