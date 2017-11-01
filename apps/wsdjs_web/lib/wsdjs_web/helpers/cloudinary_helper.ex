@@ -6,7 +6,28 @@ defmodule WsdjsWeb.CloudinaryHelper do
 
   @cld "//res.cloudinary.com/don2kwaju/image/upload/"
   @cld_https "https://res.cloudinary.com/don2kwaju/image/upload/"
+  @cld_youtube "//res.cloudinary.com/don2kwaju/image/youtube/"
   @dpr_multiple [1, 2, 3]
+
+  ###############################################
+  #
+  # YOUTUBE ART
+  #
+  ###############################################
+  alias Wsdjs.Attachments.Video
+
+  def youtube_url(%Video{video_id: video_id}, resolution) when is_integer(resolution) do
+    @cld_youtube <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/" <> "#{video_id}.jpg"
+  end
+
+  def youtube_srcset(%Video{} = video, base) when is_integer(base) do
+    resolutions = Enum.map(@dpr_multiple, &(base * &1))
+
+    resolutions
+    |> Enum.map(fn(r) -> "#{youtube_url(video, r)} #{r}w" end)
+    |> Enum.join(", ")
+  end
+
 
   ###############################################
   #

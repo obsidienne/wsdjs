@@ -43,6 +43,31 @@
   margin-top: 15px;
 }
 
+.song-page__sections {
+  display: flex;
+}
+.song-page__sections__content {
+  flex: 1;
+}
+.song-page__video {
+  display: flex;
+}
+.song-page__video a {
+  position: relative;
+  margin-right: 5px;
+}
+.song-page__video .song-play {
+  height: 20px;
+  width: 20px;
+}
+
+.song-page__video__pros  {
+  margin-top: 0;
+}
+.song-page__video__event  {
+  margin-bottom: 0;
+}
+
 @media (min-width: 768px) {
   .song-page {
     flex-direction: row;
