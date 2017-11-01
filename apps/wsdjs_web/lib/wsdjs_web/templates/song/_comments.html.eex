@@ -13,7 +13,7 @@
   <%= for comment <- @comments do %>
     <li class="comment">
       <div class="comment__avatar">
-        <img src="<%= avatar_url(comment.user.avatar, 50) %>" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
+        <img src="<%= avatar_url(comment.user.avatar, 50) %>" srcset="<%= avatar_srcset(comment.user.avatar, 50) %>" sizes="50px" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
       </div>
 
       <div class="comment__body">
