@@ -4,7 +4,7 @@
   <a>
     <article class="song-minicard">
       <div class="song-minicard__heading">
-        <img data-src="<%= art_url() %>" class="responsive" />
+        <img src="<%= art_url(nil, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
         <h4 class="text-muted">hidden track</h4>
@@ -27,7 +27,7 @@
   <a href="<%= song_path(@conn, :show, @song.id) %>">
     <article class="song-minicard">
       <div class="song-minicard__heading">
-        <img data-src="<%= art_url(@song.art) %>" class="responsive" />
+        <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
         <h5 class="text-muted"><%= @song.title %></h5>

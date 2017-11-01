@@ -2,7 +2,6 @@ import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
 import Tippy from 'tippy.js/dist/tippy';
 import MainView from '../main';
-import MyCloudinary from '../../components/my-cloudinary';
 
 export default class View extends MainView {
   constructor() {
@@ -60,8 +59,6 @@ export default class View extends MainView {
         var tpl = self._createHtmlContent(JSON.parse(this.response).data);
         container.insertAdjacentHTML('beforeend', tpl);
         new timeago().render(document.querySelectorAll("time.timeago"));
-
-        MyCloudinary.refresh();
       } else {
         console.error("Error");
       }
@@ -101,7 +98,7 @@ export default class View extends MainView {
     return `
     <li class="comment">
       <div class="comment__avatar">
-        <img data-src="${params.user.avatars.avatar_uri}"  class="comment__avatar__img">
+        <img src="${params.user.avatars.avatar_uri}"  class="comment__avatar__img">
       </div>
 
       <div class="comment__body">

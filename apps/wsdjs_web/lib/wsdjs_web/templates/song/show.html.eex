@@ -1,6 +1,6 @@
 <style>
   .hero {
-    background-image: linear-gradient(transparent, #fff), url(<%= art_url_blured(@song.art) %>);
+    background-image: linear-gradient(transparent, #fff), url(<%= art_url_blured(@song.art, 1200) %>);
   }
 </style>
 
@@ -10,7 +10,7 @@
 
   <div class="song-page container">
     <div class="song-page__art">
-      <img data-src="<%= art_url(@song.art) %>" class="responsive"/>
+      <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
     <div class="song-page__details">
       <h5 class="song-page__details__title"><%= @song.title %></h5>

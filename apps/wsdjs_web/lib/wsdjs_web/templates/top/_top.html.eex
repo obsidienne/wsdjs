@@ -2,9 +2,9 @@
       <a href="<%= top_path(@conn, :show, @top.id) %>" class="tops__top__anchor">
         <%= if Enum.count(@top.ranks) > 0 do %>
           <%= if blur_track(Enum.at(@top.ranks, 0).song, @current_user) == true do %>
-            <img data-src="<%= art_url() %>" class="tops__top__anchor__img card" >
+            <img src="<%= art_url(nil, 200) %>" class="tops__top__anchor__img card" >
           <% else %>
-            <img data-src="<%= art_url(Enum.at(@top.ranks, 0).song.art) %>" class="tops__top__anchor__img card" >
+            <img src="<%= art_url(Enum.at(@top.ranks, 0).song.art, 200) %>" class="tops__top__anchor__img card" >
           <% end %>
         <% end %>
       </a>
@@ -15,9 +15,9 @@
           <%= for rank <- @top.ranks do %>
             <div>
               <%= if blur_track(rank.song, @current_user) == true do %>
-              <img src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_cover.jpg" data-src="<%= art_url() %>" class="responsive" >
+              <img src="<%= art_url(nil, 200) %>" class="responsive" >
               <% else %>
-              <img src="//res.cloudinary.com/don2kwaju/image/upload/wsdjs/missing_cover.jpg" data-src="<%= art_url(rank.song.art) %>" class="responsive" >
+              <img src="<%= art_url(rank.song.art, 200) %>" class="responsive" >
               <% end %>
             </div>
           <% end %>

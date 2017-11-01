@@ -1,6 +1,5 @@
 import socket from "../socket"
 import Tippy from 'tippy.js/dist/tippy';
-import MyCloudinary from './my-cloudinary';
 
 export default class Radio {
   constructor() {
