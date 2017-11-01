@@ -1,16 +1,12 @@
-import MyCloudinary from '../components/my-cloudinary';
 import timeago from 'timeago.js';
 
 export default class MainView {
   mount() {
-    MyCloudinary.refresh();
     this.formatDate("time.date-format", {year: "numeric", month: "long"});
     this.formatNumber(".number");
     new timeago().render(document.querySelectorAll("time.timeago"));
   }
-  umount() {
-    MyCloudinary.disconnect();
-  }
+  umount() { }
 
   formatNumber(selector) {
     var numberFormat = new Intl.NumberFormat();

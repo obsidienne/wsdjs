@@ -2,7 +2,7 @@
 
 <li class="song-top__song">
   <header>
-    <img data-src="<%= art_url() %>" class="responsive" />
+    <img src="<%= art_url(nil, 200) %>" class="responsive" />
   </header>
 
   <div class="text-muted song-top__body">
@@ -22,7 +22,7 @@
 
 <li class="song-top__song">
   <header>
-    <img data-src="<%= art_url(@rank.song.art) %>" class="responsive" />
+    <img src="<%= art_url(@rank.song.art, 200) %>" class="responsive" />
   </header>
 
   <%= link to: song_path(@conn, :show, @rank.song), class: "text-muted song-top__body" do %>
@@ -34,7 +34,7 @@
       <%= if @rank.song.bpm do %>
         <span class="label label-primary small"><%= @rank.song.bpm %> bpm</span>
       <% end %>
-      <img data-src="<%= avatar_url(@rank.song.user.avatar) %>" class="song-top__footer__avatar tippy" title="<%= user_displayed_name(@rank.song.user) %>"/> 
+      <img src="<%= avatar_url(@rank.song.user.avatar, 50) %>" class="song-top__footer__avatar tippy" title="<%= user_displayed_name(@rank.song.user) %>"/> 
     </footer>
   <% end %>
 </li>

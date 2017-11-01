@@ -24,8 +24,8 @@ defmodule WsdjsWeb.Api.V1.AccountView do
   defp add_avatar(user, nil), do: user
   defp add_avatar(user, avatar) do
     avatars = %{
-      avatar_uri_200: CloudinaryHelper.avatar_url_with_resolution(avatar, 200),
-      avatar_uri: CloudinaryHelper.avatar_url(avatar)
+      avatar_uri_200: CloudinaryHelper.avatar_url(avatar, 200),
+      avatar_uri: CloudinaryHelper.avatar_url(avatar, 100)
     }
 
     Map.put(user, :avatar, avatars)

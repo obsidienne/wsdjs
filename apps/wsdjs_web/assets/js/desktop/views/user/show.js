@@ -1,6 +1,5 @@
 import Places from 'places.js/dist/cdn/places.js';
 import MainView from '../main';
-import MyCloudinary from '../../components/my-cloudinary';
 
 export default class View extends MainView {
   constructor() {
@@ -67,8 +66,6 @@ export default class View extends MainView {
           var sentinel = document.querySelector("#suggestions-section .sentinel");
           sentinel.parentNode.removeChild(sentinel);  
         }
-
-        MyCloudinary.refresh();
       }
     };
 

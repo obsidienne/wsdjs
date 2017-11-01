@@ -1,6 +1,5 @@
 import socket from "../socket"
 import Tippy from 'tippy.js/dist/tippy';
-import MyCloudinary from './my-cloudinary';
 
 export default class Radio {
   constructor() {
@@ -97,8 +96,6 @@ export default class Radio {
     document.querySelector(".player__description__title").innerHTML = "Radio WCS";
     document.querySelector(".player__description__sub-title").innerHTML = "by World Swing DJs";
     document.querySelector(".player").classList.remove("player--playing");
-
-    MyCloudinary.refresh();
   }
 
   play_radio(el) {
@@ -115,7 +112,7 @@ export default class Radio {
 
     if (this.radio.paused == false) {
       document.querySelector(".player__art img").setAttribute("src", data[0].image_uri);
-      document.querySelector(".player__art img").dataset.src = data[0].image_uri;
+      document.querySelector(".player__art img").setAttribute("srcset", data[0].image_srcset);
       document.querySelector(".player__description__title").setAttribute("href", data[0].path);
       document.querySelector(".player__description__title").innerHTML = data[0].title;
       document.querySelector(".player__description__sub-title").innerHTML = "by " + data[0].artist + ", " + data[0].suggested_by;

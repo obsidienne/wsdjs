@@ -12,7 +12,7 @@
     <section class="user-page__profile__section">
       <header class="user-page__profile__header">
         <div class="user-page__avatar">
-          <img data-src="<%= avatar_url(@user.avatar) %>" class="responsive">
+          <img src="<%= avatar_url(@user.avatar, 50) %>" class="responsive">
         </div>
         <div class="user-page__profile-details">
           <h4><%= @user.name %></h4>

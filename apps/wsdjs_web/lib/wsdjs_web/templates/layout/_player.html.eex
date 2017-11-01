@@ -1,7 +1,7 @@
 <div id="player" class="player" data-turbolinks-permanent>
   <div class="current-played">
     <div class="player__art">
-      <img class="responsive" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
+      <img class="responsive" src="//res.cloudinary.com/don2kwaju/image/upload/w_225/wsdjs/radiowcs_square.jpg">
     </div>
 
     <div class="player__description">
@@ -20,7 +20,7 @@
 
   <div class="player__toggle" hidden>
     <div class="player__toggle__art">
-      <img class="responsive" data-src="//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg">
+      <img class="responsive" src="//res.cloudinary.com/don2kwaju/image/upload/w_225/wsdjs/radiowcs_square.jpg">
     </div>
     <h4>Close player</h4>
    </div>

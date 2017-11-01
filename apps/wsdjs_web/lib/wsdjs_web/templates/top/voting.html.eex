@@ -42,7 +42,7 @@
               <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", class: "voting-position__selector", value: current_user_vote(@votes, rank)) %>
             </div>
           </div>
-          <img src="<%= art_url()%>" data-src="<%= art_url(rank.song.art)%>" />
+          <img src="<%= art_url(rank.song.art, 200)%>" />
           <%= if rank.song.url do %>
             <a href="<%= url_for_provider(rank.song) %>" class="song-art__play" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play</a>
           <% end %>

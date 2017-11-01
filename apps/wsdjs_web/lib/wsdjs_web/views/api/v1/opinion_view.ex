@@ -46,7 +46,7 @@ defmodule WsdjsWeb.Api.V1.OpinionView do
     %{
       name: user_displayed_name(opinion.user),
       url: user_path(WsdjsWeb.Endpoint, :show, opinion.user),
-      avatar: avatar_url(opinion.user.avatar)
+      avatar: avatar_url(opinion.user.avatar, 50)
     }
   end
 

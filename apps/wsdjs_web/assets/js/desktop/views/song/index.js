@@ -1,8 +1,6 @@
 import timeago from 'timeago.js';
 import Tippy from 'tippy.js/dist/tippy';
 import MainView from '../main';
-import MyCloudinary from '../../components/my-cloudinary';
-
 export default class View extends MainView {
   constructor() {
     super();
@@ -144,7 +142,6 @@ export default class View extends MainView {
           self._fetchSongs(sentinel);
         }
 
-        MyCloudinary.refresh();
         new timeago().render(document.querySelectorAll("time.timeago"));
         self.tips.destroyAll();
         self._formatDate();

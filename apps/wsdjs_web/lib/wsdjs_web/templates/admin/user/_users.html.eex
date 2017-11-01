@@ -6,7 +6,7 @@
 
   <%= for user <- Enum.sort(@users, &(&1.name <= &2.name)) do %>
     <tr>
-        <td><img src="<%= avatar_url(user.avatar) %>" width="50px" height="50px"/></td>
+        <td><img src="<%= avatar_url(user.avatar, 50) %>" srcset="<%= avatar_srcset(user.avatar, 50) %>" sizes="50px" width="50px" height="50px"/></td>
         <td>
         <%= link user.name, to: user_path(@conn, :show, user.id) %>
         <h6 class="small"><%= user.email %></h6>

@@ -6,6 +6,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
 
   @cld "//res.cloudinary.com/don2kwaju/image/upload/"
   @cld_https "https://res.cloudinary.com/don2kwaju/image/upload/"
+  @dpr_multiple [1, 2, 3]
 
   ###############################################
   #
@@ -14,20 +15,25 @@ defmodule WsdjsWeb.CloudinaryHelper do
   ###############################################
   alias Wsdjs.Musics.Art
 
-  @art_root_url "c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
-  @art_blured_root_url "c_crop,g_custom/w_900,o_30/f_auto,q_auto,dpr_auto/fl_immutable_cache/"
-  @art_missing_url "fl_immutable_cache/v1449164620/wsdjs/missing_cover.jpg"
-
-  def art_url(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
-    @cld <> @art_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
+  def art_url(%Art{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
+    @cld <> "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
   end
-  def art_url(_), do: @cld <> @art_missing_url
-  def art_url, do: @cld <> @art_missing_url
+  def art_url(nil, resolution), do: art_url(%Art{cld_id: "wsdjs/missing_cover.jpg", version: "1"}, resolution)
 
-  def art_url_blured(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
-    @cld <> @art_blured_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
+  def art_srcset(%Art{} = art, base) when is_integer(base) do
+    resolutions = Enum.map(@dpr_multiple, &(base * &1))
+
+    resolutions
+    |> Enum.map(fn(r) -> "#{art_url(art, r)} #{r}w" end)
+    |> Enum.join(", ")
   end
-  def art_url_blured(nil), do: @cld <> @art_missing_url
+  def art_srcset(nil, base), do: art_srcset(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, base)
+
+  def art_url_blured(%Art{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
+    @cld <> "c_crop,g_custom/c_fit,f_auto,o_30,q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
+  end
+  def art_url_blured(nil, resolution), do: art_url_blured(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
+
 
   ###############################################
   #
@@ -36,19 +42,19 @@ defmodule WsdjsWeb.CloudinaryHelper do
   ###############################################
   alias Wsdjs.Accounts.Avatar
 
-  @avatar_root_url "c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
-  @avatar_missing_url "w_400/fl_immutable_cache/wsdjs/missing_avatar.jpg"
-  @avatar_base_url "c_crop,g_custom/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
+  def avatar_url(%Avatar{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
+    @cld <> "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
+  end
+  def avatar_url(nil, resolution), do: avatar_url(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, resolution)
 
-  def avatar_url_with_resolution(%Avatar{cld_id: cld_id, version: version}, resolution) when is_binary(cld_id) do
-    @cld <> @avatar_base_url <> "w_#{resolution},h_#{resolution}/" <> "v#{version}/" <> "#{cld_id}.jpg"
+  def avatar_srcset(%Avatar{} = art, base) when is_integer(base) do
+    resolutions = Enum.map(@dpr_multiple, &(base * &1))
+
+    resolutions
+    |> Enum.map(fn(r) -> "#{avatar_url(art, r)} #{r}w" end)
+    |> Enum.join(", ")
   end
-  def avatar_url_with_resolution(nil, resolution), do: @cld <> @avatar_missing_url
-  def avatar_url(%Avatar{cld_id: cld_id, version: version}) when is_binary(cld_id) do
-    @cld <> @avatar_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
-  end
-  def avatar_url(_), do: @cld <> @avatar_missing_url
-  def avatar_url, do: @cld <> @avatar_missing_url
+  def avatar_srcset(nil, base), do: avatar_srcset(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, base)
 
   ###############################################
   #
@@ -56,7 +62,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   #
   ###############################################
   alias Wsdjs.Charts.Top
-  
+
   @doc """
   Retrieve the image URL corresping to a top in voting status
   """

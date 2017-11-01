@@ -62,8 +62,7 @@
 
     Enum.map(kind_opinions, fn opinion ->
       link to: user_path(conn, :show, opinion.user) do
-        img_tag(CloudinaryHelper.avatar_url(),
-                'data-src': CloudinaryHelper.avatar_url(opinion.user.avatar),
+        img_tag(CloudinaryHelper.avatar_url(opinion.user.avatar, 50),
                 class: "img-circle cld-responsive avatar-tiny tippy",
                 title: UserHelper.user_displayed_name(opinion.user))
       end

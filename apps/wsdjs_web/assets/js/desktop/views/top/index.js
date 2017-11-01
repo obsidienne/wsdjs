@@ -1,6 +1,5 @@
 import MainView from '../main';
 import Tippy from 'tippy.js/dist/tippy';
-import MyCloudinary from '../../components/my-cloudinary';
 
 export default class View extends MainView {
   constructor() {
