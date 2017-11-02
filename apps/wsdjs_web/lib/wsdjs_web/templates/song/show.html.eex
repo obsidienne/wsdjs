@@ -50,10 +50,10 @@
 
 <div class="container song-page__sections">
   <div class="song-page__sections__content">
-    <section id="overview-video" class="overview-video container">
+    <section id="overview-video" class="overview-video">
       <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
     </section>
-    <section id="overview-section" class="container">
+    <section id="overview-section">
       <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
     </section>
   </div>

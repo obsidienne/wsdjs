@@ -4,7 +4,7 @@
     <img src="<%= youtube_url(video, 100) %>" srcset="<%= youtube_srcset(video, 100) %>" sizes="100px">
     <span class="song-play"> </span>
    <% end %>
-  <div>
+  <div class="song-page__video__details">
     <h5 class="text-ellipsis song-page__video__pros"><%= video.title %></h4>
     <span class="song-page__video__event"><%= video.event %></span>
   </div>
