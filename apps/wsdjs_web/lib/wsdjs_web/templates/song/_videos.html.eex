@@ -1,7 +1,7 @@
 <%= for video <- @videos do %>
 <article class="song-page__video">
   <%= link to: video.url, target: "_blank" do %>
-    <img src="<%= youtube_url(video, 100) %>" srcset="<%= youtube_srcset(video, 100) %>" sizes="100px">
+    <img src="<%= youtube_url(video, 100) %>" srcset="<%= youtube_srcset(video, 100) %>" sizes="100px" width="100" height="auto">
     <span class="song-play"> </span>
    <% end %>
   <div class="song-page__video__details">
