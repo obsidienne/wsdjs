@@ -66,7 +66,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   def avatar_url(%Avatar{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
     @cld <> "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
   end
-  def avatar_url(nil, resolution), do: avatar_url(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, resolution)
+  def avatar_url(_, resolution), do: avatar_url(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, resolution)
 
   def avatar_srcset(%Avatar{} = art, base) when is_integer(base) do
     resolutions = Enum.map(@dpr_multiple, &(base * &1))
@@ -75,7 +75,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
     |> Enum.map(fn(r) -> "#{avatar_url(art, r)} #{r}w" end)
     |> Enum.join(", ")
   end
-  def avatar_srcset(nil, base), do: avatar_srcset(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, base)
+  def avatar_srcset(_, base), do: avatar_srcset(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, base)
 
   ###############################################
   #
