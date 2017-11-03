@@ -40,5 +40,18 @@ defmodule Wsdjs.Accounts.UserDetail do
     |> validate_length(:love_more, max: 255)
     |> validate_length(:hate_more, max: 255)
     |> validate_number(:djing_start_year, greater_than_or_equal_to: 1950, less_than_or_equal_to: 2017)
+    |> validate_url(:youtube)
+    |> validate_url(:facebook)
+    |> validate_url(:soundcloud)
+  end
+
+  # This function validates the format of an URL not it's validity.
+  defp validate_url(changeset, field, options \\ []) do
+    validate_change changeset, field, fn _, url ->
+      case url |> String.to_charlist |> :http_uri.parse do
+        {:ok, _} -> []
+        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect msg}"}]
+      end
+    end
   end
 end

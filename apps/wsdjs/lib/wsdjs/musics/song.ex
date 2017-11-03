@@ -43,6 +43,7 @@ defmodule Wsdjs.Musics.Song do
     |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
+    |> validate_url(:url)
     |> put_change(:video_id, Wsdjs.Helpers.Provider.extract(attrs["url"]))
   end
 
@@ -72,5 +73,15 @@ defmodule Wsdjs.Musics.Song do
     left_join: t in assoc(r, :top),
     where: (t.status == "published" and r.position <= 10 and t.due_date >= ^lower and t.due_date <= ^upper)
         or s.instant_hit == true or s.public_track == true
+  end
+
+  # This function validates the format of an URL not it's validity.
+  defp validate_url(changeset, field, options \\ []) do
+    validate_change changeset, field, fn _, url ->
+      case url |> String.to_charlist |> :http_uri.parse do
+        {:ok, _} -> []
+        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect msg}"}]
+      end
+    end
   end
 end
