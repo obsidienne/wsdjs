@@ -19,10 +19,12 @@
 }
 
 .comment__header {
-	background: #EEEEEE;
-	padding: 10px 12px;
-	border-bottom: 1px solid #E5E5E5;
-	border-radius: 4px 4px 0 0;
+  background: #EEEEEE;
+  padding: 10px 12px;
+  border-bottom: 1px solid #E5E5E5;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  align-items: center;
 }
 
 .comment__content {
@@ -32,7 +34,13 @@
 	color: #595959;
 	border-radius: 0 0 4px 4px;
 }
-
+.comment__delete {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23000000' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3C/svg%3E");
+}
 
 /** =====================
  * Responsive

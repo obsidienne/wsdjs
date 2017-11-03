@@ -96,6 +96,7 @@ a.btn.disabled {
   color: #337ab7;
   font-weight: normal;
   border-radius: 0;
+  cursor: pointer;
 }
 .btn-link,
 .btn-link:active,

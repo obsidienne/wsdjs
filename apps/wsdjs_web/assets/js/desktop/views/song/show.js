@@ -12,6 +12,12 @@ export default class View extends MainView {
         e.preventDefault();
         e.stopPropagation();
       }
+
+      if (e.target && e.target.matches(".comment__delete")) {
+        this._delete_comment(e.target);
+        e.stopPropagation();
+        e.preventDefault();
+      }
     }, false);
 
     document.addEventListener("submit", e => {
@@ -41,6 +47,29 @@ export default class View extends MainView {
   unmount() { 
     super.umount();
     this.tips.destroyAll();
+  }
+
+  _delete_comment(el) {
+    if (!window.confirm("Are you sure ?")) 
+      return;
+
+    var token = document.querySelector("[name=channel_token]").getAttribute("content");
+    var request = new XMLHttpRequest();
+    request.open("DELETE", el.href, true);
+    request.setRequestHeader('Authorization', "Bearer " + token);
+    request.setRequestHeader('Accept', 'application/json');
+
+    request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        let comment = el.closest("li");
+        comment.parentNode.removeChild(comment);
+      } else {
+        console.error("Error");
+      }
+    };
+
+    request.onerror = function() { console.error("Error"); };
+    request.send();
   }
 
   _submit(form) {
@@ -103,8 +132,11 @@ export default class View extends MainView {
 
       <div class="comment__body">
         <header class="comment__header">
-          <a href="${params.user.path}">${params.user.name}</a>
-          <time class="timeago small" title="${params.commented_at}" datetime="${params.commented_at}"></time>
+          <span>
+            <a href="${params.user.path}">${params.user.name}</a>
+            <time class="timeago small" title="${params.commented_at}" datetime="${params.commented_at}"></time>
+          </span>
+          <a class="btn-link comment__delete" href="/api/v1/comments/${params.id}"></a>
         </header>
         <div class="comment__content">${params.text}</div>
       </div>
