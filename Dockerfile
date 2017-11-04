@@ -73,7 +73,7 @@ ENV LANG=en_US.UTF-8 \
     HOME=/opt/app/ \
     TERM=xterm
 
-ENV RADIOWCS_PLATFORM_VERSION=0.1.0
+ENV RADIOWCS_PLATFORM_VERSION=0.2.0
 
 RUN apk add --no-cache ncurses-libs openssl bash
 
