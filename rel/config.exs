@@ -46,7 +46,7 @@ end
 # will be used by default
 
 release :radiowcs_platform do
-  set version: "0.1.0"
+  set version: "0.2.0"
   set applications: [
     :runtime_tools,
     wsdjs: :permanent,
