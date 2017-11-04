@@ -24,6 +24,7 @@ defmodule WsdjsWeb.Api.V1.CommentView do
       user: %{
         name: comment.user.name,
         dj_name: comment.user.djname,
+        id: comment.user.id,
         path: user_path(WsdjsWeb.Endpoint, :show, comment.user),
         avatars: %{
           avatar_uri_200: CloudinaryHelper.avatar_url(comment.user.avatar, 200),
