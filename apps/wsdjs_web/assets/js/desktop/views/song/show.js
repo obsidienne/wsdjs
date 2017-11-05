@@ -186,8 +186,6 @@ export default class View extends MainView {
     this._refresh_kind(song_up, "up", data.data.up, data.data.user_opinion);
     this._refresh_kind(song_like, "like", data.data.like, data.data.user_opinion);
     this._refresh_kind(song_down, "down", data.data.down, data.data.user_opinion);
-
-    MyCloudinary.refresh();
   }
 
   _refresh_kind(container, kind, data, user_opinion) {

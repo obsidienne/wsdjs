@@ -76,7 +76,6 @@ export default class View extends MainView {
         var sentinel = document.querySelector("#top-list .sentinel");
         sentinel.parentNode.removeChild(sentinel);    
         
-        MyCloudinary.refresh();
         self._formatDate();
       }
     };
