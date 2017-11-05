@@ -13,8 +13,8 @@ defmodule Wsdjs.Musics do
   Returns a song list according to a fulltext search.
   The song list is scoped by current user.
   """
-  def search(_current_user, ""), do: []
-  def search(current_user, q) do
+  def search(%User{}, ""), do: []
+  def search(%User{} = current_user, q) do
     q = q
         |> String.trim
         |> String.split(" ")
@@ -28,20 +28,6 @@ defmodule Wsdjs.Musics do
     |> order_by([desc: :inserted_at])
     |> limit(3)
     |> Repo.all()
-  end
-
-  @doc """
-  Get the song matching the "artist - title" pattern. 
-  The uniq index artist / title ensure the uniquenes of result. 
-  This a privileged function, no song restriction access.
-  """
-  def search_by_artist_title(artist, title) do
-    Song
-    |> where([s], fragment("lower(?)", s.title) == ^String.downcase(title))
-    |> where([s], fragment("lower(?)", s.artist) == ^String.downcase(artist))
-    |> preload([:user, :art])
-    |> preload([tops: :ranks])
-    |> Repo.one
   end
 
   def instant_hits do
@@ -90,10 +76,10 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
-  def list_songs_for_month(%Date{} = month) do
+  def list_songs(%Date{} = month) do
     lower = Timex.beginning_of_month(Timex.to_datetime(month))
     upper = Timex.end_of_month(Timex.to_datetime(month))
-    query = from s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper
+    query = from s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
 
     Repo.all(query)
   end
@@ -160,6 +146,20 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
+  Get the song matching the "artist - title" pattern. 
+  The uniq index artist / title ensure the uniquenes of result. 
+  This a privileged function, no song restriction access.
+  """
+  def get_song_by(artist, title) when is_binary(artist) and is_binary(title) do
+    Song
+    |> where([s], fragment("lower(?)", s.title) == ^String.downcase(title))
+    |> where([s], fragment("lower(?)", s.artist) == ^String.downcase(artist))
+    |> preload([:user, :art])
+    |> preload([tops: :ranks])
+    |> Repo.one
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking song changes.
 
   ## Examples
@@ -204,182 +204,5 @@ defmodule Wsdjs.Musics do
   """
   def delete_song(%Song{} = song) do
     Repo.delete(song)
-  end
-
-  ###############################################
-  #
-  # Comment
-  #
-  ###############################################
-
-  alias Wsdjs.Musics.Comment
-
-  @doc """
-  Returns the list of comments.
-
-  ## Examples
-
-      iex> list_comments(%Song{})
-      [%Comment{}, ...]
-  """
-  def list_comments(%Song{id: id}) do
-    Comment
-    |> where([song_id: ^id])
-    |> order_by([desc: :inserted_at])
-    |> Repo.all
-    |> Repo.preload([user: :avatar])
-  end
-
-  @doc """
-  Creates a comment.
-
-  ## Examples
-
-      iex> create_comment(%{field: value})
-      {:ok, %Comment{}}
-
-      iex> create_comment(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_comment(params) do
-    {:ok, comment} = %Comment{}
-    |> Comment.changeset(params)
-    |> Repo.insert()
-
-    {:ok, Repo.preload(comment, [user: :avatar])}
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking comment changes.
-
-  ## Examples
-
-      iex> change_comment(comment)
-      %Ecto.Changeset{source: %Comment{}}
-
-  """
-  def change_comment(%Comment{} = comment) do
-    Comment.changeset(comment, %{})
-  end
-
-  ###############################################
-  #
-  # Opinion
-  #
-  ###############################################
-
-  alias Wsdjs.Musics.Opinion
-
-  @doc """
-  Gets a single opinion.
-
-  Raises `Ecto.NoResultsError` if the Opinion does not exist.
-
-  ## Examples
-
-      iex> get_opinion!(123)
-      %Opinion{}
-
-      iex> get_opinion!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_opinion!(id), do: Repo.get!(Opinion, id)
-
-  @doc """
-  Gets a single opinion by parameters.
-
-  Raises `Ecto.NoResultsError` if the Opinion does not exist.
-
-  ## Examples
-
-      iex> get_opinion!(params)
-      %Opinion{}
-
-      iex> get_opinion!(not_matching_params)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_opinion_by(params), do: Repo.get_by(Opinion, params)
-
-  @doc """
-  Gets the opinion total value of opinions list.
-
-  ## Examples
-
-      iex> opinions_value([%{kind: "up"}, %{kind: "down"}, %{kind: "like"}])
-      3
-
-  """
-  def opinions_value(opinions) when is_list(opinions) do
-    Enum.reduce(opinions, 0, fn(opinion, acc) ->
-      case opinion.kind do
-        "up"   -> acc + 4
-        "like" -> acc + 2
-        "down" -> acc - 3
-        _      -> acc
-      end
-    end)
-  end
-
-  @doc """
-  List opinions for a song
-
-    ## Examples
-
-      iex> list_opinions(%Song{})
-      [%Opinion{}, ...]
-  """
-  def list_opinions(%Song{id: id}) do
-    Opinion
-    |> where([song_id: ^id])
-    |> order_by([desc: :inserted_at])
-    |> Repo.all
-    |> Repo.preload([user: :avatar])
-  end
-
-  @doc """
-  Deletes an Opinion.
-
-  ## Examples
-
-      iex> delete_opinion(opinion)
-      {:ok, %Opinion{}}
-
-      iex> delete_opinion(opinion)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_opinion(%Opinion{} = opinion) do
-    Repo.delete(opinion)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking opinion changes.
-
-  ## Examples
-
-      iex> change_opinion(opinion)
-      %Ecto.Changeset{source: %Opinion{}}
-
-  """
-  def change_opinion(%Opinion{} = opinion) do
-    Opinion.changeset(opinion, %{})
-  end
-
-  @doc """
-  Update or create an opinion.
-
-  """
-  def upsert_opinion(%User{id: user_id}, %Song{id: song_id}, kind) do
-    opinion = case get_opinion_by(user_id: user_id, song_id: song_id) do
-      nil  -> %Opinion{kind: kind, user_id: user_id, song_id: song_id}
-      song_opinion -> song_opinion
-    end
-
-    opinion
-    |> Opinion.changeset(%{kind: kind})
-    |> Repo.insert_or_update()
   end
 end

@@ -1,4 +1,4 @@
-defmodule Wsdjs.ArtTest do
+defmodule Wsdjs.Musics.ArtTest do
   use Wsdjs.DataCase
 
   alias Wsdjs.Musics.Art

@@ -9,12 +9,24 @@ defmodule WsdjsWeb.Api.V1.FallbackController do
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> render(Wsdjs.API.V1.ChangesetView, "error.json", changeset: changeset)
+    |> render(WsdjsWeb.Api.V1.ChangesetView, "error.json", changeset: changeset)
+  end
+
+  def call(conn, {:error, :invalid}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> render(WsdjsWeb.Api.V1.ErrorView, :"422")
+  end
+
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(WsdjsWeb.Api.V1.ErrorView, :"401")
   end
 
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> render(Wsdjs.API.V1.ErrorView, :"404")
+    |> render(WsdjsWeb.Api.V1.ErrorView, :"404")
   end
 end

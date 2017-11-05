@@ -78,7 +78,7 @@ defmodule Wsdjs.Charts do
     top_changeset = Top.create_changeset(%Top{}, params)
 
     month = top_changeset.changes.due_date
-    songs = Musics.list_songs_for_month(month)
+    songs = Musics.list_songs(month)
 
     top_changeset
     |> put_assoc(:songs, songs)
@@ -126,7 +126,7 @@ defmodule Wsdjs.Charts do
   def change_top_step(%Top{} = top) do
     Top.step_changeset(top, %{})
   end
-  
+
   ###############################################
   #
   # Change TOP step
@@ -263,7 +263,7 @@ defmodule Wsdjs.Charts do
     |> Repo.all()
 
     Enum.each(ranks, fn(rank) ->
-      val = Wsdjs.Musics.opinions_value(rank.song.opinions)
+      val = Wsdjs.Reactions.opinions_value(rank.song.opinions)
       rank
       |> Rank.changeset(%{likes: val})
       |> Repo.update()

@@ -3,40 +3,100 @@ defmodule WsdjsWeb.CloudinaryHelper do
   This modules contains all helpers in connection with Cloudinary.
   Notably the html tag and url helpers.
   """
+
+  @cld "//res.cloudinary.com/don2kwaju/image/upload/"
+  @cld_https "https://res.cloudinary.com/don2kwaju/image/upload/"
+  @cld_youtube "//res.cloudinary.com/don2kwaju/image/youtube/"
+  @dpr_multiple [1, 2, 3]
+
+  ###############################################
+  #
+  # YOUTUBE ART
+  #
+  ###############################################
+  alias Wsdjs.Attachments.Video
+
+  def youtube_url(%Video{video_id: video_id}, resolution) when is_integer(resolution) do
+    @cld_youtube <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/" <> "#{video_id}.jpg"
+  end
+
+  def youtube_srcset(%Video{} = video, base) when is_integer(base) do
+    resolutions = Enum.map(@dpr_multiple, &(base * &1))
+
+    resolutions
+    |> Enum.map(fn(r) -> "#{youtube_url(video, r)} #{r}w" end)
+    |> Enum.join(", ")
+  end
+
+
+  ###############################################
+  #
+  # SONG ART
+  #
+  ###############################################
   alias Wsdjs.Musics.Art
+
+  def art_url(%Art{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
+    @cld <> "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
+  end
+  def art_url(nil, resolution), do: art_url(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
+
+  def art_srcset(%Art{} = art, base) when is_integer(base) do
+    resolutions = Enum.map(@dpr_multiple, &(base * &1))
+
+    resolutions
+    |> Enum.map(fn(r) -> "#{art_url(art, r)} #{r}w" end)
+    |> Enum.join(", ")
+  end
+  def art_srcset(nil, base), do: art_srcset(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, base)
+
+  def art_url_blured(%Art{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
+    @cld <> "c_crop,g_custom/c_fit,f_auto,o_30,q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
+  end
+  def art_url_blured(nil, resolution), do: art_url_blured(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
+
+
+  ###############################################
+  #
+  # AVATAR
+  #
+  ###############################################
   alias Wsdjs.Accounts.Avatar
+
+  def avatar_url(%Avatar{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
+    @cld <> "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
+  end
+  def avatar_url(_, resolution), do: avatar_url(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, resolution)
+
+  def avatar_srcset(%Avatar{} = art, base) when is_integer(base) do
+    resolutions = Enum.map(@dpr_multiple, &(base * &1))
+
+    resolutions
+    |> Enum.map(fn(r) -> "#{avatar_url(art, r)} #{r}w" end)
+    |> Enum.join(", ")
+  end
+  def avatar_srcset(_, base), do: avatar_srcset(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, base)
+
+  ###############################################
+  #
+  # TOP
+  #
+  ###############################################
   alias Wsdjs.Charts.Top
 
-  @art_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
-  @art_blured_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_900,o_30/f_auto,q_auto,dpr_auto/fl_immutable_cache/"
-  @art_missing_url "//res.cloudinary.com/don2kwaju/image/upload/fl_immutable_cache/v1449164620/wsdjs/missing_cover.jpg"
-
-  def art_url(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
-    @art_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
-  end
-  def art_url(_), do: @art_missing_url
-  def art_url, do: @art_missing_url
-
-  def art_url_blured(%Art{cld_id: cld_id, version: version}) when is_binary(cld_id) do
-    @art_blured_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
-  end
-  def art_url_blured(nil), do: @art_missing_url
-
-  @avatar_root_url "//res.cloudinary.com/don2kwaju/image/upload/c_crop,g_custom/w_auto/q_auto,f_auto,dpr_auto/fl_immutable_cache/"
-  @avatar_missing_url "//res.cloudinary.com/don2kwaju/image/upload/w_400/fl_immutable_cache/wsdjs/missing_avatar.jpg"
-
-  def avatar_url(%Avatar{cld_id: cld_id, version: version}) when is_binary(cld_id) do
-    @avatar_root_url <> "v#{version}/" <> "#{cld_id}.jpg"
-  end
-  def avatar_url(_), do: @avatar_missing_url
-  def avatar_url, do: @avatar_missing_url
-
+  @doc """
+  Retrieve the image URL corresping to a top in voting status
+  """
   def top_art(%Top{status: "voting"}) do
-    "http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_400/wsdjs/worldswingdjs_single_flat.jpg"
+    @cld_https <> "c_scale,w_400/wsdjs/worldswingdjs_single_flat.jpg"
   end
 
+  @doc """
+  Retrieve the image URL corresping to a top in published status. 
+  It creates a sprite of the 10 first ranked song.
+  """
   def top_art(%Top{status: "published"} = top) do
-    "http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_400/"
+    @cld_https <> "c_scale,w_400/"
     <> "l_covers:#{top_rank_art(top, 1)},w_100,x_250,y_-150/"
     <> "l_covers:#{top_rank_art(top, 2)},w_100,x_200,y_-50/"
     <> "l_covers:#{top_rank_art(top, 3)},w_100,x_200,y_50/"

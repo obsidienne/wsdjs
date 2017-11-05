@@ -38,7 +38,7 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= rank.position %></div>
         </div>
-        <img data-src="<%= art_url()%>" class="responsive" />
+        <img src="<%= art_url(nil, 200)%>" class="responsive" />
       </div>
       <div class="top-song-body">
         <div class="top-song-body-info">
@@ -67,7 +67,7 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= rank.position %></div>
         </div>
-        <img data-src="<%= art_url(rank.song.art)%>" class="responsive" />
+        <img src="<%= art_url(rank.song.art, 200)%>" class="responsive" />
         <%= if rank.song.url do %>
           <a href="<%= url_for_provider(rank.song) %>" target="_blank"  <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>Play</a>
         <% end %>

@@ -79,6 +79,11 @@ defmodule Wsdjs.Accounts do
     |> Repo.get(id)
     |> Repo.preload([:avatar, :detail, :parameter])
   end
+  def get_user!(id) do
+    User
+    |> Repo.get!(id)
+    |> Repo.preload([:avatar, :detail, :parameter])
+  end
 
   def get_user_by_email(email) do
     User
@@ -134,6 +139,29 @@ defmodule Wsdjs.Accounts do
 
   def delete_magic_link_token!(token) do
     Repo.delete!(token)
+  end
+
+  ###############################################
+  #
+  # Avatar
+  #
+  ###############################################
+  alias Wsdjs.Accounts.Avatar
+
+  @doc """
+  Returns the user avatar.
+
+  ## Examples
+
+      iex> get_avatar(%User{})
+      %Avatar{}
+  """
+  def get_avatar(%User{id: id}) do
+    Avatar
+    |> where([user_id: ^id])
+    |> order_by([desc: :inserted_at])
+    |> limit(1)
+    |> Repo.all
   end
 
   ###############################################

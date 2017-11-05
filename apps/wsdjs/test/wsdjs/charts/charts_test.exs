@@ -17,6 +17,9 @@ defmodule Wsdjs.ChartsTest do
       insert(:song, %{inserted_at: Timex.shift(dt, days: 1, microseconds: 1), user: user}),
       insert(:song, %{inserted_at: dtend, user: user}),
     ]
+    insert(:song, %{inserted_at: Timex.shift(dt, microseconds: 1), user: user, suggestion: false})
+    insert(:song, %{inserted_at: Timex.shift(dt, days: 1, microseconds: 1), user: user, suggestion: false})
+    insert(:song, %{inserted_at: dtend, user: user, suggestion: false})
 
     user = insert(:user, %{admin: true})
     {:ok, %Top{} = top} = Charts.create_top(%{"due_date": Timex.today, user_id: user.id})

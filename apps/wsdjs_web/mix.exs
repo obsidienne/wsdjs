@@ -4,12 +4,12 @@ defmodule WsdjsWeb.Mixfile do
   def project do
     [
       app: :wsdjs_web,
-      version: "1.4.3",
+      version: "1.5.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "~> 1.5",
+      elixir: "1.5.1",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
@@ -23,6 +23,7 @@ defmodule WsdjsWeb.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {WsdjsWeb.Application, []},
+     included_applications: [:ua_inspector],
      extra_applications: [:logger]]
   end
 
@@ -43,6 +44,7 @@ defmodule WsdjsWeb.Mixfile do
      {:bamboo, "~> 0.8"},
      {:timex, "~> 3.0"},
      {:corsica, "~> 1.0"},
+     {:ua_inspector, "~> 0.14"},
      {:wsdjs, in_umbrella: true},
      {:wsdjs_jobs, in_umbrella: true},
      {:cowboy, "~> 1.0"}]

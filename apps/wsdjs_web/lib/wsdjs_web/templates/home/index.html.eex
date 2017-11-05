@@ -23,7 +23,7 @@
   </section>
 <% end %>
 
-<%= if Enum.count(@top.ranks) > 0 do %>
+<%= if @top && Enum.count(@top.ranks) > 0 do %>
   <section>
     <h4 class="page-header"><time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> Top</h4>
     <ul class="home-page__top__song">

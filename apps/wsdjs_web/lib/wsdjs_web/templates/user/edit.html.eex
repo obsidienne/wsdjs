@@ -2,7 +2,7 @@
 
 <main class="user-profile-edit container">
   <div id="avatar_div">
-    <img id="avatar_thumbnail" src="<%= avatar_url(@user.avatar) %>" style="width:250px;height:250px;">
+    <img id="avatar_thumbnail" src="<%= avatar_url(@user.avatar, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
       <button id="user_upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload avatar</button>
     </div>
@@ -144,6 +144,17 @@
             <%= inputs_for f, :parameter, fn fp -> %>
               <%= checkbox fp, :piwik %>
               <%= label fp, :piwik do %><% end %>
+            <% end %>
+          </div>
+        </td>
+      </tr> 
+      <tr>
+        <td>Activate video</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= inputs_for f, :parameter, fn fp -> %>
+              <%= checkbox fp, :video %>
+              <%= label fp, :video do %><% end %>
             <% end %>
           </div>
         </td>

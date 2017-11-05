@@ -5,7 +5,7 @@ defmodule WsdjsWeb.Unauthenticated do
   def api_call(conn, _params) do
     conn
     |> put_status(401)
-    |> json(%{error: "Unauthenticated!"})
+    |> json(%{errors: %{detail: "Unauthenticated"}})
     |> halt()
   end
 

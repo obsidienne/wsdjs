@@ -1,4 +1,4 @@
-defmodule Wsdjs.TopTest do
+defmodule Wsdjs.Charts.TopTest do
   use Wsdjs.DataCase, async: true
 
   alias Wsdjs.Charts.Top
@@ -44,24 +44,24 @@ defmodule Wsdjs.TopTest do
       tops = [
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -3)}),
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -5)}),
-      ]
+      ] |> Enum.sort()
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
     end
 
     test "[current month -6 to n-24]", context do
       tops = [
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -6)}),
         insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -24)})
-      ]
+      ] |> Enum.sort()
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
     end
 
     test "current month -25", context do
@@ -170,32 +170,9 @@ defmodule Wsdjs.TopTest do
     assert top.due_date == params[:due_date]
   end
 
-#    test "create_song/1 with invalid data returns error changeset" do
- #     assert {:error, %Ecto.Changeset{}} = Musics.create_song(@invalid_attrs)
-  #  end
-
-  # test "update_top/2 with valid data updates the top" do
-  #   top = insert(:top)
-  #   assert {:ok, top} = Charts.update_top(top, %{})
-  #   assert %Song{} = song
-  #   assert song.artist == "some updated artist"
-  #   assert song.title == "some updated title"
-  # end
-
-#    test "update_song/2 with invalid data returns error changeset" do
-#      song = song_fixture()
-#      assert {:error, %Ecto.Changeset{}} = Musics.update_song(song, @invalid_attrs)
-#      assert song == Musics.get_song!(song.id)
-#    end
-
   test "delete_top/1 deletes the top" do
     top = insert(:top)
     assert {:ok, %Top{}} = Charts.delete_top(top)
     assert_raise Ecto.NoResultsError, fn -> Charts.get_top!(top.id) end
   end
-
-#    test "change_song/1 returns a song changeset" do
-#      song = song_fixture()
-#      assert %Ecto.Changeset{} = Musics.change_song(song)
-#    end
 end

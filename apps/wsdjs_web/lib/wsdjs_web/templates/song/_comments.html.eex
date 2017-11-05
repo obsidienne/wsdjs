@@ -13,13 +13,16 @@
   <%= for comment <- @comments do %>
     <li class="comment">
       <div class="comment__avatar">
-        <img data-src="<%= avatar_url(comment.user.avatar) %>" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
+        <img src="<%= avatar_url(comment.user.avatar, 50) %>" srcset="<%= avatar_srcset(comment.user.avatar, 50) %>" sizes="50px" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
       </div>
 
       <div class="comment__body">
         <header class="comment__header">
-          <a href="<%= user_path(@conn, :show, comment.user) %>"><%= comment.user.name %></a>
-          <time class="timeago small" title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
+          <span>
+            <a href="<%= user_path(@conn, :show, comment.user) %>"><%= comment.user.name %></a>
+            <time class="timeago small" title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
+          </span>
+          <%= link "", to: api_comment_path(@conn, :delete, comment.id), class: "btn-link comment__delete" %>
         </header>
         <div class="comment__content">
           <%= comment.text %>

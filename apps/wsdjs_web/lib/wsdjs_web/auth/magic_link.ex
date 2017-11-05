@@ -12,22 +12,32 @@ defmodule WsdjsWeb.MagicLink do
   @doc """
     Creates and sends a new magic login token to the user or email.
   """
-  def provide_token(nil), do: {:error, :not_found}
+  def provide_token(nil, _), do: {:error, :not_found}
 
-  def provide_token(email) when is_binary(email) do
+  def provide_token(email, type) when is_binary(email) and type in ["api", "browser"] do
     email
     |> Wsdjs.Accounts.get_user_by_email()
-    |> send_token()
+    |> send_token(type)
   end
 
   # User could not be found by email.
-  defp send_token(nil), do: {:error, :not_found}
+  defp send_token(nil, _), do: {:error, :not_found}
 
   # Creates a token and sends it to the user.
-  defp send_token(user) do
+  defp send_token(user, "browser") do
     user
     |> create_token()
-    |> AuthenticationEmail.login_link(user)
+    |> AuthenticationEmail.browser_login(user)
+    |> Mailer.deliver_now()
+
+    {:ok, user}
+  end
+
+  # Creates a token and sends it to the user.
+  defp send_token(user, "api") do
+    user
+    |> create_token()
+    |> AuthenticationEmail.api_login(user)
     |> Mailer.deliver_now()
 
     {:ok, user}

@@ -1,4 +1,4 @@
-defmodule Wsdjs.UserTest do
+defmodule Wsdjs.Accounts.UserTest do
   use Wsdjs.DataCase, async: true
 
   alias Wsdjs.Accounts.User

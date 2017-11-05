@@ -22,6 +22,15 @@ defmodule Wsdjs.Factory do
       user: build(:user),
       url: "http://youtu.be/toto",
       bpm: 1,
+      suggestion: true
+    }
+  end
+
+  def video_factory do
+    %Wsdjs.Attachments.Video {
+      url: sequence(:url, &"http://www.youtube.com/#{&1}"),
+      user: build(:user),
+      song: build(:song)
     }
   end
 
@@ -41,7 +50,7 @@ defmodule Wsdjs.Factory do
   end
 
   def opinion_factory do
-    %Wsdjs.Musics.Opinion {
+    %Wsdjs.Reactions.Opinion {
       kind: "like",
       user: build(:user),
       song: build(:song)
@@ -54,6 +63,14 @@ defmodule Wsdjs.Factory do
       song: build(:song),
       top: build(:top),
       user: build(:user)
+    }
+  end
+
+  def comment_factory do
+    %Wsdjs.Reactions.Comment {
+      text: "dummy text",
+      user: build(:user),
+      song: build(:song)
     }
   end
 end

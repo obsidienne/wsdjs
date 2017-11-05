@@ -8,7 +8,7 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= @rank.position %></div>
         </div>
-        <img data-src="<%= art_url() %>" class="responsive" />
+        <img src="<%= art_url(nil, 200) %>" class="responsive" />
       </div>
 
 
@@ -37,7 +37,7 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= @rank.position %></div>
         </div>
-        <img data-src="<%= art_url(@rank.song.art) %>" class="responsive" />
+        <img src="<%= art_url(@rank.song.art, 200) %>" class="responsive" />
       </div>
 
 

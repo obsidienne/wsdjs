@@ -12,6 +12,9 @@ defmodule WsdjsWeb.Application do
       # worker(WsdjsWeb.Worker, [arg1, arg2, arg3]),
     ]
 
+    Application.put_env(:ua_inspector, :database_path, Path.join(["#{:code.priv_dir(:wsdjs_web)}", "ua_inspector"]))
+    {:ok, _} = Application.ensure_all_started(:ua_inspector)
+
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: WsdjsWeb.Supervisor]

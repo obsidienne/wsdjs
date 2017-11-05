@@ -4,7 +4,11 @@ defmodule WsdjsWeb.SongController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Musics
-  alias Wsdjs.Musics.{Comment, Song}
+  alias Wsdjs.Reactions
+  alias Wsdjs.Reactions.Comment
+  alias Wsdjs.Musics.Song
+  alias Wsdjs.Attachments
+  alias Wsdjs.Attachments.Video
 
   action_fallback WsdjsWeb.FallbackController
 
@@ -13,15 +17,41 @@ defmodule WsdjsWeb.SongController do
     apply(__MODULE__, action_name(conn), args)
   end
 
+  def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id}, current_user) do
+    with song <- Musics.get_song!(id),
+         :ok <- Musics.Policy.can?(current_user, :show, song) do
+
+      comments = Reactions.list_comments(song)
+      opinions = Reactions.list_opinions(song)
+      videos = Attachments.list_videos(song)
+      video_changeset = Attachments.change_video(%Video{})
+      comment_changeset = Reactions.change_comment(%Comment{})
+
+      render conn, "show.html", song: song,
+                                comments: comments,
+                                opinions: opinions,
+                                comment_changeset: comment_changeset,
+                                videos: videos,
+                                video_changeset: video_changeset
+    end
+  end
+
   def show(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :show, song) do
 
-      comments = Musics.list_comments(song)
-      opinions = Musics.list_opinions(song)
-      comment_changeset = Musics.change_comment(%Comment{})
+      comments = Reactions.list_comments(song)
+      opinions = Reactions.list_opinions(song)
+      videos = Attachments.list_videos(song)
+      video_changeset = Attachments.change_video(%Video{})
+      comment_changeset = Reactions.change_comment(%Comment{})
 
-      render conn, "show.html", song: song, comments: comments, opinions: opinions, comment_changeset: comment_changeset
+      render conn, "show.html", song: song,
+                                comments: comments,
+                                opinions: opinions,
+                                comment_changeset: comment_changeset,
+                                videos: videos,
+                                video_changeset: video_changeset
     end
   end
 

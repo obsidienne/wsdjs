@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+    <meta name="cloudinary_cloud_name" content="don2kwaju">
+    <meta name="description" content="World Swing DeeJays. The best West Coast Swing music from all around the world !">
+
+    <!-- Control the behavior of search engine crawling and indexing -->
+    <meta name="robots" content="index,follow"><!-- All Search Engines -->
+    <meta name="googlebot" content="index,follow"><!-- Google Specific -->
+    <!-- Tells Google not to show the sitelinks search box -->
+    <meta name="google" content="nositelinkssearchbox">
+    <!-- Tells Google not to provide a translation for this page -->
+    <meta name="google" content="notranslate">
+
+    <title><%= page_title(@conn) %></title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+
+
+    <link defer rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script defer src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script defer src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+    <script defer src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <%= if user = @conn.assigns[:current_user] do %>
+    <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", user.id) %>
+    <% end %>
+
+    <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
+  </head>
+
+  <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
+    <%= render @view_module, @view_template, assigns %>
+
+    <%= render "_player.html", conn: @conn %>
+
+    <%= render "_mobile-outside.html", conn: @conn, current_user: @current_user %>
+  </body>
+</html>

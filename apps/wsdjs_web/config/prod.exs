@@ -15,14 +15,15 @@ use Mix.Config
 # which you typically run after static files are built.
 config :wsdjs_web, WsdjsWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "www.worldswingdjs.com", port: 443, scheme: "https"],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  server: true,
+  root: ".",
+  version: Application.spec(:myapp, :vsn)
 
 config :wsdjs_web, WsdjsWeb.Mailer,
     adapter: Bamboo.SendgridAdapter,
-    api_key: System.get_env("SENDGRID_API_KEY")
+    api_key: "${SENDGRID_API_KEY}"
 
 # ## SSL Support
 #

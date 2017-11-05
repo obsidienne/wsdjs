@@ -5,7 +5,7 @@ defmodule Wsdjs.Accounts.User do
   import Ecto.Query
   alias Wsdjs.Accounts.User
 
-  alias Wsdjs.{Musics, Accounts, Charts}
+  alias Wsdjs.{Musics, Accounts, Charts, Reactions}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -19,11 +19,11 @@ defmodule Wsdjs.Accounts.User do
     field :profil_dj, :boolean
 
     has_many :songs, Musics.Song
-    has_many :comments, Musics.Comment
+    has_many :comments, Reactions.Comment
     has_one :avatar, Accounts.Avatar, on_replace: :delete
-    has_one :detail, Accounts.UserDetail, on_replace: :delete
+    has_one :detail, Accounts.UserDetail, on_replace: :update
     has_one :parameter, Accounts.UserParameter, on_replace: :delete
-    has_many :song_opinions, Musics.Opinion
+    has_many :song_opinions, Reactions.Opinion
     has_many :votes, Charts.Vote
     has_many :auth_tokens, Accounts.AuthToken
 

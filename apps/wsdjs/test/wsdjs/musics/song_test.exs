@@ -1,4 +1,4 @@
-defmodule Wsdjs.SongTest do
+defmodule Wsdjs.Musics.SongTest do
   use Wsdjs.DataCase, async: true
   import Wsdjs.Factory
 

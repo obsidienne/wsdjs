@@ -4,7 +4,7 @@ defmodule Wsdjs.Musics.Song do
   import Ecto.Query
   alias Wsdjs.Musics.Song
 
-  alias Wsdjs.{Charts, Accounts, Musics}
+  alias Wsdjs.{Charts, Accounts, Musics, Reactions}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -18,18 +18,19 @@ defmodule Wsdjs.Musics.Song do
     field :hidden_track, :boolean
     field :video_id, :string
     field :public_track, :boolean
+    field :suggestion, :boolean
     timestamps()
 
     belongs_to :user, Accounts.User
     has_one :art, Musics.Art, on_replace: :delete
-    has_many :comments, Musics.Comment
+    has_many :comments, Reactions.Comment
     has_many :ranks, Charts.Rank
-    has_many :opinions, Musics.Opinion
+    has_many :opinions, Reactions.Opinion
     has_many :votes, Charts.Vote
     many_to_many :tops, Charts.Top, join_through: Charts.Rank
   end
 
-  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track]
+  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track, :suggestion]
   @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 

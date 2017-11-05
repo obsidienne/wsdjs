@@ -21,7 +21,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   end
 
   def init(state) do
-    schedule_work(0) # Schedule work to be performed at some point
+    schedule_work(5000) # Schedule work to be performed at some point
     {:ok, state}
   end
 
@@ -49,9 +49,11 @@ defmodule Wsdjs.Jobs.NowPlaying do
         {:noreply, queue}
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         Logger.debug "Not found :("
+        schedule_work(60000) # Reschedule once more
         {:noreply, queue}
       {:error, %HTTPoison.Error{reason: reason}} ->
         Logger.error reason
+        schedule_work(60000) # Reschedule once more
         {:noreply, queue}
     end
   end
@@ -131,16 +133,18 @@ defmodule Wsdjs.Jobs.NowPlaying do
   end
 
   defp filled_from_db(song) do
-    song_in_base = Wsdjs.Musics.search_by_artist_title(song["artist"], song["title"])
+    song_in_base = Wsdjs.Musics.get_song_by(song["artist"], song["title"])
 
     if song_in_base != nil do
       song
       |> Map.put(:suggested_ts, Timex.to_unix(song_in_base.inserted_at))
-      |> Map.put(:image_uri, WsdjsWeb.CloudinaryHelper.art_url(song_in_base.art))
+      |> Map.put(:image_uri, WsdjsWeb.CloudinaryHelper.art_url(song_in_base.art, 75))
+      |> Map.put(:image_srcset, WsdjsWeb.CloudinaryHelper.art_srcset(song_in_base.art, 75))
       |> Map.put(:suggested_by, song_in_base.user.name)
       |> Map.put(:suggested_by_path, "/users/#{song_in_base.user.id}")
       |> Map.put(:path, "/songs/#{song_in_base.id}")
       |> Map.put(:tags, tags_for_song(song_in_base))
+      |> Map.put(:song_id, song_in_base.id)
     else
       song
     end

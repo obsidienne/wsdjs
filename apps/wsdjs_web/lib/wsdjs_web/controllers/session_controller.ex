@@ -2,8 +2,6 @@ defmodule WsdjsWeb.SessionController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  plug :put_layout, "login.html"
-
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.Invitation
 
@@ -13,7 +11,7 @@ defmodule WsdjsWeb.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email}}) do
-    case WsdjsWeb.MagicLink.provide_token(email) do
+    case WsdjsWeb.MagicLink.provide_token(email, "browser") do
       {:ok, _user} ->
         conn
         |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")

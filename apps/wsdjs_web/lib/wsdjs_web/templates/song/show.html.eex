@@ -1,16 +1,16 @@
-<main>
+<style>
+  .hero {
+    background-image: linear-gradient(transparent, #fff), url(<%= art_url_blured(@song.art, 1200) %>);
+  }
+</style>
 
+<main>
 <section class="hero">
-  <style>
-    .hero {
-      background-image: linear-gradient(transparent, #fff), url(<%= art_url_blured(@song.art) %>);
-    }
-  </style>
   <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 
   <div class="song-page container">
     <div class="song-page__art">
-      <img data-src="<%= art_url(@song.art) %>" class="responsive"/>
+      <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
     <div class="song-page__details">
       <h5 class="song-page__details__title"><%= @song.title %></h5>
@@ -18,6 +18,7 @@
       <h6 class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %>
         <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>"></time>
       </h6>
+
       <div class="song-page__tags">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
@@ -33,32 +34,58 @@
           <span class="label label-default small">instant hit</span>
         <% end %>
       </div>
+
+      <div class="song-page__tags song-opinions">
+        <%= opinion_link_no_tooltip("up", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+        <%= opinion_link_no_tooltip("like", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+        <%= opinion_link_no_tooltip("down", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+      </div>
+      
       <%= if @song.url do %>
         <a href="<%= url_for_provider(@song) %>" class="btn btn-primary" target="_blank" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
       <% end %>
     </div>
   </div>
-
-  <nav class="tabs-navigation container">
-    <ul class="tabs-navigation__items">
-      <li class="tabs-navigation__item active"><a data-turbolinks="false" href="#overview-section">overview</a></li>
-    </ul>
-  </nav>
 </section>
 
-<section id="overview-section" class="container tabs-pane active">
-  <%= render "_opinions.html", conn: @conn, song: @song, opinions: @opinions %>
-  <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
-</section>
+<div class="container song-page__sections">
+  <div class="song-page__sections__content">
+    <section id="overview-video" class="overview-video">
+      <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
+    </section>
+    <section id="overview-section">
+      <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
+    </section>
+  </div>
 
-<%= if Wsdjs.Musics.Policy.can?(@current_user, :edit_song, @song) == :ok do %>
-<section class="container song-page__actions">
-  <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
-  <%= if Wsdjs.Musics.Policy.can?(@current_user, :delete_song,  @song) == :ok do %>
-    <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %></h1>
-  <% end %>
-</section>
-<% end %>
+  <div>
+    <%= unless is_nil(@conn.assigns[:current_user]) do %>
+      <%= form_for @video_changeset, api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
+      <fieldset>
+        <legend>Add a video</legend>
+        <div class="form-group">
+          <%= text_input f, :url, type: "url", class: "form-control", placeholder: "Video url", required: true, maxlength: 255 %>
+          <%= error_tag f, :url %>
+          <%= text_input f, :title, type: "title", class: "form-control", placeholder: "Pro's names", required: true, maxlength: 255 %>
+          <%= error_tag f, :title %>
+          <%= text_input f, :event, type: "event", class: "form-control", placeholder: "Event", required: true, maxlength: 255 %>
+          <%= error_tag f, :event %>
+        </div>
 
+        <%= submit "Add video", class: "btn btn-primary" %>
+      </fieldset>
+    <% end %>
+    <% end %>
 
+    <%= if Wsdjs.Musics.Policy.can?(@current_user, :edit_song, @song) == :ok do %>
+    <fieldset>
+      <legend>Actions</legend>
+      <%= link "Edit song", to: song_path(@conn, :edit, @song), class: "btn btn-primary" %>
+      <%= if Wsdjs.Musics.Policy.can?(@current_user, :delete_song,  @song) == :ok do %>
+        <%= link "Delete song", to: song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %>
+      <% end %>
+    </fieldset>
+    <% end %>
+  </div>
+</div>
 </main>
