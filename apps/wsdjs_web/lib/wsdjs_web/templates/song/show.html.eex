@@ -66,10 +66,12 @@
         <div class="form-group">
           <%= text_input f, :url, type: "url", class: "form-control", placeholder: "Video url", required: true, maxlength: 255 %>
           <%= error_tag f, :url %>
-          <%= text_input f, :title, type: "title", class: "form-control", placeholder: "Pro's names", required: true, maxlength: 255 %>
+          <%= text_input f, :title, class: "form-control", placeholder: "Pro's names", required: true, maxlength: 255 %>
           <%= error_tag f, :title %>
-          <%= text_input f, :event, type: "event", class: "form-control", placeholder: "Event", required: true, maxlength: 255 %>
+          <%= text_input f, :event, class: "form-control", placeholder: "Event", required: true, maxlength: 255 %>
           <%= error_tag f, :event %>
+          <%= date_select f, :published_at, class: "form-control" %>
+          <%= error_tag f, :published_at %>
         </div>
 
         <%= submit "Add video", class: "btn btn-primary" %>
