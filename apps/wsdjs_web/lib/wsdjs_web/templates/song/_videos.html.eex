@@ -7,6 +7,9 @@
   <div class="song-page__video__details">
     <h5 class="text-ellipsis song-page__video__pros"><%= video.title %></h4>
     <span class="song-page__video__event"><%= video.event %></span>
+    <%= if video.published_at do %>
+    <timeago class="small text-muted"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</timeago>
+    <% end %>
   </div>
 </article>
 <% end %>

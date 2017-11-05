@@ -53,7 +53,9 @@
 }
 .song-page__video {
   display: flex;
-  width: 100%;
+  max-width: 100%;
+  padding-right: 5px;
+  padding-bottom: 5px;
 }
 .song-page__video a {
   position: relative;

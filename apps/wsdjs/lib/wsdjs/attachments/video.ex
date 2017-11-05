@@ -11,6 +11,7 @@ defmodule Wsdjs.Attachments.Video do
     field :video_id, :string
     field :title, :string
     field :event, :string
+    field :published_at, :date
 
     belongs_to :user, Wsdjs.Accounts.User
     belongs_to :song, Wsdjs.Musics.Song
@@ -19,7 +20,7 @@ defmodule Wsdjs.Attachments.Video do
 
   def changeset(%Video{} = video, attrs) do
     video
-    |> cast(attrs, [:url, :event, :title, :user_id, :song_id])
+    |> cast(attrs, [:url, :event, :title, :user_id, :song_id, :published_at])
     |> validate_required(:url)
     |> assoc_constraint(:user)
     |> validate_url(:url)
