@@ -3,12 +3,6 @@ defmodule WsdjsWeb.SessionController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.Invitation
-
-  def new(conn, _) do
-    changeset = Accounts.change_invitation(%Invitation{})
-    render conn, "new.html", changeset: changeset
-  end
 
   def create(conn, %{"session" => %{"email" => email}}) do
     case WsdjsWeb.MagicLink.provide_token(email, "browser") do

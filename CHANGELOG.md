@@ -1,3 +1,5 @@
+# version 1.6
+- invitation deprecated : invitation access removed. Admin can list existing invitation request 
 # version 1.5
 - apple file for universal link
 - move API to v1 

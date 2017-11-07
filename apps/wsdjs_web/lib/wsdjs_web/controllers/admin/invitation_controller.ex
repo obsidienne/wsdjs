@@ -17,7 +17,7 @@ defmodule WsdjsWeb.Admin.InvitationController do
       |> Mailer.deliver_later()
 
       conn
-      |> put_flash(:info, "Invitation #{invitation.name} accepted successfully.")
+      |> put_flash(:info, "Invitation #{invitation.name} accepted successfully. You can now delete the invitation (invitations are deprecated)")
       |> redirect(to: user_path(conn, :show, invitation.user_id))
     end
   end

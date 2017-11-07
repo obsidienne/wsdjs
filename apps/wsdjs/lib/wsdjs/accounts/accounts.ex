@@ -201,41 +201,6 @@ defmodule Wsdjs.Accounts do
   end
 
   @doc """
-  Creates a invitation.
-
-  ## Examples
-
-      iex> create_invitation(%{field: value})
-      {:ok, %Invitation{}}
-
-      iex> create_invitation(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_invitation(attrs \\ %{}) do
-    if is_nil(get_user_by_email(attrs["email"])) do
-      %Invitation{}
-      |> Invitation.changeset(attrs)
-      |> Repo.insert()
-    else
-      {:error, %Ecto.Changeset{}}
-    end
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking song changes.
-
-  ## Examples
-
-      iex> change_song(song)
-      %Ecto.Changeset{source: %Song{}}
-
-  """
-  def change_invitation(%Invitation{} = invitation) do
-    Invitation.changeset(invitation, %{})
-  end
-
-  @doc """
   """
   def accept_invitation(%Invitation{} = invitation) do
     {:ok, user} = create_user(%{email: invitation.email, name: invitation.name})

@@ -59,7 +59,6 @@ defmodule WsdjsWeb.Router do
     resources "/tops", TopController, only: [:index, :show]
     resources "/sessions", SessionController, only: [:new, :create]
     get "/signin/:token", SessionController, :show, as: :signin
-    resources "/invitations", InvitationController, only: [:new, :create]
   end
 
   scope "/admin", as: :admin, alias: :'WsdjsWeb.Admin' do
