@@ -61,24 +61,27 @@ defmodule Wsdjs.Accounts do
   end
 
   @doc """
-  Gets a single user.
+  Gets a single activated user.
 
-  Raises `Ecto.NoResultsError` if the User does not exist.
+  Raises `Ecto.NoResultsError` if the User does not exist or is deactivated.
 
   ## Examples
 
-      iex> get_user(UUID)
+      iex> get_activated_user!(UUID)
       %User{}
 
-      iex> get_user(unknow UUID)
+      iex> get_activated_user!(unknow UUID)
       nil
 
   """
-  def get_user(id) do
+  def get_activated_user!(id) do
     User
-    |> Repo.get(id)
+    |> where(deactivated: false)
+    |> Repo.get!(id)
     |> Repo.preload([:avatar, :detail, :parameter])
   end
+
+
   def get_user!(id) do
     User
     |> Repo.get!(id)
@@ -87,6 +90,7 @@ defmodule Wsdjs.Accounts do
 
   def get_user_by_email(email) do
     User
+    |> where(deactivated: false)
     |> Repo.get_by(email: String.downcase(email))
     |> Repo.preload(:avatar)
   end

@@ -138,7 +138,7 @@ defmodule WsdjsWeb.UserControllerTest do
     |> assign(:current_user, admin)
     |> put(user_path(conn, :update, user.id, %{"user" => params}))
 
-    user_updated = Wsdjs.Accounts.get_user(user.id)
+    user_updated = Wsdjs.Accounts.get_user!(user.id)
     assert user_updated.profil_djvip
     assert user_updated.profil_dj
     refute user_updated.admin
@@ -154,7 +154,7 @@ defmodule WsdjsWeb.UserControllerTest do
     |> assign(:current_user, user)
     |> put(user_path(conn, :update, user.id, %{"user" => params}))
 
-    user_updated = Wsdjs.Accounts.get_user(user.id)
+    user_updated = Wsdjs.Accounts.get_user!(user.id)
     assert user_updated.djname == "DJ has been"
     assert user_updated.detail.description == "J'aurai voulu être un artist"
     # refute user_updated.profil_djvip

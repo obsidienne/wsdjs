@@ -8,6 +8,7 @@ defmodule Wsdjs.Factory do
       admin: false,
       profil_djvip: false,
       profil_dj: false,
+      deactivated: false
     }
   end
 

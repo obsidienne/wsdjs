@@ -1,5 +1,6 @@
 # version 1.6
 - invitation deprecated : invitation access removed. Admin can list existing invitation request 
+- add a deactivated user toggle. A deactivated user cannot login or get newsletter
 # version 1.5
 - apple file for universal link
 - move API to v1 

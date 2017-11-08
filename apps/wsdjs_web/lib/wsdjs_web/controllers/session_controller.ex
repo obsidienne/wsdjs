@@ -2,7 +2,9 @@ defmodule WsdjsWeb.SessionController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  alias Wsdjs.Accounts
+  def new(conn, _) do
+    render conn, "new.html"
+  end
 
   def create(conn, %{"session" => %{"email" => email}}) do
     case WsdjsWeb.MagicLink.provide_token(email, "browser") do
@@ -12,7 +14,7 @@ defmodule WsdjsWeb.SessionController do
         |> redirect(to: home_path(conn, :index))
       {:error, :not_found} ->
         conn
-        |> put_flash(:error, "Email #{email} is not registered. Send an email to worldswingdjs@gmail.com to ask for registration.")
+        |> put_flash(:error, "Email #{email} is not registered or deactivated. Send an email to worldswingdjs@gmail.com to ask for details.")
         |> redirect(to: session_path(conn, :new))
     end
   end
