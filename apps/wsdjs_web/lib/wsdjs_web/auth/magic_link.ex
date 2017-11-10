@@ -15,10 +15,10 @@ defmodule WsdjsWeb.MagicLink do
   """
   def provide_token(nil, _), do: {:error, :not_found}
 
-  def provide_token(email, type) when is_binary(email) and type in ["api", "browser"] do
+  def provide_token(email, device) when is_binary(email) and device in ["api", "browser"] do
     email
     |> Accounts.get_user_by_email()
-    |> send_token(type)
+    |> send_token(device)
   end
 
   # User could not be found by email.
