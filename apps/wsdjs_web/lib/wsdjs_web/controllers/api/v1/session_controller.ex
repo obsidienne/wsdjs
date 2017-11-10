@@ -8,7 +8,7 @@ defmodule WsdjsWeb.Api.V1.SessionController do
   action_fallback WsdjsWeb.Api.V1.FallbackController
 
   def create(conn, %{"email" => email}) do
-    with {:ok, %User{}} <- WsdjsWeb.MagicLink.provide_token(email, "api") do
+    with {:ok, %User{}} <- WsdjsWeb.MagicLink.provide_token(email, "signin", "api") do
       conn
       |> put_status(:created)
       |> send_resp(:no_content, "")
@@ -16,7 +16,7 @@ defmodule WsdjsWeb.Api.V1.SessionController do
   end
 
   def show(conn, %{"token" => token}) do
-    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.verify_magic_link(token) do
+    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.verify_magic_link(token, "signin") do
       bearer = Phoenix.Token.sign(conn, "user", user.id)
 
       [avatar] = Accounts.get_avatar(user)
