@@ -22,6 +22,7 @@ defmodule Wsdjs.Accounts do
     User
     |> join(:left, [u], p in assoc(u, :user_parameters))
     |> where([u], u.new_song_notification == true)
+    |> where(deactivated: false)
     |> Repo.all()
     |> Repo.preload(:avatar)
   end
