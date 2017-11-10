@@ -4,6 +4,7 @@ defmodule WsdjsWeb.MagicLink do
   """
   alias WsdjsWeb.{Endpoint, Mailer, AuthenticationEmail}
   alias Wsdjs.Accounts
+  alias Wsdjs.Accounts.User
   alias Phoenix.Token
 
   #  Token is valid for 30 minutes.
@@ -16,7 +17,7 @@ defmodule WsdjsWeb.MagicLink do
 
   def provide_token(email, type) when is_binary(email) and type in ["api", "browser"] do
     email
-    |> Wsdjs.Accounts.get_user_by_email()
+    |> Accounts.get_user_by_email()
     |> send_token(type)
   end
 
@@ -24,7 +25,7 @@ defmodule WsdjsWeb.MagicLink do
   defp send_token(nil, _), do: {:error, :not_found}
 
   # Creates a token and sends it to the user.
-  defp send_token(user, "browser") do
+  defp send_token(%User{} = user, "browser") do
     user
     |> create_token()
     |> AuthenticationEmail.browser_login(user)
@@ -34,7 +35,7 @@ defmodule WsdjsWeb.MagicLink do
   end
 
   # Creates a token and sends it to the user.
-  defp send_token(user, "api") do
+  defp send_token(%User{} = user, "api") do
     user
     |> create_token()
     |> AuthenticationEmail.api_login(user)
@@ -44,7 +45,7 @@ defmodule WsdjsWeb.MagicLink do
   end
 
   # Creates a new token, store it in the DB for the given user and returns the token value.
-  defp create_token(user) do
+  defp create_token(%User{} = user) do
     auth_token = Phoenix.Token.sign(Endpoint, "user", user.id)
     Accounts.set_magic_link_token(user, auth_token)
     auth_token
