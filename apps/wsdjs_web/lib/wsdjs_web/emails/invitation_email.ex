@@ -14,4 +14,12 @@ defmodule WsdjsWeb.InvitationEmail do
     |> subject("Worldswingdjs : Invitation registered")
     |> render(:invitation_registered, invitation: user)
   end
+
+  def invitation_accepted(user) do
+    new_email()
+    |> to(user.email)
+    |> from("no-reply@worldswingdjs.com")
+    |> subject("Worldswingdjs : Invitation accepted")
+    |> render(:invitation_accepted, invitation: user)
+  end
 end
