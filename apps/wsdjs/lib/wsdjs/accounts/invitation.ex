@@ -14,15 +14,9 @@ defmodule Wsdjs.Accounts.Invitation do
     timestamps()
   end
 
-  @allowed_fields [:email, :name, :user_id]
-
   @doc false
   def changeset(%Invitation{} = invitation, attrs) do
     invitation
-    |> cast(attrs, @allowed_fields)
-    |> validate_required(:email)
-    |> validate_required(:name)
-    |> unique_constraint(:email)
-    |> validate_format(:email, ~r/.*@.*/)
+    |> cast(attrs, [:user_id])
   end
 end

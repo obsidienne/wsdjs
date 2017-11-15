@@ -17,6 +17,8 @@ defmodule Wsdjs.Accounts.User do
     field :djname, :string
     field :profil_djvip, :boolean
     field :profil_dj, :boolean
+    field :deactivated, :boolean
+    field :activated_at, :naive_datetime
 
     has_many :songs, Musics.Song
     has_many :comments, Reactions.Comment
@@ -30,7 +32,7 @@ defmodule Wsdjs.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:email, :user_country, :name, :djname, :profil_djvip, :profil_dj]
+  @allowed_fields [:email, :user_country, :name, :djname, :profil_djvip, :profil_dj, :deactivated, :activated_at]
 
   @doc false
   def changeset(%User{} = user, attrs) do

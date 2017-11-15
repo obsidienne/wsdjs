@@ -193,11 +193,9 @@ input[type="checkbox"].disabled {
   left: 0.1em;
   top: .25em;
   transition: background 0.1s 0.1s ease;
-/*  background: #F25F5C; */
   background: #E8E8E8;
   border-radius: 50px;
 }
-
 .ckbx-style-11 label:after {
   content: '';
   position: absolute;
@@ -213,12 +211,18 @@ input[type="checkbox"].disabled {
   animation: switch-off .4s ease-out forwards;
 }
 
+
 .ckbx-style-11 input[type=checkbox]:checked + label:before {
   background: #70C1B3;
 }
-
+.ckbx-style-11.danger input[type=checkbox]:checked + label:before {
+  background: #F25F5C;
+}
 .ckbx-style-11 input[type=checkbox]:checked + label:after {
   left: 1.1em;
   background: #70C1B3;
   animation: switch-on .4s ease-out forwards;
+}
+.ckbx-style-11.danger input[type=checkbox]:checked + label:after {
+  background: #F25F5C;  
 }

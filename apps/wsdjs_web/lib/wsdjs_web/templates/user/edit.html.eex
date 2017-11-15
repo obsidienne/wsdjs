@@ -111,6 +111,16 @@
   <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
     <table class="table">
       <tr>
+        <td>Deactivate user</td>
+        <td>
+          <div class=" ckbx-style-11 danger">
+            <%= checkbox f, :deactivated %>
+            <%= label f,:deactivated do %><% end %>
+          </div>
+          <p class="help-block small">When a user is desactivated, he can't login or receive notifications.</p>
+        </td>
+      </tr> 
+      <tr>
         <td>Profil admin</td>
         <td>
           <div class=" ckbx-style-11 ">

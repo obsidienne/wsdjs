@@ -3,7 +3,6 @@ defmodule WsdjsWeb.Api.V1.OpinionController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Musics
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Reactions
 
   action_fallback WsdjsWeb.Api.V1.FallbackController

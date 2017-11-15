@@ -29,6 +29,5 @@ defmodule Wsdjs.Musics.Policy do
       {:error, :unauthorized}
     end
   end
-
   def can?(_, _), do: {:error, :unauthorized}
 end
