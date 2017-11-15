@@ -8,7 +8,7 @@
       <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email", required: true %>
     </div>
     <div class="form-group">
-      <%= submit "Email me a link to sign in", class: "btn btn-primary" %>
+      <%= submit "Email me a magic link", class: "btn btn-primary" %>
     </div>
   <% end %>
 </main>
