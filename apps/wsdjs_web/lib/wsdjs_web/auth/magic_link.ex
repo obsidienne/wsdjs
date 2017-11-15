@@ -13,12 +13,26 @@ defmodule WsdjsWeb.MagicLink do
   @doc """
     Creates and sends a new magic login token to the user or email.
   """
-  def provide_token(nil, "signin", _), do: {:error, :not_found}
+  def provide_token(nil, _), do: {:error, :not_found}
 
-  def provide_token(email, "signin", device) when is_binary(email) and device in ["api", "browser"] do
-    email
-    |> Accounts.get_user_by_email()
-    |> send_token(device)
+  @doc """
+  Provide an auth token for a user. The case are as following:
+    - existing activated user => send a token
+    - non existing user => create the user and send a token
+    - existing user but desactivated => do not send the token
+  """
+  def provide_token(email, device) when is_binary(email) and device in ["api", "browser"] do
+    user = case Accounts.get_user_by_email(email) do
+      %User{deactivated: false} = user ->
+        user
+      nil ->
+        {:ok, %User{} = user} = Accounts.create_user(%{email: email})
+        user
+      _ ->
+        nil
+    end
+
+    send_token(user, device)
   end
 
   # User could not be found by email.
@@ -54,17 +68,17 @@ defmodule WsdjsWeb.MagicLink do
   @doc """
     Checks the given token.
   """
-  def verify_magic_link(value, type) when type in ["signin"] do
+  def verify_magic_link(value) do
     value
     |> Accounts.get_magic_link_token()
-    |> verify_token(type)
+    |> verify_token()
   end
 
   # Unexpired token could not be found.
   defp verify_token(nil, _), do: {:error, :invalid}
 
   # Loads the user and deletes the token as it can only be used once.
-  defp verify_token(token, "signin") do
+  defp verify_token(token) do
     %Accounts.AuthToken{} = Accounts.delete_magic_link_token!(token)
 
     %User{id: user_id} = token.user

@@ -91,7 +91,6 @@ defmodule Wsdjs.Accounts do
 
   def get_user_by_email(email) do
     User
-    |> where(deactivated: false)
     |> Repo.get_by(email: String.downcase(email))
     |> Repo.preload(:avatar)
   end

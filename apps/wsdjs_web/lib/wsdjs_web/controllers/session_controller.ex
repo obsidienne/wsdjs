@@ -9,20 +9,20 @@ defmodule WsdjsWeb.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email}}) do
-    case WsdjsWeb.MagicLink.provide_token(email, "signin", "browser") do
-      {:ok, _user} ->
-        conn
-        |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")
-        |> redirect(to: home_path(conn, :index))
+    with {:ok, %User{}} <- WsdjsWeb.MagicLink.provide_token(email, "browser") do
+      conn
+      |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")
+      |> redirect(to: home_path(conn, :index))
+    else
       {:error, :not_found} ->
         conn
-        |> put_flash(:error, "Email #{email} is not registered or deactivated. Send an email to worldswingdjs@gmail.com to ask for details.")
+        |> put_flash(:error, "Email #{email} is deactivated. Send an email to worldswingdjs@gmail.com to ask for details.")
         |> redirect(to: session_path(conn, :new))
     end
   end
 
   def show(conn, %{"token" => token}) do
-    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.verify_magic_link(token, "signin"),
+    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.verify_magic_link(token),
          {:ok, %User{} = user} <- Wsdjs.Accounts.first_auth(user) do
 
       conn
