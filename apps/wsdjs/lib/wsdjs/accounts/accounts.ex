@@ -127,6 +127,11 @@ defmodule Wsdjs.Accounts do
     |> Repo.update()
   end
 
+  def first_auth(%User{activated_at: nil} = user) do
+    update_user(user, %{activated_at: Timex.now})
+  end
+  def first_auth(%User{} = user), do: {:ok, user}
+
   def set_magic_link_token(%User{} = user, token) do
     %AuthToken{}
     |> AuthToken.changeset(%{value: token, user_id: user.id})

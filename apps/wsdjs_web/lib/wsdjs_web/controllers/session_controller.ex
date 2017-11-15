@@ -2,6 +2,8 @@ defmodule WsdjsWeb.SessionController do
   @moduledoc false
   use WsdjsWeb, :controller
 
+  alias Wsdjs.Accounts.User
+
   def new(conn, _) do
     render conn, "new.html"
   end
@@ -20,15 +22,16 @@ defmodule WsdjsWeb.SessionController do
   end
 
   def show(conn, %{"token" => token}) do
-    case WsdjsWeb.MagicLink.verify_magic_link(token, "signin") do
-      {:ok, user} ->
-        conn
-        |> assign(:current_user, user)
-        |> put_session(:user_id, user.id)
-        |> configure_session(renew: true)
-        |> put_flash(:info, "You signed in successfully.")
-        |> redirect(to: home_path(conn, :index))
+    with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.verify_magic_link(token, "signin"),
+         {:ok, %User{} = user} <- Wsdjs.Accounts.first_auth(user) do
 
+      conn
+      |> assign(:current_user, user)
+      |> put_session(:user_id, user.id)
+      |> configure_session(renew: true)
+      |> put_flash(:info, "You signed in successfully.")
+      |> redirect(to: home_path(conn, :index))
+    else
       {:error, _reason} ->
         conn
         |> put_flash(:error, "The magic link is expired or already used. You should resend a magic link.")
