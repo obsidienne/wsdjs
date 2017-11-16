@@ -12,7 +12,6 @@ defmodule Wsdjs.Jobs.NowPlaying do
   
   alias Phoenix.PubSub
 
-  @html_unmatch_template Path.expand("./lib/wsdjs_jobs/priv/static/email/radioking_unmatch.html.eex")
   @expected_fields ~w(
     title artist album cover started_at end_at duration buy_link
   )
@@ -167,7 +166,9 @@ defmodule Wsdjs.Jobs.NowPlaying do
   defp song_position(pos) when pos <= 10, do: {:ok, pos}
   defp song_position(pos) when pos > 10, do: {:ko, pos}
 
-  defp unmatch_mailing(song) do
+  def unmatch_mailing(song) do
+    tpl = Path.join(["#{:code.priv_dir(:wsdjs_jobs)}", "static", "email", "radioking_unmatch.html.eex"])
+
     users = Wsdjs.Accounts.list_users_to_notify("radioking unmatch")
 
     if Enum.count(users) > 0 do
@@ -175,7 +176,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
       |> to(users)
       |> from("no-reply@wsdjs.com")
       |> subject("Radioking unmatch")
-      |> html_body(EEx.eval_file(@html_unmatch_template, [song: song]))
+      |> html_body(EEx.eval_file(tpl, [song: song]))
       |> Wsdjs.Jobs.Mailer.deliver_later
     end
   end
