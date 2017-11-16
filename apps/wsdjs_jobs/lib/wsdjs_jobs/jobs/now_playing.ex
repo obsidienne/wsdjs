@@ -175,7 +175,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
       |> to(users)
       |> from("no-reply@wsdjs.com")
       |> subject("Radioking unmatch")
-      |> html_body(EEx.eval_file(@html_mail_template, [song: song]))
+      |> html_body(EEx.eval_file(@html_unmatch_template, [song: song]))
       |> Wsdjs.Jobs.Mailer.deliver_later
     end
   end
