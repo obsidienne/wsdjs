@@ -75,7 +75,7 @@ defmodule WsdjsWeb.MagicLink do
   end
 
   # Unexpired token could not be found.
-  defp verify_token(nil, _), do: {:error, :invalid}
+  defp verify_token(nil), do: {:error, :invalid}
 
   # Loads the user and deletes the token as it can only be used once.
   defp verify_token(token) do
