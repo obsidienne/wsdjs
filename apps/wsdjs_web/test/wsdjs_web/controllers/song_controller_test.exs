@@ -249,7 +249,6 @@ defmodule WsdjsWeb.SongControllerTest do
       assign(conn, :current_user, insert(:user, %{admin: true})),
       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
       assign(conn, :current_user, insert(:user, %{profil_dj: true})),
-      assign(conn, :current_user, insert(:user)),
       ], fn conn ->
       Enum.each([rank1, rank10], fn rank ->
         conn = get conn, song_path(conn, :show, rank.song.id)
@@ -259,6 +258,7 @@ defmodule WsdjsWeb.SongControllerTest do
     end)
 
     Enum.each([
+      assign(conn, :current_user, insert(:user)),
       assign(conn, :current_user, nil),
     ], fn conn ->
       Enum.each([rank1, rank10, rank11], fn rank ->
