@@ -14,17 +14,23 @@ defmodule Wsdjs.Accounts do
 
   ## Examples
 
-      iex> list_users_to_notify()
+      iex> list_users_to_notify(type)
       [%Accounts.User{}, ...]
 
   """
-  def list_users_to_notify do
+  def list_users_to_notify("new song") do
     User
     |> join(:left, [u], p in assoc(u, :user_parameters))
     |> where([u], u.new_song_notification == true)
     |> where(deactivated: false)
     |> Repo.all()
-    |> Repo.preload(:avatar)
+  end
+  def list_users_to_notify("radioking unmatch") do
+    User
+    |> join(:left, [u], p in assoc(u, :user_parameters))
+    |> where([u], u.radioking_unmatch == true)
+    |> where(deactivated: false)
+    |> Repo.all()
   end
 
   @doc """
@@ -40,7 +46,7 @@ defmodule Wsdjs.Accounts do
     User
     |> order_by([:name])
     |> Repo.all()
-    |> Repo.preload([:avatar, :songs, :comments])
+    |> Repo.preload([:avatar, :songs, :comments, :parameter])
   end
 
   @doc """

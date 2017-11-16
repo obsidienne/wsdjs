@@ -169,6 +169,18 @@
           </div>
         </td>
       </tr> 
+      <tr>
+        <td>Radioking umatch</td>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= inputs_for f, :parameter, fn fp -> %>
+              <%= checkbox fp, :radioking_unmatch %>
+              <%= label fp, :radioking_unmatch do %><% end %>
+            <% end %>
+          </div>
+          <p class="help-block small">When a song streamed by radioking does match with WSDJs database, receive an email.</p>
+        </td>
+      </tr>
     </table>
 
     <%= submit "Update admin", class: "btn btn-primary" %>
