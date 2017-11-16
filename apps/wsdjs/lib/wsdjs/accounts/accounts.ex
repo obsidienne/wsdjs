@@ -19,18 +19,18 @@ defmodule Wsdjs.Accounts do
 
   """
   def list_users_to_notify("new song") do
-    User
-    |> join(:left, [u], p in assoc(u, :user_parameters))
-    |> where([u], u.new_song_notification == true)
-    |> where(deactivated: false)
-    |> Repo.all()
+    query = from u in User,
+      join: p in assoc(u, :parameter),
+      where: u.deactivated == false and p.new_song_notification == true
+
+    Repo.all(query)
   end
   def list_users_to_notify("radioking unmatch") do
-    User
-    |> join(:left, [u], p in assoc(u, :user_parameters))
-    |> where([u], u.radioking_unmatch == true)
-    |> where(deactivated: false)
-    |> Repo.all()
+    query = from u in User,
+      join: p in assoc(u, :parameter),
+      where: u.deactivated == false and p.radioking_unmatch == true
+
+    Repo.all(query)
   end
 
   @doc """
