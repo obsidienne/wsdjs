@@ -8,9 +8,11 @@ defmodule Wsdjs.Jobs.NowPlaying do
   use GenServer
   use Timex
   use HTTPoison.Base
-
+  import Bamboo.Email
+  
   alias Phoenix.PubSub
 
+  @html_unmatch_template Path.expand("./lib/wsdjs_jobs/priv/static/email/radioking_unmatch.html.eex")
   @expected_fields ~w(
     title artist album cover started_at end_at duration buy_link
   )
@@ -146,6 +148,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
       |> Map.put(:tags, tags_for_song(song_in_base))
       |> Map.put(:song_id, song_in_base.id)
     else
+      unmatch_mailing(song)
       song
     end
   end
@@ -163,4 +166,17 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   defp song_position(pos) when pos <= 10, do: {:ok, pos}
   defp song_position(pos) when pos > 10, do: {:ko, pos}
+
+  defp unmatch_mailing(song) do
+    users = Wsdjs.Accounts.list_users_to_notify("radioking unmatch")
+
+    if Enum.count(users) > 0 do
+      new_email()
+      |> to(users)
+      |> from("no-reply@wsdjs.com")
+      |> subject("Radioking unmatch")
+      |> html_body(EEx.eval_file(@html_mail_template, [song: song]))
+      |> Wsdjs.Jobs.Mailer.deliver_later
+    end
+  end
 end

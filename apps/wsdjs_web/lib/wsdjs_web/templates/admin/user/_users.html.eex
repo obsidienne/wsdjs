@@ -1,6 +1,6 @@
 <table class="table">
   <thead>
-    <tr><th>Avatar</th><th>User</th><th>Profil</th><th>Activities</th></tr>
+    <tr><th>Avatar</th><th>User</th><th>Profil</th><th>Options</th><th>Activities</th></tr>
   </thead>
   <tbody>
 
@@ -18,6 +18,16 @@
           <% else %>
             <%= if user.profil_djvip do %><span class="label label-default">DJ VIP</span><% end %>
             <%= if user.profil_dj do %><span class="label label-default">DJ</span><% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= if user.parameter do %>
+            <%= if user.parameter.radioking_unmatch do %>
+              <span class="label label-danger">Radioking umatch</span>
+            <% end %>
+            <%= if user.parameter.video do %>
+              <span class="label label-danger">Add video</span>
+            <% end %> 
           <% end %>
         </td>
         <td>
