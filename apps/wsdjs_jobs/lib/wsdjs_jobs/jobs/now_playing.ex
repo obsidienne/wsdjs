@@ -99,8 +99,8 @@ defmodule Wsdjs.Jobs.NowPlaying do
     queue = if same_song?(song, last_queued) do
         queue
       else
-        :queue.in(song, queue)
         notify_new_song(song)
+        :queue.in(song, queue)
       end
 
     # no more than 9 elements in queue
