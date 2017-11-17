@@ -104,11 +104,8 @@
         </td>
       </tr>
     </table>
-    <%= submit "Update", class: "btn btn-primary" %>
-  <% end %>
 
   <%= if @current_user.admin do %>
-  <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
     <table class="table">
       <tr>
         <td>Deactivate user</td>
@@ -183,8 +180,9 @@
       </tr>
     </table>
 
-    <%= submit "Update admin", class: "btn btn-primary" %>
   <% end %>
+
+  <%= submit "Update", class: "btn btn-primary" %>
   <% end %>
  </main>
  

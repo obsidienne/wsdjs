@@ -32,15 +32,20 @@ defmodule Wsdjs.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:user_country, :name, :djname, :profil_djvip, :profil_dj, :deactivated]
-
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, @allowed_fields)
+    |> cast(attrs, [:user_country, :name, :djname])
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
     |> cast_assoc(:parameter)
+  end
+
+  def admin_changeset(%User{} = user, attrs) do
+    user
+    |> cast(attrs, [:profil_djvip, :profil_dj, :deactivated])
+    |> cast_assoc(:parameter)
+    |> merge(changeset(user, attrs))
   end
 
   def create_changeset(%User{} = user, attrs) do
