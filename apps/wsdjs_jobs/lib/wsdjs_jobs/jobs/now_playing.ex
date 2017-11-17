@@ -99,8 +99,8 @@ defmodule Wsdjs.Jobs.NowPlaying do
     queue = if same_song?(song, last_queued) do
         queue
       else
-        IO.puts "add #{song["artist"]} #{song["title"]} "
         :queue.in(song, queue)
+        notify_new_song(song)
       end
 
     # no more than 9 elements in queue
@@ -147,8 +147,8 @@ defmodule Wsdjs.Jobs.NowPlaying do
       |> Map.put(:tags, tags_for_song(song_in_base))
       |> Map.put(:song_id, song_in_base.id)
     else
-      unmatch_mailing(song)
       song
+      |> Map.put(:nomatch, true)
     end
   end
 
@@ -166,11 +166,12 @@ defmodule Wsdjs.Jobs.NowPlaying do
   defp song_position(pos) when pos <= 10, do: {:ok, pos}
   defp song_position(pos) when pos > 10, do: {:ko, pos}
 
-  def unmatch_mailing(song) do
+  def notify_new_song(%{nomatch: true} = song) do
+    IO.puts "queue unmatched #{song["artist"]} #{song["title"]} "
+
     tpl = Path.join(["#{:code.priv_dir(:wsdjs_jobs)}", "static", "email", "radioking_unmatch.html.eex"])
 
     users = Wsdjs.Accounts.list_users_to_notify("radioking unmatch")
-
     if Enum.count(users) > 0 do
       new_email()
       |> to(users)
@@ -179,5 +180,9 @@ defmodule Wsdjs.Jobs.NowPlaying do
       |> html_body(EEx.eval_file(tpl, [song: song]))
       |> Wsdjs.Jobs.Mailer.deliver_later
     end
+  end
+
+  def notify_new_song(song) do
+    IO.puts "queue #{song["artist"]} #{song["title"]} "
   end
 end
