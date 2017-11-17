@@ -32,7 +32,7 @@ defmodule Wsdjs.Accounts.User do
     timestamps()
   end
 
-  @allowed_fields [:user_country, :name, :djname, :profil_djvip, :profil_dj, :deactivated, :activated_at]
+  @allowed_fields [:user_country, :name, :djname, :profil_djvip, :profil_dj, :deactivated]
 
   @doc false
   def changeset(%User{} = user, attrs) do

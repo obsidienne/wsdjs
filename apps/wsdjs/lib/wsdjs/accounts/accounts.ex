@@ -133,7 +133,10 @@ defmodule Wsdjs.Accounts do
   end
 
   def first_auth(%User{activated_at: nil} = user) do
-    update_user(user, %{activated_at: Timex.now})
+    query = from User, where: [id: ^user.id]
+    Repo.update_all(query, set: [activated_at: Timex.now])
+
+    {:ok, user}
   end
   def first_auth(%User{} = user), do: {:ok, user}
 
