@@ -37,8 +37,8 @@ defmodule WsdjsWeb.UserController do
 
     with %User{} = user <- Accounts.get_user!(id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
-         {:ok, user} <- Accounts.update_user(user, user_params) do
-    
+         {:ok, user} <- Accounts.update_user(user, user_params, current_user) do
+
       conn
       |> put_flash(:info, "Profile updated.")
       |> redirect(to: user_path(conn, :show, user))

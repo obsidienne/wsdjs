@@ -63,7 +63,7 @@ defmodule Wsdjs.Accounts do
   """
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.create_changeset(attrs)
     |> Repo.insert()
   end
 
@@ -126,14 +126,22 @@ defmodule Wsdjs.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_user(%User{} = user, attrs) do
+  def update_user(%User{} = user, attrs, %User{admin: false}) do
     user
     |> User.changeset(attrs)
     |> Repo.update()
   end
+  def update_user(%User{} = user, attrs, %User{admin: true}) do
+    user
+    |> User.admin_changeset(attrs)
+    |> Repo.update()
+  end
 
   def first_auth(%User{activated_at: nil} = user) do
-    update_user(user, %{activated_at: Timex.now})
+    query = from User, where: [id: ^user.id]
+    Repo.update_all(query, set: [activated_at: Timex.now])
+
+    {:ok, user}
   end
   def first_auth(%User{} = user), do: {:ok, user}
 

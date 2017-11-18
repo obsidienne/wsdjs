@@ -24,11 +24,6 @@
       <%= error_tag f, :name %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">eMail</label>
-      <%= text_input f, :email, placeholder: "email", class: "form-control text-lowercase", type: "email" %>
-      <%= error_tag f, :email %>
-    </div>
-    <div class="form-group">
       <label class="small text-muted">Dj name</label>
       <%= text_input f, :djname, placeholder: "Dj name", class: "form-control" %>
       <%= error_tag f, :djname %>
@@ -98,57 +93,59 @@
         <td>New song notification <h6 class="small">Receive an email everyday if new songs have been suggeted.</h6></td>
         <td>
           <div class="ckbx-style-11 ">
-            <%= checkbox f, :new_song_notification %>
-            <%= label f,:new_song_notification do %><% end %>
+            <%= inputs_for f, :parameter, fn fp -> %>
+              <%= checkbox fp, :new_song_notification %>
+              <%= label fp, :new_song_notification do %><% end %>
+            <% end %>
           </div>
         </td>
       </tr>
     </table>
-    <%= submit "Update", class: "btn btn-primary" %>
-  <% end %>
 
   <%= if @current_user.admin do %>
-  <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
-    <table class="table">
+    <table class="table user-parameters">
       <tr>
-        <td>Deactivate user</td>
+        <th>Profil admin<br/><small>opt in</small></th>
         <td>
-          <div class=" ckbx-style-11 danger">
-            <%= checkbox f, :deactivated %>
-            <%= label f,:deactivated do %><% end %>
-          </div>
-          <p class="help-block small">When a user is desactivated, he can't login or receive notifications.</p>
-        </td>
-      </tr> 
-      <tr>
-        <td>Profil admin</td>
-        <td>
-          <div class=" ckbx-style-11 ">
+          <div class="ckbx-style-11 danger">
             <%= checkbox f, :admin %>
             <%= label f,:admin do %><% end %>
           </div>
+          <p class="help-block small">Master of universe ?</p>
         </td>
       </tr>
       <tr>
-        <td>Profil DJ VIP</td>
+        <th>Profil DJ VIP<br/><small>opt in</small></th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :profil_djvip %>
             <%= label f,:profil_djvip do %><% end %>
           </div>
+          <p class="help-block small">Can suggest song, vote for official WSDJs TOP10, access all song suggested and TOP, create personal TOP5</p>
         </td>
       </tr>
       <tr>
-        <td>Profil DJ</td>
+        <th>Profil DJ<br/><small>opt in</small></th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :profil_dj %>
             <%= label f,:profil_dj do %><% end %>
           </div>
+          <p class="help-block small">Can create a personnal TOP5.</p>
         </td>
       </tr>
       <tr>
-        <td>Activate piwik</td>
+        <th>Deactivate user</th>
+        <td>
+          <div class=" ckbx-style-11 danger">
+            <%= checkbox f, :deactivated %>
+            <%= label f,:deactivated do %><% end %>
+          </div>
+          <p class="help-block small">Desactivate a user, he can't login or receive notifications.</p>
+        </td>
+      </tr>
+      <tr>
+        <th>Activate piwik<br/><small>opt out</small></th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -156,10 +153,11 @@
               <%= label fp, :piwik do %><% end %>
             <% end %>
           </div>
+          <p class="help-block small">The user is monitored by piwik.</p>
         </td>
       </tr> 
       <tr>
-        <td>Activate video</td>
+        <th>Activate video<br/><small>opt in</small></th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -167,10 +165,11 @@
               <%= label fp, :video do %><% end %>
             <% end %>
           </div>
+          <p class="help-block small">The user can add video to a song.</p>
         </td>
       </tr> 
       <tr>
-        <td>Radioking umatch</td>
+        <th>Radioking umatch<br/><small>opt in</small></th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -178,13 +177,14 @@
               <%= label fp, :radioking_unmatch do %><% end %>
             <% end %>
           </div>
-          <p class="help-block small">When a song streamed by radioking does match with WSDJs database, receive an email.</p>
+          <p class="help-block small">Send an email when a song streamed by radioking does not match with WSDJs database.</p>
         </td>
       </tr>
     </table>
 
-    <%= submit "Update admin", class: "btn btn-primary" %>
   <% end %>
+
+  <%= submit "Update", class: "btn btn-primary" %>
   <% end %>
  </main>
  
