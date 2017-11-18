@@ -24,7 +24,7 @@ defmodule Wsdjs.Accounts.User do
     has_many :comments, Reactions.Comment
     has_one :avatar, Accounts.Avatar, on_replace: :delete
     has_one :detail, Accounts.UserDetail, on_replace: :update
-    has_one :parameter, Accounts.UserParameter, on_replace: :delete
+    has_one :parameter, Accounts.UserParameter, on_replace: :update
     has_many :song_opinions, Reactions.Opinion
     has_many :votes, Charts.Vote
     has_many :auth_tokens, Accounts.AuthToken
@@ -38,14 +38,15 @@ defmodule Wsdjs.Accounts.User do
     |> cast(attrs, [:user_country, :name, :djname])
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
-    |> cast_assoc(:parameter)
+    |> cast_assoc(:parameter, with: &Accounts.UserParameter.changeset/2)
   end
 
   def admin_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:profil_djvip, :profil_dj, :deactivated])
-    |> cast_assoc(:parameter)
-    |> merge(changeset(user, attrs))
+    |> cast(attrs, [:user_country, :name, :djname, :admin, :profil_djvip, :profil_dj, :deactivated])
+    |> cast_assoc(:avatar)
+    |> cast_assoc(:detail)
+    |> cast_assoc(:parameter, with: &Accounts.UserParameter.admin_changeset/2)
   end
 
   def create_changeset(%User{} = user, attrs) do

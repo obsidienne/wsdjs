@@ -16,12 +16,17 @@ defmodule Wsdjs.Accounts.UserParameter do
     timestamps()
   end
 
-  @allowed_fields [:new_song_notification, :user_id, :piwik, :video, :radioking_unmatch]
-
   @doc false
   def changeset(%UserParameter{} = user_parameter, attrs) do
     user_parameter
-    |> cast(attrs, @allowed_fields)
+    |> cast(attrs, [:new_song_notification])
+    |> assoc_constraint(:user)
+  end
+
+  @doc false
+  def admin_changeset(%UserParameter{} = user_parameter, attrs) do
+    user_parameter
+    |> cast(attrs, [:new_song_notification, :piwik, :video, :radioking_unmatch])
     |> assoc_constraint(:user)
   end
 end
