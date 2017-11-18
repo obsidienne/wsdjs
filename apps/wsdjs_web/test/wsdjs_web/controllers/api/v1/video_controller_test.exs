@@ -16,7 +16,7 @@ defmodule WsdjsWeb.Api.V1.VideoControllerTest do
 
   describe "create videos" do
     test "renders videos when data is valid", %{conn: conn} do
-      user = insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880"})
+      user = insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880", parameter: %{video: true}})
       song = insert(:song, %{user: user})
 
       user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
@@ -30,7 +30,7 @@ defmodule WsdjsWeb.Api.V1.VideoControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      user = insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880"})
+      user = insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880", parameter: %{video: true}})
       song = insert(:song, %{user: user})
 
       user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)

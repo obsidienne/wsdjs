@@ -8,7 +8,7 @@ defmodule Wsdjs.Attachments.Policy do
 
   def can?(%User{admin: true}, _), do: :ok
   def can?(%User{} = user, :create_video) do
-    if user.parameter.video do
+    if Ecto.assoc_loaded?(user.parameter) and user.parameter.video do
       :ok
     else
       {:error, :unauthorized}

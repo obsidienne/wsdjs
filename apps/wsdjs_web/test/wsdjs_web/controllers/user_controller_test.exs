@@ -141,7 +141,7 @@ defmodule WsdjsWeb.UserControllerTest do
     user_updated = Wsdjs.Accounts.get_user!(user.id)
     assert user_updated.profil_djvip
     assert user_updated.profil_dj
-    refute user_updated.admin
+    assert user_updated.admin
   end
 
   test "user can edit himself", %{conn: conn} do
