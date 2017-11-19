@@ -22,6 +22,9 @@
         </td>
         <td>
           <%= if user.parameter do %>
+            <%= if user.parameter.new_song_notification do %>
+              <span class="label label-default">New song notification</span>
+            <% end %>
             <%= if user.parameter.radioking_unmatch do %>
               <span class="label label-danger">Radioking umatch</span>
             <% end %>
