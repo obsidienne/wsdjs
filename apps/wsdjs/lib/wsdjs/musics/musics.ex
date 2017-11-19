@@ -68,12 +68,12 @@ defmodule Wsdjs.Musics do
   @doc """
   Returns the songs added the 24 last hours.
   """
-  def list_songs do
-    yesterday = Timex.shift(Timex.now, hours: -24)
-    Song
-    |> where([s], s.inserted_at > ^yesterday)
-    |> order_by([desc: :inserted_at])
-    |> Repo.all()
+  def list_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
+    query = from s in Song,
+    where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true,
+    order_by: [desc: :inserted_at]
+
+    Repo.all(query)
   end
 
   def list_songs(%Date{} = month) do
