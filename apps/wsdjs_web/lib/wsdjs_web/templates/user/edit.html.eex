@@ -87,7 +87,7 @@
     </div>
     <% end %>
 
-
+    <%= if Wsdjs.Accounts.Policy.can?(@user, :new_song_notification) == :ok do %>
     <table class="table">
       <tr>
         <td>New song notification <h6 class="small">Receive an email everyday if new songs have been suggeted.</h6></td>
@@ -101,6 +101,7 @@
         </td>
       </tr>
     </table>
+    <% end %>
 
   <%= if @current_user.admin do %>
     <table class="table user-parameters">
