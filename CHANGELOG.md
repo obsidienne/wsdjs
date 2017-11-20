@@ -6,6 +6,7 @@
 - the capacity for a user to add a video to a song is protected by an admin pref
 - send an email if a streamed song does not match with WSDJs internal DB
 - activate the option to be notified when a new song has been suggested the last 24h
+- use srcset for img resolution auto selection by the browser
 # version 1.5
 - apple file for universal link
 - move API to v1 
