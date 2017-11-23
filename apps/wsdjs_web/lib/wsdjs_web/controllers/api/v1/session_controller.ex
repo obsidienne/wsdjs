@@ -17,7 +17,7 @@ defmodule WsdjsWeb.Api.V1.SessionController do
 
   def show(conn, %{"token" => token}) do
     with {:ok, %User{} = user} <- WsdjsWeb.MagicLink.verify_magic_link(token),
-         {:ok, %User{} = user} <- Wsdjs.Accounts.first_auth(user) do
+         {:ok, %User{} = user} <- Wsdjs.Auth.first_auth(user) do
       bearer = Phoenix.Token.sign(conn, "user", user.id)
 
       [avatar] = Accounts.get_avatar(user)

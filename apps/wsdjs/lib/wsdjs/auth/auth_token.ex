@@ -1,8 +1,8 @@
-defmodule Wsdjs.Accounts.AuthToken do
+defmodule Wsdjs.Auth.AuthToken do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Accounts.AuthToken
+  alias Wsdjs.Auth.AuthToken
 
   @foreign_key_type :binary_id
   schema "auth_tokens" do

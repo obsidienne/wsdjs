@@ -5,6 +5,7 @@ defmodule WsdjsWeb.MagicLink do
   alias WsdjsWeb.{Endpoint, Mailer, AuthenticationEmail}
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Auth
   alias Phoenix.Token
 
   #  Token is valid for 30 minutes.
@@ -61,7 +62,7 @@ defmodule WsdjsWeb.MagicLink do
   # Creates a new token, store it in the DB for the given user and returns the token value.
   defp create_token(%User{} = user) do
     auth_token = Phoenix.Token.sign(Endpoint, "signin", user.id)
-    Accounts.set_magic_link_token(user, auth_token)
+    Auth.set_magic_link_token(user, auth_token)
     auth_token
   end
 
@@ -70,7 +71,7 @@ defmodule WsdjsWeb.MagicLink do
   """
   def verify_magic_link(value) do
     value
-    |> Accounts.get_magic_link_token()
+    |> Auth.get_magic_link_token()
     |> verify_token()
   end
 
@@ -79,7 +80,7 @@ defmodule WsdjsWeb.MagicLink do
 
   # Loads the user and deletes the token as it can only be used once.
   defp verify_token(token) do
-    %Accounts.AuthToken{} = Accounts.delete_magic_link_token!(token)
+    %Auth.AuthToken{} = Auth.delete_magic_link_token!(token)
 
     %User{id: user_id} = token.user
 
