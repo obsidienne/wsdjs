@@ -1,8 +1,8 @@
-defmodule Wsdjs.Accounts.Invitation do
+defmodule Wsdjs.Auth.Invitation do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Accounts.Invitation
+  alias Wsdjs.Auth.Invitation
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
