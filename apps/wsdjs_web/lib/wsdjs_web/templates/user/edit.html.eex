@@ -19,6 +19,10 @@
 
   <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
     <div class="form-group">
+      <label class="small text-muted">Email</label>
+      <%= text_input f, :email, class: "form-control", disabled: true %>
+    </div>
+    <div class="form-group">
       <label class="small text-muted">Name</label>
       <%= text_input f, :name, placeholder: "Name", class: "form-control text-capitalized" %>
       <%= error_tag f, :name %>
