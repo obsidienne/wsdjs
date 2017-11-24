@@ -1,4 +1,4 @@
-defmodule Wsdjs.Jobs.NewSongNotification do
+defmodule Wsdjs.Jobs.NewSuggestion do
   import Bamboo.Email
   alias Wsdjs.Musics
   alias Wsdjs.Notifications

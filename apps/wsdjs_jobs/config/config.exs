@@ -14,7 +14,7 @@ config :wsdjs_jobs, ecto_repos: []
 
 config :wsdjs_jobs, Wsdjs.Jobs.Scheduler,
   jobs: [
-    {"@daily", {Wsdjs.Jobs.NewSongNotification, :call, []}}
+    {"@daily", {Wsdjs.Jobs.NewSuggestion, :call, []}}
   ]
 
 # Import environment specific config. This must remain at the bottom
