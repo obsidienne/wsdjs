@@ -11,6 +11,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   import Bamboo.Email
   
   alias Phoenix.PubSub
+  alias Wsdjs.Notifications
 
   @expected_fields ~w(
     title artist album cover started_at end_at duration buy_link
@@ -171,7 +172,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
     tpl = Path.join(["#{:code.priv_dir(:wsdjs_jobs)}", "static", "email", "radioking_unmatch.html.eex"])
 
-    users = Wsdjs.Accounts.list_users_to_notify("radioking unmatch")
+    users = Notifications.list_users_to_notify("radioking unmatch")
     if Enum.count(users) > 0 do
       new_email()
       |> to(users)
