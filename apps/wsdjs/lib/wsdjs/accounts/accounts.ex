@@ -63,7 +63,6 @@ defmodule Wsdjs.Accounts do
     |> Repo.preload([:avatar, :detail, :parameter])
   end
 
-
   def get_user!(id) do
     User
     |> Repo.get!(id)

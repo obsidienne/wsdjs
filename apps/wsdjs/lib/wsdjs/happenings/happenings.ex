@@ -108,7 +108,7 @@ defmodule Wsdjs.Happenings do
   #
   ###############################################
   alias Wsdjs.Happenings.Event
-  
+
   @doc """
   Returns the list of events.
 

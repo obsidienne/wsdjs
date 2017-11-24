@@ -41,7 +41,6 @@ defmodule Wsdjs.Auth do
   end
   def first_auth(%User{} = user), do: {:ok, user}
 
-
   ###############################################
   #
   # Invitation
@@ -49,7 +48,7 @@ defmodule Wsdjs.Auth do
   ###############################################
   alias Wsdjs.Auth.Invitation
   alias Wsdjs.Accounts
-  
+
   @doc """
   Gets a single invitation.
 

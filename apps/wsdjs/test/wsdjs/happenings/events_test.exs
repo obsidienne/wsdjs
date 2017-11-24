@@ -1,7 +1,7 @@
 defmodule Wsdjs.Happenings.EventTest do
   use Wsdjs.DataCase
   import Wsdjs.Factory
-  
+
   alias Wsdjs.Happenings
 
   describe "events" do

@@ -1,7 +1,7 @@
 defmodule Wsdjs.Happenings.VenueTest do
   use Wsdjs.DataCase
   import Wsdjs.Factory
-  
+
   alias Wsdjs.Happenings
 
   describe "venues" do

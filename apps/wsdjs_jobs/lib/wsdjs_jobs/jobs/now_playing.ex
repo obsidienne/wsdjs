@@ -9,7 +9,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   use Timex
   use HTTPoison.Base
   import Bamboo.Email
-  
+
   alias Phoenix.PubSub
   alias Wsdjs.Notifications
 

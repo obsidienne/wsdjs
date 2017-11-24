@@ -6,13 +6,13 @@ defmodule WsdjsWeb.Api.V1.OpinionController do
   alias Wsdjs.Reactions
 
   action_fallback WsdjsWeb.Api.V1.FallbackController
-  
+
   def index(conn, %{"song_id" => song_id}) do
     current_user = conn.assigns[:current_user]
-    
+
     with song <- Musics.get_song!(song_id) do
       opinions = Reactions.list_opinions(song)
-      
+
       render(conn, "index.json", song: song, opinions: opinions, current_user: current_user)
     end
   end

@@ -7,7 +7,7 @@ defmodule WsdjsWeb.Api.V1.OpinionView do
     ups = Enum.filter(opinions, fn(x) -> x.kind == "up" end)
     likes = Enum.filter(opinions, fn(x) -> x.kind == "like" end)
     downs = Enum.filter(opinions, fn(x) -> x.kind == "down" end)
-    
+
     %{
       data: %{
         song_id: song.id,
