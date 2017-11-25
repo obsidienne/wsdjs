@@ -52,7 +52,7 @@
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], []},
   "timex": {:hex, :timex, "3.1.24", "d198ae9783ac807721cca0c5535384ebdf99da4976be8cefb9665a9262a1e9e3", [:mix], [{:combine, "~> 0.7", [hex: :combine, optional: false]}, {:gettext, "~> 0.10", [hex: :gettext, optional: false]}, {:tzdata, "~> 0.1.8 or ~> 0.5", [hex: :tzdata, optional: false]}]},
   "tzdata": {:hex, :tzdata, "0.5.13", "dfd6a10c1c9ed2b4c6493e35af5da6c37058c9578b2e413d37242d6943ed07d9", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, optional: false]}]},
-  "ua_inspector": {:hex, :ua_inspector, "0.14.0", "5d7cf8a6c0c604e42eeda60bb92e609ee9751ba4214f16f2051b2f46924678ce", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, optional: false]}, {:poolboy, "~> 1.0", [hex: :poolboy, optional: false]}, {:yamerl, "~> 0.4", [hex: :yamerl, optional: false]}]},
+  "ua_inspector": {:git, "https://github.com/elixytics/ua_inspector.git", "34aade30ed642d284772884204a8aa8fcb2b6d79", [ref: "34aade30ed642d284772884204a8aa8fcb2b6d79"]},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.3.1", "a1f612a7b512638634a603c8f401892afbf99b8ce93a45041f8aaca99cadb85e", [:rebar3], []},
   "wallaby": {:hex, :wallaby, "0.18.1", "57c1193005213ce3653f7d56a08da7024eb3bf78c84da0dc721c41e6f4008d6e", [:mix], [{:httpoison, "~> 0.12.0", [hex: :httpoison, optional: false]}, {:poison, ">= 1.4.0", [hex: :poison, optional: false]}, {:poolboy, "~> 1.5", [hex: :poolboy, optional: false]}]},
   "yamerl": {:hex, :yamerl, "0.5.0", "6ec55a5d830f6f0d65a4030f5c5db24b0e72b813dfbde32fea44b4951ed9417c", [:rebar3], []}}
