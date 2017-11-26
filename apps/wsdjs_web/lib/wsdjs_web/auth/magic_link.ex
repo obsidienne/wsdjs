@@ -78,4 +78,25 @@ defmodule WsdjsWeb.MagicLink do
         {:error, reason}
     end
   end
+
+  @doc """
+  Checks the given token.
+  """
+  alias Wsdjs.Accounts.User
+
+  @invited_max_age 86_400
+  def verify_invited_link(value) do
+    case Phoenix.Token.verify(Endpoint, "invited", value, max_age: @invited_max_age) do
+      {:ok, user_id} ->
+        user = Accounts.get_user!(user_id)
+        {:ok, user}
+
+      # reason can be :invalid or :expired
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
+  def provide_invitation_accepted_token(%User{} = user) do
+    Phoenix.Token.sign(Endpoint, "invited", user.id)
+  end
 end
