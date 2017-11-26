@@ -3,6 +3,7 @@ defmodule WsdjsWeb.InvitationEmail do
   use Bamboo.Phoenix, view: WsdjsWeb.EmailView
 
   import Bamboo.Email
+  alias Wsdjs.Auth.Invitation
 
   @doc """
   The request for invitation registration email.
@@ -15,7 +16,7 @@ defmodule WsdjsWeb.InvitationEmail do
     |> render(:invitation_registered, invitation: user)
   end
 
-  def invitation_accepted(%Wsdjs.Accounts.Invitation{} = invitation) do
+  def invitation_accepted(%Invitation{} = invitation) do
     user = Wsdjs.Accounts.get_user!(invitation.user_id)
     token = WsdjsWeb.MagicLink.provide_invitation_accepted_token(user)
 
