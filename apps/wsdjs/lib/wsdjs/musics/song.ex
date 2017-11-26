@@ -49,12 +49,20 @@ defmodule Wsdjs.Musics.Song do
 
   def genre, do: @validated_genre
 
-  def scoped(%Accounts.User{admin: :true}), do: Musics.Song
-  def scoped(%Accounts.User{profil_djvip: :true}), do: Musics.Song
+  def scoped(%Accounts.User{admin: true}), do: Musics.Song
+  def scoped(%Accounts.User{profil_djvip: true}), do: Musics.Song
+
+  def scoped(%Accounts.User{profil_dj: true} = user) do
+    upper = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+    lower = Timex.shift(upper, months: -24)
+
+    scoped(lower, upper)
+    |> or_where([s], s.user_id == ^user.id)
+  end
 
   def scoped(%Accounts.User{} = user) do
     upper = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
-    lower = Timex.shift(upper, months: -24)
+    lower = Timex.shift(upper, months: -12)
 
     scoped(lower, upper)
     |> or_where([s], s.user_id == ^user.id)
