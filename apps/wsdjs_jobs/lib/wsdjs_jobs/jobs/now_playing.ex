@@ -8,10 +8,8 @@ defmodule Wsdjs.Jobs.NowPlaying do
   use GenServer
   use Timex
   use HTTPoison.Base
-  import Bamboo.Email
 
   alias Phoenix.PubSub
-  alias Wsdjs.Notifications
 
   @expected_fields ~w(
     title artist album cover started_at end_at duration buy_link
@@ -100,7 +98,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
     queue = if same_song?(song, last_queued) do
         queue
       else
-        notify_new_song(song)
+        Wsdjs.Jobs.UnmatchSong.notify(song)
         :queue.in(song, queue)
       end
 
@@ -166,24 +164,4 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   defp song_position(pos) when pos <= 10, do: {:ok, pos}
   defp song_position(pos) when pos > 10, do: {:ko, pos}
-
-  def notify_new_song(%{nomatch: true} = song) do
-    IO.puts "queue unmatched #{song["artist"]} #{song["title"]} "
-
-    tpl = Path.join(["#{:code.priv_dir(:wsdjs_jobs)}", "static", "email", "radioking_unmatch.html.eex"])
-
-    users = Notifications.list_users_to_notify("radioking unmatch")
-    if Enum.count(users) > 0 do
-      new_email()
-      |> to(users)
-      |> from("no-reply@wsdjs.com")
-      |> subject("Radioking unmatch")
-      |> html_body(EEx.eval_file(tpl, [song: song]))
-      |> Wsdjs.Jobs.Mailer.deliver_later
-    end
-  end
-
-  def notify_new_song(song) do
-    IO.puts "queue #{song["artist"]} #{song["title"]} "
-  end
 end
