@@ -9,45 +9,42 @@
 <% end %>
 
 <dl class="user-page__profile__section user-page__details">
-<dt>Member since</dt>
-<dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></dd>
-
-<%= if @user.detail do %>
+  <dt>Member since</dt>
+  <dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></dd>
   <%= if @user.detail.description do %>
-    <dt>About Me</dt>
-    <dd><%= @user.detail.description %></dd>
-    <% end %>
-    <%= if @user.detail.love_more do %>
-    <dt>Things you love more ?</dt>
-    <dd><%= @user.detail.love_more %></dd>
-    <% end %>
-    <%= if @user.detail.hate_more do %>
-    <dt>Things you hate more ?</dt>
-    <dd><%= @user.detail.hate_more %></dd>
-    <% end %>
-    <%= if @user.detail.favorite_artist do %>
-    <dt>Favorite artist</dt>
-    <dd><%= @user.detail.favorite_artist %></dd>
-    <% end %>
-    <%= if @user.detail.favorite_genre do %>
-    <dt>Favotire genre</dt>
-    <dd><%= @user.detail.favorite_genre %></dd>
-    <% end %>
-    <%= if @user.detail.favorite_color do %>
-    <dt>Favorite color</dt>
-    <dd><%= @user.detail.favorite_color %></dd>
-    <% end %>
-    <%= if @user.detail.favorite_meal do %>
-    <dt>Favorite meal</dt>
-    <dd><%= @user.detail.favorite_meal %></dd>
-    <% end %>
-    <%= if @user.detail.favorite_animal do %>
-    <dt>Favorite animal</dt>
-    <dd><%= @user.detail.favorite_animal %></dd>
-    <% end %>
-    <%= if @user.detail.djing_start_year do %>
-    <dt>Start DJing</dt>
-    <dd><%= @user.detail.djing_start_year %></dd>
-    <% end %>
+  <dt>About Me</dt>
+  <dd><%= @user.detail.description %></dd>
+  <% end %>
+  <%= if @user.detail.love_more do %>
+  <dt>Things you love more ?</dt>
+  <dd><%= @user.detail.love_more %></dd>
+  <% end %>
+  <%= if @user.detail.hate_more do %>
+  <dt>Things you hate more ?</dt>
+  <dd><%= @user.detail.hate_more %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_artist do %>
+  <dt>Favorite artist</dt>
+  <dd><%= @user.detail.favorite_artist %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_genre do %>
+  <dt>Favotire genre</dt>
+  <dd><%= @user.detail.favorite_genre %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_color do %>
+  <dt>Favorite color</dt>
+  <dd><%= @user.detail.favorite_color %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_meal do %>
+  <dt>Favorite meal</dt>
+  <dd><%= @user.detail.favorite_meal %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_animal do %>
+  <dt>Favorite animal</dt>
+  <dd><%= @user.detail.favorite_animal %></dd>
+  <% end %>
+  <%= if @user.detail.djing_start_year do %>
+  <dt>Start DJing</dt>
+  <dd><%= @user.detail.djing_start_year %></dd>
   <% end %>
 </dl>

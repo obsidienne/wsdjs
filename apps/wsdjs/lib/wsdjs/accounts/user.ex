@@ -6,7 +6,7 @@ defmodule Wsdjs.Accounts.User do
   alias Wsdjs.Accounts.User
 
   alias Wsdjs.{Musics, Accounts, Charts, Reactions, Auth}
-  alias Wsdjs.Accounts.UserParameter
+  alias Wsdjs.Accounts.{UserParameter, UserDetail}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -58,6 +58,7 @@ defmodule Wsdjs.Accounts.User do
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
     |> put_assoc(:parameter, UserParameter.changeset(%UserParameter{}, %{}), required: true)
+    |> put_assoc(:detail, UserDetail.changeset(%UserDetail{}, %{}), required: true)
   end
 
   defp downcase_value(changeset) do
