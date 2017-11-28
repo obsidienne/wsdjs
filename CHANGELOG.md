@@ -7,6 +7,7 @@
 - send an email if a streamed song does not match with WSDJs internal DB
 - activate the option to be notified when a new song has been suggested the last 24h
 - use srcset for img resolution auto selection by the browser
+- create the user_parameters and user_details tables for every new users (need to check the prod for those tables to avoid blocking errors on profils)
 # version 1.5
 - apple file for universal link
 - move API to v1 
