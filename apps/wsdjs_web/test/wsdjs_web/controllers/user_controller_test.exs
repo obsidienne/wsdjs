@@ -50,6 +50,10 @@ defmodule WsdjsWeb.UserControllerTest do
       dj_vip = insert(:user, profil_djvip: true)
       admin = insert(:user, %{admin: true})
 
+      %Wsdjs.Accounts.UserDetail{}
+      |> Wsdjs.Accounts.UserDetail.changeset(%{user_id: admin.id})
+      |> Wsdjs.Repo.insert()
+
       Enum.each([
         assign(conn, :current_user, user),
         assign(conn, :current_user, dj),
@@ -71,6 +75,16 @@ defmodule WsdjsWeb.UserControllerTest do
       dj = insert(:user, profil_dj: true)
       dj_vip = insert(:user, profil_djvip: true)
       admin = insert(:user, %{admin: true})
+
+      %Wsdjs.Accounts.UserDetail{}
+      |> Wsdjs.Accounts.UserDetail.changeset(%{user_id: dj_vip.id})
+      |> Wsdjs.Repo.insert()
+      %Wsdjs.Accounts.UserDetail{}
+      |> Wsdjs.Accounts.UserDetail.changeset(%{user_id: dj.id})
+      |> Wsdjs.Repo.insert()
+      %Wsdjs.Accounts.UserDetail{}
+      |> Wsdjs.Accounts.UserDetail.changeset(%{user_id: user.id})
+      |> Wsdjs.Repo.insert()
 
       Enum.each([
         assign(conn, :current_user, admin),
