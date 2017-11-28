@@ -7,7 +7,7 @@ defmodule Wsdjs.Attachments.Policy do
   def can?(_, _, _), do: {:error, :unauthorized}
 
   def can?(%User{admin: true}, _), do: :ok
-  def can?(%User{} = user, :create_video) do
+  def can?(%User{parameter: %{video: true}} = user, :create_video) do
     if user.parameter.video do
       :ok
     else
