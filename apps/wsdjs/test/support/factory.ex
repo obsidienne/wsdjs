@@ -19,7 +19,6 @@ defmodule Wsdjs.Factory do
       genre: Enum.random(Wsdjs.Musics.Song.genre()),
       user: build(:user),
       url: "http://youtu.be/toto",
-      bpm: 1,
     }
   end
 

@@ -12,7 +12,7 @@ defmodule Wsdjs.Musics.Song do
     field :title, :string
     field :artist, :string
     field :url, :string
-    field :bpm, :integer
+    field :bpm, :integer, default: 0
     field :genre, :string
     field :instant_hit, :boolean, default: false
     field :hidden_track, :boolean, default: false
