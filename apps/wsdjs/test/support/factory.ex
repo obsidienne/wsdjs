@@ -17,13 +17,9 @@ defmodule Wsdjs.Factory do
       title: sequence(:title, &"title-#{&1}"),
       artist: sequence(:artist, &"artist-#{&1}"),
       genre: Enum.random(Wsdjs.Musics.Song.genre()),
-      instant_hit: false,
-      public_track: false,
-      hidden_track: false,
       user: build(:user),
       url: "http://youtu.be/toto",
       bpm: 1,
-      suggestion: true
     }
   end
 

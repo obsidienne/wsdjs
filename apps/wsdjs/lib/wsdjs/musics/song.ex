@@ -14,11 +14,11 @@ defmodule Wsdjs.Musics.Song do
     field :url, :string
     field :bpm, :integer
     field :genre, :string
-    field :instant_hit, :boolean
-    field :hidden_track, :boolean
+    field :instant_hit, :boolean, default: false
+    field :hidden_track, :boolean, default: false
     field :video_id, :string
-    field :public_track, :boolean
-    field :suggestion, :boolean
+    field :public_track, :boolean, default: false
+    field :suggestion, :boolean, default: true
     timestamps()
 
     belongs_to :user, Accounts.User
