@@ -70,6 +70,7 @@ defmodule Wsdjs.AccountsTest do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
       user = user |> Repo.preload([:avatar, :detail])
       assert Accounts.get_user_by_email(user.email) == user
+      assert Accounts.get_user_by_email(String.upcase(user.email)) == user
     end
 
     test "change_user/1 returns a user changeset" do
