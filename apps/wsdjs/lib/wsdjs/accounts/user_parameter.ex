@@ -6,10 +6,10 @@ defmodule Wsdjs.Accounts.UserParameter do
 
   @foreign_key_type :binary_id
   schema "user_parameters" do
-    field :new_song_notification, :boolean
-    field :piwik, :boolean
-    field :video, :boolean
-    field :radioking_unmatch, :boolean
+    field :new_song_notification, :boolean, default: false
+    field :piwik, :boolean, default: true
+    field :video, :boolean, default: false
+    field :radioking_unmatch, :boolean, default: false
 
     belongs_to :user, Wsdjs.Accounts.User
 

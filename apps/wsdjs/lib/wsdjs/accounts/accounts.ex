@@ -21,7 +21,7 @@ defmodule Wsdjs.Accounts do
     User
     |> order_by([:name])
     |> Repo.all()
-    |> Repo.preload([:avatar, :songs, :comments, :parameter])
+    |> Repo.preload([:avatar, :songs, :comments, :parameter, :detail])
   end
 
   @doc """
@@ -72,7 +72,7 @@ defmodule Wsdjs.Accounts do
   def get_user_by_email(email) do
     User
     |> Repo.get_by(email: String.downcase(email))
-    |> Repo.preload(:avatar)
+    |> Repo.preload([:avatar, :detail, :parameter])
   end
 
   @doc """

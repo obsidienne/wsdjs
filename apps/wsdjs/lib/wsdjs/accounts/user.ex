@@ -12,13 +12,13 @@ defmodule Wsdjs.Accounts.User do
   @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
-    field :admin, :boolean
+    field :admin, :boolean, default: false
     field :user_country, :string
     field :name, :string
     field :djname, :string
-    field :profil_djvip, :boolean
-    field :profil_dj, :boolean
-    field :deactivated, :boolean
+    field :profil_djvip, :boolean, default: false
+    field :profil_dj, :boolean, default: false
+    field :deactivated, :boolean, default: false
     field :activated_at, :naive_datetime
 
     has_many :songs, Musics.Song
