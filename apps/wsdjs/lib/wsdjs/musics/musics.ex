@@ -9,27 +9,6 @@ defmodule Wsdjs.Musics do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
 
-  @doc """
-  Returns a song list according to a fulltext search.
-  The song list is scoped by current user.
-  """
-  def search(%User{}, ""), do: []
-  def search(%User{} = current_user, q) do
-    q = q
-        |> String.trim
-        |> String.split(" ")
-        |> Enum.map(&("#{&1}:*"))
-        |> Enum.join(" & ")
-
-    current_user
-    |> Song.scoped()
-    |> preload([:art, user: :avatar])
-    |> where(fragment("(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))", ^q))
-    |> order_by([desc: :inserted_at])
-    |> limit(3)
-    |> Repo.all()
-  end
-
   def instant_hits do
     Song
     |> where(instant_hit: true)
