@@ -49,16 +49,14 @@ defmodule Wsdjs.Musics do
   """
   def list_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
     query = from s in Song,
-    where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true,
-    order_by: [desc: :inserted_at]
+    where: s.inserted_at >= ^lower and s.inserted_at <= ^upper
 
     Repo.all(query)
   end
 
-  def list_songs(%Date{} = month) do
-    lower = Timex.beginning_of_month(Timex.to_datetime(month))
-    upper = Timex.end_of_month(Timex.to_datetime(month))
-    query = from s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
+  def list_suggested_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
+    query = from s in Song,
+    where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
 
     Repo.all(query)
   end

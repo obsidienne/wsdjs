@@ -6,16 +6,41 @@ defmodule Wsdjs.MusicsTest do
   alias Wsdjs.Repo
 
   describe "songs" do
+    alias Wsdjs.Accounts
+    alias Wsdjs.Accounts.User
+    
+    @valid_attrs %{title: "my title", artist: "my artist", genre: "soul", url: "http://youtu.be/dummy"}
+
+    def user_fixture(attrs \\ %{}) do
+      {:ok, %User{} = user} =
+        attrs
+        |> Enum.into(%{email: "dummy@bshit.com"})
+        |> Accounts.create_user()
+
+      user
+    end
+
+    def song_fixture(attrs \\ %{}) do
+      user = user_fixture()
+
+      {:ok, %Song{} = song} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Map.put(:user_id, user.id)
+        |> Musics.create_song()
+
+      song
+    end
 
     test "instant_hits/0 returns all instant hit" do
-      song = insert(:song, %{instant_hit: true})
-      song = song |> Repo.preload([:art, :comments, :opinions, user: :avatar])
+      song = song_fixture(%{instant_hit: true})
+      |> Repo.preload([:art, :comments, :opinions, user: :avatar])
       assert Musics.instant_hits() == [song]
     end
 
     test "get_song!/1 returns the song with given id" do
-      song = insert(:song)
-      assert Musics.get_song!(song.id) == song |> Repo.preload([:art, :user])
+      song = song_fixture() |> Repo.preload([:art, :user])
+      assert Musics.get_song!(song.id) == song
     end
 
     test "create_song/1 with valid data creates a song" do
@@ -40,18 +65,18 @@ defmodule Wsdjs.MusicsTest do
 
     test "update_song/2 with invalid data returns error changeset" do
       song = insert(:song)
-      assert {:error, %Ecto.Changeset{}} = Musics.update_song(song, %{bpm: 0})
+      assert {:error, %Ecto.Changeset{}} = Musics.update_song(song, %{bpm: -1})
       assert Musics.get_song!(song.id) == song |> Repo.preload(:art)
     end
 
     test "delete_song/1 deletes the song" do
-      song = insert(:song)
+      song = song_fixture()
       assert {:ok, %Song{}} = Musics.delete_song(song)
       assert_raise Ecto.NoResultsError, fn -> Musics.get_song!(song.id) end
     end
 
     test "change_song/1 returns a song changeset" do
-      song = insert(:song)
+      song = song_fixture()
       assert %Ecto.Changeset{} = Musics.change_song(song)
     end
   end
