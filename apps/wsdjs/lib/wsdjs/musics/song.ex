@@ -44,7 +44,7 @@ defmodule Wsdjs.Musics.Song do
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
-    |> put_change(:video_id, Wsdjs.Helpers.Provider.extract(attrs["url"]))
+    |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
   end
 
   def genre, do: @validated_genre

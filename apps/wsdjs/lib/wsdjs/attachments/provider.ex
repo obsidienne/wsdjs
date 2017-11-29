@@ -1,4 +1,4 @@
-defmodule Wsdjs.Helpers.Provider do
+defmodule Wsdjs.Attachments.Provider do
   @moduledoc """
   This module extract the video id of a youtube url exclusively. 
   No vimeo, or dailymotin, or anything else. Only youtube.
@@ -24,7 +24,7 @@ defmodule Wsdjs.Helpers.Provider do
                           {nil, :fn_unknown},
                           fn {reg, _} -> String.match?(url, reg) end
                           )
-    Kernel.apply(Wsdjs.Helpers.Provider, func, [re, url])
+    Kernel.apply(Wsdjs.Attachments.Provider, func, [re, url])
   end
 
   @doc false
