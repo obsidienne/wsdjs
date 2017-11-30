@@ -1,6 +1,5 @@
 defmodule Wsdjs.MusicsTest do
   use Wsdjs.DataCase
-  import Wsdjs.Factory
   alias Wsdjs.Musics
   alias Wsdjs.Musics.Song
   alias Wsdjs.Repo
@@ -8,33 +7,35 @@ defmodule Wsdjs.MusicsTest do
   describe "songs" do
     alias Wsdjs.Accounts
     alias Wsdjs.Accounts.User
-    
+
     @valid_attrs %{title: "my title", artist: "my artist", genre: "soul", url: "http://youtu.be/dummy"}
 
     def user_fixture(attrs \\ %{}) do
       {:ok, %User{} = user} =
         attrs
-        |> Enum.into(%{email: "dummy@bshit.com"})
+        |> Enum.into(%{email: "dummy#{System.unique_integer([:positive])}@bshit.com"})
         |> Accounts.create_user()
 
       user
     end
 
     def song_fixture(attrs \\ %{}) do
-      user = user_fixture()
-
-      {:ok, %Song{} = song} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Map.put(:user_id, user.id)
-        |> Musics.create_song()
-
+      {:ok, %Song{} = song} = Musics.create_song(song_params(attrs))
       song
     end
 
+    def song_params(attrs \\ %{}) do
+      user = user_fixture()
+      
+      attrs
+      |> Enum.into(@valid_attrs)
+      |> Map.put(:user_id, user.id)
+    end
+
     test "instant_hits/0 returns all instant hit" do
-      song = song_fixture(%{instant_hit: true})
-      |> Repo.preload([:art, :comments, :opinions, user: :avatar])
+      song = song_fixture()
+      {:ok, %Song{} = song} = Musics.update_song(song, %{instant_hit: true})
+      song = Repo.preload(song, [:art, :comments, :opinions, user: :avatar])
       assert Musics.instant_hits() == [song]
     end
 
@@ -43,35 +44,63 @@ defmodule Wsdjs.MusicsTest do
       assert Musics.get_song!(song.id) == song
     end
 
+    test "get_song_by!/2 returns the song with given artist and title" do
+      song = song_fixture() |> Repo.preload([:art, :user, tops: :ranks])
+      assert Musics.get_song_by("my artist", "my title") == song
+    end
+
     test "create_song/1 with valid data creates a song" do
-      user = insert(:user)
-      params = params_for(:song, %{user_id: user.id})
+      user = user_fixture()
+      params = Map.put(@valid_attrs, :user_id, user.id)
 
       assert {:ok, %Song{} = song} = Musics.create_song(params)
       assert song.artist == params.artist
       assert song.title == params.title
+      assert song.url == params.url
+      assert song.bpm == 0
+      assert song.instant_hit == false
+      assert song.hidden_track == false
+      assert song.public_track == false
+      assert song.suggestion == true
     end
 
     test "create_song/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Musics.create_song(%{})
+      params = Map.put(@valid_attrs, :user_id, Ecto.UUID.generate())
+      assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(params)
+      assert "does not exist" in errors_on(changeset).user
+
+      assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(song_params(bpm: -1))
+      assert "must be greater than 0" in errors_on(changeset).bpm
+  
+      assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(song_params(title: nil))
+      assert "can't be blank" in errors_on(changeset).title
+
+      assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(song_params(artist: nil))
+      assert "can't be blank" in errors_on(changeset).artist
+  
+      assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(song_params(url: "bullshit"))
+      assert "invalid url: :no_scheme" in errors_on(changeset).url
+
+      params = song_params()
+      assert {:ok, %Song{}} = Musics.create_song(params)
+      assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(params)
+      assert "has already been taken" in errors_on(changeset).title
     end
 
     test "update_song/2 with valid data updates the song" do
-      song = insert(:song)
-      assert {:ok, song} = Musics.update_song(song, %{title: "new title"})
-      assert %Song{} = song
+      song = song_fixture()
+      assert {:ok, %Song{} = song} = Musics.update_song(song, %{title: "new title"})
       assert song.title == "new title"
     end
 
     test "update_song/2 with invalid data returns error changeset" do
-      song = insert(:song)
+      song = song_fixture()
       assert {:error, %Ecto.Changeset{}} = Musics.update_song(song, %{bpm: -1})
-      assert Musics.get_song!(song.id) == song |> Repo.preload(:art)
     end
 
     test "delete_song/1 deletes the song" do
       song = song_fixture()
-      assert {:ok, %Song{}} = Musics.delete_song(song)
+      assert {:ok, %Song{} = song} = Musics.delete_song(song)
       assert_raise Ecto.NoResultsError, fn -> Musics.get_song!(song.id) end
     end
 

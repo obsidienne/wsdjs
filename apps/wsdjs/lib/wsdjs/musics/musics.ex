@@ -98,7 +98,7 @@ defmodule Wsdjs.Musics do
   """
   def create_song(params) do
     %Song{}
-    |> Song.changeset(params)
+    |> Song.create_changeset(params)
     |> Repo.insert()
   end
 
@@ -163,7 +163,7 @@ defmodule Wsdjs.Musics do
   """
   def update_song(%Song{} = song, attrs) do
     song
-    |> Song.changeset(attrs)
+    |> Song.update_changeset(attrs)
     |> Repo.update()
   end
 
