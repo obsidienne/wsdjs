@@ -21,3 +21,6 @@ erl_crash.dump
 
 # ua inspector
 /apps/wsdjs_web/priv/static/ua_inspector
+
+#  elixirls
+.elixir_ls
