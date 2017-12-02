@@ -59,7 +59,7 @@
   </div>
 
   <div>
-    <%= unless is_nil(@conn.assigns[:current_user]) do %>
+    <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
       <%= form_for @video_changeset, api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
       <fieldset>
         <legend>Add a video</legend>
