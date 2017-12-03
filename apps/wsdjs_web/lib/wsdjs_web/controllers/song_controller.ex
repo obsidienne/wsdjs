@@ -83,9 +83,11 @@ defmodule WsdjsWeb.SongController do
     render(conn, "index.html", songs: songs, month: month_interval[:max], last: Timex.before?(month_interval[:max], interval[:min]))
   end
 
-  def new(conn, _params, _current_user) do
-    changeset = Musics.change_song(%Song{})
-    render(conn, "new.html", changeset: changeset)
+  def new(conn, _params, current_user) do
+    with :ok <- Wsdjs.Musics.Policy.can?(current_user, :create_song) do
+      changeset = Musics.change_song(%Song{})
+      render(conn, "new.html", changeset: changeset)
+    end
   end
 
   def create(conn, %{"song" => params}, current_user) do
@@ -99,28 +101,23 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  def edit(conn, %{"id" => id}, _) do
-    song = Musics.get_song!(id)
-    changeset = Musics.change_song(song)
-    render conn, "edit.html", song: song, changeset: changeset
+  def edit(conn, %{"id" => id}, current_user) do
+    with %Song{} = song <- Musics.get_song!(id),
+         :ok <- Musics.Policy.can?(current_user, :edit_song, song) do
+
+      changeset = Musics.change_song(song)
+      render conn, "edit.html", song: song, changeset: changeset
+    end
   end
 
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
-    song = Musics.get_song!(id)
-
-    song_params = if current_user.admin do
-        song_params
-      else
-        Map.drop(song_params, ["user_id", "inserted_at", "title", "artist"])
-      end
-
-    case Musics.update_song(song, song_params, current_user) do
-      {:ok, song} ->
-        conn
-        |> put_flash(:info, "Song updated")
-        |> redirect(to: song_path(conn, :show, song))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", song: song, changeset: changeset)
+    with %Song{} = song <- Musics.get_song!(id),
+         :ok <- Musics.Policy.can?(current_user, :edit_song, song),
+         {:ok, %Song{} = song} <- Musics.update_song(song, song_params, current_user) do
+  
+      conn
+      |> put_flash(:info, "Song updated")
+      |> redirect(to: song_path(conn, :show, song))
     end
   end
 
