@@ -54,6 +54,7 @@
     </div>
 
     <table class="table">
+      <%= if @current_user.admin do %>
       <tr>
         <td>Instant hit</td>
         <td>
@@ -61,8 +62,10 @@
             <%= checkbox f, :instant_hit %>
             <%= label f,:instant_hit do %><% end %>
           </div>
+
         </td>
       </tr>
+      <% end %>
       <tr>
         <td>Hidden track</td>
         <td>
