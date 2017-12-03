@@ -30,8 +30,6 @@ defmodule Wsdjs.Musics.Song do
     many_to_many :tops, Charts.Top, join_through: Charts.Rank
   end
 
-  @allowed_fields [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track, :suggestion]
-  @required_fields [:title, :artist, :url, :genre]
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
   def create_changeset(%Song{} = song, attrs) do
@@ -49,7 +47,7 @@ defmodule Wsdjs.Musics.Song do
 
   def update_changeset(%Song{} = song, attrs) do
     song
-    |> cast(attrs, [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track, :suggestion])
+    |> cast(attrs, [:url, :bpm, :genre])
     |> validate_required([:url, :bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
@@ -60,10 +58,10 @@ defmodule Wsdjs.Musics.Song do
     |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
   end
 
-  def changeset(%Song{} = song, attrs) do
+  def admin_changeset(%Song{} = song, attrs) do
     song
-    |> cast(attrs, @allowed_fields)
-    |> validate_required(@required_fields)
+    |> cast(attrs, [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track, :suggestion])
+    |> validate_required([:url, :bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
     |> cast_assoc(:art)

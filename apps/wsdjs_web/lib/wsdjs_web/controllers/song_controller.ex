@@ -114,7 +114,7 @@ defmodule WsdjsWeb.SongController do
         Map.drop(song_params, ["user_id", "inserted_at", "title", "artist"])
       end
 
-    case Musics.update_song(song, song_params) do
+    case Musics.update_song(song, song_params, current_user) do
       {:ok, song} ->
         conn
         |> put_flash(:info, "Song updated")

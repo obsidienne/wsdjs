@@ -146,7 +146,7 @@ defmodule Wsdjs.Musics do
 
   """
   def change_song(%Song{} = song) do
-    Song.changeset(song, %{})
+    Song.update_changeset(song, %{})
   end
 
   @doc """
@@ -154,16 +154,21 @@ defmodule Wsdjs.Musics do
 
   ## Examples
 
-      iex> update_song(song, %{field: new_value})
+      iex> update_song(song, %{field: new_value}, %User{})
       {:ok, %Song{}}
 
-      iex> update_song(song, %{field: bad_value})
+      iex> update_song(song, %{field: bad_value}, %User{})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_song(%Song{} = song, attrs) do
+  def update_song(%Song{} = song, attrs, %User{admin: false}) do
     song
     |> Song.update_changeset(attrs)
+    |> Repo.update()
+  end
+  def update_song(%Song{} = song, attrs, %User{admin: true}) do
+    song
+    |> Song.admin_changeset(attrs)
     |> Repo.update()
   end
 

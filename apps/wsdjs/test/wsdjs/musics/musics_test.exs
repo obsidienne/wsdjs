@@ -34,7 +34,7 @@ defmodule Wsdjs.MusicsTest do
 
     test "instant_hits/0 returns all instant hit" do
       song = song_fixture()
-      {:ok, %Song{} = song} = Musics.update_song(song, %{instant_hit: true})
+      {:ok, %Song{} = song} = Musics.update_song(song, %{instant_hit: true}, %User{admin: true})
       song = Repo.preload(song, [:art, :comments, :opinions, user: :avatar])
       assert Musics.instant_hits() == [song]
     end
@@ -87,15 +87,15 @@ defmodule Wsdjs.MusicsTest do
       assert "has already been taken" in errors_on(changeset).title
     end
 
-    test "update_song/2 with valid data updates the song" do
+    test "update_song/3 with valid data updates the song" do
       song = song_fixture()
-      assert {:ok, %Song{} = song} = Musics.update_song(song, %{title: "new title"})
+      assert {:ok, %Song{} = song} = Musics.update_song(song, %{title: "new title"}, %User{admin: true})
       assert song.title == "new title"
     end
 
-    test "update_song/2 with invalid data returns error changeset" do
+    test "update_song/3 with invalid data returns error changeset" do
       song = song_fixture()
-      assert {:error, %Ecto.Changeset{}} = Musics.update_song(song, %{bpm: -1})
+      assert {:error, %Ecto.Changeset{}} = Musics.update_song(song, %{bpm: -1}, %User{})
     end
 
     test "delete_song/1 deletes the song" do
