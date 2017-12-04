@@ -36,7 +36,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   alias Wsdjs.Musics.Art
 
   def art_url(%Art{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
-    @cld <> "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
+    @cld_https <> "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
   end
   def art_url(nil, resolution), do: art_url(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
 
