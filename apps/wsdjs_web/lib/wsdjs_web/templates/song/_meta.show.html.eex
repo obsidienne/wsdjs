@@ -9,4 +9,4 @@
 <meta name="twitter:url" content="<%= WsdjsWeb.Endpoint.url %><%= @conn.request_path %>">
 <meta name="twitter:title" content="<%= @song.title %>">
 <meta name="twitter:description" content="<%= song_full_description(@song) %>">
-<meta name="twitter:image" content="<%= art_url(@song.art, 200) %>">
+<meta name="twitter:image" content="<%= art_url(@song.art, 600) %>">
