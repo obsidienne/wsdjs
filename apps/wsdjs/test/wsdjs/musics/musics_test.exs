@@ -87,10 +87,44 @@ defmodule Wsdjs.MusicsTest do
       assert "has already been taken" in errors_on(changeset).title
     end
 
-    test "update_song/3 with valid data updates the song" do
+    @update_attrs %{
+      title: "update title",
+      artist: "update artist",
+      url: "http://youtube.com/update_url",
+      bpm: 333,
+      genre: "rnb",
+      instant_hit: true,
+      hidden_track: true,
+      public_track: true, 
+      suggestion: false,
+    }
+
+    test "update_song/3 with valid data done by admin updates the song" do
       song = song_fixture()
-      assert {:ok, %Song{} = song} = Musics.update_song(song, %{title: "new title"}, %User{admin: true})
-      assert song.title == "new title"
+      assert {:ok, %Song{} = song} = Musics.update_song(song, @update_attrs, %User{admin: true})
+      assert song.title == "update title"
+      assert song.artist == "update artist"
+      assert song.bpm == 333
+      assert song.url == "http://youtube.com/update_url"
+      assert song.genre == "rnb"
+      assert song.instant_hit == true
+      assert song.hidden_track == true
+      assert song.public_track == true
+      assert song.suggestion == false
+    end
+
+    test "update_song/3 with valid data done by user updates the song" do
+      song = song_fixture()
+      assert {:ok, %Song{} = song} = Musics.update_song(song, @update_attrs, %User{admin: false})
+      assert song.title == "my title"
+      assert song.artist == "my artist"
+      assert song.bpm == 333
+      assert song.url == "http://youtube.com/update_url"
+      assert song.genre == "rnb"
+      assert song.instant_hit == false
+      assert song.hidden_track == true
+      assert song.public_track == true
+      assert song.suggestion == true
     end
 
     test "update_song/3 with invalid data returns error changeset" do
