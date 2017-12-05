@@ -1,6 +1,5 @@
 defmodule Wsdjs.ChartsTest do
   use Wsdjs.DataCase
-  import Wsdjs.Factory
 
   alias Wsdjs.Charts
   alias Wsdjs.Charts.Top
@@ -8,23 +7,22 @@ defmodule Wsdjs.ChartsTest do
   test "Create TOP, Song are selected according to month" do
     dt = Timex.beginning_of_month(Timex.now)
     dtend = Timex.end_of_month(Timex.now)
-    user = insert(:user, profil_djvip: true)
 
-    insert(:song, %{inserted_at: Timex.to_datetime(Timex.shift(dt, seconds: -1))})
-    insert(:song, %{inserted_at: Timex.shift(dtend, seconds: 1)})
+    song_fixture(%{inserted_at: Timex.to_datetime(Timex.shift(dt, seconds: -1))})
+    song_fixture(%{inserted_at: Timex.shift(dtend, seconds: 1)})
     song_in = [
-      insert(:song, %{inserted_at: Timex.shift(dt, microseconds: 1), user: user}),
-      insert(:song, %{inserted_at: Timex.shift(dt, days: 1, microseconds: 1), user: user}),
-      insert(:song, %{inserted_at: dtend, user: user}),
+      song_fixture(%{inserted_at: Timex.shift(dt, microseconds: 1)}),
+      song_fixture(%{inserted_at: Timex.shift(dt, days: 1, microseconds: 1)}),
+      song_fixture(%{inserted_at: dtend}),
     ]
-    insert(:song, %{inserted_at: Timex.shift(dt, microseconds: 1), user: user, suggestion: false})
-    insert(:song, %{inserted_at: Timex.shift(dt, days: 1, microseconds: 1), user: user, suggestion: false})
-    insert(:song, %{inserted_at: dtend, user: user, suggestion: false})
+    song_fixture(%{inserted_at: Timex.shift(dt, microseconds: 1), suggestion: false})
+    song_fixture(%{inserted_at: Timex.shift(dt, days: 1, microseconds: 1), suggestion: false})
+    song_fixture(%{inserted_at: dtend, suggestion: false})
 
-    user = insert(:user, %{admin: true})
+    user = user_fixture(%{})
     {:ok, %Top{} = top} = Charts.create_top(%{"due_date": Timex.today, user_id: user.id})
     assert Enum.count(top.songs) == 3
-    assert song_in == top.songs |> Repo.preload(:user)
+    assert Enum.sort(song_in) == Enum.sort(top.songs)
   end
 
   describe "TOP" do
@@ -103,17 +101,37 @@ defmodule Wsdjs.ChartsTest do
     end
   end
 
+  defp song_fixture(attrs) do
+    user = user_fixture()
+
+    {:ok, %Wsdjs.Musics.Song{} = song} = 
+    %{title: "my title#{System.unique_integer([:positive])}", artist: "my artist", genre: "soul", url: "http://youtu.be/dummy"}
+    |> Map.put(:user_id, user.id)
+    |> Wsdjs.Musics.create_song()
+
+    {:ok, %Wsdjs.Musics.Song{} = song} = Wsdjs.Musics.update_song(song, attrs, %Wsdjs.Accounts.User{admin: true})
+
+    song
+  end
+
+  defp user_fixture(attrs \\ %{}) do
+    {:ok, %Wsdjs.Accounts.User{} = user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+
+    user
+  end
+
   defp create_top(_) do
     dt = Timex.beginning_of_month(Timex.now)
     dtend = Timex.end_of_month(Timex.now)
 
-    song1 = insert(:song, %{inserted_at: dt})
-    song2 = insert(:song, %{inserted_at: Timex.shift(dt, days: 1)})
-    song3 = insert(:song, %{inserted_at: dtend})
-
-    insert(:opinion, song: song1, kind: "like")
-    insert(:opinion, song: song2, kind: "up")
-    insert(:opinion, song: song3, kind: "down")
+    song1 = song_fixture(%{inserted_at: dt})
+    song2 = song_fixture(%{inserted_at: Timex.shift(dt, days: 1)})
+    song3 = song_fixture(%{inserted_at: dtend})
+    
+    user = user_fixture()
+    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song1, "like")
+    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song2, "up")
+    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song3, "down")
 
     # vote = 10 * vote[:count] - vote[:sum] + vote[:count]
     # opinion = "up"-> 4, "like" -> 2, "down" -> 3
@@ -124,12 +142,15 @@ defmodule Wsdjs.ChartsTest do
       "#{song3.id}" => 3,
     }
 
-    user = insert(:user, %{admin: true})
+    user = user_fixture()
     {:ok, %Top{} = top} = Charts.create_top(%{"due_date": Timex.today, user_id: user.id})
 
-    insert(:vote, votes: 1, song: song1, top: top)
-    insert(:vote, votes: 2, song: song2, top: top)
-    insert(:vote, votes: 3, song: song3, top: top)
+    Wsdjs.Charts.vote(user, %{"top_id" => top.id, "votes" => %{
+      song1.id => "1",
+      song2.id => "2",
+      song3.id => "3"
+    }}) 
+      
 
     %{top: top, positions: positions}
   end
