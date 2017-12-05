@@ -1,12 +1,6 @@
-<meta property="og:url" content="<%= WsdjsWeb.Endpoint.url %><%= @conn.request_path %>">
+<meta property="og:url" content="<%= Phoenix.Controller.current_url(@conn) %>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="<%= top_full_description(@top) %>">
 <meta property="og:image" content="<%= top_art(@top) %>">
 <meta property="og:description" content="<%= top_full_description(@top) %>">
 <meta property="og:site_name" content="worldswingdjs">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:url" content="<%= WsdjsWeb.Endpoint.url %><%= @conn.request_path %>">
-<meta name="twitter:title" content="<%= top_full_description(@top) %>">
-<meta name="twitter:description" content="<%= top_full_description(@top) %>">
-<meta name="twitter:image" content="<%= top_art(@top) %>">
