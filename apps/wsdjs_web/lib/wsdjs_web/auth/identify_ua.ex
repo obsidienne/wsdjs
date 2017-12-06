@@ -27,9 +27,14 @@ defmodule WsdjsWeb.IdentifyUa do
   def device_type([]), do: "desktop"
   def device_type(ua) when is_binary(ua) do
     parsed = UAInspector.parse(ua)
-    case parsed.device do
-      %{type: "smartphone"} -> "mobile"
-      _ -> "desktop"
+
+    if UAInspector.bot?(ua) do
+      "desktop"
+    else
+      case parsed.device do
+        %{type: "smartphone"} -> "mobile"
+        _ -> "desktop"
+      end
     end
   end
 end
