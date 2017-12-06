@@ -19,7 +19,7 @@ defmodule Wsdjs.ChartsTest do
     song_fixture(%{inserted_at: Timex.shift(dt, days: 1, microseconds: 1), suggestion: false})
     song_fixture(%{inserted_at: dtend, suggestion: false})
 
-    user = user_fixture(%{})
+    user = user_fixture()
     {:ok, %Top{} = top} = Charts.create_top(%{"due_date": Timex.today, user_id: user.id})
     assert Enum.count(top.songs) == 3
     assert Enum.sort(song_in) == Enum.sort(top.songs)
@@ -114,7 +114,7 @@ defmodule Wsdjs.ChartsTest do
     song
   end
 
-  defp user_fixture(attrs \\ %{}) do
+  defp user_fixture() do
     {:ok, %Wsdjs.Accounts.User{} = user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
     user
