@@ -5,174 +5,207 @@ defmodule Wsdjs.Charts.TopTest do
   alias Wsdjs.Charts
   alias Wsdjs.Repo
 
-  import Wsdjs.Factory
-
   describe "changeset" do
     test "changeset with minimal valid attributes" do
-      changeset = Top.create_changeset(%Top{}, params_for(:top))
+      changeset = Top.create_changeset(%Top{}, %{"due_date": Timex.today, user_id: Ecto.UUID.generate()})
       assert changeset.valid?
     end
 
     test "top owner accout must exist" do
-      top = Top.create_changeset(%Top{}, params_for(:top, %{user_id: Ecto.UUID.generate()}))
-      assert {:error, %{errors: [user: {"does not exist", _}]}} = Repo.insert(top)
+      top = Top.create_changeset(%Top{}, %{"due_date": Timex.today, user_id: Ecto.UUID.generate()})
+      assert {:error, %Ecto.Changeset{} = changeset} = Repo.insert(top)
+      assert "does not exist" in errors_on(changeset).user
     end
   end
 
   describe "Published top" do
-    setup do
-      [
-        admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profil_djvip: true}),
-        dj: insert(:user, %{profil_dj: true}),
-        dt: Timex.beginning_of_month(Timex.today)
-      ]
+    alias Wsdjs.Accounts.User
+
+    test "current month" do
+      top = top_fixture("published", 0)
+
+      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [] == nil |> Top.scoped() |> Repo.all()
     end
 
-    test "[current month, n-2]", context do
-      tops = [
-        insert(:top, %{user: context[:admin], status: "published", due_date: context[:dt]}),
-        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -2)}),
-      ]
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+    test "current month -2" do
+      top = top_fixture("published", -2)
+
+      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [] == nil |> Top.scoped() |> Repo.all()
     end
 
-    test "[current month -3 to -5]", context do
-      tops = [
-        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -3)}),
-        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -5)}),
-      ] |> Enum.sort()
+    test "current month -3" do
+      top = top_fixture("published", -3)
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
-      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
-      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
-      assert tops == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
     end
 
-    test "[current month -6 to n-24]", context do
-      tops = [
-        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -6)}),
-        insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -24)})
-      ] |> Enum.sort()
+    test "current month -5" do
+      top = top_fixture("published", -5)
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
-      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
-      assert tops == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
-      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user) |> Enum.sort()
+      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
     end
 
-    test "current month -25", context do
-      top = insert(:top, %{user: context[:admin], status: "published", due_date: Timex.shift(context[:dt], months: -25)})
+    test "current month -6" do
+      top = top_fixture("published", -6)
 
-      assert [top] == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [top] == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == nil |> Top.scoped() |> Repo.all()
+    end
+
+    test "current month -24" do
+      top = top_fixture("published", -24)
+      
+      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == nil |> Top.scoped() |> Repo.all()
+    end
+
+    test "current month -25" do
+      top = top_fixture("published", -25)
+      
+      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
 
   describe "Counting top" do
-    setup do
-      [
-        admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profil_djvip: true}),
-        dj: insert(:user, %{profil_dj: true}),
-        dt: Timex.beginning_of_month(Timex.today)
-      ]
-    end
+    alias Wsdjs.Accounts.User
 
-    test "current month to n-27", context do
+    test "current month to n-27 n" do
       tops = [
-        insert(:top, %{user: context[:admin], status: "counting", due_date: context[:dt]}),
-        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -2)}),
-        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -3)}),
-        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -5)}),
-        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -6)}),
-        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -26)}),
-        insert(:top, %{user: context[:admin], status: "counting", due_date: Timex.shift(context[:dt], months: -27)})
+        top_fixture("counting", 0),
+        top_fixture("counting", -2),
+        top_fixture("counting", -3),
+        top_fixture("counting", -5),
+        top_fixture("counting", -6),
+        top_fixture("counting", -26),
+        top_fixture("counting", -27),
       ]
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all()
+      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
 
   describe "Voting top" do
-    setup do
-      [
-        admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profil_djvip: true}),
-        dj: insert(:user, %{profil_dj: true}),
-        dt: Timex.beginning_of_month(Timex.today)
-      ]
-    end
+    alias Wsdjs.Accounts.User
 
-    test "current month to n-27", context do
+    test "current month to n-27" do
       tops = [
-        insert(:top, %{user: context[:admin], status: "voting", due_date: context[:dt]}),
-        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -2)}),
-        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -3)}),
-        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -5)}),
-        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -6)}),
-        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -26)}),
-        insert(:top, %{user: context[:admin], status: "voting", due_date: Timex.shift(context[:dt], months: -27)})
+        top_fixture("voting", 0),
+        top_fixture("voting", -2),
+        top_fixture("voting", -3),
+        top_fixture("voting", -5),
+        top_fixture("voting", -6),
+        top_fixture("voting", -26),
+        top_fixture("voting", -27),
       ]
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert tops == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert tops == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
 
   describe "Checking top" do
-    setup do
-      [
-        admin: insert(:user, %{admin: true}),
-        dj_vip: insert(:user, %{profil_djvip: true}),
-        dj: insert(:user, %{profil_dj: true}),
-        dt: Timex.beginning_of_month(Timex.today)
-      ]
-    end
+    alias Wsdjs.Accounts.User
 
-    test "current month to n-27", context do
+    test "current month to n-27" do
       tops = [
-        insert(:top, %{user: context[:admin], status: "checking", due_date: context[:dt]}),
-        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -2)}),
-        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -3)}),
-        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -5)}),
-        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -6)}),
-        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -26)}),
-        insert(:top, %{user: context[:admin], status: "checking", due_date: Timex.shift(context[:dt], months: -27)})
+        top_fixture("checking", 0),
+        top_fixture("checking", -2),
+        top_fixture("checking", -3),
+        top_fixture("checking", -5),
+        top_fixture("checking", -6),
+        top_fixture("checking", -26),
+        top_fixture("checking", -27),
       ]
 
-      assert tops == context[:admin] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == context[:dj_vip] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == context[:dj] |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
-      assert [] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:user)
+      assert tops == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all()
+      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
 
   test "get_top!/1 returns the top with given id" do
-    top = insert(:top)
-    assert top == top.id |> Charts.get_top!() |> Repo.preload(:user)
+    top = top_fixture()
+    assert top == Charts.get_top!(top.id) |> Repo.preload(:songs)
   end
 
   test "create_top/1 with valid data creates a top" do
-    user = insert(:user)
-    params = params_for(:top, %{user_id: user.id})
-    assert {:ok, %Top{} = top} = Charts.create_top(params)
-    assert top.due_date == params[:due_date]
+    user = user_fixture()
+    assert {:ok, %Top{} = top} = Charts.create_top(%{"due_date": Timex.today, user_id: user.id})
+    assert top.due_date == Timex.today
   end
 
   test "delete_top/1 deletes the top" do
-    top = insert(:top)
+    top = top_fixture()
     assert {:ok, %Top{}} = Charts.delete_top(top)
     assert_raise Ecto.NoResultsError, fn -> Charts.get_top!(top.id) end
+  end
+
+  def user_fixture() do
+    {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+    user
+  end
+
+  def top_fixture() do
+    user = user_fixture()
+    {:ok, %Top{} = top} = Charts.create_top(%{"due_date": Timex.today, user_id: user.id})
+    top
+  end
+
+  def top_fixture("checking", offset) do
+    dt = Timex.today
+    |> Timex.beginning_of_month()
+    |> Timex.shift(months: offset)
+
+    user = user_fixture()
+    {:ok, %Top{} = top} = Charts.create_top(%{"due_date": dt, user_id: user.id})
+
+    top
+  end
+
+  def top_fixture("voting", offset) do
+    top = top_fixture("checking", offset)
+
+    {:ok, top} = Charts.next_step(top)
+    top
+  end
+
+
+  def top_fixture("counting", offset) do
+    top = top_fixture("voting", offset)
+
+    {:ok, top} = Charts.next_step(top)
+    top
+  end
+
+  def top_fixture("published", offset) do
+    top = top_fixture("counting", offset)
+
+    {:ok, top} = Charts.next_step(top)
+    top
   end
 end
