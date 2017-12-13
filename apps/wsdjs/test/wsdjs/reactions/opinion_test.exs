@@ -1,19 +1,16 @@
 defmodule Wsdjs.Reactions.OpinionTest do
   use Wsdjs.DataCase, async: true
-  import Wsdjs.Factory
-
-  alias Wsdjs.Reactions
 
   test "Opinions are correctly summed" do
     opinions = [
-      insert(:opinion, kind: "up"),
-      insert(:opinion, kind: "up"),
-      insert(:opinion, kind: "like"),
-      insert(:opinion, kind: "like"),
-      insert(:opinion, kind: "down"),
-      insert(:opinion, kind: "down"),
+      %{kind: "up"}, 
+      %{kind: "up"}, 
+      %{kind: "down"},
+      %{kind: "down"},
+      %{kind: "like"},
+      %{kind: "like"},
     ]
 
-    assert Reactions.opinions_value(opinions) == 6
+    assert Wsdjs.Reactions.opinions_value(opinions) == 6
   end
 end

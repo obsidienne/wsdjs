@@ -9,27 +9,6 @@ defmodule Wsdjs.Musics do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
 
-  @doc """
-  Returns a song list according to a fulltext search.
-  The song list is scoped by current user.
-  """
-  def search(%User{}, ""), do: []
-  def search(%User{} = current_user, q) do
-    q = q
-        |> String.trim
-        |> String.split(" ")
-        |> Enum.map(&("#{&1}:*"))
-        |> Enum.join(" & ")
-
-    current_user
-    |> Song.scoped()
-    |> preload([:art, user: :avatar])
-    |> where(fragment("(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))", ^q))
-    |> order_by([desc: :inserted_at])
-    |> limit(3)
-    |> Repo.all()
-  end
-
   def instant_hits do
     Song
     |> where(instant_hit: true)
@@ -68,18 +47,16 @@ defmodule Wsdjs.Musics do
   @doc """
   Returns the songs added the 24 last hours.
   """
-  def list_songs do
-    yesterday = Timex.shift(Timex.now, hours: -24)
-    Song
-    |> where([s], s.inserted_at > ^yesterday)
-    |> order_by([desc: :inserted_at])
-    |> Repo.all()
+  def list_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
+    query = from s in Song,
+    where: s.inserted_at >= ^lower and s.inserted_at <= ^upper
+
+    Repo.all(query)
   end
 
-  def list_songs(%Date{} = month) do
-    lower = Timex.beginning_of_month(Timex.to_datetime(month))
-    upper = Timex.end_of_month(Timex.to_datetime(month))
-    query = from s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
+  def list_suggested_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
+    query = from s in Song,
+    where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
 
     Repo.all(query)
   end
@@ -121,7 +98,25 @@ defmodule Wsdjs.Musics do
   """
   def create_song(params) do
     %Song{}
-    |> Song.changeset(params)
+    |> Song.create_changeset(params)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Creates a suggestion.
+
+  ## Examples
+
+      iex> create_suggestion(%{field: value})
+      {:ok, %Song{}}
+
+      iex> create_suggestion(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_suggestion(params) do
+    %Song{}
+    |> Song.suggestion_changeset(params)
     |> Repo.insert()
   end
 
@@ -169,7 +164,7 @@ defmodule Wsdjs.Musics do
 
   """
   def change_song(%Song{} = song) do
-    Song.changeset(song, %{})
+    Song.update_changeset(song, %{})
   end
 
   @doc """
@@ -177,16 +172,21 @@ defmodule Wsdjs.Musics do
 
   ## Examples
 
-      iex> update_song(song, %{field: new_value})
+      iex> update_song(song, %{field: new_value}, %User{})
       {:ok, %Song{}}
 
-      iex> update_song(song, %{field: bad_value})
+      iex> update_song(song, %{field: bad_value}, %User{})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_song(%Song{} = song, attrs) do
+  def update_song(%Song{} = song, attrs, %User{admin: false}) do
     song
-    |> Song.changeset(attrs)
+    |> Song.update_changeset(attrs)
+    |> Repo.update()
+  end
+  def update_song(%Song{} = song, attrs, %User{admin: true}) do
+    song
+    |> Song.admin_changeset(attrs)
     |> Repo.update()
   end
 

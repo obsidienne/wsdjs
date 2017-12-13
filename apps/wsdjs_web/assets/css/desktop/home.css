@@ -1,8 +1,8 @@
-.SessionNewView .hero {
+.SessionNewView .hero, .RegistrationNewView .hero {
   padding: 0;
 }
 
-body.SessionNewView main {
+body.SessionNewView main, body.RegistrationNewView main {
   display: flex;
   justify-content: center;
   align-items: center;

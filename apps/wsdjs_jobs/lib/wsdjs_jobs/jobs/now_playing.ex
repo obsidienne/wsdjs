@@ -49,11 +49,11 @@ defmodule Wsdjs.Jobs.NowPlaying do
         {:noreply, queue}
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         Logger.debug "Not found :("
-        schedule_work(60000) # Reschedule once more
+        schedule_work(60_000) # Reschedule once more
         {:noreply, queue}
       {:error, %HTTPoison.Error{reason: reason}} ->
         Logger.error reason
-        schedule_work(60000) # Reschedule once more
+        schedule_work(60_000) # Reschedule once more
         {:noreply, queue}
     end
   end
@@ -98,7 +98,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
     queue = if same_song?(song, last_queued) do
         queue
       else
-        IO.puts "add #{song["artist"]} #{song["title"]} "
+        Wsdjs.Jobs.UnmatchSong.notify(song)
         :queue.in(song, queue)
       end
 
@@ -147,6 +147,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
       |> Map.put(:song_id, song_in_base.id)
     else
       song
+      |> Map.put(:nomatch, true)
     end
   end
 

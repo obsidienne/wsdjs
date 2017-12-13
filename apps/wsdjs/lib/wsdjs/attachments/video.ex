@@ -25,7 +25,7 @@ defmodule Wsdjs.Attachments.Video do
     |> assoc_constraint(:user)
     |> validate_url(:url)
     |> assoc_constraint(:song)
-    |> put_change(:video_id, Wsdjs.Helpers.Provider.extract(attrs["url"]))
+    |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
   end
 
   # This function validates the format of an URL not it's validity.

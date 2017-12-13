@@ -12,5 +12,6 @@ done
 set -e
 
 echo "Running migrations"
-bin/radiowcs_platform rpc Elixir.Release.Tasks migrate
+bin/radiowcs_platform rpc Elixir.Release.Tasks.Migrate migrate
+bin/radiowcs_platform rpc Elixir.Release.Tasks.Ua download
 echo "Migrations run successfully"

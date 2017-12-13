@@ -56,13 +56,23 @@
     <table class="table">
       <%= if @current_user.admin do %>
       <tr>
+        <td>Suggested song</td>
+        <td>
+          <div class=" ckbx-style-11 danger">
+            <%= checkbox f, :suggestion %>
+            <%= label f,:suggestion do %><% end %>
+          </div>
+          <p class="help-block small">Use this song in a month TOP 10<br/>Change with caution !</p>
+        </td>
+      </tr>
+      <tr>
         <td>Instant hit</td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :instant_hit %>
             <%= label f,:instant_hit do %><% end %>
           </div>
-
+          <p class="help-block small">This song is visible and in front page</p>
         </td>
       </tr>
       <% end %>
@@ -73,6 +83,7 @@
             <%= checkbox f, :hidden_track %>
             <%= label f,:hidden_track do %><% end %>
           </div>
+          <p class="help-block small">This song is visible only by DJ VIP</p>
         </td>
       </tr>
       <tr>
@@ -82,6 +93,7 @@
             <%= checkbox f, :public_track %>
             <%= label f,:public_track do %><% end %>
           </div>
+          <p class="help-block small">This song is always visible, no matter when it was created</p>
         </td>
       </tr>
     </table>

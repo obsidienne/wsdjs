@@ -4,7 +4,7 @@ defmodule WsdjsWeb.Mixfile do
   def project do
     [
       app: :wsdjs_web,
-      version: "1.5.0",
+      version: "1.6.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -44,7 +44,7 @@ defmodule WsdjsWeb.Mixfile do
      {:bamboo, "~> 0.8"},
      {:timex, "~> 3.0"},
      {:corsica, "~> 1.0"},
-     {:ua_inspector, "~> 0.14"},
+     {:ua_inspector, github: "elixytics/ua_inspector", ref: "34aade30ed642d284772884204a8aa8fcb2b6d79"},
      {:wsdjs, in_umbrella: true},
      {:wsdjs_jobs, in_umbrella: true},
      {:cowboy, "~> 1.0"}]

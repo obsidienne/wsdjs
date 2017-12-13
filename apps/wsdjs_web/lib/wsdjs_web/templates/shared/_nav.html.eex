@@ -26,9 +26,5 @@
     <%= link to: user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>
       <img class="glnav__user__avatar img-circle" src="<%= avatar_url(@current_user.avatar, 50) %>" srcset="<%= avatar_srcset(@current_user.avatar, 50) %>" sizes="50px">
     <% end %>
-  <% else %>
-    <%= link to: session_path(@conn, :new), data: [turbolinks: false] do %>
-      <div class="glnav__user__signin--container btn btn-primary">Sign in</div>
-    <% end %>
   <% end %>
 </nav>

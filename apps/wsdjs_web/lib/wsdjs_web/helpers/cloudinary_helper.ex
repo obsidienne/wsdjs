@@ -28,7 +28,6 @@ defmodule WsdjsWeb.CloudinaryHelper do
     |> Enum.join(", ")
   end
 
-
   ###############################################
   #
   # SONG ART
@@ -54,7 +53,6 @@ defmodule WsdjsWeb.CloudinaryHelper do
     @cld <> "c_crop,g_custom/c_fit,f_auto,o_30,q_auto,w_#{resolution}/fl_immutable_cache/" <> "v#{version}/#{cld_id}.jpg"
   end
   def art_url_blured(nil, resolution), do: art_url_blured(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
-
 
   ###############################################
   #

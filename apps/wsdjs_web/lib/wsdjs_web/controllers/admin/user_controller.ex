@@ -3,10 +3,11 @@ defmodule WsdjsWeb.Admin.UserController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Accounts
+  alias Wsdjs.Auth
 
   def index(conn, _params) do
     users = Accounts.list_users()
-    invitations = Accounts.list_invitations()
+    invitations = Auth.list_invitations()
     render conn, "index.html", users: users, invitations: invitations
   end
 end

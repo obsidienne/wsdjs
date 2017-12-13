@@ -2,7 +2,7 @@ defmodule Wsdjs.ProviderTest do
   @moduledoc false
 
   use Wsdjs.DataCase
-  doctest Wsdjs.Helpers.Provider, import: true
+  doctest Wsdjs.Attachments.Provider, import: true
 
   @youtube_urls [
       {"http://www.youtube.com/user/Scobleizer#p/u/1/1p3vcRhsYGo", "1p3vcRhsYGo"},
@@ -22,6 +22,6 @@ defmodule Wsdjs.ProviderTest do
   ]
 
   test "youtube urls" do
-    Enum.each(@youtube_urls, fn {url, video_id} -> assert Wsdjs.Helpers.Provider.extract(url) == video_id end)
+    Enum.each(@youtube_urls, fn {url, video_id} -> assert Wsdjs.Attachments.Provider.extract(url) == video_id end)
   end
 end

@@ -5,44 +5,60 @@ defmodule Wsdjs.Accounts.User do
   import Ecto.Query
   alias Wsdjs.Accounts.User
 
-  alias Wsdjs.{Musics, Accounts, Charts, Reactions}
+  alias Wsdjs.{Musics, Accounts, Charts, Reactions, Auth}
+  alias Wsdjs.Accounts.{UserParameter, UserDetail}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
-    field :admin, :boolean
+    field :admin, :boolean, default: false
     field :user_country, :string
     field :name, :string
     field :djname, :string
-    field :profil_djvip, :boolean
-    field :profil_dj, :boolean
+    field :profil_djvip, :boolean, default: false
+    field :profil_dj, :boolean, default: false
+    field :deactivated, :boolean, default: false
+    field :activated_at, :naive_datetime
 
     has_many :songs, Musics.Song
     has_many :comments, Reactions.Comment
     has_one :avatar, Accounts.Avatar, on_replace: :delete
     has_one :detail, Accounts.UserDetail, on_replace: :update
-    has_one :parameter, Accounts.UserParameter, on_replace: :delete
+    has_one :parameter, Accounts.UserParameter, on_replace: :update
     has_many :song_opinions, Reactions.Opinion
     has_many :votes, Charts.Vote
-    has_many :auth_tokens, Accounts.AuthToken
+    has_many :auth_tokens, Auth.AuthToken
 
     timestamps()
   end
 
-  @allowed_fields [:email, :user_country, :name, :djname, :profil_djvip, :profil_dj]
-
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, @allowed_fields)
-    |> validate_required(:email)
+    |> cast(attrs, [:user_country, :name, :djname])
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
-    |> cast_assoc(:parameter)
+    |> cast_assoc(:parameter, with: &Accounts.UserParameter.changeset/2)
+  end
+
+  def admin_changeset(%User{} = user, attrs) do
+    user
+    |> cast(attrs, [:user_country, :name, :djname, :admin, :profil_djvip, :profil_dj, :deactivated])
+    |> cast_assoc(:avatar)
+    |> cast_assoc(:detail)
+    |> cast_assoc(:parameter, with: &Accounts.UserParameter.admin_changeset/2)
+  end
+
+  def create_changeset(%User{} = user, attrs) do
+    user
+    |> cast(attrs, [:email])
+    |> validate_required(:email)
     |> downcase_value()
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
+    |> put_assoc(:parameter, UserParameter.changeset(%UserParameter{}, %{}), required: true)
+    |> put_assoc(:detail, UserDetail.changeset(%UserDetail{}, %{}), required: true)
   end
 
   defp downcase_value(changeset) do

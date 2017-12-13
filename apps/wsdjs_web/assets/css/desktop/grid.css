@@ -17,7 +17,7 @@
     max-width: 1140px;
   }
 }
-.SessionNewView .container-form {
+.SessionNewView .container-form, .RegistrationNewView .container-form {
   width: 100%;
   max-width: 414px;
 }

@@ -31,7 +31,7 @@ defmodule WsdjsWeb.Api.V1.AccountController do
 
     with user <- Accounts.get_user!(id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
-         {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
+         {:ok, %User{} = user} <- Accounts.update_user(user, user_params, current_user) do
 
       render(conn, "show.json", user: user)
     end

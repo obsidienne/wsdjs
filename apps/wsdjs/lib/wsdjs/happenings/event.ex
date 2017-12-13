@@ -12,7 +12,7 @@ defmodule Wsdjs.Happenings.Event do
   schema "events" do
     field :name, :string
     belongs_to :user, Wsdjs.Accounts.User
-    
+
     timestamps()
   end
 

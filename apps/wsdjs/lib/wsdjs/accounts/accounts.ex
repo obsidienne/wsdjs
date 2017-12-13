@@ -7,24 +7,6 @@ defmodule Wsdjs.Accounts do
   alias Wsdjs.Repo
 
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Accounts.AuthToken
-
-  @doc """
-  Returns the list of users having new_song_notification: true
-
-  ## Examples
-
-      iex> list_users_to_notify()
-      [%Accounts.User{}, ...]
-
-  """
-  def list_users_to_notify do
-    User
-    |> join(:left, [u], p in assoc(u, :user_parameters))
-    |> where([u], u.new_song_notification == true)
-    |> Repo.all()
-    |> Repo.preload(:avatar)
-  end
 
   @doc """
   Returns the list of users.
@@ -39,7 +21,7 @@ defmodule Wsdjs.Accounts do
     User
     |> order_by([:name])
     |> Repo.all()
-    |> Repo.preload([:avatar, :songs, :comments])
+    |> Repo.preload([:avatar, :songs, :comments, :parameter, :detail])
   end
 
   @doc """
@@ -56,29 +38,31 @@ defmodule Wsdjs.Accounts do
   """
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.create_changeset(attrs)
     |> Repo.insert()
   end
 
   @doc """
-  Gets a single user.
+  Gets a single activated user.
 
-  Raises `Ecto.NoResultsError` if the User does not exist.
+  Raises `Ecto.NoResultsError` if the User does not exist or is deactivated.
 
   ## Examples
 
-      iex> get_user(UUID)
+      iex> get_activated_user!(UUID)
       %User{}
 
-      iex> get_user(unknow UUID)
+      iex> get_activated_user!(unknow UUID)
       nil
 
   """
-  def get_user(id) do
+  def get_activated_user!(id) do
     User
-    |> Repo.get(id)
+    |> where(deactivated: false)
+    |> Repo.get!(id)
     |> Repo.preload([:avatar, :detail, :parameter])
   end
+
   def get_user!(id) do
     User
     |> Repo.get!(id)
@@ -88,7 +72,7 @@ defmodule Wsdjs.Accounts do
   def get_user_by_email(email) do
     User
     |> Repo.get_by(email: String.downcase(email))
-    |> Repo.preload(:avatar)
+    |> Repo.preload([:avatar, :detail, :parameter])
   end
 
   @doc """
@@ -116,29 +100,15 @@ defmodule Wsdjs.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_user(%User{} = user, attrs) do
+  def update_user(%User{} = user, attrs, %User{admin: false}) do
     user
     |> User.changeset(attrs)
     |> Repo.update()
   end
-
-  def set_magic_link_token(%User{} = user, token) do
-    %AuthToken{}
-    |> AuthToken.changeset(%{value: token, user_id: user.id})
-    |> Repo.insert!()
-  end
-
-  @token_max_age 1_800
-  def get_magic_link_token(value) do
-    AuthToken
-    |> where([t], t.value == ^value)
-    |> where([t], t.inserted_at > datetime_add(^Ecto.DateTime.utc, ^(@token_max_age * -1), "second"))
-    |> Repo.one()
-    |> Repo.preload(:user)
-  end
-
-  def delete_magic_link_token!(token) do
-    Repo.delete!(token)
+  def update_user(%User{} = user, attrs, %User{admin: true}) do
+    user
+    |> User.admin_changeset(attrs)
+    |> Repo.update()
   end
 
   ###############################################
@@ -162,102 +132,5 @@ defmodule Wsdjs.Accounts do
     |> order_by([desc: :inserted_at])
     |> limit(1)
     |> Repo.all
-  end
-
-  ###############################################
-  #
-  # Invitation
-  #
-  ###############################################
-  alias Wsdjs.Accounts.Invitation
-
-  @doc """
-  Gets a single invitation.
-
-  Raises `Ecto.NoResultsError` if the Invitation does not exist.
-
-  ## Examples
-
-      iex> get_invitation!(123)
-      %Invitation{}
-
-      iex> get_invitation!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_invitation!(id), do: Repo.get!(Invitation, id)
-
-  @doc """
-  Returns the list of invitations.
-
-  ## Examples
-
-      iex> list_invitations()
-      [%Invitation{}, ...]
-
-  """
-  def list_invitations do
-    Repo.all(Invitation)
-  end
-
-  @doc """
-  Creates a invitation.
-
-  ## Examples
-
-      iex> create_invitation(%{field: value})
-      {:ok, %Invitation{}}
-
-      iex> create_invitation(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_invitation(attrs \\ %{}) do
-    if is_nil(get_user_by_email(attrs["email"])) do
-      %Invitation{}
-      |> Invitation.changeset(attrs)
-      |> Repo.insert()
-    else
-      {:error, %Ecto.Changeset{}}
-    end
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking song changes.
-
-  ## Examples
-
-      iex> change_song(song)
-      %Ecto.Changeset{source: %Song{}}
-
-  """
-  def change_invitation(%Invitation{} = invitation) do
-    Invitation.changeset(invitation, %{})
-  end
-
-  @doc """
-  """
-  def accept_invitation(%Invitation{} = invitation) do
-    {:ok, user} = create_user(%{email: invitation.email, name: invitation.name})
-
-    invitation
-    |> Invitation.changeset(%{user_id: user.id})
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes an Invitation.
-
-  ## Examples
-
-      iex> delete_invitation(invitation)
-      {:ok, %Invitation{}}
-
-      iex> delete_invitation(invitation)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_invitation(%Invitation{} = invitation) do
-    Repo.delete(invitation)
   end
 end

@@ -36,3 +36,10 @@ a.label:focus {
 .label-primary[href]:focus {
   background-color: #286090;
 }
+.label-danger {
+  background-color: #F25F5C;
+}
+.label-danger[href]:hover,
+.label-danger[href]:focus {
+  background-color: #F25F5C;
+}

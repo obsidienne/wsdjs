@@ -4,11 +4,23 @@
   <div class="container">
     <h4>World Swing DeeJays</h4>
     <h5>The best West Coast Swing music from all around the world !</h5>
+
+    <%= if is_nil(@current_user) do %>
+      <%= link to: session_path(@conn, :new), data: [turbolinks: false] do %>
+        <div class="glnav__user__signin--container btn btn-primary tippy" title="You can sign in with this link">Sign in</div>
+      <% end %>
+      or 
+      <%= link "register", to: registration_path(@conn, :new), data: [turbolinks: false] %>
+    <% end %>
   </div>
 
   <div class="container">
+    <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
+      <a class="btn btn-primary tippy" title="Suggest a song for the current month TOP 10" href="<%= suggestion_path(@conn, :new) %>">Suggest a song</a>
+    <% end %>
     <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
-      <a class="btn btn-primary" title="Suggest a song" href="<%= song_path(@conn, :new) %>">Suggest a song</a>
+      <span class="btn">or</span>
+    <a class="btn btn-link" href="<%= song_path(@conn, :new) %>">Add a song</a>
     <% end %>
   </div>
 </header>

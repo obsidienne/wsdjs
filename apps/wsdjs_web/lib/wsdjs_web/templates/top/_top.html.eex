@@ -2,9 +2,9 @@
       <a href="<%= top_path(@conn, :show, @top.id) %>" class="tops__top__anchor">
         <%= if Enum.count(@top.ranks) > 0 do %>
           <%= if blur_track(Enum.at(@top.ranks, 0).song, @current_user) == true do %>
-            <img src="<%= art_url(nil, 200) %>" class="tops__top__anchor__img card" >
+            <img src="<%= art_url(nil, 100) %>" class="tops__top__anchor__img card" >
           <% else %>
-            <img src="<%= art_url(Enum.at(@top.ranks, 0).song.art, 200) %>" class="tops__top__anchor__img card" >
+            <img src="<%= art_url(Enum.at(@top.ranks, 0).song.art, 100) %>" srcset="<%= art_srcset(Enum.at(@top.ranks, 0).song.art, 100) %>" sizes="100px" class="responsive" />
           <% end %>
         <% end %>
       </a>
@@ -17,7 +17,7 @@
               <%= if blur_track(rank.song, @current_user) == true do %>
               <img src="<%= art_url(nil, 200) %>" class="responsive" >
               <% else %>
-              <img src="<%= art_url(rank.song.art, 200) %>" class="responsive" >
+              <img src="<%= art_url(rank.song.art, 200) %>" srcset="<%= art_srcset(rank.song.art, 100) %>" sizes="100px" class="responsive" />
               <% end %>
             </div>
           <% end %>

@@ -92,6 +92,9 @@
     border-radius: 50%;
 }
 
+.user-parameters th {
+  white-space: nowrap;
+}
 /****************************
   invitation
 ****************************/
