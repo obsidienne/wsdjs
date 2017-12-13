@@ -58,6 +58,7 @@ defmodule WsdjsWeb.Router do
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
     resources "/sessions", SessionController, only: [:new, :create]
+    resources "/registrations", RegistrationController, only: [:new, :create]
     get "/signin/:token", SessionController, :show, as: :signin
     get "/invited/:token", InvitedController, :show, as: :invited
     resources "/invitations", InvitationController, only: [:new, :create]
