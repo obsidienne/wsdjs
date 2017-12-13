@@ -8,6 +8,9 @@
 - activate the option to be notified when a new song has been suggested the last 24h
 - use srcset for img resolution auto selection by the browser
 - create the user_parameters and user_details tables for every new users (need to check the prod for those tables to avoid blocking errors on profils)
+- differentiates song suggestion (used in TOP 10) and song creation (not used in TOP 10) 
+- Registration and Sign in are differentiated to help user in connection/registration aspect
+- remove a lot of ex_machine usage (tech aspect not a user aspect)
 # version 1.5
 - apple file for universal link
 - move API to v1 
