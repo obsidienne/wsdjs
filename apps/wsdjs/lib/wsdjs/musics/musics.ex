@@ -103,6 +103,24 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
+  Creates a suggestion.
+
+  ## Examples
+
+      iex> create_suggestion(%{field: value})
+      {:ok, %Song{}}
+
+      iex> create_suggestion(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_suggestion(params) do
+    %Song{}
+    |> Song.suggestion_changeset(params)
+    |> Repo.insert()
+  end
+
+  @doc """
   Gets a single song.
 
   Raises `Ecto.NoResultsError` if the Song does not exist.

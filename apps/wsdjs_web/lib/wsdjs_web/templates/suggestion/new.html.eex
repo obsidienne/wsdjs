@@ -8,11 +8,10 @@
     </div>
   </div>
 
-  <%= form_for @changeset, song_path(@conn, :create), [class: "row"], fn f -> %>
+  <%= form_for @changeset, suggestion_path(@conn, :create), [class: "row"], fn f -> %>
     <p>
-    This song will <strong>NOT</strong> be used in the current month TOP 10
+    This song will be used in the current month TOP 10
     </p>
-    
     <div id="cloudinary_form_div">
       <%= inputs_for f, :art, fn fp -> %>
         <%= hidden_input fp, :cld_id, disabled: :disabled %>
@@ -45,6 +44,6 @@
       <%= error_tag f, :genre %>
     </div>
 
-    <%= submit "Add this song", class: "btn btn-primary " %>
+    <%= submit "Suggest this song", class: "btn btn-primary " %>
   <% end %>
 </main><!-- /.modal-dialog -->

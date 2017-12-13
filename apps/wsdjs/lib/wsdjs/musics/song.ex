@@ -43,6 +43,21 @@ defmodule Wsdjs.Musics.Song do
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
     |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
+    |> put_change(:suggestion, false)
+  end
+
+  def suggestion_changeset(%Song{} = song, attrs) do
+    song
+    |> cast(attrs, [:title, :artist, :url, :bpm, :genre, :user_id])
+    |> validate_required([:title, :artist, :url, :bpm, :genre, :user_id])
+    |> unique_constraint(:title, name: :songs_title_artist_index)
+    |> assoc_constraint(:user)
+    |> cast_assoc(:art)
+    |> validate_number(:bpm, greater_than: 0)
+    |> validate_inclusion(:genre, @validated_genre)
+    |> validate_url(:url)
+    |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
+    |> put_change(:suggestion, true)
   end
 
   def update_changeset(%Song{} = song, attrs) do

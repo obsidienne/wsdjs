@@ -19,7 +19,7 @@ defmodule Wsdjs.MusicsTest do
     end
 
     def song_fixture(attrs \\ %{}) do
-      {:ok, %Song{} = song} = Musics.create_song(song_params(attrs))
+      {:ok, %Song{} = song} = Musics.create_suggestion(song_params(attrs))
       song
     end
 
@@ -48,6 +48,21 @@ defmodule Wsdjs.MusicsTest do
       assert Musics.get_song_by("my artist", "my title") == song
     end
 
+    test "create_suggestion/1 with valid data suggest a song" do
+      user = user_fixture()
+      params = Map.put(@valid_attrs, :user_id, user.id)
+
+      assert {:ok, %Song{} = song} = Musics.create_suggestion(params)
+      assert song.artist == params.artist
+      assert song.title == params.title
+      assert song.url == params.url
+      assert song.bpm == 0
+      assert song.instant_hit == false
+      assert song.hidden_track == false
+      assert song.public_track == false
+      assert song.suggestion == true
+    end
+
     test "create_song/1 with valid data creates a song" do
       user = user_fixture()
       params = Map.put(@valid_attrs, :user_id, user.id)
@@ -60,7 +75,7 @@ defmodule Wsdjs.MusicsTest do
       assert song.instant_hit == false
       assert song.hidden_track == false
       assert song.public_track == false
-      assert song.suggestion == true
+      assert song.suggestion == false
     end
 
     test "create_song/1 with invalid data returns error changeset" do

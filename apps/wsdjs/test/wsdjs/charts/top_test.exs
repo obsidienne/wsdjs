@@ -97,11 +97,11 @@ defmodule Wsdjs.Charts.TopTest do
         top_fixture("counting", -6),
         top_fixture("counting", -26),
         top_fixture("counting", -27),
-      ]
+      ] |> Enum.sort()
 
-      assert tops == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all()
-      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert tops == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs) |> Enum.sort()
+      assert [] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Enum.sort()
+      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Enum.sort()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
@@ -118,11 +118,11 @@ defmodule Wsdjs.Charts.TopTest do
         top_fixture("voting", -6),
         top_fixture("voting", -26),
         top_fixture("voting", -27),
-      ]
+      ] |> Enum.sort()
 
-      assert tops == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert tops == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert tops == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs) |> Enum.sort()
+      assert tops == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs) |> Enum.sort()
+      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Enum.sort()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end

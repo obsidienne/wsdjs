@@ -107,7 +107,7 @@ defmodule Wsdjs.ChartsTest do
     {:ok, %Wsdjs.Musics.Song{} = song} = 
     %{title: "my title#{System.unique_integer([:positive])}", artist: "my artist", genre: "soul", url: "http://youtu.be/dummy"}
     |> Map.put(:user_id, user.id)
-    |> Wsdjs.Musics.create_song()
+    |> Wsdjs.Musics.create_suggestion()
 
     {:ok, %Wsdjs.Musics.Song{} = song} = Wsdjs.Musics.update_song(song, attrs, %Wsdjs.Accounts.User{admin: true})
 
