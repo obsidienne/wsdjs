@@ -67,9 +67,6 @@ exports.config = {
   },
 
   npm: {
-    enabled: true,
-    styles: {
-      'tippy.js': ['dist/tippy.css']
-    }
+    enabled: true
   }
 };

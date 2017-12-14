@@ -1,6 +1,6 @@
 import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
-import Tippy from 'tippy.js/dist/tippy';
+import Tippy from 'tippy.js/dist/tippy.all';
 import MainView from '../main';
 
 export default class View extends MainView {
@@ -36,7 +36,7 @@ export default class View extends MainView {
   mount() {
     super.mount();
     this._submit();
-    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
+    this.tips = new Tippy(".tippy[title]", {performance: true});
 
     // autolinks in comments
     var els = document.querySelectorAll(".comment__content");
@@ -168,7 +168,7 @@ export default class View extends MainView {
       if (this.status >= 200 && this.status < 400) {
         self.tips.destroyAll();
         self._refresh_layout(container, JSON.parse(this.response));
-        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
+        self.tips = new Tippy(".tippy[title]", {performance: true});
       } else {
         console.error("Error");
       }

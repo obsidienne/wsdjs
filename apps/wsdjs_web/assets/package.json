@@ -11,8 +11,7 @@
     "timeago.js": "~3.0.2",
     "autolink-js": "~1.0.2",
     "turbolinks": "~5.0.0",
-    "popper.js": "~1.12.9",
-    "tippy.js": "~1.4.2",
+    "tippy.js": "~2.0.0",
     "places.js": "~1.4.15"
   },
   "devDependencies": {
