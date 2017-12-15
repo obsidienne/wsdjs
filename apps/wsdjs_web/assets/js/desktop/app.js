@@ -71,11 +71,16 @@ function handleUnloadContentLoaded() {
 var radio = new Radio();
 var search = new Search();
 
+document.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
 document.addEventListener('pjax:ready', handleDOMContentLoaded, false);
 window.addEventListener('pjax:unload', handleUnloadContentLoaded, false);
 
 new Pjax({
   areas: [
     'body'
-  ]
+  ],
+  update: {
+    css: false,
+    js: false
+  }
 });
