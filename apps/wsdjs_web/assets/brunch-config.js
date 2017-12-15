@@ -68,6 +68,7 @@ exports.config = {
 
   npm: {
     enabled: true,
+    static: ["node_modules/pjax-api/dist/pjax-api.js"],
     styles: {
       'tippy.js': ['dist/tippy.css']
     }

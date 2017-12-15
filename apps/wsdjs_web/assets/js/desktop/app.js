@@ -22,7 +22,7 @@ import socket from "./socket"
 
 import "phoenix_html"
 import loadView from './views/loader';
-import Turbolinks from 'turbolinks';
+import Pjax from 'pjax-api';
 import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
@@ -71,6 +71,11 @@ function handleUnloadContentLoaded() {
 var radio = new Radio();
 var search = new Search();
 
-window.addEventListener('turbolinks:load', handleDOMContentLoaded, false);
-window.addEventListener('turbolinks:before-cache', handleUnloadContentLoaded, false);
-Turbolinks.start();
+document.addEventListener('pjax:ready', handleDOMContentLoaded, false);
+window.addEventListener('pjax:unload', handleUnloadContentLoaded, false);
+
+new Pjax({
+  areas: [
+    'body'
+  ]
+});
