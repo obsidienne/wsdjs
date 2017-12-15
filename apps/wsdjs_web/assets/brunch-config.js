@@ -67,6 +67,7 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    static: ["node_modules/pjax-api/dist/pjax-api.js"]
   }
 };
