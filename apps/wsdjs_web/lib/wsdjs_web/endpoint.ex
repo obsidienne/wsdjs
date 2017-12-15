@@ -13,7 +13,7 @@ defmodule WsdjsWeb.Endpoint do
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :wsdjs_web, gzip: true, brotli: true
+    at: "/", from: :wsdjs_web, gzip: true, brotli: true,
     only: ~w(css fonts images js favicon.ico robots.txt),
     cache_control_for_vsn_requests: "public, max-age=31536000, immutable"
 
