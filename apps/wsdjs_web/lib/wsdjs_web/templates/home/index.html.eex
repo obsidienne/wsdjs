@@ -30,7 +30,7 @@
   <section>
     <h4 class="page-header">Deejays' pick</h4>
     <ul class="home-page__instant__hit">
-      <%= render_many @songs, WsdjsWeb.SharedView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
+      <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
   </section>
 <% end %>

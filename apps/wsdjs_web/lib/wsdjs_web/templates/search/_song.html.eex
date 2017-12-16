@@ -1,0 +1,49 @@
+<%= if blur_track(@song, @current_user) == true do %>
+
+<li>
+  <a>
+    <article class="song-minicard">
+      <div class="song-minicard__heading">
+        <img src="<%= art_url(nil, 200) %>" class="responsive" />
+      </div>
+      <div class="song-minicard__body">
+        <h4 class="text-muted">hidden track</h4>
+
+        <footer class="song-minicard__footer">
+          <span class="label label-default"><%= @song.genre %></span>
+          <%= if @song.bpm > 0 do %>
+            <span class="label label-primary"><%= @song.bpm %> bpm</span>
+          <% end %>
+          <time class="timeago small text-muted" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
+        </footer>
+      </div>
+    </article>
+  </a>
+</li>
+
+<% else %>
+
+<li>
+  <a href="<%= song_path(@conn, :show, @song.id) %>">
+    <article class="song-minicard">
+      <div class="song-minicard__heading">
+        <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
+      </div>
+      <div class="song-minicard__body">
+        <h5 class="text-muted"><%= @song.title %></h5>
+        <h6 class="text-muted"><%= @song.artist %></h6>
+        <h6 class="text-muted small"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></h6>
+
+        <footer class="song-minicard__footer">
+          <span class="label label-default"><%= @song.genre %></span>
+          <%= if @song.bpm > 0 do %>
+            <span class="label label-primary"><%= @song.bpm %> bpm</span>
+          <% end %>
+          <time class="timeago small text-muted" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
+        </footer>
+      </div>
+    </article>
+  </a>
+</li>
+
+<% end %>
