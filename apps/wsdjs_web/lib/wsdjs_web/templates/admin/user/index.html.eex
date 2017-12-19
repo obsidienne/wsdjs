@@ -5,8 +5,8 @@
 
   <nav class="tabs-navigation container">
     <ul class="tabs-navigation__items">
-      <li class="tabs-navigation__item active"><a data-turbolinks="false" href="#users-section">users</a></li>
-      <li class="tabs-navigation__item"><a data-turbolinks="false" href="#invitations-section">invitations</a></li>
+      <li class="tabs-navigation__item active"><a href="#users-section">users</a></li>
+      <li class="tabs-navigation__item"><a href="#invitations-section">invitations</a></li>
     </ul>
   </nav>
 

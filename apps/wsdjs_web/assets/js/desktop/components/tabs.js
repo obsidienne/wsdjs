@@ -30,9 +30,6 @@ class Tabs {
     toggle.classList.add("active");
 
     let tab = document.querySelector(".tabs-navigation__item.active");
-//    <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#overview-section">overview</a></li>
-  //  <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#videos-section">videos</a></li>
-  
   };  
 }
 

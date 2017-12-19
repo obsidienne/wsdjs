@@ -2,7 +2,7 @@
   <nav class="glnav container">
     <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
     <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu text-muted" %>
-    <%= link to: session_path(@conn, :new), data: [turbolinks: false] do %>
+    <%= link to: session_path(@conn, :new) do %>
       <div class="glnav__user__signin--container  btn btn-primary">Sign in</div>
     <% end %>
   </nav>

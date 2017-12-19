@@ -35,7 +35,7 @@
           <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
         <% end %>
         <%= if Wsdjs.Accounts.Policy.can?(@current_user, :logout, @user) == :ok do %>
-          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout",  data: [turbolinks: "false"] %>
+          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout" %>
         <% end %>
       </footer>
     </section>
@@ -57,10 +57,10 @@
     <nav>
       <ul class="tabs-navigation__items">
         <%= if Enum.count(@songs) > 0 do %>
-        <li class="tabs-navigation__item active"><a data-tab data-turbolinks="false" href="#suggestions-section">suggestions</a></li>
+        <li class="tabs-navigation__item active"><a data-tab href="#suggestions-section">suggestions</a></li>
         <% end %>
         <%= if @current_user && @current_user.id == @user.id do %>
-        <li class="tabs-navigation__item"><a data-tab data-turbolinks="false" href="#parameters-section">parameters</a></li>
+        <li class="tabs-navigation__item"><a data-tab href="#parameters-section">parameters</a></li>
         <% end %>
       </ul>
     </nav>

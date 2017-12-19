@@ -6,11 +6,11 @@
       <h4>World Swing DeeJays</h4>
       <h5>The best West Coast Swing music from all around the world !</h5>
 
-      <%= link to: session_path(@conn, :new), data: [turbolinks: false] do %>
+      <%= link to: session_path(@conn, :new) do %>
         <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
       <% end %>
       or 
-      <%= link "register", to: registration_path(@conn, :new), data: [turbolinks: false] %>
+      <%= link "register", to: registration_path(@conn, :new) %>
     </div>
   <% end %>
 
