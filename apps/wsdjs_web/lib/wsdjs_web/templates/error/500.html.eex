@@ -28,7 +28,12 @@
   </head>
 
   <body>
-    <%= render "_nav.html", assigns %>
+    <header class="hero hot-hero">
+      <nav class="glnav container">
+        <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
+        <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu text-muted" %>
+      </nav>
+    </header>
 
     <section class="container">
       <h1 class="page-header text-center">Sorry something went <u>REALLY</u> wrong !</h1>
