@@ -15,7 +15,7 @@
         <%= if is_nil(invitation.user_id) do %>
         <%= link "Accept invitation", to: admin_invitation_path(@conn, :update, invitation), class: "btn btn-link", method: "put", data: [confirm: "Accept #{invitation.name} request.\n\nAre you sure ?"] %> 
         <% end %>
-        <%= link "Delete", to: admin_invitation_path(@conn, :delete, invitation), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{invitation.name} request.\n\nAre you sure ?"] %></h1>
+        <%= link "Delete", to: admin_invitation_path(@conn, :delete, invitation), class: "btn btn-danger", method: "delete", title: "Delete the invitation, not the user", data: [confirm: "Delete #{invitation.name} request.\n\nAre you sure ?"] %></h1>
       </footer>
     </article>
   </li>

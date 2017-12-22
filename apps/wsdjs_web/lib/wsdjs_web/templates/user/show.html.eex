@@ -53,20 +53,9 @@
   </div>
 
   <%= if @current_user do %>
-  <section>
-    <nav>
-      <ul class="tabs-navigation__items">
-        <%= if Enum.count(@songs) > 0 do %>
-        <li class="tabs-navigation__item active"><a data-tab href="#suggestions-section">suggestions</a></li>
-        <% end %>
-        <%= if @current_user && @current_user.id == @user.id do %>
-        <li class="tabs-navigation__item"><a data-tab href="#parameters-section">parameters</a></li>
-        <% end %>
-      </ul>
-    </nav>
-
+  <section id="suggestions-section">
     <%= if Wsdjs.Musics.Policy.can?(@current_user, :list_user_suggestions) == :ok do %>
-    <section id="suggestions-section" class="tabs-pane active">
+    <section>
       <ul id="user-page__song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
         <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song, current_user: @current_user %>
       </ul>
@@ -74,13 +63,6 @@
       <div class="sentinel"><div class="throbber-loader"></div></div>
       <% end %>
     </section>
-
-    <%= if @current_user && @current_user.id == @user.id do %>
-    <section id="parameters-section" class="tabs-pane">
-      <%= render "_user_parameters.html", user: @user %>
-    </section>
-    <% end %>
-
     <% end %>
   </section>
   <% end %>

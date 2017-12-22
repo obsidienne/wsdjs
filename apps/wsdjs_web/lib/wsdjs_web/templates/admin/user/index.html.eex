@@ -3,17 +3,10 @@
     <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
   </header>
 
-  <nav class="tabs-navigation container">
-    <ul class="tabs-navigation__items">
-      <li class="tabs-navigation__item active"><a href="#users-section">users</a></li>
-      <li class="tabs-navigation__item"><a href="#invitations-section">invitations</a></li>
-    </ul>
-  </nav>
-
-  <section id="users-section" class="container tabs-pane active">
-    <%= render "_users.html", conn: @conn, users: @users %>
-  </section>
-  <section id="invitations-section" class="container tabs-pane">
+  <section id="invitations-section" class="container">
     <%= render "_invitations.html", conn: @conn, invitations: @invitations %>
+  </section>
+  <section id="users-section" class="container">
+    <%= render "_users.html", conn: @conn, users: @users %>
   </section>
 </main>

@@ -26,7 +26,6 @@ import Pjax from 'pjax-api';
 import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
-import Tabs from './components/tabs';
 import Outdated from './components/outdated';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
