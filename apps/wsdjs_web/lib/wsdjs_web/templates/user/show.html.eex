@@ -4,7 +4,6 @@
       background-image: none;
     }
   </style>
-  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
 </section>
 <main id="user-page" class="user-page container">
 

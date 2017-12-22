@@ -1,7 +1,3 @@
-<header class="hero">
-  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
-</header>
-
 <main class="container">
   <%= form_for @changeset, top_path(@conn, :create), fn f -> %>
     <div class="form-group">

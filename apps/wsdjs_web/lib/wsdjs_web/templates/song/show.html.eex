@@ -6,8 +6,6 @@
 
 <main>
 <section class="hero">
-  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
-
   <div class="song-page container">
     <div class="song-page__art">
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>

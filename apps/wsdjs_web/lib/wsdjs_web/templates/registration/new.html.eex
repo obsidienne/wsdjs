@@ -1,8 +1,3 @@
-<nav class="glnav container">
-  <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
-
-  <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu text-muted" %>
-</nav>
 <main class="container">
     <%= form_for @conn, registration_path(@conn, :create), [as: :signup, class: "container-form"], fn f -> %>
     <div class="form-group">

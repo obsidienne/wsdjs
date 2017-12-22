@@ -35,6 +35,8 @@
   </head>
 
   <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
+    <%= render "_nav.html", conn: @conn, current_user: @current_user %>
+
     <%= render @view_module, @view_template, assigns %>
 
     <%= render "_player.html", conn: @conn %>

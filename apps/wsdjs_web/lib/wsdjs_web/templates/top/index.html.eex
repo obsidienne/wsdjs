@@ -1,6 +1,4 @@
 <header class="hero">
-  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
-
   <%= if is_nil(@current_user) do %>
     <div class="container">
       <h4>World Swing DeeJays</h4>

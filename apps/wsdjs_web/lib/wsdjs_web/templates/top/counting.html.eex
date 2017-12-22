@@ -1,6 +1,4 @@
 <header class="hero">
-  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
-
   <div class="container">
     <h3 class="page-header">TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small><%= @top.status %></small>
       <%= if @current_user && @current_user.admin do %>

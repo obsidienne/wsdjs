@@ -1,8 +1,4 @@
 <main>
-  <header class="hero admin">
-    <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
-  </header>
-
   <section id="invitations-section" class="container">
     <%= render "_invitations.html", conn: @conn, invitations: @invitations %>
   </section>
