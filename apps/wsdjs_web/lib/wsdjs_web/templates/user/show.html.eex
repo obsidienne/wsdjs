@@ -22,6 +22,7 @@
           <span class="place-icon user-page__profile-details__place"> <%= @user.user_country %></span>
           <% end %>
           <div class="user-page__profils">
+            <%= if @user.verified_profil do %><span class="label label-primary">Verified</span><% end %>
             <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
             <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
           </div>

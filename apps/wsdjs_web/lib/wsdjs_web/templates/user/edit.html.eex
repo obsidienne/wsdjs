@@ -118,6 +118,16 @@
         </td>
       </tr>
       <tr>
+        <th>Verified profil<br/><small>opt in</small></th>
+        <td>
+          <div class=" ckbx-style-11 ">
+            <%= checkbox f, :verified_profil %>
+            <%= label f,:verified_profil do %><% end %>
+          </div>
+          <p class="help-block small">The user identity has been verified, try to avoid user usurpation</p>
+        </td>
+      </tr>
+      <tr>
         <th>Profil DJ VIP<br/><small>opt in</small></th>
         <td>
           <div class=" ckbx-style-11 ">

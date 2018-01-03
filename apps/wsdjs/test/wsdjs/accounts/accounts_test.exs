@@ -30,6 +30,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.parameter.piwik == true
       assert user.parameter.video == false
       assert user.parameter.radioking_unmatch == false
+      assert user.verified_profil == false
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -88,6 +89,7 @@ defmodule Wsdjs.AccountsTest do
       profil_djvip: true,
       profil_dj: true,
       deactivated: true,
+      verified_profil: true,
       activated_at: Timex.now,
       parameter: %{
         new_song_notification: true,
@@ -149,6 +151,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.profil_dj == true
       assert user.deactivated == true
       assert user.activated_at == nil
+      assert user.verified_profil == true
 
       assert user.parameter.new_song_notification == true
       assert user.parameter.piwik == false
@@ -182,6 +185,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.profil_dj == false
       assert user.deactivated == false
       assert user.activated_at == nil
+      assert user.verified_profil == false
 
       assert user.parameter.new_song_notification == true
       assert user.parameter.piwik == true
