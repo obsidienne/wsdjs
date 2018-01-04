@@ -9,13 +9,6 @@ defmodule WsdjsApi.SongHelper do
   def url_for_provider(%Song{url: url}) when is_binary(url), do: url
   def url_for_provider(_), do: "#"
 
-  def comment_class(song) do
-    case Enum.count(song.comments) do
-      0 -> "song-comment-empty"
-      _ -> "song-comment"
-    end
-  end
-
   def utc_to_local(dt) do
     dt
     |> Timex.to_datetime()

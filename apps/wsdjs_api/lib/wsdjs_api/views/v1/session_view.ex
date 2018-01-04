@@ -8,7 +8,7 @@ defmodule WsdjsApi.V1.SessionView do
       id: user.id,
       email: user.email,
       dj_name: user.djname,
-     # path: user_path(WsdjsApi.Endpoint, :show, user),
+      path: account_path(WsdjsApi.Endpoint, :show, user),
       avatars: %{
         avatar_uri_200: CloudinaryHelper.avatar_url(avatar, 200),
         avatar_uri: CloudinaryHelper.avatar_url(avatar, 100)

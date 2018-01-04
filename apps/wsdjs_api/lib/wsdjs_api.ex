@@ -39,7 +39,6 @@ defmodule WsdjsApi do
       import WsdjsApi.Gettext
 
       # Import custom helpers
-      import WsdjsApi.OpinionsHelper
       import WsdjsApi.SongHelper
       import WsdjsApi.UserHelper
       import WsdjsApi.CloudinaryHelper
