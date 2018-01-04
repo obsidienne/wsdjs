@@ -30,10 +30,8 @@ defmodule WsdjsApi.Router do
   scope "/api", WsdjsApi do
     pipe_through [:api]
 
-    scope "/", alias: Api do
-      resources "/now_playing", NowPlayingController, only: [:index]
-      resources "/mobile_config", MobileConfigController, only: [:index]
-    end
+    resources "/now_playing", NowPlayingController, only: [:index]
+    resources "/mobile_config", MobileConfigController, only: [:index]
 
     scope "/v1", V1 do
       resources "/now_playing", NowPlayingController, only: [:index]
@@ -52,8 +50,6 @@ defmodule WsdjsApi.Router do
   scope "/", WsdjsApi do
     pipe_through [:api]
 
-    scope "/", alias: Api do
-      get "/.well-known/:page", StaticController, :show
-    end
+    get "/.well-known/:page", StaticController, :show
   end
 end
