@@ -7,7 +7,8 @@ use Mix.Config
 
 # General application configuration
 config :wsdjs_api,
-  namespace: WsdjsApi
+  namespace: WsdjsApi,
+  ecto_repos: [Wsdjs.Repo]
 
 # Configures the endpoint
 config :wsdjs_api, WsdjsApi.Endpoint,

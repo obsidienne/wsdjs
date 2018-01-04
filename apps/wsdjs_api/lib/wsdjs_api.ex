@@ -37,6 +37,12 @@ defmodule WsdjsApi do
       import WsdjsApi.Router.Helpers
       import WsdjsApi.ErrorHelpers
       import WsdjsApi.Gettext
+
+      # Import custom helpers
+      import WsdjsApi.OpinionsHelper
+      import WsdjsApi.SongHelper
+      import WsdjsApi.UserHelper
+      import WsdjsApi.CloudinaryHelper
     end
   end
 
