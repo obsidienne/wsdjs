@@ -13,7 +13,7 @@ defmodule WsdjsWeb.Api.V1.AccountControllerTest do
       conn = put_req_header(conn, "authorization", "Bearer " <> user_token)
 
       conn = get conn, api_account_path(conn, :show, user.id)
-      assert json_response(conn, 200)["data"] == %{"id" => user.id, "admin" => user.admin, "country" => user.user_country, "djname" => user.djname, "email" => user.email, "name" => user.name, "profil_dj" => user.profil_dj}
+      assert json_response(conn, 200)["data"] == %{"id" => user.id, "admin" => user.admin, "country" => user.user_country, "djname" => user.djname, "email" => user.email, "name" => user.name, "profil_dj" => user.profil_dj, "verified_profil" => false}
     end
   end
 end
