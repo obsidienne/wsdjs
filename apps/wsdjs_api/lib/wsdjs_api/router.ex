@@ -10,7 +10,7 @@ defmodule WsdjsApi.Router do
     plug WsdjsApi.EnsureAuthenticated, handler_fn: :api_call
   end
 
-  scope "/api", WsdjsApi do
+  scope "/", WsdjsApi do
     pipe_through [:api, :api_auth]
 
     scope "/v1", V1 do
@@ -27,7 +27,7 @@ defmodule WsdjsApi.Router do
     end
   end
 
-  scope "/api", WsdjsApi do
+  scope "/", WsdjsApi do
     pipe_through [:api]
 
     resources "/now_playing", NowPlayingController, only: [:index]
