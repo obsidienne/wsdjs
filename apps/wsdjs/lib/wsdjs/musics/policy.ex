@@ -19,14 +19,10 @@ defmodule Wsdjs.Musics.Policy do
 
   def can?(%User{admin: true}, _), do: :ok
   def can?(%User{profil_djvip: true}, :suggest_song), do: :ok
+  def can?(%User{profil_djvip: true}, :create_song), do: :ok
+  def can?(%User{profil_dj: true}, :create_song), do: :ok
   def can?(%User{}, :search), do: :ok
   def can?(%User{}, :list_user_suggestions), do: :ok
-  def can?{%User{} = user, :create_song} do
-    if user.parameter.videos == true do
-      :ok
-    else
-      {:error, :unauthorized}
-    end
-  end
+
   def can?(_, _), do: {:error, :unauthorized}
 end
