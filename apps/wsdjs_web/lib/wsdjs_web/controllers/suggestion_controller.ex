@@ -4,11 +4,7 @@ defmodule WsdjsWeb.SuggestionController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Musics
-  alias Wsdjs.Reactions
-  alias Wsdjs.Reactions.Comment
   alias Wsdjs.Musics.Song
-  alias Wsdjs.Attachments
-  alias Wsdjs.Attachments.Video
 
   action_fallback WsdjsWeb.FallbackController
 

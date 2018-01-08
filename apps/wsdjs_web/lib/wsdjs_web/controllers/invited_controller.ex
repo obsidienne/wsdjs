@@ -2,9 +2,6 @@ defmodule WsdjsWeb.InvitedController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.Invitation
-
   def show(conn, %{"token" => token}) do
     case WsdjsWeb.MagicLink.verify_invited_link(token) do
       {:ok, user} ->
