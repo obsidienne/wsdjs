@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.SessionController do
+defmodule WsdjsApi.V1.SessionController do
   @moduledoc false
   use WsdjsWeb, :controller
 

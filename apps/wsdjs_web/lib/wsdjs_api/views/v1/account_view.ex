@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.AccountView do
+defmodule WsdjsApi.V1.AccountView do
   use WsdjsWeb, :view
 
   alias WsdjsWeb.CloudinaryHelper

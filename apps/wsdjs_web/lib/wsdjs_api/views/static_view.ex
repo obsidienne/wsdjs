@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.StaticView do
+defmodule WsdjsApi.StaticView do
   use WsdjsWeb, :view
 
   def render("show.json", %{"page" => "apple-app-site-association"}) do

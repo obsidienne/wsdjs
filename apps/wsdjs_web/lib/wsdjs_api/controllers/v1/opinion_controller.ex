@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.OpinionController do
+defmodule WsdjsApi.V1.OpinionController do
   @moduledoc false
   use WsdjsWeb, :controller
 

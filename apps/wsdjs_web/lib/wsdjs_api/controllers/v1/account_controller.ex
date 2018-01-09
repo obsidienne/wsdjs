@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.AccountController do
+defmodule WsdjsApi.V1.AccountController do
   @moduledoc false
   use WsdjsWeb, :controller
 

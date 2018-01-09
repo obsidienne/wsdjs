@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.CommentController do
+defmodule WsdjsApi.V1.CommentController do
   @moduledoc false
   use WsdjsWeb, :controller
 

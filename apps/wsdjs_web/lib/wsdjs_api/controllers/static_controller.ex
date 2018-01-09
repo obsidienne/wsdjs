@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.StaticController do
+defmodule WsdjsApi.StaticController do
   @moduledoc false
   use WsdjsWeb, :controller
 

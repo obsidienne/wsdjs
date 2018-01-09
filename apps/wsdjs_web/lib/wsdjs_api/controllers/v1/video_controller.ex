@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.VideoController do
+defmodule WsdjsApi.V1.VideoController do
   @moduledoc false
   use WsdjsWeb, :controller
 

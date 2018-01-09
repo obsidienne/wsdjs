@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.ErrorView do
+defmodule WsdjsApi.V1.ErrorView do
   use WsdjsWeb, :view
 
   def render("401.json", _assigns) do

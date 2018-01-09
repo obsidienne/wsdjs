@@ -21,7 +21,7 @@ defmodule WsdjsWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug WsdjsWeb.VerifyHeader
+    plug WsdjsApi.VerifyHeader
   end
 
   pipeline :api_auth do
@@ -71,10 +71,10 @@ defmodule WsdjsWeb.Router do
     resources "/invitations", InvitationController, only: [:delete, :update]
   end
 
-  scope "/api", as: :api, alias: :'WsdjsWeb' do
+  scope "/api", as: :api, alias: :'WsdjsApi' do
     pipe_through [:api, :api_auth]
 
-    scope "/v1", alias: Api.V1 do
+    scope "/v1", V1 do
       resources "/songs", SongController, only: [] do
         resources "/opinions", OpinionController, only: [:create]
         resources "/comments", CommentController, only: [:create]
@@ -87,15 +87,15 @@ defmodule WsdjsWeb.Router do
     end
   end
 
-  scope "/api", as: :api, alias: :'WsdjsWeb' do
+  scope "/api", as: :api, alias: :'WsdjsApi' do
     pipe_through [:api]
 
-    scope "/", alias: Api do
+    scope "/" do
       resources "/now_playing", NowPlayingController, only: [:index]
       resources "/mobile_config", MobileConfigController, only: [:index]
     end
 
-    scope "/v1", alias: Api.V1 do
+    scope "/v1", V1 do
       resources "/now_playing", NowPlayingController, only: [:index]
       resources "/mobile_config", MobileConfigController, only: [:index]
       get "/signin/:token", SessionController, :show, as: :signin
@@ -109,10 +109,10 @@ defmodule WsdjsWeb.Router do
     end
   end
 
-  scope "/", as: :api, alias: :'WsdjsWeb' do
+  scope "/", as: :api, alias: :'WsdjsApi' do
     pipe_through [:api]
 
-    scope "/", alias: Api do
+    scope "/" do
       get "/.well-known/:page", StaticController, :show
     end
   end

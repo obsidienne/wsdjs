@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.ChangesetView do
+defmodule WsdjsApi.V1.ChangesetView do
   use WsdjsWeb, :view
 
   @doc """

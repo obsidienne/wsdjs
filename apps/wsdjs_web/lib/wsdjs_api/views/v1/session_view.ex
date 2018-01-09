@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.SessionView do
+defmodule WsdjsApi.V1.SessionView do
   use WsdjsWeb, :view
 
   alias WsdjsWeb.CloudinaryHelper

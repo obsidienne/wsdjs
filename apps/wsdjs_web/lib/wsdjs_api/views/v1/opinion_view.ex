@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.Api.V1.OpinionView do
+defmodule WsdjsApi.V1.OpinionView do
   use WsdjsWeb, :view
 
-  alias WsdjsWeb.Api.V1.OpinionView
+  alias WsdjsApi.V1.OpinionView
 
   def render("index.json", %{song: song, opinions: opinions, current_user: nil}) do
     ups = Enum.filter(opinions, fn(x) -> x.kind == "up" end)

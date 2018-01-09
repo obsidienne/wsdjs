@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.Api.V1.CommentView do
+defmodule WsdjsApi.V1.CommentView do
   use WsdjsWeb, :view
 
-  alias WsdjsWeb.Api.V1.CommentView
+  alias WsdjsApi.V1.CommentView
   alias WsdjsWeb.CloudinaryHelper
 
   def render("index.json", %{comments: comments}) do

@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.NowPlayingController do
+defmodule WsdjsApi.V1.NowPlayingController do
   @moduledoc false
   use WsdjsWeb, :controller
 

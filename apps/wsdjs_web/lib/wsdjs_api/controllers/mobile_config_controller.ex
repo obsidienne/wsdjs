@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.MobileConfigController do
+defmodule WsdjsApi.MobileConfigController do
   @moduledoc false
   use WsdjsWeb, :controller
 
