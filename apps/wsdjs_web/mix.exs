@@ -44,7 +44,7 @@ defmodule WsdjsWeb.Mixfile do
      {:bamboo, "~> 0.8"},
      {:timex, "~> 3.0"},
      {:corsica, "~> 1.0"},
-     {:ua_inspector, github: "elixytics/ua_inspector", ref: "34aade30ed642d284772884204a8aa8fcb2b6d79"},
+     {:ua_inspector, "~> 0.16"},
      {:wsdjs, in_umbrella: true},
      {:wsdjs_jobs, in_umbrella: true},
      {:cowboy, "~> 1.0"}]
