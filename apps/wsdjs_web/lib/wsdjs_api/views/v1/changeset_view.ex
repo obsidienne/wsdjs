@@ -1,5 +1,5 @@
 defmodule WsdjsApi.V1.ChangesetView do
-  use WsdjsWeb, :view
+  use WsdjsApi, :view
 
   @doc """
   Traverses and translates changeset errors.

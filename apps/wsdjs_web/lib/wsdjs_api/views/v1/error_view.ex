@@ -1,5 +1,5 @@
 defmodule WsdjsApi.V1.ErrorView do
-  use WsdjsWeb, :view
+  use WsdjsApi, :view
 
   def render("401.json", _assigns) do
     %{errors: %{detail: "Unauthorized"}}

@@ -1,5 +1,5 @@
 defmodule WsdjsApi.V1.OpinionView do
-  use WsdjsWeb, :view
+  use WsdjsApi, :view
 
   alias WsdjsApi.V1.OpinionView
 

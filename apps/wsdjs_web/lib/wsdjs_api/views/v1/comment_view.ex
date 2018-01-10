@@ -1,5 +1,5 @@
 defmodule WsdjsApi.V1.CommentView do
-  use WsdjsWeb, :view
+  use WsdjsApi, :view
 
   alias WsdjsApi.V1.CommentView
   alias WsdjsWeb.CloudinaryHelper
