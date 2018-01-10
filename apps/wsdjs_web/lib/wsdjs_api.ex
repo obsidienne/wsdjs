@@ -1,7 +1,7 @@
 defmodule WsdjsApi do
   @moduledoc """
-  A module that keeps using definitions for controllers,
-  views and so on.
+  The entrypoint for defining your web interface, such
+  as controllers, views, channels and so on.
 
   This can be used in your application as:
 
@@ -13,7 +13,8 @@ defmodule WsdjsApi do
   on imports, uses and aliases.
 
   Do NOT define functions inside the quoted expressions
-  below.
+  below. Instead, define any helper function in modules
+  and import those modules here.
   """
 
   def controller do
@@ -31,7 +32,7 @@ defmodule WsdjsApi do
                         namespace: WsdjsApi
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1, action_name: 1]
+      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
 
       import WsdjsWeb.Router.Helpers
       import WsdjsWeb.ErrorHelpers
