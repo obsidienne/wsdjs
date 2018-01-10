@@ -12,7 +12,7 @@ defmodule WsdjsWeb.Router do
   end
 
   pipeline :browser_auth do
-    plug WsdjsWeb.EnsureAuthenticated, handler_fn: :session_call
+    plug WsdjsWeb.EnsureAuthenticated
   end
 
   pipeline :ensure_admin do
@@ -25,7 +25,7 @@ defmodule WsdjsWeb.Router do
   end
 
   pipeline :api_auth do
-    plug WsdjsWeb.EnsureAuthenticated, handler_fn: :api_call
+    plug WsdjsApi.EnsureAuthenticated
   end
 
   if Mix.env == :dev do

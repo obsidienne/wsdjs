@@ -8,12 +8,11 @@ defmodule WsdjsWeb.EnsureAuthenticated do
 
   def init(opts), do: opts
 
-  def call(conn, opts) do
-    handler_fn = Keyword.get(opts, :handler_fn)
+  def call(conn, _opts) do
     case conn.assigns[:current_user] do
       nil ->
         conn = conn |> halt
-        apply(WsdjsWeb.Unauthenticated, handler_fn, [conn, conn.params])
+        apply(WsdjsWeb.Unauthenticated, :session_call, [conn, conn.params])
       _ ->
         conn
     end
