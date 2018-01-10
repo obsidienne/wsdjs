@@ -5,7 +5,7 @@ defmodule WsdjsApi.V1.AccountController do
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
 
-  action_fallback WsdjsWeb.Api.V1.FallbackController
+  action_fallback WsdjsApi.V1.FallbackController
 
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]

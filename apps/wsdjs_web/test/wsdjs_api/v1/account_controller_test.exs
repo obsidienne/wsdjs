@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Api.V1.AccountControllerTest do
+defmodule WsdjsApi.V1.AccountControllerTest do
   use WsdjsWeb.ConnCase
   import Wsdjs.Factory
 

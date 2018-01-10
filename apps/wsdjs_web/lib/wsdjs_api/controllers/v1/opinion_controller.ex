@@ -5,7 +5,7 @@ defmodule WsdjsApi.V1.OpinionController do
   alias Wsdjs.Musics
   alias Wsdjs.Reactions
 
-  action_fallback WsdjsWeb.Api.V1.FallbackController
+  action_fallback WsdjsApi.V1.FallbackController
 
   def index(conn, %{"song_id" => song_id}) do
     current_user = conn.assigns[:current_user]
