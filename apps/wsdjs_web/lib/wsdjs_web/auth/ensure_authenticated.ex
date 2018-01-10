@@ -1,9 +1,4 @@
 defmodule WsdjsWeb.EnsureAuthenticated do
-  @moduledoc """
-    plug PhoenixTokenPlug.EnsureAuthenticated,
-      handler_fn: :handle_error      # (required) Customize the handler function
-  """
-
   import Plug.Conn
 
   def init(opts), do: opts
