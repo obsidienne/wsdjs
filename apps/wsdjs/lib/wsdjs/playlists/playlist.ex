@@ -1,8 +1,8 @@
-defmodule Wsdjs.Musics.Playlist do
+defmodule Wsdjs.Playlists.Playlist do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Musics.Playlist
+  alias Wsdjs.Playlists.Playlist
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
