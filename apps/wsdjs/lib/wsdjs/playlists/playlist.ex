@@ -13,13 +13,10 @@ defmodule Wsdjs.Playlists.Playlist do
     belongs_to :user, Wsdjs.Accounts.User
   end
 
-  @allowed_fields [:name, :user_id]
-  @required_fields [:name, :user_id]
-
   def changeset(%Playlist{} = playlist, attrs) do
     playlist
-    |> cast(attrs, @allowed_fields)
-    |> validate_required(@required_fields)
+    |> cast(attrs, [:name, :user_id])
+    |> validate_required([:name, :user_id])
     |> unique_constraint(:name, name: :playlists_user_id_name_index)
     |> assoc_constraint(:user)
   end
