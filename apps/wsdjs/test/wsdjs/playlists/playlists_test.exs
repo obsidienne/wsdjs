@@ -40,6 +40,20 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
 
     test "create_playlist/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Playlists.create_playlist(@invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{} = changeset} = Playlists.create_playlist(%{name: ""})
+      assert "can't be blank" in errors_on(changeset).name
+
+      assert {:error, %Ecto.Changeset{} = changeset} = Playlists.create_playlist(%{name: " "})
+      assert "can't be blank" in errors_on(changeset).name
+
+      assert {:error, %Ecto.Changeset{} = changeset} = Playlists.create_playlist(%{name: "test", user_id: Ecto.UUID.generate()})
+      assert "does not exist" in errors_on(changeset).user
+
+      attrs = playlist_fixture_attrs()
+      assert {:ok, %Playlist{}} = Playlists.create_playlist(attrs)
+      assert {:error, %Ecto.Changeset{} = changeset} = Playlists.create_playlist(attrs)
+      assert "has already been taken" in errors_on(changeset).name
     end
 
     test "update_playlist/2 with valid data updates the playlist" do
