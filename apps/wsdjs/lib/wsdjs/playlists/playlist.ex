@@ -11,6 +11,7 @@ defmodule Wsdjs.Playlists.Playlist do
     timestamps()
 
     belongs_to :user, Wsdjs.Accounts.User
+    has_many :playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all
   end
 
   def changeset(%Playlist{} = playlist, attrs) do

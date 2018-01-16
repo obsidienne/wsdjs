@@ -6,6 +6,7 @@ defmodule Wsdjs.Playlists do
   import Ecto.Query, warn: false
   alias Wsdjs.Repo
 
+  alias Wsdjs.Musics.Song
   alias Wsdjs.Playlists.Playlist
 
   @doc """
@@ -100,5 +101,44 @@ defmodule Wsdjs.Playlists do
   """
   def change_playlist(%Playlist{} = playlist) do
     Playlist.changeset(playlist, %{})
+  end
+
+  ###############################################
+  #
+  # Playlist Songs
+  #
+  ###############################################
+  alias Ecto.Changeset
+  alias Wsdjs.Playlists.PlaylistSong
+
+  @doc """
+  Returns the list of list_playlist_songs.
+
+  ## Examples
+
+      iex> list_playlist_songs(%Playlist{id: id})
+      [%Song{}, ...]
+
+  """
+  def list_playlist_songs(%Playlist{id: id}) do
+    query = from s in Song,
+    join: ps in PlaylistSong, on: ps.playlist_id == ^id and ps.song_id == s.id,
+    order_by: ps.position
+
+    Repo.all(query)
+  end
+
+  def update_playlist_songs(%Playlist{} = playlist, song_positions) do
+    playlist = playlist |> Repo.preload(:playlist_songs)
+
+    songs = song_positions
+            |> Map.keys()
+            |> Enum.reject(fn(v) -> song_positions[v] == "" end)
+            |> Enum.map(&PlaylistSong.get_or_build(playlist, &1, song_positions[&1]))
+
+    playlist
+    |> Changeset.change
+    |> Changeset.put_assoc(:playlist_songs, songs)
+    |> Repo.update()
   end
 end

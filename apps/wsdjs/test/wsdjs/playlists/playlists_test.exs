@@ -82,4 +82,40 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       assert %Ecto.Changeset{} = Playlists.change_playlist(playlist)
     end
   end
+
+  describe "playlist_songs" do
+    alias Wsdjs.Playlists.Playlist
+
+    def song_fixture(user_id) do
+      {:ok, %Wsdjs.Musics.Song{} = song} = 
+      %{title: "my title#{System.unique_integer([:positive])}", artist: "my artist", genre: "soul", url: "http://youtu.be/dummy"}
+      |> Map.put(:user_id, user_id)
+      |> Wsdjs.Musics.create_suggestion()
+  
+      song
+    end
+
+    def playlist_with_songs_fixture() do
+      {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+      {:ok, playlist} = Playlists.create_playlist(%{name: "dummy#{System.unique_integer()}", user_id: user.id})
+
+      song1 = song_fixture(user.id)
+      song2 = song_fixture(user.id)
+      song3 = song_fixture(user.id)
+
+      Wsdjs.Playlists.update_playlist_songs(playlist, %{
+        song1.id => "1",
+        song2.id => "2",
+        song3.id => "3"
+      })
+
+     %{playlist: playlist, songs: [song1, song2, song3]}
+    end
+
+    test "list_playlist_songs/1 returns all song in the playlist" do
+      %{playlist: playlist, songs: songs} = playlist_with_songs_fixture()
+      assert Playlists.list_playlists() == [playlist]
+      assert Playlists.list_playlist_songs(playlist) == songs
+    end
+  end
 end
