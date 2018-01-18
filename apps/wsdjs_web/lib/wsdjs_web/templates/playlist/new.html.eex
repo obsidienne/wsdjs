@@ -1,0 +1,5 @@
+<h2>New Playlist</h2>
+
+<%= render "form.html", Map.put(assigns, :action, user_playlist_path(@conn, :create, @user)) %>
+
+<span><%= link "Back", to: user_playlist_path(@conn, :index, @current_user) %></span>

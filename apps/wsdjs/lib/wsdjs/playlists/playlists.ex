@@ -22,6 +22,13 @@ defmodule Wsdjs.Playlists do
     Repo.all(Playlist)
   end
 
+  def list_playlists(%Wsdjs.Accounts.User{id: id}) do
+    query = from p in Playlist,
+    where: p.user_id == ^id
+
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single playlist.
 

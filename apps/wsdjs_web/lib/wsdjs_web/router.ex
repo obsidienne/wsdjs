@@ -45,7 +45,10 @@ defmodule WsdjsWeb.Router do
 
     resources "/ranks", RankController, only: [:update, :delete]
     resources "/sessions", SessionController, only: [:delete]
-    resources "/users", UserController, only: [:edit, :update]
+    resources "/users", UserController, only: [:edit, :update] do
+      resources "/playlists", PlaylistController, only: [:new, :create]
+    end
+    resources "/playlists", PlaylistController, only: [:edit, :delete]
   end
 
   scope "/", WsdjsWeb do
@@ -53,7 +56,11 @@ defmodule WsdjsWeb.Router do
 
     get "/", HomeController, :index
     get "/search", SearchController, :index
-    resources "/users", UserController, only: [:show]
+    resources "/users", UserController, only: [:show] do
+      resources "/playlists", PlaylistController, only: [:index]
+    end
+    resources "/playlists", PlaylistController, only: [:show]
+
     resources "/home", HomeController, only: [:index]
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
