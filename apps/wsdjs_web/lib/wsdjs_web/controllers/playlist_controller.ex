@@ -15,27 +15,31 @@ defmodule WsdjsWeb.PlaylistController do
     with %Accounts.User{} = user <- Accounts.get_user!(user_id),
          playlists <- Playlists.list_playlists(user) do
 
-      render conn, "index.html", playlists: playlists
+      render conn, "index.html", playlists: playlists, user: user
     end
   end
 
-  def new(conn, _params, current_user) do
-    with :ok <- Playlists.Policy.can?(current_user, :new),
+  def new(conn, %{"user_id" => user_id}, current_user) do
+    with %Accounts.User{} = user <- Accounts.get_user!(user_id),
+         :ok <- Playlists.Policy.can?(current_user, :new),
          changeset <- Playlists.change_playlist(%Playlists.Playlist{}) do
   
-      render(conn, "new.html", changeset: changeset)
+      render(conn, "new.html", changeset: changeset, user: user)
     end
   end
 
+  @doc """
+  Only authorized user can create a playlist for somebody else
+  """
   def create(conn, %{"playlist" => playlist_params, "user_id" => user_id}, current_user) do
-    playlist_params = Map.put(playlist_params, "user_id", user_id)
-    case Playlists.create_playlist(playlist_params) do
-      {:ok, playlist} ->
-        conn
-        |> put_flash(:info, "Playlist created successfully.")
-        |> redirect(to: playlist_path(conn, :show, playlist))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+    with %Accounts.User{} = user <- Accounts.get_user!(user_id),
+         :ok <- Playlists.Policy.can?(current_user, :create, user),
+         playlist_params <- Map.put(playlist_params, "user_id", user_id),
+         {:ok, playlist} <- Playlists.create_playlist(playlist_params) do
+
+      conn
+      |> put_flash(:info, "Playlist created successfully.")
+      |> redirect(to: playlist_path(conn, :show, playlist))
     end
   end
 

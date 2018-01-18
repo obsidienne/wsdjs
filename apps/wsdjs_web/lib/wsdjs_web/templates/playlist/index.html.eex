@@ -23,4 +23,4 @@
   </tbody>
 </table>
 
-<span><%= link "New Playlist", to: user_playlist_path(@conn, :new, @current_user) %></span>
+<span><%= link "New Playlist", to: user_playlist_path(@conn, :new, @user) %></span>
