@@ -1,17 +1,12 @@
 defmodule WsdjsWeb.SuggestionController do
   @moduledoc false
-
   use WsdjsWeb, :controller
+  use WsdjsWeb.Controller
 
   alias Wsdjs.Musics
   alias Wsdjs.Musics.Song
 
   action_fallback WsdjsWeb.FallbackController
-
-  def action(conn, _) do
-    args = [conn, conn.params, conn.assigns[:current_user]]
-    apply(__MODULE__, action_name(conn), args)
-  end
 
   def new(conn, _params, current_user) do
     with :ok <- Wsdjs.Musics.Policy.can?(current_user, :suggest_song) do

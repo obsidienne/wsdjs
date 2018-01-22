@@ -2,6 +2,7 @@ defmodule WsdjsWeb.SongController do
   @moduledoc false
 
   use WsdjsWeb, :controller
+  use WsdjsWeb.Controller
 
   alias Wsdjs.Musics
   alias Wsdjs.Reactions
@@ -11,11 +12,6 @@ defmodule WsdjsWeb.SongController do
   alias Wsdjs.Attachments.Video
 
   action_fallback WsdjsWeb.FallbackController
-
-  def action(conn, _) do
-    args = [conn, conn.params, conn.assigns[:current_user]]
-    apply(__MODULE__, action_name(conn), args)
-  end
 
   def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),

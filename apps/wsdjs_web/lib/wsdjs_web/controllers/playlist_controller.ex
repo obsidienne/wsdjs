@@ -1,15 +1,11 @@
 defmodule WsdjsWeb.PlaylistController do
   use WsdjsWeb, :controller
+  use WsdjsWeb.Controller
 
   alias Wsdjs.Playlists
   alias Wsdjs.Accounts
 
   action_fallback WsdjsWeb.FallbackController
-
-  def action(conn, _) do
-    args = [conn, conn.params, conn.assigns[:current_user]]
-    apply(__MODULE__, action_name(conn), args)
-  end
 
   def index(conn, %{"user_id" => user_id}, current_user) do
     with %Accounts.User{} = user <- Accounts.get_user!(user_id),

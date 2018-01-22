@@ -1,6 +1,7 @@
 defmodule WsdjsWeb.UserController do
   @moduledoc false
   use WsdjsWeb, :controller
+  use WsdjsWeb.Controller
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
@@ -8,9 +9,7 @@ defmodule WsdjsWeb.UserController do
 
   action_fallback WsdjsWeb.FallbackController
 
-  def show(conn, %{"id" => user_id}) do
-    current_user = conn.assigns[:current_user]
-
+  def show(conn, %{"id" => user_id}, current_user) do
     with %User{} = user <- Accounts.get_user!(user_id),
         :ok <- Accounts.Policy.can?(current_user, :show, user) do
       page = Musics.paginate_songs_user(current_user, user_id)
@@ -22,9 +21,7 @@ defmodule WsdjsWeb.UserController do
     end
   end
 
-  def edit(conn, %{"id" => id}) do
-    current_user = conn.assigns[:current_user]
-
+  def edit(conn, %{"id" => id}, current_user) do
     with %User{} = user <- Accounts.get_user!(id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user) do
       changeset = Accounts.change_user(user)
@@ -32,9 +29,7 @@ defmodule WsdjsWeb.UserController do
     end
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    current_user = conn.assigns[:current_user]
-
+  def update(conn, %{"id" => id, "user" => user_params}, current_user) do
     with %User{} = user <- Accounts.get_user!(id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
          {:ok, user} <- Accounts.update_user(user, user_params, current_user) do
