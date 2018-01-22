@@ -5,19 +5,18 @@ defmodule WsdjsWeb.UserController do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics
 
   action_fallback WsdjsWeb.FallbackController
 
   def show(conn, %{"id" => user_id}, current_user) do
     with %User{} = user <- Accounts.get_user!(user_id),
         :ok <- Accounts.Policy.can?(current_user, :show, user) do
-      page = Musics.paginate_songs_user(current_user, user_id)
+
+      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      playlists = Wsdjs.Playlists.list_playlists(user)
 
       conn
-      |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
-      |> put_resp_header("page-number", Integer.to_string(page.page_number))
-      |> render("show.html", user: user, songs: page.entries, page_number: page.page_number, total_pages: page.total_pages, total_songs: page.total_entries)
+      |> render("show.html", user: user, suggested_songs: suggested_songs, playlists: playlists)
     end
   end
 

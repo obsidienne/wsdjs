@@ -44,7 +44,7 @@
       <tbody>
         <tr>
           <th class="h6 music-icon">SONG SUGGESTED</th>
-          <td class="number"><%= @total_songs %></td>
+          <td class="number"><%= @suggested_songs %></td>
         </tr>
       </tbody>
     </table>
@@ -52,18 +52,9 @@
     <%= render "_user_details.html", user: @user %>
   </div>
 
-  <%= if @current_user do %>
-  <section id="suggestions-section">
-    <%= if Wsdjs.Musics.Policy.can?(@current_user, :list_user_suggestions) == :ok do %>
-    <section>
-      <ul id="user-page__song-list" class="user-page__songs" data-js-page-number="<%= @page_number %>" data-js-total-pages="<%= @total_pages %>" user-id="<%= @user.id %>">
-        <%= render_many @songs, WsdjsWeb.SharedView, "_song.html", conn: @conn, as: :song, current_user: @current_user %>
-      </ul>
-      <%= if @page_number < @total_pages do %>
-      <div class="sentinel"><div class="throbber-loader"></div></div>
-      <% end %>
-    </section>
-    <% end %>
+  <section id="playlists-section">
+    <ul>
+      <li></li>
+    </ul>
   </section>
-  <% end %>
 </main>

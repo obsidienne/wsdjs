@@ -62,6 +62,14 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
+  How many suggested songs for the user
+  """
+  def count_suggested_songs(%User{} = user) do
+    query = from s in Song, where: s.suggestion == true and s.user_id == ^user.id
+    Repo.aggregate(query, :count, :id)
+  end
+
+  @doc """
   Paginate the songs scoped by the current_user.
   """
   def paginate_songs(current_user, paginate_params \\ %{}) do
