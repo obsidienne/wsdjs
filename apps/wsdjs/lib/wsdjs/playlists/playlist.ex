@@ -8,7 +8,7 @@ defmodule Wsdjs.Playlists.Playlist do
   @foreign_key_type :binary_id
   schema "playlists" do
     field :name, :string
-    field :type, :string
+    field :type, :string, default: "playlist"
     timestamps()
 
     belongs_to :user, Wsdjs.Accounts.User
