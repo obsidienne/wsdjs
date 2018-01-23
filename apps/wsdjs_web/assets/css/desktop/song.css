@@ -3,11 +3,25 @@
 ****************************/
 .song-page {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   margin-top: 15px;
   padding-bottom: 45px;
+}
+.song-hero {
+  color: inherit;
+  background-color: #fff;
+  position: relative;
+  min-height: 40vh;
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: scroll, fixed;
+  display: flex;
+  flex-direction: column;
+  background-position: 0% 50%;
+  justify-content: space-between;
+  padding: 5px 0 15px 0;
 }
 .song-page__art {
   position: relative;
@@ -136,9 +150,10 @@
 .song-minicard__body h6 {
   margin-top: 0;
   margin-bottom: 0;
-  overflow: hidden;
+  overflow-y: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: normal;
 }
 .song-minicard__footer {
   margin-top: auto;

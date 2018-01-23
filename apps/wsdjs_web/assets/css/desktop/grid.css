@@ -25,6 +25,16 @@
   width: 100%;
   max-width: 414px;
 }
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .home-container {
+    flex-direction: row;
+  }
+}
 
 .song-edit,
 .song-new {

@@ -1,12 +1,14 @@
-<header class="hero">
+<header>
   <div class="container">
-    <h3 class="page-header">TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time><small> Statistics</small>
-      <%= link "go back to top", to: top_path(@conn, :show, @top.id), class: "btn btn-link push-right" %>
-    </h3>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small>Statistics</small></h1>
   </div>
 </header>
 
-<main class="container top-stat">
+<div class="container actions">
+  <%= link "go back to top", to: top_path(@conn, :show, @top.id), class: "btn btn-link" %>
+</div>
+
+<section class="container top-stat">
   <table class="table">
     <tbody>
       <tr><th>Top status</th><td><%= @top.status %></td></tr>
@@ -40,4 +42,4 @@
       <% end %>
     <% end %>
   </ul>
-</main>
+</section>

@@ -36,6 +36,9 @@ defmodule WsdjsWeb.UserController do
       conn
       |> put_flash(:info, "Profile updated.")
       |> redirect(to: user_path(conn, :show, user))
+    else
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", user: current_user, changeset: changeset)
     end
   end
 end

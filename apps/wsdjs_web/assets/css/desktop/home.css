@@ -9,7 +9,12 @@ body.SessionNewView main, body.RegistrationNewView main {
   flex-direction: column;
   height: calc(100vh - 53px);
 }
-
+.hero-text {
+  padding-top: 15px;
+}
+.hero-text h5 {
+  padding-bottom: 15px;
+}
 .HomeIndexView main {
   display: flex;
   flex-direction: column;

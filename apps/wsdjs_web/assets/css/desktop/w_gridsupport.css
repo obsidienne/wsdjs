@@ -22,7 +22,7 @@
   @media (min-width: 768px) {
     .user-page {
       display: grid;
-      grid-gap: 5px;
+      grid-gap: 15px;
       grid-template-columns: 300px 1fr;
     }
     

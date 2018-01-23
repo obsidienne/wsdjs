@@ -1,30 +1,31 @@
-<header class="hero">
+<header>
   <div class="container">
-    <h3 class="page-header">TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h3>
-    <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
-    <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
-    <% end %>
-    <%= if @current_user && @current_user.admin do %>
-      <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link push-right" %>
-    <% end %>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h1>
   </div>
-
-  <%= if @current_user && @current_user.id == @top.user_id do %>
-    <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-      <section>
-        <nav>
-          <ol class="top-steps text-center">
-            <li class="visited"><em>Check</em></li>
-            <li class="current"><em>Voting</em></li>
-            <li><%= submit "next step : counting", class: "btn btn-link", name: "direction", value: "next" %></li>
-          </ol>
-        </nav>
-      </section>
-    <% end %>
-  <% end %>
 </header>
 
-<main class="container top-voting">
+<div class="container actions">
+  <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
+  <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
+  <% end %>
+  <%= if @current_user && @current_user.admin do %>
+    <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link push-right" %>
+  <% end %>
+</div>
+
+<%= if @current_user && @current_user.id == @top.user_id do %>
+<%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
+  <nav>
+    <ol class="top-steps text-center">
+      <li class="visited"><em>Check</em></li>
+      <li class="current"><em>Voting</em></li>
+      <li><%= submit "next step : counting", class: "btn btn-link", name: "direction", value: "next" %></li>
+    </ol>
+  </nav>
+<% end %>
+<% end %>
+
+<section class="container top-voting">
   <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
   <div class="top-voting-footer-actions">
     <%= submit "vote", class: "btn btn-primary" %>
@@ -79,4 +80,4 @@
     <% end %>
   </section>
   <% end %>
-</main>
+</section>

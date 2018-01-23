@@ -31,7 +31,7 @@ import Outdated from './components/outdated';
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
   // Get the current view name
-  const viewName = document.getElementsByTagName('body')[0].dataset.jsViewName;
+  const viewName = document.getElementsByTagName('main')[0].dataset.jsViewName;
 
   // Load view class and mount it
   const ViewClass = loadView(viewName);
@@ -76,7 +76,7 @@ window.addEventListener('pjax:unload', handleUnloadContentLoaded, false);
 
 new Pjax({
   areas: [
-    'body'
+    'main'
   ],
   update: {
     css: false,

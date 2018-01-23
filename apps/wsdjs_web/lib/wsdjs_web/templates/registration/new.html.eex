@@ -1,14 +1,12 @@
-<main class="container">
-    <%= form_for @conn, registration_path(@conn, :create), [as: :signup, class: "container-form"], fn f -> %>
-    <div class="form-group">
-      <h3>Registration</h3>
-      <span class="text-muted">Get a registration link sent to your email</span>
-    </div>
-    <div class="form-group">
-      <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email", required: true %>
-    </div>
-    <div class="form-group">
-      <%= submit "Email me a registration link", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-</main>
+<%= form_for @conn, registration_path(@conn, :create), [as: :signup, class: "container-form"], fn f -> %>
+<div class="form-group">
+  <h3>Registration</h3>
+  <span class="text-muted">Get a registration link sent to your email</span>
+</div>
+<div class="form-group">
+  <%= text_input f, :email, placeholder: "email", class: "form-control", type: "email", required: true %>
+</div>
+<div class="form-group">
+  <%= submit "Email me a registration link", class: "btn btn-primary" %>
+</div>
+<% end %>

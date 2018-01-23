@@ -107,13 +107,17 @@ defmodule WsdjsWeb.SongController do
   end
 
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
-    with %Song{} = song <- Musics.get_song!(id),
-         :ok <- Musics.Policy.can?(current_user, :edit_song, song),
+    song = Musics.get_song!(id)
+
+    with :ok <- Musics.Policy.can?(current_user, :edit_song, song),
          {:ok, %Song{} = song} <- Musics.update_song(song, song_params, current_user) do
   
       conn
       |> put_flash(:info, "Song updated")
       |> redirect(to: song_path(conn, :show, song))
+    else
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", song: song, user: current_user, changeset: changeset)
     end
   end
 

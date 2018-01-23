@@ -1,30 +1,33 @@
-<header class="hero">
-  <%= if is_nil(@current_user) do %>
-    <div class="container">
-      <h4>World Swing DeeJays</h4>
-      <h5>The best West Coast Swing music from all around the world !</h5>
-
-      <%= link to: session_path(@conn, :new) do %>
-        <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
-      <% end %>
-      or 
-      <%= link "register", to: registration_path(@conn, :new) %>
-    </div>
-  <% end %>
-
+<header>
   <div class="container">
-    <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-      <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
-    <% end %>
+    <h1><%= gettext "WSDJs Tops 10" %> </h1>
   </div>
 </header>
 
-<main id="top-list" class="tops container" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>">
+<%= if is_nil(@current_user) do %>
+  <div class="container">
+    <h4>World Swing DeeJays</h4>
+    <h5>The best West Coast Swing music from all around the world !</h5>
+
+    <%= link to: session_path(@conn, :new) do %>
+      <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
+    <% end %>
+    or 
+    <%= link "register", to: registration_path(@conn, :new) %>
+  </div>
+<% end %>
+
+<div class="container">
+  <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
+    <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
+  <% end %>
+</div>
+
+<section id="top-list" class="tops container" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>">
   <%= for top <- @tops do %>
     <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
   <%= if @page_number < @total_pages do %>
   <div class="sentinel"><div class="throbber-loader"></div></div>
   <% end %>
-
-</main>
+</section>

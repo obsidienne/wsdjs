@@ -1,8 +1,6 @@
-<main>
-  <section id="invitations-section" class="container">
-    <%= render "_invitations.html", conn: @conn, invitations: @invitations %>
-  </section>
-  <section id="users-section" class="container">
-    <%= render "_users.html", conn: @conn, users: @users %>
-  </section>
-</main>
+<section id="invitations-section" class="container">
+  <%= render "_invitations.html", conn: @conn, invitations: @invitations %>
+</section>
+<section id="users-section" class="container">
+  <%= render "_users.html", conn: @conn, users: @users %>
+</section>
