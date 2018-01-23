@@ -1,15 +1,6 @@
 <nav class="glnav container">
-  <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
 
-  <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu text-muted" %>
-  <%= if @current_user do %>
-    <%= link "songs", to: song_path(@conn, :index), class: "glnav__menu text-muted" %>
-  <% end %>
-  <%= if @current_user && @current_user.admin == true do %>
-    <%= link "admin", to: admin_user_path(@conn, :index), class: "glnav__menu text-muted" %>
-  <% end %>
 
-  
   <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
   <div class="search-container">
     <div class="search__input__wrap">
@@ -20,11 +11,5 @@
     <div class="search-results-container">
     </div>
   </div>
-  <% end %>
-
-  <%= if @current_user do %>
-    <%= link to: user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>
-      <img class="glnav__user__avatar img-circle" src="<%= avatar_url(@current_user.avatar, 50) %>" srcset="<%= avatar_srcset(@current_user.avatar, 50) %>" sizes="50px">
-    <% end %>
   <% end %>
 </nav>

@@ -8,18 +8,12 @@
   position: relative;
 }
 
-.glnav__user {
-  margin-left: 15px;
-}
-
 .glnav.focused .glnav__logo,
 .glnav.focused .glnav__menu,
 .glnav.focused .glnav__user {
   display: none;
 }
 @media (min-width: 768px) {
-
-
   .glnav.focused .glnav__logo,
   .glnav.focused .glnav__user {
     display: inherit;

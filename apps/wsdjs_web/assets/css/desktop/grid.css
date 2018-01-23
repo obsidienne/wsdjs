@@ -10,7 +10,11 @@
   .songs-container, .container { max-width: 720px; }
 }
 @media (min-width: 992px) {
-  .songs-container, .container { max-width: 960px; }
+  .songs-container, .container { 
+    padding-left: 0;
+    padding-right: 0;  
+    max-width: 960px; 
+  }
 }
 @media (min-width: 1200px) {
   .songs-container, .container {

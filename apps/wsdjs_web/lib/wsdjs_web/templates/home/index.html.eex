@@ -1,8 +1,5 @@
 <header class="hero hot-hero">
   <div class="container">
-    <h4>World Swing DeeJays</h4>
-    <h5>The best West Coast Swing music from all around the world !</h5>
-
     <%= if is_nil(@current_user) do %>
       <%= link to: session_path(@conn, :new) do %>
         <div class="glnav__user__signin--container btn btn-primary tippy" title="You can sign in with this link">Sign in</div>
