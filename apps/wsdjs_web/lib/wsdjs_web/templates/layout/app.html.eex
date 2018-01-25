@@ -34,11 +34,28 @@
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
   </head>
 
-  <body class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
-    <%= render "_nav.html", conn: @conn, current_user: @current_user %>
+  <body>
+    <nav class="glnav">
+      <div class="container">
+        <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
+        <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu text-muted" %>
+        <%= link "songs", to: song_path(@conn, :index), class: "glnav__menu text-muted" %>
+        <%= if @current_user && @current_user.admin do %>
+        <%= link "admin", to: admin_user_path(@conn, :index), class: "glnav__menu text-muted" %>
+        <% end %>
 
-    <%= render @view_module, @view_template, assigns %>
+        <%= if @current_user do %>
+          <%= link to: user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>
+            <img class="glnav__user__avatar img-circle" src="<%= avatar_url(@current_user.avatar, 40) %>" srcset="<%= avatar_srcset(@current_user.avatar, 50) %>" sizes="50px">
+          <% end %>
+        <% end %>
+      </div>
+    </nav>
 
+    <main class="<%= js_view_name(@conn, @view_template) %>" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    
     <%= render "_player.html", conn: @conn %>
 
     <%= render "_desktop-outside.html", conn: @conn, current_user: @current_user %>

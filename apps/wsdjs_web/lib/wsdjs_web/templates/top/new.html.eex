@@ -1,13 +1,19 @@
-<main class="container">
+<header>
+  <div class="container">
+    <h1><%= gettext "Create a new TOP 10" %> </h1>
+  </div>
+</header>
+
+<div class="container">
   <%= form_for @changeset, top_path(@conn, :create), fn f -> %>
     <div class="form-group">
       <%= label f, :due_date, "Top of", class: "control-label" %>
-			<div>
+      <div>
       <%= date_select f, :due_date, class: "form-control", required: "required", type: "date", day: [options: [1]] %>
-			</div>
+      </div>
       <%= error_tag f, :due_date %>
     </div>
 
-  	<%= submit "next step : check", class: "btn btn-primary" %>
+    <%= submit "next step : check", class: "btn btn-primary" %>
   <% end %>
-</main>
+</div>

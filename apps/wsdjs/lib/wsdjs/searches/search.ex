@@ -24,7 +24,7 @@ defmodule Wsdjs.Searches do
     |> preload([:art, user: :avatar])
     |> where(fragment("(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))", ^q))
     |> order_by([desc: :inserted_at])
-    |> limit(3)
+    |> limit(10)
     |> Repo.all()
   end
 end

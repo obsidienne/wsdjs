@@ -1,11 +1,4 @@
-<style>
-  .hero {
-    background-image: linear-gradient(transparent, #fff), url(<%= art_url_blured(@song.art, 1200) %>);
-  }
-</style>
-
-<main>
-<section class="hero">
+<section class="song-hero">
   <div class="song-page container">
     <div class="song-page__art">
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
@@ -88,4 +81,3 @@
     <% end %>
   </div>
 </div>
-</main>

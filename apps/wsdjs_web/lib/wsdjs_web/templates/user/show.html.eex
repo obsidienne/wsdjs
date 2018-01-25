@@ -1,13 +1,5 @@
-<section class="hero">
-  <style>
-    .hero {
-      background-image: none;
-    }
-  </style>
-</section>
-<main id="user-page" class="user-page container">
-
-  <div>
+<section id="user-page" class="user-page container">
+  <div class="user-page__identity">
     <section class="user-page__profile__section">
       <header class="user-page__profile__header">
         <div class="user-page__avatar">
@@ -49,12 +41,20 @@
       </tbody>
     </table>
 
+    <%= if @user.detail do %>
     <%= render "_user_details.html", user: @user %>
+    <% end %>
   </div>
 
   <section id="playlists-section">
+    <%= if @current_user.id == @user.id do %>
+      <%= link "Add a new TOP or playlist", to: user_playlist_path(@conn, :new, @current_user) %>
+    <% end %>
     <ul>
-      <li></li>
+      <li>Suggested songs</li>
+      <%= for playlist <- @playlists do %>
+      <li><%= playlist.name %></li>
+      <% end %>
     </ul>
   </section>
-</main>
+</section>

@@ -1,28 +1,29 @@
-<header class="hero">
+<header>
   <div class="container">
-    <h3 class="page-header">TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h3>
-    <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
-      <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
-    <% end %>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h1>
   </div>
-
-  <%= if @current_user && @current_user.id == @top.user_id do %>
-    <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-    <section>
-      <nav>
-        <ol class="top-steps text-center">
-          <li class="visited"><em>Create</em></li>
-          <li class="current"><em>Check</em></li>
-          <li><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
-        </ol>
-      </nav>
-    </section>
-    <% end %>
-  <% end %>
 </header>
 
+<%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
+<div class="container actions">
+  <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
+</div>
+<% end %>
 
-<main class="container">
+<%= if @current_user && @current_user.id == @top.user_id do %>
+<%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
+<nav>
+  <ol class="top-steps text-center">
+    <li class="visited"><em>Create</em></li>
+    <li class="current"><em>Check</em></li>
+    <li><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
+  </ol>
+</nav>
+<% end %>
+<% end %>
+
+
+<section class="container">
   <%= for rank <- @ranks do %>
     <article class="top-song">
       <div class="song-art-container">
@@ -68,4 +69,4 @@
       </div>
     </article>
   <% end %>
-</main>
+</section>

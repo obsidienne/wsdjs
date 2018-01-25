@@ -41,51 +41,62 @@
     <div class="form-group">
       <label class="small text-muted">Description</label>
       <%= textarea fd, :description, placeholder: "Description (2000 characteres max)", class: "form-control", maxlength: 2000 %>
+      <%= error_tag fd, :description %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Love more</label>
       <%= textarea fd, :love_more, placeholder: "255 characteres max", class: "form-control", maxlength: 255 %>
+      <%= error_tag fd, :love_more %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Hate more</label>
       <%= textarea fd, :hate_more, placeholder: "255 characteres max", class: "form-control", maxlength: 255 %>
+      <%= error_tag fd, :hate_more %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Favorite artist</label>
       <%= text_input fd, :favorite_artist, placeholder: "Favorite artist", class: "form-control", maxlength: 255 %>
+      <%= error_tag fd, :favorite_artist %>
     </div>
     <div class="form-group select optional song_genre">
       <label class="small text-muted">Favotire genre</label>
       <%= select fd, :favorite_genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
-      <%= error_tag fd, :genre %>
+      <%= error_tag fd, :favorite_genre %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Favorite color</label>
       <%= text_input fd, :favorite_color, placeholder: "Favorite color", class: "form-control", maxlength: 255 %>
+      <%= error_tag fd, :favorite_color %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Favorite meal</label>
       <%= text_input fd, :favorite_meal, placeholder: "Favorite meal", class: "form-control", maxlength: 2000 %>
+      <%= error_tag fd, :favorite_meal %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Favorite animal</label>
       <%= text_input fd, :favorite_animal, placeholder: "favorite animal", class: "form-control", maxlength: 2000 %>
+      <%= error_tag fd, :favorite_animal %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Start DJing</label>
       <%= text_input fd, :djing_start_year, placeholder: "djing start year", class: "form-control", type: "number", max: 2017, min: 1950 %>
+      <%= error_tag fd, :djing_start_year %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Facebook</label>
       <%= text_input fd, :facebook, placeholder: "https://www.facebook.com/", class: "form-control", type: "url" %>
+      <%= error_tag fd, :facebook %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Youtube</label>
       <%= text_input fd, :youtube, placeholder: "https://www.youtube.com/", class: "form-control", type: "url" %>
+      <%= error_tag fd, :youtube %>
     </div>
     <div class="form-group">
       <label class="small text-muted">Soundcloud</label>
       <%= text_input fd, :soundcloud, placeholder: "https://soundcloud.com", class: "form-control", type: "url" %>
+      <%= error_tag fd, :soundcloud %>
     </div>
     <% end %>
 
