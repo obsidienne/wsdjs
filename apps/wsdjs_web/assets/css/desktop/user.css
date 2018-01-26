@@ -29,9 +29,14 @@
 }
 .user-page__stats td {
   color: #3c3c3c;
-  float: right;
   font-size: 18px;
   font-weight: normal;
+}
+.user-page__stats td.h6 {
+  font-size: 1em;
+}
+.user-page__stats th {
+  width: 0;
 }
 .user-profile-edit {
   display: flex;
