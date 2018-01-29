@@ -7,6 +7,7 @@ defmodule Wsdjs.Playlists do
   alias Wsdjs.Repo
 
   alias Wsdjs.Musics.Song
+  alias Wsdjs.Reactions.Opinion
   alias Wsdjs.Playlists.Playlist
 
   @doc """
@@ -22,11 +23,26 @@ defmodule Wsdjs.Playlists do
     Repo.all(Playlist)
   end
 
-  def list_playlists(%Wsdjs.Accounts.User{id: id}) do
-    query = from p in Playlist,
-    where: p.user_id == ^id
+  def list_auto_playlists(%Wsdjs.Accounts.User{id: id} = user) do
+    suggested = get_playlist_by_type(user, :suggested)
+    like_or_top = get_playlist_by_type(user, :like_or_top)
+    [suggested, like_or_top]
+  end
 
-    Repo.all(query)
+  def get_playlist_by_type(%Wsdjs.Accounts.User{id: id} = user, :suggested) do
+    query = from s in Song, where: s.user_id == ^id, order_by: [desc: :inserted_at]
+    count = Repo.aggregate(query, :count, :id)
+    song = Repo.one(query |> limit(1)) |> Repo.preload(:art)
+
+    %{name: "suggested", count: count, song: song}
+  end
+
+  def get_playlist_by_type(%Wsdjs.Accounts.User{id: id} = user, :like_or_top) do
+    query = from o in Opinion, where: o.user_id == ^id and (o.kind == "like" or o.kind == "up")
+    count = Repo.aggregate(query, :count, :id)
+    song = Repo.one(query |> limit(1)) |> Repo.preload([song: :art])
+
+    %{name: "like_or_top", count: count, song: song.song}
   end
 
   @doc """

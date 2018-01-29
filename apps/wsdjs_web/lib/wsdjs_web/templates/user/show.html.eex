@@ -54,12 +54,21 @@
 
   <section id="playlists-section">
     <%= if @current_user.id == @user.id do %>
-      <%= link "Add a new TOP or playlist", to: user_playlist_path(@conn, :new, @current_user) %>
+    <div class="container actions">
+      <%= link "Add a new TOP or playlist", to: user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary" %>
+    </div>
     <% end %>
+
     <ul>
-      <li>Suggested songs</li>
-      <%= for playlist <- @playlists do %>
-      <li><%= playlist.name %></li>
+      <%= for playlist <- @auto_playlists do %>
+      <li>
+        <article>
+          <a href="#">
+            <img src="<%= art_url(playlist.song.art, 300) %>" srcset="<%= art_srcset(playlist.song.art, 300) %>" sizes="300px" class="responsive"/>
+            <%= playlist.name %>
+          </a>
+        </article>
+      </li>
       <% end %>
     </ul>
   </section>
