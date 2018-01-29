@@ -9,9 +9,11 @@ defmodule Wsdjs.Playlists.Playlist do
   schema "playlists" do
     field :name, :string
     field :type, :string, default: "playlist"
+    field :count, :integer, default: 0
     timestamps()
 
     belongs_to :user, Wsdjs.Accounts.User
+    belongs_to :song, Wsdjs.Musics.Song
     has_many :playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all
   end
 
