@@ -19,8 +19,12 @@ defmodule Wsdjs.Playlists do
       [%Playlist{}, ...]
 
   """
-  def list_playlists do
-    Repo.all(Playlist)
+  def list_playlists(%Wsdjs.Accounts.User{id: id}) do
+    query = from p in Playlist, 
+    where: p.user_id == ^id and p.count > 0,
+    order_by: [desc: :inserted_at]
+
+    Repo.all(query) |> Repo.preload(song: :art)
   end
 
   @doc """
@@ -28,9 +32,6 @@ defmodule Wsdjs.Playlists do
   Suggested songs and songs liked or upped by the user
   """
   def list_auto_playlists(%Wsdjs.Accounts.User{} = user) do
-    suggested = get_playlist_by_type(user, :suggested)
-    like_or_top = get_playlist_by_type(user, :like_or_top)
-    [suggested, like_or_top]
   end
 
   defp get_playlist_by_type(%Wsdjs.Accounts.User{id: id}, :suggested) do

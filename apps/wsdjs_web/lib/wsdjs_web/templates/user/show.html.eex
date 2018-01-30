@@ -60,7 +60,7 @@
     <% end %>
 
     <ul>
-      <%= for playlist <- @auto_playlists do %>
+      <%= for playlist <- @playlists do %>
       <li>
         <article>
           <a href="#">

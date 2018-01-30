@@ -4,16 +4,14 @@ defmodule Wsdjs.Playlists.Playlist do
   import Ecto.Changeset
   alias Wsdjs.Playlists.Playlist
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "playlists" do
     field :name, :string
     field :type, :string, default: "playlist"
     field :count, :integer, default: 0
     timestamps()
 
-    belongs_to :user, Wsdjs.Accounts.User
-    belongs_to :song, Wsdjs.Musics.Song
+    belongs_to :user, Wsdjs.Accounts.User, type: :binary_id
+    belongs_to :song, Wsdjs.Musics.Song, type: :binary_id
     has_many :playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all
   end
 

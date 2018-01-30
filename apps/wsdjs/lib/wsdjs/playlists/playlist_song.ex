@@ -6,9 +6,6 @@ defmodule Wsdjs.Playlists.PlaylistSong do
   alias Wsdjs.Repo
   alias Ecto.Changeset
 
-
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "playlist_songs" do
     field :position, :integer
     timestamps(updated_at: false)
