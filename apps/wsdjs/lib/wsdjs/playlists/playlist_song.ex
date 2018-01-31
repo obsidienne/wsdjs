@@ -11,7 +11,7 @@ defmodule Wsdjs.Playlists.PlaylistSong do
     timestamps(updated_at: false)
 
     belongs_to :playlist, Wsdjs.Playlists.Playlist
-    belongs_to :song, Wsdjs.Musics.Song
+    belongs_to :song, Wsdjs.Musics.Song, type: :binary_id
   end
 
   def changeset(%PlaylistSong{} = playlist_songs, attrs) do

@@ -9,10 +9,23 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     @update_attrs %{name: "new playlist name"}
     @invalid_attrs %{name: ""}
 
-    def playlist_fixture(attrs \\ %{}) do
-      {:ok, playlist} = Playlists.create_playlist(playlist_fixture_attrs(attrs))
+
+    def playlist_fixture(user) do
+      {:ok, playlist} = Playlists.create_playlist(%{name: "playlist name", user_id: user.id})
 
       playlist
+    end
+    
+    def playlist_fixture() do
+      {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+      {:ok, playlist} = Playlists.create_playlist(%{name: "playlist name", user_id: user.id})
+
+      playlist
+    end
+
+    def user_fixture() do
+      {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+      user
     end
 
     def playlist_fixture_attrs(attrs \\ %{}) do
@@ -23,9 +36,11 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       |> Map.put(:user_id, user.id)
     end
 
-    test "list_playlists/0 returns all playlists" do
-      playlist = playlist_fixture()
-      assert Playlists.list_playlists() == [playlist]
+    test "list_playlists/1 returns all playlists" do
+      user = user_fixture()
+
+      playlist = playlist_fixture(user) |> Repo.preload([song: :art])
+      assert Playlists.list_playlists(user) == [playlist]
     end
 
     test "get_playlist!/1 returns the playlist with given id" do
@@ -99,6 +114,8 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
       {:ok, playlist} = Playlists.create_playlist(%{name: "dummy#{System.unique_integer()}", user_id: user.id})
 
+      playlist = playlist |> Repo.preload([song: :art])
+
       song1 = song_fixture(user.id)
       song2 = song_fixture(user.id)
       song3 = song_fixture(user.id)
@@ -109,12 +126,12 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
         song3.id => "3"
       })
 
-     %{playlist: playlist, songs: [song1, song2, song3]}
+     %{user: user, playlist: playlist, songs: [song1, song2, song3]}
     end
 
     test "list_playlist_songs/1 returns all song in the playlist" do
-      %{playlist: playlist, songs: songs} = playlist_with_songs_fixture()
-      assert Playlists.list_playlists() == [playlist]
+      %{user: user, playlist: playlist, songs: songs} = playlist_with_songs_fixture()
+      assert Playlists.list_playlists(user) == [playlist]
       assert Playlists.list_playlist_songs(playlist) == songs
     end
   end

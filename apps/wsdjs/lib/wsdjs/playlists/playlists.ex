@@ -21,7 +21,7 @@ defmodule Wsdjs.Playlists do
   """
   def list_playlists(%Wsdjs.Accounts.User{id: id}) do
     query = from p in Playlist, 
-    where: p.user_id == ^id and p.count > 0,
+    where: p.user_id == ^id,
     order_by: [desc: :inserted_at]
 
     Repo.all(query) |> Repo.preload(song: :art)

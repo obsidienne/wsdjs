@@ -53,7 +53,7 @@
   </div>
 
   <section id="playlists-section">
-    <%= if @current_user.id == @user.id do %>
+    <%= if Wsdjs.Playlists.Policy.can?(@current_user, :create, @user) == :ok do %>
     <div class="container actions">
       <%= link "Add a new TOP or playlist", to: user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary" %>
     </div>
@@ -65,7 +65,7 @@
         <article>
           <a href="#">
             <img src="<%= art_url(playlist.song.art, 300) %>" srcset="<%= art_srcset(playlist.song.art, 300) %>" sizes="300px" class="responsive"/>
-            <%= playlist.name %>
+            <span><%= playlist.name %></span>
           </a>
         </article>
       </li>
