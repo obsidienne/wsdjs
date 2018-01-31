@@ -63,7 +63,7 @@
     <%= if @playlist.type == "suggested" do %>
     <%= render "_user_suggestions.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
     <% end %>
-    <%= if @playlist.type == "top or like" do %>
+    <%= if @playlist.type == "likes and tops" do %>
     <%= render "_user_top_like.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
     <% end %>
   <% end %>
