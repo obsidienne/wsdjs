@@ -3,6 +3,7 @@
 /*******************************************/
 .actions {
   display: flex;
+  align-items: center;
 }
 .search-container {
   z-index: 49;

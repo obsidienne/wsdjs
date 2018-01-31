@@ -35,7 +35,7 @@ defmodule WsdjsWeb.PlaylistController do
 
       conn
       |> put_flash(:info, "Playlist created successfully.")
-      |> redirect(to: playlist_path(conn, :show, playlist))
+      |> redirect(to: user_path(conn, :show, user, [playlist: playlist]))
     end
   end
 

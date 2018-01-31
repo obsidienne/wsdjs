@@ -52,24 +52,19 @@
     <% end %>
   </div>
 
-  <section id="playlists-section">
-    <%= if Wsdjs.Playlists.Policy.can?(@current_user, :create, @user) == :ok do %>
-    <div class="container actions">
-      <%= link "Add a new TOP or playlist", to: user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary" %>
-    </div>
-    <% end %>
+  <%= if @conn.assigns[:playlists] do %>
+    <%= render "_user_playlists.html", conn: @conn, current_user: @current_user, user: @user, playlists: @playlists %>
+  <% end %>
 
-    <ul>
-      <%= for playlist <- @playlists do %>
-      <li>
-        <article>
-          <a href="#">
-            <img src="<%= art_url(playlist.song.art, 300) %>" srcset="<%= art_srcset(playlist.song.art, 300) %>" sizes="300px" class="responsive"/>
-            <span><%= playlist.name %></span>
-          </a>
-        </article>
-      </li>
-      <% end %>
-    </ul>
-  </section>
+  <%= if @conn.assigns[:playlist] do %>
+    <%= if @playlist.type == "playlist" do %>
+    <%= render "_user_playlist.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
+    <% end %>
+    <%= if @playlist.type == "suggested" do %>
+    <%= render "_user_suggestions.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
+    <% end %>
+    <%= if @playlist.type == "top or like" do %>
+    <%= render "_user_top_like.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
+    <% end %>
+  <% end %>
 </section>

@@ -125,6 +125,23 @@ defmodule Wsdjs.Playlists do
       [%Song{}, ...]
 
   """
+  def list_playlist_songs(%Playlist{id: id, type: "suggested", user_id: user_id}) do
+    query = from s in Song,
+    where: s.user_id == ^user_id,  
+    order_by: [desc: s.inserted_at]
+
+    Repo.all(query) |> Repo.preload(:art)
+  end
+
+  def list_playlist_songs(%Playlist{id: id, type: "top or like", user_id: user_id}) do
+    query = from s in Song,
+    join: o in Opinion, on: o.song_id == s.id and s.user_id == o.user_id,
+    where: o.user_id == ^user_id,
+    order_by: [desc: o.updated_at]
+
+    Repo.all(query) |> Repo.preload(:art)
+  end
+
   def list_playlist_songs(%Playlist{id: id}) do
     query = from s in Song,
     join: ps in PlaylistSong, on: ps.playlist_id == ^id and ps.song_id == s.id,

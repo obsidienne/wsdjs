@@ -67,19 +67,19 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   #
   ###############################################
   def delete_toplike() do
-    query = "DELETE from playlists where type='top or like' and user_id not in (select user_id from opinions)"
+    query = "DELETE from playlists where type='likes and tops' and user_id not in (select user_id from opinions)"
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
   def insert_toplike() do
     query = "
       insert into playlists(name, type, user_id, inserted_at, updated_at)
-      select distinct 'top or like'
-            ,'top or like'
+      select distinct 'likes and tops'
+            ,'likes and tops'
             ,user_id, now() at time zone 'utc'
             ,now() at time zone 'utc'
       from songs 
-      where user_id not in (select user_id from playlists where type='top or like')
+      where user_id not in (select user_id from playlists where type='likes and tops')
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)
@@ -91,7 +91,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
       update playlists p 
       set count=(select count(*) from opinions o where p.user_id=o.user_id)
         , song_id=(select song_id from opinions o where p.user_id=o.user_id order by inserted_at desc LIMIT 1)
-      where p.type='top or like'
+      where p.type='likes and tops'
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)

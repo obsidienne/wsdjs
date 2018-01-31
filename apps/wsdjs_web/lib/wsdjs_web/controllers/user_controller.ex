@@ -8,6 +8,22 @@ defmodule WsdjsWeb.UserController do
 
   action_fallback WsdjsWeb.FallbackController
 
+  def show(conn, %{"id" => user_id, "playlist" => playlist_id}, current_user) do
+    with %User{} = user <- Accounts.get_user!(user_id),
+        :ok <- Accounts.Policy.can?(current_user, :show, user) do
+
+      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      playlist = Wsdjs.Playlists.get_playlist!(playlist_id)
+      songs = Wsdjs.Playlists.list_playlist_songs(playlist)
+
+      conn
+      |> render("show.html", user: user, 
+                             playlist: playlist,
+                             songs: songs,
+                             suggested_songs: suggested_songs)
+    end
+  end
+
   def show(conn, %{"id" => user_id}, current_user) do
     with %User{} = user <- Accounts.get_user!(user_id),
         :ok <- Accounts.Policy.can?(current_user, :show, user) do
