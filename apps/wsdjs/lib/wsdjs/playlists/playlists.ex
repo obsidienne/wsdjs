@@ -28,29 +28,6 @@ defmodule Wsdjs.Playlists do
   end
 
   @doc """
-  Returns the list of automated playlists. 
-  Suggested songs and songs liked or upped by the user
-  """
-  def list_auto_playlists(%Wsdjs.Accounts.User{} = user) do
-  end
-
-  defp get_playlist_by_type(%Wsdjs.Accounts.User{id: id}, :suggested) do
-    query = from s in Song, where: s.user_id == ^id, order_by: [desc: :inserted_at]
-    count = Repo.aggregate(query, :count, :id)
-    song = Repo.one(query |> limit(1)) |> Repo.preload(:art)
-
-    %{name: "suggested", count: count, song: song}
-  end
-
-  defp get_playlist_by_type(%Wsdjs.Accounts.User{id: id}, :like_or_top) do
-    query = from o in Opinion, where: o.user_id == ^id and (o.kind == "like" or o.kind == "up")
-    count = Repo.aggregate(query, :count, :id)
-    song = Repo.one(query |> limit(1)) |> Repo.preload([song: :art])
-
-    %{name: "like_or_top", count: count, song: song.song}
-  end
-
-  @doc """
   Gets a single playlist.
 
   Raises `Ecto.NoResultsError` if the Playlist does not exist.
