@@ -78,7 +78,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,'likes and tops'
             ,user_id, now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from songs 
+      from opinions 
       where user_id not in (select user_id from playlists where type='likes and tops')
     "
 
