@@ -133,7 +133,7 @@ defmodule Wsdjs.Playlists do
     Repo.all(query) |> Repo.preload(:art)
   end
 
-  def list_playlist_songs(%Playlist{id: id, type: "top or like", user_id: user_id}) do
+  def list_playlist_songs(%Playlist{id: id, type: "likes and tops", user_id: user_id}) do
     query = from s in Song,
     join: o in Opinion, on: o.song_id == s.id and s.user_id == o.user_id,
     where: o.user_id == ^user_id,
