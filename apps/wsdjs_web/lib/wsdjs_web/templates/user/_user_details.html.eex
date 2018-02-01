@@ -1,4 +1,5 @@
 <%= unless is_nil(@user.detail) do %>
+<%= unless is_nil(@user.detail.facebook) and is_nil(@user.detail.youtube) and is_nil(@user.detail.soundcloud) do %>
 <div class="user-page__profile__section">
   <%= unless is_nil(@user.detail.facebook) do %>
     <%= link to: @user.detail.facebook, target: "_blank" do %>
@@ -24,6 +25,7 @@
     <% end %>
   <% end %>
 </div>
+<% end %>
 <% end %>
 
 <dl class="user-page__profile__section user-page__details">

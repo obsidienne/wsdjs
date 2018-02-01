@@ -1,4 +1,6 @@
 # version 1.7
+- add #suggestion# and #likes and tops# playlists
+- new design
 - replace turbolinks by pjax
 - activate BROTLI and GZIP to minify JS et CSS assets
 - use immutable cache to improve bandwitch usage
