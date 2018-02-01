@@ -1,5 +1,5 @@
 <section id="playlists-section">
-  <div class="container actions">
+  <div class="actions">
     <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
       <path d="M0 0h24v24H0z" fill="none"/>
@@ -9,15 +9,15 @@
   </div>
 
   <%= if Enum.count(@songs) > 0 do %>
-  <table>
+  <table class="table">
     <tbody>
     <%= for song <- @songs do %>
     <tr>
-      <td>
-        <img src="<%= art_url(song.art, 50) %>" srcset="<%= art_srcset(song.art, 50) %>" sizes="50px" />
+      <td class="table_song-art">
+        <img src="<%= art_url(song.art, 75) %>" srcset="<%= art_srcset(song.art, 75) %>" sizes="75px" width="75px" height="75px" />
       </td>
       <td>
-        <%= link to: song_path(@conn, :show, song) do %>
+        <%= link to: song_path(@conn, :show, song), class: "text-muted" do %>
           <div><%= song.title %></div>
           <div><%= song.artist %></div>
         <% end %>

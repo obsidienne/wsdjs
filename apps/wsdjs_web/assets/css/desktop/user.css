@@ -17,6 +17,7 @@
 }
 .user-page__identity {
   background: white;
+  margin-bottom: 15px;
 }
 .user-page__profile__label {
     font-size: 11px;
