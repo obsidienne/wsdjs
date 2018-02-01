@@ -6,7 +6,7 @@
   padding: 4px;
   width: 350px;
   max-width: 98%;
-  color: #999;
+  color: hsl(0, 0%, 60%);
   box-sizing: border-box;
 }
 
@@ -21,7 +21,7 @@
   background: white;
   border-left: 4px solid #95a5a6;
   border-radius: 1px;
-  box-shadow: 0 1px 10px 0 rgba(0,0,0,.1), 0 2px 15px 0 rgba(0,0,0,.05);
+  box-shadow: 0 1px 10px 0 hsla(0, 0%, 0%, 0.1), 0 2px 15px 0 hsla(0, 0%, 0%, 0.05);
 
   opacity: 0;
   transform: translatey(-100%);
@@ -42,7 +42,7 @@
   font-weight: normal;
 }
 
-.notifier.info    { border-left-color: #3498db; }
-.notifier.success { border-left-color: #1abc9c; }
-.notifier.warning { border-left-color: #f1c40f; }
-.notifier.danger  { border-left-color: #e74c3c; }
+.notifier.info    { border-left-color: hsl(204, 70%, 53%); }
+.notifier.success { border-left-color: hsl(168, 76%, 42%); }
+.notifier.warning { border-left-color: hsl(48, 89%, 50%); }
+.notifier.danger  { border-left-color: hsl(6, 78%, 57%); }

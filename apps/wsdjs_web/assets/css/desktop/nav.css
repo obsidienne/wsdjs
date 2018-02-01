@@ -7,8 +7,11 @@
   background-color: #1F2532;
   padding-top: 5px;
   padding-bottom: 5px;
+  border-top: 2px solid hsl(45, 100%, 51.4%);
 }
-
+.glnav a:hover {
+  text-decoration: underline;
+}
 .glnav .container {
   display: flex;
   align-items: flex-end;

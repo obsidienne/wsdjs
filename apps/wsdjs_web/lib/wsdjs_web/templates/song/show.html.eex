@@ -6,7 +6,7 @@
     <div class="song-page__details">
       <h5 class="song-page__details__title"><%= @song.title %></h5>
       <h6 class="song-page__details__artist"><span class="text-muted">by</span> <%= @song.artist %></h6>
-      <h6 class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user) %>
+      <h6 class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "song-suggestor text-muted" %>
         <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>"></time>
       </h6>
 

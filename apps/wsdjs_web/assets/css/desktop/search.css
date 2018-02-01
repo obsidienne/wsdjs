@@ -29,8 +29,8 @@
 .search-input {
   position: relative;
   border: none;
-  background-color: #f9f9fb;
-  color: #596378;
+  background-color: hsl(240, 20%, 98%);
+  color: hsl(221, 15%, 41%);
   transform: translateY(0);
   transition: all ease .3s;
   pointer-events: auto;
@@ -41,18 +41,18 @@
   height: 36px;
 }
 .search-input:focus {
-  color: #596378;
-  border-bottom: 3px solid  #FFC107;
+  color: hsl(221, 15%, 41%);
+  border-bottom: 2px solid  hsl(45, 100%, 51%);
 }
 
 
 /* search results container */
 .search-results-container {
-  background-color: #fff;
+  background-color: hsl(0, 0%, 100%);
   border-radius: 4px;
   position: absolute;
   overflow: hidden;
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 19px 12px rgba(0,0,0,0.22);
+  box-shadow: 0 19px 38px hsla(0, 0%, 0%, 0.3), 0 19px 12px hsla(0, 0%, 0%, 0.22);
   pointer-events: none;
   opacity: 0;
   transform: translateY(-1px);

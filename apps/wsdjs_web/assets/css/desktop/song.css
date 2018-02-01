@@ -55,6 +55,13 @@
 .song-page__actions {
   margin-top: 15px;
 }
+.song-suggestor {
+  text-decoration: underline;
+}
+.song-suggestor:hover {
+  text-decoration: underline;
+  color: hsl(45, 100%, 51.4%)
+}
 
 .song-page__sections {
   display: flex;
