@@ -27,8 +27,9 @@ body.SessionNewView main, body.RegistrationNewView main {
   margin-bottom: 15px;  
 }
 
-.home-page__top__song a:hover, .home-page__instant__hit a:hover {
-  
+.home-page__top__song li:hover, .home-page__instant__hit li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
 }
 
 @media (min-width: 768px) {
