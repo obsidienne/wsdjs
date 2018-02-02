@@ -191,6 +191,15 @@
   padding-right: 5px;
   width: 100%;
 }
+.song-card__tags svg {
+  margin-left: auto;
+  border-radius: 100%;
+  background-color: hsla(0, 0%, 50%, 0.1);
+}
+.song-card__header:hover .song-card__tags svg {
+  transform: scale(2) translate(-5px, -5px);
+  background-color: hsl(0, 0%, 50%);
+}
 
 .song-card__tags span {
   margin-right: 5px;
@@ -199,7 +208,10 @@
 .song-card__body {
   padding: 15px;
 }
-
+.song-card__body a:hover {
+  text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
+}
 .song-card-footer {
   display: flex;
   justify-content: space-between;
@@ -208,6 +220,8 @@
   padding: 0 15px 0 5px;
   margin-top: auto;
 }
+
+
 
 .song-play {
   width: 60px;
