@@ -42,7 +42,7 @@ defmodule WsdjsWeb.PlaylistController do
   def show(conn, %{"id" => id}, current_user) do
     with playlist <- Playlists.get_playlist!(id),
         :ok <- Playlists.Policy.can?(current_user, :show, playlist),
-        songs <- Playlists.list_playlist_songs(playlist) do
+        songs <- Playlists.list_playlist_songs(playlist, current_user) do
       
       render conn, "show.html", playlist: playlist, songs: songs, current_user: current_user
     end

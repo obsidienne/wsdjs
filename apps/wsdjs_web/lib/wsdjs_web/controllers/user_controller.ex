@@ -14,7 +14,7 @@ defmodule WsdjsWeb.UserController do
 
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
       playlist = Wsdjs.Playlists.get_playlist!(playlist_id)
-      songs = Wsdjs.Playlists.list_playlist_songs(playlist)
+      songs = Wsdjs.Playlists.list_playlist_songs(playlist, current_user)
 
       conn
       |> render("show.html", user: user, 
