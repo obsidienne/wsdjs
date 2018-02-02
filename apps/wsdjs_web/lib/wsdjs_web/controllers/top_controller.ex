@@ -9,7 +9,7 @@ defmodule WsdjsWeb.TopController do
   action_fallback WsdjsWeb.FallbackController
 
   def index(conn, %{"page" => page}, current_user) do
-    page = Charts.paginate_tops(current_user, %{"page" => page, "page_size" => 3})
+    page = Charts.paginate_tops(current_user, %{"page" => page, "page_size" => 12})
 
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
@@ -19,7 +19,7 @@ defmodule WsdjsWeb.TopController do
   end
 
   def index(conn, _params, current_user) do
-    page = Charts.paginate_tops(current_user, %{"page_size" => 3})
+    page = Charts.paginate_tops(current_user, %{"page_size" => 12})
 
     conn
     |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
