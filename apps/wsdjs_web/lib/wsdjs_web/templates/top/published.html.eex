@@ -81,10 +81,10 @@
             <h5><%= rank.song.title %></h5>
           <% end %>
           <h6><%= rank.song.artist %></h6>
-          <div class="text-muted small">
-            <%= gettext "by" %> <%= user_displayed_name(rank.song.user) %>
-            <time class="timeago small" datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>"></time>
-          </div>
+          <h6 class="text-muted">
+            <%= gettext "by" %> <%= proposed_by_link(@conn, rank.song) %>,
+            <time class="timeago" datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>"></time>
+          </h6>
         </div>
 
         <aside>

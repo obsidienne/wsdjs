@@ -240,6 +240,11 @@
   margin-bottom: 15px;
   min-width: 0;
 }
+.top-song-body a:hover{
+  text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
+  transform: translateY(-2px);
+}
 
 .top-song-play {
   width: 60px;
