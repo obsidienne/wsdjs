@@ -73,7 +73,7 @@ export default class Radio {
     
     document.querySelector(".player__toggle").removeAttribute("hidden", "hidden");    
     var container = document.querySelector("#player__youtube");
-    container.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}" frameborder="0" allowfullscreen="1"></iframe>`;
+    container.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}?autoplay=1" frameborder="0" allowfullscreen="1"></iframe>`;
     container.removeAttribute("hidden");
   }
 
