@@ -4,16 +4,9 @@ defmodule WsdjsWeb.PlaylistController do
 
   alias Wsdjs.Playlists
   alias Wsdjs.Accounts
+  alias Wsdjs.Accounts.User
 
   action_fallback WsdjsWeb.FallbackController
-
-  def index(conn, %{"user_id" => user_id}, current_user) do
-    with %Accounts.User{} = user <- Accounts.get_user!(user_id),
-         playlists <- Playlists.list_playlists(user) do
-
-      render conn, "index.html", playlists: playlists, user: user
-    end
-  end
 
   def new(conn, %{"user_id" => user_id}, current_user) do
     with %Accounts.User{} = user <- Accounts.get_user!(user_id),
@@ -39,23 +32,15 @@ defmodule WsdjsWeb.PlaylistController do
     end
   end
 
-  def show(conn, %{"id" => id}, current_user) do
-    with playlist <- Playlists.get_playlist!(id),
-        :ok <- Playlists.Policy.can?(current_user, :show, playlist),
-        songs <- Playlists.list_playlist_songs(playlist, current_user) do
-      
-      render conn, "show.html", playlist: playlist, songs: songs, current_user: current_user
-    end
-  end
-
   def delete(conn, %{"id" => id}, current_user) do
     with %Playlists.Playlist{} = playlist <- Playlists.get_playlist!(id),
          :ok <- Playlists.Policy.can?(current_user, :delete, playlist),
-         {:ok, _} = Playlists.delete_playlist(playlist) do
+         {:ok, _} = Playlists.delete_playlist(playlist),
+         %User{} = user <- Accounts.get_user!(playlist.user_id) do
 
       conn
       |> put_flash(:info, "playlist deleted successfully.")
-      |> redirect(to: user_playlist_path(conn, :index, current_user))
+      |> redirect(to: user_path(conn, :show, user))
     end
   end
 end

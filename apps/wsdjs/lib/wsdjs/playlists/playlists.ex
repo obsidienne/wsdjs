@@ -34,14 +34,20 @@ defmodule Wsdjs.Playlists do
 
   ## Examples
 
-      iex> get_playlist!(123)
+      iex> get_playlist!(123, user)
       %Playlist{}
 
-      iex> get_playlist!(456)
+      iex> get_playlist!(456, user)
       ** (Ecto.NoResultsError)
 
   """
+  def get_playlist!(id, %Wsdjs.Accounts.User{} = user) do
+    query = from p in Playlist, where: p.user_id == ^user.id 
+
+    Repo.get!(query, id)
+  end
   def get_playlist!(id), do: Repo.get!(Playlist, id)
+
 
   @doc """
   Creates a playlist.

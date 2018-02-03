@@ -3,5 +3,5 @@
 <%= @user.email %>
 <%= render "form.html", Map.put(assigns, :action, user_playlist_path(@conn, :create, @user)) %>
 
-<span><%= link "Back", to: user_playlist_path(@conn, :index, @current_user) %></span>
+<span><%= link "Back", to: user_path(@conn, :show, @current_user) %></span>
 </div>

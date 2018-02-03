@@ -56,11 +56,7 @@ defmodule WsdjsWeb.Router do
 
     get "/", HomeController, :index
     get "/search", SearchController, :index
-    resources "/users", UserController, only: [:show] do
-      resources "/playlists", PlaylistController, only: [:index]
-    end
-    resources "/playlists", PlaylistController, only: [:show]
-
+    resources "/users", UserController, only: [:show]
     resources "/home", HomeController, only: [:index]
     resources "/songs", SongController, only: [:show]
     resources "/tops", TopController, only: [:index, :show]
