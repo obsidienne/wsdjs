@@ -58,7 +58,7 @@
 .song-suggestor {
   text-decoration: underline;
 }
-.song-suggestor:hover {
+.song-suggestor:hover, .top-song__title:hover {
   text-decoration: underline;
   color: hsl(45, 100%, 51.4%)
 }
