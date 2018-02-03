@@ -7,6 +7,8 @@
 - remove tabs UI design
 - add a verified profil toggle
 - create a sub app for the API part
+- add an option to hide user email
+- lot of design tuning
 # version 1.6
 - invitation deprecated : invitation access removed. Admin can list existing invitation request 
 - add a deactivated user toggle. A deactivated user cannot login or get newsletter
