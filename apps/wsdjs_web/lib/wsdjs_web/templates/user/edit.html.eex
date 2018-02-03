@@ -100,8 +100,19 @@
     </div>
     <% end %>
 
-    <%= if Wsdjs.Accounts.Policy.can?(@user, :new_song_notification) == :ok do %>
     <table class="table">
+      <tr>
+        <td>Email contact visible <h6 class="small">Your user page contains a button to send you an email. Your email is public.</h6></td>
+        <td>
+          <div class="ckbx-style-11 ">
+            <%= inputs_for f, :parameter, fn fp -> %>
+              <%= checkbox fp, :email_contact %>
+              <%= label fp, :email_contact do %><% end %>
+            <% end %>
+          </div>
+        </td>
+      </td>
+      <%= if Wsdjs.Accounts.Policy.can?(@user, :new_song_notification) == :ok do %>
       <tr>
         <td>New song notification <h6 class="small">Receive an email everyday if new songs have been suggeted.</h6></td>
         <td>
@@ -113,9 +124,9 @@
           </div>
         </td>
       </tr>
+      <% end %>
     </table>
-    <% end %>
-
+  
   <%= if @current_user.admin do %>
     <table class="table user-parameters">
       <tr>
