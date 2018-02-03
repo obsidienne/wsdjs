@@ -11,6 +11,7 @@
 }
 .glnav a:hover {
   text-decoration: underline;
+  transform: translateY(-2px);
 }
 .glnav .container {
   display: flex;

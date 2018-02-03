@@ -73,6 +73,22 @@
 .user-page__profile__section:empty {
   display: none;
 }
+
+.social-link:hover {
+  transform: translateY(-2px);
+  display: inline-block;
+}
+.social-sc:hover svg{
+  fill: #ff5500;
+}
+.social-yt:hover svg{
+  fill: #ff0000;
+}
+.social-fb:hover svg{
+  fill: #4267b2;
+}
+
+
 .user-page__profile-details__place {
   padding-top: 8px;
 }

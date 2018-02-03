@@ -78,6 +78,7 @@ a.btn.disabled {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 29%);
   border-color: hsl(207, 56%, 16%);
+  transform: translateY(-2px);
 }
 .btn-primary:active,
 .btn-primary.active {
@@ -117,11 +118,13 @@ a.btn.disabled {
   color: hsl(208, 56%, 31%);
   text-decoration: underline;
   background-color: transparent;
+  transform: translateY(-2px);
 }
 .btn-link[disabled]:hover,
 .btn-link[disabled]:focus {
   color: hsl(0, 0%, 47%);
   text-decoration: none;
+  transform: translateY(-2px);
 }
 .btn-link.text-muted {
   color: hsl(0, 0%, 47%);
@@ -142,6 +145,7 @@ a.btn.disabled {
   color: hsl(0, 0%, 100%);
   background-color: hsl(2, 64%, 48%);
   border-color: hsl(2, 65%, 41%);
+  transform: translateY(-2px);
 }
 .btn-danger:active,
 .btn-danger.active {
