@@ -127,7 +127,9 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 300px
 }
-
+#playlists-section li article:hover {
+  transform: translateY(-2px);
+}
 /****************************
   invitation
 ****************************/
