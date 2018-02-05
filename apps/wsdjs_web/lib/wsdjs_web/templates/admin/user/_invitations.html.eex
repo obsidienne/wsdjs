@@ -1,23 +1,30 @@
-<ul class="invitations">
-<%= for invitation <- @invitations do %>
-  <li class="card">
-    <article class="invitation__request">
-      <h5>
-        <%= invitation.name %> 
+<%= if Enum.count(@invitations) do %>
+<table class="table">
+  <caption>invitations</caption>
+  <thead>
+    <tr><th>name</th><th>email</th><th>status</th><th>actions</th></tr>
+  </thead>
+  <tbody>
+  <%= for invitation <- @invitations do %>
+    <tr>
+      <td><%= invitation.name %></td>
+      <td><%= invitation.email %></td>
+      <td>
         <%= if ! is_nil(invitation.user_id) do %>
           <span class="label label-default">request accepted</span>
+        <% else %>
+          <small>requested at <%= Timex.format!(Timex.to_datetime(invitation.inserted_at), "%d %b, %k:%M", :strftime) %></small>
         <% end %>
-      </h5>
-      <h6 class="text-muted"><%= invitation.email %>
-        <small>requested at <%= Timex.format!(Timex.to_datetime(invitation.inserted_at), "%d %b, %k:%M", :strftime) %></small>
-      </h6>
-      <footer class="invitation__actions">
-        <%= if is_nil(invitation.user_id) do %>
-        <%= link "Accept invitation", to: admin_invitation_path(@conn, :update, invitation), class: "btn btn-link", method: "put", data: [confirm: "Accept #{invitation.name} request.\n\nAre you sure ?"] %> 
-        <% end %>
+      </td>
+      <td>
         <%= link "Delete", to: admin_invitation_path(@conn, :delete, invitation), class: "btn btn-danger", method: "delete", title: "Delete the invitation, not the user", data: [confirm: "Delete #{invitation.name} request.\n\nAre you sure ?"] %></h1>
-      </footer>
-    </article>
-  </li>
+        
+        <%= if is_nil(invitation.user_id) do %>
+         or <%= link "Accept invitation", to: admin_invitation_path(@conn, :update, invitation), class: "btn btn-link", method: "put", data: [confirm: "Accept #{invitation.name} request.\n\nAre you sure ?"] %> 
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 <% end %>
-</ul>
