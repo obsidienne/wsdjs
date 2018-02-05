@@ -33,12 +33,15 @@ defmodule WsdjsWeb.LayoutView do
 
   @suffix "WSDJs"
 
-  def page_title(conn) do
+  def main_title(conn) do
     controller = view_name(conn)
     action = action_name(conn)
 
-    title = get(controller, action)
-    put_suffix(title)
+    get(controller, action)
+  end
+
+  def page_title(conn) do
+    main_title(conn) |> put_suffix()
   end
 
   defp put_suffix(nil), do: @suffix

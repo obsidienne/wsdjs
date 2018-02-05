@@ -1,5 +1,5 @@
 import MainView from '../main';
-import Tippy from 'tippy.js/dist/tippy';
+import Tippy from 'tippy.js/dist/tippy.all';
 
 export default class View extends MainView {
   constructor() {
@@ -12,6 +12,7 @@ export default class View extends MainView {
       timeout = setTimeout(function() {
         if (self._needToFetchTops()) {
           var sentinel = document.querySelector("#top-list .sentinel");
+          sentinel.parentNode.removeChild(sentinel);    
           self._fetchTops();
         }
       }, 100);
@@ -20,7 +21,7 @@ export default class View extends MainView {
 
   mount() { 
     super.mount();
-    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
+    this.tips = new Tippy(".tippy[title]", {performance: true});
   }
 
   unmount() {
@@ -56,7 +57,7 @@ export default class View extends MainView {
   }
 
   _fetchTops() {
-    var container = document.getElementById("top-list");    
+    var container = document.getElementById("top-list");
     var page_number = parseInt(container.dataset.jsPageNumber);
     
     var self = this;
@@ -73,9 +74,6 @@ export default class View extends MainView {
 
         container.insertAdjacentHTML('beforeend', this.response);
 
-        var sentinel = document.querySelector("#top-list .sentinel");
-        sentinel.parentNode.removeChild(sentinel);    
-        
         self._formatDate();
       }
     };

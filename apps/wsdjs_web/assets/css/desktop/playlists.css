@@ -1,0 +1,11 @@
+#playlists-section .actions,
+#playlist-section .actions {
+  padding-bottom: 15px;
+}
+
+.playlist-name {
+  margin-left: auto;
+}
+.table_song-art {
+  width: 0;
+}

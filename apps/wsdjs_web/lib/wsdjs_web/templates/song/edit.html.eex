@@ -1,10 +1,8 @@
-<%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
-
-<main class="container song-edit">
+<section class="container song-edit">
   <div id="art_div">
     <img id="art_thumbnail" src="<%= art_url(@song.art, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
-      <button id="song_edit_cldwidget_opener" class="btn btn-primary" data-turbolinks="false">Upload cover</button>
+      <button id="song_edit_cldwidget_opener" class="btn btn-primary">Upload cover</button>
     </div>
   </div>
 
@@ -112,4 +110,4 @@
     <% end %>
     <%= submit "Update", class: "btn btn-primary" %>
   <% end %>
-</main>
+</section>

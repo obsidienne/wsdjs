@@ -12,26 +12,26 @@
 }
 
 .comment__body {
-	box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+	box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.15);
   flex: 1;
   position: relative;
   width: auto;
 }
 
 .comment__header {
-  background: #EEEEEE;
+  background: hsl(0, 0%, 93%);
   padding: 10px 12px;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid hsl(0, 0%, 90%);
   border-radius: 4px 4px 0 0;
   display: flex;
   align-items: center;
 }
 
 .comment__content {
-	background: #FFF;
+	background: hsl(0, 0%, 100%);
 	padding: 12px;
 	font-size: 15px;
-	color: #595959;
+	color: hsl(0, 0%, 35%);
 	border-radius: 0 0 4px 4px;
 }
 .comment__delete {
@@ -59,7 +59,7 @@
     display: block;
     border-width: 10px 12px 10px 0;
     border-style: solid;
-    border-color: transparent #EEEEEE;
+    border-color: transparent hsl(0, 0%, 93%);
     top: 8px;
     left: -12px;
   }
@@ -74,6 +74,6 @@
     height: 65px;
     border: 3px solid #FFF;
     border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.2);
   }
 }

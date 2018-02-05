@@ -27,8 +27,4 @@ defmodule WsdjsWeb.SongHelper do
   def blur_track(%Wsdjs.Musics.Song{hidden_track: true, user_id: id}, %User{id: id}), do: false
   def blur_track(%Wsdjs.Musics.Song{hidden_track: true}, %User{profil_djvip: true}), do: false
   def blur_track(%Wsdjs.Musics.Song{hidden_track: true}, _), do: true
-
-  def sort_songs(songs) do
-    Enum.sort_by(songs, fn (dt) -> Date.to_erl(dt.inserted_at) end, &>=/2)
-  end
 end

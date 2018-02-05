@@ -1,10 +1,14 @@
-<%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
+<header>
+  <div class="container">
+    <h1><%= gettext "Add a new song" %> </h1>
+  </div>
+</header>
 
-<main class="container song-new">
+<section class="container song-new">
   <div id="art_div">
     <img id="art_thumbnail" src="<%= art_url(nil, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
-      <button id="song_upload_widget_opener" class="btn btn-primary" data-turbolinks="false">Upload cover</button>
+      <button id="song_upload_widget_opener" class="btn btn-primary">Upload cover</button>
     </div>
   </div>
 
@@ -47,4 +51,4 @@
 
     <%= submit "Add this song", class: "btn btn-primary " %>
   <% end %>
-</main><!-- /.modal-dialog -->
+</section>

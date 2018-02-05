@@ -1,30 +1,44 @@
 defmodule WsdjsWeb.UserController do
   @moduledoc false
   use WsdjsWeb, :controller
+  use WsdjsWeb.Controller
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics
 
   action_fallback WsdjsWeb.FallbackController
 
-  def show(conn, %{"id" => user_id}) do
-    current_user = conn.assigns[:current_user]
-
+  def show(conn, %{"id" => user_id, "playlist" => playlist_id}, current_user) do
     with %User{} = user <- Accounts.get_user!(user_id),
         :ok <- Accounts.Policy.can?(current_user, :show, user) do
-      page = Musics.paginate_songs_user(current_user, user_id)
+
+      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      playlist = Wsdjs.Playlists.get_playlist!(playlist_id, user)
+      songs = Wsdjs.Playlists.list_playlist_songs(playlist, current_user)
 
       conn
-      |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
-      |> put_resp_header("page-number", Integer.to_string(page.page_number))
-      |> render("show.html", user: user, songs: page.entries, page_number: page.page_number, total_pages: page.total_pages, total_songs: page.total_entries)
+      |> render("show.html", user: user, 
+                             playlist: playlist,
+                             songs: songs,
+                             suggested_songs: suggested_songs)
     end
   end
 
-  def edit(conn, %{"id" => id}) do
-    current_user = conn.assigns[:current_user]
+  def show(conn, %{"id" => user_id}, current_user) do
+    with %User{} = user <- Accounts.get_user!(user_id),
+        :ok <- Accounts.Policy.can?(current_user, :show, user) do
 
+      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      playlists = Wsdjs.Playlists.list_playlists(user)
+
+      conn
+      |> render("show.html", user: user, 
+                             suggested_songs: suggested_songs,
+                             playlists: playlists)
+    end
+  end
+
+  def edit(conn, %{"id" => id}, current_user) do
     with %User{} = user <- Accounts.get_user!(id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user) do
       changeset = Accounts.change_user(user)
@@ -32,9 +46,7 @@ defmodule WsdjsWeb.UserController do
     end
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    current_user = conn.assigns[:current_user]
-
+  def update(conn, %{"id" => id, "user" => user_params}, current_user) do
     with %User{} = user <- Accounts.get_user!(id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
          {:ok, user} <- Accounts.update_user(user, user_params, current_user) do
@@ -42,6 +54,9 @@ defmodule WsdjsWeb.UserController do
       conn
       |> put_flash(:info, "Profile updated.")
       |> redirect(to: user_path(conn, :show, user))
+    else
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", user: current_user, changeset: changeset)
     end
   end
 end

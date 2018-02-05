@@ -2,6 +2,7 @@ defmodule WsdjsWeb.SongController do
   @moduledoc false
 
   use WsdjsWeb, :controller
+  use WsdjsWeb.Controller
 
   alias Wsdjs.Musics
   alias Wsdjs.Reactions
@@ -11,11 +12,6 @@ defmodule WsdjsWeb.SongController do
   alias Wsdjs.Attachments.Video
 
   action_fallback WsdjsWeb.FallbackController
-
-  def action(conn, _) do
-    args = [conn, conn.params, conn.assigns[:current_user]]
-    apply(__MODULE__, action_name(conn), args)
-  end
 
   def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
@@ -111,13 +107,17 @@ defmodule WsdjsWeb.SongController do
   end
 
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
-    with %Song{} = song <- Musics.get_song!(id),
-         :ok <- Musics.Policy.can?(current_user, :edit_song, song),
+    song = Musics.get_song!(id)
+
+    with :ok <- Musics.Policy.can?(current_user, :edit_song, song),
          {:ok, %Song{} = song} <- Musics.update_song(song, song_params, current_user) do
   
       conn
       |> put_flash(:info, "Song updated")
       |> redirect(to: song_path(conn, :show, song))
+    else
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", song: song, user: current_user, changeset: changeset)
     end
   end
 

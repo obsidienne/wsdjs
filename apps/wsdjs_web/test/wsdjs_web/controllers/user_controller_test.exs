@@ -50,9 +50,8 @@ defmodule WsdjsWeb.UserControllerTest do
       dj_vip = insert(:user, profil_djvip: true)
       admin = insert(:user, %{admin: true})
 
-      %Wsdjs.Accounts.UserDetail{}
-      |> Wsdjs.Accounts.UserDetail.changeset(%{user_id: admin.id})
-      |> Wsdjs.Repo.insert()
+      admin = admin |> Wsdjs.Repo.preload(:parameter)
+      Wsdjs.Accounts.update_user(admin, %{"parameter" => %{email_contact: true}}, admin)
 
       Enum.each([
         assign(conn, :current_user, user),
@@ -71,20 +70,16 @@ defmodule WsdjsWeb.UserControllerTest do
     end
 
     test "all user can access show std user", %{conn: conn} do
-      user = insert(:user)
-      dj = insert(:user, profil_dj: true)
-      dj_vip = insert(:user, profil_djvip: true)
-      admin = insert(:user, %{admin: true})
+      user = insert(:user) |> Wsdjs.Repo.preload([:detail, :parameter])
+      dj = insert(:user, profil_dj: true) |> Wsdjs.Repo.preload([:detail, :parameter])
+      dj_vip = insert(:user, profil_djvip: true) |> Wsdjs.Repo.preload([:detail, :parameter])
+      admin = insert(:user, %{admin: true}) |> Wsdjs.Repo.preload([:detail, :parameter])
 
-      %Wsdjs.Accounts.UserDetail{}
-      |> Wsdjs.Accounts.UserDetail.changeset(%{user_id: dj_vip.id})
-      |> Wsdjs.Repo.insert()
-      %Wsdjs.Accounts.UserDetail{}
-      |> Wsdjs.Accounts.UserDetail.changeset(%{user_id: dj.id})
-      |> Wsdjs.Repo.insert()
-      %Wsdjs.Accounts.UserDetail{}
-      |> Wsdjs.Accounts.UserDetail.changeset(%{user_id: user.id})
-      |> Wsdjs.Repo.insert()
+      attrs = %{"parameter" => %{email_contact: true}, "detail" => %{description: "aaa"}}
+      Wsdjs.Accounts.update_user(dj, attrs, dj)
+      Wsdjs.Accounts.update_user(user, attrs, user)
+      Wsdjs.Accounts.update_user(dj_vip, attrs, dj_vip)
+
 
       Enum.each([
         assign(conn, :current_user, admin),

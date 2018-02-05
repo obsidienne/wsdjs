@@ -1,6 +1,8 @@
 import timeago from 'timeago.js';
-import Tippy from 'tippy.js/dist/tippy';
+import Tippy from 'tippy.js/dist/tippy.all';
 import MainView from '../main';
+import lazyload from '../../components/lazyload';
+
 export default class View extends MainView {
   constructor() {
     super();
@@ -25,6 +27,7 @@ export default class View extends MainView {
       }
 
     }, false);
+    lazyload.refresh();
   }
 
   mount() {
@@ -36,7 +39,7 @@ export default class View extends MainView {
     }
 
     // tooltip
-    this.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
+    this.tips = new Tippy(".tippy[title]", {performance: true});
   }
 
   unmount() {
@@ -66,7 +69,7 @@ export default class View extends MainView {
       if (this.status >= 200 && this.status < 400) {
         self.tips.destroyAll();
         self._refresh_layout(container, JSON.parse(this.response));
-        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
+        self.tips = new Tippy(".tippy[title]", {performance: true});
       } else {
         console.error("Error");
       }
@@ -145,7 +148,8 @@ export default class View extends MainView {
         new timeago().render(document.querySelectorAll("time.timeago"));
         self.tips.destroyAll();
         self._formatDate();
-        self.tips = new Tippy(".tippy[title]", {performance: true, size: "small"});
+        self.tips = new Tippy(".tippy[title]", {performance: true});
+        lazyload.refresh();
        }
     };
 

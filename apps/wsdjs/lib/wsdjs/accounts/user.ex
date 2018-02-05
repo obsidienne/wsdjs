@@ -20,6 +20,7 @@ defmodule Wsdjs.Accounts.User do
     field :profil_dj, :boolean, default: false
     field :deactivated, :boolean, default: false
     field :activated_at, :naive_datetime
+    field :verified_profil, :boolean, default: false
 
     has_many :songs, Musics.Song
     has_many :comments, Reactions.Comment
@@ -44,7 +45,7 @@ defmodule Wsdjs.Accounts.User do
 
   def admin_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:user_country, :name, :djname, :admin, :profil_djvip, :profil_dj, :deactivated])
+    |> cast(attrs, [:user_country, :name, :djname, :admin, :profil_djvip, :profil_dj, :deactivated, :verified_profil])
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
     |> cast_assoc(:parameter, with: &Accounts.UserParameter.admin_changeset/2)

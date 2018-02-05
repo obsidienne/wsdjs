@@ -9,7 +9,12 @@ body.SessionNewView main, body.RegistrationNewView main {
   flex-direction: column;
   height: calc(100vh - 53px);
 }
-
+.hero-text {
+  padding-top: 15px;
+}
+.hero-text h5 {
+  padding-bottom: 15px;
+}
 .HomeIndexView main {
   display: flex;
   flex-direction: column;
@@ -20,6 +25,11 @@ body.SessionNewView main, body.RegistrationNewView main {
 }
 .home-page__instant__hit li {
   margin-bottom: 15px;  
+}
+
+.home-page__top__song li:hover, .home-page__instant__hit li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
 }
 
 @media (min-width: 768px) {

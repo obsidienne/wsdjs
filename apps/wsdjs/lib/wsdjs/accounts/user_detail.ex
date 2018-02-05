@@ -24,7 +24,7 @@ defmodule Wsdjs.Accounts.UserDetail do
   end
 
   @allowed_fields [
-                    :user_id, :description, :favorite_genre, :favorite_artist, :favorite_color, :favorite_meal,
+                    :description, :favorite_genre, :favorite_artist, :favorite_color, :favorite_meal,
                     :favorite_animal, :djing_start_year, :love_more, :hate_more, :youtube, :facebook, :soundcloud
                   ]
 

@@ -10,7 +10,11 @@
   .songs-container, .container { max-width: 720px; }
 }
 @media (min-width: 992px) {
-  .songs-container, .container { max-width: 960px; }
+  .songs-container, .container { 
+    padding-left: 0;
+    padding-right: 0;  
+    max-width: 960px; 
+  }
 }
 @media (min-width: 1200px) {
   .songs-container, .container {
@@ -20,6 +24,16 @@
 .SessionNewView .container-form, .RegistrationNewView .container-form {
   width: 100%;
   max-width: 414px;
+}
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .home-container {
+    flex-direction: row;
+  }
 }
 
 .song-edit,

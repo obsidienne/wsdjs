@@ -1,17 +1,33 @@
-<header class="hero hot-hero">
-  <%= render WsdjsWeb.SharedView, "_nav.html", conn: @conn, current_user: @current_user %>
-
+<header>
   <div class="container">
-    <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
-      <a class="btn btn-primary tippy" title="Suggest a song for the current month TOP 10" href="<%= suggestion_path(@conn, :new) %>">Suggest a song</a>
-    <% end %>
-    <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
-      <span class="btn">or</span>
-    <a class="btn btn-link" href="<%= song_path(@conn, :new) %>">Add a song</a>
-    <% end %>
+    <h1><%= gettext "Songs" %> </h1>
   </div>
 </header>
 
-<main id="song-list">
+<div class="container actions">
+  <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
+  <div class="search-container">
+    <div class="search__input__wrap">
+      <svg fill='#455A64' height='36' viewBox='0 0 24 24' width='36' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/>
+        <path d='M0 0h24v24H0z' fill='none'/>
+      </svg>
+      <input id="search-input" placeholder="Search song ..." type="text" class="search-input" autocomplete="off" spellcheck="false">
+    </div>
+
+    <div class="search-results-container">
+    </div>
+  </div>
+  <% end %>
+
+  <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
+    <a class="btn btn-primary tippy" title="Suggest a song for the current month TOP 10" href="<%= suggestion_path(@conn, :new) %>">Suggest a song</a>
+  <% end %>
+  <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
+    <a class="btn btn-link" href="<%= song_path(@conn, :new) %>">Add a song</a>
+  <% end %>
+</div>
+
+<section id="song-list">
   <%= render "index_hot_song.html", conn: @conn, current_user: @current_user, month: @month, songs: @songs, last: @last %>
-</main>
+</section>

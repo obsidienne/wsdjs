@@ -1,0 +1,26 @@
+<section id="playlists-section">
+  <%= if Wsdjs.Playlists.Policy.can?(@current_user, :create, @user) == :ok do %>
+  <div class="actions">
+    <%= link "Add a new TOP or playlist", to: user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary" %>
+  </div>
+  <% end %>
+
+  <ul>
+    <%= for playlist <- @playlists do %>
+    <li>
+      <article>
+        <%= link to: user_path(@conn, :show, @user, [playlist: playlist.id]) do %>
+          <div class="img-embed">
+            <%= if playlist.song do %>
+            <img src="<%= art_url(playlist.song.art, 300) %>" srcset="<%= art_srcset(playlist.song.art, 300) %>" sizes="300px" class="responsive"/>
+            <% else %>
+            <img src="<%= art_url(nil, 300) %>" class="responsive"/>
+            <% end %>
+          </div>
+          <span><%= playlist.name %></span>
+        <% end %>
+      </article>
+    </li>
+    <% end %>
+  </ul>
+</section>

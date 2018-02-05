@@ -1,3 +1,14 @@
+# version 1.7
+- add #suggestion# and #likes and tops# playlists
+- new design
+- replace turbolinks by pjax
+- activate BROTLI and GZIP to minify JS et CSS assets
+- use immutable cache to improve bandwitch usage
+- remove tabs UI design
+- add a verified profil toggle
+- create a sub app for the API part
+- add an option to hide user email
+- lot of design tuning
 # version 1.6
 - invitation deprecated : invitation access removed. Admin can list existing invitation request 
 - add a deactivated user toggle. A deactivated user cannot login or get newsletter
