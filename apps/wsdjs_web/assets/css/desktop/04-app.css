@@ -32,6 +32,7 @@ ul {
 
 time {
   text-transform: capitalize;
+  cursor: help;
 }
 
 table {
@@ -51,9 +52,12 @@ img.responsive {
   height: auto;
   overflow: hidden;
 }
-
-time {
-  cursor: help;
+.img-embed {
+  padding-bottom: 100%;
+  position: relative;
+}
+.img-embed img {
+  position: absolute;
 }
 
 p {

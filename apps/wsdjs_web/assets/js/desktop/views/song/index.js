@@ -1,6 +1,7 @@
 import timeago from 'timeago.js';
 import Tippy from 'tippy.js/dist/tippy.all';
 import MainView from '../main';
+import lazyload from '../../components/lazyload';
 
 export default class View extends MainView {
   constructor() {
@@ -26,6 +27,7 @@ export default class View extends MainView {
       }
 
     }, false);
+    lazyload.refresh();
   }
 
   mount() {
@@ -147,6 +149,7 @@ export default class View extends MainView {
         self.tips.destroyAll();
         self._formatDate();
         self.tips = new Tippy(".tippy[title]", {performance: true});
+        lazyload.refresh();
        }
     };
 

@@ -69,11 +69,6 @@ p { margin: 0 0 10px; }
 .text-capitalized {
   text-transform: capitalize;
 }
-
-.text-lowercase {
-  text-transform: lowercase;
-}
-
 .text-center {
   text-align: center;
 }
@@ -97,28 +92,4 @@ label {
 }
 .img-circle {
   border-radius: 50%;
-}
-
-.line-through {
-  overflow: hidden;
-  text-align: center;
-  width: 400px;
-}
-.line-through:before,
-.line-through:after {
-  background-color: #777;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 50%;
-}
-.line-through:before {
-  right: 0.5em;
-  margin-left: -50%;
-}
-.line-through:after {
-  left: 0.5em;
-  margin-right: -50%;
 }
