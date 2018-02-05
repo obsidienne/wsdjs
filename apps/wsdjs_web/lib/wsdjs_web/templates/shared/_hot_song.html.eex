@@ -3,7 +3,9 @@
 <li class="hot-songs__song" data-id="<%= @song.id %>">
   <article class="song-card card">
     <a class="song-card__header">
-      <img src="<%= art_url(nil, 200) %>" srcset="<%= art_srcset(nil, 200) %>" sizes="200px" class="responsive" />
+      <div class="img-embed">
+        <img src="<%= art_url(nil, 200) %>" srcset="<%= art_srcset(nil, 200) %>" sizes="200px" class="responsive" />
+      </div>
 
       <h6 class="song-card__tags">
         <span class="label label-default"><%= @song.genre %></span>
@@ -45,7 +47,9 @@
 <li class="hot-songs__song" data-id="<%= @song.id %>">
   <article class="song-card card">
     <a href="<%= url_for_provider(@song) %>" class="song-card__header" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
-      <img src="<%= art_url(@song.art, 200) %>" srcset="<%= art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
+      <div class="img-embed">
+        <img src="<%= art_url(@song.art, 200) %>" srcset="<%= art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
+      </div>
       <h6 class="song-card__tags">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>

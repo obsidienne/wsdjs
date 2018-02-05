@@ -51,6 +51,13 @@ img.responsive {
   height: auto;
   overflow: hidden;
 }
+.img-embed {
+  padding-bottom: 100%;
+  position: relative;
+}
+.img-embed img {
+  position: absolute;
+}
 
 time {
   cursor: help;

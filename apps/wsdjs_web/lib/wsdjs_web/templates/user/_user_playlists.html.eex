@@ -10,11 +10,13 @@
     <li>
       <article>
         <%= link to: user_path(@conn, :show, @user, [playlist: playlist.id]) do %>
-          <%= if playlist.song do %>
-          <img src="<%= art_url(playlist.song.art, 300) %>" srcset="<%= art_srcset(playlist.song.art, 300) %>" sizes="300px" class="responsive"/>
-          <% else %>
-          <img src="<%= art_url(nil, 300) %>" class="responsive"/>
-          <% end %>
+          <div class="img-embed">
+            <%= if playlist.song do %>
+            <img src="<%= art_url(playlist.song.art, 300) %>" srcset="<%= art_srcset(playlist.song.art, 300) %>" sizes="300px" class="responsive"/>
+            <% else %>
+            <img src="<%= art_url(nil, 300) %>" class="responsive"/>
+            <% end %>
+          </div>
           <span><%= playlist.name %></span>
         <% end %>
       </article>
