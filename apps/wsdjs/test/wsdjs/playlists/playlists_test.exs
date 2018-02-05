@@ -132,7 +132,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     test "list_playlist_songs/1 returns all song in the playlist" do
       %{user: user, playlist: playlist, songs: songs} = playlist_with_songs_fixture()
       assert Playlists.list_playlists(user) == [playlist]
-      assert Playlists.list_playlist_songs(playlist) == songs
+      assert Playlists.list_playlist_songs(playlist, user) == songs |> Repo.preload(:art)
     end
   end
 end

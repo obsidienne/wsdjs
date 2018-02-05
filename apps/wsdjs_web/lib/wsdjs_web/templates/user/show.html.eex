@@ -22,7 +22,7 @@
       </header>
 
       <footer class="user-page__actions">
-        <%= if @user.parameter.email_contact do %>
+        <%= if @user && @user.parameter && @user.parameter.email_contact do %>
         <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
         <% end %>
         <%= if Wsdjs.Accounts.Policy.can?(@current_user, :edit_user, @user) == :ok do %>

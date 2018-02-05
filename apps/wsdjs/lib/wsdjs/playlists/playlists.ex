@@ -128,7 +128,7 @@ defmodule Wsdjs.Playlists do
 
   ## Examples
 
-      iex> list_playlist_songs(%Playlist{id: id})
+      iex> list_playlist_songs(%Playlist{id: id}, %User{} = user)
       [%Song{}, ...]
 
   """
