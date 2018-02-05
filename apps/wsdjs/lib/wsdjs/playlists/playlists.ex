@@ -132,7 +132,7 @@ defmodule Wsdjs.Playlists do
       [%Song{}, ...]
 
   """
-  def list_playlist_songs(%Playlist{id: id, type: "suggested", user_id: user_id}, %User{} = current_user) do
+  def list_playlist_songs(%Playlist{type: "suggested", user_id: user_id}, %User{} = current_user) do
     query = from s in Song.scoped(current_user),
     where: s.user_id == ^user_id,  
     order_by: [desc: s.inserted_at]
@@ -140,7 +140,7 @@ defmodule Wsdjs.Playlists do
     Repo.all(query) |> Repo.preload(:art)
   end
 
-  def list_playlist_songs(%Playlist{id: id, type: "likes and tops", user_id: user_id}, %User{} = current_user) do
+  def list_playlist_songs(%Playlist{type: "likes and tops", user_id: user_id}, %User{} = current_user) do
     query = from s in Song.scoped(current_user),
     join: o in Opinion, on: o.song_id == s.id,
     where: o.user_id == ^user_id,
@@ -149,7 +149,7 @@ defmodule Wsdjs.Playlists do
     Repo.all(query) |> Repo.preload(:art)
   end
 
-  def list_playlist_songs(%Playlist{id: id, type: "playlist", user_id: user_id}, %User{} = current_user) do
+  def list_playlist_songs(%Playlist{id: id, type: "playlist"}, %User{} = current_user) do
     query = from s in Song.scoped(current_user),
     join: ps in PlaylistSong, on: ps.playlist_id == ^id and ps.song_id == s.id,
     order_by: ps.position

@@ -12,8 +12,6 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   import Ecto.Query, warn: false
 
   alias Wsdjs.Repo
-  alias Wsdjs.Playlists.Playlist
-  alias Wsdjs.Musics.Song
 
   def call(_args \\ []) do
     delete_suggested()
