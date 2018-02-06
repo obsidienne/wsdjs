@@ -8,6 +8,7 @@ import TopShowView from './top/show';
 import UserEditView from './user/edit';
 import UserShowView from './user/show';
 import HomeIndexView from './home/index';
+import SuggestionNewView from './suggestion/new';
 
 // Collection of specific view modules
 const views = {
@@ -19,6 +20,7 @@ const views = {
   TopShowView,
   UserEditView,
   UserShowView,
+  SuggestionNewView,
   HomeIndexView
 };
 
