@@ -181,6 +181,11 @@
   width: 100%;
   height: auto;
 }
+
+.container.signin {
+  padding-bottom: 15px;
+}
+
 @media (min-width: 767px) {
   .top-song {
     flex-direction: row;
