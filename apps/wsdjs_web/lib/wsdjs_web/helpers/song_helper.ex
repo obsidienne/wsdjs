@@ -5,7 +5,7 @@ defmodule WsdjsWeb.SongHelper do
   alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
 
-  def url_for_provider(%Song{video_id: id}) when is_binary(id), do: "http://youtu.be/#{id}"
+  def url_for_provider(%Song{video_id: id}) when is_binary(id), do: "https://www.youtube.com/#{id}"
   def url_for_provider(%Song{url: url}) when is_binary(url), do: url
   def url_for_provider(_), do: "#"
 
