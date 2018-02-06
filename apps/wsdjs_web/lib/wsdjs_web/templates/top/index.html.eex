@@ -5,7 +5,7 @@
 </header>
 
 <%= if is_nil(@current_user) do %>
-  <div class="container">
+  <div class="container signin">
     <h4>World Swing DeeJays</h4>
     <h5>The best West Coast Swing music from all around the world !</h5>
 
@@ -17,11 +17,11 @@
   </div>
 <% end %>
 
+<%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
 <div class="container">
-  <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-    <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
-  <% end %>
+  <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
 </div>
+<% end %>
 
 <section id="top-list" class="tops container" data-js-page-number="<%= @page_number %>"  data-js-total-pages="<%= @total_pages %>">
   <%= for top <- @tops do %>
