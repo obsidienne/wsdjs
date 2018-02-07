@@ -7,7 +7,6 @@ defmodule Wsdjs.Playlists.Playlist do
   schema "playlists" do
     field(:name, :string)
     field(:type, :string, default: "playlist")
-    field(:visibility, :string, default: "private")
     field(:count, :integer, default: 0)
     timestamps()
 
@@ -18,15 +17,15 @@ defmodule Wsdjs.Playlists.Playlist do
 
   def update_changeset(%Playlist{} = playlist, attrs) do
     playlist
-    |> cast(attrs, [:name, :visibility])
-    |> validate_required([:name, :visibility])
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
     |> unique_constraint(:name, name: :playlists_user_id_name_index)
   end
 
   def changeset(%Playlist{} = playlist, attrs) do
     playlist
-    |> cast(attrs, [:name, :user_id, :visibility])
-    |> validate_required([:name, :user_id, :visibility])
+    |> cast(attrs, [:name, :user_id])
+    |> validate_required([:name, :user_id])
     |> unique_constraint(:name, name: :playlists_user_id_name_index)
     |> assoc_constraint(:user)
   end
