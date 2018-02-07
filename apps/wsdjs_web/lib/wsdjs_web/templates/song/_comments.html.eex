@@ -22,7 +22,10 @@
             <a href="<%= user_path(@conn, :show, comment.user) %>"><%= comment.user.name %></a>
             <time class="timeago small" title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
           </span>
-          <%= link "", to: api_comment_path(@conn, :delete, comment.id), class: "btn-link comment__delete" %>
+          <%= if Wsdjs.Reactions.Policy.can?(@conn.assigns[:current_user], :delete, comment) == :ok do %>
+            <button class="btn-link comment__delete" data-path="<%= api_comment_path(@conn, :delete, comment) %>">
+            </button>
+          <% end %>
         </header>
         <div class="comment__content">
           <%= comment.text %>

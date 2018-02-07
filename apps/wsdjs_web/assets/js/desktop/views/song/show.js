@@ -16,7 +16,6 @@ export default class View extends MainView {
       if (e.target && e.target.matches(".comment__delete")) {
         this._delete_comment(e.target);
         e.stopPropagation();
-        e.preventDefault();
       }
     }, false);
 
@@ -50,12 +49,13 @@ export default class View extends MainView {
   }
 
   _delete_comment(el) {
-    if (!window.confirm("Are you sure ?")) 
+    if (!window.confirm("Are you sure to delete this comment ?")) {
       return;
+    }
 
     var token = document.querySelector("[name=channel_token]").getAttribute("content");
     var request = new XMLHttpRequest();
-    request.open("DELETE", el.href, true);
+    request.open("DELETE", el.dataset.path, true);
     request.setRequestHeader('Authorization', "Bearer " + token);
     request.setRequestHeader('Accept', 'application/json');
 
@@ -136,7 +136,7 @@ export default class View extends MainView {
             <a href="${params.user.path}">${params.user.name}</a>
             <time class="timeago small" title="${params.commented_at}" datetime="${params.commented_at}"></time>
           </span>
-          <a class="btn-link comment__delete" href="/api/v1/comments/${params.id}"></a>
+          <button class="btn-link comment__delete" data-path="/api/v1/comments/${params.id}"></button>
         </header>
         <div class="comment__content">${params.text}</div>
       </div>
