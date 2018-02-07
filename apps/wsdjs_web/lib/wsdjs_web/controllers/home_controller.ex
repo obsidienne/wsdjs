@@ -9,6 +9,6 @@ defmodule WsdjsWeb.HomeController do
     songs = Musics.instant_hits()
     top = Charts.last_top(current_user)
 
-    render conn, "index.html", songs: songs, top: top
+    render(conn, "index.html", songs: songs, top: top)
   end
 end

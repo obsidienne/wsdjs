@@ -6,8 +6,8 @@ defmodule Wsdjs.Auth.AuthToken do
 
   @foreign_key_type :binary_id
   schema "auth_tokens" do
-    field :value, :string
-    belongs_to :user, Wsdjs.Accounts.User
+    field(:value, :string)
+    belongs_to(:user, Wsdjs.Accounts.User)
 
     timestamps(updated_at: false)
   end

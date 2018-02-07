@@ -18,11 +18,12 @@ defmodule WsdjsApi.V1.AccountView do
       country: user.user_country,
       djname: user.djname,
       profil_dj: user.profil_dj,
-      verified_profil: user.verified_profil,
+      verified_profil: user.verified_profil
     }
   end
 
   defp add_avatar(user, nil), do: user
+
   defp add_avatar(user, avatar) do
     avatars = %{
       avatar_uri_200: CloudinaryHelper.avatar_url(avatar, 200),
@@ -33,6 +34,7 @@ defmodule WsdjsApi.V1.AccountView do
   end
 
   defp add_details(user, nil), do: user
+
   defp add_details(user, detail) do
     details = %{
       description: detail.description,

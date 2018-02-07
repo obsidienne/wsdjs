@@ -1,14 +1,14 @@
 defmodule Wsdjs.Jobs.UpdatePlaylists do
-@doc """
-    insert into playlists(name, type, user_id, inserted_at, updated_at)
-        select distinct 'suggested'
-               ,'suggested'
-               ,user_id, now() at time zone 'utc'
-               ,now() at time zone 'utc'
-        from songs 
-        where user_id not in (select user_id from playlists where type='suggested');
+  @doc """
+      insert into playlists(name, type, user_id, inserted_at, updated_at)
+          select distinct 'suggested'
+                 ,'suggested'
+                 ,user_id, now() at time zone 'utc'
+                 ,now() at time zone 'utc'
+          from songs 
+          where user_id not in (select user_id from playlists where type='suggested');
 
-"""
+  """
   import Ecto.Query, warn: false
 
   alias Wsdjs.Repo
@@ -29,7 +29,9 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   #
   ###############################################
   def delete_suggested() do
-    query = "DELETE from playlists where type='suggested' and user_id not in (select user_id from songs)"
+    query =
+      "DELETE from playlists where type='suggested' and user_id not in (select user_id from songs)"
+
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
@@ -47,7 +49,6 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  
   def update_suggested() do
     query = "
       update playlists p 
@@ -65,7 +66,9 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   #
   ###############################################
   def delete_toplike() do
-    query = "DELETE from playlists where type='likes and tops' and user_id not in (select user_id from opinions)"
+    query =
+      "DELETE from playlists where type='likes and tops' and user_id not in (select user_id from opinions)"
+
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
@@ -83,7 +86,6 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  
   def update_toplike() do
     query = "
       update playlists p 

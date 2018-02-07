@@ -23,8 +23,10 @@ defmodule WsdjsWeb.IdentifyUa do
     ua = get_req_header(conn, "user-agent")
     device_type(ua)
   end
-  def device_type([ua|_]), do: device_type(ua)
+
+  def device_type([ua | _]), do: device_type(ua)
   def device_type([]), do: "desktop"
+
   def device_type(ua) when is_binary(ua) do
     parsed = UAInspector.parse(ua)
 

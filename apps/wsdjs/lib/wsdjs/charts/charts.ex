@@ -17,10 +17,10 @@ defmodule Wsdjs.Charts do
   def last_top(current_user) do
     current_user
     |> Top.scoped()
-    |> order_by([desc: :due_date])
+    |> order_by(desc: :due_date)
     |> where(status: "published")
     |> limit(1)
-    |> Repo.one
+    |> Repo.one()
     |> Repo.preload(ranks: list_rank())
     |> Repo.preload(ranks: :song)
     |> Repo.preload(ranks: [song: :art])
@@ -31,19 +31,21 @@ defmodule Wsdjs.Charts do
   Returns Tops accessible for the current user.
   """
   def paginate_tops(current_user, paginate_params \\ %{}) do
-    tops = current_user
-    |> Top.scoped()
-    |> order_by([desc: :due_date])
-    |> Repo.paginate(paginate_params)
+    tops =
+      current_user
+      |> Top.scoped()
+      |> order_by(desc: :due_date)
+      |> Repo.paginate(paginate_params)
 
-    entries = tops.entries
-    |> Repo.preload(ranks: list_rank())
-    |> Repo.preload(:songs)
+    entries =
+      tops.entries
+      |> Repo.preload(ranks: list_rank())
+      |> Repo.preload(:songs)
 
     %{
-      "entries": entries,
-      "total_pages": tops.total_pages,
-      "page_number": tops.page_number
+      entries: entries,
+      total_pages: tops.total_pages,
+      page_number: tops.page_number
     }
   end
 
@@ -139,9 +141,7 @@ defmodule Wsdjs.Charts do
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
   def next_step(top) do
-    %{checking: "voting",
-      voting: "counting",
-      counting: "published"}
+    %{checking: "voting", voting: "counting", counting: "published"}
     |> Map.fetch!(String.to_atom(top.status))
     |> go_step(top)
   end
@@ -150,8 +150,7 @@ defmodule Wsdjs.Charts do
   # The steps are the following : check -> vote -> count -> publish
   # The step create does not use this function.
   def previous_step(top) do
-    %{published: "counting",
-      counting: "voting"}
+    %{published: "counting", counting: "voting"}
     |> Map.fetch!(String.to_atom(top.status))
     |> go_step(top)
   end
@@ -184,19 +183,23 @@ defmodule Wsdjs.Charts do
 
   # Need to calculate the position according to likes + votes + bonus.
   defp go_step("published", top) do
-    query = from q in Rank,
-      join: p in fragment("""
-      SELECT id, top_id, row_number() OVER (
-        PARTITION BY top_id
-        ORDER BY votes + bonus + likes DESC
-      ) as rn FROM ranks
-      """),
-    where: q.top_id == ^top.id and p.id == q.id,
-    select: %{id: q.id, pos: p.rn}
+    query =
+      from(
+        q in Rank,
+        join:
+          p in fragment("""
+          SELECT id, top_id, row_number() OVER (
+            PARTITION BY top_id
+            ORDER BY votes + bonus + likes DESC
+          ) as rn FROM ranks
+          """),
+        where: q.top_id == ^top.id and p.id == q.id,
+        select: %{id: q.id, pos: p.rn}
+      )
 
     query
     |> Repo.all()
-    |> Enum.each(fn(rank) ->
+    |> Enum.each(fn rank ->
       from(p in Wsdjs.Charts.Rank, where: [id: ^rank.id])
       |> Repo.update_all(set: [position: rank.pos])
     end)
@@ -220,10 +223,11 @@ defmodule Wsdjs.Charts do
 
   defp q_list_votes(id, %User{} = user) do
     Vote
-    |> where([user_id: ^user.id, top_id: ^id])
+    |> where(user_id: ^user.id, top_id: ^id)
   end
 
   def list_votes(%Top{}, nil), do: []
+
   def list_votes(%Top{id: id}, %User{} = user) do
     id
     |> q_list_votes(user)
@@ -232,15 +236,16 @@ defmodule Wsdjs.Charts do
 
   def vote(user, %{"top_id" => top_id, "votes" => votes_param}) do
     top = get_top!(top_id)
-    top = Repo.preload top, votes: q_list_votes(top_id, user)
+    top = Repo.preload(top, votes: q_list_votes(top_id, user))
 
-    new_votes = votes_param
-                |> Map.keys()
-                |> Enum.reject(fn(v) -> votes_param[v] == "" end)
-                |> Enum.map(&Vote.get_or_build(top, user.id, &1, votes_param[&1]))
+    new_votes =
+      votes_param
+      |> Map.keys()
+      |> Enum.reject(fn v -> votes_param[v] == "" end)
+      |> Enum.map(&Vote.get_or_build(top, user.id, &1, votes_param[&1]))
 
     top
-    |> Changeset.change
+    |> Changeset.change()
     |> Changeset.put_assoc(:votes, new_votes)
     |> Repo.update()
   end
@@ -260,13 +265,15 @@ defmodule Wsdjs.Charts do
   end
 
   def set_likes(%Top{id: id}) do
-    ranks = Rank
-    |> where(top_id: ^id)
-    |> preload(song: :opinions)
-    |> Repo.all()
+    ranks =
+      Rank
+      |> where(top_id: ^id)
+      |> preload(song: :opinions)
+      |> Repo.all()
 
-    Enum.each(ranks, fn(rank) ->
+    Enum.each(ranks, fn rank ->
       val = Wsdjs.Reactions.opinions_value(rank.song.opinions)
+
       rank
       |> Rank.changeset(%{likes: val})
       |> Repo.update()
@@ -279,8 +286,9 @@ defmodule Wsdjs.Charts do
     |> group_by(:song_id)
     |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
     |> Repo.all()
-    |> Enum.each(fn(vote) ->
+    |> Enum.each(fn vote ->
       val = 10 * vote[:count] - vote[:sum] + vote[:count]
+
       from(p in Wsdjs.Charts.Rank, where: [top_id: ^id, song_id: ^vote.song_id])
       |> Repo.update_all(set: [votes: val])
     end)
@@ -341,12 +349,14 @@ defmodule Wsdjs.Charts do
     |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
     |> Repo.all()
   end
+
   def list_rank(%User{profil_djvip: true}, %Top{status: "published"} = top) do
     top
     |> list_rank()
     |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
     |> Repo.all()
   end
+
   def list_rank(%User{profil_dj: true}, %Top{status: "published"} = top) do
     top
     |> list_rank()
@@ -354,6 +364,7 @@ defmodule Wsdjs.Charts do
     |> limit(10)
     |> Repo.all()
   end
+
   def list_rank(_user, %Top{status: "published"} = top) do
     top
     |> list_rank()
@@ -368,6 +379,7 @@ defmodule Wsdjs.Charts do
     |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
     |> Repo.all()
   end
+
   def list_rank(%User{admin: true}, %Top{status: "checking"} = top) do
     top
     |> list_rank()
@@ -376,27 +388,35 @@ defmodule Wsdjs.Charts do
   end
 
   def list_rank(%User{} = current_user, %Top{id: top_id, status: "voting"}) do
-    votes = from v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id]
+    votes = from(v in Vote, where: [user_id: ^current_user.id, top_id: ^top_id])
 
-    query = from r in Rank,
-    where: r.top_id == ^top_id,
-    left_join: v in ^votes, on: [song_id: r.song_id],
-    order_by: [asc: v.votes, desc: :inserted_at],
-    preload: [song: [:art, :user, :opinions]]
+    query =
+      from(
+        r in Rank,
+        where: r.top_id == ^top_id,
+        left_join: v in ^votes,
+        on: [song_id: r.song_id],
+        order_by: [asc: v.votes, desc: :inserted_at],
+        preload: [song: [:art, :user, :opinions]]
+      )
 
-    Repo.all query
+    Repo.all(query)
   end
 
   defp list_rank(%Top{id: id}) do
-    from r in Rank,
-    where: r.top_id == ^id,
-    preload: [song: [:art, :user, :opinions]]
+    from(
+      r in Rank,
+      where: r.top_id == ^id,
+      preload: [song: [:art, :user, :opinions]]
+    )
   end
 
   def list_rank do
-    from q in Rank,
-    where: q.position <= 10,
-    order_by: [asc: q.position],
-    preload: [song: :art]
+    from(
+      q in Rank,
+      where: q.position <= 10,
+      order_by: [asc: q.position],
+      preload: [song: :art]
+    )
   end
 end

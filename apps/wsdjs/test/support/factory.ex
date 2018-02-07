@@ -8,22 +8,22 @@ defmodule Wsdjs.Factory do
       admin: false,
       profil_djvip: false,
       profil_dj: false,
-      deactivated: false,
+      deactivated: false
     }
   end
 
   def song_factory do
-    %Wsdjs.Musics.Song {
+    %Wsdjs.Musics.Song{
       title: sequence(:title, &"title-#{&1}"),
       artist: sequence(:artist, &"artist-#{&1}"),
       genre: Enum.random(Wsdjs.Musics.Song.genre()),
       user: build(:user),
-      url: "http://youtu.be/toto",
+      url: "http://youtu.be/toto"
     }
   end
 
   def video_factory do
-    %Wsdjs.Attachments.Video {
+    %Wsdjs.Attachments.Video{
       url: sequence(:url, &"http://www.youtube.com/#{&1}"),
       user: build(:user),
       song: build(:song)
@@ -31,22 +31,22 @@ defmodule Wsdjs.Factory do
   end
 
   def top_factory do
-    %Wsdjs.Charts.Top {
-      due_date: Timex.beginning_of_month(Timex.today),
+    %Wsdjs.Charts.Top{
+      due_date: Timex.beginning_of_month(Timex.today()),
       status: "checking",
-      user: build(:user),
+      user: build(:user)
     }
   end
 
   def rank_factory do
-    %Wsdjs.Charts.Rank {
+    %Wsdjs.Charts.Rank{
       song: build(:song),
       top: build(:top)
     }
   end
 
   def opinion_factory do
-    %Wsdjs.Reactions.Opinion {
+    %Wsdjs.Reactions.Opinion{
       kind: "like",
       user: build(:user),
       song: build(:song)
@@ -54,7 +54,7 @@ defmodule Wsdjs.Factory do
   end
 
   def vote_factory do
-    %Wsdjs.Charts.Vote {
+    %Wsdjs.Charts.Vote{
       votes: System.unique_integer([:positive]),
       song: build(:song),
       top: build(:top),
@@ -63,7 +63,7 @@ defmodule Wsdjs.Factory do
   end
 
   def comment_factory do
-    %Wsdjs.Reactions.Comment {
+    %Wsdjs.Reactions.Comment{
       text: "dummy text",
       user: build(:user),
       song: build(:song)

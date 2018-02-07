@@ -23,15 +23,18 @@ defmodule WsdjsWeb.MagicLink do
     - existing user but desactivated => do not send the token
   """
   def provide_token(email, device) when is_binary(email) and device in ["api", "browser"] do
-    user = case Accounts.get_user_by_email(email) do
-      %User{deactivated: false} = user ->
-        user
-      nil ->
-        {:ok, %User{} = user} = Accounts.create_user(%{email: email})
-        user
-      _ ->
-        nil
-    end
+    user =
+      case Accounts.get_user_by_email(email) do
+        %User{deactivated: false} = user ->
+          user
+
+        nil ->
+          {:ok, %User{} = user} = Accounts.create_user(%{email: email})
+          user
+
+        _ ->
+          nil
+      end
 
     send_token(user, device)
   end
@@ -112,6 +115,7 @@ defmodule WsdjsWeb.MagicLink do
         {:error, reason}
     end
   end
+
   def provide_invitation_accepted_token(%User{} = user) do
     Phoenix.Token.sign(Endpoint, "invited", user.id)
   end

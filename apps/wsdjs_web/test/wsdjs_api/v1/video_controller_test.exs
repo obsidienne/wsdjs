@@ -16,27 +16,40 @@ defmodule WsdjsApi.V1.VideoControllerTest do
 
   describe "create videos" do
     test "renders videos when data is valid", %{conn: conn} do
-      user = insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880", parameter: %{video: true}})
+      user =
+        insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880", parameter: %{video: true}})
+
       song = insert(:song, %{user: user})
 
       user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
       conn = put_req_header(conn, "authorization", "Bearer " <> user_token)
 
-      resp = post conn, api_song_video_path(conn, :create, song.id), video: %{url: "http://www.youtube.com/toto"}
+      resp =
+        post(
+          conn,
+          api_song_video_path(conn, :create, song.id),
+          video: %{url: "http://www.youtube.com/toto"}
+        )
+
       assert %{"id" => id} = json_response(resp, 201)["data"]
 
-      resp = get conn, api_song_video_path(conn, :index, song.id)
-      assert json_response(resp, 200)["data"] == [%{"id" => id, "url" => "http://www.youtube.com/toto"}]
+      resp = get(conn, api_song_video_path(conn, :index, song.id))
+
+      assert json_response(resp, 200)["data"] == [
+               %{"id" => id, "url" => "http://www.youtube.com/toto"}
+             ]
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      user = insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880", parameter: %{video: true}})
+      user =
+        insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880", parameter: %{video: true}})
+
       song = insert(:song, %{user: user})
 
       user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
       conn = put_req_header(conn, "authorization", "Bearer " <> user_token)
 
-      conn = post conn, api_song_video_path(conn, :create, song.id), video: %{url: "dummy"}
+      conn = post(conn, api_song_video_path(conn, :create, song.id), video: %{url: "dummy"})
       assert json_response(conn, 422)["errors"] != %{}
     end
   end

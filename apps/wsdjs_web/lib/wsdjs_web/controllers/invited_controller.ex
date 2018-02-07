@@ -14,8 +14,11 @@ defmodule WsdjsWeb.InvitedController do
 
       {:error, _reason} ->
         conn
-        |> put_flash(:error, "The magic link is expired or already used. You should resend a magic link.")
+        |> put_flash(
+          :error,
+          "The magic link is expired or already used. You should resend a magic link."
+        )
         |> redirect(to: session_path(conn, :new))
-     end
+    end
   end
 end

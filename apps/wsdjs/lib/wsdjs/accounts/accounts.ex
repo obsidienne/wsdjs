@@ -105,6 +105,7 @@ defmodule Wsdjs.Accounts do
     |> User.changeset(attrs)
     |> Repo.update()
   end
+
   def update_user(%User{} = user, attrs, %User{admin: true}) do
     user
     |> User.admin_changeset(attrs)
@@ -128,9 +129,9 @@ defmodule Wsdjs.Accounts do
   """
   def get_avatar(%User{id: id}) do
     Avatar
-    |> where([user_id: ^id])
-    |> order_by([desc: :inserted_at])
+    |> where(user_id: ^id)
+    |> order_by(desc: :inserted_at)
     |> limit(1)
-    |> Repo.all
+    |> Repo.all()
   end
 end

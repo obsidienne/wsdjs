@@ -22,8 +22,8 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
   version: Application.spec(:myapp, :vsn)
 
 config :wsdjs_web, WsdjsWeb.Mailer,
-    adapter: Bamboo.SendgridAdapter,
-    api_key: "${SENDGRID_API_KEY}"
+  adapter: Bamboo.SendgridAdapter,
+  api_key: "${SENDGRID_API_KEY}"
 
 # ## SSL Support
 #

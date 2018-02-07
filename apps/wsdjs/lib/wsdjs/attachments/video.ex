@@ -7,14 +7,14 @@ defmodule Wsdjs.Attachments.Video do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "videos" do
-    field :url, :string
-    field :video_id, :string
-    field :title, :string
-    field :event, :string
-    field :published_at, :date
+    field(:url, :string)
+    field(:video_id, :string)
+    field(:title, :string)
+    field(:event, :string)
+    field(:published_at, :date)
 
-    belongs_to :user, Wsdjs.Accounts.User
-    belongs_to :song, Wsdjs.Musics.Song
+    belongs_to(:user, Wsdjs.Accounts.User)
+    belongs_to(:song, Wsdjs.Musics.Song)
     timestamps()
   end
 
@@ -30,11 +30,11 @@ defmodule Wsdjs.Attachments.Video do
 
   # This function validates the format of an URL not it's validity.
   defp validate_url(changeset, field, options \\ []) do
-    validate_change changeset, field, fn _, url ->
-      case url |> String.to_charlist |> :http_uri.parse do
+    validate_change(changeset, field, fn _, url ->
+      case url |> String.to_charlist() |> :http_uri.parse() do
         {:ok, _} -> []
-        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect msg}"}]
+        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect(msg)}"}]
       end
-    end
+    end)
   end
 end

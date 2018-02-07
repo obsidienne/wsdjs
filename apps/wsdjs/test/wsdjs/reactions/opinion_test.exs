@@ -3,12 +3,12 @@ defmodule Wsdjs.Reactions.OpinionTest do
 
   test "Opinions are correctly summed" do
     opinions = [
-      %{kind: "up"}, 
-      %{kind: "up"}, 
+      %{kind: "up"},
+      %{kind: "up"},
       %{kind: "down"},
       %{kind: "down"},
       %{kind: "like"},
-      %{kind: "like"},
+      %{kind: "like"}
     ]
 
     assert Wsdjs.Reactions.opinions_value(opinions) == 6

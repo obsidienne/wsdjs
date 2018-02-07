@@ -4,9 +4,9 @@ defmodule WsdjsApi.V1.OpinionView do
   alias WsdjsApi.V1.OpinionView
 
   def render("index.json", %{song: song, opinions: opinions, current_user: nil}) do
-    ups = Enum.filter(opinions, fn(x) -> x.kind == "up" end)
-    likes = Enum.filter(opinions, fn(x) -> x.kind == "like" end)
-    downs = Enum.filter(opinions, fn(x) -> x.kind == "down" end)
+    ups = Enum.filter(opinions, fn x -> x.kind == "up" end)
+    likes = Enum.filter(opinions, fn x -> x.kind == "like" end)
+    downs = Enum.filter(opinions, fn x -> x.kind == "down" end)
 
     %{
       data: %{
@@ -19,17 +19,18 @@ defmodule WsdjsApi.V1.OpinionView do
   end
 
   def render("index.json", %{song: song, opinions: opinions, current_user: current_user}) do
-    current_opinion = Enum.find(opinions, nil, fn(x) -> x.user_id == current_user.id end)
+    current_opinion = Enum.find(opinions, nil, fn x -> x.user_id == current_user.id end)
 
-    ups = Enum.filter(opinions, fn(x) -> x.kind == "up" end)
-    likes = Enum.filter(opinions, fn(x) -> x.kind == "like" end)
-    downs = Enum.filter(opinions, fn(x) -> x.kind == "down" end)
+    ups = Enum.filter(opinions, fn x -> x.kind == "up" end)
+    likes = Enum.filter(opinions, fn x -> x.kind == "like" end)
+    downs = Enum.filter(opinions, fn x -> x.kind == "down" end)
 
-    user_opinion = if current_opinion do
-      current_opinion.kind
-    else
-      nil
-    end
+    user_opinion =
+      if current_opinion do
+        current_opinion.kind
+      else
+        nil
+      end
 
     %{
       data: %{

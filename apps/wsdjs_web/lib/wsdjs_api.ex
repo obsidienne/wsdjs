@@ -28,8 +28,9 @@ defmodule WsdjsApi do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/wsdjs_api/templates",
-                        namespace: WsdjsApi
+      use Phoenix.View,
+        root: "lib/wsdjs_api/templates",
+        namespace: WsdjsApi
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]

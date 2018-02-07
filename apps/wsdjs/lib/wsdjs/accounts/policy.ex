@@ -8,7 +8,7 @@ defmodule Wsdjs.Accounts.Policy do
 
   def can?(%User{admin: true}, _, _), do: :ok
   def can?(%User{id: id}, :logout, %User{id: id}), do: :ok
-  def can?(nil, :show,  %User{admin: false}), do: :ok
+  def can?(nil, :show, %User{admin: false}), do: :ok
   def can?(%User{admin: false}, :show, %User{admin: false}), do: :ok
   def can?(%User{id: id}, :edit_user, %User{id: id}), do: :ok
   def can?(_, _, _), do: {:error, :unauthorized}

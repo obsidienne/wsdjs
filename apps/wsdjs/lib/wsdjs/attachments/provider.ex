@@ -4,7 +4,7 @@ defmodule Wsdjs.Attachments.Provider do
   No vimeo, or dailymotin, or anything else. Only youtube.
   """
   @provider_types [
-      {~r/youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+)/i, :youtube}
+    {~r/youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+)/i, :youtube}
   ]
 
   @doc ~S"""
@@ -16,14 +16,13 @@ defmodule Wsdjs.Attachments.Provider do
       iex> extract(nil)
       nil
   """
-  @spec extract(String.t) :: String.t
+  @spec extract(String.t()) :: String.t()
   def extract(url) when is_nil(url), do: nil
 
   def extract(url) do
-    {re, func} = Enum.find(@provider_types,
-                          {nil, :fn_unknown},
-                          fn {reg, _} -> String.match?(url, reg) end
-                          )
+    {re, func} =
+      Enum.find(@provider_types, {nil, :fn_unknown}, fn {reg, _} -> String.match?(url, reg) end)
+
     Kernel.apply(Wsdjs.Attachments.Provider, func, [re, url])
   end
 

@@ -5,7 +5,7 @@ defmodule WsdjsApi.V1.AccountController do
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
 
-  action_fallback WsdjsApi.V1.FallbackController
+  action_fallback(WsdjsApi.V1.FallbackController)
 
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
@@ -21,7 +21,6 @@ defmodule WsdjsApi.V1.AccountController do
 
     with %User{} = user <- Accounts.get_user!(current_user.id),
          :ok <- Accounts.Policy.can?(current_user, :show, user) do
-
       render(conn, "show.json", user: user)
     end
   end
@@ -32,7 +31,6 @@ defmodule WsdjsApi.V1.AccountController do
     with user <- Accounts.get_user!(id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
          {:ok, %User{} = user} <- Accounts.update_user(user, user_params, current_user) do
-
       render(conn, "show.json", user: user)
     end
   end

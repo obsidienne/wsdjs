@@ -7,10 +7,10 @@ defmodule Wsdjs.Accounts.Avatar do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "avatars" do
-    field :cld_id, :string
-    field :version, :integer
+    field(:cld_id, :string)
+    field(:version, :integer)
 
-    belongs_to :user, Wsdjs.Accounts.User
+    belongs_to(:user, Wsdjs.Accounts.User)
     timestamps()
   end
 

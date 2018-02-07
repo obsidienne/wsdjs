@@ -3,11 +3,11 @@ defmodule WsdjsWeb.SearchController do
   use WsdjsWeb, :controller
   use WsdjsWeb.Controller
 
-  plug :put_layout, false
+  plug(:put_layout, false)
 
   def index(conn, %{"q" => q}, current_user) do
     songs = Wsdjs.Searches.search(current_user, q)
 
-    render conn, "index.html", songs: songs
+    render(conn, "index.html", songs: songs)
   end
 end

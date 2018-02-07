@@ -10,14 +10,16 @@ defmodule WsdjsWeb.Admin.InvitationController do
   def update(conn, %{"id" => id}) do
     with invitation <- Auth.get_invitation!(id),
          {:ok, invitation} <- Auth.accept_invitation(invitation) do
-
       # mailing is not in the with because it's not a blocking
       invitation
       |> InvitationEmail.invitation_accepted()
       |> Mailer.deliver_later()
 
       conn
-      |> put_flash(:info, "Invitation #{invitation.name} accepted successfully. You can now delete the invitation (invitations are deprecated)")
+      |> put_flash(
+        :info,
+        "Invitation #{invitation.name} accepted successfully. You can now delete the invitation (invitations are deprecated)"
+      )
       |> redirect(to: user_path(conn, :show, invitation.user_id))
     end
   end

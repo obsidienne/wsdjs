@@ -11,43 +11,49 @@ defmodule WsdjsWeb.SongController do
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Video
 
-  action_fallback WsdjsWeb.FallbackController
+  action_fallback(WsdjsWeb.FallbackController)
 
   def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :show, song) do
-
       comments = Reactions.list_comments(song)
       opinions = Reactions.list_opinions(song)
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
       comment_changeset = Reactions.change_comment(%Comment{})
 
-      render conn, "show.html", song: song,
-                                comments: comments,
-                                opinions: opinions,
-                                comment_changeset: comment_changeset,
-                                videos: videos,
-                                video_changeset: video_changeset
+      render(
+        conn,
+        "show.html",
+        song: song,
+        comments: comments,
+        opinions: opinions,
+        comment_changeset: comment_changeset,
+        videos: videos,
+        video_changeset: video_changeset
+      )
     end
   end
 
   def show(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :show, song) do
-
       comments = Reactions.list_comments(song)
       opinions = Reactions.list_opinions(song)
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
       comment_changeset = Reactions.change_comment(%Comment{})
 
-      render conn, "show.html", song: song,
-                                comments: comments,
-                                opinions: opinions,
-                                comment_changeset: comment_changeset,
-                                videos: videos,
-                                video_changeset: video_changeset
+      render(
+        conn,
+        "show.html",
+        song: song,
+        comments: comments,
+        opinions: opinions,
+        comment_changeset: comment_changeset,
+        videos: videos,
+        video_changeset: video_changeset
+      )
     end
   end
 
@@ -68,7 +74,12 @@ defmodule WsdjsWeb.SongController do
 
     conn
     |> put_layout(false)
-    |> render("index_hot_song.html", songs: songs, month: month, last: Timex.before?(month, interval[:min]))
+    |> render(
+      "index_hot_song.html",
+      songs: songs,
+      month: month,
+      last: Timex.before?(month, interval[:min])
+    )
   end
 
   def index(conn, _params, current_user) do
@@ -76,7 +87,13 @@ defmodule WsdjsWeb.SongController do
     songs = Musics.list_songs(current_user, :month, month_interval[:max])
     interval = Musics.songs_interval(current_user)
 
-    render(conn, "index.html", songs: songs, month: month_interval[:max], last: Timex.before?(month_interval[:max], interval[:min]))
+    render(
+      conn,
+      "index.html",
+      songs: songs,
+      month: month_interval[:max],
+      last: Timex.before?(month_interval[:max], interval[:min])
+    )
   end
 
   def new(conn, _params, current_user) do
@@ -100,9 +117,8 @@ defmodule WsdjsWeb.SongController do
   def edit(conn, %{"id" => id}, current_user) do
     with %Song{} = song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :edit_song, song) do
-
       changeset = Musics.change_song(song)
-      render conn, "edit.html", song: song, changeset: changeset
+      render(conn, "edit.html", song: song, changeset: changeset)
     end
   end
 
@@ -111,7 +127,6 @@ defmodule WsdjsWeb.SongController do
 
     with :ok <- Musics.Policy.can?(current_user, :edit_song, song),
          {:ok, %Song{} = song} <- Musics.update_song(song, song_params, current_user) do
-  
       conn
       |> put_flash(:info, "Song updated")
       |> redirect(to: song_path(conn, :show, song))
@@ -125,7 +140,6 @@ defmodule WsdjsWeb.SongController do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :delete_song, song),
          {:ok, _song} = Musics.delete_song(song) do
-
       conn
       |> put_flash(:info, "Song deleted successfully.")
       |> redirect(to: home_path(conn, :index))

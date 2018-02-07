@@ -8,6 +8,6 @@ defmodule WsdjsWeb.Admin.UserController do
   def index(conn, _params) do
     users = Accounts.list_users()
     invitations = Auth.list_invitations()
-    render conn, "index.html", users: users, invitations: invitations
+    render(conn, "index.html", users: users, invitations: invitations)
   end
 end

@@ -8,13 +8,16 @@ defmodule Wsdjs.Musics.Policy do
   def can?(_, :show, %Song{public_track: true}), do: :ok
   def can?(_, :show, %Song{instant_hit: true}), do: :ok
   def can?(%User{profil_djvip: true}, :show, %Song{hidden_track: true}), do: :ok
+
   def can?(user, :show, %Song{id: id}) do
     song = Repo.get(Song.scoped(user), id)
-    case song  do
+
+    case song do
       %Song{} -> :ok
       nil -> {:error, :unauthorized}
     end
   end
+
   def can?(_, _, _), do: {:error, :unauthorized}
 
   def can?(%User{admin: true}, _), do: :ok
