@@ -15,10 +15,7 @@
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
 
-          <%= opinion_link_not_empty("down", @conn, @song, @song.opinions, nil) %>
-          <%= opinion_link_not_empty("like", @conn, @song, @song.opinions, nil) %>
-          <%= opinion_link_not_empty("up", @conn, @song, @song.opinions, nil) %>
-
+          <%= render WsdjsWeb.OpinionView, "_opinion_link_not_empty.html", conn: @conn, song: @song, user: nil %>
         </footer>
       </div>
     </article>
@@ -43,9 +40,7 @@
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
 
-          <%= opinion_link_not_empty("down", @conn, @song, @song.opinions, nil) %>
-          <%= opinion_link_not_empty("like", @conn, @song, @song.opinions, nil) %>
-          <%= opinion_link_not_empty("up", @conn, @song, @song.opinions, nil) %>
+          <%= render WsdjsWeb.OpinionView, "_opinion_link_not_empty.html", conn: @conn, song: @song, user: nil %>
 
         </footer>
       </div>

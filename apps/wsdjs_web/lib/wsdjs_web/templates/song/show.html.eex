@@ -27,9 +27,7 @@
       </div>
 
       <div class="song-page__tags song-opinions">
-        <%= opinion_link_no_tooltip("up", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-        <%= opinion_link_no_tooltip("like", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-        <%= opinion_link_no_tooltip("down", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+        <%= render WsdjsWeb.OpinionView, "_opinion_link_no_tooltip.html", conn: @conn, song: @song, opinions: @opinions%>
       </div>
       
       <%= if @song.url do %>

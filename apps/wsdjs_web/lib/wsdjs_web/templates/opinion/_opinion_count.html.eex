@@ -1,0 +1,3 @@
+<span class="song-opinion song-down"><%= Enum.count(@opinions, fn(x) -> x.kind == "down" end) %></span>
+<span class="song-opinion song-like"><%= Enum.count(@opinions, fn(x) -> x.kind == "like" end) %></span>
+<span class="song-opinion song-up"><%= Enum.count(@opinions, fn(x) -> x.kind == "up" end) %></span>

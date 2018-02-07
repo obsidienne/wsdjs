@@ -1,0 +1,3 @@
+<%= opinion_link_not_empty("down", @conn, @song, @song.opinions, @user) %>
+<%= opinion_link_not_empty("like", @conn, @song, @song.opinions, @user) %>
+<%= opinion_link_not_empty("up", @conn, @song, @song.opinions, @user) %>
