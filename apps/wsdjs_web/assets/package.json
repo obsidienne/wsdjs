@@ -10,7 +10,7 @@
     "phoenix_html": "file:../../../deps/phoenix_html",
     "timeago.js": "~3.0.2",
     "autolink-js": "~1.0.2",
-    "pjax-api": "~3.20.1",
+    "pjax-api": "~3.18.2",
     "tippy.js": "~2.1.1",
     "places.js": "~1.4.18"
   },
