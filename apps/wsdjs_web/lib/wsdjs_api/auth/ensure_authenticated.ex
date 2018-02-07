@@ -7,7 +7,7 @@ defmodule WsdjsApi.EnsureAuthenticated do
     case conn.assigns[:current_user] do
       nil ->
         conn = conn |> halt
-        apply(WsdjsWeb.Unauthenticated, :api_call, [conn, conn.params])
+        apply(WsdjsApi.Unauthenticated, :api_call, [conn, conn.params])
       _ ->
         conn
     end
