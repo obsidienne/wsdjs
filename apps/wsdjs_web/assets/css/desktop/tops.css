@@ -72,6 +72,7 @@
   position: relative;
   margin-left: 60px;
   padding: 15px;
+  width: 100%;
 }
 .tops__top__date {
   font-size: 0.8125rem;
@@ -90,7 +91,9 @@
   text-align: left;
   color: #777777;
 }
-
+.container.tops-actions {
+  padding-bottom: 15px;
+}
 @media only screen and (min-width: 768px) {
   .tops :nth-child(even) {
     justify-content: flex-end;
