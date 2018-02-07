@@ -38,8 +38,8 @@ defmodule Wsdjs.Jobs.Mixfile do
     [
       {:phoenix_pubsub, "~> 1.0"},
       {:httpoison, "~> 0.12"},
-      {:quantum, ">= 2.0.0"},
-      {:timex, "~> 3.0"},
+      {:quantum, ">= 2.2.0"},
+      {:timex, "~> 3.1"},
       {:bamboo, "~> 0.8"},
       {:wsdjs, in_umbrella: true}
     ]

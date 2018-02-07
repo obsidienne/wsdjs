@@ -33,7 +33,7 @@ defmodule Wsdjs.Mixfile do
 
   defp deps do
     [
-      {:ecto, "~> 2.1"},
+      {:ecto, "~> 2.2"},
       {:postgrex, ">= 0.0.0"},
       {:scrivener_ecto, "~> 1.0"},
       {:phoenix_pubsub, "~> 1.0"},
@@ -41,7 +41,7 @@ defmodule Wsdjs.Mixfile do
       {:bamboo, "~> 0.8"},
       {:ex_machina, "~> 2.1", only: :test},
       {:httpoison, "~> 0.12"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.1"}
     ]
   end
 
