@@ -5,18 +5,18 @@ defmodule Wsdjs.Repo.Migrations.AddVisibilityToPlaylists do
 
   def up do
     alter table(:playlists) do
-      add :visibility, :string, null: false, default: "private"
+      add :public, :boolean, null: false, default: false
     end
 
     flush()
 
     from(p in "playlists", where: p.type == "suggested")
-    |> Wsdjs.Repo.update_all(set: [visibility: "public"])
+    |> Wsdjs.Repo.update_all(set: [public: true])
   end
 
   def down do
     alter table(:playlists) do
-      remove :visibility
+      remove :public
     end
   end
 

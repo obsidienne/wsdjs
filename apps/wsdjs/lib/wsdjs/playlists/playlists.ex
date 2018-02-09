@@ -42,13 +42,19 @@ defmodule Wsdjs.Playlists do
       ** (Ecto.NoResultsError)
 
   """
-  def get_playlist!(id, current_user) do
+  def get_playlist!(id, user, current_user) do
     current_user
     |> Playlist.scoped()
+    |> where(user_id: ^user.id)
     |> Repo.get!(id)
   end
   def get_playlist!(id), do: Repo.get!(Playlist, id)
 
+  def get_playlist_by_user!(user, current_user) do
+    current_user
+    |> Playlist.scoped()
+    |> Repo.get_by!([user_id: user.id, type: "likes and tops"])
+  end
 
   @doc """
   Creates a playlist.
@@ -82,8 +88,15 @@ defmodule Wsdjs.Playlists do
   """
   def update_playlist(%Playlist{} = playlist, attrs) do
     playlist
-    |> Playlist.changeset(attrs)
+    |> Playlist.update_changeset(attrs)
     |> Repo.update()
+  end
+
+  def toggle_playlist_visibiliy(%User{} = user, attrs, %User{} = current_user) do
+    playlist = get_playlist_by_user!(user, current_user)
+    bool = get_in(attrs, ["parameter", "public_top_like"])
+
+    update_playlist(playlist, %{"public" => bool})
   end
 
   @doc """

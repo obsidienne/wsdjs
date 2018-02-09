@@ -8,7 +8,7 @@ defmodule Wsdjs.Playlists.Playlist do
   schema "playlists" do
     field :name, :string
     field :type, :string, default: "playlist"
-    field :visibility, :string, default: "private"
+    field :public, :boolean, default: false
     field :count, :integer, default: 0
     timestamps()
 
@@ -18,6 +18,12 @@ defmodule Wsdjs.Playlists.Playlist do
   end
 
   def types, do: ["suggested", "likes and tops", "playlist"]
+
+  def update_changeset(%Playlist{} = playlist, attrs) do
+    playlist
+    |> cast(attrs, [:public])
+    |> validate_required([:public])
+  end
 
   def changeset(%Playlist{} = playlist, attrs) do
     playlist
@@ -29,7 +35,7 @@ defmodule Wsdjs.Playlists.Playlist do
 
   def scoped(%User{admin: true}), do: Playlist
   def scoped(%User{id: id}) do
-    from p in Playlist, where: p.user_id == ^id or p.visibility == "public"
+    from p in Playlist, where: p.user_id == ^id or p.public == true
   end
-  def scoped(_), do: from p in Playlist, where: p.visibility == "public"
+  def scoped(_), do: from p in Playlist, where: p.public == true
 end
