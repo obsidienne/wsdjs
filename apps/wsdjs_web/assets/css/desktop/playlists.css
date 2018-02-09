@@ -9,3 +9,13 @@
 .table_song-art {
   width: 0;
 }
+.playlist {
+  position: relative;
+  display: block;
+}
+
+.playlist__details {
+  display: flex;
+  justify-content: space-between;
+  line-height: 24px;
+}
