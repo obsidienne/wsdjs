@@ -13,7 +13,7 @@ defmodule WsdjsWeb.UserController do
         :ok <- Accounts.Policy.can?(current_user, :show, user) do
 
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
-      playlist = Wsdjs.Playlists.get_playlist!(playlist_id, user)
+      playlist = Wsdjs.Playlists.get_playlist!(playlist_id, user, current_user)
       songs = Wsdjs.Playlists.list_playlist_songs(playlist, current_user)
 
       conn
@@ -29,7 +29,7 @@ defmodule WsdjsWeb.UserController do
         :ok <- Accounts.Policy.can?(current_user, :show, user) do
 
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
-      playlists = Wsdjs.Playlists.list_playlists(user)
+      playlists = Wsdjs.Playlists.list_playlists(user, current_user)
 
       conn
       |> render("show.html", user: user, 
@@ -49,7 +49,8 @@ defmodule WsdjsWeb.UserController do
   def update(conn, %{"id" => id, "user" => user_params}, current_user) do
     with %User{} = user <- Accounts.get_user!(id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
-         {:ok, user} <- Accounts.update_user(user, user_params, current_user) do
+         {:ok, user} <- Accounts.update_user(user, user_params, current_user),
+         {:ok, _} <- Wsdjs.Playlists.toggle_playlist_visibiliy(user, user_params, current_user) do
 
       conn
       |> put_flash(:info, "Profile updated.")
