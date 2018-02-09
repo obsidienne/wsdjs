@@ -6,13 +6,14 @@ defmodule Wsdjs.Accounts.UserParameter do
 
   @foreign_key_type :binary_id
   schema "user_parameters" do
-    field(:new_song_notification, :boolean, default: false)
-    field(:piwik, :boolean, default: true)
-    field(:video, :boolean, default: false)
-    field(:radioking_unmatch, :boolean, default: false)
-    field(:email_contact, :boolean, default: false)
+    field :new_song_notification, :boolean, default: false
+    field :piwik, :boolean, default: true
+    field :video, :boolean, default: false
+    field :radioking_unmatch, :boolean, default: false
+    field :email_contact, :boolean, default: false
+    field :public_top_like, :boolean, default: false
 
-    belongs_to(:user, Wsdjs.Accounts.User)
+    belongs_to :user, Wsdjs.Accounts.User
 
     timestamps()
   end
@@ -20,14 +21,14 @@ defmodule Wsdjs.Accounts.UserParameter do
   @doc false
   def changeset(%UserParameter{} = user_parameter, attrs) do
     user_parameter
-    |> cast(attrs, [:new_song_notification, :email_contact])
+    |> cast(attrs, [:new_song_notification, :email_contact, :public_top_like])
     |> assoc_constraint(:user)
   end
 
   @doc false
   def admin_changeset(%UserParameter{} = user_parameter, attrs) do
     user_parameter
-    |> cast(attrs, [:new_song_notification, :piwik, :video, :radioking_unmatch, :email_contact])
+    |> cast(attrs, [:new_song_notification, :piwik, :video, :radioking_unmatch, :email_contact, :public_top_like])
     |> assoc_constraint(:user)
   end
 end
