@@ -1,12 +1,14 @@
 defmodule Wsdjs.Playlists.Playlist do
   @moduledoc false
   use Ecto.Schema
-  import Ecto.Changeset
+  import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Playlists.Playlist
+  alias Wsdjs.Accounts.User
 
   schema "playlists" do
     field :name, :string
     field :type, :string, default: "playlist"
+    field :visibility, :string, default: "private"
     field :count, :integer, default: 0
     timestamps()
 
@@ -15,6 +17,8 @@ defmodule Wsdjs.Playlists.Playlist do
     has_many :playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all
   end
 
+  def types, do: ["suggested", "likes and tops", "playlist"]
+
   def changeset(%Playlist{} = playlist, attrs) do
     playlist
     |> cast(attrs, [:name, :user_id])
@@ -22,4 +26,10 @@ defmodule Wsdjs.Playlists.Playlist do
     |> unique_constraint(:name, name: :playlists_user_id_name_index)
     |> assoc_constraint(:user)
   end
+
+  def scoped(%User{admin: true}), do: Playlist
+  def scoped(%User{id: id}) do
+    from p in Playlist, where: p.user_id == ^id or p.visibility == "public"
+  end
+  def scoped(_), do: from p in Playlist, where: p.visibility == "public"
 end

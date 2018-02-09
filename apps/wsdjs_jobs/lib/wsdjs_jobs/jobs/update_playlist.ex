@@ -35,10 +35,12 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
 
   def insert_suggested() do
     query = "
-      insert into playlists(name, type, user_id, inserted_at, updated_at)
+      insert into playlists(name, type, user_id, visibility, inserted_at, updated_at)
       select distinct 'suggested'
             ,'suggested'
-            ,user_id, now() at time zone 'utc'
+            ,user_id
+            ,'public'
+            ,now() at time zone 'utc'
             ,now() at time zone 'utc'
       from songs 
       where user_id not in (select user_id from playlists where type='suggested')
