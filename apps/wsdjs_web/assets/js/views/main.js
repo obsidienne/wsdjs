@@ -30,5 +30,4 @@ export default class MainView {
       elements[i].textContent = dateTimeFormat.format(datetime);
     }
   }
-
 }
