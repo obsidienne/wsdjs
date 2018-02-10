@@ -1,3 +1,117 @@
+@charset 'utf-8';
+
+* {
+  box-sizing: border-box;
+}
+
+*:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+ background-color: hsl(240, 20%, 98%);
+ padding-bottom: 80px;
+}
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+time {
+  text-transform: capitalize;
+  cursor: help;
+}
+
+table {
+  width: 100%;
+}
+
+tbody th {
+  text-align: left;
+}
+
+img {
+  vertical-align: top;
+}
+
+img.responsive {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.img-embed {
+  padding-bottom: 100%;
+  position: relative;
+}
+.img-embed img {
+  position: absolute;
+}
+
+p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+dd {
+  margin-bottom: .5rem;
+  margin-left: 0;
+}
+dt {
+  font-weight: bold;
+}
+input[type=range] {
+  padding: 0;
+  padding-top: 5px;
+}
+
+main > header {
+  background-color: hsl(221, 23%, 16%);
+  padding-top: 15px;
+  padding-bottom: 45px;
+  margin-bottom: 45px;
+}
+main > header h1 {
+  margin: 0;
+  color: white;
+}
+main > header h2 {
+  margin-top: 20px;
+  color: white;
+}
+
+.card {
+  display: block;
+  background-color: hsl(0, 0%, 100%);
+  min-width: 0;
+  min-height: 0;
+  box-shadow: 0 2px 3px 0 hsla(0, 0%, 50%, .50);
+  transition: box-shadow .3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.card:hover {
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
+  transform: translateY(-2px);
+}
+
+.sentinel {
+  text-align: center;
+  margin: 15px;
+}
+
+
 /*
 -----------------------------------------------
 Typesetting for World Swing Deejays

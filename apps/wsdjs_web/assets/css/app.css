@@ -1,6 +1,5 @@
-@import "01-normalize";
-@import "02-typography";
-@import "04-app";
+@import "normalize";
+@import "global";
 @import "comments";
 @import "grid";
 @import "home";
