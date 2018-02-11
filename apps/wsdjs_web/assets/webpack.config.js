@@ -34,9 +34,18 @@ module.exports = (env) => {
           loader: 'babel-loader'
         },{
           test: /\.css$/,
-          use: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'})
-        }
-      ]
+          use: ExtractTextPlugin.extract({
+            use: [{
+              loader: 'css-loader',
+              options: {
+                minimize: true,
+                sourceMap: true
+              }
+            },
+            'postcss-loader'      
+          ],
+        }),
+      }]
     },
 
     plugins: [
