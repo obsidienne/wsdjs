@@ -50,10 +50,10 @@ defmodule Wsdjs.Playlists do
   end
   def get_playlist!(id), do: Repo.get!(Playlist, id)
 
-  def get_playlist_by_user!(user, current_user) do
+  def get_playlist_by_user(user, current_user) do
     current_user
     |> Playlist.scoped()
-    |> Repo.get_by!([user_id: user.id, type: "likes and tops"])
+    |> Repo.get_by([user_id: user.id, type: "likes and tops"])
   end
 
   @doc """
@@ -93,10 +93,13 @@ defmodule Wsdjs.Playlists do
   end
 
   def toggle_playlist_visibiliy(%User{} = user, attrs, %User{} = current_user) do
-    playlist = get_playlist_by_user!(user, current_user)
+    playlist = get_playlist_by_user(user, current_user)
     bool = get_in(attrs, ["parameter", "public_top_like"])
 
-    update_playlist(playlist, %{"public" => bool})
+    case playlist do
+      nil -> {:ok, playlist}
+      _ -> update_playlist(playlist, %{"public" => bool})
+    end
   end
 
   @doc """
