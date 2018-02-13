@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "pjax-api": "^3.20.1",
+    "postcss-loader": "^2.1.0"
+  }
+}
