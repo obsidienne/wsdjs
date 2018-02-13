@@ -6,14 +6,6 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-// Environment
-const Env = process.env.MIX_ENV || 'dev'
-const isProd = (Env === 'prod')
-
-function resolve (dir) {
-  return path.join(__dirname, dir)
-}
-
 module.exports = (env) => {
   return {
     devtool: '#source-map',
@@ -47,7 +39,7 @@ module.exports = (env) => {
                 sourceMap: true
               }
             },
-            'postcss-loader'      
+            'postcss-loader'
           ],
         }),
       }]

@@ -2,8 +2,8 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "MIX_ENV=prod webpack -p",
-    "watch": "MIX_ENV=dev webpack --watch-stdin --progress --color"
+    "deploy": "webpack -p",
+    "watch": "webpack --watch-stdin --progress --color"
   },
   "dependencies": {
     "autolink-js": "~1.0.2",
