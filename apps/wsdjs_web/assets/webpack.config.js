@@ -30,8 +30,13 @@ module.exports = (env) => {
     module: {
       rules: [{
           test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader'
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['env']
+            }
+          }
         },{
           test: /\.css$/,
           use: ExtractTextPlugin.extract({
