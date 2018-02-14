@@ -9,34 +9,6 @@ defmodule WsdjsWeb.OpinionsHelper do
 
   alias WsdjsWeb.{UserHelper, CloudinaryHelper}
 
-  def opinion_link_no_tooltip(kind, _conn, _song, opinions, nil) do
-    qty = Enum.count(opinions, fn x -> x.kind == kind end)
-    default_options = [class: "song-opinion song-#{kind}"]
-
-    content_tag(:span, qty, default_options)
-  end
-
-  def opinion_link_no_tooltip(kind, conn, song, opinions, current_user) do
-    qty = Enum.count(opinions, fn x -> x.kind == kind end)
-    my_opinion = Enum.find(opinions, fn x -> x.user_id == current_user.id end)
-
-    default_options = [
-      "data-url": opinion_url(conn, kind, song, my_opinion),
-      class: html_class(kind, my_opinion),
-      "data-method": data_method(kind, my_opinion)
-    ]
-
-    content_tag(:button, qty, default_options)
-  end
-
-  def opinion_link_not_empty(kind, conn, song, opinions, current_user) do
-    qty = Enum.count(opinions, fn x -> x.kind == kind end)
-
-    if qty > 0 do
-      opinion_link(kind, conn, song, opinions, current_user)
-    end
-  end
-
   def opinion_link(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn x -> x.kind == kind end)
     default_options = [class: "song-opinion song-#{kind} tippy"]
@@ -56,22 +28,6 @@ defmodule WsdjsWeb.OpinionsHelper do
     ]
 
     content_tag(:button, qty, default_options ++ tooltip_options(kind, opinions, qty))
-  end
-
-  def opinion_owners_link(kind, conn, _song, opinions) do
-    kind_opinions =
-      opinions
-      |> Enum.filter(fn x -> x.kind == kind end)
-
-    Enum.map(kind_opinions, fn opinion ->
-      link to: user_path(conn, :show, opinion.user) do
-        img_tag(
-          CloudinaryHelper.avatar_url(opinion.user.avatar, 50),
-          class: "img-circle cld-responsive avatar-tiny tippy",
-          title: UserHelper.user_displayed_name(opinion.user)
-        )
-      end
-    end)
   end
 
   defp tooltip_options(kind, opinions, qty) when qty > 0 do
