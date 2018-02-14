@@ -44,7 +44,6 @@ defmodule WsdjsWeb do
       import WsdjsWeb.Gettext
 
       # Import custom helpers
-      import WsdjsWeb.OpinionsHelper
       import WsdjsWeb.SongHelper
       import WsdjsWeb.UserHelper
       import WsdjsWeb.CloudinaryHelper
