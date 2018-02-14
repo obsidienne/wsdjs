@@ -21,7 +21,7 @@
 
     <footer class="song-card-footer text-muted song-opinions">
       <div class="opinions-container">
-        <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, user: @conn.assigns[:current_user] %>
+        <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @song.opinions, user: @conn.assigns[:current_user] %>
       </div>
 
       <a>
@@ -75,7 +75,7 @@
 
     <footer class="song-card-footer text-muted song-opinions">
       <div class="opinions-container">
-        <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, user: @conn.assigns[:current_user] %>
+        <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @song.opinions, user: @conn.assigns[:current_user] %>
       </div>
 
       <a href="<%= song_path(@conn, :show, @song) %>">

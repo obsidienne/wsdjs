@@ -27,7 +27,7 @@
       </div>
 
       <div class="song-page__tags song-opinions">
-        <%= render WsdjsWeb.OpinionView, "_opinion_link_no_tooltip.html", conn: @conn, song: @song, opinions: @opinions%>
+        <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
       </div>
       
       <%= if @song.url do %>

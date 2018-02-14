@@ -1,3 +1,0 @@
-<%= opinion_link_no_tooltip("up", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-<%= opinion_link_no_tooltip("like", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-<%= opinion_link_no_tooltip("down", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
