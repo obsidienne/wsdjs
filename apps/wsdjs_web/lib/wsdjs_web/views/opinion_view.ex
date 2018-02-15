@@ -3,16 +3,21 @@ defmodule WsdjsWeb.OpinionView do
 
   import WsdjsWeb.Router.Helpers
 
+  alias Wsdjs.Accounts.User
   alias WsdjsWeb.{UserHelper, CloudinaryHelper}
 
-  def opinion_link(kind, _conn, _song, opinions, nil) do
+  def count(opinions, kind) when kind in ["up", "down", "like"] do
+    Enum.count(opinions, fn x -> x.kind == kind end)
+  end
+
+  def options(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn x -> x.kind == kind end)
     default_options = [class: "song-opinion song-#{kind} tippy"]
 
-    content_tag(:span, qty, default_options ++ tooltip_options(kind, opinions, qty))
+    default_options ++ tooltip_options(kind, opinions, qty)
   end
 
-  def opinion_link(kind, conn, song, opinions, current_user) do
+  def options(kind, conn, song, opinions, current_user) do
     qty = Enum.count(opinions, fn x -> x.kind == kind end)
 
     my_opinion = Enum.find(opinions, fn x -> x.user_id == current_user.id end)
@@ -22,8 +27,21 @@ defmodule WsdjsWeb.OpinionView do
       class: html_class(kind, my_opinion),
       "data-method": data_method(kind, my_opinion)
     ]
+    
+    default_options ++ tooltip_options(kind, opinions, qty)
+  end
 
-    content_tag(:button, qty, default_options ++ tooltip_options(kind, opinions, qty))
+  def opinions_names(kind, opinions) do
+    kind_opinions = Enum.filter(opinions, fn x -> x.kind == kind end)
+    names = Enum.map_join(Enum.take(kind_opinions, 3), "<br/>", & &1.user.name)
+
+    remaining_qty = Enum.count(opinions, fn x -> x.kind == kind end) - 3
+
+    if remaining_qty > 0 do
+      names <> "<br/> +#{remaining_qty} dj"
+    else
+      names
+    end
   end
 
   defp tooltip_options(kind, opinions, qty) when qty > 0 do
@@ -50,16 +68,4 @@ defmodule WsdjsWeb.OpinionView do
 
   defp html_class(kind, _), do: "song-opinion song-#{kind} tippy"
 
-  def opinions_names(kind, opinions) do
-    kind_opinions = Enum.filter(opinions, fn x -> x.kind == kind end)
-    names = Enum.map_join(Enum.take(kind_opinions, 3), "<br/>", & &1.user.name)
-
-    remaining_qty = Enum.count(opinions, fn x -> x.kind == kind end) - 3
-
-    if remaining_qty > 0 do
-      names <> "<br/> +#{remaining_qty} dj"
-    else
-      names
-    end
-  end
 end

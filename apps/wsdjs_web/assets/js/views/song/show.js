@@ -189,7 +189,7 @@ export default class View extends MainView {
   }
 
   _refresh_kind(container, kind, data, user_opinion) {
-    container.innerText = data.count;
+    container.getElementsByTagName("span")[0].innerText = data.count;
     container.dataset.method = data.method;
     container.dataset.url = data.url;
     container.setAttribute("title", data.tooltip_html);
