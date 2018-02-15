@@ -397,7 +397,7 @@ defmodule Wsdjs.Charts do
         left_join: v in ^votes,
         on: [song_id: r.song_id],
         order_by: [asc: v.votes, desc: :inserted_at],
-        preload: [song: [:art, :user, :opinions]]
+        preload: [song: [:art, :user, opinions: :user]]
       )
 
     Repo.all(query)
@@ -407,8 +407,8 @@ defmodule Wsdjs.Charts do
     from(
       r in Rank,
       where: r.top_id == ^id,
-      preload: [song: [:art, :user, :opinions]]
-    )
+      preload: [song: [:art, :user, opinions: :user]]
+      )
   end
 
   def list_rank do

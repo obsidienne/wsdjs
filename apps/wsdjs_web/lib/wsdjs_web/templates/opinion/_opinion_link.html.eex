@@ -1,3 +1,7 @@
-<%= opinion_link("down", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-<%= opinion_link("like", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
-<%= opinion_link("up", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+<%= if is_nil(@conn.assigns[:current_user]) do %>
+  <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: @opinions %>
+<% else %>
+    <%= opinion_link("down", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+    <%= opinion_link("like", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+    <%= opinion_link("up", @conn, @song, @opinions, @conn.assigns[:current_user]) %>
+<% end %>

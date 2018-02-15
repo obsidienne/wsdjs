@@ -192,6 +192,7 @@ export default class View extends MainView {
     container.innerText = data.count;
     container.dataset.method = data.method;
     container.dataset.url = data.url;
+    container.setAttribute("title", data.tooltip_html);
     container.classList.remove("active")
 
     if (user_opinion == kind) {

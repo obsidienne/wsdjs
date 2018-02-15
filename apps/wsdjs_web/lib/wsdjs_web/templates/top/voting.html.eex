@@ -13,7 +13,7 @@
   <% end %>
 </div>
 
-<%= if @current_user && @current_user.id == @top.user_id do %>
+<%= if @current_user && (@current_user.id == @top.user_id || @current_user.admin == true) do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
   <nav>
     <ol class="top-steps text-center">

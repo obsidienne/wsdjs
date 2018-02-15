@@ -50,7 +50,7 @@ defmodule WsdjsWeb.OpinionView do
 
   defp html_class(kind, _), do: "song-opinion song-#{kind} tippy"
 
-  defp opinions_names(kind, opinions) do
+  def opinions_names(kind, opinions) do
     kind_opinions = Enum.filter(opinions, fn x -> x.kind == kind end)
     names = Enum.map_join(Enum.take(kind_opinions, 3), "<br/>", & &1.user.name)
 

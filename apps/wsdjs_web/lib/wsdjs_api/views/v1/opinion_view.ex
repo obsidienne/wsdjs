@@ -57,7 +57,8 @@ defmodule WsdjsApi.V1.OpinionView do
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "DELETE",
-      url: api_opinion_path(WsdjsWeb.Endpoint, :delete, current.id)
+      url: api_opinion_path(WsdjsWeb.Endpoint, :delete, current.id),
+      tooltip_html: tooltip_from_users(opinions)
     }
   end
 
@@ -66,7 +67,20 @@ defmodule WsdjsApi.V1.OpinionView do
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "POST",
-      url: api_song_opinion_path(WsdjsWeb.Endpoint, :create, song, kind: kind)
+      url: api_song_opinion_path(WsdjsWeb.Endpoint, :create, song, kind: kind),
+      tooltip_html: tooltip_from_users(opinions)
     }
+  end
+
+  defp tooltip_from_users(opinions) do
+    names = Enum.map_join(Enum.take(opinions, 3), "<br/>", & &1.user.name)
+    remaining_qty = Enum.count(opinions) - 3
+
+    if remaining_qty > 0 do
+      names <> "<br/> +#{remaining_qty} dj"
+    else
+      names
+    end
+
   end
 end
