@@ -2004,6 +2004,10 @@ micromatch@^2.1.5, micromatch@^2.3.7:
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
+micromustache@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/micromustache/-/micromustache-5.2.0.tgz#df131ae0077c54a7cfc6d920094e1627bb678569"
+
 miller-rabin@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/miller-rabin/-/miller-rabin-4.0.1.tgz#f080351c865b0dc562a8462966daa53543c78a4d"

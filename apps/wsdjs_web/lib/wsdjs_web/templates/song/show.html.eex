@@ -79,3 +79,22 @@
     <% end %>
   </div>
 </div>
+
+<template id="comment-tpl">
+  <li class="comment">
+    <div class="comment__avatar">
+      <img src="{{user.avatars.avatar_uri}}"  class="comment__avatar__img">
+    </div>
+
+    <div class="comment__body">
+      <header class="comment__header">
+        <span>
+          <a href="{{user.path}}">{{user.name}}</a>
+          <time class="timeago small" title="{{commented_at}}" datetime="{{commented_at}}"></time>
+        </span>
+        <button class="btn-link comment__delete" data-path="/api/v1/comments/{{id}}"></button>
+      </header>
+      <div class="comment__content">{{text}}</div>
+    </div>
+  </li>
+</template>

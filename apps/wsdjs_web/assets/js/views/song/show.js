@@ -1,6 +1,7 @@
 import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
 import MainView from '../main';
+import Mustache from 'micromustache';
 
 export default class View extends MainView {
   constructor() {
@@ -75,8 +76,13 @@ export default class View extends MainView {
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
+        var data = JSON.parse(this.response).data;
+
         var container = document.getElementById("comments-container");
-        var tpl = self._createHtmlContent(JSON.parse(this.response).data);
+        var template = document.getElementById("comment-tpl").innerHTML;
+
+        var tpl = Mustache.render(template, data);
+
         container.insertAdjacentHTML('beforeend', tpl);
         new timeago().render(document.querySelectorAll("time.timeago"));
       } else {
@@ -112,26 +118,6 @@ export default class View extends MainView {
     request.onerror = function() { console.error("Error"); };
     request.send(new FormData(form));
     form.reset();
-  }
-
-  _createHtmlContent(params) {
-    return `
-    <li class="comment">
-      <div class="comment__avatar">
-        <img src="${params.user.avatars.avatar_uri}"  class="comment__avatar__img">
-      </div>
-
-      <div class="comment__body">
-        <header class="comment__header">
-          <span>
-            <a href="${params.user.path}">${params.user.name}</a>
-            <time class="timeago small" title="${params.commented_at}" datetime="${params.commented_at}"></time>
-          </span>
-          <button class="btn-link comment__delete" data-path="/api/v1/comments/${params.id}"></button>
-        </header>
-        <div class="comment__content">${params.text}</div>
-      </div>
-    </li>`;
   }
 
   _createHtmlVideoContent(params) {
