@@ -27,6 +27,8 @@ import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
 import Outdated from './components/outdated';
+import Opinions from './components/opinions';
+import Tippy from 'tippy.js/dist/tippy.all';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
@@ -59,6 +61,9 @@ function handleDOMContentLoaded() {
   } else if (window.piwikTracker != null) {
     return piwikTracker.trackPageview();
   }
+
+  new Tippy("main", {performance: true, target: ".tippy", dynamicTitle: true});
+
 }
 
 function handleUnloadContentLoaded() {
