@@ -107,8 +107,10 @@ export default class View extends MainView {
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        var container = document.getElementById("videos-container");
-        var tpl = self._createHtmlVideoContent(JSON.parse(this.response).data);
+        var data = JSON.parse(this.response).data;
+        var container = document.getElementById("overview-video");
+        var template = document.getElementById("video-tpl").innerHTML;
+        var tpl = Mustache.render(template, data);
         container.insertAdjacentHTML('beforeend', tpl);
       } else {
         console.error("Error");
@@ -118,11 +120,5 @@ export default class View extends MainView {
     request.onerror = function() { console.error("Error"); };
     request.send(new FormData(form));
     form.reset();
-  }
-
-  _createHtmlVideoContent(params) {
-    return `
-    <li class="video">
-    </li>`;
   }
 }
