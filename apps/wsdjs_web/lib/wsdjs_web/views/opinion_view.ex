@@ -27,7 +27,7 @@ defmodule WsdjsWeb.OpinionView do
       class: html_class(kind, my_opinion),
       "data-method": data_method(kind, my_opinion)
     ]
-    
+
     default_options ++ tooltip_options(kind, opinions, qty)
   end
 
@@ -67,5 +67,4 @@ defmodule WsdjsWeb.OpinionView do
     do: "song-opinion song-#{kind} active tippy "
 
   defp html_class(kind, _), do: "song-opinion song-#{kind} tippy"
-
 end
