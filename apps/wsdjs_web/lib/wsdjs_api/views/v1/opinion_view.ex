@@ -81,6 +81,5 @@ defmodule WsdjsApi.V1.OpinionView do
     else
       names
     end
-
   end
 end

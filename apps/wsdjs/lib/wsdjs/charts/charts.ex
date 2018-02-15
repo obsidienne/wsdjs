@@ -408,7 +408,7 @@ defmodule Wsdjs.Charts do
       r in Rank,
       where: r.top_id == ^id,
       preload: [song: [:art, :user, opinions: :user]]
-      )
+    )
   end
 
   def list_rank do
