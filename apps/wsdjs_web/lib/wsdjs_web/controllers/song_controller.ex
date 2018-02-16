@@ -13,23 +13,8 @@ defmodule WsdjsWeb.SongController do
 
   action_fallback WsdjsWeb.FallbackController
 
-  def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id}, current_user) do
-    with song <- Musics.get_song!(id),
-         :ok <- Musics.Policy.can?(current_user, :show, song) do
-
-      comments = Reactions.list_comments(song)
-      opinions = Reactions.list_opinions(song)
-      videos = Attachments.list_videos(song)
-      video_changeset = Attachments.change_video(%Video{})
-      comment_changeset = Reactions.change_comment(%Comment{})
-
-      render conn, "show.html", song: song,
-                                comments: comments,
-                                opinions: opinions,
-                                comment_changeset: comment_changeset,
-                                videos: videos,
-                                video_changeset: video_changeset
-    end
+  def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id} = params, current_user) do
+    show(conn, params, current_user)
   end
 
   def show(conn, %{"id" => id}, current_user) do
