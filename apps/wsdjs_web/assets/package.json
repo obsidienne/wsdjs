@@ -1,6 +1,8 @@
 {
   "repository": {},
   "license": "MIT",
+  "name": "wsdjs",
+  "version": "1",
   "scripts": {
     "deploy": "brunch build --production",
     "watch": "brunch watch --stdin"
