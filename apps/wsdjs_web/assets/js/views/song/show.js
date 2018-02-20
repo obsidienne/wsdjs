@@ -11,6 +11,11 @@ export default class View extends MainView {
         this._delete_comment(e.target);
         e.stopPropagation();
       }
+
+      if (e.target && e.target.matches(".video__delete")) {
+        this._delete_video(e.target);
+        e.stopPropagation();
+      }
     }, false);
 
     document.addEventListener("submit", e => {
@@ -63,6 +68,31 @@ export default class View extends MainView {
     request.onerror = function() { console.error("Error"); };
     request.send();
   }
+
+  _delete_video(el) {
+    if (!window.confirm("Are you sure to delete this video ?")) {
+      return;
+    }
+
+    var token = document.querySelector("[name=channel_token]").getAttribute("content");
+    var request = new XMLHttpRequest();
+    request.open("DELETE", el.dataset.path, true);
+    request.setRequestHeader('Authorization', "Bearer " + token);
+    request.setRequestHeader('Accept', 'application/json');
+
+    request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        let video = el.closest("article");
+        video.parentNode.removeChild(video);
+      } else {
+        console.error("Error");
+      }
+    };
+
+    request.onerror = function() { console.error("Error"); };
+    request.send();
+  }
+
 
   _submit(form) {
     if (form === undefined) return;
