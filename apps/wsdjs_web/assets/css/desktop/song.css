@@ -72,7 +72,16 @@
 }
 .song-page__video {
   display: flex;
-  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.unconnected h4 {
+  margin-top: 0;
+}
+.unconnected h5 {
+  margin-bottom: 15px;
+}
+.unconnected .social-links {
+  margin-top: 25px;
 }
 .song-page__video a {
   position: relative;
