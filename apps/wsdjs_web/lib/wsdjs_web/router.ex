@@ -86,6 +86,7 @@ defmodule WsdjsWeb.Router do
       resources "/opinions", OpinionController, only: [:delete]
       resources "/comments", CommentController, only: [:delete]
       resources "/accounts", AccountController, only: [:update]
+      resources "/videos", VideoController, only: [:delete]
       get "/me", AccountController, :show, as: :me
     end
   end

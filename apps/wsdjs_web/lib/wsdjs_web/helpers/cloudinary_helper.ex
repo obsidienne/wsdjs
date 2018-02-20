@@ -11,20 +11,28 @@ defmodule WsdjsWeb.CloudinaryHelper do
 
   ###############################################
   #
-  # YOUTUBE ART
+  # VIDEO THUMBNAIL
   #
   ###############################################
   alias Wsdjs.Attachments.Video
 
-  def youtube_url(%Video{video_id: video_id}, resolution) when is_integer(resolution) do
+  def thumbnail_url(%Video{video_id: video_id, provider: "youtube"}, resolution) when is_integer(resolution) do
     @cld_youtube <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/" <> "#{video_id}.jpg"
   end
 
-  def youtube_srcset(%Video{} = video, base) when is_integer(base) do
+  def thumbnail_url(%Video{provider: "facebook"}, resolution) when is_integer(resolution) do
+    @cld_https <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/v1/wsdjs/facebook.jpg"
+  end
+
+  def thumbnail_url(%Video{}, resolution) when is_integer(resolution) do
+    @cld_https <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/v1/wsdjs/missing_cover.jpg"
+  end
+
+  def thumbnail_srcset(%Video{} = video, base) when is_integer(base) do
     resolutions = Enum.map(@dpr_multiple, &(base * &1))
 
     resolutions
-    |> Enum.map(fn(r) -> "#{youtube_url(video, r)} #{r}w" end)
+    |> Enum.map(fn(r) -> "#{thumbnail_url(video, r)} #{r}w" end)
     |> Enum.join(", ")
   end
 

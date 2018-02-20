@@ -1,7 +1,7 @@
 <%= for video <- @videos do %>
 <article class="song-page__video card">
   <%= link to: video.url, target: "_blank" do %>
-    <img src="<%= youtube_url(video, 100) %>" srcset="<%= youtube_srcset(video, 100) %>" sizes="100px" width="100" height="auto">
+    <img src="<%= thumbnail_url(video, 100) %>" srcset="<%= thumbnail_srcset(video, 100) %>" sizes="100px" width="100" height="auto">
     <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
       <path d='M0 0h24v24H0z' fill='none'/>
       <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
@@ -9,10 +9,17 @@
    <% end %>
   <div class="song-page__video__details">
     <h5 class="text-ellipsis song-page__video__pros"><%= video.title %></h4>
-    <span class="song-page__video__event"><%= video.event %></span>
+    <h5 class="text-ellipsis song-page__video__event small"><%= video.event %>
     <%= if video.published_at do %>
-    <timeago class="small text-muted"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</timeago>
+    <timeago class="text-muted"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</timeago>
     <% end %>
+    </h5>
+
+    <%= if Wsdjs.Attachments.Policy.can?(@conn.assigns[:current_user], :delete, video) == :ok do %>
+    <button class="btn-link video__delete" data-path="<%= api_video_path(@conn, :delete, video) %>">
+    </button>
+    <% end %>
+
   </div>
 </article>
 <% end %>
