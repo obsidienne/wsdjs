@@ -38,7 +38,7 @@ defmodule Wsdjs.Musics do
 
     user
     |> Song.scoped()
-    |> where([s], s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period)
+    |> where([s], s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period and s.suggestion == true)
     |> order_by([desc: :inserted_at])
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
