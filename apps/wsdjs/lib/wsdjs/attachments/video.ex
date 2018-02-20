@@ -12,6 +12,7 @@ defmodule Wsdjs.Attachments.Video do
     field :title, :string
     field :event, :string
     field :published_at, :date
+    field :provider, :string, default: "unknown"
 
     belongs_to :user, Wsdjs.Accounts.User
     belongs_to :song, Wsdjs.Musics.Song
@@ -26,6 +27,7 @@ defmodule Wsdjs.Attachments.Video do
     |> validate_url(:url)
     |> assoc_constraint(:song)
     |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
+    |> put_change(:provider, Wsdjs.Attachments.Provider.type(attrs["url"]))
   end
 
   # This function validates the format of an URL not it's validity.

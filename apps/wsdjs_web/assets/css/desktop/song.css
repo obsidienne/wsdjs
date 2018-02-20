@@ -69,16 +69,21 @@
 }
 
 .song-page__sections__content {
-  flex: 1;
+  flex: 1 0 60ch;
+}
+.song-page__sections__aside {
+  flex: 1 1 300px;
 }
 .song-page__video {
   display: flex;
-  max-width: 100%;
-  padding-right: 5px;
+  margin-top: 5px;
 }
 .song-page__video a {
   position: relative;
-  margin-right: 5px;
+  height: 56.5px;
+  width: 100px;
+  overflow: hidden;
+  flex: 0 0 auto;
 }
 .song-page__video a:hover svg {
   bottom: 4px;
@@ -95,9 +100,25 @@
 }
 .song-page__video__details {
   min-width: 0;
+  padding: 5px 25px 5px 5px;
+  position: relative;
+  width: 100%;
 }
+
+.video__delete {
+  display: inline-block;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23000000' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3C/svg%3E");
+}
+
 .song-page__video__pros  {
   margin-top: 0;
+  margin-bottom: 0;
 }
 .song-page__video__event  {
   margin-bottom: 0;
@@ -125,6 +146,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 15px;
+  flex-direction: column;
 }
 .overview-video form {
   margin-left: auto;
