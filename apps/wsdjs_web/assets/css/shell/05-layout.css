@@ -7,17 +7,17 @@
   max-width: 720px;
 }
 @media (min-width: 768px) {
-  .songs-container, .container { max-width: 720px; }
+  .container { max-width: 720px; }
 }
 @media (min-width: 992px) {
-  .songs-container, .container { 
+  .container { 
     padding-left: 0;
     padding-right: 0;  
     max-width: 960px; 
   }
 }
 @media (min-width: 1200px) {
-  .songs-container, .container {
+  .container {
     max-width: 1140px;
   }
 }
