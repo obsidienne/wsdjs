@@ -114,14 +114,10 @@
     margin-bottom: 0;
   }
 
-  .song-top__container,.user-page__songs,.top-songs-container, .top-stat__votes {
+  .user-page__songs,.top-songs-container, .top-stat__votes {
     display: grid;
     grid-gap: 5px;
     grid-template-columns: repeat(1, 1fr);
-  }
-
-  .song-top__container {
-    grid-template-columns: repeat(2, 1fr);
   }
   .song-top__song {
     margin: 0;
@@ -135,11 +131,6 @@
     
     .top-stat__votes {
       grid-template-columns: repeat(3, 1fr);
-    }
-
-    .song-top__container {
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: 5px;
     }
     .user-page__songs {
       grid-template-columns: repeat(2, 1fr);
