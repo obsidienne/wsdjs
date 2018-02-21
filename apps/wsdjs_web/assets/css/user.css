@@ -3,9 +3,6 @@
 }
 .user-page {
   padding-top: 45px;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
 }
 .user-page__avatar {
   flex: 0 0 100px;
