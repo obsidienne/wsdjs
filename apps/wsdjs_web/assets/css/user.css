@@ -28,9 +28,7 @@
   width: 0;
 }
 .user-profile-edit {
-  display: flex;
   margin-top: 15px;
-  flex-direction: column;
 }
 .user-page__profile__header {
   display: flex;
