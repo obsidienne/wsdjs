@@ -172,10 +172,3 @@ a.btn.disabled {
   background-color: hsl(2, 64%, 58%);
   border-color: hsl(2, 64%, 53%);
 }
-
-[data-toggle="buttons"] > .btn input[type="radio"],
-[data-toggle="buttons"] > .btn input[type="checkbox"] {
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-  pointer-events: none;
-}

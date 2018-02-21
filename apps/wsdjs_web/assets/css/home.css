@@ -1,14 +1,6 @@
 .SessionNewView .hero, .RegistrationNewView .hero {
   padding: 0;
 }
-
-body.SessionNewView main, body.RegistrationNewView main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: calc(100vh - 53px);
-}
 .hero-text {
   padding-top: 15px;
 }

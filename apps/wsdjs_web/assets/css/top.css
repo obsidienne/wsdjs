@@ -17,39 +17,9 @@
 .voting-position__selector::-ms-expand { 
   display: none; /* hide the default arrow in ie10 and ie11 */
 }
-.top-voting-repartition {
-  margin-top: 15px;
-}
-
-.voting-container {
-  margin-bottom: 5px;
-}
-
-.voting-container label {
-  width: 100%;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.voting-container .album-art {
-  vertical-align: top;
-}
-
-.voting-song {
-  position: relative;
-}
 .counting-points {
   white-space: nowrap;
 }
-
-.voting-song-title, .voting-song-artist {
-  display: block;
-}
-
-.voting-song-artist {
-  font-weight: normal;
-}
-
 .voting-position {
     position: absolute;
     width: 80px;
@@ -87,17 +57,6 @@
     font-weight: 600;
     color: #49596a;
 }
-
-.top-voting-footer {
-  position: fixed;
-  bottom: 55px;
-  display: flex;
-  padding: 10px;
-  background-color: grey;
-  z-index: 2000;
-  justify-content: flex-end;
-}
-
 .top-voting-footer-actions > .btn {
   width: 200px;
 }
@@ -137,20 +96,6 @@
 }
 .top-counting td {
   text-align: right;
-}
-
-.top-song-position-selector {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 15px;
-  background: hsla(0, 0%, 59%, 0.4);
-  margin: 7px;
-  margin-left: 10px;
-  border-radius: 5px;
-}
-.top-song-position-selector:hover {
-  background: hsl(0, 0%, 59%);
 }
 
 .song-art-container a {
@@ -200,23 +145,6 @@
   .top-song-info-container {
     flex-direction: row;
   }
-}
-
-
-.top-song-art {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 160px;
-  height: auto;
-  margin-right: 15px;
-  position: relative;
-  margin-bottom: 0
-}
-
-.top-song-art img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
 }
 
 .top-song-body {
