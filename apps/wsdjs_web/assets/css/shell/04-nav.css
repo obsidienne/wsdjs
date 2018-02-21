@@ -1,3 +1,18 @@
+main > header {
+  background-color: hsl(221, 23%, 16%);
+  padding-top: 15px;
+  padding-bottom: 45px;
+  margin-bottom: 45px;
+}
+main > header h1 {
+  margin: 0;
+  color: white;
+}
+main > header h2 {
+  margin-top: 20px;
+  color: white;
+}
+
 /****************************
   global navigation
 ****************************/
