@@ -44,11 +44,6 @@ export default class Radio {
       if (e.target.matches(".player__toggle") || e.target.closest(".player__toggle")) {
         self.pause_youtube();
       }
-
-      if (e.target.matches(".player__expand")) {
-        document.querySelector(".player__expand").classList.toggle("player__expand--open");
-        document.querySelector(".already-played").classList.toggle("already-played--open");
-      }
     });
     document.addEventListener("change", function(e) {
       if (e.target && e.target.matches("#player__volume")) {
@@ -64,9 +59,6 @@ export default class Radio {
   }
 
   play_youtube(video_id) {
-    document.querySelector(".player__expand").classList.remove("player__expand--open");
-    document.querySelector(".already-played").classList.remove("already-played--open");
-
     this.pause_radio();
     document.querySelector(".current-played").setAttribute("hidden", "hidden");
     

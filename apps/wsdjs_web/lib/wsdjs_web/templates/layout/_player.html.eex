@@ -14,7 +14,6 @@
 
     <div class="player__play">
       <div class="player__play__vinyl"></div>
-      <div class="player__expand"></div>
     </div>
   </div>
 
@@ -26,8 +25,4 @@
    </div>
 
   <div id="player__youtube" class="player__youtube" hidden></div>
-
-  <div class="already-played">
-    <table id="already-played" class="already-played__data"></table>
-  </div>
 </div>
