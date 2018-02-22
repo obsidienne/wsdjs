@@ -9,6 +9,7 @@
   <% end %>
 <% end %>
 
+<%= if Enum.count(@comments) > 0 do %>
 <ul id="comments-container">
   <%= for comment <- @comments do %>
     <li class="comment">
@@ -38,3 +39,4 @@
     </li>
   <% end %>
 </ul>
+<% end %>
