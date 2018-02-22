@@ -60,11 +60,9 @@
       </div>
     </section>
     <% end %>
-    <%= if Enum.count(@comments) > 0 do %>
     <section id="overview-section">
       <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
     </section>
-    <% end %>
   </div>
 
   <div class="song-page__sections__aside">
