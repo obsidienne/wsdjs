@@ -41,7 +41,7 @@ export default class Radio {
         }
       }
 
-      if (e.target.matches(".player__toggle") || e.target.closest(".player__toggle")) {
+      if (e.target.matches(".player__youtube_close")) {
         self.pause_youtube();
       }
     });
@@ -60,21 +60,18 @@ export default class Radio {
 
   play_youtube(video_id) {
     this.pause_radio();
-    document.querySelector(".current-played").setAttribute("hidden", "hidden");
-    
-    document.querySelector(".player__toggle").removeAttribute("hidden", "hidden");    
-    var container = document.querySelector("#player__youtube");
-    container.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}?autoplay=1" frameborder="0" allowfullscreen="1"></iframe>`;
-    container.removeAttribute("hidden");
+
+    var player = document.querySelector("#player__youtube");
+    player.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}?autoplay=1" frameborder="0" allowfullscreen="1"></iframe>`;
+    var container = document.getElementById("player__youtube__container");
+    container.classList.add("open");
   }
 
   pause_youtube() {
-    var container = document.querySelector("#player__youtube");
-    container.setAttribute("hidden", "hidden");
-    container.innerHTML = "";
-    document.querySelector(".player__toggle").setAttribute("hidden", "hidden");
-
-    document.querySelector(".current-played").removeAttribute("hidden", "hidden");
+    var player = document.querySelector("#player__youtube");
+    player.innerHTML = "";
+    var container = document.querySelector(".player__youtube__container.open"); 
+    container.classList.remove("open");
   }
 
   pause_radio(el) {

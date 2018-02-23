@@ -1,17 +1,12 @@
 .player {
-  width: 100%;
   min-height: 75px;
   background: hsl(0, 0%, 93%);
-
-  max-width: 468px;
-
+  width: 100%;
   position: fixed;
   bottom: 0;
-  right: 15px;
-  left: 0;
+  right: 0;
   margin-right: auto;
   margin-left: auto;
-  z-index: 2000;
 }
 .current-played {
   display: flex;
@@ -32,33 +27,36 @@
   padding: 5px 5px 5px 15px;
 }
 .player__description > h6 {
-  padding-bottom: 1px;
+  padding-bottom: 4px;
   margin-bottom: 0;
+  margin-top: 0;
 }
+
 .player__description__title {
   color: black;
   font-weight: 100;
   text-decoration: none;
-  border-bottom: 1px dashed hsla(0, 0%, 61%, 0.5);
+  display: block;
 }
 .player__description__sub-title {
   margin-top: 0;
 }
 .player__description__title:hover {
-  text-shadow: 1px 1px 5px hsl(0, 0%, 0%);
+  text-decoration: underline;
+  transform: translateY(-2px);
 }
 .player__play {
   display: flex;
   flex-direction: column;
-  flex: 0 0 55px;
+  flex: 0 0 50px;
   height: 100%;
-  margin-right: 15px;  
+  margin-right: 5px;
 }
 .player__play__vinyl {
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  margin-top: -55px;
+  margin-top: -60px;
   box-shadow: 0 3px 20px 0 hsla(0, 0%, 0%, 0.35);
   text-align: center;
   cursor: pointer;
@@ -78,15 +76,36 @@
   box-shadow: 0 3px 20px 0 hsla(0, 0%, 0%, 0.5);
 }
 
-.player__youtube {
-  position: relative;
-  padding-bottom: 56.23%;
-  /* Use 75% for 4:3 videos */
+.player__youtube__container {
+  position: fixed;
+  right: 0;
+  bottom: -100%;
+
+  width: 100%;
   height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  min-width: 100%;
+  padding-bottom: 56.5%;
+  transition: bottom 1s ease-in;
+}
+.player__youtube__container.open {
+  bottom: 0;
+  transition: bottom .7s ease-in;
+}
+.player__youtube {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
   background: hsl(0, 0%, 0%);
+}
+.player__youtube_close {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  height: 30px;
+  background-color: white;
 }
 
 .player__youtube iframe {
@@ -121,4 +140,26 @@
 .already-played {
   max-height: 0;
   transition: max-height 1s ease-out;
+}
+
+@media (min-width: 768px) {
+  .player {
+    width: 320px;
+    bottom: 15px;
+    right: 15px;
+  }
+  .player__youtube {
+    height: 180px;
+    width: 320px;
+  }
+  .player__youtube__container {
+    height: 180px;
+    width: 320px;
+    right: 15px;
+    bottom: -300px;
+    padding-bottom: 0;
+  }
+  .player__youtube__container.open {
+    bottom: 15px;
+  }  
 }
