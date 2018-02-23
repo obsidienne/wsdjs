@@ -19,9 +19,15 @@
   margin-bottom: 15px;  
 }
 
+.home-page__top__song li, .home-page__instant__hit li {
+  transform: translateY(-var(--accent-action));
+  box-shadow: var(--shadow-inactive);
+}
+
+
 .home-page__top__song li:hover, .home-page__instant__hit li:hover {
   transform: translateY(-var(--accent-action));
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
+  box-shadow: var(--shadow-active);
 }
 
 @media (min-width: 768px) {
