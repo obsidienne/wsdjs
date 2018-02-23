@@ -61,7 +61,7 @@
 }
 
 .social-link:hover {
-  transform: translateY(-2px);
+  transform: translateY(-var(--accent-action));
   display: inline-block;
 }
 .social-sc:hover svg{
@@ -100,5 +100,5 @@
   grid-template-columns: repeat(3, 1fr);
 }
 #playlists-section li article:hover {
-  transform: translateY(-2px);
+  transform: translateY(-var(--accent-action));
 }

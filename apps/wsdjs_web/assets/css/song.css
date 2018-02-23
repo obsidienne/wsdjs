@@ -60,7 +60,7 @@
 }
 .song-suggestor:hover, .top-song__title:hover {
   text-decoration: underline;
-  color: hsl(45, 100%, 51.4%)
+  color: var(--accent-color);
 }
 
 .song-page__sections {
@@ -249,7 +249,7 @@
 }
 .song-card__body a:hover {
   text-decoration: underline;
-  color: hsl(45, 100%, 51.4%);
+  color: var(--accent-color);
 }
 .song-card-footer {
   display: flex;

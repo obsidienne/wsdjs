@@ -79,6 +79,6 @@
   margin-bottom: 3px;
 }
 .search-results li:hover {
-  transform: translateY(-2px);
+  transform: translateY(-var(--accent-action));
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
 }

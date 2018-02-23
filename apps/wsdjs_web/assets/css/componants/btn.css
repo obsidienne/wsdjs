@@ -48,7 +48,7 @@ a.btn.disabled {
 }
 .btn-primary {
   color: hsl(0, 0%, 100%);
-  background-color: hsl(208, 56%, 46%);
+  background-color: var(--primary-color);
   border-color: hsl(208, 56%, 41%);
 }
 .btn-primary:focus,
@@ -61,7 +61,7 @@ a.btn.disabled {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 36%);
   border-color: hsl(208, 57%, 29%);
-  transform: translateY(-2px);
+  transform: translateY(-var(--accent-action));
 }
 .btn-primary:active,
 .btn-primary.active {
@@ -78,7 +78,7 @@ a.btn.disabled {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 29%);
   border-color: hsl(207, 56%, 16%);
-  transform: translateY(-2px);
+  transform: translateY(-var(--accent-action));
 }
 .btn-primary:active,
 .btn-primary.active {
@@ -118,13 +118,13 @@ a.btn.disabled {
   color: hsl(208, 56%, 31%);
   text-decoration: underline;
   background-color: transparent;
-  transform: translateY(-2px);
+  transform: translateY(-var(--accent-action));
 }
 .btn-link[disabled]:hover,
 .btn-link[disabled]:focus {
   color: hsl(0, 0%, 47%);
   text-decoration: none;
-  transform: translateY(-2px);
+  transform: translateY(-var(--accent-action));
 }
 .btn-link.text-muted {
   color: hsl(0, 0%, 47%);
@@ -145,7 +145,7 @@ a.btn.disabled {
   color: hsl(0, 0%, 100%);
   background-color: hsl(2, 64%, 48%);
   border-color: hsl(2, 65%, 41%);
-  transform: translateY(-2px);
+  transform: translateY(-var(--accent-action));
 }
 .btn-danger:active,
 .btn-danger.active {
