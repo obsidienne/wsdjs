@@ -45,7 +45,7 @@ defmodule Wsdjs.Accounts.User do
 
   def admin_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:user_country, :name, :djname, :admin, :profil_djvip, :profil_dj, :deactivated, :verified_profil])
+    |> cast(attrs, [:email, :user_country, :name, :djname, :admin, :profil_djvip, :profil_dj, :deactivated, :verified_profil])
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
     |> cast_assoc(:parameter, with: &Accounts.UserParameter.admin_changeset/2)
