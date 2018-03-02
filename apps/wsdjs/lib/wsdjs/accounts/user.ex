@@ -11,25 +11,25 @@ defmodule Wsdjs.Accounts.User do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "users" do
-    field(:email, :string)
-    field(:admin, :boolean, default: false)
-    field(:user_country, :string)
-    field(:name, :string)
-    field(:djname, :string)
-    field(:profil_djvip, :boolean, default: false)
-    field(:profil_dj, :boolean, default: false)
-    field(:deactivated, :boolean, default: false)
-    field(:activated_at, :naive_datetime)
-    field(:verified_profil, :boolean, default: false)
+    field :email, :string
+    field :admin, :boolean, default: false
+    field :user_country, :string
+    field :name, :string
+    field :djname, :string
+    field :profil_djvip, :boolean, default: false
+    field :profil_dj, :boolean, default: false
+    field :deactivated, :boolean, default: false
+    field :activated_at, :naive_datetime
+    field :verified_profil, :boolean, default: false
 
-    has_many(:songs, Musics.Song)
-    has_many(:comments, Reactions.Comment)
-    has_one(:avatar, Accounts.Avatar, on_replace: :delete)
-    has_one(:detail, Accounts.UserDetail, on_replace: :update)
-    has_one(:parameter, Accounts.UserParameter, on_replace: :update)
-    has_many(:song_opinions, Reactions.Opinion)
-    has_many(:votes, Charts.Vote)
-    has_many(:auth_tokens, Auth.AuthToken)
+    has_many :songs, Musics.Song
+    has_many :comments, Reactions.Comment
+    has_one :avatar, Accounts.Avatar, on_replace: :delete
+    has_one :detail, Accounts.UserDetail, on_replace: :update
+    has_one :parameter, Accounts.UserParameter, on_replace: :update
+    has_many :song_opinions, Reactions.Opinion
+    has_many :votes, Charts.Vote
+    has_many :auth_tokens, Auth.AuthToken
 
     timestamps()
   end
@@ -45,16 +45,7 @@ defmodule Wsdjs.Accounts.User do
 
   def admin_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [
-      :user_country,
-      :name,
-      :djname,
-      :admin,
-      :profil_djvip,
-      :profil_dj,
-      :deactivated,
-      :verified_profil
-    ])
+    |> cast(attrs, [:email, :user_country, :name, :djname, :admin, :profil_djvip, :profil_dj, :deactivated, :verified_profil])
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
     |> cast_assoc(:parameter, with: &Accounts.UserParameter.admin_changeset/2)
@@ -82,12 +73,10 @@ defmodule Wsdjs.Accounts.User do
   - Not connected users see nothing
   """
   def scoped(%Accounts.User{admin: true}), do: Accounts.User
-
   def scoped(%Accounts.User{} = user) do
-    from(u in Accounts.User, where: u.id == ^user.id or u.admin == false)
+    from u in Accounts.User, where: u.id == ^user.id or u.admin == false
   end
-
-  def scoped(nil), do: from(u in Accounts.User, where: u.admin == false)
+  def scoped(nil), do: from u in Accounts.User, where: u.admin == false
 end
 
 defimpl Bamboo.Formatter, for: Wsdjs.Accounts.User do

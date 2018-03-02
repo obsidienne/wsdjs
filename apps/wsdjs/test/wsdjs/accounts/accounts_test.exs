@@ -85,7 +85,7 @@ defmodule Wsdjs.AccountsTest do
     end
 
     @update_attrs %{
-      email: "nochangeemail@bshit.com",
+      email: "updatedemail@bshit.com",
       user_country: "update country",
       name: "update name",
       djname: "update djname",
@@ -151,7 +151,7 @@ defmodule Wsdjs.AccountsTest do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
       assert {:ok, user} = Accounts.update_user(user, @update_attrs, %User{admin: true})
 
-      assert user.email == "dummy@bshit.com"
+      assert user.email == "updatedemail@bshit.com"
       assert user.name == "update name"
       assert user.djname == "update djname"
       assert user.user_country == "update country"
