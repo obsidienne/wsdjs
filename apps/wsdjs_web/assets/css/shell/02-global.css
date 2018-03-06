@@ -132,7 +132,7 @@ dt {
   text-align: center;
 }
 .text-muted {
-  color: #777777;
+  color: var(--inactive-color);
 }
 .text-danger {
   color: #dc3545 !important;
