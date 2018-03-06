@@ -1,5 +1,5 @@
 # from https://gist.github.com/bsedat/16cb74ebc8ab0ed61ac598a129b0a7ea
-FROM elixir:1.5.1 as asset-builder-mix-getter
+FROM elixir:1.6.2 as asset-builder-mix-getter
 
 ENV HOME=/opt/app
 
@@ -14,7 +14,7 @@ WORKDIR $HOME/apps/wsdjs_web
 RUN mix deps.get
 
 ########################################################################
-FROM node:6 as asset-builder
+FROM node:9.7.1 as asset-builder
 
 ENV HOME=/opt/app
 WORKDIR $HOME
@@ -27,7 +27,7 @@ RUN yarn install
 RUN ./node_modules/.bin/brunch build --production
 
 ########################################################################
-FROM bitwalker/alpine-elixir:1.5.1 as releaser
+FROM bitwalker/alpine-elixir:1.6.2 as releaser
 
 ENV HOME=/opt/app
 
