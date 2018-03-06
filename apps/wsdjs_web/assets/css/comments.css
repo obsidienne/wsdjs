@@ -28,7 +28,6 @@
 .comment__content {
 	background: hsl(0, 0%, 100%);
 	padding: 12px;
-	font-size: 15px;
 	color: hsl(0, 0%, 35%);
 }
 .comment__delete {
@@ -45,19 +44,6 @@
     width: auto;
   }
 
-  .comment__body:before, .comment__body:after {
-    content: '';
-    height: 0;
-    width: 0;
-    position: absolute;
-    display: block;
-    border-width: 10px 12px 10px 0;
-    border-style: solid;
-    border-color: transparent hsl(0, 0%, 93%);
-    top: 8px;
-    left: -12px;
-  }
-
   .comment__avatar {
     display: flex;
     flex: 0 1 auto;
@@ -67,7 +53,7 @@
     width: 65px;
     height: 65px;
     border: 3px solid #FFF;
-    border-radius: 4px;
+    border-radius: 50%;
     box-shadow: var(--shadow-inactive);
   }
 }
