@@ -131,10 +131,6 @@ dt {
   width: 100%;
   display: block;
 }
-
-.text-capitalized {
-  text-transform: capitalize;
-}
 .text-center {
   text-align: center;
 }
@@ -147,16 +143,12 @@ dt {
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0 20px;
-  border-bottom: 1px solid #eeeeee;
 }
 label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: bold;
-}
-.img-circle {
-  border-radius: 50%;
 }
 
 textarea {

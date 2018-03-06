@@ -56,7 +56,7 @@
 
         <%= if @current_user do %>
           <%= link to: user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>
-            <img class="glnav__user__avatar img-circle" src="<%= avatar_url(@current_user.avatar, 40) %>" srcset="<%= avatar_srcset(@current_user.avatar, 50) %>" sizes="50px">
+            <img class="glnav__user__avatar" src="<%= avatar_url(@current_user.avatar, 40) %>" srcset="<%= avatar_srcset(@current_user.avatar, 50) %>" sizes="50px">
           <% end %>
         <% end %>
       </div>

@@ -43,7 +43,8 @@ main > header h2 {
   position: relative;
   width: 40px;
   height: 40px;
-  vertical-align: top
+  vertical-align: top;
+  border-radius: 50%;
 }
 
 .glnav__menu {

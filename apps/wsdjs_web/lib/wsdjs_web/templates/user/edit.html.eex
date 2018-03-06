@@ -29,7 +29,7 @@
     <% end %>
     <div class="form-group">
       <label class="small text-muted">Name</label>
-      <%= text_input f, :name, placeholder: "Name", class: "form-control text-capitalized" %>
+      <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
       <%= error_tag f, :name %>
     </div>
     <div class="form-group">
