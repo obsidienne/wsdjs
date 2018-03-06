@@ -45,13 +45,6 @@ function handleDOMContentLoaded() {
   var notifier = new Notifier();
   notifier.show_all();
 
-  /* set the current volume radio */
-  var volumeElement = document.getElementById("player__volume");
-  if (volumeElement.getAttribute("value") == null) {
-    volumeElement.setAttribute("value", 50);    
-    radio.setVolume(0.5);
-  }
-
   /* outdated */
   Outdated.check();
   

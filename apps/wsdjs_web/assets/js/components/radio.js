@@ -45,13 +45,6 @@ export default class Radio {
         self.pause_youtube();
       }
     });
-    document.addEventListener("change", function(e) {
-      if (e.target && e.target.matches("#player__volume")) {
-        var volumeElement = document.getElementById("player__volume");
-        var volume = volumeElement.value;
-        self.radio.volume = volume / 100;
-      }
-    });
   }
 
   setVolume(vol) {
