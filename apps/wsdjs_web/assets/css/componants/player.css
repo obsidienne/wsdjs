@@ -144,17 +144,17 @@
 
 @media (min-width: 768px) {
   .player {
-    width: 320px;
+    width: 384px;
     bottom: 15px;
     right: 15px;
   }
   .player__youtube {
-    height: 180px;
-    width: 320px;
+    height: 216px;
+    width: 384px;
   }
   .player__youtube__container {
-    height: 180px;
-    width: 320px;
+    height: 216px;
+    width: 384px;
     right: 15px;
     bottom: -300px;
     padding-bottom: 0;
