@@ -42,7 +42,7 @@
 }
 .search-input:focus {
   color: hsl(221, 15%, 41%);
-  border-bottom: 2px solid  hsl(45, 100%, 51%);
+  border-bottom: 2px solid  var(--accent-color);
 }
 
 

@@ -17,7 +17,7 @@
   margin-bottom: 15px;
 }
 .user-page__stats td {
-  color: #3c3c3c;
+  color: var(--inactive-color);
   font-size: 18px;
   font-weight: normal;
 }
@@ -49,12 +49,12 @@
     border-bottom-width: 0;
 }
 .user-page__profile__section {
-    border-bottom: 1px solid #e8e8e8;
-    font-size: 13px;
-    line-height: 19px;
-    padding: 18px 15px;
-    position: relative;
-    z-index: 3;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 13px;
+  line-height: 19px;
+  padding: 18px 15px;
+  position: relative;
+  width: 100%;
 }
 .user-page__profile__section:empty {
   display: none;
@@ -79,7 +79,7 @@
   padding-top: 8px;
 }
 .user-page__details {
-  color: #6f6f6f;
+  color: var(--inactive-color);
   margin: 0;
 }
 .user-page__logout {

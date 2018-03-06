@@ -122,12 +122,12 @@ a.btn.disabled {
 }
 .btn-link[disabled]:hover,
 .btn-link[disabled]:focus {
-  color: hsl(0, 0%, 47%);
+  color: var(--inactive-color);
   text-decoration: none;
   transform: translateY(-var(--accent-action));
 }
 .btn-link.text-muted {
-  color: hsl(0, 0%, 47%);
+  color: var(--inactive-color);
 }
 
 .btn-danger {

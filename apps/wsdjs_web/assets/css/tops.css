@@ -78,7 +78,7 @@
   font-size: 0.8125rem;
   padding: 0 0 .8em 0;
   display: flex;
-  color: #777777;
+  color: var(--inactive-color);
 }
 .tops__top__date time {
   padding-right: 15px;
@@ -89,7 +89,7 @@
 .tops__top__details th,
 .tops__top__details td {
   text-align: left;
-  color: #777777;
+  color: var(--inactive-color);
 }
 .container.tops-actions {
   padding-bottom: 15px;
