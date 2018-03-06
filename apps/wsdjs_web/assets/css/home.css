@@ -20,13 +20,13 @@
 }
 
 .home-page__top__song li, .home-page__instant__hit li {
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
   box-shadow: var(--shadow-inactive);
 }
 
 
 .home-page__top__song li:hover, .home-page__instant__hit li:hover {
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
   box-shadow: var(--shadow-active);
 }
 

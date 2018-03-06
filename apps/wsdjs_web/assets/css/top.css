@@ -158,5 +158,5 @@
 .top-song-body a:hover{
   text-decoration: underline;
   color: var(--accent-color);
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }

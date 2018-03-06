@@ -61,7 +61,7 @@ a.btn.disabled {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 36%);
   border-color: hsl(208, 57%, 29%);
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }
 .btn-primary:active,
 .btn-primary.active {
@@ -78,7 +78,7 @@ a.btn.disabled {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 29%);
   border-color: hsl(207, 56%, 16%);
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }
 .btn-primary:active,
 .btn-primary.active {
@@ -118,13 +118,13 @@ a.btn.disabled {
   color: hsl(208, 56%, 31%);
   text-decoration: underline;
   background-color: transparent;
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }
 .btn-link[disabled]:hover,
 .btn-link[disabled]:focus {
   color: var(--inactive-color);
   text-decoration: none;
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }
 .btn-link.text-muted {
   color: var(--inactive-color);
@@ -145,7 +145,7 @@ a.btn.disabled {
   color: hsl(0, 0%, 100%);
   background-color: hsl(2, 64%, 48%);
   border-color: hsl(2, 65%, 41%);
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }
 .btn-danger:active,
 .btn-danger.active {

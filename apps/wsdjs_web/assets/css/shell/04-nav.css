@@ -26,7 +26,7 @@ main > header h2 {
 }
 .glnav a:hover {
   text-decoration: underline;
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }
 .glnav .container {
   display: flex;

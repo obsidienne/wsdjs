@@ -43,7 +43,7 @@
 }
 .player__description__title:hover {
   text-decoration: underline;
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }
 .player__play {
   display: flex;

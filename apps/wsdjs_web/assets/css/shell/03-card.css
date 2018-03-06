@@ -9,5 +9,5 @@
 
 .card:hover {
   box-shadow: var(--shadow-active);
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
 }

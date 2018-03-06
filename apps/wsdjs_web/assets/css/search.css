@@ -29,7 +29,7 @@
 .search-input {
   position: relative;
   border: none;
-  background-color: hsl(240, 20%, 98%);
+  background-color: var(--bg-color);
   color: hsl(221, 15%, 41%);
   transform: translateY(0);
   transition: all ease .3s;
@@ -79,6 +79,6 @@
   margin-bottom: 3px;
 }
 .search-results li:hover {
-  transform: translateY(-var(--accent-action));
+  transform: var(--accent-action);
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
 }
