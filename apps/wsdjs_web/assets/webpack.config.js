@@ -8,6 +8,9 @@ module.exports = {
     filename: 'app.js',
     path: path.resolve(__dirname, '../priv/static/js')
   },
+  externals: {
+    'pjax-api': 'commonjs pjax-api'
+  },
   module: {
     rules: [
       {
