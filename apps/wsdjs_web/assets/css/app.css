@@ -1,0 +1,25 @@
+@import "./shell/01-normalize.css";
+@import "./shell/02-global.css";
+@import "./shell/03-card.css";
+@import "./shell/04-nav.css";
+@import "./shell/05-layout.css";
+
+@import "./componants/btn.css";
+@import "./componants/form.css";
+@import "./componants/label.css";
+@import "./componants/notifier.css";
+@import "./componants/outdated.css";
+@import "./componants/player.css";
+@import "./componants/table.css";
+
+@import "./animations.css";
+@import "./comments.css";
+@import "./home.css";
+@import "./icons.css";
+@import "./playlists.css";
+@import "./search.css";
+@import "./song.css";
+@import "./top.css";
+@import "./tops.css";
+@import "./user.css";
+
