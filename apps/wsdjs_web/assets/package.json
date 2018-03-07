@@ -2,7 +2,6 @@
   "repository": {},
   "license": "MIT",
   "name": "wsdjs",
-  "version": "1",
   "scripts": {
     "deploy": "webpack --mode production",
     "watch": "webpack --mode development --watch --progress --color"

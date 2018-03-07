@@ -23,8 +23,7 @@ COPY --from=asset-builder-mix-getter $HOME/deps $HOME/deps
 
 WORKDIR $HOME/apps/wsdjs_web/assets
 COPY apps/wsdjs_web/assets/ ./
-RUN yarn install
-RUN ./node_modules/.bin/brunch build --production
+RUN yarn install && npm run deploy
 
 ########################################################################
 FROM bitwalker/alpine-elixir:1.6.2 as releaser
