@@ -5,80 +5,49 @@ import lazyload from '../../components/lazyload';
 export default class View extends MainView {
   constructor() {
     super();
-    var self = this;
 
-    var timeout;
-    window.addEventListener("scroll", function(e) {
-      clearTimeout(timeout);
-      timeout = setTimeout(function() {
-        if (self._needToFetchSongs()) {
-          var sentinel = document.querySelector("#song-list section:last-child .sentinel");        
-          self._fetchSongs(sentinel);
+    this.observer = new IntersectionObserver((entries) => { 
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          let sentinel = entries[i].target;
+          this.observer.unobserve(sentinel);
+          this.fetchSongs(sentinel);
         }
-      }, 100);
-    })
+      }
+    });
+
+    var sentinel = document.querySelector("#song-list .sentinel");
+    this.observer.observe(sentinel);
 
     lazyload.refresh();
   }
-
-  mount() {
-    super.mount();
-
-    if (this._needToFetchSongs()) {
-      var sentinel = document.querySelector("#song-list section:last-child .sentinel");
-      this._fetchSongs(sentinel);
-    }
-  }
-
-  unmount() {
-    super.umount();
-  }
  
-  _formatDate() {
-    super.formatDate("time.date-format", {year: "numeric", month: "long"});
-  }
+  fetchSongs(sentinel) {
+    var container = document.getElementById("song-list");
+    var page_number = parseInt(sentinel.dataset.jsPageNumber);
+    
+    fetch(`/songs?month=${sentinel.dataset.nextMonth}`, {credentials: 'include'})
+    .then((response) => {
+      if (response.ok) {
+        return response.text();
+      } else {
+        console.log('Mauvaise réponse du réseau');
+      }
+    })
+    .then((data) => {
+      var sentinel = document.querySelector("#song-list .sentinel");
+      sentinel.parentNode.removeChild(sentinel);
 
-  _needToFetchSongs() {
-    var correctPage = document.querySelector(".SongIndexView");          
-    var sentinel = document.querySelector("#song-list section:last-child .sentinel");
+      container.insertAdjacentHTML('beforeend', data);
+      new timeago().render(document.querySelectorAll("time.timeago"));
 
-    if (!sentinel) return false;
-
-    var rect = sentinel.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document. documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document. documentElement.clientWidth) &&
-      correctPage
-    );
-  }
-
-  _fetchSongs(sentinel) {
-    var self = this;
-    var request = new XMLHttpRequest();
-    request.open('GET', `/songs?month=${sentinel.dataset.nextMonth}`, true);
-
-    request.onload = function() {
-      if (this.status >= 200 && this.status < 400) {
-        var container = document.getElementById("song-list");
-
-        sentinel.parentNode.removeChild(sentinel);    
-        container.insertAdjacentHTML('beforeend', this.response);
-        
-        if (self._needToFetchSongs()) {
-          let sentinel = document.querySelector("#song-list section:last-child .sentinel");
-          self._fetchSongs(sentinel);
-        }
-
-        new timeago().render(document.querySelectorAll("time.timeago"));
-        self._formatDate();
-        lazyload.refresh();
-       }
-    };
-
-    request.onerror = function() { console.log("Error search"); };
-
-    request.send();
-  }
+      var sentinel = document.querySelector("#song-list .sentinel");
+      this.observer.observe(sentinel);
+      super.formatDate("time.date-format", {year: "numeric", month: "long"});
+      lazyload.refresh();
+    })
+    .catch(function(error) {
+      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+    });
+ }
 }
