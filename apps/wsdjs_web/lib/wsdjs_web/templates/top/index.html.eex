@@ -28,6 +28,6 @@
     <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
   <%= if @page_number < @total_pages do %>
-  <div class="sentinel"><div class="throbber-loader"></div></div>
+  <div class="sentinel"><div class="donut"></div></div>
   <% end %>
 </section>

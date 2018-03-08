@@ -9,7 +9,7 @@
     </ul>
     <% end %>
 
-    <div class="sentinel" data-next-month="<%= Timex.shift(@month, months: -1) %>"><div class="throbber-loader"></div></div>
+    <div class="sentinel" data-next-month="<%= Timex.shift(@month, months: -1) %>"><div class="donut"></div></div>
 </section>
 <% end %>
 
