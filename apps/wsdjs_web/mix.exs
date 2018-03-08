@@ -24,8 +24,7 @@ defmodule WsdjsWeb.Mixfile do
   def application do
     [
       mod: {WsdjsWeb.Application, []},
-      included_applications: [:ua_inspector],
-      extra_applications: [:logger]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 

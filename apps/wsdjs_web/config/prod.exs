@@ -16,10 +16,7 @@ use Mix.Config
 config :wsdjs_web, WsdjsWeb.Endpoint,
   load_from_system_env: true,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  server: true,
-  root: ".",
-  version: Application.spec(:myapp, :vsn)
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :wsdjs_web, WsdjsWeb.Mailer,
   adapter: Bamboo.SendgridAdapter,
