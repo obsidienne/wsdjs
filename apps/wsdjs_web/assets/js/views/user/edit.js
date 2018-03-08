@@ -12,12 +12,7 @@ export default class View extends MainView {
     super.mount();
     Places({
       container: document.querySelector('#user_country'),
-      type: 'country',
-      templates: {
-        suggestion: function(suggestion) {
-          return '<i class="flag ' + suggestion.countryCode + '"></i> ' +  suggestion.highlight.name;
-        }
-      }
+      type: 'country'
     })
   }
 
