@@ -1,5 +1,5 @@
 <%= render_many @tops, @view_module, "_top.html", conn: @conn, as: :top, current_user: @current_user %>
 
 <%= if @page_number < @total_pages do %>
-<div class="sentinel"><div class="donut"></div></div>
+<div class="sentinel" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
 <% end %>
