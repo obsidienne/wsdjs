@@ -24,7 +24,6 @@ import Pjax from 'pjax-api';
 import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
-import Outdated from './components/outdated';
 import Opinions from './components/opinions';
 import Tippy from 'tippy.js/dist/tippy.all';
 
@@ -43,9 +42,6 @@ function handleDOMContentLoaded() {
   var notifier = new Notifier();
   notifier.show_all();
 
-  /* outdated */
-  Outdated.check();
-  
   /* piwik */
   if (window._paq != null) {
     return _paq.push(['trackPageView']);
