@@ -33,7 +33,6 @@ export default class View extends MainView {
 
   mount() {
     super.mount();
-    this._submit();
 
     // autolinks in comments
     var els = document.querySelectorAll(".comment__content");
@@ -41,8 +40,14 @@ export default class View extends MainView {
       els[i].innerHTML = els[i].innerHTML.autoLink();
     }
   }
-  unmount() { 
-    super.umount();
+
+  _headers() {
+    var token = document.querySelector("[name=channel_token]").getAttribute("content");
+
+    return new Headers({
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/json"
+    });
   }
 
   _delete_comment(el) {
@@ -50,23 +55,19 @@ export default class View extends MainView {
       return;
     }
 
-    var token = document.querySelector("[name=channel_token]").getAttribute("content");
-    var request = new XMLHttpRequest();
-    request.open("DELETE", el.dataset.path, true);
-    request.setRequestHeader('Authorization', "Bearer " + token);
-    request.setRequestHeader('Accept', 'application/json');
-
-    request.onload = function() {
-      if (this.status >= 200 && this.status < 400) {
+    fetch(el.dataset.path, {
+      method: "DELETE",
+      headers: this._headers()
+    }).then((response) => {
+      if (response.ok) {
         let comment = el.closest("li");
         comment.parentNode.removeChild(comment);
       } else {
-        console.error("Error");
+        console.log('Mauvaise réponse du réseau');
       }
-    };
-
-    request.onerror = function() { console.error("Error"); };
-    request.send();
+    }).catch(function(error) {
+      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+    });
   }
 
   _delete_video(el) {
@@ -74,81 +75,71 @@ export default class View extends MainView {
       return;
     }
 
-    var token = document.querySelector("[name=channel_token]").getAttribute("content");
-    var request = new XMLHttpRequest();
-    request.open("DELETE", el.dataset.path, true);
-    request.setRequestHeader('Authorization', "Bearer " + token);
-    request.setRequestHeader('Accept', 'application/json');
-
-    request.onload = function() {
-      if (this.status >= 200 && this.status < 400) {
+    fetch(el.dataset.path, {
+      method: "DELETE",
+      headers: this._headers()
+    }).then((response) => {
+      if (response.ok) {
         let video = el.closest("article");
         video.parentNode.removeChild(video);
       } else {
-        console.error("Error");
+        console.log('Mauvaise réponse du réseau');
       }
-    };
-
-    request.onerror = function() { console.error("Error"); };
-    request.send();
+    }).catch(function(error) {
+      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+    });
   }
 
 
   _submit(form) {
     if (form === undefined) return;
-    var self = this;
 
-    var token = document.querySelector("[name=channel_token]").getAttribute("content");
-    var request = new XMLHttpRequest();
-    request.open(form.method, form.action, true);
-    request.setRequestHeader('Authorization', "Bearer " + token);
-    request.setRequestHeader('Accept', 'application/json');
-
-    request.onload = function() {
-      if (this.status >= 200 && this.status < 400) {
-        var data = JSON.parse(this.response).data;
-
-        var container = document.getElementById("comments-container");
-        var template = document.getElementById("comment-tpl").innerHTML;
-
-        var tpl = Mustache.render(template, data);
-
-        container.insertAdjacentHTML('beforeend', tpl);
-        new timeago().render(document.querySelectorAll("time.timeago"));
+    fetch(form.action, {
+      "method": form.method,
+      "headers": this._headers(),
+      "body": new FormData(form)
+    }).then((response) => {
+      if (response.ok) {
+        form.reset();
+        return response.json();
       } else {
-        console.error("Error");
+        console.log('Mauvaise réponse du réseau');
       }
-    };
+    }).then((payload) => {
+      var container = document.getElementById("comments-container");
+      var template = document.getElementById("comment-tpl").innerHTML;
 
-    request.onerror = function() { console.error("Error"); };
-    request.send(new FormData(form));
-    form.reset();
+      var tpl = Mustache.render(template, payload.data);
+
+      container.insertAdjacentHTML('beforeend', tpl.autoLink());
+    }).catch(function(error) {
+      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+      form.reset();
+    });
   }
 
   _submit_video(form) {
     if (form === undefined) return;
-    var self = this;
 
-    var token = document.querySelector("[name=channel_token]").getAttribute("content");
-    var request = new XMLHttpRequest();
-    request.open(form.method, form.action, true);
-    request.setRequestHeader('Authorization', "Bearer " + token);
-    request.setRequestHeader('Accept', 'application/json');
-
-    request.onload = function() {
-      if (this.status >= 200 && this.status < 400) {
-        var data = JSON.parse(this.response).data;
-        var container = document.getElementById("overview-video");
-        var template = document.getElementById("video-tpl").innerHTML;
-        var tpl = Mustache.render(template, data);
-        container.insertAdjacentHTML('beforeend', tpl);
+    fetch(form.action, {
+      "method": form.method,
+      "headers": this._headers(),
+      "body": new FormData(form)
+    }).then((response) => {
+      if (response.ok) {
+        form.reset();
+        return response.json();
       } else {
-        console.error("Error");
+        console.log('Mauvaise réponse du réseau');
       }
-    };
-
-    request.onerror = function() { console.error("Error"); };
-    request.send(new FormData(form));
-    form.reset();
+    }).then((payload) => {
+      let container = document.getElementById("overview-video");
+      let template = document.getElementById("video-tpl").innerHTML;
+      let tpl = Mustache.render(template, payload.data);
+      container.insertAdjacentHTML('beforeend', tpl);
+    }).catch(function(error) {
+      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+      form.reset();
+    });
   }
 }

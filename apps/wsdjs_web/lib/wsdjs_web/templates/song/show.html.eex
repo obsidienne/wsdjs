@@ -64,11 +64,9 @@
   </div>
 
   <div class="song-page__sections__aside">
-    <%= if Enum.count(@videos) > 0 do %>
     <section id="overview-video" class="overview-video">
       <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
     </section>
-    <% end %>
     <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
       <%= form_for @video_changeset, api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
       <fieldset>

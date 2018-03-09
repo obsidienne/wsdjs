@@ -157,6 +157,9 @@
   margin-bottom: 15px;
   flex-direction: column;
 }
+.overview-video:-moz-only-whitespace {
+  display: none;
+}
 .overview-video form {
   margin-left: auto;
 }
