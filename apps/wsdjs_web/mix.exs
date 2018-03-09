@@ -9,7 +9,7 @@ defmodule WsdjsWeb.Mixfile do
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "1.6.1",
+      elixir: "1.5.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -24,8 +24,7 @@ defmodule WsdjsWeb.Mixfile do
   def application do
     [
       mod: {WsdjsWeb.Application, []},
-      included_applications: [:ua_inspector],
-      extra_applications: [:logger]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
