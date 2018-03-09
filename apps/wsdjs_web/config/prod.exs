@@ -20,7 +20,7 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
 
 config :wsdjs_web, WsdjsWeb.Mailer,
   adapter: Bamboo.SendgridAdapter,
-  api_key: "${SENDGRID_API_KEY}"
+  api_key: System.get_env("SENDGRID_API_KEY")
 
 # ## SSL Support
 #
