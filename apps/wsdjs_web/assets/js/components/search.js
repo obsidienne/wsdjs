@@ -25,27 +25,25 @@ export default class search {
   }
 
   _search(cl) {
-    var query = document.getElementById("search-input").value;
-
-    var request = new XMLHttpRequest();
-    request.open('GET', '/search?q='+query, true);
-
-    request.onload = function() {
-      if (this.status >= 200 && this.status < 400) {
-        document.querySelector(".search-results-container").innerHTML = this.response;
-        new timeago().render(document.querySelectorAll(".search-results-container time.timeago"));
+    let query = document.getElementById("search-input").value;
+    fetch(`/search?q=${query}`, {credentials: 'include'})
+    .then((response) => {
+      if (response.ok) {
+        return response.text();
       } else {
-        document.querySelector(".search-results-container").innerHTML = "";
+        console.log('Mauvaise réponse du réseau');
       }
-    };
-
-    request.onerror = function() { console.log("Error search"); };
-
-    request.send();
+    })
+    .then((data) => {
+      document.querySelector(".search-results-container").innerHTML = data;
+      new timeago().render(document.querySelectorAll(".search-results-container time.timeago"));
+    })
+    .catch(function(error) {
+      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+    });
   }
 
   _show_search() {
-    let glnav = document.querySelector(".glnav");
     let search_container = document.querySelector(".search-container");
     search_container.classList.add("focused");
   }
