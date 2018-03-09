@@ -11,29 +11,30 @@ class Opinions {
   }
 
   _toggle_opinion(elem) {
-    var self = this;
-
-    var container = elem.closest(".song-opinions");
-    var method = elem.dataset.method;
-    var url = elem.dataset.url;
     var token = document.querySelector("[name=channel_token]").getAttribute("content");
 
-    var request = new XMLHttpRequest();
-    request.open(method, url, true);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    request.setRequestHeader('Authorization', "Bearer " + token);
-    request.setRequestHeader('Accept', 'application/json');
-
-    request.onload = function() {
-      if (this.status >= 200 && this.status < 400) {
-        self._refresh_layout(container, JSON.parse(this.response));
-      } else {
-        console.error("Error");
+    fetch(elem.dataset.url, {
+      method: elem.dataset.method,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`
       }
-    };
-
-    request.onerror = function() { console.error("Error"); };
-    request.send();
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        console.log('Mauvaise réponse du réseau');
+      }
+    })
+    .then((data) => {
+      var container = elem.closest(".song-opinions");
+      this._refresh_layout(container, data);
+    })
+    .catch(function(error) {
+      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+    });
   }
 
   _refresh_layout(container, data) {
