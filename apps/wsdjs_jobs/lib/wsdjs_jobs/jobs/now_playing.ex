@@ -17,11 +17,12 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   def start_link(name \\ nil) do
     queue = :queue.new()
-    GenServer.start_link(__MODULE__, queue, [name: name])
+    GenServer.start_link(__MODULE__, queue, name: name)
   end
 
   def init(state) do
-    schedule_work(5000) # Schedule work to be performed at some point
+    # Schedule work to be performed at some point
+    schedule_work(5000)
     {:ok, state}
   end
 
@@ -36,24 +37,30 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   @radioking_api_uri 'https://www.radioking.com/widgets/currenttrack.php?radio=84322&format=json'
   def handle_info(:work, queue) do
-    queue = if :queue.len(queue) < 9 do
-      list_broadcasted(queue)
-    else
-      queue
-    end
+    queue =
+      if :queue.len(queue) < 9 do
+        list_broadcasted(queue)
+      else
+        queue
+      end
 
     case HTTPoison.get(@radioking_api_uri) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {queue, interval} = parse_streamed_song(body, queue)
-        schedule_work(interval) # Reschedule once more
+        # Reschedule once more
+        schedule_work(interval)
         {:noreply, queue}
+
       {:ok, %HTTPoison.Response{status_code: 404}} ->
-        Logger.debug "Not found :("
-        schedule_work(60_000) # Reschedule once more
+        Logger.debug("Not found :(")
+        # Reschedule once more
+        schedule_work(60_000)
         {:noreply, queue}
+
       {:error, %HTTPoison.Error{reason: reason}} ->
-        Logger.error reason
-        schedule_work(60_000) # Reschedule once more
+        Logger.error(reason)
+        # Reschedule once more
+        schedule_work(60_000)
         {:noreply, queue}
     end
   end
@@ -66,16 +73,18 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
         json
         |> Enum.reverse()
-        |> Enum.reduce(queue, fn(song, queue) ->
+        |> Enum.reduce(queue, fn song, queue ->
           song
           |> Map.take(@expected_fields)
           |> filled_from_db()
           |> :queue.in(queue)
         end)
+
       {:ok, %HTTPoison.Response{status_code: 404}} ->
-        IO.puts "Not found :("
+        IO.puts("Not found :(")
+
       {:error, %HTTPoison.Error{reason: reason}} ->
-        IO.puts reason
+        IO.puts(reason)
     end
   end
 
@@ -85,7 +94,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
 
   defp parse_streamed_song(body, queue) do
     body
-    |> Poison.decode!
+    |> Poison.decode!()
     |> Map.take(@expected_fields)
     |> push_song(queue)
   end
@@ -95,7 +104,8 @@ defmodule Wsdjs.Jobs.NowPlaying do
     last_queued = :queue.peek_r(queue)
 
     # song already in queue ?
-    queue = if same_song?(song, last_queued) do
+    queue =
+      if same_song?(song, last_queued) do
         queue
       else
         Wsdjs.Jobs.UnmatchSong.notify(song)
@@ -103,27 +113,35 @@ defmodule Wsdjs.Jobs.NowPlaying do
       end
 
     # no more than 9 elements in queue
-    queue = if :queue.len(queue) > 9 do
-      :queue.drop(queue)
-    else
-      queue
-    end
+    queue =
+      if :queue.len(queue) > 9 do
+        :queue.drop(queue)
+      else
+        queue
+      end
 
     # find the new interval adding 1 second to the expected end
     # and then doing an abs() to manage the case where radioking is late
-    interval = song["end_at"]
+    interval =
+      song["end_at"]
       |> Timex.parse!("{ISO:Extended}")
       |> Timex.shift(seconds: 1)
-      |> Timex.diff(Timex.now, :seconds)
+      |> Timex.diff(Timex.now(), :seconds)
 
-    interval = if interval <= 0 do 2 else interval end
+    interval =
+      if interval <= 0 do
+        2
+      else
+        interval
+      end
 
-    PubSub.broadcast WsdjsWeb.PubSub, "notifications:now_playing", :new_played_song
+    PubSub.broadcast(WsdjsWeb.PubSub, "notifications:now_playing", :new_played_song)
 
     {queue, interval * 1000}
   end
 
   defp same_song?(_, :empty), do: false
+
   defp same_song?(a, {:value, b}) do
     if a["title"] == b["title"] && a["artist"] == b["artist"] do
       true
@@ -154,8 +172,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
   defp tags_for_song(song_in_base) do
     with {:ok, top_head} <- Enum.fetch(song_in_base.tops, 0),
          {:ok, rank_head} <- Enum.fetch(top_head.ranks, 0),
-         {:ok, _} <- song_position(rank_head.position)
-    do
+         {:ok, _} <- song_position(rank_head.position) do
       ["Top " <> Timex.format!(top_head.due_date, "%b%y", :strftime)]
     else
       _ -> []

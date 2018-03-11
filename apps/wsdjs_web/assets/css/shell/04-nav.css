@@ -1,0 +1,85 @@
+main > header {
+  background-color: hsl(221, 23%, 16%);
+  padding-top: 15px;
+  padding-bottom: 45px;
+  margin-bottom: 45px;
+}
+main > header h1 {
+  margin: 0;
+  color: white;
+}
+main > header h2 {
+  margin-top: 20px;
+  color: white;
+}
+
+/****************************
+  global navigation
+****************************/
+.glnav {
+  align-items: center;
+  user-select: none;
+  background-color: #1F2532;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-top: 2px solid var(--accent-color);
+}
+.glnav a:hover {
+  text-decoration: underline;
+  transform: var(--accent-action);
+}
+.glnav .container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.glnav__user {
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+}
+
+.glnav__user__avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  vertical-align: top;
+  border-radius: 50%;
+}
+
+.glnav__menu {
+  font-size: 18px;
+  padding: 0 15px;
+  color: #596377;
+  transition: color .6s cubic-bezier(.25, .8, .25, 1);
+  padding-bottom: 5px;
+}
+.glnav__menu:hover {
+  color: #D3D8E0;
+}
+
+
+.logo-small {
+  width: 40px;
+}
+.logo-wide {
+  width: 120px;
+  display: none;
+}
+.logo:hover {
+  fill: #D3D8E0;
+  transition: fill .6s cubic-bezier(.25, .8, .25, 1);
+}
+.logo:not(:hover) {
+  fill: #455A64;
+  transition: fill .6s cubic-bezier(.25, .8, .25, 1);  
+}
+
+@media (min-width: 768px) {
+  .logo-small {
+    display: none;
+  }
+  .logo-wide {
+    display: inline;
+  }
+}

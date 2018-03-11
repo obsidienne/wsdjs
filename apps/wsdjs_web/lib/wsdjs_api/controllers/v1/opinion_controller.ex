@@ -5,7 +5,7 @@ defmodule WsdjsApi.V1.OpinionController do
   alias Wsdjs.Musics
   alias Wsdjs.Reactions
 
-  action_fallback WsdjsApi.V1.FallbackController
+  action_fallback(WsdjsApi.V1.FallbackController)
 
   def index(conn, %{"song_id" => song_id}) do
     current_user = conn.assigns[:current_user]
@@ -23,7 +23,6 @@ defmodule WsdjsApi.V1.OpinionController do
     with song <- Musics.get_song!(song_id),
          :ok <- Reactions.Policy.can?(current_user, :create_opinion, song),
          {:ok, %Reactions.Opinion{}} <- Reactions.upsert_opinion(current_user, song, kind) do
-
       opinions = Reactions.list_opinions(song)
 
       conn
@@ -38,7 +37,6 @@ defmodule WsdjsApi.V1.OpinionController do
     with opinion <- Reactions.get_opinion!(id),
          :ok <- Reactions.Policy.can?(current_user, :delete, opinion),
          {:ok, opinion} = Reactions.delete_opinion(opinion) do
-
       song = Musics.get_song!(opinion.song_id)
       opinions = Reactions.list_opinions(song)
       render(conn, "index.json", song: song, opinions: opinions, current_user: current_user)

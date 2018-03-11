@@ -16,7 +16,7 @@ defmodule WsdjsApi.V1.CommentView do
     }
   end
 
-  #1506925999
+  # 1506925999
   def render("comment.json", %{comment: comment}) do
     %{
       id: comment.id,

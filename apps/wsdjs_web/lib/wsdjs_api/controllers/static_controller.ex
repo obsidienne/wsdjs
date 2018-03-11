@@ -3,6 +3,6 @@ defmodule WsdjsApi.StaticController do
   use WsdjsWeb, :controller
 
   def show(conn, params) do
-    render conn, "show.json", params
+    render(conn, "show.json", params)
   end
 end

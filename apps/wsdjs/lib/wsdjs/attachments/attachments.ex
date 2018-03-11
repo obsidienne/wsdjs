@@ -35,9 +35,9 @@ defmodule Wsdjs.Attachments do
   """
   def list_videos(%Song{id: id}) do
     Video
-    |> where([song_id: ^id])
-    |> order_by([desc: :inserted_at])
-    |> Repo.all
+    |> where(song_id: ^id)
+    |> order_by(desc: :inserted_at)
+    |> Repo.all()
   end
 
   @doc """

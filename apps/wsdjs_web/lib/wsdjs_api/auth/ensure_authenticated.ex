@@ -8,9 +8,9 @@ defmodule WsdjsApi.EnsureAuthenticated do
       nil ->
         conn = conn |> halt
         apply(WsdjsApi.Unauthenticated, :api_call, [conn, conn.params])
+
       _ ->
         conn
     end
   end
-
 end

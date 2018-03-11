@@ -1,0 +1,165 @@
+.player {
+  min-height: 75px;
+  background: hsl(0, 0%, 93%);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+.current-played {
+  display: flex;
+  align-items: center;
+}
+.current-played[hidden] {
+  display: none;
+}
+.player__art, .player__toggle__art {
+  width: 75px;
+  height: 75px;
+  box-shadow: 3px 0 3px 0 hsla(0, 0%, 0%, 0.4);
+  flex: 0 0 75px;
+}
+.player__description {
+  overflow: hidden;
+  flex: 1 1 auto;
+  padding: 5px 5px 5px 15px;
+}
+.player__description > h6 {
+  padding-bottom: 4px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.player__description__title {
+  color: black;
+  font-weight: 100;
+  text-decoration: none;
+  display: block;
+}
+.player__description__sub-title {
+  margin-top: 0;
+}
+.player__description__title:hover {
+  text-decoration: underline;
+  transform: var(--accent-action);
+}
+.player__play {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 50px;
+  height: 100%;
+  margin-right: 5px;
+}
+.player__play__vinyl {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: -60px;
+  box-shadow: 0 3px 20px 0 hsla(0, 0%, 0%, 0.35);
+  text-align: center;
+  cursor: pointer;
+  background: hsl(0, 0%, 100%);
+
+  background: url("data:image/svg+xml,%3Csvg fill='%23000000' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M8 5v14l11-7z'/%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3C/svg%3E"), #FFF;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.player--playing .player__play__vinyl {
+  transition: all 0.35s ease;
+  background: url("//res.cloudinary.com/don2kwaju/image/upload/c_scale,dpr_auto,f_auto,h_55,q_auto,w_55/v1502383947/wsdjs/vinyl.png");
+  background-size: cover;
+  animation: spin 1s infinite linear;
+}
+.player__play__vinyl:hover {
+  box-shadow: 0 3px 20px 0 hsla(0, 0%, 0%, 0.5);
+}
+
+.player__youtube__container {
+  position: fixed;
+  right: 0;
+  bottom: -100%;
+
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.5%;
+  transition: bottom 1s ease-in;
+}
+.player__youtube__container.open {
+  bottom: 0;
+  transition: bottom .7s ease-in;
+}
+.player__youtube {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: hsl(0, 0%, 0%);
+}
+.player__youtube_close {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  height: 30px;
+  background-color: white;
+}
+
+.player__youtube iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: transparent;
+}
+.player__toggle {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+.player__toggle[hidden] {
+  display: none;
+}
+.player__toggle h4 {
+  margin-left: 15px;
+}
+
+@keyframes spin {
+  0% {
+  transform: rotate(0deg);
+  }
+  100% {
+  transform: rotate(360deg);
+  }
+}
+.already-played {
+  max-height: 0;
+  transition: max-height 1s ease-out;
+}
+
+@media (min-width: 768px) {
+  .player {
+    width: 384px;
+    bottom: 15px;
+    right: 15px;
+  }
+  .player__youtube {
+    height: 216px;
+    width: 384px;
+  }
+  .player__youtube__container {
+    height: 216px;
+    width: 384px;
+    right: 15px;
+    bottom: -300px;
+    padding-bottom: 0;
+  }
+  .player__youtube__container.open {
+    bottom: 15px;
+  }  
+}

@@ -7,10 +7,10 @@ defmodule Wsdjs.Musics.Art do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "arts" do
-    field :cld_id, :string
-    field :version, :integer
+    field(:cld_id, :string)
+    field(:version, :integer)
 
-    belongs_to :song, Wsdjs.Musics.Song
+    belongs_to(:song, Wsdjs.Musics.Song)
 
     timestamps()
   end

@@ -8,26 +8,16 @@
       <h6 class="text-ellipsis">
         <a href="#" class="player__description__title">Radio WCS</a>
       </h6>
-      <h6 class="small text-ellipsis player__description__sub-title">by World Swing DJs</h6>
-      <input type="range" id="player__volume" min="0" max="100" step="10">
+      <h6 class="text-ellipsis player__description__sub-title">by World Swing DJs</h6>
     </div>
 
     <div class="player__play">
       <div class="player__play__vinyl"></div>
-      <div class="player__expand"></div>
     </div>
-  </div>
-
-  <div class="player__toggle" hidden>
-    <div class="player__toggle__art">
-      <img class="responsive" src="//res.cloudinary.com/don2kwaju/image/upload/w_225/wsdjs/radiowcs_square.jpg">
-    </div>
-    <h4>Close player</h4>
-   </div>
-
-  <div id="player__youtube" class="player__youtube" hidden></div>
-
-  <div class="already-played">
-    <table id="already-played" class="already-played__data"></table>
   </div>
 </div>
+
+<aside id="player__youtube__container" class="player__youtube__container">
+  <button class="player__youtube_close">close</button>
+  <div id="player__youtube" class="player__youtube"></div>
+</aside>

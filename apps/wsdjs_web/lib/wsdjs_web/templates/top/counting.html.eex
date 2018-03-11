@@ -60,9 +60,7 @@
             <%= if rank.song.public_track do %>
             <span class="label label-default">public track</span>
             <% end %>
-            <span class="song-opinion song-down"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "down" end) %></span>
-            <span class="song-opinion song-like"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "like" end) %></span>
-            <span class="song-opinion song-up"><%= Enum.count(rank.song.opinions, fn(x) -> x.kind == "up" end) %></span> 
+            <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
           </aside>
         </div>
         <div>

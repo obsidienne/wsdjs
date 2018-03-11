@@ -7,9 +7,9 @@ defmodule Wsdjs.Auth.Invitation do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "invitations" do
-    field :email, :string
-    field :name, :string
-    belongs_to :user, Wsdjs.Accounts.User
+    field(:email, :string)
+    field(:name, :string)
+    belongs_to(:user, Wsdjs.Accounts.User)
 
     timestamps()
   end

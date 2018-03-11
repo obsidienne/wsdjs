@@ -9,25 +9,25 @@ defmodule Wsdjs.Musics.Song do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "songs" do
-    field :title, :string
-    field :artist, :string
-    field :url, :string
-    field :bpm, :integer, default: 0
-    field :genre, :string
-    field :instant_hit, :boolean, default: false
-    field :hidden_track, :boolean, default: false
-    field :video_id, :string
-    field :public_track, :boolean, default: false
-    field :suggestion, :boolean, default: true
+    field(:title, :string)
+    field(:artist, :string)
+    field(:url, :string)
+    field(:bpm, :integer, default: 0)
+    field(:genre, :string)
+    field(:instant_hit, :boolean, default: false)
+    field(:hidden_track, :boolean, default: false)
+    field(:video_id, :string)
+    field(:public_track, :boolean, default: false)
+    field(:suggestion, :boolean, default: true)
     timestamps()
 
-    belongs_to :user, Accounts.User
-    has_one :art, Musics.Art, on_replace: :delete
-    has_many :comments, Reactions.Comment
-    has_many :ranks, Charts.Rank
-    has_many :opinions, Reactions.Opinion
-    has_many :votes, Charts.Vote
-    many_to_many :tops, Charts.Top, join_through: Charts.Rank
+    belongs_to(:user, Accounts.User)
+    has_one(:art, Musics.Art, on_replace: :delete)
+    has_many(:comments, Reactions.Comment)
+    has_many(:ranks, Charts.Rank)
+    has_many(:opinions, Reactions.Opinion)
+    has_many(:votes, Charts.Vote)
+    many_to_many(:tops, Charts.Top, join_through: Charts.Rank)
   end
 
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
@@ -75,7 +75,19 @@ defmodule Wsdjs.Musics.Song do
 
   def admin_changeset(%Song{} = song, attrs) do
     song
-    |> cast(attrs, [:title, :artist, :url, :bpm, :genre, :user_id, :instant_hit, :hidden_track, :inserted_at, :public_track, :suggestion])
+    |> cast(attrs, [
+      :title,
+      :artist,
+      :url,
+      :bpm,
+      :genre,
+      :user_id,
+      :instant_hit,
+      :hidden_track,
+      :inserted_at,
+      :public_track,
+      :suggestion
+    ])
     |> validate_required([:url, :bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
@@ -92,7 +104,7 @@ defmodule Wsdjs.Musics.Song do
   def scoped(%Accounts.User{profil_djvip: true}), do: Musics.Song
 
   def scoped(%Accounts.User{profil_dj: true} = user) do
-    upper = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+    upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
     lower = Timex.shift(upper, months: -24)
 
     scoped(lower, upper)
@@ -100,7 +112,7 @@ defmodule Wsdjs.Musics.Song do
   end
 
   def scoped(%Accounts.User{} = user) do
-    upper = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+    upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
     lower = Timex.shift(upper, months: -12)
 
     scoped(lower, upper)
@@ -108,27 +120,30 @@ defmodule Wsdjs.Musics.Song do
   end
 
   def scoped(nil) do
-    lower = Timex.shift(Timex.beginning_of_month(Timex.now), months: -6)
-    upper = Timex.shift(Timex.beginning_of_month(Timex.now), months: -3)
+    lower = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -6)
+    upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
 
     scoped(lower, upper)
   end
 
   defp scoped(%DateTime{} = lower, %DateTime{} = upper) do
-    from s in Musics.Song,
-    left_join: r in assoc(s, :ranks),
-    left_join: t in assoc(r, :top),
-    where: (t.status == "published" and r.position <= 10 and t.due_date >= ^lower and t.due_date <= ^upper)
-        or s.instant_hit == true or s.public_track == true
+    from(
+      s in Musics.Song,
+      left_join: r in assoc(s, :ranks),
+      left_join: t in assoc(r, :top),
+      where:
+        (t.status == "published" and r.position <= 10 and t.due_date >= ^lower and
+           t.due_date <= ^upper) or s.instant_hit == true or s.public_track == true
+    )
   end
 
   # This function validates the format of an URL not it's validity.
   defp validate_url(changeset, field, options \\ []) do
-    validate_change changeset, field, fn _, url ->
-      case url |> String.to_charlist |> :http_uri.parse do
+    validate_change(changeset, field, fn _, url ->
+      case url |> String.to_charlist() |> :http_uri.parse() do
         {:ok, _} -> []
-        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect msg}"}]
+        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect(msg)}"}]
       end
-    end
+    end)
   end
 end

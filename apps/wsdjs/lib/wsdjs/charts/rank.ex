@@ -7,13 +7,13 @@ defmodule Wsdjs.Charts.Rank do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "ranks" do
-    field :likes, :integer
-    field :votes, :integer
-    field :bonus, :integer
-    field :position, :integer
+    field(:likes, :integer)
+    field(:votes, :integer)
+    field(:bonus, :integer)
+    field(:position, :integer)
 
-    belongs_to :song, Wsdjs.Musics.Song
-    belongs_to :top, Wsdjs.Charts.Top
+    belongs_to(:song, Wsdjs.Musics.Song)
+    belongs_to(:top, Wsdjs.Charts.Top)
 
     timestamps()
   end

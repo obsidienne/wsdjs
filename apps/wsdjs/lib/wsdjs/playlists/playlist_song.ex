@@ -7,11 +7,11 @@ defmodule Wsdjs.Playlists.PlaylistSong do
   alias Ecto.Changeset
 
   schema "playlist_songs" do
-    field :position, :integer
+    field(:position, :integer)
     timestamps(updated_at: false)
 
-    belongs_to :playlist, Wsdjs.Playlists.Playlist
-    belongs_to :song, Wsdjs.Musics.Song, type: :binary_id
+    belongs_to(:playlist, Wsdjs.Playlists.Playlist)
+    belongs_to(:song, Wsdjs.Musics.Song, type: :binary_id)
   end
 
   def changeset(%PlaylistSong{} = playlist_songs, attrs) do
@@ -27,7 +27,7 @@ defmodule Wsdjs.Playlists.PlaylistSong do
   def get_or_build(playlist, song_id, position) do
     struct =
       Repo.get_by(Wsdjs.Playlists.PlaylistSong, playlist_id: playlist.id, song_id: song_id) ||
-      Ecto.build_assoc(playlist, :playlist_songs, song_id: song_id)
+        Ecto.build_assoc(playlist, :playlist_songs, song_id: song_id)
 
     Changeset.change(struct, position: String.to_integer(position))
   end

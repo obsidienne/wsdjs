@@ -15,7 +15,7 @@ defmodule WsdjsApi.V1.SessionView do
       },
       auth: %{
         bearer: bearer,
-        expired_at: Timex.to_unix(Timex.shift(Timex.now, seconds: 1_209_600))
+        expired_at: Timex.to_unix(Timex.shift(Timex.now(), seconds: 1_209_600))
       }
     }
   end

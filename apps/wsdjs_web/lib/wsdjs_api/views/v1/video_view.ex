@@ -17,7 +17,11 @@ defmodule WsdjsApi.V1.VideoView do
   def render("video.json", %{video: video}) do
     %{
       id: video.id,
-      url: video.url
+      url: video.url,
+      title: video.title,
+      event: video.event,
+      video_id: video.video_id,
+      published_at: Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime)
     }
   end
 end

@@ -6,15 +6,15 @@ defmodule Wsdjs.Playlists.Playlist do
   alias Wsdjs.Accounts.User
 
   schema "playlists" do
-    field :name, :string
-    field :type, :string, default: "playlist"
-    field :public, :boolean, default: false
-    field :count, :integer, default: 0
+    field(:name, :string)
+    field(:type, :string, default: "playlist")
+    field(:public, :boolean, default: false)
+    field(:count, :integer, default: 0)
     timestamps()
 
-    belongs_to :user, Wsdjs.Accounts.User, type: :binary_id
-    belongs_to :song, Wsdjs.Musics.Song, type: :binary_id
-    has_many :playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all
+    belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)
+    belongs_to(:song, Wsdjs.Musics.Song, type: :binary_id)
+    has_many(:playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all)
   end
 
   def types, do: ["suggested", "likes and tops", "playlist"]
@@ -34,8 +34,10 @@ defmodule Wsdjs.Playlists.Playlist do
   end
 
   def scoped(%User{admin: true}), do: Playlist
+
   def scoped(%User{id: id}) do
-    from p in Playlist, where: p.user_id == ^id or p.public == true
+    from(p in Playlist, where: p.user_id == ^id or p.public == true)
   end
-  def scoped(_), do: from p in Playlist, where: p.public == true
+
+  def scoped(_), do: from(p in Playlist, where: p.public == true)
 end

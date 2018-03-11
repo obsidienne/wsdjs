@@ -7,10 +7,10 @@ defmodule Wsdjs.Reactions.Comment do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "comments" do
-    field :text, :string
+    field(:text, :string)
 
-    belongs_to :user, Wsdjs.Accounts.User
-    belongs_to :song, Wsdjs.Musics.Song
+    belongs_to(:user, Wsdjs.Accounts.User)
+    belongs_to(:song, Wsdjs.Musics.Song)
     timestamps()
   end
 

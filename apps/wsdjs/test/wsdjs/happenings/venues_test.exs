@@ -17,7 +17,8 @@ defmodule Wsdjs.Happenings.VenueTest do
     end
 
     def venue_fixture_attrs(attrs \\ %{}) do
-      {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+      {:ok, user} =
+        Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
       attrs
       |> Enum.into(@valid_attrs)
@@ -45,7 +46,7 @@ defmodule Wsdjs.Happenings.VenueTest do
 
     test "update_venue/2 with valid data updates the venue" do
       venue = venue_fixture()
-      
+
       assert {:ok, venue} = Happenings.update_venue(venue, @update_attrs)
       assert %Venue{} = venue
       assert venue.name == "new venue name"

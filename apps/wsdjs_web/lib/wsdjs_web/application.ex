@@ -7,13 +7,10 @@ defmodule WsdjsWeb.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
-      supervisor(WsdjsWeb.Endpoint, []),
+      supervisor(WsdjsWeb.Endpoint, [])
       # Start your own worker by calling: WsdjsWeb.Worker.start_link(arg1, arg2, arg3)
       # worker(WsdjsWeb.Worker, [arg1, arg2, arg3]),
     ]
-
-    Application.put_env(:ua_inspector, :database_path, Path.join(["#{:code.priv_dir(:wsdjs_web)}", "ua_inspector"]))
-    {:ok, _} = Application.ensure_all_started(:ua_inspector)
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options

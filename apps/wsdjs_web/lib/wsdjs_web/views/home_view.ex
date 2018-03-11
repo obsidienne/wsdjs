@@ -3,8 +3,8 @@ defmodule WsdjsWeb.HomeView do
 
   def group_song_by_month(songs) do
     songs
-    |> Enum.group_by(fn (song) -> month_from_date(song.inserted_at) end)
-    |> Enum.sort_by(fn ({dt, _}) -> Date.to_erl(dt) end, &>=/2)
+    |> Enum.group_by(fn song -> month_from_date(song.inserted_at) end)
+    |> Enum.sort_by(fn {dt, _} -> Date.to_erl(dt) end, &>=/2)
   end
 
   def month_from_date(date) do

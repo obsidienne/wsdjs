@@ -1,0 +1,31 @@
+.SessionNewView .hero, .RegistrationNewView .hero {
+  padding: 0;
+}
+.hero-text {
+  padding-top: 15px;
+}
+.hero-text h5 {
+  padding-bottom: 15px;
+}
+.HomeIndexView main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.home-page__top__song li {
+  margin-bottom: 15px;
+}
+.home-page__instant__hit li {
+  margin-bottom: 15px;  
+}
+
+.home-page__top__song li:hover, .home-page__instant__hit li:hover {
+  transform: var(--accent-action);
+  box-shadow: var(--shadow-active);
+}
+
+@media (min-width: 768px) {
+  .HomeIndexView main {
+    flex-direction: row;
+  }
+}

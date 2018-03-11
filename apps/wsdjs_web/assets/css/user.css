@@ -1,0 +1,104 @@
+#users-section {
+  padding-top: 15px;
+}
+.user-page {
+  padding-top: 45px;
+}
+.user-page__avatar {
+  flex: 0 0 100px;
+  height: 100px;
+  width: 100px;
+}
+.user-page__avatar img {
+  border-radius: 50%;
+}
+.user-page__identity {
+  background: white;
+  margin-bottom: 15px;
+}
+.user-page__stats td {
+  color: var(--inactive-color);
+  font-size: 18px;
+  font-weight: normal;
+}
+.user-page__stats td.h6 {
+  font-size: 1em;
+}
+.user-page__stats th {
+  width: 0;
+}
+.user-profile-edit {
+  margin-top: 15px;
+}
+.user-page__profile__header {
+  display: flex;
+}
+.user-page__profile-details {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  padding: 5px;
+}
+.user-page__profile-details > h4 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 0;
+}
+.user-page__profile__section:last-child {
+    border-bottom-width: 0;
+}
+.user-page__profile__section {
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 13px;
+  line-height: 19px;
+  padding: 18px 15px;
+  position: relative;
+  width: 100%;
+}
+.user-page__profile__section:empty {
+  display: none;
+}
+
+.social-link:hover {
+  transform: var(--accent-action);
+  display: inline-block;
+}
+.social-sc:hover svg{
+  fill: #ff5500;
+}
+.social-yt:hover svg{
+  fill: #ff0000;
+}
+.social-fb:hover svg{
+  fill: #4267b2;
+}
+
+
+.user-page__profile-details__place {
+  padding-top: 8px;
+}
+.user-page__details {
+  color: var(--inactive-color);
+  margin: 0;
+}
+.user-page__logout {
+  padding-left: 0;
+}
+.user-page__actions {
+  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.user-parameters th {
+  white-space: nowrap;
+}
+#playlists-section ul, #playlist-section ul {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
+#playlists-section li article:hover {
+  transform: var(--accent-action);
+}

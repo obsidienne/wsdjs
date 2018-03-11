@@ -7,7 +7,12 @@ defmodule Wsdjs.MusicsTest do
     alias Wsdjs.Musics.Song
     alias Wsdjs.Accounts.User
 
-    @valid_attrs %{title: "my title", artist: "my artist", genre: "soul", url: "http://youtu.be/dummy"}
+    @valid_attrs %{
+      title: "my title",
+      artist: "my artist",
+      genre: "soul",
+      url: "http://youtu.be/dummy"
+    }
 
     def user_fixture(attrs \\ %{}) do
       {:ok, %Wsdjs.Accounts.User{} = user} =
@@ -25,7 +30,7 @@ defmodule Wsdjs.MusicsTest do
 
     def song_params(attrs \\ %{}) do
       user = user_fixture()
-      
+
       attrs
       |> Enum.into(@valid_attrs)
       |> Map.put(:user_id, user.id)
@@ -85,14 +90,18 @@ defmodule Wsdjs.MusicsTest do
 
       assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(song_params(bpm: -1))
       assert "must be greater than 0" in errors_on(changeset).bpm
-  
+
       assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(song_params(title: nil))
       assert "can't be blank" in errors_on(changeset).title
 
-      assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(song_params(artist: nil))
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               Musics.create_song(song_params(artist: nil))
+
       assert "can't be blank" in errors_on(changeset).artist
-  
-      assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(song_params(url: "bullshit"))
+
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               Musics.create_song(song_params(url: "bullshit"))
+
       assert "invalid url: :no_scheme" in errors_on(changeset).url
 
       params = song_params()
@@ -109,8 +118,8 @@ defmodule Wsdjs.MusicsTest do
       genre: "rnb",
       instant_hit: true,
       hidden_track: true,
-      public_track: true, 
-      suggestion: false,
+      public_track: true,
+      suggestion: false
     }
 
     test "update_song/3 with valid data done by admin updates the song" do

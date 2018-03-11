@@ -4,7 +4,7 @@ defmodule Wsdjs.Happenings.EventTest do
 
   describe "events" do
     alias Wsdjs.Happenings.Event
-    
+
     @valid_attrs %{name: "event name"}
     @update_attrs %{name: "new event name"}
     @invalid_attrs %{name: ""}
@@ -16,7 +16,8 @@ defmodule Wsdjs.Happenings.EventTest do
     end
 
     def event_fixture_attrs(attrs \\ %{}) do
-      {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+      {:ok, user} =
+        Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
       attrs
       |> Enum.into(@valid_attrs)
@@ -52,7 +53,7 @@ defmodule Wsdjs.Happenings.EventTest do
 
     test "update_event/2 with invalid data returns error changeset" do
       event = event_fixture()
-      
+
       assert {:error, %Ecto.Changeset{}} = Happenings.update_event(event, @invalid_attrs)
       assert event == Happenings.get_event!(event.id)
     end

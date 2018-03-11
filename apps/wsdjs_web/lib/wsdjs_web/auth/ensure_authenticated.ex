@@ -8,9 +8,9 @@ defmodule WsdjsWeb.EnsureAuthenticated do
       nil ->
         conn = conn |> halt
         apply(WsdjsWeb.Unauthenticated, :session_call, [conn, conn.params])
+
       _ ->
         conn
     end
   end
-
 end

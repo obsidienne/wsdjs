@@ -23,7 +23,7 @@ defmodule Wsdjs.Playlists do
   def list_playlists(%User{id: id}, current_user) do
     current_user
     |> Playlist.scoped()
-    |> where([user_id: ^id])
+    |> where(user_id: ^id)
     |> Repo.all()
     |> Repo.preload(song: :art)
   end
@@ -48,12 +48,13 @@ defmodule Wsdjs.Playlists do
     |> where(user_id: ^user.id)
     |> Repo.get!(id)
   end
+
   def get_playlist!(id), do: Repo.get!(Playlist, id)
 
   def get_playlist_by_user(user, current_user) do
     current_user
     |> Playlist.scoped()
-    |> Repo.get_by([user_id: user.id, type: "likes and tops"])
+    |> Repo.get_by(user_id: user.id, type: "likes and tops")
   end
 
   @doc """
@@ -150,28 +151,37 @@ defmodule Wsdjs.Playlists do
 
   """
   def list_playlist_songs(%Playlist{type: "suggested", user_id: user_id}, current_user) do
-
-
-    query = from s in Song.scoped(current_user),
-    where: s.user_id == ^user_id,  
-    order_by: [desc: s.inserted_at]
+    query =
+      from(
+        s in Song.scoped(current_user),
+        where: s.user_id == ^user_id,
+        order_by: [desc: s.inserted_at]
+      )
 
     Repo.all(query) |> Repo.preload(:art)
   end
 
   def list_playlist_songs(%Playlist{type: "likes and tops", user_id: user_id}, current_user) do
-    query = from s in Song.scoped(current_user),
-    join: o in Opinion, on: o.song_id == s.id,
-    where: o.user_id == ^user_id,
-    order_by: [desc: o.updated_at]
+    query =
+      from(
+        s in Song.scoped(current_user),
+        join: o in Opinion,
+        on: o.song_id == s.id,
+        where: o.user_id == ^user_id,
+        order_by: [desc: o.updated_at]
+      )
 
     Repo.all(query) |> Repo.preload(:art)
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "playlist"}, current_user) do
-    query = from s in Song.scoped(current_user),
-    join: ps in PlaylistSong, on: ps.playlist_id == ^id and ps.song_id == s.id,
-    order_by: ps.position
+    query =
+      from(
+        s in Song.scoped(current_user),
+        join: ps in PlaylistSong,
+        on: ps.playlist_id == ^id and ps.song_id == s.id,
+        order_by: ps.position
+      )
 
     Repo.all(query) |> Repo.preload(:art)
   end
@@ -179,13 +189,14 @@ defmodule Wsdjs.Playlists do
   def update_playlist_songs(%Playlist{} = playlist, song_positions) do
     playlist = playlist |> Repo.preload(:playlist_songs)
 
-    songs = song_positions
-            |> Map.keys()
-            |> Enum.reject(fn(v) -> song_positions[v] == "" end)
-            |> Enum.map(&PlaylistSong.get_or_build(playlist, &1, song_positions[&1]))
+    songs =
+      song_positions
+      |> Map.keys()
+      |> Enum.reject(fn v -> song_positions[v] == "" end)
+      |> Enum.map(&PlaylistSong.get_or_build(playlist, &1, song_positions[&1]))
 
     playlist
-    |> Changeset.change
+    |> Changeset.change()
     |> Changeset.put_assoc(:playlist_songs, songs)
     |> Repo.update()
   end

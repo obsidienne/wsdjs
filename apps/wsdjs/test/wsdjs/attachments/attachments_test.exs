@@ -10,23 +10,35 @@ defmodule Wsdjs.AttachmentsTest do
       user_attrs = %{email: "dummy#{System.unique_integer()}@bshit.com"}
       {:ok, %Wsdjs.Accounts.User{} = user} = Wsdjs.Accounts.create_user(user_attrs)
 
-      {:ok, %Wsdjs.Musics.Song{} = song} =  attrs
-      |> Enum.into(%{title: "my title", artist: "my artist", genre: "soul", url: "http://youtu.be/dummy"})
-      |> Map.put(:user_id, user.id)
-      |> Wsdjs.Musics.create_song()
+      {:ok, %Wsdjs.Musics.Song{} = song} =
+        attrs
+        |> Enum.into(%{
+          title: "my title",
+          artist: "my artist",
+          genre: "soul",
+          url: "http://youtu.be/dummy"
+        })
+        |> Map.put(:user_id, user.id)
+        |> Wsdjs.Musics.create_song()
 
       song
     end
 
-    @valid_attrs %{title: "my title", event: "my event", published_at: "2012-12-12", url: "http://youtu.be/dummy"}
+    @valid_attrs %{
+      title: "my title",
+      event: "my event",
+      published_at: "2012-12-12",
+      url: "http://youtu.be/dummy"
+    }
     def video_fixture(attrs \\ %{}) do
       song = song_fixture()
 
-      {:ok, %Wsdjs.Attachments.Video{} = video} =  attrs
-      |> Enum.into(@valid_attrs)
-      |> Map.put(:user_id, song.user_id)
-      |> Map.put(:song_id, song.id)
-      |> Wsdjs.Attachments.create_video()
+      {:ok, %Wsdjs.Attachments.Video{} = video} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Map.put(:user_id, song.user_id)
+        |> Map.put(:song_id, song.id)
+        |> Wsdjs.Attachments.create_video()
 
       video
     end

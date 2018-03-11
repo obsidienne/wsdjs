@@ -10,8 +10,8 @@ defmodule Wsdjs.Happenings.Event do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "events" do
-    field :name, :string
-    belongs_to :user, Wsdjs.Accounts.User
+    field(:name, :string)
+    belongs_to(:user, Wsdjs.Accounts.User)
 
     timestamps()
   end

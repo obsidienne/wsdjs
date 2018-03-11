@@ -8,7 +8,7 @@
     </svg>
    <% end %>
   <div class="song-page__video__details">
-    <h5 class="text-ellipsis song-page__video__pros"><%= video.title %></h4>
+    <h5 class="text-ellipsis song-page__video__pros"><%= video.title %></h5>
     <h5 class="text-ellipsis song-page__video__event small"><%= video.event %>
     <%= if video.published_at do %>
     <timeago class="text-muted"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</timeago>
@@ -17,6 +17,10 @@
 
     <%= if Wsdjs.Attachments.Policy.can?(@conn.assigns[:current_user], :delete, video) == :ok do %>
     <button class="btn-link video__delete" data-path="<%= api_video_path(@conn, :delete, video) %>">
+      <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
     </button>
     <% end %>
 

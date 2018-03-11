@@ -12,6 +12,7 @@ defmodule WsdjsWeb.NotificationsChannel do
     send(self(), :after_join)
     {:ok, socket}
   end
+
   def join("room:" <> _private_room_id, _params, _socket) do
     {:error, %{reason: "unauthorized"}}
   end
@@ -21,7 +22,7 @@ defmodule WsdjsWeb.NotificationsChannel do
     list = Jobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
-    push socket, "new_played_song", %{data: json}
+    push(socket, "new_played_song", %{data: json})
 
     {:noreply, socket}
   end
@@ -31,7 +32,7 @@ defmodule WsdjsWeb.NotificationsChannel do
     list = Wsdjs.Jobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
-    push socket, "new_played_song", %{data: json}
+    push(socket, "new_played_song", %{data: json})
     {:noreply, socket}
   end
 
@@ -40,7 +41,7 @@ defmodule WsdjsWeb.NotificationsChannel do
     list = Wsdjs.Jobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
-    push socket, "new_played_song", %{data: json}
+    push(socket, "new_played_song", %{data: json})
     {:noreply, socket}
   end
 end

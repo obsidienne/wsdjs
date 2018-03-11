@@ -24,7 +24,8 @@
 
 
     <link defer rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
-    <script defer src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/pjax-api@3.20.3/dist/pjax-api.min.js" integrity="sha256-LJsi0es16Uq53d0tdRBXbzUn2QOtnSQkP/tsoJeZaZE=" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.polyfill.io/v2/polyfill.js?features=IntersectionObserver,fetch,Promise,Promise.prototype.finally&flags=gated"></script>
     <script defer src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script defer src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
     <%= if user = @conn.assigns[:current_user] do %>
@@ -71,15 +72,15 @@
         </svg>
         <% end %>
 
-        <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu text-muted" %>
-        <%= link "songs", to: song_path(@conn, :index), class: "glnav__menu text-muted" %>
+        <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu" %>
+        <%= link "songs", to: song_path(@conn, :index), class: "glnav__menu" %>
         <%= if @current_user && @current_user.admin do %>
-        <%= link "admin", to: admin_user_path(@conn, :index), class: "glnav__menu text-muted" %>
+        <%= link "admin", to: admin_user_path(@conn, :index), class: "glnav__menu" %>
         <% end %>
 
         <%= if @current_user do %>
           <%= link to: user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>
-            <img class="glnav__user__avatar img-circle" src="<%= avatar_url(@current_user.avatar, 40) %>" srcset="<%= avatar_srcset(@current_user.avatar, 50) %>" sizes="50px">
+            <img class="glnav__user__avatar" src="<%= avatar_url(@current_user.avatar, 40) %>" srcset="<%= avatar_srcset(@current_user.avatar, 50) %>" sizes="50px">
           <% end %>
         <% end %>
       </div>

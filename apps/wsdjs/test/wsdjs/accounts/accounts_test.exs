@@ -47,7 +47,9 @@ defmodule Wsdjs.AccountsTest do
       assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(@valid_attrs)
       assert "has already been taken" in errors_on(changeset).email
 
-      assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(%{email: "DuMmY@BsHiT.cOm"})
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               Accounts.create_user(%{email: "DuMmY@BsHiT.cOm"})
+
       assert "has already been taken" in errors_on(changeset).email
     end
 
@@ -57,7 +59,10 @@ defmodule Wsdjs.AccountsTest do
       assert Accounts.get_activated_user!(activated.id) == activated
 
       assert {:ok, %User{} = deactivated} = Accounts.create_user(%{email: "dummy2@bshit.com"})
-      assert {:ok, %User{} = deactivated} = Accounts.update_user(deactivated, %{deactivated: true}, %User{admin: true})
+
+      assert {:ok, %User{} = deactivated} =
+               Accounts.update_user(deactivated, %{deactivated: true}, %User{admin: true})
+
       assert_raise Ecto.NoResultsError, fn -> Accounts.get_activated_user!(deactivated.id) end
     end
 
@@ -79,7 +84,6 @@ defmodule Wsdjs.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
 
-
     @update_attrs %{
       email: "updatedemail@bshit.com",
       user_country: "update country",
@@ -90,7 +94,7 @@ defmodule Wsdjs.AccountsTest do
       profil_dj: true,
       deactivated: true,
       verified_profil: true,
-      activated_at: Timex.now,
+      activated_at: Timex.now(),
       parameter: %{
         new_song_notification: true,
         piwik: false,
@@ -121,10 +125,12 @@ defmodule Wsdjs.AccountsTest do
       }
     }
 
-
     test "update_user/3 with invalid data done by admin returns error changeset" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert {:error, %Ecto.Changeset{} = changeset} = Accounts.update_user(user, @invalid_update_attrs, %User{admin: true})
+
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               Accounts.update_user(user, @invalid_update_attrs, %User{admin: true})
+
       assert "invalid url: :no_scheme" in errors_on(changeset).detail.facebook
       assert "invalid url: :no_scheme" in errors_on(changeset).detail.soundcloud
       assert "invalid url: :no_scheme" in errors_on(changeset).detail.youtube
@@ -132,7 +138,10 @@ defmodule Wsdjs.AccountsTest do
 
     test "update_user/3 with invalid data done by user returns error changeset" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert {:error, %Ecto.Changeset{} = changeset} = Accounts.update_user(user, @invalid_update_attrs, %User{admin: false})
+
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               Accounts.update_user(user, @invalid_update_attrs, %User{admin: false})
+
       assert "invalid url: :no_scheme" in errors_on(changeset).detail.facebook
       assert "invalid url: :no_scheme" in errors_on(changeset).detail.soundcloud
       assert "invalid url: :no_scheme" in errors_on(changeset).detail.youtube

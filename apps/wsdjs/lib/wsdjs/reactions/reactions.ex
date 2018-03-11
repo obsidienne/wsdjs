@@ -39,10 +39,10 @@ defmodule Wsdjs.Reactions do
   """
   def list_comments(%Song{id: id}) do
     Comment
-    |> where([song_id: ^id])
-    |> order_by([desc: :inserted_at])
-    |> Repo.all
-    |> Repo.preload([user: :avatar])
+    |> where(song_id: ^id)
+    |> order_by(desc: :inserted_at)
+    |> Repo.all()
+    |> Repo.preload(user: :avatar)
   end
 
   @doc """
@@ -58,11 +58,12 @@ defmodule Wsdjs.Reactions do
 
   """
   def create_comment(params) do
-    {:ok, comment} = %Comment{}
-    |> Comment.changeset(params)
-    |> Repo.insert()
+    {:ok, comment} =
+      %Comment{}
+      |> Comment.changeset(params)
+      |> Repo.insert()
 
-    {:ok, Repo.preload(comment, [user: :avatar])}
+    {:ok, Repo.preload(comment, user: :avatar)}
   end
 
   @doc """
@@ -145,12 +146,12 @@ defmodule Wsdjs.Reactions do
 
   """
   def opinions_value(opinions) when is_list(opinions) do
-    Enum.reduce(opinions, 0, fn(opinion, acc) ->
+    Enum.reduce(opinions, 0, fn opinion, acc ->
       case opinion.kind do
-        "up"   -> acc + 4
+        "up" -> acc + 4
         "like" -> acc + 2
         "down" -> acc - 3
-        _      -> acc
+        _ -> acc
       end
     end)
   end
@@ -165,10 +166,10 @@ defmodule Wsdjs.Reactions do
   """
   def list_opinions(%Song{id: id}) do
     Opinion
-    |> where([song_id: ^id])
-    |> order_by([desc: :inserted_at])
-    |> Repo.all
-    |> Repo.preload([user: :avatar])
+    |> where(song_id: ^id)
+    |> order_by(desc: :inserted_at)
+    |> Repo.all()
+    |> Repo.preload(user: :avatar)
   end
 
   @doc """
@@ -205,10 +206,11 @@ defmodule Wsdjs.Reactions do
 
   """
   def upsert_opinion(%User{id: user_id}, %Song{id: song_id}, kind) do
-    opinion = case get_opinion_by(user_id: user_id, song_id: song_id) do
-      nil  -> %Opinion{kind: kind, user_id: user_id, song_id: song_id}
-      song_opinion -> song_opinion
-    end
+    opinion =
+      case get_opinion_by(user_id: user_id, song_id: song_id) do
+        nil -> %Opinion{kind: kind, user_id: user_id, song_id: song_id}
+        song_opinion -> song_opinion
+      end
 
     opinion
     |> Opinion.changeset(%{kind: kind})
