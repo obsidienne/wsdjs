@@ -1,3 +1,17 @@
+# version 1.8
+- remove docker and distillery configuration
+- remove outdated browser check
+- downgrade elixir version to 1.5.2 to allow direct deploy to clever cloud
+- use polyfill.io to download fetch, intersectionObserver and fetch.finally when needed
+- replace js callback and XMLHTTPRequest by promise and fetch
+- replace the loading animation by a donut spin
+- remove template for country selector
+- use webpack instead brunch
+- remove sound control in web player
+- move the player to the bottom right and use perfect 16:9 size
+- load pjax-api by CDN
+- use CSS costum var to have the same values for shadows/colors/etc through all the site
+- avatar comment are now a circle
 # version 1.7
 - add #suggestion# and #likes and tops# playlists
 - new design
