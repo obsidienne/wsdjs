@@ -70,20 +70,7 @@ defmodule WsdjsWeb.Endpoint do
   def init(_key, config) do
     if config[:load_from_system_env] do
       port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
-
-      secret_key_base =
-        System.get_env("SECRET_KEY_BASE") ||
-          raise "expected the SECRET_KEY_BASE environment variable to be set"
-
-      host = System.get_env("WSDJS_URL") || "www.worldswingdjs.com"
-
-      config =
-        config
-        |> Keyword.put(:http, [:inet6, port: port])
-        |> Keyword.put(:secret_key_base, secret_key_base)
-        |> Keyword.put(:url, host: host, port: 443, scheme: "https")
-
-      {:ok, config}
+      {:ok, Keyword.put(config, :http, [:inet6, port: port])}
     else
       {:ok, config}
     end
