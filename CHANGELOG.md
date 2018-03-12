@@ -1,3 +1,5 @@
+# version 1.8.1
+- avoid recurvice on song show
 # version 1.8
 - remove docker and distillery configuration
 - remove outdated browser check
