@@ -22,11 +22,13 @@ export default class View extends MainView {
       if (e.target && e.target.matches("#song-comment-form")) {
         this._submit(e.target);
         e.preventDefault();
+        e.stopPropagation();
       }
 
       if (e.target && e.target.matches("#song-video-form")) {
         this._submit_video(e.target);
         e.preventDefault();
+        e.stopPropagation();
       }
     }, false);
   }

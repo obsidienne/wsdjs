@@ -1,7 +1,9 @@
 #comments-container {
   margin-top: 10px;
 }
-
+#comments-container:-moz-only-whitespace {
+  display: none;
+}
 .comment {
   display: flex;
   margin-bottom: 15px;
