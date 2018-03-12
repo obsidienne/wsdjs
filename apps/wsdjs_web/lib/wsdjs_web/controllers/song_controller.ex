@@ -13,9 +13,9 @@ defmodule WsdjsWeb.SongController do
 
   action_fallback WsdjsWeb.FallbackController
 
-  def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id} = params, current_user) do
-    show(conn, params, current_user)
-  end
+  # def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id} = params, current_user) do
+  #   show(conn, params, current_user)
+  # end
 
   def show(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
