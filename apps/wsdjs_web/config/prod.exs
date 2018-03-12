@@ -30,7 +30,6 @@ else
     secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 end
 
-
 config :wsdjs_web, WsdjsWeb.Mailer,
   adapter: Bamboo.SendgridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")

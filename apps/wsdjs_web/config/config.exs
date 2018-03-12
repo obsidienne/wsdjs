@@ -24,7 +24,7 @@ config :logger, :console,
 
 config :wsdjs_web, :generators, context_app: :wsdjs
 
-config :ua_inspector, database_path: Path.join(Mix.Utils.mix_home, "ua_inspector")
+config :ua_inspector, database_path: Path.join(Mix.Utils.mix_home(), "ua_inspector")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

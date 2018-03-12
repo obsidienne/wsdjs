@@ -25,23 +25,21 @@ defmodule Wsdjs.Attachments.Provider do
       iex> type("https://www.facebook.com/thibault.ramirez.1/videos/1197018457068034/")
       "facebook"
   """
-  @spec extract(String.t) :: String.t
+  @spec extract(String.t()) :: String.t()
   def extract(url) when is_nil(url), do: nil
   def type(url) when is_nil(url), do: nil
 
   def extract(url) do
-    {re, func} = Enum.find(@provider_types,
-                          {nil, :unknown},
-                          fn {reg, _} -> String.match?(url, reg) end
-                          )
+    {re, func} =
+      Enum.find(@provider_types, {nil, :unknown}, fn {reg, _} -> String.match?(url, reg) end)
+
     Kernel.apply(Wsdjs.Attachments.Provider, func, [re, url])
   end
 
   def type(url) do
-    {_, func} = Enum.find(@provider_types,
-                          {nil, :unknown},
-                          fn {reg, _} -> String.match?(url, reg) end
-                          )
+    {_, func} =
+      Enum.find(@provider_types, {nil, :unknown}, fn {reg, _} -> String.match?(url, reg) end)
+
     Atom.to_string(func)
   end
 
