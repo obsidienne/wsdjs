@@ -1,3 +1,4 @@
+<section id="users-section" class="container">
 <table class="table">
   <caption>users</caption>
   <thead>
@@ -47,3 +48,4 @@
   <% end %>
   </tbody>
 </table>
+</section>

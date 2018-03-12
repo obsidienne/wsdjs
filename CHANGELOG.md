@@ -1,5 +1,6 @@
 # version 1.8.2
 - update changelog
+- remove admin path for users as members are a public notion
 # version 1.8.1
 - avoid recurvice on song show
 # version 1.8

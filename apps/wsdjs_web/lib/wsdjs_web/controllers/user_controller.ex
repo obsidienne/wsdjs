@@ -8,6 +8,13 @@ defmodule WsdjsWeb.UserController do
 
   action_fallback(WsdjsWeb.FallbackController)
 
+  def index(conn, _params, current_user) do
+    with :ok <- Accounts.Policy.can?(current_user, :index) do
+      users = Accounts.list_users()
+      render(conn, "index.html", users: users)
+    end
+  end
+
   def show(conn, %{"id" => user_id, "playlist" => playlist_id}, current_user) do
     with %User{} = user <- Accounts.get_user!(user_id),
          :ok <- Accounts.Policy.can?(current_user, :show, user) do

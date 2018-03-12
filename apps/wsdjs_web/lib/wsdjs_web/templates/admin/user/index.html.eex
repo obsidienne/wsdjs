@@ -1,3 +1,0 @@
-<section id="users-section" class="container">
-  <%= render "_users.html", conn: @conn, users: @users %>
-</section>

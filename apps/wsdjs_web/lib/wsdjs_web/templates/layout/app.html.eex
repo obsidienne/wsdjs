@@ -74,8 +74,8 @@
 
         <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu" %>
         <%= link "songs", to: song_path(@conn, :index), class: "glnav__menu" %>
-        <%= if @current_user && @current_user.admin do %>
-        <%= link "admin", to: admin_user_path(@conn, :index), class: "glnav__menu" %>
+        <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>
+        <%= link "members", to: user_path(@conn, :index), class: "glnav__menu" %>
         <% end %>
 
         <%= if @current_user do %>

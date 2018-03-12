@@ -15,10 +15,6 @@ defmodule WsdjsWeb.Router do
     plug(WsdjsWeb.EnsureAuthenticated)
   end
 
-  pipeline :ensure_admin do
-    plug(WsdjsWeb.EnsureAdmin, handler_fn: :admin_call)
-  end
-
   pipeline :api do
     plug(:accepts, ["json"])
     plug(WsdjsApi.VerifyHeader)
@@ -48,7 +44,7 @@ defmodule WsdjsWeb.Router do
     resources("/ranks", RankController, only: [:update, :delete])
     resources("/sessions", SessionController, only: [:delete])
 
-    resources "/users", UserController, only: [:edit, :update] do
+    resources "/users", UserController, only: [:index, :edit, :update] do
       resources("/playlists", PlaylistController, only: [:new, :create])
     end
 
@@ -68,12 +64,6 @@ defmodule WsdjsWeb.Router do
     resources("/sessions", SessionController, only: [:new, :create])
     resources("/registrations", RegistrationController, only: [:new, :create])
     get("/signin/:token", SessionController, :show, as: :signin)
-  end
-
-  scope "/admin", as: :admin, alias: :"WsdjsWeb.Admin" do
-    pipe_through([:browser, :browser_auth, :ensure_admin])
-
-    resources("/users", UserController)
   end
 
   scope "/api", as: :api, alias: :WsdjsApi do
