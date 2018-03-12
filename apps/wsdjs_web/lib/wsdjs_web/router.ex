@@ -68,15 +68,12 @@ defmodule WsdjsWeb.Router do
     resources("/sessions", SessionController, only: [:new, :create])
     resources("/registrations", RegistrationController, only: [:new, :create])
     get("/signin/:token", SessionController, :show, as: :signin)
-    get("/invited/:token", InvitedController, :show, as: :invited)
-    resources("/invitations", InvitationController, only: [:new, :create])
   end
 
   scope "/admin", as: :admin, alias: :"WsdjsWeb.Admin" do
     pipe_through([:browser, :browser_auth, :ensure_admin])
 
     resources("/users", UserController)
-    resources("/invitations", InvitationController, only: [:delete, :update])
   end
 
   scope "/api", as: :api, alias: :WsdjsApi do
