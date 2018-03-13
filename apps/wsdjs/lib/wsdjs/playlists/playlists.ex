@@ -186,6 +186,18 @@ defmodule Wsdjs.Playlists do
     Repo.all(query) |> Repo.preload(:art)
   end
 
+  def list_playlist_songs(%Playlist{id: id, type: "top 5"}, current_user) do
+    query =
+      from(
+        s in Song.scoped(current_user),
+        join: ps in PlaylistSong,
+        on: ps.playlist_id == ^id and ps.song_id == s.id,
+        order_by: ps.position
+      )
+
+    Repo.all(query) |> Repo.preload(:art)
+  end
+
   def update_playlist_songs(%Playlist{} = playlist, song_positions) do
     playlist = playlist |> Repo.preload(:playlist_songs)
 

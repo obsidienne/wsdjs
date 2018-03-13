@@ -21,7 +21,50 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     delete_toplike()
     insert_toplike()
     update_toplike()
+
+    insert_TOP5_current()
+    insert_TOP5_classic()
   end
+
+  ###############################################
+  #
+  # DJ VIP - TOP 5
+  #
+  ###############################################
+  def insert_TOP5_current() do
+    query = "
+      insert into playlists(name, type, user_id, public, inserted_at, updated_at)
+      select distinct 'TOP 5 current'
+            ,'top 5'
+            ,id
+            ,false
+            ,now() at time zone 'utc'
+            ,now() at time zone 'utc'
+      from users 
+      where id not in (select user_id from playlists where type='top 5' and name = 'TOP 5 current')
+        and (profil_djvip = true or admin = true)
+    "
+
+    Ecto.Adapters.SQL.query!(Repo, query)
+  end
+
+  def insert_TOP5_classic() do
+    query = "
+      insert into playlists(name, type, user_id, public, inserted_at, updated_at)
+      select distinct 'TOP 5 classic'
+            ,'top 5'
+            ,id
+            ,false
+            ,now() at time zone 'utc'
+            ,now() at time zone 'utc'
+      from users 
+      where id not in (select user_id from playlists where type='top 5' and name = 'TOP 5 classic')
+        and (profil_djvip = true or admin = true)
+    "
+
+    Ecto.Adapters.SQL.query!(Repo, query)
+  end
+
 
   ###############################################
   #
