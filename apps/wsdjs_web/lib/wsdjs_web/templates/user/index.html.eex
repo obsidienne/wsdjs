@@ -1,51 +1,15 @@
 <section id="users-section" class="container">
+
 <table class="table">
-  <caption>users</caption>
   <thead>
     <tr><th>Avatar</th><th>User</th><th>Profil</th><th>Options</th><th>Activities</th></tr>
   </thead>
   <tbody>
 
   <%= for user <- Enum.sort(@users, &(&1.name <= &2.name)) do %>
-    <tr>
-        <td><img src="<%= avatar_url(user.avatar, 50) %>" srcset="<%= avatar_srcset(user.avatar, 50) %>" sizes="50px" width="50px" height="50px"/></td>
-        <td>
-        <%= link name_or_email(user), to: user_path(@conn, :show, user.id) %>
-        <h6 class="small"><%= user.email %></h6>
-        <h6 class="small"><%= user.user_country %>, member since <time class="date-format" datetime="<%= Date.to_iso8601(user.inserted_at) %>"></time></h6>
-        </td>
-        <td>
-          <%= if user.deactivated do %>
-            <span class="label label-danger">Deactivated</span>
-          <% else %>
-            <%= if user.profil_djvip do %><span class="label label-default">DJ VIP</span><% end %>
-            <%= if user.profil_dj do %><span class="label label-default">DJ</span><% end %>
-          <% end %>
-        </td>
-        <td>
-          <%= if user.parameter do %>
-            <%= if user.parameter.new_song_notification do %>
-              <span class="label label-default">New song notification</span>
-            <% end %>
-            <%= if user.parameter.radioking_unmatch do %>
-              <span class="label label-danger">Radioking umatch</span>
-            <% end %>
-            <%= if user.parameter.video do %>
-              <span class="label label-danger">Add video</span>
-            <% end %> 
-          <% end %>
-        </td>
-        <td>
-        <%= if Enum.count(user.songs) > 0 do %>
-        <span class="label label-primary"><%= Enum.count(user.songs) %> songs</span>
-        <% end %>
-        <%= if Enum.count(user.comments) > 0 do %>
-        <br>
-        <span class="label label-default"><%= Enum.count(user.comments) %> comments</span>
-        <% end %>
-        </td>
-    </tr>
+    <%= render "_user.html", user: user, conn: @conn %>
   <% end %>
   </tbody>
 </table>
+
 </section>
