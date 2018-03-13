@@ -77,6 +77,9 @@
         <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>
         <%= link "members", to: user_path(@conn, :index), class: "glnav__menu" %>
         <% end %>
+        <%= if Wsdjs.Happenings.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>
+        <%= link "events", to: event_path(@conn, :index), class: "glnav__menu" %>
+        <% end %>
 
         <%= if @current_user do %>
           <%= link to: user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>

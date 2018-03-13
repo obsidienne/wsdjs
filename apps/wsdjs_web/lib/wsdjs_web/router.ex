@@ -43,6 +43,7 @@ defmodule WsdjsWeb.Router do
 
     resources("/ranks", RankController, only: [:update, :delete])
     resources("/sessions", SessionController, only: [:delete])
+    resources("/events", EventController)
 
     resources "/users", UserController, only: [:index, :edit, :update] do
       resources("/playlists", PlaylistController, only: [:new, :create])
