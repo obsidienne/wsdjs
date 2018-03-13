@@ -4,9 +4,8 @@ defmodule WsdjsWeb.CloudinaryHelper do
   Notably the html tag and url helpers.
   """
 
-  @cld "//res.cloudinary.com/don2kwaju/image/upload/"
   @cld_https "https://res.cloudinary.com/don2kwaju/image/upload/"
-  @cld_youtube "//res.cloudinary.com/don2kwaju/image/youtube/"
+  @cld_youtube "https://res.cloudinary.com/don2kwaju/image/youtube/"
   @dpr_multiple [1, 2, 3]
 
   ###############################################
@@ -67,7 +66,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
 
   def art_url_blured(%Art{cld_id: cld_id, version: version}, resolution)
       when is_integer(resolution) do
-    @cld <>
+    @cld_https <>
       "c_crop,g_custom/c_fit,f_auto,o_30,q_auto,w_#{resolution}/fl_immutable_cache/" <>
       "v#{version}/#{cld_id}.jpg"
   end
@@ -84,7 +83,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
 
   def avatar_url(%Avatar{cld_id: cld_id, version: version}, resolution)
       when is_integer(resolution) do
-    @cld <>
+    @cld_https <>
       "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <>
       "v#{version}/#{cld_id}.jpg"
   end

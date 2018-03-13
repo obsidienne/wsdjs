@@ -72,7 +72,7 @@ export default class Radio {
     this.radio.src = "about:blank";
     this.radio.load();
 
-    document.querySelector(".player__art img").dataset.src = "//res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg";
+    document.querySelector(".player__art img").dataset.src = "https://res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg";
     document.querySelector(".player__description__title").setAttribute("href", "#");
     document.querySelector(".player__description__title").innerHTML = "Radio WCS";
     document.querySelector(".player__description__sub-title").innerHTML = "by World Swing DJs";
