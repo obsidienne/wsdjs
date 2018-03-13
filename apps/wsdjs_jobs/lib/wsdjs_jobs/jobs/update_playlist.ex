@@ -65,7 +65,6 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-
   ###############################################
   #
   # suggested

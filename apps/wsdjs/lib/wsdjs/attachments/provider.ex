@@ -31,7 +31,6 @@ defmodule Wsdjs.Attachments.Provider do
   """
   @spec extract(String.t()) :: String.t()
   def extract(url) when is_nil(url), do: nil
-  def type(url) when is_nil(url), do: nil
 
   def extract(url) do
     {re, func} =
@@ -39,6 +38,8 @@ defmodule Wsdjs.Attachments.Provider do
 
     Kernel.apply(Wsdjs.Attachments.Provider, func, [re, url])
   end
+
+  def type(url) when is_nil(url), do: nil
 
   def type(url) do
     {_, func} =
