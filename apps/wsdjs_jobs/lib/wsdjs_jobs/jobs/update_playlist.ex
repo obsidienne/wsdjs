@@ -42,7 +42,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,now() at time zone 'utc'
       from users 
       where id not in (select user_id from playlists where type='top 5' and name = 'TOP 5 current')
-        and (profil_djvip = true or admin = true)
+        and (admin = true)
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)
@@ -59,7 +59,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,now() at time zone 'utc'
       from users 
       where id not in (select user_id from playlists where type='top 5' and name = 'TOP 5 classic')
-        and (profil_djvip = true or admin = true)
+        and (admin = true)
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)
