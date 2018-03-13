@@ -16,6 +16,10 @@ defmodule Wsdjs.Attachments.Provider do
       nil
       iex> type(nil)
       nil
+      iex> type("http://bullshit.com/toto")
+      unknown
+      iex> extract("http://bullshit.com/toto")
+      "http://bullshit.com/toto"
       iex> extract("http://www.youtube.com/user/Scobleizer#p/u/1/1p3vcRhsYGo")
       "1p3vcRhsYGo"
       iex> type("http://www.youtube.com/user/Scobleizer#p/u/1/1p3vcRhsYGo")
@@ -44,7 +48,7 @@ defmodule Wsdjs.Attachments.Provider do
   end
 
   @doc false
-  def unknown(_re, _url), do: "unknown"
+  def unknown(_re, url), do: nil
 
   @doc false
   def youtube(re, url) do
