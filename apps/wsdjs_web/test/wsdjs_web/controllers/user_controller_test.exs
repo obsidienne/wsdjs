@@ -25,10 +25,11 @@ defmodule WsdjsWeb.UserControllerTest do
       # can list
       Enum.each(
         [
-          assign(conn, :current_user, admin)
+          assign(conn, :current_user, admin),
+          assign(conn, :current_user, dj_vip)
         ],
         fn conn ->
-          conn = get(conn, admin_user_path(conn, :index))
+          conn = get(conn, user_path(conn, :index))
           assert html_response(conn, 200) =~ "Users - WSDJs"
           assert String.contains?(conn.resp_body, user.email)
           assert String.contains?(conn.resp_body, dj.email)
@@ -42,10 +43,10 @@ defmodule WsdjsWeb.UserControllerTest do
         [
           assign(conn, :current_user, user),
           assign(conn, :current_user, dj),
-          assign(conn, :current_user, dj_vip)
+          assign(conn, :current_user, nil)
         ],
         fn conn ->
-          conn = get(conn, admin_user_path(conn, :index))
+          conn = get(conn, user_path(conn, :index))
           assert html_response(conn, 302)
         end
       )

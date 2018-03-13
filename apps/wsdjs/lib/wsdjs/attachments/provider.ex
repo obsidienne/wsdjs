@@ -17,7 +17,7 @@ defmodule Wsdjs.Attachments.Provider do
       iex> type(nil)
       nil
       iex> type("http://bullshit.com/toto")
-      unknown
+      "unknown"
       iex> extract("http://bullshit.com/toto")
       "http://bullshit.com/toto"
       iex> extract("http://www.youtube.com/user/Scobleizer#p/u/1/1p3vcRhsYGo")
