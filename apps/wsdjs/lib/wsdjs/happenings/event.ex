@@ -7,6 +7,7 @@ defmodule Wsdjs.Happenings.Event do
   import Ecto.Changeset
   alias Wsdjs.Happenings.Event
 
+  @primary_key {:id, Wsdjs.HashID, read_after_writes: true}
   schema "events" do
     field(:name, :string)
     field(:starts_on, :date)
