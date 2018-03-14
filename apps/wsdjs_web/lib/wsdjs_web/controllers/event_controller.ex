@@ -40,6 +40,7 @@ defmodule WsdjsWeb.EventController do
       |> put_flash(:info, "#{event.name} created")
       |> redirect(to: event_path(conn, :show, event))
     end
+    
   end
 
   def edit(conn, %{"id" => id}, current_user) do
