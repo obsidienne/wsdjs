@@ -175,11 +175,13 @@ defmodule Wsdjs.Playlists do
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "playlist"}, current_user) do
+    {:ok, playlist_id} = Wsdjs.HashID.dump(id)
+
     query =
       from(
         s in Song.scoped(current_user),
         join: ps in PlaylistSong,
-        on: ps.playlist_id == ^id and ps.song_id == s.id,
+        on: ps.playlist_id == ^playlist_id and ps.song_id == s.id,
         order_by: ps.position
       )
 
@@ -187,11 +189,13 @@ defmodule Wsdjs.Playlists do
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "top 5"}, current_user) do
+    {:ok, playlist_id} = Wsdjs.HashID.dump(id)
+
     query =
       from(
         s in Song.scoped(current_user),
         join: ps in PlaylistSong,
-        on: ps.playlist_id == ^id and ps.song_id == s.id,
+        on: ps.playlist_id == ^playlist_id and ps.song_id == s.id,
         order_by: ps.position
       )
 

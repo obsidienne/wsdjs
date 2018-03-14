@@ -5,6 +5,7 @@ defmodule Wsdjs.Playlists.Playlist do
   alias Wsdjs.Playlists.Playlist
   alias Wsdjs.Accounts.User
 
+  @primary_key {:id, Wsdjs.HashID, read_after_writes: true}
   schema "playlists" do
     field(:name, :string)
     field(:type, :string, default: "playlist")
