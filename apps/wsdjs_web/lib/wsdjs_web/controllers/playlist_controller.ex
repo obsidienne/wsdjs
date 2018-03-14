@@ -4,7 +4,6 @@ defmodule WsdjsWeb.PlaylistController do
 
   alias Wsdjs.Playlists
   alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.User
 
   action_fallback(WsdjsWeb.FallbackController)
 

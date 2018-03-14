@@ -74,5 +74,8 @@
     <%= if @playlist.type == "likes and tops" do %>
     <%= render "_user_top_like.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
     <% end %>
+    <%= if @playlist.type == "top 5" do %>
+    <%= render "_user_top5.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
+    <% end %>
   <% end %>
 </section>

@@ -1,0 +1,8 @@
+{
+    "editor.minimap.enabled": true,
+    "editor.minimap.side": "left",
+    "editor.renderControlCharacters": true,
+    "window.zoomLevel": 0,
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [80, 120]
+}

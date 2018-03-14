@@ -127,7 +127,10 @@ defmodule Wsdjs.Charts.TopTest do
         |> Enum.sort()
 
       assert tops ==
-               %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+               %User{admin: true}
+               |> Top.scoped()
+               |> Repo.all()
+               |> Repo.preload(:songs)
                |> Enum.sort()
 
       assert [] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Enum.sort()
@@ -153,11 +156,17 @@ defmodule Wsdjs.Charts.TopTest do
         |> Enum.sort()
 
       assert tops ==
-               %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+               %User{admin: true}
+               |> Top.scoped()
+               |> Repo.all()
+               |> Repo.preload(:songs)
                |> Enum.sort()
 
       assert tops ==
-               %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+               %User{profil_djvip: true}
+               |> Top.scoped()
+               |> Repo.all()
+               |> Repo.preload(:songs)
                |> Enum.sort()
 
       assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Enum.sort()

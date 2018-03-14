@@ -7,11 +7,12 @@ defmodule Wsdjs.Happenings.Event do
   import Ecto.Changeset
   alias Wsdjs.Happenings.Event
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, read_after_writes: true}
   schema "events" do
     field(:name, :string)
-    belongs_to(:user, Wsdjs.Accounts.User)
+    field(:starts_on, :date)
+    field(:ends_on, :date)
+    belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)
 
     timestamps()
   end
@@ -19,7 +20,8 @@ defmodule Wsdjs.Happenings.Event do
   @doc false
   def changeset(%Event{} = event, attrs) do
     event
-    |> cast(attrs, [:name, :user_id])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :user_id, :starts_on, :ends_on])
+    |> validate_required([:name, :starts_on, :ends_on])
+    |> assoc_constraint(:user)
   end
 end

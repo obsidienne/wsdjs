@@ -3,9 +3,6 @@ defmodule WsdjsWeb.OpinionView do
 
   import WsdjsWeb.Router.Helpers
 
-  alias Wsdjs.Accounts.User
-  alias WsdjsWeb.{UserHelper, CloudinaryHelper}
-
   def count(opinions, kind) when kind in ["up", "down", "like"] do
     Enum.count(opinions, fn x -> x.kind == kind end)
   end

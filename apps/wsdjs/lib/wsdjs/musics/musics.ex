@@ -13,15 +13,16 @@ defmodule Wsdjs.Musics do
     Song
     |> where(instant_hit: true)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by([desc: :inserted_at])
+    |> order_by(desc: :inserted_at)
     |> Repo.all()
   end
 
   def songs_interval(%User{} = user) do
-    songs = user
-    |> Song.scoped()
-    |> select([s], %{max: max(s.inserted_at), min: min(s.inserted_at)})
-    |> Repo.one()
+    songs =
+      user
+      |> Song.scoped()
+      |> select([s], %{max: max(s.inserted_at), min: min(s.inserted_at)})
+      |> Repo.one()
 
     %{
       min: Timex.to_date(Timex.beginning_of_month(songs[:min])),
@@ -38,8 +39,11 @@ defmodule Wsdjs.Musics do
 
     user
     |> Song.scoped()
-    |> where([s], s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period and s.suggestion == true)
-    |> order_by([desc: :inserted_at])
+    |> where(
+      [s],
+      s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period and s.suggestion == true
+    )
+    |> order_by(desc: :inserted_at)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
   end
@@ -48,26 +52,31 @@ defmodule Wsdjs.Musics do
   Returns the songs added the 24 last hours.
   """
   def list_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
-    query = from s in Song,
-    where: s.inserted_at >= ^lower and s.inserted_at <= ^upper
+    query = from(s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper)
 
     Repo.all(query)
   end
 
   def list_suggested_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
-    query = from s in Song,
-    where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
+    query =
+      from(
+        s in Song,
+        where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
+      )
 
     Repo.all(query)
   end
 
   def last_suggested_song(%User{} = user) do
-    query = from s in Song, 
-    where: s.suggestion == true and s.user_id == ^user.id,
-    order_by: [desc: s.inserted_at],
-    preload: [:art],
-    limit: 1
-    
+    query =
+      from(
+        s in Song,
+        where: s.suggestion == true and s.user_id == ^user.id,
+        order_by: [desc: s.inserted_at],
+        preload: [:art],
+        limit: 1
+      )
+
     Repo.one(query)
   end
 
@@ -75,7 +84,7 @@ defmodule Wsdjs.Musics do
   How many suggested songs for the user
   """
   def count_suggested_songs(%User{} = user) do
-    query = from s in Song, where: s.suggestion == true and s.user_id == ^user.id
+    query = from(s in Song, where: s.suggestion == true and s.user_id == ^user.id)
     Repo.aggregate(query, :count, :id)
   end
 
@@ -86,7 +95,7 @@ defmodule Wsdjs.Musics do
     current_user
     |> Song.scoped()
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by([desc: :inserted_at])
+    |> order_by(desc: :inserted_at)
     |> Repo.paginate(paginate_params)
   end
 
@@ -96,9 +105,9 @@ defmodule Wsdjs.Musics do
   def paginate_songs_user(current_user, user_id, paginate_params \\ %{}) do
     current_user
     |> Song.scoped()
-    |> where([user_id: ^user_id])
+    |> where(user_id: ^user_id)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by([desc: :inserted_at])
+    |> order_by(desc: :inserted_at)
     |> Repo.paginate(paginate_params)
   end
 
@@ -168,8 +177,8 @@ defmodule Wsdjs.Musics do
     |> where([s], fragment("lower(?)", s.title) == ^String.downcase(title))
     |> where([s], fragment("lower(?)", s.artist) == ^String.downcase(artist))
     |> preload([:user, :art])
-    |> preload([tops: :ranks])
-    |> Repo.one
+    |> preload(tops: :ranks)
+    |> Repo.one()
   end
 
   @doc """
@@ -202,6 +211,7 @@ defmodule Wsdjs.Musics do
     |> Song.update_changeset(attrs)
     |> Repo.update()
   end
+
   def update_song(%Song{} = song, attrs, %User{admin: true}) do
     song
     |> Song.admin_changeset(attrs)
