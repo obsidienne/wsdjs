@@ -7,13 +7,11 @@ defmodule Wsdjs.Happenings.Event do
   import Ecto.Changeset
   alias Wsdjs.Happenings.Event
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "events" do
     field(:name, :string)
     field(:starts_on, :date)
     field(:ends_on, :date)
-    belongs_to(:user, Wsdjs.Accounts.User)
+    belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)
 
     timestamps()
   end

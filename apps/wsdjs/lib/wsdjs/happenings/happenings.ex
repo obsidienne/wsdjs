@@ -151,9 +151,13 @@ defmodule Wsdjs.Happenings do
 
   """
   def create_event(attrs \\ %{}) do
+    a=
     %Event{}
     |> Event.changeset(attrs)
     |> Repo.insert()
+
+    IO.inspect a
+    a
   end
 
   @doc """
