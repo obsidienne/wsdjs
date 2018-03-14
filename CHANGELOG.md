@@ -1,6 +1,9 @@
 # version 1.8.2
 - update changelog
 - remove admin path for users as members are a public notion
+- events CRUD
+- use hashID for events and playlists
+- https everywhere
 # version 1.8.1
 - avoid recurvice on song show
 # version 1.8
