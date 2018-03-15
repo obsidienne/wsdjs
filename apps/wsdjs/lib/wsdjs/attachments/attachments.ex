@@ -38,6 +38,7 @@ defmodule Wsdjs.Attachments do
     |> where(song_id: ^id)
     |> order_by(desc: :inserted_at)
     |> Repo.all()
+    |> Repo.preload(:event)
   end
 
   @doc """

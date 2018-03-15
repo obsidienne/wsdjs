@@ -76,10 +76,8 @@
           <%= error_tag f, :url %>
           <%= text_input f, :title, class: "form-control", placeholder: "Pro's names", required: true, maxlength: 255 %>
           <%= error_tag f, :title %>
-          <%= text_input f, :event, class: "form-control", placeholder: "Event", required: true, maxlength: 255 %>
-          <%= error_tag f, :event %>
-          <%= date_select f, :published_at, class: "form-control" %>
-          <%= error_tag f, :published_at %>
+          <%= select f, :event_id, list_events(), class: "form-control" %>
+          <%= error_tag f, :event_id %>
         </div>
 
         <%= submit "Add video", class: "btn btn-primary" %>
