@@ -1,0 +1,149 @@
+/*
+-----------------------------------------------
+Typesetting for World Swing Deejays
+Author:   Claudio Bernardes
+Date:     20 Apr 2017
+http://modularscale.com/scale/?px1=18&px2=190&ra1=1.618
+1em @ 1:1.2 (minor third)
+http://alistapart.com/articles/more-meaningful-typography/
+-----------------------------------------------
+*/
+
+/*
+  http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
+*/
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: 1.5;
+}
+
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: inherit;
+  font-weight: 300;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.488rem;
+  margin-bottom: calc(3 * var(--line-height-base) -  var(--line-height-ratio) * 2.488rem)
+}
+h2 { 
+  font-size: 2.074rem;
+}
+h3 { 
+  font-size: 1.728rem;
+  margin-bottom: calc(2 * var(--line-height-base) - var(--line-height-ratio) * 1.728rem)
+}
+h4 { 
+  font-size: 1.44rem; 
+  margin-bottom: calc(2 * var(--line-height-base) - var(--line-height-ratio) * 1.44rem)
+}
+h5 { 
+  font-size: 1.2rem; 
+  margin-bottom: calc(2 * var(--line-height-base) - var(--line-height-ratio) * 1.2rem)
+}
+h6 { 
+  font-size: 1rem; 
+  margin-bottom: calc(1 * var(--line-height-base) -  var(--line-height-ratio) * 1rem)
+}
+
+
+.h1 { 
+  font-size: 2.488em; 
+}
+.h2 { 
+  font-size: 2.074em;
+}
+.h3 { 
+  font-size: 1.728em;
+}
+.h4 { 
+  font-size: 1.44em; 
+}
+.h5 { 
+  font-size: 1.2em; 
+}
+.h6 { 
+  font-size: 1em; 
+}
+
+small, .small {
+  font-weight: 300;
+  line-height: 1;
+  color: var(--inactive-color);
+  font-size: 60%;
+}
+
+
+h1 small, .h1 small,
+h2 small, .h2 small,
+h3 small, .h3 small,
+h1 .small, .h1 .small,
+h2 .small, .h2 .small,
+h3 .small, .h3 .small {
+  font-size: 65%;
+}
+
+.page-header {
+  font-size: 2.0736rem;
+  margin: 40px 0 20px;
+}
+
+p { 
+  margin: 0 0 10px; 
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  margin-top: calc(var(--baseline) * 0.75rem);
+}
+dd {
+  margin-bottom: .5rem;
+  margin-left: 0;
+}
+dt {
+  font-weight: bold;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: block;
+}
+.text-center {
+  text-align: center;
+}
+.text-muted {
+  color: var(--inactive-color);
+}
+.text-danger {
+  color: #dc3545 !important;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: vertical;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+time {
+  text-transform: capitalize;
+  cursor: help;
+}
