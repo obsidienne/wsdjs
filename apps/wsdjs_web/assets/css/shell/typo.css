@@ -24,55 +24,43 @@ body {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: inherit;
-  font-weight: 300;
   color: inherit;
   padding: 0;
   margin: 0;
+  font-weight: 300; 
 }
 
-h1 {
-  font-size: 2.488rem;
-  margin-bottom: calc(3 * var(--line-height-base) -  var(--line-height-ratio) * 2.488rem)
+h1, .h1 {
+  font-size: 2.375rem;
+  line-height: 3rem;
+  padding-top: 1.5rem;
+  margin-bottom: 3rem;
 }
-h2 { 
-  font-size: 2.074rem;
+h2, .h2 {
+  font-size: 1.75rem;
+  line-height: 3rem;
+  padding-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
-h3 { 
-  font-size: 1.728rem;
-  margin-bottom: calc(2 * var(--line-height-base) - var(--line-height-ratio) * 1.728rem)
+h3, .h3 {
+  font-size: 1.3125rem;
+  line-height: 1.5rem;
+  padding-top: 1.5rem;
+  margin-bottom: 0rem;
 }
-h4 { 
-  font-size: 1.44rem; 
-  margin-bottom: calc(2 * var(--line-height-base) - var(--line-height-ratio) * 1.44rem)
+h4, .h4 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-top: 1.5rem;
+  margin-bottom: 0rem;
 }
-h5 { 
-  font-size: 1.2rem; 
-  margin-bottom: calc(2 * var(--line-height-base) - var(--line-height-ratio) * 1.2rem)
-}
-h6 { 
-  font-size: 1rem; 
-  margin-bottom: calc(1 * var(--line-height-base) -  var(--line-height-ratio) * 1rem)
+h5, .h5 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-top: 1.5rem;
+  margin-bottom: 0rem;
 }
 
-
-.h1 { 
-  font-size: 2.488em; 
-}
-.h2 { 
-  font-size: 2.074em;
-}
-.h3 { 
-  font-size: 1.728em;
-}
-.h4 { 
-  font-size: 1.44em; 
-}
-.h5 { 
-  font-size: 1.2em; 
-}
-.h6 { 
-  font-size: 1em; 
-}
 
 small, .small {
   font-weight: 300;
@@ -92,8 +80,7 @@ h3 .small, .h3 .small {
 }
 
 .page-header {
-  font-size: 2.0736rem;
-  margin: 40px 0 20px;
+  
 }
 
 p { 

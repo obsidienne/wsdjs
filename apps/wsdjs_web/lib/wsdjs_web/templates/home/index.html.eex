@@ -29,7 +29,7 @@
 <section class="container home-container">
 <%= if Enum.count(@songs) > 0 do %>
   <section>
-    <h4 class="page-header">Deejays' pick</h4>
+    <h2 class="page-header">Deejays' pick</h2>
     <ul class="home-page__instant__hit">
       <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
@@ -38,7 +38,7 @@
 
 <%= if @top && Enum.count(@top.ranks) > 0 do %>
   <section>
-    <h4 class="page-header"><time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> Top</h4>
+    <h2 class="page-header"><time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> Top</h2>
     <ul class="home-page__top__song">
       <%= for rank <- @top.ranks do %>
         <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>

@@ -173,23 +173,23 @@
   margin: 0;
   display: flex;
   height: 100%;
+  max-height: 96px;
 }
 .song-minicard__heading {
   padding: 0;
-  width: calc(4 * var(--line-height-base));
-  height: calc(4 * var(--line-height-base));
+  width: 96px;
+  height: 96px;
   border: 0;
-  flex: 0 0 calc(4 * var(--line-height-base));
+  flex: 0 0 96px;
   position: relative;
   overflow: hidden;
 }
 .song-minicard__body {
   padding-top: 0;
   padding-bottom: 0;
-  padding-left: 10px;
   display: flex;
   flex-direction: column;
-  margin: 5px 0 0 0;
+  margin-left: 5px;
   min-width: 0;
   flex: 1 1 auto;
   overflow: hidden;

@@ -13,10 +13,10 @@
   justify-content: space-between;
 }
 .home-page__top__song li {
-  margin-bottom: 15px;
+  margin-bottom: 24px;
 }
 .home-page__instant__hit li {
-  margin-bottom: 15px;  
+  margin-bottom: 24px;  
 }
 
 .home-page__top__song li:hover, .home-page__instant__hit li:hover {
