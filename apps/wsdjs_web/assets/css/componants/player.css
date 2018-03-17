@@ -7,6 +7,7 @@
   right: 0;
   margin-right: auto;
   margin-left: auto;
+  z-index: 3000;
 }
 .current-played {
   display: flex;

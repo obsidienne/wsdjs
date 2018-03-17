@@ -26,13 +26,6 @@ html {
   box-sizing: inherit;
 }
 
-body:before {
-  content: "";
-
-  position: absolute;
-  width: 100%;
-  top: 0;  border-top: 1px solid var(--accent-color);
-}
 
 body {
   background-color: var(--bg-color);
