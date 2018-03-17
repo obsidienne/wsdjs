@@ -73,6 +73,12 @@ small, .small {
 h2.page-header {
   padding-top: 3rem;
 }
+.page-header-sticky {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-color);
+  z-index: 1000;
+}
 
 h1 small, .h1 small,
 h2 small, .h2 small,
