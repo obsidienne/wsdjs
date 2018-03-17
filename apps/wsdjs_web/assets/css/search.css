@@ -4,7 +4,7 @@
 .actions {
   display: flex;
   align-items: center;
-  height: calc(2 * var(--line-height-base));
+  height: 48px;
 }
 .search-container {
   z-index: 49;

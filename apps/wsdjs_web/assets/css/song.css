@@ -217,6 +217,7 @@
   display: flex;
   flex-direction: column;
   height: 100%; /* safari bug */
+  width: 216px;
 }
 .song-card__header {
   padding: 0;
@@ -248,7 +249,7 @@
 }
 
 .song-card__body {
-  padding: 15px;
+  padding: 0 12px;
 }
 .song-card__body a:hover {
   text-decoration: underline;
@@ -259,10 +260,12 @@
   justify-content: space-between;
   align-items: center;
   background-color: inherit;
-  padding: 0 15px 0 5px;
+  padding: 0 12px;
   margin-top: auto;
 }
-
+.song-card-footer a {
+  height: 24px;
+}
 /****************************
   square card
 ****************************/
