@@ -43,7 +43,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 216px);
   grid-row-gap: 24px;
-  grid-column-gap: 15px; /* need a fix */
+  grid-column-gap: 12px; /* need a fix */
+  
 }
 
 /********************/

@@ -11,6 +11,7 @@ http://alistapart.com/articles/more-meaningful-typography/
 
 /*
   http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
+  https://www.gridlover.net/try
 */
 
 body {
@@ -69,6 +70,9 @@ small, .small {
   font-size: 60%;
 }
 
+h2.page-header {
+  padding-top: 3rem;
+}
 
 h1 small, .h1 small,
 h2 small, .h2 small,
