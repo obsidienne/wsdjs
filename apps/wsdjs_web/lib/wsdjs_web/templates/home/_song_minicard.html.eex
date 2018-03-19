@@ -30,9 +30,9 @@
         <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
-        <h5 class="text-muted"><%= @song.title %></h5>
-        <h6 class="text-muted"><%= @song.artist %></h6>
-        <h6 class="text-muted"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></h6>
+        <div class="text-muted"><%= @song.title %></div>
+        <div class="text-muted"><%= @song.artist %></div>
+        <div class="text-muted"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></div>
 
         <footer class="song-minicard__footer">
           <span class="label label-default"><%= @song.genre %></span>

@@ -67,7 +67,7 @@ small, .small {
   font-weight: 300;
   line-height: 1;
   color: var(--inactive-color);
-  font-size: 60%;
+  font-size: 75%;
 }
 
 h2.page-header {
@@ -78,15 +78,6 @@ h2.page-header {
   top: 0;
   background-color: var(--bg-color);
   z-index: 1000;
-}
-
-h1 small, .h1 small,
-h2 small, .h2 small,
-h3 small, .h3 small,
-h1 .small, .h1 .small,
-h2 .small, .h2 .small,
-h3 .small, .h3 .small {
-  font-size: 65%;
 }
 
 p { 
