@@ -55,9 +55,6 @@
 .song-page__actions {
   margin-top: 15px;
 }
-.song-suggestor {
-  text-decoration: underline;
-}
 .song-suggestor:hover, .top-song__title:hover {
   text-decoration: underline;
   color: var(--accent-color);
@@ -255,13 +252,34 @@
   text-decoration: underline;
   color: var(--accent-color);
 }
+.song-title {
+  padding-top: 12px;
+  font-weight: bold;
+  color: var(--inactive-color);
+}
+.song-artist {
+  font-weight: lighter;
+  margin-bottom: 12px;
+  color: var(--inactive-color);
+}
+
+.song-suggestor {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+}
+.song-suggested-full {
+  font-size: 14px;
+  line-height: 24px;
+}
 .song-card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: inherit;
-  padding: 0 12px;
-  margin-top: auto;
+  padding: 18px 12px 0;
+  margin-bottom: 6px;
 }
 .song-card-footer a {
   height: 24px;
@@ -292,12 +310,6 @@
   text-align: center;
   color: white;
   padding: 5px;
-}
-.song-card__body__suggested-by {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  white-space: nowrap;
 }
 .song-top__title, .song-top__artist {
   width: 100%;

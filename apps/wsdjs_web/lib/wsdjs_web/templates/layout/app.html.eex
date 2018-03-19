@@ -31,9 +31,6 @@
     <%= if user = @conn.assigns[:current_user] do %>
     <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", user.id) %>
     <% end %>
-    <%= if Mix.env() == :dev do %>
-    <link rel="stylesheet" href="//basehold.it/24/ff0000">
-    <% end %>
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
   </head>
 

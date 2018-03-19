@@ -48,7 +48,7 @@
       <div class="img-embed">
         <img src="<%= art_url(nil, 200) %>" data-src="<%= art_url(@song.art, 200) %>" data-srcset="<%= art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
       </div>
-      <h6 class="song-card__tags">
+      <div class="song-card__tags">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
@@ -59,17 +59,17 @@
           <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
         </svg>
         <% end %>
-      </h6>
+      </div>
     </a>
 
     <div class="song-card__body">
-      <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "h4 text-ellipsis" %>
-      <h5 class="text-ellipsis"><%= @song.artist %></h5>
+      <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "song-title text-ellipsis" %>
+      <div class="song-artist text-ellipsis"><%= @song.artist %></div>
 
-      <h5 class="song-card__body__suggested-by text-muted">
+      <div class="text-muted text-ellipsis song-suggested-full">
         <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>,
         <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b, %k:%M", :strftime) %>"><%= utc_to_local(@song.inserted_at) %></time>
-      </h5>
+      </div>
       
     </div>
 
