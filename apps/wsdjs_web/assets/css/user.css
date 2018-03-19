@@ -39,12 +39,6 @@
   width: 100%;
   padding: 5px;
 }
-.user-page__profile-details > h4 {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-top: 0;
-}
 .user-page__profile__section:last-child {
     border-bottom-width: 0;
 }

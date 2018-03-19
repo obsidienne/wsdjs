@@ -71,12 +71,6 @@
   display: flex;
   margin-bottom: 5px;
 }
-.unconnected h4 {
-  margin-top: 0;
-}
-.unconnected h5 {
-  margin-bottom: 15px;
-}
 .unconnected .social-links {
   margin-top: 25px;
 }

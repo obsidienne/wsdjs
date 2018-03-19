@@ -7,7 +7,7 @@
         <img src="<%= art_url(nil, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
-        <h4 class="text-muted">hidden track</h4>
+        <span class="text-muted text-ellipsis">hidden track</span>
 
         <footer class="song-minicard__footer">
           <span class="label label-default"><%= @song.genre %></span>

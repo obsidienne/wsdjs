@@ -126,9 +126,6 @@
 .player__toggle[hidden] {
   display: none;
 }
-.player__toggle h4 {
-  margin-left: 15px;
-}
 
 @keyframes spin {
   0% {

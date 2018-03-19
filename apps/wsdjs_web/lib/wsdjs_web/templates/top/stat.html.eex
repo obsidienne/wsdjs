@@ -26,7 +26,7 @@
       <%= if user.profil_djvip do %>
         <li class="song-card card" >
           <article>
-          <h4><%= user.name %></h4>
+          <span><%= user.name %></span>
           <div class="text-overflow"><%= get_song_by(@top, user, 1) %></div>
           <div class="text-overflow"><%= get_song_by(@top, user, 2) %></div>
           <div class="text-overflow"><%= get_song_by(@top, user, 3) %></div>
