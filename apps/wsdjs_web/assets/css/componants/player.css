@@ -1,5 +1,5 @@
 .player {
-  min-height: 75px;
+  height: 72px;
   background: hsl(0, 0%, 93%);
   width: 100%;
   position: fixed;
@@ -17,10 +17,10 @@
   display: none;
 }
 .player__art, .player__toggle__art {
-  width: 75px;
-  height: 75px;
+  width: 72px;
+  height: 72px;
   box-shadow: 3px 0 3px 0 hsla(0, 0%, 0%, 0.4);
-  flex: 0 0 75px;
+  flex: 0 0 72px;
 }
 .player__description {
   overflow: hidden;
@@ -143,8 +143,8 @@
 @media (min-width: 768px) {
   .player {
     width: 384px;
-    bottom: 15px;
-    right: 15px;
+    bottom: 12px;
+    right: 12px;
   }
   .player__youtube {
     height: 216px;

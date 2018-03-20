@@ -1,14 +1,14 @@
-<section class="song-hero">
+<section>
   <div class="song-page container">
     <div class="song-page__art">
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
     <div class="song-page__details">
-      <h5 class="song-page__details__title"><%= @song.title %></h5>
-      <h6 class="song-page__details__artist"><span class="text-muted">by</span> <%= @song.artist %></h6>
-      <h6 class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "song-suggestor text-muted" %>
+      <span class="h2"><%= @song.title %></span>
+      <span class="h3"><span class="text-muted">by</span> <%= @song.artist %></span>
+      <span class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "song-suggestor text-muted" %>
         <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>"></time>
-      </h6>
+      </span>
 
       <div class="song-page__tags">
         <span class="label label-default"><%= @song.genre %></span>
@@ -31,7 +31,7 @@
       </div>
       
       <%= if @song.url do %>
-        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
+        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary song-page__play" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
       <% end %>
     </div>
   </div>

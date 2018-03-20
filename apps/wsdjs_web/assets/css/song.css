@@ -4,62 +4,31 @@
 .song-page {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
-  margin-top: 15px;
-  padding-bottom: 45px;
-}
-.song-hero {
-  color: inherit;
-  position: relative;
-  min-height: 40vh;
-  background-size: cover, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: scroll, fixed;
-  display: flex;
-  flex-direction: column;
-  background-position: 0% 50%;
-  justify-content: space-between;
-  padding: 5px 0 15px 0;
+  margin-top: 24px;
+  padding-bottom: 48px;
 }
 .song-page__art {
-  position: relative;
-  flex: 1 1 auto;
-  min-width: 0;
-  box-shadow:  var(--shadow-inactive);
-  overflow: hidden;
-  min-width: 300px;
-  min-height: 300px;
-}
-.song-page__art img {
-  width: 100%;
-  height: auto;
+  flex: 0 0 312px;
+  box-shadow: var(--shadow-inactive);
+  width: 312px;
+  height: 312px;
 }
 .song-page__details {
   display: flex;
   flex-direction: column;
 }
-.song-page__details .btn {
-  margin-top: 15px;
-}
-.song-page__details__artist {
-  margin-top: 0;
-}
-.song-page__tags {
-  margin-bottom: 10px;
-}
-.song-page__tags .label {
-  margin-bottom: 3px;
-}
-
-.song-page__actions {
-  margin-top: 15px;
+.song-page__play {
+  margin-top: auto;
+  margin-bottom: 0;
 }
 .song-suggestor:hover, .top-song__title:hover {
   text-decoration: underline;
   color: var(--accent-color);
 }
-
+.song-page__tags {
+  padding-top: 1rem;
+}
 .song-page__sections {
   display: flex;
   flex-direction: column;
@@ -70,6 +39,14 @@
 .song-page__video {
   display: flex;
   margin-bottom: 5px;
+}
+.song-page__tags.song-opinions {
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+}
+.song-page__tags.song-opinions button:first-child {
+  padding-left: 0;
 }
 .unconnected .social-links {
   margin-top: 25px;
@@ -126,10 +103,7 @@
     flex-direction: row;
   }
   .song-page__details {
-    padding: 15px;
-  }
-  .song-page__art {
-    flex: 0 0 300px;
+    padding-left: 16px;
   }
   .song-page__sections {
     flex-direction: row;
