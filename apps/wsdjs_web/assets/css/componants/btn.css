@@ -7,10 +7,12 @@
   cursor: pointer;
   background-image: none;
   white-space: nowrap;
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 4px;
   user-select: none;
-  margin: 6px 0;
+  margin: 4px 0;
+  border: 0;
+  line-height: 1.5;
 }
 .btn:focus,
 .btn:active:focus,
@@ -46,25 +48,21 @@ a.btn.disabled {
 .btn-primary {
   color: hsl(0, 0%, 100%);
   background-color: var(--primary-color);
-  border-color: hsl(208, 56%, 41%);
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 36%);
-  border-color: hsl(207, 56%, 16%);
 }
 .btn-primary:hover {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 36%);
-  border-color: hsl(208, 57%, 29%);
   transform: var(--accent-action);
 }
 .btn-primary:active,
 .btn-primary.active {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 36%);
-  border-color: hsl(208, 57%, 29%);
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,
@@ -74,7 +72,6 @@ a.btn.disabled {
 .btn-primary.active.focus {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 29%);
-  border-color: hsl(207, 56%, 16%);
   transform: var(--accent-action);
 }
 .btn-primary:active,
@@ -88,14 +85,14 @@ a.btn.disabled {
 .btn-primary.disabled.focus,
 .btn-primary[disabled].focus {
   background-color: hsl(208, 56%, 46%);
-  border-color: hsl(208, 56%, 41%);
 }
 
 .btn-link {
   color: hsl(208, 56%, 46%);
-  font-weight: normal;
   border-radius: 0;
   cursor: pointer;
+  border: 0;
+  padding: 4px 0;
 }
 .btn-link,
 .btn-link:active,
@@ -130,25 +127,21 @@ a.btn.disabled {
 .btn-danger {
   color: hsl(0, 0%, 100%);
   background-color: hsl(2, 64%, 58%);
-  border-color: hsl(2, 64%, 53%);
 }
 .btn-danger:focus,
 .btn-danger.focus {
   color: hsl(0, 0%, 100%);
   background-color: hsl(2, 64%, 48%);
-  border-color: hsl(2, 65%, 28%);
 }
 .btn-danger:hover {
   color: hsl(0, 0%, 100%);
   background-color: hsl(2, 64%, 48%);
-  border-color: hsl(2, 65%, 41%);
   transform: var(--accent-action);
 }
 .btn-danger:active,
 .btn-danger.active {
   color: hsl(0, 0%, 100%);
   background-color: hsl(2, 64%, 48%);
-  border-color: hsl(2, 65%, 41%);
 }
 .btn-danger:active:hover,
 .btn-danger.active:hover,
@@ -158,7 +151,6 @@ a.btn.disabled {
 .btn-danger.active.focus {
   color: hsl(0, 0%, 100%);
   background-color: hsl(2, 65%, 41%);
-  border-color: hsl(2, 65%, 28%);
 }
 .btn-danger:active,
 .btn-danger.active {
@@ -167,5 +159,4 @@ a.btn.disabled {
 .btn-danger[disabled]:hover,
 .btn-danger[disabled]:focus {
   background-color: hsl(2, 64%, 58%);
-  border-color: hsl(2, 64%, 53%);
 }

@@ -21,6 +21,7 @@
 .song-page__play {
   margin-top: auto;
   margin-bottom: 0;
+  max-width: 16ch;
 }
 .song-suggestor:hover, .top-song__title:hover {
   text-decoration: underline;

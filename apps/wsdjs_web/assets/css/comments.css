@@ -1,12 +1,12 @@
 #comments-container {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 #comments-container:-moz-only-whitespace {
   display: none;
 }
 .comment {
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .comment__avatar {
@@ -22,7 +22,7 @@
 
 .comment__header {
   background: hsl(0, 0%, 93%);
-  padding: 10px 12px;
+  padding: 8px 8px;
   display: flex;
   align-items: center;
 }
@@ -52,8 +52,8 @@
   }
 
   .comment__avatar__img {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     border: 3px solid #FFF;
     border-radius: 50%;
     box-shadow: var(--shadow-inactive);
