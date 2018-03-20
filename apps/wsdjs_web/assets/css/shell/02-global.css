@@ -16,30 +16,6 @@
   --line-height-base: calc(1rem * var(--line-height-ratio));
 }
 
-body {
-	position: relative;
-}
-
-body:after {
-	position: absolute;
-	width: auto;
-	height: auto;
-	z-index: 9999;
-	content: '';
-	display: block;
-	pointer-events: none;
-	top: 0;
-	right: 0;
-	bottom: 0;
-  left: 0;
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAABlBMVEX/////AADrWueTAAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVAiZY2AgCTwAAAEQAOFwuZEGAAAAAElFTkSuQmCC) repeat top left;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAIAQMAAADk/cxGAAAABlBMVEX/////AADrWueTAAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAMSURBVAiZY2BAAQ8AAPAA4ZQsu0UAAAAASUVORK5CYII=) repeat top left;
-}
-
-body:active:after {
-	display: none;
-}
-
 html {
   box-sizing: border-box;
   line-height: var(--line-height-base);
