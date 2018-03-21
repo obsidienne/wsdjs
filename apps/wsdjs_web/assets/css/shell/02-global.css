@@ -35,7 +35,9 @@ body {
 a, a:hover {
   text-decoration: none;
 }
-
+svg {
+  display: block;
+}
 img {
   vertical-align: top;
 }

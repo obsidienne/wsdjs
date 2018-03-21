@@ -196,8 +196,7 @@
   position: absolute;
   bottom: 0;
   display: flex;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 8px;
   width: 100%;
 }
 .song-card__tags svg {

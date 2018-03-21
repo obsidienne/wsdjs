@@ -92,7 +92,7 @@ a.btn.disabled {
   border-radius: 0;
   cursor: pointer;
   border: 0;
-  padding: 4px 0;
+  padding: 0;
 }
 .btn-link,
 .btn-link:active,

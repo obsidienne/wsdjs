@@ -33,7 +33,6 @@
 	color: hsl(0, 0%, 35%);
 }
 .comment__delete {
-  display: inline-block;
   margin-left: auto;
 }
 
