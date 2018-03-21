@@ -123,6 +123,9 @@
   margin-bottom: 16px;
   flex-direction: column;
 }
+.overview-video:empty {
+  display: none;  
+}
 .overview-video:-moz-only-whitespace {
   display: none;
 }
