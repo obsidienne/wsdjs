@@ -21,6 +21,7 @@ main > header h2 {
   position: sticky;
   top: 0;
   z-index: 2000;
+  padding-bottom: 8px;
 }
 .glnav:before {
   content: "";
