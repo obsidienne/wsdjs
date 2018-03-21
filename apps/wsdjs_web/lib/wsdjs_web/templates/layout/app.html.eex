@@ -33,7 +33,7 @@
     <% end %>
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
 
-    <%= if Mix.env() == :dev do %>
+    <%= if Mix.env() == :devd do %>
     <style type="text/css">
       body { position: relative; }
       body:after {
