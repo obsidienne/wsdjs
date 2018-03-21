@@ -110,7 +110,7 @@
     flex-direction: row;
   }
   .song-page__sections__content {
-    margin-right: 15px;
+    margin-right: 16px;
   }
   .song-page__sections__content {
     flex: 1 0 60ch;
@@ -120,7 +120,7 @@
 .overview-video {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   flex-direction: column;
 }
 .overview-video:-moz-only-whitespace {
