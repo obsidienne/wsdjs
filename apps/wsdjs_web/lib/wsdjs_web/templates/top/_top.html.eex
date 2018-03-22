@@ -28,7 +28,7 @@
         </div>
 
         <%= if !is_nil(@current_user) && (@current_user.profil_djvip || @current_user.admin) do %>
-        <table class="tops__top__details">
+        <table class="table">
           <thead>
             <tr><th>Songs</th><th>Djs</th><th>Genres</th></tr>
           </thead>

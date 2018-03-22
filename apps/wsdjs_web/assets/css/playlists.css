@@ -1,5 +1,6 @@
 .playlist-name {
   margin-left: auto;
+  display: flex;
 }
 .table_song-art {
   width: 0;

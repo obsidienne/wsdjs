@@ -5,6 +5,8 @@
 }
 .table > thead {
   position: sticky;
+}
+thead.sticked {
   top: 64px;
   background-color: var(--bg-color)
 }
