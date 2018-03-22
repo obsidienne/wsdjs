@@ -27,8 +27,8 @@
 
   <%= link to: song_path(@conn, :show, @rank.song), class: "text-muted song-top__body" do %>
     <span class="h3"><%= @rank.position %></span>
-    <span class="h5 song-top__title"><%= @rank.song.title %></span>
-    <span class="h6 song-top__artist small">by <%= @rank.song.artist %></span>    
+    <span class="song-top__title"><%= @rank.song.title %></span>
+    <span class="song-top__artist small">by <%= @rank.song.artist %></span>    
     <footer class="small">
       <span class="label label-default small"><%= @rank.song.genre %></span>
       <%= if @rank.song.bpm do %>

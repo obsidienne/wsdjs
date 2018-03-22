@@ -68,7 +68,7 @@ defmodule WsdjsWeb.TopView do
 
     if vote do
       song = Enum.find(top.songs, fn song -> song.id == vote.song_id end)
-      {:safe, "#{song.artist} <span class='h6 small'>#{song.title}</span>"}
+      {:safe, "#{song.artist} <span class='small'>#{song.title}</span>"}
     else
       ""
     end

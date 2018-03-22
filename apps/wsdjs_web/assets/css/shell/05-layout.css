@@ -1,8 +1,8 @@
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 16px;
+  padding-right: 16px;
   width: 100%;
   max-width: 720px;
 }
@@ -18,7 +18,7 @@
 .song-edit,
 .song-new {
   display: flex;
-  margin-top: 15px;
+  margin-top: 16px;
   flex-direction: column;
 }
 #avatar_div, #art_div {
@@ -29,7 +29,7 @@
 #avatar_div .form-group,
 #art_div .form-group {
   margin-bottom: 0;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 .song-new form,
@@ -94,7 +94,7 @@
 @media (min-width: 768px) {
   .user-page {
     display: grid;
-    grid-gap: 15px;
+    grid-gap: 16px;
     grid-template-columns: 300px 1fr;
   }
   

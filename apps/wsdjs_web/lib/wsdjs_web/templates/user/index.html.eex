@@ -8,7 +8,7 @@
 
 <table class="table">
   <thead>
-    <tr><th>Avatar</th><th>User</th><th>Profil</th><th>Options</th><th>Activities</th></tr>
+    <tr><th>Avatar</th><th>User</th><th>Activities</th><th>Options</th></tr>
   </thead>
   <tbody>
   <%= for user <- Enum.sort(@users, &(&1.name <= &2.name)) do %>

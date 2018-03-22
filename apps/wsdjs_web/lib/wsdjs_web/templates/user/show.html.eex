@@ -11,7 +11,7 @@
             <span class="text-muted"><%= @user.djname %></span>
           <% end %>
           <%= if @user.user_country do %>
-          <div>
+          <div class="user-place">
             <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
               <path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>
               <path d='M0 0h24v24H0z' fill='none'/>
@@ -19,7 +19,7 @@
             <%= @user.user_country %>
           </div>
           <% end %>
-          <div class="user-page__profils">
+          <div>
             <%= if @user.verified_profil do %><span class="label label-primary">Verified</span><% end %>
             <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
             <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
@@ -43,13 +43,13 @@
     <table class="user-page__stats user-page__profile__section">
       <tbody>
         <tr>
-          <th class="h6">
+          <th>
             <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
               <path d='M0 0h24v24H0z' fill='none'/>
               <path d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/>
             </svg>
           </th>
-          <td class="h6">SONG SUGGESTED</td>
+          <td>SONG SUGGESTED</td>
           <td class="number"><%= @suggested_songs %></td>
         </tr>
       </tbody>

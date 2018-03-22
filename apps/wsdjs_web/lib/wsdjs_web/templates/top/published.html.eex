@@ -77,14 +77,14 @@
       </div>
       <div class="top-song-body">
         <div class="top-song-body-info">
-          <%= link to: song_path(@conn, :show, rank.song), class: "h6" do %>
-            <h5><%= rank.song.title %></h5>
+          <%= link to: song_path(@conn, :show, rank.song) do %>
+            <span><%= rank.song.title %></span>
           <% end %>
-          <h6><%= rank.song.artist %></h6>
-          <h6 class="text-muted">
+          <span><%= rank.song.artist %></span>
+          <span class="text-muted">
             <%= gettext "by" %> <%= proposed_by_link(@conn, rank.song) %>,
             <time class="timeago" datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>"></time>
-          </h6>
+          </span>
         </div>
 
         <aside>

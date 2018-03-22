@@ -44,7 +44,7 @@
             <%= link to: song_path(@conn, :show, rank.song), class: "h5 top-song__title" do %>
               <%= rank.song.title %>
             <% end %>
-            <h6><%= rank.song.artist %></h6>
+            <span><%= rank.song.artist %></span>
           </div>
           <aside>
             <span class="label label-default"><%= rank.song.genre %></span>

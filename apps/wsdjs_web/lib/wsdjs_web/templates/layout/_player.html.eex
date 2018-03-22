@@ -5,10 +5,10 @@
     </div>
 
     <div class="player__description">
-      <h6 class="text-ellipsis">
+      <span class="text-ellipsis">
         <a href="#" class="player__description__title">Radio WCS</a>
-      </h6>
-      <h6 class="text-ellipsis player__description__sub-title">by World Swing DJs</h6>
+      </span>
+      <span class="text-ellipsis player__description__sub-title">by World Swing DJs</span>
     </div>
 
     <div class="player__play">

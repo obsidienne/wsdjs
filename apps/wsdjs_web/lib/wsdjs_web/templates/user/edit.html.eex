@@ -107,7 +107,7 @@
 
     <table class="table">
       <tr>
-        <td>Email contact visible <h6 class="small">Your user page contains a button to send you an email. Your email is public.</h6></td>
+        <td>Email contact visible <span>Your user page contains a button to send you an email. Your email is public.</span></td>
         <td>
           <div class="ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -118,7 +118,7 @@
         </td>
       </tr>
       <tr>
-        <td>likes and tops are public<h6 class="small">Your likes and tops are visible to anyone in your user profil page.</h6></td>
+        <td>likes and tops are public<span>Your likes and tops are visible to anyone in your user profil page.</span></td>
         <td>
           <div class="ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -130,7 +130,7 @@
       </tr>
       <%= if Wsdjs.Accounts.Policy.can?(@user, :new_song_notification) == :ok do %>
       <tr>
-        <td>New song notification <h6 class="small">Receive an email everyday if new songs have been suggeted.</h6></td>
+        <td>New song notification <span>Receive an email everyday if new songs have been suggeted.</span></td>
         <td>
           <div class="ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
