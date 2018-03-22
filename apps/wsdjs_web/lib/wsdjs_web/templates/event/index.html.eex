@@ -1,5 +1,14 @@
+<header>
+  <div class="container">
+    <h1><%= gettext "Events" %> </h1>
+  </div>
+</header>
+
+<div class="container actions">
+  <%= link "New event", to: event_path(@conn, :new), class: "btn btn-primary" %>
+</div>
+
 <section class="container">
-<h2>Listing Events</h2>
 
 <table class="table">
   <thead>
@@ -27,5 +36,4 @@
   </tbody>
 </table>
 
-<span><%= link "New event", to: event_path(@conn, :new) %></span>
 </section>

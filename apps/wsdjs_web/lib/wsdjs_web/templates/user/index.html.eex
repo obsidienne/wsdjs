@@ -1,3 +1,9 @@
+<header>
+  <div class="container">
+    <h1><%= gettext "Members" %> </h1>
+  </div>
+</header>
+
 <section id="users-section" class="container">
 
 <table class="table">

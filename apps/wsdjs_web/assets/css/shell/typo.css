@@ -76,7 +76,7 @@ h2.page-header {
 }
 .page-header-sticky {
   position: sticky;
-  top: 0;
+  top: 8px;
   background-color: var(--bg-color);
   z-index: 1000;
 }

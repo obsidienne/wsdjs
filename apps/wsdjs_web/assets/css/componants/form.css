@@ -1,7 +1,7 @@
 fieldset {
   padding: 8px;
   border: 0;
-  box-shadow: inset 0px 0px 3px red;
+  box-shadow: inset 0px 0px 3px var(--inactive-color);
 }
 legend {
   background-color: var(--bg-color);

@@ -1,13 +1,11 @@
-#users-section {
+
+.user-page {
   padding-top: 16px;
 }
-.user-page {
-  padding-top: 45px;
-}
 .user-page__avatar {
-  flex: 0 0 100px;
-  height: 100px;
-  width: 100px;
+  flex: 0 0 96px;
+  height: 96px;
+  width: 96px;
 }
 .user-page__avatar img {
   border-radius: 50%;
@@ -44,9 +42,7 @@
 }
 .user-page__profile__section {
   border-bottom: 1px solid #e8e8e8;
-  font-size: 13px;
-  line-height: 19px;
-  padding: 18px 15px;
+  padding: 16px;
   position: relative;
   width: 100%;
 }
@@ -66,11 +62,6 @@
 }
 .social-fb:hover svg{
   fill: #4267b2;
-}
-
-
-.user-page__profile-details__place {
-  padding-top: 8px;
 }
 .user-page__details {
   color: var(--inactive-color);
