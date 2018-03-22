@@ -1,8 +1,7 @@
 <tr>
     <td><img src="<%= avatar_url(@user.avatar, 48) %>" srcset="<%= avatar_srcset(@user.avatar, 48) %>" sizes="48px" width="48px" height="48px"/></td>
     <td>
-    <%= link name_or_email(@user), to: user_path(@conn, :show, @user.id), class: "text-ellipsis" %>
-    <span><%= @user.email %></span>
+    <%= link name_or_email(@user), to: user_path(@conn, :show, @user.id), class: "tippy text-ellipsis", title: user_tooltip(@user) %>
     <span><%= @user.user_country %>, member since <time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"></time></span>
     </td>
     <td>
