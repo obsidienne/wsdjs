@@ -49,7 +49,13 @@ function handleDOMContentLoaded() {
     return piwikTracker.trackPageview();
   }
 
-  new Tippy("main", {performance: true, target: ".tippy", dynamicTitle: true});
+  new Tippy("main", {
+    arrow: true,
+    arrowType: 'round', 
+    performance: true, 
+    target: ".tippy", 
+    dynamicTitle: true
+  });
 
 }
 

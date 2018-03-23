@@ -3838,9 +3838,9 @@ places.js@~1.4.18:
     events "^1.1.1"
     insert-css "^2.0.0"
 
-popper.js@^1.12.9:
-  version "1.12.9"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
+popper.js@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.1.tgz#b8815e5cda6f62fc2042e47618649f75866e6753"
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
@@ -5018,11 +5018,11 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tippy.js@~2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.1.1.tgz#d6dca3886564523e0212d2528562981a02d24bfe"
+tippy.js@~2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.4.1.tgz#ae9b6418dbfed2563f46bd3cf9e277d893ccc740"
   dependencies:
-    popper.js "^1.12.9"
+    popper.js "^1.14.1"
 
 tmp@^0.0.29:
   version "0.0.29"
