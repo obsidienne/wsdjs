@@ -63,6 +63,7 @@
   transform: translateY(-1px);
   transition: transform ease .1s,opacity ease .1s;
   z-index: 100;
+  overscroll-behavior: contain;
 }
 
 .search-container.focused .search-results-container {
