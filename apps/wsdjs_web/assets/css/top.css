@@ -1,6 +1,38 @@
 /****************************
-  Checking top
+  step selector
 ****************************/
+.top-steps {
+  padding: 0.5em 1em;
+  margin: 1em auto;
+  background-color: #edeff0;
+  border-radius: .25em;
+}
+.top-steps::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.top-steps li {
+  display: inline-block;
+  margin: 0.5em 0;
+}
+.top-steps li::after {
+  display: inline-block;
+  content: '\00bb';
+  margin: 0 .6em;
+  color: #959fa5;
+}
+.top-steps li:last-of-type::after {
+  display: none;
+}
+.top-steps li > * {
+  display: inline-block;
+  font-size: 1.4rem;
+  color: #2c3f4c;
+}
+.top-steps li.current > * {
+  color: #96c03d;
+}
 
 /****************************
   Voting top
