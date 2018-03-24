@@ -11,15 +11,15 @@
   <% end %>
 </div>
 
-<%= if @current_user && @current_user.id == @top.user_id do %>
+<%= if @current_user && @current_user.admin do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
   <nav>
-    <ol class="top-steps text-center">
-      <li class="visited"><em>Voting</em></li>
+    <ol class="top-steps">
+      <li class="visited">Voting</li>
       <li class="visited">
         <%= submit "Counting", class: "btn btn-link", name: "direction", value: "previous" %>
       </li>
-      <li class="visited"><em>Published</em></li>
+      <li class="current">Published</li>
     </ol>
   </nav>
 <% end %>

@@ -3,6 +3,8 @@
 ****************************/
 .top-steps {
   background-color: #edeff0;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 .top-steps ol {
   padding-top: 0.5rem;
@@ -24,7 +26,7 @@
   display: inline-block;
   color: #2c3f4c;
 }
-.top-steps li:last-child button {
+.top-steps button {
   margin: 0;
   vertical-align: inherit;
 }

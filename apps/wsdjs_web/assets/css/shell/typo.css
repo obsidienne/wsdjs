@@ -102,9 +102,6 @@ dt {
   width: 100%;
   display: block;
 }
-.text-center {
-  text-align: center;
-}
 .text-muted {
   color: var(--inactive-color);
 }
