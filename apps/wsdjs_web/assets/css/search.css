@@ -7,6 +7,12 @@
   height: 48px;
   justify-content: flex-end;
 }
+.actions > * {
+  margin-left: .5rem;
+}
+.actions > *:first-child {
+  margin-left: 0;
+}
 .search-container {
   z-index: 49;
   pointer-events: none;
