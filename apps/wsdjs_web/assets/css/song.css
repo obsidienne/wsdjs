@@ -23,7 +23,7 @@
   margin-bottom: 0;
   max-width: 16ch;
 }
-.song-suggestor:hover, .top-song__title:hover {
+.song-suggestor:hover {
   text-decoration: underline;
   color: var(--accent-color);
 }

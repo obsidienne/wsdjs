@@ -40,10 +40,10 @@
         <div class="top-song-info-container">
           <div class="top-song-body">
             <div class="top-song-body-info">
-              <%= link to: song_path(@conn, :show, rank.song), class: "top-song__title" do %>
+              <%= link to: song_path(@conn, :show, rank.song) do %>
                 <%= rank.song.title %>
               <% end %>
-              <span><%= rank.song.artist %></span>
+              <span class="text-ellipsis"><%= rank.song.artist %></span>
             </div>
 
             <aside>
@@ -60,7 +60,9 @@
               <%= if rank.song.public_track do %>
               <span class="label label-default">public track</span>
               <% end %>
+              <div class="opinions">
               <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
+              </div>
             </aside>
           </div>
         <div>

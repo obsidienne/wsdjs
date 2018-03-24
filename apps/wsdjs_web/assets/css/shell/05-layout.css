@@ -85,11 +85,8 @@
 
 .top-songs-container, .top-stat__votes {
   display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(1, 1fr);
-}
-.song-top__song {
-  margin: 0;
+  grid-gap: 4px;
+  grid-template-columns: repeat(auto-fit, minmax(352px, 1fr));
 }
 @media (min-width: 768px) {
   .user-page {
@@ -99,14 +96,6 @@
   }
   
   .top-stat__votes {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .top-songs-container {
-    grid-template-columns: repeat(2, 1fr);
-  }  
-}
-@media (min-width: 992px) {
-  .top-songs-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }

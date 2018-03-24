@@ -3,12 +3,9 @@
 ****************************/
 .top-steps {
   background-color: #edeff0;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
-.top-steps ol {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+  margin-top: -1.5rem;
 }
 .top-steps li {
   display: inline-block;
@@ -54,60 +51,51 @@
   white-space: nowrap;
 }
 .voting-position {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    font-size: 18px;
-    z-index: 1000;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+  z-index: 1000;
 }
 
 .voting-position:empty {
-    display: none;
+  display: none;
 }
 
 .voting-position .chart-bg {
-    position: absolute;
-    top: -80px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-top: 72px solid transparent;
-    border-bottom: 72px solid transparent;
-    border-left: 72px solid #FFF;
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 72px solid transparent;
+  border-bottom: 72px solid transparent;
+  border-left: 72px solid #FFF;
 }
 
 .voting-position .chart-value {
-    position: absolute;
-    top: -7px;
-    left: -10px;
-    width: 45px;
-    height: 45px;
-    text-align: center;
-    line-height: 45px;
-    font-weight: 600;
-    color: #49596a;
+  position: absolute;
+  top: -7px;
+  left: -10px;
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  font-weight: 600;
+  color: #49596a;
 }
 .top-voting-footer-actions > .btn {
-  width: 200px;
+  width: 24ch;
 }
-
-
-/****************************
-  Counting
-****************************/
-
 
 /****************************
   Published top
 ****************************/
 .tops__top__art > div {
   overflow: hidden;
-}
-.top-songs-container {
-  margin-bottom: 50px;
 }
 
 .top-song {
@@ -119,9 +107,9 @@
 }
 .song-art-container {
   position: relative;
-  width: 120px;
-  height: 120px;
-  flex: 0 0 120px;
+  width: 136px;
+  height: 136px;
+  flex: 0 0 136px;
   align-self: center;
 }
 .top-counting tr {
@@ -153,6 +141,13 @@
   display: flex;
   width: 100%;
   flex-direction: column;
+  justify-content: space-between;
+}
+.top-song-info-container > * {
+  flex: 0 0 33%;
+}
+.top-song-info-container h1 {
+  text-align: right;
 }
 
 .top-song img {
@@ -165,19 +160,30 @@
   padding-bottom: 15px;
 }
 
-@media (min-width: 767px) {
-  .top-song {
-    flex-direction: row;
-  }
-  .top-song-body-info {
-    padding-left: 15px;
-  }
-  .top-song-body aside {
-    padding-left: 15px;
-  }
-  .top-song-info-container {
-    flex-direction: row;
-  }
+.opinions {
+  display: flex;
+  margin-top: .5rem;
+}
+.opinions > *:nth-child(2) {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.top-song {
+  flex-direction: row;
+}
+.top-song-body-info {
+  padding-left: .5rem;
+}
+.top-song-body-info > a {
+  font-weight: bold;
+  color: black;
+}
+.top-song-body aside {
+  padding-left: .5rem;
+}
+.top-song-info-container {
+  flex-direction: row;
 }
 
 .top-song-body {
