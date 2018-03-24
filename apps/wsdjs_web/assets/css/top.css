@@ -2,36 +2,35 @@
   step selector
 ****************************/
 .top-steps {
-  padding: 0.5em 1em;
-  margin: 1em auto;
   background-color: #edeff0;
-  border-radius: .25em;
 }
-.top-steps::after {
-  clear: both;
-  content: "";
-  display: table;
+.top-steps ol {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 .top-steps li {
   display: inline-block;
-  margin: 0.5em 0;
 }
 .top-steps li::after {
   display: inline-block;
   content: '\00bb';
-  margin: 0 .6em;
-  color: #959fa5;
+  margin: 0 .5rem;
+  color: var(--inactive-color);
 }
 .top-steps li:last-of-type::after {
   display: none;
 }
 .top-steps li > * {
   display: inline-block;
-  font-size: 1.4rem;
   color: #2c3f4c;
 }
-.top-steps li.current > * {
-  color: #96c03d;
+.top-steps li:last-child button {
+  margin: 0;
+  vertical-align: inherit;
+}
+.top-steps li.current {
+  font-weight: bold;
+  color: var(--accent-color);
 }
 
 /****************************
@@ -111,17 +110,17 @@
 
 .top-song {
   display: flex;
-  padding-bottom: 15px;
-  padding-top: 15px;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
   border-bottom: 1px solid hsl(0, 0%, 87%);
   flex-direction: column;
 }
 .song-art-container {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
+  flex: 0 0 120px;
   align-self: center;
-  overflow: hidden;
 }
 .top-counting tr {
   height: 36px;
@@ -184,7 +183,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 15px;
   min-width: 0;
 }
 .top-song-body a:hover{

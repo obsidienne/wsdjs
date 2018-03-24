@@ -4,22 +4,22 @@
   </div>
 </header>
 
-<%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
-<div class="container actions">
-  <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
-</div>
-<% end %>
-
 <%= if @current_user && @current_user.id == @top.user_id do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-<nav>
-  <ol class="top-steps text-center">
-    <li class="visited"><em>Create</em></li>
-    <li class="current"><em>Check</em></li>
+<nav class="top-steps">
+  <ol class="container">
+    <li class="visited">Create</li>
+    <li class="current">Check</li>
     <li><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
   </ol>
 </nav>
 <% end %>
+<% end %>
+
+<%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
+<div class="container actions">
+  <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
+</div>
 <% end %>
 
 
@@ -40,7 +40,7 @@
         <div class="top-song-info-container">
           <div class="top-song-body">
             <div class="top-song-body-info">
-              <%= link to: song_path(@conn, :show, rank.song), class: "h5 top-song__title" do %>
+              <%= link to: song_path(@conn, :show, rank.song), class: "top-song__title" do %>
                 <%= rank.song.title %>
               <% end %>
               <span><%= rank.song.artist %></span>
