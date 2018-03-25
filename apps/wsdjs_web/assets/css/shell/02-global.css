@@ -38,6 +38,9 @@ a, a:hover {
 svg {
   display: block;
 }
+.contry-selector svg {
+  display: inherit;
+}
 img {
   vertical-align: top;
 }
