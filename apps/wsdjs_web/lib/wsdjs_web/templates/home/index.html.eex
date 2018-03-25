@@ -5,7 +5,7 @@
   </div>
 </header>
 <% else %>
-  <div class="container hero-text">
+  <div class="unconnected container hero-text">
     <span class="h1">World Swing DeeJays</span>
     <span class="h2">The best West Coast Swing music from all around the world !</span>
 

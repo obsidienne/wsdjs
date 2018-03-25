@@ -70,3 +70,7 @@ img.responsive {
   background: var(--accent-color);
   color: black;
 }
+.unconnected .h2 {
+  display: block;
+  white-space: nowrap;
+}
