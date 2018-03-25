@@ -198,3 +198,7 @@
   color: var(--accent-color);
   transform: var(--accent-action);
 }
+
+.top-stat__votes .card {
+  padding: .5rem;
+}

@@ -94,8 +94,4 @@
     grid-gap: 16px;
     grid-template-columns: 300px 1fr;
   }
-  
-  .top-stat__votes {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }

@@ -24,20 +24,20 @@
   <ul class="top-stat__votes">
     <%= for user <- Wsdjs.Accounts.list_users() do %>
       <%= if user.profil_djvip do %>
-        <li class="song-card card" >
-          <article>
-          <span><%= user.name %></span>
-          <div class="text-overflow"><%= get_song_by(@top, user, 1) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 2) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 3) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 4) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 5) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 6) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 7) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 8) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 9) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 10) %></div>
-          </article>
+        <li class="card" >
+          <span class="h2"><%= user.name %></span>
+          <ol>
+            <li><%= get_song_by(@top, user, 1) %></li>
+            <li><%= get_song_by(@top, user, 2) %></li>
+            <li><%= get_song_by(@top, user, 3) %></li>
+            <li><%= get_song_by(@top, user, 4) %></li>
+            <li><%= get_song_by(@top, user, 5) %></li>
+            <li><%= get_song_by(@top, user, 6) %></li>
+            <li><%= get_song_by(@top, user, 7) %></li>
+            <li><%= get_song_by(@top, user, 8) %></li>
+            <li><%= get_song_by(@top, user, 9) %></li>
+            <li><%= get_song_by(@top, user, 10) %></li>
+          </ol>
         </li>
       <% end %>
     <% end %>
