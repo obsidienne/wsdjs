@@ -18,88 +18,88 @@
   <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
     <%= if @current_user.admin do %>
     <div class="form-group">
-      <label class="small text-muted">Email</label>
+      <label>Email</label>
       <%= text_input f, :email, class: "form-control" %>
     </div>
     <% else %>
     <div class="form-group">
-      <label class="small text-muted">Email</label>
+      <label>Email</label>
       <%= text_input f, :email, class: "form-control", disabled: true %>
     </div>
     <% end %>
     <div class="form-group">
-      <label class="small text-muted">Name</label>
+      <label>Name</label>
       <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
       <%= error_tag f, :name %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Dj name</label>
+      <label>Dj name</label>
       <%= text_input f, :djname, placeholder: "Dj name", class: "form-control" %>
       <%= error_tag f, :djname %>
     </div>
     <div class="form-group contry-selector">
-      <label class="small text-muted">Your country</label>
+      <label>Your country</label>
       <input type="search" id="user_country" name="user[user_country]" class="form-control" placeholder="Country" value="<%= @current_user.user_country %>" />
     </div>
 
     <%= inputs_for f, :detail, fn fd -> %>
     <div class="form-group">
-      <label class="small text-muted">Description</label>
+      <label>Description</label>
       <%= textarea fd, :description, placeholder: "Description (2000 characteres max)", class: "form-control", maxlength: 2000 %>
       <%= error_tag fd, :description %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Love more</label>
+      <label>Love more</label>
       <%= textarea fd, :love_more, placeholder: "255 characteres max", class: "form-control", maxlength: 255 %>
       <%= error_tag fd, :love_more %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Hate more</label>
+      <label>Hate more</label>
       <%= textarea fd, :hate_more, placeholder: "255 characteres max", class: "form-control", maxlength: 255 %>
       <%= error_tag fd, :hate_more %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Favorite artist</label>
+      <label>Favorite artist</label>
       <%= text_input fd, :favorite_artist, placeholder: "Favorite artist", class: "form-control", maxlength: 255 %>
       <%= error_tag fd, :favorite_artist %>
     </div>
     <div class="form-group select optional song_genre">
-      <label class="small text-muted">Favotire genre</label>
+      <label>Favotire genre</label>
       <%= select fd, :favorite_genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
       <%= error_tag fd, :favorite_genre %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Favorite color</label>
+      <label>Favorite color</label>
       <%= text_input fd, :favorite_color, placeholder: "Favorite color", class: "form-control", maxlength: 255 %>
       <%= error_tag fd, :favorite_color %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Favorite meal</label>
+      <label>Favorite meal</label>
       <%= text_input fd, :favorite_meal, placeholder: "Favorite meal", class: "form-control", maxlength: 2000 %>
       <%= error_tag fd, :favorite_meal %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Favorite animal</label>
+      <label>Favorite animal</label>
       <%= text_input fd, :favorite_animal, placeholder: "favorite animal", class: "form-control", maxlength: 2000 %>
       <%= error_tag fd, :favorite_animal %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Start DJing</label>
+      <label>Start DJing</label>
       <%= text_input fd, :djing_start_year, placeholder: "djing start year", class: "form-control", type: "number", max: 2017, min: 1950 %>
       <%= error_tag fd, :djing_start_year %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Facebook</label>
+      <label>Facebook</label>
       <%= text_input fd, :facebook, placeholder: "https://www.facebook.com/", class: "form-control", type: "url" %>
       <%= error_tag fd, :facebook %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Youtube</label>
+      <label>Youtube</label>
       <%= text_input fd, :youtube, placeholder: "https://www.youtube.com/", class: "form-control", type: "url" %>
       <%= error_tag fd, :youtube %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Soundcloud</label>
+      <label>Soundcloud</label>
       <%= text_input fd, :soundcloud, placeholder: "https://soundcloud.com", class: "form-control", type: "url" %>
       <%= error_tag fd, :soundcloud %>
     </div>
@@ -146,43 +146,43 @@
   <%= if @current_user.admin do %>
     <table class="table user-parameters">
       <tr>
-        <th>Profil admin<br/><small>opt in</small></th>
+        <th>Profil admin</th>
         <td>
           <div class="ckbx-style-11 danger">
             <%= checkbox f, :admin %>
             <%= label f,:admin do %><% end %>
           </div>
-          <p class="help-block small">Master of universe ?</p>
+          <p class="help-block">Master of universe ?</p>
         </td>
       </tr>
       <tr>
-        <th>Verified profil<br/><small>opt in</small></th>
+        <th>Verified profil</th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :verified_profil %>
             <%= label f,:verified_profil do %><% end %>
           </div>
-          <p class="help-block small">The user identity has been verified, try to avoid user usurpation</p>
+          <p class="help-block">The user identity has been verified, try to avoid user usurpation</p>
         </td>
       </tr>
       <tr>
-        <th>Profil DJ VIP<br/><small>opt in</small></th>
+        <th>Profil DJ VIP</th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :profil_djvip %>
             <%= label f,:profil_djvip do %><% end %>
           </div>
-          <p class="help-block small">Can suggest song, vote for official WSDJs TOP10, access all song suggested and TOP, create personal TOP5</p>
+          <p class="help-block">Can suggest song, vote for official WSDJs TOP10, access all song suggested and TOP, create personal TOP5</p>
         </td>
       </tr>
       <tr>
-        <th>Profil DJ<br/><small>opt in</small></th>
+        <th>Profil DJ</th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :profil_dj %>
             <%= label f,:profil_dj do %><% end %>
           </div>
-          <p class="help-block small">Can create a personnal TOP5.</p>
+          <p class="help-block">Can create a personnal TOP5.</p>
         </td>
       </tr>
       <tr>
@@ -192,11 +192,11 @@
             <%= checkbox f, :deactivated %>
             <%= label f,:deactivated do %><% end %>
           </div>
-          <p class="help-block small">Desactivate a user, he can't login or receive notifications.</p>
+          <p class="help-block">Desactivate a user, he can't login or receive notifications.</p>
         </td>
       </tr>
       <tr>
-        <th>Activate piwik<br/><small>opt out</small></th>
+        <th>Activate piwik</th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -204,11 +204,11 @@
               <%= label fp, :piwik do %><% end %>
             <% end %>
           </div>
-          <p class="help-block small">The user is monitored by piwik.</p>
+          <p class="help-block">The user is monitored by piwik.</p>
         </td>
       </tr> 
       <tr>
-        <th>Activate video<br/><small>opt in</small></th>
+        <th>Activate video</th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -216,11 +216,11 @@
               <%= label fp, :video do %><% end %>
             <% end %>
           </div>
-          <p class="help-block small">The user can add video to a song.</p>
+          <p class="help-block">The user can add video to a song.</p>
         </td>
       </tr> 
       <tr>
-        <th>Radioking umatch<br/><small>opt in</small></th>
+        <th>Radioking umatch</th>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -228,7 +228,7 @@
               <%= label fp, :radioking_unmatch do %><% end %>
             <% end %>
           </div>
-          <p class="help-block small">Send an email when a song streamed by radioking does not match with WSDJs database.</p>
+          <p class="help-block">Send an email when a song streamed by radioking does not match with WSDJs database.</p>
         </td>
       </tr>
     </table>
