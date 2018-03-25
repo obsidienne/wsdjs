@@ -119,6 +119,7 @@
   .song-page__sections__content {
     flex: 1 0 60ch;
   }
+
 }
 
 .overview-video {
@@ -181,7 +182,7 @@
   display: flex;
   flex-direction: column;
   height: 100%; /* safari bug */
-  width: 216px;
+  width: auto;
 }
 .song-card__header {
   padding: 0;
@@ -290,4 +291,16 @@
   width: 20px;
   height: 20px;
   vertical-align: middle;
+}
+
+@media (min-width: 768px) {
+  .song-card {
+    width: 216px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hot-songs.container {
+    padding: 0;
+  }
 }

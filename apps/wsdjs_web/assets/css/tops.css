@@ -78,7 +78,7 @@
 .tops__top__content {
   color: var(--inactive-color);
   position: relative;
-  margin-left: 64px;
+  margin-left: 0;
   padding: 16px;
   width: 100%;
 }

@@ -41,10 +41,9 @@
 
 .hot-songs {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 216px);
-  grid-row-gap: 24px;
-  grid-column-gap: 12px; /* need a fix */
-  
+  grid-template-columns: 50% 50%;
+  grid-row-gap: 0rem;
+  grid-column-gap: 0;
 }
 
 /********************/
@@ -54,7 +53,11 @@
   .home-container {
     flex-direction: row;
   }
-
+  .hot-songs {
+    grid-template-columns: repeat(auto-fit, 216px);
+    grid-row-gap: 1rem;
+    grid-column-gap: .5rem; /* need a fix */
+  }
   .user-profile-edit,
   .song-edit,
   .song-new {

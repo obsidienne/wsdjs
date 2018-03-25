@@ -107,7 +107,7 @@
 
     <table class="table">
       <tr>
-        <td>Email contact visible <span>Your user page contains a button to send you an email. Your email is public.</span></td>
+        <td><strong>Email contact visible</strong><p class="text-muted">Your user page contains a button to send you an email. Your email is public.</p></td>
         <td>
           <div class="ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -118,7 +118,7 @@
         </td>
       </tr>
       <tr>
-        <td>likes and tops are public<span>Your likes and tops are visible to anyone in your user profil page.</span></td>
+        <td><strong>likes and tops are public</strong><p class="text-muted">Your likes and tops are visible to anyone in your user profil page.</p></td>
         <td>
           <div class="ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -130,7 +130,7 @@
       </tr>
       <%= if Wsdjs.Accounts.Policy.can?(@user, :new_song_notification) == :ok do %>
       <tr>
-        <td>New song notification <span>Receive an email everyday if new songs have been suggeted.</span></td>
+        <td><strong>New song notification</strong><p class="text-muted">Receive an email everyday if new songs have been suggeted.</p></td>
         <td>
           <div class="ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -146,57 +146,52 @@
   <%= if @current_user.admin do %>
     <table class="table user-parameters">
       <tr>
-        <th>Profil admin</th>
+        <td><strong>Profil admin</strong><p class="text-muted">Master of universe ?</p></td>
         <td>
           <div class="ckbx-style-11 danger">
             <%= checkbox f, :admin %>
             <%= label f,:admin do %><% end %>
           </div>
-          <p class="help-block">Master of universe ?</p>
         </td>
       </tr>
       <tr>
-        <th>Verified profil</th>
+        <td><strong>Verified profil</strong><p class="text-muted">The user identity has been verified, try to avoid user usurpation</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :verified_profil %>
             <%= label f,:verified_profil do %><% end %>
           </div>
-          <p class="help-block">The user identity has been verified, try to avoid user usurpation</p>
         </td>
       </tr>
       <tr>
-        <th>Profil DJ VIP</th>
+        <td><strong>Profil DJ VIP</strong><p class="text-muted">Can suggest song, vote for official WSDJs TOP10, access all song suggested and TOP, create personal TOP5</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :profil_djvip %>
             <%= label f,:profil_djvip do %><% end %>
           </div>
-          <p class="help-block">Can suggest song, vote for official WSDJs TOP10, access all song suggested and TOP, create personal TOP5</p>
         </td>
       </tr>
       <tr>
-        <th>Profil DJ</th>
+        <td><strong>Profil DJ</strong><p class="text-muted">Can create a personnal TOP5.</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :profil_dj %>
             <%= label f,:profil_dj do %><% end %>
           </div>
-          <p class="help-block">Can create a personnal TOP5.</p>
         </td>
       </tr>
       <tr>
-        <th>Deactivate user</th>
+        <td><strong>Deactivate user</strong><p class="text-muted">Desactivate a user, he can't login or receive notifications.</p></td>
         <td>
           <div class=" ckbx-style-11 danger">
             <%= checkbox f, :deactivated %>
             <%= label f,:deactivated do %><% end %>
           </div>
-          <p class="help-block">Desactivate a user, he can't login or receive notifications.</p>
         </td>
       </tr>
       <tr>
-        <th>Activate piwik</th>
+        <td><strong>Activate piwik</strong><p class="text-muted">The user is monitored by piwik.</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -204,11 +199,10 @@
               <%= label fp, :piwik do %><% end %>
             <% end %>
           </div>
-          <p class="help-block">The user is monitored by piwik.</p>
         </td>
       </tr> 
       <tr>
-        <th>Activate video</th>
+        <td><strong>Activate video</strong><p class="text-muted">The user can add video to a song.</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -216,11 +210,10 @@
               <%= label fp, :video do %><% end %>
             <% end %>
           </div>
-          <p class="help-block">The user can add video to a song.</p>
         </td>
       </tr> 
       <tr>
-        <th>Radioking umatch</th>
+        <td><strong>Radioking umatch</strong><p class="text-muted">Send an email when a song streamed by radioking does not match with WSDJs database.</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -228,7 +221,6 @@
               <%= label fp, :radioking_unmatch do %><% end %>
             <% end %>
           </div>
-          <p class="help-block">Send an email when a song streamed by radioking does not match with WSDJs database.</p>
         </td>
       </tr>
     </table>

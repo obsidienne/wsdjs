@@ -6,6 +6,7 @@
   align-items: center;
   height: 48px;
   justify-content: flex-end;
+  margin-bottom: .5rem;
 }
 .actions > * {
   margin-left: .5rem;

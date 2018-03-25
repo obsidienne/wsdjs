@@ -39,6 +39,7 @@ main > header h2 {
 .glnav .container {
   display: flex;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 .glnav a.home {
   height: 48px;
