@@ -16,7 +16,7 @@
   <%= if @current_user.parameter && @current_user.parameter.piwik, do: render "_piwik.html", current_user: @current_user %>
 <% end %>
 
-<%= if System.get_env["WSDJS_ENV"] == "staging" do %>
+<%= if System.get_env("DEPLOYMENT_ENV") == "staging" do %>
 <style>
 .plug-ribbon {
   position: absolute;
