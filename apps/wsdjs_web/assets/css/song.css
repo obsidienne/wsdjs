@@ -18,6 +18,9 @@
   display: flex;
   flex-direction: column;
 }
+.song-page__details > .h3 {
+  padding-bottom: .5rem;
+}
 .song-page__play {
   margin-top: auto;
   margin-bottom: 0;
@@ -42,6 +45,7 @@
   margin-bottom: 5px;
 }
 .song-page__tags.song-opinions {
+  padding-top: .5rem;
   display: flex;
   align-items: center;
   background-color: inherit;
