@@ -59,3 +59,11 @@ img.responsive {
   text-align: center;
   margin: 15px;
 }
+::-moz-selection {
+  background: var(--accent-color);
+  color: black;
+}
+::selection {
+  background: var(--accent-color);
+  color: black;
+}

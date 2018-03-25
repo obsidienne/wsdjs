@@ -1,7 +1,7 @@
 .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 18px;
+  margin-bottom: 1rem;
 }
 .table > thead {
   position: sticky;

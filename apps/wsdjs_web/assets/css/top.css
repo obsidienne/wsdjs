@@ -101,7 +101,7 @@
 .top-song {
   display: flex;
   padding-bottom: 1rem;
-  padding-top: 1rem;
+  padding-top: calc(1rem - 1px);
   border-bottom: 1px solid hsl(0, 0%, 87%);
   flex-direction: column;
 }
