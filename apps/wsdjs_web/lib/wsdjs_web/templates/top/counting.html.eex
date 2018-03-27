@@ -1,6 +1,6 @@
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h1>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <span class="text-muted"><%= @top.status %></span></h1>
   </div>
 </header>
 <%= if @current_user && @current_user.admin do %>
@@ -40,11 +40,11 @@
       </div>
       <div class="top-song-info-container">
         <div class="top-song-body">
-          <div class="top-song-body-info">
-            <%= link to: song_path(@conn, :show, rank.song) do %>
+          <div>
+            <%= link to: song_path(@conn, :show, rank.song), class: "song-title" do %>
               <%= rank.song.title %>
             <% end %>
-            <span class="text-ellipsis"><%= rank.song.artist %></span>
+            <span class="text-ellipsis song-artist"><%= rank.song.artist %></span>
           </div>
           <aside>
             <span class="label label-default"><%= rank.song.genre %></span>

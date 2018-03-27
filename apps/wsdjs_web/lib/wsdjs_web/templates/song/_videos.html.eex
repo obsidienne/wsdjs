@@ -9,7 +9,7 @@
    <% end %>
   <div class="song-page__video__details">
     <h5 class="text-ellipsis song-page__video__pros"><%= video.title %></h5>
-    <h5 class="text-ellipsis song-page__video__event small"><%= if is_nil(video.event) do video.event_str else video.event.name end %>
+    <h5 class="text-ellipsis song-page__video__event"><%= if is_nil(video.event) do video.event_str else video.event.name end %>
     <%= if video.published_at do %>
     <timeago class="text-muted"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</timeago>
     <% end %>

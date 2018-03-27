@@ -66,9 +66,7 @@ h3, .h3 {
 
 small, .small {
   font-weight: 300;
-  line-height: 1;
   color: var(--inactive-color);
-  font-size: 75%;
 }
 
 h2.page-header {
@@ -96,7 +94,9 @@ dd {
 dt {
   font-weight: bold;
 }
-
+.text-ligther {
+  font-weight: lighter;
+}
 .text-ellipsis {
   white-space: nowrap;
   overflow: hidden;

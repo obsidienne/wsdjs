@@ -14,7 +14,7 @@
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago small text-muted" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
+          <time class="timeago text-muted" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
         </footer>
       </div>
     </article>
@@ -31,7 +31,7 @@
       </div>
       <div class="song-minicard__body">
         <span class="text-muted text-ellipsis"><%= @song.title %>, by <%= @song.artist %></span>
-        <span class="text-muted small text-ellipsis">
+        <span class="text-muted text-ellipsis">
           <%= gettext "suggested by" %> <%= user_displayed_name(@song.user) %>
           <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
         </span>

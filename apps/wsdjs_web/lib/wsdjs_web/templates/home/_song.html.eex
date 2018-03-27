@@ -20,7 +20,7 @@
           <%= if @rank.song.bpm > 0 do %>
             <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago small text-muted" datetime="<%= utc_to_local(@rank.song.inserted_at) %>"><%= utc_to_local(@rank.song.inserted_at) %></time>
+          <time class="timeago text-muted" datetime="<%= utc_to_local(@rank.song.inserted_at) %>"><%= utc_to_local(@rank.song.inserted_at) %></time>
         </footer>
       </div>
     </article>
@@ -42,16 +42,16 @@
 
 
       <div class="song-minicard__body">
-        <div class="text-muted"><%= @rank.song.title %></div>
-        <div class="text-muted"><%= @rank.song.artist %></div>
-        <div class="text-muted small"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></div>
+        <div class="song-title"><%= @rank.song.title %></div>
+        <div class="song-artist"><%= @rank.song.artist %></div>
+        <div class="text-muted song-suggestor"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></div>
 
         <footer class="song-minicard__footer">
           <span class="label label-default"><%= @rank.song.genre %></span>
           <%= if @rank.song.bpm > 0 do %>
             <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago small text-muted" datetime="<%= utc_to_local(@rank.song.inserted_at) %>"><%= utc_to_local(@rank.song.inserted_at) %></time>
+          <time class="timeago text-muted" datetime="<%= utc_to_local(@rank.song.inserted_at) %>"><%= utc_to_local(@rank.song.inserted_at) %></time>
         </footer>
       </div>
     </article>

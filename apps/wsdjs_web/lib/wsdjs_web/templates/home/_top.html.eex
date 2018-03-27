@@ -9,10 +9,10 @@
     <span class="h3"><%= @rank.position %></span>
     <h2>hidden track</h2>
  
-    <footer class="small">
-      <span class="label label-default small"><%= @rank.song.genre %></span>
+    <footer>
+      <span class="label label-default"><%= @rank.song.genre %></span>
       <%= if @rank.song.bpm do %>
-        <span class="label label-primary small"><%= @rank.song.bpm %> bpm</span>
+        <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
       <% end %>
     </footer>
   </div>
@@ -25,14 +25,14 @@
     <img src="<%= art_url(@rank.song.art, 200) %>" class="responsive" />
   </header>
 
-  <%= link to: song_path(@conn, :show, @rank.song), class: "text-muted song-top__body" do %>
+  <%= link to: song_path(@conn, :show, @rank.song), class: "song-top__body" do %>
     <span class="h3"><%= @rank.position %></span>
-    <span class="song-top__title"><%= @rank.song.title %></span>
-    <span class="song-top__artist small">by <%= @rank.song.artist %></span>    
-    <footer class="small">
-      <span class="label label-default small"><%= @rank.song.genre %></span>
+    <span><%= @rank.song.title %></span>
+    <span class="text-muted">by <%= @rank.song.artist %></span>    
+    <footer>
+      <span class="label label-default"><%= @rank.song.genre %></span>
       <%= if @rank.song.bpm do %>
-        <span class="label label-primary small"><%= @rank.song.bpm %> bpm</span>
+        <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
       <% end %>
       <img src="<%= avatar_url(@rank.song.user.avatar, 50) %>" class="song-top__footer__avatar tippy" title="<%= user_displayed_name(@rank.song.user) %>"/> 
     </footer>

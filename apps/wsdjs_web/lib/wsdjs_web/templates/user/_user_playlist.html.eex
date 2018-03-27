@@ -6,7 +6,7 @@
     </svg>
     <%= link "back to playlists", to: user_path(@conn, :show, @user), class: "btn btn-link" %>
 
-    <span class="playlist-name h3"><%= @playlist.name %> <small></small></span>
+    <span class="playlist-name h3"><%= @playlist.name %></span>
   </div>
 
   <%= if Enum.count(@songs) > 0 do %>

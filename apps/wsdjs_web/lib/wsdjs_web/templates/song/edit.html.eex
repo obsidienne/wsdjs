@@ -16,12 +16,12 @@
 
     <%= if @current_user.admin do %>
       <div class="form-group">
-        <label class="small text-muted">Artist</label>
+        <label class="text-muted">Artist</label>
         <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
         <%= error_tag f, :artist %>
       </div>
       <div class="form-group">
-        <label class="small text-muted">Title</label>
+        <label class="text-muted">Title</label>
         <%= text_input f, :title, placeholder: "Song title", class: "form-control" %>
         <%= error_tag f, :title %>
       </div>
@@ -35,18 +35,18 @@
     <% end %>
 
     <div class="form-group">
-      <label class="small text-muted">URL</label>
+      <label class="text-muted">URL</label>
       <%= text_input f, :url, type: "url", placeholder: "An URL for the song (youtube prefered).", class: "form-control" %>
       <%= error_tag f, :url %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">BPM</label>
+      <label class="text-muted">BPM</label>
       <%= number_input f, :bpm, placeholder: "bpm", min: 0, class: "form-control" %>
       <%= error_tag f, :bpm %>
     </div>
 
     <div class="form-group select optional song_genre">
-      <label class="small text-muted">Genre</label>
+      <label class="text-muted">Genre</label>
       <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
       <%= error_tag f, :genre %>
     </div>
@@ -60,7 +60,7 @@
             <%= checkbox f, :suggestion %>
             <%= label f,:suggestion do %><% end %>
           </div>
-          <p class="help-block small">Use this song in a month TOP 10<br/>Change with caution !</p>
+          <p class="help-block">Use this song in a month TOP 10<br/>Change with caution !</p>
         </td>
       </tr>
       <tr>
@@ -70,7 +70,7 @@
             <%= checkbox f, :instant_hit %>
             <%= label f,:instant_hit do %><% end %>
           </div>
-          <p class="help-block small">This song is visible and in front page</p>
+          <p class="help-block">This song is visible and in front page</p>
         </td>
       </tr>
       <% end %>
@@ -81,7 +81,7 @@
             <%= checkbox f, :hidden_track %>
             <%= label f,:hidden_track do %><% end %>
           </div>
-          <p class="help-block small">This song is visible only by DJ VIP</p>
+          <p class="help-block">This song is visible only by DJ VIP</p>
         </td>
       </tr>
       <tr>
@@ -91,19 +91,19 @@
             <%= checkbox f, :public_track %>
             <%= label f,:public_track do %><% end %>
           </div>
-          <p class="help-block small">This song is always visible, no matter when it was created</p>
+          <p class="help-block">This song is always visible, no matter when it was created</p>
         </td>
       </tr>
     </table>
 
     <%= if @current_user.admin do %>
     <div class="form-group">
-      <label class="small text-muted">Suggestor</label>
+      <label class="text-muted">Suggestor</label>
       <%= select f, :user_id, list_users(), class: "form-control" %>
       <%= error_tag f, :user_id %>
     </div>
     <div class="form-group">
-      <label class="small text-muted">Suggested at</label>
+      <label class="text-muted">Suggested at</label>
       <%= datetime_select f, :inserted_at, class: "form-control" %>
       <%= error_tag f, :inserted_at %>
     </div>

@@ -1,6 +1,6 @@
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h1>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <span class="text-muted"><%= @top.status %></span></h1>
   </div>
 </header>
 
@@ -39,7 +39,7 @@
         <img src="<%= art_url(nil, 200)%>" class="responsive" />
       </div>
       <div class="top-song-body">
-        <div class="top-song-body-info">
+        <div>
           <h2 class="text-muted">hidden track</h2>
         </div>
 
@@ -76,12 +76,12 @@
         <% end %>
       </div>
       <div class="top-song-body">
-        <div class="top-song-body-info">
-          <%= link to: song_path(@conn, :show, rank.song) do %>
+        <div>
+          <%= link to: song_path(@conn, :show, rank.song), class: "song-title" do %>
             <span><%= rank.song.title %></span>
           <% end %>
-          <span class="text-ellipsis"><%= rank.song.artist %></span>
-          <span class="text-muted text-ellipsis">
+          <span class="text-ellipsis song-artist"><%= rank.song.artist %></span>
+          <span class="text-muted text-ellipsis song-suggestor">
             <%= gettext "by" %> <%= proposed_by_link(@conn, rank.song) %>,
             <time class="timeago" datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>"></time>
           </span>

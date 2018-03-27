@@ -98,13 +98,5 @@ export default class Radio {
       document.querySelector(".player__description__title").innerHTML = data[0].title;
       document.querySelector(".player__description__sub-title").innerHTML = "by " + data[0].artist + ", " + data[0].suggested_by;
     }
-
-    var played = ""
-    for (var i = 1; i < data.length; i++) {
-      played += `<tr><td class="small">${data[i].artist}</td><td class="small">${data[i].title}</td></tr>`;
-    }
-    var table = document.getElementById("already-played");
-    if (table)
-      table.innerHTML = played;
   }
 }

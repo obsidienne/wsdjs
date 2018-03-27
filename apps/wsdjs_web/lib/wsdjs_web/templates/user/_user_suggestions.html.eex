@@ -6,7 +6,7 @@
     </svg>
     <%= link "back to playlists", to: user_path(@conn, :show, @user), class: "btn btn-link" %>
 
-    <span class="playlist-name h3">suggestions <small></small>
+    <span class="playlist-name h3">suggestions
       <%= if @playlist.public == true do %>
       <span class="tippy" title="this list is public">
         <svg fill="#777777" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

@@ -26,7 +26,7 @@
   margin-bottom: 0;
   max-width: 16ch;
 }
-.song-suggestor:hover {
+a.song-suggestor:hover {
   text-decoration: underline;
   color: var(--accent-color);
 }
@@ -220,17 +220,17 @@
   color: var(--accent-color);
 }
 .song-title {
-  padding-top: 12px;
   font-weight: bold;
   color: var(--inactive-color);
+  color: black;
 }
 .song-artist {
   font-weight: lighter;
-  margin-bottom: 12px;
   color: var(--inactive-color);
 }
 
 .song-suggestor {
+  font-weight: lighter;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
@@ -277,13 +277,6 @@
   text-align: center;
   color: white;
   padding: 5px;
-}
-.song-top__title, .song-top__artist {
-  width: 100%;
-}
-
-.song-top__body .small {
-  color: white;
 }
 
 .song-top__footer__avatar {

@@ -4,9 +4,9 @@
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
     <div class="song-page__details">
-      <span class="h2"><%= @song.title %></span>
-      <span class="h3"><span class="text-muted">by</span> <%= @song.artist %></span>
-      <span class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "song-suggestor text-muted" %>
+      <span class="h2 song-title"><%= @song.title %></span>
+      <span class="h3 song-artist"><span class="text-muted">by</span> <%= @song.artist %></span>
+      <span class="text-muted song-suggestor"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "song-suggestor text-muted" %>
         <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>"></time>
       </span>
 
@@ -111,7 +111,7 @@
     <div class="song-page__video__details">
       <h5 class="text-ellipsis song-page__video__pros">{{title}}</h5>
       <h5 class="song-page__video__event">{{event}}
-      <timeago class="small text-muted"> ({{published_at}})</timeago>
+      <timeago class="text-muted"> ({{published_at}})</timeago>
       </h5>
 
       <button class="btn-link video__delete" data-path="/api/v1/videos/{{id}}">
@@ -134,7 +134,7 @@
       <header class="comment__header">
         <span>
           <a href="{{user.path}}">{{user.name}}</a>
-          <time class="timeago small" title="{{commented_at}}" datetime="{{commented_at}}"></time>
+          <time class="timeago" title="{{commented_at}}" datetime="{{commented_at}}"></time>
         </span>
         <button class="btn-link comment__delete" data-path="/api/v1/comments/{{id}}">
           <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
