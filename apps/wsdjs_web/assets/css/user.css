@@ -14,10 +14,6 @@
 .user-page__avatar img {
   border-radius: 50%;
 }
-.user-page__identity {
-  background: white;
-  margin-bottom: 16px;
-}
 .user-page__stats {
   margin-bottom: 1px;
   margin-top: 1px;
@@ -47,6 +43,7 @@
   padding-bottom: 15px;
   position: relative;
   width: 100%;
+  background-color: white;
 }
 .user-page__profile__section:empty {
   display: none;
@@ -75,18 +72,24 @@
 .user-page__actions {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 16px;
+  margin-top: 1rem;
   justify-content: space-between;
   align-items: center
 }
 .user-parameters th {
   white-space: nowrap;
 }
-#playlists-section ul, #playlist-section ul {
+#playlists-section ul {
   display: grid;
-  grid-gap: 8px;
-  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  grid-gap: .5rem;
+  grid-template-columns: 1fr 1fr;
 }
 #playlists-section li article:hover {
   transform: var(--accent-action);
+}
+
+@media (min-width: 768px) {
+  #playlists-section ul {
+    grid-template-columns: repeat( auto-fit, minmax(248px, 1fr) );
+  }
 }
