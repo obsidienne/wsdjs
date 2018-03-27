@@ -140,11 +140,14 @@
           </div>
         </td>
       </tr>
+      </tbody>
       <% end %>
-    </table>
   
-  <%= if @current_user.admin do %>
-    <table class="table user-parameters">
+      <%= if @current_user.admin do %>
+      <tbody>
+      <tr>
+      <td colspan="2"><span class="h3">Admin fields</tr></td>
+      </tr>
       <tr>
         <td><strong>Profil admin</strong><p class="text-muted">Master of universe ?</p></td>
         <td>
@@ -223,9 +226,9 @@
           </div>
         </td>
       </tr>
+    <% end %>
     </table>
 
-  <% end %>
 
   <%= submit "Update", class: "btn btn-primary" %>
   <% end %>
