@@ -1,4 +1,10 @@
-
+#users-section a {
+  text-decoration: underline dotted;
+}
+#users-section a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
 .user-page {
   padding-top: 16px;
 }
@@ -13,10 +19,6 @@
 }
 .user-page__avatar img {
   border-radius: 50%;
-}
-.user-page__stats {
-  margin-bottom: 1px;
-  margin-top: 1px;
 }
 .user-page__stats td {
   color: var(--inactive-color);
@@ -34,13 +36,10 @@
   padding-left: 4px;
   padding-right: 4px;
 }
-.user-page__profile__section:last-child {
-    border-bottom-width: 0;
-}
+
 .user-page__profile__section {
-  border-bottom: 1px solid #e8e8e8;
-  padding: 16px;
-  padding-bottom: 15px;
+  padding: 1rem;
+  padding-bottom: 1rem;
   position: relative;
   width: 100%;
   background-color: white;
@@ -48,7 +47,9 @@
 .user-page__profile__section:empty {
   display: none;
 }
-
+.social-link {
+  display: inline-block;
+}
 .social-link:hover {
   transform: var(--accent-action);
   display: inline-block;

@@ -184,6 +184,9 @@
   min-width: 0;
   margin-left: .5rem;
 }
+.top-song-body a {
+  text-decoration: underline dotted;
+}
 .top-song-body a:hover{
   text-decoration: underline;
   color: var(--accent-color);

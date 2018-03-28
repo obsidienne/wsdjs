@@ -5,10 +5,8 @@
     </div>
 
     <div class="player__description">
-      <span class="text-ellipsis">
-        <a href="#" class="player__description__title">Radio WCS</a>
-      </span>
-      <span class="text-ellipsis player__description__sub-title">by World Swing DJs</span>
+      <a href="#" class="song-title text-ellipsis player__description__title">Radio WCS</a>
+      <span class="text-ellipsis song-artist player__description__sub-title">by World Swing DJs</span>
     </div>
 
     <div class="player__play">

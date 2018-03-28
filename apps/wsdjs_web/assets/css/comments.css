@@ -26,6 +26,9 @@
   display: flex;
   align-items: center;
 }
+.comment__header a {
+  text-decoration: underline dotted;
+}
 
 .comment__content {
 	background: hsl(0, 0%, 100%);

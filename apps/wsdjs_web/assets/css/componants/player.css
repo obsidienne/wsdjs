@@ -27,19 +27,12 @@
   flex: 1 1 auto;
   padding: 5px 5px 5px 15px;
 }
-
-.player__description__title {
-  color: black;
-  font-weight: 100;
-  text-decoration: none;
-  display: block;
+.player__description .song-title {
+  text-decoration: underline dotted;
 }
-.player__description__sub-title {
-  margin-top: 0;
-}
-.player__description__title:hover {
+.player__description .song-title:hover {
+  color: var(--accent-color);
   text-decoration: underline;
-  transform: var(--accent-action);
 }
 .player__play {
   display: flex;

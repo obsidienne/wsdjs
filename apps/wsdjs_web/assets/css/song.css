@@ -208,6 +208,9 @@ a.song-suggestor:hover {
 .song-card__body {
   padding: 0 12px;
 }
+.song-card__body a {
+  text-decoration: underline dotted;
+}
 .song-card__body a:hover {
   text-decoration: underline;
   color: var(--accent-color);
@@ -228,6 +231,9 @@ a.song-suggestor:hover {
   text-overflow: ellipsis;
   width: 100%;
   white-space: nowrap;
+}
+.song-suggestor a {
+  text-decoration: underline dotted;
 }
 .song-suggested-full {
   font-size: 14px;
