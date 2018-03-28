@@ -147,7 +147,6 @@ a.song-suggestor:hover {
   margin: 0;
   display: flex;
   height: 100%;
-  max-height: 96px;
 }
 .song-minicard__heading {
   padding: 0;
@@ -167,12 +166,6 @@ a.song-suggestor:hover {
   min-width: 0;
   flex: 1 1 auto;
   overflow: hidden;
-}
-.song-minicard__footer {
-  margin-top: auto;
-  padding-bottom: 5px;
-  line-height: 29px;
-  height: 29px;
 }
 
 /****************************

@@ -42,9 +42,9 @@
 
 
       <div class="song-minicard__body">
-        <div class="song-title"><%= @rank.song.title %></div>
-        <div class="song-artist"><%= @rank.song.artist %></div>
-        <div class="text-muted song-suggestor"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></div>
+        <span class="song-title text-ellipsis"><%= @rank.song.title %></span>
+        <span class="song-artist text-ellipsis"><%= @rank.song.artist %></span>
+        <span class="text-muted song-suggestor"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></span>
 
         <footer class="song-minicard__footer">
           <span class="label label-default"><%= @rank.song.genre %></span>

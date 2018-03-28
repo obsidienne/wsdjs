@@ -11,9 +11,9 @@
   max-width: 414px;
 }
 .home-container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: .5rem;
 }
 .song-edit,
 .song-new {
@@ -51,8 +51,9 @@
   .container { max-width: 720px; }
 
   .home-container {
-    flex-direction: row;
+    grid-template-columns: 50% 50%;
   }
+  
   .hot-songs {
     grid-template-columns: repeat(auto-fit, 216px);
     grid-row-gap: 1rem;
