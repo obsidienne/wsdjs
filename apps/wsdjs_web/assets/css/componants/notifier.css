@@ -1,11 +1,11 @@
 .notifier-container {
   z-index: 999;
   position: fixed;
-  top: 72px;
-  right: 4px;
-  padding: 4px;
-  width: 344px;
-  max-width: 98%;
+  top: 4rem;
+  right: .5rem;
+  padding: .25rem;
+  width: 21rem;
+  max-width: calc(100vw - .25rem);
   color: hsl(0, 0%, 60%);
   box-sizing: border-box;
 }
