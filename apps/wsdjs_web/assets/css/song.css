@@ -220,8 +220,7 @@ a.song-suggestor:hover {
 }
 .song-title {
   font-weight: bold;
-  color: var(--inactive-color);
-  color: black;
+  color: var(--black-color);
 }
 .song-artist {
   font-weight: lighter;

@@ -89,7 +89,7 @@
   left: 0;
   right: 0;
   top: 0;
-  background: hsl(0, 0%, 0%);
+  background: var(--black-color);
 }
 .player__youtube_close {
   position: absolute;

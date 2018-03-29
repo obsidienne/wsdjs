@@ -9,6 +9,7 @@ a.song-title {
   display: block;
   -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
+  color: var(--black-color);
 }
 a.song-title:hover {
   -webkit-text-decoration: underline;
