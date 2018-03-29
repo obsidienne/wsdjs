@@ -26,10 +26,7 @@
   margin-bottom: 0;
   max-width: 16ch;
 }
-a.song-suggestor:hover {
-  text-decoration: underline;
-  color: var(--accent-color);
-}
+
 .song-page__tags {
   padding-top: 1rem;
 }
@@ -217,33 +214,6 @@ a.song-suggestor:hover {
   -webkit-text-decoration: underline;
   color: var(--accent-color);
   transform: var(--accent-action);
-}
-.song-title {
-  font-weight: bold;
-  color: var(--black-color);
-}
-.song-artist {
-  font-weight: lighter;
-  color: var(--inactive-color);
-}
-
-.song-suggestor {
-  font-weight: lighter;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  white-space: nowrap;
-}
-.song-suggestor a {
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-.song-suggestor a:hover {
-  color: var(--accent-color);
-  transform: var(--accent-action);
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  display: inline-block;
 }
 .song-suggested-full {
   font-size: 14px;

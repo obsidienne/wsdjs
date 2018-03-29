@@ -27,15 +27,6 @@
   flex: 1 1 auto;
   padding: 5px 5px 5px 15px;
 }
-.player__description .song-title {
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-.player__description .song-title:hover {
-  color: var(--accent-color);
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
 .player__play {
   display: flex;
   flex-direction: column;
@@ -89,7 +80,7 @@
   left: 0;
   right: 0;
   top: 0;
-  background: var(--black-color);
+  background: var(--font-primary-color);
 }
 .player__youtube_close {
   position: absolute;

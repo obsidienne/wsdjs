@@ -5,18 +5,6 @@
 .table_song-art {
   width: 64px;
 }
-a.song-title {
-  display: block;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-  color: var(--black-color);
-}
-a.song-title:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  color: var(--accent-color);
-  transform: var(--accent-action);
-}
 .playlist {
   position: relative;
   display: block;

@@ -44,7 +44,7 @@
 }
 .comment__delete {
   margin-left: auto;
-  color: var(--black-color);
+  color: var(--font-primary-color);
 }
 
 /** =====================
