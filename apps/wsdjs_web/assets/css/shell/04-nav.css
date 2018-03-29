@@ -34,6 +34,7 @@ main > header h2 {
 }
 
 .glnav a:hover {
+  -webkit-text-decoration: underline;
   text-decoration: underline;
   transform: var(--accent-action);
 }
@@ -63,13 +64,10 @@ main > header h2 {
 
 .glnav__menu {
   padding: 0 12px;
-  color: #596377;
-  transition: color .6s cubic-bezier(.25, .8, .25, 1);
-}
-.glnav__menu:hover {
   color: #D3D8E0;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
-
 
 .logo-small {
   width: 40px;
@@ -79,14 +77,6 @@ main > header h2 {
   height: 48px;
   width: 120px;
   display: none;
-}
-.logo:hover {
-  fill: #D3D8E0;
-  transition: fill .6s cubic-bezier(.25, .8, .25, 1);
-}
-.logo:not(:hover) {
-  fill: #455A64;
-  transition: fill .6s cubic-bezier(.25, .8, .25, 1);  
 }
 
 @media (min-width: 768px) {

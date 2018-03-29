@@ -93,6 +93,8 @@ a.btn.disabled {
   cursor: pointer;
   border: 0;
   padding: 0;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 .btn-link,
 .btn-link:active,
@@ -111,6 +113,7 @@ a.btn.disabled {
 .btn-link:focus {
   color: hsl(208, 56%, 31%);
   text-decoration: underline;
+  -webkit-text-decoration: underline;
   background-color: transparent;
   transform: var(--accent-action);
 }
