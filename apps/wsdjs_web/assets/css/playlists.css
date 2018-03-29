@@ -3,7 +3,16 @@
   display: flex;
 }
 .table_song-art {
-  width: 0;
+  width: 64px;
+}
+a.song-title {
+  display: block;
+  text-decoration: underline dotted;
+}
+a.song-title:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+  transform: var(--accent-action);
 }
 .playlist {
   position: relative;

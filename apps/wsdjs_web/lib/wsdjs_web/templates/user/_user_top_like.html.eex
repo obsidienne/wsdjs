@@ -33,13 +33,11 @@
     <%= for song <- @songs do %>
     <tr>
       <td class="table_song-art">
-        <img src="<%= art_url(song.art, 75) %>" srcset="<%= art_srcset(song.art, 75) %>" sizes="72px" width="72px" height="72px" />
+        <img src="<%= art_url(song.art, 64) %>" srcset="<%= art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
       <td>
-        <%= link to: song_path(@conn, :show, song), class: "text-muted" do %>
-          <div><%= song.title %></div>
-          <div><%= song.artist %></div>
-        <% end %>
+        <%= link song.title, to: song_path(@conn, :show, song), class: "song-title" %>
+        <span class="song-artist"><%= song.artist %></span>
       </td>
       <td>
         <span class="label label-default"><%= song.genre %></span>
