@@ -29,7 +29,6 @@
 }
 .top-steps li.current {
   font-weight: bold;
-  color: var(--accent-color);
 }
 
 /****************************
