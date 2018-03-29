@@ -209,11 +209,14 @@ a.song-suggestor:hover {
   padding: 0 12px;
 }
 .song-card__body a {
+  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
 .song-card__body a:hover {
   text-decoration: underline;
+  -webkit-text-decoration: underline;
   color: var(--accent-color);
+  transform: var(--accent-action);
 }
 .song-title {
   font-weight: bold;
@@ -233,7 +236,15 @@ a.song-suggestor:hover {
   white-space: nowrap;
 }
 .song-suggestor a {
+  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
+}
+.song-suggestor a:hover {
+  color: var(--accent-color);
+  transform: var(--accent-action);
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  display: inline-block;
 }
 .song-suggested-full {
   font-size: 14px;

@@ -1,7 +1,9 @@
 #users-section a {
+  -webkit-text-decoration: underline;
   text-decoration: underline dotted;
 }
 #users-section a:hover {
+  -webkit-text-decoration: underline;
   text-decoration: underline;
   color: var(--accent-color);
 }

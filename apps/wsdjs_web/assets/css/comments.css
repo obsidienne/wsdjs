@@ -27,9 +27,16 @@
   align-items: center;
 }
 .comment__header a {
+  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
+  display: inline-block;
 }
-
+.comment__header a:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  transform: var(--accent-action);
+  color: var(--accent-color);
+}
 .comment__content {
 	background: hsl(0, 0%, 100%);
 	padding: 12px;

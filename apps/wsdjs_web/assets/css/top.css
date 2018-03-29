@@ -185,9 +185,11 @@
   margin-left: .5rem;
 }
 .top-song-body a {
+  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
 .top-song-body a:hover{
+  -webkit-text-decoration: underline;
   text-decoration: underline;
   color: var(--accent-color);
   transform: var(--accent-action);
