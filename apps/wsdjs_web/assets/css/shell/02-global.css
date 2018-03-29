@@ -7,8 +7,8 @@
   --accent-color: hsl(45, 100%, 51.4%);
   --inactive-color: hsl(0, 0%, 45%);
   --accent-action: translateY(-2px);
-  --shadow-inactive: 0 1px 3px hsla(0, 0%, 0%, 0.2);
-  --shadow-active: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
+  --shadow-inactive: 0 1px 3px 0 hsla(0, 0%, 0%, .2);
+  --shadow-active: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
 
   --font-primary-color: hsl(0, 0%, 13%);
   --font-secondary-color: hsl(0, 0%, 29%);
