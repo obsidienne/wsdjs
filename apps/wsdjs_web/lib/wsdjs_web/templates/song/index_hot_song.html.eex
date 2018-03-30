@@ -3,7 +3,7 @@
     <%= if Enum.count(@songs) > 0 do %>
     <div class="page-header-sticky">
         <h2 class="page-header container">
-            <time class="date-format" datetime="<%= @month %>"></time> <span class="text-muted text-ligther h3"><%= Enum.count(@songs) %> suggestions</span>
+            <time class="date-format" datetime="<%= @month %>"></time> <span class="text-muted text-ligther h3"><%= Enum.count(@songs) %> songs</span>
         </h2>
     </div>
     <ul class="hot-songs container">

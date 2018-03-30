@@ -1,6 +1,6 @@
 <header>
   <div class="container">
-    <h1><%= gettext "WSDJs Tops 10" %> </h1>
+    <h1><%= gettext "DJs Tops 10" %> </h1>
   </div>
 </header>
 
