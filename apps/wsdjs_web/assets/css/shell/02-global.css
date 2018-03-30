@@ -68,14 +68,6 @@ img.responsive {
   text-align: center;
   margin: 15px;
 }
-::-moz-selection {
-  background: var(--accent-color);
-  color: var(--font-primary-color);
-}
-::selection {
-  background: var(--accent-color);
-  color: var(--font-primary-color);
-}
 .unconnected .h2 {
   display: block;
   white-space: nowrap;
