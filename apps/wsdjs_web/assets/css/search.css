@@ -24,7 +24,7 @@
 
 .search-container.focused {
   flex-grow: 1;
-  max-width: calc(20 * var(--line-height-base));
+  max-width: 20rem;
 }
 
 .search__input__wrap {
