@@ -227,9 +227,13 @@
   padding: 18px 12px 0;
   margin-bottom: 6px;
 }
+.song-card-footer button {
+  padding: 0;
+}
 .song-card-footer a {
   height: 24px;
 }
+
 /****************************
   square card
 ****************************/

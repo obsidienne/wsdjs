@@ -1,5 +1,7 @@
 .opinions-container {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 .song-opinion {
   user-select: none;
