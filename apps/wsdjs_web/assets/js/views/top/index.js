@@ -38,8 +38,6 @@ export default class View extends MainView {
 
       var sentinel = document.querySelector("#top-list .sentinel");
       this.observer.observe(sentinel);
-
-      super.formatDate("time.date-format", {year: "numeric", month: "long"});
     })
     .catch(function(error) {
       console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);

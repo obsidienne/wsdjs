@@ -68,10 +68,8 @@
       <div class="song-artist text-ellipsis"><%= @song.artist %></div>
 
       <div class="text-muted text-ellipsis song-suggested-full">
-        <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>,
-        <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b, %k:%M", :strftime) %>"><%= utc_to_local(@song.inserted_at) %></time>
+        <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>
       </div>
-      
     </div>
 
     <footer class="song-card-footer text-muted song-opinions">

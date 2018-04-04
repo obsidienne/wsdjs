@@ -20,7 +20,11 @@
           <%= if @rank.song.bpm > 0 do %>
             <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago text-muted" datetime="<%= utc_to_local(@rank.song.inserted_at) %>"><%= utc_to_local(@rank.song.inserted_at) %></time>
+          <time class="timeago text-muted" 
+                datetime="<%= utc_to_local(@rank.song.inserted_at) %>"
+                title="<%= Timex.format!(@rank.song.inserted_at, "%B %d, %Y", :strftime) %>">
+                <%= Timex.format!(@rank.song.inserted_at, "{relative}", :relative) %>
+          </time>
         </footer>
       </div>
     </article>
@@ -51,7 +55,11 @@
           <%= if @rank.song.bpm > 0 do %>
             <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago text-muted" datetime="<%= utc_to_local(@rank.song.inserted_at) %>"><%= utc_to_local(@rank.song.inserted_at) %></time>
+          <time class="timeago text-muted" 
+                datetime="<%= utc_to_local(@rank.song.inserted_at) %>"
+                title="<%= Timex.format!(@rank.song.inserted_at, "%B %d, %Y", :strftime) %>">
+                <%= Timex.format!(@rank.song.inserted_at, "{relative}", :relative) %>
+          </time>
         </footer>
       </div>
     </article>

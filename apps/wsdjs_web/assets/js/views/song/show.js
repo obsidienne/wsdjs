@@ -1,4 +1,3 @@
-import timeago from 'timeago.js';
 import autolinkjs from 'autolink-js';
 import MainView from '../main';
 import Mustache from 'micromustache';

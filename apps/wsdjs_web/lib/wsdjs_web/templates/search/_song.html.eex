@@ -14,7 +14,9 @@
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago text-muted" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
+          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>">
+            <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
+          </time>
         </footer>
       </div>
     </article>
@@ -34,7 +36,6 @@
         <span class="text-ellipsis song-artist">by <%= @song.artist %></span>
         <span class="text-muted text-ellipsis song-suggestor">
           <%= gettext "suggested by" %> <%= user_displayed_name(@song.user) %>
-          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
         </span>
 
         <footer class="song-minicard__footer">
@@ -42,6 +43,9 @@
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
+          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>">
+            <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
+          </time>
         </footer>
       </div>
     </article>

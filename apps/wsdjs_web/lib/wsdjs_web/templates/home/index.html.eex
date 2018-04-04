@@ -38,7 +38,11 @@
 
 <%= if @top && Enum.count(@top.ranks) > 0 do %>
   <section>
-    <h2 class="page-header"><time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> DJs Top</h2>
+    <h2 class="page-header">
+      <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>">
+          <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
+      </time>, DJs Top
+    </h2>
     <ul class="home-page__top__song">
       <%= for rank <- @top.ranks do %>
         <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>
