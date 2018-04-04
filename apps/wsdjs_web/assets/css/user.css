@@ -51,13 +51,20 @@
 .user-page__profile__section:empty {
   display: none;
 }
+.social-link:first-child {
+  margin-top: .5rem;
+}
 .social-link {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  margin-bottom: .5rem;
+}
+.social-link svg {
+  margin-right: .5rem;
 }
 .social-link:hover {
   transform: translateY(-2px);
   transform: var(--accent-action);
-  display: inline-block;
 }
 .social-sc:hover svg{
   fill: #ff5500;
