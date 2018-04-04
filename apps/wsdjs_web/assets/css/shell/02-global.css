@@ -32,6 +32,7 @@ html {
 
 
 body {
+  background-color: hsl(240, 20%, 98%);
   background-color: var(--bg-color);
   padding-bottom: calc(4 * 80px);
 }
@@ -73,7 +74,9 @@ img.responsive {
 
 
 .song-title {
+  font-weight: 700;
   font-weight: var(--font-primary-weight);
+  color: hsl(0, 0%, 13%);
   color: var(--font-primary-color);
 }
 a.song-title {
@@ -84,15 +87,21 @@ a.song-title {
 a.song-title:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .song-artist {
+  font-weight: 400;
   font-weight: var(--font-secondary-weight);
+  color: hsl(0, 0%, 29%);
   color: var(--font-secondary-color);
 }
 .song-suggestor {
+  font-weight: 400;
   font-weight: var(--font-secondary-weight);
+  color: hsl(0, 0%, 45%);
   color: var(--font-third-color);
 
   overflow: hidden;
@@ -109,7 +118,9 @@ a.song-suggestor:hover
 ,.song-suggestor a:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .song-suggestor a:hover {

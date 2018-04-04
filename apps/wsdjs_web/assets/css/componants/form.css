@@ -1,9 +1,11 @@
 fieldset {
   padding: 8px;
   border: 0;
+  box-shadow: inset 0px 0px 3px hsl(0, 0%, 45%);
   box-shadow: inset 0px 0px 3px var(--inactive-color);
 }
 legend {
+  background-color: hsl(240, 20%, 98%);
   background-color: var(--bg-color);
   padding-left: 4px;
   padding-right: 4px;

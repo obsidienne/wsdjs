@@ -10,6 +10,7 @@
 }
 .song-page__art {
   flex: 0 0 312px;
+  box-shadow: 0 1px 3px 0 hsla(0, 0%, 0%, .2);
   box-shadow: var(--shadow-inactive);
   width: 312px;
   height: 312px;
@@ -212,7 +213,9 @@
 .song-card__body a:hover {
   text-decoration: underline;
   -webkit-text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .song-suggested-full {

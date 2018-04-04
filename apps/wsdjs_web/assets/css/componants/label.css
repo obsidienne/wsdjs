@@ -23,6 +23,7 @@ a.label:focus {
   top: -1px;
 }
 .label-default {
+  background-color: hsl(0, 0%, 45%);
   background-color: var(--font-third-color);
 }
 .label-default[href]:hover,

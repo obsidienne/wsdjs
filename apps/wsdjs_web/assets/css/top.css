@@ -14,6 +14,7 @@
   display: inline-block;
   content: '\00bb';
   margin: 0 .5rem;
+  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 .top-steps li:last-of-type::after {
@@ -190,7 +191,9 @@
 .top-song-body a:hover{
   -webkit-text-decoration: underline;
   text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 

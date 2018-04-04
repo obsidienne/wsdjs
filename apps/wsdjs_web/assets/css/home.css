@@ -20,7 +20,9 @@
 }
 
 .home-page__top__song li:hover, .home-page__instant__hit li:hover {
+  transform: translateY(-2px);
   transform: var(--accent-action);
+  box-shadow: 0 1px 3px 0 hsla(0, 0%, 0%, .2);
   box-shadow: var(--shadow-active);
 }
 

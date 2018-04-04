@@ -76,6 +76,7 @@
   background-color: transparent;
 }
 .tops__top__content {
+  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
   position: relative;
   margin-left: 0;
@@ -84,6 +85,7 @@
 }
 .tops__top__date {
   display: flex;
+  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 .tops__top__date time {

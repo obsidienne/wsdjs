@@ -6,6 +6,7 @@
 .song-opinion {
   user-select: none;
   background: transparent;
+  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
   border: 0;
   padding-top: 0;

@@ -5,6 +5,7 @@
 #users-section a:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
 }
 .user-page {
@@ -23,6 +24,7 @@
   border-radius: 50%;
 }
 .user-page__stats td {
+  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 .user-profile-edit {
@@ -53,6 +55,7 @@
   display: inline-block;
 }
 .social-link:hover {
+  transform: translateY(-2px);
   transform: var(--accent-action);
   display: inline-block;
 }
@@ -66,6 +69,7 @@
   fill: #4267b2;
 }
 .user-page__details {
+  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
   margin: 0;
 }
@@ -88,6 +92,7 @@
   grid-template-columns: 1fr 1fr;
 }
 #playlists-section li article:hover {
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 

@@ -30,12 +30,16 @@ main > header h2 {
 
   position: absolute;
   width: 100%;
-  top: 0;  border-top: 2px solid var(--accent-color);
+  top: 0;  
+
+  border-top: 2px solid hsl(45, 100%, 51.4%);;  
+  border-top: 2px solid var(--accent-color);
 }
 
 .glnav a:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .glnav .container {
