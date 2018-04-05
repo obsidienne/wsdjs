@@ -1,38 +1,4 @@
 /****************************
-  step selector
-****************************/
-.top-steps {
-  background-color: #edeff0;
-  padding-bottom: .5rem;
-  padding-top: .5rem;
-  margin-top: -1.5rem;
-}
-.top-steps li {
-  display: inline-block;
-}
-.top-steps li::after {
-  display: inline-block;
-  content: '\00bb';
-  margin: 0 .5rem;
-  color: hsl(0, 0%, 45%);
-  color: var(--inactive-color);
-}
-.top-steps li:last-of-type::after {
-  display: none;
-}
-.top-steps li > * {
-  display: inline-block;
-  color: #2c3f4c;
-}
-.top-steps button {
-  margin: 0;
-  vertical-align: inherit;
-}
-.top-steps li.current {
-  font-weight: bold;
-}
-
-/****************************
   Voting top
 ****************************/
 .voting-position__selector {

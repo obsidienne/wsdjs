@@ -91,3 +91,42 @@ main > header h2 {
     display: inline;
   }
 }
+
+/****************************
+  secondary navigation
+****************************/
+.secondary-nav {
+  background-color: #edeff0;
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+}
+.secondary-nav li {
+  display: inline-block;
+}
+.secondary-nav.breadcrumb {
+  margin-top: -1.5rem;
+}
+.secondary-nav li::after {
+  display: inline-block;
+  content: '';
+  color: hsl(0, 0%, 45%);
+  color: var(--inactive-color);
+  margin: 0 .5rem;
+}
+.secondary-nav.breadcrumb li::after {
+  content: '\00bb';
+}
+.secondary-nav li:last-of-type::after {
+  display: none;
+}
+.secondary-nav li > * {
+  display: inline-block;
+  color: #2c3f4c;
+}
+.secondary-nav button {
+  margin: 0;
+  vertical-align: inherit;
+}
+.secondary-nav li.current {
+  font-weight: bold;
+}

@@ -1,3 +1,9 @@
+<nav class="secondary-nav">
+  <ol class="container">
+    <li class="current">playlists</li>
+  </ol>
+</nav>
+
 <section id="user-page" class="user-page container">
   <div>
     <section class="user-page__profile__section">
