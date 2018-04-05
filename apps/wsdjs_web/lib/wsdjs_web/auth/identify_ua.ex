@@ -13,7 +13,7 @@ defmodule WsdjsWeb.IdentifyUa do
 
   def layout_type(%Plug.Conn{} = conn) do
     if device_type(conn) == "mobile" do
-      {WsdjsWeb.LayoutView, :"mobile-app"}
+      {WsdjsWeb.LayoutView, :app}
     else
       {WsdjsWeb.LayoutView, :app}
     end
