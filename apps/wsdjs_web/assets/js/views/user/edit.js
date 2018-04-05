@@ -1,4 +1,3 @@
-import Places from 'places.js/dist/cdn/places.js';
 import MainView from '../main';
 import Notifier from '../../components/notifier';
 
@@ -10,7 +9,7 @@ export default class View extends MainView {
 
   mount() {
     super.mount();
-    Places({
+    places({
       container: document.querySelector('#user_country'),
       type: 'country'
     })
