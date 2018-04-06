@@ -1,0 +1,138 @@
+/*
+-----------------------------------------------
+Typesetting for World Swing Deejays
+Author:   Claudio Bernardes
+Date:     20 Apr 2017
+http://modularscale.com/scale/?px1=18&px2=190&ra1=1.618
+1em @ 1:1.2 (minor third)
+http://alistapart.com/articles/more-meaningful-typography/
+-----------------------------------------------
+*/
+
+/*
+  http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
+  https://www.gridlover.net/try
+*/
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-size: var(--font-size);
+  line-height: 1.5;
+}
+
+
+h1, h2, h3,
+.h1, .h2, .h3 {
+  font-family: inherit;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+h1, .h1 {
+  font-size: 2.375rem;
+  line-height: 3rem;
+  padding-top: 1.5rem;
+  margin-bottom: 3rem;
+  font-weight: bold;
+}
+.h1 {
+  padding-top: 0;
+  margin-bottom: 0;  
+} 
+h2, .h2 {
+  font-size: 1.75rem;
+  line-height: 3rem;
+  padding-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+.h2 {
+  padding-top: 0;
+  margin-bottom: 0;
+}
+h3, .h3 {
+  font-size: 1.3125rem;
+  line-height: 1.5rem;
+  padding-top: 1.5rem;
+  margin-bottom: 0rem;
+  font-weight: bold;
+}
+.h3{
+  padding-top: 0;
+  margin-bottom: 0;
+} 
+
+small, .small {
+  font-weight: 300;
+  color: hsl(0, 0%, 45%);
+  color: var(--inactive-color);
+}
+
+h2.page-header {
+  padding-top: 3rem;
+  margin-top: .5rem;
+}
+.page-header-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1rem;
+  background-color: hsl(240, 20%, 98%);
+  background-color: var(--bg-color);
+  z-index: 1000;
+}
+
+p { 
+  margin: 0 0 10px; 
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  margin-top: 1rem;
+}
+dd {
+  margin-bottom: 1rem;
+  margin-left: 0;
+}
+dt, .text-bold {
+  font-weight: bold;
+}
+.text-ligther {
+  font-weight: lighter;
+}
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: block;
+}
+.text-muted {
+  color: hsl(0, 0%, 45%);
+  color: var(--inactive-color);
+}
+.text-danger {
+  color: #dc3545 !important;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: vertical;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+time {
+  text-transform: capitalize;
+  cursor: help;
+}

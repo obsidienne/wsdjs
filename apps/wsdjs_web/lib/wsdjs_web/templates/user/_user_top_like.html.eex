@@ -5,7 +5,7 @@
       <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
     <%= link "back to playlists", to: user_path(@conn, :show, @user), class: "btn btn-link" %>
-    <span class="playlist-name h3">likes and tops <small><%= Enum.count(@songs) %></small>
+    <span class="playlist-name h3">likes and tops
       <%= if @playlist.public == true do %>
       <span class="tippy" title="this list is public">
         <svg fill="#777777" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -25,18 +25,19 @@
   </div>
 
   <%= if Enum.count(@songs) > 0 do %>
+  <p>
+    <%= Enum.count(@songs) %> songs
+  </p>
   <table class="table">
     <tbody>
     <%= for song <- @songs do %>
     <tr>
       <td class="table_song-art">
-        <img src="<%= art_url(song.art, 75) %>" srcset="<%= art_srcset(song.art, 75) %>" sizes="75px" width="75px" height="75px" />
+        <img src="<%= art_url(song.art, 64) %>" srcset="<%= art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
       <td>
-        <%= link to: song_path(@conn, :show, song), class: "text-muted" do %>
-          <div><%= song.title %></div>
-          <div><%= song.artist %></div>
-        <% end %>
+        <%= link song.title, to: song_path(@conn, :show, song), class: "song-title" %>
+        <span class="song-artist"><%= song.artist %></span>
       </td>
       <td>
         <span class="label label-default"><%= song.genre %></span>

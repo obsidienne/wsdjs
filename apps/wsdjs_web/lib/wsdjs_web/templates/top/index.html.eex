@@ -1,13 +1,13 @@
 <header>
   <div class="container">
-    <h1><%= gettext "WSDJs Tops 10" %> </h1>
+    <h1><%= gettext "DJs Tops 10" %> </h1>
   </div>
 </header>
 
 <%= if is_nil(@current_user) do %>
   <div class="container signin">
-    <h4>World Swing DeeJays</h4>
-    <h5>The best West Coast Swing music from all around the world !</h5>
+    <span class="h1">World Swing DeeJays</span>
+    <span class="h2">The best West Coast Swing music from all around the world !</span>
 
     <%= link to: session_path(@conn, :new) do %>
       <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
@@ -18,7 +18,7 @@
 <% end %>
 
 <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-<div class="container tops-actions">
+<div class="container actions">
   <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
 </div>
 <% end %>

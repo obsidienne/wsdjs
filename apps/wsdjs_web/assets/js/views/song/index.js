@@ -1,4 +1,3 @@
-import timeago from 'timeago.js';
 import MainView from '../main';
 import lazyload from '../../components/lazyload';
 
@@ -39,11 +38,9 @@ export default class View extends MainView {
       sentinel.parentNode.removeChild(sentinel);
 
       container.insertAdjacentHTML('beforeend', data);
-      new timeago().render(document.querySelectorAll("time.timeago"));
 
       var sentinel = document.querySelector("#song-list .sentinel");
       this.observer.observe(sentinel);
-      super.formatDate("time.date-format", {year: "numeric", month: "long"});
       lazyload.refresh();
     })
     .catch(function(error) {

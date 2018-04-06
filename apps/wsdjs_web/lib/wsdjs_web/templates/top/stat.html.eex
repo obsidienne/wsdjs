@@ -1,11 +1,15 @@
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small>Statistics</small></h1>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <span class="text-muted">Statistics</span></h1>
   </div>
 </header>
 
-<div class="container actions">
-  <%= link "go back to top", to: top_path(@conn, :show, @top.id), class: "btn btn-link" %>
+<div class="actions container">
+  <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+  </svg>
+  <%= link "go back to top", to: top_path(@conn, :show, @top.id), class: "btn btn-link", style: "margin-right: auto" %>
 </div>
 
 <section class="container top-stat">
@@ -24,20 +28,20 @@
   <ul class="top-stat__votes">
     <%= for user <- Wsdjs.Accounts.list_users() do %>
       <%= if user.profil_djvip do %>
-        <li class="song-card card" >
-          <article>
-          <h4><%= user.name %></h4>
-          <div class="text-overflow"><%= get_song_by(@top, user, 1) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 2) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 3) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 4) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 5) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 6) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 7) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 8) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 9) %></div>
-          <div class="text-overflow"><%= get_song_by(@top, user, 10) %></div>
-          </article>
+        <li class="card" >
+          <span class="h2"><%= user.name %></span>
+          <ol>
+            <li><%= get_song_by(@top, user, 1) %></li>
+            <li><%= get_song_by(@top, user, 2) %></li>
+            <li><%= get_song_by(@top, user, 3) %></li>
+            <li><%= get_song_by(@top, user, 4) %></li>
+            <li><%= get_song_by(@top, user, 5) %></li>
+            <li><%= get_song_by(@top, user, 6) %></li>
+            <li><%= get_song_by(@top, user, 7) %></li>
+            <li><%= get_song_by(@top, user, 8) %></li>
+            <li><%= get_song_by(@top, user, 9) %></li>
+            <li><%= get_song_by(@top, user, 10) %></li>
+          </ol>
         </li>
       <% end %>
     <% end %>

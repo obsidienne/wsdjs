@@ -1,19 +1,18 @@
 .btn {
   display: inline-block;
-  margin-bottom: 0;
   font-weight: normal;
   text-align: center;
   vertical-align: middle;
   touch-action: manipulation;
   cursor: pointer;
   background-image: none;
-  border: 1px solid transparent;
   white-space: nowrap;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
+  padding: 8px 12px;
   border-radius: 4px;
   user-select: none;
+  margin: 4px 0;
+  border: 0;
+  line-height: 1.5;
 }
 .btn:focus,
 .btn:active:focus,
@@ -48,26 +47,24 @@ a.btn.disabled {
 }
 .btn-primary {
   color: hsl(0, 0%, 100%);
+  background-color: hsl(208, 56%, 46%);
   background-color: var(--primary-color);
-  border-color: hsl(208, 56%, 41%);
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 36%);
-  border-color: hsl(207, 56%, 16%);
 }
 .btn-primary:hover {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 36%);
-  border-color: hsl(208, 57%, 29%);
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .btn-primary:active,
 .btn-primary.active {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 36%);
-  border-color: hsl(208, 57%, 29%);
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,
@@ -77,7 +74,7 @@ a.btn.disabled {
 .btn-primary.active.focus {
   color: hsl(0, 0%, 100%);
   background-color: hsl(208, 57%, 29%);
-  border-color: hsl(207, 56%, 16%);
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .btn-primary:active,
@@ -91,14 +88,16 @@ a.btn.disabled {
 .btn-primary.disabled.focus,
 .btn-primary[disabled].focus {
   background-color: hsl(208, 56%, 46%);
-  border-color: hsl(208, 56%, 41%);
 }
 
 .btn-link {
   color: hsl(208, 56%, 46%);
-  font-weight: normal;
   border-radius: 0;
   cursor: pointer;
+  border: 0;
+  padding: 0;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 .btn-link,
 .btn-link:active,
@@ -117,41 +116,43 @@ a.btn.disabled {
 .btn-link:focus {
   color: hsl(208, 56%, 31%);
   text-decoration: underline;
+  -webkit-text-decoration: underline;
   background-color: transparent;
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .btn-link[disabled]:hover,
 .btn-link[disabled]:focus {
+  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
   text-decoration: none;
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .btn-link.text-muted {
+  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 
 .btn-danger {
   color: hsl(0, 0%, 100%);
-  background-color: hsl(2, 64%, 58%);
-  border-color: hsl(2, 64%, 53%);
+  background-color: hsl(1, 85%, 45%);
 }
 .btn-danger:focus,
 .btn-danger.focus {
   color: hsl(0, 0%, 100%);
-  background-color: hsl(2, 64%, 48%);
-  border-color: hsl(2, 65%, 28%);
+  background-color: hsl(1, 85%, 45%);
 }
 .btn-danger:hover {
   color: hsl(0, 0%, 100%);
-  background-color: hsl(2, 64%, 48%);
-  border-color: hsl(2, 65%, 41%);
+  background-color: hsl(2, 85%, 45%);
+  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 .btn-danger:active,
 .btn-danger.active {
   color: hsl(0, 0%, 100%);
-  background-color: hsl(2, 64%, 48%);
-  border-color: hsl(2, 65%, 41%);
+  background-color: hsl(2, 85%, 45%);
 }
 .btn-danger:active:hover,
 .btn-danger.active:hover,
@@ -160,8 +161,7 @@ a.btn.disabled {
 .btn-danger:active.focus,
 .btn-danger.active.focus {
   color: hsl(0, 0%, 100%);
-  background-color: hsl(2, 65%, 41%);
-  border-color: hsl(2, 65%, 28%);
+  background-color: hsl(2, 85%, 45%);
 }
 .btn-danger:active,
 .btn-danger.active {
@@ -169,6 +169,5 @@ a.btn.disabled {
 }
 .btn-danger[disabled]:hover,
 .btn-danger[disabled]:focus {
-  background-color: hsl(2, 64%, 58%);
-  border-color: hsl(2, 64%, 53%);
+  background-color: hsl(0, 85%, 55%);
 }

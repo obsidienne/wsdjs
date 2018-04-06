@@ -7,12 +7,12 @@
         <img src="<%= art_url(nil, 200) %>" srcset="<%= art_srcset(nil, 200) %>" sizes="200px" class="responsive" />
       </div>
 
-      <h6 class="song-card__tags">
+      <div class="song-card__tags">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
         <% end %>
-      </h6>
+      </div>
     </a>
 
     <div class="song-card__body">
@@ -22,19 +22,20 @@
     <footer class="song-card-footer text-muted song-opinions">
       <div class="opinions-container">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @song.opinions, user: @conn.assigns[:current_user] %>
-      </div>
 
-      <a>
-        <%= if Enum.count(@song.comments) > 0 do %>
-          <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-            <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z' />
-          </svg>
-        <% else %>
-          <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-            <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10Z' />
-          </svg>
-        <% end %>
-      </a>
+        <a>
+          <%= if Enum.count(@song.comments) > 0 do %>
+            <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+              <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z' />
+            </svg>
+          <% else %>
+            <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+              <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10Z' />
+            </svg>
+          <% end %>
+        </a>
+
+      </div>
     </footer>
   </article>
 </li>
@@ -48,7 +49,7 @@
       <div class="img-embed">
         <img src="<%= art_url(nil, 200) %>" data-src="<%= art_url(@song.art, 200) %>" data-srcset="<%= art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
       </div>
-      <h6 class="song-card__tags">
+      <div class="song-card__tags">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
@@ -59,37 +60,35 @@
           <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
         </svg>
         <% end %>
-      </h6>
+      </div>
     </a>
 
     <div class="song-card__body">
-      <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "h5  text-ellipsis" %>
-      <h6 class="small text-ellipsis"><%= @song.artist %></h6>
+      <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "song-title text-ellipsis" %>
+      <div class="song-artist text-ellipsis"><%= @song.artist %></div>
 
-      <h6 class="song-card__body__suggested-by text-muted small">
-        <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>,
-        <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b, %k:%M", :strftime) %>"><%= utc_to_local(@song.inserted_at) %></time>
-      </h6>
-      
+      <div class="text-muted text-ellipsis song-suggested-full">
+        <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>
+      </div>
     </div>
 
     <footer class="song-card-footer text-muted song-opinions">
       <div class="opinions-container">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @song.opinions, user: @conn.assigns[:current_user] %>
+
+        <a href="<%= song_path(@conn, :show, @song) %>">
+          <%= if Enum.count(@song.comments) > 0 do %>
+            <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+              <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z' />
+            </svg>
+          <% else %>
+            <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+              <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10Z' />
+            </svg>
+          <% end %>
+        </a>
+
       </div>
-
-      <a href="<%= song_path(@conn, :show, @song) %>">
-        <%= if Enum.count(@song.comments) > 0 do %>
-          <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-            <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z' />
-          </svg>
-        <% else %>
-          <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-            <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10Z' />
-          </svg>
-        <% end %>
-      </a>
-
     </footer>
   </article>
 </li>

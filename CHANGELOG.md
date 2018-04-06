@@ -1,3 +1,10 @@
+# version 1.8.3
+- connect video to event
+- vertical rhythm 8px
+- webpack4
+- Sticky month for song list
+- update tooltip
+- Improve page titles
 # version 1.8.2
 - update changelog
 - remove admin path for users as members are a public notion

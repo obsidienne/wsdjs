@@ -1,5 +1,3 @@
-import timeago from 'timeago.js';
-
 export default class search {
   constructor() {
     var self = this;
@@ -36,7 +34,6 @@ export default class search {
     })
     .then((data) => {
       document.querySelector(".search-results-container").innerHTML = data;
-      new timeago().render(document.querySelectorAll(".search-results-container time.timeago"));
     })
     .catch(function(error) {
       console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);

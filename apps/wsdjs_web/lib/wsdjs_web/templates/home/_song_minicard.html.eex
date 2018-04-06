@@ -7,14 +7,18 @@
         <img src="<%= art_url(nil, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
-        <h4 class="text-muted">hidden track</h4>
+        <span class="text-muted text-ellipsis">hidden track</span>
 
         <footer class="song-minicard__footer">
           <span class="label label-default"><%= @song.genre %></span>
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago small text-muted" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
+          <time class="timeago text-muted" 
+                datetime="<%= utc_to_local(@song.inserted_at) %>"
+                title="<%= Timex.format!(@song.inserted_at, "%B %d, %Y", :strftime) %>">
+                <%= Timex.format!(@song.inserted_at, "{relative}", :relative) %>
+          </time>
         </footer>
       </div>
     </article>
@@ -30,16 +34,20 @@
         <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
-        <h5 class="text-muted"><%= @song.title %></h5>
-        <h6 class="text-muted"><%= @song.artist %></h6>
-        <h6 class="text-muted small"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></h6>
+        <span class="song-title text-ellipsis"><%= @song.title %></span>
+        <span class="song-artist text-ellipsis"><%= @song.artist %></span>
+        <span class="song-suggestor text-muted text-ellipsis"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></span>
 
         <footer class="song-minicard__footer">
           <span class="label label-default"><%= @song.genre %></span>
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago small text-muted" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
+          <time class="timeago text-muted" 
+                datetime="<%= utc_to_local(@song.inserted_at) %>"
+                title="<%= Timex.format!(@song.inserted_at, "%B %d, %Y", :strftime) %>">
+                <%= Timex.format!(@song.inserted_at, "{relative}", :relative) %>
+          </time>
         </footer>
       </div>
     </article>

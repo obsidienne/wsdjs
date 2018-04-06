@@ -10,18 +10,19 @@ defmodule Wsdjs.Attachments.Video do
     field(:url, :string)
     field(:video_id, :string)
     field(:title, :string)
-    field(:event, :string)
+    field(:event_str, :string, source: :event)
     field(:published_at, :date)
     field(:provider, :string, default: "unknown")
 
     belongs_to(:user, Wsdjs.Accounts.User)
     belongs_to(:song, Wsdjs.Musics.Song)
+    belongs_to(:event, Wsdjs.Happenings.Event, type: Wsdjs.HashID)
     timestamps()
   end
 
   def changeset(%Video{} = video, attrs) do
     video
-    |> cast(attrs, [:url, :event, :title, :user_id, :song_id, :published_at])
+    |> cast(attrs, [:url, :event_str, :event_id, :title, :user_id, :song_id, :published_at])
     |> validate_required(:url)
     |> assoc_constraint(:user)
     |> validate_url(:url)

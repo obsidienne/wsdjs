@@ -1,13 +1,9 @@
-#playlists-section .actions,
-#playlist-section .actions {
-  padding-bottom: 15px;
-}
-
-.playlist-name {
+.actions .playlist-name {
   margin-left: auto;
+  display: flex;
 }
 .table_song-art {
-  width: 0;
+  width: 64px;
 }
 .playlist {
   position: relative;

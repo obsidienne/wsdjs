@@ -1,6 +1,6 @@
 <header>
   <div class="container">
-    <h1><%= gettext "Songs" %> </h1>
+    <h1><%= gettext "WCS Songs" %> </h1>
   </div>
 </header>
 

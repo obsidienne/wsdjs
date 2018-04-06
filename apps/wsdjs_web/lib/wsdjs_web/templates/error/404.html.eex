@@ -35,8 +35,8 @@
     </header>
 
     <main class="container">
-      <h1 class="page-header text-center">Sorry this page does not exist !</h1>
-      <p class="text-center">
+      <h1 class="page-header">Sorry this page does not exist !</h1>
+      <p>
         <%= link "Go to the home page", to: home_path(@conn, :index), class: "btn btn-link" %>
         or 
         <%= link "Sign in", to: session_path(@conn, :new), class: "btn btn-link" %>

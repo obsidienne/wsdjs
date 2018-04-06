@@ -1,8 +1,20 @@
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <small><%= @top.status %></small></h1>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <span class="text-muted"><%= @top.status %></span></h1>
   </div>
 </header>
+
+<%= if @current_user && (@current_user.id == @top.user_id || @current_user.admin == true) do %>
+<%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
+<nav class="top-steps">
+  <ol class="container">
+    <li class="visited">Check</li>
+    <li class="current">Voting</li>
+    <li><%= submit "next step : counting", class: "btn btn-link", name: "direction", value: "next" %></li>
+  </ol>
+</nav>
+<% end %>
+<% end %>
 
 <div class="container actions">
   <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
@@ -12,18 +24,6 @@
     <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link push-right" %>
   <% end %>
 </div>
-
-<%= if @current_user && (@current_user.id == @top.user_id || @current_user.admin == true) do %>
-<%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-  <nav>
-    <ol class="top-steps text-center">
-      <li class="visited"><em>Check</em></li>
-      <li class="current"><em>Voting</em></li>
-      <li><%= submit "next step : counting", class: "btn btn-link", name: "direction", value: "next" %></li>
-    </ol>
-  </nav>
-<% end %>
-<% end %>
 
 <section class="container top-voting">
   <%= form_for @conn, top_vote_path(@conn, :create, @top.id), [id: "voting-form", as: "top"], fn f -> %>
@@ -55,28 +55,32 @@
         </div>
         <div class="top-song-info-container">
           <div class="top-song-body">
-            <div class="top-song-body-info">
-              <%= link to: song_path(@conn, :show, rank.song), class: "h5 top-song__title" do %>
+            <div>
+              <%= link to: song_path(@conn, :show, rank.song), class: "text-ellipsis song-title" do %>
                 <%= rank.song.title %>
               <% end %>
-              <h6><%= rank.song.artist %></h6>
-              <div class="text-muted small"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></div>
+              <span class="song-artist"><%= rank.song.artist %></span>
+              <span class="text-ellipsis text-muted song-suggestor"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></span>
             </div>
             <aside>
-              <span class="label label-default"><%= rank.song.genre %></span>
-              <%= if rank.song.bpm > 0 do %>
-              <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-              <% end %>
-              <%= if rank.song.instant_hit do %>
-              <span class="label label-default">instant hit</span>
-              <% end %>
-              <%= if rank.song.hidden_track do %>
-              <span class="label label-default">hidden track</span>
-              <% end %>
-              <%= if rank.song.public_track do %>
-              <span class="label label-default">public track</span>
-              <% end %>
-              <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
+              <div>
+                <span class="label label-default"><%= rank.song.genre %></span>
+                <%= if rank.song.bpm > 0 do %>
+                <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
+                <% end %>
+                <%= if rank.song.instant_hit do %>
+                <span class="label label-default">instant hit</span>
+                <% end %>
+                <%= if rank.song.hidden_track do %>
+                <span class="label label-default">hidden track</span>
+                <% end %>
+                <%= if rank.song.public_track do %>
+                <span class="label label-default">public track</span>
+                <% end %>
+              </div>
+              <div class="opinions">
+                <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
+              </div>
             </aside>
           </div>
         </div>

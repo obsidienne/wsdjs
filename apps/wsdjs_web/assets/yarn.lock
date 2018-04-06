@@ -6,10 +6,6 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@types/jquery@^2.0.40":
-  version "2.0.48"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-2.0.48.tgz#3e90d8cde2d29015e5583017f7830cb3975b2eef"
-
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -3819,28 +3815,24 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
-pjax-api@~3.18.2:
-  version "3.18.2"
-  resolved "https://registry.yarnpkg.com/pjax-api/-/pjax-api-3.18.2.tgz#a3f14f55e389caac278363da0a385aba92de0df5"
-
 pkg-dir@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-2.0.0.tgz#f6d5d1109e19d63edf428e0bd57e12777615334b"
   dependencies:
     find-up "^2.1.0"
 
-places.js@~1.4.18:
-  version "1.4.18"
-  resolved "https://registry.yarnpkg.com/places.js/-/places.js-1.4.18.tgz#9c5619ee62e7847aa4549d0545cea10a05ff0074"
+places.js@~1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/places.js/-/places.js-1.6.0.tgz#0fddc485e271eee04103212fb6d0f8b9b1e5b358"
   dependencies:
     algoliasearch "^3.24.0"
     autocomplete.js "^0.28.2"
     events "^1.1.1"
     insert-css "^2.0.0"
 
-popper.js@^1.12.9:
-  version "1.12.9"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
+popper.js@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.1.tgz#b8815e5cda6f62fc2042e47618649f75866e6753"
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
@@ -5002,12 +4994,6 @@ through@^2.3.6, through@~2.3.4:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
-timeago.js@~3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/timeago.js/-/timeago.js-3.0.2.tgz#32a67e7c0d887ea42ca588d3aae26f77de5e76cc"
-  dependencies:
-    "@types/jquery" "^2.0.40"
-
 timed-out@^4.0.0, timed-out@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
@@ -5018,11 +5004,11 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tippy.js@~2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.1.1.tgz#d6dca3886564523e0212d2528562981a02d24bfe"
+tippy.js@~2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.4.1.tgz#ae9b6418dbfed2563f46bd3cf9e277d893ccc740"
   dependencies:
-    popper.js "^1.12.9"
+    popper.js "^1.14.1"
 
 tmp@^0.0.29:
   version "0.0.29"

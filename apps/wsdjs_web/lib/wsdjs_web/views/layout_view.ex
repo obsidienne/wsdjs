@@ -31,7 +31,7 @@ defmodule WsdjsWeb.LayoutView do
     |> Enum.at(0)
   end
 
-  @suffix "WSDJs"
+  @suffix "World Swing DJs"
 
   def main_title(conn) do
     controller = view_name(conn)
@@ -47,13 +47,13 @@ defmodule WsdjsWeb.LayoutView do
   defp put_suffix(nil), do: @suffix
   defp put_suffix(title), do: title <> " - " <> @suffix
 
-  defp get("home", :index), do: "Home page"
-  defp get("song", :index), do: "Songs"
+  defp get("home", :index), do: "Home"
+  defp get("song", :index), do: "List songs"
   defp get("song", :show), do: "Song"
-  defp get("user", :index), do: "Users"
+  defp get("user", :index), do: "List users"
   defp get("user", :show), do: "User"
   defp get("user", :edit), do: "Edit user"
-  defp get("top", :index), do: "Tops"
+  defp get("top", :index), do: "List tops"
 
   defp get(_, _), do: nil
 end

@@ -5,27 +5,24 @@
   --bg-color: hsl(240, 20%, 98%);
   --primary-color: hsl(208, 56%, 46%);
   --accent-color: hsl(45, 100%, 51.4%);
-  --inactive-color: hsl(0, 0%, 47%);
-  --font-size: 100%;
+  --inactive-color: hsl(0, 0%, 45%);
   --accent-action: translateY(-2px);
-  --shadow-inactive: 0 1px 3px hsla(0, 0%, 0%, 0.2);
-  --shadow-active: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
+  --shadow-inactive: 0 1px 3px 0 hsla(0, 0%, 0%, .2);
+  --shadow-active: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
+
+  --font-primary-color: hsl(0, 0%, 13%);
+  --font-secondary-color: hsl(0, 0%, 29%);
+  --font-third-color: hsl(0, 0%, 45%);
+  --font-primary-weight: 700;
+  --font-secondary-weight: 400;
+
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-size: 16px;
 }
 
-
-/*
------------------------------------------------
-Typesetting for World Swing Deejays
-Author:   Claudio Bernardes
-Date:     20 Apr 2017
-http://modularscale.com/scale/?px1=18&px2=190&ra1=1.618
-1em @ 1:1.2 (minor third)
-http://alistapart.com/articles/more-meaningful-typography/
------------------------------------------------
-*/
 html {
   box-sizing: border-box;
+  line-height: 1.5;
 }
 *,
 *::before,
@@ -33,18 +30,22 @@ html {
   box-sizing: inherit;
 }
 
+
 body {
+  background-color: hsl(240, 20%, 98%);
   background-color: var(--bg-color);
-  padding-bottom: 80px;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
+  padding-bottom: calc(4 * 80px);
 }
 
 a, a:hover {
   text-decoration: none;
 }
-
+svg {
+  display: block;
+}
+.contry-selector svg {
+  display: inherit;
+}
 img {
   vertical-align: top;
 }
@@ -62,106 +63,66 @@ img.responsive {
   position: absolute;
 }
 
-
 .sentinel {
   text-align: center;
   margin: 15px;
 }
-
-
-
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: inherit;
-  font-weight: 300;
-  line-height: 1.1;
-  color: inherit;
-}
-
-h1, .h1 { font-size: 2.488em; }
-h2, .h2 { font-size: 2.074em; }
-h3, .h3 { font-size: 1.728em; }
-h4, .h4 { font-size: 1.44em; }
-h5, .h5 { font-size: 1.2em; }
-h6, .h6 { font-size: 1em; }
-
-small, .small {
-  font-weight: 300;
-  line-height: 1;
-  color: var(--inactive-color);
-  font-size: 60%;
-}
-
-h1, h2, h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-h1 small, .h1 small,
-h2 small, .h2 small,
-h3 small, .h3 small,
-h1 .small, .h1 .small,
-h2 .small, .h2 .small,
-h3 .small, .h3 .small {
-  font-size: 65%;
-}
-
-h4, h5, h6 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-p { 
-  margin: 0 0 10px; 
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-}
-dd {
-  margin-bottom: .5rem;
-  margin-left: 0;
-}
-dt {
-  font-weight: bold;
-}
-
-.text-ellipsis {
+.unconnected .h2 {
+  display: block;
   white-space: nowrap;
+}
+
+
+.song-title {
+  font-weight: 700;
+  font-weight: var(--font-primary-weight);
+  color: hsl(0, 0%, 13%);
+  color: var(--font-primary-color);
+}
+a.song-title {
+  display: block;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+a.song-title:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+  transform: var(--accent-action);
+}
+.song-artist {
+  font-weight: 400;
+  font-weight: var(--font-secondary-weight);
+  color: hsl(0, 0%, 29%);
+  color: var(--font-secondary-color);
+}
+.song-suggestor {
+  font-weight: 400;
+  font-weight: var(--font-secondary-weight);
+  color: hsl(0, 0%, 45%);
+  color: var(--font-third-color);
+
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  display: block;
+  white-space: nowrap;
 }
-.text-center {
-  text-align: center;
+
+.song-suggestor a {
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
-.text-muted {
-  color: var(--inactive-color);
+a.song-suggestor:hover
+,.song-suggestor a:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  color: hsl(45, 100%, 51.4%);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+  transform: var(--accent-action);
 }
-.text-danger {
-  color: #dc3545 !important;
-}
-.page-header {
-  padding-bottom: 9px;
-  margin: 40px 0 20px;
-}
-label {
+.song-suggestor a:hover {
   display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-textarea {
-  resize: vertical;
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-time {
-  text-transform: capitalize;
-  cursor: help;
 }

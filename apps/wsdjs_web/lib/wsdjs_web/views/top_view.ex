@@ -46,7 +46,7 @@ defmodule WsdjsWeb.TopView do
     |> Enum.map(fn {k, v} -> {k, Enum.count(v)} end)
     |> Enum.sort(fn {_, v1}, {_, v2} -> v1 >= v2 end)
     |> Enum.take(3)
-    |> Enum.map(fn {k, v} -> {:safe, "<div>#{k} <small>(#{v})</small></div>"} end)
+    |> Enum.map(fn {k, v} -> {:safe, "<div>#{k} <span class=\"text-muted\">(#{v})</span></div>"} end)
   end
 
   def all_genre(songs) do
@@ -56,7 +56,7 @@ defmodule WsdjsWeb.TopView do
      |> Enum.group_by(fn x -> x.genre end)
      |> Enum.map(fn {k, v} -> {k, Enum.count(v)} end)
      |> Enum.sort(fn {_, v1}, {_, v2} -> v1 >= v2 end)
-     |> Enum.map(fn {k, v} -> "#{k} <small>(#{v})</small>" end)
+     |> Enum.map(fn {k, v} -> "#{k} <span class=\"text-muted\">(#{v})</span>" end)
      |> Enum.join(", ")}
   end
 
@@ -68,7 +68,7 @@ defmodule WsdjsWeb.TopView do
 
     if vote do
       song = Enum.find(top.songs, fn song -> song.id == vote.song_id end)
-      {:safe, "#{song.artist} <span class='h6 small'>#{song.title}</span>"}
+      {:safe, "#{song.title}"}
     else
       ""
     end

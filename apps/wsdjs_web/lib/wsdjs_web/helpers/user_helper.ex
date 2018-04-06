@@ -19,7 +19,7 @@ defmodule WsdjsWeb.UserHelper do
     Phoenix.HTML.Link.link(
       user_displayed_name(song.user),
       to: user_path(conn, :show, song.user.id),
-      title: "#{song.user.name}"
+      title: "suggested by #{song.user.name}, #{Timex.format!(song.inserted_at, "%b %d, %Y", :strftime)}"
     )
   end
 end

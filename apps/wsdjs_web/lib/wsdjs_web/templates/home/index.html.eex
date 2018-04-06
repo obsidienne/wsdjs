@@ -1,13 +1,13 @@
 <%= if @current_user do %>
 <header>
   <div class="container">
-    <h1><%= gettext "Home" %> </h1>
+    <h1><%= gettext "Last pick and top" %> </h1>
   </div>
 </header>
 <% else %>
-  <div class="container hero-text">
-    <h4>World Swing DeeJays</h4>
-    <h5>The best West Coast Swing music from all around the world !</h5>
+  <div class="unconnected container hero-text">
+    <span class="h1">World Swing DeeJays</span>
+    <span class="h2">The best West Coast Swing music from all around the world !</span>
 
     <%= link to: session_path(@conn, :new) do %>
       <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
@@ -17,7 +17,7 @@
   </div>
 <% end %>
 
-<div class="container">
+<div class="container actions">
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
     <a class="btn btn-primary tippy" title="Suggest a song for the current month TOP 10" href="<%= suggestion_path(@conn, :new) %>">Suggest a song</a>
   <% end %>
@@ -29,7 +29,7 @@
 <section class="container home-container">
 <%= if Enum.count(@songs) > 0 do %>
   <section>
-    <h4 class="page-header">Deejays' pick</h4>
+    <h2 class="page-header">Deejays' pick</h2>
     <ul class="home-page__instant__hit">
       <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
@@ -38,7 +38,11 @@
 
 <%= if @top && Enum.count(@top.ranks) > 0 do %>
   <section>
-    <h4 class="page-header"><time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> Top</h4>
+    <h2 class="page-header">
+      <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>">
+          <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
+      </time>, DJs Top
+    </h2>
     <ul class="home-page__top__song">
       <%= for rank <- @top.ranks do %>
         <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>

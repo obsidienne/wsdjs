@@ -7,14 +7,16 @@
         <img src="<%= art_url(nil, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
-        <h4 class="text-muted">hidden track</h4>
+        <span class="text-muted text-ellipsis">hidden track</span>
 
         <footer class="song-minicard__footer">
           <span class="label label-default"><%= @song.genre %></span>
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
-          <time class="timeago small text-muted" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
+          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>">
+            <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
+          </time>
         </footer>
       </div>
     </article>
@@ -30,17 +32,20 @@
         <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
-        <h5 class="text-muted"><%= @song.title %>, by <%= @song.artist %></h5>
-        <h5 class="text-muted small">
+        <span class="text-ellipsis song-title"><%= @song.title %></span>
+        <span class="text-ellipsis song-artist">by <%= @song.artist %></span>
+        <span class="text-muted text-ellipsis song-suggestor">
           <%= gettext "suggested by" %> <%= user_displayed_name(@song.user) %>
-          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>"><%= utc_to_local(@song.inserted_at) %></time>
-        </h5>
+        </span>
 
         <footer class="song-minicard__footer">
           <span class="label label-default"><%= @song.genre %></span>
           <%= if @song.bpm > 0 do %>
             <span class="label label-primary"><%= @song.bpm %> bpm</span>
           <% end %>
+          <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>">
+            <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
+          </time>
         </footer>
       </div>
     </article>
