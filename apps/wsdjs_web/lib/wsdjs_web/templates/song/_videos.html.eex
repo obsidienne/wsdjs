@@ -8,12 +8,12 @@
     </svg>
    <% end %>
   <div class="song-page__video__details">
-    <h5 class="text-ellipsis song-page__video__pros"><%= video.title %></h5>
-    <h5 class="text-ellipsis song-page__video__event"><%= if is_nil(video.event) do video.event_str else video.event.name end %>
+    <span class="text-ellipsis text-bold"><%= video.title %></span>
+    <span class="text-ellipsis"><%= if is_nil(video.event) do video.event_str else video.event.name end %>
     <%= if video.published_at do %>
     <timeago class="text-muted"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</timeago>
     <% end %>
-    </h5>
+    </span>
 
     <%= if Wsdjs.Attachments.Policy.can?(@conn.assigns[:current_user], :delete, video) == :ok do %>
     <button class="btn-link video__delete" data-path="<%= api_video_path(@conn, :delete, video) %>">

@@ -93,14 +93,6 @@
   pointer-events: none;
 }
 
-.song-page__video__pros  {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.song-page__video__event  {
-  margin-bottom: 0;
-}
-
 @media (min-width: 768px) {
   .song-page {
     flex-direction: row;
