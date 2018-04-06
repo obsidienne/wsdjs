@@ -1,0 +1,60 @@
+<div>
+  <section class="user-page__profile__section">
+    <header class="user-page__profile__header">
+      <div class="user-page__avatar">
+        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive">
+      </div>
+      <div class="user-page__profile-details">
+        <span class="text-ellipsis"><%= @user.name %></span>
+        <%= if @user.djname do %>
+          <span class="text-muted"><%= @user.djname %></span>
+        <% end %>
+        <%= if @user.user_country do %>
+        <div class="user-place text-muted">
+          <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+            <path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>
+            <path d='M0 0h24v24H0z' fill='none'/>
+          </svg>
+          <%= @user.user_country %>
+        </div>
+        <% end %>
+        <div>
+          <%= if @user.verified_profil do %><span class="label label-primary">Verified</span><% end %>
+          <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
+          <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
+        </div>
+      </div>
+    </header>
+
+    <footer class="user-page__actions">
+      <%= if @user && @user.parameter && @user.parameter.email_contact do %>
+      <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
+      <% end %>
+      <%= if Wsdjs.Accounts.Policy.can?(@current_user, :edit_user, @user) == :ok do %>
+        <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
+      <% end %>
+      <%= if Wsdjs.Accounts.Policy.can?(@current_user, :logout, @user) == :ok do %>
+        <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout" %>
+      <% end %>
+    </footer>
+  </section>
+
+  <table class="user-page__stats user-page__profile__section">
+    <tbody>
+      <tr>
+        <th>
+          <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+            <path d='M0 0h24v24H0z' fill='none'/>
+            <path d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/>
+          </svg>
+        </th>
+        <td>SONG SUGGESTED</td>
+        <td class="number"><%= @suggested_songs %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= if @user.detail do %>
+  <%= render "_user_details.html", user: @user %>
+  <% end %>
+</div>
