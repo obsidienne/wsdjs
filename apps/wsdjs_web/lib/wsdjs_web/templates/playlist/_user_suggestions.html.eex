@@ -1,11 +1,12 @@
-<section id="playlists-section">
+<section id="playlist-section">
   <div class="actions">
     <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
       <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
-    <%= link "back to playlists", to: user_path(@conn, :show, @user), class: "btn btn-link" %>
-    <span class="playlist-name h3">likes and tops
+    <%= link "back to playlists", to: user_playlist_path(@conn, :index, @user), class: "btn btn-link" %>
+
+    <span class="playlist-name h3">suggestions
       <%= if @playlist.public == true do %>
       <span class="tippy" title="this list is public">
         <svg fill="#777777" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +27,7 @@
 
   <%= if Enum.count(@songs) > 0 do %>
   <p>
-    <%= Enum.count(@songs) %> songs
+  <%= Enum.count(@songs) %> songs
   </p>
   <table class="table">
     <tbody>
@@ -50,5 +51,4 @@
     </tbody>
   </table>
   <% end %>
-
 </section>

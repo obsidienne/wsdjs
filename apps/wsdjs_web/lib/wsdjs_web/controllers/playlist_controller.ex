@@ -7,11 +7,36 @@ defmodule WsdjsWeb.PlaylistController do
 
   action_fallback(WsdjsWeb.FallbackController)
 
+  def index(conn, %{"user_id" => user_id}, current_user) do
+    with %Accounts.User{} = user <- Accounts.get_user!(user_id) do
+      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      playlists = Wsdjs.Playlists.list_playlists(user, current_user)
+
+      render(conn, "index.html", user: user, suggested_songs: suggested_songs, playlists: playlists)
+    end
+  end
+
   def new(conn, %{"user_id" => user_id}, current_user) do
     with %Accounts.User{} = user <- Accounts.get_user!(user_id),
          :ok <- Playlists.Policy.can?(current_user, :new),
          changeset <- Playlists.change_playlist(%Playlists.Playlist{}) do
       render(conn, "new.html", changeset: changeset, user: user)
+    end
+  end
+
+  def show(conn, %{"id" => id}, current_user) do
+    with %Playlists.Playlist{} = playlist <- Playlists.get_playlist!(id, current_user) do
+      user = Accounts.get_user!(playlist.user_id)
+      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      songs = Wsdjs.Playlists.list_playlist_songs(playlist, current_user)
+
+      render(conn, 
+              "show.html", 
+              current_user: current_user, 
+              playlist: playlist,
+              suggested_songs: suggested_songs,
+              songs: songs,
+              user: user)
     end
   end
 

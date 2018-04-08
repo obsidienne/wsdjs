@@ -46,10 +46,10 @@ defmodule WsdjsWeb.Router do
     resources("/events", EventController)
 
     resources "/users", UserController, only: [:index, :edit, :update] do
-      resources("/playlists", PlaylistController, only: [:new, :create])
+      resources("/playlists", PlaylistController, only: [:new, :create, :index])
     end
 
-    resources("/playlists", PlaylistController, only: [:edit, :delete])
+    resources("/playlists", PlaylistController, only: [:show, :edit, :delete])
   end
 
   scope "/", WsdjsWeb do

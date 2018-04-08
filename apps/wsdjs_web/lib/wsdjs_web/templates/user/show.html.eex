@@ -1,28 +1,12 @@
 <nav class="secondary-nav">
   <ol class="container">
-    <li class="current">playlists</li>
+    <li class="current">bio</li>
+    <li>
+        <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
+    </li>
   </ol>
 </nav>
 
 <section id="user-page" class="user-page container">
   <%= render "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
-
-  <%= if @conn.assigns[:playlists] do %>
-    <%= render "_user_playlists.html", conn: @conn, current_user: @current_user, user: @user, playlists: @playlists %>
-  <% end %>
-
-  <%= if @conn.assigns[:playlist] do %>
-    <%= if @playlist.type == "playlist" do %>
-    <%= render "_user_playlist.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
-    <% end %>
-    <%= if @playlist.type == "suggested" do %>
-    <%= render "_user_suggestions.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
-    <% end %>
-    <%= if @playlist.type == "likes and tops" do %>
-    <%= render "_user_top_like.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
-    <% end %>
-    <%= if @playlist.type == "top 5" do %>
-    <%= render "_user_top5.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
-    <% end %>
-  <% end %>
 </section>
