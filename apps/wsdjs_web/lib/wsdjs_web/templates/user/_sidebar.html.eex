@@ -5,9 +5,9 @@
         <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive">
       </div>
       <div class="user-page__profile-details">
-        <span class="text-ellipsis"><%= @user.name %></span>
+        <span class="text-ellipsis user-name"><%= @user.name %></span>
         <%= if @user.djname do %>
-          <span class="text-muted"><%= @user.djname %></span>
+          <span class="text-ellipsis text-muted user-djanme"><%= @user.djname %></span>
         <% end %>
         <%= if @user.user_country do %>
         <div class="user-place text-muted">
@@ -39,20 +39,10 @@
     </footer>
   </section>
 
-  <table class="user-page__stats user-page__profile__section">
-    <tbody>
-      <tr>
-        <th>
-          <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-            <path d='M0 0h24v24H0z' fill='none'/>
-            <path d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/>
-          </svg>
-        </th>
-        <td>SONG SUGGESTED</td>
-        <td class="number"><%= @suggested_songs %></td>
-      </tr>
-    </tbody>
-  </table>
+  <ul class="user-page__profile__section user-tags">
+    <li><span class="tag"><%= @suggested_songs %> songs</li>
+  </ul>
+
 
   <%= if @user.detail do %>
   <%= render "_user_details.html", user: @user %>
