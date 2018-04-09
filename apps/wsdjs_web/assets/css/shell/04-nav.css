@@ -1,7 +1,6 @@
 main > header {
   background-color: hsl(221, 23%, 16%);
   padding-bottom: 24px;
-  margin-bottom: 24px;
 }
 
 main > header h1 {
