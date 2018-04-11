@@ -58,6 +58,10 @@
   padding-left: 4px;
   padding-right: 4px;
 }
+.user-badge {
+  display: flex;
+  justify-content: space-between;
+}
 
 .user-page__profile__section {
   padding: 1rem;
