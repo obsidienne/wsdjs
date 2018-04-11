@@ -87,6 +87,9 @@
 .social-sc:hover svg{
   fill: #ff5500;
 }
+.social-ws:hover svg{
+  fill: #4267b2;
+}
 .social-yt:hover svg{
   fill: #ff0000;
 }
