@@ -1,7 +1,7 @@
 
 
 .tag {
-  background-color: hsl(0, 0%, 80%);
+  background-color: var(--accent-color);
   border-radius: 4px 0 0 4px;
   color: var(--font-secondary-color);
   display: inline-block;
@@ -10,7 +10,6 @@
   padding: 0 20px 0 23px;
   position: relative;
   text-decoration: none;
-  transition: color 0.2s;
 }
 
 .tag::before {
@@ -28,19 +27,10 @@
 .tag::after {
   background: #fff;
   border-bottom: 12px solid transparent;
-  border-left: 10px solid hsl(0, 0%, 80%);
+  border-left: 10px solid var(--accent-color);
   border-top: 12px solid transparent;
   content: '';
   position: absolute;
   right: 0;
   top: 0;
-}
-
-.tag:hover {
-  background-color: crimson;
-  color: white;
-}
-
-.tag:hover::after {
-    border-left-color: crimson; 
 }
