@@ -1,6 +1,11 @@
 <div>
   <section class="user-page__profile__section">
     <header class="user-page__profile__header">
+      <div>
+        <%= if @user.verified_profil do %><span class="label label-primary">Verified</span><% end %>
+        <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
+        <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
+      </div>
       <div class="user-page__avatar">
         <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive">
       </div>
@@ -18,11 +23,6 @@
           <%= @user.user_country %>
         </div>
         <% end %>
-        <div>
-          <%= if @user.verified_profil do %><span class="label label-primary">Verified</span><% end %>
-          <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
-          <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
-        </div>
       </div>
     </header>
 
