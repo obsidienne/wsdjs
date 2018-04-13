@@ -26,8 +26,8 @@ defmodule Wsdjs.Happenings.Event do
   @doc false
   def changeset(%Event{} = event, attrs) do
     event
-    |> cast(attrs, [:name, :user_id, :starts_on, :ends_on, :lng, :lat])
-    |> validate_required([:name, :starts_on, :ends_on, :lng, :lat])
+    |> cast(attrs, [:name, :user_id, :starts_on, :ends_on, :lng, :lat, :venue])
+    |> validate_required([:name, :starts_on, :ends_on, :lng, :lat, :venue])
     |> assoc_constraint(:user)
     |> cast_coordinates()
   end

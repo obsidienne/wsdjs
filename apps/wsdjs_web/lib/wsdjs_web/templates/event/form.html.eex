@@ -31,13 +31,13 @@
 
   <div class="form-group">
     <%= label f, :lng, class: "control-label" %>
-    <%= text_input f, :lng, class: "form-control", type: "number" %>
+    <%= text_input f, :lng, class: "form-control", type: "number", step: "any" %>
     <%= error_tag f, :lng %>
   </div>
 
   <div class="form-group">
     <%= label f, :lat, class: "control-label" %>
-    <%= text_input f, :lat, class: "form-control", type: "number" %>
+    <%= text_input f, :lat, class: "form-control", type: "number", step: "any" %>
     <%= error_tag f, :lat %>
   </div>
 
