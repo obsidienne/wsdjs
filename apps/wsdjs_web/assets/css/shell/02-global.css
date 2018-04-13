@@ -43,7 +43,7 @@ a, a:hover {
 svg {
   display: block;
 }
-.contry-selector svg {
+.contry-selector svg, .algolia-places svg {
   display: inherit;
 }
 img {
