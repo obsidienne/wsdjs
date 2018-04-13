@@ -42,6 +42,7 @@ defmodule Wsdjs.Mixfile do
       {:ex_machina, "~> 2.1", only: :test},
       {:httpoison, "~> 0.12"},
       {:hashids, "~> 2.0"},
+      {:geo_postgis, "~> 1.0"},
       {:timex, "~> 3.1"}
     ]
   end
