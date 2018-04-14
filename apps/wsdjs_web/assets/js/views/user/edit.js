@@ -16,15 +16,20 @@ export default class View extends MainView {
   }
 
   _cloudinary() {
-    var params = { upload_preset: "music_cover",
-                   cloud_name: "don2kwaju",
-                   cropping: "server",
-                   cropping_aspect_ratio: 1,
-                   thumbnail_transformation: { crop: 'crop', gravity: 'custom' } };
+    var params = {
+      upload_preset: "music_cover",
+      cloud_name: "don2kwaju",
+      cropping: "server",
+      cropping_aspect_ratio: 1,
+      thumbnail_transformation: {
+        crop: 'crop',
+        gravity: 'custom'
+      }
+    };
 
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
       if (e.target && e.target.matches("#user_upload_widget_opener")) {
-        cloudinary.openUploadWidget(params, function(error, result) {
+        cloudinary.openUploadWidget(params, function (error, result) {
           document.getElementById("avatar_thumbnail").setAttribute("src", result[0]['thumbnail_url']);
           document.getElementById("user_avatar_cld_id").value = result[0]['public_id'];
           document.getElementById("user_avatar_version").value = result[0]['version'];
@@ -36,7 +41,7 @@ export default class View extends MainView {
           request.open("POST", formElement.getAttribute("action"));
           request.send(new FormData(formElement));
 
-          request.onload = function() {
+          request.onload = function () {
             if (this.status >= 200 && this.status < 400) {
               document.getElementById("notifier-container").innerHTML = `
               <div id="info-notification" class="notifier info" role="alert">
@@ -51,14 +56,14 @@ export default class View extends MainView {
             var notifier = new Notifier();
             notifier.show_all();
           };
-          request.onerror = function() { 
+          request.onerror = function () {
             document.getElementById("notifier-container").innerHTML = `
                 <div id="info-notification" class="notifier danger" role="alert">
                   <h2 class="notifier-title">Something went wrong.</h2>
                 </div>`;
-            };
-            var notifier = new Notifier();
-            notifier.show_all();
+          };
+          var notifier = new Notifier();
+          notifier.show_all();
         })
       }
     }, false);

@@ -2,9 +2,11 @@
   margin-left: auto;
   display: flex;
 }
+
 .table_song-art {
   width: 64px;
 }
+
 .playlist {
   position: relative;
   display: block;

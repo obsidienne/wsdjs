@@ -66,7 +66,7 @@ export default class View extends MainView {
       } else {
         console.log('Mauvaise réponse du réseau');
       }
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
     });
   }
@@ -86,7 +86,7 @@ export default class View extends MainView {
       } else {
         console.log('Mauvaise réponse du réseau');
       }
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
     });
   }
@@ -113,7 +113,7 @@ export default class View extends MainView {
       var tpl = Mustache.render(template, payload.data);
 
       container.insertAdjacentHTML('beforeend', tpl.autoLink());
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
       form.reset();
     });
@@ -138,7 +138,7 @@ export default class View extends MainView {
       let template = document.getElementById("video-tpl").innerHTML;
       let tpl = Mustache.render(template, payload.data);
       container.insertAdjacentHTML('beforeend', tpl);
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
       form.reset();
     });

@@ -4,16 +4,16 @@ export default class View extends MainView {
   constructor() {
     super();
     this._bonus();
-    
+
     var self = this;
 
-    document.addEventListener("change", function(e) {
+    document.addEventListener("change", function (e) {
       if (e.target && e.target.matches("#voting-form select")) {
         self._sort_on_vote(e);
-      }      
+      }
     }, false);
 
-    document.addEventListener("submit", function(e) {
+    document.addEventListener("submit", function (e) {
       if (e.target && e.target.matches("#voting-form")) {
         self._submit(e);
       }
@@ -28,7 +28,7 @@ export default class View extends MainView {
   }
 
   _bonus() {
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
       let elem = e.target;
       if (elem && (elem.matches(".counting-points") || elem.closest('.counting-points'))) {
         e.preventDefault();
@@ -47,13 +47,13 @@ export default class View extends MainView {
     let parent = document.querySelector('.top-songs-container');
     let song = e.target.closest(".top-song");
     let position = parseInt(e.target.value);
-    
+
     let elem = parent.removeChild(song);
 
     parent.insertBefore(elem, parent.children[position - 1])
 
     /* set the position in a data */
-    for(let i = 0; i < parent.children.length; i++) {
+    for (let i = 0; i < parent.children.length; i++) {
       if (i + 1 > 10) {
         parent.children[i].querySelector("select").value = '';
       }
@@ -63,12 +63,12 @@ export default class View extends MainView {
 
   _submit(e) {
     var values = document.querySelectorAll('#voting-form select');
-    
+
     var qty = 0;
     var sum = 0;
     for (var i = 0; i < values.length; ++i) {
       if (values[i].value > 0) {
-        sum +=  parseInt(values[i].value);
+        sum += parseInt(values[i].value);
         qty += 1;
       }
     }
@@ -86,7 +86,7 @@ export default class View extends MainView {
     request.setRequestHeader('Authorization', "Bearer " + token);
     request.setRequestHeader('Accept', 'application/json');
 
-    request.onload = function() {
+    request.onload = function () {
       if (this.status >= 200 && this.status < 400) {
         // Success!
         self.parentNode.innerHTML = this.response;
@@ -97,7 +97,9 @@ export default class View extends MainView {
     };
 
     // There was a connection error of some sort
-    request.onerror = function() { console.error("Error"); };
+    request.onerror = function () {
+      console.error("Error");
+    };
     request.send();
   }
 }

@@ -6,26 +6,33 @@
   width: 100%;
   max-width: 720px;
 }
-.SessionNewView .container-form, .RegistrationNewView .container-form {
+
+.SessionNewView .container-form,
+.RegistrationNewView .container-form {
   width: 100%;
   max-width: 414px;
 }
+
 .home-container {
   display: grid;
   grid-template-columns: 100%;
   grid-gap: .5rem;
 }
+
 .song-edit,
 .song-new {
   display: flex;
   margin-top: 16px;
   flex-direction: column;
 }
-#avatar_div, #art_div {
+
+#avatar_div,
+#art_div {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 }
+
 #avatar_div .form-group,
 #art_div .form-group {
   margin-bottom: 0;
@@ -38,7 +45,6 @@
   flex: 1 1 auto;
 }
 
-
 .hot-songs {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -47,17 +53,19 @@
 }
 
 /********************/
-@media (min-width: 768px) {
-  .container { max-width: 720px; }
 
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
   .home-container {
     grid-template-columns: 50% 50%;
   }
-  
   .hot-songs {
     grid-template-columns: repeat(auto-fit, 216px);
     grid-row-gap: 1rem;
-    grid-column-gap: .5rem; /* need a fix */
+    grid-column-gap: .5rem;
+    /* need a fix */
   }
   .user-profile-edit,
   .song-edit,
@@ -73,12 +81,13 @@
 }
 
 @media (min-width: 992px) {
-  .container { 
+  .container {
     padding-left: 0;
-    padding-right: 0;  
-    max-width: 960px; 
+    padding-right: 0;
+    max-width: 960px;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;
@@ -87,11 +96,13 @@
 
 /********************/
 
-.top-songs-container, .top-stat__votes {
+.top-songs-container,
+.top-stat__votes {
   display: grid;
   grid-gap: 4px;
   grid-template-columns: repeat(auto-fit, minmax(352px, 1fr));
 }
+
 @media (min-width: 768px) {
   .user-page {
     display: grid;

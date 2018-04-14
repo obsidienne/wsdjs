@@ -1,25 +1,32 @@
-.SessionNewView .hero, .RegistrationNewView .hero {
+.SessionNewView .hero,
+.RegistrationNewView .hero {
   padding: 0;
 }
+
 .hero-text {
   padding-top: 15px;
 }
+
 .hero-text h5 {
   padding-bottom: 15px;
 }
+
 .HomeIndexView main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .home-page__top__song li {
   margin-bottom: 24px;
 }
+
 .home-page__instant__hit li {
-  margin-bottom: 24px;  
+  margin-bottom: 24px;
 }
 
-.home-page__top__song li:hover, .home-page__instant__hit li:hover {
+.home-page__top__song li:hover,
+.home-page__instant__hit li:hover {
   transform: translateY(-2px);
   transform: var(--accent-action);
   box-shadow: 0 1px 3px 0 hsla(0, 0%, 0%, .2);

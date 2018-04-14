@@ -14,27 +14,27 @@ class Opinions {
     var token = document.querySelector("[name=channel_token]").getAttribute("content");
 
     fetch(elem.dataset.url, {
-      method: elem.dataset.method,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "Accept": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        console.log('Mauvaise réponse du réseau');
-      }
-    })
-    .then((data) => {
-      var container = elem.closest(".song-opinions");
-      this._refresh_layout(container, data);
-    })
-    .catch(function(error) {
-      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
-    });
+        method: elem.dataset.method,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log('Mauvaise réponse du réseau');
+        }
+      })
+      .then((data) => {
+        var container = elem.closest(".song-opinions");
+        this._refresh_layout(container, data);
+      })
+      .catch(function (error) {
+        console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+      });
   }
 
   _refresh_layout(container, data) {
