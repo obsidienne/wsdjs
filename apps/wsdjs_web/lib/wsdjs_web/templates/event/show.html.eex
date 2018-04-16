@@ -18,6 +18,11 @@
     <%= @event.ends_on %>
   </li>
 
+  <li>
+    <strong>Venue</strong>
+    <%= @event.venue %>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: event_path(@conn, :edit, @event) %></span>
