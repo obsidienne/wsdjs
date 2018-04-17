@@ -6,4 +6,5 @@ config :wsdjs, Wsdjs.Repo,
   password: "postgres",
   database: "wsdjs_test",
   hostname: "localhost",
+  types: Wsdjs.PostgresTypes,
   pool: Ecto.Adapters.SQL.Sandbox
