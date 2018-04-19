@@ -130,10 +130,4 @@ a.song-suggestor:hover,
   text-decoration: underline;
   color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
-  transform: translateY(-2px);
-  transform: var(--accent-action);
-}
-
-.song-suggestor a:hover {
-  display: inline-block;
 }
