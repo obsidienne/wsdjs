@@ -1,3 +1,7 @@
+# version 1.8.4
+- activate postgis
+- use places.js to find event venue
+- better user profil style page
 # version 1.8.3
 - connect video to event
 - vertical rhythm 8px
