@@ -9,13 +9,10 @@
         <%= if @user.profil_djvip do %><span class="label label-default">DJ VIP</span><% end %>
         <%= if @user.profil_dj do %><span class="label label-default">DJ</span><% end %>
       <% end %>
-    </td>
-    <td>
       <%= if Enum.count(@user.songs) > 0 do %>
       <span class="label label-primary"><%= Enum.count(@user.songs) %> songs</span>
       <% end %>
       <%= if Enum.count(@user.comments) > 0 do %>
-      <br>
       <span class="label label-default"><%= Enum.count(@user.comments) %> comments</span>
       <% end %>
     </td>

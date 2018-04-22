@@ -5,18 +5,22 @@ export default class Radio {
     var self = this;
     this.radio = new Audio();
 
-     
+
     // Now that you are connected, you can join channels with a topic:
     this.channel = socket.channel("notifications:now_playing", {})
     this.channel.join()
-      .receive("ok", resp => { console.log("Joined successfully", resp) })
-      .receive("error", resp => { console.log("Unable to join", resp) })
+      .receive("ok", resp => {
+        console.log("Joined successfully", resp)
+      })
+      .receive("error", resp => {
+        console.log("Unable to join", resp)
+      })
 
     this.channel.on("new_played_song", payload => {
       console.log("broadcasted");
       this.refresh_radio(payload)
     });
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
       if (!e.target) return;
 
       if (e.target.matches(".player__play__vinyl")) {
@@ -63,7 +67,7 @@ export default class Radio {
   pause_youtube() {
     var player = document.querySelector("#player__youtube");
     player.innerHTML = "";
-    var container = document.querySelector(".player__youtube__container.open"); 
+    var container = document.querySelector(".player__youtube__container.open");
     container.classList.remove("open");
   }
 

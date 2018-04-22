@@ -1,81 +1,56 @@
+<nav class="secondary-nav">
+  <ol class="container">
+    <li class="current">bio</li>
+    <li>
+        <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
+    </li>
+  </ol>
+</nav>
+
 <section id="user-page" class="user-page container">
+  <%= render "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
+
   <div>
-    <section class="user-page__profile__section">
-      <header class="user-page__profile__header">
-        <div class="user-page__avatar">
-          <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive">
-        </div>
-        <div class="user-page__profile-details">
-          <span class="text-ellipsis"><%= @user.name %></span>
-          <%= if @user.djname do %>
-            <span class="text-muted"><%= @user.djname %></span>
-          <% end %>
-          <%= if @user.user_country do %>
-          <div class="user-place text-muted">
-            <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>
-              <path d='M0 0h24v24H0z' fill='none'/>
-            </svg>
-            <%= @user.user_country %>
-          </div>
-          <% end %>
-          <div>
-            <%= if @user.verified_profil do %><span class="label label-primary">Verified</span><% end %>
-            <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
-            <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
-          </div>
-        </div>
-      </header>
 
-      <footer class="user-page__actions">
-        <%= if @user && @user.parameter && @user.parameter.email_contact do %>
-        <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
-        <% end %>
-        <%= if Wsdjs.Accounts.Policy.can?(@current_user, :edit_user, @user) == :ok do %>
-          <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
-        <% end %>
-        <%= if Wsdjs.Accounts.Policy.can?(@current_user, :logout, @user) == :ok do %>
-          <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout" %>
-        <% end %>
-      </footer>
-    </section>
-
-    <table class="user-page__stats user-page__profile__section">
-      <tbody>
-        <tr>
-          <th>
-            <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M0 0h24v24H0z' fill='none'/>
-              <path d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/>
-            </svg>
-          </th>
-          <td>SONG SUGGESTED</td>
-          <td class="number"><%= @suggested_songs %></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <%= if @user.detail do %>
-    <%= render "_user_details.html", user: @user %>
-    <% end %>
+<dl class="user-page__profile__section user-page__details">
+  <%= if @user.detail.description do %>
+  <dt>About Me</dt>
+  <dd><%= @user.detail.description %></dd>
+  <% end %>
+  <dt>Member since</dt>
+  <dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= Timex.format!(@user.inserted_at, "%B %d, %Y", :strftime) %></time></dd>
+  <%= if @user.detail.love_more do %>
+  <dt>Things you love more ?</dt>
+  <dd><%= @user.detail.love_more %></dd>
+  <% end %>
+  <%= if @user.detail.hate_more do %>
+  <dt>Things you hate more ?</dt>
+  <dd><%= @user.detail.hate_more %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_artist do %>
+  <dt>Favorite artist</dt>
+  <dd><%= @user.detail.favorite_artist %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_genre do %>
+  <dt>Favotire genre</dt>
+  <dd><%= @user.detail.favorite_genre %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_color do %>
+  <dt>Favorite color</dt>
+  <dd><%= @user.detail.favorite_color %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_meal do %>
+  <dt>Favorite meal</dt>
+  <dd><%= @user.detail.favorite_meal %></dd>
+  <% end %>
+  <%= if @user.detail.favorite_animal do %>
+  <dt>Favorite animal</dt>
+  <dd><%= @user.detail.favorite_animal %></dd>
+  <% end %>
+  <%= if @user.detail.djing_start_year do %>
+  <dt>Start DJing</dt>
+  <dd><%= @user.detail.djing_start_year %></dd>
+  <% end %>
+</dl>
   </div>
-
-  <%= if @conn.assigns[:playlists] do %>
-    <%= render "_user_playlists.html", conn: @conn, current_user: @current_user, user: @user, playlists: @playlists %>
-  <% end %>
-
-  <%= if @conn.assigns[:playlist] do %>
-    <%= if @playlist.type == "playlist" do %>
-    <%= render "_user_playlist.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
-    <% end %>
-    <%= if @playlist.type == "suggested" do %>
-    <%= render "_user_suggestions.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
-    <% end %>
-    <%= if @playlist.type == "likes and tops" do %>
-    <%= render "_user_top_like.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
-    <% end %>
-    <%= if @playlist.type == "top 5" do %>
-    <%= render "_user_top5.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
-    <% end %>
-  <% end %>
 </section>

@@ -7,4 +7,5 @@ config :wsdjs, Wsdjs.Repo,
   password: "postgres",
   database: "wsdjs_dev",
   hostname: "localhost",
+  types: Wsdjs.PostgresTypes,
   pool_size: 10

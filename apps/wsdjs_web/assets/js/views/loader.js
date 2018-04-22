@@ -6,6 +6,8 @@ import SongNewView from './song/new';
 import TopIndexView from './top/index';
 import TopShowView from './top/show';
 import UserEditView from './user/edit';
+import EventNewView from './event/new';
+import EventEditView from './event/edit';
 import SuggestionNewView from './suggestion/new';
 
 // Collection of specific view modules
@@ -17,6 +19,8 @@ const views = {
   TopIndexView,
   TopShowView,
   UserEditView,
+  EventNewView,
+  EventEditView,
   SuggestionNewView
 };
 

@@ -4,5 +4,9 @@
     "editor.renderControlCharacters": true,
     "window.zoomLevel": 0,
     "editor.renderWhitespace": "all",
-    "editor.rulers": [80, 120]
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        120
+    ]
 }

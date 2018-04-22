@@ -3,6 +3,7 @@
   justify-content: space-between;
   width: 100%;
 }
+
 .song-opinion {
   user-select: none;
   background: transparent;
@@ -15,18 +16,23 @@
   display: flex;
   line-height: 1.5;
 }
+
 button.song-opinion {
   cursor: pointer;
 }
+
 button.song-opinion * {
   pointer-events: none;
 }
+
 .song-down.active svg {
   fill: hsl(0, 100%, 35%);
 }
+
 .song-like.active svg {
   fill: hsl(240, 100%, 35%);
 }
+
 .song-up.active svg {
   fill: hsl(120, 100%, 35%);
 }

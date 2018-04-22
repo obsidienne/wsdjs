@@ -1,6 +1,7 @@
 /*
   CUSTOM 
 */
+
 :root {
   --bg-color: hsl(240, 20%, 98%);
   --primary-color: hsl(208, 56%, 46%);
@@ -9,13 +10,11 @@
   --accent-action: translateY(-2px);
   --shadow-inactive: 0 1px 3px 0 hsla(0, 0%, 0%, .2);
   --shadow-active: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
-
   --font-primary-color: hsl(0, 0%, 13%);
   --font-secondary-color: hsl(0, 0%, 29%);
   --font-third-color: hsl(0, 0%, 45%);
   --font-primary-weight: 700;
   --font-secondary-weight: 400;
-
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-size: 16px;
 }
@@ -24,12 +23,12 @@ html {
   box-sizing: border-box;
   line-height: 1.5;
 }
+
 *,
 *::before,
 *::after {
   box-sizing: inherit;
 }
-
 
 body {
   background-color: hsl(240, 20%, 98%);
@@ -37,15 +36,20 @@ body {
   padding-bottom: calc(4 * 80px);
 }
 
-a, a:hover {
+a,
+a:hover {
   text-decoration: none;
 }
+
 svg {
   display: block;
 }
-.contry-selector svg {
+
+.contry-selector svg,
+.algolia-places svg {
   display: inherit;
 }
+
 img {
   vertical-align: top;
 }
@@ -55,10 +59,12 @@ img.responsive {
   height: auto;
   overflow: hidden;
 }
+
 .img-embed {
   padding-bottom: 100%;
   position: relative;
 }
+
 .img-embed img {
   position: absolute;
 }
@@ -67,11 +73,11 @@ img.responsive {
   text-align: center;
   margin: 15px;
 }
+
 .unconnected .h2 {
   display: block;
   white-space: nowrap;
 }
-
 
 .song-title {
   font-weight: 700;
@@ -79,11 +85,13 @@ img.responsive {
   color: hsl(0, 0%, 13%);
   color: var(--font-primary-color);
 }
+
 a.song-title {
   display: block;
   -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
+
 a.song-title:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
@@ -92,18 +100,19 @@ a.song-title:hover {
   transform: translateY(-2px);
   transform: var(--accent-action);
 }
+
 .song-artist {
   font-weight: 400;
   font-weight: var(--font-secondary-weight);
   color: hsl(0, 0%, 29%);
   color: var(--font-secondary-color);
 }
-.song-suggestor {
+
+.song-suggestor {
   font-weight: 400;
   font-weight: var(--font-secondary-weight);
   color: hsl(0, 0%, 45%);
   color: var(--font-third-color);
-
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
@@ -114,15 +123,11 @@ a.song-title:hover {
   -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
-a.song-suggestor:hover
-,.song-suggestor a:hover {
+
+a.song-suggestor:hover,
+.song-suggestor a:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
-  transform: translateY(-2px);
-  transform: var(--accent-action);
-}
-.song-suggestor a:hover {
-  display: inline-block;
 }

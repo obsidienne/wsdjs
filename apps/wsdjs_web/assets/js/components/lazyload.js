@@ -15,7 +15,7 @@ class LazyLoad {
   }
   _initIntersectionObserver() {
     let self = this;
-    this.observer = new IntersectionObserver(function(entries) {
+    this.observer = new IntersectionObserver(function (entries) {
       for (var i = 0; i < entries.length; i++) {
         if (entries[i].isIntersecting) {
           self.observer.unobserve(entries[i].target);

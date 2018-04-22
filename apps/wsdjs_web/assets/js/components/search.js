@@ -2,7 +2,7 @@ export default class search {
   constructor() {
     var self = this;
 
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
       if (e.target && e.target.matches("#search-input")) {
         self._show_search();
       }
@@ -12,32 +12,34 @@ export default class search {
     })
 
     var timeout;
-    document.addEventListener("keyup", function(e) {
+    document.addEventListener("keyup", function (e) {
       if (e.target && e.target.matches("#search-input")) {
         clearTimeout(timeout);
-        timeout = setTimeout(function() {
+        timeout = setTimeout(function () {
           self._search();
         }, 50);
-      }      
+      }
     })
   }
 
   _search(cl) {
     let query = document.getElementById("search-input").value;
-    fetch(`/search?q=${query}`, {credentials: 'include'})
-    .then((response) => {
-      if (response.ok) {
-        return response.text();
-      } else {
-        console.log('Mauvaise réponse du réseau');
-      }
-    })
-    .then((data) => {
-      document.querySelector(".search-results-container").innerHTML = data;
-    })
-    .catch(function(error) {
-      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
-    });
+    fetch(`/search?q=${query}`, {
+        credentials: 'include'
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.text();
+        } else {
+          console.log('Mauvaise réponse du réseau');
+        }
+      })
+      .then((data) => {
+        document.querySelector(".search-results-container").innerHTML = data;
+      })
+      .catch(function (error) {
+        console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+      });
   }
 
   _show_search() {
@@ -48,7 +50,7 @@ export default class search {
   _hide_search() {
     // remove focus
     var elements = document.querySelectorAll(".focused");
-    Array.prototype.forEach.call(elements, function(el, i){
+    Array.prototype.forEach.call(elements, function (el, i) {
       el.classList.remove("focused");
     });
 

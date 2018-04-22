@@ -42,10 +42,9 @@ defmodule Wsdjs.Playlists do
       ** (Ecto.NoResultsError)
 
   """
-  def get_playlist!(id, user, current_user) do
+  def get_playlist!(id, current_user) do
     current_user
     |> Playlist.scoped()
-    |> where(user_id: ^user.id)
     |> Repo.get!(id)
   end
 

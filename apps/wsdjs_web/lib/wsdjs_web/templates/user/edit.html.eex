@@ -103,6 +103,11 @@
       <%= text_input fd, :soundcloud, placeholder: "https://soundcloud.com", class: "form-control", type: "url" %>
       <%= error_tag fd, :soundcloud %>
     </div>
+    <div class="form-group">
+      <label>Website</label>
+      <%= text_input fd, :website, placeholder: "https://my-website.com", class: "form-control", type: "url" %>
+      <%= error_tag fd, :website %>
+    </div>
     <% end %>
 
     <table class="table">

@@ -18,6 +18,7 @@ defmodule Wsdjs.Accounts.UserDetail do
     field(:youtube, :string)
     field(:facebook, :string)
     field(:soundcloud, :string)
+    field(:website, :string)
 
     belongs_to(:user, Wsdjs.Accounts.User)
     timestamps()
@@ -35,7 +36,8 @@ defmodule Wsdjs.Accounts.UserDetail do
     :hate_more,
     :youtube,
     :facebook,
-    :soundcloud
+    :soundcloud,
+    :website
   ]
 
   def changeset(%UserDetail{} = user_detail, attrs) do
@@ -57,6 +59,7 @@ defmodule Wsdjs.Accounts.UserDetail do
     |> validate_url(:youtube)
     |> validate_url(:facebook)
     |> validate_url(:soundcloud)
+    |> validate_url(:website)
   end
 
   # This function validates the format of an URL not it's validity.

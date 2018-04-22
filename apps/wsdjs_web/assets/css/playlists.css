@@ -2,16 +2,27 @@
   margin-left: auto;
   display: flex;
 }
+
 .table_song-art {
   width: 64px;
 }
+
 .playlist {
   position: relative;
   display: block;
 }
 
-.playlist__details {
+.playlist-visibility {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.playlist-name {
+  position: absolute;
+  bottom: 0px;
+  padding: 4px;
+  background-color: hsla(221, 23%, 16%, .8);
+  color: #D3D8E0;
   display: flex;
-  justify-content: space-between;
-  line-height: 24px;
 }

@@ -1,6 +1,7 @@
 /****************************
   ??
 ****************************/
+
 .tops__top__art {
   display: flex;
   flex-wrap: wrap;
@@ -9,7 +10,7 @@
   margin-top: .5rem;
 }
 
-.tops__top__art > div {
+.tops__top__art>div {
   flex: 1 0 20%;
 }
 
@@ -21,6 +22,7 @@
 /****************************
   top timeline vertical line
 ****************************/
+
 .tops::before {
   content: '';
   position: absolute;
@@ -30,6 +32,7 @@
   width: 4px;
   background: #d7e4ed;
 }
+
 @media only screen and (min-width: 768px) {
   .tops::before {
     left: 50%;
@@ -40,23 +43,29 @@
 /****************************
   top timeline
 ****************************/
+
 .tops {
   position: relative;
 }
+
 .tops__top {
   display: flex;
   position: relative;
   margin: 2em 0;
 }
-.tops__top > a {
+
+.tops__top>a {
   overflow: hidden;
 }
+
 .tops__top:first-child {
   margin-top: 0;
 }
+
 .tops__top:last-child {
   margin-bottom: 0;
 }
+
 .tops__top__anchor {
   position: absolute;
   top: 0;
@@ -65,16 +74,20 @@
   height: 48px;
   border-radius: 50%;
 }
+
 .tops__top__anchor__img {
   width: 100%;
   height: auto;
 }
+
 .tops__top table {
   margin-top: 8px;
-} 
+}
+
 .tops__top thead {
   background-color: transparent;
 }
+
 .tops__top__content {
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
@@ -83,14 +96,17 @@
   padding: 16px;
   width: 100%;
 }
+
 .tops__top__date {
   display: flex;
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
+
 .tops__top__date time {
   padding-right: 16px;
 }
+
 .tops__top__details {
   margin-top: 16px;
 }

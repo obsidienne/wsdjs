@@ -1,6 +1,7 @@
 export default class Notifier {
   show_all() {
-    var notifications = document.querySelectorAll('.notifier-container .notifier'), i;
+    var notifications = document.querySelectorAll('.notifier-container .notifier'),
+      i;
 
     for (i = 0; i < notifications.length; ++i) {
       notifications[i].classList.add("shown");
@@ -15,11 +16,11 @@ export default class Notifier {
       timeout_value = 15000;
     }
     console.log(timeout_value);
-    
-    setTimeout(function() {
+
+    setTimeout(function () {
       var notification = document.getElementById(id);
       notification.classList.remove("shown");
-      setTimeout(function() {
+      setTimeout(function () {
         notification.parentNode.removeChild(notification);
       }, 800);
     }, timeout_value);

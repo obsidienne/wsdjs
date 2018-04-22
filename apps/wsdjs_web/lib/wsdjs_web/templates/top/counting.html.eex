@@ -5,7 +5,7 @@
 </header>
 <%= if @current_user && @current_user.admin do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="top-steps">
+<nav class="secondary-nav breadcrumb">
   <ol class="container">
     <li class="visited">
       <%= submit "Voting", class: "btn btn-link", name: "direction", value: "previous" %>

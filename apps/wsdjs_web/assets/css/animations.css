@@ -1,6 +1,7 @@
 /****************************
 donut
 ****************************/
+
 @keyframes donut-spin {
   0% {
     transform: rotate(0deg);
@@ -9,6 +10,7 @@ donut
     transform: rotate(360deg);
   }
 }
+
 .donut {
   display: inline-block;
   border: 4px solid rgba(0, 0, 0, 0.1);
@@ -25,6 +27,7 @@ donut
 /****************************
 throbber-loader
 ****************************/
+
 @keyframes throbber-loader {
   0% {
     background: hsl(210, 17%, 89%);
@@ -36,7 +39,9 @@ throbber-loader
     background: hsl(210, 17%, 89%);
   }
 }
+
 /* :not(:required) hides these rules from IE9 and below */
+
 .throbber-loader {
   animation: throbber-loader 1000ms 300ms infinite ease-out;
   background: #dde2e7;
@@ -47,7 +52,9 @@ throbber-loader
   height: 1.5em;
   margin: 0 1.6em;
 }
-.throbber-loader:before, .throbber-loader:after {
+
+.throbber-loader:before,
+.throbber-loader:after {
   background: #dde2e7;
   content: '\x200B';
   display: inline-block;
@@ -56,12 +63,13 @@ throbber-loader
   position: absolute;
   top: 0;
 }
+
 .throbber-loader:before {
   animation: throbber-loader 1000ms 150ms infinite ease-out;
   left: -1.6em;
 }
+
 .throbber-loader:after {
   animation: throbber-loader 1000ms 450ms infinite ease-out;
   right: -1.6em;
 }
-

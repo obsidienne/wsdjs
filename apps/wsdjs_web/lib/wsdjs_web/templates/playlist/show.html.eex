@@ -1,0 +1,27 @@
+<nav class="secondary-nav">
+  <ol class="container">
+    <li>
+        <%= link "bio", to: user_path(@conn, :show, @user) %>
+    </li>
+    <li class="current">playlists</li>
+  </ol>
+</nav>
+
+<section id="user-page" class="user-page container">
+  <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
+
+  <%= if @conn.assigns[:playlist] do %>
+    <%= if @playlist.type == "playlist" do %>
+    <%= render "_user_playlist.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
+    <% end %>
+    <%= if @playlist.type == "suggested" do %>
+    <%= render "_user_suggestions.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
+    <% end %>
+    <%= if @playlist.type == "likes and tops" do %>
+    <%= render "_user_top_like.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
+    <% end %>
+    <%= if @playlist.type == "top 5" do %>
+    <%= render "_user_top5.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, songs: @songs %>
+    <% end %>
+  <% end %>
+</section>

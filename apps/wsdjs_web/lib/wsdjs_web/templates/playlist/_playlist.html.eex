@@ -4,7 +4,7 @@
       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
       <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
-    <%= link "back to playlists", to: user_path(@conn, :show, @user), class: "btn btn-link" %>
+    <%= link "back to playlists", to: user_playlist_path(@conn, :index, @user), class: "btn btn-link" %>
 
     <span class="playlist-name h3"><%= @playlist.name %></span>
   </div>

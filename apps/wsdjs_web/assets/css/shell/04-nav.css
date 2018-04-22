@@ -1,19 +1,20 @@
-main > header {
+main>header {
   background-color: hsl(221, 23%, 16%);
   padding-bottom: 24px;
-  margin-bottom: 24px;
 }
 
-main > header h1 {
+main>header h1 {
   color: white;
 }
-main > header h2 {
+
+main>header h2 {
   color: white;
 }
 
 /****************************
   global navigation
 ****************************/
+
 .glnav {
   align-items: center;
   user-select: none;
@@ -25,14 +26,14 @@ main > header h2 {
   padding-bottom: 8px;
   padding-top: 8px;
 }
+
 .glnav:before {
   content: "";
-
   position: absolute;
   width: 100%;
-  top: 0;  
-
-  border-top: 2px solid hsl(45, 100%, 51.4%);;  
+  top: 0;
+  border-top: 2px solid hsl(45, 100%, 51.4%);
+  ;
   border-top: 2px solid var(--accent-color);
 }
 
@@ -42,11 +43,13 @@ main > header h2 {
   transform: translateY(-2px);
   transform: var(--accent-action);
 }
+
 .glnav .container {
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
 }
+
 .glnav a.home {
   height: 48px;
 }
@@ -77,6 +80,7 @@ main > header h2 {
   width: 40px;
   height: 48px;
 }
+
 .logo-wide {
   height: 48px;
   width: 120px;
@@ -90,4 +94,52 @@ main > header h2 {
   .logo-wide {
     display: inline;
   }
+}
+
+/****************************
+  secondary navigation
+****************************/
+
+.secondary-nav {
+  background-color: #edeff0;
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+}
+
+.secondary-nav li {
+  display: inline-block;
+}
+
+.secondary-nav.breadcrumb {
+  margin-top: -1.5rem;
+}
+
+.secondary-nav li::after {
+  display: inline-block;
+  content: '';
+  color: hsl(0, 0%, 45%);
+  color: var(--inactive-color);
+  margin: 0 .5rem;
+}
+
+.secondary-nav.breadcrumb li::after {
+  content: '\00bb';
+}
+
+.secondary-nav li:last-of-type::after {
+  display: none;
+}
+
+.secondary-nav li>* {
+  display: inline-block;
+  color: #2c3f4c;
+}
+
+.secondary-nav button {
+  margin: 0;
+  vertical-align: inherit;
+}
+
+.secondary-nav li.current {
+  font-weight: bold;
 }

@@ -51,9 +51,9 @@ function handleDOMContentLoaded() {
 
   new Tippy("main", {
     arrow: true,
-    arrowType: 'round', 
-    performance: true, 
-    target: ".tippy", 
+    arrowType: 'round',
+    performance: true,
+    target: ".tippy",
     dynamicTitle: true
   });
 
