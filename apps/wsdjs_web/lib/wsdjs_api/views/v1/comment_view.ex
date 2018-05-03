@@ -21,6 +21,7 @@ defmodule WsdjsApi.V1.CommentView do
     %{
       id: comment.id,
       text: comment.text,
+      text_html: comment.text_html,
       user: %{
         name: comment.user.name,
         dj_name: comment.user.djname,

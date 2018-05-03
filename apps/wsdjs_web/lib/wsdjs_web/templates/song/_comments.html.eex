@@ -32,7 +32,7 @@
           <% end %>
         </header>
         <div class="comment__content">
-          <%= comment.text %>
+          <%= raw(comment.text_html) %>
         </div>
       </div>
     </li>

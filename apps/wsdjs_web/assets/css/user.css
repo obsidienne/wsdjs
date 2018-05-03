@@ -45,6 +45,11 @@
   font-weight: var(--font-primary-weight);
 }
 
+.aboutme>ul {
+  list-style-type: disc;
+  margin-left: 2.5rem;
+}
+
 .user-djanme {
   text-align: center;
   font-weight: var(--font-secondary-weight);
@@ -128,6 +133,7 @@
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
   margin: 0;
+  margin-bottom: .5rem;
 }
 
 .user-page__logout {

@@ -145,7 +145,7 @@
           </svg>
         </button>
       </header>
-      <div class="comment__content">{{text}}</div>
+      <div class="comment__content">{{text_html}}</div>
     </div>
   </li>
 </template>

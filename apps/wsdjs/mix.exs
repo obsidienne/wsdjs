@@ -44,6 +44,7 @@ defmodule Wsdjs.Mixfile do
       {:earmark, "~> 1.2"},
       {:hashids, "~> 2.0"},
       {:geo_postgis, "~> 1.0"},
+      {:html_sanitize_ex, "~> 1.3.0-rc3"},
       {:timex, "~> 3.1"}
     ]
   end
