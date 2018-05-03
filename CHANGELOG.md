@@ -1,3 +1,6 @@
+# version 1.8.5
+- Use markdown for comment and user description
+- Add user count
 # version 1.8.4
 - activate postgis
 - use places.js to find event venue
