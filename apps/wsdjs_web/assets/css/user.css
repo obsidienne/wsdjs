@@ -136,6 +136,10 @@
   margin-bottom: .5rem;
 }
 
+.aboutme a {
+  text-decoration: underline;
+}
+
 .user-page__logout {
   padding-left: 0;
 }
