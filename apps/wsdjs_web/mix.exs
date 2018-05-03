@@ -4,7 +4,7 @@ defmodule WsdjsWeb.Mixfile do
   def project do
     [
       app: :wsdjs_web,
-      version: "1.8.4",
+      version: "1.8.5",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -46,6 +46,7 @@ defmodule WsdjsWeb.Mixfile do
       {:bamboo, "~> 0.8"},
       {:timex, "~> 3.1"},
       {:corsica, "~> 1.0"},
+      {:earmark, "~> 1.2"},
       {:ua_inspector, "~> 0.16.1"},
       {:wsdjs, in_umbrella: true},
       {:wsdjs_jobs, in_umbrella: true},

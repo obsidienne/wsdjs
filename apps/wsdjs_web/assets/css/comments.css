@@ -21,6 +21,7 @@
   flex: 1;
   position: relative;
   width: auto;
+  background: hsl(0, 0%, 100%);
 }
 
 .comment__header {
@@ -47,8 +48,12 @@
 
 .comment__content {
   background: hsl(0, 0%, 100%);
-  padding: 12px;
+  padding: 0 8px;
   color: hsl(0, 0%, 35%);
+}
+
+.comment__content a {
+  text-decoration: underline;
 }
 
 .comment__delete {

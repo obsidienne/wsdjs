@@ -7,6 +7,7 @@ defmodule Wsdjs.Accounts.UserDetail do
   @foreign_key_type :binary_id
   schema "user_details" do
     field(:description, :string)
+    field(:description_html, :string)
     field(:favorite_genre, :string)
     field(:favorite_artist, :string)
     field(:favorite_color, :string)
@@ -60,6 +61,7 @@ defmodule Wsdjs.Accounts.UserDetail do
     |> validate_url(:facebook)
     |> validate_url(:soundcloud)
     |> validate_url(:website)
+    |> markdown_text(attrs)
   end
 
   # This function validates the format of an URL not it's validity.
@@ -70,5 +72,19 @@ defmodule Wsdjs.Accounts.UserDetail do
         {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect(msg)}"}]
       end
     end)
+  end
+
+  defp markdown_text(model, %{"description" => nil}) do
+    model
+  end
+
+  defp markdown_text(model, %{"description" => body}) do
+    {:ok, clean_body, []} = body |> Earmark.as_html()
+    clean_body = HtmlSanitizeEx.markdown_html(clean_body)
+    model |> put_change(:description_html, clean_body)
+  end
+  
+  defp markdown_text(model, _) do
+    model
   end
 end

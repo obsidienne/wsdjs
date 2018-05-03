@@ -4,7 +4,7 @@ defmodule Wsdjs.Mixfile do
   def project do
     [
       app: :wsdjs,
-      version: "1.8.4",
+      version: "1.8.5",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -41,8 +41,10 @@ defmodule Wsdjs.Mixfile do
       {:bamboo, "~> 0.8"},
       {:ex_machina, "~> 2.1", only: :test},
       {:httpoison, "~> 0.12"},
+      {:earmark, "~> 1.2"},
       {:hashids, "~> 2.0"},
       {:geo_postgis, "~> 1.0"},
+      {:html_sanitize_ex, "~> 1.3.0-rc3"},
       {:timex, "~> 3.1"}
     ]
   end

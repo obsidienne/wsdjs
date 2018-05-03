@@ -4,7 +4,7 @@ defmodule Wsdjs.Jobs.Mixfile do
   def project do
     [
       app: :wsdjs_jobs,
-      version: "1.8.4",
+      version: "1.8.5",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -38,7 +38,7 @@ defmodule Wsdjs.Jobs.Mixfile do
     [
       {:phoenix_pubsub, "~> 1.0"},
       {:httpoison, "~> 0.12"},
-      {:quantum, ">= 2.2.0"},
+      {:quantum, ">= 2.2.7"},
       {:timex, "~> 3.1"},
       {:bamboo, "~> 0.8"},
       {:wsdjs, in_umbrella: true}
