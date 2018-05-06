@@ -3,6 +3,7 @@ defmodule WsdjsWeb.PlaylistController do
   use WsdjsWeb.Controller
 
   alias Wsdjs.Playlists
+  alias Wsdjs.Playlists
   alias Wsdjs.Accounts
 
   action_fallback(WsdjsWeb.FallbackController)
@@ -39,6 +40,23 @@ defmodule WsdjsWeb.PlaylistController do
               user: user)
     end
   end
+
+  def edit(conn, %{"id" => id}, current_user) do
+    with %Playlists.Playlist{} = playlist <- Playlists.get_playlist!(id),
+         :ok <- Playlists.Policy.can?(current_user, :edit_playlist, playlist) do
+
+      user = Accounts.get_user!(playlist.user_id)
+      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      changeset = Playlists.change_playlist(playlist)
+      
+      render(conn, "edit.html", 
+              playlist: playlist, 
+              suggested_songs: suggested_songs,
+              changeset: changeset,
+              user: user)
+    end
+  end
+
 
   @doc """
   Only authorized user can create a playlist for somebody else
