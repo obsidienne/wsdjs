@@ -4,6 +4,9 @@
         <%= link "bio", to: user_path(@conn, :show, @user) %>
     </li>
     <li class="current">playlists</li>
+    <li>
+        <%= link "params", to: user_params_path(@conn, :show, @user) %>
+    </li>
   </ol>
 </nav>
 

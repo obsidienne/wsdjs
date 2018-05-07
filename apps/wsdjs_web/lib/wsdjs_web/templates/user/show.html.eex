@@ -4,6 +4,9 @@
     <li>
         <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
     </li>
+    <li>
+      <%= link "params", to: user_params_path(@conn, :show, @user) %>
+    </li>
   </ol>
 </nav>
 
