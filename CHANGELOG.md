@@ -1,3 +1,6 @@
+# version 1.8.6
+- specific page for user params
+- edit page for playlist public status (remove it from user edit page)
 # version 1.8.5
 - Use markdown for comment and user description
 - Add user count

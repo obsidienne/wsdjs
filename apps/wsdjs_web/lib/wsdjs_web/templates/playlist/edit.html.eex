@@ -15,5 +15,22 @@
   <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
 
+  <%= form_for @changeset, playlist_path(@conn, :update, @playlist), fn f -> %>
+    <div class="form-group">
+      <label>Playlist name</label>
+      <%= text_input f, :name, placeholder: "Playlist name", class: "form-control" %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <div class="form-group">
+      <label>This playlist/top is visible to anyone.</label>
+      <div class="ckbx-style-11 ">
+          <%= checkbox f, :public %>
+          <%= label f, :public do %><% end %>
+      </div>
+    </div>
+
+    <%= submit "Update", class: "btn btn-primary" %>
+  <% end %>
 
 </section>

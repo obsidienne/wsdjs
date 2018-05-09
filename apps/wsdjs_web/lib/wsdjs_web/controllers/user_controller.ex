@@ -38,16 +38,17 @@ defmodule WsdjsWeb.UserController do
   end
 
   def update(conn, %{"id" => id, "user" => user_params}, current_user) do
-    with %User{} = user <- Accounts.get_user!(id),
-         :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
-         {:ok, user} <- Accounts.update_user(user, user_params, current_user),
-         {:ok, _} <- Wsdjs.Playlists.toggle_playlist_visibiliy(user, user_params, current_user) do
+    user = Accounts.get_user!(id)
+
+    with :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
+         {:ok, _} <- Accounts.update_user(user, user_params, current_user) do
+      
       conn
       |> put_flash(:info, "Profile updated.")
       |> redirect(to: user_path(conn, :show, user))
     else
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: current_user, changeset: changeset)
+        render(conn, "edit.html", user: user, changeset: changeset)
     end
   end
 end

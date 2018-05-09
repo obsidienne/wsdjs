@@ -86,20 +86,10 @@ defmodule Wsdjs.Playlists do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_playlist(%Playlist{} = playlist, attrs) do
+  def update_playlist(%Playlist{} = playlist, attrs, %User{}) do
     playlist
     |> Playlist.update_changeset(attrs)
     |> Repo.update()
-  end
-
-  def toggle_playlist_visibiliy(%User{} = user, attrs, %User{} = current_user) do
-    playlist = get_playlist_by_user(user, current_user)
-    bool = get_in(attrs, ["parameter", "public_top_like"])
-
-    case playlist do
-      nil -> {:ok, playlist}
-      _ -> update_playlist(playlist, %{"public" => bool})
-    end
   end
 
   @doc """

@@ -22,8 +22,8 @@ defmodule Wsdjs.Playlists.Playlist do
 
   def update_changeset(%Playlist{} = playlist, attrs) do
     playlist
-    |> cast(attrs, [:public])
-    |> validate_required([:public])
+    |> cast(attrs, [:public, :name])
+    |> validate_required([:public, :name])
   end
 
   def changeset(%Playlist{} = playlist, attrs) do

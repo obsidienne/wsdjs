@@ -50,7 +50,7 @@ defmodule WsdjsWeb.Router do
     end
     resources("/user-params", UserParamsController, only: [:show])
 
-    resources("/playlists", PlaylistController, only: [:show, :edit, :delete])
+    resources("/playlists", PlaylistController, only: [:show, :edit, :delete, :update])
   end
 
   scope "/", WsdjsWeb do
