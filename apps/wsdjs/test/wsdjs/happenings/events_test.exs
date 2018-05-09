@@ -5,7 +5,13 @@ defmodule Wsdjs.Happenings.EventTest do
   describe "events" do
     alias Wsdjs.Happenings.Event
 
-    @valid_attrs %{name: "event name"}
+    @valid_attrs %{name: "event name", 
+      starts_on: ~N[2000-01-01 23:00:07],
+      ends_on: ~N[2000-01-04 23:00:07],
+      lng: 1.4,
+      lat: -1.3,
+      venue: "testouille"
+    }
     @update_attrs %{name: "new event name"}
     @invalid_attrs %{name: ""}
 

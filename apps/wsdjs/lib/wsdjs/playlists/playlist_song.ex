@@ -10,7 +10,7 @@ defmodule Wsdjs.Playlists.PlaylistSong do
     field(:position, :integer)
     timestamps(updated_at: false)
 
-    belongs_to(:playlist, Wsdjs.Playlists.Playlist)
+    belongs_to(:playlist, Wsdjs.Playlists.Playlist, type: Wsdjs.HashID)
     belongs_to(:song, Wsdjs.Musics.Song, type: :binary_id)
   end
 

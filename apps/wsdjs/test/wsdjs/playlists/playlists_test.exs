@@ -1,6 +1,7 @@
 defmodule Wsdjs.Playlists.PlaylistsTest do
   use Wsdjs.DataCase
   alias Wsdjs.Playlists
+  alias Wsdjs.Accounts
 
   describe "playlists" do
     alias Wsdjs.Playlists.Playlist
@@ -80,7 +81,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     test "update_playlist/2 with valid data updates the playlist" do
       playlist = playlist_fixture()
 
-      assert {:ok, playlist} = Playlists.update_playlist(playlist, @update_attrs)
+      assert {:ok, playlist} = Playlists.update_playlist(playlist, @update_attrs, %Accounts.User{})
       assert %Playlist{} = playlist
       assert playlist.name == "new playlist name"
     end
@@ -88,7 +89,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     test "update_playlist/2 with invalid data returns error changeset" do
       playlist = playlist_fixture()
 
-      assert {:error, %Ecto.Changeset{}} = Playlists.update_playlist(playlist, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Playlists.update_playlist(playlist, @invalid_attrs, %Accounts.User{})
       assert playlist == Playlists.get_playlist!(playlist.id)
     end
 
