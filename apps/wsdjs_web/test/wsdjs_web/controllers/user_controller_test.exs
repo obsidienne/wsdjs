@@ -30,7 +30,7 @@ defmodule WsdjsWeb.UserControllerTest do
         ],
         fn conn ->
           conn = get(conn, user_path(conn, :index))
-          assert html_response(conn, 200) =~ "Users - WSDJs"
+          assert html_response(conn, 200) =~ "List users - World Swing DJs"
           assert String.contains?(conn.resp_body, user.email)
           assert String.contains?(conn.resp_body, dj.email)
           assert String.contains?(conn.resp_body, dj_vip.email)
@@ -103,15 +103,15 @@ defmodule WsdjsWeb.UserControllerTest do
         ],
         fn conn ->
           conn_done = get(conn, user_path(conn, :show, dj_vip.id))
-          assert html_response(conn_done, 200) =~ "User - WSDJs"
+          assert html_response(conn_done, 200) =~ "User - World Swing DJs"
           assert String.contains?(conn_done.resp_body, dj_vip.email)
 
           conn_done = get(conn, user_path(conn, :show, dj.id))
-          assert html_response(conn_done, 200) =~ "User - WSDJs"
+          assert html_response(conn_done, 200) =~ "User - World Swing DJs"
           assert String.contains?(conn_done.resp_body, dj.email)
 
           conn_done = get(conn, user_path(conn, :show, user.id))
-          assert html_response(conn_done, 200) =~ "User - WSDJs"
+          assert html_response(conn_done, 200) =~ "User - World Swing DJs"
           assert String.contains?(conn_done.resp_body, user.email)
         end
       )
@@ -134,7 +134,7 @@ defmodule WsdjsWeb.UserControllerTest do
         ],
         fn conn ->
           conn = get(conn, user_path(conn, :edit, user.id))
-          assert html_response(conn, 200) =~ "Edit user - WSDJs"
+          assert html_response(conn, 200) =~ "Edit user - World Swing DJs"
           assert String.contains?(conn.resp_body, user.name)
         end
       )

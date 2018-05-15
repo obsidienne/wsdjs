@@ -41,7 +41,7 @@ defmodule WsdjsWeb.TopControllerTest do
       ],
       fn conn ->
         conn = get(conn, top_path(conn, :index))
-        assert html_response(conn, 200) =~ "Tops - WSDJs"
+        assert html_response(conn, 200) =~ "List tops - World Swing DJs"
       end
     )
   end

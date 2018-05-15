@@ -34,7 +34,7 @@ defmodule WsdjsWeb.SongControllerTest do
       ],
       fn conn ->
         conn = get(conn, song_path(conn, :show, song.id))
-        assert html_response(conn, 200) =~ "Song - WSDJs"
+        assert html_response(conn, 200) =~ "Song - World Swing DJs"
         assert String.contains?(conn.resp_body, song.title)
       end
     )
@@ -52,7 +52,7 @@ defmodule WsdjsWeb.SongControllerTest do
       ],
       fn conn ->
         conn = get(conn, song_path(conn, :show, song.id))
-        assert html_response(conn, 200) =~ "Song - WSDJs"
+        assert html_response(conn, 200) =~ "Song - World Swing DJs"
         assert String.contains?(conn.resp_body, song.title)
       end
     )
@@ -69,7 +69,7 @@ defmodule WsdjsWeb.SongControllerTest do
       ],
       fn conn ->
         conn = get(conn, song_path(conn, :show, song.id))
-        assert html_response(conn, 200) =~ "Song - WSDJs"
+        assert html_response(conn, 200) =~ "Song - World Swing DJs"
         assert String.contains?(conn.resp_body, song.title)
       end
     )
@@ -100,7 +100,7 @@ defmodule WsdjsWeb.SongControllerTest do
       ],
       fn song ->
         conn = get(conn, song_path(conn, :show, song.id))
-        assert html_response(conn, 200) =~ "Song - WSDJs"
+        assert html_response(conn, 200) =~ "Song - World Swing DJs"
         assert String.contains?(conn.resp_body, song.title)
       end
     )
@@ -136,7 +136,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank1, rank10, rank11], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
@@ -176,7 +176,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank1, rank10, rank11], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
@@ -202,7 +202,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank11], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
@@ -219,7 +219,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank1, rank10], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
@@ -245,7 +245,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank11], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
@@ -262,7 +262,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank1, rank10], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
@@ -288,7 +288,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank11], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
@@ -303,7 +303,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank1, rank10], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
@@ -342,7 +342,7 @@ defmodule WsdjsWeb.SongControllerTest do
       fn conn ->
         Enum.each([rank11], fn rank ->
           conn = get(conn, song_path(conn, :show, rank.song.id))
-          assert html_response(conn, 200) =~ "Song - WSDJs"
+          assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, rank.song.title)
         end)
       end
