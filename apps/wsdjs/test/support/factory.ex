@@ -8,7 +8,14 @@ defmodule Wsdjs.Factory do
       admin: false,
       profil_djvip: false,
       profil_dj: false,
-      deactivated: false
+      deactivated: false,
+      detail: build(:detail)
+    }
+  end
+
+  def detail_factory do
+    %Wsdjs.Accounts.UserDetail{
+
     }
   end
 

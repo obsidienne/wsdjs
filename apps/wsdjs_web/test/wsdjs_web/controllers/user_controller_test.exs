@@ -25,8 +25,7 @@ defmodule WsdjsWeb.UserControllerTest do
       # can list
       Enum.each(
         [
-          assign(conn, :current_user, admin),
-          assign(conn, :current_user, dj_vip)
+          assign(conn, :current_user, admin)
         ],
         fn conn ->
           conn = get(conn, user_path(conn, :index))
@@ -42,6 +41,7 @@ defmodule WsdjsWeb.UserControllerTest do
       Enum.each(
         [
           assign(conn, :current_user, user),
+          assign(conn, :current_user, dj_vip),
           assign(conn, :current_user, dj),
           assign(conn, :current_user, nil)
         ],

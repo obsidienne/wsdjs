@@ -1,6 +1,10 @@
 defmodule WsdjsWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :wsdjs_web
 
+  if Application.get_env(:wsdjs, :sql_sandbox) do
+    plug Phoenix.Ecto.SQL.Sandbox
+  end
+
   plug(
     Corsica,
     origins: ["http://radiowcs.com", "http://www.radiowcs.com"],
