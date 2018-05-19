@@ -3,6 +3,7 @@ defmodule WsdjsWeb.UserSocket do
 
   ## Channels
   channel("notifications:*", WsdjsWeb.NotificationsChannel)
+  channel("radio:*", WsdjsWeb.RadioChannel)
 
   ## Transports
   transport(:websocket, Phoenix.Transports.WebSocket)

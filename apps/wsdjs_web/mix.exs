@@ -48,6 +48,7 @@ defmodule WsdjsWeb.Mixfile do
       {:corsica, "~> 1.0"},
       {:earmark, "~> 1.2"},
       {:ua_inspector, "~> 0.16.1"},
+      {:con_cache, "~> 0.13.0"},
       {:wallaby, "~> 0.20.0", [runtime: false, only: :test]},
       {:wsdjs, in_umbrella: true},
       {:wsdjs_jobs, in_umbrella: true},

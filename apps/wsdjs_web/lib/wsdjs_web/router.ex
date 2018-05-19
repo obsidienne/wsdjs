@@ -97,6 +97,7 @@ defmodule WsdjsWeb.Router do
     scope "/v1", V1 do
       resources("/now_playing", NowPlayingController, only: [:index])
       resources("/mobile_config", MobileConfigController, only: [:index])
+      resources("/radio", RadioController, only: [:index])
       get("/signin/:token", SessionController, :show, as: :signin)
       resources("/sessions", SessionController, only: [:create])
 

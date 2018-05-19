@@ -7,7 +7,7 @@ export default class Radio {
 
 
     // Now that you are connected, you can join channels with a topic:
-    this.channel = socket.channel("notifications:now_playing", {})
+    this.channel = socket.channel("radio:streamed", {})
     this.channel.join()
       .receive("ok", resp => {
         console.log("Joined successfully", resp)
@@ -16,7 +16,7 @@ export default class Radio {
         console.log("Unable to join", resp)
       })
 
-    this.channel.on("new_played_song", payload => {
+    this.channel.on("new_streamed_song", payload => {
       console.log("broadcasted");
       this.refresh_radio(payload)
     });
@@ -87,7 +87,7 @@ export default class Radio {
     this.radio.src = "http://www.radioking.com/play/radio-wcs";
     this.radio.load();
 
-    this.channel.push("played_song_list")
+    this.channel.push("list_song")
     this.radio.play();
     document.querySelector(".player").classList.add("player--playing");
   }
