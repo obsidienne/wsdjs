@@ -59,6 +59,7 @@ defmodule WsdjsWeb.Router do
 
     get("/", HomeController, :index)
     get("/search", SearchController, :index)
+    get("/radio", RadioController, :show)
     resources("/users", UserController, only: [:show])
     resources("/home", HomeController, only: [:index])
     resources("/songs", SongController, only: [:show])
