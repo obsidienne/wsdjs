@@ -60,7 +60,7 @@ function handleDOMContentLoaded() {
 }
 
 function handleUnloadContentLoaded() {
-  if (window.currentView.unmount) {
+  if (window.currentView && window.currentView.unmount) {
     window.currentView.unmount();
   }
 }
