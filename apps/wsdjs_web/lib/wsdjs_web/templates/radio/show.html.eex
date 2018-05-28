@@ -1,0 +1,22 @@
+<nav class="secondary-nav">
+  <ol class="container">
+    <li class="current">Current</li>
+  </ol>
+</nav>
+
+<section id="radio-page" class="radio-page container">
+  <%= if @songs == :empty do %>
+  <% else %>
+    <% song = List.first(@songs) %>
+    <div class="radio-song">
+      <div class="radio-song_header">
+      <img src="<%= Map.fetch!(song, "image_uri") %>" 
+          srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive"/>
+        <button>Play</button>
+      </div>
+      <div class="radio-song_body">
+        <%=Map.fetch!(song, "title") %>
+      </div>
+    </div>
+  <% end %>
+</section>
