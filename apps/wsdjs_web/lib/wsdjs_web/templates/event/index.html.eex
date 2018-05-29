@@ -37,3 +37,5 @@
 </table>
 
 </section>
+
+<%= link "add", to: event_path(@conn, :new), class: "btn btn-primary fab" %>

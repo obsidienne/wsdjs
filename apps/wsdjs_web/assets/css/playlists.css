@@ -1,4 +1,21 @@
-.actions .playlist-name {
+.playlist-actions {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  justify-content: flex-end;
+  margin-bottom: .5rem;
+  margin-top: 1rem;
+}
+
+.playlist-actions>* {
+  margin-left: .5rem;
+}
+
+.playlist-actions>*:first-child {
+  margin-left: 0;
+}
+
+.playlist-actions .playlist-name {
   margin-left: auto;
   display: flex;
 }

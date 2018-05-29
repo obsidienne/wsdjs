@@ -46,6 +46,7 @@
 
 .tops {
   position: relative;
+  margin-top: 1rem;
 }
 
 .tops__top {

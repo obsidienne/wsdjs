@@ -41,3 +41,7 @@
     <% end %>
   </ul>
 </section>
+
+<%= if Wsdjs.Playlists.Policy.can?(@current_user, :create, @user) == :ok do %>
+  <%= link "add", to: user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary fab" %>
+<% end %>

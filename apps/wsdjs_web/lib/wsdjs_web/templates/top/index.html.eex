@@ -31,3 +31,7 @@
   <div class="sentinel" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
   <% end %>
 </section>
+
+<%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
+  <%= link "add", to: top_path(@conn, :new), class: "btn btn-primary fab"  %>
+<% end %>

@@ -50,4 +50,8 @@
     </ul>
   </section>
 <% end %>
+
+  <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
+    <%= link "add", to: suggestion_path(@conn, :new), class: "btn fab btn-primary" %>
+  <% end %>
 </section>
