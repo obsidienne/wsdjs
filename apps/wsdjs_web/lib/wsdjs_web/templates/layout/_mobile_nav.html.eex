@@ -1,13 +1,6 @@
 <nav class="mobile-nav">
   <ul>
     <li>
-      <%= link to: radio_path(@conn, :show), class: "mobile-nav_menu" do %>
-      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-        <path fill="#455A64" d="M20,6A2,2 0 0,1 22,8V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V8C2,7.15 2.53,6.42 3.28,6.13L15.71,1L16.47,2.83L8.83,6H20M20,8H4V12H16V10H18V12H20V8M7,14A3,3 0 0,0 4,17A3,3 0 0,0 7,20A3,3 0 0,0 10,17A3,3 0 0,0 7,14Z" />
-      </svg>
-      <% end %>
-    </li>
-    <li>
       <%= link to: top_path(@conn, :index), class: "mobile-nav_menu" do %>
       <svg style="width:24px;height:24px" viewBox="0 0 24 24">
         <path fill="#455A64" d="M20.2,2H19.5H18C17.1,2 16,3 16,4H8C8,3 6.9,2 6,2H4.5H3.8H2V11C2,12 3,13 4,13H6.2C6.6,15 7.9,16.7 11,17V19.1C8.8,19.3 8,20.4 8,21.7V22H16V21.7C16,20.4 15.2,19.3 13,19.1V17C16.1,16.7 17.4,15 17.8,13H20C21,13 22,12 22,11V2H20.2M4,11V4H6V6V11C5.1,11 4.3,11 4,11M20,11C19.7,11 18.9,11 18,11V6V4H20V11Z" />
@@ -16,9 +9,28 @@
     </li>
     <li>
       <%= link to: song_path(@conn, :index), class: "mobile-nav_menu" do %>
-      <svg style="width:36px;height:36px" viewBox="0 0 24 24">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
         <path fill="#455A64" d="M4,6H2V20A2,2 0 0,0 4,22H18V20H4M18,7H15V12.5A2.5,2.5 0 0,1 12.5,15A2.5,2.5 0 0,1 10,12.5A2.5,2.5 0 0,1 12.5,10C13.07,10 13.58,10.19 14,10.5V5H18M20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2Z" />
       </svg>
+      <% end %>
+    </li>
+    <li>
+      <%= link to: radio_path(@conn, :show), class: "mobile-nav_menu radio-paused" do %>
+      
+        <svg style="width:36px;height:36px" viewBox="0 0 24 24">
+          <path fill="#455A64" d="M20,6A2,2 0 0,1 22,8V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V8C2,7.15 2.53,6.42 3.28,6.13L15.71,1L16.47,2.83L8.83,6H20M20,8H4V12H16V10H18V12H20V8M7,14A3,3 0 0,0 4,17A3,3 0 0,0 7,20A3,3 0 0,0 10,17A3,3 0 0,0 7,14Z" />
+        </svg>
+
+        <div class="sound-bars">
+          <div class="sound-bar"></div>
+          <div class="sound-bar"></div>
+          <div class="sound-bar"></div>
+          <div class="sound-bar"></div>
+          <div class="sound-bar"></div>
+          <div class="sound-bar"></div>
+          <div class="sound-bar"></div>
+        </div>
+
       <% end %>
     </li>
     <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>

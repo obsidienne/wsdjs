@@ -1,3 +1,21 @@
 .radio-page {
   margin-top: 1rem;
 }
+
+.radio-song {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.radio-song img {
+  max-width: 300px;
+}
+
+.radio-paused .sound-bars {
+  display: none;
+}
+
+.radio-playing>svg {
+  display: none;
+}

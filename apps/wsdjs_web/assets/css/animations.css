@@ -25,6 +25,82 @@ donut
 }
 
 /****************************
+sound bar
+****************************/
+
+.sound-bars {
+  background-color: #edeff0;
+  border: 2px solid #1F2532;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 6px;
+}
+
+.sound-bar {
+  background: #FFC107;
+  bottom: 1px;
+  height: 3px;
+  width: 3px;
+  animation: sound 0ms -800ms linear infinite alternate;
+  margin-right: 1px;
+}
+
+@keyframes sound {
+  0% {
+    opacity: .35;
+    height: 3px;
+  }
+  100% {
+    opacity: 1;
+    height: 26px;
+  }
+}
+
+.sound-bar:nth-child(1) {
+  animation-duration: 474ms;
+}
+
+.sound-bar:nth-child(2) {
+  animation-duration: 433ms;
+}
+
+.sound-bar:nth-child(3) {
+  animation-duration: 407ms;
+}
+
+.sound-bar:nth-child(4) {
+  animation-duration: 458ms;
+}
+
+.sound-bar:nth-child(5) {
+  animation-duration: 400ms;
+}
+
+.sound-bar:nth-child(6) {
+  animation-duration: 427ms;
+}
+
+.sound-bar:nth-child(7) {
+  animation-duration: 441ms;
+}
+
+.sound-bar:nth-child(8) {
+  animation-duration: 419ms;
+}
+
+.sound-bar:nth-child(9) {
+  animation-duration: 487ms;
+}
+
+.sound-bar:nth-child(10) {
+  animation-duration: 442ms;
+}
+
+/****************************
 throbber-loader
 ****************************/
 
