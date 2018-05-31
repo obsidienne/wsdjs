@@ -6,17 +6,22 @@
 
 <section id="radio-page" class="radio-page container">
   <%= if @songs == :empty do %>
+    <strong>Something went really bad</strong>
   <% else %>
     <% song = List.first(@songs) %>
     <div class="radio-song">
-      <div class="radio-song_header">
       <img src="<%= Map.fetch!(song, "image_uri") %>" 
           srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive"/>
-        <button>Play</button>
-      </div>
-      <div class="radio-song_body">
+      <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body">
         <%=Map.fetch!(song, "title") %>
+      </a>
+      <div class="radio-suggestor">
+        <a href="<%= Map.fetch!(song, "suggested_by_path") %>" class=""><%= Map.fetch!(song, "suggested_by") %></a>
       </div>
     </div>
   <% end %>
+
+  <button class="radio-button" id="radio-toggle-play">
+  play / pause
+  </button>
 </section>
