@@ -114,7 +114,8 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
     
-    <%= render "_player.html", conn: @conn %>
+    <%= render "_radio_player.html", conn: @conn %>
+    <%= render "_video_player.html", conn: @conn %>
     <%= render "_mobile_nav.html", conn: @conn %>
 
     <%= render "_desktop-outside.html", conn: @conn, current_user: @current_user %>
