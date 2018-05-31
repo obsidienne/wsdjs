@@ -52,6 +52,11 @@
 <% end %>
 
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
-    <%= link "add", to: suggestion_path(@conn, :new), class: "btn fab btn-primary" %>
+    <%= link to: suggestion_path(@conn, :new), class: "btn fab btn-primary" do %>
+      <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>
+        <path d='M0 0h24v24H0z' fill='none'/>
+      </svg>
+    <% end %>
   <% end %>
 </section>
