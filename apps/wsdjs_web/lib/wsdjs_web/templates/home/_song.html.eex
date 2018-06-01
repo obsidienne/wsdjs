@@ -15,7 +15,7 @@
       <div class="song-minicard__body">
         <span class="text-muted text-ellipsis">hidden track</span>
 
-        <footer class="song-minicard__footer">
+        <footer>
           <span class="label label-default"><%= @rank.song.genre %></span>
           <%= if @rank.song.bpm > 0 do %>
             <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
@@ -50,7 +50,7 @@
         <span class="secondary-text text-ellipsis"><%= @rank.song.artist %></span>
         <span class="text-muted visible-link song-suggestor"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></span>
 
-        <footer class="song-minicard__footer">
+        <footer>
           <span class="label label-default"><%= @rank.song.genre %></span>
           <%= if @rank.song.bpm > 0 do %>
             <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
