@@ -7,7 +7,6 @@
   width: 21rem;
   max-width: calc(100vw - .25rem);
   color: hsl(0, 0%, 60%);
-  box-sizing: border-box;
 }
 
 .notifier {

@@ -18,6 +18,17 @@
   box-shadow: var(--shadow-active);
 }
 
+.rounded {
+  border-radius: 50%;
+}
+
+.card {
+  display: block;
+  background-color: hsl(0, 0%, 100%);
+  min-width: 0;
+  min-height: 0;
+}
+
 .clickable:hover {
   transform: translateY(-2px);
   transform: var(--accent-action);
@@ -54,4 +65,12 @@
 
 .m-a-2 {
   margin: 1rem;
+}
+
+/* 
+https://github.com/twbs/bootstrap/tree/v4-dev/scss/utilities
+flex
+*/
+.d-flex {
+  display: flex;
 }

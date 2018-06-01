@@ -12,18 +12,6 @@ legend {
   padding-right: 4px;
 }
 
-button,
-input,
-optgroup,
-select,
-textarea {
-  line-height: 1.5;
-}
-
-input[type="search"] {
-  box-sizing: border-box;
-}
-
 input[type="radio"],
 input[type="checkbox"] {
   margin: 4px 0 0;

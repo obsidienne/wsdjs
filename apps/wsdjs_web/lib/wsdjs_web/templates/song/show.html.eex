@@ -102,7 +102,7 @@
 </div>
 
 <template id="video-tpl">
-  <article class="song-page__video card">
+  <article class="song-page__video card shadow clickable">
     <a href="{{url}}" target="_blank" rel="noopener">
       <img src="//res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg" srcset="https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg 100w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_200,q_auto/fl_immutable_cache/{{video_id}}.jpg 200w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_300,q_auto/fl_immutable_cache/{{video_id}}.jpg 300w" sizes="100px" height="auto" width="100">
       <svg fill="#FFC107" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
