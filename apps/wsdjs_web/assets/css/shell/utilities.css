@@ -74,3 +74,9 @@ flex
 .d-flex {
   display: flex;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.align-items-end {
+  align-items: flex-end;
+}
