@@ -56,7 +56,7 @@
   </head>
 
   <body>
-    <nav class="glnav">
+    <nav class="glnav line-upper">
       <div class="container">
         <%= link to: home_path(@conn, :index), class: "home clickable" do %>
         <svg class="logo logo-small" fill='#D3D8E0' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
