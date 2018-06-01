@@ -12,10 +12,10 @@
     <div class="radio-song">
       <img src="<%= Map.fetch!(song, "image_uri") %>" 
           srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive"/>
-      <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body">
+      <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body clickable">
         <%=Map.fetch!(song, "title") %>
       </a>
-      <div class="radio-suggestor">
+      <div class="radio-suggestor clickable">
         <a href="<%= Map.fetch!(song, "suggested_by_path") %>" class=""><%= Map.fetch!(song, "suggested_by") %></a>
       </div>
     </div>

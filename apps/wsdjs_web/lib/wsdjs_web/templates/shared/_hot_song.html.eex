@@ -64,8 +64,8 @@
     </a>
 
     <div class="song-card__body">
-      <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "song-title text-ellipsis" %>
-      <div class="song-artist text-ellipsis"><%= @song.artist %></div>
+      <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "primary-text action-link visible-link text-ellipsis" %>
+      <div class="secondary-text text-ellipsis"><%= @song.artist %></div>
 
       <div class="text-muted text-ellipsis song-suggested-full">
         <%= gettext "by" %> <%= proposed_by_link(@conn, @song) %>

@@ -41,10 +41,10 @@
       <div class="top-song-info-container">
         <div class="top-song-body">
           <div>
-            <%= link to: song_path(@conn, :show, rank.song), class: "song-title" do %>
+            <%= link to: song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
               <%= rank.song.title %>
             <% end %>
-            <span class="text-ellipsis song-artist"><%= rank.song.artist %></span>
+            <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
           </div>
           <aside>
             <span class="label label-default"><%= rank.song.genre %></span>

@@ -223,20 +223,6 @@
   padding: 0 12px;
 }
 
-.song-card__body a {
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-
-.song-card__body a:hover {
-  text-decoration: underline;
-  -webkit-text-decoration: underline;
-  color: hsl(45, 100%, 51.4%);
-  color: var(--accent-color);
-  transform: translateY(-2px);
-  transform: var(--accent-action);
-}
-
 .song-suggested-full {
   font-size: 14px;
   line-height: 24px;

@@ -71,15 +71,7 @@ main>header h2 {
   width: 100%;
   top: 0;
   border-top: 2px solid hsl(45, 100%, 51.4%);
-  ;
   border-top: 2px solid var(--accent-color);
-}
-
-.glnav a:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  transform: translateY(-2px);
-  transform: var(--accent-action);
 }
 
 .glnav .container {
@@ -110,8 +102,6 @@ main>header h2 {
 .glnav__menu {
   padding: 0 12px;
   color: #D3D8E0;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
 }
 
 .logo-small {

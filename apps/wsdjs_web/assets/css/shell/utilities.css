@@ -9,7 +9,40 @@
   box-shadow: var(--shadow-active);
 }
 
-.usable {
+.clickable:hover {
   transform: translateY(-2px);
   transform: var(--accent-action);
+}
+
+.action-link:hover {
+  color: hsl(45, 100%, 51.4%);
+  color: var(--accent-color);
+}
+
+.visible-link {
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+.visible-link:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.primary-text {
+  font-weight: 700;
+  font-weight: var(--font-primary-weight);
+  color: hsl(0, 0%, 13%);
+  color: var(--font-primary-color);
+}
+
+.secondary-text {
+  font-weight: 400;
+  font-weight: var(--font-secondary-weight);
+  color: hsl(0, 0%, 29%);
+  color: var(--font-secondary-color);
+}
+
+.m-a-2 {
+  margin: 1rem;
 }

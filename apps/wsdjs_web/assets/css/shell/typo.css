@@ -101,6 +101,9 @@ dt, .text-bold {
 .text-ligther {
   font-weight: lighter;
 }
+.text-centered {
+  text-align: center;
+}
 .text-ellipsis {
   white-space: nowrap;
   overflow: hidden;

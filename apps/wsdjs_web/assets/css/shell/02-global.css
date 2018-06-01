@@ -33,12 +33,16 @@ html {
 body {
   background-color: hsl(240, 20%, 98%);
   background-color: var(--bg-color);
-  padding-bottom: calc(4 * 80px);
+  padding-bottom: 5rem;
 }
 
 a,
 a:hover {
   text-decoration: none;
+}
+
+a.song-title {
+  display: block;
 }
 
 svg {
@@ -69,43 +73,9 @@ img.responsive {
   position: absolute;
 }
 
-.sentinel {
-  text-align: center;
-  margin: 15px;
-}
-
 .unconnected .h2 {
   display: block;
   white-space: nowrap;
-}
-
-.song-title {
-  font-weight: 700;
-  font-weight: var(--font-primary-weight);
-  color: hsl(0, 0%, 13%);
-  color: var(--font-primary-color);
-}
-
-a.song-title {
-  display: block;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-
-a.song-title:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  color: hsl(45, 100%, 51.4%);
-  color: var(--accent-color);
-  transform: translateY(-2px);
-  transform: var(--accent-action);
-}
-
-.song-artist {
-  font-weight: 400;
-  font-weight: var(--font-secondary-weight);
-  color: hsl(0, 0%, 29%);
-  color: var(--font-secondary-color);
 }
 
 .song-suggestor {

@@ -93,15 +93,17 @@ export default class Radio {
     /* update the radio player */
     document.querySelector(".player__art img").setAttribute("src", data[0].image_uri);
     document.querySelector(".player__art img").setAttribute("srcset", data[0].image_srcset);
-    document.querySelector(".player__description__title").setAttribute("href", data[0].path);
-    document.querySelector(".player__description__title").innerHTML = data[0].title;
-    document.querySelector(".player__description__sub-title").innerHTML = "by " + data[0].artist + ", " + data[0].suggested_by;
+    document.querySelector("#player-title").setAttribute("href", data[0].path);
+    document.querySelector("#player-title").innerHTML = data[0].title;
+    document.querySelector("#player-suggestor").innerHTML = "by " + data[0].artist + ", " + data[0].suggested_by;
 
-    /* update the song page */
-    document.querySelector(".radio-song img").setAttribute("src", data[0].image_uri);
-    document.querySelector(".radio-song img").setAttribute("srcset", data[0].image_srcset);
-    document.querySelector(".radio-suggestor").setAttribute("href", data[0].suggested_by_path);
-    document.querySelector(".radio-suggestor").innerHTML = data[0].suggested_by;
-    document.querySelector(".radio-song_body").innerHTML = data[0].title;
+    /* update the song page but only if we are in the song page */
+    if (document.querySelector(".radio-song img")) {
+      document.querySelector(".radio-song img").setAttribute("src", data[0].image_uri);
+      document.querySelector(".radio-song img").setAttribute("srcset", data[0].image_srcset);
+      document.querySelector(".radio-suggestor").setAttribute("href", data[0].suggested_by_path);
+      document.querySelector(".radio-suggestor").innerHTML = data[0].suggested_by;
+      document.querySelector(".radio-song_body").innerHTML = data[0].title;  
+    }
   }
 }

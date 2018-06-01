@@ -37,8 +37,8 @@
         <img src="<%= art_url(song.art, 64) %>" srcset="<%= art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
       <td>
-        <%= link song.title, to: song_path(@conn, :show, song), class: "song-title" %>
-        <span class="song-artist"><%= song.artist %></span>
+        <%= link song.title, to: song_path(@conn, :show, song), class: "primary-text action-link visible-link" %>
+        <span class="secondary-text"><%= song.artist %></span>
       </td>
       <td>
         <span class="label label-default"><%= song.genre %></span>

@@ -32,9 +32,9 @@
         <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
       </div>
       <div class="song-minicard__body">
-        <span class="text-ellipsis song-title"><%= @song.title %></span>
-        <span class="text-ellipsis song-artist">by <%= @song.artist %></span>
-        <span class="text-muted text-ellipsis song-suggestor">
+        <span class="text-ellipsis primary-text action-link visible-link"><%= @song.title %></span>
+        <span class="text-ellipsis secondary-text">by <%= @song.artist %></span>
+        <span class="text-muted text-ellipsis visible-link song-suggestor">
           <%= gettext "suggested by" %> <%= user_displayed_name(@song.user) %>
         </span>
 
