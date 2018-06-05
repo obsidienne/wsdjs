@@ -26,6 +26,9 @@ export default class Radio {
       if (e.target.matches(".player__play__vinyl")) {
         self.toggle_radio(e.target);
       }
+      if (e.target.matches("#radio-toggle-play")) {
+        self.toggle_radio(e.target);
+      }
 
       if (e.target.matches("[data-video-id]")) {
         e.preventDefault();
@@ -72,7 +75,13 @@ export default class Radio {
       this.radio.play();
 
       this.channel.push("list_song") // remove this ?
+      let r = document.querySelector(".radio-paused");
+      r.classList.remove("radio-paused")
+      r.classList.add("radio-playing")
     } else {
+      let r = document.querySelector(".radio-playing");
+      r.classList.add("radio-paused")
+      r.classList.remove("radio-playing")
 
       this.radio.pause();
       this.radio.src = "about:blank";
@@ -103,7 +112,7 @@ export default class Radio {
       document.querySelector(".radio-song img").setAttribute("srcset", data[0].image_srcset);
       document.querySelector(".radio-suggestor").setAttribute("href", data[0].suggested_by_path);
       document.querySelector(".radio-suggestor").innerHTML = data[0].suggested_by;
-      document.querySelector(".radio-song_body").innerHTML = data[0].title;  
+      document.querySelector(".radio-song_body").innerHTML = data[0].title;
     }
   }
 }
