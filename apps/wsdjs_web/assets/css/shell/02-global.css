@@ -77,27 +77,3 @@ img.responsive {
   display: block;
   white-space: nowrap;
 }
-
-.song-suggestor {
-  font-weight: 400;
-  font-weight: var(--font-secondary-weight);
-  color: hsl(0, 0%, 45%);
-  color: var(--font-third-color);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  white-space: nowrap;
-}
-
-.song-suggestor a {
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-
-a.song-suggestor:hover,
-.song-suggestor a:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  color: hsl(45, 100%, 51.4%);
-  color: var(--accent-color);
-}

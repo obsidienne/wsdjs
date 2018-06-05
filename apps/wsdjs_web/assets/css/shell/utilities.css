@@ -71,12 +71,19 @@
 https://github.com/twbs/bootstrap/tree/v4-dev/scss/utilities
 flex
 */
+
+.d-inline-block {
+  display: inline-block;
+}
+
 .d-flex {
   display: flex;
 }
+
 .flex-wrap {
   flex-wrap: wrap;
 }
+
 .align-items-end {
   align-items: flex-end;
 }

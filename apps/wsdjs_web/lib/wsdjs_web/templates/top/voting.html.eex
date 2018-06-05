@@ -60,7 +60,7 @@
                 <%= rank.song.title %>
               <% end %>
               <span class="secondary-text"><%= rank.song.artist %></span>
-              <span class="text-ellipsis text-muted visible-link song-suggestor"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></span>
+              <span class="text-ellipsis text-muted"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></span>
             </div>
             <aside>
               <div>

@@ -77,11 +77,11 @@
       </div>
       <div class="top-song-body">
         <div>
-          <%= link to: song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
+          <%= link to: song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link clickable d-inline-block" do %>
             <span><%= rank.song.title %></span>
           <% end %>
           <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
-          <span class="text-muted text-ellipsis visible-link song-suggestor">
+          <span class="text-muted text-ellipsis">
             <%= gettext "by" %> <%= proposed_by_link(@conn, rank.song) %>,
             <time class="timeago" datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>"></time>
           </span>

@@ -4,9 +4,9 @@
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
     <div class="song-page__details">
-      <span class="h2 primary-text action-link visible-link"><%= @song.title %></span>
+      <span class="h2 primary-text"><%= @song.title %></span>
       <span class="h3 secondary-text"><span class="text-muted">by</span> <%= @song.artist %></span>
-      <div class="text-muted visible-link song-suggestor"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link song-suggestor text-muted" %>,
+      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
         <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
