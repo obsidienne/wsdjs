@@ -217,7 +217,12 @@ a.btn.disabled {
   background-image: none;
 }
 
-.btn-danger[disabled]:hover,
-.btn-danger[disabled]:focus {
-  background-color: hsl(0, 85%, 55%);
+.btn-reverse {
+  background-color: hsl(221, 23%, 16%);
+  color: #D3D8E0;
+}
+
+.btn-reverse:hover,
+.btn-reverse:focus {
+  color: #D3D8E0;
 }

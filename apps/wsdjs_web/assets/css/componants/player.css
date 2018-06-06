@@ -97,10 +97,8 @@ body.radio-playing .player__play__vinyl {
 
 .player__youtube_close {
   position: absolute;
-  top: -30px;
+  top: -48px;
   right: 0;
-  height: 30px;
-  background-color: white;
 }
 
 .player__youtube iframe {
