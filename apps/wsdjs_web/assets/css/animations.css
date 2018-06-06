@@ -34,7 +34,7 @@ sound bar
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: flex-end;
   padding-bottom: 6px;

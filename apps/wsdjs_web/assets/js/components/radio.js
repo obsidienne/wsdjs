@@ -75,20 +75,12 @@ export default class Radio {
       this.radio.play();
 
       this.channel.push("list_song") // remove this ?
-      let r = document.querySelector(".radio-paused");
-      r.classList.remove("radio-paused")
-      r.classList.add("radio-playing")
     } else {
-      let r = document.querySelector(".radio-playing");
-      r.classList.add("radio-paused")
-      r.classList.remove("radio-playing")
-
       this.radio.pause();
       this.radio.src = "about:blank";
       this.radio.load(); // stop the stream not only the player
     }
-
-    document.querySelector(".player").classList.toggle("player--playing");
+    document.querySelector("body").classList.toggle("radio-playing");
   }
 
   /*

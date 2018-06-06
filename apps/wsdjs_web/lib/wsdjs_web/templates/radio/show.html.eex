@@ -5,23 +5,35 @@
 </nav>
 
 <section id="radio-page" class="radio-page container">
-  <%= if @songs == :empty do %>
-    <strong>Something went really bad</strong>
-  <% else %>
-    <% song = List.first(@songs) %>
-    <div class="radio-song">
-      <img src="<%= Map.fetch!(song, "image_uri") %>" 
-          srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive"/>
-      <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body clickable">
+  <div class="radio-song">
+    <%= if @songs == :empty do %>
+      <strong>Something went really bad</strong>
+    <% else %>
+      <% song = List.first(@songs) %>
+      <%= if Map.has_key?(song, "path") do %>
+        <img src="<%= Map.fetch!(song, "image_uri") %>" 
+            srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive"/>
+        <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body clickable">
+          <%=Map.fetch!(song, "title") %>
+        </a>
+        <div class="radio-suggestor clickable">
+          <a href="<%= Map.fetch!(song, "suggested_by_path") %>" class=""><%= Map.fetch!(song, "suggested_by") %></a>
+        </div>
+      <% else %>
+        <img src="<%= Map.fetch!(song, "cover") %>" class="responsive"/>
         <%=Map.fetch!(song, "title") %>
-      </a>
-      <div class="radio-suggestor clickable">
-        <a href="<%= Map.fetch!(song, "suggested_by_path") %>" class=""><%= Map.fetch!(song, "suggested_by") %></a>
-      </div>
-    </div>
-  <% end %>
+      <% end %>
+    <% end %>
 
-  <button class="radio-button" id="radio-toggle-play">
-  play / pause
-  </button>
+    <button class="reset clickable playing" id="radio-toggle-play">
+      <svg fill='#000000' height='48' viewBox='0 0 24 24' width='48' class="icon-play">
+        <path d='M8 5v14l11-7z'/>
+        <path d='M0 0h24v24H0z' fill='none'/>
+      </svg>
+
+      <svg fill="#000000" height='48' viewBox='0 0 24 24' width='48' class="icon-pause">
+        <path d="M14,19H18V5H14M6,19H10V5H6V19Z" />
+      </svg>
+    </button>
+  </div>
 </section>

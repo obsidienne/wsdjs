@@ -17,11 +17,7 @@ defmodule WsdjsApi.Service.RadioSrv do
     |> Poison.encode!()
   end
 
-  defp render(_conn, s, nil) when is_map(s) do
-     s
-     |> Map.put(:image_uri, s["cover"])
-     |> Map.put(:image_srcset, s["cover"])
-   end
+  defp render(_conn, s, nil) when is_map(s), do: s
   defp render(conn, s, %Wsdjs.Musics.Song{} = song) when is_map(s) do
     s
     |> Map.put(:suggested_ts, Timex.to_unix(song.inserted_at))

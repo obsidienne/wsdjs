@@ -56,7 +56,7 @@
   background-position: 50% 50%;
 }
 
-.player--playing .player__play__vinyl {
+body.radio-playing .player__play__vinyl {
   transition: all 0.35s ease;
   background: url("//res.cloudinary.com/don2kwaju/image/upload/c_scale,dpr_auto,f_auto,h_55,q_auto,w_55/v1502383947/wsdjs/vinyl.png");
   background-size: cover;
@@ -75,6 +75,7 @@
   height: 0;
   padding-bottom: 56.5%;
   transition: bottom 1s ease-in;
+  z-index: 1000;
 }
 
 .player__youtube__container.open {

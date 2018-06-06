@@ -12,10 +12,22 @@
   max-width: 300px;
 }
 
-.radio-paused .sound-bars {
+body.radio-playing .sound-bars {
+  display: flex;
+}
+
+body.radio-playing .icon-radio {
   display: none;
 }
 
-.radio-playing>svg {
+body.radio-playing .icon-play {
+  display: none;
+}
+
+body.radio-playing .icon-pause {
+  display: inline-block;
+}
+
+.icon-pause {
   display: none;
 }
