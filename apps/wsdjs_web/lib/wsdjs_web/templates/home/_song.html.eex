@@ -1,6 +1,6 @@
 <%= if blur_track(@rank.song, @current_user) == true do %>
 
-<li>
+<li class="clickable">
   <a>
     <article class="song-minicard">
       <div class="song-minicard__heading">
@@ -33,7 +33,7 @@
 
 <% else %>
 
-<li>
+<li class="clickable">
   <a href="<%= song_path(@conn, :show, @rank.song.id) %>">
     <article class="song-minicard">
       <div class="song-minicard__heading">

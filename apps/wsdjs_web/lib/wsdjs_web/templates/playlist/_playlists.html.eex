@@ -8,7 +8,7 @@
 
   <ul>
     <%= for playlist <- @playlists do %>
-    <li>
+    <li class="clickable">
       <%= link to: playlist_path(@conn, :show, playlist), class: "playlist" do %>
         <div class="img-embed">
           <%= if playlist.song do %>

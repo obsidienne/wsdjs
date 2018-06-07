@@ -32,18 +32,7 @@
 }
 
 .comment__header a {
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
   display: inline-block;
-}
-
-.comment__header a:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  transform: translateY(-2px);
-  transform: var(--accent-action);
-  color: hsl(45, 100%, 51.4%);
-  color: var(--accent-color);
 }
 
 .comment__content {

@@ -3,9 +3,11 @@
 /* search                                  */
 
 /*******************************************/
+
 .actions {
   display: none;
 }
+
 .actions {
   align-items: center;
   height: 48px;
@@ -13,21 +15,20 @@
   margin-bottom: .5rem;
   margin-top: 1rem;
 }
+
 .actions>* {
-    margin-left: .5rem;
+  margin-left: .5rem;
 }
 
 .actions>*:first-child {
-    margin-left: 0;
+  margin-left: 0;
 }
-
 
 @media (min-width: 768px) {
   .actions {
     display: flex;
   }
 }
-
 
 .search-container {
   z-index: 49;
@@ -108,7 +109,5 @@
 }
 
 .search-results li:hover {
-  transform: translateY(-2px);
-  transform: var(--accent-action);
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
 }
