@@ -1,6 +1,6 @@
 <section>
-  <div class="song-page container">
-    <div class="song-page__art">
+  <div class="song-page container d-flex m-top-3 p-bottom-6">
+    <div class="song-page__art shadow-nohover">
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
     <div class="song-page__details">
@@ -12,7 +12,7 @@
         </time>
       </div>
 
-      <div class="song-page__tags">
+      <div class="song-page__tags p-top-2">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
@@ -66,7 +66,7 @@
   </div>
 
   <div class="song-page__sections__aside">
-    <section id="overview-video" class="overview-video"><%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %></section>
+    <section id="overview-video" class="overview-video m-bottom-2"><%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %></section>
     <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
       <%= form_for @video_changeset, api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
       <fieldset>

@@ -5,7 +5,7 @@
   </div>
 </header>
 <% else %>
-  <div class="p-top-2 container">
+  <div class="p-top-4 container">
     <span class="h1 d-block">World Swing DeeJays</span>
     <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
 
@@ -30,7 +30,7 @@
 <%= if Enum.count(@songs) > 0 do %>
   <section>
     <h2 class="page-header">Deejays' pick</h2>
-    <ul class="home-page__instant__hit">
+    <ul>
       <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
   </section>
@@ -43,7 +43,7 @@
           <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
       </time>, DJs Top
     </h2>
-    <ul class="home-page__top__song">
+    <ul>
       <%= for rank <- @top.ranks do %>
         <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>
       <% end %>

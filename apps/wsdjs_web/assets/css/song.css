@@ -3,17 +3,12 @@
 ****************************/
 
 .song-page {
-  display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  margin-top: 24px;
-  padding-bottom: 48px;
 }
 
 .song-page__art {
   flex: 0 0 312px;
-  box-shadow: 0 1px 3px 0 hsla(0, 0%, 0%, .2);
-  box-shadow: var(--shadow-inactive);
   width: 312px;
   height: 312px;
 }
@@ -31,10 +26,6 @@
   margin-top: auto;
   margin-bottom: 0;
   max-width: 16ch;
-}
-
-.song-page__tags {
-  padding-top: 1rem;
 }
 
 .song-page__sections {
@@ -125,7 +116,6 @@
 .overview-video {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 16px;
   flex-direction: column;
 }
 
