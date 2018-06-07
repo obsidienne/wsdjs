@@ -5,9 +5,9 @@
 </header>
 
 <%= if is_nil(@current_user) do %>
-  <div class="container signin">
-    <span class="h1">World Swing DeeJays</span>
-    <span class="h2">The best West Coast Swing music from all around the world !</span>
+  <div class="container p-top-2">
+    <span class="h1 d-block">World Swing DeeJays</span>
+    <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
 
     <%= link to: session_path(@conn, :new) do %>
       <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
@@ -28,7 +28,7 @@
     <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
   <%= if @page_number < @total_pages do %>
-  <div class="sentinel text-centered m-a-2" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
+  <div class="sentinel text-centered m-all-2" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
   <% end %>
 </section>
 

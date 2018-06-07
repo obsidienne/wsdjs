@@ -73,8 +73,3 @@ img.responsive {
 .img-embed img {
   position: absolute;
 }
-
-.unconnected .h2 {
-  display: block;
-  white-space: nowrap;
-}

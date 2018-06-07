@@ -1,28 +1,7 @@
-.SessionNewView .hero,
-.RegistrationNewView .hero {
-  padding: 0;
-}
-
-.hero-text {
-  padding-top: 15px;
-}
-
-.hero-text h5 {
-  padding-bottom: 15px;
-}
-
 .HomeIndexView main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.home-page__top__song li {
-  margin-bottom: 24px;
-}
-
-.home-page__instant__hit li {
-  margin-bottom: 24px;
 }
 
 .home-page__top__song li:hover,

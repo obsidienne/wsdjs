@@ -43,8 +43,8 @@
   <div class="song-page__sections__content">
     <%= unless @current_user do %>
     <section class="unconnected">
-      <span class="h1">World Swing DeeJays</span>
-      <span class="h2">The best West Coast Swing music from all around the world !</span>
+      <span class="h1 d-block">World Swing DeeJays</span>
+      <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
 
       <%= link to: session_path(@conn, :new) do %>
         <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>

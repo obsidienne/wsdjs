@@ -25,7 +25,7 @@
 
   <div class="form-group">
     <%= label f, :fb_url, class: "control-label" %>
-    <%= text_input f, :fb_url, class: "form-control search-place", type: "url" %>
+    <%= text_input f, :fb_url, class: "form-control", type: "url" %>
     <%= error_tag f, :fb_url %>
   </div>
 

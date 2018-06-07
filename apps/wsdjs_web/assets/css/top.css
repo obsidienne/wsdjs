@@ -138,10 +138,6 @@
   height: auto;
 }
 
-.container.signin {
-  padding-bottom: 15px;
-}
-
 .opinions {
   display: flex;
   margin-top: .5rem;
