@@ -108,11 +108,6 @@
   margin-right: .5rem;
 }
 
-.social-link:hover {
-  transform: translateY(-2px);
-  transform: var(--accent-action);
-}
-
 .social-sc:hover svg {
   fill: #ff5500;
 }
