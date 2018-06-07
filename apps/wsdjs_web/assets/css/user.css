@@ -1,15 +1,3 @@
-#users-section a {
-  -webkit-text-decoration: underline;
-  text-decoration: underline dotted;
-}
-
-#users-section a:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  color: hsl(45, 100%, 51.4%);
-  color: var(--accent-color);
-}
-
 .user-page {
   padding-top: 16px;
 }
