@@ -4,7 +4,7 @@
   </ol>
 </nav>
 
-<section id="radio-page" class="radio-page container">
+<section id="radio-page" class="radio-page container m-top-2">
   <div class="radio-song">
     <%= if @songs == :empty do %>
       <strong>Something went really bad</strong>

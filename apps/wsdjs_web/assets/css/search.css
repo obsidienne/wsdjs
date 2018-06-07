@@ -107,7 +107,3 @@
 .search-container.focused~a {
   display: none;
 }
-
-.search-results li:hover {
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 50%, .75);
-}

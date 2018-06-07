@@ -1,6 +1,6 @@
 <%= if blur_track(@song, @current_user) == true do %>
 
-<li>
+<li class="shadow-onlyhover">
   <a>
     <article class="song-minicard">
       <div class="song-minicard__heading">
@@ -25,7 +25,7 @@
 
 <% else %>
 
-<li>
+<li class="shadow-onlyhover">
   <a href="<%= song_path(@conn, :show, @song.id) %>">
     <article class="song-minicard">
       <div class="song-minicard__heading">
