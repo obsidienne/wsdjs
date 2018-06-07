@@ -47,6 +47,7 @@ a.song-title {
 
 svg {
   display: block;
+  pointer-events: none;
 }
 
 .contry-selector svg,
