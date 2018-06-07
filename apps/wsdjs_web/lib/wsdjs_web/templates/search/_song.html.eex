@@ -35,7 +35,7 @@
         <span class="text-ellipsis primary-text"><%= @song.title %></span>
         <span class="text-ellipsis secondary-text">by <%= @song.artist %></span>
         <span class="text-muted">
-          <%= gettext "suggested by" %> <%= user_displayed_name(@song.user) %>
+          <%= user_displayed_name(@song.user) %>
         </span>
 
         <footer>
