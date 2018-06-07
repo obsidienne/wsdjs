@@ -104,10 +104,6 @@
   height: 24px;
 }
 
-.video__delete svg {
-  pointer-events: none;
-}
-
 @media (min-width: 768px) {
   .song-page {
     flex-direction: row;
