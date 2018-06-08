@@ -78,6 +78,10 @@ https://github.com/twbs/bootstrap/tree/v4-dev/scss/utilities
 flex
 */
 
+/***
+display utilities
+***/
+
 .d-inline-block {
   display: inline-block;
 }
@@ -97,6 +101,10 @@ flex
 .align-items-end {
   align-items: flex-end;
 }
+
+/***
+ padding / margin utilities
+***/
 
 .p-bottom-6 {
   padding-bottom: 3rem;

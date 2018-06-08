@@ -42,13 +42,8 @@ a:hover {
 }
 
 svg {
-  display: block;
+  display: inline-block;
   pointer-events: none;
-}
-
-.contry-selector svg,
-.algolia-places svg {
-  display: inherit;
 }
 
 img {
