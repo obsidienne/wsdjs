@@ -67,8 +67,8 @@
       <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "primary-text action-link visible-link text-ellipsis" %>
       <div class="secondary-text text-ellipsis"><%= @song.artist %></div>
 
-      <div class="text-muted song-suggested-full">
-        <span class="d-inline-block"><%= gettext "by" %> </span> <%= proposed_by_link(@conn, @song) %>
+      <div class="text-muted d-flex">
+        <%= gettext "by" %>&nbsp;<%= proposed_by_link(@conn, @song) %>
       </div>
     </div>
 
