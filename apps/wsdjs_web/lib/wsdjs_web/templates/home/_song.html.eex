@@ -1,68 +1,64 @@
 <%= if blur_track(@rank.song, @current_user) == true do %>
 
 <li class="clickable shadow-onlyhover">
-  <a>
-    <article class="song-minicard">
-      <div class="song-minicard__heading">
-        <div class="voting-position charted">
-          <div class="chart-bg"></div>
-          <div class="chart-value"><%= @rank.position %></div>
-        </div>
-        <img src="<%= art_url(nil, 200) %>" class="responsive" />
+  <a class="d-flex m-all-0">
+    <div class="song-minicard__heading">
+      <div class="voting-position charted">
+        <div class="chart-bg"></div>
+        <div class="chart-value"><%= @rank.position %></div>
       </div>
+      <img src="<%= art_url(nil, 200) %>" class="responsive" />
+    </div>
 
 
-      <div class="song-minicard__body">
-        <span class="text-muted text-ellipsis">hidden track</span>
+    <div class="song-minicard__body">
+      <span class="text-muted text-ellipsis">hidden track</span>
 
-        <footer>
-          <span class="label label-default"><%= @rank.song.genre %></span>
-          <%= if @rank.song.bpm > 0 do %>
-            <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
-          <% end %>
-          <time class="timeago text-muted" 
-                datetime="<%= utc_to_local(@rank.song.inserted_at) %>"
-                title="<%= Timex.format!(@rank.song.inserted_at, "%B %d, %Y", :strftime) %>">
-                <%= Timex.format!(@rank.song.inserted_at, "{relative}", :relative) %>
-          </time>
-        </footer>
-      </div>
-    </article>
+      <footer>
+        <span class="label label-default"><%= @rank.song.genre %></span>
+        <%= if @rank.song.bpm > 0 do %>
+          <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
+        <% end %>
+        <time class="timeago text-muted" 
+              datetime="<%= utc_to_local(@rank.song.inserted_at) %>"
+              title="<%= Timex.format!(@rank.song.inserted_at, "%B %d, %Y", :strftime) %>">
+              <%= Timex.format!(@rank.song.inserted_at, "{relative}", :relative) %>
+        </time>
+      </footer>
+    </div>
   </a>
 </li>
 
 <% else %>
 
 <li class="clickable shadow-onlyhover">
-  <a href="<%= song_path(@conn, :show, @rank.song.id) %>">
-    <article class="song-minicard">
-      <div class="song-minicard__heading">
-        <div class="voting-position charted">
-          <div class="chart-bg"></div>
-          <div class="chart-value"><%= @rank.position %></div>
-        </div>
-        <img src="<%= art_url(@rank.song.art, 200) %>" class="responsive" />
+  <a href="<%= song_path(@conn, :show, @rank.song.id) %>" class="d-flex m-all-0">
+    <div class="song-minicard__heading">
+      <div class="voting-position charted">
+        <div class="chart-bg"></div>
+        <div class="chart-value"><%= @rank.position %></div>
       </div>
+      <img src="<%= art_url(@rank.song.art, 200) %>" class="responsive" />
+    </div>
 
 
-      <div class="song-minicard__body">
-        <span class="primary-text text-ellipsis"><%= @rank.song.title %></span>
-        <span class="secondary-text text-ellipsis"><%= @rank.song.artist %></span>
-        <span class="text-muted"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></span>
+    <div class="song-minicard__body">
+      <span class="primary-text text-ellipsis"><%= @rank.song.title %></span>
+      <span class="secondary-text text-ellipsis"><%= @rank.song.artist %></span>
+      <span class="text-muted"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></span>
 
-        <footer>
-          <span class="label label-default"><%= @rank.song.genre %></span>
-          <%= if @rank.song.bpm > 0 do %>
-            <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
-          <% end %>
-          <time class="timeago text-muted" 
-                datetime="<%= utc_to_local(@rank.song.inserted_at) %>"
-                title="<%= Timex.format!(@rank.song.inserted_at, "%B %d, %Y", :strftime) %>">
-                <%= Timex.format!(@rank.song.inserted_at, "{relative}", :relative) %>
-          </time>
-        </footer>
-      </div>
-    </article>
+      <footer>
+        <span class="label label-default"><%= @rank.song.genre %></span>
+        <%= if @rank.song.bpm > 0 do %>
+          <span class="label label-primary"><%= @rank.song.bpm %> bpm</span>
+        <% end %>
+        <time class="timeago text-muted" 
+              datetime="<%= utc_to_local(@rank.song.inserted_at) %>"
+              title="<%= Timex.format!(@rank.song.inserted_at, "%B %d, %Y", :strftime) %>">
+              <%= Timex.format!(@rank.song.inserted_at, "{relative}", :relative) %>
+        </time>
+      </footer>
+    </div>
   </a>
 </li>
 

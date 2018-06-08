@@ -118,6 +118,10 @@ display utilities
   padding-top: 2rem;
 }
 
+.m-all-0 {
+  margin: 0;
+}
+
 .m-all-2 {
   margin: 1rem;
 }
