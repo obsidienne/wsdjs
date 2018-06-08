@@ -33,16 +33,12 @@ html {
 body {
   background-color: hsl(240, 20%, 98%);
   background-color: var(--bg-color);
-  padding-bottom: 5rem;
+  padding-bottom: 6rem;
 }
 
 a,
 a:hover {
   text-decoration: none;
-}
-
-a.song-title {
-  display: block;
 }
 
 svg {
