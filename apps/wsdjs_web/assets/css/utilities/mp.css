@@ -1,6 +1,6 @@
-.p-bottom-6 {
-  padding-bottom: 3rem;
-}
+/*************
+  padding
+*************/
 
 .p-top-2 {
   padding-top: 1rem;
@@ -10,12 +10,32 @@
   padding-top: 2rem;
 }
 
+.p-bottom-1 {
+  padding-bottom: .5rem;
+}
+
+.p-bottom-6 {
+  padding-bottom: 3rem;
+}
+
+/*************
+  margin
+*************/
+
 .m-all-0 {
   margin: 0;
 }
 
 .m-all-2 {
   margin: 1rem;
+}
+
+.m-top-2 {
+  margin-top: 1rem;
+}
+
+.m-top-3 {
+  margin-top: 1.5rem;
 }
 
 .m-bottom-1 {
@@ -32,12 +52,4 @@
 
 .m-left-1 {
   margin-left: .5rem;
-}
-
-.m-top-2 {
-  margin-top: 1rem;
-}
-
-.m-top-3 {
-  margin-top: 1.5rem;
 }

@@ -1,5 +1,5 @@
 <%= for video <- @videos do %>
-<article class="song-page__video card shadow clickable">
+<article class="song-page__video card shadow clickable d-flex m-bottom-1">
   <%= link to: video.url, target: "_blank" do %>
     <img src="<%= thumbnail_url(video, 100) %>" srcset="<%= thumbnail_srcset(video, 100) %>" sizes="100px" width="100" height="auto">
     <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>

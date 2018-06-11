@@ -3,9 +3,9 @@
     <div class="song-page__art shadow-nohover">
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
-    <div class="song-page__details">
+    <div class="song-page__details d-flex">
       <span class="h2 primary-text"><%= @song.title %></span>
-      <span class="h3 secondary-text"><span class="text-muted">by</span> <%= @song.artist %></span>
+      <span class="h3 secondary-text p-bottom-1"><span class="text-muted">by</span> <%= @song.artist %></span>
       <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
         <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
@@ -39,7 +39,7 @@
   </div>
 </section>
 
-<div class="container song-page__sections">
+<div class="container song-page__sections d-flex">
   <div class="song-page__sections__content">
     <%= unless @current_user do %>
     <section class="unconnected">
@@ -102,7 +102,7 @@
 </div>
 
 <template id="video-tpl">
-  <article class="song-page__video card shadow clickable">
+  <article class="song-page__video card shadow clickable d-flex m-bottom-1">
     <a href="{{url}}" target="_blank" rel="noopener">
       <img src="//res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg" srcset="https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg 100w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_200,q_auto/fl_immutable_cache/{{video_id}}.jpg 200w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_300,q_auto/fl_immutable_cache/{{video_id}}.jpg 300w" sizes="100px" height="auto" width="100">
       <svg fill="#FFC107" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

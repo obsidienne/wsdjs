@@ -14,12 +14,7 @@
 }
 
 .song-page__details {
-  display: flex;
   flex-direction: column;
-}
-
-.song-page__details>.h3 {
-  padding-bottom: .5rem;
 }
 
 .song-page__play {
@@ -29,17 +24,11 @@
 }
 
 .song-page__sections {
-  display: flex;
   flex-direction: column;
 }
 
 .song-page__sections__aside {
   flex: 1 1 300px;
-}
-
-.song-page__video {
-  display: flex;
-  margin-bottom: 5px;
 }
 
 .song-page__tags.song-opinions {
