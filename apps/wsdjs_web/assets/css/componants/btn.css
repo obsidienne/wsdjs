@@ -43,7 +43,7 @@ button.reset {
 
 @media (max-width: 767px) {
   .fab {
-    display: inline-block;
+    display: flex;
   }
 }
 
