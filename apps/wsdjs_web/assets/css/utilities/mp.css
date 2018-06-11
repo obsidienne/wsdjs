@@ -18,8 +18,20 @@
   margin: 1rem;
 }
 
+.m-bottom-1 {
+  margin-bottom: .5rem;
+}
+
 .m-bottom-2 {
   margin-bottom: 1rem;
+}
+
+.m-left-auto {
+  margin-left: auto;
+}
+
+.m-left-1 {
+  margin-left: .5rem;
 }
 
 .m-top-2 {
