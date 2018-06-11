@@ -61,7 +61,7 @@ defmodule WsdjsWeb.OpinionView do
     do: api_song_opinion_path(conn, :create, song, kind: kind)
 
   defp html_class(kind, %Wsdjs.Reactions.Opinion{kind: my_kind}) when kind == my_kind,
-    do: "song-opinion song-#{kind} active tippy "
+    do: "song-opinion song-#{kind} active tippy hvr-pulse"
 
-  defp html_class(kind, _), do: "song-opinion song-#{kind} tippy"
+  defp html_class(kind, _), do: "song-opinion song-#{kind} tippy hvr-pulse"
 end
