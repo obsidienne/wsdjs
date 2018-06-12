@@ -15,7 +15,7 @@ defmodule Wsdjs.Happenings.Event do
     field(:fb_url, :string)
 
     field(:venue, :string)
-    field(:coordinates, Geo.Point)     # add the actual column
+    field(:coordinates, Geo.PostGIS.Geometry)     # add the actual column
     field(:lng, :float, virtual: true) # add the virtual flag here and below
     field(:lat, :float, virtual: true)
 
