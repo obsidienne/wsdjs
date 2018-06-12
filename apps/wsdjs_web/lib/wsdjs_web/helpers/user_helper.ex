@@ -16,7 +16,7 @@ defmodule WsdjsWeb.UserHelper do
       user_displayed_name(song.user),
       to: user_path(conn, :show, song.user.id),
       title: "suggested by #{song.user.name}, #{Timex.format!(song.inserted_at, "%b %d, %Y", :strftime)}",
-      class: "visible-link clickable text-ellipsis action-link"
+      class: "visible-link clickable action-link"
     )
   end
 end

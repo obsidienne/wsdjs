@@ -11,6 +11,9 @@
 
 .song-art__play {
   z-index: 1001;
+  position: absolute;
+  bottom: .25rem;
+  right: .25rem;
 }
 
 .voting-position__selector::-ms-expand {
@@ -96,17 +99,8 @@
   text-align: right;
 }
 
-.song-art-container a {
-  display: block;
-}
-
 .song-art-container a svg {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
   border-radius: 50%;
-  height: 24px;
-  width: 24px;
 }
 
 .song-art-container a:hover svg {
