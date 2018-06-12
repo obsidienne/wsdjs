@@ -22,6 +22,7 @@ main>header h2 {
   right: 0;
   height: 48px;
   background: hsl(0, 0%, 93%);
+  z-index: 9999;
 }
 
 .mobile-nav>ul {
@@ -36,7 +37,8 @@ main>header h2 {
   display: flex;
   height: 100%;
 }
-.mobile-nav_menu{
+
+.mobile-nav_menu {
   display: flex;
   flex: 1;
   justify-content: center;
