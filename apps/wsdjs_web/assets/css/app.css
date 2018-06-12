@@ -16,6 +16,7 @@
 @import "./animations.css";
 @import "./comments.css";
 @import "./pages/home.css";
+@import "./pages/event.css";
 @import "./icons.css";
 @import "./playlists.css";
 @import "./search.css";
@@ -24,3 +25,4 @@
 @import "./tops.css";
 @import "./radio.css";
 @import "./user.css";
+@import '../node_modules/leaflet/dist/leaflet.css';
