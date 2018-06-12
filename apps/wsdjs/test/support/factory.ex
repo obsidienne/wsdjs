@@ -14,9 +14,7 @@ defmodule Wsdjs.Factory do
   end
 
   def detail_factory do
-    %Wsdjs.Accounts.UserDetail{
-
-    }
+    %Wsdjs.Accounts.UserDetail{}
   end
 
   def song_factory do

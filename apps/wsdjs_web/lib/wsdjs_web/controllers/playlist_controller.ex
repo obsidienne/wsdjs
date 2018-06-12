@@ -13,7 +13,13 @@ defmodule WsdjsWeb.PlaylistController do
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
       playlists = Wsdjs.Playlists.list_playlists(user, current_user)
 
-      render(conn, "index.html", user: user, suggested_songs: suggested_songs, playlists: playlists)
+      render(
+        conn,
+        "index.html",
+        user: user,
+        suggested_songs: suggested_songs,
+        playlists: playlists
+      )
     end
   end
 
@@ -31,29 +37,33 @@ defmodule WsdjsWeb.PlaylistController do
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
       songs = Wsdjs.Playlists.list_playlist_songs(playlist, current_user)
 
-      render(conn, 
-              "show.html", 
-              current_user: current_user, 
-              playlist: playlist,
-              suggested_songs: suggested_songs,
-              songs: songs,
-              user: user)
+      render(
+        conn,
+        "show.html",
+        current_user: current_user,
+        playlist: playlist,
+        suggested_songs: suggested_songs,
+        songs: songs,
+        user: user
+      )
     end
   end
 
   def edit(conn, %{"id" => id}, current_user) do
     with %Playlists.Playlist{} = playlist <- Playlists.get_playlist!(id),
          :ok <- Playlists.Policy.can?(current_user, :edit_playlist, playlist) do
-
       user = Accounts.get_user!(playlist.user_id)
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
       changeset = Playlists.change_playlist(playlist)
-      
-      render(conn, "edit.html", 
-              playlist: playlist, 
-              suggested_songs: suggested_songs,
-              changeset: changeset,
-              user: user)
+
+      render(
+        conn,
+        "edit.html",
+        playlist: playlist,
+        suggested_songs: suggested_songs,
+        changeset: changeset,
+        user: user
+      )
     end
   end
 

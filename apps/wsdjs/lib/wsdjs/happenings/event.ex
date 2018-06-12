@@ -15,8 +15,10 @@ defmodule Wsdjs.Happenings.Event do
     field(:fb_url, :string)
 
     field(:venue, :string)
-    field(:coordinates, Geo.PostGIS.Geometry)     # add the actual column
-    field(:lng, :float, virtual: true) # add the virtual flag here and below
+    # add the actual column
+    field(:coordinates, Geo.PostGIS.Geometry)
+    # add the virtual flag here and below
+    field(:lng, :float, virtual: true)
     field(:lat, :float, virtual: true)
 
     belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)

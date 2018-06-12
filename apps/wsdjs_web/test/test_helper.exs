@@ -4,4 +4,4 @@ ExUnit.start()
 
 Ecto.Adapters.SQL.Sandbox.mode(Wsdjs.Repo, :manual)
 
-Application.put_env(:wallaby, :base_url, WsdjsWeb.Endpoint.url)
+Application.put_env(:wallaby, :base_url, WsdjsWeb.Endpoint.url())

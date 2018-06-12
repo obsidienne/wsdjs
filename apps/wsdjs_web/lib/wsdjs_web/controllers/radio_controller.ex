@@ -6,10 +6,12 @@ defmodule WsdjsWeb.RadioController do
 
   def show(conn, _params, current_user) do
     songs = WsdjsApi.Service.RadioSrv.streamed(conn)
+
     case Poison.decode(songs) do
-      {:ok, songs} -> 
+      {:ok, songs} ->
         render(conn, "show.html", songs: songs)
-      {:error, _, _} -> 
+
+      {:error, _, _} ->
         render(conn, "show.html", songs: :empty)
     end
   end

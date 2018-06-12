@@ -48,6 +48,7 @@ defmodule WsdjsWeb.Router do
     resources "/users", UserController, only: [:index, :edit, :update] do
       resources("/playlists", PlaylistController, only: [:new, :create, :index])
     end
+
     resources("/user-params", UserParamsController, only: [:show])
 
     resources("/playlists", PlaylistController, only: [:show, :edit, :delete, :update])

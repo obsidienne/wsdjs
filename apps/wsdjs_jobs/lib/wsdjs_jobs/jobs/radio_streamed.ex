@@ -6,11 +6,12 @@ defmodule Wsdjs.Jobs.RadioStreamed do
   def call(_args \\ []) do
     case HTTPoison.get(@radioking_api_uri_list) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        songs = body 
-        |> Poison.decode!() 
-        |> Enum.map(fn song ->
-          Map.take(song, @expected_fields)
-        end)
+        songs =
+          body
+          |> Poison.decode!()
+          |> Enum.map(fn song ->
+            Map.take(song, @expected_fields)
+          end)
 
         previous_songs = ConCache.get(:wsdjs_cache, "streamed_songs")
         notify(songs, previous_songs)
@@ -24,8 +25,9 @@ defmodule Wsdjs.Jobs.RadioStreamed do
   end
 
   defp notify(songs, songs), do: nil
+
   defp notify(songs, _) do
-    IO.inspect songs
+    IO.inspect(songs)
     ConCache.put(:wsdjs_cache, "streamed_songs", songs)
     ConCache.delete(:wsdjs_cache, "streamed_songs_json")
 

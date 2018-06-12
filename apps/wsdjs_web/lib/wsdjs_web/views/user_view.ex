@@ -14,5 +14,6 @@ defmodule WsdjsWeb.UserView do
   def user_tooltip(%User{} = user) do
     "#{user.email}<br/>member since #{Timex.format!(user.inserted_at, "{Mfull} {YYYY}")}"
   end
+
   def user_tooltip(_), do: ""
 end

@@ -10,7 +10,7 @@ defmodule Wsdjs.HashID do
   def type(), do: :id
 
   def cast(term) when is_integer(term), do: {:ok, Hashids.encode(@hashids, term)}
-  def cast(term) when is_binary(term),  do: dump(term)
+  def cast(term) when is_binary(term), do: dump(term)
   def cast(_), do: :error
 
   def dump(term) when is_binary(term) do
@@ -20,6 +20,7 @@ defmodule Wsdjs.HashID do
       _ -> :error
     end
   end
+
   def dump(term) when is_integer(term), do: {:ok, term}
   def dump(_), do: :error
 

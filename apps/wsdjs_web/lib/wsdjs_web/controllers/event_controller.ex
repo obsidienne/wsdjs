@@ -12,7 +12,6 @@ defmodule WsdjsWeb.EventController do
   def show(conn, %{"id" => id}, current_user) do
     with event <- Happenings.get_event!(id),
          :ok <- Happenings.Policy.can?(current_user, :show, event) do
-
       render(conn, "show.html", event: event)
     end
   end
@@ -40,7 +39,6 @@ defmodule WsdjsWeb.EventController do
       |> put_flash(:info, "#{event.name} created")
       |> redirect(to: event_path(conn, :show, event))
     end
-    
   end
 
   def edit(conn, %{"id" => id}, current_user) do
