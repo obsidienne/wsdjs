@@ -83,7 +83,7 @@
           <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
           <span class="text-muted d-flex">
             <%= gettext "by" %>&nbsp;<%= proposed_by_link(@conn, rank.song) %>, &nbsp;
-            <time class="timeago" datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>">
+            <time datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>">
               <%= Timex.format!(rank.song.inserted_at, "%b %Y", :strftime) %>
             </time>
           </span>

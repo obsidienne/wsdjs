@@ -7,7 +7,7 @@
       <span class="h2 primary-text"><%= @song.title %></span>
       <span class="h3 secondary-text p-bottom-1"><span class="text-muted">by</span> <%= @song.artist %></span>
       <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
-        <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
+        <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
       </div>
@@ -113,7 +113,7 @@
     <div class="song-page__video__details">
       <h5 class="text-ellipsis song-page__video__pros">{{title}}</h5>
       <h5 class="song-page__video__event">{{event}}
-      <timeago class="text-muted"> ({{published_at}})</timeago>
+      <time class="text-muted"> ({{published_at}})</time>
       </h5>
 
       <button class="btn-link video__delete" data-path="/api/v1/videos/{{id}}">
@@ -136,7 +136,7 @@
       <header class="comment__header">
         <span>
           <a href="{{user.path}}">{{user.name}}</a>
-          <time class="timeago" title="{{commented_at}}" datetime="{{commented_at}}"></time>
+          <time title="{{commented_at}}" datetime="{{commented_at}}"></time>
         </span>
         <button class="btn-link comment__delete" data-path="/api/v1/comments/{{id}}">
           <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
