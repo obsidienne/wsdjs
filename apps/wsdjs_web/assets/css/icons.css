@@ -36,3 +36,15 @@ button.song-opinion * {
 .song-up.active svg {
   fill: hsl(120, 100%, 35%);
 }
+
+.song-down:hover svg {
+  fill: hsl(0, 100%, 35%);
+}
+
+.song-like:hover svg {
+  fill: hsl(240, 100%, 35%);
+}
+
+.song-up:hover svg {
+  fill: hsl(120, 100%, 35%);
+}
