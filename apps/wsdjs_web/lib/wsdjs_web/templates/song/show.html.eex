@@ -28,7 +28,7 @@
         <% end %>
       </div>
 
-      <div class="song-page__tags song-opinions">
+      <div class="song-page__tags song-opinions m-bottom-2">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
       </div>
       
