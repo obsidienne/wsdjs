@@ -2,9 +2,9 @@ defmodule Wsdjs.Playlists.PlaylistSong do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Ecto.Changeset
   alias Wsdjs.Playlists.PlaylistSong
   alias Wsdjs.Repo
-  alias Ecto.Changeset
 
   schema "playlist_songs" do
     field(:position, :integer)

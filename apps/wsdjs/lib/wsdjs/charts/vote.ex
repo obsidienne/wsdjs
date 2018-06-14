@@ -2,11 +2,11 @@ defmodule Wsdjs.Charts.Vote do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Charts.Vote
 
-  alias Wsdjs.{Musics, Charts, Accounts}
-  alias Wsdjs.Repo
   alias Ecto.Changeset
+  alias Wsdjs.Charts.Vote
+  alias Wsdjs.Repo
+  alias Wsdjs.{Accounts, Charts, Musics}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

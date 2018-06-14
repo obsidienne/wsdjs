@@ -1,8 +1,8 @@
 defmodule Wsdjs.Charts.TopTest do
   use Wsdjs.DataCase, async: true
 
-  alias Wsdjs.Charts.Top
   alias Wsdjs.Charts
+  alias Wsdjs.Charts.Top
   alias Wsdjs.Repo
 
   describe "changeset" do

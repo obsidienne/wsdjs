@@ -4,12 +4,12 @@ defmodule WsdjsWeb.SongController do
   use WsdjsWeb, :controller
   use WsdjsWeb.Controller
 
-  alias Wsdjs.Musics
-  alias Wsdjs.Reactions
-  alias Wsdjs.Reactions.Comment
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Video
+  alias Wsdjs.Musics
+  alias Wsdjs.Musics.Song
+  alias Wsdjs.Reactions
+  alias Wsdjs.Reactions.Comment
 
   action_fallback(WsdjsWeb.FallbackController)
 

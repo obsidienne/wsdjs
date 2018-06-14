@@ -1,7 +1,6 @@
 defmodule Wsdjs.Repo.Migrations.AddVerifiedProfil do
   use Ecto.Migration
 
-
   def up do
     alter table(:users) do
       add :verified_profil, :boolean, null: false, default: false

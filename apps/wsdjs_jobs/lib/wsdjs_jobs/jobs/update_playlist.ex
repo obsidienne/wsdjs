@@ -1,13 +1,7 @@
 defmodule Wsdjs.Jobs.UpdatePlaylists do
-  @doc """
-      insert into playlists(name, type, user_id, inserted_at, updated_at)
-          select distinct 'suggested'
-                 ,'suggested'
-                 ,user_id, now() at time zone 'utc'
-                 ,now() at time zone 'utc'
-          from songs 
-          where user_id not in (select user_id from playlists where type='suggested');
-
+  @moduledoc """
+  This modules contains the database calls needed to fill the automatic user
+  playlists.
   """
   import Ecto.Query, warn: false
 

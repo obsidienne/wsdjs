@@ -1,7 +1,7 @@
 defmodule Wsdjs.Playlists.PlaylistsTest do
   use Wsdjs.DataCase
-  alias Wsdjs.Playlists
   alias Wsdjs.Accounts
+  alias Wsdjs.Playlists
 
   describe "playlists" do
     alias Wsdjs.Playlists.Playlist

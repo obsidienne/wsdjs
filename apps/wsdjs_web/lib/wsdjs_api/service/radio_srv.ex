@@ -1,4 +1,8 @@
 defmodule WsdjsApi.Service.RadioSrv do
+  @moduledoc """
+  This module store the inflated version of the songs played. We use a blocking
+  access cache to avoid duplicating database calls when a new song is streamed.
+  """
   alias Wsdjs.Musics
   import WsdjsWeb.Router.Helpers
 

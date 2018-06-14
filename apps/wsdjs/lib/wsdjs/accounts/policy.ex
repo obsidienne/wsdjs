@@ -1,9 +1,4 @@
 defmodule Wsdjs.Accounts.Policy do
-  @moduledoc """
-  The Policies for the Dj system.
-  - A connected user can create a song.
-  - By default everything is denied.
-  """
   alias Wsdjs.Accounts.User
 
   def can?(%User{admin: true}, action, _) when action not in [:logout], do: :ok

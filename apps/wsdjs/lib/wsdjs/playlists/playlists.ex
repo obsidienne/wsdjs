@@ -6,10 +6,10 @@ defmodule Wsdjs.Playlists do
   import Ecto.Query, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Musics.Song
-  alias Wsdjs.Reactions.Opinion
-  alias Wsdjs.Playlists.Playlist
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Musics.Song
+  alias Wsdjs.Playlists.Playlist
+  alias Wsdjs.Reactions.Opinion
 
   @doc """
   Returns the list of playlists.

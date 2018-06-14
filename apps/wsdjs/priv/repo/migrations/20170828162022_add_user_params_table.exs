@@ -4,7 +4,7 @@ defmodule Wsdjs.Repo.Migrations.AddUserParamsTable do
   def change do
     create table(:user_parameters) do
       add :user_id, references(:users, on_delete: :delete_all, type: :binary_id), null: false
-      
+
       add :new_song_notification, :boolean, null: false, default: false
       add :userback, :boolean, null: false, default: false
 

@@ -1,8 +1,8 @@
 defmodule Wsdjs.Reactions.Policy do
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Musics.Song
   alias Wsdjs.Reactions.Comment
   alias Wsdjs.Reactions.Opinion
-  alias Wsdjs.Musics.Song
 
   def can?(%User{admin: true}, _, _), do: :ok
   def can?(%User{id: id}, :delete, %Comment{user_id: id}), do: :ok

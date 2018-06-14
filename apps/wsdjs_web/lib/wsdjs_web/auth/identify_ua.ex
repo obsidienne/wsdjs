@@ -1,4 +1,7 @@
 defmodule WsdjsWeb.IdentifyUa do
+  @moduledoc """
+  This module adds to the conn a layout_type atom based on the user-agent.
+  """
   import Plug.Conn
 
   @doc false

@@ -2,9 +2,9 @@ defmodule Wsdjs.Musics.Song do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Wsdjs.Musics.Song
 
-  alias Wsdjs.{Charts, Accounts, Musics, Reactions}
+  alias Wsdjs.Musics.Song
+  alias Wsdjs.{Accounts, Charts, Musics, Reactions}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
