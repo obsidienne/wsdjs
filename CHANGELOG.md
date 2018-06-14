@@ -1,3 +1,17 @@
+# version 1.8.7
+- add a the facebook url to event
+- edit playlist name and visibility
+- create a user params page
+- change the mechanism for updating radio (cron job)
+- move job schedules config to env config
+- create a radio page
+- improve mobile menu
+- Float Action Button in mobile configuration
+- Design video close button
+- Admin can only see his logout button
+- Bump elixir and erlang version to match the latest version installed in the server
+- Improve the CSS file organization
+- add a map in happenings
 # version 1.8.6
 - specific page for user params
 - edit page for playlist public status (remove it from user edit page)
