@@ -26,5 +26,21 @@ Use [acme_bank](https://github.com/wojtekmach/acme_bank) app as an example to cr
 
 iex -S mix phx.server
 
-To use the layout_type:
+
+```elixir
+  # to use the layout type
   def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id}, current_user) do
+  end
+````
+
+# env vars for clever apps 
+
+|env|value|
+|---|-----|
+|CC_PHOENIX_ASSETS_DIR|apps/wsdjs_web/assets/|
+|CC_PRE_RUN_HOOK|mix ecto.migrate && mix ua_inspector.download.databases --force && mix ua_inspector.download.short_code_maps --force|
+|DEPLOYMENT_ENV|staging|
+|MIX_ENV|prod|
+|PORT|8080|
+|SENDGRID_API_KEY||
+|SECRET_KEY_BASE||
