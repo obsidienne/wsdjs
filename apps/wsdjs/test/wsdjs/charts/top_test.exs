@@ -212,14 +212,14 @@ defmodule Wsdjs.Charts.TopTest do
     assert_raise Ecto.NoResultsError, fn -> Charts.get_top!(top.id) end
   end
 
-  def user_fixture() do
+  def user_fixture do
     {:ok, user} =
       Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
     user
   end
 
-  def top_fixture() do
+  def top_fixture do
     user = user_fixture()
     {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
     top

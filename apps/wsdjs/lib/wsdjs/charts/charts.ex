@@ -4,12 +4,12 @@ defmodule Wsdjs.Charts do
   """
 
   import Ecto.{Query, Changeset}, warn: false
-  alias Wsdjs.Repo
-  alias Ecto.Changeset
 
-  alias Wsdjs.Charts.{Top, Rank, Vote}
-  alias Wsdjs.Musics
+  alias Ecto.Changeset
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Charts.{Rank, Top, Vote}
+  alias Wsdjs.Musics
+  alias Wsdjs.Repo
 
   @doc """
   Returns the current user's last accessible published Top.

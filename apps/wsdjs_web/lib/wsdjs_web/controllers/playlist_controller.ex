@@ -2,9 +2,9 @@ defmodule WsdjsWeb.PlaylistController do
   use WsdjsWeb, :controller
   use WsdjsWeb.Controller
 
+  alias Wsdjs.Accounts
   alias Wsdjs.Playlists
   alias Wsdjs.Playlists.Playlist
-  alias Wsdjs.Accounts
 
   action_fallback(WsdjsWeb.FallbackController)
 

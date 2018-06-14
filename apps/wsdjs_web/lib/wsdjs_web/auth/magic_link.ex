@@ -2,11 +2,13 @@ defmodule WsdjsWeb.MagicLink do
   @moduledoc """
     Service with functions for creating and signing in with magic link tokens.
   """
-  alias WsdjsWeb.{Endpoint, Mailer, AuthenticationEmail}
+  alias Phoenix.Token
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
   alias Wsdjs.Auth
-  alias Phoenix.Token
+  alias WsdjsWeb.AuthenticationEmail
+  alias WsdjsWeb.Endpoint
+  alias WsdjsWeb.Mailer
 
   #  Token is valid for 30 minutes.
   @token_max_age 1_800

@@ -4,9 +4,12 @@ defmodule Wsdjs.Charts.Vote do
   import Ecto.Changeset
 
   alias Ecto.Changeset
+
+  alias Wsdjs.Accounts
+  alias Wsdjs.Charts
   alias Wsdjs.Charts.Vote
+  alias Wsdjs.Musics
   alias Wsdjs.Repo
-  alias Wsdjs.{Accounts, Charts, Musics}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

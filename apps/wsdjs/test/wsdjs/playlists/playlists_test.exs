@@ -16,7 +16,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       playlist
     end
 
-    def playlist_fixture() do
+    def playlist_fixture do
       {:ok, user} =
         Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
@@ -25,7 +25,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       playlist
     end
 
-    def user_fixture() do
+    def user_fixture do
       {:ok, user} =
         Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
@@ -126,7 +126,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       song
     end
 
-    def playlist_with_songs_fixture() do
+    def playlist_with_songs_fixture do
       {:ok, user} =
         Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 

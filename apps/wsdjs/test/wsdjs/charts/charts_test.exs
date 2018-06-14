@@ -125,7 +125,7 @@ defmodule Wsdjs.ChartsTest do
     song
   end
 
-  defp user_fixture() do
+  defp user_fixture do
     {:ok, %Wsdjs.Accounts.User{} = user} =
       Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 

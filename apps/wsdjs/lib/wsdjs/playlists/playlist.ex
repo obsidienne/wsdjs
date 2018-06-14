@@ -2,8 +2,8 @@ defmodule Wsdjs.Playlists.Playlist do
   @moduledoc false
   use Ecto.Schema
   import Ecto.{Query, Changeset}, warn: false
-  alias Wsdjs.Playlists.Playlist
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Playlists.Playlist
 
   @primary_key {:id, Wsdjs.HashID, read_after_writes: true}
   schema "playlists" do

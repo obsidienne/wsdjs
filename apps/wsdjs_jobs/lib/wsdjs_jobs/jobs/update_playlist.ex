@@ -16,8 +16,8 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     insert_toplike()
     update_toplike()
 
-    insert_TOP5_current()
-    insert_TOP5_classic()
+    insert_top5_current()
+    insert_top5_classic()
   end
 
   ###############################################
@@ -25,7 +25,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   # DJ VIP - TOP 5
   #
   ###############################################
-  def insert_TOP5_current() do
+  def insert_top5_current do
     query = "
       insert into playlists(name, type, user_id, public, inserted_at, updated_at)
       select distinct 'TOP 5 current'
@@ -42,7 +42,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def insert_TOP5_classic() do
+  def insert_top5_classic do
     query = "
       insert into playlists(name, type, user_id, public, inserted_at, updated_at)
       select distinct 'TOP 5 classic'
@@ -64,14 +64,14 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   # suggested
   #
   ###############################################
-  def delete_suggested() do
+  def delete_suggested do
     query =
       "DELETE from playlists where type='suggested' and user_id not in (select user_id from songs)"
 
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def insert_suggested() do
+  def insert_suggested do
     query = "
       insert into playlists(name, type, user_id, public, inserted_at, updated_at)
       select distinct 'suggested'
@@ -87,7 +87,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def update_suggested() do
+  def update_suggested do
     query = "
       update playlists p 
       set count=(select count(*) from songs s where p.user_id=s.user_id)
@@ -103,14 +103,14 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   # top or like
   #
   ###############################################
-  def delete_toplike() do
+  def delete_toplike do
     query =
       "DELETE from playlists where type='likes and tops' and user_id not in (select user_id from opinions)"
 
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def insert_toplike() do
+  def insert_toplike do
     query = "
       insert into playlists(name, type, user_id, inserted_at, updated_at)
       select distinct 'likes and tops'
@@ -124,7 +124,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def update_toplike() do
+  def update_toplike do
     query = "
       update playlists p 
       set count=(select count(*) from opinions o where p.user_id=o.user_id)

@@ -3,7 +3,8 @@ defmodule WsdjsWeb.HomeController do
   use WsdjsWeb, :controller
   use WsdjsWeb.Controller
 
-  alias Wsdjs.{Musics, Charts}
+  alias Wsdjs.Charts
+  alias Wsdjs.Musics
 
   def index(conn, _params, current_user) do
     songs = Musics.instant_hits()

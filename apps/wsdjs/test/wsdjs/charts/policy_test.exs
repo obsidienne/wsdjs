@@ -1,8 +1,8 @@
 defmodule Wsdjs.Charts.PolicyTest do
   use Wsdjs.DataCase
 
-  alias Wsdjs.Charts.Policy
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Charts.Policy
 
   describe "policy" do
     defp top_fixture(attrs) do

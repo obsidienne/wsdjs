@@ -3,7 +3,7 @@ defmodule Wsdjs.ReactionsTest do
   alias Wsdjs.Reactions
 
   describe "comments" do
-    def comment_fixture() do
+    def comment_fixture do
       {:ok, user} =
         Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 

@@ -6,8 +6,8 @@ defmodule Wsdjs.Attachments do
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Attachments.Video
+  alias Wsdjs.Musics.Song
 
   @doc """
   Gets a single video.
