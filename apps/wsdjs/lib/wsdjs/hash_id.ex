@@ -14,7 +14,8 @@ defmodule Wsdjs.HashID do
   def cast(_), do: :error
 
   def dump(term) when is_binary(term) do
-    Hashids.decode!(@hashids, term)
+    @hashids
+    |> Hashids.decode!(term)
     |> case do
       [int] -> {:ok, int}
       _ -> :error

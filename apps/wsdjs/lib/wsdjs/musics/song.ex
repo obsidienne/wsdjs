@@ -118,7 +118,8 @@ defmodule Wsdjs.Musics.Song do
     upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
     lower = Timex.shift(upper, months: -12)
 
-    scoped(lower, upper)
+    lower
+    |> scoped(upper)
     |> or_where([s], s.user_id == ^user.id)
   end
 
