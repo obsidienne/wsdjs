@@ -1,4 +1,9 @@
 defmodule Wsdjs.Playlists.Policy do
+  @moduledoc """
+  ## Examples
+      iex> can?(%User{admin: true}, :create)
+      :ok
+  """
   alias Wsdjs.Accounts.User
 
   def can?(%User{admin: true}, _, _), do: :ok

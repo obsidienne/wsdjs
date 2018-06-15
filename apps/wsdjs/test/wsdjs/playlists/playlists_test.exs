@@ -1,7 +1,10 @@
 defmodule Wsdjs.Playlists.PlaylistsTest do
   use Wsdjs.DataCase
   alias Wsdjs.Accounts
+  alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists
+
+  doctest Wsdjs.Playlists.Policy, import: true
 
   describe "playlists" do
     alias Wsdjs.Playlists.Playlist

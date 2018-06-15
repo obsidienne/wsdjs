@@ -39,8 +39,13 @@ defmodule Wsdjs.Happenings.Event do
   def cast_coordinates(changeset) do
     lat = get_change(changeset, :lat)
     lng = get_change(changeset, :lng)
-    geo = %Geo.Point{coordinates: {lng, lat}, srid: 4326}
-    changeset |> put_change(:coordinates, geo)
+
+    if is_nil(lat) or is_nil(lng) do
+      changeset
+    else
+      geo = %Geo.Point{coordinates: {lng, lat}, srid: 4326}
+      changeset |> put_change(:coordinates, geo)
+    end
   end
 
   # This function validates the format of an URL not it's validity.
