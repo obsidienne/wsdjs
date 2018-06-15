@@ -51,7 +51,7 @@ defmodule Wsdjs.Happenings do
     q =
       from(
         e in Event,
-        elect: %{e | lat: st_y(e.coordinates), lng: st_x(e.coordinates)}
+        select: %{e | lat: st_y(e.coordinates), lng: st_x(e.coordinates)}
       )
 
     Repo.get!(q, id)
