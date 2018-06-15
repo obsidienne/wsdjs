@@ -12,6 +12,7 @@ defmodule Wsdjs.Happenings do
   #
   ###############################################
   alias Wsdjs.Happenings.Event
+  import Geo.PostGIS
 
   @doc """
   Returns the list of events.
@@ -23,7 +24,13 @@ defmodule Wsdjs.Happenings do
 
   """
   def list_events do
-    Repo.all(Event)
+    q =
+      from(
+        e in Event,
+        select: %{e | lat: st_y(e.coordinates), lng: st_x(e.coordinates)}
+      )
+
+    Repo.all(q)
   end
 
   @doc """
@@ -40,7 +47,15 @@ defmodule Wsdjs.Happenings do
       ** (Ecto.NoResultsError)
 
   """
-  def get_event!(id), do: Repo.get!(Event, id)
+  def get_event!(id) do
+    q =
+      from(
+        e in Event,
+        elect: %{e | lat: st_y(e.coordinates), lng: st_x(e.coordinates)}
+      )
+
+    Repo.get!(q, id)
+  end
 
   @doc """
   Creates a event.
