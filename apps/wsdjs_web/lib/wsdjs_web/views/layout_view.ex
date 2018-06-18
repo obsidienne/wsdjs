@@ -41,7 +41,7 @@ defmodule WsdjsWeb.LayoutView do
   end
 
   def page_title(conn) do
-    main_title(conn) |> put_suffix()
+    conn |> main_title() |> put_suffix()
   end
 
   defp put_suffix(nil), do: @suffix

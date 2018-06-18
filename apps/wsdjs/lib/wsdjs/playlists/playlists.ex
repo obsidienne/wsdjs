@@ -147,7 +147,7 @@ defmodule Wsdjs.Playlists do
         order_by: [desc: s.inserted_at]
       )
 
-    Repo.all(query) |> Repo.preload(:art)
+    query |> Repo.all() |> Repo.preload(:art)
   end
 
   def list_playlist_songs(%Playlist{type: "likes and tops", user_id: user_id}, current_user) do
@@ -160,7 +160,7 @@ defmodule Wsdjs.Playlists do
         order_by: [desc: o.updated_at]
       )
 
-    Repo.all(query) |> Repo.preload(:art)
+    query |> Repo.all() |> Repo.preload(:art)
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "playlist"}, current_user) do
@@ -174,7 +174,7 @@ defmodule Wsdjs.Playlists do
         order_by: ps.position
       )
 
-    Repo.all(query) |> Repo.preload(:art)
+    query |> Repo.all() |> Repo.preload(:art)
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "top 5"}, current_user) do
@@ -188,7 +188,7 @@ defmodule Wsdjs.Playlists do
         order_by: ps.position
       )
 
-    Repo.all(query) |> Repo.preload(:art)
+    query |> Repo.all() |> Repo.preload(:art)
   end
 
   def update_playlist_songs(%Playlist{} = playlist, song_positions) do
