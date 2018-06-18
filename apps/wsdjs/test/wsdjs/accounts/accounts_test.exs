@@ -6,7 +6,7 @@ defmodule Wsdjs.AccountsTest do
   describe "users" do
     alias Wsdjs.Accounts.User
 
-    @valid_attrs %{email: "dummy@bshit.com"}
+    @valid_attrs %{"email" => "dummy@bshit.com"}
 
     test "list_users/0 returns all users" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
@@ -34,10 +34,12 @@ defmodule Wsdjs.AccountsTest do
     end
 
     test "create_user/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(%{email: "bullshit"})
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               Accounts.create_user(%{"email" => "bullshit"})
+
       assert "has invalid format" in errors_on(changeset).email
 
-      assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(%{email: nil})
+      assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(%{"email" => nil})
       assert "can't be blank" in errors_on(changeset).email
     end
 
@@ -48,7 +50,7 @@ defmodule Wsdjs.AccountsTest do
       assert "has already been taken" in errors_on(changeset).email
 
       assert {:error, %Ecto.Changeset{} = changeset} =
-               Accounts.create_user(%{email: "DuMmY@BsHiT.cOm"})
+               Accounts.create_user(%{"email" => "DuMmY@BsHiT.cOm"})
 
       assert "has already been taken" in errors_on(changeset).email
     end
@@ -58,7 +60,7 @@ defmodule Wsdjs.AccountsTest do
       activated = Repo.preload(activated, :avatar)
       assert Accounts.get_activated_user!(activated.id) == activated
 
-      assert {:ok, %User{} = deactivated} = Accounts.create_user(%{email: "dummy2@bshit.com"})
+      assert {:ok, %User{} = deactivated} = Accounts.create_user(%{"email" => "dummy2@bshit.com"})
 
       assert {:ok, %User{} = deactivated} =
                Accounts.update_user(deactivated, %{deactivated: true}, %User{admin: true})
@@ -85,43 +87,43 @@ defmodule Wsdjs.AccountsTest do
     end
 
     @update_attrs %{
-      email: "updatedemail@bshit.com",
-      user_country: "update country",
-      name: "update name",
-      djname: "update djname",
-      admin: true,
-      profil_djvip: true,
-      profil_dj: true,
-      deactivated: true,
-      verified_profil: true,
-      activated_at: Timex.now(),
-      parameter: %{
-        new_song_notification: true,
-        piwik: false,
-        video: true,
-        radioking_unmatch: true
+      "email" => "updatedemail@bshit.com",
+      "user_country" => "update country",
+      "name" => "update name",
+      "djname" => "update djname",
+      "admin" => true,
+      "profil_djvip" => true,
+      "profil_dj" => true,
+      "deactivated" => true,
+      "verified_profil" => true,
+      "activated_at" => Timex.now(),
+      "parameter" => %{
+        "new_song_notification" => true,
+        "piwik" => false,
+        "video" => true,
+        "radioking_unmatch" => true
       },
-      detail: %{
-        description: "update description",
-        favorite_genre: "soul",
-        favorite_artist: "update favorite artist",
-        favorite_color: "update favorite color",
-        favorite_meal: "update favorite meal",
-        favorite_animal: "update favorite animal",
-        djing_start_year: 2000,
-        love_more: "update love more",
-        hate_more: "update hate more",
-        youtube: "http://update.youtube.fr",
-        facebook: "http://update.facebook.fr",
-        soundcloud: "http://update.soundcloud.fr"
+      "detail" => %{
+        "description" => "update description",
+        "favorite_genre" => "soul",
+        "favorite_artist" => "update favorite artist",
+        "favorite_color" => "update favorite color",
+        "favorite_meal" => "update favorite meal",
+        "favorite_animal" => "update favorite animal",
+        "djing_start_year" => 2000,
+        "love_more" => "update love more",
+        "hate_more" => "update hate more",
+        "youtube" => "http://update.youtube.fr",
+        "facebook" => "http://update.facebook.fr",
+        "soundcloud" => "http://update.soundcloud.fr"
       }
     }
 
     @invalid_update_attrs %{
       detail: %{
-        youtube: "not valid yt",
-        facebook: "not valid fb",
-        soundcloud: "not valid sd"
+        "youtube" => "not valid yt",
+        "facebook" => "not valid fb",
+        "soundcloud" => "not valid sd"
       }
     }
 

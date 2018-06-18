@@ -3,8 +3,8 @@ defmodule Wsdjs.Accounts.AvatarTest do
 
   alias Wsdjs.Accounts.Avatar
 
-  @create_attrs %{cld_id: "covers/gerkk29hk1t2ydaqlqyh", version: "1464527941"}
-  @invalid_attrs %{cld_id: nil, version: nil}
+  @create_attrs %{"cld_id" => "covers/gerkk29hk1t2ydaqlqyh", "version" => "1464527941"}
+  @invalid_attrs %{"cld_id" => nil, "version" => nil}
 
   test "changeset with valid attributes" do
     changeset = Avatar.changeset(%Avatar{}, @create_attrs)
