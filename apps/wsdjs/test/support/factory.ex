@@ -17,24 +17,6 @@ defmodule Wsdjs.Factory do
     %Wsdjs.Accounts.UserDetail{}
   end
 
-  def song_factory do
-    %Wsdjs.Musics.Song{
-      title: sequence(:title, &"title-#{&1}"),
-      artist: sequence(:artist, &"artist-#{&1}"),
-      genre: Enum.random(Wsdjs.Musics.Song.genre()),
-      user: build(:user),
-      url: "http://youtu.be/toto"
-    }
-  end
-
-  def video_factory do
-    %Wsdjs.Attachments.Video{
-      url: sequence(:url, &"http://www.youtube.com/#{&1}"),
-      user: build(:user),
-      song: build(:song)
-    }
-  end
-
   def top_factory do
     %Wsdjs.Charts.Top{
       due_date: Timex.beginning_of_month(Timex.today()),
