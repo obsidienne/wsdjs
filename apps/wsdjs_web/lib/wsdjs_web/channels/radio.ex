@@ -4,8 +4,6 @@ defmodule WsdjsWeb.RadioChannel do
   """
   use Phoenix.Channel
 
-  alias Wsdjs.Jobs
-
   Phoenix.Channel.intercept(["new_streamed_song"])
 
   def join("radio:streamed", _message, socket) do

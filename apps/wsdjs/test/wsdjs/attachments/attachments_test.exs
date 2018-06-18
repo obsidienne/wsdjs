@@ -30,12 +30,11 @@ defmodule Wsdjs.AttachmentsTest do
       published_at: "2012-12-12",
       url: "http://youtu.be/dummy"
     }
-    def video_fixture(attrs \\ %{}) do
+    def video_fixture do
       song = song_fixture()
 
       {:ok, %Wsdjs.Attachments.Video{} = video} =
-        attrs
-        |> Enum.into(@valid_attrs)
+        @valid_attrs
         |> Map.put(:user_id, song.user_id)
         |> Map.put(:song_id, song.id)
         |> Wsdjs.Attachments.create_video()

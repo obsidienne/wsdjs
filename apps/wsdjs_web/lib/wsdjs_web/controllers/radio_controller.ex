@@ -4,7 +4,7 @@ defmodule WsdjsWeb.RadioController do
   use WsdjsWeb, :controller
   use WsdjsWeb.Controller
 
-  def show(conn, _params, current_user) do
+  def show(conn, _params, _current_user) do
     songs = WsdjsApi.Service.RadioSrv.streamed(conn)
 
     case Poison.decode(songs) do

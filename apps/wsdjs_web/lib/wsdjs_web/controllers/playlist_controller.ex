@@ -70,7 +70,7 @@ defmodule WsdjsWeb.PlaylistController do
   def update(conn, %{"id" => id, "playlist" => playlist_params}, current_user) do
     with %Playlist{} = playlist <- Playlists.get_playlist!(id),
          :ok <- Playlists.Policy.can?(current_user, :edit, playlist),
-         {:ok, user} <- Playlists.update_playlist(playlist, playlist_params, current_user) do
+         {:ok, _user} <- Playlists.update_playlist(playlist, playlist_params, current_user) do
       conn
       |> put_flash(:info, "Playlist updated.")
       |> redirect(to: playlist_path(conn, :show, playlist))
