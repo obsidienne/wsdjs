@@ -1,6 +1,5 @@
 defmodule WsdjsWeb.TopControllerTest do
   use WsdjsWeb.ConnCase
-  import Wsdjs.Factory
 
   test "STD users cannot alter a top", %{conn: conn} do
     top = insert(:top)

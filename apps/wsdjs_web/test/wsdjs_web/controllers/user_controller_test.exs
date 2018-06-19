@@ -1,6 +1,5 @@
 defmodule WsdjsWeb.UserControllerTest do
   use WsdjsWeb.ConnCase
-  import Wsdjs.Factory
 
   test "requires user authentication on actions", %{conn: conn} do
     Enum.each(

@@ -1,6 +1,5 @@
 defmodule WsdjsWeb.SongControllerTest do
   use WsdjsWeb.ConnCase
-  import Wsdjs.Factory
 
   test "requires user authentication on actions", %{conn: conn} do
     user = insert(:user)
