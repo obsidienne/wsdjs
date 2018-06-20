@@ -1,48 +1,92 @@
 defmodule WsdjsApi.V1.AccountControllerTest do
   use WsdjsWeb.ConnCase
 
-  setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  @create_attrs %{name: "John", email: "john@example.com"}
+
+  defp create_user(_) do
+    {:ok, user} = Wsdjs.Accounts.create_user(@create_attrs)
+    {:ok, user: user}
   end
 
-  describe "users" do
-    test "renders users by id", %{conn: conn} do
-      user = insert(:user)
+  describe "show/2" do
+    setup [:create_user]
+
+    test "Responds with user info if the user is found", %{conn: conn, user: user} do
       user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
-      conn = put_req_header(conn, "authorization", "Bearer " <> user_token)
 
-      conn = get(conn, api_account_path(conn, :show, user.id))
+      response =
+        conn
+        |> put_req_header("authorization", "Bearer " <> user_token)
+        |> get(api_account_path(conn, :show, user.id))
+        |> json_response(200)
 
-      assert json_response(conn, 200)["data"] == %{
-               "id" => user.id,
-               "admin" => user.admin,
-               "country" => user.user_country,
-               "djname" => user.djname,
-               "email" => user.email,
-               "name" => user.name,
-               "profil_dj" => user.profil_dj,
-               "verified_profil" => false
-             }
+      expected = %{
+        "data" => %{
+          "id" => user.id,
+          "admin" => user.admin,
+          "country" => user.user_country,
+          "djname" => user.djname,
+          "email" => user.email,
+          "name" => user.name,
+          "profil_dj" => user.profil_dj,
+          "verified_profil" => false,
+          "detail" => %{
+            "description" => nil,
+            "djing_start_year" => nil,
+            "facebook" => nil,
+            "favorite_animal" => nil,
+            "favorite_artist" => nil,
+            "favorite_color" => nil,
+            "favorite_genre" => nil,
+            "favorite_meal" => nil,
+            "hate_more" => nil,
+            "love_more" => nil,
+            "soundcloud" => nil,
+            "youtube" => nil
+          }
+        }
+      }
+
+      assert response == expected
     end
 
-    test "renders current user", %{conn: conn} do
-      _user = insert(:user)
-      current_user = insert(:user)
-      user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", current_user.id)
-      conn = put_req_header(conn, "authorization", "Bearer " <> user_token)
+    test "Responds with user info if the current_user is found", %{conn: conn, user: user} do
+      user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
 
-      conn = get(conn, api_me_path(conn, :show))
+      response =
+        conn
+        |> put_req_header("authorization", "Bearer " <> user_token)
+        |> get(api_me_path(conn, :show))
+        |> json_response(200)
 
-      assert json_response(conn, 200)["data"] == %{
-               "id" => current_user.id,
-               "admin" => current_user.admin,
-               "country" => current_user.user_country,
-               "djname" => current_user.djname,
-               "email" => current_user.email,
-               "name" => current_user.name,
-               "profil_dj" => current_user.profil_dj,
-               "verified_profil" => false
-             }
+      expected = %{
+        "data" => %{
+          "id" => user.id,
+          "admin" => user.admin,
+          "country" => user.user_country,
+          "djname" => user.djname,
+          "email" => user.email,
+          "name" => user.name,
+          "profil_dj" => user.profil_dj,
+          "verified_profil" => false,
+          "detail" => %{
+            "description" => nil,
+            "djing_start_year" => nil,
+            "facebook" => nil,
+            "favorite_animal" => nil,
+            "favorite_artist" => nil,
+            "favorite_color" => nil,
+            "favorite_genre" => nil,
+            "favorite_meal" => nil,
+            "hate_more" => nil,
+            "love_more" => nil,
+            "soundcloud" => nil,
+            "youtube" => nil
+          }
+        }
+      }
+
+      assert response == expected
     end
   end
 end
