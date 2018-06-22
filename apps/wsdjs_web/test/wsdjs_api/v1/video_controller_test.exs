@@ -3,7 +3,7 @@ defmodule WsdjsApi.V1.VideoControllerTest do
   alias Wsdjs.Accounts
 
   defp create_user(_) do
-    {:ok, user} = Wsdjs.Accounts.create_user(%{"name" => "John", "email" => "john@example.com"})
+    {:ok, user} = Wsdjs.Accounts.create_user(%{"email" => "john@example.com"})
 
     {:ok, user} =
       Accounts.update_user(user, %{parameter: %{video: true}}, %Accounts.User{admin: true})
