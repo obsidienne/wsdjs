@@ -54,9 +54,19 @@ defmodule Wsdjs.Attachments do
 
   """
   def create_video(params) do
-    %Video{}
-    |> Video.changeset(params)
-    |> Repo.insert()
+    video =
+      %Video{}
+      |> Video.changeset(params)
+      |> Repo.insert()
+
+    case video do
+      {:ok, video} ->
+        video = Repo.preload(video, :event)
+        {:ok, video}
+
+      _ ->
+        video
+    end
   end
 
   @doc """
