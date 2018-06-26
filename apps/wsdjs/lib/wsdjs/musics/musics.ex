@@ -129,6 +129,12 @@ defmodule Wsdjs.Musics do
     |> Repo.insert()
   end
 
+  def create_song!(params) do
+    %Song{}
+    |> Song.create_changeset(params)
+    |> Repo.insert!()
+  end
+
   @doc """
   Creates a suggestion.
 
@@ -168,8 +174,8 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Get the song matching the "artist - title" pattern. 
-  The uniq index artist / title ensure the uniquenes of result. 
+  Get the song matching the "artist - title" pattern.
+  The uniq index artist / title ensure the uniquenes of result.
   This a privileged function, no song restriction access.
   """
   def get_song_by(artist, title) when is_binary(artist) and is_binary(title) do
