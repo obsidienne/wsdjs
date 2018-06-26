@@ -65,7 +65,7 @@ defmodule WsdjsWeb.SongControllerTest do
      song: song, instant_hit: instant_hit, public_track: public_track, hidden_track: hidden_track}
   end
 
-  describe "access" do
+  describe "access actions" do
     setup [:create_users, :create_songs]
 
     test "requires user authentication on actions", %{conn: conn, song: song} do
@@ -84,6 +84,10 @@ defmodule WsdjsWeb.SongControllerTest do
         end
       )
     end
+  end
+
+  describe "access song from song param" do
+    setup [:create_users, :create_songs]
 
     test "instant hit is visible", %{
       conn: conn,
@@ -186,6 +190,13 @@ defmodule WsdjsWeb.SongControllerTest do
           assert String.contains?(conn.resp_body, song.title)
         end
       )
+    end
+  end
+
+  describe "access song by top" do
+    setup [:create_users]
+
+    test "show song TOP current month", %{conn: conn, suggestor: suggestor, admin: admin} do
     end
   end
 
