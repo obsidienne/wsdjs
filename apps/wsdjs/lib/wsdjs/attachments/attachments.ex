@@ -23,7 +23,11 @@ defmodule Wsdjs.Attachments do
       ** (Ecto.NoResultsError)
 
   """
-  def get_video!(id), do: Repo.get!(Video, id)
+  def get_video!(id) do
+    Video
+    |> Repo.get!(id)
+    |> Repo.preload(:event)
+  end
 
   @doc """
   Returns the list of videos.
