@@ -29,7 +29,7 @@
 <section class="container home-container">
 <%= if Enum.count(@songs) > 0 do %>
   <section>
-    <h2 class="page-header">Deejays' pick</h2>
+    <h2 class="page-header">#trends</h2>
     <ul>
       <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
