@@ -186,49 +186,48 @@ defmodule WsdjsWeb.UserControllerTest do
         end
       )
     end
+
+    test "admin can edit admin fields", %{
+      conn: conn,
+      user: user,
+      admin: admin
+    } do
+      refute user.profil_djvip
+      refute user.profil_dj
+      refute user.admin
+
+      params = %{profil_djvip: true, profil_dj: true, admin: true}
+
+      conn
+      |> assign(:current_user, admin)
+      |> put(user_path(conn, :update, user.id, %{"user" => params}))
+
+      user_updated = Wsdjs.Accounts.get_user!(user.id)
+      assert user_updated.profil_djvip
+      assert user_updated.profil_dj
+      assert user_updated.admin
+    end
+
+    test "user can edit himself", %{conn: conn, user: user} do
+      params = %{
+        profil_djvip: true,
+        profil_dj: true,
+        admin: true,
+        djname: "DJ has been",
+        detail: %{description: "J'aurai voulu être un artist"}
+      }
+
+      # change values
+      conn
+      |> assign(:current_user, user)
+      |> put(user_path(conn, :update, user, %{"user" => params}))
+
+      user_updated = Wsdjs.Accounts.get_user!(user.id)
+      assert user_updated.djname == "DJ has been"
+      assert user_updated.detail.description == "J'aurai voulu être un artist"
+      refute user_updated.profil_djvip
+      refute user_updated.profil_dj
+      refute user_updated.admin
+    end
   end
-
-  # test "admin can edit admin fields", %{conn: conn} do
-  #   user = insert(:user)
-  #   admin = insert(:user, %{admin: true})
-  #   refute user.profil_djvip
-  #   refute user.profil_dj
-  #   refute user.admin
-
-  #   params = %{profil_djvip: true, profil_dj: true, admin: true}
-
-  #   # change values
-  #   conn
-  #   |> assign(:current_user, admin)
-  #   |> put(user_path(conn, :update, user.id, %{"user" => params}))
-
-  #   user_updated = Wsdjs.Accounts.get_user!(user.id)
-  #   assert user_updated.profil_djvip
-  #   assert user_updated.profil_dj
-  #   assert user_updated.admin
-  # end
-
-  # test "user can edit himself", %{conn: conn} do
-  #   user = insert(:user)
-
-  #   params = %{
-  #     profil_djvip: true,
-  #     profil_dj: true,
-  #     admin: true,
-  #     djname: "DJ has been",
-  #     detail: %{description: "J'aurai voulu être un artist"}
-  #   }
-
-  #   # change values
-  #   conn
-  #   |> assign(:current_user, user)
-  #   |> put(user_path(conn, :update, user.id, %{"user" => params}))
-
-  #   user_updated = Wsdjs.Accounts.get_user!(user.id)
-  #   assert user_updated.djname == "DJ has been"
-  #   assert user_updated.detail.description == "J'aurai voulu être un artist"
-  #   # refute user_updated.profil_djvip
-  #   # refute user_updated.profil_dj
-  #   # refute user_updated.admin
-  # end
 end

@@ -65,9 +65,6 @@ defmodule WsdjsWeb.SongControllerTest do
      song: song, instant_hit: instant_hit, public_track: public_track, hidden_track: hidden_track}
   end
 
-  defp create_ranks() do
-  end
-
   describe "access" do
     setup [:create_users, :create_songs]
 
@@ -193,246 +190,52 @@ defmodule WsdjsWeb.SongControllerTest do
   end
 
   # only published top set the position value in ranks
-  test "show song TOP current month", %{conn: conn} do
-    # dt = Timex.beginning_of_month(Timex.today())
-    # top = insert(:top, %{due_date: dt, status: "published"})
-    # rank1 = insert(:rank, position: 1, top: top)
-    # rank10 = insert(:rank, position: 10, top: top)
-    # rank11 = insert(:rank, position: 11, top: top)
+  #  test "show song TOP current month", %{conn: conn} do
+  # dt = Timex.beginning_of_month(Timex.today())
+  # top = insert(:top, %{due_date: dt, status: "published"})
+  # rank1 = insert(:rank, position: 1, top: top)
+  # rank10 = insert(:rank, position: 10, top: top)
+  # rank11 = insert(:rank, position: 11, top: top)
 
-    # Enum.each(
-    #   [
-    #     assign(conn, :current_user, insert(:user, %{profil_dj: true})),
-    #     assign(conn, :current_user, insert(:user)),
-    #     assign(conn, :current_user, nil)
-    #   ],
-    #   fn conn ->
-    #     Enum.each([rank1, rank10, rank11], fn rank ->
-    #       conn = get(conn, song_path(conn, :show, rank.song.id))
-    #       assert html_response(conn, 302)
-    #     end)
-    #   end
-    # )
-
-    #   Enum.each(
-    #     [
-    #       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
-    #       assign(conn, :current_user, insert(:user, %{admin: true}))
-    #     ],
-    #     fn conn ->
-    #       Enum.each([rank1, rank10, rank11], fn rank ->
-    #         conn = get(conn, song_path(conn, :show, rank.song.id))
-    #         assert html_response(conn, 200) =~ "Song - World Swing DJs"
-    #         assert String.contains?(conn.resp_body, rank.song.title)
-    #       end)
-    #     end
-    #   )
-    # end
-
-    # test "show song TOP current month -2", %{conn: conn} do
-    #   dt =
-    #     Timex.today()
-    #     |> Timex.beginning_of_month()
-    #     |> Timex.shift(months: -2)
-
-    #   top = insert(:top, %{due_date: dt, status: "published"})
-    #   rank1 = insert(:rank, position: 1, top: top)
-    #   rank10 = insert(:rank, position: 10, top: top)
-    #   rank11 = insert(:rank, position: 11, top: top)
-
-    #   Enum.each(
-    #     [
-    #       assign(conn, :current_user, insert(:user, %{profil_dj: true})),
-    #       assign(conn, :current_user, insert(:user)),
-    #       assign(conn, :current_user, nil)
-    #     ],
-    #     fn conn ->
-    #       Enum.each([rank1, rank10, rank11], fn rank ->
-    #         conn = get(conn, song_path(conn, :show, rank.song.id))
-    #         assert html_response(conn, 302)
-    #       end)
-    #     end
-    #   )
-
-    #   Enum.each(
-    #     [
-    #       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
-    #       assign(conn, :current_user, insert(:user, %{admin: true}))
-    #     ],
-    #     fn conn ->
-    #       Enum.each([rank1, rank10, rank11], fn rank ->
-    #         conn = get(conn, song_path(conn, :show, rank.song.id))
-    #         assert html_response(conn, 200) =~ "Song - World Swing DJs"
-    #         assert String.contains?(conn.resp_body, rank.song.title)
-    #       end)
-    #     end
-    #   )
-  end
-
-  test "show song TOP current month -3", %{conn: conn} do
-    # dt =
-    #   Timex.today()
-    #   |> Timex.beginning_of_month()
-    #   |> Timex.shift(months: -3)
-
-    # top = insert(:top, %{due_date: dt, status: "published"})
-    # rank1 = insert(:rank, position: 1, top: top)
-    # rank10 = insert(:rank, position: 10, top: top)
-    # rank11 = insert(:rank, position: 11, top: top)
-
-    # Enum.each(
-    #   [
-    #     assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
-    #     assign(conn, :current_user, insert(:user, %{admin: true}))
-    #   ],
-    #   fn conn ->
-    #     Enum.each([rank11], fn rank ->
-    #       conn = get(conn, song_path(conn, :show, rank.song.id))
-    #       assert html_response(conn, 200) =~ "Song - World Swing DJs"
-    #       assert String.contains?(conn.resp_body, rank.song.title)
-    #     end)
-    #   end
-    # )
-
-    # Enum.each(
-    #   [
-    #     assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
-    #     assign(conn, :current_user, insert(:user, %{admin: true})),
-    #     assign(conn, :current_user, insert(:user, %{profil_dj: true})),
-    #     assign(conn, :current_user, insert(:user)),
-    #     assign(conn, :current_user, nil)
-    #   ],
-    #   fn conn ->
-    #     Enum.each([rank1, rank10], fn rank ->
-    #       conn = get(conn, song_path(conn, :show, rank.song.id))
-    #       assert html_response(conn, 200) =~ "Song - World Swing DJs"
-    #       assert String.contains?(conn.resp_body, rank.song.title)
-    #     end)
-    #   end
-    # )
-  end
-
-  # test "show song TOP current month -6", %{conn: conn} do
-  #   dt =
-  #     Timex.today()
-  #     |> Timex.beginning_of_month()
-  #     |> Timex.shift(months: -6)
-
-  #   top = insert(:top, %{due_date: dt, status: "published"})
-  #   rank1 = insert(:rank, position: 1, top: top)
-  #   rank10 = insert(:rank, position: 10, top: top)
-  #   rank11 = insert(:rank, position: 11, top: top)
+  # Enum.each(
+  #   [
+  #     assign(conn, :current_user, insert(:user, %{profil_dj: true})),
+  #     assign(conn, :current_user, insert(:user)),
+  #     assign(conn, :current_user, nil)
+  #   ],
+  #   fn conn ->
+  #     Enum.each([rank1, rank10, rank11], fn rank ->
+  #       conn = get(conn, song_path(conn, :show, rank.song.id))
+  #       assert html_response(conn, 302)
+  #     end)
+  #   end
+  # )
 
   #   Enum.each(
   #     [
   #       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
   #       assign(conn, :current_user, insert(:user, %{admin: true}))
-  #     ],
-  #     fn conn ->
-  #       Enum.each([rank11], fn rank ->
-  #         conn = get(conn, song_path(conn, :show, rank.song.id))
-  #         assert html_response(conn, 200) =~ "Song - World Swing DJs"
-  #         assert String.contains?(conn.resp_body, rank.song.title)
-  #       end)
-  #     end
-  #   )
-
-  #   Enum.each(
-  #     [
-  #       assign(conn, :current_user, insert(:user, %{admin: true})),
-  #       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
-  #       assign(conn, :current_user, insert(:user, %{profil_dj: true})),
-  #       assign(conn, :current_user, insert(:user)),
-  #       assign(conn, :current_user, nil)
-  #     ],
-  #     fn conn ->
-  #       Enum.each([rank1, rank10], fn rank ->
-  #         conn = get(conn, song_path(conn, :show, rank.song.id))
-  #         assert html_response(conn, 200) =~ "Song - World Swing DJs"
-  #         assert String.contains?(conn.resp_body, rank.song.title)
-  #       end)
-  #     end
-  #   )
-  # end
-
-  # test "show song TOP current month -27", %{conn: conn} do
-  #   dt =
-  #     Timex.today()
-  #     |> Timex.beginning_of_month()
-  #     |> Timex.shift(months: -27)
-
-  #   top = insert(:top, %{due_date: dt, status: "published"})
-  #   rank1 = insert(:rank, position: 1, top: top)
-  #   rank10 = insert(:rank, position: 10, top: top)
-  #   rank11 = insert(:rank, position: 11, top: top)
-
-  #   Enum.each(
-  #     [
-  #       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
-  #       assign(conn, :current_user, insert(:user, %{admin: true}))
-  #     ],
-  #     fn conn ->
-  #       Enum.each([rank11], fn rank ->
-  #         conn = get(conn, song_path(conn, :show, rank.song.id))
-  #         assert html_response(conn, 200) =~ "Song - World Swing DJs"
-  #         assert String.contains?(conn.resp_body, rank.song.title)
-  #       end)
-  #     end
-  #   )
-
-  #   Enum.each(
-  #     [
-  #       assign(conn, :current_user, insert(:user, %{admin: true})),
-  #       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
-  #       assign(conn, :current_user, insert(:user, %{profil_dj: true}))
-  #     ],
-  #     fn conn ->
-  #       Enum.each([rank1, rank10], fn rank ->
-  #         conn = get(conn, song_path(conn, :show, rank.song.id))
-  #         assert html_response(conn, 200) =~ "Song - World Swing DJs"
-  #         assert String.contains?(conn.resp_body, rank.song.title)
-  #       end)
-  #     end
-  #   )
-
-  #   Enum.each(
-  #     [
-  #       assign(conn, :current_user, insert(:user)),
-  #       assign(conn, :current_user, nil)
   #     ],
   #     fn conn ->
   #       Enum.each([rank1, rank10, rank11], fn rank ->
   #         conn = get(conn, song_path(conn, :show, rank.song.id))
-  #         assert html_response(conn, 302)
-  #       end)
-  #     end
-  #   )
-  # end
-
-  # test "show song TOP current month -28", %{conn: conn} do
-  #   dt =
-  #     Timex.today()
-  #     |> Timex.beginning_of_month()
-  #     |> Timex.shift(months: -28)
-
-  #   top = insert(:top, %{due_date: dt, status: "published"})
-  #   rank1 = insert(:rank, position: 1, top: top)
-  #   rank10 = insert(:rank, position: 10, top: top)
-  #   rank11 = insert(:rank, position: 11, top: top)
-
-  #   Enum.each(
-  #     [
-  #       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
-  #       assign(conn, :current_user, insert(:user, %{admin: true}))
-  #     ],
-  #     fn conn ->
-  #       Enum.each([rank11], fn rank ->
-  #         conn = get(conn, song_path(conn, :show, rank.song.id))
   #         assert html_response(conn, 200) =~ "Song - World Swing DJs"
   #         assert String.contains?(conn.resp_body, rank.song.title)
   #       end)
   #     end
   #   )
+  # end
+
+  # test "show song TOP current month -2", %{conn: conn} do
+  #   dt =
+  #     Timex.today()
+  #     |> Timex.beginning_of_month()
+  #     |> Timex.shift(months: -2)
+
+  #   top = insert(:top, %{due_date: dt, status: "published"})
+  #   rank1 = insert(:rank, position: 1, top: top)
+  #   rank10 = insert(:rank, position: 10, top: top)
+  #   rank11 = insert(:rank, position: 11, top: top)
 
   #   Enum.each(
   #     [
@@ -447,5 +250,199 @@ defmodule WsdjsWeb.SongControllerTest do
   #       end)
   #     end
   #   )
+
+  #   Enum.each(
+  #     [
+  #       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+  #       assign(conn, :current_user, insert(:user, %{admin: true}))
+  #     ],
+  #     fn conn ->
+  #       Enum.each([rank1, rank10, rank11], fn rank ->
+  #         conn = get(conn, song_path(conn, :show, rank.song.id))
+  #         assert html_response(conn, 200) =~ "Song - World Swing DJs"
+  #         assert String.contains?(conn.resp_body, rank.song.title)
+  #       end)
+  #     end
+  #   )
   # end
+
+  # test "show song TOP current month -3", %{conn: conn} do
+  # dt =
+  #   Timex.today()
+  #   |> Timex.beginning_of_month()
+  #   |> Timex.shift(months: -3)
+
+  # top = insert(:top, %{due_date: dt, status: "published"})
+  # rank1 = insert(:rank, position: 1, top: top)
+  # rank10 = insert(:rank, position: 10, top: top)
+  # rank11 = insert(:rank, position: 11, top: top)
+
+  # Enum.each(
+  #   [
+  #     assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+  #     assign(conn, :current_user, insert(:user, %{admin: true}))
+  #   ],
+  #   fn conn ->
+  #     Enum.each([rank11], fn rank ->
+  #       conn = get(conn, song_path(conn, :show, rank.song.id))
+  #       assert html_response(conn, 200) =~ "Song - World Swing DJs"
+  #       assert String.contains?(conn.resp_body, rank.song.title)
+  #     end)
+  #   end
+  # )
+
+  # Enum.each(
+  #   [
+  #     assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+  #     assign(conn, :current_user, insert(:user, %{admin: true})),
+  #     assign(conn, :current_user, insert(:user, %{profil_dj: true})),
+  #     assign(conn, :current_user, insert(:user)),
+  #     assign(conn, :current_user, nil)
+  #   ],
+  #   fn conn ->
+  #     Enum.each([rank1, rank10], fn rank ->
+  #       conn = get(conn, song_path(conn, :show, rank.song.id))
+  #       assert html_response(conn, 200) =~ "Song - World Swing DJs"
+  #       assert String.contains?(conn.resp_body, rank.song.title)
+  #     end)
+  #   end
+  # )
 end
+
+# test "show song TOP current month -6", %{conn: conn} do
+#   dt =
+#     Timex.today()
+#     |> Timex.beginning_of_month()
+#     |> Timex.shift(months: -6)
+
+#   top = insert(:top, %{due_date: dt, status: "published"})
+#   rank1 = insert(:rank, position: 1, top: top)
+#   rank10 = insert(:rank, position: 10, top: top)
+#   rank11 = insert(:rank, position: 11, top: top)
+
+#   Enum.each(
+#     [
+#       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+#       assign(conn, :current_user, insert(:user, %{admin: true}))
+#     ],
+#     fn conn ->
+#       Enum.each([rank11], fn rank ->
+#         conn = get(conn, song_path(conn, :show, rank.song.id))
+#         assert html_response(conn, 200) =~ "Song - World Swing DJs"
+#         assert String.contains?(conn.resp_body, rank.song.title)
+#       end)
+#     end
+#   )
+
+#   Enum.each(
+#     [
+#       assign(conn, :current_user, insert(:user, %{admin: true})),
+#       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+#       assign(conn, :current_user, insert(:user, %{profil_dj: true})),
+#       assign(conn, :current_user, insert(:user)),
+#       assign(conn, :current_user, nil)
+#     ],
+#     fn conn ->
+#       Enum.each([rank1, rank10], fn rank ->
+#         conn = get(conn, song_path(conn, :show, rank.song.id))
+#         assert html_response(conn, 200) =~ "Song - World Swing DJs"
+#         assert String.contains?(conn.resp_body, rank.song.title)
+#       end)
+#     end
+#   )
+# end
+
+# test "show song TOP current month -27", %{conn: conn} do
+#   dt =
+#     Timex.today()
+#     |> Timex.beginning_of_month()
+#     |> Timex.shift(months: -27)
+
+#   top = insert(:top, %{due_date: dt, status: "published"})
+#   rank1 = insert(:rank, position: 1, top: top)
+#   rank10 = insert(:rank, position: 10, top: top)
+#   rank11 = insert(:rank, position: 11, top: top)
+
+#   Enum.each(
+#     [
+#       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+#       assign(conn, :current_user, insert(:user, %{admin: true}))
+#     ],
+#     fn conn ->
+#       Enum.each([rank11], fn rank ->
+#         conn = get(conn, song_path(conn, :show, rank.song.id))
+#         assert html_response(conn, 200) =~ "Song - World Swing DJs"
+#         assert String.contains?(conn.resp_body, rank.song.title)
+#       end)
+#     end
+#   )
+
+#   Enum.each(
+#     [
+#       assign(conn, :current_user, insert(:user, %{admin: true})),
+#       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+#       assign(conn, :current_user, insert(:user, %{profil_dj: true}))
+#     ],
+#     fn conn ->
+#       Enum.each([rank1, rank10], fn rank ->
+#         conn = get(conn, song_path(conn, :show, rank.song.id))
+#         assert html_response(conn, 200) =~ "Song - World Swing DJs"
+#         assert String.contains?(conn.resp_body, rank.song.title)
+#       end)
+#     end
+#   )
+
+#   Enum.each(
+#     [
+#       assign(conn, :current_user, insert(:user)),
+#       assign(conn, :current_user, nil)
+#     ],
+#     fn conn ->
+#       Enum.each([rank1, rank10, rank11], fn rank ->
+#         conn = get(conn, song_path(conn, :show, rank.song.id))
+#         assert html_response(conn, 302)
+#       end)
+#     end
+#   )
+# end
+
+# test "show song TOP current month -28", %{conn: conn} do
+#   dt =
+#     Timex.today()
+#     |> Timex.beginning_of_month()
+#     |> Timex.shift(months: -28)
+
+#   top = insert(:top, %{due_date: dt, status: "published"})
+#   rank1 = insert(:rank, position: 1, top: top)
+#   rank10 = insert(:rank, position: 10, top: top)
+#   rank11 = insert(:rank, position: 11, top: top)
+
+#   Enum.each(
+#     [
+#       assign(conn, :current_user, insert(:user, %{profil_djvip: true})),
+#       assign(conn, :current_user, insert(:user, %{admin: true}))
+#     ],
+#     fn conn ->
+#       Enum.each([rank11], fn rank ->
+#         conn = get(conn, song_path(conn, :show, rank.song.id))
+#         assert html_response(conn, 200) =~ "Song - World Swing DJs"
+#         assert String.contains?(conn.resp_body, rank.song.title)
+#       end)
+#     end
+#   )
+
+#   Enum.each(
+#     [
+#       assign(conn, :current_user, insert(:user, %{profil_dj: true})),
+#       assign(conn, :current_user, insert(:user)),
+#       assign(conn, :current_user, nil)
+#     ],
+#     fn conn ->
+#       Enum.each([rank1, rank10, rank11], fn rank ->
+#         conn = get(conn, song_path(conn, :show, rank.song.id))
+#         assert html_response(conn, 302)
+#       end)
+#     end
+#   )
+# end
+# end

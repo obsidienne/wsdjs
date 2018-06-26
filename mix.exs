@@ -26,6 +26,7 @@ defmodule Wsdjs.Umbrella.Mixfile do
     [
       {:credo, "~> 0.9.3", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.18", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 0.6", only: :dev},
       {:dialyxir, "~> 1.0.0-rc.0", only: [:dev], runtime: false}
     ]
   end
