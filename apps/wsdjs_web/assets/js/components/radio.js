@@ -89,6 +89,9 @@ export default class Radio {
       - the radio page
   */
   refresh_radio(payload) {
+    if (payload.data == "")
+      return;
+
     var data = JSON.parse(payload.data);
 
     /* update the radio player */
