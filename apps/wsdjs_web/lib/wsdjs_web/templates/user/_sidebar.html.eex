@@ -1,20 +1,17 @@
 <div>
   <section class="user-page__profile__section">
     <header class="user-page__profile__header">
-      <div class="user-badge">
-        <div class="flex-grow-1">
+      <div class="d-flex align-items-end justify-content-between">
+        <div class="d-flex">
           <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
           <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
         </div>
 
-
         <%= if @user.verified_profil do %>
-        <div class="flex-grow-1 text-right">
-          <span class="tippy" title="User profil has been verified">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-              <path fill="#00b200" d="M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z" />
-            </svg>
-          </span>
+        <div class="d-flex justify-content-end">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24" class="tippy pointer-event-auto" title="User profil has been verified">
+            <path fill="#00b200" d="M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z" />
+          </svg>
         </div>
         <% end %>
 
