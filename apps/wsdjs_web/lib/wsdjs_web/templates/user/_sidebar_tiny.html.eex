@@ -35,8 +35,7 @@
         <% end %>
       </div>
     </header>
-
-    <footer class="d-flex flex-wrap justify-content-between align-items-center m-top-2">
+    <footer class="d-none d-md-flex flex-wrap justify-content-between align-items-center m-top-2">
       <%= if @user && @user.parameter && @user.parameter.email_contact do %>
       <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
       <% end %>

@@ -11,7 +11,7 @@
 </nav>
 
 <section id="user-page" class="user-page container">
-  <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
+  <%= render WsdjsWeb.UserView, "_sidebar_tiny.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
   <div>
     <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
