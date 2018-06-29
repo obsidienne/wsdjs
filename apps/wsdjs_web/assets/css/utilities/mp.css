@@ -34,6 +34,10 @@
   margin: 1rem;
 }
 
+.m-top-auto {
+  margin-top: auto;
+}
+
 .m-top-2 {
   margin-top: 1rem;
 }

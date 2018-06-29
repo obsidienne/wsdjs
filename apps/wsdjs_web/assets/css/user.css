@@ -1,13 +1,3 @@
-.user-page {
-  padding-top: 16px;
-}
-
-.user-place {
-  display: flex;
-  margin-top: auto;
-  justify-content: center;
-}
-
 .user-page__avatar {
   flex: 0 0 96px;
   height: 96px;
@@ -41,10 +31,6 @@
 .user-page__stats td {
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
-}
-
-.user-profile-edit {
-  margin-top: 16px;
 }
 
 .user-page__profile-details {

@@ -12,7 +12,7 @@
   </ol>
 </nav>
 
-<section id="user-page" class="user-page container">
+<section id="user-page" class="user-page container p-top-2">
   <%= render WsdjsWeb.UserView, "_sidebar_tiny.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
   <%= if @conn.assigns[:playlist] do %>
