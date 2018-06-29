@@ -10,6 +10,10 @@
   pointer-events: auto;
 }
 
+.w-100 {
+  width: 100%;
+}
+
 /******************
  display utilities
 ******************/

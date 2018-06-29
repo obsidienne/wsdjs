@@ -51,16 +51,6 @@
   display: none;
 }
 
-.social-link:first-child {
-  margin-top: .5rem;
-}
-
-.social-link {
-  display: flex;
-  align-items: center;
-  margin-bottom: .5rem;
-}
-
 .social-link svg {
   margin-right: .5rem;
 }

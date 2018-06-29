@@ -12,19 +12,19 @@
       </a>
 
       <a href="<%= top_path(@conn, :show, @top.id) %>" class="card clickable shadow tops__top__content">
-        <span class="tops__top__date">
-          <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>">
+        <span class="tops__top__date d-flex m-bottom-1">
+          <time class="date-format p-right-2" datetime="<%= Date.to_iso8601(@top.due_date) %>">
             <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
           </time> 
           <span class="label label-default"><%= @top.status %></span></span>
-        <div class="tops__top__art">
+        <div class="tops__top__art d-flex flex-wrap justify-content-between m-top-1 w-100">
           <%= for rank <- @top.ranks do %>
             <div>
               <div class="img-embed">
                 <%= if blur_track(rank.song, @current_user) == true do %>
-                <img src="<%= art_url(nil, 200) %>" class="responsive" >
+                <img src="<%= art_url(nil, 200) %>" class="responsive w-100" >
                 <% else %>
-                <img src="<%= art_url(rank.song.art, 200) %>" srcset="<%= art_srcset(rank.song.art, 100) %>" sizes="100px" class="responsive" />
+                <img src="<%= art_url(rank.song.art, 200) %>" srcset="<%= art_srcset(rank.song.art, 100) %>" sizes="100px" class="responsive w-100" />
                 <% end %>
               </div>
             </div>

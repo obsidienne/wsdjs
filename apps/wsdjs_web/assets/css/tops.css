@@ -2,20 +2,11 @@
   ??
 ****************************/
 
-.tops__top__art {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: .5rem;
-}
-
 .tops__top__art>div {
   flex: 1 0 20%;
 }
 
 .tops__top__art img {
-  width: 100%;
   vertical-align: top;
 }
 
@@ -99,17 +90,8 @@
 }
 
 .tops__top__date {
-  display: flex;
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
-}
-
-.tops__top__date time {
-  padding-right: 16px;
-}
-
-.tops__top__details {
-  margin-top: 16px;
 }
 
 @media only screen and (min-width: 768px) {
