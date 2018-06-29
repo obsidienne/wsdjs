@@ -27,6 +27,7 @@ defmodule Wsdjs.Jobs.RadioStreamed do
   defp notify(songs, songs), do: nil
 
   defp notify(songs, _) do
+    # credo:disable-for-lines:1
     IO.inspect(songs)
     ConCache.put(:wsdjs_cache, "streamed_songs", songs)
     ConCache.delete(:wsdjs_cache, "streamed_songs_json")

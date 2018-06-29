@@ -170,6 +170,7 @@ defmodule Wsdjs.Charts do
   # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
   # After that, the top creator can apply bonus to the top.
   defp go_step("counting", top) do
+    # credo:disable-for-lines:2
     from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id])
     |> Repo.update_all(set: [votes: 0, likes: 0, position: nil])
 
@@ -200,6 +201,7 @@ defmodule Wsdjs.Charts do
     query
     |> Repo.all()
     |> Enum.each(fn rank ->
+      # credo:disable-for-lines:2
       from(p in Wsdjs.Charts.Rank, where: [id: ^rank.id])
       |> Repo.update_all(set: [position: rank.pos])
     end)
@@ -289,6 +291,7 @@ defmodule Wsdjs.Charts do
     |> Enum.each(fn vote ->
       val = 10 * vote[:count] - vote[:sum] + vote[:count]
 
+      # credo:disable-for-lines:2
       from(p in Wsdjs.Charts.Rank, where: [top_id: ^id, song_id: ^vote.song_id])
       |> Repo.update_all(set: [votes: val])
     end)
