@@ -8,9 +8,10 @@
 }
 
 .song-page__art {
-  flex: 0 0 312px;
-  width: 312px;
-  height: 312px;
+  flex-basis: 288px;
+  flex-grow: 1;
+  max-width: 312px;
+  max-height: 312px;
 }
 
 .song-page__details {
