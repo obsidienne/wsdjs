@@ -1,6 +1,6 @@
-<div>
-  <section class="user-page__profile__section  p-all-2">
-    <header class="user-page__profile__header">
+<div class="m-bottom-1">
+  <section class="user-page__profile__section p-all-2">
+    <header class="d-flex flex-column">
       <div class="d-flex align-items-end justify-content-between">
         <div class="d-flex">
           <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>

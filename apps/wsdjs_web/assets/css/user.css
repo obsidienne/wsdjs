@@ -47,11 +47,6 @@
   margin-top: 16px;
 }
 
-.user-page__profile__header {
-  display: flex;
-  flex-direction: column;
-}
-
 .user-page__profile-details {
   flex: 1 1 auto;
   min-width: 0;

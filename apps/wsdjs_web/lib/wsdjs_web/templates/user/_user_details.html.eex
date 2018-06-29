@@ -46,7 +46,7 @@
 <% end %>
 <% end %>
 
-<dl class="user-page__profile__section p-all-2 user-page__details">
+<dl class="user-page__profile__section m-all-0 p-all-2 user-page__details">
   <%= if @user.detail.djing_start_year do %>
   <dt>Start DJing</dt>
   <dd><%= @user.detail.djing_start_year %></dd>
