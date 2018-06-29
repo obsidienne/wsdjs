@@ -51,7 +51,7 @@ defmodule WsdjsWeb.PlaylistController do
 
   def edit(conn, %{"id" => id}, current_user) do
     with %Playlists.Playlist{} = playlist <- Playlists.get_playlist!(id),
-         :ok <- Playlists.Policy.can?(current_user, :edit_playlist, playlist) do
+         :ok <- Playlists.Policy.can?(current_user, :edit, playlist) do
       user = Accounts.get_user!(playlist.user_id)
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
       changeset = Playlists.change_playlist(playlist)

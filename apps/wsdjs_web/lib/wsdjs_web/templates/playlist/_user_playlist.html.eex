@@ -23,7 +23,9 @@
       </span>
       <% end %>
     </span>
-    <%= link "edit", to: playlist_path(@conn, :edit, @playlist), class: "btn btn-link m-left-1" %>
+    <%= if Wsdjs.Playlists.Policy.can?(@conn.assigns.current_user, :edit, @playlist) == :ok do %>
+      <%= link "edit", to: playlist_path(@conn, :edit, @playlist), class: "btn btn-link m-left-1" %>
+    <% end %>
   </div>
 
   <%= if Enum.count(@songs) > 0 do %>
