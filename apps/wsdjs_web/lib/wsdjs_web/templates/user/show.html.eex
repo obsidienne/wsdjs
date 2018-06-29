@@ -18,13 +18,13 @@
   <div>
 
   <%= if @user.detail.description do %>
-  <dl class="user-page__profile__section user-page__details">
+  <dl class="user-page__profile__section p-all-2 user-page__details">
     <dt>About Me</dt>
     <dd class="aboutme"><%= raw(@user.detail.description_html) %></dd>
   </dl>
   <% end %>
 
-<dl class="user-page__profile__section user-page__details">
+<dl class="user-page__profile__section p-all-2 user-page__details">
   <dt>Member since</dt>
   <dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= Timex.format!(@user.inserted_at, "%B %d, %Y", :strftime) %></time></dd>
   <%= if @user.detail.love_more do %>

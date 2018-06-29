@@ -1,6 +1,6 @@
 <%= unless is_nil(@user.detail) do %>
 <%= unless is_nil(@user.detail.facebook) and is_nil(@user.detail.youtube) and is_nil(@user.detail.soundcloud) and is_nil(@user.detail.website) do %>
-<ul class="user-page__profile__section">
+<ul class="user-page__profile__section  p-all-2">
   <li class="text-bold text-muted">Elsewhere</li>
   <%= unless is_nil(@user.detail.facebook) do %>
     <li>
@@ -46,7 +46,7 @@
 <% end %>
 <% end %>
 
-<dl class="user-page__profile__section user-page__details">
+<dl class="user-page__profile__section p-all-2 user-page__details">
   <%= if @user.detail.djing_start_year do %>
   <dt>Start DJing</dt>
   <dd><%= @user.detail.djing_start_year %></dd>

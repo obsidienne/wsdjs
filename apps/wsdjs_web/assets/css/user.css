@@ -61,8 +61,6 @@
 }
 
 .user-page__profile__section {
-  padding: 1rem;
-  padding-bottom: 1rem;
   position: relative;
   width: 100%;
   background-color: white;
@@ -105,8 +103,6 @@
 .user-page__details {
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
-  margin: 0;
-  margin-bottom: .5rem;
 }
 
 .aboutme a {

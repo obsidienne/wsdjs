@@ -1,5 +1,5 @@
-<div>
-  <section class="user-page__profile__section">
+<div class="m-bottom-1">
+  <section class="user-page__profile__section p-all-2">
     <header class="user-page__profile__header">
       <div class="d-flex align-items-end justify-content-between">
         <div class="d-flex">
@@ -48,12 +48,20 @@
     </footer>
   </section>
 
-  <ul class="user-page__profile__section d-none d-md-flex flex-wrap">
+  <ul class="user-page__profile__section p-all-2 d-none d-md-flex flex-wrap">
     <li class="user-tag"><span class="tag"><%= @suggested_songs %> songs</li>
   </ul>
 
-
   <%= if @user.detail do %>
-  <%= render "_user_details.html", user: @user %>
+    <dl class="user-page__profile__section user-page__details p-all-2 d-none d-md-block m-all-0">
+      <%= if @user.detail.djing_start_year do %>
+      <dt>Start DJing</dt>
+      <dd><%= @user.detail.djing_start_year %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_genre do %>
+      <dt>Favotire genre</dt>
+      <dd><%= @user.detail.favorite_genre %></dd>
+      <% end %>
+    </dl>
   <% end %>
 </div>
