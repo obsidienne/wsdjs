@@ -10,6 +10,7 @@ defmodule Wsdjs.Jobs.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
+      worker(Wsdjs.Jobs.NowPlaying, [Wsdjs.Jobs.NowPlaying]),
       worker(Wsdjs.Jobs.Scheduler, [])
     ]
 
