@@ -25,6 +25,7 @@ defmodule WsdjsWeb.SongController do
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
       comment_changeset = Reactions.change_comment(%Comment{})
+      ranks = Wsdjs.Charts.get_ranks(song)
 
       render(
         conn,
@@ -34,6 +35,7 @@ defmodule WsdjsWeb.SongController do
         opinions: opinions,
         comment_changeset: comment_changeset,
         videos: videos,
+        ranks: ranks,
         video_changeset: video_changeset
       )
     end
