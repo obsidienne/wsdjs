@@ -26,6 +26,11 @@
         <%= if @song.instant_hit do %>
           <span class="label label-default">instant hit</span>
         <% end %>
+        <%= for rank <- @ranks do %>
+          <%= if rank.position <= 10 do %>
+            <span class="label label-default">Top <%= Timex.format!(rank.top.due_date, "%b%y", :strftime) %> # <%= rank.position %></span>
+          <% end %>
+        <% end %>
       </div>
 
       <div class="song-page__tags song-opinions">
