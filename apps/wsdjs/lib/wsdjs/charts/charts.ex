@@ -313,6 +313,13 @@ defmodule Wsdjs.Charts do
   """
   def get_rank!(id), do: Repo.get!(Rank, id)
 
+  def get_ranks(%Wsdjs.Musics.Song{id: id}) do
+    Rank
+    |> where(song_id: ^id)
+    |> Repo.all()
+    |> Repo.preload(:top)
+  end
+
   @doc """
   Deletes a Rank.
 

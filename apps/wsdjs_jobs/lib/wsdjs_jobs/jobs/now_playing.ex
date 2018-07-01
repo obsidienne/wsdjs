@@ -170,10 +170,10 @@ defmodule Wsdjs.Jobs.NowPlaying do
   end
 
   defp tags_for_song(song_in_base) do
-    with {:ok, top_head} <- Enum.fetch(song_in_base.tops, 0),
-         {:ok, rank_head} <- Enum.fetch(top_head.ranks, 0),
-         {:ok, _} <- song_position(rank_head.position) do
-      ["Top " <> Timex.format!(top_head.due_date, "%b%y", :strftime)]
+    with ranks <- Wsdjs.Charts.get_ranks(song_in_base),
+         {:ok, rank} <- Enum.fetch(ranks, 0),
+         {:ok, _} <- song_position(rank.position) do
+      ["Top " <> Timex.format!(rank.top.due_date, "%b%y", :strftime)]
     else
       _ -> []
     end
