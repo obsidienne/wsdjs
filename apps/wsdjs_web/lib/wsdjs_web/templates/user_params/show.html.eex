@@ -28,17 +28,6 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <td><strong>likes and tops are public</strong><p class="text-muted">Your likes and tops are visible to anyone in your user profil page.</p></td>
-        <td>
-          <div class="ckbx-style-11 ">
-            <%= inputs_for f, :parameter, fn fp -> %>
-              <%= checkbox fp, :public_top_like %>
-              <%= label fp, :public_top_like do %><% end %>
-            <% end %>
-          </div>
-        </td>
-      </tr>
       <%= if Wsdjs.Accounts.Policy.can?(@user, :new_song_notification) == :ok do %>
       <tr>
         <td><strong>New song notification</strong><p class="text-muted">Receive an email everyday if new songs have been suggeted.</p></td>
