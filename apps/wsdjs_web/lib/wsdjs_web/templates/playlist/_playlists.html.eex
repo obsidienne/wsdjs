@@ -1,7 +1,7 @@
 
 <section id="playlists-section">
-  <%= if Wsdjs.Playlists.Policy.can?(@current_user, :create, @user) == :ok do %>
-  <div class="actions">
+  <%= if Wsdjs.Playlists.Policy.can?(@current_user, :new) == :ok do %>
+  <div class="d-none d-md-flex">
     <%= link "Add a new TOP or playlist", to: user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary" %>
   </div>
   <% end %>
@@ -42,7 +42,7 @@
   </ul>
 </section>
 
-<%= if Wsdjs.Playlists.Policy.can?(@current_user, :create, @user) == :ok do %>
+<%= if Wsdjs.Playlists.Policy.can?(@current_user, :new) == :ok do %>
   <%= link to: user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary fab" do %>
     <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
       <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>

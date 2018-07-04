@@ -12,5 +12,6 @@ defmodule Wsdjs.Playlists.Policy do
   def can?(_, _, _), do: {:error, :unauthorized}
 
   def can?(%User{admin: true}, _), do: :ok
+  def can?(%User{profil_djvip: true}, :new), do: :ok
   def can?(_, _), do: {:error, :unauthorized}
 end

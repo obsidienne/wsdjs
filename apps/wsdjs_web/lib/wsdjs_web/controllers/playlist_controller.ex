@@ -87,11 +87,11 @@ defmodule WsdjsWeb.PlaylistController do
     user = Accounts.get_user!(user_id)
     playlist_params = Map.put(playlist_params, "user_id", user_id)
 
-    with :ok <- Playlists.Policy.can?(current_user, :create, user),
+    with :ok <- Playlists.Policy.can?(current_user, :new),
          {:ok, playlist} <- Playlists.create_playlist(playlist_params) do
       conn
       |> put_flash(:info, "Playlist created successfully.")
-      |> redirect(to: user_path(conn, :show, user, playlist: playlist))
+      |> redirect(to: playlist_path(conn, :show, playlist))
     end
   end
 
