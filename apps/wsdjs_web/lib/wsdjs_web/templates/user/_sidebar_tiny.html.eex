@@ -37,13 +37,7 @@
     </header>
     <footer class="d-none d-md-flex flex-wrap justify-content-between align-items-center m-top-2">
       <%= if @user && @user.parameter && @user.parameter.email_contact do %>
-      <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Message</a>
-      <% end %>
-      <%= if Wsdjs.Accounts.Policy.can?(@current_user, :edit_user, @user) == :ok do %>
-        <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
-      <% end %>
-      <%= if Wsdjs.Accounts.Policy.can?(@current_user, :logout, @user) == :ok do %>
-        <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout" %>
+      <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Send an eMail</a>
       <% end %>
     </footer>
   </section>
