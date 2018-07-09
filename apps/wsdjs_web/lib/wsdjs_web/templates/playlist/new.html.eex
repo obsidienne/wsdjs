@@ -1,7 +1,7 @@
 <div class="container">
 <h2>New Playlist</h2>
 <p>
-<%= name_or_email(@user) %>, you are creating a new playlist. By default, your playlist is public
+<%= name_or_email(@user) %>, you are creating a new playlist. By default, your playlist is private
 </p>
 <%= render "form.html", Map.put(assigns, :action, user_playlist_path(@conn, :create, @user)) %>
 
