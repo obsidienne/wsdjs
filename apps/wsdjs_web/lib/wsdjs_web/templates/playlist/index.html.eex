@@ -3,7 +3,7 @@
     <li>
         <%= link "bio", to: user_path(@conn, :show, @user) %>
     </li>
-    <li class="current">playlists</li>
+    <li class="current"><%= link "playlists", to: user_path(@conn, :show, @user) %></li>
     <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :edit_user, @user) == :ok do %>
     <li>
         <%= link "params", to: user_params_path(@conn, :show, @user) %>
