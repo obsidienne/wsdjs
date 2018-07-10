@@ -13,10 +13,10 @@
       <%= if Map.has_key?(song, "path") do %>
         <img src="<%= Map.fetch!(song, "image_uri") %>" 
             srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive"/>
-        <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body visible-link action-link h1 clickable">
+        <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body visible-link action-link h1 clickable text-center">
           <%=Map.fetch!(song, "title") %>
         </a>
-        <div class="radio-suggestor m-top-2">
+        <div class="radio-suggestor m-top-2 text-center">
           <a href="<%= Map.fetch!(song, "suggested_by_path") %>" class="d-inline-block clickable visible-link"><%= Map.fetch!(song, "suggested_by") %></a>
         </div>
       <% else %>
