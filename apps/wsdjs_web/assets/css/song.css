@@ -10,8 +10,8 @@
 .song-page__art {
   flex-basis: 288px;
   flex-grow: 1;
-  max-width: 312px;
-  max-height: 312px;
+  max-width: 381px;
+  max-height: 381px;
 }
 
 .song-page__details {
