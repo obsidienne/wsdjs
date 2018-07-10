@@ -43,7 +43,7 @@
   </section>
 
   <ul class="user-page__profile__section p-all-2 d-none d-md-flex flex-wrap">
-    <li class="user-tag"><span class="tag"><%= @suggested_songs %> songs</li>
+    <li class="user-tag tippy" title="<%= @suggested_songs %> songs suggested"><span class="tag"><%= @suggested_songs %> songs</li>
   </ul>
 
   <%= if @user.detail do %>
