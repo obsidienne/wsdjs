@@ -37,6 +37,6 @@
 
 
   <%= if Wsdjs.Playlists.Policy.can?(@current_user, :delete, @playlist) == :ok do %>
-    <%= link "Delete", to: playlist_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger m-top-3" %>
+    <%= link "Delete", to: playlist_path(@conn, :delete, @playlist), method: :delete, class: "btn btn-link text-danger m-top-3" %>
   <% end %>
 </section>
