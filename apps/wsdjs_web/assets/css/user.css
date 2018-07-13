@@ -94,8 +94,21 @@
   grid-template-columns: 1fr 1fr;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
   #playlists-section ul {
-    grid-template-columns: repeat( auto-fit, minmax(248px, 1fr));
+    grid-template-columns: repeat( auto-fit, minmax(min-content, auto));
+  }
+}
+
+@media (min-width: 992px) {
+  #playlists-section ul {
+    grid-template-columns: repeat( auto-fill, minmax(min-content, 208px));
+  }
+}
+
+@media (min-width: 1200px) {
+  #playlists-section ul {
+    grid-gap: 1rem;
+    grid-template-columns: repeat( auto-fit, minmax(min-content, 264px));
   }
 }
