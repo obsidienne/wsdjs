@@ -33,18 +33,16 @@
   <p>
     <%= Enum.count(@songs) %> songs
   </p>
-  <table>
+  <table class="table">
     <tbody>
     <%= for song <- @songs do %>
     <tr>
       <td class="table_song-art">
-        <img src="<%= art_url(song.art, 50) %>" srcset="<%= art_srcset(song.art, 50) %>" sizes="50px" />
+        <img src="<%= art_url(song.art, 64) %>" srcset="<%= art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
       <td>
-        <%= link to: song_path(@conn, :show, song) do %>
-          <div><%= song.title %></div>
-          <div><%= song.artist %></div>
-        <% end %>
+        <%= link song.title, to: song_path(@conn, :show, song), class: "primary-text action-link visible-link" %>
+        <span class="secondary-text"><%= song.artist %></span>
         <div>
           <span class="label label-default"><%= song.genre %></span>
           <%= if song.bpm > 0 do %>
