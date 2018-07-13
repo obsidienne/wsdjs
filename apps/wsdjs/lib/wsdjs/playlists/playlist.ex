@@ -14,7 +14,7 @@ defmodule Wsdjs.Playlists.Playlist do
     timestamps()
 
     belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)
-    belongs_to(:song, Wsdjs.Musics.Song, type: :binary_id)
+    belongs_to(:cover, Wsdjs.Musics.Song, type: :binary_id)
     has_many(:playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all)
   end
 

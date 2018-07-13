@@ -25,7 +25,7 @@ defmodule Wsdjs.Playlists do
     |> Playlist.scoped()
     |> where(user_id: ^id)
     |> Repo.all()
-    |> Repo.preload(song: :art)
+    |> Repo.preload(cover: :art)
   end
 
   @doc """

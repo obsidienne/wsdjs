@@ -34,7 +34,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,false
             ,now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from users 
+      from users
       where id not in (select user_id from playlists where type='top 5' and name = 'TOP 5 current')
         and (admin = true)
     "
@@ -51,7 +51,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,false
             ,now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from users 
+      from users
       where id not in (select user_id from playlists where type='top 5' and name = 'TOP 5 classic')
         and (admin = true)
     "
@@ -80,18 +80,19 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,true
             ,now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from songs 
+      from songs
       where user_id not in (select user_id from playlists where type='suggested')
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
+  # update the playlist entity to set the suggestion count and the playlist cover image
   def update_suggested do
     query = "
-      update playlists p 
+      update playlists p
       set count=(select count(*) from songs s where p.user_id=s.user_id)
-        , song_id=(select id from songs s where p.user_id=s.user_id order by inserted_at desc LIMIT 1)
+        , cover_id=(select id from songs s where p.user_id=s.user_id order by inserted_at desc LIMIT 1)
       where p.type='suggested'
     "
 
@@ -117,18 +118,19 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,'likes and tops'
             ,user_id, now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from opinions 
+      from opinions
       where user_id not in (select user_id from playlists where type='likes and tops')
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
+  # update the playlist entity to set the top/like count and the playlist cover image
   def update_toplike do
     query = "
-      update playlists p 
+      update playlists p
       set count=(select count(*) from opinions o where p.user_id=o.user_id)
-        , song_id=(select song_id from opinions o where p.user_id=o.user_id order by inserted_at desc LIMIT 1)
+        , cover_id=(select song_id from opinions o where p.user_id=o.user_id order by inserted_at desc LIMIT 1)
       where p.type='likes and tops'
     "
 

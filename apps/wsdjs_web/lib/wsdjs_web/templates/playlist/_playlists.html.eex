@@ -11,8 +11,8 @@
     <li class="clickable">
       <%= link to: playlist_path(@conn, :show, playlist), class: "playlist" do %>
         <div class="img-embed">
-          <%= if playlist.song do %>
-          <img src="<%= art_url(playlist.song.art, 300) %>" srcset="<%= art_srcset(playlist.song.art, 300) %>" sizes="300px" class="responsive"/>
+          <%= if playlist.cover do %>
+          <img src="<%= art_url(playlist.cover.art, 300) %>" srcset="<%= art_srcset(playlist.cover.art, 300) %>" sizes="300px" class="responsive"/>
           <% else %>
           <img src="<%= art_url(nil, 300) %>" class="responsive"/>
           <% end %>
