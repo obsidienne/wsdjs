@@ -18,6 +18,8 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
 
     insert_top5_current()
     insert_top5_classic()
+
+    update_playlist()
   end
 
   ###############################################
@@ -132,6 +134,23 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
       set count=(select count(*) from opinions o where p.user_id=o.user_id)
         , cover_id=(select song_id from opinions o where p.user_id=o.user_id order by inserted_at desc LIMIT 1)
       where p.type='likes and tops'
+    "
+
+    Ecto.Adapters.SQL.query!(Repo, query)
+  end
+
+  ###############################################
+  #
+  # other playlist type
+  #
+  ###############################################
+
+  def update_playlist do
+    query = "
+      update playlists p
+      set count=(select count(*) from playlist_songs s where p.id=s.playlist_id)
+        , cover_id=(select song_id from playlist_songs s where p.id=s.playlist_id order by inserted_at desc LIMIT 1)
+      where p.type in ('playlist', 'top 5')
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)
