@@ -3,7 +3,7 @@
     <header class="d-flex flex-column">
       <div class="d-flex align-items-end justify-content-between">
         <div class="d-flex">
-          <%= if @user.profil_djvip do %><span class="label label-primary">DJ VIP</span><% end %>
+          <%= if @user.profil_djvip do %><span class="label label-primary m-right-1">DJ VIP</span><% end %>
           <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
         </div>
 
@@ -43,9 +43,6 @@
       <%= if Wsdjs.Accounts.Policy.can?(@current_user, :edit_user, @user) == :ok do %>
         <%= link "Edit profile", to: user_path(@conn, :edit, @user), class: "btn btn-link" %>
       <% end %>
-      <%= if Wsdjs.Accounts.Policy.can?(@current_user, :logout, @user) == :ok do %>
-        <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete, class: "btn btn-link text-danger user-page__logout" %>
-      <% end %>
     </footer>
   </section>
 
@@ -58,3 +55,4 @@
   <%= render "_user_details.html", user: @user %>
   <% end %>
 </div>
+

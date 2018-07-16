@@ -10,6 +10,10 @@
   pointer-events: auto;
 }
 
+.w-33 {
+  width: 33%;
+}
+
 .w-100 {
   width: 100%;
 }
