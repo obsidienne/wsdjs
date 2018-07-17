@@ -41,16 +41,6 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  def index(conn, %{"user_id" => user_id, "page" => page}, current_user) do
-    page = Musics.paginate_songs_user(current_user, user_id, %{"page" => page})
-
-    conn
-    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
-    |> put_resp_header("page-number", Integer.to_string(page.page_number))
-    |> put_layout(false)
-    |> render("index_user_song.html", songs: page.entries)
-  end
-
   def index(conn, %{"month" => month}, current_user) do
     month = Timex.beginning_of_month(Timex.to_date(Timex.parse!(month, "%Y-%m-%d", :strftime)))
     songs = Musics.list_songs(current_user, :month, month)
