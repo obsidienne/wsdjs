@@ -18,25 +18,6 @@
     <div class="song-card__body">
       <h2 class="text-muted">hidden track</h2>
     </div>
-
-    <footer class="song-card-footer text-muted song-opinions">
-      <div class="opinions-container">
-        <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @song.opinions, user: @conn.assigns[:current_user] %>
-
-        <a>
-          <%= if Enum.count(@song.comments) > 0 do %>
-            <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-              <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z' />
-            </svg>
-          <% else %>
-            <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-              <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10Z' />
-            </svg>
-          <% end %>
-        </a>
-
-      </div>
-    </footer>
   </article>
 </li>
 
@@ -73,21 +54,13 @@
     </div>
 
     <footer class="song-card-footer text-muted song-opinions">
-      <div class="opinions-container">
-        <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @song.opinions, user: @conn.assigns[:current_user] %>
-
-        <a href="<%= song_path(@conn, :show, @song) %>">
-          <%= if Enum.count(@song.comments) > 0 do %>
-            <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-              <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z' />
-            </svg>
-          <% else %>
-            <svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-              <path fill='#455A64' d='M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10Z' />
-            </svg>
-          <% end %>
-        </a>
-
+      <div class="d-flex justify-content-between w-100">
+        <%= render WsdjsWeb.OpinionView, "_opinion_button.html", conn: @conn, song: @song, opinions: @song.opinions, user: @conn.assigns[:current_user] %>
+        <span class="tippy">
+          <svg height='24' viewBox='0 0 24 24' width='24'>
+            <path fill="#455A64" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
+          </svg>
+        </span>
       </div>
     </footer>
   </article>

@@ -20,7 +20,6 @@ defmodule WsdjsWeb.SongController do
   def show(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :show, song) do
-      comments = Reactions.list_comments(song)
       opinions = Reactions.list_opinions(song)
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
@@ -31,7 +30,6 @@ defmodule WsdjsWeb.SongController do
         conn,
         "show.html",
         song: song,
-        comments: comments,
         opinions: opinions,
         comment_changeset: comment_changeset,
         videos: videos,

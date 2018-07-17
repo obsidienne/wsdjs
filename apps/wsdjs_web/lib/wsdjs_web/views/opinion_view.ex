@@ -14,6 +14,16 @@ defmodule WsdjsWeb.OpinionView do
     default_options ++ tooltip_options(kind, opinions, qty)
   end
 
+  def current_opinion(opinions, current_user) do
+    opinion = Enum.find(opinions, fn x -> x.user_id == current_user.id end)
+
+    if is_nil(opinion) do
+      nil
+    else
+      opinion.kind
+    end
+  end
+
   def options(kind, conn, song, opinions, current_user) do
     qty = Enum.count(opinions, fn x -> x.kind == kind end)
 
