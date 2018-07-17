@@ -72,6 +72,9 @@
   .d-md-flex {
     display: flex;
   }
+  .d-md-table-row {
+    display: table-row;
+  }
 }
 
 @media (min-width: 992px) {

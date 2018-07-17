@@ -35,6 +35,12 @@
   </p>
   <table class="table">
     <tbody>
+    <tr class="d-none d-md-table-row">
+      <td>
+        <img src="<%= art_url(nil, 64) %>" srcset="<%= art_srcset(nil, 64) %>" sizes="64px" width="64px" height="64px" />
+      </td>
+      <td style="vertical-align:middle"><span class="text-muted primary-text">Add a song to the playlist</span></td>
+    </tr>
     <%= for song <- @songs do %>
     <tr>
       <td class="table_song-art">
