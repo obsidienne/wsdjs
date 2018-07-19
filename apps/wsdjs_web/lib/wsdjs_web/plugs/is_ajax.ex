@@ -14,9 +14,7 @@ defmodule WsdjsWeb.IsAjax do
   end
 
   def is_ajax(%Plug.Conn{} = conn) do
-    IO.inspect(get_req_header(conn, "x-requested-with"))
-
-    if get_req_header(conn, "x-requested-with") == "XMLHttpRequest" do
+    if get_req_header(conn, "x-requested-with") == ["XMLHttpRequest"] do
       true
     else
       false
