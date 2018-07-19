@@ -26,7 +26,10 @@ export default class View extends MainView {
     var page_number = parseInt(sentinel.dataset.jsPageNumber);
 
     fetch(`/songs?month=${sentinel.dataset.nextMonth}`, {
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
       })
       .then((response) => {
         if (response.ok) {

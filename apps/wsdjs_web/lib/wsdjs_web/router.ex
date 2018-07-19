@@ -9,6 +9,7 @@ defmodule WsdjsWeb.Router do
     plug(:put_secure_browser_headers)
     plug(WsdjsWeb.VerifySession)
     plug(WsdjsWeb.IdentifyUa)
+    plug(WsdjsWeb.IsAjax)
   end
 
   pipeline :browser_auth do
