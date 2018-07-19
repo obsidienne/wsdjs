@@ -17,11 +17,18 @@
     <meta name="google" content="notranslate">
 
     <title><%= page_title(@conn) %></title>
+    
+    <meta name="apple-mobile-web-app-title" content="WorldSwingDJs">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
     <link rel="icon" type="image/png" sizes="96x96" href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
 
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_80/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_152/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_180/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_167/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
 
     <link defer rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
     <script defer src="https://cdn.polyfill.io/v2/polyfill.js?features=IntersectionObserver,fetch,Promise,IntersectionObserverEntry&flags=gated"></script>
