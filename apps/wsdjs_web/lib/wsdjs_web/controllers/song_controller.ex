@@ -57,16 +57,15 @@ defmodule WsdjsWeb.SongController do
   end
 
   def index(conn, _params, current_user) do
-    month_interval = Musics.songs_interval(current_user)
-    songs = Musics.list_songs(current_user, :month, month_interval[:max])
     interval = Musics.songs_interval(current_user)
+    songs = Musics.list_songs(current_user, :month, interval[:max])
 
     render(
       conn,
       "index.html",
       songs: songs,
-      month: month_interval[:max],
-      last: Timex.before?(month_interval[:max], interval[:min])
+      month: interval[:max],
+      last: Timex.before?(interval[:max], interval[:min])
     )
   end
 
