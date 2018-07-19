@@ -9,15 +9,12 @@ defmodule WsdjsWeb.IsAjax do
 
   @doc false
   def call(conn, _repo) do
-    conn
-    |> assign(:is_ajax, is_ajax(conn))
-  end
-
-  def is_ajax(%Plug.Conn{} = conn) do
     if get_req_header(conn, "x-requested-with") == ["XMLHttpRequest"] do
-      true
+      conn
+      |> assign(:is_ajax, true)
+      |> assign(:ajax_suffix, "_ajax")
     else
-      false
+      conn
     end
   end
 end

@@ -41,31 +41,34 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  def index(conn, %{"month" => month}, current_user) do
-    month = Timex.beginning_of_month(Timex.to_date(Timex.parse!(month, "%Y-%m-%d", :strftime)))
+  def index(conn, params, current_user) do
+    interval = Musics.songs_interval(current_user)
+
+    month =
+      if is_nil(params["month"]) do
+        interval[:max]
+      else
+        params["month"]
+        |> Timex.parse!("%Y-%m-%d", :strftime)
+        |> Timex.to_date()
+        |> Timex.beginning_of_month()
+      end
+
     songs = Musics.list_songs(current_user, :month, month)
-    interval = Musics.songs_interval(current_user)
 
-    conn
-    |> put_layout(false)
-    |> render(
-      "index_hot_song.html",
-      songs: songs,
-      month: month,
-      last: Timex.before?(month, interval[:min])
-    )
-  end
-
-  def index(conn, _params, current_user) do
-    interval = Musics.songs_interval(current_user)
-    songs = Musics.list_songs(current_user, :month, interval[:max])
+    conn =
+      if Map.get(conn.assigns, :is_ajax) == true do
+        put_layout(conn, false)
+      else
+        conn
+      end
 
     render(
       conn,
-      "index.html",
+      "index#{Map.get(conn.assigns, :ajax_suffix)}.html",
       songs: songs,
-      month: interval[:max],
-      last: Timex.before?(interval[:max], interval[:min])
+      month: month,
+      last: Timex.before?(month, interval[:min])
     )
   end
 
