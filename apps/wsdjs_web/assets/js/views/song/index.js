@@ -34,41 +34,50 @@ export default class View extends MainView {
 
   opinionTooltipMount() {
     let tip = new Tippy("#song-list", {
-      animation: 'shift-toward',
-      arrow: true,
-      arrowType: 'round',
+      animation: 'shift-away',
+      arrow: false,
       html: '#opinion-selector-tpl',
       performance: true,
+      interactive: true,
+      theme: "wsdjs",
+      placement: "top-start",
+      interactiveBorder: 2,
       target: ".opinion-tippy",
+      appendTo: document.getElementsByTagName("main")[0],
       onHidden: (instance) => {
         const content = instance.popper.querySelector('.tippy-content');
         content.innerHTML = "loading...";
       },
       onShow: (instance) => {
         const content = instance.popper.querySelector('.tippy-content');
-        console.log(content.innerHTML)
+
         if (this.tip.loading || content.innerHTML !== "loading...") return;
         this.tip.loading = true;
 
-        fetch('https://unsplash.it/200/?random').then(resp => resp.blob()).then(blob => {
-          const url = URL.createObjectURL(blob);
-          content.innerHTML = `<img width="200" height="200" src="${url}">`;
-          this.tip.loading = false;
-        }).catch(e => {
-          content.innerHTML = 'Loading failed';
-          this.tip.loading = false;
-        })
-      },
-      // prevent tooltip from displaying over button
-      popperOptions: {
-        modifiers: {
-          preventOverflow: {
-            enabled: true
-          },
-          hide: {
-            enabled: false
-          }
-        }
+        let songId = instance.reference.closest("li").dataset.id;
+
+        fetch(`/songs/${songId}/opinions`, {
+            credentials: 'include',
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          })
+          .then((response) => {
+            if (response.ok) {
+              return response.text();
+            } else {
+              this.tip.loading = false;
+              console.log('Loading failed');
+            }
+          })
+          .then((data) => {
+            content.innerHTML = data;
+            this.tip.loading = false;
+          })
+          .catch(e => {
+            content.innerHTML = 'Loading failed';
+            this.tip.loading = false;
+          })
       }
     });
 

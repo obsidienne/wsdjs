@@ -3,9 +3,10 @@ class Opinions {
 
     document.addEventListener("click", e => {
       if (e.target && e.target.matches(".song-opinion")) {
-        this._toggle_opinion(e.target);
         e.preventDefault();
         e.stopPropagation();
+        this._toggle_opinion(e.target);
+
       }
     }, false);
   }
@@ -14,7 +15,7 @@ class Opinions {
     var token = document.querySelector("[name=channel_token]").getAttribute("content");
 
     fetch(elem.dataset.url, {
-        method: elem.dataset.method,
+        method: elem.dataset.localMethod,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
           "Accept": "application/json",
@@ -29,7 +30,7 @@ class Opinions {
         }
       })
       .then((data) => {
-        var container = elem.closest(".song-opinions");
+        var container = elem.closest(".song-opinions") || (elem.closest && elem.closest(".tippy-content"));
         this._refresh_layout(container, data);
       })
       .catch(function (error) {
@@ -49,7 +50,7 @@ class Opinions {
 
   _refresh_kind(container, kind, data, user_opinion) {
     container.getElementsByTagName("span")[0].innerText = data.count;
-    container.dataset.method = data.method;
+    container.dataset.localMethod = data.method;
     container.dataset.url = data.url;
     container.setAttribute("title", data.tooltip_html);
     container.classList.remove("active")

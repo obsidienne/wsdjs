@@ -9,7 +9,7 @@ defmodule WsdjsWeb.OpinionView do
 
   def options(kind, _conn, _song, opinions, nil) do
     qty = Enum.count(opinions, fn x -> x.kind == kind end)
-    default_options = [class: "song-opinion song-#{kind} tippy"]
+    default_options = [class: "song-opinion song-#{kind} tippy local-tippy"]
 
     default_options ++ tooltip_options(kind, opinions, qty)
   end
@@ -32,7 +32,7 @@ defmodule WsdjsWeb.OpinionView do
     default_options = [
       "data-url": opinion_url(conn, kind, song, my_opinion),
       class: html_class(kind, my_opinion),
-      "data-method": data_method(kind, my_opinion)
+      "data-local-method": data_method(kind, my_opinion)
     ]
 
     default_options ++ tooltip_options(kind, opinions, qty)
@@ -71,7 +71,7 @@ defmodule WsdjsWeb.OpinionView do
     do: api_song_opinion_path(conn, :create, song, kind: kind)
 
   defp html_class(kind, %Wsdjs.Reactions.Opinion{kind: my_kind}) when kind == my_kind,
-    do: "song-opinion song-#{kind} active tippy hvr-buzz-out"
+    do: "song-opinion song-#{kind} active tippy hvr-buzz-out  local-tippy"
 
-  defp html_class(kind, _), do: "song-opinion song-#{kind} tippy hvr-buzz-out"
+  defp html_class(kind, _), do: "song-opinion song-#{kind} tippy hvr-buzz-out  local-tippy"
 end

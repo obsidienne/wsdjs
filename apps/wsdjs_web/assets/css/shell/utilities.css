@@ -89,3 +89,8 @@ display utilities
 .align-items-end {
   align-items: flex-end;
 }
+
+.bg-hover:hover {
+  filter: brightness(80%);
+  background-color: rgba(29, 33, 41, .04);
+}

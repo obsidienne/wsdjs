@@ -33,6 +33,7 @@ defmodule WsdjsWeb.Router do
     pipe_through([:browser, :browser_auth])
 
     resources("/songs", SongController, only: [:index, :create, :new, :delete, :edit, :update])
+
     resources("/suggestions", SuggestionController, only: [:create, :new])
     resources("/song_opinions", SongOpinionController, only: [:delete])
 
@@ -64,11 +65,14 @@ defmodule WsdjsWeb.Router do
     get("/radio", RadioController, :show)
     resources("/users", UserController, only: [:show])
     resources("/home", HomeController, only: [:index])
-    resources("/songs", SongController, only: [:show])
     resources("/tops", TopController, only: [:index, :show])
     resources("/sessions", SessionController, only: [:new, :create])
     resources("/registrations", RegistrationController, only: [:new, :create])
     get("/signin/:token", SessionController, :show, as: :signin)
+
+    resources("/songs", SongController, only: [:show]) do
+      resources("/opinions", OpinionController, only: [:index])
+    end
   end
 
   scope "/api", as: :api, alias: :WsdjsApi do
