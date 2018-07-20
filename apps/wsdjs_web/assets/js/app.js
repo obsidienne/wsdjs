@@ -25,6 +25,7 @@ import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
 import Opinions from './components/opinions';
+import Tooltip from './components/tooltip';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
@@ -47,12 +48,17 @@ function handleDOMContentLoaded() {
   } else if (window.piwikTracker != null) {
     return piwikTracker.trackPageview();
   }
+
+  Opinions.mount();
+  Tooltip.mount();
 }
 
 function handleUnloadContentLoaded() {
   if (window.currentView && window.currentView.unmount) {
     window.currentView.unmount();
   }
+  Opinions.unmount();
+  Tooltip.unmount();
 }
 
 var radio = new Radio();

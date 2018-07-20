@@ -11,30 +11,20 @@ class Opinions {
 
       }
     }, false);
-
-    this.mount();
   }
 
   mount() {
-    console.log("mountint tooltip...");
-    this.opinionsTip = this.opinionTooltipMount();
-    this.tip = this.tooltipMount();
+    console.log("mountint opinions tooltip...");
+    if (document.getElementById("opinion-selector-tpl")) {
+      this.tip = this.opinionTooltipMount();
+    }
   }
 
   unmount() {
-    console.log("unmountint tooltip...");
-    this.tip.destroyAll();
-    this.opinionsTip.destroyAll();
-  }
-
-  tooltipMount() {
-    return new Tippy("main", {
-      arrow: true,
-      arrowType: 'round',
-      performance: true,
-      target: ".tippy",
-      dynamicTitle: true
-    });
+    console.log("unmountint opinions tooltip...");
+    if (this.tip) {
+      this.tip.destroyAll();
+    }
   }
 
   opinionTooltipMount() {
@@ -65,8 +55,8 @@ class Opinions {
   _fetch_opinions(instance) {
     const content = instance.popper.querySelector('.tippy-content');
 
-    if (this.opinionsTip.loading || content.innerHTML !== "loading...") return;
-    this.opinionsTip.loading = true;
+    if (this.tip.loading || content.innerHTML !== "loading...") return;
+    this.tip.loading = true;
 
     let songId = instance.reference.closest("li").dataset.id;
 
@@ -89,7 +79,7 @@ class Opinions {
       .catch(e => {
         content.innerHTML = 'Loading failed';
       }).finally(e => {
-        this.opinionsTip.loading = false;
+        this.tip.loading = false;
       })
   }
 
