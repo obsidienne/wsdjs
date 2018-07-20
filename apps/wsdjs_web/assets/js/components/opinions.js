@@ -1,3 +1,5 @@
+import Tippy from 'tippy.js/dist/tippy.all';
+
 class Opinions {
   constructor() {
 
@@ -9,6 +11,86 @@ class Opinions {
 
       }
     }, false);
+
+    this.mount();
+  }
+
+  mount() {
+    console.log("mountint tooltip...");
+    this.opinionsTip = this.opinionTooltipMount();
+    this.tip = this.tooltipMount();
+  }
+
+  unmount() {
+    console.log("unmountint tooltip...");
+    this.tip.destroyAll();
+    this.opinionsTip.destroyAll();
+  }
+
+  tooltipMount() {
+    return new Tippy("main", {
+      arrow: true,
+      arrowType: 'round',
+      performance: true,
+      target: ".tippy",
+      dynamicTitle: true
+    });
+  }
+
+  opinionTooltipMount() {
+    let tip = new Tippy("main", {
+      animation: 'shift-away',
+      arrow: false,
+      html: '#opinion-selector-tpl',
+      performance: true,
+      interactive: true,
+      theme: "wsdjs",
+      placement: "top-start",
+      interactiveBorder: 2,
+      target: ".opinion-tippy",
+      appendTo: document.getElementsByTagName("main")[0],
+      onHidden: (instance) => {
+        const content = instance.popper.querySelector('.tippy-content');
+        content.innerHTML = "loading...";
+      },
+      onShow: (instance) => {
+        this._fetch_opinions(instance);
+      }
+    });
+
+    tip.loading = false;
+    return tip;
+  }
+
+  _fetch_opinions(instance) {
+    const content = instance.popper.querySelector('.tippy-content');
+
+    if (this.opinionsTip.loading || content.innerHTML !== "loading...") return;
+    this.opinionsTip.loading = true;
+
+    let songId = instance.reference.closest("li").dataset.id;
+
+    fetch(`/songs/${songId}/opinions`, {
+        credentials: 'include',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.text();
+        } else {
+          console.log('Loading failed');
+        }
+      })
+      .then((data) => {
+        content.innerHTML = data;
+      })
+      .catch(e => {
+        content.innerHTML = 'Loading failed';
+      }).finally(e => {
+        this.opinionsTip.loading = false;
+      })
   }
 
   _toggle_opinion(elem) {
