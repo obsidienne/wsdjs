@@ -8,7 +8,6 @@ class Opinions {
         e.preventDefault();
         e.stopPropagation();
         this._toggle_opinion(e.target);
-
       }
     }, false);
   }
