@@ -54,7 +54,7 @@ defmodule WsdjsWeb.SongController do
         |> Timex.beginning_of_month()
       end
 
-    songs = Musics.list_songs(current_user, :month, month)
+    songs = Musics.list_songs(current_user, month, params["q"])
 
     conn =
       if Map.get(conn.assigns, :is_ajax) == true do
