@@ -89,29 +89,6 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Paginate the songs scoped by the current_user.
-  """
-  def paginate_songs(current_user, paginate_params \\ %{}) do
-    current_user
-    |> Song.scoped()
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by(desc: :inserted_at)
-    |> Repo.paginate(paginate_params)
-  end
-
-  @doc """
-  Paginate the songs suggested by a user scoped by current user.
-  """
-  def paginate_songs_user(current_user, user_id, paginate_params \\ %{}) do
-    current_user
-    |> Song.scoped()
-    |> where(user_id: ^user_id)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by(desc: :inserted_at)
-    |> Repo.paginate(paginate_params)
-  end
-
-  @doc """
   Creates a song.
 
   ## Examples
