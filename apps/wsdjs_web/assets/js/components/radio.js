@@ -8,14 +8,14 @@ export default class Radio {
     this.channel = socket.channel("radio:streamed", {})
     this.channel.join()
       .receive("ok", resp => {
-        console.log("RadioWCS successfully joined", resp)
+        console.log("Radio stream successfully joined", resp)
       })
       .receive("error", resp => {
-        console.log("Unable to join RadioWCS", resp)
+        console.log("Unable to join the radio stream", resp)
       })
 
     this.channel.on("new_streamed_song", payload => {
-      console.log("RadioWCS stream a new song");
+      console.log("New song streamed");
       this.refresh_radio(payload)
     });
 
