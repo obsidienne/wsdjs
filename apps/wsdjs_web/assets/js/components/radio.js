@@ -3,7 +3,6 @@ import socket from "../socket"
 export default class Radio {
   constructor() {
     var self = this;
-    this.radio = new Audio();
 
     // Now that you are connected, you can join channels with a topic:
     this.channel = socket.channel("radio:streamed", {})
@@ -51,7 +50,8 @@ export default class Radio {
   }
 
   play_youtube(video_id) {
-    if (this.radio.paused == false) {
+    let radio = document.getElementById("audio_player");
+    if (radio.paused == false) {
       this.toggle_radio();
     }
 
@@ -69,16 +69,18 @@ export default class Radio {
   }
 
   toggle_radio(el) {
-    if (this.radio.paused == true) {
-      this.radio.src = "http://www.radioking.com/play/radio-wcs";
-      this.radio.load();
-      this.radio.play();
+    let radio = document.getElementById("audio_player");
+
+    if (radio.paused == true) {
+      radio.src = "http://www.radioking.com/play/radio-wcs";
+      radio.load();
+      radio.play();
 
       this.channel.push("list_song") // remove this ?
     } else {
-      this.radio.pause();
-      this.radio.src = "about:blank";
-      this.radio.load(); // stop the stream not only the player
+      radio.pause();
+      radio.src = "about:blank";
+      radio.load(); // stop the stream not only the player
     }
     document.querySelector("body").classList.toggle("radio-playing");
   }

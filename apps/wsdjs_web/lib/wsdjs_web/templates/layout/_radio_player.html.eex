@@ -13,4 +13,6 @@
       <div class="player__play__vinyl"></div>
     </div>
   </div>
+
+  <audio id="audio_player" preload="metadata" src="about:blank"></audio>
 </div>
