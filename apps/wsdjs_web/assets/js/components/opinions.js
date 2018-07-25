@@ -13,14 +13,14 @@ class Opinions {
   }
 
   mount() {
-    console.log("mountint opinions tooltip...");
+    console.log("mounting opinions tooltip...");
     if (document.getElementById("opinion-selector-tpl")) {
       this.tip = this.opinionTooltipMount();
     }
   }
 
   unmount() {
-    console.log("unmountint opinions tooltip...");
+    console.log("unmounting opinions tooltip...");
     if (this.tip) {
       this.tip.destroyAll();
     }
@@ -97,7 +97,7 @@ class Opinions {
         if (response.ok) {
           return response.json();
         } else {
-          console.log('Mauvaise réponse du réseau');
+          console.log('loading failed');
         }
       })
       .then((data) => {
@@ -105,8 +105,11 @@ class Opinions {
         this._refresh_layout(container, data);
       })
       .catch(function (error) {
-        console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
-      });
+        console.log('Loading failed, reason: ' + error.message);
+      })
+      .finally(e => {
+        this.tip.hide();
+      })
   }
 
   _refresh_layout(container, data) {
