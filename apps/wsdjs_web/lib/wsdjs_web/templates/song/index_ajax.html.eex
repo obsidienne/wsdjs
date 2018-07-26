@@ -10,7 +10,13 @@
     </h2>
   </div>
   <ul class="hot-songs container">
-    <%= render_many @songs, WsdjsWeb.SharedView, "_hot_song.html", conn: @conn, as: :song, current_user: @current_user %>
+    <%= for song <- @songs do %>
+      <%= if blur_track(song, @current_user) == true do %>
+        <%= render "_song_blurred.html", song: song %>
+      <% else %>
+        <%= render "_song.html", conn: @conn, song: song, current_user: @current_user %>
+      <% end %>
+    <% end %>
   </ul>
   <% end %>
 

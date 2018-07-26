@@ -1,5 +1,6 @@
 import MainView from '../main';
 import lazyload from '../../components/lazyload';
+import opinionPicker from '../../components/opinionPicker';
 
 export default class View extends MainView {
   constructor() {
@@ -23,10 +24,12 @@ export default class View extends MainView {
 
   mount() {
     super.mount();
+    opinionPicker.mount();
   }
 
   unmount() {
     super.umount();
+    opinionPicker.unmount();
   }
 
 

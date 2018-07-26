@@ -1,4 +1,5 @@
 import Tippy from 'tippy.js/dist/tippy.all';
+import Mustache from 'micromustache';
 
 class Opinions {
   constructor() {
@@ -14,9 +15,6 @@ class Opinions {
 
   mount() {
     console.log("mounting opinions tooltip...");
-    if (document.getElementById("opinion-selector-tpl")) {
-      this.tip = this.opinionTooltipMount();
-    }
   }
 
   unmount() {
@@ -24,62 +22,6 @@ class Opinions {
     if (this.tip) {
       this.tip.destroyAll();
     }
-  }
-
-  opinionTooltipMount() {
-    let tip = new Tippy("main", {
-      animation: 'shift-away',
-      arrow: false,
-      html: '#opinion-selector-tpl',
-      performance: true,
-      interactive: true,
-      theme: "wsdjs",
-      placement: "top-start",
-      interactiveBorder: 2,
-      target: ".opinion-tippy",
-      appendTo: document.getElementsByTagName("main")[0],
-      onHidden: (instance) => {
-        const content = instance.popper.querySelector('.tippy-content');
-        content.innerHTML = "loading...";
-      },
-      onShow: (instance) => {
-        this._fetch_opinions(instance);
-      }
-    });
-
-    tip.loading = false;
-    return tip;
-  }
-
-  _fetch_opinions(instance) {
-    const content = instance.popper.querySelector('.tippy-content');
-
-    if (this.tip.loading || content.innerHTML !== "loading...") return;
-    this.tip.loading = true;
-
-    let songId = instance.reference.closest("li").dataset.id;
-
-    fetch(`/songs/${songId}/opinions`, {
-        credentials: 'include',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        } else {
-          console.log('Loading failed');
-        }
-      })
-      .then((data) => {
-        content.innerHTML = data;
-      })
-      .catch(e => {
-        content.innerHTML = 'Loading failed';
-      }).finally(e => {
-        this.tip.loading = false;
-      })
   }
 
   _toggle_opinion(elem) {
@@ -108,7 +50,7 @@ class Opinions {
         console.log('Loading failed, reason: ' + error.message);
       })
       .finally(e => {
-        this.tip.hide();
+
       })
   }
 
