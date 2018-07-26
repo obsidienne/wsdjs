@@ -2,6 +2,10 @@
   padding
 *************/
 
+.p-all-1 {
+  padding: .5rem;
+}
+
 .p-all-2 {
   padding: 1rem;
 }

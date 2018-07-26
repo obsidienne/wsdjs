@@ -20,6 +20,11 @@ class OpinionPicker {
     }
   }
 
+  remount() {
+    this.unmount();
+    this.mount();
+  }
+
   opinionPickerMount() {
     let tip = new Tippy(".opinion-picker", {
       animation: 'shift-away',

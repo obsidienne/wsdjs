@@ -59,6 +59,7 @@ export default class View extends MainView {
         var sentinel = document.querySelector("#song-list .sentinel");
         this.observer.observe(sentinel);
         lazyload.refresh();
+        opinionPicker.remount();
       })
       .catch(function (error) {
         console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
