@@ -10,12 +10,30 @@
   pointer-events: auto;
 }
 
+.pointer-event-none {
+  pointer-events: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.bg-transparent {
+  background: transparent;
+}
+
+.border-circle {
+  border-radius: 50%;
+}
+
 .w-33 {
   width: 33%;
 }
+
 .w-50 {
   width: 50%;
 }
+
 .w-100 {
   width: 100%;
 }

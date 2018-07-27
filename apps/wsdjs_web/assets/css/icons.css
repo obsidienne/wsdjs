@@ -3,20 +3,9 @@
   background: transparent;
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
-  border: 0;
-  padding-top: 0;
-  padding-bottom: 0;
   outline: 0;
   display: flex;
   line-height: 1.5;
-}
-
-button.song-opinion {
-  cursor: pointer;
-}
-
-button.song-opinion * {
-  pointer-events: none;
 }
 
 .song-down.active svg {
