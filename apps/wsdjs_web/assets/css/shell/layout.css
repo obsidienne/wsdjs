@@ -47,9 +47,9 @@
 
 .hot-songs {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-row-gap: 0rem;
-  grid-column-gap: 0;
+  grid-template-columns: calc(50% - .25rem) calc(50% - .25rem);
+  grid-row-gap: .5rem;
+  grid-column-gap: .5rem;
 }
 
 /********************/
