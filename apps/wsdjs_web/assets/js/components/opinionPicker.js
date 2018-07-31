@@ -41,7 +41,6 @@ class OpinionPicker {
       theme: "wsdjs",
       placement: "top-start",
       interactiveBorder: 2,
-      touchHold: true,
       onShow: (instance) => {
         this.ref = instance.reference;
         const songId = instance.reference.closest(".hot-songs__song").dataset.id;
