@@ -25,16 +25,23 @@ defmodule WsdjsApi.V1.OpinionView do
     likes = Enum.filter(opinions, fn x -> x.kind == "like" end)
     downs = Enum.filter(opinions, fn x -> x.kind == "down" end)
 
-    user_opinion =
+    user_opinion_kind =
       if current_opinion do
         current_opinion.kind
       else
         nil
       end
+    user_opinion_id =
+        if current_opinion do
+          current_opinion.id
+        else
+          nil
+        end
 
     %{
       data: %{
-        user_opinion: user_opinion,
+        user_opinion: user_opinion_kind,
+        user_opinion_id: user_opinion_id,
         song_id: song.id,
         up: render_opinion(ups, "up", song, current_opinion),
         like: render_opinion(likes, "like", song, current_opinion),

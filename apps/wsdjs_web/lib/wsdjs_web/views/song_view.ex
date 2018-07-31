@@ -3,16 +3,18 @@ defmodule WsdjsWeb.SongView do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Happenings
+  alias Wsdjs.Reactions.Opinion
 
+  def current_opinion(opinions, nil), do: nil
   def current_opinion(opinions, current_user) do
-    opinion = Enum.find(opinions, fn x -> x.user_id == current_user.id end)
-
-    if is_nil(opinion) do
-      nil
-    else
-      opinion.kind
-    end
+   Enum.find(opinions, fn x -> x.user_id == current_user.id end)
   end
+
+  def opinion_id(nil), do: nil
+  def opinion_id(%Opinion{id: id}), do: id
+
+  def opinion_kind(nil), do: nil
+  def opinion_kind(%Opinion{kind: kind}), do: kind
 
   def list_users do
     users = Accounts.list_users()
