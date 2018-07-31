@@ -33,13 +33,13 @@
 </section>
 
 <template id="opinion-picker-tpl">
-  <button class="b-all-0 p-all-0 song-down hvr-buzz-out bg-transparent song-picker-opinion" data-local-method="{{down_method}}" data-url="{{down_url}}" data-opinion="down">
+  <button class="b-all-0 p-all-0 song-down hvr-buzz-out bg-transparent song-picker-opinion" data-opinion="down">
     <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"></path></svg>
   </button>
-  <button class="b-all-0 p-all-0 song-like hvr-buzz-out bg-transparent song-picker-opinion" data-local-method="{{like_method}}" data-url="{{like_url}}"  data-opinion="like">
+  <button class="b-all-0 p-all-0 song-like hvr-buzz-out bg-transparent song-picker-opinion" data-opinion="like">
     <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"></path></svg>
   </button>
-  <button class="b-all-0 p-all-0 song-up hvr-buzz-out bg-transparent song-picker-opinion" data-local-method="{{top_method}}" data-url="{{top_url}}"  data-opinion="up">
+  <button class="b-all-0 p-all-0 song-up hvr-buzz-out bg-transparent song-picker-opinion" data-opinion="up">
     <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"></path></svg>
   </button>
 </template>

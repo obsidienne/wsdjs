@@ -44,17 +44,13 @@ class OpinionPicker {
       onShow: (instance) => {
         this.ref = instance.reference;
         const songId = instance.reference.closest(".hot-songs__song").dataset.id;
-        const content = instance.popper.querySelector('.tippy-content');
+        const opinion = instance.reference.dataset.opinion;
 
-        let tpl = Mustache.render(content.innerHTML, {
-          down_method: "POST",
-          down_url: "/api/v1/songs/${songId}/opinions?kind=down",
-          like_method: "",
-          like_url: "/api/v1/songs/${songId}/opinions?kind=like",
-          top_method: "",
-          top_url: "/api/v1/songs/${songId}/opinions?kind=top"
+        instance.popper.querySelectorAll('.tippy-content button').forEach( e => {
+          e.classList.remove("active");
         });
-        content.innerHTML = tpl;
+
+        instance.popper.querySelector(`.tippy-content .song-${opinion}`).classList.add("active")
       },
       onHide: () => {
         this.ref = undefined;
