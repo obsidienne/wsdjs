@@ -52,3 +52,25 @@
   display: flex;
   padding: 4px;
 }
+
+
+
+.tippy-tooltip.playlist-picker-theme {
+  background-color: var(--bg-color);
+  font-weight: bold;
+  color: #333;
+  padding: 0;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
+  box-shadow: var(--shadow-active);
+}
+
+.tippy-tooltip.playlist-picker-theme .tippy-backdrop {
+  background-color: white;
+}
+
+.tippy-tooltip.playlist-picker-theme .tippy-content {
+  /* Your styling here. Example: */
+  padding: .5rem 0 .5rem 0;
+  text-align: left;
+}
+
