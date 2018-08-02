@@ -6,6 +6,13 @@
   border: 0;
 }
 
+.b-bottom-1 {
+  border-bottom-color: hsl(0, 0%, 45%);
+  border-bottom-color: var(--inactive-color);
+  border-bottom-width: 1px;
+  border-bottom-style: dotted;
+}
+
 /*************
   padding
 *************/
@@ -86,14 +93,22 @@
   margin-left: auto;
 }
 
+.m-x-1,
 .m-left-1 {
   margin-left: .5rem;
 }
 
+.m-x-1,
 .m-right-1 {
   margin-right: .5rem;
 }
 
+.m-x-2,
 .m-right-2 {
   margin-right: 1rem;
+}
+
+.m-x-2,
+.m-left-2 {
+  margin-left: 1rem;
 }
