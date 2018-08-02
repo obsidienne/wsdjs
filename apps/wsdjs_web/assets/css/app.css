@@ -3,7 +3,6 @@
 @import "./shell/nav.css";
 @import "./shell/layout.css";
 @import "./shell/typo.css";
-@import "./shell/utilities.css";
 @import "./componants/btn.css";
 @import "./componants/form.css";
 @import "./componants/label.css";
@@ -11,6 +10,7 @@
 @import "./componants/player.css";
 @import "./componants/table.css";
 @import "./componants/tag.css";
+@import "./utilities/utilities.css";
 @import "./utilities/display.css";
 @import "./utilities/mp.css";
 @import "./animations.css";
