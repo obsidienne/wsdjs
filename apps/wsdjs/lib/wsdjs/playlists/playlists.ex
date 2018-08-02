@@ -53,7 +53,8 @@ defmodule Wsdjs.Playlists do
   def get_playlist_by_user(user, current_user) do
     current_user
     |> Playlist.scoped()
-    |> Repo.get_by(user_id: user.id, type: "likes and tops")
+    |> where([p], p.user_id == ^user.id and p.type == "playlist")
+    |> Repo.all()
   end
 
   @doc """
