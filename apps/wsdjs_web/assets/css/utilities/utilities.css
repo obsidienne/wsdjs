@@ -82,14 +82,6 @@ flex
 display utilities
 ***/
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.align-items-end {
-  align-items: flex-end;
-}
-
 .bg-hover:hover {
   filter: brightness(80%);
   background-color: rgba(29, 33, 41, .04);
