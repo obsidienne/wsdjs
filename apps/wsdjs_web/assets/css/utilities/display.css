@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .pointer-event-auto {
   pointer-events: auto;
 }
