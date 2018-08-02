@@ -130,6 +130,10 @@ a.btn.disabled {
   background-color: hsl(208, 56%, 46%);
 }
 
+/******************
+  .btn-link
+******************/
+
 .btn-link {
   color: hsl(208, 56%, 46%);
   border-radius: 0;
@@ -174,6 +178,24 @@ a.btn.disabled {
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
+
+/******************
+  .btn-no-style
+******************/
+
+.btn-no-style {
+  border-radius: 0;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+/******************
+  .btn-danger
+******************/
 
 .btn-danger {
   color: hsl(0, 0%, 100%);
