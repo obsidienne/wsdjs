@@ -8,6 +8,7 @@ defmodule WsdjsWeb.SongController do
   alias Wsdjs.Attachments.Video
   alias Wsdjs.Musics
   alias Wsdjs.Musics.Song
+  alias Wsdjs.Playlists
   alias Wsdjs.Reactions
   alias Wsdjs.Reactions.Comment
 
@@ -43,6 +44,7 @@ defmodule WsdjsWeb.SongController do
 
   def index(conn, params, current_user) do
     interval = Musics.songs_interval(current_user)
+    playlists = Playlists.get_playlist_by_user(current_user, current_user)
 
     month =
       if is_nil(params["month"]) do
@@ -68,6 +70,7 @@ defmodule WsdjsWeb.SongController do
       "index#{Map.get(conn.assigns, :ajax_suffix)}.html",
       songs: songs,
       month: month,
+      playlists: playlists,
       last: Timex.before?(month, interval[:min])
     )
   end

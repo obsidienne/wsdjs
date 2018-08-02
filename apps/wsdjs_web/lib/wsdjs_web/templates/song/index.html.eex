@@ -44,6 +44,20 @@
   </button>
 </template>
 
+<template id="playlist-picker-tpl">
+  <span class="d-block m-bottom-1 text-center">Playlists</span>
+  <ul>
+    <li>
+      <button class="bg-hover btn-link p-y-1 p-x-2">Create a playlist</button>
+    </li>
+    <%= for playlist <- @playlists do %>
+    <li>
+      <button class="bg-hover btn-link d-block p-y-1 p-x-2"><%= playlist.name %></button>
+    </li>
+    <% end %>
+  </ul>
+</template>
+
 <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
   <%= link to: suggestion_path(@conn, :new), class: "btn btn-primary fab" do %>
   <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
