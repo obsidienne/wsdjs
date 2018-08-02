@@ -1,6 +1,7 @@
 import MainView from '../main';
 import lazyload from '../../components/lazyload';
 import opinionPicker from '../../components/opinionPicker';
+import playlistPicker from '../../components/playlistPicker';
 
 export default class View extends MainView {
   constructor() {
@@ -60,6 +61,7 @@ export default class View extends MainView {
         this.observer.observe(sentinel);
         lazyload.refresh();
         opinionPicker.remount();
+        playlistPicker.remount();
       })
       .catch(function (error) {
         console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);

@@ -26,6 +26,7 @@ import Search from './components/search';
 import Notifier from './components/notifier';
 import Opinions from './components/opinions';
 import OpinionPicker from './components/opinionPicker';
+import PlaylistPicker from './components/playlistPicker';
 import Tooltip from './components/tooltip';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1

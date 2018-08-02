@@ -45,7 +45,7 @@
         <% end %>
       </span>
 
-      <span class="tippy w-50 text-right bg-hover">
+      <span class="w-50 text-right bg-hover playlist-picker">
         <svg height='24' viewBox='0 0 24 24' width='24'>
           <path fill="#455A64" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
         </svg>
