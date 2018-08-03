@@ -1,7 +1,7 @@
 use Mix.Config
 
 config :wsdjs_jobs, Wsdjs.Jobs.Mailer,
-  adapter: Bamboo.SendgridAdapter,
+  adapter: Bamboo.SendGridAdapter,
   api_key: "${SENDGRID_API_KEY}"
 
 config :wsdjs_jobs, Wsdjs.Jobs.Scheduler,
