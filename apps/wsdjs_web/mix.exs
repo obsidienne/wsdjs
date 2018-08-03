@@ -43,7 +43,7 @@ defmodule WsdjsWeb.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.13"},
-      {:bamboo, "~> 0.8"},
+      {:bamboo, "~> 1.0"},
       {:timex, "~> 3.1"},
       {:corsica, "~> 1.0"},
       {:earmark, "~> 1.2"},

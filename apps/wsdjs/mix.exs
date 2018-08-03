@@ -38,7 +38,7 @@ defmodule Wsdjs.Mixfile do
       {:scrivener_ecto, "~> 1.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:csv, "~> 1.4.4"},
-      {:bamboo, "~> 0.8"},
+      {:bamboo, "~> 1.0"},
       {:httpoison, "~> 0.12"},
       {:earmark, "~> 1.2"},
       {:hashids, "~> 2.0"},

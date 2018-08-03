@@ -40,7 +40,7 @@ defmodule Wsdjs.Jobs.Mixfile do
       {:httpoison, "~> 0.12"},
       {:quantum, ">= 2.2.7"},
       {:timex, "~> 3.1"},
-      {:bamboo, "~> 0.8"},
+      {:bamboo, "~> 1.0"},
       {:wsdjs, in_umbrella: true}
     ]
   end
