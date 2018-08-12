@@ -5,8 +5,7 @@ defmodule Wsdjs.Umbrella.Mixfile do
     [
       apps_path: "apps",
       start_permanent: Mix.env() == :prod,
-      deps: deps(),
-      aliases: aliases()
+      deps: deps()
     ]
   end
 
@@ -29,9 +28,5 @@ defmodule Wsdjs.Umbrella.Mixfile do
       {:mix_test_watch, "~> 0.8", only: :dev},
       {:dialyxir, "~> 1.0.0-rc.0", only: [:dev], runtime: false}
     ]
-  end
-
-  defp aliases do
-    ["ecto.seed": ["run apps/wsdjs/priv/repo/seeds.exs"]]
   end
 end
