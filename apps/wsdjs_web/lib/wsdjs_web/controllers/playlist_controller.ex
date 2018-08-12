@@ -84,7 +84,6 @@ defmodule WsdjsWeb.PlaylistController do
   Only authorized user can create a playlist for somebody else
   """
   def create(conn, %{"playlist" => playlist_params, "user_id" => user_id}, current_user) do
-    user = Accounts.get_user!(user_id)
     playlist_params = Map.put(playlist_params, "user_id", user_id)
 
     with :ok <- Playlists.Policy.can?(current_user, :new),

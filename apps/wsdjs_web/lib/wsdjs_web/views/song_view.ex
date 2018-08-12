@@ -5,9 +5,10 @@ defmodule WsdjsWeb.SongView do
   alias Wsdjs.Happenings
   alias Wsdjs.Reactions.Opinion
 
-  def current_opinion(opinions, nil), do: nil
-  def current_opinion(opinions, current_user) do
-   Enum.find(opinions, fn x -> x.user_id == current_user.id end)
+  def current_opinion(_opinions, nil), do: nil
+
+  def current_opinion(opinions, %Accounts.User{} = current_user) do
+    Enum.find(opinions, fn x -> x.user_id == current_user.id end)
   end
 
   def opinion_id(nil), do: nil

@@ -7,13 +7,6 @@ defmodule WsdjsWeb.OpinionView do
     Enum.count(opinions, fn x -> x.kind == kind end)
   end
 
-  def options(kind, _conn, _song, opinions, nil) do
-    qty = Enum.count(opinions, fn x -> x.kind == kind end)
-    default_options = [class: "song-opinion b-all-0 p-all-0 song-#{kind} tippy"]
-
-    default_options ++ tooltip_options(kind, opinions, qty)
-  end
-
   def current_opinion(opinions, current_user) do
     opinion = Enum.find(opinions, fn x -> x.user_id == current_user.id end)
 
@@ -22,6 +15,13 @@ defmodule WsdjsWeb.OpinionView do
     else
       opinion.kind
     end
+  end
+
+  def options(kind, _conn, _song, opinions, nil) do
+    qty = Enum.count(opinions, fn x -> x.kind == kind end)
+    default_options = [class: "song-opinion b-all-0 p-all-0 song-#{kind} tippy"]
+
+    default_options ++ tooltip_options(kind, opinions, qty)
   end
 
   def options(kind, conn, song, opinions, current_user) do
@@ -71,10 +71,8 @@ defmodule WsdjsWeb.OpinionView do
     do: api_song_opinion_path(conn, :create, song, kind: kind)
 
   defp html_class(kind, %Wsdjs.Reactions.Opinion{kind: my_kind}) when kind == my_kind,
-    do:
-      "song-opinion b-all-0 p-all-0 song-#{kind} active tippy hvr-buzz-out"
+    do: "song-opinion b-all-0 p-all-0 song-#{kind} active tippy hvr-buzz-out"
 
   defp html_class(kind, _),
-    do:
-      "song-opinion b-all-0 p-all-0 song-#{kind} tippy hvr-buzz-out"
+    do: "song-opinion b-all-0 p-all-0 song-#{kind} tippy hvr-buzz-out"
 end
