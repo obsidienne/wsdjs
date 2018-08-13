@@ -8,6 +8,8 @@ defmodule WsdjsWeb.UserParamsController do
 
   action_fallback(WsdjsWeb.FallbackController)
 
+  @spec show(Plug.Conn.t(), map(), Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def show(conn, %{"id" => user_id}, current_user) do
     with %User{} = user <- Accounts.get_user!(user_id),
          :ok <- Accounts.Policy.can?(current_user, :edit_user, user) do

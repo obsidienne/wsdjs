@@ -77,6 +77,9 @@ defmodule WsdjsWeb.PlaylistController do
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: current_user, changeset: changeset)
+
+      {:error, :unauthorized} ->
+        {:error, :unauthorized}
     end
   end
 

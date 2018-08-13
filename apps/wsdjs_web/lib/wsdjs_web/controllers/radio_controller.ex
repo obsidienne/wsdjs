@@ -4,6 +4,7 @@ defmodule WsdjsWeb.RadioController do
   use WsdjsWeb, :controller
   use WsdjsWeb.Controller
 
+  @spec show(Plug.Conn.t(), any(), any()) :: Plug.Conn.t()
   def show(conn, _params, _current_user) do
     songs = WsdjsApi.Service.RadioSrv.streamed(conn)
 

@@ -6,6 +6,7 @@ defmodule WsdjsWeb.HomeController do
   alias Wsdjs.Charts
   alias Wsdjs.Musics
 
+  @spec index(Plug.Conn.t(), any(), nil | Wsdjs.Accounts.User.t()) :: Plug.Conn.t()
   def index(conn, _params, current_user) do
     songs = Musics.instant_hits()
     top = Charts.last_top(current_user)

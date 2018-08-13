@@ -3,6 +3,7 @@ defmodule WsdjsWeb.VoteController do
   use WsdjsWeb, :controller
   use WsdjsWeb.Controller
 
+  @spec create(Plug.Conn.t(), map(), Wsdjs.Accounts.User.t()) :: Plug.Conn.t()
   def create(conn, %{"votes" => _votes_params, "top_id" => top_id} = params, current_user) do
     case Wsdjs.Charts.vote(current_user, params) do
       {:ok, _top} ->

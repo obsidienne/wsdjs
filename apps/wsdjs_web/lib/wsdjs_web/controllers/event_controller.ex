@@ -9,6 +9,8 @@ defmodule WsdjsWeb.EventController do
 
   action_fallback(WsdjsWeb.FallbackController)
 
+  @spec show(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def show(conn, %{"id" => id}, current_user) do
     with event <- Happenings.get_event!(id),
          :ok <- Happenings.Policy.can?(current_user, :show, event) do
@@ -16,6 +18,8 @@ defmodule WsdjsWeb.EventController do
     end
   end
 
+  @spec index(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def index(conn, _params, current_user) do
     with :ok <- Happenings.Policy.can?(current_user, :index) do
       events = Happenings.list_events()
@@ -23,6 +27,8 @@ defmodule WsdjsWeb.EventController do
     end
   end
 
+  @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def new(conn, _params, current_user) do
     with :ok <- Happenings.Policy.can?(current_user, :create_event) do
       changeset = Happenings.change_event(%Event{})
@@ -30,6 +36,8 @@ defmodule WsdjsWeb.EventController do
     end
   end
 
+  @spec create(Plug.Conn.t(), %{event: map()}, Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def create(conn, %{"event" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
 
@@ -41,6 +49,8 @@ defmodule WsdjsWeb.EventController do
     end
   end
 
+  @spec edit(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def edit(conn, %{"id" => id}, current_user) do
     with %Event{} = event <- Happenings.get_event!(id),
          :ok <- Happenings.Policy.can?(current_user, :edit_event, event) do
@@ -49,6 +59,8 @@ defmodule WsdjsWeb.EventController do
     end
   end
 
+  @spec update(Plug.Conn.t(), %{id: String.t(), event: map()}, Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def update(conn, %{"id" => id, "event" => event_params}, current_user) do
     event = Happenings.get_event!(id)
 
@@ -60,9 +72,14 @@ defmodule WsdjsWeb.EventController do
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", event: event, user: current_user, changeset: changeset)
+
+      {:error, :unauthorized} ->
+        {:error, :unauthorized}
     end
   end
 
+  @spec delete(Plug.Conn.t(), map(), Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
     with event <- Happenings.get_event!(id),
          :ok <- Happenings.Policy.can?(current_user, :delete_event, event),

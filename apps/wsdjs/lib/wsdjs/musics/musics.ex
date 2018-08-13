@@ -33,7 +33,7 @@ defmodule Wsdjs.Musics do
   @doc """
   Returns the songs added the 24 last hours.
   """
-  def list_songs(%User{} = user, %Date{} = month, q) do
+  def list_songs(%User{} = user, %Date{} = month, _q) do
     begin_period = Timex.to_datetime(Timex.beginning_of_month(month))
     end_period = Timex.to_datetime(Timex.end_of_month(month))
 
