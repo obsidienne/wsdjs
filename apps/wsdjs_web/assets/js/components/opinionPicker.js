@@ -46,11 +46,14 @@ class OpinionPicker {
         const songId = instance.reference.closest(".hot-songs__song").dataset.id;
         const opinion = instance.reference.dataset.opinion;
 
-        instance.popper.querySelectorAll('.tippy-content button').forEach( e => {
+        instance.popper.querySelectorAll('.tippy-content button').forEach(e => {
           e.classList.remove("active");
         });
 
-        instance.popper.querySelector(`.tippy-content .song-${opinion}`).classList.add("active")
+        let b = instance.popper.querySelector(`.tippy-content .song-${opinion}`);
+        if (b) {
+          b.classList.add("active");
+        }
       },
       onHide: () => {
         this.ref = undefined;
@@ -109,26 +112,26 @@ class OpinionPicker {
 
     // It should work so launch the request
     fetch(url, {
-      method: method,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "Accept": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        console.log('loading failed');
-      }
-    })    
-    .then((data) => {
-      trigger.dataset.opinionId = data.data.user_opinion_id;
-    })
-    .catch(function (error) {
-      console.log('Loading failed, reason: ' + error.message);
-    })
+        method: method,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log('loading failed');
+        }
+      })
+      .then((data) => {
+        trigger.dataset.opinionId = data.data.user_opinion_id;
+      })
+      .catch(function (error) {
+        console.log('Loading failed, reason: ' + error.message);
+      })
   }
 }
 

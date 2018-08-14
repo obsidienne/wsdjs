@@ -31,6 +31,9 @@ defmodule WsdjsWeb.LayoutView do
     |> Enum.at(0)
   end
 
+  def current_user_id(nil), do: nil
+  def current_user_id(%Wsdjs.Accounts.User{} = user), do: user.id
+
   @suffix "World Swing DJs"
 
   def main_title(conn) do

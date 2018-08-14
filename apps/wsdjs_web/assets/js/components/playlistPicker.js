@@ -37,23 +37,66 @@ class PlaylistPicker {
       html: '#playlist-picker-tpl',
       performance: true,
       interactive: true,
-      trigger: 'click',
       theme: "playlist-picker",
       placement: "top-end",
       onShow: (instance) => {
         this.ref = instance.reference;
-        this.poper = instance.popper;
+        this.popper = instance.popper;
+        this.savedContent = this.popper.querySelector('.tippy-content').innerHTML
+        this._fetchPlaylists(instance);
       },
       onHide: () => {
+        this.popper.querySelector('.tippy-content').innerHTML = this.savedContent;
         this.ref = undefined;
-        this.poper = undefined;
+        this.popper = undefined;
       }
     });
 
+    tip.loading = false;
     return tip;
   }
 
+  _fetchPlaylists(instance) {
+    const content = instance.popper.querySelector('.tippy-content');
+
+    if (this.tip.loading || content.innerHTML !== this.savedContent) return;
+    this.tip.loading = true;
+
+    let userId = document.querySelector("main").dataset.userId;
+    let token = document.querySelector("[name=channel_token]").getAttribute("content");
+
+    fetch(`/api/v1/users/${userId}/playlists`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/json"
+        }
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log('Loading failed');
+        }
+      })
+      .then((data) => {
+        let l = "";
+        data.data.forEach(e => {
+          l += `<li>
+                  <button class="bg-hover btn-no-style d-block p-y-1 p-x-2 w-100 text-left song-picker-playlist" data-id="${e.id}">${e.name}</button>
+                </li>`
+        });
+
+        content.querySelector("ul").innerHTML = l;
+      })
+      .catch(e => {
+        content.innerHTML = 'Loading failed';
+      }).finally(e => {
+        this.tip.loading = false;
+      })
+  }
+
   _addToPlaylist(el) {
+    console.log(el);
     // change the button value
     this._updatePickerRef(el);
 
@@ -65,8 +108,7 @@ class PlaylistPicker {
   _updatePickerRef(el) {
     const id = this.ref.closest(".hot-songs__song").dataset.id;
     const token = document.querySelector("[name=channel_token]").getAttribute("content");
-
-}
+  }
 }
 
 export default new PlaylistPicker();

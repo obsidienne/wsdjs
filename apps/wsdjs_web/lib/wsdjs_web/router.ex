@@ -85,6 +85,10 @@ defmodule WsdjsWeb.Router do
         resources("/videos", VideoController, only: [:create])
       end
 
+      resources("/users", UserController, only: []) do
+        resources("/playlists", PlaylistController, only: [:index])
+      end
+
       resources("/opinions", OpinionController, only: [:delete])
       resources("/comments", CommentController, only: [:delete])
       resources("/accounts", AccountController, only: [:update])
