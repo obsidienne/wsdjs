@@ -10,6 +10,10 @@
   text-align: left;
 }
 
+.text-nowrap {
+  white-space: nowrap;
+}
+
 .pointer-event-auto {
   pointer-events: auto;
 }
@@ -45,7 +49,6 @@
 /******************
  display utilities
 ******************/
-
 .d-none {
   display: none;
 }
@@ -66,15 +69,19 @@
   .d-sm-none {
     display: none;
   }
+
   .d-sm-inline {
     display: inline;
   }
+
   .d-sm-inline-block {
     display: inline-block;
   }
+
   .d-sm-block {
     display: block;
   }
+
   .d-sm-flex {
     display: flex;
   }
@@ -84,18 +91,23 @@
   .d-md-none {
     display: none;
   }
+
   .d-md-inline {
     display: inline;
   }
+
   .d-md-inline-block {
     display: inline-block;
   }
+
   .d-md-block {
     display: block;
   }
+
   .d-md-flex {
     display: flex;
   }
+
   .d-md-table-row {
     display: table-row;
   }
@@ -105,15 +117,19 @@
   .d-lg-none {
     display: none;
   }
+
   .d-lg-inline {
     display: inline;
   }
+
   .d-lg-inline-block {
     display: inline-block;
   }
+
   .d-lg-block {
     display: block;
   }
+
   .d-lg-flex {
     display: flex;
   }
@@ -123,18 +139,23 @@
   .d-xl-none {
     display: none;
   }
+
   .d-xl-inline {
     display: inline;
   }
+
   .d-xl-inline-block {
     display: inline-block;
   }
+
   .d-xl-block {
     display: block;
   }
+
   .d-xl-flex {
     display: flex;
   }
+
   .d-xl-inline-flex {
     display: inline-flex;
   }
@@ -143,7 +164,6 @@
 /******************
  flex utilities
 ******************/
-
 .flex-column {
   flex-direction: column;
 }

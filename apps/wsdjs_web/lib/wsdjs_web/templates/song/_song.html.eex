@@ -3,6 +3,9 @@
     <div class="p-y-1 p-x-2 d-flex align-items-center">
       <img class="m-right-1 border-circle" src="<%= avatar_url(@song.user.avatar, 32) %>" srcset="<%= avatar_srcset(@song.user.avatar, 32) %>" sizes="32px">
       <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link clickable action-link text-ellipsis" %>
+      <span class="secondary-text text-nowrap">
+        <%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b", :strftime)%>
+      </span>
     </div>
     <a href="<%= url_for_provider(@song) %>" class="song-card__header" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
       <div class="img-embed">

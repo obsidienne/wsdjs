@@ -1,7 +1,6 @@
 /****************************
   song-page
 ****************************/
-
 .song-page {
   justify-content: flex-start;
   flex-direction: column;
@@ -89,15 +88,19 @@
   .song-page {
     flex-direction: row;
   }
+
   .song-page__details {
     padding-left: 16px;
   }
+
   .song-page__sections {
     flex-direction: row;
   }
+
   .song-page__sections__content {
     margin-right: 16px;
   }
+
   .song-page__sections__content {
     flex: 1 0 60ch;
   }
@@ -124,7 +127,6 @@
 /****************************
   minicard
 ****************************/
-
 .song-minicard__heading {
   padding: 0;
   width: 96px;
@@ -149,7 +151,6 @@
 /****************************
   card
 ****************************/
-
 .song-card {
   display: flex;
   flex-direction: column;
@@ -195,7 +196,6 @@
 /****************************
   square card
 ****************************/
-
 .song-top__song {
   position: relative;
   flex: 0 1 143px;

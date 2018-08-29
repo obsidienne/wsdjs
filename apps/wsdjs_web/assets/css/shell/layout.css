@@ -53,26 +53,29 @@
 }
 
 /********************/
-
 @media (min-width: 768px) {
   .container {
     max-width: 720px;
   }
+
   .home-container {
     grid-template-columns: 50% 50%;
   }
+
   .hot-songs {
     grid-template-columns: repeat(auto-fit, 216px);
     grid-row-gap: 1rem;
     grid-column-gap: .5rem;
     /* need a fix */
   }
+
   .user-profile-edit,
   .song-edit,
   .song-new {
     flex-direction: row;
     max-width: 768px;
   }
+
   #avatar_div,
   #art_div {
     margin-bottom: 0;
@@ -95,7 +98,6 @@
 }
 
 /********************/
-
 .top-songs-container,
 .top-stat__votes {
   display: grid;
