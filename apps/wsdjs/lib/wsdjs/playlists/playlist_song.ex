@@ -19,6 +19,7 @@ defmodule Wsdjs.Playlists.PlaylistSong do
     |> cast(attrs, [:playlist_id, :song_id, :position])
     |> validate_required([:playlist_id, :song_id, :position])
     |> validate_number(:position, greater_than_or_equal_to: 0)
+    |> unique_constraint(:song_id, name: :playlist_songs_playlist_id_song_id_index)
     |> assoc_constraint(:song)
   end
 

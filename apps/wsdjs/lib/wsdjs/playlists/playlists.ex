@@ -53,7 +53,10 @@ defmodule Wsdjs.Playlists do
   def get_playlist_by_user(user, current_user) do
     current_user
     |> Playlist.scoped()
-    |> where([p], p.user_id == ^user.id and p.type == "playlist")
+    |> where(
+      [p],
+      p.user_id == ^user.id and (p.type == "playlist" or p.type == "top 5")
+    )
     |> Repo.all()
   end
 
