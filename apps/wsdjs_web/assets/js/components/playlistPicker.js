@@ -6,7 +6,10 @@ class PlaylistPicker {
       if (e.target && e.target.matches(".song-picker-playlist")) {
         e.preventDefault();
         e.stopPropagation();
-        this._addToPlaylist(e.target);
+        let playlistId = e.target.dataset.id;
+        let songId = this.ref.closest(".hot-songs__song").dataset.id;
+        console.log(songId)
+        this._addToPlaylist(playlistId, songId);
       }
     }, false);
   }
@@ -95,19 +98,30 @@ class PlaylistPicker {
       })
   }
 
-  _addToPlaylist(el) {
-    console.log(el);
-    // change the button value
-    this._updatePickerRef(el);
-
-    // hide the picker
-    this.ref._tippy.hide();
-  }
-
-
-  _updatePickerRef(el) {
-    const id = this.ref.closest(".hot-songs__song").dataset.id;
+  _addToPlaylist(playlistId, songId) {
+    console.log(playlistId);
+    console.log(songId);
     const token = document.querySelector("[name=channel_token]").getAttribute("content");
+
+    fetch(`/api/v1/playlists/${playlistId}/songs`, {
+        body: JSON.stringify({
+          song_id: songId
+        }),
+        cache: 'no-cache',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+          'content-type': 'application/json'
+        },
+        method: 'POST',
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log('Loading failed');
+        }
+      })
   }
 }
 

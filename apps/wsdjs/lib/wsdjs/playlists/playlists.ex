@@ -192,6 +192,24 @@ defmodule Wsdjs.Playlists do
     query |> Repo.all() |> Repo.preload(:art)
   end
 
+  @doc """
+  Add a song to a playlist.
+
+  ## Examples
+
+      iex> create_playlist_song(%{field: value})
+      {:ok, %PlaylistSong{}}
+
+      iex> create_playlist_song(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_playlist_song(attrs \\ %{}) do
+    %PlaylistSong{}
+    |> PlaylistSong.changeset(attrs)
+    |> Repo.insert()
+  end
+
   def update_playlist_songs(%Playlist{} = playlist, song_positions) do
     playlist = playlist |> Repo.preload(:playlist_songs)
 
