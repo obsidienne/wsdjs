@@ -73,6 +73,9 @@ class PlaylistPicker {
           console.log('Cannot add the song to the playlist.');
         }
       })
+      .finally(e => {
+        this.ref._tippy.hide();
+      })
   }
 }
 
