@@ -32,7 +32,9 @@ defmodule WsdjsWeb.Router do
   scope "/", WsdjsWeb do
     pipe_through([:browser, :browser_auth])
 
-    resources("/songs", SongController, only: [:index, :create, :new, :delete, :edit, :update])
+    resources("/songs", SongController, only: [:index, :create, :new, :delete, :edit, :update]) do
+      resources("/videos", SongVideosController, only: [:index])
+    end
 
     resources("/suggestions", SuggestionController, only: [:create, :new])
     resources("/song_opinions", SongOpinionController, only: [:delete])
