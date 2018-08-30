@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env, options) => ({
   optimization: {
@@ -42,6 +43,7 @@ module.exports = (env, options) => ({
     new MiniCssExtractPlugin({
       filename: '../css/app.css'
     }),
+    new BundleAnalyzerPlugin(),
     new CopyWebpackPlugin([{
       from: 'static/',
       to: '../'
