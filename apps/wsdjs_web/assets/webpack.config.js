@@ -43,7 +43,11 @@ module.exports = (env, options) => ({
     new MiniCssExtractPlugin({
       filename: '../css/app.css'
     }),
-    new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+      defaultSizes: 'gzip',
+      analyzerMode: 'static'
+    }),
     new CopyWebpackPlugin([{
       from: 'static/',
       to: '../'
