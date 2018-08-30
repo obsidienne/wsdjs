@@ -10,6 +10,8 @@ import css from '../css/app.css';
 // Import dependencies
 //
 import "phoenix_html";
+import "./polyfills/IntersectionObserver";
+import "./polyfills/IntersectionObserverEntry";
 
 // Import local files
 //
