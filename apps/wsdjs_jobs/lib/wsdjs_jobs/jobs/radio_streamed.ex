@@ -1,7 +1,7 @@
 defmodule Wsdjs.Jobs.RadioStreamed do
   import Ecto.Query, warn: false
 
-  @radioking_api_uri_list 'https://www.radioking.com/widgets/api/v1/radio/84322/track/ckoi?limit=10'
+  @radioking_api_uri_list "https://www.radioking.com/widgets/api/v1/radio/84322/track/ckoi?limit=10"
   @expected_fields ~w(title artist cover started_at end_at duration)
   def call(_args \\ []) do
     case HTTPoison.get(@radioking_api_uri_list) do
