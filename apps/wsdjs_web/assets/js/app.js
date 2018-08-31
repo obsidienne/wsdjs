@@ -35,6 +35,7 @@ import Tooltip from './components/tooltip';
 function handleDOMContentLoaded() {
   // Get the current view name
   const viewName = document.getElementsByTagName('main')[0].dataset.jsViewName;
+  console.log(`Loading ${viewName}`);
 
   // Load view class and mount it
   const ViewClass = loadView(viewName);

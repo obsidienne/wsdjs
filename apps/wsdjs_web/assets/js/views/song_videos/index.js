@@ -1,4 +1,3 @@
-import autolinkjs from 'autolink-js';
 import MainView from '../main';
 import Mustache from 'micromustache';
 
@@ -6,14 +5,14 @@ export default class View extends MainView {
   constructor() {
     super();
     document.addEventListener("click", e => {
-      if (e.target && e.target.matches(".comment__delete")) {
-        this._delete_comment(e.target);
+      if (e.target && e.target.matches(".video__delete")) {
+        this._delete_video(e.target);
         e.stopPropagation();
       }
     }, false);
 
     document.addEventListener("submit", e => {
-      if (e.target && e.target.matches("#song-comment-form")) {
+      if (e.target && e.target.matches("#song-video-form")) {
         this._submit(e.target);
         e.preventDefault();
         e.stopPropagation();
@@ -23,12 +22,6 @@ export default class View extends MainView {
 
   mount() {
     super.mount();
-
-    // autolinks in comments
-    var els = document.querySelectorAll(".comment__content");
-    for (var i = 0; i < els.length; i++) {
-      els[i].innerHTML = els[i].innerHTML.autoLink();
-    }
   }
 
   _headers() {
@@ -40,8 +33,8 @@ export default class View extends MainView {
     });
   }
 
-  _delete_comment(el) {
-    if (!window.confirm("Are you sure to delete this comment ?")) {
+  _delete_video(el) {
+    if (!window.confirm("Are you sure to delete this video ?")) {
       return;
     }
 
@@ -50,8 +43,8 @@ export default class View extends MainView {
       headers: this._headers()
     }).then((response) => {
       if (response.ok) {
-        let comment = el.closest("li");
-        comment.parentNode.removeChild(comment);
+        let video = el.closest("article");
+        video.parentNode.removeChild(video);
       } else {
         console.log('Mauvaise réponse du réseau');
       }
@@ -75,12 +68,10 @@ export default class View extends MainView {
         console.log('Mauvaise réponse du réseau');
       }
     }).then((payload) => {
-      var container = document.getElementById("comments-container");
-      var template = document.getElementById("comment-tpl").innerHTML;
-
-      var tpl = Mustache.render(template, payload.data);
-
-      container.insertAdjacentHTML('beforeend', tpl.autoLink());
+      let container = document.getElementById("overview-video");
+      let template = document.getElementById("video-tpl").innerHTML;
+      let tpl = Mustache.render(template, payload.data);
+      container.insertAdjacentHTML('beforeend', tpl);
     }).catch(function (error) {
       console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
       form.reset();

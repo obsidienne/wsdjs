@@ -3,6 +3,7 @@ import SongShowView from './song/show';
 import SongIndexView from './song/index';
 import SongEditView from './song/edit';
 import SongNewView from './song/new';
+import Song_videosIndexView from './song_videos/index';
 import TopIndexView from './top/index';
 import TopShowView from './top/show';
 import UserEditView from './user/edit';
@@ -18,6 +19,7 @@ const views = {
   SongIndexView,
   SongNewView,
   SongEditView,
+  Song_videosIndexView,
   TopIndexView,
   TopShowView,
   UserEditView,
