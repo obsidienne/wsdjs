@@ -2,12 +2,16 @@ defmodule WsdjsWeb.EventController do
   @moduledoc false
 
   use WsdjsWeb, :controller
-  use WsdjsWeb.Controller
 
   alias Wsdjs.Happenings
   alias Wsdjs.Happenings.Event
 
   action_fallback(WsdjsWeb.FallbackController)
+
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns.current_user]
+    apply(__MODULE__, action_name(conn), args)
+  end
 
   @spec show(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()

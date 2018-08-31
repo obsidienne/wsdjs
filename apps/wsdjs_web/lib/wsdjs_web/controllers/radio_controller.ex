@@ -2,10 +2,9 @@ defmodule WsdjsWeb.RadioController do
   @moduledoc false
 
   use WsdjsWeb, :controller
-  use WsdjsWeb.Controller
 
-  @spec show(Plug.Conn.t(), any(), any()) :: Plug.Conn.t()
-  def show(conn, _params, _current_user) do
+  @spec show(Plug.Conn.t(), any()) :: Plug.Conn.t()
+  def show(conn, _params) do
     songs = WsdjsApi.Service.RadioSrv.streamed(conn)
 
     case Poison.decode(songs) do

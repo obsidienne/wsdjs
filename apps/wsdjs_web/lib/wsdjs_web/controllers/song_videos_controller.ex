@@ -2,13 +2,17 @@ defmodule WsdjsWeb.SongVideosController do
   @moduledoc false
 
   use WsdjsWeb, :controller
-  use WsdjsWeb.Controller
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Video
   alias Wsdjs.Musics
 
   action_fallback(WsdjsWeb.FallbackController)
+
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns.current_user]
+    apply(__MODULE__, action_name(conn), args)
+  end
 
   @spec index(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()

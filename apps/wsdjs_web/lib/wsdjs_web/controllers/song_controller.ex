@@ -2,7 +2,6 @@ defmodule WsdjsWeb.SongController do
   @moduledoc false
 
   use WsdjsWeb, :controller
-  use WsdjsWeb.Controller
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Video
@@ -17,6 +16,11 @@ defmodule WsdjsWeb.SongController do
   # def show(%Plug.Conn{assigns: %{layout_type: "mobile"}} = conn, %{"id" => id} = params, current_user) do
   #   show(conn, params, current_user)
   # end
+
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns.current_user]
+    apply(__MODULE__, action_name(conn), args)
+  end
 
   @spec show(Plug.Conn.t(), %{id: String.t()}, nil | Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()

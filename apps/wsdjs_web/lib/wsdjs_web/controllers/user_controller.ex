@@ -1,12 +1,16 @@
 defmodule WsdjsWeb.UserController do
   @moduledoc false
   use WsdjsWeb, :controller
-  use WsdjsWeb.Controller
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
 
   action_fallback(WsdjsWeb.FallbackController)
+
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns.current_user]
+    apply(__MODULE__, action_name(conn), args)
+  end
 
   def index(conn, _params, current_user) do
     with :ok <- Accounts.Policy.can?(current_user, :index) do
