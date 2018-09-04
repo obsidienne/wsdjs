@@ -26,10 +26,6 @@
   cursor: pointer;
 }
 
-.bg-transparent {
-  background: transparent;
-}
-
 .border-circle {
   border-radius: 50%;
 }
