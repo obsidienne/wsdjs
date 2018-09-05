@@ -33,6 +33,7 @@ defmodule WsdjsWeb.SongController do
       comment_changeset = Reactions.change_comment(%Comment{})
       ranks = Wsdjs.Charts.get_ranks(song)
       comments = Reactions.list_comments(song)
+      playlists = Playlists.get_playlist_by_user(current_user, current_user)
 
       render(
         conn,
@@ -40,6 +41,7 @@ defmodule WsdjsWeb.SongController do
         song: song,
         opinions: opinions,
         comments: comments,
+        playlists: playlists,
         comment_changeset: comment_changeset,
         videos: videos,
         ranks: ranks,

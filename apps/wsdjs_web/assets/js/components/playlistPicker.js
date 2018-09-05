@@ -7,7 +7,7 @@ class PlaylistPicker {
         e.preventDefault();
         e.stopPropagation();
         let playlistId = e.target.dataset.id;
-        let songId = this.ref.closest(".hot-songs__song").dataset.id;
+        let songId = this._getSongId(this.ref);
         this._addToPlaylist(playlistId, songId);
       }
     }, false);
@@ -51,7 +51,17 @@ class PlaylistPicker {
     return tip;
   }
 
+  _getSongId(el) {
+    let songCard = el.closest(".hot-songs__song");
+    if (songCard) {
+      return songCard.dataset.id;
+    } else {
+      return el.dataset.songId;
+    }
+  }
+
   _addToPlaylist(playlistId, songId) {
+    console.log(`Add to playlist ${playlistId}, the song ${songId}`);
     const token = document.querySelector("[name=channel_token]").getAttribute("content");
 
     fetch(`/api/v1/playlists/${playlistId}/songs`, {

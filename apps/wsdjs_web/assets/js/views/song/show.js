@@ -1,6 +1,7 @@
 import autolinkjs from 'autolink-js';
 import MainView from '../main';
 import Mustache from 'micromustache';
+import playlistPicker from '../../components/playlistPicker';
 
 export default class View extends MainView {
   constructor() {
@@ -29,6 +30,12 @@ export default class View extends MainView {
     for (var i = 0; i < els.length; i++) {
       els[i].innerHTML = els[i].innerHTML.autoLink();
     }
+    playlistPicker.mount();
+  }
+
+  unmount() {
+    super.umount();
+    playlistPicker.unmount();
   }
 
   _headers() {

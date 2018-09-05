@@ -42,6 +42,11 @@
 
       <div class="song-page__tags song-opinions m-bottom-2">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
+        <span class="w-50 text-right bg-hover playlist-picker"  data-song-id="<%= @song.id %>">
+          <svg height='24' viewBox='0 0 24 24' width='24'>
+            <path fill="#455A64" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
+          </svg>
+        </span>
       </div>
       
       <%= if @song.url do %>
@@ -49,6 +54,16 @@
       <% end %>
     </div>
   </div>
+  <template id="playlist-picker-tpl">
+    <span class="d-block p-bottom-1 m-x-2 text-center b-bottom-1">Playlists</span>
+    <ul>
+      <%= for playlist <- @playlists do %>
+      <li>
+        <button class="bg-hover btn-no-style d-block p-y-1 p-x-2 w-100 text-left song-picker-playlist" data-id="<%= playlist.id %>"><%= playlist.name %></button>
+      </li>
+      <% end %>
+    </ul>
+  </template>
 </section>
 
 <div class="container song-page__sections d-flex">
