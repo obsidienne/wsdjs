@@ -22,7 +22,7 @@ main>header h2 {
   right: 0;
   height: 48px;
   background: hsl(0, 0%, 93%);
-  z-index: 9999;
+  z-index: 9990;
 }
 
 .mobile-nav>ul {
@@ -112,6 +112,7 @@ main>header h2 {
   .logo-small {
     display: none;
   }
+
   .logo-wide {
     display: inline;
   }

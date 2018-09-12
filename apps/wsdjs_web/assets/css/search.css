@@ -3,31 +3,12 @@
 /* search                                  */
 
 /*******************************************/
-
-.actions {
-  display: none;
-}
-
-.actions {
-  align-items: center;
-  height: 48px;
-  justify-content: flex-end;
-  margin-bottom: .5rem;
-  margin-top: 1rem;
-}
-
 .actions>* {
   margin-left: .5rem;
 }
 
 .actions>*:first-child {
   margin-left: 0;
-}
-
-@media (min-width: 768px) {
-  .actions {
-    display: flex;
-  }
 }
 
 .search-container {

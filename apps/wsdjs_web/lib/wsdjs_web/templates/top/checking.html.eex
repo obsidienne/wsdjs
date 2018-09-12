@@ -17,7 +17,7 @@
 <% end %>
 
 <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
-<div class="container actions">
+<div class="container d-flex align-items-center justify-content-end m-bottom-1 m-top-2 h-6">
   <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
 </div>
 <% end %>

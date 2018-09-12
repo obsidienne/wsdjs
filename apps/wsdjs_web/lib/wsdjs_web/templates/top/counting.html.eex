@@ -18,7 +18,7 @@
 <% end %>
 
 
-<div class="container actions">
+<div class="container d-flex align-items-center justify-content-end m-bottom-1 m-top-2 h-6">
   <%= if @current_user && @current_user.admin do %>
     <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link" %>
   <% end %>

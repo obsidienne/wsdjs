@@ -4,7 +4,7 @@
   </div>
 </header>
 
-<div class="container actions">
+<div class="container d-flex align-items-center justify-content-end m-bottom-1 m-top-2 h-6">
   <%= link "New event", to: event_path(@conn, :new), class: "btn btn-primary" %>
 </div>
 

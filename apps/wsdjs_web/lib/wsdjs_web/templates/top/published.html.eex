@@ -19,12 +19,12 @@
 <% end %>
 
 
-<div class="container actions">
-  <%= if @current_user && @current_user.admin do %>
-    <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link push-right", target: "_blank" %>
-    <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link push-right" %>
-  <% end %>
+<%= if @current_user && @current_user.admin do %>
+<div class="container d-flex align-items-center justify-content-end m-bottom-1 m-top-2 h-6">
+  <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link", target: "_blank" %>
+  <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link m-left-1" %>
 </div>
+<% end %>
 
 <section class="container top-published">
   <%= for rank <- @ranks do %>

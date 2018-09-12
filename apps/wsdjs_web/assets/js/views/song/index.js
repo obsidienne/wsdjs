@@ -33,12 +33,27 @@ export default class View extends MainView {
     opinionPicker.unmount();
   }
 
-
   fetchSongs(sentinel) {
+    let q = document.getElementById('search-input').value;
+    let month = sentinel.dataset.nextMonth;
+
+    let facets = {
+      month: month
+    }
+    if (q !== "") {
+      facets["q"] = q;
+    }
+
+    let queryString = Object.keys(facets).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(facets[k])}`).join('&');
+
+    this.doFetchSongs(sentinel, queryString);
+  }
+
+  doFetchSongs(sentinel, queryString) {
     var container = document.getElementById("song-list");
     var page_number = parseInt(sentinel.dataset.jsPageNumber);
 
-    fetch(`/songs?month=${sentinel.dataset.nextMonth}`, {
+    fetch(`/songs?${queryString}`, {
         credentials: 'include',
         headers: {
           'X-Requested-With': 'XMLHttpRequest'

@@ -30,6 +30,7 @@ import Opinions from './components/opinions';
 import OpinionPicker from './components/opinionPicker';
 import PlaylistPicker from './components/playlistPicker';
 import Tooltip from './components/tooltip';
+import Drawer from './components/drawer';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {

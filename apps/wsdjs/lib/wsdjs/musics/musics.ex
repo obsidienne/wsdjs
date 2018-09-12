@@ -9,6 +9,16 @@ defmodule Wsdjs.Musics do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
 
+  def bpm_ranges do
+    %{
+      very_slow: 1..69,
+      slow: 70..89,
+      medium: 90..109,
+      fast: 110..129,
+      very_fast: 130..9999
+    }
+  end
+
   def instant_hits do
     Song
     |> where(instant_hit: true)

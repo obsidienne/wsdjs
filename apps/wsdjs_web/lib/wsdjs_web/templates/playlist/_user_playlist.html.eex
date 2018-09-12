@@ -35,7 +35,7 @@
   </p>
   <table class="table">
     <tbody>
-    <tr class="d-none d-md-table-row">
+    <tr>
       <td>
         <img src="<%= art_url(nil, 64) %>" srcset="<%= art_srcset(nil, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
