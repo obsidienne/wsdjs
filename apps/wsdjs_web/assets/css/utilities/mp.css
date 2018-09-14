@@ -25,6 +25,16 @@
   padding: 1rem;
 }
 
+.p-x-1,
+.p-left-1 {
+  padding-left: .5rem;
+}
+
+.p-x-1,
+.p-right-1 {
+  padding-right: .5rem;
+}
+
 .p-x-2,
 .p-left-2 {
   padding-left: 1rem;

@@ -4,6 +4,9 @@ class Drawer {
             if (e.target && this.isOutside(e) && this.drawerIsOpen()) {
                 this.hide();
             }
+            if (e.target && e.target.closest("[data-js-drawer]")) {
+                this.show();
+            }
         }, false);
     }
 
@@ -13,6 +16,13 @@ class Drawer {
 
     drawerIsOpen() {
         return document.querySelector(".facets-container.open");
+    }
+
+    show() {
+        let d = document.querySelector(".facets-container");
+        if (d) {
+            d.classList.add("open");
+        }
     }
 
     hide() {

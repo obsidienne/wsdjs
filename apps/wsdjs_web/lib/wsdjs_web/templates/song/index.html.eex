@@ -6,7 +6,17 @@
 
 <div class="container actions d-flex align-items-center justify-content-end m-bottom-1 m-top-2 h-6">
   <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
-    <input id="search-input" placeholder="Search song ..." type="text" class="search-input" autocomplete="off" spellcheck="false">
+    <div class="d-flex w-100 align-items-center">
+      <span class="cursor-pointer d-flex  align-items-center"  data-js-drawer>
+        <svg fill='#455A64' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/>
+          <path d='M0 0h24v24H0z' fill='none'/>
+        </svg>
+        <span class="facets-opener p-x-1">Search song ...</span>
+      </span>
+    </div>
+
+
   <% end %>
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
     <a class="btn btn-primary tippy d-none d-md-inline-block" title="Suggest a song for the current month TOP 10" href="<%= suggestion_path(@conn, :new) %>">Suggest a song</a>
@@ -17,86 +27,8 @@
 </div>
 
 <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
-<div class="facets-container">
-  <form class="facets">
-    <input id="search-input" placeholder="Search song ..." type="text" class="search-input" autocomplete="off" spellcheck="false">
-    <h1>Genres</h1>
-    <div class="d-flex flex-column">
-      <div>
-        <input type="checkbox" id="id-acoustic" name="genres" value="acoustic" />
-        <label for="id-acoustic">acoustic</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-blues" name="genres" value="blues" />
-        <label for="id-blues">blues</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-country" name="genres" value="country" />
-        <label for="id-country">country</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-dance" name="genres" value="dance" />
-        <label for="id-dance">dance</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-hiphop" name="genres" value="hiphop" />
-        <label for="id-hiphop">hiphop</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-jazz" name="genres" value="jazz" />
-        <label for="id-jazz">jazz</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-pop" name="genres" value="pop" />
-        <label for="id-pop">pop</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-rnb" name="genres" value="rnb" />
-        <label for="id-rnb">acoustic</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-rock" name="genres" value="rock" />
-        <label for="id-rock">rock</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-soul" name="genres" value="soul" />
-        <label for="id-soul">soul</label>
-      </div>
-    </div>
-    <div>
-      <h1>bpm</h1>
-      <div>
-        <input type="checkbox" id="id-not-set" name="bpm" value="not-set" />
-        <label for="id-not-set">no BPM set</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-very-slow" name="bpm" value="very-slow" />
-        <label for="id-very-slow">very slow</label>
-      </div> 
-      <div>
-        <input type="checkbox" id="id-slow" name="bpm" value="slow" />
-        <label for="id-slow">slow</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-usual" name="bpm" value="medium" />
-        <label for="id-usual">medium</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-fast" name="bpm" value="fast" />
-        <label for="id-quick">fast</label>
-      </div>
-      <div>
-        <input type="checkbox" id="id-very-fast" name="bpm" value="very-fast" />
-        <label for="id-very-fast">very fast</label>
-      </div>
-    </div>
-    <input type="checkbox" value="videos">With videos
-  </form>
-  <button class="close-button" id="close-button">Close Menu</button>
-</div>
+  <%= render "_facets.html" %>
 <% end %>
-
-
 
 <section id="song-list">
   <%= render "index_ajax.html", conn: @conn, current_user: @current_user, month: @month, songs: @songs, last: @last %>
