@@ -31,8 +31,8 @@
 <% end %>
 
 <section id="song-list">
-  <%= if @last == false do %>
-  <div class="sentinel text-centered m-all-2" data-next-month="<%= @month %>"><div class="donut"></div></div>
+  <%= unless is_nil(@next_month) do %>
+  <div class="sentinel text-centered m-all-2" data-next-month="<%= Timex.format!(@next_month, "%Y-%m-%d", :strftime) %>"><div class="donut"></div></div>
   <% end %>
 </section>
 

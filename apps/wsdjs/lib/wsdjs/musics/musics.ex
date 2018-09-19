@@ -28,16 +28,26 @@ defmodule Wsdjs.Musics do
   end
 
   def songs_interval(%User{} = user) do
-    songs =
-      user
-      |> Song.scoped()
-      |> select([s], %{max: max(s.inserted_at), min: min(s.inserted_at)})
-      |> Repo.one()
+    user
+    |> Song.scoped()
+    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
+    |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> limit(1)
+    |> Repo.one()
+  end
 
-    %{
-      min: Timex.to_date(Timex.beginning_of_month(songs[:min])),
-      max: Timex.to_date(Timex.beginning_of_month(songs[:max]))
-    }
+  def songs_interval(%User{} = user, %Date{} = month) do
+    month = Timex.to_naive_datetime(month)
+
+    user
+    |> Song.scoped()
+    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> where([s], s.inserted_at < ^month)
+    |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
+    |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> limit(1)
+    |> Repo.one()
   end
 
   @doc """

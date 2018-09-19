@@ -1,9 +1,8 @@
-<%= if @last == false do %>
-<section>
+<section data-count="<%= Enum.count(@songs) %>">
   <%= if Enum.count(@songs) > 0 do %>
   <div class="page-header-sticky">
     <h2 class="page-header container">
-      <time class="date-format" datetime="<%= @month %>">
+      <time class="date-format">
         <%= Timex.format!(@month, "%B %Y", :strftime) %>
       </time> 
       <span class="text-muted text-ligther h3"><%= Enum.count(@songs) %> songs</span>
@@ -20,8 +19,9 @@
   </ul>
   <% end %>
 
-  <div class="sentinel text-centered m-all-2" data-next-month="<%= Timex.shift(@month, months: -1) %>"><div class="donut"></div></div>
+  <%= unless is_nil(@next_month) do %>
+  <div class="sentinel text-centered m-all-2" data-next-month="<%= Timex.format!(@next_month, "%Y-%m-%d", :strftime) %>"><div class="donut"></div></div>
+  <% end %>
 </section>
-<% end %>
 
 

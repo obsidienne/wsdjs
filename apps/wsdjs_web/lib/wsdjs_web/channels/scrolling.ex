@@ -18,20 +18,15 @@ defmodule WsdjsWeb.ScrollingChannel do
   def handle_in("song", %{"month" => month}, socket) do
     current_user = socket.assigns[:current_user]
 
-    interval = Musics.songs_interval(current_user)
-    playlists = Playlists.get_playlist_by_user(current_user, current_user)
-
     month =
-      if is_nil(month) do
-        interval[:max]
-      else
-        month
-        |> Timex.parse!("%Y-%m-%d", :strftime)
-        |> Timex.to_date()
-        |> Timex.beginning_of_month()
-      end
+      month
+      |> Timex.parse!("%Y-%m-%d", :strftime)
+      |> Timex.to_date()
 
     songs = Musics.list_songs(current_user, month, "")
+
+    next_month = Musics.songs_interval(current_user, month)
+    IO.inspect(next_month)
 
     tpl =
       Phoenix.View.render_to_string(
@@ -41,8 +36,7 @@ defmodule WsdjsWeb.ScrollingChannel do
         songs: songs,
         current_user: current_user,
         month: month,
-        playlists: playlists,
-        last: Timex.before?(month, interval[:min])
+        next_month: next_month
       )
 
     broadcast!(socket, "song", %{tpl: tpl})
