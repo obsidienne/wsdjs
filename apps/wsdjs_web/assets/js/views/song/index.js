@@ -49,7 +49,7 @@ export default class View extends MainView {
   }
 
   fetchSongs(sentinel) {
-    let month = sentinel.dataset.nextMonth;
+    let month = sentinel.dataset.query;
 
     let facets = {
       month: month
