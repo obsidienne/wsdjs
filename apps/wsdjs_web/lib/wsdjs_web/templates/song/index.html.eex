@@ -31,7 +31,9 @@
 <% end %>
 
 <section id="song-list">
-  <%= render "index_ajax.html", conn: @conn, current_user: @current_user, month: @month, songs: @songs, last: @last %>
+  <%= if @last == false do %>
+  <div class="sentinel text-centered m-all-2" data-next-month="<%= @month %>"><div class="donut"></div></div>
+  <% end %>
 </section>
 
 <template id="opinion-picker-tpl">
