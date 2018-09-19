@@ -2,6 +2,7 @@ import MainView from '../main';
 import lazyload from '../../components/lazyload';
 import opinionPicker from '../../components/opinionPicker';
 import playlistPicker from '../../components/playlistPicker';
+import socket from "../../socket"
 
 export default class View extends MainView {
   constructor() {
@@ -21,6 +22,20 @@ export default class View extends MainView {
     this.observer.observe(sentinel);
 
     lazyload.refresh();
+
+    this.channel = socket.channel("scrolling:song", {})
+    this.channel.join()
+      .receive("ok", resp => {
+        console.log("Scrolling stream successfully joined", resp)
+      })
+      .receive("error", resp => {
+        console.log("Unable to join the scrolling stream", resp)
+      })
+
+    this.channel.on("song", payload => {
+      this.insertFetchedSongs(payload);
+    });
+
   }
 
   mount() {
@@ -34,52 +49,29 @@ export default class View extends MainView {
   }
 
   fetchSongs(sentinel) {
-    let q = document.getElementById('search-input').value;
     let month = sentinel.dataset.nextMonth;
 
     let facets = {
       month: month
     }
-    if (q !== "") {
-      facets["q"] = q;
-    }
 
-    let queryString = Object.keys(facets).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(facets[k])}`).join('&');
-
-    this.doFetchSongs(sentinel, queryString);
+    this.channel.push("song", facets)
   }
 
-  doFetchSongs(sentinel, queryString) {
+  // song width = vw/2 - .25rem or 216px
+  // song height = width + 146px
+  insertFetchedSongs(payload) {
+    // remove sentinel
+    var sentinel = document.querySelector("#song-list .sentinel");
+    sentinel.parentNode.removeChild(sentinel);
+
     var container = document.getElementById("song-list");
-    var page_number = parseInt(sentinel.dataset.jsPageNumber);
+    container.insertAdjacentHTML('beforeend', payload.tpl);
 
-    fetch(`/songs?${queryString}`, {
-        credentials: 'include',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        } else {
-          console.log('Mauvaise réponse du réseau');
-        }
-      })
-      .then((data) => {
-        var sentinel = document.querySelector("#song-list .sentinel");
-        sentinel.parentNode.removeChild(sentinel);
-
-        container.insertAdjacentHTML('beforeend', data);
-
-        var sentinel = document.querySelector("#song-list .sentinel");
-        this.observer.observe(sentinel);
-        lazyload.refresh();
-        opinionPicker.remount();
-        playlistPicker.remount();
-      })
-      .catch(function (error) {
-        console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
-      });
+    var sentinel = document.querySelector("#song-list .sentinel");
+    this.observer.observe(sentinel);
+    lazyload.refresh();
+    opinionPicker.remount();
+    playlistPicker.remount();
   }
 }
