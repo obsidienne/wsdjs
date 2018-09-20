@@ -5,7 +5,6 @@ defmodule WsdjsWeb.ScrollingChannel do
   use Phoenix.Channel
 
   alias Wsdjs.Musics
-  alias Wsdjs.Playlists
 
   def join("scrolling:song", _message, socket) do
     {:ok, socket}
@@ -15,18 +14,13 @@ defmodule WsdjsWeb.ScrollingChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
-  def handle_in("song", %{"month" => month, "q" => q}, socket) do
+  def handle_in("song", %{"month" => month} = params, socket) do
     current_user = socket.assigns[:current_user]
 
-    month =
-      month
-      |> Timex.parse!("%Y-%m-%d", :strftime)
-      |> Timex.to_date()
+    songs = Musics.list_songs(current_user, params)
 
-    songs = Musics.list_songs(current_user, month, "")
-
-    next_month = Musics.songs_interval(current_user, month)
-    IO.inspect(next_month)
+    month = Timex.parse!(month, "%Y-%m-%d", :strftime)
+    next_month = Musics.songs_interval(current_user, params)
 
     tpl =
       Phoenix.View.render_to_string(
@@ -44,11 +38,14 @@ defmodule WsdjsWeb.ScrollingChannel do
     {:noreply, socket}
   end
 
+  # this function is called when no month is given. Like during the first load
+  # When we define the first month for the current_user we call the handle_in
+  # function with the first song set and everything follows the same way
   def handle_in("song", params, socket) do
     current_user = socket.assigns[:current_user]
-    next_month = Musics.songs_interval(current_user)
+    first_month = Musics.songs_interval(current_user, params)
 
-    params = Map.put(params, "month", Timex.format!(next_month, "%Y-%m-%d", :strftime))
+    params = Map.put(params, "month", Timex.format!(first_month, "%Y-%m-%d", :strftime))
 
     handle_in("song", params, socket)
   end

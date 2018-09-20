@@ -116,14 +116,16 @@ export default class View extends MainView {
   // song height = width + 146px
   insertFetchedSongs(payload) {
     // remove sentinel
-    var sentinel = document.querySelector("#song-list .sentinel");
+    let sentinel = document.querySelector("#song-list .sentinel");
     sentinel.parentNode.removeChild(sentinel);
 
-    var container = document.getElementById("song-list");
+    const container = document.getElementById("song-list");
     container.insertAdjacentHTML('beforeend', payload.tpl);
 
-    var sentinel = document.querySelector("#song-list .sentinel");
-    this.observer.observe(sentinel);
+    sentinel = document.querySelector("#song-list .sentinel");
+    if (sentinel) {
+      this.observer.observe(sentinel);
+    }
     lazyload.refresh();
     opinionPicker.remount();
     playlistPicker.remount();

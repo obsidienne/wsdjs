@@ -27,45 +27,32 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
-  def songs_interval(%User{} = user) do
-    user
-    |> Song.scoped()
-    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
-    |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
-    |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
-    |> limit(1)
-    |> Repo.one()
-  end
-
-  def songs_interval(%User{} = user, %Date{} = month) do
-    month = Timex.to_naive_datetime(month)
+  def songs_interval(%User{} = user, %{"month" => month} = facets) do
+    month =
+      month
+      |> Timex.parse!("%Y-%m-%d", :strftime)
+      |> Timex.to_naive_datetime()
 
     user
     |> Song.scoped()
-    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> filter_by_fulltext(facets)
     |> where([s], s.inserted_at < ^month)
+    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
     |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
     |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
     |> limit(1)
     |> Repo.one()
   end
 
-  @doc """
-  Returns the songs added the 24 last hours.
-  """
-  def list_songs(%User{} = user, %Date{} = month, _q) do
-    begin_period = Timex.to_datetime(Timex.beginning_of_month(month))
-    end_period = Timex.to_datetime(Timex.end_of_month(month))
-
+  def songs_interval(%User{} = user, facets) when is_map(facets) do
     user
     |> Song.scoped()
-    |> where(
-      [s],
-      s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period and s.suggestion == true
-    )
-    |> order_by(desc: :inserted_at)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> Repo.all()
+    |> filter_by_fulltext(facets)
+    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
+    |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> limit(1)
+    |> Repo.one()
   end
 
   @doc """
@@ -76,6 +63,55 @@ defmodule Wsdjs.Musics do
 
     Repo.all(query)
   end
+
+  @doc """
+  Returns the songs filtered by facets.
+  """
+  def list_songs(%User{} = user, facets) do
+    user
+    |> Song.scoped()
+    |> filter_by_date(facets)
+    |> filter_by_fulltext(facets)
+    |> where([s], s.suggestion == true)
+    |> order_by(desc: :inserted_at)
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> Repo.all()
+  end
+
+  defp filter_by_date(query, %{"month" => month}) do
+    month =
+      month
+      |> Timex.parse!("%Y-%m-%d", :strftime)
+      |> Timex.to_date()
+
+    begin_period = Timex.to_datetime(Timex.beginning_of_month(month))
+    end_period = Timex.to_datetime(Timex.end_of_month(month))
+
+    query
+    |> where(
+      [s],
+      s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period
+    )
+  end
+
+  defp filter_by_fulltext(query, %{"q" => q}) do
+    q =
+      q
+      |> String.trim()
+      |> String.split(" ")
+      |> Enum.map(&"#{&1}:*")
+      |> Enum.join(" & ")
+
+    query
+    |> where(
+      fragment(
+        "(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))",
+        ^q
+      )
+    )
+  end
+
+  defp filter_by_fulltext(query, _), do: query
 
   def list_suggested_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
     query =
