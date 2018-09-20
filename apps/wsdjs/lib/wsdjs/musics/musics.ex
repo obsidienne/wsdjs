@@ -9,16 +9,6 @@ defmodule Wsdjs.Musics do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
 
-  def bpm_ranges do
-    %{
-      very_slow: 1..69,
-      slow: 70..89,
-      medium: 90..109,
-      fast: 110..129,
-      very_fast: 130..9999
-    }
-  end
-
   def instant_hits do
     Song
     |> where(instant_hit: true)
@@ -36,6 +26,7 @@ defmodule Wsdjs.Musics do
     user
     |> Song.scoped()
     |> filter_by_fulltext(facets)
+    |> filter_by_bpm(facets)
     |> where([s], s.inserted_at < ^month)
     |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
     |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
@@ -48,6 +39,7 @@ defmodule Wsdjs.Musics do
     user
     |> Song.scoped()
     |> filter_by_fulltext(facets)
+    |> filter_by_bpm(facets)
     |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
     |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
     |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
@@ -72,11 +64,38 @@ defmodule Wsdjs.Musics do
     |> Song.scoped()
     |> filter_by_date(facets)
     |> filter_by_fulltext(facets)
+    |> filter_by_bpm(facets)
     |> where([s], s.suggestion == true)
     |> order_by(desc: :inserted_at)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
   end
+
+  defp filter_by_bpm(query, %{"bpm" => bpm}) do
+    lower =
+      case bpm do
+        "vs" -> 0
+        "s" -> 70
+        "m" -> 90
+        "f" -> 110
+        "vf" -> 130
+      end
+
+    upper =
+      case bpm do
+        "vs" -> 69
+        "s" -> 89
+        "m" -> 109
+        "f" -> 129
+        "vf" -> 9999
+      end
+
+    query
+    |> where([s], s.bpm >= ^lower)
+    |> where([s], s.bpm <= ^upper)
+  end
+
+  defp filter_by_bpm(query, _), do: query
 
   defp filter_by_date(query, %{"month" => month}) do
     month =

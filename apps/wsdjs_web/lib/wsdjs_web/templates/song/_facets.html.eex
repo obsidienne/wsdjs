@@ -12,6 +12,28 @@
       </div>
     </div>
 
+    <div>
+      <input type="checkbox" id="bpm_s" name="bpm" value="vs" />
+      <label for="bpm_s">very slow</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_vs" name="bpm" value="s" />
+      <label for="bpm_vs">slow</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_m" name="bpm" value="m" />
+      <label for="bpm_m">medium</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_f" name="bpm" value="f" />
+      <label for="bpm_f">fast</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_vf" name="bpm" value="vf" />
+      <label for="bpm_vf">very fast</label>
+    </div>
+
+
     <input type="submit" class="close-button" id="close-button" value="Filter" />
   </form>
 </div>

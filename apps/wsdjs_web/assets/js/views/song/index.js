@@ -108,6 +108,7 @@ export default class View extends MainView {
     if (sentinel.dataset.query) {
       facets["month"] = sentinel.dataset.query;
     }
+    console.log(facets);
 
     this.channel.push("song", facets)
   }
