@@ -15,7 +15,7 @@ defmodule WsdjsWeb.ScrollingChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
-  def handle_in("song", %{"month" => month}, socket) do
+  def handle_in("song", %{"month" => month, "q" => q}, socket) do
     current_user = socket.assigns[:current_user]
 
     month =
@@ -42,5 +42,14 @@ defmodule WsdjsWeb.ScrollingChannel do
     broadcast!(socket, "song", %{tpl: tpl})
 
     {:noreply, socket}
+  end
+
+  def handle_in("song", params, socket) do
+    current_user = socket.assigns[:current_user]
+    next_month = Musics.songs_interval(current_user)
+
+    params = Map.put(params, "month", Timex.format!(next_month, "%Y-%m-%d", :strftime))
+
+    handle_in("song", params, socket)
   end
 end

@@ -30,7 +30,6 @@ import Opinions from './components/opinions';
 import OpinionPicker from './components/opinionPicker';
 import PlaylistPicker from './components/playlistPicker';
 import Tooltip from './components/tooltip';
-import FacetedSearch from './components/facetedSearch.js';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
@@ -65,6 +64,29 @@ function handleUnloadContentLoaded() {
   }
   Opinions.unmount();
   Tooltip.unmount();
+}
+
+window.formToObject = (form) => {
+  let output = {};
+
+  new FormData(form).forEach(
+    (value, key) => {
+      if (value) {
+        // Check if property already exist
+        if (Object.prototype.hasOwnProperty.call(output, key)) {
+          let current = output[key];
+          if (!Array.isArray(current)) {
+            current = output[key] = [current];
+          }
+          current.push(value); // Add the new value to the array.
+        } else {
+          output[key] = value;
+        }
+      }
+    }
+  );
+
+  return output;
 }
 
 var radio = new Radio();

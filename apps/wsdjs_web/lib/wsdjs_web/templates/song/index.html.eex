@@ -31,9 +31,7 @@
 <% end %>
 
 <section id="song-list">
-  <%= unless is_nil(@next_month) do %>
-  <div class="sentinel text-centered m-all-2" data-query="<%= Timex.format!(@next_month, "%Y-%m-%d", :strftime) %>"><div class="donut"></div></div>
-  <% end %>
+  <div class="sentinel text-centered m-all-2"><div class="donut"></div></div>
 </section>
 
 <template id="opinion-picker-tpl">

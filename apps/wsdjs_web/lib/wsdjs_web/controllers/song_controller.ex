@@ -51,15 +51,9 @@ defmodule WsdjsWeb.SongController do
   end
 
   def index(conn, _params, current_user) do
-    next_month = Musics.songs_interval(current_user)
     playlists = Playlists.get_playlist_by_user(current_user, current_user)
 
-    render(
-      conn,
-      "index.html",
-      next_month: next_month,
-      playlists: playlists
-    )
+    render(conn, "index.html", playlists: playlists)
   end
 
   @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::

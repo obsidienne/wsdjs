@@ -18,6 +18,25 @@ export default class View extends MainView {
       }
     });
 
+    document.addEventListener("click", e => {
+      if (e.target && this.isOutside(e) && this.drawerIsOpen()) {
+        this.hide();
+      }
+      if (e.target && e.target.closest("[data-js-drawer]")) {
+        this.show();
+      }
+    }, false);
+
+    document.addEventListener("submit", e => {
+      if (e.target && e.target.matches("#facets-form")) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.search();
+        return false;
+      }
+    })
+
+
     var sentinel = document.querySelector("#song-list .sentinel");
     this.observer.observe(sentinel);
 
@@ -48,11 +67,46 @@ export default class View extends MainView {
     opinionPicker.unmount();
   }
 
-  fetchSongs(sentinel) {
-    let month = sentinel.dataset.query;
+  isOutside(e) {
+    return e.target.matches(".facets-container.open");
+  }
 
-    let facets = {
-      month: month
+  drawerIsOpen() {
+    return document.querySelector(".facets-container.open");
+  }
+
+  show() {
+    let d = document.querySelector(".facets-container");
+    if (d) {
+      d.classList.add("open");
+    }
+  }
+
+  hide() {
+    let d = document.querySelector(".facets-container.open");
+    if (d) {
+      d.classList.remove("open");
+    }
+  }
+
+  search() {
+    opinionPicker.unmount();
+    playlistPicker.unmount();
+
+    const container = document.getElementById("song-list");
+    container.innerHTML = '<div class="sentinel text-centered m-all-2"><div class="donut"></div></div>';
+
+    var sentinel = document.querySelector("#song-list .sentinel");
+    this.observer.observe(sentinel);
+    this.hide();
+  }
+
+  fetchSongs(sentinel) {
+    let form = document.getElementById('facets-form')
+    let facets = window.formToObject(form);
+
+    if (sentinel.dataset.query) {
+      facets["month"] = sentinel.dataset.query;
     }
 
     this.channel.push("song", facets)
