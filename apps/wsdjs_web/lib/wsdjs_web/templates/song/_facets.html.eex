@@ -48,31 +48,31 @@
       <label for="genre_c">country</label>
     </div>
     <div>
-      <input type="checkbox" id="bpm_d" name="genre" value="dance" />
+      <input type="checkbox" id="genre_d" name="genre" value="dance" />
       <label for="genre_d">dance</label>
     </div>
     <div>
-      <input type="checkbox" id="bpm_h" name="genre" value="hiphop" />
+      <input type="checkbox" id="genre_h" name="genre" value="hiphop" />
       <label for="genre_h">hiphop</label>
     </div>
     <div>
-      <input type="checkbox" id="bpm_j" name="genre" value="jazz" />
+      <input type="checkbox" id="genre_j" name="genre" value="jazz" />
       <label for="genre_j">jazz</label>
     </div>
     <div>
-      <input type="checkbox" id="bpm_p" name="genre" value="pop" />
+      <input type="checkbox" id="genre_p" name="genre" value="pop" />
       <label for="genre_p">pop</label>
     </div>
     <div>
-      <input type="checkbox" id="bpm_rnb" name="genre" value="rnb" />
+      <input type="checkbox" id="genre_rnb" name="genre" value="rnb" />
       <label for="genre_rnb">rnb</label>
     </div>
     <div>
-      <input type="checkbox" id="bpm_r" name="genre" value="rock" />
+      <input type="checkbox" id="genre_r" name="genre" value="rock" />
       <label for="genre_r">rock</label>
     </div>
     <div>
-      <input type="checkbox" id="bpm_s" name="genre" value="soul" />
+      <input type="checkbox" id="genre_s" name="genre" value="soul" />
       <label for="genre_s">soul</label>
     </div>
     
