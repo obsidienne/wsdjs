@@ -33,6 +33,50 @@
       <label for="bpm_vf">very fast</label>
     </div>
 
+     
+
+    <div>
+      <input type="checkbox" id="genre_a" name="genre" value="acoustic" />
+      <label for="genre_a">acoustic</label>
+    </div>
+    <div>
+      <input type="checkbox" id="genre_b" name="genre" value="blues" />
+      <label for="genre_b">blues</label>
+    </div>
+    <div>
+      <input type="checkbox" id="genre_c" name="genre" value="country" />
+      <label for="genre_c">country</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_d" name="genre" value="dance" />
+      <label for="genre_d">dance</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_h" name="genre" value="hiphop" />
+      <label for="genre_h">hiphop</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_j" name="genre" value="jazz" />
+      <label for="genre_j">jazz</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_p" name="genre" value="pop" />
+      <label for="genre_p">pop</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_rnb" name="genre" value="rnb" />
+      <label for="genre_rnb">rnb</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_r" name="genre" value="rock" />
+      <label for="genre_r">rock</label>
+    </div>
+    <div>
+      <input type="checkbox" id="bpm_s" name="genre" value="soul" />
+      <label for="genre_s">soul</label>
+    </div>
+    
+            
 
     <input type="submit" class="close-button" id="close-button" value="Filter" />
   </form>

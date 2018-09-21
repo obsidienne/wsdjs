@@ -27,6 +27,7 @@ defmodule Wsdjs.Musics do
     |> Song.scoped()
     |> filter_by_fulltext(facets)
     |> filter_by_bpm(facets)
+    |> filter_by_genre(facets)
     |> where([s], s.inserted_at < ^month)
     |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
     |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
@@ -40,6 +41,7 @@ defmodule Wsdjs.Musics do
     |> Song.scoped()
     |> filter_by_fulltext(facets)
     |> filter_by_bpm(facets)
+    |> filter_by_genre(facets)
     |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
     |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
     |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
@@ -65,34 +67,52 @@ defmodule Wsdjs.Musics do
     |> filter_by_date(facets)
     |> filter_by_fulltext(facets)
     |> filter_by_bpm(facets)
+    |> filter_by_genre(facets)
     |> where([s], s.suggestion == true)
     |> order_by(desc: :inserted_at)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
   end
 
+  defp filter_by_genre(query, %{"genre" => genre}) when is_list(genre) do
+    dynamic =
+      List.foldl(genre, false, fn x, acc ->
+        dynamic([p], p.genre == ^x or ^acc)
+      end)
+
+    from(query, where: ^dynamic)
+  end
+
+  defp filter_by_genre(query, %{"genre" => genre}) when is_binary(genre) do
+    where(query, genre: ^genre)
+  end
+
+  defp filter_by_genre(query, _), do: query
+
+  def bpm_ranges do
+    %{
+      "vs" => 1..69,
+      "s" => 70..89,
+      "m" => 90..109,
+      "f" => 110..129,
+      "vf" => 130..9999
+    }
+  end
+
+  defp filter_by_bpm(query, %{"bpm" => bpm}) when is_list(bpm) do
+    dynamic =
+      List.foldl(bpm, false, fn x, acc ->
+        lower..upper = Map.fetch!(bpm_ranges(), x)
+        dynamic([p], (p.bpm >= ^lower and p.bpm <= ^upper) or ^acc)
+      end)
+
+    from(query, where: ^dynamic)
+  end
+
   defp filter_by_bpm(query, %{"bpm" => bpm}) do
-    lower =
-      case bpm do
-        "vs" -> 0
-        "s" -> 70
-        "m" -> 90
-        "f" -> 110
-        "vf" -> 130
-      end
+    lower..upper = Map.fetch!(bpm_ranges(), bpm)
 
-    upper =
-      case bpm do
-        "vs" -> 69
-        "s" -> 89
-        "m" -> 109
-        "f" -> 129
-        "vf" -> 9999
-      end
-
-    query
-    |> where([s], s.bpm >= ^lower)
-    |> where([s], s.bpm <= ^upper)
+    where(query, [s], s.bpm >= ^lower and s.bpm <= ^upper)
   end
 
   defp filter_by_bpm(query, _), do: query
