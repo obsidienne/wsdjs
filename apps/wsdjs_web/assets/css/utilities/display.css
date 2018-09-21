@@ -26,8 +26,16 @@
   cursor: pointer;
 }
 
+/******************
+ border utilities
+******************/
+
 .border-circle {
   border-radius: 50%;
+}
+
+.border-top-1 {
+  border-top: 1px solid #d8d8d8;
 }
 
 /******************

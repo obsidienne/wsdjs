@@ -140,13 +140,6 @@ dt,
   color: #dc3545 !important;
 }
 
-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
 textarea {
   resize: vertical;
 }
