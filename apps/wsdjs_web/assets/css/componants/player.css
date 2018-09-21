@@ -79,7 +79,7 @@ body.radio-playing .player__play__vinyl {
 }
 
 .player__youtube__container.open {
-  bottom: 0;
+  bottom: 48px;
   transition: bottom .7s ease-in;
 }
 
@@ -125,6 +125,7 @@ body.radio-playing .player__play__vinyl {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -142,10 +143,12 @@ body.radio-playing .player__play__vinyl {
     bottom: 1rem;
     right: 1rem;
   }
+
   .player__youtube {
     height: 216px;
     width: 384px;
   }
+
   .player__youtube__container {
     height: 216px;
     width: 384px;
@@ -154,6 +157,7 @@ body.radio-playing .player__play__vinyl {
     padding-bottom: 0;
     z-index: 3001;
   }
+
   .player__youtube__container.open {
     bottom: 1rem;
   }
