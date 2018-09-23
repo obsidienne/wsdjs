@@ -36,12 +36,13 @@
   </p>
   <table class="table">
     <tbody>
+    <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
     <tr>
       <td>
         <img src="<%= art_url(nil, 64) %>" srcset="<%= art_srcset(nil, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
       <td style="vertical-align:middle">
-        <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
+        <span class="text-muted primary-text">Add a song to the playlist</span>
         <div class="search-container">
           <div class="search__input__wrap">
             <svg fill='#455A64' height='36' viewBox='0 0 24 24' width='36' xmlns='http://www.w3.org/2000/svg'>
@@ -54,10 +55,9 @@
           <div class="search-results-container">
           </div>
         </div>
-        <% end %>
-        <span class="text-muted primary-text">Add a song to the playlist</span>
       </td>
     </tr>
+    <% end %>
     <%= for {song, idx} <- Enum.with_index(@songs) do %>
     <%= if idx == 5 do %>
     <tr><td colspan="2">the following songs are not public</td></tr>
