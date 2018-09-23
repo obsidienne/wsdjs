@@ -1,14 +1,7 @@
 class LazyLoad {
   constructor() {
-    // Enter this class only if all IntersectionObserver and IntersectionObserverEntry
-    // features are supported. 
-    // Manage the out of network use case
-    if ('IntersectionObserver' in window &&
-      'IntersectionObserverEntry' in window &&
-      'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
-      this._initIntersectionObserver();
-      this.refresh();
-    }
+    this._initIntersectionObserver();
+    this.refresh();
   }
 
   refresh() {
