@@ -13,10 +13,6 @@
   max-height: 381px;
 }
 
-.song-page__details {
-  flex-direction: column;
-}
-
 .song-page__play {
   margin-top: auto;
   margin-bottom: 0;
@@ -40,10 +36,6 @@
 
 .song-page__tags.song-opinions button:first-child {
   padding-left: 0;
-}
-
-.unconnected .social-links {
-  margin-top: 25px;
 }
 
 .song-page__video a {

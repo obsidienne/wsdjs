@@ -10,7 +10,7 @@
     <div class="song-page__art shadow-nohover">
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
-    <div class="song-page__details d-flex">
+    <div class="song-page__details d-flex flex-column">
       <span class="h2 primary-text"><%= @song.title %></span>
       <span class="h3 secondary-text p-bottom-1"><span class="text-muted">by</span> <%= @song.artist %></span>
       <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
@@ -79,7 +79,7 @@
       or 
       <%= link "register", to: registration_path(@conn, :new) %>
 
-      <div class="social-links">
+      <div class="m-top-3">
         <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FWorld-Swing-DJs-1430112430533570%2F&width=85&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" 
                 width="103" height="21" 
                 style="border:none;overflow:hidden" 
