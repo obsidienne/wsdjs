@@ -1,30 +1,7 @@
-<%= if blur_track(@song, @current_user) == true do %>
+<%= if blur_track(@song, @current_user) == false do %>
 
 <li class="shadow-onlyhover">
   <a class="d-flex m-all-0">
-    <div class="song-minicard__heading">
-      <img src="<%= art_url(nil, 200) %>" class="responsive" />
-    </div>
-    <div class="song-minicard__body">
-      <span class="text-muted text-ellipsis">hidden track</span>
-
-      <footer>
-        <span class="label label-default"><%= @song.genre %></span>
-        <%= if @song.bpm > 0 do %>
-          <span class="label label-primary"><%= @song.bpm %> bpm</span>
-        <% end %>
-        <time datetime="<%= utc_to_local(@song.inserted_at) %>">
-          <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
-        </time>
-      </footer>
-    </div>
-  </a>
-</li>
-
-<% else %>
-
-<li class="shadow-onlyhover">
-  <a href="<%= song_path(@conn, :show, @song.id) %>" class="d-flex m-all-0">
     <div class="song-minicard__heading">
       <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
     </div>
@@ -40,9 +17,6 @@
         <%= if @song.bpm > 0 do %>
           <span class="label label-primary"><%= @song.bpm %> bpm</span>
         <% end %>
-        <time datetime="<%= utc_to_local(@song.inserted_at) %>">
-          <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
-        </time>
       </footer>
     </div>
   </a>

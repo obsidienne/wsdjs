@@ -88,27 +88,27 @@
   white-space: nowrap;
 }
 
-#playlists-section ul {
+.playlists-grid {
   display: grid;
   grid-gap: .5rem;
   grid-template-columns: 1fr 1fr;
 }
 
 @media (min-width: 576px) {
-  #playlists-section ul {
-    grid-template-columns: repeat( auto-fit, minmax(min-content, auto));
+  .playlists-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min-content, auto));
   }
 }
 
 @media (min-width: 992px) {
-  #playlists-section ul {
-    grid-template-columns: repeat( auto-fill, minmax(min-content, 208px));
+  .playlists-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min-content, 208px));
   }
 }
 
 @media (min-width: 1200px) {
-  #playlists-section ul {
+  .playlists-grid {
     grid-gap: 1rem;
-    grid-template-columns: repeat( auto-fit, minmax(min-content, 264px));
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 264px));
   }
 }

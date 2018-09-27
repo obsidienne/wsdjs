@@ -1,23 +1,24 @@
 export default class search {
   constructor() {
-    var self = this;
-
-    document.addEventListener("click", function (e) {
+    document.addEventListener("click", (e) => {
       if (e.target && e.target.matches("#search-input")) {
-        self._show_search();
+        this._show_search();
       }
       if (e.target && e.target.closest('.search-container') == null) {
-        self._hide_search();
+        this._move_search();
+        this._hide_search();
       }
     })
 
     var timeout;
-    document.addEventListener("keyup", function (e) {
+    var self = this;
+
+    document.addEventListener("keyup", (e) => {
       if (e.target && e.target.matches("#search-input")) {
         clearTimeout(timeout);
-        timeout = setTimeout(function () {
-          self._search();
-        }, 50);
+        timeout = setTimeout(() => {
+          this._search();
+        }, 400);
       }
     })
   }
@@ -47,6 +48,7 @@ export default class search {
     search_container.classList.add("focused");
   }
 
+  _move_search() {}
   _hide_search() {
     // remove focus
     var elements = document.querySelectorAll(".focused");

@@ -89,6 +89,10 @@
   display: flex;
 }
 
+.d-inline-flex {
+  display: inline-flex;
+}
+
 @media (min-width: 576px) {
   .d-sm-none {
     display: none;

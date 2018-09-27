@@ -21,16 +21,11 @@
 
 .search-container.focused {
   flex-grow: 1;
-  max-width: 20rem;
 }
 
 .search__input__wrap {
   position: relative;
-  z-index: 2;
   transition: transform ease .1s;
-  width: 100%;
-  display: inline-flex;
-  padding-top: 6px;
 }
 
 /* style the search input */
