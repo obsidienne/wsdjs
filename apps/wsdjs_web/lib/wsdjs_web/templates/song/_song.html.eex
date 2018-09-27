@@ -25,7 +25,7 @@
       </div>
     </a>
 
-    <div class="song-card__body">
+    <div class="p-x-2 p-y-0 ">
       <%= link @song.title, to: song_path(@conn, :show, @song.id), class: "primary-text action-link visible-link text-ellipsis" %>
       <div class="secondary-text text-ellipsis"><%= @song.artist %></div>
     </div>

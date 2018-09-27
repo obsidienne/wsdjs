@@ -10,9 +10,7 @@
 @import "./componants/player.css";
 @import "./componants/table.css";
 @import "./componants/tag.css";
-@import "./utilities/utilities.css";
-@import "./utilities/display.css";
-@import "./utilities/mp.css";
+@import "./utilities.css";
 @import "./animations.css";
 @import "./comments.css";
 @import "./pages/home.css";

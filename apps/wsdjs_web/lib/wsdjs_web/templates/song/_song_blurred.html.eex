@@ -13,7 +13,7 @@
       </div>
     </a>
 
-    <div class="song-card__body">
+    <div class="p-x-2 p-y-0">
       <h2 class="text-muted">hidden track</h2>
     </div>
   </article>

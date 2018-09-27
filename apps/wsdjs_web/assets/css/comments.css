@@ -1,7 +1,3 @@
-#comments-container {
-  margin-top: 8px;
-}
-
 #comments-container:-moz-only-whitespace {
   display: none;
 }
@@ -60,10 +56,12 @@
     margin-left: 10px;
     width: auto;
   }
+
   .comment__avatar {
     display: flex;
     flex: 0 1 auto;
   }
+
   .comment__avatar__img {
     width: 48px;
     height: 48px;
