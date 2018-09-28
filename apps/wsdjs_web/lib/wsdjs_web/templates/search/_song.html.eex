@@ -5,7 +5,7 @@
     <div class="search-minicard__heading p-all-0 b-all-0">
       <img src="<%= art_url(@song.art, 100) %>" class="responsive" />
     </div>
-    <div class="song-minicard__body">
+    <div class="song-minicard__body d-flex p-y-0 m-left-1">
       <span class="text-ellipsis primary-text"><%= @song.title %></span>
       <span class="text-ellipsis secondary-text">by <%= @song.artist %></span>
       <span class="text-muted">

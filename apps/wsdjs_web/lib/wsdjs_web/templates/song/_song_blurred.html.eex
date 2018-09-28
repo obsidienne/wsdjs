@@ -5,10 +5,10 @@
         <img src="<%= art_url(nil, 200) %>" srcset="<%= art_srcset(nil, 200) %>" sizes="200px" class="responsive" />
       </div>
 
-      <div class="song-card__tags">
-        <span class="label label-default"><%= @song.genre %></span>
+      <div class="song-card__tags d-flex p-x-2 p-y-1 w-100">
+        <span class="label label-default m-right-05"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
-        <span class="label label-primary"><%= @song.bpm %> bpm</span>
+        <span class="label label-primary m-right-05"><%= @song.bpm %> bpm</span>
         <% end %>
       </div>
     </a>

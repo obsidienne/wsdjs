@@ -11,7 +11,7 @@
     </div>
 
 
-    <div class="song-minicard__body">
+    <div class="song-minicard__body d-flex p-y-0 m-left-1">
       <span class="text-muted text-ellipsis">hidden track</span>
 
       <footer>
@@ -42,7 +42,7 @@
     </div>
 
 
-    <div class="song-minicard__body">
+    <div class="song-minicard__body d-flex p-y-0 m-left-1">
       <span class="primary-text text-ellipsis"><%= @rank.song.title %></span>
       <span class="secondary-text text-ellipsis"><%= @rank.song.artist %></span>
       <span class="text-muted"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></span>

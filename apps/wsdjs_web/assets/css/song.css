@@ -136,11 +136,7 @@
 }
 
 .song-minicard__body {
-  padding-top: 0;
-  padding-bottom: 0;
-  display: flex;
   flex-direction: column;
-  margin-left: 5px;
   min-width: 0;
   flex: 1 1 auto;
   overflow: hidden;
@@ -167,9 +163,6 @@
 .song-card__tags {
   position: absolute;
   bottom: 0;
-  display: flex;
-  padding: 8px;
-  width: 100%;
 }
 
 .song-card__tags svg {
@@ -181,10 +174,6 @@
 .song-card__header:hover .song-card__tags svg {
   transform: scale(2) translate(-5px, -5px);
   background-color: hsl(0, 0%, 50%);
-}
-
-.song-card__tags span {
-  margin-right: 5px;
 }
 
 /****************************

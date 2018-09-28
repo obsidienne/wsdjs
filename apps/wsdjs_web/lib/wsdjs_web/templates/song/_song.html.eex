@@ -11,10 +11,10 @@
       <div class="img-embed">
         <img src="<%= art_url(nil, 200) %>" data-src="<%= art_url(@song.art, 200) %>" data-srcset="<%= art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
       </div>
-      <div class="song-card__tags">
-        <span class="label label-default"><%= @song.genre %></span>
+      <div class="song-card__tags d-flex  p-x-2 p-y-1 w-100">
+        <span class="label label-default m-right-05"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
-        <span class="label label-primary"><%= @song.bpm %> bpm</span>
+        <span class="label label-primary m-right-05"><%= @song.bpm %> bpm</span>
         <% end %>
         <%= if is_binary(@song.video_id) do %>
         <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>

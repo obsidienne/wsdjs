@@ -131,6 +131,10 @@
   margin-left: auto;
 }
 
+.m-right-05 {
+  margin-right: .25rem;
+}
+
 .m-x-1,
 .m-left-1 {
   margin-left: .5rem;
