@@ -1,9 +1,9 @@
 <%= if blur_track(@song, @current_user) == false do %>
 
 <li class="shadow-onlyhover">
-  <a class="d-flex m-all-0">
+  <div class="d-flex m-all-0">
     <div class="song-minicard__heading">
-      <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
+      <img src="<%= art_url(@song.art, 100) %>" class="responsive" />
     </div>
     <div class="song-minicard__body">
       <span class="text-ellipsis primary-text"><%= @song.title %></span>
@@ -11,15 +11,8 @@
       <span class="text-muted">
         <%= user_displayed_name(@song.user) %>
       </span>
-
-      <footer>
-        <span class="label label-default"><%= @song.genre %></span>
-        <%= if @song.bpm > 0 do %>
-          <span class="label label-primary"><%= @song.bpm %> bpm</span>
-        <% end %>
-      </footer>
     </div>
-  </a>
+  </div>
 </li>
 
 <% end %>

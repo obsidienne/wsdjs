@@ -38,11 +38,7 @@
   <table class="table">
     <tbody>
     <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
-    <tr>
-      <td>
-        <img src="<%= art_url(nil, 64) %>" srcset="<%= art_srcset(nil, 64) %>" sizes="64px" width="64px" height="64px" />
-      </td>
-      <td style="vertical-align:middle">
+      <td style="vertical-align:middle" colspan="2">
         <span class="text-muted primary-text">Add a song to the playlist</span>
         <div class="search-container">
           <div class="search__input__wrap w-100 d-inline-flex p-top-1">

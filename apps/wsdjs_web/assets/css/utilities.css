@@ -372,6 +372,12 @@
   justify-content: space-between;
 }
 
+@media (min-width: 768px) {
+  .flex-md-row {
+    flex-direction: row;
+  }
+}
+
 /******************
  AUTRES
 ******************/
