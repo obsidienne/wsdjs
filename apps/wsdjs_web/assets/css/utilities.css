@@ -41,6 +41,10 @@
   padding-bottom: 0;
 }
 
+.p-all-0 {
+  padding: 0;
+}
+
 .p-all-1 {
   padding: .5rem;
 }

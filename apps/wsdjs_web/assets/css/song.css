@@ -119,11 +119,17 @@
 /****************************
   minicard
 ****************************/
+.search-minicard__heading {
+  width: 5rem;
+  height: 5rem;
+  flex: 0 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
 .song-minicard__heading {
-  padding: 0;
   width: 96px;
   height: 96px;
-  border: 0;
   flex: 0 0 96px;
   position: relative;
   overflow: hidden;
