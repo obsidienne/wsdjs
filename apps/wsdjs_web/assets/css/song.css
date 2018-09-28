@@ -146,8 +146,6 @@
   card
 ****************************/
 .song-card {
-  display: flex;
-  flex-direction: column;
   height: 100%;
   /* safari bug */
   width: auto;
@@ -158,6 +156,10 @@
   position: relative;
   display: block;
   overflow: hidden;
+}
+
+.song-card__header span {
+  transition: all 0.2s ease;
 }
 
 .song-card__tags {
@@ -176,41 +178,13 @@
   background-color: hsl(0, 0%, 50%);
 }
 
+.song-card__header:hover .song-card__tags span {
+  opacity: 0;
+}
+
 /****************************
   square card
 ****************************/
-.song-top__song {
-  position: relative;
-  flex: 0 1 143px;
-  margin-bottom: 5px;
-}
-
-.song-top__song>header {
-  overflow: hidden;
-}
-
-.song-top__body {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: hsla(0, 0%, 39%, 0.8);
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  color: white;
-  padding: 5px;
-}
-
-.song-top__footer__avatar {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-}
 
 @media (min-width: 768px) {
   .song-card {
