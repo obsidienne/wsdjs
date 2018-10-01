@@ -42,7 +42,7 @@
 
       <div class="song-page__tags song-opinions m-bottom-2">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
-        <span class="w-50 text-right bg-hover playlist-picker"  data-song-id="<%= @song.id %>">
+        <span class="m-left-auto p-all-1 p-right-0 text-right playlist-picker"  data-song-id="<%= @song.id %>">
           <svg height='24' viewBox='0 0 24 24' width='24'>
             <path fill="#455A64" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
           </svg>

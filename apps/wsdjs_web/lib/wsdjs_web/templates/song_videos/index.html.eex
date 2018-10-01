@@ -21,21 +21,6 @@
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
       </div>
-      <div class="song-page__tags p-top-2">
-        <span class="label label-default"><%= @song.genre %></span>
-        <%= if @song.bpm > 0 do %>
-          <span class="label label-primary"><%= @song.bpm %> bpm</span>
-        <% end %>
-        <%= if @song.hidden_track do %>
-          <span class="label label-default">hidden track</span>
-        <% end %>
-        <%= if @song.public_track do %>
-          <span class="label label-default">public track</span>
-        <% end %>
-        <%= if @song.instant_hit do %>
-          <span class="label label-default">instant hit</span>
-        <% end %>
-      </div>
     </div>
   </div>
 </section>
