@@ -17,13 +17,6 @@
 
 .comment__header {
   background: hsl(0, 0%, 93%);
-  padding: 8px 8px;
-  display: flex;
-  align-items: center;
-}
-
-.comment__header a {
-  display: inline-block;
 }
 
 .comment__content {
