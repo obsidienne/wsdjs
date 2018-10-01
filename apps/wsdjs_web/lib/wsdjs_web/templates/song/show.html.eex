@@ -106,7 +106,7 @@
 </div>
 
 <template id="comment-tpl">
-  <li class="comment">
+  <li class="d-flex m-bottom-2">
     <div class="comment__avatar">
       <img src="{{user.avatars.avatar_uri}}"  class="comment__avatar__img">
     </div>

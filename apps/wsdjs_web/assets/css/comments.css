@@ -2,11 +2,6 @@
   display: none;
 }
 
-.comment {
-  display: flex;
-  margin-bottom: 16px;
-}
-
 .comment__avatar {
   display: none;
 }
