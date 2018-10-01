@@ -26,7 +26,7 @@ export default class View extends MainView {
     super.mount();
 
     // autolinks in comments
-    var els = document.querySelectorAll(".comment__content");
+    var els = document.querySelectorAll("[data-autolink]");
     for (var i = 0; i < els.length; i++) {
       els[i].innerHTML = els[i].innerHTML.autoLink();
     }

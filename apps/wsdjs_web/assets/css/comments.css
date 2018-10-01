@@ -1,9 +1,5 @@
-#comments-container:-moz-only-whitespace {
-  display: none;
-}
-
 .comment__avatar {
-  display: none;
+  flex: 0 1 auto;
 }
 
 .comment__body {
@@ -21,7 +17,6 @@
 
 .comment__content {
   background: hsl(0, 0%, 100%);
-  padding: 0 8px;
   color: hsl(0, 0%, 35%);
 }
 
@@ -43,11 +38,6 @@
   .comment__body {
     margin-left: 10px;
     width: auto;
-  }
-
-  .comment__avatar {
-    display: flex;
-    flex: 0 1 auto;
   }
 
   .comment__avatar__img {

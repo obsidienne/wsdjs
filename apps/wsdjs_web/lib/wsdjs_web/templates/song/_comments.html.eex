@@ -12,7 +12,7 @@
 <ul id="comments-container" class="m-top-2">
   <%= for comment <- @comments do %>
     <li class="d-flex m-bottom-2">
-      <div class="comment__avatar">
+      <div class="d-none d-md-flex comment__avatar">
         <img src="<%= avatar_url(comment.user.avatar, 50) %>" srcset="<%= avatar_srcset(comment.user.avatar, 50) %>" sizes="50px" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
       </div>
 
@@ -31,7 +31,7 @@
             </button>
           <% end %>
         </header>
-        <div class="comment__content">
+        <div class="comment__content p-x-1" data-autolink>
           <%= raw(comment.text_html) %>
         </div>
       </div>

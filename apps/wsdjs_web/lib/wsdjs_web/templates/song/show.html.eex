@@ -107,7 +107,7 @@
 
 <template id="comment-tpl">
   <li class="d-flex m-bottom-2">
-    <div class="comment__avatar">
+    <div class="d-none d-md-flex comment__avatar">
       <img src="{{user.avatars.avatar_uri}}"  class="comment__avatar__img">
     </div>
 
@@ -124,7 +124,7 @@
           </svg>
         </button>
       </header>
-      <div class="comment__content">{{text_html}}</div>
+      <div class="comment__content p-x-1" data-autolink>{{text_html}}</div>
     </div>
   </li>
 </template>
