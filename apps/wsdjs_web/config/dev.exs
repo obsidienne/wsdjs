@@ -44,7 +44,7 @@ config :wsdjs_web, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
 config :wsdjs_web, WsdjsWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg|scss)$},
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/wsdjs_web/views/.*(ex)$},
       ~r{lib/wsdjs_web/templates/.*(eex)$}
