@@ -14,6 +14,19 @@ defmodule WsdjsWeb.ScrollingChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
+  def handle_in("song", nil, socket) do
+    tpl =
+      Phoenix.View.render_to_string(
+        WsdjsWeb.SongView,
+        "_no_song.html",
+        conn: WsdjsWeb.Endpoint
+      )
+
+    broadcast!(socket, "song", %{tpl: tpl})
+
+    {:noreply, socket}
+  end
+
   def handle_in("song", %{"month" => month} = params, socket) do
     current_user = socket.assigns[:current_user]
 
@@ -41,11 +54,17 @@ defmodule WsdjsWeb.ScrollingChannel do
   # this function is called when no month is given. Like during the first load
   # When we define the first month for the current_user we call the handle_in
   # function with the first song set and everything follows the same way
+  # If there is no result then, we call handle_in with nil
   def handle_in("song", params, socket) do
     current_user = socket.assigns[:current_user]
     first_month = Musics.songs_interval(current_user, params)
 
-    params = Map.put(params, "month", Timex.format!(first_month, "%Y-%m-%d", :strftime))
+    params =
+      if is_nil(first_month) do
+        nil
+      else
+        Map.put(params, "month", Timex.format!(first_month, "%Y-%m-%d", :strftime))
+      end
 
     handle_in("song", params, socket)
   end
