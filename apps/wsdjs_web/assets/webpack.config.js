@@ -4,7 +4,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const MediaQueryPlugin = require('media-query-plugin');
 
 module.exports = (env, options) => ({
   optimization: {
@@ -19,7 +18,7 @@ module.exports = (env, options) => ({
   },
   entry: './js/app.js',
   output: {
-    filename: '[name].js',
+    filename: 'app.js',
     path: path.resolve(__dirname, '../priv/static/js')
   },
   module: {
@@ -31,13 +30,8 @@ module.exports = (env, options) => ({
         }
       },
       {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          MediaQueryPlugin.loader,
-          'sass-loader'
-        ]
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.(gif|svg|jpg|png)$/,
@@ -47,22 +41,12 @@ module.exports = (env, options) => ({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '../css/[name].css'
+      filename: '../css/app.css'
     }),
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
       defaultSizes: 'gzip',
       analyzerMode: 'static'
-    }),
-    new MediaQueryPlugin({
-      include: true,
-      queries: {
-        'print': 'print',
-        '(min-width: 576px)': 'phone',
-        '(min-width: 768px)': 'tablet',
-        '(min-width: 992px)': 'desktop',
-        '(min-width: 1200px)': 'wide'
-      }
     }),
     new CopyWebpackPlugin([{
       from: 'static/',
