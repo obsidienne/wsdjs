@@ -60,8 +60,14 @@
     <tr><td colspan="2">the following songs are not public</td></tr>
     <% end %>
     <tr>
-      <td class="table_song-art">
-        <img src="<%= art_url(song.art, 64) %>" srcset="<%= art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
+      <td class="table_song-art ">
+        <div class="song-art-container h-12 w-12">
+          <div class="voting-position charted">
+            <div class="chart-bg"></div>
+            <div class="chart-value"><%= idx + 1 %></div>
+          </div>
+          <img src="<%= art_url(song.art, 96) %>" srcset="<%= art_srcset(song.art, 96) %>" sizes="96px" width="96px" height="96px" />
+        </div>
       </td>
       <td>
         <%= link song.title, to: song_path(@conn, :show, song), class: "primary-text action-link visible-link" %>
