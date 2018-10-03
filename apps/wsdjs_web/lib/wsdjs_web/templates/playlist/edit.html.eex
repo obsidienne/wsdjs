@@ -13,7 +13,7 @@
 </nav>
 
 
-<section id="user-page" class="user-page container p-top-2">
+<section id="user-page" class="user-page container pt-3">
   <%= render WsdjsWeb.UserView, "_sidebar_tiny.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
 
@@ -37,6 +37,6 @@
 
 
   <%= if Wsdjs.Playlists.Policy.can?(@current_user, :delete, @playlist) == :ok do %>
-    <%= link "Delete", to: playlist_path(@conn, :delete, @playlist), method: :delete, class: "btn btn-link text-danger m-top-3" %>
+    <%= link "Delete", to: playlist_path(@conn, :delete, @playlist), method: :delete, class: "btn btn-link text-danger mt-4" %>
   <% end %>
 </section>

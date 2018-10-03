@@ -1,11 +1,11 @@
 <%= if blur_track(@song, @current_user) == true do %>
 
 <li class="clickable shadow-onlyhover">
-  <a class="d-flex m-all-0">
-    <div class="song-minicard__heading p-all-0 b-all-0">
+  <a class="d-flex m-0">
+    <div class="song-minicard__heading p-0 b-all-0">
       <img src="<%= art_url(nil, 200) %>" class="responsive" />
     </div>
-    <div class="song-minicard__body d-flex p-y-0 m-left-1">
+    <div class="song-minicard__body d-flex py-0 ml-2">
       <span class="text-muted text-ellipsis">hidden track</span>
 
       <footer>
@@ -26,11 +26,11 @@
 <% else %>
 
 <li class="clickable shadow-onlyhover">
-  <a href="<%= song_path(@conn, :show, @song.id) %>" class="d-flex m-all-0">
-    <div class="song-minicard__heading p-all-0 b-all-0">
+  <a href="<%= song_path(@conn, :show, @song.id) %>" class="d-flex m-0">
+    <div class="song-minicard__heading p-0 b-all-0">
       <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
     </div>
-    <div class="song-minicard__body d-flex p-y-0 m-left-1">
+    <div class="song-minicard__body d-flex py-0 ml-2">
       <span class="primary-text text-ellipsis"><%= @song.title %></span>
       <span class="secondary-text text-ellipsis"><%= @song.artist %></span>
       <span class="text-muted text-ellipsis"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></span>

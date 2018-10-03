@@ -14,19 +14,19 @@
   </ol>
 </nav>
 
-<section id="user-page" class="user-page container p-top-2">
+<section id="user-page" class="user-page container pt-3">
   <%= render "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
   <div>
 
   <%= if @user.detail.description do %>
-  <dl class="user-page__profile__section p-all-2 user-page__details">
+  <dl class="user-page__profile__section p-3 user-page__details">
     <dt>About Me</dt>
     <dd class="aboutme"><%= raw(@user.detail.description_html) %></dd>
   </dl>
   <% end %>
 
-<dl class="user-page__profile__section p-all-2 user-page__details">
+<dl class="user-page__profile__section p-3 user-page__details">
   <dt>Member since</dt>
   <dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= Timex.format!(@user.inserted_at, "%B %d, %Y", :strftime) %></time></dd>
   <%= if @user.detail.love_more do %>

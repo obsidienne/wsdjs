@@ -20,9 +20,9 @@
 
 
 <%= if @current_user && @current_user.admin do %>
-<div class="container d-flex align-items-center justify-content-end m-bottom-1 m-top-2 h-6">
+<div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
   <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link", target: "_blank" %>
-  <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link m-left-1" %>
+  <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link ml-2" %>
 </div>
 <% end %>
 

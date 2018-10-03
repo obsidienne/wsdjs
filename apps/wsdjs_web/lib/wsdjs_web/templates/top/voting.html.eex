@@ -16,12 +16,12 @@
 <% end %>
 <% end %>
 
-<div class="container d-flex align-items-center justify-content-end m-bottom-1 m-top-2 h-6">
+<div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
   <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
   <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
   <% end %>
   <%= if @current_user && @current_user.admin do %>
-    <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link m-left-1" %>
+    <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link ml-2" %>
   <% end %>
 </div>
 

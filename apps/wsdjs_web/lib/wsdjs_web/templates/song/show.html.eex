@@ -6,20 +6,20 @@
 </nav>
 
 <section>
-  <div class="song-page container d-flex m-top-3 p-bottom-6">
+  <div class="song-page container d-flex mt-4 pb-6">
     <div class="song-page__art shadow-nohover">
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
     <div class="song-page__details d-flex flex-column">
       <span class="h2 primary-text"><%= @song.title %></span>
-      <span class="h3 secondary-text p-bottom-1"><span class="text-muted">by</span> <%= @song.artist %></span>
+      <span class="h3 secondary-text pb-2"><span class="text-muted">by</span> <%= @song.artist %></span>
       <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
       </div>
 
-      <div class="song-page__tags p-top-2">
+      <div class="song-page__tags pt-3">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
@@ -40,9 +40,9 @@
         <% end %>
       </div>
 
-      <div class="song-page__tags song-opinions m-bottom-2">
+      <div class="song-page__tags song-opinions mb-3">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
-        <span class="m-left-auto p-all-1 p-right-0 text-right playlist-picker"  data-song-id="<%= @song.id %>">
+        <span class="ml-auto p-2 pr-0 text-right playlist-picker"  data-song-id="<%= @song.id %>">
           <svg height='24' viewBox='0 0 24 24' width='24'>
             <path fill="#455A64" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
           </svg>
@@ -55,11 +55,11 @@
     </div>
   </div>
   <template id="playlist-picker-tpl">
-    <span class="d-block p-bottom-1 m-x-2 text-center b-bottom-1">Playlists</span>
+    <span class="d-block pb-2 mx-3 text-center b-bottom-1">Playlists</span>
     <ul>
       <%= for playlist <- @playlists do %>
       <li>
-        <button class="bg-hover btn-no-style d-block p-y-1 p-x-2 w-100 text-left song-picker-playlist" data-id="<%= playlist.id %>"><%= playlist.name %></button>
+        <button class="bg-hover btn-no-style d-block py-2 px-3 w-100 text-left song-picker-playlist" data-id="<%= playlist.id %>"><%= playlist.name %></button>
       </li>
       <% end %>
     </ul>
@@ -79,7 +79,7 @@
       or 
       <%= link "register", to: registration_path(@conn, :new) %>
 
-      <div class="m-top-3">
+      <div class="mt-4">
         <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FWorld-Swing-DJs-1430112430533570%2F&width=85&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" 
                 width="103" height="21" 
                 style="border:none;overflow:hidden" 
@@ -106,13 +106,13 @@
 </div>
 
 <template id="comment-tpl">
-  <li class="d-flex m-bottom-2">
+  <li class="d-flex mb-3">
     <div class="d-none d-md-flex comment__avatar">
       <img src="{{user.avatars.avatar_uri}}"  class="comment__avatar__img">
     </div>
 
     <div class="comment__body">
-      <header class="comment__header d-flex align-items-center p-all-1">
+      <header class="comment__header d-flex align-items-center p-2">
         <span>
           <a href="{{user.path}}" class="clickable visible-link action-link d-inline-block">{{user.name}}</a>
           <time title="{{commented_at}}" datetime="{{commented_at}}"></time>
@@ -124,7 +124,7 @@
           </svg>
         </button>
       </header>
-      <div class="comment__content p-x-1" data-autolink>{{text_html}}</div>
+      <div class="comment__content px-2" data-autolink>{{text_html}}</div>
     </div>
   </li>
 </template>

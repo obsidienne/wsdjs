@@ -1,4 +1,4 @@
-<nav class="secondary-nav m-bottom-2">
+<nav class="secondary-nav mb-3">
   <ol class="container">
     <li><%= link "Song", to: song_path(@conn, :show, @song) %></li>
     <li class="current"><%= link "Videos", to: song_song_videos_path(@conn, :index, @song) %></li>
@@ -7,14 +7,14 @@
 
 
 <section class="container">
-  <div class="d-flex p-all-1 bg-white">
+  <div class="d-flex p-2 bg-white">
     <div>
       <img src="<%= art_url(@song.art, 48) %>" srcset="<%= art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
     </div>
-    <div class="p-left-2">
+    <div class="pl-3">
       <div>
         <span class="primary-text"><%= @song.title %></span>
-        <span class="secondary-text p-bottom-1"><span class="text-muted">by</span> <%= @song.artist %></span>
+        <span class="secondary-text pb-2"><span class="text-muted">by</span> <%= @song.artist %></span>
       </div>
       <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
@@ -26,7 +26,7 @@
 </section>
 
 <div class="container song-page__sections d-flex">
-  <section id="overview-video" class="overview-video m-bottom-2">
+  <section id="overview-video" class="overview-video mb-3">
     <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
   </section>
 
@@ -54,7 +54,7 @@
 </div>
 
 <template id="video-tpl">
-  <article class="song-page__video card shadow clickable d-flex m-bottom-1">
+  <article class="song-page__video card shadow clickable d-flex mb-2">
     <a href="{{url}}" target="_blank" rel="noopener">
       <img src="//res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg" srcset="https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg 100w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_200,q_auto/fl_immutable_cache/{{video_id}}.jpg 200w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_300,q_auto/fl_immutable_cache/{{video_id}}.jpg 300w" sizes="100px" height="auto" width="100">
       <svg fill="#FFC107" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

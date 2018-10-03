@@ -1,11 +1,11 @@
 <%= if blur_track(@song, @current_user) == false do %>
 
 <li class="shadow-onlyhover">
-  <div class="d-flex m-all-0">
-    <div class="search-minicard__heading p-all-0 b-all-0">
+  <div class="d-flex m-0">
+    <div class="search-minicard__heading p-0 b-all-0">
       <img src="<%= art_url(@song.art, 100) %>" class="responsive" />
     </div>
-    <div class="song-minicard__body d-flex p-y-0 m-left-1">
+    <div class="song-minicard__body d-flex py-0 ml-2">
       <span class="text-ellipsis primary-text"><%= @song.title %></span>
       <span class="text-ellipsis secondary-text">by <%= @song.artist %></span>
       <span class="text-muted">

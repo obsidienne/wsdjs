@@ -1,6 +1,6 @@
 <div class="facets-container">
   <form id="facets-form" method="GET" action="/songs" class="facets d-flex flex-column">
-    <section class="p-all-2">
+    <section class="p-3">
       <div class="flex-grow-1">
         <div class="d-flex w-100 align-items-center">
           <span class="cursor-pointer d-flex  align-items-center">
@@ -14,8 +14,8 @@
       </div>
     </section>
 
-    <section  class="border-top-1 p-all-2 ">
-      <span class="text-bold d-block m-bottom-2">bpm</span>
+    <section  class="border-top-1 p-3 ">
+      <span class="text-bold d-block mb-3">bpm</span>
       <div>
         <input type="checkbox" id="bpm_s" name="bpm" value="vs" />
         <label for="bpm_s">very slow</label>
@@ -39,8 +39,8 @@
     </section>
 
      
-    <section class="border-top-1 p-all-2 ">
-      <span class="text-bold d-block m-bottom-2">genre</span>
+    <section class="border-top-1 p-3 ">
+      <span class="text-bold d-block mb-3">genre</span>
       <div>
         <input type="checkbox" id="genre_a" name="genre" value="acoustic" />
         <label for="genre_a">acoustic</label>
@@ -83,7 +83,7 @@
       </div>
     </section>
     
-    <section class="m-top-auto p-all-2">
+    <section class="mt-auto p-3">
       <input type="submit" class="w-100" id="close-button" value="Filter" />
     </section>
   </form>

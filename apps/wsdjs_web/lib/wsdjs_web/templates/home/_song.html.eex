@@ -1,8 +1,8 @@
 <%= if blur_track(@rank.song, @current_user) == true do %>
 
 <li class="clickable shadow-onlyhover">
-  <a class="d-flex m-all-0">
-    <div class="song-minicard__heading p-all-0 b-all-0">
+  <a class="d-flex m-0">
+    <div class="song-minicard__heading p-0 b-all-0">
       <div class="voting-position charted">
         <div class="chart-bg"></div>
         <div class="chart-value"><%= @rank.position %></div>
@@ -11,7 +11,7 @@
     </div>
 
 
-    <div class="song-minicard__body d-flex p-y-0 m-left-1">
+    <div class="song-minicard__body d-flex py-0 ml-2">
       <span class="text-muted text-ellipsis">hidden track</span>
 
       <footer>
@@ -32,8 +32,8 @@
 <% else %>
 
 <li class="clickable shadow-onlyhover">
-  <a href="<%= song_path(@conn, :show, @rank.song.id) %>" class="d-flex m-all-0">
-    <div class="song-minicard__heading p-all-0 b-all-0">
+  <a href="<%= song_path(@conn, :show, @rank.song.id) %>" class="d-flex m-0">
+    <div class="song-minicard__heading p-0 b-all-0">
       <div class="voting-position charted">
         <div class="chart-bg"></div>
         <div class="chart-value"><%= @rank.position %></div>
@@ -42,7 +42,7 @@
     </div>
 
 
-    <div class="song-minicard__body d-flex p-y-0 m-left-1">
+    <div class="song-minicard__body d-flex py-0 ml-2">
       <span class="primary-text text-ellipsis"><%= @rank.song.title %></span>
       <span class="secondary-text text-ellipsis"><%= @rank.song.artist %></span>
       <span class="text-muted"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></span>

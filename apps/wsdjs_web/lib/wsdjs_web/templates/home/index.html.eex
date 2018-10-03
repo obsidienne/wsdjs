@@ -5,7 +5,7 @@
   </div>
 </header>
 <% else %>
-  <div class="p-top-4 container">
+  <div class="pt-5 container">
     <span class="h1 d-block">World Swing DeeJays</span>
     <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
 
@@ -17,12 +17,12 @@
   </div>
 <% end %>
 
-<div class="container justify-content-end align-items-center m-top-2 d-none d-md-flex ">
+<div class="container justify-content-end align-items-center mt-3 d-none d-md-flex ">
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
     <a class="btn btn-primary tippy" title="Suggest a song for the current month TOP 10" href="<%= suggestion_path(@conn, :new) %>">Suggest a song</a>
   <% end %>
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
-  <a class="btn btn-link m-left-1" href="<%= song_path(@conn, :new) %>">Add a song</a>
+  <a class="btn btn-link ml-2" href="<%= song_path(@conn, :new) %>">Add a song</a>
   <% end %>
 </div>
 

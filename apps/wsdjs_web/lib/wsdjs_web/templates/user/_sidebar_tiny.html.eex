@@ -1,9 +1,9 @@
-<div class="m-bottom-1 d-none d-md-block">
-  <section class="user-page__profile__section p-all-2">
+<div class="mb-2 d-none d-md-block">
+  <section class="user-page__profile__section p-3">
     <header class="d-flex flex-column">
       <div class="d-flex align-items-end justify-content-between">
         <div class="d-flex">
-          <%= if @user.profil_djvip do %><span class="label label-primary m-right-1">DJ VIP</span><% end %>
+          <%= if @user.profil_djvip do %><span class="label label-primary mr-2">DJ VIP</span><% end %>
           <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
         </div>
 
@@ -25,7 +25,7 @@
           <span class="text-ellipsis text-muted user-djanme"><%= @user.djname %></span>
         <% end %>
         <%= if @user.user_country do %>
-        <div class="d-flex m-top-auto justify-content-center text-muted">
+        <div class="d-flex mt-auto justify-content-center text-muted">
           <svg fill='#455A64' height='24' viewBox= '0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
             <path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>
             <path d='M0 0h24v24H0z' fill='none'/>
@@ -35,19 +35,19 @@
         <% end %>
       </div>
     </header>
-    <footer class="d-none d-md-flex flex-wrap justify-content-between align-items-center m-top-2">
+    <footer class="d-none d-md-flex flex-wrap justify-content-between align-items-center mt-3">
       <%= if @user && @user.parameter && @user.parameter.email_contact do %>
       <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Send an eMail</a>
       <% end %>
     </footer>
   </section>
 
-  <ul class="user-page__profile__section p-all-2 d-flex flex-wrap">
+  <ul class="user-page__profile__section p-3 d-flex flex-wrap">
     <li class="user-tag tippy" title="<%= @suggested_songs %> songs suggested"><span class="tag"><%= @suggested_songs %> songs</li>
   </ul>
 
   <%= if @user.detail do %>
-    <dl class="user-page__profile__section user-page__details p-all-2 d-none d-md-block m-all-0">
+    <dl class="user-page__profile__section user-page__details p-3 d-none d-md-block m-0">
       <%= if @user.detail.djing_start_year do %>
       <dt>Start DJing</dt>
       <dd><%= @user.detail.djing_start_year %></dd>
@@ -60,12 +60,12 @@
   <% end %>
 </div>
 
-<div class="m-bottom-1 d-md-none">
-  <section class="user-page__profile__section p-all-2">
+<div class="mb-2 d-md-none">
+  <section class="user-page__profile__section p-3">
     <header class="d-flex flex-column">
-      <div class="d-flex align-items-end m-bottom-2">
+      <div class="d-flex align-items-end mb-3">
         <div class="d-flex w-33">
-          <%= if @user.profil_djvip do %><span class="label label-primary m-right-1">DJ VIP</span><% end %>
+          <%= if @user.profil_djvip do %><span class="label label-primary mr-2">DJ VIP</span><% end %>
           <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
         </div>
 
@@ -83,7 +83,7 @@
       </div>
 
       <div class="user-page__profile-details">
-        <div class="d-flex m-top-auto justify-content-center text-muted">
+        <div class="d-flex mt-auto justify-content-center text-muted">
           <%= if @user.djname do %>
             <span class="text-muted"><%= @user.djname %></span>
           <% else %>

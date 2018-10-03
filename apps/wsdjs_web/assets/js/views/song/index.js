@@ -94,7 +94,7 @@ export default class View extends MainView {
     playlistPicker.unmount();
 
     const container = document.getElementById("song-list");
-    container.innerHTML = '<div class="sentinel text-centered m-all-2"><div class="donut"></div></div>';
+    container.innerHTML = '<div class="sentinel text-centered m-3"><div class="donut"></div></div>';
 
     var sentinel = document.querySelector("#song-list .sentinel");
     this.observer.observe(sentinel);
