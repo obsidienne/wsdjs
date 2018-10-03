@@ -1,5 +1,5 @@
 <div class="mb-2">
-  <section class="user-page__profile__section p-3">
+  <section class="user-page__profile__section p-3 w-100">
     <header class="d-flex flex-column">
       <div class="d-flex align-items-end justify-content-between">
         <div class="d-flex">
@@ -17,9 +17,9 @@
 
       </div>
       <div class="user-page__avatar">
-        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive">
+        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive border-circle">
       </div>
-      <div class="user-page__profile-details">
+      <div class="user-page__profile-details px-1 w-100">
         <span class="text-ellipsis user-name"><%= @user.name %></span>
         <%= if @user.djname do %>
           <span class="text-ellipsis text-muted user-djanme"><%= @user.djname %></span>
@@ -46,8 +46,8 @@
     </footer>
   </section>
 
-  <ul class="user-page__profile__section  p-3 d-none d-md-flex flex-wrap">
-    <li class="user-tag"><span class="tag"><%= @suggested_songs %> songs</li>
+  <ul class="user-page__profile__section  p-3 d-none d-md-flex flex-wrap w-100">
+    <li class="my-0 mx-2"><span class="tag"><%= @suggested_songs %> songs</li>
   </ul>
 
 

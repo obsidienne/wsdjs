@@ -5,14 +5,6 @@
   align-self: center;
 }
 
-.user-tag {
-  margin: 0 .5rem .5rem 0;
-}
-
-.user-page__avatar img {
-  border-radius: 50%;
-}
-
 .user-name {
   text-align: center;
   font-weight: var(--font-primary-weight);
@@ -36,23 +28,15 @@
 .user-page__profile-details {
   flex: 1 1 auto;
   min-width: 0;
-  width: 100%;
-  padding-left: 4px;
-  padding-right: 4px;
 }
 
 .user-page__profile__section {
   position: relative;
-  width: 100%;
   background-color: white;
 }
 
 .user-page__profile__section:empty {
   display: none;
-}
-
-.social-link svg {
-  margin-right: .5rem;
 }
 
 .social-sc:hover svg {
@@ -80,16 +64,7 @@
   text-decoration: underline;
 }
 
-.user-page__logout {
-  padding-left: 0;
-}
-
-.user-parameters th {
-  white-space: nowrap;
-}
-
 .playlists-grid {
-  display: grid;
   grid-gap: .5rem;
   grid-template-columns: 1fr 1fr;
 }

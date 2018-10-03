@@ -1,5 +1,5 @@
- <article class="tops__top">
-      <a href="<%= top_path(@conn, :show, @top.id) %>" class="tops__top__anchor">
+ <article class="tops__top d-flex">
+      <a href="<%= top_path(@conn, :show, @top.id) %>" class="tops__top__anchor border-circle">
         <%= if Enum.count(@top.ranks) > 0 do %>
         <div class="img-embed">
           <%= if blur_track(Enum.at(@top.ranks, 0).song, @current_user) == true do %>

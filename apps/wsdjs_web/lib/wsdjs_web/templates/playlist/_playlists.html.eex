@@ -6,7 +6,7 @@
   </div>
   <% end %>
 
-  <ul class="playlists-grid">
+  <ul class="playlists-grid d-grid">
     <%= for playlist <- @playlists do %>
     <li class="clickable">
       <%= link to: playlist_path(@conn, :show, playlist), class: "playlist" do %>

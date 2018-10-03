@@ -23,7 +23,7 @@
 </div>
 <% end %>
 
-<section id="top-list" class="tops container">
+<section id="top-list" class="tops container mt-3">
   <%= for top <- @tops do %>
     <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>

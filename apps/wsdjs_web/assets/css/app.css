@@ -21,6 +21,7 @@
 @import "./tops.css";
 @import "./radio.css";
 @import "./user.css";
+@import "./utilities/align.css";
 @import "./utilities/border.css";
 @import "./utilities/display.css";
 @import "./utilities/flex.css";

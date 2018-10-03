@@ -1,5 +1,5 @@
 <div class="mb-2 d-none d-md-block">
-  <section class="user-page__profile__section p-3">
+  <section class="user-page__profile__section p-3 w-100">
     <header class="d-flex flex-column">
       <div class="d-flex align-items-end justify-content-between">
         <div class="d-flex">
@@ -17,9 +17,9 @@
 
       </div>
       <div class="user-page__avatar">
-        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive">
+        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive border-circle">
       </div>
-      <div class="user-page__profile-details">
+      <div class="user-page__profile-details px-1 w-100">
         <span class="text-ellipsis user-name"><%= @user.name %></span>
         <%= if @user.djname do %>
           <span class="text-ellipsis text-muted user-djanme"><%= @user.djname %></span>
@@ -42,12 +42,12 @@
     </footer>
   </section>
 
-  <ul class="user-page__profile__section p-3 d-flex flex-wrap">
-    <li class="user-tag tippy" title="<%= @suggested_songs %> songs suggested"><span class="tag"><%= @suggested_songs %> songs</li>
+  <ul class="user-page__profile__section p-3 d-flex flex-wrap w-100">
+    <li class="tippy my-0 mx-2" title="<%= @suggested_songs %> songs suggested"><span class="tag"><%= @suggested_songs %> songs</li>
   </ul>
 
   <%= if @user.detail do %>
-    <dl class="user-page__profile__section user-page__details p-3 d-none d-md-block m-0">
+    <dl class="user-page__profile__section user-page__details p-3 d-none d-md-block m-0 w-100">
       <%= if @user.detail.djing_start_year do %>
       <dt>Start DJing</dt>
       <dd><%= @user.detail.djing_start_year %></dd>
@@ -61,7 +61,7 @@
 </div>
 
 <div class="mb-2 d-md-none">
-  <section class="user-page__profile__section p-3">
+  <section class="user-page__profile__section p-3 w-100">
     <header class="d-flex flex-column">
       <div class="d-flex align-items-end mb-3">
         <div class="d-flex w-33">
@@ -82,7 +82,7 @@
         <% end %>
       </div>
 
-      <div class="user-page__profile-details">
+      <div class="user-page__profile-details px-1 w-100">
         <div class="d-flex mt-auto justify-content-center text-muted">
           <%= if @user.djname do %>
             <span class="text-muted"><%= @user.djname %></span>

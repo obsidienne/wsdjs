@@ -37,11 +37,9 @@
 
 .tops {
   position: relative;
-  margin-top: 1rem;
 }
 
 .tops__top {
-  display: flex;
   position: relative;
   margin: 2em 0;
 }
@@ -64,7 +62,6 @@
   left: 0;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
 }
 
 .tops__top__anchor__img {
@@ -98,19 +95,23 @@
   .tops :nth-child(even) {
     justify-content: flex-end;
   }
+
   .tops :nth-child(odd) .tops__top__date {
     flex-direction: row-reverse;
   }
+
   .tops :nth-child(odd) .tops__top__date time {
     padding-right: 0;
     padding-left: 15px;
   }
+
   .tops__top__anchor {
     width: 64px;
     height: 64px;
     left: 50%;
     margin-left: -30px;
   }
+
   .tops__top__content {
     margin-left: 0;
     width: 45%;

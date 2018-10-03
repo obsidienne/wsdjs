@@ -25,7 +25,6 @@
 }
 
 .comment__delete {
-  margin-left: auto;
   color: hsl(0, 0%, 13%);
   color: var(--font-primary-color);
 }
