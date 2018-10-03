@@ -35,29 +35,6 @@
 
 
 /******************
- border utilities
-******************/
-
-.border-circle {
-  border-radius: 50%;
-}
-
-.border-top-1 {
-  border-top: 1px solid #d8d8d8;
-}
-
-.b-all-0 {
-  border: 0;
-}
-
-.b-bottom-1 {
-  border-bottom-color: hsl(0, 0%, 45%);
-  border-bottom-color: var(--inactive-color);
-  border-bottom-width: 1px;
-  border-bottom-style: dotted;
-}
-
-/******************
  sizes utilities
 ******************/
 .w-33 {
@@ -82,67 +59,6 @@
 
 .h-12 {
   height: 6rem;
-}
-
-/******************
- display utilities
-******************/
-
-/******************
- flex utilities
-******************/
-.flex-column {
-  flex-direction: column;
-}
-
-.flex-grow-0 {
-  flex-grow: 0;
-}
-
-.flex-grow-1 {
-  flex-grow: 1;
-}
-
-.flex-shrink-0 {
-  flex-shrink: 0;
-}
-
-.flex-shrink-1 {
-  flex-shrink: 1;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.align-items-end {
-  align-items: flex-end;
-}
-
-.justify-content-end {
-  justify-content: flex-end;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-
-.justify-content-around {
-  justify-content: space-around;
-}
-
-.justify-content-between {
-  justify-content: space-between;
-}
-
-@media (min-width: 768px) {
-  .flex-md-row {
-    flex-direction: row;
-  }
 }
 
 /******************
