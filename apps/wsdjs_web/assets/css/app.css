@@ -22,4 +22,5 @@
 @import "./radio.css";
 @import "./user.css";
 @import "./utilities/spacing.css";
+@import "./utilities/display.css";
 @import '../node_modules/leaflet/dist/leaflet.css';
