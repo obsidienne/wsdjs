@@ -18,6 +18,10 @@
     display: inline-flex;
 }
 
+.d-grid {
+    display: grid;
+}
+
 @media (min-width: 768px) {
     .d-md-none {
         display: none;

@@ -4,7 +4,7 @@
   </div>
 </header>
 
-<section class="container song-new">
+<section class="container song-new  d-flex mt-3 flex-column flex-md-row">
   <div id="art_div">
     <img id="art_thumbnail" src="<%= art_url(nil, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">

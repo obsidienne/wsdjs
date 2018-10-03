@@ -14,16 +14,8 @@
 }
 
 .home-container {
-  display: grid;
   grid-template-columns: 100%;
   grid-gap: .5rem;
-}
-
-.song-edit,
-.song-new {
-  display: flex;
-  margin-top: 16px;
-  flex-direction: column;
 }
 
 #avatar_div,
