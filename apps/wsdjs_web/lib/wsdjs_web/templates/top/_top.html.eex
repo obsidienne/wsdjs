@@ -1,4 +1,4 @@
- <article class="tops__top d-flex">
+ <article class="tops__top d-flex mt-3">
       <a href="<%= top_path(@conn, :show, @top.id) %>" class="tops__top__anchor border-circle">
         <%= if Enum.count(@top.ranks) > 0 do %>
         <div class="img-embed">
