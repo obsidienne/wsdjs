@@ -1,5 +1,5 @@
 <section id="playlist-section">
-  <div class="playlist-actions d-flex flex-wrap mb-2 mt-3">
+  <div class="h-5 d-flex flex-wrap mb-2 mt-3 align-items-center">
     <%= link to: user_playlist_path(@conn, :index, @user), class: "d-flex" do %>
     <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
@@ -34,7 +34,7 @@
     <tbody>
     <%= for song <- @songs do %>
     <tr>
-      <td class="table_song-art">
+      <td class="w-6">
         <img src="<%= art_url(song.art, 64) %>" srcset="<%= art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
       <td>

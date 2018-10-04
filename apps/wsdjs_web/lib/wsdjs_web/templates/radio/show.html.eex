@@ -5,7 +5,7 @@
 </nav>
 
 <section id="radio-page" class="radio-page container mt-3">
-  <div class="radio-song">
+  <div class="radio-song d-flex align-items-center flex-column ">
     <%= if @songs == :empty do %>
       <strong>Something went really bad</strong>
     <% else %>

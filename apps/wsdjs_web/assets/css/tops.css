@@ -41,7 +41,6 @@
 
 .tops__top {
   position: relative;
-  margin: 2em 0;
 }
 
 .tops__top>a {
@@ -67,10 +66,6 @@
 .tops__top__anchor__img {
   width: 100%;
   height: auto;
-}
-
-.tops__top table {
-  margin-top: 8px;
 }
 
 .tops__top thead {

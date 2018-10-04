@@ -7,7 +7,7 @@
         <%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b", :strftime)%>
       </span>
     </div>
-    <a href="<%= url_for_provider(@song) %>" class="song-card__header" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
+    <a href="<%= url_for_provider(@song) %>" class="song-card__header p-0 d-block" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
       <div class="img-embed">
         <img src="<%= art_url(nil, 200) %>" data-src="<%= art_url(@song.art, 200) %>" data-srcset="<%= art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
       </div>

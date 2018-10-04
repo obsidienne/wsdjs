@@ -10,6 +10,10 @@
     width: 100%;
 }
 
+.w-6 {
+    width: 4rem;
+}
+
 .w-12 {
     width: 6rem;
 }
