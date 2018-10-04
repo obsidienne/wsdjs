@@ -160,12 +160,10 @@
 }
 
 .top-song-body a {
-  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
 
 .top-song-body a:hover {
-  -webkit-text-decoration: underline;
   text-decoration: underline;
   color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);

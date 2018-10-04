@@ -6,13 +6,13 @@
 
 <%= if @current_user && @current_user.admin do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb">
+<nav class="secondary-nav breadcrumb py-2">
   <ol class="container">
-    <li class="visited">Voting</li>
-    <li class="visited">
+    <li class="visited d-inline-block">Voting</li>
+    <li class="visited d-inline-block">
       <%= submit "Counting", class: "btn btn-link", name: "direction", value: "previous" %>
     </li>
-    <li class="current">Published</li>
+    <li class="current d-inline-block">Published</li>
   </ol>
 </nav>
 <% end %>

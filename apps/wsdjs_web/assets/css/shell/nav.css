@@ -123,12 +123,6 @@ main>header h2 {
 
 .secondary-nav {
   background-color: #edeff0;
-  padding-bottom: .5rem;
-  padding-top: .5rem;
-}
-
-.secondary-nav li {
-  display: inline-block;
 }
 
 .secondary-nav.breadcrumb {

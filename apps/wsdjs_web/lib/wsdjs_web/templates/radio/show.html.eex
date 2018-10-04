@@ -1,6 +1,6 @@
-<nav class="secondary-nav">
+<nav class="secondary-nav py-2">
   <ol class="container">
-    <li class="current">Current</li>
+    <li class="current d-inline-block">Current</li>
   </ol>
 </nav>
 

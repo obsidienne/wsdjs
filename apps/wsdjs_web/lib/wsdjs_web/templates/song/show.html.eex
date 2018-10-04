@@ -1,7 +1,7 @@
-<nav class="secondary-nav">
+<nav class="secondary-nav py-2">
   <ol class="container">
-    <li class="current"><%= link "Song", to: song_path(@conn, :show, @song) %></li>
-    <li><%= link "Videos", to: song_song_videos_path(@conn, :index, @song) %></li>
+    <li class="current d-inline-block"><%= link "Song", to: song_path(@conn, :show, @song) %></li>
+    <li class="d-inline-block"><%= link "Videos", to: song_song_videos_path(@conn, :index, @song) %></li>
   </ol>
 </nav>
 

@@ -5,12 +5,12 @@
 </header>
 <%= if @current_user && @current_user.admin do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb">
-  <ol class="container">
+<nav class="secondary-nav breadcrumb py-2">
+  <ol class="container d-inline-block">
     <li class="visited">
       <%= submit "Voting", class: "btn btn-link", name: "direction", value: "previous" %>
     </li>
-    <li class="current">Counting</li>
+    <li class="current d-inline-block">Counting</li>
     <li><%= submit "next step : publish", class: "btn btn-link", name: "direction", value: "next" %></li>
   </ol>
 </nav>

@@ -6,11 +6,11 @@
 
 <%= if @current_user && @current_user.id == @top.user_id do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb">
+<nav class="secondary-nav breadcrumb py-2">
   <ol class="container">
-    <li class="visited">Create</li>
-    <li class="current">Check</li>
-    <li><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
+    <li class="visited d-inline-block">Create</li>
+    <li class="current d-inline-block">Check</li>
+    <li class="d-inline-block"><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
   </ol>
 </nav>
 <% end %>

@@ -1,12 +1,12 @@
-<nav class="secondary-nav">
+<nav class="secondary-nav py-2">
   <ol class="container">
-    <li>
+    <li class="d-inline-block">
       <%= link "bio", to: user_path(@conn, :show, @user) %>
     </li>
-    <li>
+    <li class="d-inline-block">
       <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
     </li>
-    <li class="current">
+    <li class="current d-inline-block">
       <%= link "params", to: user_params_path(@conn, :show, @user) %>
     </li>
   </ol>
