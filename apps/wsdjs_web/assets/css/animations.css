@@ -6,6 +6,7 @@ donut
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -54,6 +55,7 @@ sound bar
     opacity: .35;
     height: 3px;
   }
+
   100% {
     opacity: 1;
     height: 16px;
@@ -80,9 +82,11 @@ throbber-loader
   0% {
     background: hsl(210, 17%, 89%);
   }
+
   10% {
     background: hsl(208, 46%, 60%);
   }
+
   40% {
     background: hsl(210, 17%, 89%);
   }
@@ -127,25 +131,12 @@ https://github.com/IanLunn/Hover/blob/master/css/hover.css
 
 Pulse
 ****************************/
-
-@-webkit-keyframes hvr-pulse {
-  25% {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-  }
-  75% {
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-}
-
 @keyframes hvr-pulse {
   25% {
-    -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
+
   75% {
-    -webkit-transform: scale(0.9);
     transform: scale(0.9);
   }
 }
@@ -153,7 +144,6 @@ Pulse
 .hvr-pulse {
   display: inline-block;
   vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
@@ -161,13 +151,9 @@ Pulse
 .hvr-pulse:hover,
 .hvr-pulse:focus,
 .hvr-pulse:active {
-  -webkit-animation-name: hvr-pulse;
   animation-name: hvr-pulse;
-  -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
 
@@ -175,88 +161,44 @@ Pulse
 buzz out
 ****************************/
 
-@-webkit-keyframes hvr-buzz-out {
-  10% {
-    -webkit-transform: translateX(3px) rotate(2deg);
-    transform: translateX(3px) rotate(2deg);
-  }
-  20% {
-    -webkit-transform: translateX(-3px) rotate(-2deg);
-    transform: translateX(-3px) rotate(-2deg);
-  }
-  30% {
-    -webkit-transform: translateX(3px) rotate(2deg);
-    transform: translateX(3px) rotate(2deg);
-  }
-  40% {
-    -webkit-transform: translateX(-3px) rotate(-2deg);
-    transform: translateX(-3px) rotate(-2deg);
-  }
-  50% {
-    -webkit-transform: translateX(2px) rotate(1deg);
-    transform: translateX(2px) rotate(1deg);
-  }
-  60% {
-    -webkit-transform: translateX(-2px) rotate(-1deg);
-    transform: translateX(-2px) rotate(-1deg);
-  }
-  70% {
-    -webkit-transform: translateX(2px) rotate(1deg);
-    transform: translateX(2px) rotate(1deg);
-  }
-  80% {
-    -webkit-transform: translateX(-2px) rotate(-1deg);
-    transform: translateX(-2px) rotate(-1deg);
-  }
-  90% {
-    -webkit-transform: translateX(1px) rotate(0);
-    transform: translateX(1px) rotate(0);
-  }
-  100% {
-    -webkit-transform: translateX(-1px) rotate(0);
-    transform: translateX(-1px) rotate(0);
-  }
-}
-
 @keyframes hvr-buzz-out {
   10% {
-    -webkit-transform: translateX(3px) rotate(2deg);
     transform: translateX(3px) rotate(2deg);
   }
+
   20% {
-    -webkit-transform: translateX(-3px) rotate(-2deg);
     transform: translateX(-3px) rotate(-2deg);
   }
+
   30% {
-    -webkit-transform: translateX(3px) rotate(2deg);
     transform: translateX(3px) rotate(2deg);
   }
+
   40% {
-    -webkit-transform: translateX(-3px) rotate(-2deg);
     transform: translateX(-3px) rotate(-2deg);
   }
+
   50% {
-    -webkit-transform: translateX(2px) rotate(1deg);
     transform: translateX(2px) rotate(1deg);
   }
+
   60% {
-    -webkit-transform: translateX(-2px) rotate(-1deg);
     transform: translateX(-2px) rotate(-1deg);
   }
+
   70% {
-    -webkit-transform: translateX(2px) rotate(1deg);
     transform: translateX(2px) rotate(1deg);
   }
+
   80% {
-    -webkit-transform: translateX(-2px) rotate(-1deg);
     transform: translateX(-2px) rotate(-1deg);
   }
+
   90% {
-    -webkit-transform: translateX(1px) rotate(0);
     transform: translateX(1px) rotate(0);
   }
+
   100% {
-    -webkit-transform: translateX(-1px) rotate(0);
     transform: translateX(-1px) rotate(0);
   }
 }
@@ -264,7 +206,6 @@ buzz out
 .hvr-buzz-out {
   display: inline-block;
   vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
@@ -272,12 +213,8 @@ buzz out
 .hvr-buzz-out:hover,
 .hvr-buzz-out:focus,
 .hvr-buzz-out:active {
-  -webkit-animation-name: hvr-buzz-out;
   animation-name: hvr-buzz-out;
-  -webkit-animation-duration: 0.75s;
   animation-duration: 0.75s;
-  -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
-  -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
 }

@@ -82,12 +82,10 @@
 }
 
 .visible-link {
-  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
 
 .visible-link:hover {
-  -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
