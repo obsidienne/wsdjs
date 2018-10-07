@@ -26,4 +26,5 @@
 @import "./utilities/flex.css";
 @import "utilities/sizes.css";
 @import "./utilities/spacing.css";
+@import 'shame.css';
 @import '../node_modules/leaflet/dist/leaflet.css';

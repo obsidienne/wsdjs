@@ -1,0 +1,8 @@
+.shadow-onlyhover:hover input[type=submit] {
+    opacity: 1;
+    transition: opacity 0.1s 0.1s ease;
+}
+
+.shadow-onlyhover input[type=submit] {
+    opacity: 0;
+}

@@ -12,6 +12,7 @@ import EventShowView from './event/show';
 import EventNewView from './event/new';
 import EventEditView from './event/edit';
 import SuggestionNewView from './suggestion/new';
+import PlaylistShowView from './playlist/show';
 
 // Collection of specific view modules
 const views = {
@@ -27,6 +28,7 @@ const views = {
   EventNewView,
   EventEditView,
   EventShowView,
+  PlaylistShowView,
   SuggestionNewView
 };
 

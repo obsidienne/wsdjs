@@ -1,7 +1,7 @@
 <%= if blur_track(@song, @current_user) == false do %>
 
 <li class="shadow-onlyhover">
-  <div class="d-flex m-0">
+  <div class="d-flex m-0" data-id="<%= @song.id %>">
     <div class="search-minicard__heading p-0 b-all-0">
       <img src="<%= art_url(@song.art, 100) %>" class="responsive" />
     </div>
@@ -12,7 +12,9 @@
         <%= user_displayed_name(@song.user) %>
       </span>
     </div>
-  </div>
+    <form>
+      <input type="submit" value="Add" />
+    </form>
 </li>
 
 <% end %>
