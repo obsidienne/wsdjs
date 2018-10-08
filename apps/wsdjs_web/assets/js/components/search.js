@@ -24,8 +24,10 @@ export default class search {
   }
 
   _search(cl) {
-    let query = document.getElementById("search-input").value;
-    fetch(`/search?q=${query}`, {
+    let el = document.getElementById("search-input");
+    let playlist = el.dataset.playlist;
+    let query = el.value;
+    fetch(`/playlists/${playlist}/search?q=${query}`, {
         credentials: 'include'
       })
       .then((response) => {

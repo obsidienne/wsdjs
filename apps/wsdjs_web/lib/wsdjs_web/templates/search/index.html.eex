@@ -1,3 +1,0 @@
-<ul class="search-results">
-  <%= render_many @songs, WsdjsWeb.SearchView, "_song.html", conn: @conn, as: :song, current_user: @current_user %>
-</ul>

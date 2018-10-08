@@ -55,7 +55,10 @@ defmodule WsdjsWeb.Router do
 
     resources("/user-params", UserParamsController, only: [:show])
 
-    resources("/playlists", PlaylistController, only: [:show, :edit, :delete, :update])
+    resources("/playlists", PlaylistController, only: [:show, :edit, :delete, :update]) do
+      resources("/songs", PlaylistSongsController, only: [:create])
+      resources("/search", PlaylistSearchAddController, only: [:index])
+    end
   end
 
   scope "/", WsdjsWeb do
@@ -63,7 +66,6 @@ defmodule WsdjsWeb.Router do
     pipe_through(:browser)
 
     get("/", HomeController, :index)
-    get("/search", SearchController, :index)
     get("/radio", RadioController, :show)
     resources("/users", UserController, only: [:show])
     resources("/home", HomeController, only: [:index])
