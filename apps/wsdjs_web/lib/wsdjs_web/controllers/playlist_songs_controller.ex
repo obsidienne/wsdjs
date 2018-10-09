@@ -22,6 +22,14 @@ defmodule WsdjsWeb.PlaylistSongsController do
       conn
       |> put_flash(:info, "Song added successfully.")
       |> redirect(to: playlist_path(conn, :show, playlist))
+    else
+      {:error, %Ecto.Changeset{}} ->
+        conn
+        |> put_flash(:error, "Song already added.")
+        |> redirect(to: playlist_path(conn, :show, playlist))
+
+      {:error, val} ->
+        {:error, val}
     end
   end
 end
