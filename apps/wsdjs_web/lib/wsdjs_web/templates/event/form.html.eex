@@ -51,3 +51,4 @@
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
+<script src="https://cdn.jsdelivr.net/npm/places.js@1.6.0/dist/cdn/places.min.js" integrity="sha256-BA9pf3Y/3PRVzdPQBOt3AGkDY/ZJWAbK7RljFMoGbfc=" crossorigin="anonymous"></script>
