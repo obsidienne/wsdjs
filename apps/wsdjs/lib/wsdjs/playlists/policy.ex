@@ -8,6 +8,7 @@ defmodule Wsdjs.Playlists.Policy do
   alias Wsdjs.Playlists.Playlist
 
   def can?(%User{id: id}, :add_song, %Playlist{user_id: id}), do: :ok
+  def can?(%User{id: id}, :delete_song, %Playlist{user_id: id}), do: :ok
 
   def can?(%User{admin: true}, _, _), do: :ok
   def can?(%User{id: id}, :edit, %Playlist{user_id: id}), do: :ok

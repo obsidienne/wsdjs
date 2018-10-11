@@ -134,6 +134,13 @@ defmodule Wsdjs.Playlists do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists.PlaylistSong
 
+  def get_playlist_song!(playlist_id, song_id) do
+    PlaylistSong
+    |> where(playlist_id: ^playlist_id)
+    |> where(song_id: ^song_id)
+    |> Repo.one!()
+  end
+
   @doc """
   Returns the list of list_playlist_songs.
 
@@ -227,4 +234,21 @@ defmodule Wsdjs.Playlists do
     |> Changeset.put_assoc(:playlist_songs, songs)
     |> Repo.update()
   end
+
+  @doc """
+  Deletes a Playlist song.
+
+  ## Examples
+
+      iex> delete_playlist_song(playlist_song)
+      {:ok, %PlaylistSong{}}
+
+      iex> delete_playlist(playlist_song)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_playlist_song(%PlaylistSong{} = playlist_song) do
+    Repo.delete(playlist_song)
+  end
+
 end

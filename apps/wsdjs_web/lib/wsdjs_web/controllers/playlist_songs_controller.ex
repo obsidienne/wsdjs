@@ -32,4 +32,18 @@ defmodule WsdjsWeb.PlaylistSongsController do
         {:error, val}
     end
   end
+
+  @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
+  def delete(conn, %{"playlist_id" => playlist_id, "song_id" => song_id}, current_user) do
+    playlist = Playlists.get_playlist!(playlist_id)
+    playlist_song = Playlists.get_playlist_song!(playlist_id, song_id)
+
+    with :ok <- Playlists.Policy.can?(current_user, :delete_song, playlist),
+         {:ok, _song} = Playlists.delete_playlist_song(playlist_song) do
+      conn
+      |> put_flash(:info, "Song deleted successfully.")
+      |> redirect(to: playlist_path(conn, :show, playlist))
+    end
+  end
 end
