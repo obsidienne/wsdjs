@@ -1,4 +1,4 @@
-import Tippy from 'tippy.js/dist/tippy.all';
+import Tippy from 'tippy.js';
 import Mustache from 'micromustache';
 
 class OpinionPicker {
@@ -35,7 +35,7 @@ class OpinionPicker {
     let tip = new Tippy(".opinion-picker", {
       animation: 'shift-away',
       arrow: false,
-      html: '#opinion-picker-tpl',
+      content: document.querySelector('#opinion-picker-tpl').innerHTML,
       performance: true,
       interactive: true,
       theme: "wsdjs",

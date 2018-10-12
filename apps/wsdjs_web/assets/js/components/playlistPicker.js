@@ -1,4 +1,4 @@
-import Tippy from 'tippy.js/dist/tippy.all';
+import Tippy from 'tippy.js';
 
 class PlaylistPicker {
   constructor() {
@@ -36,16 +36,18 @@ class PlaylistPicker {
     let tip = new Tippy(".playlist-picker", {
       animation: 'shift-away',
       arrow: false,
-      html: '#playlist-picker-tpl',
+      content: document.querySelector('#playlist-picker-tpl').innerHTML,
       performance: true,
       interactive: true,
       theme: "playlist-picker",
       placement: "top-end",
       onShow: (instance) => {
         this.ref = instance.reference;
+        return true;
       },
       onHide: () => {
         this.ref = undefined;
+        return true;
       }
     });
     return tip;

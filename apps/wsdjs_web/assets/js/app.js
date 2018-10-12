@@ -2,6 +2,7 @@
 // The ExtractTextPlugin is used to separate it out into
 // its own CSS file.
 import css from '../css/app.css';
+import 'tippy.js/dist/tippy.css';
 
 // webpack automatically concatenates all files in your
 // watched paths. Those paths can be configured as
@@ -27,7 +28,7 @@ import Notifier from './components/notifier';
 import Opinions from './components/opinions';
 import OpinionPicker from './components/opinionPicker';
 import PlaylistPicker from './components/playlistPicker';
-import Tooltip from './components/tooltip';
+import Tippy from 'tippy.js';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
@@ -53,7 +54,6 @@ function handleDOMContentLoaded() {
   }
 
   Opinions.mount();
-  Tooltip.mount();
 }
 
 function handleUnloadContentLoaded() {
@@ -61,7 +61,6 @@ function handleUnloadContentLoaded() {
     window.currentView.unmount();
   }
   Opinions.unmount();
-  Tooltip.unmount();
 }
 
 var radio = new Radio();
@@ -70,6 +69,7 @@ var search = new Search();
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
 document.addEventListener('pjax:ready', handleDOMContentLoaded, false);
 window.addEventListener('pjax:unload', handleUnloadContentLoaded, false);
+window.addEventListener('scroll', () => Tippy.hideAllPoppers())
 
 new Pjax({
   areas: [

@@ -1,9 +1,8 @@
-import Tippy from 'tippy.js/dist/tippy.all';
+import Tippy from 'tippy.js';
 import Mustache from 'micromustache';
 
 class Opinions {
   constructor() {
-
     document.addEventListener("click", e => {
       if (e.target && e.target.matches(".song-opinion")) {
         e.preventDefault();
@@ -68,7 +67,16 @@ class Opinions {
     container.getElementsByTagName("span")[0].innerText = data.count;
     container.dataset.localMethod = data.method;
     container.dataset.url = data.url;
-    container.setAttribute("title", data.tooltip_html);
+    if (data.tooltip_html) {
+      container.dataset.tippyContent = data.tooltip_html;
+      Tippy(container);
+
+    } else {
+      delete container.dataset.tippy;
+      if (container._tippy) {
+        container._tippy.destroy();
+      }
+    }
     container.classList.remove("active")
 
     if (user_opinion == kind) {
