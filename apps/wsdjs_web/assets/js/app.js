@@ -78,5 +78,8 @@ new Pjax({
   update: {
     css: false,
     js: false
+  },
+  filter: function (el) {
+    return el.matches(':not([target])') && el.matches(':not([pjax="false"])');
   }
 });

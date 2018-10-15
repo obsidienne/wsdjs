@@ -78,7 +78,7 @@
         </div>
       </td>
       <td>
-        <%= link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, song), class: "btn btn-danger", method: "delete" %>
+        <%= link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, song), class: "btn btn-danger", method: "delete", pjax: "false" %>
       </td>
     <tr>
     <% end %>

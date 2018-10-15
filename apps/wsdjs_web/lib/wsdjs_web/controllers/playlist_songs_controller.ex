@@ -35,7 +35,7 @@ defmodule WsdjsWeb.PlaylistSongsController do
 
   @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
-  def delete(conn, %{"playlist_id" => playlist_id, "song_id" => song_id}, current_user) do
+  def delete(conn, %{"playlist_id" => playlist_id, "id" => song_id}, current_user) do
     playlist = Playlists.get_playlist!(playlist_id)
     playlist_song = Playlists.get_playlist_song!(playlist_id, song_id)
 
