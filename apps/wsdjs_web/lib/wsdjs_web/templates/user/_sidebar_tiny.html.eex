@@ -17,7 +17,7 @@
 
       </div>
       <div class="user-page__avatar">
-        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive border-circle">
+        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive rounded-circle">
       </div>
       <div class="user-page__profile-details px-1 w-100">
         <span class="text-ellipsis user-name"><%= @user.name %></span>

@@ -14,7 +14,7 @@
       </div>
     </section>
 
-    <section  class="border-top-1 p-3 ">
+    <section  class="border-top p-3 ">
       <span class="text-bold d-block mb-3">bpm</span>
       <div>
         <input type="checkbox" id="bpm_s" name="bpm" value="vs" />
@@ -39,7 +39,7 @@
     </section>
 
      
-    <section class="border-top-1 p-3 ">
+    <section class="border-top p-3 ">
       <span class="text-bold d-block mb-3">genre</span>
       <div>
         <input type="checkbox" id="genre_a" name="genre" value="acoustic" />

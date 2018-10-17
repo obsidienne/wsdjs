@@ -2,7 +2,7 @@
 
 <li class="clickable shadow-onlyhover">
   <a class="d-flex m-0">
-    <div class="song-minicard__heading p-0 b-all-0">
+    <div class="song-minicard__heading p-0 border-0">
       <div class="voting-position charted">
         <div class="chart-bg"></div>
         <div class="chart-value"><%= @rank.position %></div>
@@ -33,7 +33,7 @@
 
 <li class="clickable shadow-onlyhover">
   <a href="<%= song_path(@conn, :show, @rank.song.id) %>" class="d-flex m-0">
-    <div class="song-minicard__heading p-0 b-all-0">
+    <div class="song-minicard__heading p-0 border-0">
       <div class="voting-position charted">
         <div class="chart-bg"></div>
         <div class="chart-value"><%= @rank.position %></div>

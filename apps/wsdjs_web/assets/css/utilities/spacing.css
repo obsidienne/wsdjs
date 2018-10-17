@@ -48,6 +48,11 @@
     padding: 1rem;
 }
 
+.py-3 {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
 .px-3,
 .pl-3 {
     padding-left: 1rem;

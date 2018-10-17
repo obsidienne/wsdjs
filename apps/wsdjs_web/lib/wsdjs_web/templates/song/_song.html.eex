@@ -1,7 +1,7 @@
 <li class="hot-songs__song" data-id="<%= @song.id %>">
   <article class="song-card card shadow clickable d-flex flex-column">
     <div class="py-2 px-3 d-flex align-items-center">
-      <img class="mr-2 border-circle" src="<%= avatar_url(@song.user.avatar, 32) %>" srcset="<%= avatar_srcset(@song.user.avatar, 32) %>" sizes="32px">
+      <img class="mr-2 rounded-circle" src="<%= avatar_url(@song.user.avatar, 32) %>" srcset="<%= avatar_srcset(@song.user.avatar, 32) %>" sizes="32px">
       <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link clickable action-link text-ellipsis" %>
       <span class="secondary-text text-nowrap">
         <%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b", :strftime)%>

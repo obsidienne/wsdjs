@@ -29,13 +29,6 @@
     <% end %>
   </div>
 
-
-  <%= if Enum.count(@songs) > 0 do %>
-  <p>
-    <%= Enum.count(@songs) %> songs
-  </p>
-  <% end %>
-
   <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
   <div class="search-container">
     <div class="search__input__wrap w-100 d-inline-flex pt-2">
@@ -50,6 +43,47 @@
     </div>
   </div>
   <% end %>
+
+  <%= if true do %>
+  <%# start write user %>
+
+  <ol class="list-unstyled">
+    <%= for {song, idx} <- Enum.with_index(@songs) do %>
+    <%= if idx == 5 do %>
+    <li>the following songs are not public</li>
+    <% end %>
+    <li class="d-flex mb-2">
+      <div class="pr-2">
+        <div class="song-art-container h-12 w-12">
+          <div class="voting-position charted">
+            <div class="chart-bg"></div>
+            <div class="chart-value"><%= idx + 1 %></div>
+          </div>
+          <img src="<%= art_url(song.art, 96) %>" srcset="<%= art_srcset(song.art, 96) %>" sizes="96px" width="96px" height="96px" />
+        </div>
+      </div>
+      <div class="flex-grow-1 pr-2">
+        <%= link song.title, to: song_path(@conn, :show, song), class: "primary-text action-link visible-link d-block" %>
+        <div class="secondary-text"><%= song.artist %></div>
+        <div>
+          <span class="label label-default"><%= song.genre %></span>
+          <%= if song.bpm > 0 do %>
+            <span class="label label-primary"><%= song.bpm %> bpm</span>
+          <% end %>
+        </div>
+      </div>
+      <%= form_for @conn, playlist_playlist_songs_path(@conn, :update, @playlist, song), [class: "d-flex flex-column justify-content-between py-3"], fn f -> %>
+        <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z'/></svg>
+        <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'/></svg>
+      <% end %>
+
+        <%# link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, song), class: "btn btn-danger", method: "delete", pjax: "false" %>
+  <% end %>
+  </ol>
+
+  <%# end write user %>
+  <% else %>
+  <%# start read only user %>
 
   <table class="table">
     <tbody>
@@ -77,13 +111,10 @@
           <% end %>
         </div>
       </td>
-      <td>
-        <%= link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, song), class: "btn btn-danger", method: "delete", pjax: "false" %>
-      </td>
     <tr>
     <% end %>
     </tbody>
   </table>
 
-
+  <% end %> <%# end read only user %>
 </section>

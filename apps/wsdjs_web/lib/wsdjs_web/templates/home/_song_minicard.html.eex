@@ -2,7 +2,7 @@
 
 <li class="clickable shadow-onlyhover">
   <a class="d-flex m-0">
-    <div class="song-minicard__heading p-0 b-all-0">
+    <div class="song-minicard__heading p-0 border-0">
       <img src="<%= art_url(nil, 200) %>" class="responsive" />
     </div>
     <div class="song-minicard__body d-flex py-0 ml-2">
@@ -27,7 +27,7 @@
 
 <li class="clickable shadow-onlyhover">
   <a href="<%= song_path(@conn, :show, @song.id) %>" class="d-flex m-0">
-    <div class="song-minicard__heading p-0 b-all-0">
+    <div class="song-minicard__heading p-0 border-0">
       <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
     </div>
     <div class="song-minicard__body d-flex py-0 ml-2">

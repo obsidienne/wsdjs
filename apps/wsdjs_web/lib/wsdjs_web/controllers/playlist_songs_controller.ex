@@ -12,7 +12,8 @@ defmodule WsdjsWeb.PlaylistSongsController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def create(conn, %{"playlist_id" => playlist_id, "song_id" => song_id}, current_user) when not is_nil(current_user) do
+  def create(conn, %{"playlist_id" => playlist_id, "song_id" => song_id}, current_user)
+      when not is_nil(current_user) do
     playlist = Playlists.get_playlist!(playlist_id)
     song = Musics.get_song!(song_id)
     params = %{playlist_id: playlist.id, song_id: song.id, position: 0}
@@ -31,6 +32,11 @@ defmodule WsdjsWeb.PlaylistSongsController do
       {:error, val} ->
         {:error, val}
     end
+  end
+
+  def update(conn, %{"ranks" => _votes_params, "playlist_id" => playlist_id}) do
+    playlist = Playlists.get_playlist!(playlist_id)
+    redirect(conn, to: playlist_path(conn, :show, playlist))
   end
 
   @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
