@@ -188,18 +188,17 @@ defmodule Wsdjs.Playlists do
     query |> Repo.all() |> Repo.preload(:art)
   end
 
-  def list_playlist_songs(%Playlist{id: id, type: "top 5"}, current_user) do
+  def list_playlist_songs(%Playlist{id: id, type: "top 5"}, _current_user) do
     {:ok, playlist_id} = Wsdjs.HashID.dump(id)
 
     query =
       from(
-        s in Song.scoped(current_user),
-        join: ps in PlaylistSong,
-        on: ps.playlist_id == ^playlist_id and ps.song_id == s.id,
+        ps in PlaylistSong,
+        where: ps.playlist_id == ^playlist_id,
         order_by: ps.position
       )
 
-    query |> Repo.all() |> Repo.preload(:art)
+    query |> Repo.all() |> Repo.preload(song: :art)
   end
 
   @doc """
@@ -251,4 +250,16 @@ defmodule Wsdjs.Playlists do
     Repo.delete(playlist_song)
   end
 
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking playlist song changes.
+
+  ## Examples
+
+      iex> change_playlist_song(playlist_song)
+      %Ecto.Changeset{source: %PlaylistSong{}}
+
+  """
+  def change_playlist_song(%PlaylistSong{} = playlist_song) do
+    PlaylistSong.changeset(playlist_song, %{})
+  end
 end

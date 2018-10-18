@@ -29,9 +29,9 @@
     <% end %>
   </div>
 
-  <%= if Enum.count(@songs) > 0 do %>
+  <%= if Enum.count(@playlist_songs) > 0 do %>
   <p>
-    <%= Enum.count(@songs) %> songs
+    <%= Enum.count(@playlist_songs) %> songs
   </p>
   <table class="table">
     <tbody>
@@ -41,7 +41,7 @@
       </td>
       <td style="vertical-align:middle"><span class="text-muted primary-text">Add a song to the playlist</span></td>
     </tr>
-    <%= for song <- @songs do %>
+    <%= for song <- @playlist_songs do %>
     <tr>
       <td class="w-6">
         <img src="<%= art_url(song.art, 64) %>" srcset="<%= art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />

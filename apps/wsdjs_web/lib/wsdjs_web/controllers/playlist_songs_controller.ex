@@ -34,7 +34,8 @@ defmodule WsdjsWeb.PlaylistSongsController do
     end
   end
 
-  def update(conn, %{"ranks" => _votes_params, "playlist_id" => playlist_id}) do
+  def update(conn, %{"playlist_id" => playlist_id} = params, _current_user) do
+    IO.inspect(params)
     playlist = Playlists.get_playlist!(playlist_id)
     redirect(conn, to: playlist_path(conn, :show, playlist))
   end

@@ -39,7 +39,7 @@ defmodule WsdjsWeb.PlaylistController do
     with %Playlists.Playlist{} = playlist <- Playlists.get_playlist!(id, current_user) do
       user = Accounts.get_user!(playlist.user_id)
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
-      songs = Wsdjs.Playlists.list_playlist_songs(playlist, current_user)
+      playlist_songs = Wsdjs.Playlists.list_playlist_songs(playlist, current_user)
 
       render(
         conn,
@@ -47,7 +47,7 @@ defmodule WsdjsWeb.PlaylistController do
         current_user: current_user,
         playlist: playlist,
         suggested_songs: suggested_songs,
-        songs: songs,
+        playlist_songs: playlist_songs,
         user: user
       )
     end

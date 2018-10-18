@@ -48,9 +48,18 @@
   <%# start write user %>
 
   <ol class="list-unstyled">
-    <%= for {song, idx} <- Enum.with_index(@songs) do %>
+    <%
+      nb_ps = Enum.count(@playlist_songs)
+    %>
+    <%= for {ps, idx} <- Enum.with_index(@playlist_songs) do %>
+    <% 
+      song = ps.song 
+      changeset = Wsdjs.Playlists.change_playlist_song(ps)
+    %>
     <%= if idx == 5 do %>
-    <li>the following songs are not public</li>
+    <li class="mb-3">
+    <hr />
+    the following songs are not public</li>
     <% end %>
     <li class="d-flex mb-2">
       <div class="pr-2">
@@ -74,13 +83,19 @@
       </div>
       <div class="d-flex flex-column"> 
         <%= link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, song), class: "btn btn-danger", method: "delete", pjax: "false", data: [confirm: "Are you sure to remove this song from this playlist ?"] %>
-        <%= form_for @conn, playlist_playlist_songs_path(@conn, :update, @playlist, song), [class: "d-flex justify-content-between py-3"], fn f -> %>
-          <%= submit class: "reset", value: "up" do %>
-            <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z'/></svg>
+        <%= form_for changeset, playlist_playlist_songs_path(@conn, :update, @playlist, ps), [class: "d-flex justify-content-between py-3"], fn f -> %>
+          <%= if idx > 0 do %>
+            <%= submit class: "reset", value: "up" do %>
+              <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z'/></svg>
+            <% end %>
+          <% else %>
+            &nbsp;
           <% end %>
 
-          <%= submit class: "reset", value: "down" do %>
-            <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'/></svg>
+          <%= if idx < nb_ps - 1 do %>
+            <%= submit class: "reset", value: "down" do %>
+              <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'/></svg>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -94,7 +109,7 @@
 
   <table class="table">
     <tbody>
-    <%= for {song, idx} <- Enum.with_index(@songs) do %>
+    <%= for {song, idx} <- Enum.with_index(@playlist_songs) do %>
     <%= if idx == 5 do %>
     <tr><td colspan="2">the following songs are not public</td></tr>
     <% end %>
