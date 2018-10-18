@@ -14,14 +14,16 @@
     width: 4rem;
 }
 
-.w-12 {
-    width: 6rem;
-}
-
 .h-5 {
     height: 3rem;
 }
 
-.h-12 {
-    height: 6rem;
+@media (min-width: 768px) {
+    .w-md-12 {
+        width: 6rem;
+    }
+
+    .h-md-12 {
+        height: 6rem;
+    }
 }

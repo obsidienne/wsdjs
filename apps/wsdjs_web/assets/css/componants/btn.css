@@ -15,7 +15,8 @@
   line-height: 1.5;
 }
 
-.btn:hover {
+.btn:hover,
+button.reset:hover {
   transform: translateY(-2px);
   transform: var(--accent-action);
 }

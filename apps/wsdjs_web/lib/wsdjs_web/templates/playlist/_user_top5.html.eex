@@ -54,12 +54,12 @@
     <% end %>
     <li class="d-flex mb-2">
       <div class="pr-2">
-        <div class="song-art-container h-12 w-12">
+        <div class="song-art-container h-6 w-6 h-md-12 w-md-12">
           <div class="voting-position charted">
             <div class="chart-bg"></div>
             <div class="chart-value"><%= idx + 1 %></div>
           </div>
-          <img src="<%= art_url(song.art, 96) %>" srcset="<%= art_srcset(song.art, 96) %>" sizes="96px" width="96px" height="96px" />
+          <img src="<%= art_url(song.art, 96) %>" srcset="<%= art_srcset(song.art, 96) %>" sizes="96px" class="d-object-contain responsive" />
         </div>
       </div>
       <div class="flex-grow-1 pr-2">
@@ -72,12 +72,19 @@
           <% end %>
         </div>
       </div>
-      <%= form_for @conn, playlist_playlist_songs_path(@conn, :update, @playlist, song), [class: "d-flex flex-column justify-content-between py-3"], fn f -> %>
-        <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z'/></svg>
-        <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'/></svg>
-      <% end %>
+      <div class="d-flex flex-column"> 
+        <%= link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, song), class: "btn btn-danger", method: "delete", pjax: "false", data: [confirm: "Are you sure to remove this song from this playlist ?"] %>
+        <%= form_for @conn, playlist_playlist_songs_path(@conn, :update, @playlist, song), [class: "d-flex justify-content-between py-3"], fn f -> %>
+          <%= submit class: "reset", value: "up" do %>
+            <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z'/></svg>
+          <% end %>
 
-        <%# link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, song), class: "btn btn-danger", method: "delete", pjax: "false" %>
+          <%= submit class: "reset", value: "down" do %>
+            <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h24v24H0V0z' fill='none'/><path d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'/></svg>
+          <% end %>
+        <% end %>
+      </div>
+
   <% end %>
   </ol>
 
@@ -93,7 +100,7 @@
     <% end %>
     <tr>
       <td class="w-6 ">
-        <div class="song-art-container h-12 w-12">
+        <div class="song-art-container h-6 w-6 h-md-12 w-md-12">
           <div class="voting-position charted">
             <div class="chart-bg"></div>
             <div class="chart-value"><%= idx + 1 %></div>

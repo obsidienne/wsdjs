@@ -1,3 +1,7 @@
+.d-object-contain {
+    object-fit: contain;
+}
+
 .d-none {
     display: none;
 }
