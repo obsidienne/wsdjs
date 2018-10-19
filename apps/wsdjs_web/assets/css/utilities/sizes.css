@@ -18,12 +18,12 @@
     height: 3rem;
 }
 
-@media (min-width: 768px) {
-    .w-md-12 {
+@media (min-width: 576px) {
+    .w-sm-12 {
         width: 6rem;
     }
 
-    .h-md-12 {
+    .h-sm-12 {
         height: 6rem;
     }
 }
