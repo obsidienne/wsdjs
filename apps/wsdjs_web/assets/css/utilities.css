@@ -31,26 +31,6 @@
   border-top: 2px solid var(--accent-color);
 }
 
-.shadow-nohover {
-  box-shadow: 0 1px 3px 0 hsla(0, 0%, 0%, .2);
-  box-shadow: var(--shadow-inactive);
-}
-
-.shadow-onlyhover:hover {
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
-  box-shadow: var(--shadow-active);
-}
-
-.shadow {
-  box-shadow: 0 1px 3px 0 hsla(0, 0%, 0%, .2);
-  box-shadow: var(--shadow-inactive);
-  transition: box-shadow .3s cubic-bezier(.25, .8, .25, 1);
-}
-
-.shadow:hover {
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
-  box-shadow: var(--shadow-active);
-}
 
 .rounded {
   border-radius: 50%;

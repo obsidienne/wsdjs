@@ -1,4 +1,4 @@
-<div id="player" class="player">
+<div id="player" class="player shadow">
   <div class="current-played">
     <div class="player__art">
       <img class="responsive" src="https://res.cloudinary.com/don2kwaju/image/upload/w_225/wsdjs/radiowcs_square.jpg">
