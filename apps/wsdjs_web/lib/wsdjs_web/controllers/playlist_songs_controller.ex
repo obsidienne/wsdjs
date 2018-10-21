@@ -34,10 +34,19 @@ defmodule WsdjsWeb.PlaylistSongsController do
     end
   end
 
-  def update(conn, %{"playlist_id" => playlist_id} = params, _current_user) do
-    IO.inspect(params)
+  def update(
+        conn,
+        %{"playlist_id" => playlist_id, "id" => song_id, "dir" => dir},
+        current_user
+      )
+      when dir in ["up", "down"] do
     playlist = Playlists.get_playlist!(playlist_id)
-    redirect(conn, to: playlist_path(conn, :show, playlist))
+    playlist_song = Playlists.get_playlist_song!(playlist_id, song_id)
+
+    with :ok <- Playlists.Policy.can?(current_user, :rank_song, playlist),
+         {:ok, _song} = Playlists.update_playlist_song(playlist_song) do
+      redirect(conn, to: playlist_path(conn, :show, playlist))
+    end
   end
 
   @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::

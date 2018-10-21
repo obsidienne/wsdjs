@@ -219,19 +219,26 @@ defmodule Wsdjs.Playlists do
     |> Repo.insert()
   end
 
-  def update_playlist_songs(%Playlist{} = playlist, song_positions) do
-    playlist = playlist |> Repo.preload(:playlist_songs)
+  def update_playlist_songs(%PlaylistSong{position: pos} = ps, "up") when pos > 0 do
+    up = from(u in PlaylistSong, update: [inc: [position: -1]], where: u.id == ^ps.id)
 
-    songs =
-      song_positions
-      |> Map.keys()
-      |> Enum.reject(fn v -> song_positions[v] == "" end)
-      |> Enum.map(&PlaylistSong.get_or_build(playlist, &1, song_positions[&1]))
+    down =
+      from(
+        u in PlaylistSong,
+        update: [inc: [position: 1]],
+        where: u.playlist_id == ^ps.playlist_id and u.position == ^(pos - 1)
+      )
 
-    playlist
-    |> Changeset.change()
-    |> Changeset.put_assoc(:playlist_songs, songs)
-    |> Repo.update()
+    result =
+      Ecto.Multi.new()
+      |> Ecto.Multi.update(:up, up)
+      |> Ecto.Multi.update(:down, down)
+      |> Repo.transaction()
+
+    case result do
+      {:ok, _} -> {:ok, ps}
+      {:error, _, _, _} -> {:error, ps}
+    end
   end
 
   @doc """

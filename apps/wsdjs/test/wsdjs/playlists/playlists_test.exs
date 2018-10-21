@@ -129,28 +129,6 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       song
     end
 
-    def playlist_with_songs_fixture do
-      {:ok, user} =
-        Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
-
-      {:ok, playlist} =
-        Playlists.create_playlist(%{name: "dummy#{System.unique_integer()}", user_id: user.id})
-
-      playlist = playlist |> Repo.preload(song: :art)
-
-      song1 = song_fixture(user.id)
-      song2 = song_fixture(user.id)
-      song3 = song_fixture(user.id)
-
-      Wsdjs.Playlists.update_playlist_songs(playlist, %{
-        song1.id => "1",
-        song2.id => "2",
-        song3.id => "3"
-      })
-
-      %{user: user, playlist: playlist, songs: [song1, song2, song3]}
-    end
-
     test "list_playlist_songs/1 returns all song in the playlist" do
       %{user: user, playlist: playlist, songs: songs} = playlist_with_songs_fixture()
       assert Playlists.list_playlists(user, user) == [playlist]
