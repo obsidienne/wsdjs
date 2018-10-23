@@ -1,5 +1,4 @@
-.shadow,
-.shadow-hover {
+.shadow {
     box-shadow: var(--shadow-inactive);
     box-shadow: 0 .5rem 1rem hsla(0, 0%, 0%, 0.15) !important;
     transition: box-shadow .3s cubic-bezier(.25, .8, .25, 1);
