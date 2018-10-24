@@ -130,15 +130,16 @@ defmodule Wsdjs.Playlists do
   # Playlist Songs
   #
   ###############################################
-  alias Ecto.Changeset
-  alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists.PlaylistSong
 
-  def get_playlist_song!(playlist_id, song_id) do
-    PlaylistSong
-    |> where(playlist_id: ^playlist_id)
-    |> where(song_id: ^song_id)
-    |> Repo.one!()
+  def get_playlist_song!(playlist_song_id, current_user) do
+    playlist_song = Repo.get!(PlaylistSong, playlist_song_id)
+
+    current_user
+    |> Playlist.scoped()
+    |> Repo.get!(playlist_song.playlist_id)
+
+    playlist_song
   end
 
   @doc """
@@ -202,7 +203,7 @@ defmodule Wsdjs.Playlists do
   end
 
   @doc """
-  Add a song to a playlist.
+  Add a song to a playlist. It refreshes the song position after insert.
 
   ## Examples
 
@@ -214,31 +215,63 @@ defmodule Wsdjs.Playlists do
 
   """
   def create_playlist_song(attrs \\ %{}) do
+    {:ok, playlist_id} = Wsdjs.HashID.dump(Map.get(attrs, :playlist_id))
+
     %PlaylistSong{}
     |> PlaylistSong.changeset(attrs)
     |> Repo.insert()
+    |> case do
+      {:ok, %PlaylistSong{} = new_ps} ->
+        from(ps in PlaylistSong, where: ps.playlist_id == ^playlist_id and ps.id != ^new_ps.id)
+        |> Repo.update_all(inc: [position: 1])
+
+        sort_playlist_song(playlist_id)
+        {:ok, new_ps}
+
+      default ->
+        default
+    end
   end
 
-  def update_playlist_songs(%PlaylistSong{position: pos} = ps, "up") when pos > 0 do
-    up = from(u in PlaylistSong, update: [inc: [position: -1]], where: u.id == ^ps.id)
+  def update_playlist_song(%PlaylistSong{position: pos} = ps, "up") when pos > 0 do
+    down =
+      PlaylistSong
+      |> Repo.get_by!(playlist_id: ps.playlist_id, position: pos - 1)
+      |> PlaylistSong.changeset(%{position: pos})
+
+    up =
+      ps
+      |> PlaylistSong.changeset(%{position: pos - 1})
+
+    do_switch(ps, down, up)
+  end
+
+  def update_playlist_song(%PlaylistSong{position: pos} = ps, "down") do
+    up =
+      PlaylistSong
+      |> Repo.get_by!(playlist_id: ps.playlist_id, position: pos + 1)
+      |> PlaylistSong.changeset(%{position: pos})
 
     down =
-      from(
-        u in PlaylistSong,
-        update: [inc: [position: 1]],
-        where: u.playlist_id == ^ps.playlist_id and u.position == ^(pos - 1)
-      )
+      ps
+      |> PlaylistSong.changeset(%{position: pos + 1})
 
-    result =
+    do_switch(ps, down, up)
+  end
+
+  defp do_switch(current, down, up) do
+    ret =
       Ecto.Multi.new()
       |> Ecto.Multi.update(:up, up)
       |> Ecto.Multi.update(:down, down)
       |> Repo.transaction()
+      |> case do
+        {:ok, _} -> {:ok, current}
+        {:error, _, _, _} -> {:error, current}
+      end
 
-    case result do
-      {:ok, _} -> {:ok, ps}
-      {:error, _, _, _} -> {:error, ps}
-    end
+    sort_playlist_song(current.playlist_id)
+    ret
   end
 
   @doc """
@@ -254,7 +287,9 @@ defmodule Wsdjs.Playlists do
 
   """
   def delete_playlist_song(%PlaylistSong{} = playlist_song) do
-    Repo.delete(playlist_song)
+    {:ok, ps} = Repo.delete(playlist_song)
+    sort_playlist_song(ps.playlist_id)
+    {:ok, ps}
   end
 
   @doc """
@@ -268,5 +303,33 @@ defmodule Wsdjs.Playlists do
   """
   def change_playlist_song(%PlaylistSong{} = playlist_song) do
     PlaylistSong.changeset(playlist_song, %{})
+  end
+
+  defp sort_playlist_song(id) do
+    {:ok, playlist_id} = Wsdjs.HashID.dump(id)
+
+    IO.inspect(playlist_id)
+
+    query =
+      from(
+        ps in PlaylistSong,
+        join:
+          r in fragment("""
+          SELECT id, playlist_id, row_number() OVER (
+            PARTITION BY playlist_id
+            ORDER BY position
+          ) as rn FROM playlist_songs
+          """),
+        where: ps.playlist_id == ^playlist_id and ps.id == r.id,
+        select: %{id: ps.id, pos: r.rn}
+      )
+
+    query
+    |> Repo.all()
+    |> Enum.each(fn rank ->
+      # credo:disable-for-lines:2
+      from(ps in PlaylistSong, where: [id: ^rank.id])
+      |> Repo.update_all(set: [position: rank.pos])
+    end)
   end
 end

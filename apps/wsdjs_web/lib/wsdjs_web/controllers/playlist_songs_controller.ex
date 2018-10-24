@@ -36,24 +36,24 @@ defmodule WsdjsWeb.PlaylistSongsController do
 
   def update(
         conn,
-        %{"playlist_id" => playlist_id, "id" => song_id, "dir" => dir},
+        %{"playlist_id" => playlist_id, "id" => playlist_song_id, "dir" => dir},
         current_user
       )
       when dir in ["up", "down"] do
     playlist = Playlists.get_playlist!(playlist_id)
-    playlist_song = Playlists.get_playlist_song!(playlist_id, song_id)
+    playlist_song = Playlists.get_playlist_song!(playlist_song_id, current_user)
 
     with :ok <- Playlists.Policy.can?(current_user, :rank_song, playlist),
-         {:ok, _song} = Playlists.update_playlist_song(playlist_song) do
+         {:ok, _song} = Playlists.update_playlist_song(playlist_song, dir) do
       redirect(conn, to: playlist_path(conn, :show, playlist))
     end
   end
 
   @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
-  def delete(conn, %{"playlist_id" => playlist_id, "id" => song_id}, current_user) do
+  def delete(conn, %{"playlist_id" => playlist_id, "id" => playlist_song_id}, current_user) do
     playlist = Playlists.get_playlist!(playlist_id)
-    playlist_song = Playlists.get_playlist_song!(playlist_id, song_id)
+    playlist_song = Playlists.get_playlist_song!(playlist_song_id, current_user)
 
     with :ok <- Playlists.Policy.can?(current_user, :delete_song, playlist),
          {:ok, _song} = Playlists.delete_playlist_song(playlist_song) do
