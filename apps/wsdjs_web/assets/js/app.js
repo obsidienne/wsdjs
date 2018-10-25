@@ -80,6 +80,6 @@ new Pjax({
     js: false
   },
   filter: function (el) {
-    return el.matches(':not([target])') && el.matches(':not([pjax="false"])');
+    return el.matches(':not([target])') && el.matches(':not([data-pjax="false"])');
   }
 });

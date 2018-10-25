@@ -189,12 +189,12 @@ defmodule Wsdjs.Playlists do
     query |> Repo.all() |> Repo.preload(:art)
   end
 
-  def list_playlist_songs(%Playlist{id: id, type: "top 5"}, _current_user) do
+  def list_playlist_songs(%Playlist{id: id, type: "top 5"}, current_user) do
     {:ok, playlist_id} = Wsdjs.HashID.dump(id)
 
     query =
       from(
-        ps in PlaylistSong,
+        ps in PlaylistSong.scoped(current_user),
         where: ps.playlist_id == ^playlist_id,
         order_by: ps.position
       )

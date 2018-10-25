@@ -1,8 +1,11 @@
 defmodule Wsdjs.Playlists.PlaylistSong do
   @moduledoc false
   use Ecto.Schema
-  import Ecto.Changeset
+
+  import Ecto.{Query, Changeset}, warn: false
+
   alias Ecto.Changeset
+  alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists.PlaylistSong
   alias Wsdjs.Repo
 
@@ -21,6 +24,24 @@ defmodule Wsdjs.Playlists.PlaylistSong do
     |> validate_number(:position, greater_than_or_equal_to: 0)
     |> unique_constraint(:song_id, name: :playlist_songs_playlist_id_song_id_index)
     |> assoc_constraint(:song)
+  end
+
+  def scoped(%User{admin: true}), do: PlaylistSong
+
+  def scoped(%User{id: id}) do
+    from(
+      ps in PlaylistSong,
+      join: p in assoc(ps, :playlist),
+      where: p.user_id == ^id
+    )
+  end
+
+  def scoped(_) do
+    from(
+      ps in PlaylistSong,
+      join: p in assoc(ps, :playlist),
+      where: (ps.position <= 5 and p.type == "top 5") or p.type != "top 5"
+    )
   end
 
   def get_or_build(playlist, song_id, position) do

@@ -18,7 +18,7 @@ defmodule Wsdjs.Playlists.Playlist do
     has_many(:playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all)
   end
 
-  def types, do: ["suggested", "likes and tops", "playlist"]
+  def types, do: ["suggested", "likes and tops", "playlist", "top 5"]
 
   def update_changeset(%Playlist{} = playlist, attrs) do
     playlist

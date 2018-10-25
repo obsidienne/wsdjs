@@ -82,7 +82,7 @@
         </div>
       </div>
       <div class="d-flex flex-column"> 
-        <%= link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, ps), class: "btn btn-danger", method: "delete", pjax: "false", data: [confirm: "Are you sure to remove this song from this playlist ?"] %>
+        <%= link "Remove", to: playlist_playlist_songs_path(@conn, :delete, @playlist, ps), class: "btn btn-danger", method: "delete", data: [pjax: "false", confirm: "Are you sure to remove this song from this playlist ?"] %>
         <%= form_for changeset, playlist_playlist_songs_path(@conn, :update, @playlist, ps), [class: "d-flex justify-content-between"], fn f -> %>
           <%= if idx > 0 do %>
             <%= submit class: "reset", name: "dir", value: "up" do %>
