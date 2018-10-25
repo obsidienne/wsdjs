@@ -308,8 +308,6 @@ defmodule Wsdjs.Playlists do
   defp sort_playlist_song(id) do
     {:ok, playlist_id} = Wsdjs.HashID.dump(id)
 
-    IO.inspect(playlist_id)
-
     query =
       from(
         ps in PlaylistSong,
