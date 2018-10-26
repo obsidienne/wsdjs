@@ -5,9 +5,9 @@
 </header>
 
 <%= if is_nil(@current_user) do %>
-  <div class="container signin">
-    <span class="h1">World Swing DeeJays</span>
-    <span class="h2">The best West Coast Swing music from all around the world !</span>
+  <div class="container pt-5">
+    <span class="h1 d-block">World Swing DeeJays</span>
+    <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
 
     <%= link to: session_path(@conn, :new) do %>
       <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
@@ -18,16 +18,25 @@
 <% end %>
 
 <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-<div class="container actions">
+<div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
   <a class="btn btn-primary" title="Create a new top" href="<%= top_path(@conn, :new) %>">Create a new top</a>
 </div>
 <% end %>
 
-<section id="top-list" class="tops container">
+<section id="top-list" class="tops container mt-3">
   <%= for top <- @tops do %>
     <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
   <%= if @page_number < @total_pages do %>
-  <div class="sentinel" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
+  <div class="sentinel text-centered m-3" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
   <% end %>
 </section>
+
+<%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
+  <%= link to: top_path(@conn, :new), class: "btn btn-primary fab" do %>
+    <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>
+      <path d='M0 0h24v24H0z' fill='none'/>
+    </svg>
+  <% end %>
+<% end %>

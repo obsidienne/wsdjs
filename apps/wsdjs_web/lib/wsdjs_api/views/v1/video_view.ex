@@ -15,13 +15,22 @@ defmodule WsdjsApi.V1.VideoView do
   end
 
   def render("video.json", %{video: video}) do
-    %{
+    v = %{
       id: video.id,
       url: video.url,
       title: video.title,
       event: video.event,
-      video_id: video.video_id,
-      published_at: Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime)
+      video_id: video.video_id
     }
+
+    if is_nil(video.published_at) do
+      v
+    else
+      Map.put(
+        v,
+        :published_at,
+        Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime)
+      )
+    end
   end
 end

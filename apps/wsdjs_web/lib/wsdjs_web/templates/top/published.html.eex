@@ -6,25 +6,25 @@
 
 <%= if @current_user && @current_user.admin do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb">
+<nav class="secondary-nav breadcrumb py-2">
   <ol class="container">
-    <li class="visited">Voting</li>
-    <li class="visited">
+    <li class="visited d-inline-block">Voting</li>
+    <li class="visited d-inline-block">
       <%= submit "Counting", class: "btn btn-link", name: "direction", value: "previous" %>
     </li>
-    <li class="current">Published</li>
+    <li class="current d-inline-block">Published</li>
   </ol>
 </nav>
 <% end %>
 <% end %>
 
 
-<div class="container actions">
-  <%= if @current_user && @current_user.admin do %>
-    <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link push-right", target: "_blank" %>
-    <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link push-right" %>
-  <% end %>
+<%= if @current_user && @current_user.admin do %>
+<div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
+  <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link", target: "_blank" %>
+  <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link ml-2" %>
 </div>
+<% end %>
 
 <section class="container top-published">
   <%= for rank <- @ranks do %>
@@ -63,11 +63,11 @@
           <div class="chart-bg"></div>
           <div class="chart-value"><%= rank.position %></div>
         </div>
+        <div class="img-embed">
+          <img src="<%= art_url(rank.song.art, 300) %>" srcset="<%= art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />
+        </div>
         <%= if rank.song.url do %>
-          <a href="<%= url_for_provider(rank.song) %>" target="_blank" rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %> >
-            <div class="img-embed">
-              <img src="<%= art_url(rank.song.art, 300) %>" srcset="<%= art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />
-            </div>
+          <a href="<%= url_for_provider(rank.song) %>" class="d-flex song-art__play" target="_blank" rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %> >
             <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
               <path d='M0 0h24v24H0z' fill='none'/>
               <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
@@ -77,13 +77,15 @@
       </div>
       <div class="top-song-body">
         <div>
-          <%= link to: song_path(@conn, :show, rank.song), class: "song-title" do %>
+          <%= link to: song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link clickable d-inline-block" do %>
             <span><%= rank.song.title %></span>
           <% end %>
-          <span class="text-ellipsis song-artist"><%= rank.song.artist %></span>
-          <span class="text-muted text-ellipsis song-suggestor">
-            <%= gettext "by" %> <%= proposed_by_link(@conn, rank.song) %>,
-            <time class="timeago" datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>"></time>
+          <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
+          <span class="text-muted d-flex">
+            <%= gettext "by" %>&nbsp;<%= proposed_by_link(@conn, rank.song) %>, &nbsp;
+            <time datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>">
+              <%= Timex.format!(rank.song.inserted_at, "%b %Y", :strftime) %>
+            </time>
           </span>
         </div>
 

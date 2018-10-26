@@ -3,32 +3,30 @@ import socket from "../socket"
 export default class Radio {
   constructor() {
     var self = this;
-    this.radio = new Audio();
-
 
     // Now that you are connected, you can join channels with a topic:
-    this.channel = socket.channel("notifications:now_playing", {})
+    this.channel = socket.channel("radio:streamed", {})
     this.channel.join()
       .receive("ok", resp => {
-        console.log("Joined successfully", resp)
+        console.log("Radio stream successfully joined", resp)
       })
       .receive("error", resp => {
-        console.log("Unable to join", resp)
+        console.log("Unable to join the radio stream", resp)
       })
 
-    this.channel.on("new_played_song", payload => {
-      console.log("broadcasted");
+    this.channel.on("new_streamed_song", payload => {
+      console.log("New song streamed");
       this.refresh_radio(payload)
     });
+
     document.addEventListener("click", function (e) {
       if (!e.target) return;
 
       if (e.target.matches(".player__play__vinyl")) {
-        if (self.radio.paused) {
-          self.play_radio(e.target)
-        } else {
-          self.pause_radio(e.target)
-        }
+        self.toggle_radio(e.target);
+      }
+      if (e.target.matches("#radio-toggle-play")) {
+        self.toggle_radio(e.target);
       }
 
       if (e.target.matches("[data-video-id]")) {
@@ -51,12 +49,11 @@ export default class Radio {
     });
   }
 
-  setVolume(vol) {
-    this.radio.volume = vol;
-  }
-
   play_youtube(video_id) {
-    this.pause_radio();
+    let radio = document.getElementById("audio_player");
+    if (radio.paused == false) {
+      this.toggle_radio();
+    }
 
     var player = document.querySelector("#player__youtube");
     player.innerHTML = `<iframe src="https://www.youtube.com/embed/${video_id}?autoplay=1" frameborder="0" allowfullscreen="1"></iframe>`;
@@ -71,36 +68,48 @@ export default class Radio {
     container.classList.remove("open");
   }
 
-  pause_radio(el) {
-    this.radio.pause();
-    this.radio.src = "about:blank";
-    this.radio.load();
+  toggle_radio(el) {
+    let radio = document.getElementById("audio_player");
 
-    document.querySelector(".player__art img").dataset.src = "https://res.cloudinary.com/don2kwaju/image/upload/w_auto/wsdjs/radiowcs_square.jpg";
-    document.querySelector(".player__description__title").setAttribute("href", "#");
-    document.querySelector(".player__description__title").innerHTML = "Radio WCS";
-    document.querySelector(".player__description__sub-title").innerHTML = "by World Swing DJs";
-    document.querySelector(".player").classList.remove("player--playing");
+    if (radio.paused == true) {
+      radio.src = "http://www.radioking.com/play/radio-wcs";
+      radio.load();
+      radio.play();
+
+      this.channel.push("list_song") // remove this ?
+    } else {
+      radio.pause();
+      radio.src = "about:blank";
+      radio.load(); // stop the stream not only the player
+    }
+    document.querySelector("body").classList.toggle("radio-playing");
   }
 
-  play_radio(el) {
-    this.radio.src = "http://www.radioking.com/play/radio-wcs";
-    this.radio.load();
-
-    this.channel.push("played_song_list")
-    this.radio.play();
-    document.querySelector(".player").classList.add("player--playing");
-  }
-
+  /*
+    this function is used to update
+      - the radio player
+      - the radio page
+  */
   refresh_radio(payload) {
+    if (payload.data == "")
+      return;
+
     var data = JSON.parse(payload.data);
 
-    if (this.radio.paused == false) {
-      document.querySelector(".player__art img").setAttribute("src", data[0].image_uri);
-      document.querySelector(".player__art img").setAttribute("srcset", data[0].image_srcset);
-      document.querySelector(".player__description__title").setAttribute("href", data[0].path);
-      document.querySelector(".player__description__title").innerHTML = data[0].title;
-      document.querySelector(".player__description__sub-title").innerHTML = "by " + data[0].artist + ", " + data[0].suggested_by;
+    /* update the radio player */
+    document.querySelector(".player__art img").setAttribute("src", data[0].image_uri);
+    document.querySelector(".player__art img").setAttribute("srcset", data[0].image_srcset);
+    document.querySelector("#player-title").setAttribute("href", data[0].path);
+    document.querySelector("#player-title").innerHTML = data[0].title;
+    document.querySelector("#player-suggestor").innerHTML = "by " + data[0].artist + ", " + data[0].suggested_by;
+
+    /* update the song page but only if we are in the song page */
+    if (document.querySelector(".radio-song img")) {
+      document.querySelector(".radio-song img").setAttribute("src", data[0].image_uri);
+      document.querySelector(".radio-song img").setAttribute("srcset", data[0].image_srcset);
+      document.querySelector(".radio-suggestor").setAttribute("href", data[0].suggested_by_path);
+      document.querySelector(".radio-suggestor").innerHTML = data[0].suggested_by;
+      document.querySelector(".radio-song_body").innerHTML = data[0].title;
     }
   }
 }

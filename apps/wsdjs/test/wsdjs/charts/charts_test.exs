@@ -111,12 +111,12 @@ defmodule Wsdjs.ChartsTest do
 
     {:ok, %Wsdjs.Musics.Song{} = song} =
       %{
-        title: "my title#{System.unique_integer([:positive])}",
-        artist: "my artist",
-        genre: "soul",
-        url: "http://youtu.be/dummy"
+        "title" => "my title#{System.unique_integer([:positive])}",
+        "artist" => "my artist",
+        "genre" => "soul",
+        "url" => "http://youtu.be/dummy"
       }
-      |> Map.put(:user_id, user.id)
+      |> Map.put("user_id", user.id)
       |> Wsdjs.Musics.create_suggestion()
 
     {:ok, %Wsdjs.Musics.Song{} = song} =
@@ -125,9 +125,9 @@ defmodule Wsdjs.ChartsTest do
     song
   end
 
-  defp user_fixture() do
+  defp user_fixture do
     {:ok, %Wsdjs.Accounts.User{} = user} =
-      Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+      Wsdjs.Accounts.create_user(%{"email" => "dummy#{System.unique_integer()}@bshit.com"})
 
     user
   end

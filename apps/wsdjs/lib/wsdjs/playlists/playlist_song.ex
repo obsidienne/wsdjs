@@ -1,16 +1,19 @@
 defmodule Wsdjs.Playlists.PlaylistSong do
   @moduledoc false
   use Ecto.Schema
-  import Ecto.Changeset
+
+  import Ecto.{Query, Changeset}, warn: false
+
+  alias Ecto.Changeset
+  alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists.PlaylistSong
   alias Wsdjs.Repo
-  alias Ecto.Changeset
 
   schema "playlist_songs" do
     field(:position, :integer)
     timestamps(updated_at: false)
 
-    belongs_to(:playlist, Wsdjs.Playlists.Playlist)
+    belongs_to(:playlist, Wsdjs.Playlists.Playlist, type: Wsdjs.HashID)
     belongs_to(:song, Wsdjs.Musics.Song, type: :binary_id)
   end
 
@@ -18,10 +21,27 @@ defmodule Wsdjs.Playlists.PlaylistSong do
     playlist_songs
     |> cast(attrs, [:playlist_id, :song_id, :position])
     |> validate_required([:playlist_id, :song_id, :position])
-    |> unique_constraint(:position, name: :playlist_songs_playlist_id_song_id_position_index)
     |> validate_number(:position, greater_than_or_equal_to: 0)
-    |> assoc_constraint(:user)
+    |> unique_constraint(:song_id, name: :playlist_songs_playlist_id_song_id_index)
     |> assoc_constraint(:song)
+  end
+
+  def scoped(%User{admin: true}), do: PlaylistSong
+
+  def scoped(%User{id: id}) do
+    from(
+      ps in PlaylistSong,
+      join: p in assoc(ps, :playlist),
+      where: p.user_id == ^id
+    )
+  end
+
+  def scoped(_) do
+    from(
+      ps in PlaylistSong,
+      join: p in assoc(ps, :playlist),
+      where: (ps.position <= 5 and p.type == "top 5") or p.type != "top 5"
+    )
   end
 
   def get_or_build(playlist, song_id, position) do

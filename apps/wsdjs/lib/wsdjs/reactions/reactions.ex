@@ -10,8 +10,8 @@ defmodule Wsdjs.Reactions do
   # Comment
   #
   ###############################################
-  alias Wsdjs.Reactions.Comment
   alias Wsdjs.Musics.Song
+  alias Wsdjs.Reactions.Comment
 
   @doc """
   Gets a single comment.
@@ -100,8 +100,8 @@ defmodule Wsdjs.Reactions do
   # Opinion
   #
   ###############################################
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Musics.Song
   alias Wsdjs.Reactions.Opinion
 
   @doc """

@@ -1,28 +1,11 @@
-.opinions-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
 .song-opinion {
   user-select: none;
   background: transparent;
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
-  border: 0;
-  padding-top: 0;
-  padding-bottom: 0;
   outline: 0;
   display: flex;
   line-height: 1.5;
-}
-
-button.song-opinion {
-  cursor: pointer;
-}
-
-button.song-opinion * {
-  pointer-events: none;
 }
 
 .song-down.active svg {
@@ -36,3 +19,58 @@ button.song-opinion * {
 .song-up.active svg {
   fill: hsl(120, 100%, 35%);
 }
+
+.song-down:hover svg {
+  fill: hsl(0, 100%, 35%);
+}
+
+.song-like:hover svg {
+  fill: hsl(240, 100%, 35%);
+}
+
+.song-up:hover svg {
+  fill: hsl(120, 100%, 35%);
+}
+
+.tippy-tooltip.wsdjs-theme {
+  /* Your styling here. Example: */
+  background-color: var(--bg-color);
+  border: 2px solid white;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
+  box-shadow: var(--shadow-active);
+}
+
+.tippy-tooltip.wsdjs-theme .tippy-backdrop {
+  /* Your styling here. Example: */
+  background-color: white;
+}
+
+.tippy-tooltip.wsdjs-theme .tippy-content {
+  /* Your styling here. Example: */
+  display: flex;
+  padding: 4px;
+}
+
+
+
+.tippy-tooltip.playlist-picker-theme {
+  background-color: var(--bg-color);
+  font-weight: bold;
+  color: #333;
+  padding: 0;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
+  box-shadow: var(--shadow-active);
+}
+
+.tippy-tooltip.playlist-picker-theme .tippy-backdrop {
+  background-color: white;
+}
+
+.tippy-tooltip.playlist-picker-theme .tippy-content {
+  /* Your styling here. Example: */
+  padding: .5rem 0 .5rem 0;
+  text-align: left;
+}
+

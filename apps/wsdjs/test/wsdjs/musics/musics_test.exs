@@ -4,8 +4,8 @@ defmodule Wsdjs.MusicsTest do
   alias Wsdjs.Repo
 
   describe "songs" do
-    alias Wsdjs.Musics.Song
     alias Wsdjs.Accounts.User
+    alias Wsdjs.Musics.Song
 
     @valid_attrs %{
       title: "my title",

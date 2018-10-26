@@ -4,12 +4,12 @@ defmodule Wsdjs.Mixfile do
   def project do
     [
       app: :wsdjs,
-      version: "1.8.5",
+      version: "1.9.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "1.5.2",
+      elixir: "1.6.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -38,12 +38,11 @@ defmodule Wsdjs.Mixfile do
       {:scrivener_ecto, "~> 1.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:csv, "~> 1.4.4"},
-      {:bamboo, "~> 0.8"},
-      {:ex_machina, "~> 2.1", only: :test},
+      {:bamboo, "~> 1.0"},
       {:httpoison, "~> 0.12"},
       {:earmark, "~> 1.2"},
       {:hashids, "~> 2.0"},
-      {:geo_postgis, "~> 1.0"},
+      {:geo_postgis, "~> 2.0"},
       {:html_sanitize_ex, "~> 1.3.0-rc3"},
       {:timex, "~> 3.1"}
     ]

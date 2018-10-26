@@ -5,8 +5,12 @@ defmodule Wsdjs.Accounts.User do
   import Ecto.Query
   alias Wsdjs.Accounts.User
 
-  alias Wsdjs.{Musics, Accounts, Charts, Reactions, Auth}
-  alias Wsdjs.Accounts.{UserParameter, UserDetail}
+  alias Wsdjs.Accounts
+  alias Wsdjs.Accounts.{UserDetail, UserParameter}
+  alias Wsdjs.Auth
+  alias Wsdjs.Charts
+  alias Wsdjs.Musics
+  alias Wsdjs.Reactions
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

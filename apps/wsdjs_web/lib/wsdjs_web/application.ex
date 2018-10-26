@@ -7,6 +7,7 @@ defmodule WsdjsWeb.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
+      {ConCache, [name: :wsdjs_cache, ttl_check_interval: false]},
       supervisor(WsdjsWeb.Endpoint, [])
       # Start your own worker by calling: WsdjsWeb.Worker.start_link(arg1, arg2, arg3)
       # worker(WsdjsWeb.Worker, [arg1, arg2, arg3]),

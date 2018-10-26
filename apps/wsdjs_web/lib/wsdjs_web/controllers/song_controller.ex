@@ -2,14 +2,14 @@ defmodule WsdjsWeb.SongController do
   @moduledoc false
 
   use WsdjsWeb, :controller
-  use WsdjsWeb.Controller
 
-  alias Wsdjs.Musics
-  alias Wsdjs.Reactions
-  alias Wsdjs.Reactions.Comment
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Video
+  alias Wsdjs.Musics
+  alias Wsdjs.Musics.Song
+  alias Wsdjs.Playlists
+  alias Wsdjs.Reactions
+  alias Wsdjs.Reactions.Comment
 
   action_fallback(WsdjsWeb.FallbackController)
 
@@ -17,22 +17,31 @@ defmodule WsdjsWeb.SongController do
   #   show(conn, params, current_user)
   # end
 
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns.current_user]
+    apply(__MODULE__, action_name(conn), args)
+  end
+
+  @spec show(Plug.Conn.t(), %{id: String.t()}, nil | Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def show(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :show, song) do
-      comments = Reactions.list_comments(song)
       opinions = Reactions.list_opinions(song)
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
       comment_changeset = Reactions.change_comment(%Comment{})
       ranks = Wsdjs.Charts.get_ranks(song)
+      comments = Reactions.list_comments(song)
+      playlists = Playlists.get_playlist_by_user(current_user, current_user)
 
       render(
         conn,
         "show.html",
         song: song,
-        comments: comments,
         opinions: opinions,
+        comments: comments,
+        playlists: playlists,
         comment_changeset: comment_changeset,
         videos: videos,
         ranks: ranks,
@@ -41,45 +50,14 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  def index(conn, %{"user_id" => user_id, "page" => page}, current_user) do
-    page = Musics.paginate_songs_user(current_user, user_id, %{"page" => page})
-
-    conn
-    |> put_resp_header("total-pages", Integer.to_string(page.total_pages))
-    |> put_resp_header("page-number", Integer.to_string(page.page_number))
-    |> put_layout(false)
-    |> render("index_user_song.html", songs: page.entries)
-  end
-
-  def index(conn, %{"month" => month}, current_user) do
-    month = Timex.beginning_of_month(Timex.to_date(Timex.parse!(month, "%Y-%m-%d", :strftime)))
-    songs = Musics.list_songs(current_user, :month, month)
-    interval = Musics.songs_interval(current_user)
-
-    conn
-    |> put_layout(false)
-    |> render(
-      "index_hot_song.html",
-      songs: songs,
-      month: month,
-      last: Timex.before?(month, interval[:min])
-    )
-  end
-
   def index(conn, _params, current_user) do
-    month_interval = Musics.songs_interval(current_user)
-    songs = Musics.list_songs(current_user, :month, month_interval[:max])
-    interval = Musics.songs_interval(current_user)
+    playlists = Playlists.get_playlist_by_user(current_user, current_user)
 
-    render(
-      conn,
-      "index.html",
-      songs: songs,
-      month: month_interval[:max],
-      last: Timex.before?(month_interval[:max], interval[:min])
-    )
+    render(conn, "index.html", playlists: playlists)
   end
 
+  @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def new(conn, _params, current_user) do
     with :ok <- Wsdjs.Musics.Policy.can?(current_user, :create_song) do
       changeset = Musics.change_song(%Song{})
@@ -98,6 +76,8 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
+  @spec edit(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def edit(conn, %{"id" => id}, current_user) do
     with %Song{} = song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :edit_song, song) do
@@ -106,6 +86,8 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
+  @spec update(Plug.Conn.t(), %{id: String.t(), song: map()}, Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
     song = Musics.get_song!(id)
 
@@ -117,9 +99,14 @@ defmodule WsdjsWeb.SongController do
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", song: song, user: current_user, changeset: changeset)
+
+      {:error, :unauthorized} ->
+        {:error, :unauthorized}
     end
   end
 
+  @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
     with song <- Musics.get_song!(id),
          :ok <- Musics.Policy.can?(current_user, :delete_song, song),

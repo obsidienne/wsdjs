@@ -1,0 +1,129 @@
+/*************
+  cursor
+*************/
+
+.pointer-event-auto {
+  pointer-events: auto;
+}
+
+.pointer-event-none {
+  pointer-events: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+/******************
+ sizes utilities
+******************/
+
+/******************
+ AUTRES
+******************/
+.line-upper:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  top: 0;
+  border-top: 2px solid hsl(45, 100%, 51.4%);
+  border-top: 2px solid var(--accent-color);
+}
+
+
+.rounded {
+  border-radius: 50%;
+}
+
+.card {
+  display: block;
+  background-color: hsl(0, 0%, 100%);
+  min-width: 0;
+  min-height: 0;
+}
+
+.bg-transparent {
+  background: transparent;
+}
+
+.bg-white {
+  background: white;
+}
+
+.clickable:hover {
+  transform: translateY(-2px);
+  transform: var(--accent-action);
+}
+
+.action-link:hover {
+  color: hsl(45, 100%, 51.4%);
+  color: var(--accent-color);
+}
+
+.visible-link {
+  text-decoration: underline dotted;
+}
+
+.visible-link:hover {
+  text-decoration: underline;
+}
+
+.primary-text {
+  font-weight: 700;
+  font-weight: var(--font-primary-weight);
+  color: hsl(0, 0%, 13%);
+  color: var(--font-primary-color);
+}
+
+.secondary-text {
+  font-weight: 400;
+  font-weight: var(--font-secondary-weight);
+  color: hsl(0, 0%, 29%);
+  color: var(--font-secondary-color);
+}
+
+/* 
+https://github.com/twbs/bootstrap/tree/v4-dev/scss/utilities
+flex
+*/
+/***
+display utilities
+***/
+.bg-hover:hover {
+  filter: brightness(80%);
+  background-color: rgba(29, 33, 41, .04);
+}
+
+.facets-container {
+  pointer-events: none;
+  visibility: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  z-index: 9999;
+}
+
+.facets-container.open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.facets {
+  background-color: hsl(240, 20%, 98%);
+  background-color: var(--bg-color);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  width: 320px;
+  height: 100%;
+  transition: all 0.3s ease;
+  left: -320px;
+  position: absolute;
+}
+
+.facets-container.open .facets {
+  left: 0px;
+}

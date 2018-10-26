@@ -3,10 +3,12 @@ import SongShowView from './song/show';
 import SongIndexView from './song/index';
 import SongEditView from './song/edit';
 import SongNewView from './song/new';
+import Song_videosIndexView from './song_videos/index';
 import TopIndexView from './top/index';
 import TopShowView from './top/show';
 import UserEditView from './user/edit';
 import UserShowView from './user/show';
+import EventShowView from './event/show';
 import EventNewView from './event/new';
 import EventEditView from './event/edit';
 import SuggestionNewView from './suggestion/new';
@@ -17,12 +19,14 @@ const views = {
   SongIndexView,
   SongNewView,
   SongEditView,
+  Song_videosIndexView,
   TopIndexView,
   TopShowView,
   UserEditView,
   UserShowView,
   EventNewView,
   EventEditView,
+  EventShowView,
   SuggestionNewView
 };
 

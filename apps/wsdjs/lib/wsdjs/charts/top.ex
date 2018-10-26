@@ -3,8 +3,11 @@ defmodule Wsdjs.Charts.Top do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
+
+  alias Wsdjs.Accounts
+  alias Wsdjs.Charts
   alias Wsdjs.Charts.Top
-  alias Wsdjs.{Accounts, Charts, Musics}
+  alias Wsdjs.Musics
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

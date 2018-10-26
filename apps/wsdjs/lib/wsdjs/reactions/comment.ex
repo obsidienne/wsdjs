@@ -36,7 +36,7 @@ defmodule Wsdjs.Reactions.Comment do
     clean_body = HtmlSanitizeEx.markdown_html(clean_body)
     model |> put_change(:text_html, clean_body)
   end
-  
+
   defp markdown_text(model, _) do
     model
   end

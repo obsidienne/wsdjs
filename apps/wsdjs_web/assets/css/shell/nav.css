@@ -1,0 +1,160 @@
+main>header {
+  background-color: hsl(221, 23%, 16%);
+  padding-bottom: 24px;
+}
+
+main>header h1 {
+  color: white;
+}
+
+main>header h2 {
+  color: white;
+}
+
+/****************************
+  global mobile navigation
+****************************/
+
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: hsl(0, 0%, 93%);
+  z-index: 9990;
+}
+
+.mobile-nav>ul {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.mobile-nav>ul>li {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+
+.mobile-nav_menu {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+/****************************
+  global navigation
+****************************/
+
+.glnav {
+  align-items: center;
+  user-select: none;
+  background-color: #1F2532;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+
+.glnav a.home {
+  height: 48px;
+}
+
+.glnav__user {
+  width: 48px;
+  height: 48px;
+  margin-left: auto;
+}
+
+.glnav__user__avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-top: 4px;
+  vertical-align: top;
+  border-radius: 50%;
+}
+
+.glnav__menu {
+  padding: 0 12px;
+  color: #D3D8E0;
+}
+
+.logo-small {
+  width: 40px;
+  height: 48px;
+}
+
+.logo-wide {
+  height: 48px;
+  width: 120px;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .glnav__menu {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .logo-small {
+    display: none;
+  }
+
+  .logo-wide {
+    display: inline;
+  }
+}
+
+/****************************
+  secondary navigation
+****************************/
+
+.secondary-nav {
+  background-color: #edeff0;
+}
+
+.secondary-nav.breadcrumb {
+  margin-top: -1.5rem;
+}
+
+.secondary-nav li::after {
+  display: inline-block;
+  content: '';
+  color: hsl(0, 0%, 45%);
+  color: var(--inactive-color);
+  margin: 0 .5rem;
+}
+
+.secondary-nav.breadcrumb li::after {
+  content: '\00bb';
+}
+
+.secondary-nav li:last-of-type::after {
+  display: none;
+}
+
+.secondary-nav li>* {
+  display: inline-block;
+  color: #2c3f4c;
+}
+
+.secondary-nav button {
+  margin: 0;
+  vertical-align: inherit;
+}
+
+.secondary-nav li.current {
+  font-weight: bold;
+}

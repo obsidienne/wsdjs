@@ -9,27 +9,27 @@ defmodule WsdjsApi.V1.AccountController do
 
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns[:current_user]
+    user = Accounts.get_user!(id)
 
-    with %User{} = user <- Accounts.get_user!(id),
-         :ok <- Accounts.Policy.can?(current_user, :show, user) do
+    with :ok <- Accounts.Policy.can?(current_user, :show, user) do
       render(conn, "show.json", user: user)
     end
   end
 
   def show(conn, %{}) do
     current_user = conn.assigns[:current_user]
+    user = Accounts.get_user!(current_user.id)
 
-    with %User{} = user <- Accounts.get_user!(current_user.id),
-         :ok <- Accounts.Policy.can?(current_user, :show, user) do
+    with :ok <- Accounts.Policy.can?(current_user, :show, user) do
       render(conn, "show.json", user: user)
     end
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     current_user = conn.assigns[:current_user]
+    user = Accounts.get_user!(id)
 
-    with user <- Accounts.get_user!(id),
-         :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
+    with :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
          {:ok, %User{} = user} <- Accounts.update_user(user, user_params, current_user) do
       render(conn, "show.json", user: user)
     end

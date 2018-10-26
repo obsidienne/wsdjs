@@ -2,9 +2,12 @@ defmodule Wsdjs.Musics.Song do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Wsdjs.Musics.Song
 
-  alias Wsdjs.{Charts, Accounts, Musics, Reactions}
+  alias Wsdjs.Accounts
+  alias Wsdjs.Charts
+  alias Wsdjs.Musics
+  alias Wsdjs.Musics.Song
+  alias Wsdjs.Reactions
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -107,6 +110,7 @@ defmodule Wsdjs.Musics.Song do
     upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
     lower = Timex.shift(upper, months: -24)
 
+    # credo:disable-for-lines:2
     scoped(lower, upper)
     |> or_where([s], s.user_id == ^user.id)
   end
@@ -115,6 +119,7 @@ defmodule Wsdjs.Musics.Song do
     upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
     lower = Timex.shift(upper, months: -12)
 
+    # credo:disable-for-lines:2
     scoped(lower, upper)
     |> or_where([s], s.user_id == ^user.id)
   end

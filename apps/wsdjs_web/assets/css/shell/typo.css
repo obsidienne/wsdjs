@@ -23,50 +23,62 @@ body {
   line-height: 1.5;
 }
 
-
-h1, h2, h3,
-.h1, .h2, .h3 {
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3 {
   font-family: inherit;
   color: inherit;
   padding: 0;
   margin: 0;
 }
 
-h1, .h1 {
+h1,
+.h1 {
   font-size: 2.375rem;
   line-height: 3rem;
   padding-top: 1.5rem;
   margin-bottom: 3rem;
   font-weight: bold;
 }
+
 .h1 {
   padding-top: 0;
-  margin-bottom: 0;  
-} 
-h2, .h2 {
+  margin-bottom: 0;
+}
+
+h2,
+.h2 {
   font-size: 1.75rem;
   line-height: 3rem;
   padding-top: 1.5rem;
   margin-bottom: 1.5rem;
   font-style: italic;
 }
+
 .h2 {
   padding-top: 0;
   margin-bottom: 0;
 }
-h3, .h3 {
+
+h3,
+.h3 {
   font-size: 1.3125rem;
   line-height: 1.5rem;
   padding-top: 1.5rem;
   margin-bottom: 0rem;
   font-weight: bold;
 }
-.h3{
+
+.h3 {
   padding-top: 0;
   margin-bottom: 0;
-} 
+}
 
-small, .small {
+small,
+.small {
   font-weight: 300;
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
@@ -76,6 +88,7 @@ h2.page-header {
   padding-top: 3rem;
   margin-top: .5rem;
 }
+
 .page-header-sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -85,41 +98,46 @@ h2.page-header {
   z-index: 1000;
 }
 
-p { 
-  margin: 0 0 10px; 
+p {
+  margin: 0 0 10px;
   overflow-wrap: break-word;
   word-wrap: break-word;
   margin-top: 1rem;
 }
+
 dd {
   margin-bottom: 1rem;
   margin-left: 0;
 }
-dt, .text-bold {
+
+dt,
+.text-bold {
   font-weight: bold;
 }
+
 .text-ligther {
   font-weight: lighter;
 }
+
+.text-centered {
+  text-align: center;
+}
+
 .text-ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  display: block;
+  display: inline-block;
 }
+
 .text-muted {
   color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
+
 .text-danger {
   color: #dc3545 !important;
-}
-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
 }
 
 textarea {
@@ -130,6 +148,24 @@ ul {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.list-inline {
+  padding-left: 0;
+  list-style: none;
+}
+
+.list-inline-item {
+  display: inline-block;
+}
+
+.list-inline-item:not(:last-child) {
+  margin-right: 0.5rem;
 }
 
 time {

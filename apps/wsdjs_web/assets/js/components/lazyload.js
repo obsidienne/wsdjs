@@ -5,6 +5,7 @@ class LazyLoad {
   }
 
   refresh() {
+    if (this.observer == null) return;
     this.observer.disconnect();
 
     var els = document.querySelectorAll('img[data-src]');

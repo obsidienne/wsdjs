@@ -1,18 +1,25 @@
+<nav class="secondary-nav py-2">
+  <ol class="container">
+    <li class="current d-inline-block"><%= link "Song", to: song_path(@conn, :show, @song) %></li>
+    <li class="d-inline-block"><%= link "Videos", to: song_song_videos_path(@conn, :index, @song) %></li>
+  </ol>
+</nav>
+
 <section>
-  <div class="song-page container">
-    <div class="song-page__art">
+  <div class="song-page container d-flex mt-4 pb-6">
+    <div class="song-page__art shadow-nohover">
       <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
-    <div class="song-page__details">
-      <span class="h2 song-title"><%= @song.title %></span>
-      <span class="h3 song-artist"><span class="text-muted">by</span> <%= @song.artist %></span>
-      <div class="text-muted song-suggestor"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "song-suggestor text-muted" %>,
-        <time class="timeago" datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
+    <div class="song-page__details d-flex flex-column">
+      <span class="h2 primary-text"><%= @song.title %></span>
+      <span class="h3 secondary-text pb-2"><span class="text-muted">by</span> <%= @song.artist %></span>
+      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
+        <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
       </div>
 
-      <div class="song-page__tags">
+      <div class="song-page__tags pt-3">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
@@ -33,8 +40,13 @@
         <% end %>
       </div>
 
-      <div class="song-page__tags song-opinions">
+      <div class="song-page__tags song-opinions mb-3">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
+        <span class="ml-auto p-2 pr-0 text-right playlist-picker"  data-song-id="<%= @song.id %>">
+          <svg height='24' viewBox='0 0 24 24' width='24'>
+            <path fill="#455A64" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
+          </svg>
+        </span>
       </div>
       
       <%= if @song.url do %>
@@ -42,14 +54,26 @@
       <% end %>
     </div>
   </div>
+  <template id="playlist-picker-tpl">
+  <div>
+    <span class="d-block pb-2 mx-3 text-center border-bottom">Playlists</span>
+    <ul>
+      <%= for playlist <- @playlists do %>
+      <li>
+        <button class="bg-hover btn-no-style d-block py-2 px-3 w-100 text-left song-picker-playlist" data-id="<%= playlist.id %>"><%= playlist.name %></button>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  </template>
 </section>
 
-<div class="container song-page__sections">
+<div class="container song-page__sections d-flex">
   <div class="song-page__sections__content">
     <%= unless @current_user do %>
     <section class="unconnected">
-      <span class="h1">World Swing DeeJays</span>
-      <span class="h2">The best West Coast Swing music from all around the world !</span>
+      <span class="h1 d-block">World Swing DeeJays</span>
+      <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
 
       <%= link to: session_path(@conn, :new) do %>
         <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
@@ -57,7 +81,7 @@
       or 
       <%= link "register", to: registration_path(@conn, :new) %>
 
-      <div class="social-links">
+      <div class="mt-4">
         <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FWorld-Swing-DJs-1430112430533570%2F&width=85&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" 
                 width="103" height="21" 
                 style="border:none;overflow:hidden" 
@@ -71,29 +95,6 @@
   </div>
 
   <div class="song-page__sections__aside">
-    <section id="overview-video" class="overview-video"><%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %></section>
-    <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
-      <%= form_for @video_changeset, api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
-      <fieldset>
-        <legend>Add a video</legend>
-        <div class="form-group">
-          <%= text_input f, :url, type: "url", class: "form-control", placeholder: "Video url", required: true, maxlength: 255 %>
-          <%= error_tag f, :url %>
-        </div>
-        <div class="form-group">
-          <%= text_input f, :title, class: "form-control", placeholder: "Pro's names", required: true, maxlength: 255 %>
-          <%= error_tag f, :title %>
-        </div>
-        <div class="form-group">
-          <%= select f, :event_id, list_events(), class: "form-control" %>
-          <%= error_tag f, :event_id %>
-        </div>
-
-        <%= submit "Add video", class: "btn btn-primary" %>
-      </fieldset>
-    <% end %>
-    <% end %>
-
     <%= if Wsdjs.Musics.Policy.can?(@current_user, :edit_song, @song) == :ok do %>
     <fieldset>
       <legend>Actions</legend>
@@ -106,51 +107,26 @@
   </div>
 </div>
 
-<template id="video-tpl">
-  <article class="song-page__video card">
-    <a href="{{url}}" target="_blank" rel="noopener">
-      <img src="//res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg" srcset="https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg 100w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_200,q_auto/fl_immutable_cache/{{video_id}}.jpg 200w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_300,q_auto/fl_immutable_cache/{{video_id}}.jpg 300w" sizes="100px" height="auto" width="100">
-      <svg fill="#FFC107" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
-      </svg>
-    </a>
-    <div class="song-page__video__details">
-      <h5 class="text-ellipsis song-page__video__pros">{{title}}</h5>
-      <h5 class="song-page__video__event">{{event}}
-      <timeago class="text-muted"> ({{published_at}})</timeago>
-      </h5>
-
-      <button class="btn-link video__delete" data-path="/api/v1/videos/{{id}}">
-        <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-          <path d="M0 0h24v24H0z" fill="none"/>
-        </svg>
-      </button>
-    </div>
-  </article>
-</template>
-
 <template id="comment-tpl">
-  <li class="comment">
-    <div class="comment__avatar">
+  <li class="d-flex mb-3">
+    <div class="d-none d-md-flex comment__avatar">
       <img src="{{user.avatars.avatar_uri}}"  class="comment__avatar__img">
     </div>
 
     <div class="comment__body">
-      <header class="comment__header">
+      <header class="comment__header d-flex align-items-center p-2">
         <span>
-          <a href="{{user.path}}">{{user.name}}</a>
-          <time class="timeago" title="{{commented_at}}" datetime="{{commented_at}}"></time>
+          <a href="{{user.path}}" class="clickable visible-link action-link d-inline-block">{{user.name}}</a>
+          <time title="{{commented_at}}" datetime="{{commented_at}}"></time>
         </span>
-        <button class="btn-link comment__delete" data-path="/api/v1/comments/{{id}}">
+        <button class="btn-link comment__delete ml-auto" data-path="/api/v1/comments/{{id}}">
           <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
         </button>
       </header>
-      <div class="comment__content">{{text_html}}</div>
+      <div class="comment__content px-2" data-autolink>{{text_html}}</div>
     </div>
   </li>
 </template>

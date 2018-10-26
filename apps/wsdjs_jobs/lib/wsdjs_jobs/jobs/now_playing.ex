@@ -35,7 +35,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
     {:reply, Enum.reverse(list), queue}
   end
 
-  @radioking_api_uri 'https://www.radioking.com/widgets/currenttrack.php?radio=84322&format=json'
+  @radioking_api_uri "https://www.radioking.com/widgets/currenttrack.php?radio=84322&format=json"
   def handle_info(:work, queue) do
     queue =
       if :queue.len(queue) < 9 do
@@ -65,7 +65,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
     end
   end
 
-  @radioking_api_uri_list 'https://www.radioking.com/widgets/api/v1/radio/84322/track/ckoi?limit=10'
+  @radioking_api_uri_list "https://www.radioking.com/widgets/api/v1/radio/84322/track/ckoi?limit=10"
   defp list_broadcasted(queue) do
     case HTTPoison.get(@radioking_api_uri_list) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->

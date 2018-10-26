@@ -1,59 +1,80 @@
-<nav class="secondary-nav">
+<nav class="secondary-nav py-2">
   <ol class="container">
-    <li class="current">bio</li>
-    <li>
+    <li class="current d-inline-block">
+      <%= link "bio", to: user_path(@conn, :show, @user) %>
+    </li>
+    <li class="d-inline-block">
         <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
     </li>
+    <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :edit_user, @user) == :ok do %>
+    <li class="d-inline-block">
+      <%= link "params", to: user_params_path(@conn, :show, @user) %>
+    </li>
+    <% end %>
   </ol>
 </nav>
 
-<section id="user-page" class="user-page container">
+<section id="user-page" class="user-page container pt-3">
   <%= render "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
   <div>
 
-  <%= if @user.detail.description do %>
-  <dl class="user-page__profile__section user-page__details">
-    <dt>About Me</dt>
-    <dd class="aboutme"><%= raw(@user.detail.description_html) %></dd>
-  </dl>
-  <% end %>
+    <%= if @user.detail.description do %>
+    <dl class="user-page__profile__section p-3 user-page__details w-100">
+      <dt>About Me</dt>
+      <dd class="aboutme"><%= raw(@user.detail.description_html) %></dd>
+    </dl>
+    <% end %>
 
-<dl class="user-page__profile__section user-page__details">
-  <dt>Member since</dt>
-  <dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= Timex.format!(@user.inserted_at, "%B %d, %Y", :strftime) %></time></dd>
-  <%= if @user.detail.love_more do %>
-  <dt>Things you love more ?</dt>
-  <dd><%= @user.detail.love_more %></dd>
-  <% end %>
-  <%= if @user.detail.hate_more do %>
-  <dt>Things you hate more ?</dt>
-  <dd><%= @user.detail.hate_more %></dd>
-  <% end %>
-  <%= if @user.detail.favorite_artist do %>
-  <dt>Favorite artist</dt>
-  <dd><%= @user.detail.favorite_artist %></dd>
-  <% end %>
-  <%= if @user.detail.favorite_genre do %>
-  <dt>Favotire genre</dt>
-  <dd><%= @user.detail.favorite_genre %></dd>
-  <% end %>
-  <%= if @user.detail.favorite_color do %>
-  <dt>Favorite color</dt>
-  <dd><%= @user.detail.favorite_color %></dd>
-  <% end %>
-  <%= if @user.detail.favorite_meal do %>
-  <dt>Favorite meal</dt>
-  <dd><%= @user.detail.favorite_meal %></dd>
-  <% end %>
-  <%= if @user.detail.favorite_animal do %>
-  <dt>Favorite animal</dt>
-  <dd><%= @user.detail.favorite_animal %></dd>
-  <% end %>
-  <%= if @user.detail.djing_start_year do %>
-  <dt>Start DJing</dt>
-  <dd><%= @user.detail.djing_start_year %></dd>
-  <% end %>
-</dl>
+    <dl class="user-page__profile__section p-3 user-page__details w-100">
+      <dt>Member since</dt>
+      <dd><time class="date-format" datetime="<%= Date.to_iso8601(@user.inserted_at) %>"><%= Timex.format!(@user.inserted_at, "%B %d, %Y", :strftime) %></time></dd>
+      <%= if @user.detail.love_more do %>
+      <dt>Things you love more ?</dt>
+      <dd><%= @user.detail.love_more %></dd>
+      <% end %>
+      <%= if @user.detail.hate_more do %>
+      <dt>Things you hate more ?</dt>
+      <dd><%= @user.detail.hate_more %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_artist do %>
+      <dt>Favorite artist</dt>
+      <dd><%= @user.detail.favorite_artist %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_genre do %>
+      <dt>Favotire genre</dt>
+      <dd><%= @user.detail.favorite_genre %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_color do %>
+      <dt>Favorite color</dt>
+      <dd><%= @user.detail.favorite_color %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_meal do %>
+      <dt>Favorite meal</dt>
+      <dd><%= @user.detail.favorite_meal %></dd>
+      <% end %>
+      <%= if @user.detail.favorite_animal do %>
+      <dt>Favorite animal</dt>
+      <dd><%= @user.detail.favorite_animal %></dd>
+      <% end %>
+      <%= if @user.detail.djing_start_year do %>
+      <dt>Start DJing</dt>
+      <dd><%= @user.detail.djing_start_year %></dd>
+      <% end %>
+    </dl>
+
+    <%= for playlist <- @playlists do %>
+    <div class="user-page__profile__section p-3 user-page__details w-100">
+      <span class="text-bold"><%= playlist.name %></span>
+
+      <ol>
+      <%= for playlist_song <- playlist.playlist_songs do %>
+      <li>
+      <%= playlist_song.song.title %>
+      </li>
+      <% end %>
+      </ol>
+    </div>
+    <% end %>
   </div>
 </section>

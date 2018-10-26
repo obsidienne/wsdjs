@@ -1,14 +1,21 @@
-<nav class="secondary-nav">
+<nav class="secondary-nav py-2">
   <ol class="container">
-    <li>
+    <li class="d-inline-block">
         <%= link "bio", to: user_path(@conn, :show, @user) %>
     </li>
-    <li class="current">playlists</li>
+    <li class="current d-inline-block">
+      <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
+    </li>
+    <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :edit_user, @user) == :ok do %>
+    <li class="d-inline-block">
+        <%= link "params", to: user_params_path(@conn, :show, @user) %>
+    </li>
+    <% end %>
   </ol>
 </nav>
 
-<section id="user-page" class="user-page container">
-  <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
+<section id="user-page" class="user-page container p-top-2">
+  <%= render WsdjsWeb.UserView, "_sidebar_tiny.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
   <%= render "_playlists.html", conn: @conn, current_user: @current_user, user: @user, playlists: @playlists %>
 </section>

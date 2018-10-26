@@ -1,0 +1,7 @@
+<ul class="search-results">
+  <%= render_many @songs, WsdjsWeb.PlaylistSearchAddView, "_song.html", 
+    conn: @conn,
+    as: :song, 
+    current_user: @current_user,
+    playlist: @playlist %>
+</ul>

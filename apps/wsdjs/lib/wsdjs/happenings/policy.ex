@@ -7,7 +7,6 @@ defmodule Wsdjs.Happenings.Policy do
   def can?(%User{admin: true}, _), do: :ok
   def can?(_, _), do: {:error, :unauthorized}
 
-
   def can?(%User{admin: true}, _, _), do: :ok
   def can?(_, _, _), do: {:error, :unauthorized}
 end

@@ -7,19 +7,21 @@ defmodule Wsdjs.HashID do
   See http://hashids.org/ for more information.
   """
 
-  def type(), do: :id
+  def type, do: :id
 
   def cast(term) when is_integer(term), do: {:ok, Hashids.encode(@hashids, term)}
-  def cast(term) when is_binary(term),  do: dump(term)
+  def cast(term) when is_binary(term), do: dump(term)
   def cast(_), do: :error
 
   def dump(term) when is_binary(term) do
-    Hashids.decode!(@hashids, term)
+    @hashids
+    |> Hashids.decode!(term)
     |> case do
       [int] -> {:ok, int}
       _ -> :error
     end
   end
+
   def dump(term) when is_integer(term), do: {:ok, term}
   def dump(_), do: :error
 

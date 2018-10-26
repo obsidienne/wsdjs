@@ -27,4 +27,6 @@
 
 <span><%= link "Edit", to: event_path(@conn, :edit, @event) %></span>
 <span><%= link "Back", to: event_path(@conn, :index) %></span>
+
+<div id="mapid" class="w-50 h-5 d-block" data-lat="<%= lat(@event.coordinates) %>" data-lon="<%= lon(@event.coordinates) %>"></div>
 </section>

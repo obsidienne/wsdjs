@@ -1,0 +1,18 @@
+<div id="player" class="player shadow">
+  <div class="current-played">
+    <div class="player__art">
+      <img class="responsive" src="https://res.cloudinary.com/don2kwaju/image/upload/w_225/wsdjs/radiowcs_square.jpg">
+    </div>
+
+    <div class="player__description">
+      <a href="#" id="player-title" class="primary-text action-link visible-link text-ellipsis clickable">Radio WCS</a>
+      <span id="player-suggestor" class="text-ellipsis secondary-text">by World Swing DJs</span>
+    </div>
+
+    <div class="player__play">
+      <div class="player__play__vinyl"></div>
+    </div>
+  </div>
+
+  <audio id="audio_player" preload="metadata" src="about:blank"></audio>
+</div>

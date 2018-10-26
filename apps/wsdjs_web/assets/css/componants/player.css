@@ -8,6 +8,7 @@
   margin-right: auto;
   margin-left: auto;
   z-index: 3000;
+  display: none;
 }
 
 .current-played {
@@ -55,7 +56,7 @@
   background-position: 50% 50%;
 }
 
-.player--playing .player__play__vinyl {
+body.radio-playing .player__play__vinyl {
   transition: all 0.35s ease;
   background: url("//res.cloudinary.com/don2kwaju/image/upload/c_scale,dpr_auto,f_auto,h_55,q_auto,w_55/v1502383947/wsdjs/vinyl.png");
   background-size: cover;
@@ -74,10 +75,11 @@
   height: 0;
   padding-bottom: 56.5%;
   transition: bottom 1s ease-in;
+  z-index: 1000;
 }
 
 .player__youtube__container.open {
-  bottom: 0;
+  bottom: 48px;
   transition: bottom .7s ease-in;
 }
 
@@ -95,10 +97,8 @@
 
 .player__youtube_close {
   position: absolute;
-  top: -30px;
+  top: -48px;
   right: 0;
-  height: 30px;
-  background-color: white;
 }
 
 .player__youtube iframe {
@@ -125,6 +125,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -137,14 +138,17 @@
 
 @media (min-width: 768px) {
   .player {
+    display: block;
     width: 384px;
     bottom: 1rem;
     right: 1rem;
   }
+
   .player__youtube {
     height: 216px;
     width: 384px;
   }
+
   .player__youtube__container {
     height: 216px;
     width: 384px;
@@ -153,6 +157,7 @@
     padding-bottom: 0;
     z-index: 3001;
   }
+
   .player__youtube__container.open {
     bottom: 1rem;
   }

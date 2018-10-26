@@ -6,8 +6,8 @@ defmodule Wsdjs.Attachments do
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Attachments.Video
+  alias Wsdjs.Musics.Song
 
   @doc """
   Gets a single video.
@@ -23,7 +23,11 @@ defmodule Wsdjs.Attachments do
       ** (Ecto.NoResultsError)
 
   """
-  def get_video!(id), do: Repo.get!(Video, id)
+  def get_video!(id) do
+    Video
+    |> Repo.get!(id)
+    |> Repo.preload(:event)
+  end
 
   @doc """
   Returns the list of videos.
@@ -54,9 +58,19 @@ defmodule Wsdjs.Attachments do
 
   """
   def create_video(params) do
-    %Video{}
-    |> Video.changeset(params)
-    |> Repo.insert()
+    video =
+      %Video{}
+      |> Video.changeset(params)
+      |> Repo.insert()
+
+    case video do
+      {:ok, video} ->
+        video = Repo.preload(video, :event)
+        {:ok, video}
+
+      _ ->
+        video
+    end
   end
 
   @doc """

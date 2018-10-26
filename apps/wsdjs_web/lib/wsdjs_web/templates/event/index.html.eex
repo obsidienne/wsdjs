@@ -4,7 +4,7 @@
   </div>
 </header>
 
-<div class="container actions">
+<div class="container justify-content-end align-items-center mt-3 d-none d-md-flex ">
   <%= link "New event", to: event_path(@conn, :new), class: "btn btn-primary" %>
 </div>
 
@@ -37,3 +37,11 @@
 </table>
 
 </section>
+
+<%= link to: event_path(@conn, :new), class: "btn btn-primary fab" do %>
+  <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
+    <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>
+    <path d='M0 0h24v24H0z' fill='none'/>
+  </svg>
+<% end %>
+

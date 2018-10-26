@@ -9,6 +9,7 @@ defmodule WsdjsWeb.Router do
     plug(:put_secure_browser_headers)
     plug(WsdjsWeb.VerifySession)
     plug(WsdjsWeb.IdentifyUa)
+    plug(WsdjsWeb.IsAjax)
   end
 
   pipeline :browser_auth do
@@ -25,13 +26,16 @@ defmodule WsdjsWeb.Router do
   end
 
   if Mix.env() == :dev do
-    forward("/sent_emails", Bamboo.EmailPreviewPlug)
+    forward("/sent_emails", Bamboo.SentEmailViewerPlug)
   end
 
   scope "/", WsdjsWeb do
     pipe_through([:browser, :browser_auth])
 
-    resources("/songs", SongController, only: [:index, :create, :new, :delete, :edit, :update])
+    resources("/songs", SongController, only: [:index, :create, :new, :delete, :edit, :update]) do
+      resources("/videos", SongVideosController, only: [:index])
+    end
+
     resources("/suggestions", SuggestionController, only: [:create, :new])
     resources("/song_opinions", SongOpinionController, only: [:delete])
 
@@ -49,7 +53,12 @@ defmodule WsdjsWeb.Router do
       resources("/playlists", PlaylistController, only: [:new, :create, :index])
     end
 
-    resources("/playlists", PlaylistController, only: [:show, :edit, :delete])
+    resources("/user-params", UserParamsController, only: [:show])
+
+    resources("/playlists", PlaylistController, only: [:show, :edit, :delete, :update]) do
+      resources("/songs", PlaylistSongsController, only: [:create, :delete, :update])
+      resources("/search", PlaylistSearchAddController, only: [:index])
+    end
   end
 
   scope "/", WsdjsWeb do
@@ -57,14 +66,17 @@ defmodule WsdjsWeb.Router do
     pipe_through(:browser)
 
     get("/", HomeController, :index)
-    get("/search", SearchController, :index)
+    get("/radio", RadioController, :show)
     resources("/users", UserController, only: [:show])
     resources("/home", HomeController, only: [:index])
-    resources("/songs", SongController, only: [:show])
     resources("/tops", TopController, only: [:index, :show])
     resources("/sessions", SessionController, only: [:new, :create])
     resources("/registrations", RegistrationController, only: [:new, :create])
     get("/signin/:token", SessionController, :show, as: :signin)
+
+    resources("/songs", SongController, only: [:show]) do
+      resources("/opinions", OpinionController, only: [:index])
+    end
   end
 
   scope "/api", as: :api, alias: :WsdjsApi do
@@ -75,6 +87,14 @@ defmodule WsdjsWeb.Router do
         resources("/opinions", OpinionController, only: [:create])
         resources("/comments", CommentController, only: [:create])
         resources("/videos", VideoController, only: [:create])
+      end
+
+      resources("/users", UserController, only: []) do
+        resources("/playlists", PlaylistController, only: [:index])
+      end
+
+      resources("/playlists", PlaylistController, only: []) do
+        resources("/songs", PlaylistSongsController, only: [:create])
       end
 
       resources("/opinions", OpinionController, only: [:delete])
@@ -96,6 +116,7 @@ defmodule WsdjsWeb.Router do
     scope "/v1", V1 do
       resources("/now_playing", NowPlayingController, only: [:index])
       resources("/mobile_config", MobileConfigController, only: [:index])
+      resources("/radio", RadioController, only: [:index])
       get("/signin/:token", SessionController, :show, as: :signin)
       resources("/sessions", SessionController, only: [:create])
 

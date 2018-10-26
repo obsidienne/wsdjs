@@ -5,32 +5,32 @@
   </div>
 </header>
 <% else %>
-  <div class="unconnected container hero-text">
-    <span class="h1">World Swing DeeJays</span>
-    <span class="h2">The best West Coast Swing music from all around the world !</span>
+  <div class="pt-5 container">
+    <span class="h1 d-block">World Swing DeeJays</span>
+    <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
 
     <%= link to: session_path(@conn, :new) do %>
       <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
     <% end %>
     or 
-    <%= link "register", to: registration_path(@conn, :new) %>
+    <%= link "register", to: registration_path(@conn, :new), class: "d-inline-block visible-link clickable" %>
   </div>
 <% end %>
 
-<div class="container actions">
+<div class="container justify-content-end align-items-center mt-3 d-none d-md-flex ">
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
     <a class="btn btn-primary tippy" title="Suggest a song for the current month TOP 10" href="<%= suggestion_path(@conn, :new) %>">Suggest a song</a>
   <% end %>
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
-  <a class="btn btn-link" href="<%= song_path(@conn, :new) %>">Add a song</a>
+  <a class="btn btn-link ml-2" href="<%= song_path(@conn, :new) %>">Add a song</a>
   <% end %>
 </div>
 
-<section class="container home-container">
+<section class="container home-container d-grid">
 <%= if Enum.count(@songs) > 0 do %>
   <section>
     <h2 class="page-header">#trends</h2>
-    <ul class="home-page__instant__hit">
+    <ul>
       <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
   </section>
@@ -43,11 +43,20 @@
           <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
       </time>, DJs Top
     </h2>
-    <ul class="home-page__top__song">
+    <ul>
       <%= for rank <- @top.ranks do %>
         <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>
       <% end %>
     </ul>
   </section>
 <% end %>
+
+  <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
+    <%= link to: suggestion_path(@conn, :new), class: "btn fab btn-primary" do %>
+      <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>
+        <path d='M0 0h24v24H0z' fill='none'/>
+      </svg>
+    <% end %>
+  <% end %>
 </section>

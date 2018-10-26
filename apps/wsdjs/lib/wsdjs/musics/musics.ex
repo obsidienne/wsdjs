@@ -17,35 +17,36 @@ defmodule Wsdjs.Musics do
     |> Repo.all()
   end
 
-  def songs_interval(%User{} = user) do
-    songs =
-      user
-      |> Song.scoped()
-      |> select([s], %{max: max(s.inserted_at), min: min(s.inserted_at)})
-      |> Repo.one()
-
-    %{
-      min: Timex.to_date(Timex.beginning_of_month(songs[:min])),
-      max: Timex.to_date(Timex.beginning_of_month(songs[:max]))
-    }
-  end
-
-  @doc """
-  Returns the songs added the 24 last hours.
-  """
-  def list_songs(%User{} = user, :month, %Date{} = month) do
-    begin_period = Timex.to_datetime(Timex.beginning_of_month(month))
-    end_period = Timex.to_datetime(Timex.end_of_month(month))
+  def songs_interval(%User{} = user, %{"month" => month} = facets) do
+    month =
+      month
+      |> Timex.parse!("%Y-%m-%d", :strftime)
+      |> Timex.to_naive_datetime()
 
     user
     |> Song.scoped()
-    |> where(
-      [s],
-      s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period and s.suggestion == true
-    )
-    |> order_by(desc: :inserted_at)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> Repo.all()
+    |> filter_by_fulltext(facets)
+    |> filter_by_bpm(facets)
+    |> filter_by_genre(facets)
+    |> where([s], s.inserted_at < ^month)
+    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
+    |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> limit(1)
+    |> Repo.one()
+  end
+
+  def songs_interval(%User{} = user, facets) when is_map(facets) do
+    user
+    |> Song.scoped()
+    |> filter_by_fulltext(facets)
+    |> filter_by_bpm(facets)
+    |> filter_by_genre(facets)
+    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
+    |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
+    |> limit(1)
+    |> Repo.one()
   end
 
   @doc """
@@ -56,6 +57,100 @@ defmodule Wsdjs.Musics do
 
     Repo.all(query)
   end
+
+  @doc """
+  Returns the songs filtered by facets.
+  """
+  def list_songs(%User{} = user, facets) do
+    user
+    |> Song.scoped()
+    |> filter_by_date(facets)
+    |> filter_by_fulltext(facets)
+    |> filter_by_bpm(facets)
+    |> filter_by_genre(facets)
+    |> where([s], s.suggestion == true)
+    |> order_by(desc: :inserted_at)
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> Repo.all()
+  end
+
+  defp filter_by_genre(query, %{"genre" => genre}) when is_list(genre) do
+    dynamic =
+      List.foldl(genre, false, fn x, acc ->
+        dynamic([p], p.genre == ^x or ^acc)
+      end)
+
+    from(query, where: ^dynamic)
+  end
+
+  defp filter_by_genre(query, %{"genre" => genre}) when is_binary(genre) do
+    where(query, genre: ^genre)
+  end
+
+  defp filter_by_genre(query, _), do: query
+
+  def bpm_ranges do
+    %{
+      "vs" => 1..69,
+      "s" => 70..89,
+      "m" => 90..109,
+      "f" => 110..129,
+      "vf" => 130..9999
+    }
+  end
+
+  defp filter_by_bpm(query, %{"bpm" => bpm}) when is_list(bpm) do
+    dynamic =
+      List.foldl(bpm, false, fn x, acc ->
+        lower..upper = Map.fetch!(bpm_ranges(), x)
+        dynamic([p], (p.bpm >= ^lower and p.bpm <= ^upper) or ^acc)
+      end)
+
+    from(query, where: ^dynamic)
+  end
+
+  defp filter_by_bpm(query, %{"bpm" => bpm}) do
+    lower..upper = Map.fetch!(bpm_ranges(), bpm)
+
+    where(query, [s], s.bpm >= ^lower and s.bpm <= ^upper)
+  end
+
+  defp filter_by_bpm(query, _), do: query
+
+  defp filter_by_date(query, %{"month" => month}) do
+    month =
+      month
+      |> Timex.parse!("%Y-%m-%d", :strftime)
+      |> Timex.to_date()
+
+    begin_period = Timex.to_datetime(Timex.beginning_of_month(month))
+    end_period = Timex.to_datetime(Timex.end_of_month(month))
+
+    query
+    |> where(
+      [s],
+      s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period
+    )
+  end
+
+  defp filter_by_fulltext(query, %{"q" => q}) do
+    q =
+      q
+      |> String.trim()
+      |> String.split(" ")
+      |> Enum.map(&"#{&1}:*")
+      |> Enum.join(" & ")
+
+    query
+    |> where(
+      fragment(
+        "(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))",
+        ^q
+      )
+    )
+  end
+
+  defp filter_by_fulltext(query, _), do: query
 
   def list_suggested_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
     query =
@@ -89,29 +184,6 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Paginate the songs scoped by the current_user.
-  """
-  def paginate_songs(current_user, paginate_params \\ %{}) do
-    current_user
-    |> Song.scoped()
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by(desc: :inserted_at)
-    |> Repo.paginate(paginate_params)
-  end
-
-  @doc """
-  Paginate the songs suggested by a user scoped by current user.
-  """
-  def paginate_songs_user(current_user, user_id, paginate_params \\ %{}) do
-    current_user
-    |> Song.scoped()
-    |> where(user_id: ^user_id)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> order_by(desc: :inserted_at)
-    |> Repo.paginate(paginate_params)
-  end
-
-  @doc """
   Creates a song.
 
   ## Examples
@@ -127,6 +199,12 @@ defmodule Wsdjs.Musics do
     %Song{}
     |> Song.create_changeset(params)
     |> Repo.insert()
+  end
+
+  def create_song!(params) do
+    %Song{}
+    |> Song.create_changeset(params)
+    |> Repo.insert!()
   end
 
   @doc """
@@ -168,8 +246,8 @@ defmodule Wsdjs.Musics do
   end
 
   @doc """
-  Get the song matching the "artist - title" pattern. 
-  The uniq index artist / title ensure the uniquenes of result. 
+  Get the song matching the "artist - title" pattern.
+  The uniq index artist / title ensure the uniquenes of result.
   This a privileged function, no song restriction access.
   """
   def get_song_by(artist, title) when is_binary(artist) and is_binary(title) do

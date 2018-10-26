@@ -2,8 +2,8 @@ defmodule Wsdjs.Playlists.Playlist do
   @moduledoc false
   use Ecto.Schema
   import Ecto.{Query, Changeset}, warn: false
-  alias Wsdjs.Playlists.Playlist
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Playlists.Playlist
 
   @primary_key {:id, Wsdjs.HashID, read_after_writes: true}
   schema "playlists" do
@@ -11,19 +11,20 @@ defmodule Wsdjs.Playlists.Playlist do
     field(:type, :string, default: "playlist")
     field(:public, :boolean, default: false)
     field(:count, :integer, default: 0)
+    field(:front_page, :boolean, default: false)
     timestamps()
 
     belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)
-    belongs_to(:song, Wsdjs.Musics.Song, type: :binary_id)
+    belongs_to(:cover, Wsdjs.Musics.Song, type: :binary_id)
     has_many(:playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all)
   end
 
-  def types, do: ["suggested", "likes and tops", "playlist"]
+  def types, do: ["suggested", "likes and tops", "playlist", "top 5"]
 
   def update_changeset(%Playlist{} = playlist, attrs) do
     playlist
-    |> cast(attrs, [:public])
-    |> validate_required([:public])
+    |> cast(attrs, [:public, :name, :front_page])
+    |> validate_required([:public, :name])
   end
 
   def changeset(%Playlist{} = playlist, attrs) do

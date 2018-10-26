@@ -1,4 +1,9 @@
 defmodule Wsdjs.Musics.Policy do
+  @moduledoc """
+    This policy module follows the following rules
+    - admin can do anything
+    - user can do anything to his own song
+  """
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
   alias Wsdjs.Repo

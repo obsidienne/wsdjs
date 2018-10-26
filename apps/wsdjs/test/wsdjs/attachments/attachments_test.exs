@@ -7,37 +7,36 @@ defmodule Wsdjs.AttachmentsTest do
     alias Wsdjs.Attachments.Video
 
     def song_fixture(attrs \\ %{}) do
-      user_attrs = %{email: "dummy#{System.unique_integer()}@bshit.com"}
+      user_attrs = %{"email" => "dummy#{System.unique_integer()}@bshit.com"}
       {:ok, %Wsdjs.Accounts.User{} = user} = Wsdjs.Accounts.create_user(user_attrs)
 
       {:ok, %Wsdjs.Musics.Song{} = song} =
         attrs
         |> Enum.into(%{
-          title: "my title",
-          artist: "my artist",
-          genre: "soul",
-          url: "http://youtu.be/dummy"
+          "title" => "my title",
+          "artist" => "my artist",
+          "genre" => "soul",
+          "url" => "http://youtu.be/dummy"
         })
-        |> Map.put(:user_id, user.id)
+        |> Map.put("user_id", user.id)
         |> Wsdjs.Musics.create_song()
 
       song
     end
 
     @valid_attrs %{
-      title: "my title",
-      event: "my event",
-      published_at: "2012-12-12",
-      url: "http://youtu.be/dummy"
+      "title" => "my title",
+      "event" => "my event",
+      "published_at" => "2012-12-12",
+      "url" => "http://youtu.be/dummy"
     }
-    def video_fixture(attrs \\ %{}) do
+    def video_fixture do
       song = song_fixture()
 
       {:ok, %Wsdjs.Attachments.Video{} = video} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Map.put(:user_id, song.user_id)
-        |> Map.put(:song_id, song.id)
+        @valid_attrs
+        |> Map.put("user_id", song.user_id)
+        |> Map.put("song_id", song.id)
         |> Wsdjs.Attachments.create_video()
 
       video
@@ -46,7 +45,7 @@ defmodule Wsdjs.AttachmentsTest do
     test "list_videos/1 returns all videos for a song" do
       video = video_fixture()
       song = Wsdjs.Musics.get_song!(video.song_id)
-      assert Attachments.list_videos(song) == [video]
+      assert Attachments.list_videos(song) == [video] |> Repo.preload(:event)
     end
 
     test "get_video!/1 returns the videos with given id" do
@@ -56,14 +55,20 @@ defmodule Wsdjs.AttachmentsTest do
 
     test "create_video/1 with valid data creates a videos" do
       song = song_fixture()
-      params = %{url: "http://youtu.be/dummy", user_id: song.user_id, song_id: song.id}
+
+      params = %{
+        "url" => "http://youtu.be/dummy",
+        "user_id" => song.user_id,
+        "song_id" => song.id
+      }
+
       assert {:ok, %Video{} = video} = Attachments.create_video(params)
       assert video.url == "http://youtu.be/dummy"
     end
 
     test "create_video/1 with invalid data returns error changeset" do
       song = song_fixture()
-      params = %{url: "false url", user_id: song.user_id, song_id: song.id}
+      params = %{"url" => "false url", "user_id" => song.user_id, "song_id" => song.id}
       assert {:error, %Ecto.Changeset{}} = Attachments.create_video(params)
     end
 

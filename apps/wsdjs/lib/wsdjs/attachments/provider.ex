@@ -1,11 +1,12 @@
 defmodule Wsdjs.Attachments.Provider do
   @moduledoc """
-  This module extract the video id of a youtube url exclusively. 
+  This module extract the video id of a youtube url exclusively.
   No vimeo, or dailymotin, or anything else. Only youtube.
   """
   @provider_types [
     {~r/youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+)/i, :youtube},
-    {~r/.*facebook\.com\/(.+\/videos\/\w+)/i, :facebook}
+    {~r/.*facebook\.com\/(.+\/videos\/\w+)/i, :facebook},
+    {~r/.*/i, :unknown}
   ]
 
   @doc ~S"""
@@ -19,13 +20,17 @@ defmodule Wsdjs.Attachments.Provider do
       iex> type("http://bullshit.com/toto")
       "unknown"
       iex> extract("http://bullshit.com/toto")
-      "http://bullshit.com/toto"
+      nil
+      iex> type("http://youtu.be/dummy")
+      "youtube"
+      iex> extract("http://youtu.be/dummy")
+      "dummy"
       iex> extract("http://www.youtube.com/user/Scobleizer#p/u/1/1p3vcRhsYGo")
       "1p3vcRhsYGo"
       iex> type("http://www.youtube.com/user/Scobleizer#p/u/1/1p3vcRhsYGo")
       "youtube"
       iex> extract("https://www.facebook.com/thibault.ramirez.1/videos/1197018457068034/")
-      "thibault.ramirez.1/videos/1197018457068034/"
+      "thibault.ramirez.1/videos/1197018457068034"
       iex> type("https://www.facebook.com/thibault.ramirez.1/videos/1197018457068034/")
       "facebook"
   """
@@ -49,7 +54,7 @@ defmodule Wsdjs.Attachments.Provider do
   end
 
   @doc false
-  def unknown(_re, url), do: nil
+  def unknown(_re, _url), do: nil
 
   @doc false
   def youtube(re, url) do

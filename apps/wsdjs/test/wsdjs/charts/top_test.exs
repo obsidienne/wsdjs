@@ -1,8 +1,9 @@
 defmodule Wsdjs.Charts.TopTest do
   use Wsdjs.DataCase, async: true
 
-  alias Wsdjs.Charts.Top
+  alias Wsdjs.Accounts
   alias Wsdjs.Charts
+  alias Wsdjs.Charts.Top
   alias Wsdjs.Repo
 
   describe "changeset" do
@@ -13,7 +14,7 @@ defmodule Wsdjs.Charts.TopTest do
       assert changeset.valid?
     end
 
-    test "top owner accout must exist" do
+    test "top owner account must exist" do
       top =
         Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: Ecto.UUID.generate()})
 
@@ -23,97 +24,76 @@ defmodule Wsdjs.Charts.TopTest do
   end
 
   describe "Published top" do
-    alias Wsdjs.Accounts.User
+    setup :create_users
 
-    test "current month" do
+    test "current month", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", 0)
 
-      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] ==
-               %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
 
-    test "current month -2" do
+    test "current month -2", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -2)
 
-      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] ==
-               %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
 
-    test "current month -3" do
+    test "current month -3", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -3)
 
-      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] ==
-               %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == dj |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
       assert [top] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
     end
 
-    test "current month -5" do
+    test "current month -5", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -5)
 
-      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] ==
-               %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == dj |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
       assert [top] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
     end
 
-    test "current month -6" do
+    test "current month -6", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -6)
 
-      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] ==
-               %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == dj |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
 
-    test "current month -24" do
+    test "current month -24", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -24)
 
-      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] ==
-               %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == dj |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
 
-    test "current month -25" do
+    test "current month -25", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -25)
 
-      assert [top] == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [top] ==
-               %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-
-      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
 
   describe "Counting top" do
-    alias Wsdjs.Accounts.User
+    setup :create_users
 
-    test "current month to n-27 n" do
+    test "current month to n-27 n", %{admin: admin, djvip: djvip, dj: dj} do
       tops =
         [
           top_fixture("counting", 0),
@@ -127,22 +107,22 @@ defmodule Wsdjs.Charts.TopTest do
         |> Enum.sort()
 
       assert tops ==
-               %User{admin: true}
+               admin
                |> Top.scoped()
                |> Repo.all()
                |> Repo.preload(:songs)
                |> Enum.sort()
 
-      assert [] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all() |> Enum.sort()
-      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Enum.sort()
+      assert [] == djvip |> Top.scoped() |> Repo.all() |> Enum.sort()
+      assert [] == dj |> Top.scoped() |> Repo.all() |> Enum.sort()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
 
   describe "Voting top" do
-    alias Wsdjs.Accounts.User
+    setup :create_users
 
-    test "current month to n-27" do
+    test "current month to n-27", %{admin: admin, djvip: djvip, dj: dj} do
       tops =
         [
           top_fixture("voting", 0),
@@ -155,29 +135,29 @@ defmodule Wsdjs.Charts.TopTest do
         ]
         |> Enum.sort()
 
-      assert tops ==
-               %User{admin: true}
-               |> Top.scoped()
-               |> Repo.all()
-               |> Repo.preload(:songs)
-               |> Enum.sort()
+      Enum.each(
+        [admin, djvip],
+        fn u ->
+          expected =
+            u
+            |> Top.scoped()
+            |> Repo.all()
+            |> Repo.preload(:songs)
+            |> Enum.sort()
 
-      assert tops ==
-               %User{profil_djvip: true}
-               |> Top.scoped()
-               |> Repo.all()
-               |> Repo.preload(:songs)
-               |> Enum.sort()
+          assert tops == expected
+        end
+      )
 
-      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all() |> Enum.sort()
+      assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
 
   describe "Checking top" do
-    alias Wsdjs.Accounts.User
+    setup :create_users
 
-    test "current month to n-27" do
+    test "current month to n-27", %{admin: admin, djvip: djvip, dj: dj} do
       tops = [
         top_fixture("checking", 0),
         top_fixture("checking", -2),
@@ -188,9 +168,9 @@ defmodule Wsdjs.Charts.TopTest do
         top_fixture("checking", -27)
       ]
 
-      assert tops == %User{admin: true} |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [] == %User{profil_djvip: true} |> Top.scoped() |> Repo.all()
-      assert [] == %User{profil_dj: true} |> Top.scoped() |> Repo.all()
+      assert tops == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [] == djvip |> Top.scoped() |> Repo.all()
+      assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
@@ -212,14 +192,14 @@ defmodule Wsdjs.Charts.TopTest do
     assert_raise Ecto.NoResultsError, fn -> Charts.get_top!(top.id) end
   end
 
-  def user_fixture() do
+  def user_fixture do
     {:ok, user} =
       Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
     user
   end
 
-  def top_fixture() do
+  def top_fixture do
     user = user_fixture()
     {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
     top
@@ -256,5 +236,31 @@ defmodule Wsdjs.Charts.TopTest do
 
     {:ok, top} = Charts.next_step(top)
     top
+  end
+
+  defp create_users(_) do
+    god = %Accounts.User{admin: true}
+    {:ok, suggestor} = Wsdjs.Accounts.create_user(%{"email" => "suggestor@wsdjs.com"})
+    {:ok, suggestor} = Accounts.update_user(suggestor, %{"name" => "suggestor"}, god)
+
+    {:ok, user} = Wsdjs.Accounts.create_user(%{"email" => "user@wsdjs.com"})
+    {:ok, user} = Accounts.update_user(user, %{"name" => "user"}, god)
+
+    {:ok, dj} = Wsdjs.Accounts.create_user(%{"email" => "dj@wsdjs.com"})
+    {:ok, dj} = Accounts.update_user(dj, %{"name" => "dj", "profil_dj" => true}, god)
+
+    {:ok, djvip} = Wsdjs.Accounts.create_user(%{"email" => "djvip@wsdjs.com"})
+    {:ok, djvip} = Accounts.update_user(djvip, %{"name" => "djvip", "profil_djvip" => true}, god)
+
+    {:ok, admin} = Wsdjs.Accounts.create_user(%{"name" => "admin", "email" => "admin@wsdjs.com"})
+
+    {:ok, admin} =
+      Accounts.update_user(
+        admin,
+        %{"name" => "admin", "admin" => true, "parameter" => %{email_contact: true}},
+        god
+      )
+
+    {:ok, suggestor: suggestor, user: user, dj: dj, djvip: djvip, admin: admin}
   end
 end

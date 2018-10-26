@@ -1,13 +1,7 @@
 defmodule Wsdjs.Jobs.UpdatePlaylists do
-  @doc """
-      insert into playlists(name, type, user_id, inserted_at, updated_at)
-          select distinct 'suggested'
-                 ,'suggested'
-                 ,user_id, now() at time zone 'utc'
-                 ,now() at time zone 'utc'
-          from songs 
-          where user_id not in (select user_id from playlists where type='suggested');
-
+  @moduledoc """
+  This modules contains the database calls needed to fill the automatic user
+  playlists.
   """
   import Ecto.Query, warn: false
 
@@ -22,8 +16,11 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     insert_toplike()
     update_toplike()
 
-    insert_TOP5_current()
-    insert_TOP5_classic()
+    insert_top5_current()
+    insert_top5_classic()
+
+    update_playlist()
+    update_top5()
   end
 
   ###############################################
@@ -31,7 +28,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   # DJ VIP - TOP 5
   #
   ###############################################
-  def insert_TOP5_current() do
+  def insert_top5_current do
     query = "
       insert into playlists(name, type, user_id, public, inserted_at, updated_at)
       select distinct 'TOP 5 current'
@@ -40,7 +37,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,false
             ,now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from users 
+      from users
       where id not in (select user_id from playlists where type='top 5' and name = 'TOP 5 current')
         and (admin = true)
     "
@@ -48,7 +45,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def insert_TOP5_classic() do
+  def insert_top5_classic do
     query = "
       insert into playlists(name, type, user_id, public, inserted_at, updated_at)
       select distinct 'TOP 5 classic'
@@ -57,7 +54,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,false
             ,now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from users 
+      from users
       where id not in (select user_id from playlists where type='top 5' and name = 'TOP 5 classic')
         and (admin = true)
     "
@@ -70,14 +67,14 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   # suggested
   #
   ###############################################
-  def delete_suggested() do
+  def delete_suggested do
     query =
       "DELETE from playlists where type='suggested' and user_id not in (select user_id from songs)"
 
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def insert_suggested() do
+  def insert_suggested do
     query = "
       insert into playlists(name, type, user_id, public, inserted_at, updated_at)
       select distinct 'suggested'
@@ -86,18 +83,19 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
             ,true
             ,now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from songs 
+      from songs
       where user_id not in (select user_id from playlists where type='suggested')
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def update_suggested() do
+  # update the playlist entity to set the suggestion count and the playlist cover image
+  def update_suggested do
     query = "
-      update playlists p 
+      update playlists p
       set count=(select count(*) from songs s where p.user_id=s.user_id)
-        , song_id=(select id from songs s where p.user_id=s.user_id order by inserted_at desc LIMIT 1)
+        , cover_id=(select id from songs s where p.user_id=s.user_id order by inserted_at desc LIMIT 1)
       where p.type='suggested'
     "
 
@@ -109,33 +107,68 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
   # top or like
   #
   ###############################################
-  def delete_toplike() do
+  def delete_toplike do
     query =
       "DELETE from playlists where type='likes and tops' and user_id not in (select user_id from opinions)"
 
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def insert_toplike() do
+  def insert_toplike do
     query = "
       insert into playlists(name, type, user_id, inserted_at, updated_at)
       select distinct 'likes and tops'
             ,'likes and tops'
             ,user_id, now() at time zone 'utc'
             ,now() at time zone 'utc'
-      from opinions 
+      from opinions
       where user_id not in (select user_id from playlists where type='likes and tops')
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)
   end
 
-  def update_toplike() do
+  # update the playlist entity to set the top/like count and the playlist cover image
+  def update_toplike do
     query = "
-      update playlists p 
+      update playlists p
       set count=(select count(*) from opinions o where p.user_id=o.user_id)
-        , song_id=(select song_id from opinions o where p.user_id=o.user_id order by inserted_at desc LIMIT 1)
+        , cover_id=(select song_id from opinions o where p.user_id=o.user_id order by inserted_at desc LIMIT 1)
       where p.type='likes and tops'
+    "
+
+    Ecto.Adapters.SQL.query!(Repo, query)
+  end
+
+  ###############################################
+  #
+  # playlist
+  #
+  ###############################################
+
+  def update_playlist do
+    query = "
+      update playlists p
+      set count=(select count(*) from playlist_songs s where p.id=s.playlist_id)
+        , cover_id=(select song_id from playlist_songs s where p.id=s.playlist_id order by inserted_at desc LIMIT 1)
+      where p.type = 'playlist'
+    "
+
+    Ecto.Adapters.SQL.query!(Repo, query)
+  end
+
+  ###############################################
+  #
+  # top 5
+  #
+  ###############################################
+
+  def update_top5 do
+    query = "
+      update playlists p
+      set count=(select count(*) from playlist_songs s where p.id=s.playlist_id)
+        , cover_id=(select song_id from playlist_songs s where p.id=s.playlist_id order by position desc LIMIT 1)
+      where p.type = 'top 5'
     "
 
     Ecto.Adapters.SQL.query!(Repo, query)

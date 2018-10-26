@@ -1,0 +1,27 @@
+<section data-count="<%= Enum.count(@songs) %>">
+  <%= if Enum.count(@songs) > 0 do %>
+  <div class="page-header-sticky">
+    <h2 class="page-header container">
+      <time class="date-format">
+        <%= Timex.format!(@month, "%B %Y", :strftime) %>
+      </time> 
+      <span class="text-muted text-ligther h3"><%= Enum.count(@songs) %> songs</span>
+    </h2>
+  </div>
+  <ul class="hot-songs container">
+    <%= for song <- @songs do %>
+      <%= if blur_track(song, @current_user) == true do %>
+        <%= render "_song_blurred.html", song: song %>
+      <% else %>
+        <%= render "_song.html", conn: @conn, song: song, current_user: @current_user %>
+      <% end %>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <%= unless is_nil(@next_month) do %>
+  <div class="sentinel text-centered m-3" data-query="<%= Timex.format!(@next_month, "%Y-%m-%d", :strftime) %>"><div class="donut"></div></div>
+  <% end %>
+</section>
+
+

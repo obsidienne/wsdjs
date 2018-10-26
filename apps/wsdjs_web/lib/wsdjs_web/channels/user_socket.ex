@@ -3,6 +3,8 @@ defmodule WsdjsWeb.UserSocket do
 
   ## Channels
   channel("notifications:*", WsdjsWeb.NotificationsChannel)
+  channel("radio:*", WsdjsWeb.RadioChannel)
+  channel("scrolling:*", WsdjsWeb.ScrollingChannel)
 
   ## Transports
   transport(:websocket, Phoenix.Transports.WebSocket)
@@ -19,9 +21,19 @@ defmodule WsdjsWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  @max_age 24 * 60 * 60
+  def connect(%{"token" => token}, socket) do
+    case Phoenix.Token.verify(socket, "user", token, max_age: @max_age) do
+      {:ok, user_id} ->
+        user = if user_id, do: Wsdjs.Accounts.get_activated_user!(user_id)
+        {:ok, assign(socket, :current_user, user)}
+
+      {:error, _reason} ->
+        :error
+    end
   end
+
+  def connect(_params, _socket), do: :error
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #

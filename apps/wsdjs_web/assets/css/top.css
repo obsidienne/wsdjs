@@ -11,6 +11,9 @@
 
 .song-art__play {
   z-index: 1001;
+  position: absolute;
+  bottom: .25rem;
+  right: .25rem;
 }
 
 .voting-position__selector::-ms-expand {
@@ -96,17 +99,8 @@
   text-align: right;
 }
 
-.song-art-container a {
-  display: block;
-}
-
 .song-art-container a svg {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
   border-radius: 50%;
-  height: 24px;
-  width: 24px;
 }
 
 .song-art-container a:hover svg {
@@ -138,10 +132,6 @@
   height: auto;
 }
 
-.container.signin {
-  padding-bottom: 15px;
-}
-
 .opinions {
   display: flex;
   margin-top: .5rem;
@@ -170,17 +160,13 @@
 }
 
 .top-song-body a {
-  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
 
 .top-song-body a:hover {
-  -webkit-text-decoration: underline;
   text-decoration: underline;
   color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
-  transform: translateY(-2px);
-  transform: var(--accent-action);
 }
 
 .top-stat__votes .card {

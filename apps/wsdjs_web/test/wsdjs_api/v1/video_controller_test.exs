@@ -1,92 +1,161 @@
 defmodule WsdjsApi.V1.VideoControllerTest do
   use WsdjsWeb.ConnCase
-  import Wsdjs.Factory
+  alias Wsdjs.Accounts
 
-  setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  defp create_user(_) do
+    {:ok, user} = Wsdjs.Accounts.create_user(%{"email" => "john@example.com"})
+
+    {:ok, user} =
+      Accounts.update_user(user, %{parameter: %{video: true}}, %Accounts.User{admin: true})
+
+    user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
+
+    {:ok, user: user, user_token: user_token}
   end
 
-  # describe "index" do
-  #   test "lists all videos for a song", %{conn: conn} do
-  #     song = insert(:song)
-  #     conn = get conn, api_song_video_path(conn, :index, song.id)
-  #     assert json_response(conn, 200)["data"] == []
-  #   end
-  # end
+  defp create_song(%{user: user}) do
+    songs = %{
+      title: "a",
+      artist: "b",
+      url: "http://youtu.be/a",
+      bpm: 12,
+      genre: "rnb",
+      user_id: user.id
+    }
 
-  describe "create videos" do
-    test "renders videos when data is valid", %{conn: conn} do
-      user =
-        insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880", parameter: %{video: true}})
+    {:ok, song} = Wsdjs.Musics.create_song(songs)
 
-      song = insert(:song, %{user: user})
+    {:ok, song: song}
+  end
 
-      user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
-      conn = put_req_header(conn, "authorization", "Bearer " <> user_token)
+  defp create_video(%{user: user, song: song}) do
+    {:ok, video} =
+      %{"url" => "http://youtu.be/video1", "song_id" => song.id, "user_id" => user.id}
+      |> Wsdjs.Attachments.create_video()
 
-      resp =
-        post(
-          conn,
+    {:ok, video: video}
+  end
+
+  describe "index/2" do
+    setup [:create_user, :create_song]
+
+    test "index/2 responds with all Video's songs", %{
+      conn: conn,
+      song: song,
+      user: user,
+      user_token: user_token
+    } do
+      videos = [
+        %{"url" => "http://youtu.be/video1", "song_id" => song.id, "user_id" => user.id},
+        %{"url" => "http://youtu.be/video2", "song_id" => song.id, "user_id" => user.id}
+      ]
+
+      # create users local to this database connection and test
+      [{:ok, video1}, {:ok, video2}] = Enum.map(videos, &Wsdjs.Attachments.create_video(&1))
+
+      response =
+        conn
+        |> put_req_header("authorization", "Bearer " <> user_token)
+        |> get(api_song_video_path(conn, :index, song.id))
+        |> json_response(200)
+
+      expected = %{
+        "data" => [
+          %{
+            "event" => nil,
+            "id" => video2.id,
+            "title" => nil,
+            "url" => video2.url,
+            "video_id" => "video2"
+          },
+          %{
+            "event" => nil,
+            "id" => video1.id,
+            "title" => nil,
+            "url" => video1.url,
+            "video_id" => "video1"
+          }
+        ]
+      }
+
+      assert response == expected
+    end
+  end
+
+  describe "create/2" do
+    setup [:create_user, :create_song]
+
+    test "Creates, and responds with a newly created video if attributes are valid", %{
+      conn: conn,
+      song: song,
+      user_token: user_token
+    } do
+      response =
+        conn
+        |> put_req_header("authorization", "Bearer " <> user_token)
+        |> post(
           api_song_video_path(conn, :create, song.id),
           video: %{url: "http://www.youtube.com/toto"}
         )
+        |> json_response(201)
 
-      assert %{"id" => id} = json_response(resp, 201)["data"]
+      expected = %{
+        "data" => %{
+          "event" => nil,
+          "id" => response |> Map.get("data") |> Map.get("id"),
+          "title" => nil,
+          "url" => "http://www.youtube.com/toto",
+          "video_id" => "toto"
+        }
+      }
 
-      resp = get(conn, api_song_video_path(conn, :index, song.id))
-
-      assert json_response(resp, 200)["data"] == [
-               %{"id" => id, "url" => "http://www.youtube.com/toto"}
-             ]
+      assert response == expected
     end
 
-    test "renders errors when data is invalid", %{conn: conn} do
-      user =
-        insert(:user, %{id: "d66d74c0-7c84-4057-8943-91feb397e880", parameter: %{video: true}})
+    test "Returns an error and does not create a video if attributes are invalid", %{
+      conn: conn,
+      song: song,
+      user_token: user_token
+    } do
+      response =
+        conn
+        |> put_req_header("authorization", "Bearer " <> user_token)
+        |> post(
+          api_song_video_path(conn, :create, song.id),
+          video: %{url: "dummyvalue"}
+        )
+        |> json_response(422)
 
-      song = insert(:song, %{user: user})
+      expected = %{
+        "errors" => %{"url" => ["invalid url: :no_scheme"]}
+      }
 
-      user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
-      conn = put_req_header(conn, "authorization", "Bearer " <> user_token)
-
-      conn = post(conn, api_song_video_path(conn, :create, song.id), video: %{url: "dummy"})
-      assert json_response(conn, 422)["errors"] != %{}
+      assert response == expected
     end
   end
 
-  # describe "update videos" do
-  #   setup [:create_videos]
+  describe "delete videos" do
+    setup [:create_user, :create_song, :create_video]
 
-  #   test "renders videos when data is valid", %{conn: conn, videos: %Videos{id: id} = videos} do
-  #     conn = put conn, videos_path(conn, :update, videos), videos: @update_attrs
-  #     assert %{"id" => ^id} = json_response(conn, 200)["data"]
+    test "delete/2 and responds with :ok if the video was deleted", %{
+      conn: conn,
+      song: song,
+      video: video,
+      user_token: user_token
+    } do
+      conn
+      |> put_req_header("authorization", "Bearer " <> user_token)
+      |> delete(api_video_path(conn, :delete, video))
+      |> response(204)
 
-  #     conn = get conn, videos_path(conn, :show, id)
-  #     assert json_response(conn, 200)["data"] == %{
-  #       "id" => id,
-  #       "url" => "some updated url"}
-  #   end
+      response =
+        conn
+        |> put_req_header("authorization", "Bearer " <> user_token)
+        |> get(api_song_video_path(conn, :index, song))
+        |> json_response(200)
 
-  #   test "renders errors when data is invalid", %{conn: conn, videos: videos} do
-  #     conn = put conn, videos_path(conn, :update, videos), videos: @invalid_attrs
-  #     assert json_response(conn, 422)["errors"] != %{}
-  #   end
-  # end
-
-  # describe "delete videos" do
-  #   setup [:create_videos]
-
-  #   test "deletes chosen videos", %{conn: conn, videos: videos} do
-  #     conn = delete conn, videos_path(conn, :delete, videos)
-  #     assert response(conn, 204)
-  #     assert_error_sent 404, fn ->
-  #       get conn, videos_path(conn, :show, videos)
-  #     end
-  #   end
-  # end
-
-  # defp create_videos(_) do
-  #   videos = fixture(:videos)
-  #   {:ok, videos: videos}
-  # end
+      expected = %{"data" => []}
+      assert expected == response
+    end
+  end
 end

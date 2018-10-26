@@ -2,6 +2,7 @@
 // The ExtractTextPlugin is used to separate it out into
 // its own CSS file.
 import css from '../css/app.css';
+import 'tippy.js/dist/tippy.css';
 
 // webpack automatically concatenates all files in your
 // watched paths. Those paths can be configured as
@@ -18,19 +19,22 @@ import "phoenix_html";
 
 import socket from "./socket";
 
-
+import './helpers';
 import loadView from './views/loader';
 import Pjax from 'pjax-api';
 import Radio from './components/radio';
 import Search from './components/search';
 import Notifier from './components/notifier';
 import Opinions from './components/opinions';
-import Tippy from 'tippy.js/dist/tippy.all';
+import OpinionPicker from './components/opinionPicker';
+import PlaylistPicker from './components/playlistPicker';
+import Tippy from 'tippy.js';
 
 //https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
 function handleDOMContentLoaded() {
   // Get the current view name
   const viewName = document.getElementsByTagName('main')[0].dataset.jsViewName;
+  console.log(`Loading ${viewName}`);
 
   // Load view class and mount it
   const ViewClass = loadView(viewName);
@@ -49,20 +53,14 @@ function handleDOMContentLoaded() {
     return piwikTracker.trackPageview();
   }
 
-  new Tippy("main", {
-    arrow: true,
-    arrowType: 'round',
-    performance: true,
-    target: ".tippy",
-    dynamicTitle: true
-  });
-
+  Opinions.mount();
 }
 
 function handleUnloadContentLoaded() {
-  if (window.currentView.unmount) {
+  if (window.currentView && window.currentView.unmount) {
     window.currentView.unmount();
   }
+  Opinions.unmount();
 }
 
 var radio = new Radio();
@@ -71,6 +69,7 @@ var search = new Search();
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
 document.addEventListener('pjax:ready', handleDOMContentLoaded, false);
 window.addEventListener('pjax:unload', handleUnloadContentLoaded, false);
+window.addEventListener('scroll', () => Tippy.hideAllPoppers())
 
 new Pjax({
   areas: [
@@ -79,5 +78,8 @@ new Pjax({
   update: {
     css: false,
     js: false
+  },
+  filter: function (el) {
+    return el.matches(':not([target])') && el.matches(':not([data-pjax="false"])');
   }
 });

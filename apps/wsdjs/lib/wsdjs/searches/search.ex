@@ -3,9 +3,9 @@ defmodule Wsdjs.Searches do
   The boundary for the Notification system.
   """
   import Ecto.{Query, Changeset}, warn: false
-  alias Wsdjs.Repo
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Musics.Song
+  alias Wsdjs.Repo
 
   @doc """
   Returns a song list according to a fulltext search.

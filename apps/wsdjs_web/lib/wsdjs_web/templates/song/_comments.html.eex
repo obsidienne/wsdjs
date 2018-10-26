@@ -9,21 +9,21 @@
   <% end %>
 <% end %>
 
-<ul id="comments-container">
+<ul id="comments-container" class="mt-3">
   <%= for comment <- @comments do %>
-    <li class="comment">
-      <div class="comment__avatar">
+    <li class="d-flex mb-3">
+      <div class="d-none d-md-flex comment__avatar">
         <img src="<%= avatar_url(comment.user.avatar, 50) %>" srcset="<%= avatar_srcset(comment.user.avatar, 50) %>" sizes="50px" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
       </div>
 
       <div class="comment__body">
-        <header class="comment__header">
+        <header class="comment__header d-flex align-items-center p-2">
           <span>
-            <a href="<%= user_path(@conn, :show, comment.user) %>"><%= comment.user.name %></a>
-            <time class="timeago" title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
+            <a href="<%= user_path(@conn, :show, comment.user) %>" class="clickable visible-link action-link d-inline-block"><%= comment.user.name %></a>
+            <time title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
           </span>
           <%= if Wsdjs.Reactions.Policy.can?(@conn.assigns[:current_user], :delete, comment) == :ok do %>
-            <button class="btn btn-link comment__delete" data-path="<%= api_comment_path(@conn, :delete, comment) %>">
+            <button class="btn btn-link comment__delete ml-auto" data-path="<%= api_comment_path(@conn, :delete, comment) %>">
               <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
                 <path d="M0 0h24v24H0z" fill="none"/>
@@ -31,7 +31,7 @@
             </button>
           <% end %>
         </header>
-        <div class="comment__content">
+        <div class="comment__content px-2" data-autolink>
           <%= raw(comment.text_html) %>
         </div>
       </div>

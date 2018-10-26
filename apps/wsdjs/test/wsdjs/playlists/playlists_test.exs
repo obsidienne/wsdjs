@@ -1,6 +1,10 @@
 defmodule Wsdjs.Playlists.PlaylistsTest do
   use Wsdjs.DataCase
+  alias Wsdjs.Accounts
+  alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists
+
+  doctest Wsdjs.Playlists.Policy, import: true
 
   describe "playlists" do
     alias Wsdjs.Playlists.Playlist
@@ -15,7 +19,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       playlist
     end
 
-    def playlist_fixture() do
+    def playlist_fixture do
       {:ok, user} =
         Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
@@ -24,7 +28,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
       playlist
     end
 
-    def user_fixture() do
+    def user_fixture do
       {:ok, user} =
         Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
@@ -80,7 +84,9 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     test "update_playlist/2 with valid data updates the playlist" do
       playlist = playlist_fixture()
 
-      assert {:ok, playlist} = Playlists.update_playlist(playlist, @update_attrs)
+      assert {:ok, playlist} =
+               Playlists.update_playlist(playlist, @update_attrs, %Accounts.User{})
+
       assert %Playlist{} = playlist
       assert playlist.name == "new playlist name"
     end
@@ -88,7 +94,9 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     test "update_playlist/2 with invalid data returns error changeset" do
       playlist = playlist_fixture()
 
-      assert {:error, %Ecto.Changeset{}} = Playlists.update_playlist(playlist, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} =
+               Playlists.update_playlist(playlist, @invalid_attrs, %Accounts.User{})
+
       assert playlist == Playlists.get_playlist!(playlist.id)
     end
 
@@ -119,28 +127,6 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
         |> Wsdjs.Musics.create_suggestion()
 
       song
-    end
-
-    def playlist_with_songs_fixture() do
-      {:ok, user} =
-        Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
-
-      {:ok, playlist} =
-        Playlists.create_playlist(%{name: "dummy#{System.unique_integer()}", user_id: user.id})
-
-      playlist = playlist |> Repo.preload(song: :art)
-
-      song1 = song_fixture(user.id)
-      song2 = song_fixture(user.id)
-      song3 = song_fixture(user.id)
-
-      Wsdjs.Playlists.update_playlist_songs(playlist, %{
-        song1.id => "1",
-        song2.id => "2",
-        song3.id => "3"
-      })
-
-      %{user: user, playlist: playlist, songs: [song1, song2, song3]}
     end
 
     test "list_playlist_songs/1 returns all song in the playlist" do

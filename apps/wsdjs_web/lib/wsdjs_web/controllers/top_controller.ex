@@ -1,12 +1,16 @@
 defmodule WsdjsWeb.TopController do
   @moduledoc false
   use WsdjsWeb, :controller
-  use WsdjsWeb.Controller
 
   alias Wsdjs.Charts
   alias Wsdjs.Charts.Top
 
   action_fallback(WsdjsWeb.FallbackController)
+
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns.current_user]
+    apply(__MODULE__, action_name(conn), args)
+  end
 
   def index(conn, %{"page" => page}, current_user) do
     page = Charts.paginate_tops(current_user, %{"page" => page, "page_size" => 12})
@@ -59,6 +63,8 @@ defmodule WsdjsWeb.TopController do
     end
   end
 
+  @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def new(conn, _params, current_user) do
     with :ok <- Charts.Policy.can?(current_user, :create_top) do
       changeset = Charts.change_top_creation(%Top{})
@@ -66,6 +72,8 @@ defmodule WsdjsWeb.TopController do
     end
   end
 
+  @spec update(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def update(conn, %{"id" => id, "direction" => "next"}, current_user) do
     with top = Charts.get_top!(id),
          :ok <- Charts.Policy.can?(current_user, :update_top, top),
@@ -96,6 +104,8 @@ defmodule WsdjsWeb.TopController do
     end
   end
 
+  @spec delete(Plug.Conn.t(), map(), Wsdjs.Accounts.User.t()) ::
+          {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
     with top = Charts.get_top!(id),
          :ok <- Charts.Policy.can?(current_user, :delete_top, top),

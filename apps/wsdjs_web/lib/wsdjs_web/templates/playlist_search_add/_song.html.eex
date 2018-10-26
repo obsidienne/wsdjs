@@ -1,0 +1,24 @@
+<%= if blur_track(@song, @current_user) == false do %>
+
+<li class="shadow-hover">
+  <div class="d-flex m-0" data-id="<%=  %>">
+    <div class="search-minicard__heading p-0 border-0">
+      <img src="<%= art_url(@song.art, 100) %>" class="responsive" />
+    </div>
+    <div class="song-minicard__body d-flex py-0 ml-2">
+      <span class="text-ellipsis primary-text"><%= @song.title %></span>
+      <span class="text-ellipsis secondary-text">by <%= @song.artist %></span>
+      <span class="text-muted">
+        <%= user_displayed_name(@song.user) %>
+      </span>
+    </div>
+
+    <%= form_for @conn, playlist_playlist_songs_path(@conn, :create, @playlist), [class: "d-flex align-items-center mr-1"], fn f -> %>
+      <%= hidden_input f, :song_id, value: @song.id %>
+      <div>
+      <%= submit "Add", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+</li>
+
+<% end %>

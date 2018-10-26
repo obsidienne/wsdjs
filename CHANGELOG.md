@@ -1,3 +1,32 @@
+# version 1.9.0
+- add TOP5 management
+- simplify CSS
+- update tippyjs
+- modify opinion selector (up/down/like)
+- add a playlist selector for song
+- add a search by filter in song page
+- add a search song in playlist
+- first 5 songs of a playlist can be in the user front page
+- add log out link
+- add autoprefixer to webpack
+- add a webmanifest (need test in android)
+# version 1.8.7
+- add a the facebook url to event
+- edit playlist name and visibility
+- create a user params page
+- change the mechanism for updating radio (cron job)
+- move job schedules config to env config
+- create a radio page
+- improve mobile menu
+- Float Action Button in mobile configuration
+- Design video close button
+- Admin can only see his logout button
+- Bump elixir and erlang version to match the latest version installed in the server
+- Improve the CSS file organization
+- add a map in happenings
+# version 1.8.6
+- specific page for user params
+- edit page for playlist public status (remove it from user edit page)
 # version 1.8.5
 - Use markdown for comment and user description
 - Add user count

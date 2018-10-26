@@ -6,18 +6,18 @@
 
 <%= if @current_user && @current_user.id == @top.user_id do %>
 <%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb">
+<nav class="secondary-nav breadcrumb py-2">
   <ol class="container">
-    <li class="visited">Create</li>
-    <li class="current">Check</li>
-    <li><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
+    <li class="visited d-inline-block">Create</li>
+    <li class="current d-inline-block">Check</li>
+    <li class="d-inline-block"><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
   </ol>
 </nav>
 <% end %>
 <% end %>
 
 <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
-<div class="container actions">
+<div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
   <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
 </div>
 <% end %>
@@ -27,9 +27,11 @@
   <%= for rank <- @ranks do %>
     <article class="top-song">
       <div class="song-art-container">
-        <img src="<%= art_url(rank.song.art, 300) %>" srcset="<%= art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />
+        <div class="img-embed">
+          <img src="<%= art_url(rank.song.art, 300) %>" srcset="<%= art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />
+        </div>
         <%= if rank.song.url do %>
-          <a href="<%= url_for_provider(rank.song) %>" target="_blank"  rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
+          <a href="<%= url_for_provider(rank.song) %>" class="d-flex song-art__play" target="_blank"  rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
             <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
               <path d='M0 0h24v24H0z' fill='none'/>
               <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
@@ -40,10 +42,10 @@
         <div class="top-song-info-container">
           <div class="top-song-body">
             <div>
-              <%= link to: song_path(@conn, :show, rank.song), class: "song-title" do %>
+              <%= link to: song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
                 <%= rank.song.title %>
               <% end %>
-              <span class="text-ellipsis song-artist"><%= rank.song.artist %></span>
+              <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
             </div>
 
             <aside>

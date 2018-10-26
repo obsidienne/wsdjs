@@ -2,9 +2,9 @@ defmodule WsdjsApi.V1.VideoController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  alias Wsdjs.Musics
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Video
+  alias Wsdjs.Musics
 
   action_fallback(WsdjsApi.V1.FallbackController)
 
