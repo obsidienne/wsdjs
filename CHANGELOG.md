@@ -1,3 +1,15 @@
+# version 1.9.0
+- add TOP5 management
+- simplify CSS
+- update tippyjs
+- modify opinion selector (up/down/like)
+- add a playlist selector for song
+- add a search by filter in song page
+- add a search song in playlist
+- first 5 songs of a playlist can be in the user front page
+- add log out link
+- add autoprefixer to webpack
+- add a webmanifest (need test in android)
 # version 1.8.7
 - add a the facebook url to event
 - edit playlist name and visibility
