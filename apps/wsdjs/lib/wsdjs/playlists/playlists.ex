@@ -143,6 +143,25 @@ defmodule Wsdjs.Playlists do
   end
 
   @doc """
+  Returns the first 5 playlist songs in a front page playlists.
+
+  ## Examples
+
+      iex> list_frontpage_playlist_songs(%User{} = user)
+      [%Playlist{playlist_song: [songs: []]}, ...]
+
+  """
+  def list_frontpage_playlist_songs(current_user) do
+    query = from(ps in PlaylistSong, order_by: ps.position, limit: 5, preload: [song: :art])
+
+    current_user
+    |> Playlist.scoped()
+    |> where([p], p.front_page == true)
+    |> Repo.all()
+    |> Repo.preload(playlist_songs: query)
+  end
+
+  @doc """
   Returns the list of list_playlist_songs.
 
   ## Examples

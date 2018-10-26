@@ -23,12 +23,14 @@ defmodule WsdjsWeb.UserController do
     with %User{} = user <- Accounts.get_user!(user_id),
          :ok <- Accounts.Policy.can?(current_user, :show, user) do
       suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      playlists = Wsdjs.Playlists.list_frontpage_playlist_songs(current_user)
 
       conn
       |> render(
         "show.html",
         user: user,
-        suggested_songs: suggested_songs
+        suggested_songs: suggested_songs,
+        playlists: playlists
       )
     end
   end
