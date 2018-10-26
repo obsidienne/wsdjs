@@ -11,6 +11,7 @@ defmodule Wsdjs.Playlists.Playlist do
     field(:type, :string, default: "playlist")
     field(:public, :boolean, default: false)
     field(:count, :integer, default: 0)
+    field(:front_page, :boolean, default: false)
     timestamps()
 
     belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)
@@ -22,7 +23,7 @@ defmodule Wsdjs.Playlists.Playlist do
 
   def update_changeset(%Playlist{} = playlist, attrs) do
     playlist
-    |> cast(attrs, [:public, :name])
+    |> cast(attrs, [:public, :name, :front_page])
     |> validate_required([:public, :name])
   end
 

@@ -135,7 +135,7 @@
 <% end %>
   </div>
 
-  <%= link "log out", to: session_path(@conn, :delete, @current_user), method: :delete, data: [pjax: "false"] %>
+  <%= link "log out", to: session_path(@conn, :delete, @current_user), method: :delete, data: [pjax: "false"], class: "btn btn-link text-danger mt-4" %>
 
 </section>
 

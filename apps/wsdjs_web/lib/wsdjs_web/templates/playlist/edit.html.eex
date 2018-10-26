@@ -2,8 +2,8 @@
   <ol class="container">
     <li class="d-inline-block">
         <%= link "bio", to: user_path(@conn, :show, @user) %>
-    </li class="d-inline-block">
-    <li class="current">
+    </li>
+    <li class="d-inline-block current">
       <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
     </li>
     <li class="d-inline-block">
@@ -25,10 +25,18 @@
     </div>
 
     <div class="form-group">
-      <label>This playlist/top is visible to anyone.</label>
+      <label>Public playlist</label>
       <div class="ckbx-style-11 ">
           <%= checkbox f, :public %>
           <%= label f, :public do %><% end %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Visible in the user profil page</label>
+      <div class="ckbx-style-11 ">
+          <%= checkbox f, :front_page %>
+          <%= label f, :front_page do %><% end %>
       </div>
     </div>
 
