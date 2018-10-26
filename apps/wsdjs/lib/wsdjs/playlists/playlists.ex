@@ -125,6 +125,19 @@ defmodule Wsdjs.Playlists do
     Playlist.changeset(playlist, %{})
   end
 
+  defp update_playlist_stat(playlist_id) do
+    IO.inspect(playlist_id)
+
+    query = "
+      update playlists p
+      set count=(select count(*) from playlist_songs s where p.id=s.playlist_id)
+        , cover_id=(select song_id from playlist_songs s where p.id=s.playlist_id order by position LIMIT 1)
+      where p.id=#{playlist_id}
+    "
+
+    Ecto.Adapters.SQL.query!(Repo, query)
+  end
+
   ###############################################
   #
   # Playlist Songs
@@ -245,6 +258,7 @@ defmodule Wsdjs.Playlists do
         |> Repo.update_all(inc: [position: 1])
 
         sort_playlist_song(playlist_id)
+        update_playlist_stat(playlist_id)
         {:ok, new_ps}
 
       default ->
@@ -289,7 +303,10 @@ defmodule Wsdjs.Playlists do
         {:error, _, _, _} -> {:error, current}
       end
 
-    sort_playlist_song(current.playlist_id)
+    {:ok, playlist_id} = Wsdjs.HashID.dump(current.playlist_id)
+
+    sort_playlist_song(playlist_id)
+    update_playlist_stat(playlist_id)
     ret
   end
 
@@ -307,7 +324,11 @@ defmodule Wsdjs.Playlists do
   """
   def delete_playlist_song(%PlaylistSong{} = playlist_song) do
     {:ok, ps} = Repo.delete(playlist_song)
-    sort_playlist_song(ps.playlist_id)
+    {:ok, playlist_id} = Wsdjs.HashID.dump(ps.playlist_id)
+
+    sort_playlist_song(playlist_id)
+    update_playlist_stat(playlist_id)
+
     {:ok, ps}
   end
 
@@ -324,9 +345,7 @@ defmodule Wsdjs.Playlists do
     PlaylistSong.changeset(playlist_song, %{})
   end
 
-  defp sort_playlist_song(id) do
-    {:ok, playlist_id} = Wsdjs.HashID.dump(id)
-
+  defp sort_playlist_song(playlist_id) do
     query =
       from(
         ps in PlaylistSong,
