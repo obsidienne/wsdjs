@@ -18,5 +18,4 @@ defmodule Wsdjs.Repo.Migrations.CreatePlaylistSongs do
   def down do
     drop table(:playlist_songs)
   end
-
 end

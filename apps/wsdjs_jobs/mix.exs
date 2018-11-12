@@ -36,11 +36,11 @@ defmodule Wsdjs.Jobs.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix_pubsub, "~> 1.0"},
-      {:httpoison, "~> 0.12"},
-      {:quantum, ">= 2.3.2"},
-      {:timex, "~> 3.1"},
-      {:bamboo, "~> 1.0"},
+      {:phoenix_pubsub, "~> 1.1"},
+      {:httpoison, "~> 1.4.0"},
+      {:quantum, "~> 2.3.3"},
+      {:timex, "~> 3.4"},
+      {:bamboo, "~> 1.1"},
       {:wsdjs, in_umbrella: true}
     ]
   end
@@ -53,8 +53,6 @@ defmodule Wsdjs.Jobs.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end

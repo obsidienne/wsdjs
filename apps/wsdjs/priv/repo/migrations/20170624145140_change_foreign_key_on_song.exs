@@ -7,7 +7,9 @@ defmodule Wsdjs.Repo.Migrations.ChangeForeignKeyOnSong do
     drop constraint(:opinions, "song_opinions_song_id_fkey")
 
     execute "ALTER TABLE arts ADD FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE;"
+
     execute "ALTER TABLE comments ADD FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE;"
+
     execute "ALTER TABLE opinions ADD FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE;"
   end
 end

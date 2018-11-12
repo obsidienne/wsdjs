@@ -1,4 +1,4 @@
-defmodule Wsdjs.Umbrella.Mixfile do
+defmodule Wsdjs.Umbrella.MixProject do
   use Mix.Project
 
   def project do
@@ -22,11 +22,6 @@ defmodule Wsdjs.Umbrella.Mixfile do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps folder
   defp deps do
-    [
-      {:credo, "~> 0.10.0", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:mix_test_watch, "~> 0.8", only: :dev},
-      {:dialyxir, "~> 1.0.0-rc.0", only: [:dev], runtime: false}
-    ]
+    []
   end
 end

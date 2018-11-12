@@ -15,6 +15,7 @@ defmodule Wsdjs.Repo.Migrations.ChangePlaylistPK do
 
       timestamps()
     end
+
     create unique_index(:playlists, [:user_id, :name])
 
     create table(:playlist_songs) do

@@ -5,6 +5,7 @@ defmodule Wsdjs.Repo.Migrations.AddPlaceToEvent do
     alter table(:events) do
       add :venue, :string
     end
+
     flush()
     execute("CREATE EXTENSION IF NOT EXISTS postgis;")
     flush()
