@@ -2,13 +2,10 @@ defmodule WsdjsWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
+  # channel "room:*", WsdjsWeb.RoomChannel
   channel("notifications:*", WsdjsWeb.NotificationsChannel)
   channel("radio:*", WsdjsWeb.RadioChannel)
   channel("scrolling:*", WsdjsWeb.ScrollingChannel)
-
-  ## Transports
-  transport(:websocket, Phoenix.Transports.WebSocket)
-  # transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -42,7 +39,7 @@ defmodule WsdjsWeb.UserSocket do
   # Would allow you to broadcast a "disconnect" event and terminate
   # all active sockets and channels for a given user:
   #
-  #     GallyUmbrella.Web.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
+  #     WsdjsWeb.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil
