@@ -1,6 +1,6 @@
 defmodule Wsdjs.HashID do
   @behaviour Ecto.Type
-  @hashids Hashids.new(min_len: 8, salt: "ed_sheeran")
+  @hashids Hashids.new(min_len: 8, salt: "ISeeFireByEdSheeranFromTheDesolationOfSmaug")
   @moduledoc """
   Converts integers to Hashids.
 
