@@ -32,7 +32,7 @@
 <% else %>
 
 <li class="clickable shadow-hover">
-  <a href="<%= song_path(@conn, :show, @rank.song.id) %>" class="d-flex m-0">
+  <a href="<%= Routes.song_path(@conn, :show, @rank.song.id) %>" class="d-flex m-0">
     <div class="song-minicard__heading p-0 border-0">
       <div class="voting-position charted">
         <div class="chart-bg"></div>

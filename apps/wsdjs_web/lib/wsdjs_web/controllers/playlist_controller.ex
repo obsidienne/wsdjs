@@ -77,7 +77,7 @@ defmodule WsdjsWeb.PlaylistController do
          {:ok, _user} <- Playlists.update_playlist(playlist, playlist_params, current_user) do
       conn
       |> put_flash(:info, "Playlist updated.")
-      |> redirect(to: playlist_path(conn, :show, playlist))
+      |> redirect(to: Routes.playlist_path(conn, :show, playlist))
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: current_user, changeset: changeset)
@@ -97,7 +97,7 @@ defmodule WsdjsWeb.PlaylistController do
          {:ok, playlist} <- Playlists.create_playlist(playlist_params) do
       conn
       |> put_flash(:info, "Playlist created successfully.")
-      |> redirect(to: playlist_path(conn, :show, playlist))
+      |> redirect(to: Routes.playlist_path(conn, :show, playlist))
     end
   end
 
@@ -109,7 +109,7 @@ defmodule WsdjsWeb.PlaylistController do
          {:ok, _} = Playlists.delete_playlist(playlist) do
       conn
       |> put_flash(:info, "playlist deleted successfully.")
-      |> redirect(to: user_path(conn, :show, user))
+      |> redirect(to: Routes.user_path(conn, :show, user))
     end
   end
 end

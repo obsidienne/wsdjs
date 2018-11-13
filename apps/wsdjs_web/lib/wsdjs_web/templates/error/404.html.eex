@@ -23,23 +23,23 @@
     <link rel="icon" type="image/png" sizes="96x96" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
 
 
-    <link defer rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link defer rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <header class="hero hot-hero">
       <nav class="glnav line-upper container">
-        <%= link "", to: home_path(@conn, :index), class: "glnav__logo" %>
-        <%= link "tops", to: top_path(@conn, :index), class: "glnav__menu text-muted" %>
+        <%= link "", to: Routes.home_path(@conn, :index), class: "glnav__logo" %>
+        <%= link "tops", to: Routes.top_path(@conn, :index), class: "glnav__menu text-muted" %>
       </nav>
     </header>
 
     <main class="container">
       <h1 class="page-header">Sorry this page does not exist !</h1>
       <p>
-        <%= link "Go to the home page", to: home_path(@conn, :index), class: "btn btn-link" %>
+        <%= link "Go to the home page", to: Routes.home_path(@conn, :index), class: "btn btn-link" %>
         or 
-        <%= link "Sign in", to: session_path(@conn, :new), class: "btn btn-link" %>
+        <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "btn btn-link" %>
       </p>
     </main>
   </body>

@@ -26,7 +26,7 @@ defmodule WsdjsWeb.SuggestionController do
          {:ok, song} <- Musics.create_suggestion(params) do
       conn
       |> put_flash(:info, "#{song.title} suggested")
-      |> redirect(to: song_path(conn, :show, song.id))
+      |> redirect(to: Routes.song_path(conn, :show, song.id))
     end
   end
 end

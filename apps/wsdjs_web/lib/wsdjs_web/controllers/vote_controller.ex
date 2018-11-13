@@ -10,12 +10,12 @@ defmodule WsdjsWeb.VoteController do
       {:ok, _top} ->
         conn
         |> put_flash(:info, "Voted !")
-        |> redirect(to: top_path(conn, :show, top_id))
+        |> redirect(to: Routes.top_path(conn, :show, top_id))
 
       {:error, _changeset} ->
         conn
         |> put_flash(:error, "Something went wrong !")
-        |> redirect(to: top_path(conn, :show, top_id))
+        |> redirect(to: Routes.top_path(conn, :show, top_id))
     end
   end
 end

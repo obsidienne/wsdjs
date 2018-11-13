@@ -1,14 +1,14 @@
 <nav class="secondary-nav py-2">
   <ol class="container">
     <li class="current d-inline-block">
-      <%= link "bio", to: user_path(@conn, :show, @user) %>
+      <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
     </li>
     <li class="d-inline-block">
-        <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
+        <%= link "playlists", to: Routes.user_playlist_path(@conn, :index, @user) %>
     </li>
     <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :edit_user, @user) == :ok do %>
     <li class="d-inline-block">
-      <%= link "params", to: user_params_path(@conn, :show, @user) %>
+      <%= link "params", to: Routes.user_params_path(@conn, :show, @user) %>
     </li>
     <% end %>
   </ol>

@@ -5,7 +5,7 @@
 </header>
 
 <%= if @current_user && @current_user.admin do %>
-<%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
+<%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
 <nav class="secondary-nav breadcrumb py-2">
   <ol class="container">
     <li class="visited d-inline-block">Voting</li>
@@ -21,8 +21,8 @@
 
 <%= if @current_user && @current_user.admin do %>
 <div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
-  <%= link "Text version", to: top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link", target: "_blank" %>
-  <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link ml-2" %>
+  <%= link "Text version", to: Routes.top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link", target: "_blank" %>
+  <%= link "statistics", to: Routes.top_stat_path(@conn, :stat, @top.id), class: "btn btn-link ml-2" %>
 </div>
 <% end %>
 
@@ -77,7 +77,7 @@
       </div>
       <div class="top-song-body">
         <div>
-          <%= link to: song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link clickable d-inline-block" do %>
+          <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link clickable d-inline-block" do %>
             <span><%= rank.song.title %></span>
           <% end %>
           <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>

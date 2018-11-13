@@ -1,7 +1,7 @@
 <nav class="secondary-nav mb-3 py-2">
   <ol class="container">
-    <li class="d-inline-block"><%= link "Song", to: song_path(@conn, :show, @song) %></li>
-    <li class="current d-inline-block"><%= link "Videos", to: song_song_videos_path(@conn, :index, @song) %></li>
+    <li class="d-inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
+    <li class="current d-inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
   </ol>
 </nav>
 
@@ -16,7 +16,7 @@
         <span class="primary-text"><%= @song.title %></span>
         <span class="secondary-text pb-2"><span class="text-muted">by</span> <%= @song.artist %></span>
       </div>
-      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
+      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
@@ -31,7 +31,7 @@
   </section>
 
   <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
-    <%= form_for @video_changeset, api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
+    <%= form_for @video_changeset, Routes.api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
       <fieldset>
         <legend>Add a video</legend>
         <div class="form-group">

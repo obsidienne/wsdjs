@@ -26,7 +26,7 @@
 <% else %>
 
 <li class="clickable shadow-hover">
-  <a href="<%= song_path(@conn, :show, @song.id) %>" class="d-flex m-0">
+  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>" class="d-flex m-0">
     <div class="song-minicard__heading p-0 border-0">
       <img src="<%= art_url(@song.art, 200) %>" class="responsive" />
     </div>

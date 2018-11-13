@@ -49,7 +49,7 @@ defmodule WsdjsWeb.EventController do
          {:ok, event} <- Happenings.create_event(params) do
       conn
       |> put_flash(:info, "#{event.name} created")
-      |> redirect(to: event_path(conn, :show, event))
+      |> redirect(to: Routes.event_path(conn, :show, event))
     end
   end
 
@@ -72,7 +72,7 @@ defmodule WsdjsWeb.EventController do
          {:ok, %Event{} = event} <- Happenings.update_event(event, event_params) do
       conn
       |> put_flash(:info, "Event updated")
-      |> redirect(to: event_path(conn, :show, event))
+      |> redirect(to: Routes.event_path(conn, :show, event))
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", event: event, user: current_user, changeset: changeset)
@@ -90,7 +90,7 @@ defmodule WsdjsWeb.EventController do
          {:ok, _event} = Happenings.delete_event(event) do
       conn
       |> put_flash(:info, "Event deleted successfully.")
-      |> redirect(to: event_path(conn, :index))
+      |> redirect(to: Routes.event_path(conn, :index))
     end
   end
 end

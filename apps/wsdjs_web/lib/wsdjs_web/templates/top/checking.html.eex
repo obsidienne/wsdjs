@@ -5,7 +5,7 @@
 </header>
 
 <%= if @current_user && @current_user.id == @top.user_id do %>
-<%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
+<%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
 <nav class="secondary-nav breadcrumb py-2">
   <ol class="container">
     <li class="visited d-inline-block">Create</li>
@@ -18,7 +18,7 @@
 
 <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
 <div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
-  <%= link "Delete top", to: top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
+  <%= link "Delete top", to: Routes.top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
 </div>
 <% end %>
 
@@ -42,7 +42,7 @@
         <div class="top-song-info-container">
           <div class="top-song-body">
             <div>
-              <%= link to: song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
+              <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
                 <%= rank.song.title %>
               <% end %>
               <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
@@ -70,7 +70,7 @@
         <div>
         <div>
           <div class="form-group">
-            <%= link "Remove song from this top", to: rank_path(@conn, :delete, rank.id), method: :delete, class: "btn btn-danger" %>
+            <%= link "Remove song from this top", to: Routes.rank_path(@conn, :delete, rank.id), method: :delete, class: "btn btn-danger" %>
           </div>
         </div>
       </div>

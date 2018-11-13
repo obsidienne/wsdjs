@@ -1,5 +1,5 @@
 <%= unless is_nil(@conn.assigns[:current_user]) do %>
-  <%= form_for @changeset, api_song_comment_path(@conn, :create, @song), [id: "song-comment-form"], fn f -> %>
+  <%= form_for @changeset, Routes.api_song_comment_path(@conn, :create, @song), [id: "song-comment-form"], fn f -> %>
   <div class="form-group">
     <%= textarea f, :text, class: "form-control", placeholder: "Comment", required: true, maxlength: 255 %>
     <%= error_tag f, :text %>
@@ -19,11 +19,11 @@
       <div class="comment__body">
         <header class="comment__header d-flex align-items-center p-2">
           <span>
-            <a href="<%= user_path(@conn, :show, comment.user) %>" class="clickable visible-link action-link d-inline-block"><%= comment.user.name %></a>
+            <a href="<%= Routes.user_path(@conn, :show, comment.user) %>" class="clickable visible-link action-link d-inline-block"><%= comment.user.name %></a>
             <time title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
           </span>
           <%= if Wsdjs.Reactions.Policy.can?(@conn.assigns[:current_user], :delete, comment) == :ok do %>
-            <button class="btn btn-link comment__delete ml-auto" data-path="<%= api_comment_path(@conn, :delete, comment) %>">
+            <button class="btn btn-link comment__delete ml-auto" data-path="<%= Routes.api_comment_path(@conn, :delete, comment) %>">
               <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
                 <path d="M0 0h24v24H0z" fill="none"/>
