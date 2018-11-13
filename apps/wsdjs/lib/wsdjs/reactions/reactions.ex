@@ -2,7 +2,7 @@ defmodule Wsdjs.Reactions do
   @moduledoc """
   The boundary for the Reaction system.
   """
-  import Ecto.{Query, Changeset}, warn: false
+  import Ecto.Query, warn: false
   alias Wsdjs.Repo
 
   ###############################################
