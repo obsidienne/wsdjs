@@ -43,7 +43,6 @@ defmodule WsdjsWeb do
       import WsdjsWeb.Gettext
       alias WsdjsWeb.Router.Helpers, as: Routes
 
-
       # Import custom helpers
       import WsdjsWeb.SongHelper
       import WsdjsWeb.UserHelper
