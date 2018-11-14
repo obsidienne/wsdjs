@@ -1,3 +1,3 @@
-defmodule Wsdjs.Jobs.Scheduler do
+defmodule WsdjsJobs.Scheduler do
   use Quantum.Scheduler, otp_app: :wsdjs_jobs
 end
