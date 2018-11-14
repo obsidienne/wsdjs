@@ -165,7 +165,12 @@ defmodule Wsdjs.Playlists do
 
   """
   def list_frontpage_playlist_songs(current_user) do
-    query = from(ps in PlaylistSong, where: ps.position <= 5, preload: [song: :art])
+    query =
+      from(ps in PlaylistSong,
+        where: ps.position <= 5,
+        preload: [song: :art],
+        order_by: ps.position
+      )
 
     current_user
     |> Playlist.scoped()
