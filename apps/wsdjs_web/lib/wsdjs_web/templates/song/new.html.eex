@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <%= form_for @changeset, song_path(@conn, :create), [class: "row"], fn f -> %>
+  <%= form_for @changeset, Routes.song_path(@conn, :create), [class: "row"], fn f -> %>
     <p>
     This song will <strong>NOT</strong> be used in the current month TOP 10
     </p>

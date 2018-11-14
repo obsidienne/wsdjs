@@ -15,7 +15,7 @@ defmodule WsdjsWeb.RegistrationController do
         :info,
         "Check your email inboxWe have sent you a link for signing in via email to #{email}."
       )
-      |> redirect(to: home_path(conn, :index))
+      |> redirect(to: Routes.home_path(conn, :index))
     else
       {:error, :not_found} ->
         conn
@@ -23,7 +23,7 @@ defmodule WsdjsWeb.RegistrationController do
           :error,
           "Email #{email} is deactivated. Send an email to worldswingdjs@gmail.com to ask for details."
         )
-        |> redirect(to: session_path(conn, :new))
+        |> redirect(to: Routes.session_path(conn, :new))
     end
   end
 end

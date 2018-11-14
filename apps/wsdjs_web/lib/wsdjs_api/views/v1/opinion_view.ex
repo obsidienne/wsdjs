@@ -31,12 +31,13 @@ defmodule WsdjsApi.V1.OpinionView do
       else
         nil
       end
+
     user_opinion_id =
-        if current_opinion do
-          current_opinion.id
-        else
-          nil
-        end
+      if current_opinion do
+        current_opinion.id
+      else
+        nil
+      end
 
     %{
       data: %{

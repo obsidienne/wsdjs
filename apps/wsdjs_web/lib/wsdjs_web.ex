@@ -21,8 +21,8 @@ defmodule WsdjsWeb do
     quote do
       use Phoenix.Controller, namespace: WsdjsWeb
       import Plug.Conn
-      import WsdjsWeb.Router.Helpers
       import WsdjsWeb.Gettext
+      alias WsdjsWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -39,9 +39,9 @@ defmodule WsdjsWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import WsdjsWeb.Router.Helpers
       import WsdjsWeb.ErrorHelpers
       import WsdjsWeb.Gettext
+      alias WsdjsWeb.Router.Helpers, as: Routes
 
       # Import custom helpers
       import WsdjsWeb.SongHelper

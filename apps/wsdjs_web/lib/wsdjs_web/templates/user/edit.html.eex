@@ -5,7 +5,7 @@
       <button id="user_upload_widget_opener" class="btn btn-primary">Upload avatar</button>
     </div>
 
-    <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
+    <%= form_for @changeset, Routes.user_path(@conn, :update, @user), fn f -> %>
       <div id="cloudinary_form_div">
         <%= inputs_for f, :avatar, fn fp -> %>
           <%= hidden_input fp, :cld_id %>
@@ -15,7 +15,7 @@
     <% end %>
   </div>
 
-  <%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
+  <%= form_for @changeset, Routes.user_path(@conn, :update, @user), fn f -> %>
     <%= if @current_user.admin do %>
     <div class="form-group">
       <label>Email</label>

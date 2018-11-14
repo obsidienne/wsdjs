@@ -19,10 +19,10 @@
 
   <% end %>
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
-    <a class="btn btn-primary tippy d-none d-md-inline-block" title="Suggest a song for the current month TOP 10" href="<%= suggestion_path(@conn, :new) %>">Suggest a song</a>
+    <a class="btn btn-primary tippy d-none d-md-inline-block" title="Suggest a song for the current month TOP 10" href="<%= Routes.suggestion_path(@conn, :new) %>">Suggest a song</a>
   <% end %>
   <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
-    <a class="btn btn-link d-none d-md-inline-block ml-2" href="<%= song_path(@conn, :new) %>">Add a song</a>
+    <a class="btn btn-link d-none d-md-inline-block ml-2" href="<%= Routes.song_path(@conn, :new) %>">Add a song</a>
   <% end %>
 </div>
 
@@ -58,7 +58,7 @@
 </template>
 
 <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
-  <%= link to: suggestion_path(@conn, :new), class: "btn btn-primary fab" do %>
+  <%= link to: Routes.suggestion_path(@conn, :new), class: "btn btn-primary fab" do %>
   <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
     <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>
     <path d='M0 0h24v24H0z' fill='none'/>

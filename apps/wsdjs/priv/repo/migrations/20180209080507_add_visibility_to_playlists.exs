@@ -19,5 +19,4 @@ defmodule Wsdjs.Repo.Migrations.AddVisibilityToPlaylists do
       remove :public
     end
   end
-
 end

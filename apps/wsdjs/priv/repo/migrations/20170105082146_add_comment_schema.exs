@@ -10,7 +10,6 @@ defmodule Wsdjs.Repo.Migrations.AddCommentSchema do
 
       timestamps()
     end
-
   end
 
   def down do
