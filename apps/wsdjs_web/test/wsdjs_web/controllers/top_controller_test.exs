@@ -60,11 +60,11 @@ defmodule WsdjsWeb.TopControllerTest do
 
           Enum.each(
             [
-              get(conn, top_path(conn, :new)),
-              put(conn, top_path(conn, :update, top.id, %{"direction" => "next"})),
-              put(conn, top_path(conn, :update, top.id, %{"direction" => "previous"})),
-              post(conn, top_path(conn, :create), top: %{due_date: Timex.today()}),
-              delete(conn, top_path(conn, :delete, top.id))
+              get(conn, Routes.top_path(conn, :new)),
+              put(conn, Routes.top_path(conn, :update, top.id, %{"direction" => "next"})),
+              put(conn, Routes.top_path(conn, :update, top.id, %{"direction" => "previous"})),
+              post(conn, Routes.top_path(conn, :create), top: %{due_date: Timex.today()}),
+              delete(conn, Routes.top_path(conn, :delete, top.id))
             ],
             fn conn ->
               assert html_response(conn, 302)
@@ -88,7 +88,7 @@ defmodule WsdjsWeb.TopControllerTest do
           assign(conn, :current_user, nil)
         ],
         fn conn ->
-          conn = get(conn, top_path(conn, :index))
+          conn = get(conn, Routes.top_path(conn, :index))
           assert html_response(conn, 200) =~ "List tops - World Swing DJs"
         end
       )
