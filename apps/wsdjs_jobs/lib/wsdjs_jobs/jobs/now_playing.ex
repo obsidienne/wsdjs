@@ -1,4 +1,4 @@
-defmodule Wsdjs.Jobs.NowPlaying do
+defmodule WsdjsJobs.NowPlaying do
   @moduledoc """
   Retrieves from the radioking API datas for the current played song.
   """
@@ -108,7 +108,7 @@ defmodule Wsdjs.Jobs.NowPlaying do
       if same_song?(song, last_queued) do
         queue
       else
-        Wsdjs.Jobs.UnmatchSong.notify(song)
+        WsdjsJobs.UnmatchSong.notify(song)
         :queue.in(song, queue)
       end
 

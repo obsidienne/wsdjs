@@ -1,4 +1,4 @@
-defmodule Wsdjs.Jobs.Mixfile do
+defmodule WsdjsJobs.Mixfile do
   use Mix.Project
 
   def project do
@@ -22,7 +22,7 @@ defmodule Wsdjs.Jobs.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Wsdjs.Jobs.Application, []},
+      mod: {WsdjsJobs.Application, []},
       extra_applications: [:logger]
     ]
   end

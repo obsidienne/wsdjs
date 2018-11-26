@@ -1,3 +1,3 @@
-defmodule Wsdjs.Jobs.Mailer do
+defmodule WsdjsJobs.Mailer do
   use Bamboo.Mailer, otp_app: :wsdjs_jobs
 end

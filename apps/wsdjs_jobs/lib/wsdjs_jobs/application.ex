@@ -1,4 +1,4 @@
-defmodule Wsdjs.Jobs.Application do
+defmodule WsdjsJobs.Application do
   @moduledoc false
 
   use Application
@@ -10,13 +10,13 @@ defmodule Wsdjs.Jobs.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      worker(Wsdjs.Jobs.NowPlaying, [Wsdjs.Jobs.NowPlaying]),
-      worker(Wsdjs.Jobs.Scheduler, [])
+      worker(WsdjsJobs.NowPlaying, [WsdjsJobs.NowPlaying]),
+      worker(WsdjsJobs.Scheduler, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Wsdjs.Jobs.Supervisor]
+    opts = [strategy: :one_for_one, name: WsdjsJobs.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
