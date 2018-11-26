@@ -1,10 +1,10 @@
 use Mix.Config
 
-config :wsdjs_jobs, Wsdjs.Jobs.Mailer, adapter: Bamboo.LocalAdapter
+config :wsdjs_jobs, WsdjsJobs.Mailer, adapter: Bamboo.LocalAdapter
 
-config :wsdjs_jobs, Wsdjs.Jobs.Scheduler,
+config :wsdjs_jobs, WsdjsJobs.Scheduler,
   jobs: [
-    {"@daily", {Wsdjs.Jobs.NewSuggestion, :call, []}},
-    {{:extended, "*/5 * * * *"}, {Wsdjs.Jobs.RadioStreamed, :call, []}},
-    {"*/5 * * * *", {Wsdjs.Jobs.UpdatePlaylists, :call, []}}
+    {"@daily", {WsdjsJobs.NewSuggestion, :call, []}},
+    {{:extended, "*/5 * * * *"}, {WsdjsJobs.RadioStreamed, :call, []}},
+    {"*/5 * * * *", {WsdjsJobs.UpdatePlaylists, :call, []}}
   ]

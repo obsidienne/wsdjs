@@ -5,8 +5,8 @@ defmodule WsdjsApi.V1.NowPlayingController do
   require Logger
 
   def index(conn, _params) do
-    pid = Process.whereis(Wsdjs.Jobs.NowPlaying)
-    list = Wsdjs.Jobs.NowPlaying.read(pid)
+    pid = Process.whereis(WsdjsJobs.NowPlaying)
+    list = WsdjsJobs.NowPlaying.read(pid)
 
     conn
     |> put_resp_header("content-type", "application/json; charset=utf-8")
