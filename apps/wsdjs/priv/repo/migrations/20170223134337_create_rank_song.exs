@@ -12,8 +12,8 @@ defmodule Wsdjs.Repo.Migrations.CreateRankSong do
 
       timestamps()
     end
-    create unique_index(:rank_songs, [:song_id, :top_id, :user_id])
 
+    create unique_index(:rank_songs, [:song_id, :top_id, :user_id])
   end
 
   def down do

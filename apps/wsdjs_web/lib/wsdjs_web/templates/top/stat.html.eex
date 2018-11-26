@@ -9,7 +9,7 @@
     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
     <path d="M0 0h24v24H0z" fill="none"/>
   </svg>
-  <%= link "go back to top", to: top_path(@conn, :show, @top.id), class: "btn btn-link", style: "margin-right: auto" %>
+  <%= link "go back to top", to: Routes.top_path(@conn, :show, @top.id), class: "btn btn-link", style: "margin-right: auto" %>
 </div>
 
 <section class="container top-stat">

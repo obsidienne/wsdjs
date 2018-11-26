@@ -22,12 +22,12 @@ defmodule WsdjsWeb.PlaylistSongsController do
          {:ok, _} <- Playlists.create_playlist_song(params) do
       conn
       |> put_flash(:info, "Song added successfully.")
-      |> redirect(to: playlist_path(conn, :show, playlist))
+      |> redirect(to: Routes.playlist_path(conn, :show, playlist))
     else
       {:error, %Ecto.Changeset{}} ->
         conn
         |> put_flash(:error, "Song already added.")
-        |> redirect(to: playlist_path(conn, :show, playlist))
+        |> redirect(to: Routes.playlist_path(conn, :show, playlist))
 
       {:error, val} ->
         {:error, val}
@@ -45,7 +45,7 @@ defmodule WsdjsWeb.PlaylistSongsController do
 
     with :ok <- Playlists.Policy.can?(current_user, :rank_song, playlist),
          {:ok, _song} = Playlists.update_playlist_song(playlist_song, dir) do
-      redirect(conn, to: playlist_path(conn, :show, playlist))
+      redirect(conn, to: Routes.playlist_path(conn, :show, playlist))
     end
   end
 
@@ -59,7 +59,7 @@ defmodule WsdjsWeb.PlaylistSongsController do
          {:ok, _song} = Playlists.delete_playlist_song(playlist_song) do
       conn
       |> put_flash(:info, "Song deleted successfully.")
-      |> redirect(to: playlist_path(conn, :show, playlist))
+      |> redirect(to: Routes.playlist_path(conn, :show, playlist))
     end
   end
 end

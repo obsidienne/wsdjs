@@ -4,7 +4,7 @@ defmodule WsdjsWeb.NotificationsChannel do
   """
   use Phoenix.Channel
 
-  alias Wsdjs.Jobs
+  alias WsdjsJobs
 
   Phoenix.Channel.intercept(["new_played_song"])
 
@@ -28,8 +28,8 @@ defmodule WsdjsWeb.NotificationsChannel do
   end
 
   def handle_info(:after_join, socket) do
-    pid = Process.whereis(Wsdjs.Jobs.NowPlaying)
-    list = Wsdjs.Jobs.NowPlaying.read(pid)
+    pid = Process.whereis(WsdjsJobs.NowPlaying)
+    list = WsdjsJobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
     push(socket, "new_played_song", %{data: json})
@@ -37,8 +37,8 @@ defmodule WsdjsWeb.NotificationsChannel do
   end
 
   def handle_info(:new_played_song, socket) do
-    pid = Process.whereis(Wsdjs.Jobs.NowPlaying)
-    list = Wsdjs.Jobs.NowPlaying.read(pid)
+    pid = Process.whereis(WsdjsJobs.NowPlaying)
+    list = WsdjsJobs.NowPlaying.read(pid)
     json = Poison.encode!(list)
 
     push(socket, "new_played_song", %{data: json})

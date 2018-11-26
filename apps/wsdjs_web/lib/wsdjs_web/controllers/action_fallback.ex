@@ -15,13 +15,13 @@ defmodule WsdjsWeb.FallbackController do
   def call(conn, {:error, :NoResultsError}) do
     conn
     |> put_flash(:error, "Not found.")
-    |> redirect(to: home_path(conn, :index))
+    |> redirect(to: Routes.home_path(conn, :index))
   end
 
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_flash(:error, "Unauthorized action.")
-    |> redirect(to: home_path(conn, :index))
+    |> redirect(to: Routes.home_path(conn, :index))
   end
 
   def call(conn, {:error, changeset}) do

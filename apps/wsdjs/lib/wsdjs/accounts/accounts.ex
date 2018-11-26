@@ -3,7 +3,7 @@ defmodule Wsdjs.Accounts do
   The boundary for the Accounts system.
   """
 
-  import Ecto.{Query, Changeset}, warn: false
+  import Ecto.Query, warn: false
   alias Wsdjs.Repo
 
   alias Wsdjs.Accounts.User

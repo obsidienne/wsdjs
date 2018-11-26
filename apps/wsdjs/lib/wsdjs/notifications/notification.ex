@@ -2,7 +2,7 @@ defmodule Wsdjs.Notifications do
   @moduledoc """
   The boundary for the Notification system.
   """
-  import Ecto.{Query, Changeset}, warn: false
+  import Ecto.Query, warn: false
   alias Wsdjs.Repo
 
   alias Wsdjs.Accounts.User

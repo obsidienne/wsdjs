@@ -17,5 +17,4 @@ defmodule Photo.Repo.Migrations.Photo do
   def down do
     drop table(:photos)
   end
-
 end

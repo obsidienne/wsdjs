@@ -14,11 +14,11 @@ defmodule Wsdjs.Repo.Migrations.ConvertMarkdown do
       |> Ecto.Changeset.cast(%{text_html: text_html}, [:text_html])
       |> Wsdjs.Repo.update()
     end)
+
     Wsdjs.Accounts.UserDetail
     |> where([u], not is_nil(u.description))
     |> Wsdjs.Repo.all()
     |> Enum.map(fn c ->
-
       description_html =
         c.description
         |> Earmark.as_html!()

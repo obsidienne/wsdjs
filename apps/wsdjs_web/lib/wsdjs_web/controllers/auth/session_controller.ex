@@ -12,7 +12,7 @@ defmodule WsdjsWeb.SessionController do
     with {:ok, %User{}} <- WsdjsWeb.MagicLink.provide_token(email, "browser") do
       conn
       |> put_flash(:info, "We have sent you a link for signing in via email to #{email}.")
-      |> redirect(to: home_path(conn, :index))
+      |> redirect(to: Routes.home_path(conn, :index))
     else
       {:error, :not_found} ->
         conn
@@ -20,7 +20,7 @@ defmodule WsdjsWeb.SessionController do
           :error,
           "Email #{email} is deactivated. Send an email to worldswingdjs@gmail.com to ask for details."
         )
-        |> redirect(to: session_path(conn, :new))
+        |> redirect(to: Routes.session_path(conn, :new))
     end
   end
 
@@ -32,7 +32,7 @@ defmodule WsdjsWeb.SessionController do
       |> put_session(:user_id, user.id)
       |> configure_session(renew: true)
       |> put_flash(:info, "You signed in successfully.")
-      |> redirect(to: home_path(conn, :index))
+      |> redirect(to: Routes.home_path(conn, :index))
     else
       {:error, _reason} ->
         conn
@@ -40,7 +40,7 @@ defmodule WsdjsWeb.SessionController do
           :error,
           "The magic link is expired or already used. You should resend a magic link."
         )
-        |> redirect(to: session_path(conn, :new))
+        |> redirect(to: Routes.session_path(conn, :new))
     end
   end
 
@@ -50,6 +50,6 @@ defmodule WsdjsWeb.SessionController do
     |> configure_session(drop: true)
     |> delete_session(:user_id)
     |> put_flash(:info, "You logged out successfully. Enjoy your day!")
-    |> redirect(to: home_path(conn, :index))
+    |> redirect(to: Routes.home_path(conn, :index))
   end
 end

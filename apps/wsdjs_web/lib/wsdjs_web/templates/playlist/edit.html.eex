@@ -1,13 +1,13 @@
 <nav class="secondary-nav py-2">
   <ol class="container">
     <li class="d-inline-block">
-        <%= link "bio", to: user_path(@conn, :show, @user) %>
+        <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
     </li>
     <li class="d-inline-block current">
-      <%= link "playlists", to: user_playlist_path(@conn, :index, @user) %>
+      <%= link "playlists", to: Routes.user_playlist_path(@conn, :index, @user) %>
     </li>
     <li class="d-inline-block">
-        <%= link "params", to: user_params_path(@conn, :show, @user) %>
+        <%= link "params", to: Routes.user_params_path(@conn, :show, @user) %>
     </li>
   </ol>
 </nav>
@@ -17,7 +17,7 @@
   <%= render WsdjsWeb.UserView, "_sidebar_tiny.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
 
-  <%= form_for @changeset, playlist_path(@conn, :update, @playlist), fn f -> %>
+  <%= form_for @changeset, Routes.playlist_path(@conn, :update, @playlist), fn f -> %>
     <div class="form-group">
       <label>Playlist name</label>
       <%= text_input f, :name, placeholder: "Playlist name", class: "form-control" %>
@@ -45,6 +45,6 @@
 
 
   <%= if Wsdjs.Playlists.Policy.can?(@current_user, :delete, @playlist) == :ok do %>
-    <%= link "Delete", to: playlist_path(@conn, :delete, @playlist), method: :delete, class: "btn btn-link text-danger mt-4" %>
+    <%= link "Delete", to: Routes.playlist_path(@conn, :delete, @playlist), method: :delete, class: "btn btn-link text-danger mt-4" %>
   <% end %>
 </section>

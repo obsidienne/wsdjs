@@ -72,7 +72,7 @@ defmodule WsdjsWeb.SongController do
          {:ok, song} <- Musics.create_song(params) do
       conn
       |> put_flash(:info, "#{song.title} created")
-      |> redirect(to: song_path(conn, :show, song.id))
+      |> redirect(to: Routes.song_path(conn, :show, song.id))
     end
   end
 
@@ -95,7 +95,7 @@ defmodule WsdjsWeb.SongController do
          {:ok, %Song{} = song} <- Musics.update_song(song, song_params, current_user) do
       conn
       |> put_flash(:info, "Song updated")
-      |> redirect(to: song_path(conn, :show, song))
+      |> redirect(to: Routes.song_path(conn, :show, song))
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", song: song, user: current_user, changeset: changeset)
@@ -113,7 +113,7 @@ defmodule WsdjsWeb.SongController do
          {:ok, _song} = Musics.delete_song(song) do
       conn
       |> put_flash(:info, "Song deleted successfully.")
-      |> redirect(to: home_path(conn, :index))
+      |> redirect(to: Routes.home_path(conn, :index))
     end
   end
 end

@@ -21,8 +21,8 @@ defmodule WsdjsApi do
     quote do
       use Phoenix.Controller, namespace: WsdjsApi
       import Plug.Conn
-      import WsdjsWeb.Router.Helpers
       import WsdjsWeb.Gettext
+      alias WsdjsWeb.Router.Helpers, as: Routes
     end
   end
 

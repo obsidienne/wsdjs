@@ -8,14 +8,14 @@ defmodule WsdjsWeb.RankController do
       {:ok, rank} ->
         conn
         |> put_flash(:info, "Bonus set")
-        |> redirect(to: top_path(conn, :show, rank.top_id))
+        |> redirect(to: Routes.top_path(conn, :show, rank.top_id))
 
       {:error, _changeset} ->
         rank = Wsdjs.Repo.get!(Charts.Rank, id)
 
         conn
         |> put_flash(:error, "Something went wrong")
-        |> redirect(to: top_path(conn, :show, rank.top_id))
+        |> redirect(to: Routes.top_path(conn, :show, rank.top_id))
     end
   end
 
@@ -25,6 +25,6 @@ defmodule WsdjsWeb.RankController do
 
     conn
     |> put_flash(:info, "Song removed successfully.")
-    |> redirect(to: top_path(conn, :show, rank.top_id))
+    |> redirect(to: Routes.top_path(conn, :show, rank.top_id))
   end
 end

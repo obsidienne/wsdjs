@@ -4,7 +4,7 @@
   </div>
 </header>
 <%= if @current_user && @current_user.admin do %>
-<%= form_for @changeset, top_path(@conn, :update, @top.id), fn _ -> %>
+<%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
 <nav class="secondary-nav breadcrumb py-2">
   <ol class="container d-inline-block">
     <li class="visited">
@@ -20,7 +20,7 @@
 
 <div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
   <%= if @current_user && @current_user.admin do %>
-    <%= link "statistics", to: top_stat_path(@conn, :stat, @top.id), class: "btn btn-link" %>
+    <%= link "statistics", to: Routes.top_stat_path(@conn, :stat, @top.id), class: "btn btn-link" %>
   <% end %>
 </div>
 
@@ -41,7 +41,7 @@
       <div class="top-song-info-container">
         <div class="top-song-body">
           <div>
-            <%= link to: song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
+            <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
               <%= rank.song.title %>
             <% end %>
             <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
@@ -66,7 +66,7 @@
           </aside>
         </div>
         <div>
-          <%= form_for Wsdjs.Charts.change_rank(rank), rank_path(@conn, :update, rank.id), fn f -> %>
+          <%= form_for Wsdjs.Charts.change_rank(rank), Routes.rank_path(@conn, :update, rank.id), fn f -> %>
           <table>
             <tbody>
             <tr><th>likes</th><td><%= rank.likes %></td></tr>

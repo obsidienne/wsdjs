@@ -3,7 +3,7 @@ defmodule Wsdjs.Attachments do
   The boundary for the Attachments system.
   """
 
-  import Ecto.{Query, Changeset}, warn: false
+  import Ecto.Query, warn: false
   alias Wsdjs.Repo
 
   alias Wsdjs.Attachments.Video

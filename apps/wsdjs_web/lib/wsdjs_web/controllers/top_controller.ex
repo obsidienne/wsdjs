@@ -78,7 +78,7 @@ defmodule WsdjsWeb.TopController do
     with top = Charts.get_top!(id),
          :ok <- Charts.Policy.can?(current_user, :update_top, top),
          {:ok, _top} = Charts.next_step(top) do
-      redirect(conn, to: top_path(conn, :show, top))
+      redirect(conn, to: Routes.top_path(conn, :show, top))
     end
   end
 
@@ -86,7 +86,7 @@ defmodule WsdjsWeb.TopController do
     with top = Charts.get_top!(id),
          :ok <- Charts.Policy.can?(current_user, :update_top, top),
          {:ok, _top} = Charts.previous_step(top) do
-      redirect(conn, to: top_path(conn, :show, top))
+      redirect(conn, to: Routes.top_path(conn, :show, top))
     end
   end
 
@@ -100,7 +100,7 @@ defmodule WsdjsWeb.TopController do
          {:ok, top} <- Charts.create_top(params) do
       conn
       |> put_flash(:info, "Top created !")
-      |> redirect(to: top_path(conn, :show, top.id))
+      |> redirect(to: Routes.top_path(conn, :show, top.id))
     end
   end
 
@@ -112,7 +112,7 @@ defmodule WsdjsWeb.TopController do
          {:ok, _top} = Charts.delete_top(top) do
       conn
       |> put_flash(:info, "Top deleted successfully.")
-      |> redirect(to: top_path(conn, :index))
+      |> redirect(to: Routes.top_path(conn, :index))
     end
   end
 end

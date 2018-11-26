@@ -1,4 +1,4 @@
-Click and confirm that you want to sign in to WorldSwingDjs. This link will expire in fifteen minutes and can only be used once : <%= api_signin_url(WsdjsWeb.Endpoint, :show, @token) %>
+Click and confirm that you want to sign in to WorldSwingDjs. This link will expire in fifteen minutes and can only be used once : <%= Routes.api_signin_url(WsdjsWeb.Endpoint, :show, @token) %>
 
 If you did not make this request, please contact us at worldswingdeejays@gmail.com
 

@@ -1,15 +1,15 @@
-defmodule Wsdjs.Jobs.Mixfile do
+defmodule WsdjsJobs.Mixfile do
   use Mix.Project
 
   def project do
     [
       app: :wsdjs_jobs,
-      version: "1.9.0",
+      version: "1.9.1",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "1.6.5",
+      elixir: "1.7.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -22,7 +22,7 @@ defmodule Wsdjs.Jobs.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Wsdjs.Jobs.Application, []},
+      mod: {WsdjsJobs.Application, []},
       extra_applications: [:logger]
     ]
   end
@@ -36,11 +36,11 @@ defmodule Wsdjs.Jobs.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix_pubsub, "~> 1.0"},
-      {:httpoison, "~> 0.12"},
-      {:quantum, ">= 2.3.2"},
-      {:timex, "~> 3.1"},
-      {:bamboo, "~> 1.0"},
+      {:phoenix_pubsub, "~> 1.1"},
+      {:httpoison, "~> 1.4.0"},
+      {:quantum, "~> 2.3.3"},
+      {:timex, "~> 3.4"},
+      {:bamboo, "~> 1.1"},
       {:wsdjs, in_umbrella: true}
     ]
   end
@@ -53,8 +53,6 @@ defmodule Wsdjs.Jobs.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end

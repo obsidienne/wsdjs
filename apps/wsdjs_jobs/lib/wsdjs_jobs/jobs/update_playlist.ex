@@ -1,4 +1,4 @@
-defmodule Wsdjs.Jobs.UpdatePlaylists do
+defmodule WsdjsJobs.UpdatePlaylists do
   @moduledoc """
   This modules contains the database calls needed to fill the automatic user
   playlists.
@@ -167,7 +167,7 @@ defmodule Wsdjs.Jobs.UpdatePlaylists do
     query = "
       update playlists p
       set count=(select count(*) from playlist_songs s where p.id=s.playlist_id)
-        , cover_id=(select song_id from playlist_songs s where p.id=s.playlist_id order by position desc LIMIT 1)
+        , cover_id=(select song_id from playlist_songs s where p.id=s.playlist_id order by position LIMIT 1)
       where p.type = 'top 5'
     "
 

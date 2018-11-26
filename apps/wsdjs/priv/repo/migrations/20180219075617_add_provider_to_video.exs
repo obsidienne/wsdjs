@@ -16,5 +16,4 @@ defmodule Wsdjs.Repo.Migrations.AddProviderToVideo do
       remove :provider
     end
   end
-
 end
