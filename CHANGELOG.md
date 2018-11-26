@@ -1,3 +1,5 @@
+# version 1.9.1
+- rename namespace for jobs
 # version 1.9.0
 - add TOP5 management
 - simplify CSS
