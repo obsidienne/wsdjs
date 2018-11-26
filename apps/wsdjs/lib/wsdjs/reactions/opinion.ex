@@ -4,8 +4,8 @@ defmodule Wsdjs.Reactions.Opinion do
   import Ecto.Changeset
   alias Wsdjs.Reactions.Opinion
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "opinions" do
     field(:kind, :string)
 

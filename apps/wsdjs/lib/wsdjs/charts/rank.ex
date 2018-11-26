@@ -4,8 +4,8 @@ defmodule Wsdjs.Charts.Rank do
   import Ecto.Changeset
   alias Wsdjs.Charts.Rank
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "ranks" do
     field(:likes, :integer)
     field(:votes, :integer)

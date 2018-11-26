@@ -4,8 +4,8 @@ defmodule Wsdjs.Attachments.Video do
   import Ecto.Changeset
   alias Wsdjs.Attachments.Video
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "videos" do
     field(:url, :string)
     field(:video_id, :string)
@@ -16,7 +16,7 @@ defmodule Wsdjs.Attachments.Video do
 
     belongs_to(:user, Wsdjs.Accounts.User)
     belongs_to(:song, Wsdjs.Musics.Song)
-    belongs_to(:event, Wsdjs.Happenings.Event, type: Wsdjs.HashID)
+    belongs_to(:event, Wsdjs.Happenings.Event)
     timestamps()
   end
 

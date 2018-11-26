@@ -5,7 +5,8 @@ defmodule Wsdjs.Playlists.Playlist do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists.Playlist
 
-  @primary_key {:id, Wsdjs.HashID, read_after_writes: true}
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "playlists" do
     field(:name, :string)
     field(:type, :string, default: "playlist")
@@ -14,8 +15,8 @@ defmodule Wsdjs.Playlists.Playlist do
     field(:front_page, :boolean, default: false)
     timestamps()
 
-    belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)
-    belongs_to(:cover, Wsdjs.Musics.Song, type: :binary_id)
+    belongs_to(:user, Wsdjs.Accounts.User)
+    belongs_to(:cover, Wsdjs.Musics.Song)
     has_many(:playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all)
   end
 

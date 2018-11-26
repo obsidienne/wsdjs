@@ -4,7 +4,8 @@ defmodule Wsdjs.Accounts.UserDetail do
   import Ecto.Changeset
   alias Wsdjs.Accounts.UserDetail
 
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "user_details" do
     field(:description, :string)
     field(:description_html, :string)

@@ -9,8 +9,8 @@ defmodule Wsdjs.Charts.Top do
   alias Wsdjs.Charts.Top
   alias Wsdjs.Musics
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "tops" do
     field(:due_date, :date)
     field(:status, :string)
