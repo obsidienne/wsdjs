@@ -1,3 +1,3 @@
-# Wsdjs.Jobs
+# WsdjsJobs
 
 **TODO: Add description**

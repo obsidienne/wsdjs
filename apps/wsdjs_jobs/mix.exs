@@ -1,10 +1,10 @@
-defmodule Wsdjs.Jobs.Mixfile do
+defmodule WsdjsJobs.Mixfile do
   use Mix.Project
 
   def project do
     [
       app: :wsdjs_jobs,
-      version: "1.9.0",
+      version: "1.9.1",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -22,7 +22,7 @@ defmodule Wsdjs.Jobs.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Wsdjs.Jobs.Application, []},
+      mod: {WsdjsJobs.Application, []},
       extra_applications: [:logger]
     ]
   end
