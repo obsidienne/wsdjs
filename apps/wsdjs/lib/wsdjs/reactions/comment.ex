@@ -4,8 +4,8 @@ defmodule Wsdjs.Reactions.Comment do
   import Ecto.Changeset
   alias Wsdjs.Reactions.Comment
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "comments" do
     field(:text, :string)
     field(:text_html, :string)

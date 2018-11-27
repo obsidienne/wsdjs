@@ -4,8 +4,8 @@ defmodule Wsdjs.Accounts.Avatar do
   import Ecto.Changeset
   alias Wsdjs.Accounts.Avatar
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "avatars" do
     field(:cld_id, :string)
     field(:version, :integer)

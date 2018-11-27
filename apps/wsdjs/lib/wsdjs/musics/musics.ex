@@ -245,6 +245,12 @@ defmodule Wsdjs.Musics do
     |> Repo.preload(to_preload)
   end
 
+  def get_song_by_uuid!(uuid, to_preload \\ [:art, :user]) do
+    Song
+    |> Repo.get_by!(uuid: uuid)
+    |> Repo.preload(to_preload)
+  end
+
   @doc """
   Get the song matching the "artist - title" pattern.
   The uniq index artist / title ensure the uniquenes of result.

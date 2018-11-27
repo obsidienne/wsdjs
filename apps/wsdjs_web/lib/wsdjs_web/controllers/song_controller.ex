@@ -25,8 +25,14 @@ defmodule WsdjsWeb.SongController do
   @spec show(Plug.Conn.t(), %{id: String.t()}, nil | Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def show(conn, %{"id" => id}, current_user) do
-    with song <- Musics.get_song!(id),
-         :ok <- Musics.Policy.can?(current_user, :show, song) do
+    song =
+      if String.match?(id, ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/) do
+        Musics.get_song_by_uuid!(id)
+      else
+        Musics.get_song!(id)
+      end
+
+    with :ok <- Musics.Policy.can?(current_user, :show, song) do
       opinions = Reactions.list_opinions(song)
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})

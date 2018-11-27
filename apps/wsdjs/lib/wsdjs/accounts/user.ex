@@ -12,8 +12,8 @@ defmodule Wsdjs.Accounts.User do
   alias Wsdjs.Musics
   alias Wsdjs.Reactions
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "users" do
     field(:email, :string)
     field(:admin, :boolean, default: false)

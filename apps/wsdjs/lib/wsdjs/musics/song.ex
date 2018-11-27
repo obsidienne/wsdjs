@@ -9,8 +9,8 @@ defmodule Wsdjs.Musics.Song do
   alias Wsdjs.Musics.Song
   alias Wsdjs.Reactions
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "songs" do
     field(:title, :string)
     field(:artist, :string)
