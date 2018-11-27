@@ -155,17 +155,91 @@ defmodule Wsdjs.Repo.Migrations.ChangePrimaryKey do
   end
 
   defp create_constraints do
+    #
+    #  Not null
+    #
+
+    alter table(:arts) do
+      modify :song_id, :bigint, null: false
+    end
+
+    alter table(:auth_tokens) do
+      modify :user_id, :bigint, null: false
+    end
+
+    alter table(:avatars) do
+      modify :user_id, :bigint, null: false
+    end
+
+    alter table(:comments) do
+      modify :user_id, :bigint, null: false
+      modify :song_id, :bigint, null: false
+    end
+
+    alter table(:events) do
+      modify :user_id, :bigint, null: false
+    end
+
+    alter table(:opinions) do
+      modify :user_id, :bigint, null: false
+      modify :song_id, :bigint, null: false
+    end
+
+    alter table(:playlist_songs) do
+      modify :song_id, :bigint, null: false
+    end
+
+    alter table(:playlists) do
+      modify :user_id, :bigint, null: false
+    end
+
+    alter table(:ranks) do
+      modify :top_id, :bigint, null: false
+      modify :song_id, :bigint, null: false
+    end
+
+    alter table(:songs) do
+      modify :user_id, :bigint, null: false
+    end
+
+    alter table(:tops) do
+      modify :user_id, :bigint, null: false
+    end
+
+    alter table(:user_details) do
+      modify :user_id, :bigint, null: false
+    end
+
+    alter table(:user_parameters) do
+      modify :user_id, :bigint, null: false
+    end
+
+    alter table(:videos) do
+      modify :user_id, :bigint, null: false
+      modify :song_id, :bigint, null: false
+    end
+
+    alter table(:votes) do
+      modify :user_id, :bigint, null: false
+      modify :song_id, :bigint, null: false
+      modify :top_id, :bigint, null: false
+    end
+
+    #
+    # foreign keys
+    #
     execute "ALTER TABLE comments ADD FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE"
     execute "ALTER TABLE arts ADD FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE"
 
     execute "ALTER TABLE opinions ADD FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE"
+
+    execute "ALTER TABLE playlists ADD FOREIGN KEY (cover_id) REFERENCES songs(id) ON DELETE SET NULL"
 
     execute "ALTER TABLE auth_tokens ADD FOREIGN KEY (user_id) REFERENCES users(id)"
     execute "ALTER TABLE avatars ADD FOREIGN KEY (user_id) REFERENCES users(id)"
     execute "ALTER TABLE comments ADD FOREIGN KEY (user_id) REFERENCES users(id)"
     execute "ALTER TABLE events ADD FOREIGN KEY (user_id) REFERENCES users(id)"
     execute "ALTER TABLE playlist_songs ADD FOREIGN KEY (song_id) REFERENCES songs(id)"
-    execute "ALTER TABLE playlists ADD FOREIGN KEY (cover_id) REFERENCES songs(id)"
     execute "ALTER TABLE playlists ADD FOREIGN KEY (user_id) REFERENCES users(id)"
     execute "ALTER TABLE ranks ADD FOREIGN KEY (song_id) REFERENCES songs(id)"
     execute "ALTER TABLE ranks ADD FOREIGN KEY (top_id) REFERENCES tops(id)"

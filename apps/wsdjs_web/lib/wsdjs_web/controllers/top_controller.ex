@@ -50,8 +50,14 @@ defmodule WsdjsWeb.TopController do
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    with top <- Charts.get_top!(id),
-         :ok <- Charts.Policy.can?(current_user, :show, top) do
+    top =
+      if String.match?(id, ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/) do
+        Charts.get_top_by_uuid!(id)
+      else
+        Charts.get_top!(id)
+      end
+
+    with :ok <- Charts.Policy.can?(current_user, :show, top) do
       render(
         conn,
         :show,
