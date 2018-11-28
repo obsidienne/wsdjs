@@ -7,7 +7,6 @@ defmodule Wsdjs.Charts.Vote do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Charts
-  alias Wsdjs.Charts.Vote
   alias Wsdjs.Musics
   alias Wsdjs.Repo
 
@@ -23,7 +22,7 @@ defmodule Wsdjs.Charts.Vote do
     timestamps()
   end
 
-  def changeset(%Vote{} = vote, attrs) do
+  def changeset(%__MODULE__{} = vote, attrs) do
     vote
     |> cast(attrs, [:votes, :user_id, :song_id])
     |> assoc_constraint(:song)

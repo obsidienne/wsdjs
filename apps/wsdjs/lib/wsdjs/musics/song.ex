@@ -6,7 +6,6 @@ defmodule Wsdjs.Musics.Song do
   alias Wsdjs.Accounts
   alias Wsdjs.Charts
   alias Wsdjs.Musics
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Reactions
 
   @primary_key {:id, Wsdjs.HashID, autogenerate: true}
@@ -35,7 +34,7 @@ defmodule Wsdjs.Musics.Song do
 
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
-  def create_changeset(%Song{} = song, attrs) do
+  def create_changeset(%__MODULE__{} = song, attrs) do
     song
     |> cast(attrs, [:title, :artist, :url, :bpm, :genre, :user_id])
     |> validate_required([:title, :artist, :url, :bpm, :genre, :user_id])
@@ -49,7 +48,7 @@ defmodule Wsdjs.Musics.Song do
     |> put_change(:suggestion, false)
   end
 
-  def suggestion_changeset(%Song{} = song, attrs) do
+  def suggestion_changeset(%__MODULE__{} = song, attrs) do
     song
     |> cast(attrs, [:title, :artist, :url, :bpm, :genre, :user_id])
     |> validate_required([:title, :artist, :url, :bpm, :genre, :user_id])
@@ -63,7 +62,7 @@ defmodule Wsdjs.Musics.Song do
     |> put_change(:suggestion, true)
   end
 
-  def update_changeset(%Song{} = song, attrs) do
+  def update_changeset(%__MODULE__{} = song, attrs) do
     song
     |> cast(attrs, [:url, :bpm, :genre, :hidden_track, :public_track])
     |> validate_required([:url, :bpm, :genre])
@@ -76,7 +75,7 @@ defmodule Wsdjs.Musics.Song do
     |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
   end
 
-  def admin_changeset(%Song{} = song, attrs) do
+  def admin_changeset(%__MODULE__{} = song, attrs) do
     song
     |> cast(attrs, [
       :title,

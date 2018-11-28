@@ -5,7 +5,6 @@ defmodule Wsdjs.Happenings.Event do
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Happenings.Event
 
   @primary_key {:id, Wsdjs.HashID, autogenerate: true}
   @foreign_key_type Wsdjs.HashID
@@ -28,7 +27,7 @@ defmodule Wsdjs.Happenings.Event do
   end
 
   @doc false
-  def changeset(%Event{} = event, attrs) do
+  def changeset(%__MODULE__{} = event, attrs) do
     event
     |> cast(attrs, [:name, :user_id, :starts_on, :ends_on, :lng, :lat, :venue, :fb_url])
     |> validate_required([:name, :starts_on, :ends_on, :lng, :lat, :venue])

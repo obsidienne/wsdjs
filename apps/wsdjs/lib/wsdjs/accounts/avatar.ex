@@ -2,7 +2,6 @@ defmodule Wsdjs.Accounts.Avatar do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Accounts.Avatar
 
   @primary_key {:id, Wsdjs.HashID, autogenerate: true}
   @foreign_key_type Wsdjs.HashID
@@ -16,7 +15,7 @@ defmodule Wsdjs.Accounts.Avatar do
 
   @allowed_fields [:cld_id, :version, :user_id]
 
-  def changeset(%Avatar{} = avatar, attrs) do
+  def changeset(%__MODULE__{} = avatar, attrs) do
     avatar
     |> cast(attrs, @allowed_fields)
     |> validate_required([:cld_id, :version])

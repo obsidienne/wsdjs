@@ -2,7 +2,6 @@ defmodule Wsdjs.Accounts.UserDetail do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Accounts.UserDetail
 
   @primary_key {:id, Wsdjs.HashID, autogenerate: true}
   @foreign_key_type Wsdjs.HashID
@@ -42,7 +41,7 @@ defmodule Wsdjs.Accounts.UserDetail do
     :website
   ]
 
-  def changeset(%UserDetail{} = user_detail, attrs) do
+  def changeset(%__MODULE__{} = user_detail, attrs) do
     user_detail
     |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:user)

@@ -22,13 +22,13 @@ defmodule Wsdjs.Playlists.Playlist do
 
   def types, do: ["suggested", "likes and tops", "playlist", "top 5"]
 
-  def update_changeset(%Playlist{} = playlist, attrs) do
+  def update_changeset(%__MODULE__{} = playlist, attrs) do
     playlist
     |> cast(attrs, [:public, :name, :front_page])
     |> validate_required([:public, :name])
   end
 
-  def changeset(%Playlist{} = playlist, attrs) do
+  def changeset(%__MODULE__{} = playlist, attrs) do
     playlist
     |> cast(attrs, [:name, :user_id])
     |> validate_required([:name, :user_id])

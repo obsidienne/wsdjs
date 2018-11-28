@@ -3,7 +3,6 @@ defmodule Wsdjs.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias Wsdjs.Accounts.User
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.{UserDetail, UserParameter}
@@ -39,7 +38,7 @@ defmodule Wsdjs.Accounts.User do
   end
 
   @doc false
-  def changeset(%User{} = user, attrs) do
+  def changeset(%__MODULE__{} = user, attrs) do
     user
     |> cast(attrs, [:user_country, :name, :djname])
     |> cast_assoc(:avatar)
@@ -47,7 +46,7 @@ defmodule Wsdjs.Accounts.User do
     |> cast_assoc(:parameter, with: &Accounts.UserParameter.changeset/2)
   end
 
-  def admin_changeset(%User{} = user, attrs) do
+  def admin_changeset(%__MODULE__{} = user, attrs) do
     user
     |> cast(attrs, [
       :email,
@@ -65,7 +64,7 @@ defmodule Wsdjs.Accounts.User do
     |> cast_assoc(:parameter, with: &Accounts.UserParameter.admin_changeset/2)
   end
 
-  def create_changeset(%User{} = user, attrs) do
+  def create_changeset(%__MODULE__{} = user, attrs) do
     user
     |> cast(attrs, [:email])
     |> validate_required(:email)

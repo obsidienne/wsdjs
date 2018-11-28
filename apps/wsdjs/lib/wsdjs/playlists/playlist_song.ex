@@ -19,7 +19,7 @@ defmodule Wsdjs.Playlists.PlaylistSong do
     belongs_to(:song, Wsdjs.Musics.Song)
   end
 
-  def changeset(%PlaylistSong{} = playlist_songs, attrs) do
+  def changeset(%__MODULE__{} = playlist_songs, attrs) do
     playlist_songs
     |> cast(attrs, [:playlist_id, :song_id, :position])
     |> validate_required([:playlist_id, :song_id, :position])
