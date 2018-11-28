@@ -126,7 +126,7 @@ defmodule Wsdjs.Playlists do
   end
 
   defp update_playlist_stat(playlist_id) do
-    IO.inspect(playlist_id)
+    {:ok, playlist_id} = Wsdjs.HashID.dump(playlist_id)
 
     query = "
       update playlists p
@@ -213,13 +213,11 @@ defmodule Wsdjs.Playlists do
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "playlist"}, current_user) do
-    {:ok, playlist_id} = Wsdjs.HashID.dump(id)
-
     query =
       from(
         s in Song.scoped(current_user),
         join: ps in PlaylistSong,
-        on: ps.playlist_id == ^playlist_id and ps.song_id == s.id,
+        on: ps.playlist_id == ^id and ps.song_id == s.id,
         order_by: ps.position
       )
 
@@ -227,12 +225,10 @@ defmodule Wsdjs.Playlists do
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "top 5"}, current_user) do
-    {:ok, playlist_id} = Wsdjs.HashID.dump(id)
-
     query =
       from(
         ps in PlaylistSong.scoped(current_user),
-        where: ps.playlist_id == ^playlist_id,
+        where: ps.playlist_id == ^id,
         order_by: ps.position
       )
 
@@ -252,7 +248,7 @@ defmodule Wsdjs.Playlists do
 
   """
   def create_playlist_song(attrs \\ %{}) do
-    {:ok, playlist_id} = Wsdjs.HashID.dump(Map.get(attrs, :playlist_id))
+    playlist_id = Map.get(attrs, :playlist_id)
 
     %PlaylistSong{}
     |> PlaylistSong.changeset(attrs)
@@ -308,10 +304,8 @@ defmodule Wsdjs.Playlists do
         {:error, _, _, _} -> {:error, current}
       end
 
-    {:ok, playlist_id} = Wsdjs.HashID.dump(current.playlist_id)
-
-    sort_playlist_song(playlist_id)
-    update_playlist_stat(playlist_id)
+    sort_playlist_song(current.playlist_id)
+    update_playlist_stat(current.playlist_id)
     ret
   end
 
@@ -329,10 +323,9 @@ defmodule Wsdjs.Playlists do
   """
   def delete_playlist_song(%PlaylistSong{} = playlist_song) do
     {:ok, ps} = Repo.delete(playlist_song)
-    {:ok, playlist_id} = Wsdjs.HashID.dump(ps.playlist_id)
 
-    sort_playlist_song(playlist_id)
-    update_playlist_stat(playlist_id)
+    sort_playlist_song(ps.playlist_id)
+    update_playlist_stat(ps.playlist_id)
 
     {:ok, ps}
   end

@@ -6,11 +6,10 @@ defmodule Wsdjs.Charts.Top do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Charts
-  alias Wsdjs.Charts.Top
   alias Wsdjs.Musics
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "tops" do
     field(:due_date, :date)
     field(:status, :string)
@@ -25,7 +24,7 @@ defmodule Wsdjs.Charts.Top do
 
   @valid_status ~w(checking voting counting published)
 
-  def create_changeset(%Top{} = top, attrs) do
+  def create_changeset(%__MODULE__{} = top, attrs) do
     top
     |> cast(attrs, [:due_date, :user_id])
     |> validate_required(:due_date)
@@ -35,7 +34,7 @@ defmodule Wsdjs.Charts.Top do
     |> assoc_constraint(:user)
   end
 
-  def step_changeset(%Top{} = top, attrs) do
+  def step_changeset(%__MODULE__{} = top, attrs) do
     top
     |> cast(attrs, [:status])
     |> validate_inclusion(:status, @valid_status)

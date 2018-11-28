@@ -2,10 +2,9 @@ defmodule Wsdjs.Charts.Rank do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Charts.Rank
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "ranks" do
     field(:likes, :integer)
     field(:votes, :integer)
@@ -20,7 +19,7 @@ defmodule Wsdjs.Charts.Rank do
 
   @allowed_fields [:likes, :votes, :bonus, :song_id, :top_id]
 
-  def changeset(%Rank{} = rank, attrs) do
+  def changeset(%__MODULE__{} = rank, attrs) do
     rank
     |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:song)

@@ -9,15 +9,17 @@ defmodule Wsdjs.Playlists.PlaylistSong do
   alias Wsdjs.Playlists.PlaylistSong
   alias Wsdjs.Repo
 
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "playlist_songs" do
     field(:position, :integer)
     timestamps(updated_at: false)
 
-    belongs_to(:playlist, Wsdjs.Playlists.Playlist, type: Wsdjs.HashID)
-    belongs_to(:song, Wsdjs.Musics.Song, type: :binary_id)
+    belongs_to(:playlist, Wsdjs.Playlists.Playlist)
+    belongs_to(:song, Wsdjs.Musics.Song)
   end
 
-  def changeset(%PlaylistSong{} = playlist_songs, attrs) do
+  def changeset(%__MODULE__{} = playlist_songs, attrs) do
     playlist_songs
     |> cast(attrs, [:playlist_id, :song_id, :position])
     |> validate_required([:playlist_id, :song_id, :position])

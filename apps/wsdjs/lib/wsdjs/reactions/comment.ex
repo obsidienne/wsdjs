@@ -2,10 +2,9 @@ defmodule Wsdjs.Reactions.Comment do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Reactions.Comment
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "comments" do
     field(:text, :string)
     field(:text_html, :string)
@@ -17,7 +16,7 @@ defmodule Wsdjs.Reactions.Comment do
 
   @allowed_fields [:text, :user_id, :song_id]
 
-  def changeset(%Comment{} = comment, attrs) do
+  def changeset(%__MODULE__{} = comment, attrs) do
     comment
     |> cast(attrs, @allowed_fields)
     |> validate_required(:text)

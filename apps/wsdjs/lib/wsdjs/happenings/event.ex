@@ -5,9 +5,9 @@ defmodule Wsdjs.Happenings.Event do
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Happenings.Event
 
-  @primary_key {:id, Wsdjs.HashID, read_after_writes: true}
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "events" do
     field(:name, :string)
     field(:starts_on, :date)
@@ -21,13 +21,13 @@ defmodule Wsdjs.Happenings.Event do
     field(:lng, :float, virtual: true)
     field(:lat, :float, virtual: true)
 
-    belongs_to(:user, Wsdjs.Accounts.User, type: :binary_id)
+    belongs_to(:user, Wsdjs.Accounts.User)
 
     timestamps()
   end
 
   @doc false
-  def changeset(%Event{} = event, attrs) do
+  def changeset(%__MODULE__{} = event, attrs) do
     event
     |> cast(attrs, [:name, :user_id, :starts_on, :ends_on, :lng, :lat, :venue, :fb_url])
     |> validate_required([:name, :starts_on, :ends_on, :lng, :lat, :venue])

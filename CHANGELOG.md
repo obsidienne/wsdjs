@@ -1,3 +1,5 @@
+# version 2.0.0
+- change PK from uuid to bigint with hashid
 # version 1.9.1
 - rename namespace for jobs
 # version 1.9.0

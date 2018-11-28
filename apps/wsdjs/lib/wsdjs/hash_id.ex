@@ -9,8 +9,8 @@ defmodule Wsdjs.HashID do
 
   def type, do: :id
 
-  def cast(term) when is_integer(term), do: {:ok, Hashids.encode(@hashids, term)}
-  def cast(term) when is_binary(term), do: dump(term)
+  # TODO: Validate the hashid is valid on cast
+  def cast(term) when is_binary(term), do: {:ok, term}
   def cast(_), do: :error
 
   def dump(term) when is_binary(term) do
@@ -22,9 +22,8 @@ defmodule Wsdjs.HashID do
     end
   end
 
-  def dump(term) when is_integer(term), do: {:ok, term}
   def dump(_), do: :error
 
-  def load(term) when is_integer(term), do: cast(term)
+  def load(term) when is_integer(term), do:  {:ok, Hashids.encode(@hashids, term)}
   def load(_), do: :error
 end

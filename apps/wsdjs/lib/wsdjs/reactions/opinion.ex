@@ -2,10 +2,9 @@ defmodule Wsdjs.Reactions.Opinion do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Reactions.Opinion
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "opinions" do
     field(:kind, :string)
 
@@ -18,7 +17,7 @@ defmodule Wsdjs.Reactions.Opinion do
   @allowed_fields [:kind, :user_id, :song_id]
   @validated_opinions ~w(up like down)
 
-  def changeset(%Opinion{} = opinion, attrs) do
+  def changeset(%__MODULE__{} = opinion, attrs) do
     opinion
     |> cast(attrs, @allowed_fields)
     |> validate_required([:kind])

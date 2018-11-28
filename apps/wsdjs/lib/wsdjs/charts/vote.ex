@@ -7,12 +7,11 @@ defmodule Wsdjs.Charts.Vote do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Charts
-  alias Wsdjs.Charts.Vote
   alias Wsdjs.Musics
   alias Wsdjs.Repo
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "votes" do
     field(:votes, :integer)
 
@@ -23,7 +22,7 @@ defmodule Wsdjs.Charts.Vote do
     timestamps()
   end
 
-  def changeset(%Vote{} = vote, attrs) do
+  def changeset(%__MODULE__{} = vote, attrs) do
     vote
     |> cast(attrs, [:votes, :user_id, :song_id])
     |> assoc_constraint(:song)

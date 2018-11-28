@@ -2,9 +2,9 @@ defmodule Wsdjs.Accounts.UserParameter do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
-  alias Wsdjs.Accounts.UserParameter
 
-  @foreign_key_type :binary_id
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @foreign_key_type Wsdjs.HashID
   schema "user_parameters" do
     field(:new_song_notification, :boolean, default: false)
     field(:piwik, :boolean, default: true)
@@ -18,14 +18,14 @@ defmodule Wsdjs.Accounts.UserParameter do
   end
 
   @doc false
-  def changeset(%UserParameter{} = user_parameter, attrs) do
+  def changeset(%__MODULE__{} = user_parameter, attrs) do
     user_parameter
     |> cast(attrs, [:new_song_notification, :email_contact])
     |> assoc_constraint(:user)
   end
 
   @doc false
-  def admin_changeset(%UserParameter{} = user_parameter, attrs) do
+  def admin_changeset(%__MODULE__{} = user_parameter, attrs) do
     user_parameter
     |> cast(attrs, [
       :new_song_notification,
