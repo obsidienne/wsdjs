@@ -17,13 +17,18 @@
   </div>
 <% end %>
 
-<%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-<div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
-  <a class="btn btn-primary" title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">Create a new top</a>
-</div>
-<% end %>
-
 <section id="top-list" class="tops container mt-3">
+  <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
+   <article class="tops__top d-flex mt-3 ">
+      <a class="card clickable tops__top__content shadow d-flex border border-dashed border-thick " title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">
+        <span>Create a new top</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" class="ml-auto">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      </a>
+    </article>
+  <% end %>
+
   <%= for top <- @tops do %>
     <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
