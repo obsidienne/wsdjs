@@ -91,7 +91,6 @@ body.radio-playing .player__play__vinyl {
   left: 0;
   right: 0;
   top: 0;
-  background: hsl(0, 0%, 13%);
   background: var(--font-primary-color);
 }
 

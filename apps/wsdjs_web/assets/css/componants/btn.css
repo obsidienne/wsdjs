@@ -17,7 +17,6 @@
 
 .btn:hover,
 button.reset:hover {
-  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 
@@ -87,7 +86,6 @@ a.btn.disabled {
 
 .btn-primary {
   color: hsl(0, 0%, 100%);
-  background-color: hsl(208, 56%, 46%);
   background-color: var(--primary-color);
 }
 
@@ -168,13 +166,11 @@ a.btn.disabled {
 
 .btn-link[disabled]:hover,
 .btn-link[disabled]:focus {
-  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
   text-decoration: none;
 }
 
 .btn-link.text-muted {
-  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 
