@@ -88,14 +88,14 @@
         </svg>
         <% end %>
 
-        <%= link "radio", to: Routes.radio_path(@conn, :show), class: "glnav__menu visible-link clickable" %>
-        <%= link "tops", to: Routes.top_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
-        <%= link "songs", to: Routes.song_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
+        <%= link "Radio", to: Routes.radio_path(@conn, :show), class: "glnav__menu visible-link clickable" %>
+        <%= link "Chart", to: Routes.top_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
+        <%= link "Library", to: Routes.song_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
         <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>
-        <%= link "members", to: Routes.user_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
+        <%= link "Members", to: Routes.user_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
         <% end %>
         <%= if Wsdjs.Happenings.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>
-        <%= link "events", to: Routes.event_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
+        <%= link "Events", to: Routes.event_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
         <% end %>
 
         <%= if @current_user do %>
