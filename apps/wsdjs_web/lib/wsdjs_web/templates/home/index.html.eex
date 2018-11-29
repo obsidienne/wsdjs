@@ -17,15 +17,6 @@
   </div>
 <% end %>
 
-<div class="container justify-content-end align-items-center mt-3 d-none d-md-flex ">
-  <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
-    <a class="btn btn-primary tippy" title="Suggest a song for the current month TOP 10" href="<%= Routes.suggestion_path(@conn, :new) %>">Suggest a song</a>
-  <% end %>
-  <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
-  <a class="btn btn-link ml-2" href="<%= Routes.song_path(@conn, :new) %>">Add a song</a>
-  <% end %>
-</div>
-
 <section class="container home-container d-grid">
 <%= if Enum.count(@songs) > 0 do %>
   <section>
