@@ -50,28 +50,6 @@
     <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", user.id) %>
     <% end %>
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
-
-    <%= if Mix.env() == :devs do %>
-    <style type="text/css">
-      body { position: relative; }
-      body:after {
-        position: absolute;
-        width: auto;
-        height: auto;
-        z-index: 9999;
-        content: '';
-        display: block;
-        pointer-events: none;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAABlBMVEX/////AADrWueTAAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVAiZY2AgCTwAAAEQAOFwuZEGAAAAAElFTkSuQmCC) repeat top left;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAIAQMAAADk/cxGAAAABlBMVEX/////AADrWueTAAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAMSURBVAiZY2BAAQ8AAPAA4ZQsu0UAAAAASUVORK5CYII=) repeat top left;
-      }
-      body:active:after { display: none; }
-    </style>
-    <% end %>
   </head>
 
   <body>
