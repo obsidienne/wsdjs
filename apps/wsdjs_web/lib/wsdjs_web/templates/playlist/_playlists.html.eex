@@ -1,12 +1,21 @@
 
 <section id="playlists-section">
-  <%= if Wsdjs.Playlists.Policy.can?(@current_user, :new) == :ok do %>
-  <div class="d-none d-md-flex">
-    <%= link "Add a new TOP or playlist", to: Routes.user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary" %>
-  </div>
-  <% end %>
-
   <ul class="playlists-grid d-grid">
+    <%= if Wsdjs.Playlists.Policy.can?(@current_user, :new) == :ok do %>
+    <li class="clickable">
+        <%= link to: Routes.user_playlist_path(@conn, :new, @current_user), class: "playlist clickable" do %>
+          <div class="border border-dashed border-thick pt-100 position-relative">
+            <div class="position-absolute w-100 h-100 top-0 p-3 text-center d-flex flex-column align-items-center justify-content-around">
+            Add a new TOP or playlist
+            <svg width="40" height="40" viewBox="0 0 24 24">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+            </div>
+          </div>
+        <% end %>
+    </li>
+    <% end %>
+
     <%= for playlist <- @playlists do %>
     <li class="clickable">
       <%= link to: Routes.playlist_path(@conn, :show, playlist), class: "playlist" do %>
@@ -41,12 +50,3 @@
     <% end %>
   </ul>
 </section>
-
-<%= if Wsdjs.Playlists.Policy.can?(@current_user, :new) == :ok do %>
-  <%= link to: Routes.user_playlist_path(@conn, :new, @current_user), class: "btn btn-primary fab" do %>
-    <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
-      <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>
-      <path d='M0 0h24v24H0z' fill='none'/>
-    </svg>
-  <% end %>
-<% end %>
