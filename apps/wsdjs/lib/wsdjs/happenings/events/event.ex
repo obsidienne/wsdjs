@@ -3,11 +3,9 @@ defmodule Wsdjs.Happenings.Event do
   An event is a logical group of happenings. Generally, an event
   contains several parties, competitions and workshops
   """
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
   schema "events" do
     field(:name, :string)
     field(:starts_on, :date)

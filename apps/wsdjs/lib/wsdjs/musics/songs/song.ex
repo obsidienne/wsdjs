@@ -1,15 +1,30 @@
 defmodule Wsdjs.Musics.Song do
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
   import Ecto.Query
 
   alias Wsdjs.Accounts
   alias Wsdjs.Charts
   alias Wsdjs.Musics
+  alias Wsdjs.Attachments
   alias Wsdjs.Reactions
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @type t :: %__MODULE__{
+          id: integer,
+          title: String.t(),
+          artist: String.t(),
+          url: String.t(),
+          bpm: integer,
+          genre: String.t(),
+          instant_hit: boolean,
+          hidden_track: boolean,
+          video_id: String.t(),
+          public_track: boolean,
+          suggestion: boolean,
+          updated_at: DateTime.t(),
+          inserted_at: DateTime.t()
+        }
+
   schema "songs" do
     field(:title, :string)
     field(:artist, :string)
@@ -24,7 +39,7 @@ defmodule Wsdjs.Musics.Song do
     timestamps()
 
     belongs_to(:user, Accounts.User)
-    has_one(:art, Musics.Art, on_replace: :delete)
+    has_one(:art, Attachments.Arts.Art, on_replace: :delete)
     has_many(:comments, Reactions.Comment)
     has_many(:ranks, Charts.Rank)
     has_many(:opinions, Reactions.Opinion)

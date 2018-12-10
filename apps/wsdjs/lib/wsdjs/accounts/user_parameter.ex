@@ -1,10 +1,8 @@
 defmodule Wsdjs.Accounts.UserParameter do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
   schema "user_parameters" do
     field(:new_song_notification, :boolean, default: false)
     field(:piwik, :boolean, default: true)

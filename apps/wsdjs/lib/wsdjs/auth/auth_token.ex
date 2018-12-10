@@ -1,10 +1,8 @@
 defmodule Wsdjs.Auth.AuthToken do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
   schema "auth_tokens" do
     field(:value, :string)
     belongs_to(:user, Wsdjs.Accounts.User)

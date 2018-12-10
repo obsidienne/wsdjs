@@ -1,10 +1,16 @@
 defmodule Wsdjs.Reactions.Comment do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @type t :: %__MODULE__{
+          id: integer,
+          text: String.t(),
+          text_html: String.t(),
+          updated_at: DateTime.t(),
+          inserted_at: DateTime.t()
+        }
+
   schema "comments" do
     field(:text, :string)
     field(:text_html, :string)
@@ -14,7 +20,7 @@ defmodule Wsdjs.Reactions.Comment do
     timestamps()
   end
 
-  @allowed_fields [:text, :user_id, :song_id]
+  @allowed_fields ~w(text, user_id, song_id)a
 
   def changeset(%__MODULE__{} = comment, attrs) do
     comment

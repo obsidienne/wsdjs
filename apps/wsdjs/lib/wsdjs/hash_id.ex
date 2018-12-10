@@ -24,6 +24,6 @@ defmodule Wsdjs.HashID do
 
   def dump(_), do: :error
 
-  def load(term) when is_integer(term), do:  {:ok, Hashids.encode(@hashids, term)}
+  def load(term) when is_integer(term), do: {:ok, Hashids.encode(@hashids, term)}
   def load(_), do: :error
 end

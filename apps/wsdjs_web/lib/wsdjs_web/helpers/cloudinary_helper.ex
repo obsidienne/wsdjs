@@ -13,7 +13,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   # VIDEO THUMBNAIL
   #
   ###############################################
-  alias Wsdjs.Attachments.Video
+  alias Wsdjs.Attachments.Videos.Video
 
   def thumbnail_url(%Video{video_id: video_id, provider: "youtube"}, resolution)
       when is_integer(resolution) do
@@ -42,7 +42,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   # SONG ART
   #
   ###############################################
-  alias Wsdjs.Musics.Art
+  alias Wsdjs.Attachments.Arts.Art
 
   def art_url(%Art{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
     @cld_https <>
@@ -79,7 +79,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   # AVATAR
   #
   ###############################################
-  alias Wsdjs.Accounts.Avatar
+  alias Wsdjs.Attachments.Avatars.Avatar
 
   def avatar_url(%Avatar{cld_id: cld_id, version: version}, resolution)
       when is_integer(resolution) do
@@ -117,7 +117,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   end
 
   @doc """
-  Retrieve the image URL corresping to a top in published status. 
+  Retrieve the image URL corresping to a top in published status.
   It creates a sprite of the 10 first ranked song.
   """
   def top_art(%Top{status: "published"} = top) do

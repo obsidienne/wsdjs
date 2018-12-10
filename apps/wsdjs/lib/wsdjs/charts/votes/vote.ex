@@ -1,17 +1,19 @@
 defmodule Wsdjs.Charts.Vote do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
 
-  alias Ecto.Changeset
+  alias Wsdjs.{Accounts, Charts, Musics, Repo}
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Charts
-  alias Wsdjs.Musics
-  alias Wsdjs.Repo
+  @type t :: %__MODULE__{
+          id: integer,
+          votes: integer,
+          updated_at: DateTime.t(),
+          inserted_at: DateTime.t()
+        }
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @allowed_fields ~w(votes, user_id, song_id)a
+
   schema "votes" do
     field(:votes, :integer)
 
@@ -24,7 +26,7 @@ defmodule Wsdjs.Charts.Vote do
 
   def changeset(%__MODULE__{} = vote, attrs) do
     vote
-    |> cast(attrs, [:votes, :user_id, :song_id])
+    |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:song)
     |> assoc_constraint(:user)
     |> assoc_constraint(:top)
@@ -37,6 +39,6 @@ defmodule Wsdjs.Charts.Vote do
       Repo.get_by(Charts.Vote, user_id: user_id, top_id: top.id, song_id: song_id) ||
         Ecto.build_assoc(top, :votes, user_id: user_id, song_id: song_id)
 
-    Changeset.change(struct, votes: String.to_integer(votes))
+    Ecto.Changeset.change(struct, votes: String.to_integer(votes))
   end
 end

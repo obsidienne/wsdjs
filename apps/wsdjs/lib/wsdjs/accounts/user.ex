@@ -1,18 +1,17 @@
 defmodule Wsdjs.Accounts.User do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
   import Ecto.Query
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.{UserDetail, UserParameter}
   alias Wsdjs.Auth
+  alias Wsdjs.Attachments
   alias Wsdjs.Charts
   alias Wsdjs.Musics
   alias Wsdjs.Reactions
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
   schema "users" do
     field(:email, :string)
     field(:admin, :boolean, default: false)
@@ -27,7 +26,7 @@ defmodule Wsdjs.Accounts.User do
 
     has_many(:songs, Musics.Song)
     has_many(:comments, Reactions.Comment)
-    has_one(:avatar, Accounts.Avatar, on_replace: :delete)
+    has_one(:avatar, Attachments.Avatars.Avatar, on_replace: :delete)
     has_one(:detail, Accounts.UserDetail, on_replace: :update)
     has_one(:parameter, Accounts.UserParameter, on_replace: :update)
     has_many(:song_opinions, Reactions.Opinion)

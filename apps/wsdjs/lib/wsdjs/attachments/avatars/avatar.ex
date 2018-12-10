@@ -1,10 +1,21 @@
-defmodule Wsdjs.Accounts.Avatar do
-  @moduledoc false
-  use Ecto.Schema
+defmodule Wsdjs.Attachments.Avatars.Avatar do
+  @moduledoc """
+  An image used as user avatar.
+  """
+  use Wsdjs.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @type t :: %__MODULE__{
+          id: integer,
+          cld_id: String.t(),
+          version: integer,
+          updated_at: DateTime.t(),
+          inserted_at: DateTime.t()
+        }
+
+  @allowed_fields ~w(cld_id, version, user_id)a
+  @required_fields ~w(cld_id version)a
+
   schema "avatars" do
     field(:cld_id, :string)
     field(:version, :integer)
@@ -13,12 +24,11 @@ defmodule Wsdjs.Accounts.Avatar do
     timestamps()
   end
 
-  @allowed_fields [:cld_id, :version, :user_id]
-
+  @doc false
   def changeset(%__MODULE__{} = avatar, attrs) do
     avatar
     |> cast(attrs, @allowed_fields)
-    |> validate_required([:cld_id, :version])
+    |> validate_required(@required_fields)
     |> unique_constraint(:cld_id)
   end
 end

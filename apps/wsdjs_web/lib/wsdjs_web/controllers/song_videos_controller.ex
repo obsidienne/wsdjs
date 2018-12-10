@@ -4,7 +4,7 @@ defmodule WsdjsWeb.SongVideosController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Attachments
-  alias Wsdjs.Attachments.Video
+  alias Wsdjs.Attachments.Videos.Video
   alias Wsdjs.Musics
 
   action_fallback(WsdjsWeb.FallbackController)

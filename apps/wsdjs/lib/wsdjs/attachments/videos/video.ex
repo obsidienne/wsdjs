@@ -1,10 +1,25 @@
-defmodule Wsdjs.Attachments.Video do
-  @moduledoc false
-  use Ecto.Schema
+defmodule Wsdjs.Attachments.Videos.Video do
+  @moduledoc """
+  A video attached to a song and maybe an event.
+  """
+  use Wsdjs.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @type t :: %__MODULE__{
+          id: integer,
+          url: String.t(),
+          video_id: String.t(),
+          title: String.t(),
+          event_str: String.t(),
+          published_at: Date.t(),
+          provider: String.t(),
+          updated_at: DateTime.t(),
+          inserted_at: DateTime.t()
+        }
+
+  @allowed_fields ~w(url, event_str, event_id, title, user_id, song_id, published_at)a
+  @required_fields ~w(url)a
+
   schema "videos" do
     field(:url, :string)
     field(:video_id, :string)
@@ -19,10 +34,11 @@ defmodule Wsdjs.Attachments.Video do
     timestamps()
   end
 
+  @doc false
   def changeset(%__MODULE__{} = video, attrs) do
     video
-    |> cast(attrs, [:url, :event_str, :event_id, :title, :user_id, :song_id, :published_at])
-    |> validate_required(:url)
+    |> cast(attrs, @allowed_fields)
+    |> validate_required(@required_fields)
     |> assoc_constraint(:user)
     |> validate_url(:url)
     |> assoc_constraint(:song)

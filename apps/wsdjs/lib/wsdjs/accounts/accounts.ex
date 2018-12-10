@@ -21,8 +21,18 @@ defmodule Wsdjs.Accounts do
     User
     |> order_by([:name])
     |> Repo.all()
-    |> Repo.preload([:avatar, :songs, :comments, :parameter, :detail])
+    |> load_avatar()
+    |> load_songs()
+    |> load_comments()
+    |> load_parameter()
+    |> load_detail()
   end
+
+  def load_avatar(user), do: Repo.preload(user, :avatar)
+  def load_songs(user), do: Repo.preload(user, :songs)
+  def load_comments(user), do: Repo.preload(user, :comments)
+  def load_parameter(user), do: Repo.preload(user, :parameter)
+  def load_detail(user), do: Repo.preload(user, :detail)
 
   @doc """
   Creates a user.
@@ -60,19 +70,25 @@ defmodule Wsdjs.Accounts do
     User
     |> where(deactivated: false)
     |> Repo.get!(id)
-    |> Repo.preload([:avatar, :detail, :parameter])
+    |> load_avatar()
+    |> load_detail()
+    |> load_parameter()
   end
 
   def get_user!(id) do
     User
     |> Repo.get!(id)
-    |> Repo.preload([:avatar, :detail, :parameter])
+    |> load_avatar()
+    |> load_detail()
+    |> load_parameter()
   end
 
   def get_user_by_email(email) do
     User
     |> Repo.get_by(email: String.downcase(email))
-    |> Repo.preload([:avatar, :detail, :parameter])
+    |> load_avatar()
+    |> load_detail()
+    |> load_parameter()
   end
 
   @doc """
@@ -117,7 +133,7 @@ defmodule Wsdjs.Accounts do
   # Avatar
   #
   ###############################################
-  alias Wsdjs.Accounts.Avatar
+  alias Wsdjs.Attachments.Avatars.Avatar
 
   @doc """
   Returns the user avatar.

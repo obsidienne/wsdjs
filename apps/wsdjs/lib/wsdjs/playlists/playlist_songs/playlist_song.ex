@@ -1,6 +1,6 @@
 defmodule Wsdjs.Playlists.PlaylistSong do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
 
   import Ecto.{Query, Changeset}, warn: false
 
@@ -9,8 +9,15 @@ defmodule Wsdjs.Playlists.PlaylistSong do
   alias Wsdjs.Playlists.PlaylistSong
   alias Wsdjs.Repo
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @type t :: %__MODULE__{
+          id: integer,
+          position: integer,
+          inserted_at: DateTime.t()
+        }
+
+  @allowed_fields ~w(playlist_id, song_id, position)a
+  @required_fields ~w(playlist_id, song_id, position)a
+
   schema "playlist_songs" do
     field(:position, :integer)
     timestamps(updated_at: false)
@@ -21,8 +28,8 @@ defmodule Wsdjs.Playlists.PlaylistSong do
 
   def changeset(%__MODULE__{} = playlist_songs, attrs) do
     playlist_songs
-    |> cast(attrs, [:playlist_id, :song_id, :position])
-    |> validate_required([:playlist_id, :song_id, :position])
+    |> cast(attrs, @allowed_fields)
+    |> validate_required(@required_fields)
     |> validate_number(:position, greater_than_or_equal_to: 0)
     |> unique_constraint(:song_id, name: :playlist_songs_playlist_id_song_id_index)
     |> assoc_constraint(:song)

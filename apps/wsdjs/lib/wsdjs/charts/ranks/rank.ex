@@ -1,10 +1,22 @@
 defmodule Wsdjs.Charts.Rank do
-  @moduledoc false
-  use Ecto.Schema
+  @moduledoc """
+  A rank in a chart.
+  """
+  use Wsdjs.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @type t :: %__MODULE__{
+          id: integer,
+          likes: integer,
+          votes: integer,
+          bonus: integer,
+          position: integer,
+          updated_at: DateTime.t(),
+          inserted_at: DateTime.t()
+        }
+
+  @allowed_fields ~w(likes, votes, bonus, song_id, top_id)a
+
   schema "ranks" do
     field(:likes, :integer)
     field(:votes, :integer)
@@ -17,8 +29,7 @@ defmodule Wsdjs.Charts.Rank do
     timestamps()
   end
 
-  @allowed_fields [:likes, :votes, :bonus, :song_id, :top_id]
-
+  @doc false
   def changeset(%__MODULE__{} = rank, attrs) do
     rank
     |> cast(attrs, @allowed_fields)

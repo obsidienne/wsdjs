@@ -1,12 +1,21 @@
 defmodule Wsdjs.Playlists.Playlist do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.{Query, Changeset}, warn: false
   alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists.Playlist
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @type t :: %__MODULE__{
+          id: integer,
+          name: String.t(),
+          type: String.t(),
+          public: boolean,
+          count: integer,
+          front_page: boolean,
+          updated_at: DateTime.t(),
+          inserted_at: DateTime.t()
+        }
+
   schema "playlists" do
     field(:name, :string)
     field(:type, :string, default: "playlist")

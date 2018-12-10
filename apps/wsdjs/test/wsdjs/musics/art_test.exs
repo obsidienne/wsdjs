@@ -1,7 +1,7 @@
-defmodule Wsdjs.Musics.ArtTest do
+defmodule Wsdjs.Attachments.Arts.ArtTest do
   use Wsdjs.DataCase
 
-  alias Wsdjs.Musics.Art
+  alias Wsdjs.Attachments.Arts.Art
 
   @create_attrs %{cld_id: "covers/gerkk29hk1t2ydaqlqyh", version: "1464527941"}
   @invalid_attrs %{cld_id: nil, version: nil}

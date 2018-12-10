@@ -1,15 +1,22 @@
 defmodule Wsdjs.Charts.Top do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Charts
-  alias Wsdjs.Musics
+  alias Wsdjs.{Accounts, Charts, Musics}
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
-  @foreign_key_type Wsdjs.HashID
+  @type t :: %__MODULE__{
+          id: integer,
+          due_date: Date.t(),
+          status: String.t(),
+          updated_at: DateTime.t(),
+          inserted_at: DateTime.t()
+        }
+
+  @allowed_fields ~w(due_date, user_id)a
+  @valid_status ~w(checking voting counting published)
+
   schema "tops" do
     field(:due_date, :date)
     field(:status, :string)
@@ -22,11 +29,9 @@ defmodule Wsdjs.Charts.Top do
     timestamps()
   end
 
-  @valid_status ~w(checking voting counting published)
-
   def create_changeset(%__MODULE__{} = top, attrs) do
     top
-    |> cast(attrs, [:due_date, :user_id])
+    |> cast(attrs, @allowed_fields)
     |> validate_required(:due_date)
     |> change(status: "checking")
     |> validate_inclusion(:status, @valid_status)
