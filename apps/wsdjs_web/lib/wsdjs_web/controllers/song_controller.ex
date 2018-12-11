@@ -85,8 +85,9 @@ defmodule WsdjsWeb.SongController do
   @spec edit(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def edit(conn, %{"id" => id}, current_user) do
-    with %Song{} = song <- Musics.get_song!(id),
-         :ok <- Musics.Policy.can?(current_user, :edit_song, song) do
+    song = Musics.get_song!(id)
+
+    with :ok <- Musics.Policy.can?(current_user, :edit_song, song) do
       changeset = Musics.change_song(song)
       render(conn, "edit.html", song: song, changeset: changeset)
     end
@@ -114,8 +115,9 @@ defmodule WsdjsWeb.SongController do
   @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
-    with song <- Musics.get_song!(id),
-         :ok <- Musics.Policy.can?(current_user, :delete_song, song),
+    song = Musics.get_song!(id)
+
+    with :ok <- Musics.Policy.can?(current_user, :delete_song, song),
          {:ok, _song} = Musics.delete_song(song) do
       conn
       |> put_flash(:info, "Song deleted successfully.")
