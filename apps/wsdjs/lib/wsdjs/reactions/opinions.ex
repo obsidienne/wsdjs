@@ -69,7 +69,7 @@ defmodule Wsdjs.Reactions.Opinions do
     |> where(song_id: ^id)
     |> order_by(desc: :inserted_at)
     |> Repo.all()
-    |> Repo.preload(user: :avatar)
+    |> load_user()
   end
 
   @doc """
@@ -115,5 +115,9 @@ defmodule Wsdjs.Reactions.Opinions do
     opinion
     |> Opinion.changeset(%{kind: kind})
     |> Repo.insert_or_update()
+  end
+
+  def load_user(opinion) do
+    Repo.preload(opinion, user: :avatar)
   end
 end
