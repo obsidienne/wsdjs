@@ -13,7 +13,7 @@ defmodule Wsdjs.Attachments.Avatars.Avatar do
           inserted_at: DateTime.t()
         }
 
-  @allowed_fields ~w(cld_id, version, user_id)a
+  @allowed_fields ~w(cld_id version user_id)a
   @required_fields ~w(cld_id version)a
 
   schema "avatars" do

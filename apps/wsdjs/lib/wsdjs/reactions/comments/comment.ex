@@ -1,4 +1,4 @@
-defmodule Wsdjs.Reactions.Comment do
+defmodule Wsdjs.Reactions.Comments.Comment do
   @moduledoc false
   use Wsdjs.Schema
   import Ecto.Changeset
@@ -11,6 +11,8 @@ defmodule Wsdjs.Reactions.Comment do
           inserted_at: DateTime.t()
         }
 
+  @allowed_fields ~w(text user_id song_id)a
+
   schema "comments" do
     field(:text, :string)
     field(:text_html, :string)
@@ -19,8 +21,6 @@ defmodule Wsdjs.Reactions.Comment do
     belongs_to(:song, Wsdjs.Musics.Song)
     timestamps()
   end
-
-  @allowed_fields ~w(text, user_id, song_id)a
 
   def changeset(%__MODULE__{} = comment, attrs) do
     comment

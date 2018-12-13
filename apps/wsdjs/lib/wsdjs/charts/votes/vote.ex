@@ -12,7 +12,7 @@ defmodule Wsdjs.Charts.Vote do
           inserted_at: DateTime.t()
         }
 
-  @allowed_fields ~w(votes, user_id, song_id)a
+  @allowed_fields ~w(votes user_id song_id)a
 
   schema "votes" do
     field(:votes, :integer)

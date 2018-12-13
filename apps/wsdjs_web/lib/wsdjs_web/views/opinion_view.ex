@@ -57,12 +57,17 @@ defmodule WsdjsWeb.OpinionView do
 
   defp tooltip_options(_kind, _opinions, qty) when qty == 0, do: []
 
-  defp data_method(kind, %Wsdjs.Reactions.Opinion{kind: my_kind}) when kind == my_kind,
+  defp data_method(kind, %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind}) when kind == my_kind,
     do: "DELETE"
 
   defp data_method(_, _), do: "POST"
 
-  defp opinion_url(conn, kind, _song, %Wsdjs.Reactions.Opinion{kind: my_kind} = my_opinion)
+  defp opinion_url(
+         conn,
+         kind,
+         _song,
+         %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind} = my_opinion
+       )
        when kind == my_kind do
     api_opinion_path(conn, :delete, my_opinion.id)
   end
@@ -70,7 +75,7 @@ defmodule WsdjsWeb.OpinionView do
   defp opinion_url(conn, kind, song, _),
     do: api_song_opinion_path(conn, :create, song, kind: kind)
 
-  defp html_class(kind, %Wsdjs.Reactions.Opinion{kind: my_kind}) when kind == my_kind,
+  defp html_class(kind, %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind}) when kind == my_kind,
     do: "song-opinion border-0 p-2 song-#{kind} active hvr-buzz-out"
 
   defp html_class(kind, _),

@@ -15,7 +15,7 @@ defmodule Wsdjs.Charts.Rank do
           inserted_at: DateTime.t()
         }
 
-  @allowed_fields ~w(likes, votes, bonus, song_id, top_id)a
+  @allowed_fields ~w(likes votes bonus song_id top_id)a
 
   schema "ranks" do
     field(:likes, :integer)

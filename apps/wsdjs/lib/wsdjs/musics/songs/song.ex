@@ -7,7 +7,7 @@ defmodule Wsdjs.Musics.Song do
   alias Wsdjs.Charts
   alias Wsdjs.Musics
   alias Wsdjs.Attachments
-  alias Wsdjs.Reactions
+  alias Wsdjs.Reactions.{Comments, Opinions}
 
   @type t :: %__MODULE__{
           id: integer,
@@ -40,9 +40,9 @@ defmodule Wsdjs.Musics.Song do
 
     belongs_to(:user, Accounts.User)
     has_one(:art, Attachments.Arts.Art, on_replace: :delete)
-    has_many(:comments, Reactions.Comment)
+    has_many(:comments, Comments.Comment)
     has_many(:ranks, Charts.Rank)
-    has_many(:opinions, Reactions.Opinion)
+    has_many(:opinions, Opinions.Opinion)
     has_many(:votes, Charts.Vote)
     many_to_many(:tops, Charts.Top, join_through: Charts.Rank)
   end

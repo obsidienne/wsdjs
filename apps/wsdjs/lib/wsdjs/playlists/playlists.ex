@@ -9,7 +9,7 @@ defmodule Wsdjs.Playlists do
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
   alias Wsdjs.Playlists.Playlist
-  alias Wsdjs.Reactions.Opinion
+  alias Wsdjs.Reactions.Opinions.Opinion
 
   @doc """
   Returns the list of playlists.

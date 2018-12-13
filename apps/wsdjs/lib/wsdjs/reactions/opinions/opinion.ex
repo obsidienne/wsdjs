@@ -1,4 +1,4 @@
-defmodule Wsdjs.Reactions.Opinion do
+defmodule Wsdjs.Reactions.Opinions.Opinion do
   @moduledoc false
   use Wsdjs.Schema
   import Ecto.Changeset
@@ -10,6 +10,10 @@ defmodule Wsdjs.Reactions.Opinion do
           inserted_at: DateTime.t()
         }
 
+  @allowed_fields ~w(kind user_id song_id)a
+  @validated_opinions ~w(up like down)
+  @required_fields ~w(kind)a
+
   schema "opinions" do
     field(:kind, :string)
 
@@ -18,10 +22,6 @@ defmodule Wsdjs.Reactions.Opinion do
 
     timestamps()
   end
-
-  @allowed_fields ~w(kind, user_id, song_id)a
-  @validated_opinions ~w(up like down)
-  @required_fields ~w()a
 
   def changeset(%__MODULE__{} = opinion, attrs) do
     opinion

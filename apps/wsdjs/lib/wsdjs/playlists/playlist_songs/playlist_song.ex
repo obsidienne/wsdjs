@@ -15,8 +15,8 @@ defmodule Wsdjs.Playlists.PlaylistSong do
           inserted_at: DateTime.t()
         }
 
-  @allowed_fields ~w(playlist_id, song_id, position)a
-  @required_fields ~w(playlist_id, song_id, position)a
+  @allowed_fields ~w(playlist_id song_id position)a
+  @required_fields ~w(playlist_id song_id position)a
 
   schema "playlist_songs" do
     field(:position, :integer)

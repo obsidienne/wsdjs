@@ -9,7 +9,7 @@ defmodule WsdjsWeb.SongController do
   alias Wsdjs.Musics.Song
   alias Wsdjs.Playlists
   alias Wsdjs.Reactions
-  alias Wsdjs.Reactions.Comment
+  alias Wsdjs.Reactions.Comments
 
   action_fallback(WsdjsWeb.FallbackController)
 
@@ -33,12 +33,12 @@ defmodule WsdjsWeb.SongController do
       end
 
     with :ok <- Musics.Policy.can?(current_user, :show, song) do
-      opinions = Reactions.list_opinions(song)
+      opinions = Reactions.Opinions.list(song)
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
-      comment_changeset = Reactions.change_comment(%Comment{})
+      comment_changeset = Comments.change()
       ranks = Wsdjs.Charts.get_ranks(song)
-      comments = Reactions.list_comments(song)
+      comments = Comments.list(song)
       playlists = Playlists.get_playlist_by_user(current_user, current_user)
 
       render(

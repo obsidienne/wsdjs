@@ -17,7 +17,7 @@ defmodule Wsdjs.Attachments.Videos.Video do
           inserted_at: DateTime.t()
         }
 
-  @allowed_fields ~w(url, event_str, event_id, title, user_id, song_id, published_at)a
+  @allowed_fields ~w(url event_str event_id title user_id song_id published_at)a
   @required_fields ~w(url)a
 
   schema "videos" do

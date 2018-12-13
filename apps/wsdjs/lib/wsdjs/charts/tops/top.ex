@@ -14,7 +14,7 @@ defmodule Wsdjs.Charts.Top do
           inserted_at: DateTime.t()
         }
 
-  @allowed_fields ~w(due_date, user_id)a
+  @allowed_fields ~w(due_date user_id)a
   @valid_status ~w(checking voting counting published)
 
   schema "tops" do

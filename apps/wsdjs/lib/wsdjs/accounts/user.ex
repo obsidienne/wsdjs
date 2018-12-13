@@ -10,7 +10,7 @@ defmodule Wsdjs.Accounts.User do
   alias Wsdjs.Attachments
   alias Wsdjs.Charts
   alias Wsdjs.Musics
-  alias Wsdjs.Reactions
+  alias Wsdjs.Reactions.{Comments, Opinions}
 
   schema "users" do
     field(:email, :string)
@@ -25,11 +25,11 @@ defmodule Wsdjs.Accounts.User do
     field(:verified_profil, :boolean, default: false)
 
     has_many(:songs, Musics.Song)
-    has_many(:comments, Reactions.Comment)
+    has_many(:comments, Comments.Comment)
     has_one(:avatar, Attachments.Avatars.Avatar, on_replace: :delete)
     has_one(:detail, Accounts.UserDetail, on_replace: :update)
     has_one(:parameter, Accounts.UserParameter, on_replace: :update)
-    has_many(:song_opinions, Reactions.Opinion)
+    has_many(:song_opinions, Opinions.Opinion)
     has_many(:votes, Charts.Vote)
     has_many(:auth_tokens, Auth.AuthToken)
 

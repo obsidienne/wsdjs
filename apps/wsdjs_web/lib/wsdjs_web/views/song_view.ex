@@ -3,7 +3,7 @@ defmodule WsdjsWeb.SongView do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Happenings
-  alias Wsdjs.Reactions.Opinion
+  alias Wsdjs.Reactions.Opinions.Opinion
 
   def current_opinion(_opinions, nil), do: nil
 
