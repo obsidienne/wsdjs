@@ -13,7 +13,7 @@ defmodule WsdjsWeb.PlaylistController do
 
   def index(conn, %{"user_id" => user_id}, current_user) do
     with %Accounts.User{} = user <- Accounts.get_user!(user_id) do
-      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      suggested_songs = Wsdjs.Musics.Songs.count_suggested_songs(user)
       playlists = Wsdjs.Playlists.list_playlists(user, current_user)
 
       render(
@@ -39,7 +39,7 @@ defmodule WsdjsWeb.PlaylistController do
     playlist = Playlists.get_playlist!(id, current_user)
     user = Accounts.get_user!(playlist.user_id)
 
-    suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+    suggested_songs = Wsdjs.Musics.Songs.count_suggested_songs(user)
     playlist_songs = Wsdjs.Playlists.list_playlist_songs(playlist, current_user)
 
     render(
@@ -58,7 +58,7 @@ defmodule WsdjsWeb.PlaylistController do
     user = Accounts.get_user!(playlist.user_id)
 
     with :ok <- Playlists.Policy.can?(current_user, :edit, playlist) do
-      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      suggested_songs = Wsdjs.Musics.Songs.count_suggested_songs(user)
       changeset = Playlists.change_playlist(playlist)
 
       render(

@@ -84,7 +84,7 @@ defmodule Wsdjs.Charts do
     lower = Timex.beginning_of_month(Timex.to_datetime(month))
     upper = Timex.end_of_month(Timex.to_datetime(month))
 
-    songs = Musics.list_suggested_songs(lower, upper)
+    songs = Musics.Songs.list_suggested_songs(lower, upper)
 
     top_changeset
     |> put_assoc(:songs, songs)

@@ -17,7 +17,7 @@ defmodule WsdjsWeb.UserParamsController do
     user = Accounts.get_user!(user_id)
 
     with :ok <- Accounts.Policy.can?(current_user, :edit_user, user) do
-      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      suggested_songs = Wsdjs.Musics.Songs.count_suggested_songs(user)
       changeset = Accounts.change_user(user)
 
       conn

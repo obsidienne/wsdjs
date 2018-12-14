@@ -29,7 +29,7 @@
     <% end %>
   </div>
 
-  <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
+  <%= if Wsdjs.Musics.Songs.can?(@current_user, :search) == :ok do %>
   <div class="search-container">
     <div class="search__input__wrap w-100 d-inline-flex pt-2">
       <svg fill='#455A64' height='36' viewBox='0 0 24 24' width='36' xmlns='http://www.w3.org/2000/svg'>

@@ -10,7 +10,7 @@ defmodule WsdjsApi.V1.OpinionController do
   def index(conn, %{"song_id" => song_id}) do
     current_user = conn.assigns[:current_user]
 
-    with song <- Musics.get_song!(song_id) do
+    with song <- Musics.Songs.get_song!(song_id) do
       opinions = Opinions.list(song)
 
       render(conn, "index.json", song: song, opinions: opinions, current_user: current_user)
@@ -20,7 +20,7 @@ defmodule WsdjsApi.V1.OpinionController do
   def create(conn, %{"kind" => kind, "song_id" => song_id}) do
     current_user = conn.assigns[:current_user]
 
-    with song <- Musics.get_song!(song_id),
+    with song <- Musics.Songs.get_song!(song_id),
          :ok <- Opinions.can?(current_user, :create, song),
          {:ok, _} <- Opinions.upsert(current_user, song, kind) do
       opinions = Opinions.list(song)
@@ -37,7 +37,7 @@ defmodule WsdjsApi.V1.OpinionController do
     with opinion <- Opinions.get!(id),
          :ok <- Opinions.can?(current_user, :delete, opinion),
          {:ok, opinion} = Opinions.delete(opinion) do
-      song = Musics.get_song!(opinion.song_id)
+      song = Musics.Songs.get_song!(opinion.song_id)
       opinions = Opinions.list(song)
       render(conn, "index.json", song: song, opinions: opinions, current_user: current_user)
     end

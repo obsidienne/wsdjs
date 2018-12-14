@@ -15,7 +15,7 @@ defmodule WsdjsWeb.PlaylistSongsController do
   def create(conn, %{"playlist_id" => playlist_id, "song_id" => song_id}, current_user)
       when not is_nil(current_user) do
     playlist = Playlists.get_playlist!(playlist_id)
-    song = Musics.get_song!(song_id)
+    song = Musics.Songs.get_song!(song_id)
     params = %{playlist_id: playlist.id, song_id: song.id, position: 0}
 
     with :ok <- Playlists.Policy.can?(current_user, :add_song, playlist),

@@ -21,7 +21,7 @@ defmodule WsdjsJobs.NewSuggestion do
     upper = Timex.now()
     lower = Timex.shift(upper, hours: -24)
 
-    Enum.count(Musics.list_songs(lower, upper)) > 0
+    Enum.count(Musics.Songs.list_songs(lower, upper)) > 0
   end
 
   defp email_path("html"),

@@ -1,11 +1,9 @@
 defmodule Wsdjs.Musics.Song do
   use Wsdjs.Schema
   import Ecto.Changeset
-  import Ecto.Query
 
   alias Wsdjs.Accounts
   alias Wsdjs.Charts
-  alias Wsdjs.Musics
   alias Wsdjs.Attachments
   alias Wsdjs.Reactions.{Comments, Opinions}
 
@@ -24,6 +22,8 @@ defmodule Wsdjs.Musics.Song do
           updated_at: DateTime.t(),
           inserted_at: DateTime.t()
         }
+
+  @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
   schema "songs" do
     field(:title, :string)
@@ -46,8 +46,6 @@ defmodule Wsdjs.Musics.Song do
     has_many(:votes, Charts.Vote)
     many_to_many(:tops, Charts.Top, join_through: Charts.Rank)
   end
-
-  @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
   def create_changeset(%__MODULE__{} = song, attrs) do
     song
@@ -116,45 +114,6 @@ defmodule Wsdjs.Musics.Song do
   end
 
   def genre, do: @validated_genre
-
-  def scoped(%Accounts.User{admin: true}), do: Musics.Song
-  def scoped(%Accounts.User{profil_djvip: true}), do: Musics.Song
-
-  def scoped(%Accounts.User{profil_dj: true} = user) do
-    upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
-    lower = Timex.shift(upper, months: -24)
-
-    # credo:disable-for-lines:2
-    scoped(lower, upper)
-    |> or_where([s], s.user_id == ^user.id)
-  end
-
-  def scoped(%Accounts.User{} = user) do
-    upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
-    lower = Timex.shift(upper, months: -12)
-
-    # credo:disable-for-lines:2
-    scoped(lower, upper)
-    |> or_where([s], s.user_id == ^user.id)
-  end
-
-  def scoped(nil) do
-    lower = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -6)
-    upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
-
-    scoped(lower, upper)
-  end
-
-  defp scoped(%DateTime{} = lower, %DateTime{} = upper) do
-    from(
-      s in Musics.Song,
-      left_join: r in assoc(s, :ranks),
-      left_join: t in assoc(r, :top),
-      where:
-        (t.status == "published" and r.position <= 10 and t.due_date >= ^lower and
-           t.due_date <= ^upper) or s.instant_hit == true or s.public_track == true
-    )
-  end
 
   # This function validates the format of an URL not it's validity.
   defp validate_url(changeset, field, options \\ []) do

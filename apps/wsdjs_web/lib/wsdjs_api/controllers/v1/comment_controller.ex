@@ -8,7 +8,7 @@ defmodule WsdjsApi.V1.CommentController do
   action_fallback(WsdjsApi.V1.FallbackController)
 
   def index(conn, %{"song_id" => song_id}) do
-    with song <- Musics.get_song!(song_id) do
+    with song <- Musics.Songs.get_song!(song_id) do
       comments = Comments.list(song)
 
       render(conn, "index.json", comments: comments)
@@ -17,7 +17,7 @@ defmodule WsdjsApi.V1.CommentController do
 
   def create(conn, %{"song_id" => song_id, "comment" => params}) do
     current_user = conn.assigns[:current_user]
-    song = Musics.get_song!(song_id)
+    song = Musics.Songs.get_song!(song_id)
 
     params =
       params

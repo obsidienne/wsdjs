@@ -5,11 +5,10 @@ defmodule WsdjsWeb.SongController do
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Videos.Video
-  alias Wsdjs.Musics
+  alias Wsdjs.Musics.Songs
   alias Wsdjs.Musics.Song
   alias Wsdjs.Playlists
-  alias Wsdjs.Reactions
-  alias Wsdjs.Reactions.Comments
+  alias Wsdjs.Reactions.{Comments, Opinions}
 
   action_fallback(WsdjsWeb.FallbackController)
 
@@ -27,13 +26,13 @@ defmodule WsdjsWeb.SongController do
   def show(conn, %{"id" => id}, current_user) do
     song =
       if String.match?(id, ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/) do
-        Musics.get_song_by_uuid!(id)
+        Songs.get_song_by_uuid!(id)
       else
-        Musics.get_song!(id)
+        Songs.get_song!(id)
       end
 
-    with :ok <- Musics.Policy.can?(current_user, :show, song) do
-      opinions = Reactions.Opinions.list(song)
+    with :ok <- Songs.can?(current_user, :show, song) do
+      opinions = Opinions.list(song)
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
       comment_changeset = Comments.change()
@@ -65,8 +64,8 @@ defmodule WsdjsWeb.SongController do
   @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def new(conn, _params, current_user) do
-    with :ok <- Wsdjs.Musics.Policy.can?(current_user, :create_song) do
-      changeset = Musics.change_song(%Song{})
+    with :ok <- Songs.can?(current_user, :create) do
+      changeset = Songs.change(%Song{})
       render(conn, "new.html", changeset: changeset)
     end
   end
@@ -74,8 +73,8 @@ defmodule WsdjsWeb.SongController do
   def create(conn, %{"song" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
 
-    with :ok <- Wsdjs.Musics.Policy.can?(current_user, :create_song),
-         {:ok, song} <- Musics.create_song(params) do
+    with :ok <- Songs.can?(current_user, :create),
+         {:ok, song} <- Songs.create_song(params) do
       conn
       |> put_flash(:info, "#{song.title} created")
       |> redirect(to: Routes.song_path(conn, :show, song.id))
@@ -85,10 +84,10 @@ defmodule WsdjsWeb.SongController do
   @spec edit(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def edit(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(id)
+    song = Songs.get_song!(id)
 
-    with :ok <- Musics.Policy.can?(current_user, :edit_song, song) do
-      changeset = Musics.change_song(song)
+    with :ok <- Songs.can?(current_user, :edit, song) do
+      changeset = Songs.change(song)
       render(conn, "edit.html", song: song, changeset: changeset)
     end
   end
@@ -96,10 +95,10 @@ defmodule WsdjsWeb.SongController do
   @spec update(Plug.Conn.t(), %{id: String.t(), song: map()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
-    song = Musics.get_song!(id)
+    song = Songs.get_song!(id)
 
-    with :ok <- Musics.Policy.can?(current_user, :edit_song, song),
-         {:ok, %Song{} = song} <- Musics.update_song(song, song_params, current_user) do
+    with :ok <- Songs.can?(current_user, :edit, song),
+         {:ok, %Song{} = song} <- Songs.update(song, song_params, current_user) do
       conn
       |> put_flash(:info, "Song updated")
       |> redirect(to: Routes.song_path(conn, :show, song))
@@ -115,10 +114,10 @@ defmodule WsdjsWeb.SongController do
   @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(id)
+    song = Songs.get_song!(id)
 
-    with :ok <- Musics.Policy.can?(current_user, :delete_song, song),
-         {:ok, _song} = Musics.delete_song(song) do
+    with :ok <- Songs.can?(current_user, :delete, song),
+         {:ok, _song} = Songs.delete(song) do
       conn
       |> put_flash(:info, "Song deleted successfully.")
       |> redirect(to: Routes.home_path(conn, :index))

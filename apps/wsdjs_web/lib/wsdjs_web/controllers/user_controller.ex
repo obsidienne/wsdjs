@@ -22,7 +22,7 @@ defmodule WsdjsWeb.UserController do
     user = Accounts.get_user!(user_id)
 
     with :ok <- Accounts.Policy.can?(current_user, :show, user) do
-      suggested_songs = Wsdjs.Musics.count_suggested_songs(user)
+      suggested_songs = Wsdjs.Musics.Songs.count_suggested_songs(user)
       playlists = Wsdjs.Playlists.list_frontpage_playlist_songs(current_user)
 
       conn

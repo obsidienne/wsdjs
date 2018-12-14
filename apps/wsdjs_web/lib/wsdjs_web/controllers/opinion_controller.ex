@@ -8,7 +8,7 @@ defmodule WsdjsWeb.OpinionController do
 
   @spec index(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def index(conn, %{"song_id" => song_id}) do
-    with song <- Musics.get_song!(song_id) do
+    with song <- Musics.Songs.get_song!(song_id) do
       opinions = Opinions.list(song)
 
       conn

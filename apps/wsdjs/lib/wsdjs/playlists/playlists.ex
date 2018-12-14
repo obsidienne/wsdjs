@@ -7,7 +7,7 @@ defmodule Wsdjs.Playlists do
   alias Wsdjs.Repo
 
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics.Song
+  alias Wsdjs.Musics.Songs
   alias Wsdjs.Playlists.Playlist
   alias Wsdjs.Reactions.Opinions.Opinion
 
@@ -191,7 +191,7 @@ defmodule Wsdjs.Playlists do
   def list_playlist_songs(%Playlist{type: "suggested", user_id: user_id}, current_user) do
     query =
       from(
-        s in Song.scoped(current_user),
+        s in Songs.scoped(current_user),
         where: s.user_id == ^user_id,
         order_by: [desc: s.inserted_at]
       )
@@ -202,7 +202,7 @@ defmodule Wsdjs.Playlists do
   def list_playlist_songs(%Playlist{type: "likes and tops", user_id: user_id}, current_user) do
     query =
       from(
-        s in Song.scoped(current_user),
+        s in Songs.scoped(current_user),
         join: o in Opinion,
         on: o.song_id == s.id,
         where: o.user_id == ^user_id,
@@ -215,7 +215,7 @@ defmodule Wsdjs.Playlists do
   def list_playlist_songs(%Playlist{id: id, type: "playlist"}, current_user) do
     query =
       from(
-        s in Song.scoped(current_user),
+        s in Songs.scoped(current_user),
         join: ps in PlaylistSong,
         on: ps.playlist_id == ^id and ps.song_id == s.id,
         order_by: ps.position

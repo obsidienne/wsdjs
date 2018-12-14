@@ -5,7 +5,7 @@ defmodule WsdjsWeb.SongVideosController do
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Videos.Video
-  alias Wsdjs.Musics
+  alias Wsdjs.Musics.Songs
 
   action_fallback(WsdjsWeb.FallbackController)
 
@@ -17,9 +17,9 @@ defmodule WsdjsWeb.SongVideosController do
   @spec index(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def index(conn, %{"song_id" => song_id}, current_user) do
-    song = Musics.get_song!(song_id)
+    song = Songs.get_song!(song_id)
 
-    with :ok <- Musics.Policy.can?(current_user, :show, song) do
+    with :ok <- Songs.can?(current_user, :show, song) do
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
 

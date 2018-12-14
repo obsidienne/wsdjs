@@ -5,7 +5,7 @@
 </header>
 
 <div class="container actions d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
-  <%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
+  <%= if Wsdjs.Musics.Songs.can?(@current_user, :search) == :ok do %>
     <div class="d-flex w-100 align-items-center">
       <span class="cursor-pointer d-flex  align-items-center"  data-js-drawer>
         <svg fill='#455A64' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'>
@@ -18,15 +18,15 @@
 
 
   <% end %>
-  <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
+  <%= if Wsdjs.Musics.Songs.can?(@conn.assigns.current_user, :suggest) == :ok do %>
     <a class="btn btn-primary tippy d-none d-md-inline-block" title="Suggest a song for the current month TOP 10" href="<%= Routes.suggestion_path(@conn, :new) %>">Suggest a song</a>
   <% end %>
-  <%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :create_song) == :ok do %>
+  <%= if Wsdjs.Musics.Songs.can?(@conn.assigns.current_user, :create) == :ok do %>
     <a class="btn btn-link d-none d-md-inline-block ml-2" href="<%= Routes.song_path(@conn, :new) %>">Add a song</a>
   <% end %>
 </div>
 
-<%= if Wsdjs.Musics.Policy.can?(@current_user, :search) == :ok do %>
+<%= if Wsdjs.Musics.Songs.can?(@current_user, :search) == :ok do %>
   <%= render "_facets.html" %>
 <% end %>
 
@@ -57,7 +57,7 @@
   </ul>
 </template>
 
-<%= if Wsdjs.Musics.Policy.can?(@conn.assigns.current_user, :suggest_song) == :ok do %>
+<%= if Wsdjs.Musics.Songs.can?(@conn.assigns.current_user, :suggest) == :ok do %>
   <%= link to: Routes.suggestion_path(@conn, :new), class: "btn btn-primary fab" do %>
   <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
     <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>
