@@ -91,7 +91,7 @@
         <%= link "Radio", to: Routes.radio_path(@conn, :show), class: "glnav__menu visible-link clickable" %>
         <%= link "Chart", to: Routes.top_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
         <%= link "Library", to: Routes.song_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
-        <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>
+        <%= if Wsdjs.Accounts.Users.can?(@conn.assigns.current_user, :index) == :ok do %>
         <%= link "Members", to: Routes.user_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
         <% end %>
         <%= if Wsdjs.Happenings.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>

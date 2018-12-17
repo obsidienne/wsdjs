@@ -30,7 +30,7 @@
           </div>
         </td>
       </tr>
-      <%= if Wsdjs.Accounts.Policy.can?(@user, :new_song_notification) == :ok do %>
+      <%= if Wsdjs.Accounts.Users.can?(@user, :new_song_notification) == :ok do %>
       <tr>
         <td><strong>New song notification</strong><p class="text-muted">Receive an email everyday if new songs have been suggeted.</p></td>
         <td>

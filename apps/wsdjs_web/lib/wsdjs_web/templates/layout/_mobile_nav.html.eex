@@ -29,7 +29,7 @@
 
       <% end %>
     </li>
-    <%= if Wsdjs.Accounts.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>
+    <%= if Wsdjs.Accounts.Users.can?(@conn.assigns.current_user, :index) == :ok do %>
     <li>
       <%= link to: Routes.user_path(@conn, :index), class: "mobile-nav_menu" do %>
       <svg style="width:24px;height:24px" viewBox="0 0 24 24">

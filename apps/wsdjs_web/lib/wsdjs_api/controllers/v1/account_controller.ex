@@ -11,7 +11,7 @@ defmodule WsdjsApi.V1.AccountController do
     current_user = conn.assigns[:current_user]
     user = Accounts.get_user!(id)
 
-    with :ok <- Accounts.Policy.can?(current_user, :show, user) do
+    with :ok <- Accounts.Users.can?(current_user, :show, user) do
       render(conn, "show.json", user: user)
     end
   end
@@ -20,7 +20,7 @@ defmodule WsdjsApi.V1.AccountController do
     current_user = conn.assigns[:current_user]
     user = Accounts.get_user!(current_user.id)
 
-    with :ok <- Accounts.Policy.can?(current_user, :show, user) do
+    with :ok <- Accounts.Users.can?(current_user, :show, user) do
       render(conn, "show.json", user: user)
     end
   end
@@ -29,7 +29,7 @@ defmodule WsdjsApi.V1.AccountController do
     current_user = conn.assigns[:current_user]
     user = Accounts.get_user!(id)
 
-    with :ok <- Accounts.Policy.can?(current_user, :edit_user, user),
+    with :ok <- Accounts.Users.can?(current_user, :edit_user, user),
          {:ok, %User{} = user} <- Accounts.update_user(user, user_params, current_user) do
       render(conn, "show.json", user: user)
     end

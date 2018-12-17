@@ -2,7 +2,6 @@ defmodule Wsdjs.Accounts.User do
   @moduledoc false
   use Wsdjs.Schema
   import Ecto.Changeset
-  import Ecto.Query
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.{UserDetail, UserParameter}
@@ -77,20 +76,6 @@ defmodule Wsdjs.Accounts.User do
   defp downcase_value(changeset) do
     update_change(changeset, :email, &String.downcase/1)
   end
-
-  @doc """
-  The function scope is used to filter the users according to the user specified.
-  - Admin see every user
-  - Connected user can every users exceptsee himself and not admin users
-  - Not connected users see nothing
-  """
-  def scoped(%Accounts.User{admin: true}), do: Accounts.User
-
-  def scoped(%Accounts.User{} = user) do
-    from(u in Accounts.User, where: u.id == ^user.id or u.admin == false)
-  end
-
-  def scoped(nil), do: from(u in Accounts.User, where: u.admin == false)
 end
 
 defimpl Bamboo.Formatter, for: Wsdjs.Accounts.User do
