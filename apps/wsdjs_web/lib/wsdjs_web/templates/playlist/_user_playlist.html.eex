@@ -24,7 +24,7 @@
       </span>
       <% end %>
     </span>
-    <%= if Wsdjs.Playlists.Policy.can?(@conn.assigns.current_user, :edit, @playlist) == :ok do %>
+    <%= if Wsdjs.Playlists.can?(@conn.assigns.current_user, :edit, @playlist) == :ok do %>
       <%= link "edit", to: Routes.playlist_path(@conn, :edit, @playlist), class: "btn btn-link ml-2" %>
     <% end %>
   </div>

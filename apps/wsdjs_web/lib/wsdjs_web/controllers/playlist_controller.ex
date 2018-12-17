@@ -29,7 +29,7 @@ defmodule WsdjsWeb.PlaylistController do
   def new(conn, %{"user_id" => user_id}, current_user) do
     user = Accounts.get_user!(user_id)
 
-    with :ok <- Playlists.Policy.can?(current_user, :new),
+    with :ok <- Playlists.can?(current_user, :new),
          changeset <- Playlists.change_playlist(%Playlists.Playlist{}) do
       render(conn, "new.html", changeset: changeset, user: user)
     end
@@ -57,7 +57,7 @@ defmodule WsdjsWeb.PlaylistController do
     playlist = Playlists.get_playlist!(id)
     user = Accounts.get_user!(playlist.user_id)
 
-    with :ok <- Playlists.Policy.can?(current_user, :edit, playlist) do
+    with :ok <- Playlists.can?(current_user, :edit, playlist) do
       suggested_songs = Wsdjs.Musics.Songs.count_suggested_songs(user)
       changeset = Playlists.change_playlist(playlist)
 
@@ -75,7 +75,7 @@ defmodule WsdjsWeb.PlaylistController do
   def update(conn, %{"id" => id, "playlist" => playlist_params}, current_user) do
     playlist = Playlists.get_playlist!(id)
 
-    with :ok <- Playlists.Policy.can?(current_user, :edit, playlist),
+    with :ok <- Playlists.can?(current_user, :edit, playlist),
          {:ok, _user} <- Playlists.update_playlist(playlist, playlist_params, current_user) do
       conn
       |> put_flash(:info, "Playlist updated.")
@@ -95,7 +95,7 @@ defmodule WsdjsWeb.PlaylistController do
   def create(conn, %{"playlist" => playlist_params, "user_id" => user_id}, current_user) do
     playlist_params = Map.put(playlist_params, "user_id", user_id)
 
-    with :ok <- Playlists.Policy.can?(current_user, :new),
+    with :ok <- Playlists.can?(current_user, :new),
          {:ok, playlist} <- Playlists.create_playlist(playlist_params) do
       conn
       |> put_flash(:info, "Playlist created successfully.")
@@ -107,7 +107,7 @@ defmodule WsdjsWeb.PlaylistController do
     playlist = Playlists.get_playlist!(id)
     user = Accounts.get_user!(playlist.user_id)
 
-    with :ok <- Playlists.Policy.can?(current_user, :delete, playlist),
+    with :ok <- Playlists.can?(current_user, :delete, playlist),
          {:ok, _} = Playlists.delete_playlist(playlist) do
       conn
       |> put_flash(:info, "playlist deleted successfully.")

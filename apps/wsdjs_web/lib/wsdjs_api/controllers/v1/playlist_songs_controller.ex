@@ -14,7 +14,7 @@ defmodule WsdjsApi.V1.PlaylistSongsController do
     song = Musics.Songs.get_song!(song_id)
     params = %{playlist_id: playlist.id, song_id: song.id, position: 0}
 
-    with :ok <- Playlists.Policy.can?(current_user, :add_song, playlist),
+    with :ok <- Playlists.can?(current_user, :add_song, playlist),
          {:ok, _} <- Playlists.create_playlist_song(params) do
       conn
       |> put_status(:created)

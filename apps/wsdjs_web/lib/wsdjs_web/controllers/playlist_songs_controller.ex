@@ -18,7 +18,7 @@ defmodule WsdjsWeb.PlaylistSongsController do
     song = Musics.Songs.get_song!(song_id)
     params = %{playlist_id: playlist.id, song_id: song.id, position: 0}
 
-    with :ok <- Playlists.Policy.can?(current_user, :add_song, playlist),
+    with :ok <- Playlists.can?(current_user, :add_song, playlist),
          {:ok, _} <- Playlists.create_playlist_song(params) do
       conn
       |> put_flash(:info, "Song added successfully.")
@@ -43,7 +43,7 @@ defmodule WsdjsWeb.PlaylistSongsController do
     playlist = Playlists.get_playlist!(playlist_id)
     playlist_song = Playlists.get_playlist_song!(playlist_song_id, current_user)
 
-    with :ok <- Playlists.Policy.can?(current_user, :rank_song, playlist),
+    with :ok <- Playlists.can?(current_user, :rank_song, playlist),
          {:ok, _song} = Playlists.update_playlist_song(playlist_song, dir) do
       redirect(conn, to: Routes.playlist_path(conn, :show, playlist))
     end
@@ -55,7 +55,7 @@ defmodule WsdjsWeb.PlaylistSongsController do
     playlist = Playlists.get_playlist!(playlist_id)
     playlist_song = Playlists.get_playlist_song!(playlist_song_id, current_user)
 
-    with :ok <- Playlists.Policy.can?(current_user, :delete_song, playlist),
+    with :ok <- Playlists.can?(current_user, :delete_song, playlist),
          {:ok, _song} = Playlists.delete_playlist_song(playlist_song) do
       conn
       |> put_flash(:info, "Song deleted successfully.")

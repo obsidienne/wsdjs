@@ -2,8 +2,6 @@ defmodule Wsdjs.Playlists.Playlist do
   @moduledoc false
   use Wsdjs.Schema
   import Ecto.{Query, Changeset}, warn: false
-  alias Wsdjs.Accounts.User
-  alias Wsdjs.Playlists.Playlist
 
   @type t :: %__MODULE__{
           id: integer,
@@ -44,12 +42,4 @@ defmodule Wsdjs.Playlists.Playlist do
     |> unique_constraint(:name, name: :playlists_user_id_name_index)
     |> assoc_constraint(:user)
   end
-
-  def scoped(%User{admin: true}), do: Playlist
-
-  def scoped(%User{id: id}) do
-    from(p in Playlist, where: p.user_id == ^id or p.public == true)
-  end
-
-  def scoped(_), do: from(p in Playlist, where: p.public == true)
 end
