@@ -94,7 +94,7 @@
         <%= if Wsdjs.Accounts.Users.can?(@conn.assigns.current_user, :index) == :ok do %>
         <%= link "Members", to: Routes.user_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
         <% end %>
-        <%= if Wsdjs.Happenings.Policy.can?(@conn.assigns.current_user, :index) == :ok do %>
+        <%= if Wsdjs.Happenings.can?(@conn.assigns.current_user, :index) == :ok do %>
         <%= link "Events", to: Routes.event_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
         <% end %>
 
