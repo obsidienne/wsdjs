@@ -28,11 +28,11 @@ defmodule Wsdjs.Accounts.Users do
   - Connected user can every users exceptsee himself and not admin users
   - Not connected users see nothing
   """
-  def scoped(%Accounts.User{admin: true}), do: Accounts.User
+  def scoped(query, %Accounts.User{admin: true}), do: query
 
-  def scoped(%Accounts.User{} = user) do
-    from(u in Accounts.User, where: u.id == ^user.id or u.admin == false)
+  def scoped(query, %Accounts.User{} = user) do
+    where(query, [u], u.id == ^user.id or u.admin == false)
   end
 
-  def scoped(_), do: from(u in Accounts.User, where: u.admin == false)
+  def scoped(query, _), do: where(query, admin: false)
 end
