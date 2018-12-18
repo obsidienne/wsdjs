@@ -103,4 +103,28 @@ defmodule Wsdjs.Attachments do
   def delete_video(%Video{} = video) do
     Repo.delete(video)
   end
+
+  ###############################################
+  #
+  # Avatar
+  #
+  ###############################################
+  alias Wsdjs.Attachments.Avatars.Avatar
+  alias Wsdjs.Accounts.User
+
+  @doc """
+  Returns the user avatar.
+
+  ## Examples
+
+      iex> get_avatar(%User{})
+      %Avatar{}
+  """
+  def get_avatar(%User{id: id}) do
+    Avatar
+    |> where(user_id: ^id)
+    |> order_by(desc: :inserted_at)
+    |> limit(1)
+    |> Repo.all()
+  end
 end
