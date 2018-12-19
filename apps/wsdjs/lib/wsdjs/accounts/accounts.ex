@@ -49,8 +49,7 @@ defmodule Wsdjs.Accounts do
         u in User,
         join: p in assoc(u, :parameter),
         where:
-          u.deactivated == false and p.new_song_notification == true and u.profil_djvip == true and
-            u.deactivated == false
+          u.deactivated == false and p.new_song_notification == true and u.profil_djvip == true
       )
 
     Repo.all(query)
