@@ -1,10 +1,10 @@
 defmodule WsdjsJobs.NewSuggestion do
   import Bamboo.Email
   alias Wsdjs.Musics
-  alias Wsdjs.Notifications
+  alias Wsdjs.Accounts
 
   def call(_args \\ []) do
-    users = Notifications.list_users_to_notify("new song")
+    users = Accounts.list_users_to_notify("new song")
 
     if Enum.count(users) > 0 and new_songs?() do
       new_email()
