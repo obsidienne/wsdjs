@@ -41,6 +41,7 @@ defmodule WsdjsJobs.Mixfile do
       {:quantum, "~> 2.3.3"},
       {:timex, "~> 3.4"},
       {:bamboo, "~> 1.1"},
+      {:attachments, in_umbrella: true},
       {:wsdjs, in_umbrella: true}
     ]
   end

@@ -2,7 +2,6 @@ defmodule WsdjsApi.V1.CommentView do
   use WsdjsApi, :view
 
   alias WsdjsApi.V1.CommentView
-  alias WsdjsWeb.CloudinaryHelper
 
   def render("index.json", %{comments: comments}) do
     %{
@@ -28,8 +27,8 @@ defmodule WsdjsApi.V1.CommentView do
         id: comment.user.id,
         path: user_path(WsdjsWeb.Endpoint, :show, comment.user),
         avatars: %{
-          avatar_uri_200: CloudinaryHelper.avatar_url(comment.user.avatar, 200),
-          avatar_uri: CloudinaryHelper.avatar_url(comment.user.avatar, 100)
+          avatar_uri_200: Attachments.avatar_url(comment.user.avatar, 200),
+          avatar_uri: Attachments.avatar_url(comment.user.avatar, 100)
         }
       },
       commented_at: DateTime.to_iso8601(DateTime.from_naive!(comment.inserted_at, "Etc/UTC")),

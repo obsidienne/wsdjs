@@ -21,9 +21,9 @@
       <%= link to: Routes.playlist_path(@conn, :show, playlist), class: "playlist" do %>
         <div class="img-embed">
           <%= if playlist.cover do %>
-          <img src="<%= art_url(playlist.cover.art, 300) %>" srcset="<%= art_srcset(playlist.cover.art, 300) %>" sizes="300px" class="responsive"/>
+          <img src="<%= Attachments.art_url(playlist.cover.art, 300) %>" srcset="<%= Attachments.art_srcset(playlist.cover.art, 300) %>" sizes="300px" class="responsive"/>
           <% else %>
-          <img src="<%= art_url(nil, 300) %>" class="responsive"/>
+          <img src="<%= Attachments.art_url(nil, 300) %>" class="responsive"/>
           <% end %>
         </div>
         <span class="playlist-name">

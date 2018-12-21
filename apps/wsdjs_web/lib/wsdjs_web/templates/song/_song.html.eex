@@ -1,7 +1,7 @@
 <li class="hot-songs__song" data-id="<%= @song.id %>">
   <article class="song-card card shadow clickable d-flex flex-column">
     <div class="py-2 px-3 d-flex align-items-center">
-      <img class="mr-2 rounded-circle" src="<%= avatar_url(@song.user.avatar, 32) %>" srcset="<%= avatar_srcset(@song.user.avatar, 32) %>" sizes="32px">
+      <img class="mr-2 rounded-circle" src="<%= Attachments.avatar_url(@song.user.avatar, 32) %>" srcset="<%= Attachments.avatar_srcset(@song.user.avatar, 32) %>" sizes="32px">
       <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link clickable action-link text-ellipsis" %>
       <span class="secondary-text text-nowrap">
         <%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b", :strftime)%>
@@ -9,7 +9,7 @@
     </div>
     <a href="<%= url_for_provider(@song) %>" class="song-card__header p-0 d-block" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
       <div class="img-embed">
-        <img src="<%= art_url(nil, 200) %>" data-src="<%= art_url(@song.art, 200) %>" data-srcset="<%= art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
+        <img src="<%= Attachments.art_url(nil, 200) %>" data-src="<%= Attachments.art_url(@song.art, 200) %>" data-srcset="<%= Attachments.art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
       </div>
       <div class="song-card__tags d-flex  px-3 py-2 w-100">
         <span class="label label-default mr-1"><%= @song.genre %></span>

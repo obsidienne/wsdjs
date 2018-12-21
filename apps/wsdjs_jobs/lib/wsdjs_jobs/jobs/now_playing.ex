@@ -156,8 +156,8 @@ defmodule WsdjsJobs.NowPlaying do
     if song_in_base != nil do
       song
       |> Map.put(:suggested_ts, Timex.to_unix(song_in_base.inserted_at))
-      |> Map.put(:image_uri, WsdjsWeb.CloudinaryHelper.art_url(song_in_base.art, 900))
-      |> Map.put(:image_srcset, WsdjsWeb.CloudinaryHelper.art_srcset(song_in_base.art, 300))
+      |> Map.put(:image_uri, Attachments.art_url(song_in_base.art, 900))
+      |> Map.put(:image_srcset, Attachments.art_srcset(song_in_base.art, 300))
       |> Map.put(:suggested_by, song_in_base.user.name)
       |> Map.put(:suggested_by_path, "/users/#{song_in_base.user.id}")
       |> Map.put(:path, "/songs/#{song_in_base.id}")
