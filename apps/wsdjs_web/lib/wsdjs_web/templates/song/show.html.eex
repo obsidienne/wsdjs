@@ -8,7 +8,7 @@
 <section>
   <div class="song-page container d-flex mt-4 pb-6">
     <div class="song-page__art shadow-nohover">
-      <img src="<%= art_url(@song.art, 300) %>" srcset="<%= art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
+      <img src="<%= Attachments.art_url(@song.art, 300) %>" srcset="<%= Attachments.art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
     <div class="song-page__details d-flex flex-column">
       <span class="h2 primary-text"><%= @song.title %></span>
@@ -95,11 +95,11 @@
   </div>
 
   <div class="song-page__sections__aside">
-    <%= if Wsdjs.Musics.Policy.can?(@current_user, :edit_song, @song) == :ok do %>
+    <%= if Wsdjs.Musics.Songs.can?(@current_user, :edit, @song) == :ok do %>
     <fieldset>
       <legend>Actions</legend>
       <%= link "Edit song", to: Routes.song_path(@conn, :edit, @song), class: "btn btn-primary" %>
-      <%= if Wsdjs.Musics.Policy.can?(@current_user, :delete_song,  @song) == :ok do %>
+      <%= if Wsdjs.Musics.Songs.can?(@current_user, :delete,  @song) == :ok do %>
         <%= link "Delete song", to: Routes.song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %>
       <% end %>
     </fieldset>

@@ -44,7 +44,7 @@
   <% end %>
 
 
-  <%= if Wsdjs.Playlists.Policy.can?(@current_user, :delete, @playlist) == :ok do %>
+  <%= if Wsdjs.Playlists.can?(@current_user, :delete, @playlist) == :ok do %>
     <%= link "Delete", to: Routes.playlist_path(@conn, :delete, @playlist), method: :delete, class: "btn btn-link text-danger mt-4" %>
   <% end %>
 </section>

@@ -74,6 +74,14 @@
     border-color: #fff;
 }
 
+.border-dashed {
+    border-style: dashed;
+}
+
+.border-thick {
+    border-width: thick;
+}
+
 .rounded {
     border-radius: .25rem;
 }

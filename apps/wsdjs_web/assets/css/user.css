@@ -21,7 +21,6 @@
 }
 
 .user-page__stats td {
-  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 
@@ -56,7 +55,6 @@
 }
 
 .user-page__details {
-  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 

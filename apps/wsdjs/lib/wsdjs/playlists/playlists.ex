@@ -7,9 +7,38 @@ defmodule Wsdjs.Playlists do
   alias Wsdjs.Repo
 
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics.Song
+  alias Wsdjs.Musics.Songs
+  alias Wsdjs.Playlists
   alias Wsdjs.Playlists.Playlist
-  alias Wsdjs.Reactions.Opinion
+  alias Wsdjs.Reactions.Opinions.Opinion
+
+  @doc """
+
+  """
+  def can?(%User{id: id}, :rank_song, %Playlist{user_id: id}), do: :ok
+
+  def can?(%User{id: id}, :add_song, %Playlist{user_id: id}), do: :ok
+  def can?(%User{id: id}, :delete_song, %Playlist{user_id: id}), do: :ok
+
+  def can?(%User{admin: true}, _, _), do: :ok
+  def can?(%User{id: id}, :edit, %Playlist{user_id: id}), do: :ok
+  def can?(%User{id: id}, :delete, %Playlist{user_id: id, type: "playlist"}), do: :ok
+  def can?(_, _, _), do: {:error, :unauthorized}
+
+  def can?(%User{admin: true}, _), do: :ok
+  def can?(%User{profil_djvip: true}, :new), do: :ok
+  def can?(_, _), do: {:error, :unauthorized}
+
+  @doc """
+
+  """
+  def scoped(query, %User{admin: true}), do: query
+
+  def scoped(query, %User{id: id}) do
+    where(query, [p], p.user_id == ^id or p.public == true)
+  end
+
+  def scoped(query, _), do: where(query, [p], p.public == true)
 
   @doc """
   Returns the list of playlists.
@@ -21,8 +50,8 @@ defmodule Wsdjs.Playlists do
 
   """
   def list_playlists(%User{id: id}, current_user) do
-    current_user
-    |> Playlist.scoped()
+    Playlist
+    |> Playlists.scoped(current_user)
     |> where(user_id: ^id)
     |> Repo.all()
     |> Repo.preload(cover: :art)
@@ -43,16 +72,16 @@ defmodule Wsdjs.Playlists do
 
   """
   def get_playlist!(id, current_user) do
-    current_user
-    |> Playlist.scoped()
+    Playlist
+    |> Playlists.scoped(current_user)
     |> Repo.get!(id)
   end
 
   def get_playlist!(id), do: Repo.get!(Playlist, id)
 
   def get_playlist_by_user(user, current_user) do
-    current_user
-    |> Playlist.scoped()
+    Playlist
+    |> Playlists.scoped(current_user)
     |> where(
       [p],
       p.user_id == ^user.id and (p.type == "playlist" or p.type == "top 5")
@@ -126,7 +155,7 @@ defmodule Wsdjs.Playlists do
   end
 
   defp update_playlist_stat(playlist_id) do
-    IO.inspect(playlist_id)
+    {:ok, playlist_id} = Wsdjs.HashID.dump(playlist_id)
 
     query = "
       update playlists p
@@ -148,8 +177,8 @@ defmodule Wsdjs.Playlists do
   def get_playlist_song!(playlist_song_id, current_user) do
     playlist_song = Repo.get!(PlaylistSong, playlist_song_id)
 
-    current_user
-    |> Playlist.scoped()
+    Playlist
+    |> Playlists.scoped(current_user)
     |> Repo.get!(playlist_song.playlist_id)
 
     playlist_song
@@ -172,8 +201,8 @@ defmodule Wsdjs.Playlists do
         order_by: ps.position
       )
 
-    current_user
-    |> Playlist.scoped()
+    Playlist
+    |> Playlists.scoped(current_user)
     |> where([p], p.front_page == true)
     |> Repo.all()
     |> Repo.preload(playlist_songs: query)
@@ -191,7 +220,7 @@ defmodule Wsdjs.Playlists do
   def list_playlist_songs(%Playlist{type: "suggested", user_id: user_id}, current_user) do
     query =
       from(
-        s in Song.scoped(current_user),
+        s in Songs.scoped(current_user),
         where: s.user_id == ^user_id,
         order_by: [desc: s.inserted_at]
       )
@@ -202,7 +231,7 @@ defmodule Wsdjs.Playlists do
   def list_playlist_songs(%Playlist{type: "likes and tops", user_id: user_id}, current_user) do
     query =
       from(
-        s in Song.scoped(current_user),
+        s in Songs.scoped(current_user),
         join: o in Opinion,
         on: o.song_id == s.id,
         where: o.user_id == ^user_id,
@@ -213,13 +242,11 @@ defmodule Wsdjs.Playlists do
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "playlist"}, current_user) do
-    {:ok, playlist_id} = Wsdjs.HashID.dump(id)
-
     query =
       from(
-        s in Song.scoped(current_user),
+        s in Songs.scoped(current_user),
         join: ps in PlaylistSong,
-        on: ps.playlist_id == ^playlist_id and ps.song_id == s.id,
+        on: ps.playlist_id == ^id and ps.song_id == s.id,
         order_by: ps.position
       )
 
@@ -227,12 +254,10 @@ defmodule Wsdjs.Playlists do
   end
 
   def list_playlist_songs(%Playlist{id: id, type: "top 5"}, current_user) do
-    {:ok, playlist_id} = Wsdjs.HashID.dump(id)
-
     query =
       from(
         ps in PlaylistSong.scoped(current_user),
-        where: ps.playlist_id == ^playlist_id,
+        where: ps.playlist_id == ^id,
         order_by: ps.position
       )
 
@@ -252,7 +277,7 @@ defmodule Wsdjs.Playlists do
 
   """
   def create_playlist_song(attrs \\ %{}) do
-    {:ok, playlist_id} = Wsdjs.HashID.dump(Map.get(attrs, :playlist_id))
+    playlist_id = Map.get(attrs, :playlist_id)
 
     %PlaylistSong{}
     |> PlaylistSong.changeset(attrs)
@@ -308,10 +333,8 @@ defmodule Wsdjs.Playlists do
         {:error, _, _, _} -> {:error, current}
       end
 
-    {:ok, playlist_id} = Wsdjs.HashID.dump(current.playlist_id)
-
-    sort_playlist_song(playlist_id)
-    update_playlist_stat(playlist_id)
+    sort_playlist_song(current.playlist_id)
+    update_playlist_stat(current.playlist_id)
     ret
   end
 
@@ -329,10 +352,9 @@ defmodule Wsdjs.Playlists do
   """
   def delete_playlist_song(%PlaylistSong{} = playlist_song) do
     {:ok, ps} = Repo.delete(playlist_song)
-    {:ok, playlist_id} = Wsdjs.HashID.dump(ps.playlist_id)
 
-    sort_playlist_song(playlist_id)
-    update_playlist_stat(playlist_id)
+    sort_playlist_song(ps.playlist_id)
+    update_playlist_stat(ps.playlist_id)
 
     {:ok, ps}
   end

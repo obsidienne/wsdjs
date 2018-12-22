@@ -24,7 +24,7 @@ defmodule WsdjsApi.V1.PlaylistController do
 
     playlist_params = Map.put(playlist_params, "user_id", user_id)
 
-    with :ok <- Playlists.Policy.can?(current_user, :new),
+    with :ok <- Playlists.can?(current_user, :new),
          {:ok, playlist} <- Playlists.create_playlist(playlist_params) do
       conn
       |> put_status(:created)

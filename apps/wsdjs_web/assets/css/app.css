@@ -28,5 +28,6 @@
 @import "./utilities/sizes.css";
 @import "./utilities/shadow.css";
 @import "./utilities/spacing.css";
+@import "./utilities/text.css";
 @import 'shame.css';
 @import '../node_modules/leaflet/dist/leaflet.css';

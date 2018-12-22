@@ -27,7 +27,6 @@ a.label:focus {
 }
 
 .label-default {
-  background-color: hsl(0, 0%, 45%);
   background-color: var(--font-third-color);
 }
 

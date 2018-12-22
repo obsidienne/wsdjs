@@ -17,7 +17,7 @@
 
       </div>
       <div class="user-page__avatar">
-        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive rounded-circle">
+        <img src="<%= Attachments.avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 50) %>" class="responsive rounded-circle">
       </div>
       <div class="user-page__profile-details px-1 w-100">
         <span class="text-ellipsis user-name"><%= @user.name %></span>
@@ -40,7 +40,7 @@
       <%= if @user && @user.parameter && @user.parameter.email_contact do %>
       <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Send an eMail</a>
       <% end %>
-      <%= if Wsdjs.Accounts.Policy.can?(@current_user, :edit_user, @user) == :ok do %>
+      <%= if Wsdjs.Accounts.Users.can?(@current_user, :edit_user, @user) == :ok do %>
         <%= link "Edit profile", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-link" %>
       <% end %>
     </footer>

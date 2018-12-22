@@ -9,7 +9,7 @@
 <section class="container">
   <div class="d-flex p-2 bg-white">
     <div>
-      <img src="<%= art_url(@song.art, 48) %>" srcset="<%= art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
+      <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
     </div>
     <div class="pl-3">
       <div>

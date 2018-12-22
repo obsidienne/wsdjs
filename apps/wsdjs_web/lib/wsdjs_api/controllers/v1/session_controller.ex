@@ -2,7 +2,6 @@ defmodule WsdjsApi.V1.SessionController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
 
   action_fallback(WsdjsApi.V1.FallbackController)
@@ -20,7 +19,7 @@ defmodule WsdjsApi.V1.SessionController do
          {:ok, %User{} = user} <- Wsdjs.Auth.first_auth(user) do
       bearer = Phoenix.Token.sign(conn, "user", user.id)
 
-      [avatar] = Accounts.get_avatar(user)
+      [avatar] = Wsdjs.Attachments.get_avatar(user)
       render(conn, "show.json", user: user, avatar: avatar, bearer: bearer)
     end
   end

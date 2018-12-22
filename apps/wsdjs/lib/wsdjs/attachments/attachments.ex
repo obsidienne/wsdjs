@@ -6,7 +6,7 @@ defmodule Wsdjs.Attachments do
   import Ecto.Query, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Attachments.Video
+  alias Wsdjs.Attachments.Videos.Video
   alias Wsdjs.Musics.Song
 
   @doc """
@@ -26,8 +26,10 @@ defmodule Wsdjs.Attachments do
   def get_video!(id) do
     Video
     |> Repo.get!(id)
-    |> Repo.preload(:event)
+    |> load_event()
   end
+
+  def load_event(video), do: Repo.preload(video, :event)
 
   @doc """
   Returns the list of videos.
@@ -42,7 +44,7 @@ defmodule Wsdjs.Attachments do
     |> where(song_id: ^id)
     |> order_by(desc: :inserted_at)
     |> Repo.all()
-    |> Repo.preload(:event)
+    |> load_event()
   end
 
   @doc """
@@ -65,7 +67,7 @@ defmodule Wsdjs.Attachments do
 
     case video do
       {:ok, video} ->
-        video = Repo.preload(video, :event)
+        video = load_event(video)
         {:ok, video}
 
       _ ->
@@ -100,5 +102,29 @@ defmodule Wsdjs.Attachments do
   """
   def delete_video(%Video{} = video) do
     Repo.delete(video)
+  end
+
+  ###############################################
+  #
+  # Avatar
+  #
+  ###############################################
+  alias Wsdjs.Attachments.Avatars.Avatar
+  alias Wsdjs.Accounts.User
+
+  @doc """
+  Returns the user avatar.
+
+  ## Examples
+
+      iex> get_avatar(%User{})
+      %Avatar{}
+  """
+  def get_avatar(%User{id: id}) do
+    Avatar
+    |> where(user_id: ^id)
+    |> order_by(desc: :inserted_at)
+    |> limit(1)
+    |> Repo.all()
   end
 end

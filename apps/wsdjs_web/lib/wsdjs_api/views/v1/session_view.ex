@@ -1,8 +1,6 @@
 defmodule WsdjsApi.V1.SessionView do
   use WsdjsApi, :view
 
-  alias WsdjsWeb.CloudinaryHelper
-
   def render("show.json", %{user: user, avatar: avatar, bearer: bearer}) do
     %{
       id: user.id,
@@ -10,8 +8,8 @@ defmodule WsdjsApi.V1.SessionView do
       dj_name: user.djname,
       path: user_path(WsdjsWeb.Endpoint, :show, user),
       avatars: %{
-        avatar_uri_200: CloudinaryHelper.avatar_url(avatar, 200),
-        avatar_uri: CloudinaryHelper.avatar_url(avatar, 100)
+        avatar_uri_200: Attachments.avatar_url(avatar, 200),
+        avatar_uri: Attachments.avatar_url(avatar, 100)
       },
       auth: %{
         bearer: bearer,

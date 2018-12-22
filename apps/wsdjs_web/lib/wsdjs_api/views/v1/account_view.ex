@@ -1,8 +1,6 @@
 defmodule WsdjsApi.V1.AccountView do
   use WsdjsApi, :view
 
-  alias WsdjsWeb.CloudinaryHelper
-
   def render("show.json", %{user: user}) do
     %{
       data: user |> user_details() |> add_avatar(user.avatar) |> add_details(user.detail)
@@ -26,8 +24,8 @@ defmodule WsdjsApi.V1.AccountView do
 
   defp add_avatar(user, avatar) do
     avatars = %{
-      avatar_uri_200: CloudinaryHelper.avatar_url(avatar, 200),
-      avatar_uri: CloudinaryHelper.avatar_url(avatar, 100)
+      avatar_uri_200: Attachments.avatar_url(avatar, 200),
+      avatar_uri: Attachments.avatar_url(avatar, 100)
     }
 
     Map.put(user, :avatar, avatars)

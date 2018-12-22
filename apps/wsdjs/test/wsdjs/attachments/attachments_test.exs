@@ -4,7 +4,7 @@ defmodule Wsdjs.AttachmentsTest do
   alias Wsdjs.Attachments
 
   describe "video" do
-    alias Wsdjs.Attachments.Video
+    alias Wsdjs.Attachments.Videos.Video
 
     def song_fixture(attrs \\ %{}) do
       user_attrs = %{"email" => "dummy#{System.unique_integer()}@bshit.com"}
@@ -33,7 +33,7 @@ defmodule Wsdjs.AttachmentsTest do
     def video_fixture do
       song = song_fixture()
 
-      {:ok, %Wsdjs.Attachments.Video{} = video} =
+      {:ok, %Wsdjs.Attachments.Videos.Video{} = video} =
         @valid_attrs
         |> Map.put("user_id", song.user_id)
         |> Map.put("song_id", song.id)

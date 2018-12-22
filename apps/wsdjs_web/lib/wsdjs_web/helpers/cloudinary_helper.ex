@@ -5,102 +5,6 @@ defmodule WsdjsWeb.CloudinaryHelper do
   """
 
   @cld_https "https://res.cloudinary.com/don2kwaju/image/upload/"
-  @cld_youtube "https://res.cloudinary.com/don2kwaju/image/youtube/"
-  @dpr_multiple [1, 2, 3]
-
-  ###############################################
-  #
-  # VIDEO THUMBNAIL
-  #
-  ###############################################
-  alias Wsdjs.Attachments.Video
-
-  def thumbnail_url(%Video{video_id: video_id, provider: "youtube"}, resolution)
-      when is_integer(resolution) do
-    @cld_youtube <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/" <> "#{video_id}.jpg"
-  end
-
-  def thumbnail_url(%Video{provider: "facebook"}, resolution) when is_integer(resolution) do
-    @cld_https <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/v1/wsdjs/facebook.jpg"
-  end
-
-  def thumbnail_url(%Video{}, resolution) when is_integer(resolution) do
-    @cld_https <>
-      "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/v1/wsdjs/missing_cover.jpg"
-  end
-
-  def thumbnail_srcset(%Video{} = video, base) when is_integer(base) do
-    resolutions = Enum.map(@dpr_multiple, &(base * &1))
-
-    resolutions
-    |> Enum.map(fn r -> "#{thumbnail_url(video, r)} #{r}w" end)
-    |> Enum.join(", ")
-  end
-
-  ###############################################
-  #
-  # SONG ART
-  #
-  ###############################################
-  alias Wsdjs.Musics.Art
-
-  def art_url(%Art{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
-    @cld_https <>
-      "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <>
-      "v#{version}/#{cld_id}.jpg"
-  end
-
-  def art_url(nil, resolution),
-    do: art_url(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
-
-  def art_srcset(%Art{} = art, base) when is_integer(base) do
-    resolutions = Enum.map(@dpr_multiple, &(base * &1))
-
-    resolutions
-    |> Enum.map(fn r -> "#{art_url(art, r)} #{r}w" end)
-    |> Enum.join(", ")
-  end
-
-  def art_srcset(nil, base),
-    do: art_srcset(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, base)
-
-  def art_url_blured(%Art{cld_id: cld_id, version: version}, resolution)
-      when is_integer(resolution) do
-    @cld_https <>
-      "c_crop,g_custom/c_fit,f_auto,o_30,q_auto,w_#{resolution}/fl_immutable_cache/" <>
-      "v#{version}/#{cld_id}.jpg"
-  end
-
-  def art_url_blured(nil, resolution),
-    do: art_url_blured(%Art{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
-
-  ###############################################
-  #
-  # AVATAR
-  #
-  ###############################################
-  alias Wsdjs.Accounts.Avatar
-
-  def avatar_url(%Avatar{cld_id: cld_id, version: version}, resolution)
-      when is_integer(resolution) do
-    @cld_https <>
-      "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <>
-      "v#{version}/#{cld_id}.jpg"
-  end
-
-  def avatar_url(_, resolution),
-    do: avatar_url(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, resolution)
-
-  def avatar_srcset(%Avatar{} = art, base) when is_integer(base) do
-    resolutions = Enum.map(@dpr_multiple, &(base * &1))
-
-    resolutions
-    |> Enum.map(fn r -> "#{avatar_url(art, r)} #{r}w" end)
-    |> Enum.join(", ")
-  end
-
-  def avatar_srcset(_, base),
-    do: avatar_srcset(%Avatar{cld_id: "wsdjs/missing_avatar", version: "1"}, base)
 
   ###############################################
   #
@@ -117,7 +21,7 @@ defmodule WsdjsWeb.CloudinaryHelper do
   end
 
   @doc """
-  Retrieve the image URL corresping to a top in published status. 
+  Retrieve the image URL corresping to a top in published status.
   It creates a sprite of the 10 first ranked song.
   """
   def top_art(%Top{status: "published"} = top) do

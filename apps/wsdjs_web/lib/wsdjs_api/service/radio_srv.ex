@@ -18,7 +18,7 @@ defmodule WsdjsApi.Service.RadioSrv do
   defp render(conn, songs) when is_list(songs) do
     songs
     |> Enum.map(fn s ->
-      render(conn, s, Musics.get_song_by(s["artist"], s["title"]))
+      render(conn, s, Musics.Songs.get_song_by(s["artist"], s["title"]))
     end)
     |> Poison.encode!()
   end
@@ -28,8 +28,8 @@ defmodule WsdjsApi.Service.RadioSrv do
   defp render(conn, s, %Wsdjs.Musics.Song{} = song) when is_map(s) do
     s
     |> Map.put(:suggested_ts, Timex.to_unix(song.inserted_at))
-    |> Map.put(:image_uri, WsdjsWeb.CloudinaryHelper.art_url(song.art, 900))
-    |> Map.put(:image_srcset, WsdjsWeb.CloudinaryHelper.art_srcset(song.art, 300))
+    |> Map.put(:image_uri, Attachments.art_url(song.art, 900))
+    |> Map.put(:image_srcset, Attachments.art_srcset(song.art, 300))
     |> Map.put(:suggested_by, song.user.name)
     |> Map.put(:suggested_by_path, user_path(conn, :show, song.user))
     |> Map.put(:path, song_path(conn, :show, song))

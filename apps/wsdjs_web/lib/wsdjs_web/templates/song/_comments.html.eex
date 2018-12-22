@@ -13,7 +13,7 @@
   <%= for comment <- @comments do %>
     <li class="d-flex mb-3">
       <div class="d-none d-md-flex comment__avatar">
-        <img src="<%= avatar_url(comment.user.avatar, 50) %>" srcset="<%= avatar_srcset(comment.user.avatar, 50) %>" sizes="50px" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
+        <img src="<%= Attachments.avatar_url(comment.user.avatar, 50) %>" srcset="<%= Attachments.avatar_srcset(comment.user.avatar, 50) %>" sizes="50px" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
       </div>
 
       <div class="comment__body">
@@ -22,7 +22,7 @@
             <a href="<%= Routes.user_path(@conn, :show, comment.user) %>" class="clickable visible-link action-link d-inline-block"><%= comment.user.name %></a>
             <time title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
           </span>
-          <%= if Wsdjs.Reactions.Policy.can?(@conn.assigns[:current_user], :delete, comment) == :ok do %>
+          <%= if Wsdjs.Reactions.Comments.can?(@conn.assigns[:current_user], :delete, comment) == :ok do %>
             <button class="btn btn-link comment__delete ml-auto" data-path="<%= Routes.api_comment_path(@conn, :delete, comment) %>">
               <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>

@@ -35,7 +35,7 @@
     <%= for song <- @playlist_songs do %>
     <tr>
       <td class="w-6">
-        <img src="<%= art_url(song.art, 64) %>" srcset="<%= art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
+        <img src="<%= Attachments.art_url(song.art, 64) %>" srcset="<%= Attachments.art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
       <td>
         <%= link song.title, to: Routes.song_path(@conn, :show, song), class: "primary-text action-link visible-link" %>

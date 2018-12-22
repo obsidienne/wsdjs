@@ -1,6 +1,6 @@
 <meta property="og:url" content="<%= Phoenix.Controller.current_url(@conn) %>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="<%= @song.title %>">
-<meta property="og:image" content="<%= art_url(@song.art, 600) %>">
+<meta property="og:image" content="<%= Attachments.art_url(@song.art, 600) %>">
 <meta property="og:description" content="<%= song_full_description(@song) %>">
 <meta property="og:site_name" content="worldswingdjs">

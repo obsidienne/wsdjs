@@ -55,12 +55,17 @@ defmodule WsdjsApi.V1.OpinionView do
     %{
       name: user_displayed_name(opinion.user),
       url: user_path(WsdjsWeb.Endpoint, :show, opinion.user),
-      avatar: avatar_url(opinion.user.avatar, 50)
+      avatar: Attachments.avatar_url(opinion.user.avatar, 50)
     }
   end
 
   # if the kind in current_user opinion equals the kind retrieved
-  defp render_opinion(opinions, kind, _song, %Wsdjs.Reactions.Opinion{kind: kind} = current) do
+  defp render_opinion(
+         opinions,
+         kind,
+         _song,
+         %Wsdjs.Reactions.Opinions.Opinion{kind: kind} = current
+       ) do
     %{
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),

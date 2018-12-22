@@ -1,10 +1,8 @@
 defmodule Wsdjs.Auth.AuthToken do
   @moduledoc false
-  use Ecto.Schema
+  use Wsdjs.Schema
   import Ecto.Changeset
-  alias Wsdjs.Auth.AuthToken
 
-  @foreign_key_type :binary_id
   schema "auth_tokens" do
     field(:value, :string)
     belongs_to(:user, Wsdjs.Accounts.User)
@@ -12,7 +10,7 @@ defmodule Wsdjs.Auth.AuthToken do
     timestamps(updated_at: false)
   end
 
-  def changeset(%AuthToken{} = auth_token, attrs) do
+  def changeset(%__MODULE__{} = auth_token, attrs) do
     auth_token
     |> cast(attrs, [:user_id, :value])
     |> validate_required([:value, :user_id])
