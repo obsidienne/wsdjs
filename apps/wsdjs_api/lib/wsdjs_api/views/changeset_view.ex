@@ -1,11 +1,11 @@
-defmodule WsdjsApi.V1.ChangesetView do
+defmodule WsdjsApi.ChangesetView do
   use WsdjsApi, :view
 
   @doc """
   Traverses and translates changeset errors.
 
   See `Ecto.Changeset.traverse_errors/2` and
-  `TestWeb.ErrorHelpers.translate_error/1` for more details.
+  `WsdjsApi.ErrorHelpers.translate_error/1` for more details.
   """
   def translate_errors(changeset) do
     Ecto.Changeset.traverse_errors(changeset, &translate_error/1)

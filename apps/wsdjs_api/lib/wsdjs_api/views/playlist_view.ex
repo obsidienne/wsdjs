@@ -1,6 +1,7 @@
-defmodule WsdjsApi.V1.PlaylistView do
+defmodule WsdjsApi.PlaylistView do
   use WsdjsApi, :view
-  alias WsdjsApi.V1.PlaylistView
+
+  alias WsdjsApi.PlaylistView
 
   def render("index.json", %{playlists: playlists}) do
     %{

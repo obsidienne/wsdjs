@@ -31,7 +31,7 @@
   </section>
 
   <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
-    <%= form_for @video_changeset, Routes.api_song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
+    <%= form_for @video_changeset, ApiRoutes.song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
       <fieldset>
         <legend>Add a video</legend>
         <div class="form-group">

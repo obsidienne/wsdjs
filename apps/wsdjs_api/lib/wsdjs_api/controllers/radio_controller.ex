@@ -1,6 +1,6 @@
-defmodule WsdjsApi.V1.RadioController do
+defmodule WsdjsApi.RadioController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use WsdjsApi, :controller
 
   require Logger
 

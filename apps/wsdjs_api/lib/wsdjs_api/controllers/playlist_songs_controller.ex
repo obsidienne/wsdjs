@@ -1,6 +1,6 @@
-defmodule WsdjsApi.V1.PlaylistSongsController do
+defmodule WsdjsApi.PlaylistSongsController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use WsdjsApi, :controller
 
   alias Wsdjs.Playlists
   alias Wsdjs.Musics

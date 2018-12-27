@@ -1,7 +1,7 @@
-defmodule WsdjsApi.V1.OpinionView do
+defmodule WsdjsApi.OpinionView do
   use WsdjsApi, :view
 
-  alias WsdjsApi.V1.OpinionView
+  alias WsdjsApi.OpinionView
 
   def render("index.json", %{song: song, opinions: opinions, current_user: nil}) do
     ups = Enum.filter(opinions, fn x -> x.kind == "up" end)
@@ -54,7 +54,7 @@ defmodule WsdjsApi.V1.OpinionView do
   def render("opinion.json", %{opinion: opinion}) do
     %{
       name: user_displayed_name(opinion.user),
-      url: user_path(WsdjsWeb.Endpoint, :show, opinion.user),
+      url: WebRoutes.user_path(WsdjsApi.Endpoint, :show, opinion.user),
       avatar: Attachments.avatar_url(opinion.user.avatar, 50)
     }
   end
@@ -70,7 +70,7 @@ defmodule WsdjsApi.V1.OpinionView do
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "DELETE",
-      url: api_opinion_path(WsdjsWeb.Endpoint, :delete, current.id),
+      url: Routes.opinion_path(WsdjsApi.Endpoint, :delete, current),
       tooltip_html: tooltip_from_users(opinions)
     }
   end
@@ -80,7 +80,7 @@ defmodule WsdjsApi.V1.OpinionView do
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "POST",
-      url: api_song_opinion_path(WsdjsWeb.Endpoint, :create, song, kind: kind),
+      url: Routes.song_opinion_path(WsdjsApi.Endpoint, :create, song, kind: kind),
       tooltip_html: tooltip_from_users(opinions)
     }
   end
@@ -95,4 +95,8 @@ defmodule WsdjsApi.V1.OpinionView do
       names
     end
   end
+
+  defp user_displayed_name(%{djname: djname}) when is_binary(djname), do: "#{djname}"
+  defp user_displayed_name(%{name: name}) when is_binary(name), do: name
+  defp user_displayed_name(%{email: email}), do: email
 end

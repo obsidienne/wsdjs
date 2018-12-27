@@ -23,6 +23,7 @@ defmodule WsdjsWeb do
       import Plug.Conn
       import WsdjsWeb.Gettext
       alias WsdjsWeb.Router.Helpers, as: Routes
+      alias WsdjsWeb.ApiRouteHelpers, as: ApiRoutes
     end
   end
 
@@ -42,6 +43,7 @@ defmodule WsdjsWeb do
       import WsdjsWeb.ErrorHelpers
       import WsdjsWeb.Gettext
       alias WsdjsWeb.Router.Helpers, as: Routes
+      alias WsdjsWeb.ApiRouteHelpers, as: ApiRoutes
 
       # Import custom helpers
       import WsdjsWeb.SongHelper

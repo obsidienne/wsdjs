@@ -1,5 +1,5 @@
-defmodule WsdjsApi.V1.VideoControllerTest do
-  use WsdjsWeb.ConnCase
+defmodule WsdjsApi.VideoControllerTest do
+  use WsdjsApi.ConnCase
   alias Wsdjs.Accounts
 
   defp create_user(_) do
@@ -8,7 +8,7 @@ defmodule WsdjsApi.V1.VideoControllerTest do
     {:ok, user} =
       Accounts.update_user(user, %{parameter: %{video: true}}, %Accounts.User{admin: true})
 
-    user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
+    user_token = Phoenix.Token.sign(WsdjsApi.Endpoint, "user", user.id)
 
     {:ok, user: user, user_token: user_token}
   end

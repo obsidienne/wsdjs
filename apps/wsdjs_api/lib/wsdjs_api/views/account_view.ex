@@ -1,4 +1,4 @@
-defmodule WsdjsApi.V1.AccountView do
+defmodule WsdjsApi.AccountView do
   use WsdjsApi, :view
 
   def render("show.json", %{user: user}) do

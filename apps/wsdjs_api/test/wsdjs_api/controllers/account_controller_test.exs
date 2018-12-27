@@ -1,5 +1,5 @@
-defmodule WsdjsApi.V1.AccountControllerTest do
-  use WsdjsWeb.ConnCase
+defmodule WsdjsApi.AccountControllerTest do
+  use WsdjsApi.ConnCase
 
   @create_attrs %{name: "John", email: "john@example.com"}
 
@@ -12,7 +12,7 @@ defmodule WsdjsApi.V1.AccountControllerTest do
     setup [:create_user]
 
     test "Responds with user info if the user is found", %{conn: conn, user: user} do
-      user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
+      user_token = Phoenix.Token.sign(WsdjsApi.Endpoint, "user", user.id)
 
       response =
         conn
@@ -51,7 +51,7 @@ defmodule WsdjsApi.V1.AccountControllerTest do
     end
 
     test "Responds with user info if the current_user is found", %{conn: conn, user: user} do
-      user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
+      user_token = Phoenix.Token.sign(WsdjsApi.Endpoint, "user", user.id)
 
       response =
         conn

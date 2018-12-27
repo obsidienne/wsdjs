@@ -5,7 +5,7 @@
         <div>
           <p style="margin-top:0;margin-bottom:20px">Click and confirm that you want to sign in to WorldSwingDjs. This link will expire in fifteen minutes and can only be used once.</p>
           <p style="margin-top:0;margin-bottom:20px">
-            <a href="<%= Routes.api_signin_url(WsdjsWeb.Endpoint, :show, @token) %>" style="color:#ffffff;text-decoration:none;display:inline-block;height:38px;line-height:38px;padding-top:0;padding-right:16px;padding-bottom:0;padding-left:16px;border:0;outline:0;background-color:#02b875;font-size:14px;font-style:normal;font-weight:400;text-align:center;white-space:nowrap;border-radius:999em" target="_blank">Sign in to WorldSwingDjs</a>
+            <a href="<%= ApiRoutes.signin_url(WsdjsWeb.Endpoint, :show, @token) %>" style="color:#ffffff;text-decoration:none;display:inline-block;height:38px;line-height:38px;padding-top:0;padding-right:16px;padding-bottom:0;padding-left:16px;border:0;outline:0;background-color:#02b875;font-size:14px;font-style:normal;font-weight:400;text-align:center;white-space:nowrap;border-radius:999em" target="_blank">Sign in to WorldSwingDjs</a>
           </p>
 
           <div style="color:#b3b3b1;font-size:14px;text-align:center;margin-top:50px;margin-right:0;margin-bottom:50px;margin-left:0">If you did not make this request, please contact us at <a href="mailto:worldswingdeejays@gmail.com" style="color:#b3b3b1;text-decoration:underline" target="_blank">worldswingdeejays@gmail.com</a></div>

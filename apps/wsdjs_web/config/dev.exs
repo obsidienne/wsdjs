@@ -32,6 +32,8 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
     ]
   ]
 
+config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "http://localhost:5000"
+
 config :wsdjs_web, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
 
 # ## SSL Support

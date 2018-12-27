@@ -5,7 +5,7 @@ defmodule WsdjsWeb.RadioController do
 
   @spec show(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def show(conn, _params) do
-    songs = WsdjsApi.Service.RadioSrv.streamed(conn)
+    songs = WsdjsWeb.Service.RadioSrv.streamed(conn)
 
     case Poison.decode(songs) do
       {:ok, songs} ->

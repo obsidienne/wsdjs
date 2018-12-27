@@ -42,6 +42,7 @@ defmodule WsdjsApi.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:con_cache, "~> 0.13.0"},
       {:attachments, in_umbrella: true},
       {:wsdjs, in_umbrella: true}
     ]

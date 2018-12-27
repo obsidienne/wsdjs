@@ -1,12 +1,13 @@
-defmodule WsdjsApi.V1.SessionView do
+defmodule WsdjsApi.SessionView do
   use WsdjsApi, :view
+  alias WsdjsApi.WebRouteHelpers
 
   def render("show.json", %{user: user, avatar: avatar, bearer: bearer}) do
     %{
       id: user.id,
       email: user.email,
       dj_name: user.djname,
-      path: user_path(WsdjsWeb.Endpoint, :show, user),
+      path: WebRouteHelpers.user_path(WsdjsApi.Endpoint, :show, user),
       avatars: %{
         avatar_uri_200: Attachments.avatar_url(avatar, 200),
         avatar_uri: Attachments.avatar_url(avatar, 100)

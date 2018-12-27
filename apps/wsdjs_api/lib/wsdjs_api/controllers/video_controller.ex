@@ -1,6 +1,6 @@
-defmodule WsdjsApi.V1.VideoController do
+defmodule WsdjsApi.VideoController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use WsdjsApi, :controller
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Videos.Video

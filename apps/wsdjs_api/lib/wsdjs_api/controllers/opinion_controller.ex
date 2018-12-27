@@ -1,6 +1,6 @@
-defmodule WsdjsApi.V1.OpinionController do
+defmodule WsdjsApi.OpinionController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use WsdjsApi, :controller
 
   alias Wsdjs.Musics
   alias Wsdjs.Reactions.Opinions

@@ -23,6 +23,7 @@ defmodule WsdjsApi do
       import Plug.Conn
       import WsdjsApi.Gettext
       alias WsdjsApi.Router.Helpers, as: Routes
+      alias WsdjsApi.WebRouteHelpers, as: WebRoutes
     end
   end
 
@@ -38,6 +39,7 @@ defmodule WsdjsApi do
       import WsdjsApi.ErrorHelpers
       import WsdjsApi.Gettext
       alias WsdjsApi.Router.Helpers, as: Routes
+      alias WsdjsApi.WebRouteHelpers, as: WebRoutes
     end
   end
 

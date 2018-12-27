@@ -1,6 +1,6 @@
-defmodule WsdjsApi.V1.SessionController do
+defmodule WsdjsApi.SessionController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use WsdjsApi, :controller
 
   alias Wsdjs.Accounts.User
 

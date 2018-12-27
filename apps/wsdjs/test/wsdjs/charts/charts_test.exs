@@ -141,9 +141,14 @@ defmodule Wsdjs.ChartsTest do
     song3 = song_fixture(%{inserted_at: dtend})
 
     user = user_fixture()
-    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song1, "like")
-    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song2, "up")
-    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song3, "down")
+
+    {:ok, %Wsdjs.Reactions.Opinions.Opinion{}} =
+      Wsdjs.Reactions.upsert_opinion(user, song1, "like")
+
+    {:ok, %Wsdjs.Reactions.Opinions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song2, "up")
+
+    {:ok, %Wsdjs.Reactions.Opinions.Opinion{}} =
+      Wsdjs.Reactions.upsert_opinion(user, song3, "down")
 
     # vote = 10 * vote[:count] - vote[:sum] + vote[:count]
     # opinion = "up"-> 4, "like" -> 2, "down" -> 3

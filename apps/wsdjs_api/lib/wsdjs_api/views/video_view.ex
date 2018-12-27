@@ -1,6 +1,6 @@
-defmodule WsdjsApi.V1.VideoView do
+defmodule WsdjsApi.VideoView do
   use WsdjsApi, :view
-  alias WsdjsApi.V1.VideoView
+  alias WsdjsApi.VideoView
 
   def render("index.json", %{videos: videos}) do
     %{

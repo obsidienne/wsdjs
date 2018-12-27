@@ -1,7 +1,8 @@
-defmodule WsdjsApi.V1.CommentView do
+defmodule WsdjsApi.CommentView do
   use WsdjsApi, :view
 
-  alias WsdjsApi.V1.CommentView
+  alias WsdjsApi.CommentView
+  alias WsdjsApi.WebRouteHelpers
 
   def render("index.json", %{comments: comments}) do
     %{
@@ -25,7 +26,7 @@ defmodule WsdjsApi.V1.CommentView do
         name: comment.user.name,
         dj_name: comment.user.djname,
         id: comment.user.id,
-        path: user_path(WsdjsWeb.Endpoint, :show, comment.user),
+        path: WebRouteHelpers.user_path(WsdjsApi.Endpoint, :show, comment.user),
         avatars: %{
           avatar_uri_200: Attachments.avatar_url(comment.user.avatar, 200),
           avatar_uri: Attachments.avatar_url(comment.user.avatar, 100)

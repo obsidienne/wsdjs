@@ -1,6 +1,6 @@
-defmodule WsdjsApi.V1.CommentController do
+defmodule WsdjsApi.CommentController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use WsdjsApi, :controller
 
   alias Wsdjs.Musics
   alias Wsdjs.Reactions.Comments
