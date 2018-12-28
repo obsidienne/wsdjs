@@ -8,7 +8,7 @@ defmodule Wsdjs.ReactionsTest do
         Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
 
       {:ok, song} =
-        Wsdjs.Musics.create_song(%{
+        Wsdjs.Musics.Songs.create_song(%{
           title: "my title#{System.unique_integer()}",
           artist: "my artist",
           genre: "soul",
@@ -17,21 +17,21 @@ defmodule Wsdjs.ReactionsTest do
         })
 
       {:ok, comment} =
-        Reactions.create_comment(%{text: "mega song", user_id: user.id, song_id: song.id})
+        Reactions.Comments.create(%{text: "mega song", user_id: user.id, song_id: song.id})
 
       comment
     end
 
     test "get_comment!/1 returns the comment with given id" do
       comment = comment_fixture()
-      assert Reactions.get_comment!(comment.id) |> Wsdjs.Repo.preload(user: :avatar) == comment
+      assert Reactions.Comments.get!(comment.id) |> Wsdjs.Repo.preload(user: :avatar) == comment
     end
 
     test "list_comments/1 returns all song comments" do
       comment = comment_fixture()
       _dummy = comment_fixture()
-      song = Wsdjs.Musics.get_song!(comment.song_id)
-      assert Reactions.list_comments(song) == [comment]
+      song = Wsdjs.Musics.Songs.get_song!(comment.song_id)
+      assert Wsdjs.Reactions.Comments.list(song) == [comment]
     end
   end
 end

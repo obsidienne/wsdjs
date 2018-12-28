@@ -22,25 +22,16 @@ defmodule Wsdjs.Charts.RankTest do
     assert {:error, %{errors: [top: {"does not exist", _}]}} = Repo.insert(rank)
   end
 
-  test "rank/song/top combinaison is unique" do
-    changeset = Rank.changeset(%Rank{}, rank_fixture_params(%{rank: 1}))
-    Repo.insert(changeset)
-    {:error, changeset} = Repo.insert(changeset)
-    assert "has already been taken" in errors_on(changeset).song_id
-  end
-
   test "votes/bonus can be equal to zero" do
     changeset = Rank.changeset(%Rank{}, rank_fixture_params(%{votes: 0, bonus: 0}))
     assert changeset.valid?
   end
 
   defp rank_fixture_params(attrs \\ %{}) do
-    {:ok, %Wsdjs.Accounts.User{} = user} = Wsdjs.Accounts.create_user(%{email: "dummy@bshit.com"})
+    {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy@bshit.com"})
+    {:ok, top} = Wsdjs.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
 
-    {:ok, %Wsdjs.Charts.Top{} = top} =
-      Wsdjs.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
-
-    {:ok, %Wsdjs.Musics.Song{} = song} =
+    {:ok, song} =
       Wsdjs.Musics.Songs.create_song(%{
         title: "a",
         artist: "a",

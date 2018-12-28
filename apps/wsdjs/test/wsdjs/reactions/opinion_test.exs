@@ -11,6 +11,6 @@ defmodule Wsdjs.Reactions.OpinionTest do
       %{kind: "like"}
     ]
 
-    assert Wsdjs.Reactions.opinions_value(opinions) == 6
+    assert Wsdjs.Reactions.Opinions.opinions_value(opinions) == 6
   end
 end

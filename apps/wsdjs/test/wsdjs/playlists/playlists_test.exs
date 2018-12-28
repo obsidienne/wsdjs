@@ -1,7 +1,6 @@
 defmodule Wsdjs.Playlists.PlaylistsTest do
   use Wsdjs.DataCase
   alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.User
   alias Wsdjs.Playlists
 
   describe "playlists" do
@@ -45,7 +44,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     test "list_playlists/1 returns all playlists" do
       user = user_fixture()
 
-      playlist = playlist_fixture(user) |> Repo.preload(song: :art)
+      playlist = playlist_fixture(user) |> Repo.preload(cover: :art)
       assert Playlists.list_playlists(user, user) == [playlist]
     end
 
@@ -60,22 +59,22 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     end
 
     test "create_playlist/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Playlists.create_playlist(@invalid_attrs)
+      {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
 
-      assert {:error, %Ecto.Changeset{} = changeset} = Playlists.create_playlist(%{name: ""})
+      assert {:error, _} = Playlists.create_playlist(@invalid_attrs)
+
+      assert {:error, changeset} = Playlists.create_playlist(%{name: ""})
       assert "can't be blank" in errors_on(changeset).name
 
-      assert {:error, %Ecto.Changeset{} = changeset} = Playlists.create_playlist(%{name: " "})
+      assert {:error, changeset} = Playlists.create_playlist(%{name: " "})
       assert "can't be blank" in errors_on(changeset).name
 
-      assert {:error, %Ecto.Changeset{} = changeset} =
-               Playlists.create_playlist(%{name: "test", user_id: Ecto.UUID.generate()})
-
+      assert {:error, changeset} = Playlists.create_playlist(%{name: "test", user_id: dummy_id})
       assert "does not exist" in errors_on(changeset).user
 
       attrs = playlist_fixture_attrs()
       assert {:ok, %Playlist{}} = Playlists.create_playlist(attrs)
-      assert {:error, %Ecto.Changeset{} = changeset} = Playlists.create_playlist(attrs)
+      assert {:error, changeset} = Playlists.create_playlist(attrs)
       assert "has already been taken" in errors_on(changeset).name
     end
 
@@ -92,8 +91,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     test "update_playlist/2 with invalid data returns error changeset" do
       playlist = playlist_fixture()
 
-      assert {:error, %Ecto.Changeset{}} =
-               Playlists.update_playlist(playlist, @invalid_attrs, %Accounts.User{})
+      assert {:error, _} = Playlists.update_playlist(playlist, @invalid_attrs, %Accounts.User{})
 
       assert playlist == Playlists.get_playlist!(playlist.id)
     end

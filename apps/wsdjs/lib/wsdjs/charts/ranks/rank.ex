@@ -35,7 +35,6 @@ defmodule Wsdjs.Charts.Rank do
     |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:song)
     |> assoc_constraint(:top)
-    |> unique_constraint(:song_id, name: :ranks_song_id_top_id_index)
     |> validate_number(:votes, greater_than_or_equal_to: 0)
     |> validate_number(:bonus, greater_than_or_equal_to: 0)
   end

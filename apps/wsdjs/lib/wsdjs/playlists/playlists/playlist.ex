@@ -33,13 +33,14 @@ defmodule Wsdjs.Playlists.Playlist do
     playlist
     |> cast(attrs, [:public, :name, :front_page])
     |> validate_required([:public, :name])
+    |> unique_constraint(:name, name: :playlists_name_user_id_index)
   end
 
   def changeset(%__MODULE__{} = playlist, attrs) do
     playlist
     |> cast(attrs, [:name, :user_id])
     |> validate_required([:name, :user_id])
-    |> unique_constraint(:name, name: :playlists_user_id_name_index)
+    |> unique_constraint(:name, name: :playlists_name_user_id_index)
     |> assoc_constraint(:user)
   end
 end

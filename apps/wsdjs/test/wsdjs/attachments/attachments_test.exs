@@ -19,7 +19,7 @@ defmodule Wsdjs.AttachmentsTest do
           "url" => "http://youtu.be/dummy"
         })
         |> Map.put("user_id", user.id)
-        |> Wsdjs.Musics.create_song()
+        |> Wsdjs.Musics.Songs.create_song()
 
       song
     end
@@ -44,7 +44,7 @@ defmodule Wsdjs.AttachmentsTest do
 
     test "list_videos/1 returns all videos for a song" do
       video = video_fixture()
-      song = Wsdjs.Musics.get_song!(video.song_id)
+      song = Wsdjs.Musics.Songs.get_song!(video.song_id)
       assert Attachments.list_videos(song) == [video] |> Repo.preload(:event)
     end
 
