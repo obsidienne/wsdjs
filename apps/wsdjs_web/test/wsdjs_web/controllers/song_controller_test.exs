@@ -89,12 +89,12 @@ defmodule WsdjsWeb.SongControllerTest do
     test "requires user authentication on actions", %{conn: conn, song: song} do
       Enum.each(
         [
-          get(conn, song_path(conn, :new)),
-          get(conn, song_path(conn, :index)),
-          get(conn, song_path(conn, :edit, song.id)),
-          put(conn, song_path(conn, :update, song.id, %{})),
-          post(conn, song_path(conn, :create, %{})),
-          delete(conn, song_path(conn, :delete, song.id))
+          get(conn, Routes.song_path(conn, :new)),
+          get(conn, Routes.song_path(conn, :index)),
+          get(conn, Routes.song_path(conn, :edit, song.id)),
+          put(conn, Routes.song_path(conn, :update, song.id, %{})),
+          post(conn, Routes.song_path(conn, :create, %{})),
+          delete(conn, Routes.song_path(conn, :delete, song.id))
         ],
         fn conn ->
           assert html_response(conn, 302)
@@ -124,7 +124,7 @@ defmodule WsdjsWeb.SongControllerTest do
           assign(conn, :current_user, suggestor)
         ],
         fn conn ->
-          conn = get(conn, song_path(conn, :show, instant_hit))
+          conn = get(conn, Routes.song_path(conn, :show, instant_hit))
           assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, instant_hit.title)
         end
@@ -148,7 +148,7 @@ defmodule WsdjsWeb.SongControllerTest do
           assign(conn, :current_user, suggestor)
         ],
         fn conn ->
-          conn = get(conn, song_path(conn, :show, public_track))
+          conn = get(conn, Routes.song_path(conn, :show, public_track))
           assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, public_track.title)
         end
@@ -171,7 +171,7 @@ defmodule WsdjsWeb.SongControllerTest do
           assign(conn, :current_user, suggestor)
         ],
         fn conn ->
-          conn = get(conn, song_path(conn, :show, hidden_track))
+          conn = get(conn, Routes.song_path(conn, :show, hidden_track))
           assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, hidden_track.title)
         end
@@ -184,7 +184,7 @@ defmodule WsdjsWeb.SongControllerTest do
           assign(conn, :current_user, dj)
         ],
         fn conn ->
-          conn = get(conn, song_path(conn, :show, hidden_track))
+          conn = get(conn, Routes.song_path(conn, :show, hidden_track))
           assert html_response(conn, 302)
         end
       )
@@ -203,7 +203,7 @@ defmodule WsdjsWeb.SongControllerTest do
       Enum.each(
         [song, public_track, instant_hit, hidden_track],
         fn song ->
-          conn = get(conn, song_path(conn, :show, song))
+          conn = get(conn, Routes.song_path(conn, :show, song))
           assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, song.title)
         end
