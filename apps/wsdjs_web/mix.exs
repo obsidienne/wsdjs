@@ -51,7 +51,6 @@ defmodule WsdjsWeb.Mixfile do
       {:con_cache, "~> 0.13.0"},
       {:attachments, in_umbrella: true},
       {:wsdjs, in_umbrella: true},
-      {:wsdjs_jobs, in_umbrella: true},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
