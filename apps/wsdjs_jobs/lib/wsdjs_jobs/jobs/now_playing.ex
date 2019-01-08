@@ -83,6 +83,9 @@ defmodule WsdjsJobs.NowPlaying do
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         IO.puts("Not found :(")
 
+      {:ok, %HTTPoison.Response{status_code: 400, body: body}} ->
+        IO.inspect(body)
+
       {:error, %HTTPoison.Error{reason: reason}} ->
         IO.puts(reason)
     end
