@@ -79,6 +79,8 @@ defmodule Wsdjs.Playlists do
 
   def get_playlist!(id), do: Repo.get!(Playlist, id)
 
+  def get_playlist_by_user(_user, nil), do: []
+
   def get_playlist_by_user(user, current_user) do
     Playlist
     |> Playlists.scoped(current_user)

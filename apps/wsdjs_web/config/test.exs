@@ -9,3 +9,5 @@ use Mix.Config
 config :wsdjs_web, WsdjsWeb.Endpoint,
   http: [port: 4002],
   server: false
+
+config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "http://test:5000"
