@@ -6,7 +6,7 @@ defmodule WsdjsApi.VideoController do
   alias Wsdjs.Attachments.Videos.Video
   alias Wsdjs.Musics
 
-  action_fallback(WsdjsApi.V1.FallbackController)
+  action_fallback(WsdjsApi.FallbackController)
 
   def index(conn, %{"song_id" => song_id}) do
     with song <- Musics.Songs.get_song!(song_id) do

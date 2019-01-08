@@ -3,7 +3,8 @@ defmodule WsdjsApi.VideoControllerTest do
   alias Wsdjs.Accounts
 
   defp create_user(_) do
-    {:ok, user} = Wsdjs.Accounts.create_user(%{"email" => "john@example.com"})
+    {:ok, user} =
+      Wsdjs.Accounts.create_user(%{"email" => "dummy#{System.unique_integer()}@bshit.com"})
 
     {:ok, user} =
       Accounts.update_user(user, %{parameter: %{video: true}}, %Accounts.User{admin: true})
@@ -15,15 +16,15 @@ defmodule WsdjsApi.VideoControllerTest do
 
   defp create_song(%{user: user}) do
     songs = %{
-      title: "a",
-      artist: "b",
+      title: "a-#{System.unique_integer()}",
+      artist: "b-#{System.unique_integer()}",
       url: "http://youtu.be/a",
       bpm: 12,
       genre: "rnb",
       user_id: user.id
     }
 
-    {:ok, song} = Wsdjs.Musics.create_song(songs)
+    {:ok, song} = Wsdjs.Musics.Songs.create_song(songs)
 
     {:ok, song: song}
   end
@@ -56,24 +57,24 @@ defmodule WsdjsApi.VideoControllerTest do
       response =
         conn
         |> put_req_header("authorization", "Bearer " <> user_token)
-        |> get(Routes.api_song_video_path(conn, :index, song.id))
+        |> get(Routes.song_video_path(conn, :index, song.id))
         |> json_response(200)
 
       expected = %{
         "data" => [
           %{
             "event" => nil,
-            "id" => video2.id,
-            "title" => nil,
-            "url" => video2.url,
-            "video_id" => "video2"
-          },
-          %{
-            "event" => nil,
             "id" => video1.id,
             "title" => nil,
             "url" => video1.url,
             "video_id" => "video1"
+          },
+          %{
+            "event" => nil,
+            "id" => video2.id,
+            "title" => nil,
+            "url" => video2.url,
+            "video_id" => "video2"
           }
         ]
       }
@@ -94,7 +95,7 @@ defmodule WsdjsApi.VideoControllerTest do
         conn
         |> put_req_header("authorization", "Bearer " <> user_token)
         |> post(
-          Routes.api_song_video_path(conn, :create, song.id),
+          Routes.song_video_path(conn, :create, song.id),
           video: %{url: "http://www.youtube.com/toto"}
         )
         |> json_response(201)
@@ -121,7 +122,7 @@ defmodule WsdjsApi.VideoControllerTest do
         conn
         |> put_req_header("authorization", "Bearer " <> user_token)
         |> post(
-          Routes.api_song_video_path(conn, :create, song.id),
+          Routes.song_video_path(conn, :create, song.id),
           video: %{url: "dummyvalue"}
         )
         |> json_response(422)
@@ -145,13 +146,13 @@ defmodule WsdjsApi.VideoControllerTest do
     } do
       conn
       |> put_req_header("authorization", "Bearer " <> user_token)
-      |> delete(Routes.api_video_path(conn, :delete, video))
+      |> delete(Routes.video_path(conn, :delete, video))
       |> response(204)
 
       response =
         conn
         |> put_req_header("authorization", "Bearer " <> user_token)
-        |> get(Routes.api_song_video_path(conn, :index, song))
+        |> get(Routes.song_video_path(conn, :index, song))
         |> json_response(200)
 
       expected = %{"data" => []}

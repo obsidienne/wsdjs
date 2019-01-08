@@ -1,7 +1,10 @@
 defmodule WsdjsApi.AccountControllerTest do
   use WsdjsApi.ConnCase
 
-  @create_attrs %{name: "John", email: "john@example.com"}
+  @create_attrs %{
+    name: "John-#{System.unique_integer()}",
+    email: "john-#{System.unique_integer()}@example.com"
+  }
 
   defp create_user(_) do
     {:ok, user} = Wsdjs.Accounts.create_user(@create_attrs)
@@ -17,7 +20,7 @@ defmodule WsdjsApi.AccountControllerTest do
       response =
         conn
         |> put_req_header("authorization", "Bearer " <> user_token)
-        |> get(Routes.api_account_path(conn, :show, user.id))
+        |> get(Routes.account_path(conn, :show, user.id))
         |> json_response(200)
 
       expected = %{
@@ -56,7 +59,7 @@ defmodule WsdjsApi.AccountControllerTest do
       response =
         conn
         |> put_req_header("authorization", "Bearer " <> user_token)
-        |> get(Routes.api_me_path(conn, :show))
+        |> get(Routes.me_path(conn, :show))
         |> json_response(200)
 
       expected = %{

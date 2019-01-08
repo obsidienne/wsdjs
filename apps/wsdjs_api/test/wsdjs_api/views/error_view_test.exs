@@ -5,11 +5,11 @@ defmodule WsdjsApi.ErrorViewTest do
   import Phoenix.View
 
   test "renders 404.json" do
-    assert render(WsdjsApi.ErrorView, "404.json", []) == %{errors: %{detail: "Not Found"}}
+    assert render(WsdjsApi.ErrorView, "404.json", []) == %{errors: %{detail: "Page not found"}}
   end
 
   test "renders 500.json" do
     assert render(WsdjsApi.ErrorView, "500.json", []) ==
-             %{errors: %{detail: "Internal Server Error"}}
+             %{errors: %{detail: "Internal server error"}}
   end
 end
