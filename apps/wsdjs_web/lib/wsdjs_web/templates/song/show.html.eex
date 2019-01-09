@@ -119,7 +119,7 @@
           <a href="{{user.path}}" class="clickable visible-link action-link d-inline-block">{{user.name}}</a>
           <time title="{{commented_at}}" datetime="{{commented_at}}"></time>
         </span>
-        <button class="btn-link comment__delete ml-auto" data-path="/api/v1/comments/{{id}}">
+        <button class="btn-link comment__delete ml-auto" data-path="<%= ApiRoutes.comment_path(@conn, :delete, "{{id}}") %>">
           <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
             <path d="M0 0h24v24H0z" fill="none"/>

@@ -15,8 +15,16 @@ defmodule WsdjsWeb.ApiRouteHelpers do
 
       iex> WsdjsWeb.ApiRouteHelpers.comment_path("conn", :delete, %{id: 42})
       "http://api:5000/comments/42"
+
+      iex> WsdjsWeb.ApiRouteHelpers.comment_path("conn", :delete, 42)
+      "http://api:5000/comments/42"
   """
   def comment_path(_, :delete, %{id: id}) do
+    base_url = Application.get_env(:wsdjs_web, __MODULE__) |> Keyword.get(:base_url)
+    base_url <> "/comments/#{id}"
+  end
+
+  def comment_path(_, :delete, id) do
     base_url = Application.get_env(:wsdjs_web, __MODULE__) |> Keyword.get(:base_url)
     base_url <> "/comments/#{id}"
   end
@@ -54,8 +62,16 @@ defmodule WsdjsWeb.ApiRouteHelpers do
 
       iex> WsdjsWeb.ApiRouteHelpers.video_path("conn", :delete, %{id: 42})
       "http://api:5000/videos/42"
+
+      iex> WsdjsWeb.ApiRouteHelpers.video_path("conn", :delete, 42)
+      "http://api:5000/videos/42"
   """
   def video_path(_, :delete, %{id: id}) do
+    base_url = Application.get_env(:wsdjs_web, __MODULE__) |> Keyword.get(:base_url)
+    base_url <> "/videos/#{id}"
+  end
+
+  def video_path(_, :delete, id) do
     base_url = Application.get_env(:wsdjs_web, __MODULE__) |> Keyword.get(:base_url)
     base_url <> "/videos/#{id}"
   end
