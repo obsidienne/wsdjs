@@ -10,7 +10,7 @@ defmodule WsdjsApi.Router do
     plug(WsdjsApi.EnsureAuthenticated)
   end
 
-  scope "/", WsdjsApi do
+  scope "/api", WsdjsApi do
     pipe_through([:api, :api_auth])
 
     resources "/songs", SongController, only: [] do
@@ -34,7 +34,7 @@ defmodule WsdjsApi.Router do
     get("/me", AccountController, :show, as: :me)
   end
 
-  scope "/", WsdjsApi do
+  scope "/api", WsdjsApi do
     pipe_through([:api])
 
     resources("/now_playing", NowPlayingController, only: [:index])

@@ -17,7 +17,7 @@ config :wsdjs_api, WsdjsApi.Endpoint,
   check_origin: false,
   watchers: []
 
-config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "http://localhost:4000"
+config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "http://localhost:4080"
 
 # ## SSL Support
 #
