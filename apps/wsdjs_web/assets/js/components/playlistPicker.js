@@ -66,7 +66,7 @@ class PlaylistPicker {
     console.log(`Add to playlist ${playlistId}, the song ${songId}`);
     const token = document.querySelector("[name=channel_token]").getAttribute("content");
 
-    fetch(`/api/v1/playlists/${playlistId}/songs`, {
+    fetch(`${window.baseApiUrl}/playlists/${playlistId}/songs`, {
         body: JSON.stringify({
           song_id: songId
         }),
