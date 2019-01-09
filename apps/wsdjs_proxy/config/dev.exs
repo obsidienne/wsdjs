@@ -11,11 +11,31 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :wsdjs_proxy, WsdjsProxy.Endpoint,
-  http: [port: 4000],
+  http: [port: 6000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
   watchers: []
+
+config :master_proxy,
+  http: [:inet6, port: 4080],
+  backends: [
+    %{
+      host: ~r/localhost/,
+      path: ~r/api/,
+      phoenix_endpoint: WsdjsApi.Endpoint
+    },
+    %{
+      host: ~r/localhost/,
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    },
+    %{
+      verb: ~r/get/i,
+      path: ~r{^/master-proxy-plug-test$},
+      plug: MasterProxy.Plug.Test,
+      opts: [1, 2, 3]
+    }
+  ]
 
 # ## SSL Support
 #
