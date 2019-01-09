@@ -65,23 +65,23 @@ defmodule WsdjsWeb.SongControllerTest do
      song: song, instant_hit: instant_hit, public_track: public_track, hidden_track: hidden_track}
   end
 
-  defp create_ranks(%{admin: admin}) do
-    dt = Timex.beginning_of_month(Timex.today())
-    top = insert(:top, %{due_date: dt, status: "published"})
-    rank1 = insert(:rank, position: 1, top: top)
-    rank10 = insert(:rank, position: 10, top: top)
-    rank11 = insert(:rank, position: 11, top: top)
+  # defp create_ranks(%{admin: admin}) do
+  #   dt = Timex.beginning_of_month(Timex.today())
+  #   top = insert(:top, %{due_date: dt, status: "published"})
+  #   rank1 = insert(:rank, position: 1, top: top)
+  #   rank10 = insert(:rank, position: 10, top: top)
+  #   rank11 = insert(:rank, position: 11, top: top)
 
-    dt =
-      Timex.today()
-      |> Timex.beginning_of_month()
-      |> Timex.shift(months: -2)
+  #   dt =
+  #     Timex.today()
+  #     |> Timex.beginning_of_month()
+  #     |> Timex.shift(months: -2)
 
-    top = insert(:top, %{due_date: dt, status: "published"})
-    rank1 = insert(:rank, position: 1, top: top)
-    rank10 = insert(:rank, position: 10, top: top)
-    rank11 = insert(:rank, position: 11, top: top)
-  end
+  #   top = insert(:top, %{due_date: dt, status: "published"})
+  #   rank1 = insert(:rank, position: 1, top: top)
+  #   rank10 = insert(:rank, position: 10, top: top)
+  #   rank11 = insert(:rank, position: 11, top: top)
+  # end
 
   describe "access actions" do
     setup [:create_users, :create_songs]
