@@ -14,10 +14,20 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :wsdjs_api, WsdjsApi.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 5000],
+  http: [:inet6, port: 5000],
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
+
+if System.get_env("DEPLOYMENT_ENV") == "staging" do
+  config :wsdjs_api, WsdjsApi.Endpoint,
+    url: [scheme: "https", host: "wsdjs-staging.cleverapps.io", port: 443]
+  config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "https://wsdjs-staging.cleverapps.io"
+else
+  config :wsdjs_api, WsdjsApi.Endpoint,
+    url: [scheme: "https", host: "www.worldswingdjs.com", port: 443]
+  config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "https://www.worldswingdjs.com"
+end
 
 # ## SSL Support
 #

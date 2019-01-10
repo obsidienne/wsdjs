@@ -14,9 +14,33 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :wsdjs_proxy, WsdjsProxy.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 6000],
+  http: [:inet6, port: 6000],
   url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
+
+config :master_proxy,
+  http: [:inet6, port: System.get_env("PORT")],
+  backends: [
+    %{
+      host: ~r/wsdjs-staging.cleverapps.io/,
+      path: ~r/api/,
+      phoenix_endpoint: WsdjsApi.Endpoint
+    },
+    %{
+      host: ~r/www.worldswingdjs.com/,
+      path: ~r/api/,
+      phoenix_endpoint: WsdjsApi.Endpoint
+    },
+    %{
+      host: ~r/wsdjs-staging.cleverapps.io/,
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    },
+    %{
+      host: ~r/www.worldswingdjs.com/,
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    }
+  ]
 
 # ## SSL Support
 #
