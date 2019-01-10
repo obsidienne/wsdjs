@@ -11,7 +11,7 @@ config :wsdjs_api,
 # Configures the endpoint
 config :wsdjs_api, WsdjsApi.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "FB66S3fYIEJBnfcCC7UDd9LPuPdaBi9vYXGn6HA6MZgrApsW9Hu7B7BzJYoX/5fO",
+  secret_key_base: "vJT1iDt6U73/4jsybB6t5FSGqEzxnzfRL4SExYeGc3yPpBSn1/U3JmfDlrsN+9n9",
   render_errors: [view: WsdjsApi.ErrorView, accepts: ~w(json)],
   pubsub: [name: WsdjsApi.PubSub, adapter: Phoenix.PubSub.PG2]
 

@@ -16,7 +16,8 @@ use Mix.Config
 config :wsdjs_api, WsdjsApi.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 5000],
   url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
 # ## SSL Support
 #
@@ -66,7 +67,3 @@ config :wsdjs_api, WsdjsApi.Endpoint,
 #
 # Note you can't rely on `System.get_env/1` when using releases.
 # See the releases documentation accordingly.
-
-# Finally import the config/prod.secret.exs which should be versioned
-# separately.
-import_config "prod.secret.exs"
