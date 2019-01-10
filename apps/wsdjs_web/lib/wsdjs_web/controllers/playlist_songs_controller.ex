@@ -2,8 +2,8 @@ defmodule WsdjsWeb.PlaylistSongsController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  alias Wsdjs.Playlists
   alias Wsdjs.Musics
+  alias Wsdjs.Playlists
 
   action_fallback(WsdjsWeb.FallbackController)
 

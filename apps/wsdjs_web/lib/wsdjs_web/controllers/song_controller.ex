@@ -5,8 +5,8 @@ defmodule WsdjsWeb.SongController do
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Videos.Video
-  alias Wsdjs.Musics.Songs
   alias Wsdjs.Musics.Song
+  alias Wsdjs.Musics.Songs
   alias Wsdjs.Playlists
   alias Wsdjs.Reactions.{Comments, Opinions}
 

@@ -5,7 +5,7 @@ defmodule WsdjsWeb.ApiRouteHelpers do
       iex> WsdjsWeb.ApiRouteHelpers.base_path()
       "http://api:5000"
   """
-  def base_path() do
+  def base_path do
     Application.get_env(:wsdjs_web, __MODULE__) |> Keyword.get(:base_url)
   end
 

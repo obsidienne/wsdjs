@@ -6,11 +6,11 @@ defmodule Wsdjs.Musics.Songs do
   import Ecto.Query, warn: false
   alias Wsdjs.Repo
 
-  alias Wsdjs.Accounts.User
   alias Wsdjs.Accounts
+  alias Wsdjs.Accounts.User
   alias Wsdjs.Musics
-  alias Wsdjs.Musics.Songs
   alias Wsdjs.Musics.Song
+  alias Wsdjs.Musics.Songs
 
   @doc """
   The scope rules are

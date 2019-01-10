@@ -22,8 +22,8 @@ defmodule WsdjsWeb do
       use Phoenix.Controller, namespace: WsdjsWeb
       import Plug.Conn
       import WsdjsWeb.Gettext
-      alias WsdjsWeb.Router.Helpers, as: Routes
       alias WsdjsWeb.ApiRouteHelpers, as: ApiRoutes
+      alias WsdjsWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -42,13 +42,13 @@ defmodule WsdjsWeb do
 
       import WsdjsWeb.ErrorHelpers
       import WsdjsWeb.Gettext
-      alias WsdjsWeb.Router.Helpers, as: Routes
       alias WsdjsWeb.ApiRouteHelpers, as: ApiRoutes
+      alias WsdjsWeb.Router.Helpers, as: Routes
 
       # Import custom helpers
+      import WsdjsWeb.CloudinaryHelper
       import WsdjsWeb.SongHelper
       import WsdjsWeb.UserHelper
-      import WsdjsWeb.CloudinaryHelper
     end
   end
 

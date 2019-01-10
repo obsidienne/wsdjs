@@ -3,8 +3,8 @@ defmodule Wsdjs.Musics.Song do
   import Ecto.Changeset
 
   alias Wsdjs.Accounts
-  alias Wsdjs.Charts
   alias Wsdjs.Attachments
+  alias Wsdjs.Charts
   alias Wsdjs.Reactions.{Comments, Opinions}
 
   @type t :: %__MODULE__{

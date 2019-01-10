@@ -2,8 +2,8 @@ defmodule WsdjsWeb.SuggestionController do
   @moduledoc false
   use WsdjsWeb, :controller
 
-  alias Wsdjs.Musics.Songs
   alias Wsdjs.Musics.Song
+  alias Wsdjs.Musics.Songs
 
   action_fallback(WsdjsWeb.FallbackController)
 

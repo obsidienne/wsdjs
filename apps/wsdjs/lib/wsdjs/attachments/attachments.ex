@@ -109,8 +109,8 @@ defmodule Wsdjs.Attachments do
   # Avatar
   #
   ###############################################
-  alias Wsdjs.Attachments.Avatars.Avatar
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Attachments.Avatars.Avatar
 
   @doc """
   Returns the user avatar.

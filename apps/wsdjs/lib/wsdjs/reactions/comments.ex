@@ -3,10 +3,10 @@ defmodule Wsdjs.Reactions.Comments do
   """
   import Ecto.Query, warn: false
 
-  alias Wsdjs.Repo
-  alias Wsdjs.Musics.Song
   alias Wsdjs.Accounts.User
+  alias Wsdjs.Musics.Song
   alias Wsdjs.Reactions.Comments.Comment
+  alias Wsdjs.Repo
 
   @doc """
   This policies of this module are
@@ -94,7 +94,7 @@ defmodule Wsdjs.Reactions.Comments do
       %Ecto.Changeset{source: %Comment{}}
 
   """
-  def change() do
+  def change do
     Comment.changeset(%Comment{}, %{})
   end
 

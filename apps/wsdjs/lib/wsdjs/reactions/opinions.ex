@@ -3,10 +3,10 @@ defmodule Wsdjs.Reactions.Opinions do
   """
   import Ecto.Query, warn: false
 
-  alias Wsdjs.Repo
   alias Wsdjs.Accounts.User
   alias Wsdjs.Musics.Song
   alias Wsdjs.Reactions.Opinions.Opinion
+  alias Wsdjs.Repo
 
   @doc """
         The policies of this module are

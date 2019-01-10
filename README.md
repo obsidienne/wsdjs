@@ -42,3 +42,6 @@ iex -S mix phx.server
 |PORT|8080|
 |SENDGRID_API_KEY||
 |SECRET_KEY_BASE||
+
+If errors on mix.exs
+rm -r deps _build .elixir_ls && mix deps.get

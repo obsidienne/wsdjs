@@ -5,8 +5,8 @@ defmodule Wsdjs.Accounts.User do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.{UserDetail, UserParameter}
-  alias Wsdjs.Auth
   alias Wsdjs.Attachments
+  alias Wsdjs.Auth
   alias Wsdjs.Charts
   alias Wsdjs.Musics
   alias Wsdjs.Reactions.{Comments, Opinions}
