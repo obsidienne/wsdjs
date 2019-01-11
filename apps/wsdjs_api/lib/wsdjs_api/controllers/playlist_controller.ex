@@ -7,10 +7,13 @@ defmodule WsdjsApi.PlaylistController do
 
   action_fallback(WsdjsApi.V1.FallbackController)
 
-  @spec index(Plug.Conn.t(), %{id: String.t()}) :: Plug.Conn.t()
-  def index(conn, %{"user_id" => user_id}) do
-    current_user = conn.assigns[:current_user]
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns.current_user]
+    apply(__MODULE__, action_name(conn), args)
+  end
 
+  @spec index(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t() | nil) :: Plug.Conn.t()
+  def index(conn, %{"user_id" => user_id}, current_user) do
     with user <- Accounts.get_user!(user_id) do
       playlists = Playlists.get_playlist_by_user(user, current_user)
 
@@ -18,10 +21,8 @@ defmodule WsdjsApi.PlaylistController do
     end
   end
 
-  @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
-  def create(conn, %{"playlist" => playlist_params, "user_id" => user_id}) do
-    current_user = conn.assigns[:current_user]
-
+  @spec create(Plug.Conn.t(), map(), Wsdjs.Accounts.User.t() | nil) :: Plug.Conn.t()
+  def create(conn, %{"playlist" => playlist_params, "user_id" => user_id}, current_user) do
     playlist_params = Map.put(playlist_params, "user_id", user_id)
 
     with :ok <- Playlists.can?(current_user, :new),
