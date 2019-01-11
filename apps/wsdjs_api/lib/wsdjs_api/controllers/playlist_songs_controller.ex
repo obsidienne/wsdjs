@@ -5,7 +5,7 @@ defmodule WsdjsApi.PlaylistSongsController do
   alias Wsdjs.Musics
   alias Wsdjs.Playlists
 
-  action_fallback(WsdjsApi.V1.FallbackController)
+  action_fallback(WsdjsApi.FallbackController)
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]

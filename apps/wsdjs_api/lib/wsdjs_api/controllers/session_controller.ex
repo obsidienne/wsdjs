@@ -4,7 +4,7 @@ defmodule WsdjsApi.SessionController do
 
   alias Wsdjs.Accounts.User
 
-  action_fallback(WsdjsApi.V1.FallbackController)
+  action_fallback(WsdjsApi.FallbackController)
 
   def create(conn, %{"email" => email}) do
     with {:ok, %User{}} <- WsdjsWeb.MagicLink.provide_token(email, "api") do
