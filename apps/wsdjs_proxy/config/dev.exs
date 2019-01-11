@@ -28,12 +28,6 @@ config :master_proxy,
     %{
       host: ~r/localhost/,
       phoenix_endpoint: WsdjsWeb.Endpoint
-    },
-    %{
-      verb: ~r/get/i,
-      path: ~r{^/master-proxy-plug-test$},
-      plug: MasterProxy.Plug.Test,
-      opts: [1, 2, 3]
     }
   ]
 
