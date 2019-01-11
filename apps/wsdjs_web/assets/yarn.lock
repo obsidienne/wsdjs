@@ -4135,10 +4135,10 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-leaflet@1.3.4:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.3.4.tgz#7f006ea5832603b53d7269ef5c595fd773060a40"
-  integrity sha512-FYL1LGFdj6v+2Ifpw+AcFIuIOqjNggfoLUwuwQv6+3sS21Za7Wvapq+LhbSE4NDXrEj6eYnW3y7LsaBICpyXtw==
+leaflet@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.4.0.tgz#d5f56eeb2aa32787c24011e8be4c77e362ae171b"
+  integrity sha512-x9j9tGY1+PDLN9pcWTx9/y6C5nezoTMB8BLK5jTakx+H7bPlnbCHfi9Hjg+Qt36sgDz/cb9lrSpNQXmk45Tvhw==
 
 listr-silent-renderer@^1.1.1:
   version "1.1.1"
@@ -5102,10 +5102,10 @@ pbkdf2@^3.0.3:
     sha.js "^2.4.8"
 
 "phoenix@file:../../../deps/phoenix":
-  version "1.3.4"
+  version "1.4.0"
 
 "phoenix_html@file:../../../deps/phoenix_html":
-  version "2.12.0"
+  version "2.13.1"
 
 pify@^2.3.0:
   version "2.3.0"
@@ -5129,10 +5129,10 @@ pinkie@^2.0.0:
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
-pjax-api@3.23.0:
-  version "3.23.0"
-  resolved "https://registry.yarnpkg.com/pjax-api/-/pjax-api-3.23.0.tgz#073a2936cda4e6d860b8be3af9cbc43b34c0d70d"
-  integrity sha1-BzopNs2k5thguL46+cvEOzTA1w0=
+pjax-api@3.25.0:
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/pjax-api/-/pjax-api-3.25.0.tgz#fe60d916964979c9e3317097be6d4473c5a91b44"
+  integrity sha512-ezx2vfX3zvKTyF1XMFA+AQWABUuqvtPS3TKPWtOwsLfdD1Zi6l8TKmaBVT9VHjleQ0YiqzF1RYeKV03HTg9vfA==
 
 pkg-dir@^2.0.0:
   version "2.0.0"
@@ -5141,10 +5141,10 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-popper.js@^1.14.4:
-  version "1.14.4"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.4.tgz#8eec1d8ff02a5a3a152dd43414a15c7b79fd69b6"
-  integrity sha1-juwdj/AqWjoVLdQ0FKFce3n9abY=
+popper.js@^1.14.6:
+  version "1.14.6"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.6.tgz#ab20dd4edf9288b8b3b6531c47c361107b60b4b0"
+  integrity sha512-AGwHGQBKumlk/MDfrSOf0JHhJCImdDMcGNoqKmKkU+68GFazv3CQ6q9r7Ja1sKDZmYWTckY/uLyEznheTDycnA==
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
@@ -6570,12 +6570,12 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tippy.js@~3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-3.0.6.tgz#ad29361e96129de582bf4088f00ea8413632ceb4"
-  integrity sha512-/paH+Kf3Caj0J+AlB1Kdg2KFAZ8yJeXZ8hPiwDBfxOLZg3YxDUa2OpMi3ODK8TXSMoPqcGUExCVcc46AmGCxjQ==
+tippy.js@~3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-3.4.0.tgz#adc8a106eb990ed055b84c9b41404ec8c1cb4541"
+  integrity sha512-mI5Fyn/E/nXRrGQKk/5M6baw9hcc6h3I11zMe5YR2LYitwmymGw9n+J3BstdOXcqx15+p0EFv3DpwSHNhePl3A==
   dependencies:
-    popper.js "^1.14.4"
+    popper.js "^1.14.6"
 
 tmp@^0.0.33:
   version "0.0.33"
