@@ -1,3 +1,8 @@
+# version 2.1.0
+- split wsdjs_web into wsdjs_web and wsdjs_api
+- create a wsdjs_proxy
+- create an attachment lib
+- refactoring
 # version 2.0.0
 - change PK from uuid to bigint with hashid
 # version 1.9.1
