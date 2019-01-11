@@ -1,8 +1,6 @@
 defmodule WsdjsWeb.OpinionView do
   use WsdjsWeb, :view
 
-  import WsdjsWeb.Router.Helpers
-
   def count(opinions, kind) when kind in ["up", "down", "like"] do
     Enum.count(opinions, fn x -> x.kind == kind end)
   end
@@ -57,20 +55,25 @@ defmodule WsdjsWeb.OpinionView do
 
   defp tooltip_options(_kind, _opinions, qty) when qty == 0, do: []
 
-  defp data_method(kind, %Wsdjs.Reactions.Opinion{kind: my_kind}) when kind == my_kind,
+  defp data_method(kind, %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind}) when kind == my_kind,
     do: "DELETE"
 
   defp data_method(_, _), do: "POST"
 
-  defp opinion_url(conn, kind, _song, %Wsdjs.Reactions.Opinion{kind: my_kind} = my_opinion)
+  defp opinion_url(
+         conn,
+         kind,
+         _song,
+         %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind} = my_opinion
+       )
        when kind == my_kind do
-    api_opinion_path(conn, :delete, my_opinion.id)
+    ApiRoutes.opinion_path(conn, :delete, my_opinion)
   end
 
   defp opinion_url(conn, kind, song, _),
-    do: api_song_opinion_path(conn, :create, song, kind: kind)
+    do: ApiRoutes.song_opinion_path(conn, :create, song, kind: kind)
 
-  defp html_class(kind, %Wsdjs.Reactions.Opinion{kind: my_kind}) when kind == my_kind,
+  defp html_class(kind, %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind}) when kind == my_kind,
     do: "song-opinion border-0 p-2 song-#{kind} active hvr-buzz-out"
 
   defp html_class(kind, _),

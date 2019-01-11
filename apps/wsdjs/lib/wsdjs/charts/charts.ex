@@ -84,7 +84,7 @@ defmodule Wsdjs.Charts do
     lower = Timex.beginning_of_month(Timex.to_datetime(month))
     upper = Timex.end_of_month(Timex.to_datetime(month))
 
-    songs = Musics.list_suggested_songs(lower, upper)
+    songs = Musics.Songs.list_suggested_songs(lower, upper)
 
     top_changeset
     |> put_assoc(:songs, songs)
@@ -275,7 +275,7 @@ defmodule Wsdjs.Charts do
       |> Repo.all()
 
     Enum.each(ranks, fn rank ->
-      val = Wsdjs.Reactions.opinions_value(rank.song.opinions)
+      val = Wsdjs.Reactions.Opinions.opinions_value(rank.song.opinions)
 
       rank
       |> Rank.changeset(%{likes: val})

@@ -81,16 +81,18 @@ defmodule WsdjsWeb.TopController do
   @spec update(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def update(conn, %{"id" => id, "direction" => "next"}, current_user) do
-    with top = Charts.get_top!(id),
-         :ok <- Charts.Policy.can?(current_user, :update_top, top),
+    top = Charts.get_top!(id)
+
+    with :ok <- Charts.Policy.can?(current_user, :update_top, top),
          {:ok, _top} = Charts.next_step(top) do
       redirect(conn, to: Routes.top_path(conn, :show, top))
     end
   end
 
   def update(conn, %{"id" => id, "direction" => "previous"}, current_user) do
-    with top = Charts.get_top!(id),
-         :ok <- Charts.Policy.can?(current_user, :update_top, top),
+    top = Charts.get_top!(id)
+
+    with :ok <- Charts.Policy.can?(current_user, :update_top, top),
          {:ok, _top} = Charts.previous_step(top) do
       redirect(conn, to: Routes.top_path(conn, :show, top))
     end
@@ -113,8 +115,9 @@ defmodule WsdjsWeb.TopController do
   @spec delete(Plug.Conn.t(), map(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
-    with top = Charts.get_top!(id),
-         :ok <- Charts.Policy.can?(current_user, :delete_top, top),
+    top = Charts.get_top!(id)
+
+    with :ok <- Charts.Policy.can?(current_user, :delete_top, top),
          {:ok, _top} = Charts.delete_top(top) do
       conn
       |> put_flash(:info, "Top deleted successfully.")

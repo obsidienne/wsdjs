@@ -21,7 +21,49 @@ defmodule Wsdjs.Accounts do
     User
     |> order_by([:name])
     |> Repo.all()
-    |> Repo.preload([:avatar, :songs, :comments, :parameter, :detail])
+    |> load_avatar()
+    |> load_songs()
+    |> load_comments()
+    |> load_parameter()
+    |> load_detail()
+  end
+
+  def load_avatar(user), do: Repo.preload(user, :avatar)
+  def load_songs(user), do: Repo.preload(user, :songs)
+  def load_comments(user), do: Repo.preload(user, :comments)
+  def load_parameter(user), do: Repo.preload(user, :parameter)
+  def load_detail(user), do: Repo.preload(user, :detail)
+
+  @doc """
+  Returns the list of users having new_song_notification: true
+
+  ## Examples
+
+      iex> list_users_to_notify(type)
+      [%Accounts.User{}, ...]
+
+  """
+  def list_users_to_notify("new song") do
+    query =
+      from(
+        u in User,
+        join: p in assoc(u, :parameter),
+        where:
+          u.deactivated == false and p.new_song_notification == true and u.profil_djvip == true
+      )
+
+    Repo.all(query)
+  end
+
+  def list_users_to_notify("radioking unmatch") do
+    query =
+      from(
+        u in User,
+        join: p in assoc(u, :parameter),
+        where: u.deactivated == false and p.radioking_unmatch == true
+      )
+
+    Repo.all(query)
   end
 
   @doc """
@@ -60,19 +102,25 @@ defmodule Wsdjs.Accounts do
     User
     |> where(deactivated: false)
     |> Repo.get!(id)
-    |> Repo.preload([:avatar, :detail, :parameter])
+    |> load_avatar()
+    |> load_detail()
+    |> load_parameter()
   end
 
   def get_user!(id) do
     User
     |> Repo.get!(id)
-    |> Repo.preload([:avatar, :detail, :parameter])
+    |> load_avatar()
+    |> load_detail()
+    |> load_parameter()
   end
 
   def get_user_by_email(email) do
     User
     |> Repo.get_by(email: String.downcase(email))
-    |> Repo.preload([:avatar, :detail, :parameter])
+    |> load_avatar()
+    |> load_detail()
+    |> load_parameter()
   end
 
   @doc """
@@ -110,28 +158,5 @@ defmodule Wsdjs.Accounts do
     user
     |> User.admin_changeset(attrs)
     |> Repo.update()
-  end
-
-  ###############################################
-  #
-  # Avatar
-  #
-  ###############################################
-  alias Wsdjs.Accounts.Avatar
-
-  @doc """
-  Returns the user avatar.
-
-  ## Examples
-
-      iex> get_avatar(%User{})
-      %Avatar{}
-  """
-  def get_avatar(%User{id: id}) do
-    Avatar
-    |> where(user_id: ^id)
-    |> order_by(desc: :inserted_at)
-    |> limit(1)
-    |> Repo.all()
   end
 end

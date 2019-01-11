@@ -1,7 +1,6 @@
 .song-opinion {
   user-select: none;
   background: transparent;
-  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
   outline: 0;
   display: flex;
@@ -38,7 +37,6 @@
   border: 2px solid white;
   font-weight: bold;
   color: #333;
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
   box-shadow: var(--shadow-active);
 }
 
@@ -60,7 +58,6 @@
   font-weight: bold;
   color: #333;
   padding: 0;
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
   box-shadow: var(--shadow-active);
 }
 

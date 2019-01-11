@@ -109,7 +109,7 @@ defmodule Wsdjs.ChartsTest do
   defp song_fixture(attrs) do
     user = user_fixture()
 
-    {:ok, %Wsdjs.Musics.Song{} = song} =
+    {:ok, song} =
       %{
         "title" => "my title#{System.unique_integer([:positive])}",
         "artist" => "my artist",
@@ -117,11 +117,9 @@ defmodule Wsdjs.ChartsTest do
         "url" => "http://youtu.be/dummy"
       }
       |> Map.put("user_id", user.id)
-      |> Wsdjs.Musics.create_suggestion()
+      |> Wsdjs.Musics.Songs.create_suggestion()
 
-    {:ok, %Wsdjs.Musics.Song{} = song} =
-      Wsdjs.Musics.update_song(song, attrs, %Wsdjs.Accounts.User{admin: true})
-
+    {:ok, song} = Wsdjs.Musics.Songs.update(song, attrs, %Wsdjs.Accounts.User{admin: true})
     song
   end
 
@@ -141,9 +139,10 @@ defmodule Wsdjs.ChartsTest do
     song3 = song_fixture(%{inserted_at: dtend})
 
     user = user_fixture()
-    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song1, "like")
-    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song2, "up")
-    {:ok, %Wsdjs.Reactions.Opinion{}} = Wsdjs.Reactions.upsert_opinion(user, song3, "down")
+
+    {:ok, _} = Wsdjs.Reactions.Opinions.upsert(user, song1, "like")
+    {:ok, _} = Wsdjs.Reactions.Opinions.upsert(user, song2, "up")
+    {:ok, _} = Wsdjs.Reactions.Opinions.upsert(user, song3, "down")
 
     # vote = 10 * vote[:count] - vote[:sum] + vote[:count]
     # opinion = "up"-> 4, "like" -> 2, "down" -> 3

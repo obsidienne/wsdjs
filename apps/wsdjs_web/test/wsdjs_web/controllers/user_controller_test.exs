@@ -5,8 +5,8 @@ defmodule WsdjsWeb.UserControllerTest do
   test "requires user authentication on actions", %{conn: conn} do
     Enum.each(
       [
-        get(conn, user_path(conn, :edit, Ecto.UUID.generate())),
-        put(conn, user_path(conn, :update, Ecto.UUID.generate(), %{}))
+        get(conn, Routes.user_path(conn, :edit, Ecto.UUID.generate())),
+        put(conn, Routes.user_path(conn, :update, Ecto.UUID.generate(), %{}))
       ],
       fn conn ->
         assert html_response(conn, 302)
@@ -50,7 +50,7 @@ defmodule WsdjsWeb.UserControllerTest do
           assign(conn, :current_user, admin)
         ],
         fn conn ->
-          conn = get(conn, user_path(conn, :index))
+          conn = get(conn, Routes.user_path(conn, :index))
           assert html_response(conn, 200) =~ "List users - World Swing DJs"
           assert String.contains?(conn.resp_body, user.email)
           assert String.contains?(conn.resp_body, dj.email)
@@ -68,7 +68,7 @@ defmodule WsdjsWeb.UserControllerTest do
           assign(conn, :current_user, nil)
         ],
         fn conn ->
-          conn = get(conn, user_path(conn, :index))
+          conn = get(conn, Routes.user_path(conn, :index))
           assert html_response(conn, 302)
         end
       )
@@ -93,7 +93,7 @@ defmodule WsdjsWeb.UserControllerTest do
           assign(conn, :current_user, nil)
         ],
         fn conn ->
-          conn = get(conn, user_path(conn, :show, admin.id))
+          conn = get(conn, Routes.user_path(conn, :show, admin.id))
           assert html_response(conn, 302)
         end
       )
@@ -101,7 +101,7 @@ defmodule WsdjsWeb.UserControllerTest do
       response =
         conn
         |> assign(:current_user, admin)
-        |> get(user_path(conn, :show, admin))
+        |> get(Routes.user_path(conn, :show, admin))
         |> html_response(200)
 
       assert String.contains?(response, "User - World Swing DJs")
@@ -126,21 +126,21 @@ defmodule WsdjsWeb.UserControllerTest do
         fn conn ->
           response =
             conn
-            |> get(user_path(conn, :show, djvip.id))
+            |> get(Routes.user_path(conn, :show, djvip.id))
             |> html_response(200)
 
           assert String.contains?(response, djvip.name)
 
           response =
             conn
-            |> get(user_path(conn, :show, dj.id))
+            |> get(Routes.user_path(conn, :show, dj.id))
             |> html_response(200)
 
           assert String.contains?(response, dj.name)
 
           response =
             conn
-            |> get(user_path(conn, :show, user.id))
+            |> get(Routes.user_path(conn, :show, user.id))
             |> html_response(200)
 
           assert String.contains?(response, user.name)
@@ -167,7 +167,7 @@ defmodule WsdjsWeb.UserControllerTest do
           assign(conn, :current_user, admin)
         ],
         fn conn ->
-          conn = get(conn, user_path(conn, :edit, user))
+          conn = get(conn, Routes.user_path(conn, :edit, user))
           assert html_response(conn, 200) =~ "Edit user - World Swing DJs"
           assert String.contains?(conn.resp_body, user.name)
         end
@@ -181,7 +181,7 @@ defmodule WsdjsWeb.UserControllerTest do
           assign(conn, :current_user, djvip)
         ],
         fn conn ->
-          conn = get(conn, user_path(conn, :edit, user.id))
+          conn = get(conn, Routes.user_path(conn, :edit, user.id))
           assert html_response(conn, 302)
         end
       )
@@ -200,7 +200,7 @@ defmodule WsdjsWeb.UserControllerTest do
 
       conn
       |> assign(:current_user, admin)
-      |> put(user_path(conn, :update, user.id, %{"user" => params}))
+      |> put(Routes.user_path(conn, :update, user.id, %{"user" => params}))
 
       user_updated = Wsdjs.Accounts.get_user!(user.id)
       assert user_updated.profil_djvip
@@ -220,7 +220,7 @@ defmodule WsdjsWeb.UserControllerTest do
       # change values
       conn
       |> assign(:current_user, user)
-      |> put(user_path(conn, :update, user, %{"user" => params}))
+      |> put(Routes.user_path(conn, :update, user, %{"user" => params}))
 
       user_updated = Wsdjs.Accounts.get_user!(user.id)
       assert user_updated.djname == "DJ has been"

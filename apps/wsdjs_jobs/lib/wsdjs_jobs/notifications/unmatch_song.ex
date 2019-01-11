@@ -1,6 +1,6 @@
 defmodule WsdjsJobs.UnmatchSong do
   import Bamboo.Email
-  alias Wsdjs.Notifications
+  alias Wsdjs.Accounts
 
   def notify(%{nomatch: true} = song) do
     IO.puts("queue unmatched #{song["artist"]} #{song["title"]} ")
@@ -13,7 +13,7 @@ defmodule WsdjsJobs.UnmatchSong do
         "radioking_unmatch.html.eex"
       ])
 
-    users = Notifications.list_users_to_notify("radioking unmatch")
+    users = Accounts.list_users_to_notify("radioking unmatch")
 
     if Enum.count(users) > 0 do
       new_email()

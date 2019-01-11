@@ -4,7 +4,7 @@ defmodule WsdjsWeb.SessionControllerTest do
   test "requires user authentication on actions", %{conn: conn} do
     Enum.each(
       [
-        delete(conn, session_path(conn, :delete, Ecto.UUID.generate()))
+        delete(conn, Routes.session_path(conn, :delete, Ecto.UUID.generate()))
       ],
       fn conn ->
         assert html_response(conn, 302)

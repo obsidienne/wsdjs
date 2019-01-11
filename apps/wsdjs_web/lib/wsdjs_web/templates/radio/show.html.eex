@@ -1,9 +1,3 @@
-<nav class="secondary-nav py-2">
-  <ol class="container">
-    <li class="current d-inline-block">Current</li>
-  </ol>
-</nav>
-
 <section id="radio-page" class="radio-page container mt-3">
   <div class="radio-song d-flex align-items-center flex-column ">
     <%= if @songs == :empty do %>

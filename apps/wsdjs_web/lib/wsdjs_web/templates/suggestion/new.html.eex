@@ -6,7 +6,7 @@
 
 <section class="container song-new d-flex mt-3 flex-column flex-md-row ">
   <div id="art_div">
-    <img id="art_thumbnail" src="<%= art_url(nil, 250) %>" style="width:250px;height:250px;">
+    <img id="art_thumbnail" src="<%= Attachments.art_url(nil, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
       <button id="song_upload_widget_opener" class="btn btn-primary">Upload cover</button>
     </div>

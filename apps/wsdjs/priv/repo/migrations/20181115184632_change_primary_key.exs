@@ -53,6 +53,10 @@ defmodule Wsdjs.Repo.Migrations.ChangePrimaryKey do
     alter table(:songs) do
       modify :uuid, :binary_id, null: true
     end
+
+    alter table(:users) do
+      modify :uuid, :binary_id, null: true
+    end
   end
 
   defp rename_foreign_key do

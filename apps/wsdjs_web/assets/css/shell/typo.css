@@ -18,7 +18,6 @@ body {
   -webkit-font-smoothing: antialiased;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-family: var(--font-family);
-  font-size: 16px;
   font-size: var(--font-size);
   line-height: 1.5;
 }
@@ -80,7 +79,6 @@ h3,
 small,
 .small {
   font-weight: 300;
-  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 
@@ -93,7 +91,6 @@ h2.page-header {
   position: -webkit-sticky;
   position: sticky;
   top: 1rem;
-  background-color: hsl(240, 20%, 98%);
   background-color: var(--bg-color);
   z-index: 1000;
 }
@@ -132,7 +129,6 @@ dt,
 }
 
 .text-muted {
-  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
 }
 

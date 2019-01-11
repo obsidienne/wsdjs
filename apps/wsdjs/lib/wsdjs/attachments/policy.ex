@@ -1,6 +1,6 @@
 defmodule Wsdjs.Attachments.Policy do
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Attachments.Video
+  alias Wsdjs.Attachments.Videos.Video
 
   def can?(%User{admin: true}, _, _), do: :ok
   def can?(%User{id: id}, :delete, %Video{user_id: id}), do: :ok

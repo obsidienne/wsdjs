@@ -85,7 +85,7 @@ class OpinionPicker {
     const newValue = el.dataset.opinion;
 
     let method = "POST";
-    let url = `/api/v1/songs/${id}/opinions?kind=${newValue}`;
+    let url = `${window.baseApiUrl}/songs/${id}/opinions?kind=${newValue}`;
     let trigger = this.ref;
 
     if (prevValue == newValue) {
@@ -93,7 +93,7 @@ class OpinionPicker {
       this.ref.innerHTML = none;
       method = "DELETE";
       let opinionId = this.ref.closest("footer").dataset.opinionId;
-      url = `/api/v1/opinions/${opinionId}`;
+      url = `${window.baseApiUrl}/opinions/${opinionId}`;
     } else {
       this.ref.dataset.opinion = newValue;
 

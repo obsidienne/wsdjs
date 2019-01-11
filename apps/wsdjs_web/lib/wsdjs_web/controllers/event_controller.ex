@@ -16,8 +16,9 @@ defmodule WsdjsWeb.EventController do
   @spec show(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def show(conn, %{"id" => id}, current_user) do
-    with event <- Happenings.get_event!(id),
-         :ok <- Happenings.Policy.can?(current_user, :show, event) do
+    event = Happenings.get_event!(id)
+
+    with :ok <- Happenings.can?(current_user, :show, event) do
       render(conn, "show.html", event: event)
     end
   end
@@ -25,7 +26,7 @@ defmodule WsdjsWeb.EventController do
   @spec index(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def index(conn, _params, current_user) do
-    with :ok <- Happenings.Policy.can?(current_user, :index) do
+    with :ok <- Happenings.can?(current_user, :index) do
       events = Happenings.list_events()
       render(conn, "index.html", events: events)
     end
@@ -34,7 +35,7 @@ defmodule WsdjsWeb.EventController do
   @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def new(conn, _params, current_user) do
-    with :ok <- Happenings.Policy.can?(current_user, :create_event) do
+    with :ok <- Happenings.can?(current_user, :create_event) do
       changeset = Happenings.change_event(%Event{})
       render(conn, "new.html", changeset: changeset)
     end
@@ -45,7 +46,7 @@ defmodule WsdjsWeb.EventController do
   def create(conn, %{"event" => params}, current_user) do
     params = Map.put(params, "user_id", current_user.id)
 
-    with :ok <- Happenings.Policy.can?(current_user, :create_event),
+    with :ok <- Happenings.can?(current_user, :create_event),
          {:ok, event} <- Happenings.create_event(params) do
       conn
       |> put_flash(:info, "#{event.name} created")
@@ -56,8 +57,9 @@ defmodule WsdjsWeb.EventController do
   @spec edit(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def edit(conn, %{"id" => id}, current_user) do
-    with %Event{} = event <- Happenings.get_event!(id),
-         :ok <- Happenings.Policy.can?(current_user, :edit_event, event) do
+    event = Happenings.get_event!(id)
+
+    with :ok <- Happenings.can?(current_user, :edit_event, event) do
       changeset = Happenings.change_event(event)
       render(conn, "edit.html", event: event, changeset: changeset)
     end
@@ -68,7 +70,7 @@ defmodule WsdjsWeb.EventController do
   def update(conn, %{"id" => id, "event" => event_params}, current_user) do
     event = Happenings.get_event!(id)
 
-    with :ok <- Happenings.Policy.can?(current_user, :edit_event, event),
+    with :ok <- Happenings.can?(current_user, :edit_event, event),
          {:ok, %Event{} = event} <- Happenings.update_event(event, event_params) do
       conn
       |> put_flash(:info, "Event updated")
@@ -85,8 +87,9 @@ defmodule WsdjsWeb.EventController do
   @spec delete(Plug.Conn.t(), map(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
-    with event <- Happenings.get_event!(id),
-         :ok <- Happenings.Policy.can?(current_user, :delete_event, event),
+    event = Happenings.get_event!(id)
+
+    with :ok <- Happenings.can?(current_user, :delete_event, event),
          {:ok, _event} = Happenings.delete_event(event) do
       conn
       |> put_flash(:info, "Event deleted successfully.")

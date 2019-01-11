@@ -1,7 +1,7 @@
 defmodule Wsdjs.Reactions.CommentsTest do
   use Wsdjs.DataCase, async: true
 
-  alias Wsdjs.Reactions.Comment
+  alias Wsdjs.Reactions.Comments.Comment
 
   @create_attrs %{text: "song title"}
 
@@ -11,10 +11,12 @@ defmodule Wsdjs.Reactions.CommentsTest do
   end
 
   test "comment user and song must exist" do
-    params = Map.put(@create_attrs, :user_id, Ecto.UUID.generate())
-    params = Map.put(params, :song_id, Ecto.UUID.generate())
+    {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+
+    params = Map.put(@create_attrs, :user_id, dummy_id)
+    params = Map.put(params, :song_id, dummy_id)
     comment = Comment.changeset(%Comment{}, params)
-    assert {:error, %{errors: [user: {"does not exist", _}]}} = Repo.insert(comment)
+    assert {:error, %{errors: [song: {"does not exist", _}]}} = Repo.insert(comment)
   end
 
   test "song comment length > 0" do

@@ -4,7 +4,7 @@ defmodule WsdjsJobs.Mixfile do
   def project do
     [
       app: :wsdjs_jobs,
-      version: "2.0.0",
+      version: "2.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -41,6 +41,7 @@ defmodule WsdjsJobs.Mixfile do
       {:quantum, "~> 2.3.3"},
       {:timex, "~> 3.4"},
       {:bamboo, "~> 1.1"},
+      {:attachments, in_umbrella: true},
       {:wsdjs, in_umbrella: true}
     ]
   end

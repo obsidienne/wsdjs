@@ -6,25 +6,20 @@ defmodule Wsdjs.Charts.RankTest do
 
   test "rank song must exist" do
     attrs = rank_fixture_params()
+    {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
 
-    params = %{top_id: attrs.top_id, song_id: Ecto.UUID.generate()}
+    params = %{top_id: attrs.top_id, song_id: dummy_id}
     rank = Rank.changeset(%Rank{}, params)
     assert {:error, %{errors: [song: {"does not exist", _}]}} = Repo.insert(rank)
   end
 
   test "rank top must exist" do
     attrs = rank_fixture_params()
+    {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
 
-    params = %{top_id: Ecto.UUID.generate(), song_id: attrs.song_id}
+    params = %{top_id: dummy_id, song_id: attrs.song_id}
     rank = Rank.changeset(%Rank{}, params)
     assert {:error, %{errors: [top: {"does not exist", _}]}} = Repo.insert(rank)
-  end
-
-  test "rank/song/top combinaison is unique" do
-    changeset = Rank.changeset(%Rank{}, rank_fixture_params(%{rank: 1}))
-    Repo.insert(changeset)
-    {:error, changeset} = Repo.insert(changeset)
-    assert "has already been taken" in errors_on(changeset).song_id
   end
 
   test "votes/bonus can be equal to zero" do
@@ -33,13 +28,11 @@ defmodule Wsdjs.Charts.RankTest do
   end
 
   defp rank_fixture_params(attrs \\ %{}) do
-    {:ok, %Wsdjs.Accounts.User{} = user} = Wsdjs.Accounts.create_user(%{email: "dummy@bshit.com"})
+    {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy@bshit.com"})
+    {:ok, top} = Wsdjs.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
 
-    {:ok, %Wsdjs.Charts.Top{} = top} =
-      Wsdjs.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
-
-    {:ok, %Wsdjs.Musics.Song{} = song} =
-      Wsdjs.Musics.create_song(%{
+    {:ok, song} =
+      Wsdjs.Musics.Songs.create_song(%{
         title: "a",
         artist: "a",
         genre: "soul",

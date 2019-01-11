@@ -10,7 +10,7 @@ defmodule WsdjsWeb.PlaylistSearchAddController do
 
   def index(conn, %{"playlist_id" => playlist_id, "q" => q}) do
     current_user = conn.assigns.current_user
-    songs = Wsdjs.Searches.search(current_user, q)
+    songs = Wsdjs.Musics.search(current_user, q)
     playlist = Playlists.get_playlist!(playlist_id)
 
     render(conn, "index.html", songs: songs, playlist: playlist)

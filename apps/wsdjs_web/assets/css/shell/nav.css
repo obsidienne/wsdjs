@@ -132,7 +132,6 @@ main>header h2 {
 .secondary-nav li::after {
   display: inline-block;
   content: '';
-  color: hsl(0, 0%, 45%);
   color: var(--inactive-color);
   margin: 0 .5rem;
 }

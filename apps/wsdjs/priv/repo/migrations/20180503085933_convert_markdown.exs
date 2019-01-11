@@ -3,7 +3,7 @@ defmodule Wsdjs.Repo.Migrations.ConvertMarkdown do
   import Ecto.Query
 
   def change do
-    Wsdjs.Repo.all(Wsdjs.Reactions.Comment)
+    Wsdjs.Repo.all(Wsdjs.Reactions.Comments.Comment)
     |> Enum.map(fn c ->
       text_html =
         c.text

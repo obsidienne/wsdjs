@@ -17,7 +17,7 @@
 
       </div>
       <div class="user-page__avatar">
-        <img src="<%= avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="responsive rounded-circle">
+        <img src="<%= Attachments.avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 50) %>" class="responsive rounded-circle">
       </div>
       <div class="user-page__profile-details px-1 w-100">
         <span class="text-ellipsis user-name"><%= @user.name %></span>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="d-flex w-33 justify-content-center">
-          <img src="<%= avatar_url(@user.avatar, 32) %>" sizes="32px" srcset="<%= avatar_srcset(@user.avatar, 50) %>" class="rounded">
+          <img src="<%= Attachments.avatar_url(@user.avatar, 32) %>" sizes="32px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 50) %>" class="rounded">
         </div>
 
         <%= if @user.verified_profil do %>

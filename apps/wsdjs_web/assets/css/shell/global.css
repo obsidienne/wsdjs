@@ -31,7 +31,6 @@ html {
 }
 
 body {
-  background-color: hsl(240, 20%, 98%);
   background-color: var(--bg-color);
   padding-bottom: 6rem;
 }

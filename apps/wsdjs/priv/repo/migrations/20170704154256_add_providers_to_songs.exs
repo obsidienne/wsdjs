@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.AddProvidersToSongs do
+defmodule Wsdjs.Repo.Migrations.AddAttachmentsToSongs do
   use Ecto.Migration
 
   def change do

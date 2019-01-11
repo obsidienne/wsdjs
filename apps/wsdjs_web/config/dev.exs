@@ -12,12 +12,6 @@ use Mix.Config
 # with webpack to recompile .js and .css sources.
 config :wsdjs_web, WsdjsWeb.Endpoint,
   http: [port: 4000],
-  https: [
-    port: 4001,
-    cipher_suite: :strong,
-    certfile: "priv/cert/selfsigned.pem",
-    keyfile: "priv/cert/selfsigned_key.pem"
-  ],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -31,6 +25,8 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
+
+config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "http://localhost:4080/api"
 
 config :wsdjs_web, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
 

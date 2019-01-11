@@ -52,12 +52,10 @@
 }
 
 .clickable:hover {
-  transform: translateY(-2px);
   transform: var(--accent-action);
 }
 
 .action-link:hover {
-  color: hsl(45, 100%, 51.4%);
   color: var(--accent-color);
 }
 
@@ -70,16 +68,12 @@
 }
 
 .primary-text {
-  font-weight: 700;
   font-weight: var(--font-primary-weight);
-  color: hsl(0, 0%, 13%);
   color: var(--font-primary-color);
 }
 
 .secondary-text {
-  font-weight: 400;
   font-weight: var(--font-secondary-weight);
-  color: hsl(0, 0%, 29%);
   color: var(--font-secondary-color);
 }
 
@@ -113,7 +107,6 @@ display utilities
 }
 
 .facets {
-  background-color: hsl(240, 20%, 98%);
   background-color: var(--bg-color);
   overflow-y: auto;
   overscroll-behavior: contain;

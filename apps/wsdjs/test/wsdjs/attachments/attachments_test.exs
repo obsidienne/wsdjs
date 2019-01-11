@@ -4,7 +4,7 @@ defmodule Wsdjs.AttachmentsTest do
   alias Wsdjs.Attachments
 
   describe "video" do
-    alias Wsdjs.Attachments.Video
+    alias Wsdjs.Attachments.Videos.Video
 
     def song_fixture(attrs \\ %{}) do
       user_attrs = %{"email" => "dummy#{System.unique_integer()}@bshit.com"}
@@ -19,7 +19,7 @@ defmodule Wsdjs.AttachmentsTest do
           "url" => "http://youtu.be/dummy"
         })
         |> Map.put("user_id", user.id)
-        |> Wsdjs.Musics.create_song()
+        |> Wsdjs.Musics.Songs.create_song()
 
       song
     end
@@ -33,7 +33,7 @@ defmodule Wsdjs.AttachmentsTest do
     def video_fixture do
       song = song_fixture()
 
-      {:ok, %Wsdjs.Attachments.Video{} = video} =
+      {:ok, %Wsdjs.Attachments.Videos.Video{} = video} =
         @valid_attrs
         |> Map.put("user_id", song.user_id)
         |> Map.put("song_id", song.id)
@@ -44,7 +44,7 @@ defmodule Wsdjs.AttachmentsTest do
 
     test "list_videos/1 returns all videos for a song" do
       video = video_fixture()
-      song = Wsdjs.Musics.get_song!(video.song_id)
+      song = Wsdjs.Musics.Songs.get_song!(video.song_id)
       assert Attachments.list_videos(song) == [video] |> Repo.preload(:event)
     end
 

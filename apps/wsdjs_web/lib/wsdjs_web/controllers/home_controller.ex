@@ -7,7 +7,7 @@ defmodule WsdjsWeb.HomeController do
 
   @spec index(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def index(conn, _params) do
-    songs = Musics.instant_hits()
+    songs = Musics.Songs.instant_hits()
     top = Charts.last_top(conn.assigns.current_user)
 
     render(conn, "index.html", songs: songs, top: top)

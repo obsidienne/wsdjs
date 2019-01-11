@@ -30,10 +30,10 @@ defmodule WsdjsWeb.ScrollingChannel do
   def handle_in("song", %{"month" => month} = params, socket) do
     current_user = socket.assigns[:current_user]
 
-    songs = Musics.list_songs(current_user, params)
+    songs = Musics.Songs.list_songs(current_user, params)
 
     month = Timex.parse!(month, "%Y-%m-%d", :strftime)
-    next_month = Musics.songs_interval(current_user, params)
+    next_month = Musics.Songs.songs_interval(current_user, params)
 
     tpl =
       Phoenix.View.render_to_string(
@@ -57,7 +57,7 @@ defmodule WsdjsWeb.ScrollingChannel do
   # If there is no result then, we call handle_in with nil
   def handle_in("song", params, socket) do
     current_user = socket.assigns[:current_user]
-    first_month = Musics.songs_interval(current_user, params)
+    first_month = Musics.Songs.songs_interval(current_user, params)
 
     params =
       if is_nil(first_month) do

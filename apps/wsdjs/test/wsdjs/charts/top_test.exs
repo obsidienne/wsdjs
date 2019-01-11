@@ -8,15 +8,15 @@ defmodule Wsdjs.Charts.TopTest do
 
   describe "changeset" do
     test "changeset with minimal valid attributes" do
-      changeset =
-        Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: Ecto.UUID.generate()})
+      {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+      changeset = Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: dummy_id})
 
       assert changeset.valid?
     end
 
     test "top owner account must exist" do
-      top =
-        Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: Ecto.UUID.generate()})
+      {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+      top = Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: dummy_id})
 
       assert {:error, %Ecto.Changeset{} = changeset} = Repo.insert(top)
       assert "does not exist" in errors_on(changeset).user

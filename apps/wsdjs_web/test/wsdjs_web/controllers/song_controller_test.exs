@@ -41,47 +41,47 @@ defmodule WsdjsWeb.SongControllerTest do
     {:ok, song} =
       attrs
       |> Map.put(:title, "song")
-      |> Wsdjs.Musics.create_song()
+      |> Wsdjs.Musics.Songs.create_song()
 
     {:ok, instant_hit} =
       attrs
       |> Map.put(:title, "instant hit")
-      |> Wsdjs.Musics.create_song!()
-      |> Wsdjs.Musics.update_song(%{instant_hit: true}, %User{admin: true})
+      |> Wsdjs.Musics.Songs.create_song!()
+      |> Wsdjs.Musics.Songs.update(%{instant_hit: true}, %User{admin: true})
 
     {:ok, public_track} =
       attrs
       |> Map.put(:title, "public track")
-      |> Wsdjs.Musics.create_song!()
-      |> Wsdjs.Musics.update_song(%{public_track: true}, %User{admin: true})
+      |> Wsdjs.Musics.Songs.create_song!()
+      |> Wsdjs.Musics.Songs.update(%{public_track: true}, %User{admin: true})
 
     {:ok, hidden_track} =
       attrs
       |> Map.put(:title, "hidden track")
-      |> Wsdjs.Musics.create_song!()
-      |> Wsdjs.Musics.update_song(%{hidden_track: true}, %User{admin: true})
+      |> Wsdjs.Musics.Songs.create_song!()
+      |> Wsdjs.Musics.Songs.update(%{hidden_track: true}, %User{admin: true})
 
     {:ok,
      song: song, instant_hit: instant_hit, public_track: public_track, hidden_track: hidden_track}
   end
 
-  defp create_ranks(%{admin: admin}) do
-    dt = Timex.beginning_of_month(Timex.today())
-    top = insert(:top, %{due_date: dt, status: "published"})
-    rank1 = insert(:rank, position: 1, top: top)
-    rank10 = insert(:rank, position: 10, top: top)
-    rank11 = insert(:rank, position: 11, top: top)
+  # defp create_ranks(%{admin: admin}) do
+  #   dt = Timex.beginning_of_month(Timex.today())
+  #   top = insert(:top, %{due_date: dt, status: "published"})
+  #   rank1 = insert(:rank, position: 1, top: top)
+  #   rank10 = insert(:rank, position: 10, top: top)
+  #   rank11 = insert(:rank, position: 11, top: top)
 
-    dt =
-      Timex.today()
-      |> Timex.beginning_of_month()
-      |> Timex.shift(months: -2)
+  #   dt =
+  #     Timex.today()
+  #     |> Timex.beginning_of_month()
+  #     |> Timex.shift(months: -2)
 
-    top = insert(:top, %{due_date: dt, status: "published"})
-    rank1 = insert(:rank, position: 1, top: top)
-    rank10 = insert(:rank, position: 10, top: top)
-    rank11 = insert(:rank, position: 11, top: top)
-  end
+  #   top = insert(:top, %{due_date: dt, status: "published"})
+  #   rank1 = insert(:rank, position: 1, top: top)
+  #   rank10 = insert(:rank, position: 10, top: top)
+  #   rank11 = insert(:rank, position: 11, top: top)
+  # end
 
   describe "access actions" do
     setup [:create_users, :create_songs]
@@ -89,12 +89,12 @@ defmodule WsdjsWeb.SongControllerTest do
     test "requires user authentication on actions", %{conn: conn, song: song} do
       Enum.each(
         [
-          get(conn, song_path(conn, :new)),
-          get(conn, song_path(conn, :index)),
-          get(conn, song_path(conn, :edit, song.id)),
-          put(conn, song_path(conn, :update, song.id, %{})),
-          post(conn, song_path(conn, :create, %{})),
-          delete(conn, song_path(conn, :delete, song.id))
+          get(conn, Routes.song_path(conn, :new)),
+          get(conn, Routes.song_path(conn, :index)),
+          get(conn, Routes.song_path(conn, :edit, song.id)),
+          put(conn, Routes.song_path(conn, :update, song.id, %{})),
+          post(conn, Routes.song_path(conn, :create, %{})),
+          delete(conn, Routes.song_path(conn, :delete, song.id))
         ],
         fn conn ->
           assert html_response(conn, 302)
@@ -124,7 +124,7 @@ defmodule WsdjsWeb.SongControllerTest do
           assign(conn, :current_user, suggestor)
         ],
         fn conn ->
-          conn = get(conn, song_path(conn, :show, instant_hit))
+          conn = get(conn, Routes.song_path(conn, :show, instant_hit))
           assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, instant_hit.title)
         end
@@ -148,7 +148,7 @@ defmodule WsdjsWeb.SongControllerTest do
           assign(conn, :current_user, suggestor)
         ],
         fn conn ->
-          conn = get(conn, song_path(conn, :show, public_track))
+          conn = get(conn, Routes.song_path(conn, :show, public_track))
           assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, public_track.title)
         end
@@ -171,7 +171,7 @@ defmodule WsdjsWeb.SongControllerTest do
           assign(conn, :current_user, suggestor)
         ],
         fn conn ->
-          conn = get(conn, song_path(conn, :show, hidden_track))
+          conn = get(conn, Routes.song_path(conn, :show, hidden_track))
           assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, hidden_track.title)
         end
@@ -184,7 +184,7 @@ defmodule WsdjsWeb.SongControllerTest do
           assign(conn, :current_user, dj)
         ],
         fn conn ->
-          conn = get(conn, song_path(conn, :show, hidden_track))
+          conn = get(conn, Routes.song_path(conn, :show, hidden_track))
           assert html_response(conn, 302)
         end
       )
@@ -203,7 +203,7 @@ defmodule WsdjsWeb.SongControllerTest do
       Enum.each(
         [song, public_track, instant_hit, hidden_track],
         fn song ->
-          conn = get(conn, song_path(conn, :show, song))
+          conn = get(conn, Routes.song_path(conn, :show, song))
           assert html_response(conn, 200) =~ "Song - World Swing DJs"
           assert String.contains?(conn.resp_body, song.title)
         end
