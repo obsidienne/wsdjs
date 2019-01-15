@@ -1,5 +1,5 @@
 <section class="container">
-  <%= form_for @conn, Routes.registration_path(@conn, :create), [as: :signup, class: "container-form"], fn f -> %>
+  <%= form_for @conn, Routes.registration_path(@conn, :create), [as: :signup, class: "w-full max-w-sm"], fn f -> %>
   <div class="form-group">
     <h3>Registration</h3>
     <span class="text-muted">Get a registration link sent to your email</span>

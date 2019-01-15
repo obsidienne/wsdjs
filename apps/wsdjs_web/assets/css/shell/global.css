@@ -17,10 +17,6 @@
   --font-size: 16px;
 }
 
-html {
-  box-sizing: border-box;
-}
-
 body {
   background-color: var(--bg-color);
   padding-bottom: 6rem;

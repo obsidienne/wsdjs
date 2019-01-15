@@ -1,5 +1,5 @@
 <section class="container">
-  <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session, class: "container-form"], fn f -> %>
+  <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session, class: "w-full max-w-sm"], fn f -> %>
   <div class="form-group">
     <h3>Sign in</h3>
     <span class="text-muted">Get a magic link sent to your email that'll sign you instantly !</span>
