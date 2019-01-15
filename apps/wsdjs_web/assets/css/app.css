@@ -1,4 +1,96 @@
-@import "./shell/normalize.css";
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/preflight";
+ */
+@tailwind preflight;
+
+/**
+ * This injects any component classes registered by plugins.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/components";
+ */
+@tailwind components;
+
+/**
+ * Here you would add any of your custom component classes; stuff that you'd
+ * want loaded *before* the utilities so that the utilities could still
+ * override them.
+ *
+ * Example:
+ *
+ * .btn { ... }
+ * .form-input { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "components/buttons";
+ * @import "components/forms";
+ */
+@import "./components/buttons.css";
+
+
+.comment__avatar__img {
+    @apply w-12 h-12 rounded-full shadow border-2 border-solid border-white;
+}
+.container {
+    @apply mx-auto px-4 w-full max-w-md;
+}
+.aboutme a {
+    @apply underline;
+}
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/utilities";
+ */
+@tailwind utilities;
+
+
+/**
+ * Here you would add any custom utilities you need that don't come out of the
+ * box with Tailwind.
+ *
+ * Example :
+ *
+ * .bg-pattern-graph-paper { ... }
+ * .skew-45 { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "utilities/background-patterns";
+ * @import "utilities/skew-transforms";
+ */
+.d-grid {
+    display: grid;
+}
+
+.pt-full {
+    padding-top: 100%;
+}
+
+.line-upper:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: 0;
+    border-top: 2px solid hsl(45, 100%, 51.4%);
+    border-top: 2px solid var(--accent-color);
+}
+
+
 @import "./shell/global.css";
 @import "./shell/nav.css";
 @import "./shell/layout.css";
@@ -20,14 +112,7 @@
 @import "./tops.css";
 @import "./radio.css";
 @import "./user.css";
-@import "./utilities/align.css";
 @import "./utilities/border.css";
-@import "./utilities/display.css";
 @import "./utilities/flex.css";
-@import "./utilities/position.css";
-@import "./utilities/sizes.css";
 @import "./utilities/shadow.css";
-@import "./utilities/spacing.css";
-@import "./utilities/text.css";
-@import 'shame.css';
 @import '../node_modules/leaflet/dist/leaflet.css';

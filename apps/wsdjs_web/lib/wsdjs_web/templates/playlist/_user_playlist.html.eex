@@ -1,13 +1,13 @@
 <section id="playlist-section">
-  <div class="d-flex flex-wrap mb-2 mt-3 align-items-center h-5">
-    <%= link to: Routes.user_playlist_path(@conn, :index, @user), class: "d-flex" do %>
+  <div class="flex flex-wrap mb-2 mt-4 items-center h-12">
+    <%= link to: Routes.user_playlist_path(@conn, :index, @user), class: "flex" do %>
     <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
       <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
     <% end %>
 
-    <span class="playlist-name h3 d-flex ml-auto"><%= @playlist.name %>
+    <span class="playlist-name h3 flex ml-auto"><%= @playlist.name %>
     <%= if @playlist.public == true do %>
       <span class="tippy ml-2" title="this list is public">
         <svg fill="#777777" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +43,7 @@
     </tr>
     <%= for song <- @playlist_songs do %>
     <tr>
-      <td class="w-6">
+      <td class="w-16">
         <img src="<%= Attachments.art_url(song.art, 64) %>" srcset="<%= Attachments.art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
       <td>

@@ -1,25 +1,25 @@
-<nav class="secondary-nav py-2">
+<nav class="secondary-nav py-4">
   <ol class="container">
-    <li class="current d-inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
-    <li class="d-inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
+    <li class="current inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
+    <li class="inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
   </ol>
 </nav>
 
 <section>
-  <div class="song-page container d-flex mt-4 pb-6">
-    <div class="song-page__art shadow-nohover">
+  <div class="flex md:flex-row flex-col justify-start container mt-6 pb-12">
+    <div class="song-page__art flex-grow shadow-nohover">
       <img src="<%= Attachments.art_url(@song.art, 300) %>" srcset="<%= Attachments.art_srcset(@song.art, 300) %>" sizes="300px" class="responsive"/>
     </div>
-    <div class="song-page__details d-flex flex-column">
+    <div class="flex flex-col md:pl-4">
       <span class="h2 primary-text"><%= @song.title %></span>
       <span class="h3 secondary-text pb-2"><span class="text-muted">by</span> <%= @song.artist %></span>
-      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
+      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
       </div>
 
-      <div class="song-page__tags pt-3">
+      <div class="song-page__tags pt-4">
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
@@ -40,7 +40,7 @@
         <% end %>
       </div>
 
-      <div class="song-page__tags song-opinions mb-3">
+      <div class="song-page__tags song-opinions mb-4">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
         <span class="ml-auto p-2 pr-0 text-right playlist-picker"  data-song-id="<%= @song.id %>">
           <svg height='24' viewBox='0 0 24 24' width='24'>
@@ -50,17 +50,17 @@
       </div>
       
       <%= if @song.url do %>
-        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary song-page__play" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
+        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary song-page__play mt-auto mb-0" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
       <% end %>
     </div>
   </div>
   <template id="playlist-picker-tpl">
   <div>
-    <span class="d-block pb-2 mx-3 text-center border-bottom">Playlists</span>
+    <span class="block pb-2 mx-4 text-center border-bottom">Playlists</span>
     <ul>
       <%= for playlist <- @playlists do %>
       <li>
-        <button class="bg-hover btn-no-style d-block py-2 px-3 w-100 text-left song-picker-playlist" data-id="<%= playlist.id %>"><%= playlist.name %></button>
+        <button class="bg-hover btn-no-style block py-2 px-4 w-full text-left song-picker-playlist" data-id="<%= playlist.id %>"><%= playlist.name %></button>
       </li>
       <% end %>
     </ul>
@@ -68,12 +68,12 @@
   </template>
 </section>
 
-<div class="container song-page__sections d-flex">
+<div class="container flex-col md:flex-row flex">
   <div class="song-page__sections__content">
     <%= unless @current_user do %>
     <section class="unconnected">
-      <span class="h1 d-block">World Swing DeeJays</span>
-      <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
+      <span class="h1 block">World Swing DeeJays</span>
+      <span class="h2 block">The best West Coast Swing music from all around the world !</span>
 
       <%= link to: Routes.session_path(@conn, :new) do %>
         <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
@@ -81,7 +81,7 @@
       or 
       <%= link "register", to: Routes.registration_path(@conn, :new) %>
 
-      <div class="mt-4">
+      <div class="mt-6">
         <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FWorld-Swing-DJs-1430112430533570%2F&width=85&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" 
                 width="103" height="21" 
                 style="border:none;overflow:hidden" 
@@ -96,8 +96,8 @@
 
   <div class="song-page__sections__aside">
     <%= if Wsdjs.Musics.Songs.can?(@current_user, :edit, @song) == :ok do %>
-    <fieldset>
-      <legend>Actions</legend>
+    <fieldset class="p-2 border-0 shadow-inner">
+      <legend class="px-2">Actions</legend>
       <%= link "Edit song", to: Routes.song_path(@conn, :edit, @song), class: "btn btn-primary" %>
       <%= if Wsdjs.Musics.Songs.can?(@current_user, :delete,  @song) == :ok do %>
         <%= link "Delete song", to: Routes.song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %>
@@ -108,15 +108,15 @@
 </div>
 
 <template id="comment-tpl">
-  <li class="d-flex mb-3">
-    <div class="d-none d-md-flex comment__avatar">
+  <li class="flex mb-4">
+    <div class="hidden md:flex">
       <img src="{{user.avatars.avatar_uri}}"  class="comment__avatar__img">
     </div>
 
-    <div class="comment__body">
-      <header class="comment__header d-flex align-items-center p-2">
+    <div class="w-auto md:mx-2 relative bg-white shadow flex-1">
+      <header class="bg-grey-light flex items-center p-2">
         <span>
-          <a href="{{user.path}}" class="clickable visible-link action-link d-inline-block">{{user.name}}</a>
+          <a href="{{user.path}}" class="clickable visible-link action-link inline-block">{{user.name}}</a>
           <time title="{{commented_at}}" datetime="{{commented_at}}"></time>
         </span>
         <button class="btn-link comment__delete ml-auto" data-path="<%= ApiRoutes.comment_path(@conn, :delete, "{{id}}") %>">
@@ -126,7 +126,7 @@
           </svg>
         </button>
       </header>
-      <div class="comment__content px-2" data-autolink>{{text_html}}</div>
+      <div class="text-black bg-white px-2" data-autolink>{{text_html}}</div>
     </div>
   </li>
 </template>

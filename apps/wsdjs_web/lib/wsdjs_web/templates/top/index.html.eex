@@ -5,9 +5,9 @@
 </header>
 
 <%= if is_nil(@current_user) do %>
-  <div class="container pt-5">
-    <span class="h1 d-block">World Swing DeeJays</span>
-    <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
+  <div class="container pt-8">
+    <span class="h1 block">World Swing DeeJays</span>
+    <span class="h2 block">The best West Coast Swing music from all around the world !</span>
 
     <%= link to: Routes.session_path(@conn, :new) do %>
       <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
@@ -17,10 +17,10 @@
   </div>
 <% end %>
 
-<section id="top-list" class="tops container mt-3">
+<section id="top-list" class="tops container mt-4">
   <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-   <article class="tops__top d-flex mt-3 ">
-      <a class="card clickable tops__top__content shadow d-flex border border-dashed border-thick " title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">
+   <article class="tops__top flex mt-4 ">
+      <a class="card clickable tops__top__content shadow flex border border-dashed border-4 " title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">
         <span>Create a new top</span>
         <svg width="24" height="24" viewBox="0 0 24 24" class="ml-auto">
           <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>
@@ -33,6 +33,6 @@
     <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
   <%= if @page_number < @total_pages do %>
-  <div class="sentinel text-centered m-3" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
+  <div class="sentinel text-centered m-4" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
   <% end %>
 </section>

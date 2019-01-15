@@ -1,17 +1,17 @@
 <li class="hot-songs__song" data-id="<%= @song.id %>">
-  <article class="song-card card shadow clickable d-flex flex-column">
-    <div class="py-2 px-3 d-flex align-items-center">
-      <img class="mr-2 rounded-circle" src="<%= Attachments.avatar_url(@song.user.avatar, 32) %>" srcset="<%= Attachments.avatar_srcset(@song.user.avatar, 32) %>" sizes="32px">
+  <article class="song-card card shadow clickable flex flex-col">
+    <div class="py-2 px-4 flex items-center">
+      <img class="mr-2 rounded-full" src="<%= Attachments.avatar_url(@song.user.avatar, 32) %>" srcset="<%= Attachments.avatar_srcset(@song.user.avatar, 32) %>" sizes="32px">
       <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link clickable action-link text-ellipsis" %>
-      <span class="secondary-text text-nowrap">
+      <span class="secondary-text whitespace-no-wrap">
         <%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b", :strftime)%>
       </span>
     </div>
-    <a href="<%= url_for_provider(@song) %>" class="song-card__header p-0 d-block" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
+    <a href="<%= url_for_provider(@song) %>" class="song-card__header p-0 block" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>
       <div class="img-embed">
         <img src="<%= Attachments.art_url(nil, 200) %>" data-src="<%= Attachments.art_url(@song.art, 200) %>" data-srcset="<%= Attachments.art_srcset(@song.art, 200) %>" sizes="200px" class="responsive" />
       </div>
-      <div class="song-card__tags d-flex  px-3 py-2 w-100">
+      <div class="song-card__tags flex  px-4 py-2 w-full">
         <span class="label label-default mr-1"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
         <span class="label label-primary mr-1"><%= @song.bpm %> bpm</span>
@@ -25,14 +25,14 @@
       </div>
     </a>
 
-    <div class="px-3 py-0 ">
+    <div class="px-4 py-0 ">
       <%= link @song.title, to: Routes.song_path(@conn, :show, @song.id), class: "primary-text action-link visible-link text-ellipsis" %>
       <div class="secondary-text text-ellipsis"><%= @song.artist %></div>
     </div>
 
     <%= unless is_nil(@current_user) do %>
     <% op = current_opinion(@song.opinions, @current_user) %>
-    <footer class="d-flex justify-content-between align-items-center w-100 px-2 py-2 " data-opinion-id="<%= opinion_id(op) %>">
+    <footer class="flex justify-between items-center w-full px-2 py-2 " data-opinion-id="<%= opinion_id(op) %>">
       <span class="opinion-picker p-2 bg-hover cursor-pointer" data-opinion="<%= opinion_kind(op) %>">
         <%= if is_nil(op) do %>
           <svg fill='#455A64' height='24' viewBox='0 0 24 24' width='24'><path d='M0 0h24v24H0z' fill='none'/><path d='M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z'/></svg>

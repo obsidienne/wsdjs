@@ -8,10 +8,6 @@
     box-shadow: var(--shadow-active);
 }
 
-.shadow-none {
-    box-shadow: none !important;
-}
-
 .shadow-hover:hover input[type=submit] {
     opacity: 1;
 }

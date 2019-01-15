@@ -1,11 +1,4 @@
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-  width: 100%;
-  max-width: 720px;
-}
+
 
 .SessionNewView .container-form,
 .RegistrationNewView .container-form {

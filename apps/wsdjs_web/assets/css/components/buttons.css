@@ -1,0 +1,21 @@
+.btn {
+    @apply font-normal py-2 px-4 rounded inline-block text-center;
+    @apply align-middle border-0 cursor-pointer whitespace-no-wrap select-none;
+}
+.btn-primary {
+    @apply bg-blue text-white;
+}
+.btn-primary:hover {
+    @apply bg-blue-dark;
+}
+.btn-danger {
+    @apply bg-red text-white;
+}
+.btn-danger:hover {
+    @apply bg-red-dark;
+}
+.fab {
+    @apply fixed p-1 rounded-full z-50 flex;
+    right: 1rem;
+    bottom: 4rem;
+}

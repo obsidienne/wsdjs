@@ -6,17 +6,17 @@
 
 <%= if @current_user && (@current_user.id == @top.user_id || @current_user.admin == true) do %>
 <%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb py-2">
+<nav class="secondary-nav breadcrumb py-4">
   <ol class="container">
-    <li class="visited d-inline-block">Check</li>
-    <li class="current d-inline-block">Voting</li>
-    <li class="d-inline-block"><%= submit "next step : counting", class: "btn btn-link", name: "direction", value: "next" %></li>
+    <li class="visited inline-block">Check</li>
+    <li class="current inline-block">Voting</li>
+    <li class="inline-block"><%= submit "next step : counting", class: "btn btn-link", name: "direction", value: "next" %></li>
   </ol>
 </nav>
 <% end %>
 <% end %>
 
-<div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
+<div class="container flex items-center justify-end mb-2 mt-4 h-12">
   <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
   <%= link "Delete top", to: Routes.top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
   <% end %>
@@ -45,7 +45,7 @@
             <img src="<%= Attachments.art_url(rank.song.art, 300) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />
           </div>
           <%= if rank.song.url do %>
-            <a href="<%= url_for_provider(rank.song) %>" class="d-flex song-art__play" target="_blank" rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
+            <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play" target="_blank" rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
               <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
                 <path d='M0 0h24v24H0z' fill='none'/>
                 <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>

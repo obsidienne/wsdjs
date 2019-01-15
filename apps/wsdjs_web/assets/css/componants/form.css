@@ -1,15 +1,3 @@
-fieldset {
-  padding: 8px;
-  border: 0;
-  box-shadow: inset 0px 0px 3px var(--inactive-color);
-}
-
-legend {
-  background-color: var(--bg-color);
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
 input[type="radio"],
 input[type="checkbox"] {
   margin: 4px 0 0;

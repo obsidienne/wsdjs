@@ -1,22 +1,22 @@
-<nav class="secondary-nav mb-3 py-2">
+<nav class="secondary-nav mb-4 py-4">
   <ol class="container">
-    <li class="d-inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
-    <li class="current d-inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
+    <li class="inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
+    <li class="current inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
   </ol>
 </nav>
 
 
 <section class="container">
-  <div class="d-flex p-2 bg-white">
+  <div class="flex p-2 bg-white">
     <div>
       <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
     </div>
-    <div class="pl-3">
+    <div class="pl-4">
       <div>
         <span class="primary-text"><%= @song.title %></span>
         <span class="secondary-text pb-2"><span class="text-muted">by</span> <%= @song.artist %></span>
       </div>
-      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
+      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
@@ -25,15 +25,15 @@
   </div>
 </section>
 
-<div class="container song-page__sections d-flex">
-  <section id="overview-video" class="overview-video mb-3 d-flex flex-wrap flex-column">
+<div class="container flex-col md:flex-row flex">
+  <section id="overview-video" class="overview-video mb-4 flex flex-wrap flex-col">
     <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
   </section>
 
   <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
     <%= form_for @video_changeset, ApiRoutes.song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
-      <fieldset>
-        <legend>Add a video</legend>
+      <fieldset class="p-2 border-0 shadow-inner">
+        <legend class="px-2">Add a video</legend>
         <div class="form-group">
           <%= text_input f, :url, type: "url", class: "form-control", placeholder: "Video url", required: true, maxlength: 255 %>
           <%= error_tag f, :url %>
@@ -54,7 +54,7 @@
 </div>
 
 <template id="video-tpl">
-  <article class="song-page__video card shadow clickable d-flex mb-2">
+  <article class="song-page__video card shadow clickable flex mb-2">
     <a href="{{url}}" target="_blank" rel="noopener">
       <img src="//res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg" srcset="https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg 100w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_200,q_auto/fl_immutable_cache/{{video_id}}.jpg 200w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_300,q_auto/fl_immutable_cache/{{video_id}}.jpg 300w" sizes="100px" height="auto" width="100">
       <svg fill="#FFC107" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

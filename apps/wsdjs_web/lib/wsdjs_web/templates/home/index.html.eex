@@ -5,15 +5,15 @@
   </div>
 </header>
 <% else %>
-  <div class="pt-5 container">
-    <span class="h1 d-block">World Swing DeeJays</span>
-    <span class="h2 d-block">The best West Coast Swing music from all around the world !</span>
+  <div class="pt-8 container">
+    <span class="h1 ">World Swing DeeJays</span>
+    <span class="h2 block">The best West Coast Swing music from all around the world !</span>
 
     <%= link to: Routes.session_path(@conn, :new) do %>
       <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
     <% end %>
     or 
-    <%= link "register", to: Routes.registration_path(@conn, :new), class: "d-inline-block visible-link clickable" %>
+    <%= link "register", to: Routes.registration_path(@conn, :new), class: "inline-block visible-link clickable" %>
   </div>
 <% end %>
 

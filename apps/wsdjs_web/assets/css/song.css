@@ -1,26 +1,14 @@
 /****************************
   song-page
 ****************************/
-.song-page {
-  justify-content: flex-start;
-  flex-direction: column;
-}
-
 .song-page__art {
   flex-basis: 288px;
-  flex-grow: 1;
   max-width: 381px;
   max-height: 381px;
 }
 
 .song-page__play {
-  margin-top: auto;
-  margin-bottom: 0;
   max-width: 16ch;
-}
-
-.song-page__sections {
-  flex-direction: column;
 }
 
 .song-page__sections__aside {
@@ -77,18 +65,6 @@
 }
 
 @media (min-width: 768px) {
-  .song-page {
-    flex-direction: row;
-  }
-
-  .song-page__details {
-    padding-left: 1rem;
-  }
-
-  .song-page__sections {
-    flex-direction: row;
-  }
-
   .song-page__sections__content {
     margin-right: 1rem;
     flex: 1 0 60ch;

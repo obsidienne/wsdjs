@@ -9,17 +9,17 @@
   <% end %>
 <% end %>
 
-<ul id="comments-container" class="mt-3">
+<ul id="comments-container" class="mt-4">
   <%= for comment <- @comments do %>
-    <li class="d-flex mb-3">
-      <div class="d-none d-md-flex comment__avatar">
+    <li class="flex mb-4">
+      <div class="hidden md:flex">
         <img src="<%= Attachments.avatar_url(comment.user.avatar, 50) %>" srcset="<%= Attachments.avatar_srcset(comment.user.avatar, 50) %>" sizes="50px" class="comment__avatar__img" alt="<%= user_avatar_alt(comment.user) %>">
       </div>
 
-      <div class="comment__body">
-        <header class="comment__header d-flex align-items-center p-2">
+      <div class="w-auto md:mx-2 relative bg-white shadow flex-1">
+        <header class="bg-grey-light flex items-center p-2">
           <span>
-            <a href="<%= Routes.user_path(@conn, :show, comment.user) %>" class="clickable visible-link action-link d-inline-block"><%= comment.user.name %></a>
+            <a href="<%= Routes.user_path(@conn, :show, comment.user) %>" class="clickable visible-link action-link inline-block"><%= comment.user.name %></a>
             <time title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
           </span>
           <%= if Wsdjs.Reactions.Comments.can?(@conn.assigns[:current_user], :delete, comment) == :ok do %>
@@ -31,7 +31,7 @@
             </button>
           <% end %>
         </header>
-        <div class="comment__content px-2" data-autolink>
+        <div class="text-black bg-white px-2" data-autolink>
           <%= raw(comment.text_html) %>
         </div>
       </div>

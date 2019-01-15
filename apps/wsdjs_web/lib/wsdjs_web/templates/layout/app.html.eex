@@ -55,7 +55,7 @@
 
   <body>
     <nav class="glnav line-upper">
-      <div class="container d-flex flex-wrap align-items-end">
+      <div class="container flex flex-wrap items-end">
         <%= link to: Routes.home_path(@conn, :index), class: "home clickable" do %>
         <svg class="logo logo-small" fill='#D3D8E0' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
           <g>
@@ -107,7 +107,7 @@
       </div>
     </nav>
 
-    <main class="<%= js_view_name(@conn, @view_template) %> d-flex flex-column justify-content-between"
+    <main class="<%= js_view_name(@conn, @view_template) %> flex flex-col justify-between"
           data-js-view-name="<%= js_view_name(@conn, @view_template) %>"
           data-user-id="<%= current_user_id(@current_user) %>">
       <%= render @view_module, @view_template, assigns %>

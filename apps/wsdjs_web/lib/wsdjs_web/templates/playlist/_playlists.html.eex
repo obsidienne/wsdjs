@@ -4,8 +4,8 @@
     <%= if Wsdjs.Playlists.can?(@current_user, :new) == :ok do %>
     <li class="clickable">
         <%= link to: Routes.user_playlist_path(@conn, :new, @current_user), class: "playlist clickable" do %>
-          <div class="border border-dashed border-thick pt-100 position-relative">
-            <div class="position-absolute w-100 h-100 top-0 p-3 text-center d-flex flex-column align-items-center justify-content-around">
+          <div class="border border-dashed border-4 pt-full relative">
+            <div class="absolute w-full h-full pin-t p-4 text-center flex flex-col items-center justify-around">
             Add a new TOP or playlist
             <svg width="40" height="40" viewBox="0 0 24 24">
               <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>

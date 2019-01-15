@@ -1,31 +1,31 @@
 <div class="mb-2">
-  <section class="user-page__profile__section p-3 w-100">
-    <header class="d-flex flex-column">
-      <div class="d-flex align-items-end justify-content-between">
-        <div class="d-flex">
+  <section class="relative bg-white p-4 w-full">
+    <header class="flex flex-col">
+      <div class="flex items-end justify-between">
+        <div class="flex">
           <%= if @user.profil_djvip do %><span class="label label-primary mr-2">DJ VIP</span><% end %>
           <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
         </div>
 
         <%= if @user.verified_profil do %>
-        <div class="d-flex justify-content-end">
-          <svg style="width:24px;height:24px" viewBox="0 0 24 24" class="tippy pointer-event-auto" title="User profil has been verified">
+        <div class="flex justify-end">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24" class="tippy pointer-events-auto" title="User profil has been verified">
             <path fill="#00b200" d="M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z" />
           </svg>
         </div>
         <% end %>
 
       </div>
-      <div class="user-page__avatar">
-        <img src="<%= Attachments.avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 50) %>" class="responsive rounded-circle">
+      <div class="user-page__avatar flex self-center w-24 h-24 flex-no-grow flex-no-shrink">
+        <img src="<%= Attachments.avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 50) %>" class="responsive rounded-full">
       </div>
-      <div class="user-page__profile-details px-1 w-100">
-        <span class="text-ellipsis user-name"><%= @user.name %></span>
+      <div class="flex-shrink flex-grow flex-auto min-w-0 px-1 w-full">
+        <span class="text-ellipsis font-bold text-center"><%= @user.name %></span>
         <%= if @user.djname do %>
-          <span class="text-ellipsis text-muted user-djanme"><%= @user.djname %></span>
+          <span class="text-ellipsis text-muted text-center font-normal"><%= @user.djname %></span>
         <% end %>
         <%= if @user.user_country do %>
-        <div class="d-flex mt-auto justify-content-center text-muted">
+        <div class="flex mt-auto justify-center text-muted">
           <svg fill='#455A64' height='24' viewBox= '0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
             <path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>
             <path d='M0 0h24v24H0z' fill='none'/>
@@ -36,7 +36,7 @@
       </div>
     </header>
 
-    <footer class="d-flex flex-wrap justify-content-between align-items-center mt-3">
+    <footer class="flex flex-wrap justify-between items-center mt-4">
       <%= if @user && @user.parameter && @user.parameter.email_contact do %>
       <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Send an eMail</a>
       <% end %>
@@ -46,7 +46,7 @@
     </footer>
   </section>
 
-  <ul class="user-page__profile__section  p-3 d-none d-md-flex flex-wrap w-100">
+  <ul class="relative bg-white p-4 hidden md:flex flex-wrap w-full">
     <li class="my-0 mx-2"><span class="tag"><%= @suggested_songs %> songs</li>
   </ul>
 

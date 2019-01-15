@@ -16,10 +16,11 @@
     "tippy.js": "~3.4.0"
   },
   "devDependencies": {
-    "autoprefixer": "^9.1.5",
     "@babel/core": "^7.0.0",
-    "babel-loader": "^8.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@fullhuman/postcss-purgecss": "^1.1.0",
+    "autoprefixer": "^9.1.5",
+    "babel-loader": "^8.0.0",
     "copy-webpack-plugin": "^4.5.0",
     "css-loader": "^0.28.10",
     "file-loader": "^1.1.11",
@@ -27,6 +28,7 @@
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "postcss-loader": "^3.0.0",
     "style-loader": "^0.20.2",
+    "tailwindcss": "^0.7.3",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "4.4.0",
     "webpack-bundle-analyzer": "2.13.1",

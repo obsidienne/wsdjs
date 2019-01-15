@@ -1,4 +1,4 @@
-<section class="container song-edit d-flex mt-3 flex-column flex-md-row">
+<section class="container song-edit flex mt-4 flex-col md:flex-row">
   <div id="art_div">
     <img id="art_thumbnail" src="<%= Attachments.art_url(@song.art, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
