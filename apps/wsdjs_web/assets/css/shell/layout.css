@@ -3,13 +3,6 @@
   grid-gap: .5rem;
 }
 
-#avatar_div,
-#art_div {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-}
-
 #avatar_div .form-group,
 #art_div .form-group {
   margin-bottom: 0;

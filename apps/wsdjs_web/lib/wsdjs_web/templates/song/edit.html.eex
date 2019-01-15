@@ -1,5 +1,5 @@
 <section class="container song-edit flex mt-4 flex-col md:flex-row">
-  <div id="art_div">
+  <div id="art_div" class="flex flex-col mb-12">
     <img id="art_thumbnail" src="<%= Attachments.art_url(@song.art, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
       <button id="song_edit_cldwidget_opener" class="btn btn-primary">Upload cover</button>
