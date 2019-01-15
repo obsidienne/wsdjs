@@ -6,7 +6,7 @@
       <% song = List.first(@songs) %>
       <%= if Map.has_key?(song, "path") do %>
         <img src="<%= Map.fetch!(song, "image_uri") %>" 
-            srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive shadow-nohover"/>
+            srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive shadow"/>
         <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body visible-link action-link h1 clickable text-center">
           <%=Map.fetch!(song, "title") %>
         </a>

@@ -1,6 +1,6 @@
 <%= if blur_track(@song, @current_user) == false do %>
 
-<li class="shadow-hover">
+<li class="hover:shadow">
   <div class="flex m-0" data-id="<%=  %>">
     <div class="search-minicard__heading p-0 border-0">
       <img src="<%= Attachments.art_url(@song.art, 100) %>" class="responsive" />

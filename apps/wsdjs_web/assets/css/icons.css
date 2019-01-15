@@ -37,7 +37,7 @@
   border: 2px solid white;
   font-weight: bold;
   color: #333;
-  box-shadow: var(--shadow-active);
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
 }
 
 .tippy-tooltip.wsdjs-theme .tippy-backdrop {
@@ -58,7 +58,7 @@
   font-weight: bold;
   color: #333;
   padding: 0;
-  box-shadow: var(--shadow-active);
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
 }
 
 .tippy-tooltip.playlist-picker-theme .tippy-backdrop {
