@@ -71,7 +71,7 @@
           <img src="<%= Attachments.art_url(song.art, 96) %>" srcset="<%= Attachments.art_srcset(song.art, 96) %>" sizes="96px" class="object-contain responsive" />
         </div>
       </div>
-      <div class="flex-grow-1 pr-2">
+      <div class="flex-grow pr-2">
         <%= link song.title, to: Routes.song_path(@conn, :show, song), class: "primary-text action-link visible-link block" %>
         <div class="secondary-text"><%= song.artist %></div>
         <div>

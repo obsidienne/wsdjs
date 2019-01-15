@@ -113,5 +113,4 @@
 @import "./radio.css";
 @import "./user.css";
 @import "./utilities/border.css";
-@import "./utilities/flex.css";
 @import '../node_modules/leaflet/dist/leaflet.css';
