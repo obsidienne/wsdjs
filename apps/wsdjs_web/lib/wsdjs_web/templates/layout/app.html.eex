@@ -53,7 +53,7 @@
     <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
   </head>
 
-  <body>
+  <body class="font-sans bg-grey-lightest">
     <nav class="glnav line-upper">
       <div class="container flex flex-wrap items-end">
         <%= link to: Routes.home_path(@conn, :index), class: "home clickable" do %>
@@ -107,7 +107,7 @@
       </div>
     </nav>
 
-    <main class="<%= js_view_name(@conn, @view_template) %> flex flex-col justify-between"
+    <main class="<%= js_view_name(@conn, @view_template) %> flex flex-col justify-between pb-24"
           data-js-view-name="<%= js_view_name(@conn, @view_template) %>"
           data-user-id="<%= current_user_id(@current_user) %>">
       <%= render @view_module, @view_template, assigns %>

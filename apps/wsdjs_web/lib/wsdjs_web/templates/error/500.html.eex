@@ -27,7 +27,7 @@
     <script defer src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
 
-  <body>
+  <body class="font-sans bg-grey-lightest">
     <header class="hero hot-hero">
       <nav class="glnav line-upper container">
         <%= link "", to: Routes.home_path(@conn, :index), class: "glnav__logo" %>

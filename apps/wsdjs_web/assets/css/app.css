@@ -36,7 +36,9 @@
  * @import "components/forms";
  */
 @import "./components/buttons.css";
-
+@import "./components/forms.css";
+@import "./components/toggle.css";
+@import "./components/tag.css";
 
 .comment__avatar__img {
     @apply w-12 h-12 rounded-full shadow border-2 border-solid border-white;
@@ -47,6 +49,7 @@
 .aboutme a {
     @apply underline;
 }
+
 
 /**
  * This injects all of Tailwind's utility classes, generated based on your
@@ -90,18 +93,15 @@
     border-top: 2px solid var(--accent-color);
 }
 
-
 @import "./shell/global.css";
 @import "./shell/nav.css";
 @import "./shell/layout.css";
 @import "./shell/typo.css";
 @import "./componants/btn.css";
-@import "./componants/form.css";
 @import "./componants/label.css";
 @import "./componants/notifier.css";
 @import "./componants/player.css";
 @import "./componants/table.css";
-@import "./componants/tag.css";
 @import "./utilities.css";
 @import "./animations.css";
 @import "./comments.css";

@@ -45,17 +45,17 @@
     <%= inputs_for f, :detail, fn fd -> %>
     <div class="form-group">
       <label>Description</label>
-      <%= textarea fd, :description, placeholder: "Description (2000 characteres max)", class: "form-control", maxlength: 2000 %>
+      <%= textarea fd, :description, placeholder: "Description (2000 characteres max)", class: "form-control h-16", maxlength: 2000 %>
       <%= error_tag fd, :description %>
     </div>
     <div class="form-group">
       <label>Love more</label>
-      <%= textarea fd, :love_more, placeholder: "255 characteres max", class: "form-control", maxlength: 255 %>
+      <%= textarea fd, :love_more, placeholder: "255 characteres max", class: "form-control h-16", maxlength: 255 %>
       <%= error_tag fd, :love_more %>
     </div>
     <div class="form-group">
       <label>Hate more</label>
-      <%= textarea fd, :hate_more, placeholder: "255 characteres max", class: "form-control", maxlength: 255 %>
+      <%= textarea fd, :hate_more, placeholder: "255 characteres max", class: "form-control h-16", maxlength: 255 %>
       <%= error_tag fd, :hate_more %>
     </div>
     <div class="form-group">
