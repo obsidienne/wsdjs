@@ -1,11 +1,11 @@
- <article class="tops__top flex mt-4">
+ <article class="flex mt-4 relative">
       <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="tops__top__anchor rounded-full">
         <%= if Enum.count(@top.ranks) > 0 do %>
         <div class="img-embed">
           <%= if blur_track(Enum.at(@top.ranks, 0).song, @current_user) == true do %>
             <img src="<%= Attachments.art_url(nil, 100) %>" class="tops__top__anchor__img card shadow" >
           <% else %>
-            <img src="<%= Attachments.art_url(Enum.at(@top.ranks, 0).song.art, 100) %>" srcset="<%= Attachments.art_srcset(Enum.at(@top.ranks, 0).song.art, 100) %>" sizes="100px" class="responsive" />
+            <img src="<%= Attachments.art_url(Enum.at(@top.ranks, 0).song.art, 100) %>" srcset="<%= Attachments.art_srcset(Enum.at(@top.ranks, 0).song.art, 100) %>" sizes="100px" class="responsive rounded-full" />
           <% end %>
         </div>
         <% end %>
@@ -33,7 +33,7 @@
 
         <%= if !is_nil(@current_user) && (@current_user.profil_djvip || @current_user.admin) do %>
         <table class="table my-8 mx-0">
-          <thead>
+          <thead class="bg-transparent">
             <tr><th>Songs</th><th>Djs</th><th>Genres</th></tr>
           </thead>
           <tbody>

@@ -19,8 +19,8 @@
 
 <section id="top-list" class="tops container mt-4">
   <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-   <article class="tops__top flex mt-4 ">
-      <a class="card clickable tops__top__content shadow flex border border-dashed border-4 " title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">
+   <article class="flex mt-4 relative">
+      <a class="clickable tops__top__content shadow flex border border-dashed border-4 content-center card" title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">
         <span>Create a new top</span>
         <svg width="24" height="24" viewBox="0 0 24 24" class="ml-auto">
           <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>
