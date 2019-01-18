@@ -1,9 +1,3 @@
-<header>
-  <div class="container">
-    <h1><%= gettext "WCS Songs" %> </h1>
-  </div>
-</header>
-
 <div class="container actions flex items-center justify-end mb-2 mt-4 h-12">
   <%= if Wsdjs.Musics.Songs.can?(@current_user, :search) == :ok do %>
     <div class="flex w-full items-center">

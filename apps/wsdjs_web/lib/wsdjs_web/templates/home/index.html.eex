@@ -1,10 +1,4 @@
-<%= if @current_user do %>
-<header>
-  <div class="container">
-    <h1><%= gettext "Last pick and top" %> </h1>
-  </div>
-</header>
-<% else %>
+<%= if is_nil(@current_user) do %>
   <div class="pt-8 container">
     <span class="h1 ">World Swing DeeJays</span>
     <span class="h2 block">The best West Coast Swing music from all around the world !</span>

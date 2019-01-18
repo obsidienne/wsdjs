@@ -1,16 +1,3 @@
-main>header {
-  background-color: hsl(221, 23%, 16%);
-  padding-bottom: 24px;
-}
-
-main>header h1 {
-  color: white;
-}
-
-main>header h2 {
-  color: white;
-}
-
 /****************************
   global mobile navigation
 ****************************/
