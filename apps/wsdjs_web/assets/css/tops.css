@@ -40,16 +40,11 @@
 }
 
 .tops__top__anchor {
-  position: absolute;
   top: 0;
-  left: 0;
-  width: 48px;
-  height: 48px;
-}
-
-.tops__top__anchor__img {
-  width: 100%;
-  height: auto;
+  width: 4rem;
+  height: 4rem;
+  left: 50%;
+  margin-left: -30px;
 }
 
 .tops__top__content {
@@ -78,15 +73,8 @@
     padding-left: 15px;
   }
 
-  .tops__top__anchor {
-    width: 64px;
-    height: 64px;
-    left: 50%;
-    margin-left: -30px;
-  }
 
   .tops__top__content {
-    margin-left: 0;
     width: 45%;
   }
 }

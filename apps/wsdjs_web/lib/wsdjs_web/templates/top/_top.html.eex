@@ -1,9 +1,9 @@
  <article class="flex mt-4 relative">
-      <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="tops__top__anchor rounded-full">
+      <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="tops__top__anchor hidden md:block absolute rounded-full">
         <%= if Enum.count(@top.ranks) > 0 do %>
         <div class="img-embed">
           <%= if blur_track(Enum.at(@top.ranks, 0).song, @current_user) == true do %>
-            <img src="<%= Attachments.art_url(nil, 100) %>" class="tops__top__anchor__img card shadow" >
+            <img src="<%= Attachments.art_url(nil, 100) %>" class="w-full h-auto card shadow" >
           <% else %>
             <img src="<%= Attachments.art_url(Enum.at(@top.ranks, 0).song.art, 100) %>" srcset="<%= Attachments.art_srcset(Enum.at(@top.ranks, 0).song.art, 100) %>" sizes="100px" class="responsive rounded-full" />
           <% end %>
