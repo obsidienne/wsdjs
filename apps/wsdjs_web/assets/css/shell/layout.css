@@ -21,6 +21,7 @@
 @media (min-width: 768px) {
   .container {
     max-width: 720px;
+    @apply px-0;
   }
 
   .hot-songs {
@@ -46,14 +47,14 @@
 
 @media (min-width: 992px) {
   .container {
-    padding-left: 0;
-    padding-right: 0;
+    @apply px-0;
     max-width: 960px;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
+    @apply px-0;
     max-width: 1140px;
   }
 }

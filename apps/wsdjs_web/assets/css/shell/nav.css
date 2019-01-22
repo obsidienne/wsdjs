@@ -43,7 +43,7 @@
 ****************************/
 
 .glnav {
-  @apply sticky py-2 pin-t z-50 items-center bg-white;
+  @apply sticky py-2 pin-t z-50 items-center bg-white shadow;
 }
 
 .glnav a.home {

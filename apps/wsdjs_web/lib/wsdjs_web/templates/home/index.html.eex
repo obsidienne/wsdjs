@@ -15,7 +15,7 @@
 <%= if Enum.count(@songs) > 0 do %>
   <section>
     <h2 class="page-header">#trends</h2>
-    <ul class="list-reset">
+    <ul class="list-reset grid overflow-x-hidden" style="grid-gap: 1rem; grid-auto-columns: calc((720px / 4) - 3rem);">
       <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
   </section>
@@ -28,7 +28,7 @@
           <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
       </time>, DJs Top
     </h2>
-    <ul class="list-reset">
+    <ul class="list-reset flex overflow-x-hidden">
       <%= for rank <- @top.ranks do %>
         <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>
       <% end %>
