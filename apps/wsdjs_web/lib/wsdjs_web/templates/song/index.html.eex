@@ -25,7 +25,7 @@
 <% end %>
 
 <section id="song-list">
-  <div class="sentinel text-centered m-4"><div class="donut"></div></div>
+  <div class="sentinel text-center m-4"><div class="donut"></div></div>
 </section>
 
 <template id="opinion-picker-tpl">

@@ -85,10 +85,9 @@ h2.page-header {
 }
 
 .page-header-sticky {
-  position: -webkit-sticky;
   position: sticky;
   top: 1rem;
-  background-color: var(--bg-color);
+  background-color: white;
   z-index: 1000;
 }
 
@@ -113,10 +112,6 @@ dt,
   font-weight: lighter;
 }
 
-.text-centered {
-  text-align: center;
-}
-
 .text-ellipsis {
   white-space: nowrap;
   overflow: hidden;
@@ -135,30 +130,6 @@ dt,
 
 textarea {
   resize: vertical;
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.list-unstyled {
-  padding-left: 0;
-  list-style: none;
-}
-
-.list-inline {
-  padding-left: 0;
-  list-style: none;
-}
-
-.list-inline-item {
-  display: inline-block;
-}
-
-.list-inline-item:not(:last-child) {
-  margin-right: 0.5rem;
 }
 
 time {

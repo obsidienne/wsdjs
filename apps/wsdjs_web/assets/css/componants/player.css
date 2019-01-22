@@ -8,7 +8,6 @@
   margin-right: auto;
   margin-left: auto;
   z-index: 3000;
-  display: none;
 }
 
 .current-played {
@@ -137,7 +136,6 @@ body.radio-playing .player__play__vinyl {
 
 @media (min-width: 768px) {
   .player {
-    display: block;
     width: 384px;
     bottom: 1rem;
     right: 1rem;

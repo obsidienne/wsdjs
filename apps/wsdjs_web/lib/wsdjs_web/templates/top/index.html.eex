@@ -27,6 +27,6 @@
     <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
   <%= if @page_number < @total_pages do %>
-  <div class="sentinel text-centered m-4" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
+  <div class="sentinel text-center m-4" data-js-page-number="<%= @page_number %>"><div class="donut"></div></div>
   <% end %>
 </section>

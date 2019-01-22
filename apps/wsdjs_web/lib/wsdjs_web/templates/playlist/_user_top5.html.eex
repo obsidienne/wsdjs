@@ -47,7 +47,7 @@
   <%= if true do %>
   <%# start write user %>
 
-  <ol class="list-unstyled">
+  <ol class="list-reset">
     <%
       nb_ps = Enum.count(@playlist_songs)
     %>
