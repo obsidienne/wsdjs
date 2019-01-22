@@ -28,7 +28,7 @@
 
   <body class="font-sans bg-grey-lightest">
     <header class="hero hot-hero">
-      <nav class="glnav line-upper container">
+      <nav class="glnav container">
         <%= link "", to: Routes.home_path(@conn, :index), class: "glnav__logo" %>
         <%= link "tops", to: Routes.top_path(@conn, :index), class: "glnav__menu text-muted" %>
       </nav>

@@ -84,15 +84,6 @@
     padding-top: 100%;
 }
 
-.line-upper:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    top: 0;
-    border-top: 2px solid hsl(45, 100%, 51.4%);
-    border-top: 2px solid var(--accent-color);
-}
-
 @import "./shell/global.css";
 @import "./shell/nav.css";
 @import "./shell/layout.css";

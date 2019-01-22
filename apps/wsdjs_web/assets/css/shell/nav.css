@@ -43,14 +43,7 @@
 ****************************/
 
 .glnav {
-  align-items: center;
-  user-select: none;
-  background-color: #1F2532;
-  position: sticky;
-  top: 0;
-  z-index: 2000;
-  padding-bottom: 8px;
-  padding-top: 8px;
+  @apply sticky py-2 pin-t z-50 items-center bg-white;
 }
 
 .glnav a.home {
@@ -74,7 +67,6 @@
 
 .glnav__menu {
   padding: 0 12px;
-  color: #D3D8E0;
 }
 
 .logo-small {
