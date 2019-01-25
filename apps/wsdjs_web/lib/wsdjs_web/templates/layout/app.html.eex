@@ -54,7 +54,7 @@
   </head>
 
   <body class="font-sans">
-    <nav class="glnav">
+    <nav class="glnav md:px-4">
       <div class="container flex flex-wrap items-end">
         <%= link "Discover", to: Routes.home_path(@conn, :index), class: "h1" %>
 
@@ -75,7 +75,7 @@
       </div>
     </nav>
 
-    <main class="<%= js_view_name(@conn, @view_template) %> flex flex-col justify-between pb-24"
+    <main class="<%= js_view_name(@conn, @view_template) %> flex flex-col justify-between md:px-4 pb-32"
           data-js-view-name="<%= js_view_name(@conn, @view_template) %>"
           data-user-id="<%= current_user_id(@current_user) %>">
       <%= render @view_module, @view_template, assigns %>

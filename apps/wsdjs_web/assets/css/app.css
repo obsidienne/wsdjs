@@ -39,12 +39,10 @@
 @import "./components/forms.css";
 @import "./components/toggle.css";
 @import "./components/tag.css";
+@import "./components/container.css";
 
 .comment__avatar__img {
     @apply w-12 h-12 rounded-full shadow border-2 border-solid border-white;
-}
-.container {
-    @apply mx-auto px-4 w-full max-w-md;
 }
 .aboutme a {
     @apply underline;
@@ -78,6 +76,38 @@
  */
 .grid {
     display: grid;
+}
+.grid-overflow {
+    grid-gap: 1rem; 
+    grid-auto-columns: calc(((100vw - 2rem) / 2) - 0.5rem);
+}
+
+@media (min-width: 576px) {
+    .grid-overflow {
+        grid-gap: 2rem; 
+        grid-auto-columns: 10rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .grid-overflow {
+        grid-gap: 1rem; 
+        grid-auto-columns: 9rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .grid-overflow {
+        grid-gap: 1rem; 
+        grid-auto-columns: 10rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid-overflow {
+        grid-gap: 1.5rem; 
+        grid-auto-columns: 10rem;
+    }
 }
 
 .pt-full {

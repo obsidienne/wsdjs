@@ -1,6 +1,6 @@
 
 <section id="playlists-section">
-  <ul class="playlists-grid grid">
+  <ul class="playlists-grid grid list-reset">
     <%= if Wsdjs.Playlists.can?(@current_user, :new) == :ok do %>
     <li class="clickable">
         <%= link to: Routes.user_playlist_path(@conn, :new, @current_user), class: "playlist clickable" do %>

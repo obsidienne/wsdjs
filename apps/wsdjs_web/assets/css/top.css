@@ -3,8 +3,6 @@
 ****************************/
 
 .voting-position__selector {
-  -moz-appearance: none;
-  -webkit-appearance: none;
   appearance: none;
   border: none;
 }
@@ -26,14 +24,11 @@
 }
 
 .voting-position {
-  position: absolute;
+  @apply z-20 absolute overflow-hidden text-lg;
   width: 80px;
   height: 80px;
-  overflow: hidden;
   top: 0;
   left: 0;
-  font-size: 18px;
-  z-index: 1000;
 }
 
 .voting-position:empty {

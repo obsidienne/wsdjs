@@ -148,9 +148,3 @@
     width: 216px;
   }
 }
-
-@media (max-width: 768px) {
-  .hot-songs.container {
-    padding: 0;
-  }
-}

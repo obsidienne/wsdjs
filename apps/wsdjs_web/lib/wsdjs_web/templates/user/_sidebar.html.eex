@@ -46,7 +46,7 @@
     </footer>
   </section>
 
-  <ul class="relative bg-white p-4 hidden md:flex flex-wrap w-full">
+  <ul class="relative bg-white p-4 hidden md:flex flex-wrap w-full list-reset">
     <li class="my-0 mx-2"><span class="tag"><%= @suggested_songs %> songs</li>
   </ul>
 

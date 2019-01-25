@@ -1,5 +1,5 @@
-<nav class="mobile-nav">
-  <ul>
+<nav class="mobile-nav z-50">
+  <ul class="list-reset">
     <li>
       <%= link to: Routes.top_path(@conn, :index), class: "mobile-nav_menu" do %>
       <svg style="width:24px;height:24px" viewBox="0 0 24 24">

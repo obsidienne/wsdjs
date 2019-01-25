@@ -9,7 +9,7 @@
   <% end %>
 <% end %>
 
-<ul id="comments-container" class="mt-4">
+<ul id="comments-container" class="mt-4 list-reset">
   <%= for comment <- @comments do %>
     <li class="flex mb-4">
       <div class="hidden md:flex">

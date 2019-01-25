@@ -167,10 +167,10 @@ module.exports = {
   */
 
   screens: {
-    'sm': '576px',
-    'md': '768px',
-    'lg': '992px',
-    'xl': '1200px',
+    'sm': '576px', //576 - 544
+    'md': '768px', //768 - 720
+    'lg': '992px', //992 - 960
+    'xl': '1200px', //1200 - 1140
   },
 
 
@@ -914,7 +914,7 @@ module.exports = {
     negativeMargin: ['responsive'],
     objectFit: false,
     objectPosition: false,
-    opacity: ['responsive'],
+    opacity: ['responsive', 'hover'],
     outline: ['focus'],
     overflow: ['responsive'],
     padding: ['responsive'],

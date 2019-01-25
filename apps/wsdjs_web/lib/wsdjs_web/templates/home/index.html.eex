@@ -11,11 +11,18 @@
   </div>
 <% end %>
 
-<section class="container">
+<section class="container pt-8">
 <%= if Enum.count(@songs) > 0 do %>
   <section>
     <h2 class="page-header">#trends</h2>
-    <ul class="list-reset grid overflow-x-hidden" style="grid-gap: 1rem; grid-auto-columns: calc((720px / 4) - 3rem);">
+    <%# 
+    XS: 1 REM, 8.5 REM
+    SM: 2 REM, 10 REM
+    MD: 2 REM, 9.75REM
+    Lg: 2.5rem, 10rem
+    xl: 
+    %>
+    <ul class="list-reset grid overflow-x-hidden grid-overflow">
       <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
     </ul>
   </section>
@@ -28,7 +35,7 @@
           <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
       </time>, DJs Top
     </h2>
-    <ul class="list-reset flex overflow-x-hidden">
+    <ul class="list-reset grid overflow-x-hidden grid-overflow">
       <%= for rank <- @top.ranks do %>
         <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>
       <% end %>

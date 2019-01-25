@@ -25,7 +25,7 @@
 
   <h2 class="page-header">Votes</h2>
 
-  <ul class="top-stat__votes">
+  <ul class="top-stat__votes list-reset">
     <%= for user <- Wsdjs.Accounts.list_users() do %>
       <%= if user.profil_djvip do %>
         <li class="card shadow clickable" >

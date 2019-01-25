@@ -42,7 +42,7 @@
     </footer>
   </section>
 
-  <ul class="relative bg-white p-4 flex flex-wrap w-full">
+  <ul class="relative bg-white p-4 flex flex-wrap w-full list-reset">
     <li class="tippy my-0 mx-2" title="<%= @suggested_songs %> songs suggested"><span class="tag"><%= @suggested_songs %> songs</li>
   </ul>
 

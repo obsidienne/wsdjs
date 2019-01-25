@@ -1,6 +1,6 @@
 <%= if blur_track(@song, @current_user) == true do %>
 
-<li class="clickable hover:shadow mr-4 w-48 flex-no-grow flex-no-shrink">
+<li class="hover:shadow mr-4 w-48 flex-no-grow flex-no-shrink">
   <a class="flex flex-col m-0">
     <div class="p-0 border-0">
       <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive" />
@@ -25,9 +25,9 @@
 
 <% else %>
 
-<li class="clickable overflow-hidden" style="grid-row: 1">
-  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>" class="">
-    <img src="<%= Attachments.art_url(@song.art, 200) %>" srcset="<%= Attachments.art_srcset(@song.art, 200) %>" class="responsive rounded-lg rounded-lg shadow" />
+<li class="overflow-hidden" style="grid-row: 1">
+  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>">
+    <img src="<%= Attachments.art_url(@song.art, 200) %>" srcset="<%= Attachments.art_srcset(@song.art, 200) %>" class="responsive rounded-lg rounded-lg shadow hover:opacity-50" />
     <div class="song-minicard__body flex pt-2">
       <span class="primary-text text-ellipsis"><%= @song.title %></span>
       <span class="secondary-text text-ellipsis"><%= @song.artist %></span>

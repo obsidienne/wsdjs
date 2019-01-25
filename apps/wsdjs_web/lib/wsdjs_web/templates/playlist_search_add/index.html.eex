@@ -1,4 +1,4 @@
-<ul class="search-results">
+<ul class="search-results list-reset">
   <%= render_many @songs, WsdjsWeb.PlaylistSearchAddView, "_song.html", 
     conn: @conn,
     as: :song, 

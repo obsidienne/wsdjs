@@ -9,7 +9,6 @@
   right: 0;
   height: 48px;
   background: hsl(0, 0%, 93%);
-  z-index: 9990;
 }
 
 .mobile-nav>ul {

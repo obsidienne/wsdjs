@@ -1,6 +1,6 @@
 <%= if blur_track(@rank.song, @current_user) == true do %>
 
-<li class="clickable hover:shadow mr-4 w-48 flex-no-grow flex-no-shrink">
+<li  style="grid-row: 1">
   <a>
     <div class="p-0 border-0">
       <div class="voting-position charted">
@@ -31,7 +31,7 @@
 
 <% else %>
 
-<li class="mr-4 w-48 flex-no-grow flex-no-shrink">
+<li style="grid-row: 1">
   <a href="<%= Routes.song_path(@conn, :show, @rank.song.id) %>">
     <div class="clickable relative rounded-lg shadow overflow-hidden">
       <div class="voting-position charted">

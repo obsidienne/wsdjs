@@ -8,7 +8,7 @@
       <span class="text-muted text-ligther h3"><%= Enum.count(@songs) %> songs</span>
     </h2>
   </div>
-  <ul class="hot-songs container">
+  <ul class="hot-songs container list-reset">
     <%= for song <- @songs do %>
       <%= if blur_track(song, @current_user) == true do %>
         <%= render "_song_blurred.html", song: song %>
