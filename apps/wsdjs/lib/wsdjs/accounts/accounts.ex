@@ -34,6 +34,14 @@ defmodule Wsdjs.Accounts do
   def load_parameter(user), do: Repo.preload(user, :parameter)
   def load_detail(user), do: Repo.preload(user, :detail)
 
+  def list_djs do
+    User
+    |> limit(5)
+    |> where(profil_djvip: true)
+    |> Repo.all()
+    |> load_avatar()
+  end
+
   @doc """
   Returns the list of users having new_song_notification: true
 

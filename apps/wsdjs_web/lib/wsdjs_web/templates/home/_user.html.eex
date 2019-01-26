@@ -1,0 +1,6 @@
+<li style="grid-row: 1">
+  <a href="<%= Routes.user_path(@conn, :show, @user) %>">
+    <img src="<%= Attachments.art_url(@user.avatar, 200) %>" srcset="<%= Attachments.art_srcset(@user.avatar, 200) %>" class="responsive rounded-lg rounded-full shadow hover:opacity-50" />
+  </a>
+</li>
+
