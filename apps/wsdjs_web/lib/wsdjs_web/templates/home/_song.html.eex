@@ -33,12 +33,12 @@
 
 <li style="grid-row: 1">
   <a href="<%= Routes.song_path(@conn, :show, @rank.song.id) %>">
-    <div class="clickable relative rounded-lg shadow overflow-hidden">
+    <div class="relative rounded-lg shadow overflow-hidden">
       <div class="voting-position charted">
         <div class="chart-bg"></div>
         <div class="chart-value"><%= @rank.position %></div>
       </div>
-      <img src="<%= Attachments.art_url(@rank.song.art, 200) %>" srcset="<%= Attachments.art_srcset(@rank.song.art, 200) %>" class="responsive rounded-lg" />
+      <img src="<%= Attachments.art_url(@rank.song.art, 200) %>" srcset="<%= Attachments.art_srcset(@rank.song.art, 200) %>" class="responsive rounded-lg hover:opacity-50" />
     </div>
 
     <div class="song-minicard__body flex pt-2">

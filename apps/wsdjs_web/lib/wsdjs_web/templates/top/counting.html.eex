@@ -1,22 +1,22 @@
-<header>
-  <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-muted"><%= @top.status %></span></h1>
-  </div>
-</header>
 <%= if @current_user && @current_user.admin do %>
 <%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
 <nav class="secondary-nav breadcrumb py-4">
-  <ol class="container inline-block">
-    <li class="visited">
+  <ol class="container">
+    <li class="visited inline-block">
       <%= submit "Voting", class: "btn btn-link", name: "direction", value: "previous" %>
     </li>
     <li class="current inline-block">Counting</li>
-    <li><%= submit "next step : publish", class: "btn btn-link", name: "direction", value: "next" %></li>
+    <li class="inline-block"><%= submit "next step : publish", class: "btn btn-link", name: "direction", value: "next" %></li>
   </ol>
 </nav>
 <% end %>
 <% end %>
 
+<header>
+  <div class="container">
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-muted"><%= @top.status %></span></h1>
+  </div>
+</header>
 
 <div class="container flex items-center justify-end mb-2 mt-4 h-12">
   <%= if @current_user && @current_user.admin do %>

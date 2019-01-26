@@ -1,9 +1,3 @@
-<header>
-  <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-muted"><%= @top.status %></span></h1>
-  </div>
-</header>
-
 <%= if @current_user && (@current_user.id == @top.user_id || @current_user.admin == true) do %>
 <%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
 <nav class="secondary-nav breadcrumb py-4">
@@ -15,6 +9,12 @@
 </nav>
 <% end %>
 <% end %>
+
+<header>
+  <div class="container">
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-muted"><%= @top.status %></span></h1>
+  </div>
+</header>
 
 <div class="container flex items-center justify-end mb-2 mt-4 h-12">
   <%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>

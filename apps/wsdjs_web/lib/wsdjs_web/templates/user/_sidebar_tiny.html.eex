@@ -1,5 +1,5 @@
-<div class="mb-2 hidden md:block">
-  <section class="relative bg-white p-4 w-full">
+<div class="mb-2 hidden md:block ">
+  <section class="relative bg-white p-4 w-full shadow mb-4">
     <header class="flex flex-col">
       <div class="flex items-end justify-between">
         <div class="flex">
@@ -61,16 +61,16 @@
 </div>
 
 <div class="mb-2 md:hidden">
-  <section class="relative bg-white p-4 w-full">
+  <section class="relative bg-white p-4 w-full shadow mb-4">
     <header class="flex flex-col">
-      <div class="flex items-end mb-4">
+      <div class="flex items-center mb-4">
         <div class="flex w-1/3">
           <%= if @user.profil_djvip do %><span class="label label-primary mr-2">DJ VIP</span><% end %>
           <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
         </div>
 
         <div class="flex w-1/3 justify-center">
-          <img src="<%= Attachments.avatar_url(@user.avatar, 32) %>" sizes="32px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 50) %>" class="rounded-full">
+          <img src="<%= Attachments.avatar_url(@user.avatar, 48) %>" sizes="48px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 48) %>" class="rounded-full">
         </div>
 
         <%= if @user.verified_profil do %>

@@ -1,5 +1,5 @@
-<div class="mb-2">
-  <section class="relative bg-white p-4 w-full">
+<div class="mb-2 ">
+  <section class="relative bg-white p-4 w-full shadow mb-4">
     <header class="flex flex-col">
       <div class="flex items-end justify-between">
         <div class="flex">

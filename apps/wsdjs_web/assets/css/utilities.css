@@ -8,6 +8,10 @@
   min-height: 0;
 }
 
+.pt-full {
+  padding-top: 100%;
+}
+
 .clickable:hover {
   transform: var(--accent-action);
 }

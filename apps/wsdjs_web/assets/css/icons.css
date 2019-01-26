@@ -1,3 +1,14 @@
+.svg-icon {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 0;
+  vertical-align: top;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
 .song-opinion {
   user-select: none;
   background: transparent;
@@ -70,4 +81,3 @@
   padding: .5rem 0 .5rem 0;
   text-align: left;
 }
-

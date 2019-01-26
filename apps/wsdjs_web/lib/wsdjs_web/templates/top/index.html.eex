@@ -11,7 +11,7 @@
   </div>
 <% end %>
 
-<section id="top-list" class="tops container my-4">
+<section id="top-list" class="tops container mt-8">
   <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
    <article class="flex mb-6 relative">
       <a class="clickable tops__top__content shadow flex border border-dashed bg-white" title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">

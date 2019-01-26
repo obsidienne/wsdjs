@@ -103,10 +103,6 @@
   background-color: #edeff0;
 }
 
-.secondary-nav.breadcrumb {
-  margin-top: -1.5rem;
-}
-
 .secondary-nav li::after {
   display: inline-block;
   content: '';

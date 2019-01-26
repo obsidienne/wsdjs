@@ -22,10 +22,7 @@ export default class Radio {
     document.addEventListener("click", function (e) {
       if (!e.target) return;
 
-      if (e.target.matches(".player__play__vinyl")) {
-        self.toggle_radio(e.target);
-      }
-      if (e.target.matches("#radio-toggle-play")) {
+      if (e.target.matches(".radio-toggle-play")) {
         self.toggle_radio(e.target);
       }
 
