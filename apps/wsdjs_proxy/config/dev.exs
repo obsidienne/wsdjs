@@ -18,7 +18,7 @@ config :wsdjs_proxy, WsdjsProxy.Endpoint,
   watchers: []
 
 config :master_proxy,
-  http: [:inet6, port: 4080],
+  http: [:inet6, port: 8080],
   backends: [
     %{
       host: ~r/localhost/,
