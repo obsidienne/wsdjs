@@ -24,7 +24,7 @@
     transition-timing-function: ease-in-out;
     display: grid;
     grid-gap: 1rem;
-    grid-auto-columns: 9.5rem;
+    grid-auto-columns: 9rem;
 }
 
 
