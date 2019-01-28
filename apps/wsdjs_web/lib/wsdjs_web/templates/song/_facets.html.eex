@@ -84,7 +84,7 @@
     </section>
     
     <section class="mt-auto p-4">
-      <input type="submit" class="w-full" id="close-button" value="Filter" />
+      <input type="submit" class="w-full btn btn-primary" id="close-button" value="Filter" />
     </section>
   </form>
 </div>
