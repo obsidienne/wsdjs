@@ -1,7 +1,7 @@
 <section data-count="<%= Enum.count(@songs) %>">
   <%= if Enum.count(@songs) > 0 do %>
   <div class="page-header-sticky">
-    <h2 class="page-header container">
+    <h2 class="container">
       <time class="date-format">
         <%= Timex.format!(@month, "%B %Y", :strftime) %>
       </time> 

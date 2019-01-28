@@ -80,16 +80,8 @@ a {
   @apply text-black;
 }
 
-h2.page-header {
-  padding-top: 3rem;
-  margin-top: .5rem;
-}
-
 .page-header-sticky {
-  position: sticky;
-  top: 1rem;
-  background-color: white;
-  z-index: 1000;
+  @apply sticky bg-white z-30 pin-t;
 }
 
 p {

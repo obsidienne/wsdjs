@@ -23,7 +23,7 @@
     </tbody>
   </table>
 
-  <h2 class="page-header">Votes</h2>
+  <h2>Votes</h2>
 
   <ul class="top-stat__votes list-reset">
     <%= for user <- Wsdjs.Accounts.list_users() do %>

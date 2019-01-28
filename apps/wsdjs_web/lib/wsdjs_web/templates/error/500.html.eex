@@ -36,7 +36,7 @@
     </header>
 
     <main class="container">
-      <h1 class="page-header">Sorry something went <u>REALLY</u> wrong !</h1>
+      <h1>Sorry something went <u>REALLY</u> wrong !</h1>
       <p>
         <%= link "Go to the home page", to: Routes.home_path(@conn, :index), class: "btn btn-link" %>
         or 

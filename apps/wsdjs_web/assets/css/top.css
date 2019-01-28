@@ -8,7 +8,7 @@
 }
 
 .song-art__play {
-  z-index: 1001;
+  @apply z-10;
   position: absolute;
   bottom: .25rem;
   right: .25rem;
@@ -24,7 +24,7 @@
 }
 
 .voting-position {
-  @apply z-20 absolute overflow-hidden text-lg;
+  @apply z-10 absolute overflow-hidden text-lg;
   width: 80px;
   height: 80px;
   top: 0;
