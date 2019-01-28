@@ -11,7 +11,7 @@
     <span class="text-ellipsis text-bold"><%= video.title %></span>
     <span class="text-ellipsis"><%= if is_nil(video.event) do video.event_str else video.event.name end %>
     <%= if video.published_at do %>
-    <time class="text-muted"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</time>
+    <time class="text-grey-darkest"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</time>
     <% end %>
     </span>
 

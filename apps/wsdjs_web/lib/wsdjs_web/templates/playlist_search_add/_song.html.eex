@@ -8,7 +8,7 @@
     <div class="song-minicard__body flex py-0 ml-2">
       <span class="text-ellipsis primary-text"><%= @song.title %></span>
       <span class="text-ellipsis secondary-text">by <%= @song.artist %></span>
-      <span class="text-muted">
+      <span class="text-grey-darkest">
         <%= user_displayed_name(@song.user) %>
       </span>
     </div>

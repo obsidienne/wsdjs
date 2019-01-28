@@ -14,7 +14,7 @@
     </a>
 
     <div class="px-4 py-0">
-      <h2 class="text-muted">hidden track</h2>
+      <h2 class="text-grey-darkest">hidden track</h2>
     </div>
   </article>
 </li>

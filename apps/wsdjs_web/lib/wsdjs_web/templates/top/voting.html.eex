@@ -12,7 +12,7 @@
 
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-muted"><%= @top.status %></span></h1>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-grey-darkest"><%= @top.status %></span></h1>
   </div>
 </header>
 
@@ -60,7 +60,7 @@
                 <%= rank.song.title %>
               <% end %>
               <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
-              <span class="text-ellipsis text-muted"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></span>
+              <span class="text-ellipsis text-grey-darkest"><%= gettext "by" %> <%= user_displayed_name(rank.song.user) %></span>
             </div>
             <aside>
               <div>

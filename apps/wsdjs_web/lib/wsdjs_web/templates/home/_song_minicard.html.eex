@@ -6,14 +6,14 @@
       <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive" />
     </div>
     <div class="song-minicard__body flex py-0">
-      <span class="text-muted text-ellipsis">hidden track</span>
+      <span class="text-grey-darkest text-ellipsis">hidden track</span>
 
       <footer>
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
           <span class="label label-primary"><%= @song.bpm %> bpm</span>
         <% end %>
-        <time class="text-muted" 
+        <time class="text-grey-darkest" 
               datetime="<%= utc_to_local(@song.inserted_at) %>"
               title="<%= Timex.format!(@song.inserted_at, "%B %d, %Y", :strftime) %>">
               <%= Timex.format!(@song.inserted_at, "{relative}", :relative) %>
@@ -31,14 +31,14 @@
     <div class="song-minicard__body flex pt-2">
       <span class="primary-text text-ellipsis"><%= @song.title %></span>
       <span class="secondary-text text-ellipsis"><%= @song.artist %></span>
-      <span class="text-muted text-ellipsis"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></span>
+      <span class="text-grey-darkest text-ellipsis"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></span>
 
       <footer>
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
           <span class="label label-primary"><%= @song.bpm %> bpm</span>
         <% end %>
-        <time class="text-muted" 
+        <time class="text-grey-darkest" 
               datetime="<%= utc_to_local(@song.inserted_at) %>"
               title="<%= Timex.format!(@song.inserted_at, "%B %d, %Y", :strftime) %>">
               <%= Timex.format!(@song.inserted_at, "{relative}", :relative) %>

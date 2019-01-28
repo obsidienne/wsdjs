@@ -39,7 +39,7 @@
       <td>
         <img src="<%= Attachments.art_url(nil, 64) %>" srcset="<%= Attachments.art_srcset(nil, 64) %>" sizes="64px" width="64px" height="64px" />
       </td>
-      <td style="vertical-align:middle"><span class="text-muted primary-text">Add a song to the playlist</span></td>
+      <td style="vertical-align:middle"><span class="text-grey-darkest primary-text">Add a song to the playlist</span></td>
     </tr>
     <%= for song <- @playlist_songs do %>
     <tr>

@@ -22,10 +22,10 @@
       <div class="flex-shrink flex-grow flex-auto min-w-0 px-1 w-full">
         <span class="text-ellipsis font-bold text-center"><%= @user.name %></span>
         <%= if @user.djname do %>
-          <span class="text-ellipsis text-muted text-center font-normal"><%= @user.djname %></span>
+          <span class="text-ellipsis text-grey-darkest text-center font-normal"><%= @user.djname %></span>
         <% end %>
         <%= if @user.user_country do %>
-        <div class="flex mt-auto justify-center text-muted">
+        <div class="flex mt-auto justify-center text-grey-darkest">
           <svg fill='#455A64' height='24' viewBox= '0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
             <path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>
             <path d='M0 0h24v24H0z' fill='none'/>

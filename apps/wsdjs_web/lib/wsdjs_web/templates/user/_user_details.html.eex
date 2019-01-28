@@ -1,7 +1,7 @@
 <%= unless is_nil(@user.detail) do %>
 <%= unless is_nil(@user.detail.facebook) and is_nil(@user.detail.youtube) and is_nil(@user.detail.soundcloud) and is_nil(@user.detail.website) do %>
 <ul class="relative bg-white p-4 w-full list-reset">
-  <li class="text-bold text-muted mb-2">Elsewhere</li>
+  <li class="text-bold text-grey-darkest mb-2">Elsewhere</li>
   <%= unless is_nil(@user.detail.facebook) do %>
     <li>
     <%= link to: @user.detail.facebook, target: "_blank", class: "flex items-center mb-2 social-fb clickable" do %>

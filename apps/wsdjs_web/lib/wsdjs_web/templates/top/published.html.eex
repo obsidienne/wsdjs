@@ -14,7 +14,7 @@
 
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-muted"><%= @top.status %></span></h1>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-grey-darkest"><%= @top.status %></span></h1>
   </div>
 </header>
 
@@ -39,7 +39,7 @@
       </div>
       <div class="top-song-body">
         <div>
-          <h2 class="text-muted">hidden track</h2>
+          <h2 class="text-grey-darkest">hidden track</h2>
         </div>
 
         <aside>
@@ -80,7 +80,7 @@
             <span><%= rank.song.title %></span>
           <% end %>
           <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
-          <span class="text-muted flex">
+          <span class="text-grey-darkest flex">
             <%= gettext "by" %>&nbsp;<%= proposed_by_link(@conn, rank.song) %>, &nbsp;
             <time datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>">
               <%= Timex.format!(rank.song.inserted_at, "%b %Y", :strftime) %>
