@@ -1,7 +1,7 @@
 class Carousel {
     constructor() {
         document.addEventListener("click", e => {
-            if (e.target && e.target.matches(".carousel-prev")) {
+            if (e.target && e.target.matches(".carousel-prev:not(.disabled)")) {
                 e.preventDefault();
                 e.stopPropagation();
                 this.prev(e.target);
@@ -9,7 +9,7 @@ class Carousel {
         }, false);
 
         document.addEventListener("click", e => {
-            if (e.target && e.target.matches(".carousel-next")) {
+            if (e.target && e.target.matches(".carousel-next:not(.disabled)")) {
                 e.preventDefault();
                 e.stopPropagation();
                 this.next(e.target);
@@ -60,10 +60,35 @@ class Carousel {
         return parseInt(step[1]);
     }
 
+    _switchDisable(el) {
+        let root = el.closest(".carousel");
+        let next_ctrl = root.querySelector(".carousel-next");
+        let prev_ctrl = root.querySelector(".carousel-prev");
+
+        let current_step = Math.abs(this._extractStep(el.style.transform));
+        let max_width = el.scrollWidth;
+        let step_size = this._getStepSize();
+
+        if (current_step === 0) {
+            next_ctrl.classList.remove("disabled");
+            prev_ctrl.classList.add("disabled");
+        } 
+        else if (step_size + current_step  < max_width) {
+            next_ctrl.classList.remove("disabled");
+            prev_ctrl.classList.remove("disabled");
+
+        }
+        else if (step_size + current_step + 16 >= max_width) {
+            next_ctrl.classList.add("disabled");
+            prev_ctrl.classList.remove("disabled");
+        }
+    }
+
     prev(el) {
         let items_container = this._getItemsContainer(el);
         let step = this._getPrevStepSize(items_container);
         items_container.style.transform = "translateX(" + step + "px)";
+        this._switchDisable(items_container)
     }
 
     next(el) {
@@ -75,6 +100,7 @@ class Carousel {
         }
 
         items_container.style.transform = "translateX(" + step + "px)";
+        this._switchDisable(items_container)
     }
 }
 

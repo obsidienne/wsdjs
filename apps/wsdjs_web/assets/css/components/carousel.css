@@ -9,6 +9,11 @@
     transition-property: background-color, color, opacity;
 }
 
+.carousel-control.disabled {
+    cursor: default;
+    opacity: .3;
+}
+
 .carousel-prev {
     @apply rounded-l-full;
 }
