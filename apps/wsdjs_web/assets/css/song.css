@@ -10,11 +10,6 @@
 .song-page__play {
   max-width: 16ch;
 }
-
-.song-page__sections__aside {
-  flex: 1 1 300px;
-}
-
 .song-page__tags.song-opinions {
   padding-top: .5rem;
   display: flex;
@@ -62,13 +57,6 @@
   right: 2px;
   width: 24px;
   height: 24px;
-}
-
-@media (min-width: 768px) {
-  .song-page__sections__content {
-    margin-right: 1rem;
-    flex: 1 1 60ch;
-  }
 }
 
 .overview-video:empty {

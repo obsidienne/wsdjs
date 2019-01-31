@@ -29,6 +29,7 @@ defmodule WsdjsWeb.Router do
 
     resources("/songs", SongController, only: [:index, :create, :new, :delete, :edit, :update]) do
       resources("/videos", SongVideosController, only: [:index])
+      resources("/actions", SongActionsController, only: [:index])
     end
 
     resources("/suggestions", SuggestionController, only: [:create, :new])

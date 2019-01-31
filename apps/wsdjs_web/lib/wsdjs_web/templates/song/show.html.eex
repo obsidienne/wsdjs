@@ -2,6 +2,9 @@
   <ol class="container">
     <li class="current inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
     <li class="inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
+    <%= if Wsdjs.Musics.Songs.can?(@current_user, :edit, @song) == :ok do %>
+    <li class="inline-block"><%= link "Edit", to: Routes.song_song_actions_path(@conn, :index, @song) %></li>
+    <% end %>
   </ol>
 </nav>
 
@@ -68,43 +71,29 @@
   </template>
 </section>
 
-<div class="container flex-col md:flex-row flex">
-  <div class="song-page__sections__content">
-    <%= unless @current_user do %>
-    <section class="unconnected">
-      <span class="h1 block">World Swing DeeJays</span>
-      <span class="h2 block">The best West Coast Swing music from all around the world !</span>
+<div class="container">
+  <%= unless @current_user do %>
+  <section class="unconnected">
+    <span class="h1 block">World Swing DeeJays</span>
+    <span class="h2 block">The best West Coast Swing music from all around the world !</span>
 
-      <%= link to: Routes.session_path(@conn, :new) do %>
-        <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
-      <% end %>
-      or 
-      <%= link "register", to: Routes.registration_path(@conn, :new) %>
-
-      <div class="mt-6">
-        <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FWorld-Swing-DJs-1430112430533570%2F&width=85&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" 
-                width="103" height="21" 
-                style="border:none;overflow:hidden" 
-                scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-      </div>
-    </section>
+    <%= link to: Routes.session_path(@conn, :new) do %>
+      <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
     <% end %>
-    <section id="overview-section">
-      <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
-    </section>
-  </div>
+    or 
+    <%= link "register", to: Routes.registration_path(@conn, :new) %>
 
-  <div class="song-page__sections__aside">
-    <%= if Wsdjs.Musics.Songs.can?(@current_user, :edit, @song) == :ok do %>
-    <fieldset class="p-2 border-0 shadow-inner">
-      <legend class="px-2">Actions</legend>
-      <%= link "Edit song", to: Routes.song_path(@conn, :edit, @song), class: "btn btn-primary" %>
-      <%= if Wsdjs.Musics.Songs.can?(@current_user, :delete,  @song) == :ok do %>
-        <%= link "Delete song", to: Routes.song_path(@conn, :delete, @song), class: "btn btn-danger", method: "delete", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"] %>
-      <% end %>
-    </fieldset>
-    <% end %>
-  </div>
+    <div class="mt-6">
+      <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FWorld-Swing-DJs-1430112430533570%2F&width=85&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" 
+              width="103" height="21" 
+              style="border:none;overflow:hidden" 
+              scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+    </div>
+  </section>
+  <% end %>
+  <section id="overview-section" class="w-full">
+    <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
+  </section>
 </div>
 
 <template id="comment-tpl">
