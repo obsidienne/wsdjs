@@ -126,7 +126,7 @@
           </svg>
         </button>
       </header>
-      <div class="text-black bg-white px-2" data-autolink>{{text_html}}</div>
+      <div class="text-black bg-white px-2 comment_body" data-autolink>{{text_html}}</div>
     </div>
   </li>
 </template>
