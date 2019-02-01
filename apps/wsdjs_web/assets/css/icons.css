@@ -78,6 +78,6 @@ svg:not(:root) {
 
 .tippy-tooltip.playlist-picker-theme .tippy-content {
   /* Your styling here. Example: */
-  padding: .5rem 0 .5rem 0;
+  @apply m-2;
   text-align: left;
 }
