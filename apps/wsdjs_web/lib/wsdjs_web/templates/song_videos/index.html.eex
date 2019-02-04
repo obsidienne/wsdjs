@@ -3,7 +3,7 @@
     <li class="inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
     <li class="current inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
     <%= if Wsdjs.Musics.Songs.can?(@current_user, :edit, @song) == :ok do %>
-    <li class="inline-block"><%= link "Edit", to: Routes.song_song_actions_path(@conn, :index, @song) %></li>
+    <li class="inline-block"><%= link "Edit", to: Routes.song_song_actions_path(@conn, :edit, @song) %></li>
     <% end %>
   </ol>
 </nav>

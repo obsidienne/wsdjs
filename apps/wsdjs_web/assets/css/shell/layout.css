@@ -6,14 +6,12 @@
 
 
 
-#avatar_div .form-group,
-#art_div .form-group {
+#avatar_div .form-group {
   margin-bottom: 0;
   margin-top: 16px;
 }
 
 .song-new form,
-.song-edit form,
 .user-profile-edit form {
   flex: 1 1 auto;
 }
@@ -35,14 +33,12 @@
   }
 
   .user-profile-edit,
-  .song-edit,
   .song-new {
     flex-direction: row;
     max-width: 768px;
   }
 
-  #avatar_div,
-  #art_div {
+  #avatar_div {
     margin-bottom: 0;
     margin-right: 15px;
   }
