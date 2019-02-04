@@ -4,15 +4,15 @@
   </div>
 </header>
 
-<section class="container song-new flex mt-4 flex-col md:flex-row ">
-  <div id="art_div" class="flex flex-col mb-12">
+<section class="container song-new mt-4">
+  <div id="art_div">
     <img id="art_thumbnail" src="<%= Attachments.art_url(nil, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
       <button id="song_upload_widget_opener" class="btn btn-primary">Upload cover</button>
     </div>
   </div>
 
-  <%= form_for @changeset, Routes.suggestion_path(@conn, :create), [class: "row"], fn f -> %>
+  <%= form_for @changeset, Routes.suggestion_path(@conn, :create), fn f -> %>
     <p>
     This song will be used in the current month TOP 10
     </p>
