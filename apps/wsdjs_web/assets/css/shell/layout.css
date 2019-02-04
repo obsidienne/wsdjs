@@ -11,10 +11,6 @@
   margin-top: 16px;
 }
 
-.user-profile-edit form {
-  flex: 1 1 auto;
-}
-
 .hot-songs {
   display: grid;
   grid-template-columns: calc(50% - .25rem) calc(50% - .25rem);
@@ -29,11 +25,6 @@
     grid-row-gap: 1rem;
     grid-column-gap: .5rem;
     /* need a fix */
-  }
-
-  .user-profile-edit {
-    flex-direction: row;
-    max-width: 768px;
   }
 
   #avatar_div {
