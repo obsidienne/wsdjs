@@ -4,10 +4,10 @@
     <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
       <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
+    </svg>likes and tops
     <% end %>
 
-    <span class="playlist-name h3 ml-auto flex">likes and tops
+    <span class="playlist-name h3 ml-auto flex">
       <%= if @playlist.public == true do %>
       <span class="tippy ml-2" title="this list is public">
         <svg fill="#777777" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
