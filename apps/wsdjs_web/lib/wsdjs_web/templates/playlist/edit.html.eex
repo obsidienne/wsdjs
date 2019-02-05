@@ -14,7 +14,7 @@
 
 
 <section id="user-page" class="container pt-4">
-  <%= render WsdjsWeb.UserView, "_sidebar_tiny.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
+  <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
 
 
   <%= form_for @changeset, Routes.playlist_path(@conn, :update, @playlist), fn f -> %>
