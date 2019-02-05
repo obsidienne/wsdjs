@@ -33,10 +33,7 @@ class Carousel {
         if (width < 992) {
             return 480;
         }
-        if (width < 1200) {
-            return 704;
-        }
-        return 920;
+        return 704;
     }
 
     _getNextStepSize(el) {

@@ -53,10 +53,3 @@
         grid-auto-columns: 10rem;
     }
 }
-
-@media (min-width: 1200px) {
-    .carousel-items {
-        grid-gap: 1.5rem;
-        grid-auto-columns: 10rem;
-    }
-}
