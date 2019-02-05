@@ -40,3 +40,6 @@
   grid-gap: 4px;
   grid-template-columns: repeat(auto-fit, minmax(352px, 1fr));
 }
+.aboutme p {
+  margin: 0;
+}
