@@ -1,4 +1,4 @@
-@ <nav class="secondary-nav py-4">
+<nav class="secondary-nav py-4">
   <ol class="container">
     <li class="inline-block">
         <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
