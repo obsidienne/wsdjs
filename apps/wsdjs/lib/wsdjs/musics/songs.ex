@@ -252,14 +252,6 @@ defmodule Wsdjs.Musics.Songs do
   end
 
   @doc """
-  How many suggested songs for the user
-  """
-  def count_suggested_songs(%User{} = user) do
-    query = from(s in Song, where: s.suggestion == true and s.user_id == ^user.id)
-    Repo.aggregate(query, :count, :id)
-  end
-
-  @doc """
   Creates a song.
 
   ## Examples
