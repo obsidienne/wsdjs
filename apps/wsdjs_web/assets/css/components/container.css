@@ -3,6 +3,7 @@
     max-width: 20rem;
 }
 
+
 main, .glnav {
     max-width: 100%;
 }
@@ -11,7 +12,6 @@ main, .glnav {
     .container {
         @apply mx-auto w-full px-4;
         max-width: 36rem;
-
     }
 }
 
@@ -20,6 +20,7 @@ main, .glnav {
         @apply px-0;
         max-width: 29rem;
     }
+
     main, .glnav {
         max-width: calc(100vw - 17rem);
     }
@@ -31,12 +32,5 @@ main, .glnav {
 @media (min-width: 992px) {
     .container {
         max-width: 43rem;
-    }
-}
-
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 56rem;
     }
 }

@@ -24,25 +24,25 @@
 }
 
 .playlists-grid {
-  grid-gap: .5rem;
+  grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
 }
 
 @media (min-width: 576px) {
   .playlists-grid {
-    grid-template-columns: repeat(auto-fit, minmax(min-content, auto));
+    grid-template-columns: 16.5rem 16.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .playlists-grid {
+    grid-template-columns: 14rem 14rem;
   }
 }
 
 @media (min-width: 992px) {
   .playlists-grid {
-    grid-template-columns: repeat(auto-fill, minmax(min-content, 208px));
-  }
-}
-
-@media (min-width: 1200px) {
-  .playlists-grid {
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(min-content, 264px));
+    grid-gap: 1.25rem;
+    grid-template-columns: 13.5rem 13.5rem 13.5rem;
   }
 }
