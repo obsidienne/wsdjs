@@ -15,7 +15,8 @@ body.radio-playing .icon-pause {
 }
 
 .radio-song img {
-  max-width: 300px;
+  width: 16rem;
+  height: 16rem;
 }
 
 .icon-pause {

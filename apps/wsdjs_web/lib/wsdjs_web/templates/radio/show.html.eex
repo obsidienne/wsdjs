@@ -1,4 +1,4 @@
-<section id="radio-page" class="radio-page container mt-4">
+<section class="container mt-4">
   <div class="radio-song flex items-center flex-col ">
     <%= if @songs == :empty do %>
       <strong>Something went really bad</strong>
@@ -6,7 +6,7 @@
       <% song = List.first(@songs) %>
       <%= if Map.has_key?(song, "path") do %>
         <img src="<%= Map.fetch!(song, "image_uri") %>" 
-            srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="300px" class="responsive shadow"/>
+            srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="288px" class="shadow"/>
         <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body visible-link action-link h1 clickable text-center">
           <%=Map.fetch!(song, "title") %>
         </a>
@@ -14,7 +14,7 @@
           <a href="<%= Map.fetch!(song, "suggested_by_path") %>" class="inline-block clickable visible-link"><%= Map.fetch!(song, "suggested_by") %></a>
         </div>
       <% else %>
-        <img src="<%= Map.fetch!(song, "cover") %>" class="responsive"/>
+        <img src="<%= Map.fetch!(song, "cover") %>" class="shadow"/>
         <%=Map.fetch!(song, "title") %>
       <% end %>
     <% end %>
