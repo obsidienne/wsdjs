@@ -10,7 +10,7 @@
 
 <section>
   <div class="flex md:flex-row flex-col justify-start container mt-6 pb-12">
-    <div class="song-page__art flex-grow">
+    <div class="song-page__art">
       <img src="<%= Attachments.art_url(@song.art, 300) %>" srcset="<%= Attachments.art_srcset(@song.art, 300) %>" sizes="300px" class="responsive shadow rounded"/>
     </div>
     <div class="flex flex-col md:pl-4">

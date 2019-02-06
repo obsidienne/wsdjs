@@ -2,9 +2,9 @@
   song-page
 ****************************/
 .song-page__art {
-  flex-basis: 288px;
-  max-width: 381px;
-  max-height: 381px;
+  flex-basis: 18rem;
+  width: 18rem;
+  height: 18rem;
 }
 
 .song-page__play {
