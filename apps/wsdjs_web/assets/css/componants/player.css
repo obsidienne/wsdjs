@@ -6,6 +6,8 @@
 
 .player__art {
   @apply shadow m-auto;
+  width: 15rem;
+  height: 15rem;
 }
 
 .player__description {
