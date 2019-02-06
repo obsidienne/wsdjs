@@ -31,12 +31,22 @@
     grid-gap: 1rem;
     grid-auto-columns: 9rem;
 }
-
+.carousel-item {
+    @apply block;
+}
+.carousel-item img {
+    width: 9rem;
+    height: 9rem;
+}
 
 @media (min-width: 576px) {
     .carousel-items {
         grid-gap: 2rem;
         grid-auto-columns: 10rem;
+    }
+    .carousel-item img {
+        width: 10rem;
+        height: 10rem;
     }
 }
 
@@ -45,11 +55,19 @@
         grid-gap: 1rem;
         grid-auto-columns: 9rem;
     }
+    .carousel-item img {
+        width: 9rem;
+        height: 9rem;
+    }    
 }
 
 @media (min-width: 992px) {
     .carousel-items {
         grid-gap: 1rem;
         grid-auto-columns: 10rem;
+    }
+    .carousel-item img {
+        width: 10rem;
+        height: 10rem;
     }
 }

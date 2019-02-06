@@ -26,8 +26,8 @@
 <% else %>
 
 <li class="overflow-hidden" style="grid-row: 1">
-  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>">
-    <img src="<%= Attachments.art_url(@song.art, 200) %>" srcset="<%= Attachments.art_srcset(@song.art, 200) %>" class="responsive rounded-lg rounded-lg shadow hover:opacity-50" />
+  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>" class="carousel-item">
+    <img src="<%= Attachments.art_url(@song.art, 200) %>" srcset="<%= Attachments.art_srcset(@song.art, 200) %>" class="rounded-lg shadow hover:opacity-50" />
     <div class="song-minicard__body flex pt-2">
       <span class="primary-text text-ellipsis"><%= @song.title %></span>
       <span class="secondary-text text-ellipsis"><%= @song.artist %></span>
