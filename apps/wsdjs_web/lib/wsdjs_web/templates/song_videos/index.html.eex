@@ -51,32 +51,9 @@
         </div>
 
         <%= submit "Add video", class: "btn btn-primary" %>
-      </fieldset>
-    <% end %>
+    </fieldset>
   <% end %>
-</div>
+  <% end %>
 
-<template id="video-tpl">
-  <article class="song-page__video card shadow clickable flex mb-2">
-    <a href="{{url}}" target="_blank" rel="noopener">
-      <img src="//res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg" srcset="https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg 100w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_200,q_auto/fl_immutable_cache/{{video_id}}.jpg 200w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_300,q_auto/fl_immutable_cache/{{video_id}}.jpg 300w" sizes="100px" height="auto" width="100">
-      <svg fill="#FFC107" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
-      </svg>
-    </a>
-    <div class="song-page__video__details">
-      <h5 class="text-ellipsis song-page__video__pros">{{title}}</h5>
-      <h5 class="song-page__video__event">{{event}}
-      <time class="text-grey-darkest"> ({{published_at}})</time>
-      </h5>
-
-      <button class="btn-link video__delete" data-path="<%= ApiRoutes.video_path(@conn, :delete, "{{id}}") %>">
-        <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-          <path d="M0 0h24v24H0z" fill="none"/>
-        </svg>
-      </button>
-    </div>
-  </article>
-</template>
+  <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
+</section>
