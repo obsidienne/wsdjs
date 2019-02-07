@@ -144,11 +144,18 @@ defmodule Wsdjs.Musics.Songs do
     |> filter_by_fulltext(facets)
     |> filter_by_bpm(facets)
     |> filter_by_genre(facets)
+    |> filter_has_video(facets)
     |> where([s], s.suggestion == true)
     |> order_by(desc: :inserted_at)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
   end
+
+  defp filter_has_video(query, %{"with_video" => "true"}) do
+    videos_subquery = from(v in Wsdjs.Attachments.Videos.Video, select: v.song_id)
+    join(query, :inner, [q], v in ^videos_subquery, on: q.id == v.song_id)
+  end
+  defp filter_has_video(query, _), do: query
 
   defp filter_by_genre(query, %{"genre" => genre}) when is_list(genre) do
     dynamic =
