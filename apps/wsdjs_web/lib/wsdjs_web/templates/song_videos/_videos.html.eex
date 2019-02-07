@@ -1,19 +1,16 @@
 <%= for video <- @videos do %>
-<article class="song-page__video card shadow clickable flex mb-2">
-  <%= link to: video.url, target: "_blank" do %>
-    <img src="<%= Attachments.thumbnail_url(video, 100) %>" srcset="<%= Attachments.thumbnail_srcset(video, 100) %>" sizes="100px" width="100" height="auto">
+<article class="song-page__video block">
+  <%= link to: video.url, target: "_blank", class: "aspect-ratio-16/9 relative block" do %>
+    <img src="<%= Attachments.thumbnail_url(video, 320) %>" srcset="<%= Attachments.thumbnail_srcset(video, 320) %>"  class="absolute pin-t w-full h-full shadow">
     <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
       <path d='M0 0h24v24H0z' fill='none'/>
       <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
     </svg>
    <% end %>
   <div class="song-page__video__details">
-    <span class="text-ellipsis text-bold"><%= video.title %></span>
-    <span class="text-ellipsis"><%= if is_nil(video.event) do video.event_str else video.event.name end %>
-    <%= if video.published_at do %>
-    <time class="text-grey-darkest"> (<%= Timex.format!(Timex.to_datetime(video.published_at), "%d %b %Y", :strftime) %>)</time>
-    <% end %>
-    </span>
+    <span class="text-bold"><%= video.title %></span>
+    <br/>
+    <span><%= if is_nil(video.event) do video.event_str else video.event.name end %></span>
 
     <%= if Wsdjs.Attachments.Policy.can?(@conn.assigns[:current_user], :delete, video) == :ok do %>
     <button class="btn-link video__delete" data-path="<%= ApiRoutes.video_path(@conn, :delete, video) %>">

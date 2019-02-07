@@ -23,7 +23,7 @@
   fill: #4267b2;
 }
 
-.playlists-grid {
+.playlists-grid{
   grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
 }
