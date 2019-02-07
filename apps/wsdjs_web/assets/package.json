@@ -29,6 +29,7 @@
     "postcss-loader": "^3.0.0",
     "style-loader": "^0.20.2",
     "tailwindcss": "^0.7.3",
+    "tailwindcss-aspect-ratio": "1.0.1",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "4.4.0",
     "webpack-bundle-analyzer": "2.13.1",
