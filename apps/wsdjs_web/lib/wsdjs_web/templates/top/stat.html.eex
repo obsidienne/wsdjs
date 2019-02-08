@@ -23,13 +23,11 @@
     </tbody>
   </table>
 
-  <h2>Votes</h2>
-
-  <ul class="top-stat__votes list-reset">
+  <ul class="list-reset">
     <%= for user <- Wsdjs.Accounts.list_users() do %>
       <%= if user.profil_djvip do %>
-        <li class="card shadow clickable" >
-          <span class="h2"><%= user.name %></span>
+        <li class="shadow p-4" >
+          <h2 class="h2"><%= user.name %></h2>
           <ol>
             <li><%= get_song_by(@top, user, 1) %></li>
             <li><%= get_song_by(@top, user, 2) %></li>

@@ -162,7 +162,3 @@
   text-decoration: underline;
   color: var(--accent-color);
 }
-
-.top-stat__votes .card {
-  padding: .5rem;
-}
