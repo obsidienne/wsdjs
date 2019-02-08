@@ -4,13 +4,6 @@
   display: grid;
 }
 
-
-
-#avatar_div .form-group {
-  margin-bottom: 0;
-  margin-top: 16px;
-}
-
 .hot-songs {
   display: grid;
   grid-template-columns: calc(50% - .25rem) calc(50% - .25rem);
@@ -25,10 +18,5 @@
     grid-row-gap: 1rem;
     grid-column-gap: .5rem;
     /* need a fix */
-  }
-
-  #avatar_div {
-    margin-bottom: 0;
-    margin-right: 15px;
   }
 }
