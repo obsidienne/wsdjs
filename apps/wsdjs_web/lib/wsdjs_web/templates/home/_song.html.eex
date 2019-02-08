@@ -12,7 +12,7 @@
 
 
     <div class="song-minicard__body flex py-0 ml-2">
-      <span class="text-grey-darkest text-ellipsis">hidden track</span>
+      <span class="text-grey-darkest text-ellipsis truncate">hidden track</span>
 
       <footer>
         <span class="label label-default"><%= @rank.song.genre %></span>
@@ -42,8 +42,8 @@
     </div>
 
     <div class="song-minicard__body flex pt-2">
-      <span class="primary-text text-ellipsis"><%= @rank.song.title %></span>
-      <span class="secondary-text text-ellipsis"><%= @rank.song.artist %></span>
+      <span class="primary-text text-ellipsis truncate"><%= @rank.song.title %></span>
+      <span class="secondary-text text-ellipsis truncate"><%= @rank.song.artist %></span>
       <span class="text-grey-darkest"><%= gettext "by" %> <%= user_displayed_name(@rank.song.user) %></span>
 
       <footer>

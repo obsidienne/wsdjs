@@ -45,7 +45,7 @@
               <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
                 <%= rank.song.title %>
               <% end %>
-              <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
+              <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
             </div>
 
             <aside>

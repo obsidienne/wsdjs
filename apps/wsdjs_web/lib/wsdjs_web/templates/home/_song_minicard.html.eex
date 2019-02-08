@@ -6,7 +6,7 @@
       <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive" />
     </div>
     <div class="song-minicard__body flex py-0">
-      <span class="text-grey-darkest text-ellipsis">hidden track</span>
+      <span class="text-grey-darkest text-ellipsis truncate">hidden track</span>
 
       <footer>
         <span class="label label-default"><%= @song.genre %></span>
@@ -29,9 +29,9 @@
   <a href="<%= Routes.song_path(@conn, :show, @song.id) %>" class="carousel-item">
     <img src="<%= Attachments.art_url(@song.art, 200) %>" srcset="<%= Attachments.art_srcset(@song.art, 200) %>" class="rounded-lg shadow hover:opacity-50" />
     <div class="song-minicard__body flex pt-2">
-      <span class="primary-text text-ellipsis"><%= @song.title %></span>
-      <span class="secondary-text text-ellipsis"><%= @song.artist %></span>
-      <span class="text-grey-darkest text-ellipsis"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></span>
+      <span class="primary-text text-ellipsis truncate"><%= @song.title %></span>
+      <span class="secondary-text text-ellipsis truncate"><%= @song.artist %></span>
+      <span class="text-grey-darkest text-ellipsis truncate"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></span>
 
       <footer>
         <span class="label label-default"><%= @song.genre %></span>

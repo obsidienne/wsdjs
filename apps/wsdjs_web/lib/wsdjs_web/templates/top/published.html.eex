@@ -79,7 +79,7 @@
           <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link clickable inline-block" do %>
             <span><%= rank.song.title %></span>
           <% end %>
-          <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
+          <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
           <span class="text-grey-darkest flex">
             <%= gettext "by" %>&nbsp;<%= proposed_by_link(@conn, rank.song) %>, &nbsp;
             <time datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>">

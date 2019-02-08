@@ -27,8 +27,8 @@
       <img class="responsive rounded shadow" src="https://res.cloudinary.com/don2kwaju/image/upload/w_240/wsdjs/radiowcs_square.jpg">
     </div>
 
-    <a href="#" id="player-title" class="action-link h3 mb-2 text-grey-light visible-link text-ellipsis">Radio WCS</a>
-    <span id="player-suggestor" class="text-grey-light h4 text-ellipsis">by World Swing DJs</span>
+    <a href="#" id="player-title" class="action-link h3 mb-2 text-grey-light visible-link text-ellipsis truncate">Radio WCS</a>
+    <span id="player-suggestor" class="text-grey-light h4 text-ellipsis truncate">by World Swing DJs</span>
 
     <div class="player__play__vinyl radio-toggle-play"></div>
   </div>
