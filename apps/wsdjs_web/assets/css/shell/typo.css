@@ -133,3 +133,8 @@ time {
 .comment_body a {
   text-decoration: underline;
 }
+
+/********************/
+.aboutme p {
+  margin: 0;
+}
