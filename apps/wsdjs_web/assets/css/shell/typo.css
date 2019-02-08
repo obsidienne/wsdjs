@@ -91,10 +91,6 @@ dt, .text-bold {
   font-weight: bold;
 }
 
-.text-ligther {
-  font-weight: lighter;
-}
-
 .text-ellipsis {
   width: 100%;
   display: inline-block;
