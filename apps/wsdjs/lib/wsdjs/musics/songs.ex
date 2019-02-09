@@ -152,9 +152,9 @@ defmodule Wsdjs.Musics.Songs do
   end
 
   defp filter_has_video(query, %{"with_video" => "true"}) do
-    videos_subquery = from(v in Wsdjs.Attachments.Videos.Video, select: v.song_id)
-    join(query, :inner, [q], v in ^videos_subquery, on: q.id == v.song_id)
+    join(query, :inner, [q], v in fragment("SELECT song_id FROM videos AS v group by song_id"), on: q.id == v.song_id)
   end
+
   defp filter_has_video(query, _), do: query
 
   defp filter_by_genre(query, %{"genre" => genre}) when is_list(genre) do
