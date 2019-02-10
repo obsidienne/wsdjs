@@ -28,7 +28,7 @@ defmodule WsdjsWeb.Router do
     pipe_through([:browser, :browser_auth])
 
     resources("/songs", SongController, only: [:index, :create, :new, :delete, :update]) do
-      get "/videos", SongVideosController, :index
+      resources("/videos", SongVideosController, only: [:index, :new, :create])
       get "/edit", SongActionsController, :edit
     end
 

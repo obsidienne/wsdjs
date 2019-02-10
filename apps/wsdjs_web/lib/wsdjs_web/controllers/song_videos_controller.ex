@@ -5,6 +5,7 @@ defmodule WsdjsWeb.SongVideosController do
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Videos.Video
+  alias Wsdjs.Musics.Song
   alias Wsdjs.Musics.Songs
 
   action_fallback(WsdjsWeb.FallbackController)
@@ -30,6 +31,31 @@ defmodule WsdjsWeb.SongVideosController do
         videos: videos,
         video_changeset: video_changeset
       )
+    end
+  end
+
+  def new(conn, %{"song_id" => song_id}, current_user) do
+    song = Songs.get_song!(song_id)
+
+    with :ok <- Songs.can?(current_user, :create) do
+      changeset = Attachments.change_video(%Video{})
+      render(conn, "new.html", changeset: changeset, song: song)
+    end
+  end
+
+  def create(conn, %{"song_id" => song_id, "video" => params}, current_user) do
+    song = Songs.get_song!(song_id)
+
+    params =
+      params
+      |> Map.put("user_id", current_user.id)
+      |> Map.put("song_id", song_id)
+
+    with :ok <- Attachments.Policy.can?(current_user, :create_video),
+         {:ok, _} <- Attachments.create_video(params) do
+      conn
+      |> put_flash(:info, "Video created")
+      |> redirect(to: Routes.song_song_videos_path(conn, :index, song))
     end
   end
 end

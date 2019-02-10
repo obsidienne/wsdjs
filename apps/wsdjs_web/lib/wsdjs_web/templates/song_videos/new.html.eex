@@ -1,0 +1,44 @@
+<nav class="secondary-nav mb-4 py-4">
+  <ol class="container">
+    <li class="current inline-block"><%= link "Return to videos list", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
+  </ol>
+</nav>
+
+<section class="container">
+  <div class="flex p-2 bg-white shadow mb-4">
+    <div>
+      <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
+    </div>
+    <div class="pl-4">
+      <div>
+        <span class="primary-text"><%= @song.title %></span>
+        <span class="secondary-text pb-2"><span class="text-grey-darkest">by</span> <%= @song.artist %></span>
+      </div>
+      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-grey-darkest inline-block" %>,
+        <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
+          <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
+        </time>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= form_for @changeset, Routes.song_song_videos_path(@conn, :create, @song), [id: "song-video-form", class: "container"], fn f -> %>
+  <fieldset class="p-2 border-0 shadow-inner mb-8">
+    <legend class="px-2">Add a video</legend>
+    <div class="form-group">
+      <%= text_input f, :url, type: "url", class: "form-control", placeholder: "Video url", required: true, maxlength: 255 %>
+      <%= error_tag f, :url %>
+    </div>
+    <div class="form-group">
+      <%= text_input f, :title, class: "form-control", placeholder: "Pro's names", required: true, maxlength: 255 %>
+      <%= error_tag f, :title %>
+    </div>
+    <div class="form-group">
+      <%= select f, :event_id, list_events(), class: "form-control" %>
+      <%= error_tag f, :event_id %>
+    </div>
+  </fieldset>
+
+  <%= submit "Add video", class: "btn btn-primary" %>
+<% end %>
