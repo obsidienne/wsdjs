@@ -1,6 +1,6 @@
 <%= for video <- @videos do %>
 <article class="song-page__video block">
-  <%= link to: video.url, target: "_blank", class: "aspect-ratio-16/9 relative block hover:opacity-50 border-l-4 " do %>
+  <%= link to: video.url, target: "_blank", class: "aspect-ratio-16/9 relative block hover:opacity-50" do %>
     <img src="<%= Attachments.thumbnail_url(video, 320) %>" srcset="<%= Attachments.thumbnail_srcset(video, 320) %>"  class="absolute pin-t w-full h-full shadow">
   <% end %>
   <div class="mt-2 flex">
