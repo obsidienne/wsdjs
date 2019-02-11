@@ -58,4 +58,16 @@ defmodule WsdjsWeb.SongVideosController do
       |> redirect(to: Routes.song_song_videos_path(conn, :index, song))
     end
   end
+
+  def delete(conn, %{"id" => id}, current_user) do
+    video = Attachments.get_video!(id)
+    song = Songs.get_song!(video.song_id)
+
+    with :ok <- Attachments.Policy.can?(current_user, :delete, video),
+         {:ok, _} <- Attachments.delete_video(video) do
+      conn
+      |> put_flash(:info, "Video deleted")
+      |> redirect(to: Routes.song_song_videos_path(conn, :index, song))
+    end
+  end
 end
