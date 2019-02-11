@@ -37,6 +37,7 @@
 
 .tops {
   position: relative;
+  width: 100%;
 }
 
 .tops__top__anchor {
