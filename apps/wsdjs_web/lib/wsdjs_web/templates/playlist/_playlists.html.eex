@@ -19,7 +19,7 @@
     <%= for playlist <- @playlists do %>
     <li class="clickable">
       <%= link to: Routes.playlist_path(@conn, :show, playlist), class: "playlist" do %>
-        <div class="img-embed">
+        <div class="aspect-ratio-square relative">
           <%= if playlist.cover do %>
           <img src="<%= Attachments.art_url(playlist.cover.art, 300) %>" srcset="<%= Attachments.art_srcset(playlist.cover.art, 300) %>" sizes="300px" class="responsive"/>
           <% else %>

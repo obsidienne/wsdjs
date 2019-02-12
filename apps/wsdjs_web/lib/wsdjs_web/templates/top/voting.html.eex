@@ -41,7 +41,7 @@
               <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", class: "voting-position__selector", value: current_user_vote(@votes, rank)) %>
             </div>
           </div>
-          <div class="img-embed">
+          <div class="aspect-ratio-square relative">
             <img src="<%= Attachments.art_url(rank.song.art, 300) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />
           </div>
           <%= if rank.song.url do %>

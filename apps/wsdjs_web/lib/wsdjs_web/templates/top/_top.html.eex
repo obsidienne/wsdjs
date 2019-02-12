@@ -1,7 +1,7 @@
  <article class="flex mb-6 relative">
       <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="tops__top__anchor hidden md:block absolute rounded-full">
         <%= if Enum.count(@top.ranks) > 0 do %>
-        <div class="img-embed">
+        <div class="aspect-ratio-square relative">
           <%= if blur_track(Enum.at(@top.ranks, 0).song, @current_user) == true do %>
             <img src="<%= Attachments.art_url(nil, 100) %>" class="w-full h-auto card shadow" >
           <% else %>
@@ -20,7 +20,7 @@
         <div class="tops__top__art flex flex-wrap justify-between m-top-1 w-full">
           <%= for rank <- @top.ranks do %>
             <div>
-              <div class="img-embed">
+              <div class="aspect-ratio-square relative">
                 <%= if blur_track(rank.song, @current_user) == true do %>
                 <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive w-full" >
                 <% else %>

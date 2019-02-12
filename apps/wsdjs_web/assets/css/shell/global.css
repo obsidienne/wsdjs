@@ -35,11 +35,6 @@ img.responsive {
   overflow: hidden;
 }
 
-.img-embed {
-  padding-bottom: 100%;
-  position: relative;
-}
-
 .img-embed img {
   position: absolute;
 }
