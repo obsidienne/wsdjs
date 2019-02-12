@@ -2,7 +2,7 @@
   <article class="song-card card shadow clickable flex flex-col">
     <a class="song-card__header p-0 block">
       <div class="aspect-ratio-square relative">
-        <img src="<%= Attachments.art_url(nil, 200) %>" srcset="<%= Attachments.art_srcset(nil, 200) %>" sizes="200px" class="responsive" />
+        <img src="<%= Attachments.art_url(nil, 200) %>" srcset="<%= Attachments.art_srcset(nil, 200) %>" sizes="200px" class="responsive absolute pin-t" />
       </div>
 
       <div class="song-card__tags flex px-4 py-2 w-full">

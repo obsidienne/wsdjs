@@ -34,7 +34,3 @@ img.responsive {
   height: auto;
   overflow: hidden;
 }
-
-.img-embed img {
-  position: absolute;
-}

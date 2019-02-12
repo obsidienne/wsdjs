@@ -63,7 +63,7 @@
           <div class="chart-value"><%= rank.position %></div>
         </div>
         <div class="aspect-ratio-square relative">
-          <img src="<%= Attachments.art_url(rank.song.art, 300) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />
+          <img src="<%= Attachments.art_url(rank.song.art, 300) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive absolute pin-t" />
         </div>
         <%= if rank.song.url do %>
           <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play" target="_blank" rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %> >
