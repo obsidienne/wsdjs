@@ -1,5 +1,5 @@
 .container {
-    @apply mx-auto px-2  max-w-md;
+    @apply mx-auto px-2 max-w-md w-full;
     max-width: 20rem;
 }
 
@@ -10,7 +10,7 @@ main, .glnav {
 
 @media (min-width: 576px) {
     .container {
-        @apply mx-auto w-full px-4;
+        @apply mx-auto px-4;
         max-width: 36rem;
     }
 }
@@ -23,9 +23,6 @@ main, .glnav {
 
     main, .glnav {
         max-width: calc(100vw - 17rem);
-    }
-    .hot-songs.container {
-        padding: 0;
     }
 }
 
