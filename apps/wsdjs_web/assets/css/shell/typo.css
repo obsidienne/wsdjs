@@ -71,6 +71,11 @@ a {
   @apply text-black;
 }
 
+a,
+a:hover {
+  text-decoration: none;
+}
+
 .page-header-sticky {
   @apply sticky bg-white z-30 pin-t;
 }
