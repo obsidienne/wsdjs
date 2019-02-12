@@ -12,7 +12,7 @@ svg:not(:root) {
 .song-opinion {
   user-select: none;
   background: transparent;
-  color: var(--inactive-color);
+  color: hsl(0, 0%, 45%);
   outline: 0;
   display: flex;
   line-height: 1.5;
@@ -44,7 +44,7 @@ svg:not(:root) {
 
 .tippy-tooltip.wsdjs-theme {
   /* Your styling here. Example: */
-  background-color: var(--bg-color);
+  background-color: hsl(240, 20%, 98%);
   border: 2px solid white;
   font-weight: bold;
   color: #333;
@@ -65,7 +65,7 @@ svg:not(:root) {
 
 
 .tippy-tooltip.playlist-picker-theme {
-  background-color: var(--bg-color);
+  background-color: hsl(240, 20%, 98%);
   font-weight: bold;
   color: #333;
   padding: 0;

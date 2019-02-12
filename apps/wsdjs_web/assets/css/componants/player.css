@@ -65,7 +65,7 @@ body.radio-playing .player__play__vinyl {
   left: 0;
   right: 0;
   top: 0;
-  background: var(--font-primary-color);
+  background: hsl(0, 0%, 13%);
 }
 
 .player__youtube_close {

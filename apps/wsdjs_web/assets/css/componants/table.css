@@ -10,7 +10,7 @@
 
 thead.sticked {
   top: 64px;
-  background-color: var(--bg-color)
+  background-color: hsl(240, 20%, 98%);
 }
 
 .table>thead>tr>th,

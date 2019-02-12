@@ -23,7 +23,7 @@
 }
 
 .btn-link[disabled]:hover, .btn-link[disabled]:focus {
-  color: var(--inactive-color);
+  color: hsl(0, 0%, 45%);
   text-decoration: none;
 }
 

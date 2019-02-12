@@ -49,7 +49,7 @@
 }
 
 .tops__top__content {
-  color: var(--inactive-color);
+  color: hsl(0, 0%, 45%);
   position: relative;
   margin-left: 0;
   padding: 16px;
@@ -57,7 +57,7 @@
 }
 
 .tops__top__date {
-  color: var(--inactive-color);
+  color: hsl(0, 0%, 45%);
 }
 
 @media only screen and (min-width: 992px) {

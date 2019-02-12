@@ -106,7 +106,7 @@
 .secondary-nav li::after {
   display: inline-block;
   content: '';
-  color: var(--inactive-color);
+  color: hsl(0, 0%, 45%);
   margin: 0 .5rem;
 }
 

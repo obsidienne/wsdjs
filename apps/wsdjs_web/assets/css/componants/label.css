@@ -27,7 +27,7 @@ a.label:focus {
 }
 
 .label-default {
-  background-color: var(--font-third-color);
+  background-color: hsl(0, 0%, 45%);
 }
 
 .label-default[href]:hover,

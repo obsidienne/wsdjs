@@ -1,20 +1,3 @@
-/*
-  CUSTOM 
-*/
-
-:root {
-  --bg-color: hsl(240, 20%, 98%);
-  --primary-color: hsl(208, 56%, 46%);
-  --accent-color: hsl(45, 100%, 51.4%);
-  --inactive-color: hsl(0, 0%, 45%);
-  --accent-action: translateY(-2px);
-  --font-primary-color: hsl(0, 0%, 13%);
-  --font-secondary-color: hsl(0, 0%, 29%);
-  --font-third-color: hsl(0, 0%, 45%);
-  --font-primary-weight: 700;
-  --font-secondary-weight: 400;
-}
-
 a,
 a:hover {
   text-decoration: none;

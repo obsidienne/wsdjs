@@ -9,11 +9,11 @@
 }
 
 .clickable:hover {
-  transform: var(--accent-action);
+  transform: translateY(-2px);
 }
 
 .action-link:hover {
-  color: var(--accent-color);
+  color: hsl(45, 100%, 51.4%);
 }
 
 .visible-link {
@@ -25,13 +25,13 @@
 }
 
 .primary-text {
-  font-weight: var(--font-primary-weight);
-  color: var(--font-primary-color);
+  font-weight: 700;
+  color: hsl(0, 0%, 13%);
 }
 
 .secondary-text {
-  font-weight: var(--font-secondary-weight);
-  color: var(--font-secondary-color);
+  font-weight: 400;
+  color: hsl(0, 0%, 29%);
 }
 
 .bg-hover:hover {
@@ -50,7 +50,7 @@
 }
 
 .facets {
-  background-color: var(--bg-color);
+  background-color: hsl(240, 20%, 98%);
   overflow-y: auto;
   overscroll-behavior: contain;
   width: 320px;

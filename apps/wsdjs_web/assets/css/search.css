@@ -37,7 +37,7 @@
 .search-input {
   position: relative;
   border: none;
-  background-color: var(--bg-color);
+  background-color: hsl(240, 20%, 98%);
   color: hsl(221, 15%, 41%);
   transform: translateY(0);
   transition: all ease .3s;
@@ -52,7 +52,7 @@
 
 .search-input:focus {
   color: hsl(221, 15%, 41%);
-  border-bottom: 2px solid var(--accent-color);
+  border-bottom: 2px solid hsl(45, 100%, 51.4%);
   outline: none;
 }
 

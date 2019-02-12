@@ -160,5 +160,5 @@
 
 .top-song-body a:hover {
   text-decoration: underline;
-  color: var(--accent-color);
+  color: hsl(45, 100%, 51.4%);
 }
