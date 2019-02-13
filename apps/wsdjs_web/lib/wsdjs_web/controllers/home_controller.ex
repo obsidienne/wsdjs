@@ -9,7 +9,8 @@ defmodule WsdjsWeb.HomeController do
   def index(conn, _params) do
     songs = Musics.Songs.instant_hits()
     top = Charts.last_top(conn.assigns.current_user)
+    users = Wsdjs.Accounts.list_djs()
 
-    render(conn, "index.html", songs: songs, top: top)
+    render(conn, "index.html", songs: songs, top: top, users: users)
   end
 end

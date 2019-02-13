@@ -1,37 +1,6 @@
-.user-page__avatar {
-  flex: 0 0 96px;
-  height: 96px;
-  width: 96px;
-  align-self: center;
-}
-
-.user-name {
-  text-align: center;
-  font-weight: var(--font-primary-weight);
-}
-
 .aboutme>ul {
   list-style-type: disc;
   margin-left: 2.5rem;
-}
-
-.user-djanme {
-  text-align: center;
-  font-weight: var(--font-secondary-weight);
-}
-
-.user-page__stats td {
-  color: var(--inactive-color);
-}
-
-.user-page__profile-details {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.user-page__profile__section {
-  position: relative;
-  background-color: white;
 }
 
 .user-page__profile__section:empty {
@@ -54,34 +23,26 @@
   fill: #4267b2;
 }
 
-.user-page__details {
-  color: var(--inactive-color);
-}
-
-.aboutme a {
-  text-decoration: underline;
-}
-
-.playlists-grid {
-  grid-gap: .5rem;
+.playlists-grid{
+  grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
 }
 
 @media (min-width: 576px) {
   .playlists-grid {
-    grid-template-columns: repeat(auto-fit, minmax(min-content, auto));
+    grid-template-columns: 16.5rem 16.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .playlists-grid {
+    grid-template-columns: 14rem 14rem;
   }
 }
 
 @media (min-width: 992px) {
   .playlists-grid {
-    grid-template-columns: repeat(auto-fill, minmax(min-content, 208px));
-  }
-}
-
-@media (min-width: 1200px) {
-  .playlists-grid {
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(min-content, 264px));
+    grid-gap: 1.25rem;
+    grid-template-columns: 13.5rem 13.5rem 13.5rem;
   }
 }

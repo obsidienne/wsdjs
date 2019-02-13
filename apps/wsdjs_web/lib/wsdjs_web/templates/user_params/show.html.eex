@@ -1,26 +1,26 @@
-<nav class="secondary-nav py-2">
+<nav class="secondary-nav py-4">
   <ol class="container">
-    <li class="d-inline-block">
+    <li class="inline-block">
       <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
     </li>
-    <li class="d-inline-block">
+    <li class="inline-block">
       <%= link "playlists", to: Routes.user_playlist_path(@conn, :index, @user) %>
     </li>
-    <li class="current d-inline-block">
+    <li class="current inline-block">
       <%= link "params", to: Routes.user_params_path(@conn, :show, @user) %>
     </li>
   </ol>
 </nav>
 
-<section id="user-page" class="user-page container pt-3">
-  <%= render WsdjsWeb.UserView, "_sidebar_tiny.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
+<section class="container pt-4">
+  <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, user: @user %>
 
   <div>
     <%= form_for @changeset, Routes.user_path(@conn, :update, @user), fn f -> %>
 
       <table class="table">
       <tr>
-        <td><strong>Email contact visible</strong><p class="text-muted">Your user page contains a button to send you an email. Your email is public.</p></td>
+        <td><strong>Email contact visible</strong><p class="text-grey-darkest">Your user page contains a button to send you an email. Your email is public.</p></td>
         <td>
           <div class="ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -32,7 +32,7 @@
       </tr>
       <%= if Wsdjs.Accounts.Users.can?(@user, :new_song_notification) == :ok do %>
       <tr>
-        <td><strong>New song notification</strong><p class="text-muted">Receive an email everyday if new songs have been suggeted.</p></td>
+        <td><strong>New song notification</strong><p class="text-grey-darkest">Receive an email everyday if new songs have been suggeted.</p></td>
         <td>
           <div class="ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -51,7 +51,7 @@
       <td colspan="2"><span class="h3">Admin fields</tr></td>
       </tr>
       <tr>
-        <td><strong>Profil admin</strong><p class="text-muted">Master of universe ?</p></td>
+        <td><strong>Profil admin</strong><p class="text-grey-darkest">Master of universe ?</p></td>
         <td>
           <div class="ckbx-style-11 danger">
             <%= checkbox f, :admin %>
@@ -60,7 +60,7 @@
         </td>
       </tr>
       <tr>
-        <td><strong>Verified profil</strong><p class="text-muted">The user identity has been verified, try to avoid user usurpation</p></td>
+        <td><strong>Verified profil</strong><p class="text-grey-darkest">The user identity has been verified, try to avoid user usurpation</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :verified_profil %>
@@ -69,7 +69,7 @@
         </td>
       </tr>
       <tr>
-        <td><strong>Profil DJ VIP</strong><p class="text-muted">Can suggest song, vote for official WSDJs TOP10, access all song suggested and TOP, create personal TOP5</p></td>
+        <td><strong>Profil DJ VIP</strong><p class="text-grey-darkest">Can suggest song, vote for official WSDJs TOP10, access all song suggested and TOP, create personal TOP5</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :profil_djvip %>
@@ -78,7 +78,7 @@
         </td>
       </tr>
       <tr>
-        <td><strong>Profil DJ</strong><p class="text-muted">Can create a personnal TOP5.</p></td>
+        <td><strong>Profil DJ</strong><p class="text-grey-darkest">Can create a personnal TOP5.</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= checkbox f, :profil_dj %>
@@ -87,7 +87,7 @@
         </td>
       </tr>
       <tr>
-        <td><strong>Deactivate user</strong><p class="text-muted">Desactivate a user, he can't login or receive notifications.</p></td>
+        <td><strong>Deactivate user</strong><p class="text-grey-darkest">Desactivate a user, he can't login or receive notifications.</p></td>
         <td>
           <div class=" ckbx-style-11 danger">
             <%= checkbox f, :deactivated %>
@@ -96,7 +96,7 @@
         </td>
       </tr>
       <tr>
-        <td><strong>Activate piwik</strong><p class="text-muted">The user is monitored by piwik.</p></td>
+        <td><strong>Activate piwik</strong><p class="text-grey-darkest">The user is monitored by piwik.</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -107,7 +107,7 @@
         </td>
       </tr> 
       <tr>
-        <td><strong>Activate video</strong><p class="text-muted">The user can add video to a song.</p></td>
+        <td><strong>Activate video</strong><p class="text-grey-darkest">The user can add video to a song.</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -118,7 +118,7 @@
         </td>
       </tr> 
       <tr>
-        <td><strong>Radioking umatch</strong><p class="text-muted">Send an email when a song streamed by radioking does not match with WSDJs database.</p></td>
+        <td><strong>Radioking umatch</strong><p class="text-grey-darkest">Send an email when a song streamed by radioking does not match with WSDJs database.</p></td>
         <td>
           <div class=" ckbx-style-11 ">
             <%= inputs_for f, :parameter, fn fp -> %>
@@ -135,7 +135,7 @@
 <% end %>
   </div>
 
-  <%= link "log out", to: Routes.session_path(@conn, :delete, @current_user), method: :delete, data: [pjax: "false"], class: "btn btn-link text-danger mt-4" %>
+  <%= link "log out", to: Routes.session_path(@conn, :delete, @current_user), method: :delete, data: [pjax: "false"], class: "btn btn-link text-danger mt-6" %>
 
 </section>
 

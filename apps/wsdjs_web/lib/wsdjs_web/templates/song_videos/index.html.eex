@@ -1,22 +1,25 @@
-<nav class="secondary-nav mb-3 py-2">
+<nav class="secondary-nav mb-4 py-4">
   <ol class="container">
-    <li class="d-inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
-    <li class="current d-inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
+    <li class="inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
+    <li class="current inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
+    <%= if Wsdjs.Musics.Songs.can?(@current_user, :edit, @song) == :ok do %>
+    <li class="inline-block"><%= link "Edit", to: Routes.song_song_actions_path(@conn, :edit, @song) %></li>
+    <% end %>
   </ol>
 </nav>
 
 
 <section class="container">
-  <div class="d-flex p-2 bg-white">
+  <div class="flex p-2 bg-white shadow mb-4">
     <div>
       <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
     </div>
-    <div class="pl-3">
+    <div class="pl-4">
       <div>
         <span class="primary-text"><%= @song.title %></span>
-        <span class="secondary-text pb-2"><span class="text-muted">by</span> <%= @song.artist %></span>
+        <span class="secondary-text pb-2"><span class="text-grey-darkest">by</span> <%= @song.artist %></span>
       </div>
-      <div class="text-muted"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-muted d-inline-block" %>,
+      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-grey-darkest inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
@@ -25,55 +28,20 @@
   </div>
 </section>
 
-<div class="container song-page__sections d-flex">
-  <section id="overview-video" class="overview-video mb-3 d-flex flex-wrap flex-column">
-    <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
-  </section>
 
+<section id="overview-video" class="overview-video container">
   <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
-    <%= form_for @video_changeset, ApiRoutes.song_video_path(@conn, :create, @song), [id: "song-video-form"], fn f -> %>
-      <fieldset>
-        <legend>Add a video</legend>
-        <div class="form-group">
-          <%= text_input f, :url, type: "url", class: "form-control", placeholder: "Video url", required: true, maxlength: 255 %>
-          <%= error_tag f, :url %>
+    <%= link to: Routes.song_song_videos_path(@conn, :new, @song), class: "clickable" do %>
+      <div class="border border-dashed pt-full relative aspect-ratio-16/9">
+        <div class="absolute w-full h-full pin-t p-4 text-center flex flex-col items-center justify-around">
+        Add a new video
+        <svg width="40" height="40" viewBox="0 0 24 24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
         </div>
-        <div class="form-group">
-          <%= text_input f, :title, class: "form-control", placeholder: "Pro's names", required: true, maxlength: 255 %>
-          <%= error_tag f, :title %>
-        </div>
-        <div class="form-group">
-          <%= select f, :event_id, list_events(), class: "form-control" %>
-          <%= error_tag f, :event_id %>
-        </div>
-
-        <%= submit "Add video", class: "btn btn-primary" %>
-      </fieldset>
+      </div>
     <% end %>
   <% end %>
-</div>
 
-<template id="video-tpl">
-  <article class="song-page__video card shadow clickable d-flex mb-2">
-    <a href="{{url}}" target="_blank" rel="noopener">
-      <img src="//res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg" srcset="https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_100,q_auto/fl_immutable_cache/{{video_id}}.jpg 100w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_200,q_auto/fl_immutable_cache/{{video_id}}.jpg 200w, https://res.cloudinary.com/don2kwaju/image/youtube/c_fit,f_auto,w_300,q_auto/fl_immutable_cache/{{video_id}}.jpg 300w" sizes="100px" height="auto" width="100">
-      <svg fill="#FFC107" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
-      </svg>
-    </a>
-    <div class="song-page__video__details">
-      <h5 class="text-ellipsis song-page__video__pros">{{title}}</h5>
-      <h5 class="song-page__video__event">{{event}}
-      <time class="text-muted"> ({{published_at}})</time>
-      </h5>
-
-      <button class="btn-link video__delete" data-path="<%= ApiRoutes.video_path(@conn, :delete, "{{id}}") %>">
-        <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-          <path d="M0 0h24v24H0z" fill="none"/>
-        </svg>
-      </button>
-    </div>
-  </article>
-</template>
+  <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
+</section>

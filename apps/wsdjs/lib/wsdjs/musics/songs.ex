@@ -144,11 +144,18 @@ defmodule Wsdjs.Musics.Songs do
     |> filter_by_fulltext(facets)
     |> filter_by_bpm(facets)
     |> filter_by_genre(facets)
+    |> filter_has_video(facets)
     |> where([s], s.suggestion == true)
     |> order_by(desc: :inserted_at)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> Repo.all()
   end
+
+  defp filter_has_video(query, %{"with_video" => "true"}) do
+    join(query, :inner, [q], v in fragment("SELECT song_id FROM videos AS v group by song_id"), on: q.id == v.song_id)
+  end
+
+  defp filter_has_video(query, _), do: query
 
   defp filter_by_genre(query, %{"genre" => genre}) when is_list(genre) do
     dynamic =
@@ -249,14 +256,6 @@ defmodule Wsdjs.Musics.Songs do
       )
 
     Repo.one(query)
-  end
-
-  @doc """
-  How many suggested songs for the user
-  """
-  def count_suggested_songs(%User{} = user) do
-    query = from(s in Song, where: s.suggestion == true and s.user_id == ^user.id)
-    Repo.aggregate(query, :count, :id)
   end
 
   @doc """

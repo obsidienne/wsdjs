@@ -1,7 +1,7 @@
 <tr>
     <td><img src="<%= Attachments.avatar_url(@user.avatar, 48) %>" srcset="<%= Attachments.avatar_srcset(@user.avatar, 48) %>" sizes="48px" width="48px" height="48px"/></td>
     <td>
-      <%= link name_or_email(@user), to: Routes.user_path(@conn, :show, @user.id), class: "tippy text-ellipsis visible-link action-link clickable", title: user_tooltip(@user) %>
+      <%= link name_or_email(@user), to: Routes.user_path(@conn, :show, @user.id), class: "tippy text-ellipsis truncate visible-link action-link clickable", title: user_tooltip(@user) %>
       <%= if @user.verified_profil do %><span class="label label-info">verified</span><% end %>
       <%= if @user.deactivated do %>
         <span class="label label-danger">Deactivated</span>

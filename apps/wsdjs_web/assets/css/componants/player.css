@@ -1,37 +1,18 @@
 .player {
-  height: 72px;
-  background: hsl(0, 0%, 93%);
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin-right: auto;
-  margin-left: auto;
-  z-index: 3000;
-  display: none;
+  @apply fixed pin-y pin-r;
+  background-color: #1f2532;
+  width: 17rem;
 }
 
-.current-played {
-  display: flex;
-  align-items: center;
-}
-
-.current-played[hidden] {
-  display: none;
-}
-
-.player__art,
-.player__toggle__art {
-  width: 72px;
-  height: 72px;
-  box-shadow: 3px 0 3px 0 hsla(0, 0%, 0%, 0.4);
-  flex: 0 0 72px;
+.player__art {
+  @apply shadow m-auto;
+  width: 15rem;
+  height: 15rem;
 }
 
 .player__description {
   overflow: hidden;
   flex: 1 1 auto;
-  padding: 5px 5px 5px 15px;
 }
 
 .player__play {
@@ -43,15 +24,8 @@
 }
 
 .player__play__vinyl {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-top: -60px;
-  box-shadow: 0 3px 20px 0 hsla(0, 0%, 0%, 0.35);
-  text-align: center;
-  cursor: pointer;
-  background: hsl(0, 0%, 100%);
-  background: url("data:image/svg+xml,%3Csvg fill='%23000000' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M8 5v14l11-7z'/%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3C/svg%3E"), #FFF;
+  @apply w-16 h-16 rounded-full shadow cursor-pointer bg-white mx-auto mt-8;
+  background: url("data:image/svg+xml,%3Csvg fill='%23000000' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M8 5v14l11-7z'/%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3C/svg%3E"), #FFF;
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
@@ -91,7 +65,7 @@ body.radio-playing .player__play__vinyl {
   left: 0;
   right: 0;
   top: 0;
-  background: var(--font-primary-color);
+  background: hsl(0, 0%, 13%);
 }
 
 .player__youtube_close {
@@ -136,13 +110,6 @@ body.radio-playing .player__play__vinyl {
 }
 
 @media (min-width: 768px) {
-  .player {
-    display: block;
-    width: 384px;
-    bottom: 1rem;
-    right: 1rem;
-  }
-
   .player__youtube {
     height: 216px;
     width: 384px;

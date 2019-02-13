@@ -18,7 +18,7 @@ config :wsdjs_proxy, WsdjsProxy.Endpoint,
   watchers: []
 
 config :master_proxy,
-  http: [:inet6, port: 4080],
+  http: [:inet6, port: 8080],
   backends: [
     %{
       host: ~r/localhost/,
@@ -28,12 +28,6 @@ config :master_proxy,
     %{
       host: ~r/localhost/,
       phoenix_endpoint: WsdjsWeb.Endpoint
-    },
-    %{
-      verb: ~r/get/i,
-      path: ~r{^/master-proxy-plug-test$},
-      plug: MasterProxy.Plug.Test,
-      opts: [1, 2, 3]
     }
   ]
 

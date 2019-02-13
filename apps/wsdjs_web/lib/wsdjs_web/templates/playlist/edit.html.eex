@@ -1,20 +1,20 @@
-<nav class="secondary-nav py-2">
+<nav class="secondary-nav py-4">
   <ol class="container">
-    <li class="d-inline-block">
+    <li class="inline-block">
         <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
     </li>
-    <li class="d-inline-block current">
+    <li class="inline-block current">
       <%= link "playlists", to: Routes.user_playlist_path(@conn, :index, @user) %>
     </li>
-    <li class="d-inline-block">
+    <li class="inline-block">
         <%= link "params", to: Routes.user_params_path(@conn, :show, @user) %>
     </li>
   </ol>
 </nav>
 
 
-<section id="user-page" class="user-page container pt-3">
-  <%= render WsdjsWeb.UserView, "_sidebar_tiny.html", conn: @conn, current_user: @current_user, suggested_songs: @suggested_songs, user: @user %>
+<section class="container pt-4">
+  <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, user: @user %>
 
 
   <%= form_for @changeset, Routes.playlist_path(@conn, :update, @playlist), fn f -> %>
@@ -45,6 +45,6 @@
 
 
   <%= if Wsdjs.Playlists.can?(@current_user, :delete, @playlist) == :ok do %>
-    <%= link "Delete", to: Routes.playlist_path(@conn, :delete, @playlist), method: :delete, class: "btn btn-link text-danger mt-4" %>
+    <%= link "Delete", to: Routes.playlist_path(@conn, :delete, @playlist), method: :delete, class: "btn btn-link text-danger mt-6" %>
   <% end %>
 </section>

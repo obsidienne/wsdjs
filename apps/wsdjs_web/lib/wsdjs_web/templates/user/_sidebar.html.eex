@@ -1,58 +1,36 @@
-<div class="mb-2">
-  <section class="user-page__profile__section p-3 w-100">
-    <header class="d-flex flex-column">
-      <div class="d-flex align-items-end justify-content-between">
-        <div class="d-flex">
-          <%= if @user.profil_djvip do %><span class="label label-primary mr-2">DJ VIP</span><% end %>
-          <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
-        </div>
-
-        <%= if @user.verified_profil do %>
-        <div class="d-flex justify-content-end">
-          <svg style="width:24px;height:24px" viewBox="0 0 24 24" class="tippy pointer-event-auto" title="User profil has been verified">
-            <path fill="#00b200" d="M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z" />
-          </svg>
-        </div>
-        <% end %>
-
+<section class="relative bg-white p-4 w-full shadow mb-4">
+  <header class="flex flex-col">
+    <div class="flex items-center mb-4">
+      <div class="flex w-1/3">
+        <%= if @user.profil_djvip do %><span class="label label-primary mr-2">DJ VIP</span><% end %>
+        <%= if @user.profil_dj do %><span class="label label-primary">DJ</span><% end %>
       </div>
-      <div class="user-page__avatar">
-        <img src="<%= Attachments.avatar_url(@user.avatar, 50) %>" sizes="50px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 50) %>" class="responsive rounded-circle">
+
+      <div class="flex w-1/3 justify-center">
+        <img src="<%= Attachments.avatar_url(@user.avatar, 48) %>" sizes="48px" srcset="<%= Attachments.avatar_srcset(@user.avatar, 48) %>" class="rounded-full">
       </div>
-      <div class="user-page__profile-details px-1 w-100">
-        <span class="text-ellipsis user-name"><%= @user.name %></span>
-        <%= if @user.djname do %>
-          <span class="text-ellipsis text-muted user-djanme"><%= @user.djname %></span>
-        <% end %>
-        <%= if @user.user_country do %>
-        <div class="d-flex mt-auto justify-content-center text-muted">
+
+      <%= if @user.verified_profil do %>
+      <div class="flex justify-end w-1/3">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24" class="tippy pointer-events-auto" title="User profil has been verified">
+          <path fill="#00b200" d="M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z" />
+        </svg>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="flex-shrink flex-grow flex-auto min-w-0 px-1 w-full">
+      <span class="font-bold text-center block"><%= @user.name %></span>
+      <%= if @user.user_country do %>
+        <div class="flex mt-auto justify-center text-grey-darkest">
           <svg fill='#455A64' height='24' viewBox= '0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
             <path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/>
             <path d='M0 0h24v24H0z' fill='none'/>
           </svg>
           <%= @user.user_country %>
         </div>
-        <% end %>
-      </div>
-    </header>
-
-    <footer class="d-flex flex-wrap justify-content-between align-items-center mt-3">
-      <%= if @user && @user.parameter && @user.parameter.email_contact do %>
-      <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Send an eMail</a>
       <% end %>
-      <%= if Wsdjs.Accounts.Users.can?(@current_user, :edit_user, @user) == :ok do %>
-        <%= link "Edit profile", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-link" %>
-      <% end %>
-    </footer>
-  </section>
-
-  <ul class="user-page__profile__section  p-3 d-none d-md-flex flex-wrap w-100">
-    <li class="my-0 mx-2"><span class="tag"><%= @suggested_songs %> songs</li>
-  </ul>
-
-
-  <%= if @user.detail do %>
-  <%= render "_user_details.html", user: @user %>
-  <% end %>
-</div>
+    </div>
+  </header>
+</section>
 

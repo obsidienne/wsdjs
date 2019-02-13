@@ -6,10 +6,6 @@
   flex: 1 0 20%;
 }
 
-.tops__top__art img {
-  vertical-align: top;
-}
-
 /****************************
   top timeline vertical line
 ****************************/
@@ -24,7 +20,7 @@
   background: #d7e4ed;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   .tops::before {
     left: 50%;
     margin-left: -2px;
@@ -37,43 +33,19 @@
 
 .tops {
   position: relative;
-}
-
-.tops__top {
-  position: relative;
-}
-
-.tops__top>a {
-  overflow: hidden;
-}
-
-.tops__top:first-child {
-  margin-top: 0;
-}
-
-.tops__top:last-child {
-  margin-bottom: 0;
+  width: 100%;
 }
 
 .tops__top__anchor {
-  position: absolute;
   top: 0;
-  left: 0;
-  width: 48px;
-  height: 48px;
-}
-
-.tops__top__anchor__img {
-  width: 100%;
-  height: auto;
-}
-
-.tops__top thead {
-  background-color: transparent;
+  width: 3rem;
+  height: 3rem;
+  left: 50%;
+  margin-left: -23px;
 }
 
 .tops__top__content {
-  color: var(--inactive-color);
+  color: hsl(0, 0%, 45%);
   position: relative;
   margin-left: 0;
   padding: 16px;
@@ -81,10 +53,10 @@
 }
 
 .tops__top__date {
-  color: var(--inactive-color);
+  color: hsl(0, 0%, 45%);
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   .tops :nth-child(even) {
     justify-content: flex-end;
   }
@@ -98,15 +70,8 @@
     padding-left: 15px;
   }
 
-  .tops__top__anchor {
-    width: 64px;
-    height: 64px;
-    left: 50%;
-    margin-left: -30px;
-  }
 
   .tops__top__content {
-    margin-left: 0;
-    width: 45%;
+    width: 19rem;
   }
 }

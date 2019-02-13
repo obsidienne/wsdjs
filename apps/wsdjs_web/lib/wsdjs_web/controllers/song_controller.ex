@@ -81,17 +81,6 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  @spec edit(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
-          {:error, :unauthorized} | Plug.Conn.t()
-  def edit(conn, %{"id" => id}, current_user) do
-    song = Songs.get_song!(id)
-
-    with :ok <- Songs.can?(current_user, :edit, song) do
-      changeset = Songs.change(song)
-      render(conn, "edit.html", song: song, changeset: changeset)
-    end
-  end
-
   @spec update(Plug.Conn.t(), %{id: String.t(), song: map()}, Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do

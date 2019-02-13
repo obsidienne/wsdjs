@@ -26,16 +26,16 @@
     <link defer rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
   </head>
 
-  <body>
+  <body class="font-sans bg-grey-lightest">
     <header class="hero hot-hero">
-      <nav class="glnav line-upper container">
+      <nav class="glnav container">
         <%= link "", to: Routes.home_path(@conn, :index), class: "glnav__logo" %>
-        <%= link "tops", to: Routes.top_path(@conn, :index), class: "glnav__menu text-muted" %>
+        <%= link "tops", to: Routes.top_path(@conn, :index), class: "glnav__menu text-grey-darkest" %>
       </nav>
     </header>
 
     <main class="container">
-      <h1 class="page-header">Sorry this page does not exist !</h1>
+      <h1>Sorry this page does not exist !</h1>
       <p>
         <%= link "Go to the home page", to: Routes.home_path(@conn, :index), class: "btn btn-link" %>
         or 

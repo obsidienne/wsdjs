@@ -1,9 +1,37 @@
-<section class="container song-edit d-flex mt-3 flex-column flex-md-row">
-  <div id="art_div">
-    <img id="art_thumbnail" src="<%= Attachments.art_url(@song.art, 250) %>" style="width:250px;height:250px;">
-    <div class="form-group">
-      <button id="song_edit_cldwidget_opener" class="btn btn-primary">Upload cover</button>
+<nav class="secondary-nav mb-4 py-4">
+  <ol class="container">
+    <li class="inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
+    <li class="inline-block"><%= link "Videos", to: Routes.song_song_videos_path(@conn, :index, @song) %></li>
+    <%= if Wsdjs.Musics.Songs.can?(@current_user, :edit, @song) == :ok do %>
+    <li class="current inline-block"><%= link "Edit", to: Routes.song_song_actions_path(@conn, :edit, @song) %></li>
+    <% end %>
+  </ol>
+</nav>
+
+
+<section class="container mb-8">
+  <div class="flex p-2 bg-white shadow">
+    <div>
+      <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
     </div>
+    <div class="pl-4">
+      <div>
+        <span class="primary-text"><%= @song.title %></span>
+        <span class="secondary-text pb-2"><span class="text-grey-darkest">by</span> <%= @song.artist %></span>
+      </div>
+      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-grey-darkest inline-block" %>,
+        <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
+          <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
+        </time>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container mb-32">
+  <div id="art_div" class="relative mb-4">
+    <img id="art_thumbnail" class="opacity-25 shadow rounded" src="<%= Attachments.art_url(@song.art, 240) %>" style="width:240px;height:240px;">
+    <button id="song_edit_cldwidget_opener" class="btn btn-primary absolute pin-b pin-l">Update cover</button>
   </div>
 
   <%= form_for @changeset, Routes.song_path(@conn, :update, @song), fn f -> %>
@@ -16,12 +44,12 @@
 
     <%= if @current_user.admin do %>
       <div class="form-group">
-        <label class="text-muted">Artist</label>
+        <label class="text-grey-darkest">Artist</label>
         <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
         <%= error_tag f, :artist %>
       </div>
       <div class="form-group">
-        <label class="text-muted">Title</label>
+        <label class="text-grey-darkest">Title</label>
         <%= text_input f, :title, placeholder: "Song title", class: "form-control" %>
         <%= error_tag f, :title %>
       </div>
@@ -98,12 +126,12 @@
 
     <%= if @current_user.admin do %>
     <div class="form-group">
-      <label class="text-muted">Suggestor</label>
+      <label class="text-grey-darkest">Suggestor</label>
       <%= select f, :user_id, list_users(), class: "form-control" %>
       <%= error_tag f, :user_id %>
     </div>
     <div class="form-group">
-      <label class="text-muted">Suggested at</label>
+      <label class="text-grey-darkest">Suggested at</label>
       <%= datetime_select f, :inserted_at, class: "form-control" %>
       <%= error_tag f, :inserted_at %>
     </div>
@@ -111,3 +139,10 @@
     <%= submit "Update", class: "btn btn-primary" %>
   <% end %>
 </section>
+
+<section class="container">
+  <%= form_for @conn, Routes.song_path(@conn, :delete, @song), [method: "DELETE", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"]], fn f -> %>
+    <%= submit "Delete song", class: "btn btn-danger w-full" %>
+  <% end %>
+</section>
+

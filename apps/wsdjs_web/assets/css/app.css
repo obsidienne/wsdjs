@@ -1,18 +1,82 @@
-@import "./shell/normalize.css";
-@import "./shell/global.css";
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/preflight";
+ */
+@tailwind preflight;
+
+/**
+ * This injects any component classes registered by plugins.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/components";
+ */
+@tailwind components;
+
+/**
+ * Here you would add any of your custom component classes; stuff that you'd
+ * want loaded *before* the utilities so that the utilities could still
+ * override them.
+ *
+ * Example:
+ *
+ * .btn { ... }
+ * .form-input { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "components/buttons";
+ * @import "components/forms";
+ */
+@import "./components/buttons.css";
+@import "./components/forms.css";
+@import "./components/toggle.css";
+@import "./components/container.css";
+@import "./components/carousel.css";
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/utilities";
+ */
+@tailwind utilities;
+
+
+/**
+ * Here you would add any custom utilities you need that don't come out of the
+ * box with Tailwind.
+ *
+ * Example :
+ *
+ * .bg-pattern-graph-paper { ... }
+ * .skew-45 { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "utilities/background-patterns";
+ * @import "utilities/skew-transforms";
+ */
+
 @import "./shell/nav.css";
 @import "./shell/layout.css";
 @import "./shell/typo.css";
 @import "./componants/btn.css";
-@import "./componants/form.css";
 @import "./componants/label.css";
 @import "./componants/notifier.css";
 @import "./componants/player.css";
 @import "./componants/table.css";
-@import "./componants/tag.css";
 @import "./utilities.css";
 @import "./animations.css";
-@import "./comments.css";
 @import "./icons.css";
 @import "./search.css";
 @import "./song.css";
@@ -20,14 +84,4 @@
 @import "./tops.css";
 @import "./radio.css";
 @import "./user.css";
-@import "./utilities/align.css";
-@import "./utilities/border.css";
-@import "./utilities/display.css";
-@import "./utilities/flex.css";
-@import "./utilities/position.css";
-@import "./utilities/sizes.css";
-@import "./utilities/shadow.css";
-@import "./utilities/spacing.css";
-@import "./utilities/text.css";
-@import 'shame.css';
 @import '../node_modules/leaflet/dist/leaflet.css';

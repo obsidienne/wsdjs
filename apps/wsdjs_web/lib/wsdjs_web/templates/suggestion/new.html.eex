@@ -4,7 +4,7 @@
   </div>
 </header>
 
-<section class="container song-new d-flex mt-3 flex-column flex-md-row ">
+<section class="container song-new mt-4">
   <div id="art_div">
     <img id="art_thumbnail" src="<%= Attachments.art_url(nil, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <%= form_for @changeset, Routes.suggestion_path(@conn, :create), [class: "row"], fn f -> %>
+  <%= form_for @changeset, Routes.suggestion_path(@conn, :create), fn f -> %>
     <p>
     This song will be used in the current month TOP 10
     </p>

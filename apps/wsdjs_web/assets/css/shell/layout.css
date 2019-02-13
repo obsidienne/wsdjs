@@ -1,40 +1,7 @@
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-  width: 100%;
-  max-width: 720px;
-}
-
-.SessionNewView .container-form,
-.RegistrationNewView .container-form {
-  width: 100%;
-  max-width: 414px;
-}
-
-.home-container {
-  grid-template-columns: 100%;
-  grid-gap: .5rem;
-}
-
-#avatar_div,
-#art_div {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-}
-
-#avatar_div .form-group,
-#art_div .form-group {
-  margin-bottom: 0;
-  margin-top: 16px;
-}
-
-.song-new form,
-.song-edit form,
-.user-profile-edit form {
-  flex: 1 1 auto;
+/******
+******/
+.grid {
+  display: grid;
 }
 
 .hot-songs {
@@ -46,61 +13,20 @@
 
 /********************/
 @media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-
-  .home-container {
-    grid-template-columns: 50% 50%;
-  }
-
   .hot-songs {
     grid-template-columns: repeat(auto-fit, 216px);
     grid-row-gap: 1rem;
     grid-column-gap: .5rem;
     /* need a fix */
   }
-
-  .user-profile-edit,
-  .song-edit,
-  .song-new {
-    flex-direction: row;
-    max-width: 768px;
-  }
-
-  #avatar_div,
-  #art_div {
-    margin-bottom: 0;
-    margin-right: 15px;
-  }
 }
 
-@media (min-width: 992px) {
-  .container {
-    padding-left: 0;
-    padding-right: 0;
-    max-width: 960px;
-  }
+img {
+  vertical-align: top;
 }
 
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-
-/********************/
-.top-songs-container,
-.top-stat__votes {
-  display: grid;
-  grid-gap: 4px;
-  grid-template-columns: repeat(auto-fit, minmax(352px, 1fr));
-}
-
-@media (min-width: 768px) {
-  .user-page {
-    display: grid;
-    grid-gap: 16px;
-    grid-template-columns: 300px 1fr;
-  }
+img.responsive {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
 }

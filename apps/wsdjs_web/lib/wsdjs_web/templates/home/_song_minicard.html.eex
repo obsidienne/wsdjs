@@ -1,19 +1,19 @@
 <%= if blur_track(@song, @current_user) == true do %>
 
-<li class="clickable shadow-hover">
-  <a class="d-flex m-0">
-    <div class="song-minicard__heading p-0 border-0">
+<li class="hover:shadow mr-4 w-48 flex-no-grow flex-no-shrink">
+  <a class="flex flex-col m-0">
+    <div class="p-0 border-0">
       <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive" />
     </div>
-    <div class="song-minicard__body d-flex py-0 ml-2">
-      <span class="text-muted text-ellipsis">hidden track</span>
+    <div class="song-minicard__body flex py-0">
+      <span class="text-grey-darkest text-ellipsis truncate">hidden track</span>
 
       <footer>
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
           <span class="label label-primary"><%= @song.bpm %> bpm</span>
         <% end %>
-        <time class="text-muted" 
+        <time class="text-grey-darkest" 
               datetime="<%= utc_to_local(@song.inserted_at) %>"
               title="<%= Timex.format!(@song.inserted_at, "%B %d, %Y", :strftime) %>">
               <%= Timex.format!(@song.inserted_at, "{relative}", :relative) %>
@@ -25,22 +25,20 @@
 
 <% else %>
 
-<li class="clickable shadow-hover">
-  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>" class="d-flex m-0">
-    <div class="song-minicard__heading p-0 border-0">
-      <img src="<%= Attachments.art_url(@song.art, 200) %>" class="responsive" />
-    </div>
-    <div class="song-minicard__body d-flex py-0 ml-2">
-      <span class="primary-text text-ellipsis"><%= @song.title %></span>
-      <span class="secondary-text text-ellipsis"><%= @song.artist %></span>
-      <span class="text-muted text-ellipsis"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></span>
+<li class="overflow-hidden" style="grid-row: 1">
+  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>" class="carousel-item">
+    <img src="<%= Attachments.art_url(@song.art, 200) %>" srcset="<%= Attachments.art_srcset(@song.art, 200) %>" class="rounded-lg shadow hover:opacity-50" />
+    <div class="song-minicard__body flex pt-2">
+      <span class="primary-text text-ellipsis truncate"><%= @song.title %></span>
+      <span class="secondary-text text-ellipsis truncate"><%= @song.artist %></span>
+      <span class="text-grey-darkest text-ellipsis truncate"><%= gettext "by" %> <%= user_displayed_name(@song.user) %></span>
 
       <footer>
         <span class="label label-default"><%= @song.genre %></span>
         <%= if @song.bpm > 0 do %>
           <span class="label label-primary"><%= @song.bpm %> bpm</span>
         <% end %>
-        <time class="text-muted" 
+        <time class="text-grey-darkest" 
               datetime="<%= utc_to_local(@song.inserted_at) %>"
               title="<%= Timex.format!(@song.inserted_at, "%B %d, %Y", :strftime) %>">
               <%= Timex.format!(@song.inserted_at, "{relative}", :relative) %>

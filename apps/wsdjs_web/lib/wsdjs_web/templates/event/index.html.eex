@@ -1,10 +1,4 @@
-<header>
-  <div class="container">
-    <h1><%= gettext "Events" %> </h1>
-  </div>
-</header>
-
-<div class="container justify-content-end align-items-center mt-3 d-none d-md-flex ">
+<div class="container justify-end items-center mt-4 hidden md:flex ">
   <%= link "New event", to: Routes.event_path(@conn, :new), class: "btn btn-primary" %>
 </div>
 
@@ -38,7 +32,7 @@
 
 </section>
 
-<%= link to: Routes.event_path(@conn, :new), class: "btn btn-primary fab" do %>
+<%= link to: Routes.event_path(@conn, :new), class: "btn btn-primary fab md:hidden" do %>
   <svg fill='#ffffff' height='48' viewBox='0 0 24 24' width='48' xmlns='http://www.w3.org/2000/svg'>
     <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/>
     <path d='M0 0h24v24H0z' fill='none'/>

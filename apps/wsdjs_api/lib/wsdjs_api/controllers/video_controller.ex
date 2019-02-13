@@ -8,7 +8,12 @@ defmodule WsdjsApi.VideoController do
 
   action_fallback(WsdjsApi.FallbackController)
 
-  def index(conn, %{"song_id" => song_id}) do
+  def action(conn, _) do
+    args = [conn, conn.params, conn.assigns.current_user]
+    apply(__MODULE__, action_name(conn), args)
+  end
+
+  def index(conn, %{"song_id" => song_id}, _current_user) do
     with song <- Musics.Songs.get_song!(song_id) do
       videos = Attachments.list_videos(song)
 
@@ -16,9 +21,7 @@ defmodule WsdjsApi.VideoController do
     end
   end
 
-  def create(conn, %{"song_id" => song_id, "video" => params}) do
-    current_user = conn.assigns[:current_user]
-
+  def create(conn, %{"song_id" => song_id, "video" => params}, current_user) do
     params =
       params
       |> Map.put("user_id", current_user.id)
@@ -32,9 +35,7 @@ defmodule WsdjsApi.VideoController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    current_user = conn.assigns[:current_user]
-
+  def delete(conn, %{"id" => id}, current_user) do
     video = Attachments.get_video!(id)
 
     with :ok <- Attachments.Policy.can?(current_user, :delete, video),

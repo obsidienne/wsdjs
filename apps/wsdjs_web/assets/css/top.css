@@ -3,14 +3,12 @@
 ****************************/
 
 .voting-position__selector {
-  -moz-appearance: none;
-  -webkit-appearance: none;
   appearance: none;
   border: none;
 }
 
 .song-art__play {
-  z-index: 1001;
+  @apply z-10;
   position: absolute;
   bottom: .25rem;
   right: .25rem;
@@ -26,14 +24,11 @@
 }
 
 .voting-position {
-  position: absolute;
+  @apply z-10 absolute overflow-hidden text-lg;
   width: 80px;
   height: 80px;
-  overflow: hidden;
   top: 0;
   left: 0;
-  font-size: 18px;
-  z-index: 1000;
 }
 
 .voting-position:empty {
@@ -165,9 +160,5 @@
 
 .top-song-body a:hover {
   text-decoration: underline;
-  color: var(--accent-color);
-}
-
-.top-stat__votes .card {
-  padding: .5rem;
+  color: hsl(45, 100%, 51.4%);
 }

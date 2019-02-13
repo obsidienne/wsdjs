@@ -20,7 +20,7 @@ config :wsdjs_proxy, WsdjsProxy.Endpoint,
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
 config :master_proxy,
-  http: [:inet6, port: System.get_env("PORT")],
+  http: [:inet6, port: 8080],
   backends: [
     %{
       host: ~r/wsdjs-staging.cleverapps.io/,

@@ -1,24 +1,24 @@
-<header>
-  <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-muted"><%= @top.status %></span></h1>
-  </div>
-</header>
 <%= if @current_user && @current_user.admin do %>
 <%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb py-2">
-  <ol class="container d-inline-block">
-    <li class="visited">
+<nav class="secondary-nav breadcrumb py-4">
+  <ol class="container">
+    <li class="visited inline-block">
       <%= submit "Voting", class: "btn btn-link", name: "direction", value: "previous" %>
     </li>
-    <li class="current d-inline-block">Counting</li>
-    <li><%= submit "next step : publish", class: "btn btn-link", name: "direction", value: "next" %></li>
+    <li class="current inline-block">Counting</li>
+    <li class="inline-block"><%= submit "next step : publish", class: "btn btn-link", name: "direction", value: "next" %></li>
   </ol>
 </nav>
 <% end %>
 <% end %>
 
+<header>
+  <div class="container">
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-grey-darkest"><%= @top.status %></span></h1>
+  </div>
+</header>
 
-<div class="container d-flex align-items-center justify-content-end mb-2 mt-3 h-5">
+<div class="container flex items-center justify-end mb-2 mt-4 h-12">
   <%= if @current_user && @current_user.admin do %>
     <%= link "statistics", to: Routes.top_stat_path(@conn, :stat, @top.id), class: "btn btn-link" %>
   <% end %>
@@ -30,7 +30,7 @@
       <div class="song-art-container">
         <img src="<%= Attachments.art_url(rank.song.art, 300) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />
         <%= if rank.song.url do %>
-          <a href="<%= url_for_provider(rank.song) %>" class="d-flex song-art__play" target="_blank"  rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
+          <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play" target="_blank"  rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
             <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
               <path d='M0 0h24v24H0z' fill='none'/>
               <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
@@ -44,7 +44,7 @@
             <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
               <%= rank.song.title %>
             <% end %>
-            <span class="text-ellipsis secondary-text"><%= rank.song.artist %></span>
+            <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
           </div>
           <aside>
             <span class="label label-default"><%= rank.song.genre %></span>

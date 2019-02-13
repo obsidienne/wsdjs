@@ -1,30 +1,30 @@
- <article class="tops__top d-flex mt-3">
-      <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="tops__top__anchor rounded-circle">
+ <article class="flex mb-6 relative">
+      <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="tops__top__anchor hidden md:block absolute rounded-full">
         <%= if Enum.count(@top.ranks) > 0 do %>
-        <div class="img-embed">
+        <div class="aspect-ratio-square relative">
           <%= if blur_track(Enum.at(@top.ranks, 0).song, @current_user) == true do %>
-            <img src="<%= Attachments.art_url(nil, 100) %>" class="tops__top__anchor__img card shadow" >
+            <img src="<%= Attachments.art_url(nil, 100) %>" class="w-full h-auto card shadow absolute pin-t" >
           <% else %>
-            <img src="<%= Attachments.art_url(Enum.at(@top.ranks, 0).song.art, 100) %>" srcset="<%= Attachments.art_srcset(Enum.at(@top.ranks, 0).song.art, 100) %>" sizes="100px" class="responsive" />
+            <img src="<%= Attachments.art_url(Enum.at(@top.ranks, 0).song.art, 100) %>" srcset="<%= Attachments.art_srcset(Enum.at(@top.ranks, 0).song.art, 100) %>" sizes="100px" class="responsive rounded-full absolute pin-t" />
           <% end %>
         </div>
         <% end %>
       </a>
 
-      <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="card clickable shadow tops__top__content">
-        <span class="tops__top__date d-flex mb-2">
-          <time class="date-format pr-3" datetime="<%= Date.to_iso8601(@top.due_date) %>">
+      <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="card clickable tops__top__content shadow">
+        <span class="tops__top__date flex mb-2">
+          <time class="date-format pr-4" datetime="<%= Date.to_iso8601(@top.due_date) %>">
             <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
           </time> 
           <span class="label label-default"><%= @top.status %></span></span>
-        <div class="tops__top__art d-flex flex-wrap justify-content-between m-top-1 w-100">
+        <div class="tops__top__art flex flex-wrap m-top-1 w-full">
           <%= for rank <- @top.ranks do %>
             <div>
-              <div class="img-embed">
+              <div class="aspect-ratio-square relative">
                 <%= if blur_track(rank.song, @current_user) == true do %>
-                <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive w-100" >
+                <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive w-full absolute pin-t" >
                 <% else %>
-                <img src="<%= Attachments.art_url(rank.song.art, 200) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 100) %>" sizes="100px" class="responsive w-100" />
+                <img src="<%= Attachments.art_url(rank.song.art, 200) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 100) %>" sizes="100px" class="responsive w-full absolute pin-t" />
                 <% end %>
               </div>
             </div>
@@ -32,8 +32,8 @@
         </div>
 
         <%= if !is_nil(@current_user) && (@current_user.profil_djvip || @current_user.admin) do %>
-        <table class="table my-5 mx-0">
-          <thead>
+        <table class="table my-8 mx-0">
+          <thead class="bg-transparent">
             <tr><th>Songs</th><th>Djs</th><th>Genres</th></tr>
           </thead>
           <tbody>

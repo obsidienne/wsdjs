@@ -15,7 +15,9 @@ export default class View extends MainView {
     });
 
     var sentinel = document.querySelector("#top-list .sentinel");
-    this.observer.observe(sentinel);
+    if (sentinel !== null) {
+      this.observer.observe(sentinel);
+    }
   }
 
   fetchTops(sentinel) {

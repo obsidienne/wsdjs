@@ -26,7 +26,7 @@ defmodule WsdjsWeb.UserSocket do
         {:ok, assign(socket, :current_user, user)}
 
       {:error, _reason} ->
-        :error
+        {:ok, assign(socket, :current_user, nil)}
     end
   end
 
