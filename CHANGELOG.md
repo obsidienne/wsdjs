@@ -1,3 +1,7 @@
+# version 2.2.0
+- tailwindcss usage
+- master proxy
+- new design
 # version 2.1.0
 - split wsdjs_web into wsdjs_web and wsdjs_api
 - create a wsdjs_proxy
