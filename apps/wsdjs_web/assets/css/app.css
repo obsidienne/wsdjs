@@ -67,7 +67,6 @@
  * @import "utilities/skew-transforms";
  */
 
-@import "./shell/global.css";
 @import "./shell/nav.css";
 @import "./shell/layout.css";
 @import "./shell/typo.css";
