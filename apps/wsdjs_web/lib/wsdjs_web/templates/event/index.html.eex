@@ -1,35 +1,26 @@
-<div class="container justify-end items-center mt-4 hidden md:flex ">
-  <%= link "New event", to: Routes.event_path(@conn, :new), class: "btn btn-primary" %>
-</div>
-
-<section class="container">
-
-<table class="table">
-  <thead class="sticked">
-    <tr>
-      <th>name</th>
-      <th>starts on</th>
-      <th>ends on</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+<section class="container mt-4">
+<ul class="list-reset events">
+  <li class="p-4 border border-dashed bg-white">
+    <%= link to: Routes.event_path(@conn, :new), class: "flex h-full w-full items-center" do %>
+      <span>Create a new top</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" class="ml-auto">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+    <% end %>
+  </li>
 <%= for event <- @events do %>
-    <tr>
-      <td><%= event.name %></td>
-      <td><%= event.starts_on %></td>
-      <td><%= event.ends_on %></td>
-
-      <td class="text-right">
-        <span><%= link "Show", to: Routes.event_path(@conn, :show, event), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: Routes.event_path(@conn, :edit, event), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: Routes.event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
-    </tr>
+    <li class="shadow p-4">
+      <span class="font-bold"><%= event.name %></span>
+      <div>
+        <%= event.starts_on %>
+        <%= event.ends_on %>
+      </div>
+      <%= link "Show", to: Routes.event_path(@conn, :show, event) %>
+      <%= link "Edit", to: Routes.event_path(@conn, :edit, event) %>
+      <%= link "Delete", to: Routes.event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"] %>
+    </li>
 <% end %>
-  </tbody>
-</table>
-
+</ul>
 </section>
 
 <%= link to: Routes.event_path(@conn, :new), class: "btn btn-primary fab md:hidden" do %>
