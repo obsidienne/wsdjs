@@ -12,7 +12,9 @@
 <section class="container">
   <div class="flex p-2 bg-white shadow mb-4">
     <div>
-      <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
+      <div class="relative w-12 h-12 aspect-ratio-square">
+        <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive absolute pin-t"/>
+      </div>
     </div>
     <div class="pl-4">
       <div>
