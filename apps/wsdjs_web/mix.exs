@@ -47,7 +47,6 @@ defmodule WsdjsWeb.Mixfile do
       {:timex, "~> 3.4"},
       {:corsica, "~> 1.1"},
       {:earmark, "~> 1.2"},
-      {:ua_inspector, "~> 0.18"},
       {:con_cache, "~> 0.13.0"},
       {:attachments, in_umbrella: true},
       {:wsdjs, in_umbrella: true},
