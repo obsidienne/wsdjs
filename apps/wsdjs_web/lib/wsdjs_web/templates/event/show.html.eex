@@ -29,4 +29,7 @@
 <span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
 
 <div id="mapid" class="w-1/2 h-12 block" data-lat="<%= lat(@event.coordinates) %>" data-lon="<%= lon(@event.coordinates) %>"></div>
+
+
+<%= link "Delete", to: Routes.event_path(@conn, :delete, @event), method: :delete, data: [confirm: "Are you sure?"] %>
 </section>
