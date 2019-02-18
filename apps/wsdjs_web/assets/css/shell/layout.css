@@ -11,13 +11,6 @@
   grid-column-gap: .5rem;
 }
 
-
-.events {
-  display: grid;
-  grid-row-gap: 1rem;
-  grid-column-gap: 1rem;
-  grid-template-columns: 21rem 21rem;
-}
 /********************/
 @media (min-width: 768px) {
   .hot-songs {
