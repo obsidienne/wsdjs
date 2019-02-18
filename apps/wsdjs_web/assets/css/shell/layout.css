@@ -21,9 +21,18 @@
 /********************/
 @media (min-width: 768px) {
   .hot-songs {
-    grid-template-columns: repeat(auto-fit, 216px);
+    grid-template-columns: repeat(auto-fit, 13.5rem);
     grid-row-gap: 1rem;
     grid-column-gap: .5rem;
+    /* need a fix */
+  }
+}
+
+@media (min-width: 1200px) {
+  .hot-songs {
+    grid-template-columns: repeat(auto-fit, 13rem);
+    grid-row-gap: 1rem;
+    grid-column-gap: .66rem;
     /* need a fix */
   }
 }
