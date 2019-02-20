@@ -15,6 +15,15 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
+.text-overlay {
+  box-decoration-break: clone;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.blend-exclusion {
+  mix-blend-mode: exclusion;
+}
+
 .card {
   display: block;
   background-color: hsl(0, 0%, 100%);

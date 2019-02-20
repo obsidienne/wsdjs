@@ -898,7 +898,7 @@ module.exports = {
     borderCollapse: [],
     borderColors: ['responsive', 'hover', 'focus'],
     borderRadius: ['responsive'],
-    borderStyle: ['responsive'],
+    borderStyle: ['responsive', 'hover'],
     borderWidths: ['responsive'],
     cursor: ['responsive'],
     display: ['responsive'],
