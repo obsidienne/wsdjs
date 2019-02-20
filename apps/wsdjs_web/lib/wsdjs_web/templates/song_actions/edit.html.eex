@@ -21,7 +21,7 @@
         <span class="primary-text"><%= @song.title %></span>
         <span class="secondary-text pb-2"><span class="text-grey-darkest">by</span> <%= @song.artist %></span>
       </div>
-      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-grey-darkest inline-block" %>,
+      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link text-grey-darkest inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>

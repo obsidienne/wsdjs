@@ -1,11 +1,11 @@
-<li class="mb-4 p-2 flex shadow">
+<li class="mb-4 p-2 flex shadow relative">
     <div class="mr-4">
       <img src="<%= Attachments.avatar_url(@user.avatar, 96) %>" srcset="<%= Attachments.avatar_srcset(@user.avatar, 96) %>" sizes="96px" width="96px" height="96px"/>
     </div>
 
     <div>
       <div>
-        <%= link name_or_email(@user), to: Routes.user_path(@conn, :show, @user.id), class: "tippy block visible-link action-link clickable", title: user_tooltip(@user) %>
+        <%= link name_or_email(@user), to: Routes.user_path(@conn, :show, @user.id), class: "tippy block visible-link action-link stretched-link", title: user_tooltip(@user) %>
         <%= if @user.verified_profil do %><span class="label label-info">verified</span><% end %>
         <%= if @user.deactivated do %>
           <span class="label label-danger">Deactivated</span>

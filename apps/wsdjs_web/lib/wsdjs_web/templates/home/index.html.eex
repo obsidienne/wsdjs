@@ -7,7 +7,7 @@
       <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
     <% end %>
     or 
-    <%= link "register", to: Routes.registration_path(@conn, :new), class: "inline-block visible-link clickable" %>
+    <%= link "register", to: Routes.registration_path(@conn, :new), class: "inline-block visible-link" %>
   </div>
 <% end %>
 

@@ -76,7 +76,7 @@
       </div>
       <div class="top-song-body">
         <div>
-          <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link clickable inline-block" do %>
+          <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link inline-block" do %>
             <span><%= rank.song.title %></span>
           <% end %>
           <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
