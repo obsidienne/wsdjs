@@ -1,4 +1,4 @@
-<div class="container actions flex items-center justify-end mb-2 mt-4 h-12">
+<div class="container actions flex items-center justify-end mb-8 mt-12  h-12">
   <%= if Wsdjs.Musics.Songs.can?(@current_user, :search) == :ok do %>
     <div class="flex w-full items-center">
       <span class="cursor-pointer flex items-center" data-js-drawer>

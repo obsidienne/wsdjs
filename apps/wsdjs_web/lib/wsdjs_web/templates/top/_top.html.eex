@@ -1,4 +1,4 @@
- <article class="flex mb-6 relative">
+ <article class="flex mb-12 lg:mb-24 relative">
       <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="tops__top__anchor hidden md:block absolute rounded-full">
         <%= if Enum.count(@top.ranks) > 0 do %>
         <div class="aspect-ratio-square relative">
