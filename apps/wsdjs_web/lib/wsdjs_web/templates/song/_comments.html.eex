@@ -19,7 +19,7 @@
       <div class="w-auto md:mx-2 relative bg-white shadow flex-1">
         <header class="bg-grey-light flex items-center p-2">
           <span>
-            <a href="<%= Routes.user_path(@conn, :show, comment.user) %>" class="clickable visible-link action-link inline-block"><%= comment.user.name %></a>
+            <a href="<%= Routes.user_path(@conn, :show, comment.user) %>" class="visible-link action-link inline-block"><%= comment.user.name %></a>
             <time title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>" datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
           </span>
           <%= if Wsdjs.Reactions.Comments.can?(@conn.assigns[:current_user], :delete, comment) == :ok do %>

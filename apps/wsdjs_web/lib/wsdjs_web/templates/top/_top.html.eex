@@ -1,4 +1,4 @@
- <article class="flex mb-6 relative">
+ <article class="flex mb-12 lg:mb-24 relative">
       <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="tops__top__anchor hidden md:block absolute rounded-full">
         <%= if Enum.count(@top.ranks) > 0 do %>
         <div class="aspect-ratio-square relative">
@@ -11,7 +11,7 @@
         <% end %>
       </a>
 
-      <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="card clickable tops__top__content shadow">
+      <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="card tops__top__content shadow">
         <span class="tops__top__date flex mb-2">
           <time class="date-format pr-4" datetime="<%= Date.to_iso8601(@top.due_date) %>">
             <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>

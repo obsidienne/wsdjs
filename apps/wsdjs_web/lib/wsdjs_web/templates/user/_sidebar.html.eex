@@ -1,4 +1,4 @@
-<section class="relative bg-white p-4 w-full shadow mb-4">
+<section class="relative bg-white p-4 w-full shadow mt-4 mb-12">
   <header class="flex flex-col">
     <div class="flex items-center mb-4">
       <div class="flex w-1/3">

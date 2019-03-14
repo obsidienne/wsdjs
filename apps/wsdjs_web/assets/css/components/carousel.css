@@ -34,7 +34,7 @@
 .carousel-item {
     @apply block;
 }
-.carousel-item img {
+.carousel-item-img {
     width: 9rem;
     height: 9rem;
 }
@@ -44,7 +44,7 @@
         grid-gap: 2rem;
         grid-auto-columns: 10rem;
     }
-    .carousel-item img {
+    .carousel-item-img {
         width: 10rem;
         height: 10rem;
     }
@@ -55,7 +55,7 @@
         grid-gap: 1rem;
         grid-auto-columns: 9rem;
     }
-    .carousel-item img {
+    .carousel-item-img {
         width: 9rem;
         height: 9rem;
     }    
@@ -66,7 +66,7 @@
         grid-gap: 1rem;
         grid-auto-columns: 10rem;
     }
-    .carousel-item img {
+    .carousel-item-img {
         width: 10rem;
         height: 10rem;
     }

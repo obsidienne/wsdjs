@@ -12,14 +12,16 @@
 <section class="container">
   <div class="flex p-2 bg-white shadow mb-4">
     <div>
-      <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive"/>
+      <div class="relative w-12 h-12 aspect-ratio-square">
+        <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive absolute pin-t"/>
+      </div>
     </div>
     <div class="pl-4">
       <div>
         <span class="primary-text"><%= @song.title %></span>
         <span class="secondary-text pb-2"><span class="text-grey-darkest">by</span> <%= @song.artist %></span>
       </div>
-      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link clickable text-grey-darkest inline-block" %>,
+      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link text-grey-darkest inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
@@ -31,7 +33,7 @@
 
 <section id="overview-video" class="overview-video container">
   <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
-    <%= link to: Routes.song_song_videos_path(@conn, :new, @song), class: "clickable" do %>
+    <%= link to: Routes.song_song_videos_path(@conn, :new, @song) do %>
       <div class="border border-dashed pt-full relative aspect-ratio-16/9">
         <div class="absolute w-full h-full pin-t p-4 text-center flex flex-col items-center justify-around">
         Add a new video

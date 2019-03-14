@@ -7,7 +7,7 @@
     </svg><%= @playlist.name %>
     <% end %>
 
-    <span class="playlist-name h3 ml-auto flex">
+    <span class="h3 ml-auto flex">
       <%= if @playlist.public == true do %>
       <span class="tippy ml-2" title="this list is public">
         <svg fill="#777777" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

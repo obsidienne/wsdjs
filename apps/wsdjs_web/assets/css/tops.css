@@ -75,3 +75,9 @@
     width: 19rem;
   }
 }
+
+@media (min-width: 1200px) {
+  .tops__top__content {
+    width: 23rem;
+  }
+}

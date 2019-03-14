@@ -7,16 +7,25 @@
 .hot-songs {
   display: grid;
   grid-template-columns: calc(50% - .25rem) calc(50% - .25rem);
-  grid-row-gap: .5rem;
+  grid-row-gap: 2rem;
   grid-column-gap: .5rem;
 }
 
 /********************/
 @media (min-width: 768px) {
   .hot-songs {
-    grid-template-columns: repeat(auto-fit, 216px);
-    grid-row-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, 13.5rem);
+    grid-row-gap: 2rem;
     grid-column-gap: .5rem;
+    /* need a fix */
+  }
+}
+
+@media (min-width: 1200px) {
+  .hot-songs {
+    grid-template-columns: repeat(auto-fit, 13rem);
+    grid-row-gap: 2rem;
+    grid-column-gap: .66rem;
     /* need a fix */
   }
 }

@@ -11,10 +11,10 @@
   </div>
 <% end %>
 
-<section id="top-list" class="tops container mt-8">
+<section id="top-list" class="tops container mt-16">
   <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-   <article class="flex mb-6 relative">
-      <a class="clickable tops__top__content shadow flex border border-dashed bg-white" title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">
+   <article class="flex mb-12 lg:mb-24 relative">
+      <a class="tops__top__content shadow flex border border-dashed bg-white" title="Create a new top" href="<%= Routes.top_path(@conn, :new) %>">
         <span>Create a new top</span>
         <svg width="24" height="24" viewBox="0 0 24 24" class="ml-auto">
           <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>

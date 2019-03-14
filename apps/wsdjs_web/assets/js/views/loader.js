@@ -7,7 +7,6 @@ import TopIndexView from './top/index';
 import TopShowView from './top/show';
 import UserEditView from './user/edit';
 import UserShowView from './user/show';
-import EventShowView from './event/show';
 import EventNewView from './event/new';
 import EventEditView from './event/edit';
 import SuggestionNewView from './suggestion/new';
@@ -24,7 +23,6 @@ const views = {
   UserShowView,
   EventNewView,
   EventEditView,
-  EventShowView,
   SuggestionNewView
 };
 

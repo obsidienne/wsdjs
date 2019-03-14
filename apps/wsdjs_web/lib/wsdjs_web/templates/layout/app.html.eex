@@ -58,17 +58,17 @@
       <div class="container flex flex-wrap items-end">
         <%= link "Discover", to: Routes.home_path(@conn, :index), class: "h1" %>
 
-        <%= link "Chart", to: Routes.top_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
-        <%= link "Library", to: Routes.song_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
-        <%= if Wsdjs.Accounts.Users.can?(@conn.assigns.current_user, :index) == :dummy do %>
-        <%= link "Members", to: Routes.user_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
+        <%= link "Chart", to: Routes.top_path(@conn, :index), class: "glnav__menu visible-link" %>
+        <%= link "Library", to: Routes.song_path(@conn, :index), class: "glnav__menu visible-link" %>
+        <%= if Wsdjs.Accounts.Users.can?(@conn.assigns.current_user, :index) == :ok do %>
+        <%= link "Members", to: Routes.user_path(@conn, :index), class: "glnav__menu visible-link" %>
         <% end %>
-        <%= if Wsdjs.Happenings.can?(@conn.assigns.current_user, :index) == :dummy do %>
-        <%= link "Events", to: Routes.event_path(@conn, :index), class: "glnav__menu visible-link clickable" %>
+        <%= if Wsdjs.Happenings.can?(@conn.assigns.current_user, :index) == :ok do %>
+        <%= link "Events", to: Routes.event_path(@conn, :index), class: "glnav__menu visible-link" %>
         <% end %>
 
         <%= if @current_user do %>
-          <%= link to: Routes.user_path(@conn, :show, @current_user.id), class: "glnav__user clickable" do %>
+          <%= link to: Routes.user_path(@conn, :show, @current_user.id), class: "glnav__user" do %>
             <img class="glnav__user__avatar" src="<%= Attachments.avatar_url(@current_user.avatar, 40) %>" srcset="<%= Attachments.avatar_srcset(@current_user.avatar, 50) %>" sizes="50px">
           <% end %>
         <% end %>
