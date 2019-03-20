@@ -1,6 +1,5 @@
 {
-    "editor.minimap.enabled": true,
-    "editor.minimap.side": "left",
+    "editor.minimap.enabled": false,
     "editor.renderControlCharacters": true,
     "window.zoomLevel": 0,
     "editor.renderWhitespace": "all",
@@ -8,6 +7,5 @@
     "editor.rulers": [
         80,
         120
-    ],
-    "elixirLS.fetchDeps": false
+    ]
 }
