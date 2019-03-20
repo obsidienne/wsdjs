@@ -20,7 +20,7 @@ main, .glnav {
     }
 
     main, .glnav {
-        max-width: calc(100vw - 17rem);
+        max-width: calc(100% - 17rem);
     }
 }
 
