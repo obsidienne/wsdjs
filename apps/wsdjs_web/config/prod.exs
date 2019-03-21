@@ -32,7 +32,28 @@ else
   config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "https://www.worldswingdjs.com/api"
 end
 
-
+config :master_proxy,
+  http: [:inet6, port: System.get_env("PORT")],
+  backends: [
+    %{
+      host: ~r/wsdjs-staging.cleverapps.io/,
+      path: ~r/api/,
+      phoenix_endpoint: WsdjsApi.Endpoint
+    },
+    %{
+      host: ~r/www.worldswingdjs.com/,
+      path: ~r/api/,
+      phoenix_endpoint: WsdjsApi.Endpoint
+    },
+    %{
+      host: ~r/wsdjs-staging.cleverapps.io/,
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    },
+    %{
+      host: ~r/www.worldswingdjs.com/,
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    }
+  ]
 
 config :wsdjs_web, WsdjsWeb.Mailer,
   adapter: Bamboo.SendGridAdapter,
@@ -90,3 +111,6 @@ config :wsdjs_web, WsdjsWeb.Mailer,
 # Finally import the config/prod.secret.exs which should be versioned
 # separately.
 # import_config "prod.secret.exs"
+
+
+

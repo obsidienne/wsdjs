@@ -51,6 +51,7 @@ defmodule WsdjsWeb.Mixfile do
       {:attachments, in_umbrella: true},
       {:wsdjs, in_umbrella: true},
       {:jason, "~> 1.0"},
+      {:master_proxy, "~> 0.1.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
   end

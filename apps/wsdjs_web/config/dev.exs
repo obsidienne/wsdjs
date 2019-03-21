@@ -26,6 +26,20 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
     ]
   ]
 
+config :master_proxy,
+  http: [:inet6, port: 8080],
+  backends: [
+    %{
+      host: ~r/localhost/,
+      path: ~r/api/,
+      phoenix_endpoint: WsdjsApi.Endpoint
+    },
+    %{
+      host: ~r/localhost/,
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    }
+  ]
+
 config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "http://localhost:8080/api"
 
 config :wsdjs_web, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
