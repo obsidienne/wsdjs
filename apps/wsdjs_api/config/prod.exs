@@ -22,10 +22,12 @@ config :wsdjs_api, WsdjsApi.Endpoint,
 if System.get_env("DEPLOYMENT_ENV") == "staging" do
   config :wsdjs_api, WsdjsApi.Endpoint,
     url: [scheme: "https", host: "wsdjs-staging.cleverapps.io", port: 443]
+
   config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "https://wsdjs-staging.cleverapps.io"
 else
   config :wsdjs_api, WsdjsApi.Endpoint,
     url: [scheme: "https", host: "www.worldswingdjs.com", port: 443]
+
   config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "https://www.worldswingdjs.com"
 end
 

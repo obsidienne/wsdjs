@@ -20,7 +20,6 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
-
 if System.get_env("DEPLOYMENT_ENV") == "staging" do
   config :wsdjs_web, WsdjsWeb.Endpoint,
     url: [scheme: "https", host: "wsdjs-staging.cleverapps.io", port: 443]
@@ -29,6 +28,7 @@ if System.get_env("DEPLOYMENT_ENV") == "staging" do
 else
   config :wsdjs_web, WsdjsWeb.Endpoint,
     url: [scheme: "https", host: "www.worldswingdjs.com", port: 443]
+
   config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "https://www.worldswingdjs.com/api"
 end
 
@@ -111,6 +111,3 @@ config :wsdjs_web, WsdjsWeb.Mailer,
 # Finally import the config/prod.secret.exs which should be versioned
 # separately.
 # import_config "prod.secret.exs"
-
-
-
