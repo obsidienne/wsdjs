@@ -45,6 +45,10 @@
   @apply sticky py-2 pin-t z-30 items-center bg-white shadow;
 }
 
+.nav-active {
+  @apply border-yellow-dark;
+}
+
 .glnav a.home {
   height: 48px;
 }
@@ -65,7 +69,12 @@
 }
 
 .glnav__menu {
-  padding: 0 12px;
+  margin-right: 24px;
+  @apply border-b-4 border-solid border-transparent;
+}
+
+.glnav__menu.active {
+  @apply border-yellow-dark;
 }
 
 .logo-small {

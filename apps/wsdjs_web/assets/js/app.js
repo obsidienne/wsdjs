@@ -67,20 +67,20 @@ function handleUnloadContentLoaded() {
 var radio = new Radio();
 var search = new Search();
 
-document.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
-document.addEventListener('pjax:ready', handleDOMContentLoaded, false);
-window.addEventListener('pjax:unload', handleUnloadContentLoaded, false);
-window.addEventListener('scroll', () => Tippy.hideAllPoppers())
+document.addEventListener("DOMContentLoaded", handleDOMContentLoaded, false);
+document.addEventListener("pjax:ready", handleDOMContentLoaded, false);
+window.addEventListener("pjax:unload", handleUnloadContentLoaded, false);
+window.addEventListener("scroll", () => Tippy.hideAllPoppers());
 
 new Pjax({
-  areas: [
-    'main'
-  ],
+  areas: ["main, .glnav"],
   update: {
     css: false,
     js: false
   },
-  filter: function (el) {
-    return el.matches(':not([target])') && el.matches(':not([data-pjax="false"])');
+  filter: function(el) {
+    return (
+      el.matches(":not([target])") && el.matches(':not([data-pjax="false"])')
+    );
   }
 });

@@ -56,15 +56,15 @@
   <body class="font-sans">
     <nav class="glnav md:px-4">
       <div class="container flex flex-wrap items-end">
-        <%= link "Discover", to: Routes.home_path(@conn, :index), class: "h1" %>
+        <%= link "Discover", to: Routes.home_path(@conn, :index), class: "h1 glnav__menu #{active_class(@conn, ["home"])}" %>
 
-        <%= link "Chart", to: Routes.top_path(@conn, :index), class: "glnav__menu visible-link" %>
-        <%= link "Library", to: Routes.song_path(@conn, :index), class: "glnav__menu visible-link" %>
+        <%= link "Chart", to: Routes.top_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["top"])}" %>
+        <%= link "Library", to: Routes.song_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["song", "song_videos", "song_actions"])}" %>
         <%= if Wsdjs.Accounts.Users.can?(@conn.assigns.current_user, :index) == :ok do %>
-        <%= link "Members", to: Routes.user_path(@conn, :index), class: "glnav__menu visible-link" %>
+        <%= link "Members", to: Routes.user_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["user", "playlist", "user_params"])}" %>
         <% end %>
         <%= if Wsdjs.Happenings.can?(@conn.assigns.current_user, :index) == :ok do %>
-        <%= link "Events", to: Routes.event_path(@conn, :index), class: "glnav__menu visible-link" %>
+        <%= link "Events", to: Routes.event_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["event"])}" %>
         <% end %>
 
         <%= if @current_user do %>
