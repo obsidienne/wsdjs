@@ -1,73 +1,73 @@
 .carousel-control {
-    background-color: #fff;
-    border: 1px solid #dedee3;
-    color: #32323d;
-    cursor: pointer;
-    padding: 8px;
-    text-align: center;
-    transition-duration: .15s;
-    transition-property: background-color, color, opacity;
+  background-color: #fff;
+  border: 1px solid #dedee3;
+  color: #32323d;
+  cursor: pointer;
+  padding: 8px;
+  text-align: center;
+  transition-duration: 0.15s;
+  transition-property: background-color, color, opacity;
 }
 
 .carousel-control.disabled {
-    cursor: default;
-    opacity: .3;
+  cursor: default;
+  opacity: 0.3;
 }
 
 .carousel-prev {
-    @apply rounded-l-full;
+  @apply rounded-l-full;
 }
 
 .carousel-next {
-    @apply rounded-r-full;
-    margin-left: -1px;
+  @apply rounded-r-full;
+  margin-left: -1px;
 }
 
 .carousel-items {
-    transition-duration: .6s;
-    transition-property: transform;
-    transition-timing-function: ease-in-out;
-    display: grid;
-    grid-gap: 1rem;
-    grid-auto-columns: 9rem;
+  transition-duration: 0.6s;
+  transition-property: transform;
+  transition-timing-function: ease-in-out;
+  display: grid;
+  grid-gap: 1rem;
+  grid-auto-columns: 9rem;
 }
 .carousel-item {
-    @apply block;
+  @apply block;
 }
 .carousel-item-img {
-    width: 9rem;
-    height: 9rem;
+  width: 9rem;
+  height: 9rem;
 }
 
 @media (min-width: 576px) {
-    .carousel-items {
-        grid-gap: 2rem;
-        grid-auto-columns: 10rem;
-    }
-    .carousel-item-img {
-        width: 10rem;
-        height: 10rem;
-    }
+  .carousel-items {
+    grid-gap: 2rem;
+    grid-auto-columns: 10rem;
+  }
+  .carousel-item-img {
+    width: 10rem;
+    height: 10rem;
+  }
 }
 
 @media (min-width: 768px) {
-    .carousel-items {
-        grid-gap: 1rem;
-        grid-auto-columns: 9rem;
-    }
-    .carousel-item-img {
-        width: 9rem;
-        height: 9rem;
-    }    
+  .carousel-items {
+    grid-gap: 1rem;
+    grid-auto-columns: 9rem;
+  }
+  .carousel-item-img {
+    width: 9rem;
+    height: 9rem;
+  }
 }
 
 @media (min-width: 992px) {
-    .carousel-items {
-        grid-gap: 1rem;
-        grid-auto-columns: 10rem;
-    }
-    .carousel-item-img {
-        width: 10rem;
-        height: 10rem;
-    }
+  .carousel-items {
+    grid-gap: 1rem;
+    grid-auto-columns: 10rem;
+  }
+  .carousel-item-img {
+    width: 10rem;
+    height: 10rem;
+  }
 }

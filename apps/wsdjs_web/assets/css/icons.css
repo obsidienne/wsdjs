@@ -53,7 +53,7 @@ svg:not(:root) {
   border: 2px solid white;
   font-weight: bold;
   color: #333;
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
 
 .tippy-tooltip.wsdjs-theme .tippy-backdrop {
@@ -67,14 +67,12 @@ svg:not(:root) {
   padding: 4px;
 }
 
-
-
 .tippy-tooltip.playlist-picker-theme {
   background-color: hsl(240, 20%, 98%);
   font-weight: bold;
   color: #333;
   padding: 0;
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, .2);
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
 
 .tippy-tooltip.playlist-picker-theme .tippy-backdrop {

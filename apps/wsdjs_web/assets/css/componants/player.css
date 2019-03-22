@@ -25,7 +25,8 @@
 
 .player__play__vinyl {
   @apply w-16 h-16 rounded-full shadow cursor-pointer bg-white mx-auto mt-8;
-  background: url("data:image/svg+xml,%3Csvg fill='%23000000' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M8 5v14l11-7z'/%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3C/svg%3E"), #FFF;
+  background: url("data:image/svg+xml,%3Csvg fill='%23000000' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M8 5v14l11-7z'/%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3C/svg%3E"),
+    #fff;
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
@@ -54,7 +55,7 @@ body.radio-playing .player__play__vinyl {
 
 .player__youtube__container.open {
   bottom: 48px;
-  transition: bottom .7s ease-in;
+  transition: bottom 0.7s ease-in;
 }
 
 .player__youtube {

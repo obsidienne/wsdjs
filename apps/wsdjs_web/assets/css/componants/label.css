@@ -1,13 +1,13 @@
 .label {
   display: inline-block;
-  padding: .4em;
+  padding: 0.4em;
   font-size: 75%;
   line-height: 1;
   color: #ffffff;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: .25em;
+  border-radius: 0.25em;
 }
 
 a.label:hover,
@@ -50,7 +50,7 @@ a.label:focus {
 
 .label-danger[href]:hover,
 .label-danger[href]:focus {
-  background-color: #F25F5C;
+  background-color: #f25f5c;
 }
 
 .label-info {

@@ -29,7 +29,7 @@ sound bar
 
 .sound-bars {
   background-color: #edeff0;
-  border: 2px solid #455A64;
+  border: 2px solid #455a64;
   height: 32px;
   width: 32px;
   border-radius: 50%;
@@ -40,7 +40,7 @@ sound bar
 }
 
 .sound-bar {
-  background: #FFC107;
+  background: #ffc107;
   bottom: 1px;
   height: 3px;
   width: 4px;
@@ -50,7 +50,7 @@ sound bar
 
 @keyframes sound {
   0% {
-    opacity: .35;
+    opacity: 0.35;
     height: 3px;
   }
 
@@ -106,7 +106,7 @@ throbber-loader
 .throbber-loader:before,
 .throbber-loader:after {
   background: #dde2e7;
-  content: '\x200B';
+  content: "\x200B";
   display: inline-block;
   width: 0.9em;
   height: 1.5em;

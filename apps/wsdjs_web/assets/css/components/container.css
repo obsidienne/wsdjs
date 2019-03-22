@@ -1,37 +1,39 @@
 .container {
-    @apply mx-auto px-2 max-w-md w-full;
+  @apply mx-auto px-2 max-w-md w-full;
 }
 
-main, .glnav {
-    max-width: 100%;
+main,
+.glnav {
+  max-width: 100%;
 }
 
 @media (min-width: 576px) {
-    .container {
-        @apply mx-auto px-4;
-        max-width: 36rem;
-    }
+  .container {
+    @apply mx-auto px-4;
+    max-width: 36rem;
+  }
 }
 
 @media (min-width: 768px) {
-    .container {
-        @apply px-0;
-        max-width: 29rem;
-    }
+  .container {
+    @apply px-0;
+    max-width: 29rem;
+  }
 
-    main, .glnav {
-        max-width: calc(100% - 17rem);
-    }
+  main,
+  .glnav {
+    max-width: calc(100% - 17rem);
+  }
 }
 
 @media (min-width: 992px) {
-    .container {
-        max-width: 43rem;
-    }
+  .container {
+    max-width: 43rem;
+  }
 }
 
 @media (min-width: 1200px) {
-    .container {
-        max-width: 54rem;
-    }
+  .container {
+    max-width: 54rem;
+  }
 }
