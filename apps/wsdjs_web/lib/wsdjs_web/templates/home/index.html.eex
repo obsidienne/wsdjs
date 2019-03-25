@@ -1,14 +1,5 @@
 <%= if is_nil(@current_user) do %>
-  <div class="pt-8 container">
-    <span class="h1 ">World Swing DeeJays</span>
-    <span class="h2 block">The best West Coast Swing music from all around the world !</span>
-
-    <%= link to: Routes.session_path(@conn, :new) do %>
-      <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
-    <% end %>
-    or 
-    <%= link "register", to: Routes.registration_path(@conn, :new), class: "inline-block visible-link" %>
-  </div>
+  <%= render "_not_connected.html", conn: @conn%>
 <% end %>
 
 <section class="container">

@@ -58,8 +58,10 @@
       <div class="container flex flex-wrap items-end">
         <%= link "Discover", to: Routes.home_path(@conn, :index), class: "h1 glnav__menu #{active_class(@conn, ["home"])}" %>
 
-        <%= link "Chart", to: Routes.top_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["top"])}" %>
-        <%= link "Library", to: Routes.song_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["song", "song_videos", "song_actions"])}" %>
+        <%= if not is_nil(@conn.assigns.current_user) do %>
+          <%= link "Chart", to: Routes.top_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["top"])}" %>
+          <%= link "Library", to: Routes.song_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["song", "song_videos", "song_actions"])}" %>
+        <% end %>
         <%= if Wsdjs.Accounts.Users.can?(@conn.assigns.current_user, :index) == :ok do %>
         <%= link "Members", to: Routes.user_path(@conn, :index), class: "glnav__menu #{active_class(@conn, ["user", "playlist", "user_params"])}" %>
         <% end %>

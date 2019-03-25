@@ -1,16 +1,3 @@
-<%= if is_nil(@current_user) do %>
-  <div class="container pt-8">
-    <span class="h1 block">World Swing DeeJays</span>
-    <span class="h2 block">The best West Coast Swing music from all around the world !</span>
-
-    <%= link to: Routes.session_path(@conn, :new) do %>
-      <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
-    <% end %>
-    or 
-    <%= link "register", to: Routes.registration_path(@conn, :new) %>
-  </div>
-<% end %>
-
 <section id="top-list" class="tops container mt-16">
   <%= if Wsdjs.Charts.Policy.can?(@conn.assigns.current_user, :create_top) == :ok do %>
    <article class="flex mb-12 lg:mb-24 relative">

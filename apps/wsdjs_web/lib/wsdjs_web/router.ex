@@ -34,7 +34,7 @@ defmodule WsdjsWeb.Router do
     resources("/suggestions", SuggestionController, only: [:create, :new])
     resources("/song_opinions", SongOpinionController, only: [:delete])
 
-    resources "/tops", TopController, only: [:create, :new, :update, :delete] do
+    resources "/tops", TopController, only: [:index, :create, :new, :update, :delete] do
       resources("/votes", VoteController, only: [:create])
     end
 
@@ -64,7 +64,7 @@ defmodule WsdjsWeb.Router do
     get("/radio", RadioController, :show)
     resources("/users", UserController, only: [:show])
     resources("/home", HomeController, only: [:index])
-    resources("/tops", TopController, only: [:index, :show])
+    resources("/tops", TopController, only: [:show])
     resources("/sessions", SessionController, only: [:new, :create])
     resources("/registrations", RegistrationController, only: [:new, :create])
     get("/signin/:token", SessionController, :show, as: :signin)
