@@ -21,6 +21,7 @@ svg:not(:root) {
   outline: 0;
   display: flex;
   line-height: 1.5;
+  margin-right: 1rem;
 }
 
 .song-down.active svg {
