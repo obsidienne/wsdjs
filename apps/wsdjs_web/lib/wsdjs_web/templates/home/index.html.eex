@@ -25,13 +25,14 @@
 
 <%= if @top && Enum.count(@top.ranks) > 0 do %>
   <section class="overflow-x-hidden carousel mt-12">
-    <div class="flex items-end justify-between">
+    <div class="flex items-end">
       <h2 class="mb-4">
         <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>">
             <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
         </time>, DJs Top
       </h2>
-      <div class="carousel-controls mb-4 whitespace-no-wrap">
+      <%= link "details", to: Routes.top_path(@conn, :show, @top), class: "ml-2 mb-6 @apply border-b-2 border-solid border-yellow-dark" %>
+      <div class="carousel-controls mb-4 whitespace-no-wrap ml-auto">
         <button class="carousel-control carousel-prev disabled" type="button">
           <svg class="svg-icon" height="16" width="16" viewBox="0 0 12 12" aria-hidden="true"><g><path d="M4.00017708,5.98684317 C3.99681925,5.84078825 4.05038488,5.70791994 4.13783464,5.60205861 L5.73305973,2.95634347 L7.32828482,0.310628317 C7.7589241,-0.403596201 8.83051001,0.242212541 8.39987073,0.956437059 L6.88291326,3.47234368 L5.36595579,5.9882503 L8.40053527,11.0447071 C8.82970125,11.7598174 7.75678626,12.4034167 7.32762028,11.6883064 L4.13704111,6.37191056 C4.04980977,6.26586926 3.99651816,6.13289086 4.00017708,5.98684317 L4.00017708,5.98684317 L4.00017708,5.98684317 Z"></path></g></svg>
           <span class="sr-only">Back</span>
