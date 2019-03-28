@@ -29,7 +29,7 @@ class Carousel {
 
   _getItemsContainer(el) {
     let container = el.closest(".carousel");
-    return container.querySelector("[data-simplebar]");
+    return container.querySelector(".simplebar-content");
   }
 
   _getStepSize() {
@@ -49,32 +49,12 @@ class Carousel {
     return 880;
   }
 
-  _getNextStepSize(el) {
-    let step_size = this._getStepSize();
-    let current_step = this._extractStep(el.style.transform);
-    return current_step - step_size;
-  }
-
-  _getPrevStepSize(el) {
-    let step_size = this._getStepSize();
-    let current_step = this._extractStep(el.style.transform);
-    return Math.min(current_step + step_size, 0);
-  }
-
-  _extractStep(str) {
-    let regex = /translateX\((-?\d+)px\)/;
-    let step = str.match(regex);
-
-    if (step === null) return 0;
-    return parseInt(step[1]);
-  }
-
   _switchDisable(el) {
     let root = el.closest(".carousel");
     let next_ctrl = root.querySelector(".carousel-next");
     let prev_ctrl = root.querySelector(".carousel-prev");
 
-    let current_step = Math.abs(this._extractStep(el.style.transform));
+    let current_step = el.scrollLeft;
     let max_width = el.scrollWidth;
     let step_size = this._getStepSize();
 
@@ -92,21 +72,15 @@ class Carousel {
 
   prev(el) {
     let items_container = this._getItemsContainer(el);
-    console.log(items_container);
-    let step = this._getPrevStepSize(items_container);
-    items_container.style.transform = "translateX(" + step + "px)";
+    let step = this._getStepSize();
+    items_container.scrollLeft = items_container.scrollLeft - step;
     this._switchDisable(items_container);
   }
 
   next(el) {
     let items_container = this._getItemsContainer(el);
-    let step = this._getNextStepSize(items_container);
-    let max_width = items_container.scrollWidth;
-    if (Math.abs(step) > max_width) {
-      return;
-    }
-
-    items_container.style.transform = "translateX(" + step + "px)";
+    let step = this._getStepSize();
+    items_container.scrollLeft = items_container.scrollLeft + step;
     this._switchDisable(items_container);
   }
 }

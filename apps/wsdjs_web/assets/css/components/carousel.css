@@ -9,6 +9,10 @@
   transition-property: background-color, color, opacity;
 }
 
+.simplebar-content {
+  scroll-behavior: smooth;
+}
+
 .carousel-control.disabled {
   cursor: default;
   opacity: 0.3;
