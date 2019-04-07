@@ -4,7 +4,7 @@ defmodule WsdjsWeb.Mixfile do
   def project do
     [
       app: :wsdjs_web,
-      version: "2.3.0",
+      version: "2.4.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -51,6 +51,7 @@ defmodule WsdjsWeb.Mixfile do
       {:attachments, in_umbrella: true},
       {:wsdjs, in_umbrella: true},
       {:jason, "~> 1.0"},
+      {:master_proxy, "~> 0.1.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
   end

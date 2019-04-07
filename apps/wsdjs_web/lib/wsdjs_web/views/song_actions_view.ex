@@ -1,6 +1,6 @@
 defmodule WsdjsWeb.SongActionsView do
   use WsdjsWeb, :view
-  
+
   alias Wsdjs.Accounts
 
   def list_users do

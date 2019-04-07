@@ -2,7 +2,7 @@
   ??
 ****************************/
 
-.tops__top__art>div {
+.tops__top__art > div {
   flex: 1 0 20%;
 }
 
@@ -11,7 +11,7 @@
 ****************************/
 
 .tops::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 33px;
@@ -69,7 +69,6 @@
     padding-right: 0;
     padding-left: 15px;
   }
-
 
   .tops__top__content {
     width: 19rem;

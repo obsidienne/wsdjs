@@ -1,0 +1,19 @@
+<div class="bg-grey-lightest pt-16 pb-8">
+  <div class="container">
+    <span class="h1 tracking-wide">World Swing DeeJays</span>
+    <span class="h2 block mb-8 font-thin">The best West Coast Swing music from all around the world !</span>
+
+    <%= link to: Routes.session_path(@conn, :new), class: "mr-4" do %>
+      <div class="btn btn-primary" title="You can register and sign in with this link">Sign in</div>
+    <% end %>
+    <span class="mr-4">or</span>
+    <%= link "register", to: Routes.registration_path(@conn, :new), class: "inline-block visible-link" %>
+
+    <div class="mt-8">
+      <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FWorld-Swing-DJs-1430112430533570%2F&width=85&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" 
+          width="103" height="21" 
+          style="border:none;overflow:hidden" 
+          scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+    </div>
+  </div>
+</div>

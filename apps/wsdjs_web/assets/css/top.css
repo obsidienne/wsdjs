@@ -10,8 +10,8 @@
 .song-art__play {
   @apply z-10;
   position: absolute;
-  bottom: .25rem;
-  right: .25rem;
+  bottom: 0.25rem;
+  right: 0.25rem;
 }
 
 .voting-position__selector::-ms-expand {
@@ -43,7 +43,7 @@
   height: 0;
   border-top: 72px solid transparent;
   border-bottom: 72px solid transparent;
-  border-left: 72px solid #FFF;
+  border-left: 72px solid #fff;
 }
 
 .voting-position .chart-value {
@@ -58,7 +58,7 @@
   color: #49596a;
 }
 
-.top-voting-footer-actions>.btn {
+.top-voting-footer-actions > .btn {
   width: 24ch;
 }
 
@@ -66,7 +66,7 @@
   Published top
 ****************************/
 
-.tops__top__art>div {
+.tops__top__art > div {
   overflow: hidden;
 }
 
@@ -113,7 +113,7 @@
   justify-content: space-between;
 }
 
-.top-song-info-container>* {
+.top-song-info-container > * {
   flex: 0 0 33%;
 }
 
@@ -129,10 +129,10 @@
 
 .opinions {
   display: flex;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
-.opinions>*:nth-child(2) {
+.opinions > *:nth-child(2) {
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -151,7 +151,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-width: 0;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 .top-song-body a {

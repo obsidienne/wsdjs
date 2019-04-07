@@ -20,7 +20,6 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
-
 if System.get_env("DEPLOYMENT_ENV") == "staging" do
   config :wsdjs_web, WsdjsWeb.Endpoint,
     url: [scheme: "https", host: "wsdjs-staging.cleverapps.io", port: 443]
@@ -29,10 +28,32 @@ if System.get_env("DEPLOYMENT_ENV") == "staging" do
 else
   config :wsdjs_web, WsdjsWeb.Endpoint,
     url: [scheme: "https", host: "www.worldswingdjs.com", port: 443]
+
   config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "https://www.worldswingdjs.com/api"
 end
 
-
+config :master_proxy,
+  http: [:inet6, port: System.get_env("PORT")],
+  backends: [
+    %{
+      host: ~r/wsdjs-staging.cleverapps.io/,
+      path: ~r/api/,
+      phoenix_endpoint: WsdjsApi.Endpoint
+    },
+    %{
+      host: ~r/www.worldswingdjs.com/,
+      path: ~r/api/,
+      phoenix_endpoint: WsdjsApi.Endpoint
+    },
+    %{
+      host: ~r/wsdjs-staging.cleverapps.io/,
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    },
+    %{
+      host: ~r/www.worldswingdjs.com/,
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    }
+  ]
 
 config :wsdjs_web, WsdjsWeb.Mailer,
   adapter: Bamboo.SendGridAdapter,

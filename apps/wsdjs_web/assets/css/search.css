@@ -3,11 +3,11 @@
 /* search                                  */
 
 /*******************************************/
-.actions>* {
-  margin-left: .5rem;
+.actions > * {
+  margin-left: 0.5rem;
 }
 
-.actions>*:first-child {
+.actions > *:first-child {
   margin-left: 0;
 }
 
@@ -24,11 +24,10 @@
 
 .search__input__wrap {
   position: relative;
-  transition: transform ease .1s;
+  transition: transform ease 0.1s;
 }
 
 /* style the search input */
-
 
 .facets-opener {
   color: hsl(222, 10%, 68%);
@@ -40,7 +39,7 @@
   background-color: hsl(240, 20%, 98%);
   color: hsl(221, 15%, 41%);
   transform: translateY(0);
-  transition: all ease .3s;
+  transition: all ease 0.3s;
   pointer-events: auto;
   -webkit-appearance: none;
   padding: 6px 12px;
@@ -63,11 +62,12 @@
   border-radius: 4px;
   position: absolute;
   overflow: hidden;
-  box-shadow: 0 19px 38px hsla(0, 0%, 0%, 0.3), 0 19px 12px hsla(0, 0%, 0%, 0.22);
+  box-shadow: 0 19px 38px hsla(0, 0%, 0%, 0.3),
+    0 19px 12px hsla(0, 0%, 0%, 0.22);
   pointer-events: none;
   opacity: 0;
   transform: translateY(-1px);
-  transition: transform ease .1s, opacity ease .1s;
+  transition: transform ease 0.1s, opacity ease 0.1s;
   z-index: 100;
   overscroll-behavior: contain;
 }
@@ -83,6 +83,6 @@
   overflow-y: auto;
 }
 
-.search-container.focused~a {
+.search-container.focused ~ a {
   display: none;
 }

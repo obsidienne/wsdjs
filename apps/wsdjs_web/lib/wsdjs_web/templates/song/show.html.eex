@@ -1,3 +1,6 @@
+<%= unless @current_user do %>
+  <%= render "_not_connected.html", conn: @conn%>
+<% else %>
 <nav class="secondary-nav py-4">
   <ol class="container">
     <li class="current inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
@@ -7,6 +10,8 @@
     <% end %>
   </ol>
 </nav>
+<% end %>
+
 
 <section>
   <div class="flex md:flex-row flex-col justify-start container mt-6 pb-12">
@@ -45,11 +50,14 @@
 
       <div class="song-page__tags song-opinions mb-4">
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
+
+        <%= unless is_nil(@current_user) do %>
         <span class="ml-auto p-2 pr-0 text-right playlist-picker"  data-song-id="<%= @song.id %>">
           <svg height='24' viewBox='0 0 24 24' width='24'>
             <path fill="#455A64" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
           </svg>
         </span>
+        <% end %>
       </div>
       
       <%= if @song.url do %>
@@ -72,25 +80,6 @@
 </section>
 
 <div class="container">
-  <%= unless @current_user do %>
-  <section class="unconnected">
-    <span class="h1 block">World Swing DeeJays</span>
-    <span class="h2 block">The best West Coast Swing music from all around the world !</span>
-
-    <%= link to: Routes.session_path(@conn, :new) do %>
-      <div class="glnav__user__signin--container btn btn-primary tippy" title="You can register and sign in with this link">Sign in</div>
-    <% end %>
-    or 
-    <%= link "register", to: Routes.registration_path(@conn, :new) %>
-
-    <div class="mt-6">
-      <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FWorld-Swing-DJs-1430112430533570%2F&width=85&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId" 
-              width="103" height="21" 
-              style="border:none;overflow:hidden" 
-              scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-    </div>
-  </section>
-  <% end %>
   <section id="overview-section" class="w-full">
     <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
   </section>
