@@ -11,6 +11,12 @@ defmodule WsdjsWeb.SongView do
     Enum.find(opinions, fn x -> x.user_id == current_user.id end)
   end
 
+  def opinion_used(opinions) do
+    opinions
+    |> Enum.map(fn x -> x.kind end)
+    |> Enum.uniq()
+  end
+
   def opinion_id(nil), do: nil
   def opinion_id(%Opinion{id: id}), do: id
 
