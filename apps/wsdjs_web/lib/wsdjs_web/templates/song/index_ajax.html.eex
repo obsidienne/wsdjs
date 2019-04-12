@@ -18,6 +18,7 @@
     <% end %>
   </ul>
   <% end %>
+  <span>&nbsp;</span>
 
   <%= unless is_nil(@next_month) do %>
   <div class="sentinel text-center m-4" data-query="<%= Timex.format!(@next_month, "%Y-%m-%d", :strftime) %>"><div class="donut"></div></div>
