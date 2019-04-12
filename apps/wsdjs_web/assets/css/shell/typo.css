@@ -86,6 +86,7 @@ a:hover {
 
 .page-header-sticky {
   @apply sticky bg-white z-30 pin-t;
+  height: 100px;
 }
 
 p {
