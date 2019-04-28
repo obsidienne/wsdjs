@@ -37,8 +37,8 @@ defmodule WsdjsApi.Router do
   scope "/api", WsdjsApi do
     pipe_through([:api])
 
-    resources("/now_playing", NowPlayingController, only: [:index])
-    resources("/mobile_config", MobileConfigController, only: [:index])
+    resources("/v1/now_playing", NowPlayingController, only: [:index])
+    resources("/v1/mobile_config", MobileConfigController, only: [:index])
 
     resources("/now_playing", NowPlayingController, only: [:index])
     resources("/mobile_config", MobileConfigController, only: [:index])
