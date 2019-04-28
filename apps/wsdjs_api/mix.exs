@@ -41,6 +41,7 @@ defmodule WsdjsApi.MixProject do
       {:phoenix_pubsub, "~> 1.1"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:corsica, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
       {:con_cache, "~> 0.13.0"},
       {:attachments, in_umbrella: true},

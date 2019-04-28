@@ -1,6 +1,14 @@
 defmodule WsdjsApi.Endpoint do
   use Phoenix.Endpoint, otp_app: :wsdjs_api
 
+  plug(
+    Corsica,
+    origins: ["http://radiowcs.com", "http://www.radiowcs.com"],
+    allow_headers: ["Authorization", "Origin", "user-token", "Content-Type", "X-Requested-With"],
+    allow_methods: ["GET"],
+    allow_credentials: true
+  )
+
   socket "/socket", WsdjsApi.UserSocket,
     websocket: true,
     longpoll: false
