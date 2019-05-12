@@ -31,6 +31,11 @@ config :master_proxy,
   backends: [
     %{
       host: ~r/localhost/,
+      path: ~r{/api/v1/now_playing},
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    },
+    %{
+      host: ~r/localhost/,
       path: ~r/api/,
       phoenix_endpoint: WsdjsApi.Endpoint
     },
