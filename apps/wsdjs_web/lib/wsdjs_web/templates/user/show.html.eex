@@ -19,10 +19,15 @@
 </section>
 
 <section class="container pt-4">
-  <%= if @user && @user.parameter && @user.parameter.email_contact do %>
-  <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Send an eMail</a>
-  <% end %>
-
+  <div class="flex items-center">
+    <%= if @user && @user.parameter && @user.parameter.email_contact do %>
+    <a class="btn btn-primary" href="mailto:<%= @user.email %>" target = "_blank">Send an eMail</a>
+    <% end %>
+    <%= if @user && Wsdjs.Accounts.Users.can?(@conn.assigns.current_user, :edit_user, @user) == :ok do %>
+    <%= link "edit", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-link ml-auto" %>
+    <% end %>
+  </div>
+  
   <dl class="pt-4">
   <%= if @user.detail.description do %>
     <dt>About Me</dt>
