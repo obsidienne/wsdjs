@@ -72,6 +72,9 @@ defmodule WsdjsWeb.Router do
     resources("/songs", SongController, only: [:show]) do
       resources("/opinions", OpinionController, only: [:index])
     end
+
+    resources("/api/v1/now_playing", NowPlayingController, only: [:index])
+    resources("/api/now_playing", NowPlayingController, only: [:index])
   end
 
   scope "/", as: :api, alias: :WsdjsApi do

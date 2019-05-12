@@ -37,6 +37,16 @@ config :master_proxy,
   backends: [
     %{
       host: ~r/wsdjs-staging.cleverapps.io/,
+      path: ~r{/api/v1/now_playing},
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    },
+    %{
+      host: ~r/www.worldswingdjs.com/,
+      path: ~r{/api/v1/now_playing},
+      phoenix_endpoint: WsdjsWeb.Endpoint
+    },
+    %{
+      host: ~r/wsdjs-staging.cleverapps.io/,
       path: ~r/api/,
       phoenix_endpoint: WsdjsApi.Endpoint
     },
