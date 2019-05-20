@@ -31,7 +31,7 @@ defmodule WsdjsWeb.Service.RadioSrv do
     |> Map.put(:image_uri, Attachments.art_url(song.art, 900))
     |> Map.put(:image_srcset, Attachments.art_srcset(song.art, 300))
     |> Map.put(:suggested_by, song.user.name)
-    |> Map.put(:suggested_by_path, Routes.user_path(conn, :show, song))
+    |> Map.put(:suggested_by_path, Routes.user_path(conn, :show, user))
     |> Map.put(:path, Routes.song_path(conn, :show, song))
     |> Map.put(:tags, tags_for_song(song))
     |> Map.put(:song_id, song.id)
