@@ -1,3 +1,0 @@
-# WsdjsJobs
-
-**TODO: Add description**
