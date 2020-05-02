@@ -3,19 +3,6 @@ defmodule Attachments do
   Documentation for Attachments.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Attachments.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
-
   @base_url ~S(https://res.cloudinary.com/)
   @cloud_name ~S(don2kwaju)
   @cld_https "https://res.cloudinary.com/don2kwaju/image/upload/"
