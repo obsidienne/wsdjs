@@ -11,3 +11,4 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
   server: false
 
 config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "http://api:5000"
+config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "http://web:4000"

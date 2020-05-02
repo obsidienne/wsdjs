@@ -46,7 +46,7 @@ config :master_proxy,
   ]
 
 config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "http://localhost:8080/api"
-
+config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "http://localhost:4080"
 config :wsdjs_web, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
 
 # ## SSL Support
