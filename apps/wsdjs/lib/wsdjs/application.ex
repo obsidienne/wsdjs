@@ -7,7 +7,8 @@ defmodule Wsdjs.Application do
 
   def start(_type, _args) do
     children = [
-      Wsdjs.Repo
+      Wsdjs.Repo,
+      WsdjsJobs.Scheduler
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: Wsdjs.Supervisor)
