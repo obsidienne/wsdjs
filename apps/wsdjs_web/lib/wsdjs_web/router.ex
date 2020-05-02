@@ -90,7 +90,7 @@ defmodule WsdjsWeb.Router do
     end
   end
 
-  scope "/api", WsdjsApi do
+  scope "/api", WsdjsWeb.Api, as: :api do
     pipe_through([:api, :api_auth])
 
     resources "/songs", SongController, only: [] do
@@ -114,7 +114,7 @@ defmodule WsdjsWeb.Router do
     get("/me", AccountController, :show, as: :me)
   end
 
-  scope "/api", WsdjsApi do
+  scope "/api", WsdjsWeb.Api, as: :api do
     pipe_through([:api])
 
     resources("/v1/mobile_config", MobileConfigController, only: [:index])

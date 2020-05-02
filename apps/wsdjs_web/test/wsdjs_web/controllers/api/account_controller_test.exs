@@ -11,6 +11,10 @@ defmodule WsdjsWeb.Api.AccountControllerTest do
     {:ok, user: user}
   end
 
+  setup %{conn: conn} do
+    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  end
+
   describe "show/2" do
     setup [:create_user]
 
@@ -20,7 +24,7 @@ defmodule WsdjsWeb.Api.AccountControllerTest do
       response =
         conn
         |> put_req_header("authorization", "Bearer " <> user_token)
-        |> get(Routes.account_path(conn, :show, user.id))
+        |> get(Routes.api_account_path(conn, :show, user.id))
         |> json_response(200)
 
       expected = %{
@@ -59,7 +63,7 @@ defmodule WsdjsWeb.Api.AccountControllerTest do
       response =
         conn
         |> put_req_header("authorization", "Bearer " <> user_token)
-        |> get(Routes.me_path(conn, :show))
+        |> get(Routes.api_me_path(conn, :show))
         |> json_response(200)
 
       expected = %{
