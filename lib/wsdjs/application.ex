@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Application do
+defmodule Wsdjs.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -6,8 +6,9 @@ defmodule WsdjsWeb.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
+      Wsdjs.Repo,
+      WsdjsJobs.Scheduler,
       # Start the endpoint when the application starts
       WsdjsWeb.Endpoint,
       # Starts a worker by calling: WsdjsWeb.Worker.start_link(arg)
@@ -17,11 +18,11 @@ defmodule WsdjsWeb.Application do
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: WsdjsWeb.Supervisor]
+    opts = [strategy: :one_for_one, name: Wsdjs.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
-  # Tell Phoenix to update the endpoint configuration
+    # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
     WsdjsWeb.Endpoint.config_change(changed, removed)
