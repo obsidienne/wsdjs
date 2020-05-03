@@ -4,7 +4,7 @@ defmodule WsdjsApi.Service.RadioSrv do
   access cache to avoid duplicating database calls when a new song is streamed.
   """
   alias Wsdjs.Musics
-  alias WsdjsApi.WebRouteHelpers
+  alias WsdjsWeb.Api.WebRouteHelpers
 
   def streamed(conn) do
     ConCache.get_or_store(:wsdjs_cache, "streamed_songs_json", fn ->
