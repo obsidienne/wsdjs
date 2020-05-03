@@ -20,5 +20,5 @@ defmodule WsdjsWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :wsdjs_web
+  use Gettext, otp_app: :wsdjs
 end
