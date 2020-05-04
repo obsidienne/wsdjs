@@ -6,6 +6,7 @@ config :wsdjs, Wsdjs.Repo,
   password: "postgres",
   database: "wsdjs_dev",
   hostname: "localhost",
+  show_sensitive_data_on_connection_error: true,
   types: Wsdjs.PostgresTypes,
   pool_size: 10
 
@@ -59,17 +60,13 @@ config :wsdjs, WsdjsWeb.Endpoint,
 config :wsdjs, WsdjsWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-      ~r{priv/gettext/.*(po)$},
-      ~r{lib/wsdjs_web/views/.*(ex)$},
-      ~r{lib/wsdjs_web/templates/.*(eex)$}
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/wsdjs_web/(live|views)/.*(ex)$",
+      ~r"lib/wsdjs_web/templates/.*(eex)$"
     ]
   ]
 
-config :wsdjs_jobs, WsdjsJobs.Mailer, adapter: Bamboo.LocalAdapter
-
-config :wsdjs, WsdjsWeb.ApiRouteHelpers, base_url: "http://localhost:8080/api"
-config :wsdjs, WsdjsApi.WebRouteHelpers, base_url: "http://localhost:4080"
 config :wsdjs, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
 
 config :wsdjs, WsdjsJobs.Scheduler,

@@ -1,10 +1,14 @@
 use Mix.Config
 
 # Configure your database
+#
+# The MIX_TEST_PARTITION environment variable can be used
+# to provide built-in test partitioning in CI environment.
+# Run `mix help test` for more information.
 config :wsdjs, Wsdjs.Repo,
   username: "postgres",
   password: "postgres",
-  database: "wsdjs_test",
+  database: "escudo_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   types: Wsdjs.PostgresTypes,
   pool: Ecto.Adapters.SQL.Sandbox
@@ -15,8 +19,7 @@ config :wsdjs, WsdjsWeb.Endpoint,
   http: [port: 4002],
   server: false
 
-config :wsdjs, WsdjsWeb.ApiRouteHelpers, base_url: "http://api:5000"
-config :wsdjs, WsdjsApi.WebRouteHelpers, base_url: "http://web:4000"
+config :wsdjs, WsdjsWeb.Mailer, adapter: Bamboo.TestAdapter
 
 # Print only warnings and errors during test
 config :logger, level: :warn

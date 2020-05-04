@@ -14,12 +14,12 @@ config :wsdjs,
 config :wsdjs, WsdjsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "vJT1iDt6U73/4jsybB6t5FSGqEzxnzfRL4SExYeGc3yPpBSn1/U3JmfDlrsN+9n9",
-  render_errors: [view: WsdjsWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: WsdjsWeb.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: WsdjsWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Wsdjs.PubSub,
+  live_view: [signing_salt: "HQjPaNYm"]
 
 # Configures Elixir's Logger
 config :logger, :console,
-  level: :info,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
