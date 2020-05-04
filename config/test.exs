@@ -11,12 +11,12 @@ config :wsdjs, Wsdjs.Repo,
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :wsdjs_web, WsdjsWeb.Endpoint,
+config :wsdjs, WsdjsWeb.Endpoint,
   http: [port: 4002],
   server: false
 
-config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "http://api:5000"
-config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "http://web:4000"
+config :wsdjs, WsdjsWeb.ApiRouteHelpers, base_url: "http://api:5000"
+config :wsdjs, WsdjsApi.WebRouteHelpers, base_url: "http://web:4000"
 
 # Print only warnings and errors during test
 config :logger, level: :warn

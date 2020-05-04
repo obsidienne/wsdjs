@@ -11,7 +11,7 @@ config :wsdjs,
   ecto_repos: [Wsdjs.Repo]
 
 # Configures the endpoint
-config :wsdjs_web, WsdjsWeb.Endpoint,
+config :wsdjs, WsdjsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "vJT1iDt6U73/4jsybB6t5FSGqEzxnzfRL4SExYeGc3yPpBSn1/U3JmfDlrsN+9n9",
   render_errors: [view: WsdjsWeb.ErrorView, accepts: ~w(html json)],

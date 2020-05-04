@@ -1,5 +1,5 @@
 defmodule WsdjsWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :wsdjs_web
+  use Phoenix.Endpoint, otp_app: :wsdjs
 
   plug(
     Corsica,
@@ -20,7 +20,7 @@ defmodule WsdjsWeb.Endpoint do
   plug(
     Plug.Static,
     at: "/",
-    from: :wsdjs_web,
+    from: :wsdjs,
     gzip: true,
     brotli: true,
     only: ~w(css fonts images js favicon.ico robots.txt),
