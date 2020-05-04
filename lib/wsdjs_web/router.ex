@@ -82,14 +82,6 @@ defmodule WsdjsWeb.Router do
     resources("/api/now_playing", NowPlayingController, only: [:index])
   end
 
-  scope "/", as: :api, alias: :WsdjsApi do
-    pipe_through([:api])
-
-    scope "/" do
-      get("/.well-known/:page", StaticController, :show)
-    end
-  end
-
   scope "/api", WsdjsWeb.Api, as: :api do
     pipe_through([:api, :api_auth])
 
