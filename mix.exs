@@ -69,7 +69,7 @@ defmodule Wsdjs.MixProject do
       {:scrivener_ecto, "~> 2.0"},
       {:bamboo, "~> 1.1"},
       {:httpoison, "~> 1.4"},
-      {:earmark, "~> 1.2"},
+      {:earmark, "~> 1.4"},
       {:hashids, "~> 2.0"},
       {:quantum, "~> 2.3.3"},
       {:geo_postgis, "~> 2.1"},
