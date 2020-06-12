@@ -20,6 +20,6 @@ defmodule WsdjsWeb.Api.MobileConfigController do
 
     conn
     |> put_resp_header("content-type", "application/json; charset=utf-8")
-    |> send_resp(200, Poison.encode!(list))
+    |> send_resp(200, Jason.encode!(list))
   end
 end
