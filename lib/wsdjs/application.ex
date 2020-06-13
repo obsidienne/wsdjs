@@ -9,6 +9,8 @@ defmodule Wsdjs.Application do
     children = [
       Wsdjs.Repo,
       WsdjsJobs.Scheduler,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Wsdjs.PubSub},
       # Start the endpoint when the application starts
       WsdjsWeb.Endpoint,
       # Starts a worker by calling: WsdjsWeb.Worker.start_link(arg)
@@ -22,7 +24,7 @@ defmodule Wsdjs.Application do
     Supervisor.start_link(children, opts)
   end
 
-    # Tell Phoenix to update the endpoint configuration
+  # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
     WsdjsWeb.Endpoint.config_change(changed, removed)

@@ -1,16 +1,18 @@
 {
   "repository": {},
+  "description": " ",
   "license": "MIT",
-  "name": "wsdjs",
   "scripts": {
     "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch --progress --color"
+    "watch": "webpack --mode development --watch"
   },
   "dependencies": {
     "autolink-js": "~1.0.2",
     "micromustache": "^5.4.0",
-    "phoenix": "file:../../../deps/phoenix",
-    "phoenix_html": "file:../../../deps/phoenix_html",
+    "nprogress": "^0.2.0",
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html",
+    "phoenix_live_view": "file:../deps/phoenix_live_view",
     "pjax-api": "3.25.0",
     "simplebar": "^3.1.4",
     "tippy.js": "~3.4.0"
