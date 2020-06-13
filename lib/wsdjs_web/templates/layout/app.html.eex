@@ -1,4 +1,4 @@
-<main role="main" class="container"
+<main role="main" class="HomeIndexView flex flex-col justify-between pb-32"
   class="<%= js_view_name(@conn, @view_template) %> flex flex-col justify-between pb-32"
   data-js-view-name="<%= js_view_name(@conn, @view_template) %>" data-user-id="<%= current_user_id(@current_user) %>">
   <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
