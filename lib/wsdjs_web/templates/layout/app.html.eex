@@ -122,7 +122,7 @@
 
   <main class="<%= js_view_name(@conn, @view_template) %> flex flex-col justify-between pb-32"
     data-js-view-name="<%= js_view_name(@conn, @view_template) %>" data-user-id="<%= current_user_id(@current_user) %>">
-    <%= render @view_module, @view_template, assigns %>
+    <%= @inner_content %>
   </main>
 
   <%= render "_radio_player.html", conn: @conn %>
