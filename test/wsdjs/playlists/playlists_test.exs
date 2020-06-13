@@ -120,7 +120,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
           url: "http://youtu.be/dummy"
         }
         |> Map.put(:user_id, user_id)
-        |> Wsdjs.Musics.create_suggestion()
+        |> Wsdjs.Musics.Songs.create_suggestion()
 
       song
     end

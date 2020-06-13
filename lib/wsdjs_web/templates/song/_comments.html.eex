@@ -1,5 +1,5 @@
 <%= unless is_nil(@conn.assigns[:current_user]) do %>
-<%= form_for @changeset, ApiRoutes.song_comment_path(@conn, :create, @song), [id: "song-comment-form"], fn f -> %>
+<%= form_for @changeset, WsdjsWeb.ApiRouteHelpers.song_comment_path(@conn, :create, @song), [id: "song-comment-form"], fn f -> %>
 <div class="form-group">
   <%= textarea f, :text, class: "h-16 form-control", placeholder: "Comment", required: true, maxlength: 255 %>
   <%= error_tag f, :text %>
