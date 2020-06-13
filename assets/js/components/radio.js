@@ -1,3 +1,4 @@
+import socket from "../socket"
 
 export default class Radio {
   constructor() {

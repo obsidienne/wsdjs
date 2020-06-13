@@ -36,6 +36,7 @@ window.liveSocket = liveSocket
 // Import local files
 import "./helpers";
 import loadView from "./views/loader";
+import Pjax from "pjax-api";
 import Radio from "./components/radio";
 import Search from "./components/search";
 import Notifier from "./components/notifier";
@@ -43,6 +44,7 @@ import Opinions from "./components/opinions";
 import OpinionPicker from "./components/opinionPicker";
 import PlaylistPicker from "./components/playlistPicker";
 import Carousel from "./components/carousel";
+import Tippy from "tippy.js";
 import "simplebar";
 import "simplebar/dist/simplebar.css";
 
@@ -86,3 +88,16 @@ document.addEventListener("DOMContentLoaded", handleDOMContentLoaded, false);
 document.addEventListener("pjax:ready", handleDOMContentLoaded, false);
 window.addEventListener("pjax:unload", handleUnloadContentLoaded, false);
 window.addEventListener("scroll", () => Tippy.hideAllPoppers());
+
+new Pjax({
+  areas: ["main, .glnav"],
+  update: {
+    css: false,
+    js: false
+  },
+  filter: function (el) {
+    return (
+      el.matches(":not([target])") && el.matches(':not([data-pjax="false"])')
+    );
+  }
+});

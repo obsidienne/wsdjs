@@ -1,3 +1,4 @@
+import Tippy from 'tippy.js';
 
 class PlaylistPicker {
   constructor() {

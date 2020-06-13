@@ -1,6 +1,7 @@
+import autolinkjs from 'autolink-js';
 import MainView from '../main';
+import Mustache from 'micromustache';
 import playlistPicker from '../../components/playlistPicker';
-
 export default class View extends MainView {
   constructor() {
     super();

@@ -1,5 +1,5 @@
+import autolinkjs from 'autolink-js';
 import MainView from '../main';
-
 export default class View extends MainView {
   mount() {
     super.mount();

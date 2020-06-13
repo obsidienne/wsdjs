@@ -1,4 +1,4 @@
-
+import SimpleBar from "simplebar";
 class Carousel {
   constructor() {
     document.addEventListener(
