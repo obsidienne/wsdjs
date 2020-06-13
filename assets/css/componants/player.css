@@ -1,5 +1,5 @@
 .player {
-  @apply fixed pin-y right-0;
+  @apply fixed inset-y-0 right-0;
   background-color: #1f2532;
   width: 17rem;
 }

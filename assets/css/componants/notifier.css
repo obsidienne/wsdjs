@@ -20,13 +20,13 @@
 }
 
 .notifier.success {
-  @apply bg-green-100 border-green-500 text-green-dark;
+  @apply bg-green-100 border-green-500 text-green-600;
 }
 
 .notifier.warning {
-  @apply bg-orange-lightest border-orange text-orange-dark;
+  @apply bg-orange-100 border-orange-500 border-orange-600;
 }
 
 .notifier.danger {
-  @apply bg-red-500-lightest border-red text-red-dark;
+  @apply bg-red-500 border-red-500 text-red-600;
 }
