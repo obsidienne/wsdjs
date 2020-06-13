@@ -7,7 +7,11 @@ defmodule Wsdjs.Application do
 
   def start(_type, _args) do
     children = [
+      # Start the Ecto repository
       Wsdjs.Repo,
+      # Start the Telemetry supervisor
+      WsdjsWeb.Telemetry,
+      # start the Scheduler
       WsdjsJobs.Scheduler,
       # Start the PubSub system
       {Phoenix.PubSub, name: Wsdjs.PubSub},
