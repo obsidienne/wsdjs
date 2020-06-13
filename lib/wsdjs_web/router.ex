@@ -4,7 +4,8 @@ defmodule WsdjsWeb.Router do
   pipeline :browser do
     plug(:accepts, ["html", "text"])
     plug(:fetch_session)
-    plug(:fetch_flash)
+    plug :fetch_live_flash
+    plug :put_root_layout, {WsdjsWeb.LayoutView, :root}
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
     plug(WsdjsWeb.VerifySession)
