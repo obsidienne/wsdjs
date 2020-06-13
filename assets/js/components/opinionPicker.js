@@ -1,5 +1,3 @@
-import Tippy from 'tippy.js';
-import Mustache from 'micromustache';
 
 class OpinionPicker {
   constructor() {
@@ -112,13 +110,13 @@ class OpinionPicker {
 
     // It should work so launch the request
     fetch(url, {
-        method: method,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-      })
+      method: method,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();

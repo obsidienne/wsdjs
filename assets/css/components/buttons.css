@@ -3,16 +3,16 @@
   @apply align-middle border-0 cursor-pointer whitespace-no-wrap select-none;
 }
 .btn-primary {
-  @apply bg-blue text-white;
+  @apply bg-blue-500 text-white;
 }
 .btn-primary:hover {
-  @apply bg-blue-dark;
+  @apply bg-blue-500;
 }
 .btn-danger {
-  @apply bg-red text-white;
+  @apply bg-red-500 text-white;
 }
 .btn-danger:hover {
-  @apply bg-red-dark;
+  @apply bg-red-500;
 }
 .fab {
   @apply fixed p-1 rounded-full z-50 flex;

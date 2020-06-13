@@ -1,5 +1,5 @@
 <%= unless @current_user do %>
-  <%= render "_not_connected.html", conn: @conn%>
+<%= render "_not_connected.html", conn: @conn%>
 <% else %>
 <nav class="secondary-nav py-4">
   <ol class="container">
@@ -16,13 +16,16 @@
 <section>
   <div class="flex md:flex-row flex-col justify-start container mt-6 pb-12">
     <div class="song-page__art">
-      <img src="<%= Attachments.art_url(@song.art, 300) %>" srcset="<%= Attachments.art_srcset(@song.art, 300) %>" sizes="300px" class="responsive shadow rounded"/>
+      <img src="<%= Attachments.art_url(@song.art, 300) %>" srcset="<%= Attachments.art_srcset(@song.art, 300) %>"
+        sizes="300px" class="responsive shadow rounded" />
     </div>
     <div class="flex flex-col md:pl-4">
       <span class="h2 primary-text"><%= @song.title %></span>
-      <span class="h3 secondary-text pb-2"><span class="text-grey-darkest">by</span> <%= @song.artist %></span>
-      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link text-grey-darkest inline-block" %>,
-        <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
+      <span class="h3 secondary-text pb-2"><span class="text-gray-800">by</span> <%= @song.artist %></span>
+      <div class="text-gray-800"> suggested by
+        <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link text-gray-800 inline-block" %>,
+        <time datetime="<%= utc_to_local(@song.inserted_at) %>"
+          title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
       </div>
@@ -33,18 +36,19 @@
         <span class="label label-primary"><%= @song.bpm %> bpm</span>
         <% end %>
         <%= if @song.hidden_track do %>
-          <span class="label label-default">hidden track</span>
+        <span class="label label-default">hidden track</span>
         <% end %>
         <%= if @song.public_track do %>
-          <span class="label label-default">public track</span>
+        <span class="label label-default">public track</span>
         <% end %>
         <%= if @song.instant_hit do %>
-          <span class="label label-default">instant hit</span>
+        <span class="label label-default">instant hit</span>
         <% end %>
         <%= for rank <- @ranks do %>
-          <%= if rank.position <= 10 do %>
-            <span class="label label-default">Top <%= Timex.format!(rank.top.due_date, "%b%y", :strftime) %> # <%= rank.position %></span>
-          <% end %>
+        <%= if rank.position <= 10 do %>
+        <span class="label label-default">Top <%= Timex.format!(rank.top.due_date, "%b%y", :strftime) %> #
+          <%= rank.position %></span>
+        <% end %>
         <% end %>
       </div>
 
@@ -52,30 +56,33 @@
         <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
 
         <%= unless is_nil(@current_user) do %>
-        <span class="ml-auto p-2 pr-0 text-right playlist-picker"  data-song-id="<%= @song.id %>">
+        <span class="ml-auto p-2 pr-0 text-right playlist-picker" data-song-id="<%= @song.id %>">
           <svg height='24' viewBox='0 0 24 24' width='24'>
-            <path fill="#455A64" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
+            <path fill="#455A64"
+              d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
           </svg>
         </span>
         <% end %>
       </div>
-      
+
       <%= if @song.url do %>
-        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary song-page__play mt-auto mb-0" target="_blank" rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
+      <a href="<%= url_for_provider(@song) %>" class="btn btn-primary song-page__play mt-auto mb-0" target="_blank"
+        rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
       <% end %>
     </div>
   </div>
   <template id="playlist-picker-tpl">
-  <div>
-    <span class="block pb-2 mx-4 text-center border-bottom">Playlists</span>
-    <ul class="list-reset">
-      <%= for playlist <- @playlists do %>
-      <li class="hover:bg-grey p-1">
-        <button class="btn-no-style w-full text-left song-picker-playlist" data-id="<%= playlist.id %>"><%= playlist.name %></button>
-      </li>
-      <% end %>
-    </ul>
-  </div>
+    <div>
+      <span class="block pb-2 mx-4 text-center border-bottom">Playlists</span>
+      <ul class="list-reset">
+        <%= for playlist <- @playlists do %>
+        <li class="hover:bg-grey p-1">
+          <button class="btn-no-style w-full text-left song-picker-playlist"
+            data-id="<%= playlist.id %>"><%= playlist.name %></button>
+        </li>
+        <% end %>
+      </ul>
+    </div>
   </template>
 </section>
 
@@ -88,7 +95,7 @@
 <template id="comment-tpl">
   <li class="flex mb-4">
     <div class="hidden md:flex">
-      <img src="{{user.avatars.avatar_uri}}"  class="comment__avatar__img">
+      <img src="{{user.avatars.avatar_uri}}" class="comment__avatar__img">
     </div>
 
     <div class="w-auto md:mx-2 relative bg-white shadow flex-1">
@@ -97,10 +104,11 @@
           <a href="{{user.path}}" class="visible-link action-link inline-block">{{user.name}}</a>
           <time title="{{commented_at}}" datetime="{{commented_at}}"></time>
         </span>
-        <button class="btn-link comment__delete ml-auto" data-path="<%= ApiRoutes.comment_path(@conn, :delete, "{{id}}") %>">
+        <button class="btn-link comment__delete ml-auto"
+          data-path="<%= ApiRoutes.comment_path(@conn, :delete, "{{id}}") %>">
           <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+            <path d="M0 0h24v24H0z" fill="none" />
           </svg>
         </button>
       </header>

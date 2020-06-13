@@ -2,7 +2,6 @@ import MainView from '../main';
 import lazyload from '../../components/lazyload';
 import opinionPicker from '../../components/opinionPicker';
 import playlistPicker from '../../components/playlistPicker';
-import socket from "../../socket"
 
 export default class View extends MainView {
   constructor() {

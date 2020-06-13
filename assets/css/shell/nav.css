@@ -42,11 +42,11 @@
 ****************************/
 
 .glnav {
-  @apply sticky py-6 pin-t z-30 items-center bg-white shadow;
+  @apply sticky py-6 top-0 z-30 items-center bg-white shadow;
 }
 
 .nav-active {
-  @apply border-yellow-dark;
+  @apply border-yellow-600;
 }
 
 .glnav a.home {
@@ -73,7 +73,7 @@
 }
 
 .glnav__menu.active {
-  @apply border-yellow-dark;
+  @apply border-yellow-600;
 }
 
 .logo-small {

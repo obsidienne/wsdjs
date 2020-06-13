@@ -1,22 +1,24 @@
 <%= for video <- @videos do %>
 <article class="song-page__video block">
   <%= link to: video.url, target: "_blank", class: "aspect-ratio-16/9 relative block hover:opacity-50" do %>
-    <img src="<%= Attachments.thumbnail_url(video, 320) %>" srcset="<%= Attachments.thumbnail_srcset(video, 320) %>"  class="absolute pin-t w-full h-full shadow">
+  <img src="<%= Attachments.thumbnail_url(video, 320) %>" srcset="<%= Attachments.thumbnail_srcset(video, 320) %>"
+    class="absolute top-0 w-full h-full shadow">
   <% end %>
   <div class="mt-2 flex">
     <div>
       <span class="text-bold"><%= video.title %></span>
-      <br/>
+      <br />
       <span><%= if is_nil(video.event) do video.event_str else video.event.name end %></span>
     </div>
     <%= if Wsdjs.Attachments.Policy.can?(@conn.assigns[:current_user], :delete, video) == :ok do %>
     <div class="ml-auto">
-    <%= link to: Routes.song_song_videos_path(@conn, :delete, @song, video), class: "block", method: "delete", data: [pjax: "false", confirm: "Delete video.\n\nAre you sure ?"] do %>
-      <svg fill="#455A64" class="svg-icon" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-        <path d="M0 0h24v24H0z" fill="none"/>
+      <%= link to: Routes.song_song_videos_path(@conn, :delete, @song, video), class: "block", method: "delete", data: [pjax: "false", confirm: "Delete video.\n\nAre you sure ?"] do %>
+      <svg fill="#455A64" class="svg-icon" height="24" viewBox="0 0 24 24" width="24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+        <path d="M0 0h24v24H0z" fill="none" />
       </svg>
-    <% end %>
+      <% end %>
     </div>
     <% end %>
 

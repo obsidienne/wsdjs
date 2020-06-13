@@ -1,6 +1,8 @@
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-grey-darkest"><%= @top.status %></span></h1>
+    <h1>TOP 10, <time class="date-format"
+        datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time>
+      <span class="text-gray-800"><%= @top.status %></span></h1>
   </div>
 </header>
 
@@ -10,7 +12,8 @@
   <ol class="container">
     <li class="visited inline-block">Create</li>
     <li class="current inline-block">Check</li>
-    <li class="inline-block"><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %></li>
+    <li class="inline-block"><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %>
+    </li>
   </ol>
 </nav>
 <% end %>
@@ -25,55 +28,58 @@
 
 <section class="container">
   <%= for rank <- @ranks do %>
-    <article class="top-song">
-      <div class="song-art-container">
-        <div class="aspect-ratio-square relative">
-          <img src="<%= Attachments.art_url(rank.song.art, 300) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive absolute pin-t" />
-        </div>
-        <%= if rank.song.url do %>
-          <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play" target="_blank"  rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
-            <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M0 0h24v24H0z' fill='none'/>
-              <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
-            </svg>
-          </a>
-        <% end %>
+  <article class="top-song">
+    <div class="song-art-container">
+      <div class="aspect-ratio-square relative">
+        <img src="<%= Attachments.art_url(rank.song.art, 300) %>"
+          srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive absolute top-0" />
       </div>
-        <div class="top-song-info-container">
-          <div class="top-song-body">
-            <div>
-              <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
-                <%= rank.song.title %>
-              <% end %>
-              <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
-            </div>
-
-            <aside>
-              <span class="label label-default"><%= rank.song.genre %></span>
-              <%= if rank.song.bpm > 0 do %>
-              <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-              <% end %>
-              <%= if rank.song.instant_hit do %>
-              <span class="label label-default">instant hit</span>
-              <% end %>
-              <%= if rank.song.hidden_track do %>
-              <span class="label label-default">hidden track</span>
-              <% end %>
-              <%= if rank.song.public_track do %>
-              <span class="label label-default">public track</span>
-              <% end %>
-              <div class="opinions">
-              <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
-              </div>
-            </aside>
-          </div>
+      <%= if rank.song.url do %>
+      <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play" target="_blank" rel="noopener"
+        <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
+        <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M0 0h24v24H0z' fill='none' />
+          <path
+            d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z' />
+        </svg>
+      </a>
+      <% end %>
+    </div>
+    <div class="top-song-info-container">
+      <div class="top-song-body">
         <div>
+          <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
+          <%= rank.song.title %>
+          <% end %>
+          <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
+        </div>
+
+        <aside>
+          <span class="label label-default"><%= rank.song.genre %></span>
+          <%= if rank.song.bpm > 0 do %>
+          <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
+          <% end %>
+          <%= if rank.song.instant_hit do %>
+          <span class="label label-default">instant hit</span>
+          <% end %>
+          <%= if rank.song.hidden_track do %>
+          <span class="label label-default">hidden track</span>
+          <% end %>
+          <%= if rank.song.public_track do %>
+          <span class="label label-default">public track</span>
+          <% end %>
+          <div class="opinions">
+            <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
+          </div>
+        </aside>
+      </div>
+      <div>
         <div>
           <div class="form-group">
             <%= link "Remove song from this top", to: Routes.rank_path(@conn, :delete, rank.id), method: :delete, class: "btn btn-danger" %>
           </div>
         </div>
       </div>
-    </article>
+  </article>
   <% end %>
 </section>

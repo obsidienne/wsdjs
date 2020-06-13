@@ -1,4 +1,3 @@
-import Tippy from 'tippy.js';
 
 class PlaylistPicker {
   constructor() {
@@ -67,17 +66,17 @@ class PlaylistPicker {
     const token = document.querySelector("[name=channel_token]").getAttribute("content");
 
     fetch(`${window.baseApiUrl}/playlists/${playlistId}/songs`, {
-        body: JSON.stringify({
-          song_id: songId
-        }),
-        cache: 'no-cache',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json',
-          'content-type': 'application/json'
-        },
-        method: 'POST',
-      })
+      body: JSON.stringify({
+        song_id: songId
+      }),
+      cache: 'no-cache',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+    })
       .then((response) => {
         if (response.ok) {
           console.log('Song added to the playlist');
