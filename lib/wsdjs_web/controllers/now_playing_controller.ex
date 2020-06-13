@@ -10,5 +10,5 @@ defmodule WsdjsWeb.NowPlayingController do
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(200, songs)
-    end
+  end
 end
