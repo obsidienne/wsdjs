@@ -14,7 +14,7 @@ defmodule WsdjsWeb.UserController do
   def index(conn, _params, current_user) do
     with :ok <- Accounts.Users.can?(current_user, :index) do
       users = Accounts.list_users()
-      render(conn, "index.html", users: users)
+      render(conn, "index.html", users: users, page_title: "List users - World Swing DJs")
     end
   end
 
@@ -28,7 +28,8 @@ defmodule WsdjsWeb.UserController do
       |> render(
         "show.html",
         user: user,
-        playlists: playlists
+        playlists: playlists,
+        page_title: "User - World Swing DJs"
       )
     end
   end
@@ -38,7 +39,12 @@ defmodule WsdjsWeb.UserController do
 
     with :ok <- Accounts.Users.can?(current_user, :edit_user, user) do
       changeset = Accounts.change_user(user)
-      render(conn, "edit.html", user: user, changeset: changeset)
+
+      render(conn, "edit.html",
+        user: user,
+        changeset: changeset,
+        page_title: "Edit user - World Swing DJs"
+      )
     end
   end
 

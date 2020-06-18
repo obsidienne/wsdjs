@@ -72,7 +72,7 @@ defmodule Wsdjs.MixProject do
       {:earmark, "~> 1.4"},
       {:hashids, "~> 2.0"},
       {:quantum, "~> 2.3.3"},
-      {:geo_postgis, "~> 2.1"},
+      {:geo_postgis, "~> 3.1"},
       {:html_sanitize_ex, "~> 1.3.0"},
       {:corsica, "~> 1.1"},
       {:con_cache, "~> 0.13.0"},
