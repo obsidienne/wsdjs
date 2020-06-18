@@ -80,7 +80,7 @@ defmodule WsdjsWeb.Api.OpinionView do
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "POST",
-      url: Routes.song_opinion_path(WsdjsWeb.Endpoint, :create, song, kind: kind),
+      url: Routes.api_song_opinion_path(WsdjsWeb.Endpoint, :create, song.id, kind: kind),
       tooltip_html: tooltip_from_users(opinions)
     }
   end
