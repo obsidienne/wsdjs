@@ -7,7 +7,7 @@
           <p style="margin-top:0;margin-bottom:20px">Click and confirm that you want to sign in to WorldSwingDjs. This
             link will expire in fifteen minutes and can only be used once.</p>
           <p style="margin-top:0;margin-bottom:20px">
-            <a href="<%= WsdjsWeb.ApiRouteHelpers.signin_url(WsdjsWeb.Endpoint, :show, @token) %>"
+            <a href="<%= Routes.api_signin_path(WsdjsWeb.Endpoint, :show, @token) %>"
               style="color:#ffffff;text-decoration:none;display:inline-block;height:38px;line-height:38px;padding-top:0;padding-right:16px;padding-bottom:0;padding-left:16px;border:0;outline:0;background-color:#02b875;font-size:14px;font-style:normal;font-weight:400;text-align:center;white-space:nowrap;border-radius:999em"
               target="_blank">Sign in to WorldSwingDjs</a>
           </p>

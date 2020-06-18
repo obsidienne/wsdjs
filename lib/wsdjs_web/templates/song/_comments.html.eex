@@ -1,5 +1,5 @@
 <%= unless is_nil(@conn.assigns[:current_user]) do %>
-<%= form_for @changeset, WsdjsWeb.ApiRouteHelpers.song_comment_path(@conn, :create, @song), [id: "song-comment-form"], fn f -> %>
+<%= form_for @changeset, Routes.api_song_comment_path(@conn, :create, @song), [id: "song-comment-form"], fn f -> %>
 <div class="form-group">
   <%= textarea f, :text, class: "h-16 form-control", placeholder: "Comment", required: true, maxlength: 255 %>
   <%= error_tag f, :text %>
@@ -28,7 +28,7 @@
         </span>
         <%= if Wsdjs.Reactions.Comments.can?(@conn.assigns[:current_user], :delete, comment) == :ok do %>
         <button class="btn btn-link comment__delete ml-auto"
-          data-path="<%= WsdjsWeb.ApiRouteHelpers.comment_path(@conn, :delete, comment) %>">
+          data-path="<%= Routes.api_comment_path(@conn, :delete, comment) %>">
           <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
             <path d="M0 0h24v24H0z" fill="none" />

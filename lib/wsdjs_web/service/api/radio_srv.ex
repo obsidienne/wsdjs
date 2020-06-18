@@ -4,7 +4,7 @@ defmodule WsdjsApi.Service.RadioSrv do
   access cache to avoid duplicating database calls when a new song is streamed.
   """
   alias Wsdjs.Musics
-  alias WsdjsWeb.Api.WebRouteHelpers
+  alias WsdjsWeb.Router.Helpers, as: Routes
 
   def streamed(conn) do
     ConCache.get_or_store(:wsdjs_cache, "streamed_songs_json", fn ->
@@ -31,8 +31,8 @@ defmodule WsdjsApi.Service.RadioSrv do
     |> Map.put(:image_uri, Attachments.art_url(song.art, 900))
     |> Map.put(:image_srcset, Attachments.art_srcset(song.art, 300))
     |> Map.put(:suggested_by, song.user.name)
-    |> Map.put(:suggested_by_path, WebRouteHelpers.user_path(conn, :show, song.user))
-    |> Map.put(:path, WebRouteHelpers.song_path(conn, :show, song))
+    |> Map.put(:suggested_by_path, Routes.user_path(conn, :show, song.user))
+    |> Map.put(:path, Routes.song_path(conn, :show, song))
     |> Map.put(:tags, tags_for_song(song))
     |> Map.put(:song_id, song.id)
   end

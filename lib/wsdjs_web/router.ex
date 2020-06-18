@@ -38,7 +38,6 @@ defmodule WsdjsWeb.Router do
     end
 
     resources("/suggestions", SuggestionController, only: [:create, :new])
-    resources("/song_opinions", SongOpinionController, only: [:delete])
 
     resources "/tops", TopController, only: [:index, :create, :new, :update, :delete] do
       resources("/votes", VoteController, only: [:create])
