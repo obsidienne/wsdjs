@@ -14,7 +14,9 @@
 
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time> <span class="text-grey-darkest"><%= @top.status %></span></h1>
+    <h1>TOP 10, <time class="date-format"
+        datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time>
+      <span class="text-gray-800"><%= @top.status %></span></h1>
   </div>
 </header>
 
@@ -29,77 +31,81 @@
   <%= for rank <- @ranks do %>
   <%= if blur_track(rank.song, @current_user) == true do %>
 
-    <article class="top-song">
-      <div class="song-art-container">
-        <div class="voting-position charted">
-          <div class="chart-bg"></div>
-          <div class="chart-value"><%= rank.position %></div>
-        </div>
-        <img src="<%= Attachments.art_url(nil, 200)%>" class="responsive" />
+  <article class="top-song">
+    <div class="song-art-container">
+      <div class="voting-position charted">
+        <div class="chart-bg"></div>
+        <div class="chart-value"><%= rank.position %></div>
       </div>
-      <div class="top-song-body">
-        <div>
-          <h2 class="text-grey-darkest">hidden track</h2>
-        </div>
-
-        <aside>
-          <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
-
-          <span class="label label-default"><%= rank.song.genre %></span>
-          <%= if rank.song.bpm > 0 do %>
-          <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-          <% end %>
-          <span class="label label-primary"><%= rank.votes + rank.bonus + rank.likes %> points</span>
-        </aside>
+      <img src="<%= Attachments.art_url(nil, 200)%>" class="responsive" />
+    </div>
+    <div class="top-song-body">
+      <div>
+        <h2 class="text-gray-800">hidden track</h2>
       </div>
-    </article>
+
+      <aside>
+        <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
+
+        <span class="label label-default"><%= rank.song.genre %></span>
+        <%= if rank.song.bpm > 0 do %>
+        <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
+        <% end %>
+        <span class="label label-primary"><%= rank.votes + rank.bonus + rank.likes %> points</span>
+      </aside>
+    </div>
+  </article>
 
   <% else %>
 
-    <article class="top-song">
-      <div class="song-art-container">
-        <div class="voting-position charted">
-          <div class="chart-bg"></div>
-          <div class="chart-value"><%= rank.position %></div>
-        </div>
-        <div class="aspect-ratio-square relative">
-          <img src="<%= Attachments.art_url(rank.song.art, 300) %>" srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive absolute pin-t" />
-        </div>
-        <%= if rank.song.url do %>
-          <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play" target="_blank" rel="noopener" <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %> >
-            <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M0 0h24v24H0z' fill='none'/>
-              <path d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/>
-            </svg>
-          </a>
+  <article class="top-song">
+    <div class="song-art-container">
+      <div class="voting-position charted">
+        <div class="chart-bg"></div>
+        <div class="chart-value"><%= rank.position %></div>
+      </div>
+      <div class="aspect-ratio-square relative">
+        <img src="<%= Attachments.art_url(rank.song.art, 300) %>"
+          srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive absolute top-0" />
+      </div>
+      <%= if rank.song.url do %>
+      <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play" target="_blank" rel="noopener"
+        <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
+        <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M0 0h24v24H0z' fill='none' />
+          <path
+            d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z' />
+        </svg>
+      </a>
+      <% end %>
+    </div>
+    <div class="top-song-body">
+      <div>
+        <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link inline-block" do %>
+        <span><%= rank.song.title %></span>
         <% end %>
+        <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
+        <span class="text-gray-800 flex">
+          <%= gettext "by" %>&nbsp;<%= proposed_by_link(@conn, rank.song) %>, &nbsp;
+          <time datetime="<%= utc_to_local(rank.song.inserted_at) %>"
+            title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>">
+            <%= Timex.format!(rank.song.inserted_at, "%b %Y", :strftime) %>
+          </time>
+        </span>
       </div>
-      <div class="top-song-body">
-        <div>
-          <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link inline-block" do %>
-            <span><%= rank.song.title %></span>
-          <% end %>
-          <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
-          <span class="text-grey-darkest flex">
-            <%= gettext "by" %>&nbsp;<%= proposed_by_link(@conn, rank.song) %>, &nbsp;
-            <time datetime="<%= utc_to_local(rank.song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>">
-              <%= Timex.format!(rank.song.inserted_at, "%b %Y", :strftime) %>
-            </time>
-          </span>
-        </div>
 
-        <aside>
-          <span class="label label-default"><%= rank.song.genre %></span>
-          <%= if rank.song.bpm > 0 do %>
-          <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-          <% end %>
-          <span class="label label-primary"><%= rank.votes + rank.bonus + rank.likes %> points</span>
-          <div class="opinions">
-            <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
-          </div>
-        </aside>
-      </div>
-    </article>
+      <aside>
+        <span class="label label-default"><%= rank.song.genre %></span>
+        <%= if rank.song.bpm > 0 do %>
+        <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
+        <% end %>
+        <span class="label label-primary"><%= rank.votes + rank.bonus + rank.likes %> points</span>
+        <div class="opinions">
+          <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
+        </div>
+      </aside>
+    </div>
+  </article>
   <% end %>
   <% end %>
 </section>

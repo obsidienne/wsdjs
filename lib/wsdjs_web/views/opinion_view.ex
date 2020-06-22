@@ -67,11 +67,11 @@ defmodule WsdjsWeb.OpinionView do
          %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind} = my_opinion
        )
        when kind == my_kind do
-    ApiRoutes.opinion_path(conn, :delete, my_opinion)
+    Routes.api_opinion_path(conn, :delete, my_opinion)
   end
 
   defp opinion_url(conn, kind, song, _),
-    do: ApiRoutes.song_opinion_path(conn, :create, song, kind: kind)
+    do: Routes.api_song_opinion_path(conn, :create, song, kind: kind)
 
   defp html_class(kind, %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind}) when kind == my_kind,
     do: "song-opinion border-0 p-2 song-#{kind} active hvr-buzz-out"

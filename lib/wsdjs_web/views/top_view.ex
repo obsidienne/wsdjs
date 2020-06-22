@@ -47,7 +47,7 @@ defmodule WsdjsWeb.TopView do
     |> Enum.sort(fn {_, v1}, {_, v2} -> v1 >= v2 end)
     |> Enum.take(3)
     |> Enum.map(fn {k, v} ->
-      {:safe, "<div>#{k} <span class=\"text-grey-darkest\">(#{v})</span></div>"}
+      {:safe, "<div>#{k} <span class=\"text-gray-800\">(#{v})</span></div>"}
     end)
   end
 
@@ -58,7 +58,7 @@ defmodule WsdjsWeb.TopView do
      |> Enum.group_by(fn x -> x.genre end)
      |> Enum.map(fn {k, v} -> {k, Enum.count(v)} end)
      |> Enum.sort(fn {_, v1}, {_, v2} -> v1 >= v2 end)
-     |> Enum.map(fn {k, v} -> "#{k} <span class=\"text-grey-darkest\">(#{v})</span>" end)
+     |> Enum.map(fn {k, v} -> "#{k} <span class=\"text-gray-800\">(#{v})</span>" end)
      |> Enum.join(", ")}
   end
 

@@ -54,7 +54,7 @@ defmodule WsdjsWeb.Api.OpinionView do
   def render("opinion.json", %{opinion: opinion}) do
     %{
       name: user_displayed_name_2(opinion.user),
-      url: Routes.user_path(WsdjsApi.Endpoint, :show, opinion.user),
+      url: Routes.user_path(WsdjsWeb.Endpoint, :show, opinion.user),
       avatar: Attachments.avatar_url(opinion.user.avatar, 50)
     }
   end
@@ -70,7 +70,7 @@ defmodule WsdjsWeb.Api.OpinionView do
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "DELETE",
-      url: Routes.api_opinion_path(WsdjsApi.Endpoint, :delete, current),
+      url: Routes.api_opinion_path(WsdjsWeb.Endpoint, :delete, current),
       tooltip_html: tooltip_from_users(opinions)
     }
   end
@@ -80,7 +80,7 @@ defmodule WsdjsWeb.Api.OpinionView do
       count: Enum.count(opinions),
       users: render_many(opinions, OpinionView, "opinion.json"),
       method: "POST",
-      url: Routes.song_opinion_path(WsdjsApi.Endpoint, :create, song, kind: kind),
+      url: Routes.api_song_opinion_path(WsdjsWeb.Endpoint, :create, song.id, kind: kind),
       tooltip_html: tooltip_from_users(opinions)
     }
   end

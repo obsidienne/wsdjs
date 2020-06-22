@@ -8,7 +8,7 @@ defmodule WsdjsJobs.RadioStreamed do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         songs =
           body
-          |> Poison.decode!()
+          |> Jason.decode!()
           |> Enum.map(fn song ->
             Map.take(song, @expected_fields)
           end)

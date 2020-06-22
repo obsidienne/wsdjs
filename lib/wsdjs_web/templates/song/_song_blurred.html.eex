@@ -1,8 +1,9 @@
-<li class="hot-songs__song" data-id="<%= @song.id %>" >
+<li class="hot-songs__song" data-id="<%= @song.id %>">
   <article class="song-card card shadow flex flex-col">
     <a class="song-card__header p-0 block">
       <div class="aspect-ratio-square relative">
-        <img src="<%= Attachments.art_url(nil, 200) %>" srcset="<%= Attachments.art_srcset(nil, 200) %>" sizes="200px" class="responsive absolute pin-t" />
+        <img src="<%= Attachments.art_url(nil, 200) %>" srcset="<%= Attachments.art_srcset(nil, 200) %>" sizes="200px"
+          class="responsive absolute top-0" />
       </div>
 
       <div class="song-card__tags flex px-4 py-2 w-full">
@@ -14,7 +15,7 @@
     </a>
 
     <div class="px-4 py-0">
-      <h2 class="text-grey-darkest">hidden track</h2>
+      <h2 class="text-gray-800">hidden track</h2>
     </div>
   </article>
 </li>

@@ -18,6 +18,7 @@ defmodule WsdjsWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
+  @impl true
   @max_age 24 * 60 * 60
   def connect(%{"token" => token}, socket) do
     case Phoenix.Token.verify(socket, "user", token, max_age: @max_age) do
@@ -42,5 +43,6 @@ defmodule WsdjsWeb.UserSocket do
   #     WsdjsWeb.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
+  @impl true
   def id(_socket), do: nil
 end

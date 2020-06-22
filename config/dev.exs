@@ -6,6 +6,7 @@ config :wsdjs, Wsdjs.Repo,
   password: "postgres",
   database: "wsdjs_dev",
   hostname: "localhost",
+  show_sensitive_data_on_connection_error: true,
   types: Wsdjs.PostgresTypes,
   pool_size: 10
 
@@ -15,7 +16,7 @@ config :wsdjs, Wsdjs.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :wsdjs_web, WsdjsWeb.Endpoint,
+config :wsdjs, WsdjsWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -56,23 +57,19 @@ config :wsdjs_web, WsdjsWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :wsdjs_web, WsdjsWeb.Endpoint,
+config :wsdjs, WsdjsWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-      ~r{priv/gettext/.*(po)$},
-      ~r{lib/wsdjs_web/views/.*(ex)$},
-      ~r{lib/wsdjs_web/templates/.*(eex)$}
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/wsdjs_web/(live|views)/.*(ex)$",
+      ~r"lib/wsdjs_web/templates/.*(eex)$"
     ]
   ]
 
-config :wsdjs_jobs, WsdjsJobs.Mailer, adapter: Bamboo.LocalAdapter
+config :wsdjs, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
 
-config :wsdjs_web, WsdjsWeb.ApiRouteHelpers, base_url: "http://localhost:8080/api"
-config :wsdjs_api, WsdjsApi.WebRouteHelpers, base_url: "http://localhost:4080"
-config :wsdjs_web, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
-
-config :wsdjs_jobs, WsdjsJobs.Scheduler,
+config :wsdjs, WsdjsJobs.Scheduler,
   jobs: [
     {"@daily", {WsdjsJobs.NewSuggestion, :call, []}},
     {{:extended, "*/5 * * * *"}, {WsdjsJobs.RadioStreamed, :call, []}},

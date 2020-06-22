@@ -1,3 +1,4 @@
+
 import Tippy from 'tippy.js';
 import Mustache from 'micromustache';
 
@@ -27,13 +28,13 @@ class Opinions {
     var token = document.querySelector("[name=channel_token]").getAttribute("content");
 
     fetch(elem.dataset.url, {
-        method: elem.dataset.localMethod,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-      })
+      method: elem.dataset.localMethod,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();

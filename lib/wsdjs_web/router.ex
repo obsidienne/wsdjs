@@ -4,7 +4,8 @@ defmodule WsdjsWeb.Router do
   pipeline :browser do
     plug(:accepts, ["html", "text"])
     plug(:fetch_session)
-    plug(:fetch_flash)
+    plug :fetch_live_flash
+    plug :put_root_layout, {WsdjsWeb.LayoutView, :root}
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
     plug(WsdjsWeb.VerifySession)
@@ -37,7 +38,6 @@ defmodule WsdjsWeb.Router do
     end
 
     resources("/suggestions", SuggestionController, only: [:create, :new])
-    resources("/song_opinions", SongOpinionController, only: [:delete])
 
     resources "/tops", TopController, only: [:index, :create, :new, :update, :delete] do
       resources("/votes", VoteController, only: [:create])
@@ -80,14 +80,6 @@ defmodule WsdjsWeb.Router do
 
     resources("/api/v1/now_playing", NowPlayingController, only: [:index])
     resources("/api/now_playing", NowPlayingController, only: [:index])
-  end
-
-  scope "/", as: :api, alias: :WsdjsApi do
-    pipe_through([:api])
-
-    scope "/" do
-      get("/.well-known/:page", StaticController, :show)
-    end
   end
 
   scope "/api", WsdjsWeb.Api, as: :api do

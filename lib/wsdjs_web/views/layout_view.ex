@@ -41,30 +41,4 @@ defmodule WsdjsWeb.LayoutView do
 
   def current_user_id(nil), do: nil
   def current_user_id(%Wsdjs.Accounts.User{} = user), do: user.id
-
-  @suffix "World Swing DJs"
-
-  def main_title(conn) do
-    controller = view_name(conn)
-    action = action_name(conn)
-
-    get(controller, action)
-  end
-
-  def page_title(conn) do
-    conn |> main_title() |> put_suffix()
-  end
-
-  defp put_suffix(nil), do: @suffix
-  defp put_suffix(title), do: title <> " - " <> @suffix
-
-  defp get("home", :index), do: "Home"
-  defp get("song", :index), do: "List songs"
-  defp get("song", :show), do: "Song"
-  defp get("user", :index), do: "List users"
-  defp get("user", :show), do: "User"
-  defp get("user", :edit), do: "Edit user"
-  defp get("top", :index), do: "List tops"
-
-  defp get(_, _), do: nil
 end

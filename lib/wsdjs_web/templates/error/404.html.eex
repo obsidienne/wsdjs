@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
-    <meta name="cloudinary_cloud_name" content="don2kwaju">
-    <meta name="description" content="World Swing DeeJays. The best West Coast Swing music from all around the world !">
 
-    <!-- Control the behavior of search engine crawling and indexing -->
-    <meta name="robots" content="index,follow"><!-- All Search Engines -->
-    <meta name="googlebot" content="index,follow"><!-- Google Specific -->
-    <!-- Tells Google not to show the sitelinks search box -->
-    <meta name="google" content="nositelinkssearchbox">
-    <!-- Tells Google not to provide a translation for this page -->
-    <meta name="google" content="notranslate">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+  <meta name="cloudinary_cloud_name" content="don2kwaju">
+  <meta name="description" content="World Swing DeeJays. The best West Coast Swing music from all around the world !">
 
-    <title>404 error page</title>
+  <!-- Control the behavior of search engine crawling and indexing -->
+  <meta name="robots" content="index,follow"><!-- All Search Engines -->
+  <meta name="googlebot" content="index,follow"><!-- Google Specific -->
+  <!-- Tells Google not to show the sitelinks search box -->
+  <meta name="google" content="nositelinkssearchbox">
+  <!-- Tells Google not to provide a translation for this page -->
+  <meta name="google" content="notranslate">
 
-    <link rel="icon" type="image/png" sizes="16x16" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+  <title>404 error page</title>
+
+  <link rel="icon" type="image/png" sizes="16x16"
+    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
 
 
-    <link defer rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
-  </head>
+  <link defer rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
+</head>
 
-  <body class="font-sans bg-grey-lightest">
-    <header class="hero hot-hero">
-      <nav class="glnav container">
-        <%= link "", to: Routes.home_path(@conn, :index), class: "glnav__logo" %>
-        <%= link "tops", to: Routes.top_path(@conn, :index), class: "glnav__menu text-grey-darkest" %>
-      </nav>
-    </header>
+<body class="font-sans bg-grey-lightest">
+  <header class="hero hot-hero">
+    <nav class="glnav container">
+      <%= link "", to: Routes.home_path(@conn, :index), class: "glnav__logo" %>
+      <%= link "tops", to: Routes.top_path(@conn, :index), class: "glnav__menu text-gray-800" %>
+    </nav>
+  </header>
 
-    <main class="container">
-      <h1>Sorry this page does not exist !</h1>
-      <p>
-        <%= link "Go to the home page", to: Routes.home_path(@conn, :index), class: "btn btn-link" %>
-        or 
-        <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "btn btn-link" %>
-      </p>
-    </main>
-  </body>
+  <main class="container">
+    <h1>Sorry this page does not exist !</h1>
+    <p>
+      <%= link "Go to the home page", to: Routes.home_path(@conn, :index), class: "btn btn-link" %>
+      or
+      <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "btn btn-link" %>
+    </p>
+  </main>
+</body>
+
 </html>

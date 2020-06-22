@@ -13,16 +13,19 @@
   <div class="flex p-2 bg-white shadow">
     <div>
       <div class="relative w-12 h-12 aspect-ratio-square">
-        <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive absolute pin-t"/>
+        <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>"
+          sizes="48px" class="responsive absolute top-0" />
       </div>
     </div>
     <div class="pl-4">
       <div>
         <span class="primary-text"><%= @song.title %></span>
-        <span class="secondary-text pb-2"><span class="text-grey-darkest">by</span> <%= @song.artist %></span>
+        <span class="secondary-text pb-2"><span class="text-gray-800">by</span> <%= @song.artist %></span>
       </div>
-      <div class="text-grey-darkest"> suggested by <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link text-grey-darkest inline-block" %>,
-        <time datetime="<%= utc_to_local(@song.inserted_at) %>" title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
+      <div class="text-gray-800"> suggested by
+        <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link text-gray-800 inline-block" %>,
+        <time datetime="<%= utc_to_local(@song.inserted_at) %>"
+          title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
         </time>
       </div>
@@ -32,119 +35,119 @@
 
 <section class="container mb-32">
   <div id="art_div" class="relative mb-4">
-    <img id="art_thumbnail" class="opacity-25 shadow rounded" src="<%= Attachments.art_url(@song.art, 240) %>" style="width:240px;height:240px;">
-    <button id="song_edit_cldwidget_opener" class="btn btn-primary absolute pin-b pin-l">Update cover</button>
+    <img id="art_thumbnail" class="opacity-25 shadow rounded" src="<%= Attachments.art_url(@song.art, 240) %>"
+      style="width:240px;height:240px;">
+    <button id="song_edit_cldwidget_opener" class="btn btn-primary absolute bottom-0 pin-l">Update cover</button>
   </div>
 
   <%= form_for @changeset, Routes.song_path(@conn, :update, @song), fn f -> %>
-    <div id="cloudinary_form_div">
-      <%= inputs_for f, :art, fn fp -> %>
-        <%= hidden_input fp, :cld_id, disabled: :disabled %>
-        <%= hidden_input fp, :version, disabled: :disabled %>
-      <% end %>
-    </div>
-
-    <%= if @current_user.admin do %>
-      <div class="form-group">
-        <label class="text-grey-darkest">Artist</label>
-        <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
-        <%= error_tag f, :artist %>
-      </div>
-      <div class="form-group">
-        <label class="text-grey-darkest">Title</label>
-        <%= text_input f, :title, placeholder: "Song title", class: "form-control" %>
-        <%= error_tag f, :title %>
-      </div>
-    <% else %>
-      <div class="form-group">
-        <%= @song.artist %>
-      </div>
-      <div class="form-group">
-        <%= @song.title %>
-      </div>
+  <div id="cloudinary_form_div">
+    <%= inputs_for f, :art, fn fp -> %>
+    <%= hidden_input fp, :cld_id, disabled: :disabled %>
+    <%= hidden_input fp, :version, disabled: :disabled %>
     <% end %>
+  </div>
 
-    <div class="form-group">
-      <label>URL</label>
-      <%= text_input f, :url, type: "url", placeholder: "An URL for the song (youtube prefered).", class: "form-control" %>
-      <%= error_tag f, :url %>
-    </div>
-    <div class="form-group">
-      <label>BPM</label>
-      <%= number_input f, :bpm, placeholder: "bpm", min: 0, class: "form-control" %>
-      <%= error_tag f, :bpm %>
-    </div>
+  <%= if @current_user.admin do %>
+  <div class="form-group">
+    <label class="text-gray-800">Artist</label>
+    <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
+    <%= error_tag f, :artist %>
+  </div>
+  <div class="form-group">
+    <label class="text-gray-800">Title</label>
+    <%= text_input f, :title, placeholder: "Song title", class: "form-control" %>
+    <%= error_tag f, :title %>
+  </div>
+  <% else %>
+  <div class="form-group">
+    <%= @song.artist %>
+  </div>
+  <div class="form-group">
+    <%= @song.title %>
+  </div>
+  <% end %>
 
-    <div class="form-group select optional song_genre">
-      <label>Genre</label>
-      <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
-      <%= error_tag f, :genre %>
-    </div>
+  <div class="form-group">
+    <label>URL</label>
+    <%= text_input f, :url, type: "url", placeholder: "An URL for the song (youtube prefered).", class: "form-control" %>
+    <%= error_tag f, :url %>
+  </div>
+  <div class="form-group">
+    <label>BPM</label>
+    <%= number_input f, :bpm, placeholder: "bpm", min: 0, class: "form-control" %>
+    <%= error_tag f, :bpm %>
+  </div>
 
-    <table class="table">
-      <%= if @current_user.admin do %>
-      <tr>
-        <td>Suggested song</td>
-        <td>
-          <div class=" ckbx-style-11 danger">
-            <%= checkbox f, :suggestion %>
-            <%= label f,:suggestion do %><% end %>
-          </div>
-          <p class="help-block">Use this song in a month TOP 10<br/>Change with caution !</p>
-        </td>
-      </tr>
-      <tr>
-        <td>Instant hit</td>
-        <td>
-          <div class=" ckbx-style-11 ">
-            <%= checkbox f, :instant_hit %>
-            <%= label f,:instant_hit do %><% end %>
-          </div>
-          <p class="help-block">This song is visible and in front page</p>
-        </td>
-      </tr>
-      <% end %>
-      <tr>
-        <td>Hidden track</td>
-        <td>
-          <div class=" ckbx-style-11 ">
-            <%= checkbox f, :hidden_track %>
-            <%= label f,:hidden_track do %><% end %>
-          </div>
-          <p class="help-block">This song is visible only by DJ VIP</p>
-        </td>
-      </tr>
-      <tr>
-        <td>Public track</td>
-        <td>
-          <div class=" ckbx-style-11 ">
-            <%= checkbox f, :public_track %>
-            <%= label f,:public_track do %><% end %>
-          </div>
-          <p class="help-block">This song is always visible, no matter when it was created</p>
-        </td>
-      </tr>
-    </table>
+  <div class="form-group select optional song_genre">
+    <label>Genre</label>
+    <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
+    <%= error_tag f, :genre %>
+  </div>
 
+  <table class="table">
     <%= if @current_user.admin do %>
-    <div class="form-group">
-      <label class="text-grey-darkest">Suggestor</label>
-      <%= select f, :user_id, list_users(), class: "form-control" %>
-      <%= error_tag f, :user_id %>
-    </div>
-    <div class="form-group">
-      <label class="text-grey-darkest">Suggested at</label>
-      <%= datetime_select f, :inserted_at, class: "form-control" %>
-      <%= error_tag f, :inserted_at %>
-    </div>
+    <tr>
+      <td>Suggested song</td>
+      <td>
+        <div class=" ckbx-style-11 danger">
+          <%= checkbox f, :suggestion %>
+          <%= label f,:suggestion do %><% end %>
+        </div>
+        <p class="help-block">Use this song in a month TOP 10<br />Change with caution !</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Instant hit</td>
+      <td>
+        <div class=" ckbx-style-11 ">
+          <%= checkbox f, :instant_hit %>
+          <%= label f,:instant_hit do %><% end %>
+        </div>
+        <p class="help-block">This song is visible and in front page</p>
+      </td>
+    </tr>
     <% end %>
-    <%= submit "Update", class: "btn btn-primary" %>
+    <tr>
+      <td>Hidden track</td>
+      <td>
+        <div class=" ckbx-style-11 ">
+          <%= checkbox f, :hidden_track %>
+          <%= label f,:hidden_track do %><% end %>
+        </div>
+        <p class="help-block">This song is visible only by DJ VIP</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Public track</td>
+      <td>
+        <div class=" ckbx-style-11 ">
+          <%= checkbox f, :public_track %>
+          <%= label f,:public_track do %><% end %>
+        </div>
+        <p class="help-block">This song is always visible, no matter when it was created</p>
+      </td>
+    </tr>
+  </table>
+
+  <%= if @current_user.admin do %>
+  <div class="form-group">
+    <label class="text-gray-800">Suggestor</label>
+    <%= select f, :user_id, list_users(), class: "form-control" %>
+    <%= error_tag f, :user_id %>
+  </div>
+  <div class="form-group">
+    <label class="text-gray-800">Suggested at</label>
+    <%= datetime_select f, :inserted_at, class: "form-control" %>
+    <%= error_tag f, :inserted_at %>
+  </div>
+  <% end %>
+  <%= submit "Update", class: "btn btn-primary" %>
   <% end %>
 </section>
 
 <section class="container">
   <%= form_for @conn, Routes.song_path(@conn, :delete, @song), [method: "DELETE", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"]], fn _ -> %>
-    <%= submit "Delete song", class: "btn btn-danger w-full" %>
+  <%= submit "Delete song", class: "btn btn-danger w-full" %>
   <% end %>
 </section>
-

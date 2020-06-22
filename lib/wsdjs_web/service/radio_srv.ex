@@ -20,7 +20,7 @@ defmodule WsdjsWeb.Service.RadioSrv do
     |> Enum.map(fn s ->
       render(conn, s, Musics.Songs.get_song_by(s["artist"], s["title"]))
     end)
-    |> Poison.encode!()
+    |> Jason.encode!()
   end
 
   defp render(_conn, s, nil) when is_map(s), do: s

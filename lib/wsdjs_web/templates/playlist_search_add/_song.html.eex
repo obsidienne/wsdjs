@@ -8,16 +8,16 @@
     <div class="song-minicard__body flex py-0 ml-2">
       <span class="text-ellipsis primary-text truncate"><%= @song.title %></span>
       <span class="text-ellipsis secondary-text truncate">by <%= @song.artist %></span>
-      <span class="text-grey-darkest">
+      <span class="text-gray-800">
         <%= user_displayed_name(@song.user) %>
       </span>
     </div>
 
     <%= form_for @conn, Routes.playlist_playlist_songs_path(@conn, :create, @playlist), [class: "flex items-center mr-1"], fn f -> %>
-      <%= hidden_input f, :song_id, value: @song.id %>
-      <div>
+    <%= hidden_input f, :song_id, value: @song.id %>
+    <div>
       <%= submit "Add", class: "btn btn-primary" %>
-      </div>
+    </div>
     <% end %>
 </li>
 

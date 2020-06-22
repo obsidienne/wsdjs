@@ -1,13 +1,14 @@
 <header>
   <div class="container">
-    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <span class="text-grey-darkest">Statistics</span></h1>
+    <h1>TOP 10, <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>"></time> <span
+        class="text-gray-800">Statistics</span></h1>
   </div>
 </header>
 
 <div class="container flex items-center justify-end mb-2 mt-4 h-12">
   <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+    <path d="M0 0h24v24H0z" fill="none" />
   </svg>
   <%= link "go back to top", to: Routes.top_path(@conn, :show, @top.id), class: "btn btn-link", style: "margin-right: auto" %>
 </div>
@@ -15,33 +16,45 @@
 <section class="container top-stat">
   <table class="table">
     <tbody>
-      <tr><th>Top status</th><td><%= @top.status %></td></tr>
-      <tr><th>Songs suggested</th><td><%= Enum.count(@top.ranks) %></td></tr>
-      <tr><th>DJs</th><td><%= count_dj(@top.songs) %></td></tr>
-      <tr><th>Genres</th><td><%= all_genre(@top.songs) %></td></tr>
- 
+      <tr>
+        <th>Top status</th>
+        <td><%= @top.status %></td>
+      </tr>
+      <tr>
+        <th>Songs suggested</th>
+        <td><%= Enum.count(@top.ranks) %></td>
+      </tr>
+      <tr>
+        <th>DJs</th>
+        <td><%= count_dj(@top.songs) %></td>
+      </tr>
+      <tr>
+        <th>Genres</th>
+        <td><%= all_genre(@top.songs) %></td>
+      </tr>
+
     </tbody>
   </table>
 
   <ul class="list-reset">
     <%= for user <- Wsdjs.Accounts.list_users() do %>
-      <%= if user.profil_djvip do %>
-        <li class="shadow p-4" >
-          <h2 class="h2"><%= user.name %></h2>
-          <ol>
-            <li><%= get_song_by(@top, user, 1) %></li>
-            <li><%= get_song_by(@top, user, 2) %></li>
-            <li><%= get_song_by(@top, user, 3) %></li>
-            <li><%= get_song_by(@top, user, 4) %></li>
-            <li><%= get_song_by(@top, user, 5) %></li>
-            <li><%= get_song_by(@top, user, 6) %></li>
-            <li><%= get_song_by(@top, user, 7) %></li>
-            <li><%= get_song_by(@top, user, 8) %></li>
-            <li><%= get_song_by(@top, user, 9) %></li>
-            <li><%= get_song_by(@top, user, 10) %></li>
-          </ol>
-        </li>
-      <% end %>
+    <%= if user.profil_djvip do %>
+    <li class="shadow p-4">
+      <h2 class="h2"><%= user.name %></h2>
+      <ol>
+        <li><%= get_song_by(@top, user, 1) %></li>
+        <li><%= get_song_by(@top, user, 2) %></li>
+        <li><%= get_song_by(@top, user, 3) %></li>
+        <li><%= get_song_by(@top, user, 4) %></li>
+        <li><%= get_song_by(@top, user, 5) %></li>
+        <li><%= get_song_by(@top, user, 6) %></li>
+        <li><%= get_song_by(@top, user, 7) %></li>
+        <li><%= get_song_by(@top, user, 8) %></li>
+        <li><%= get_song_by(@top, user, 9) %></li>
+        <li><%= get_song_by(@top, user, 10) %></li>
+      </ol>
+    </li>
+    <% end %>
     <% end %>
   </ul>
 </section>
