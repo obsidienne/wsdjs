@@ -74,8 +74,9 @@ defmodule WsdjsWeb.OpinionView do
     do: Routes.api_song_opinion_path(conn, :create, song, kind: kind)
 
   defp html_class(kind, %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind}) when kind == my_kind,
-    do: "song-opinion border-0 p-2 song-#{kind} active hvr-buzz-out"
+    do:
+      "song-opinion border-0 p-2 song-#{kind} active hover:animate__animated hover:animate__swing"
 
   defp html_class(kind, _),
-    do: "song-opinion border-0 p-2 song-#{kind} hvr-buzz-out"
+    do: "song-opinion border-0 p-2 song-#{kind} hover:animate__animated  hover:animate__swing"
 end
