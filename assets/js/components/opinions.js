@@ -1,4 +1,7 @@
 
+import Tippy from 'tippy.js';
+import Mustache from 'micromustache';
+
 class Opinions {
   constructor() {
     document.addEventListener("click", e => {
