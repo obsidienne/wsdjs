@@ -19,6 +19,10 @@ module.exports = {
         aspectRatio: ['responsive']
     },
     plugins: [
-        require('tailwindcss-aspect-ratio')
+        require('tailwindcss-aspect-ratio'),
+        require('tailwindcss-animatecss')({
+            classes: ['animate__animated', 'animate__fadeIn', 'animate__bounceIn', 'animate__lightSpeedOut'],
+            variants: ['responsive', 'hover', 'reduced-motion'],
+        }),
     ]
 };

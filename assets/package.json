@@ -15,6 +15,7 @@
     "phoenix_live_view": "file:../deps/phoenix_live_view",
     "pjax-api": "3.25.0",
     "simplebar": "^3.1.4",
+    "tailwindcss-animatecss": "^1.0.7",
     "tippy.js": "~3.4.0"
   },
   "devDependencies": {
