@@ -34,6 +34,26 @@ defmodule Wsdjs.Accounts do
   def load_parameter(user), do: Repo.preload(user, :parameter)
   def load_detail(user), do: Repo.preload(user, :detail)
 
+  def list_users(criteria) when is_list(criteria) do
+    query = from(d in User)
+
+    Enum.reduce(criteria, query, fn
+      {:paginate, %{page: page, per_page: per_page}}, query ->
+        from q in query,
+          offset: ^((page - 1) * per_page),
+          limit: ^per_page
+
+      {:sort, %{sort_by: sort_by, sort_order: sort_order}}, query ->
+        from q in query, order_by: [{^sort_order, ^sort_by}]
+    end)
+    |> Repo.all()
+    |> load_avatar()
+    |> load_songs()
+    |> load_comments()
+    |> load_parameter()
+    |> load_detail()
+  end
+
   def list_djs do
     User
     |> limit(7)

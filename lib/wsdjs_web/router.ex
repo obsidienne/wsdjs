@@ -53,6 +53,8 @@ defmodule WsdjsWeb.Router do
       resources("/playlists", PlaylistController, only: [:new, :create, :index])
     end
 
+    live "/paginate-users", PaginateUsersLive
+
     resources("/user-params", UserParamsController, only: [:show])
 
     resources("/playlists", PlaylistController, only: [:show, :edit, :delete, :update]) do

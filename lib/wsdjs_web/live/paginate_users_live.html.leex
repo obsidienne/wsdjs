@@ -1,0 +1,71 @@
+<section id="users-section" class="container">
+
+<ul class="list-reset">
+<%= for user <- @users do %>
+
+<li class="mb-4 p-2 flex shadow relative">
+    <div class="mr-4">
+      <img src="<%= Attachments.avatar_url(user.avatar, 96) %>" srcset="<%= Attachments.avatar_srcset(user.avatar, 96) %>" sizes="96px" width="96px" height="96px"/>
+    </div>
+
+    <div>
+      <div>
+        <%= link user.email, to: Routes.user_path(WsdjsWeb.Endpoint, :show, user.id), class: "tippy block visible-link action-link stretched-link" %>
+        <%= if user.verified_profil do %><span class="label label-info">verified</span><% end %>
+        <%= if user.deactivated do %>
+          <span class="label label-danger">Deactivated</span>
+        <% else %>
+          <%= if user.profil_djvip do %><span class="label label-default">DJ VIP</span><% end %>
+          <%= if user.profil_dj do %><span class="label label-default">DJ</span><% end %>
+        <% end %>
+        <%= if Enum.count(user.songs) > 0 do %>
+        <span class="label label-primary"><%= Enum.count(user.songs) %> songs</span>
+        <% end %>
+        <%= if Enum.count(user.comments) > 0 do %>
+        <span class="label label-default"><%= Enum.count(user.comments) %> comments</span>
+        <% end %>
+      </div>
+      <div>
+        <%= if user.parameter do %>
+          <%= if user.parameter.new_song_notification do %>
+            <span class="label label-default">New song notification</span>
+          <% end %>
+          <%= if user.parameter.radioking_unmatch do %>
+            <span class="label label-danger">Radioking umatch</span>
+          <% end %>
+          <%= if user.parameter.video do %>
+            <span class="label label-danger">Add video</span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+</li>
+
+
+
+<% end %>
+</ul>
+
+  <div class="pagination">
+        <%= if @options.page > 1 do %>
+          <%= pagination_link(@socket,
+                              "Previous",
+                              @options.page - 1,
+                              @options.per_page,
+                              "previous") %>
+        <% end %>
+        <%= for i <- (@options.page - 2)..(@options.page + 2), i > 0 do %>
+          <%= pagination_link(@socket,
+                                i,
+                                i,
+                                @options.per_page,
+                                (if i == @options.page, do: "active")) %>
+        <% end %>
+        <%= pagination_link(@socket,
+                              "Next",
+                              @options.page + 1,
+                              @options.per_page,
+                              "next") %>
+      </div>
+
+</section>
