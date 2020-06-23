@@ -1,3 +1,5 @@
+import Tippy from 'tippy.js';
+import Mustache from 'micromustache';
 
 class OpinionPicker {
   constructor() {
