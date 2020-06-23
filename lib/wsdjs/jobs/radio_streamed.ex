@@ -32,6 +32,6 @@ defmodule Wsdjs.RadioStreamed do
     ConCache.put(:wsdjs_cache, "streamed_songs", songs)
     ConCache.delete(:wsdjs_cache, "streamed_songs_json")
 
-    Phoenix.PubSub.broadcast(WsdjsWeb.PubSub, "radio:streamed", :new_streamed_song)
+    Phoenix.PubSub.broadcast(Wsdjs.PubSub, "radio:streamed", :new_streamed_song)
   end
 end
