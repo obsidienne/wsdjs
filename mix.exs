@@ -62,7 +62,7 @@ defmodule Wsdjs.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.3"},
-      {:phx_gen_auth, "~> 0.1.0-rc.0", only: [:dev], runtime: false},
+      {:phx_gen_auth, "~> 0.4.0", only: [:dev], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
