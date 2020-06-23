@@ -8,7 +8,7 @@ use Mix.Config
 config :wsdjs, Wsdjs.Repo,
   username: "postgres",
   password: "postgres",
-  database: "escudo_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "wsdjs_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   types: Wsdjs.PostgresTypes,
   pool: Ecto.Adapters.SQL.Sandbox

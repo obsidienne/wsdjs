@@ -44,7 +44,7 @@ defmodule WsdjsWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {EscudoWeb.LayoutView, "live.html"}
+        layout: {WsdjsWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
