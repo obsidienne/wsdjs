@@ -21,6 +21,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@tailwindcss/ui": "^0.3.0",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.0.0",
     "copy-webpack-plugin": "^5.1.1",
