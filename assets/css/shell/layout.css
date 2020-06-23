@@ -1,11 +1,6 @@
 /******
 ******/
-.grid {
-  display: grid;
-}
-
 .hot-songs {
-  display: grid;
   grid-template-columns: calc(50% - 0.25rem) calc(50% - 0.25rem);
   grid-row-gap: 2rem;
   grid-column-gap: 0.5rem;

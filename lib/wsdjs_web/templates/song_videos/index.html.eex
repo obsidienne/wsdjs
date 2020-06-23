@@ -34,7 +34,7 @@
 </section>
 
 
-<section id="overview-video" class="overview-video container">
+<section id="overview-video" class="grid gap-4 overview-video container">
   <%= if Wsdjs.Attachments.Policy.can?(@current_user, :create_video) == :ok do %>
   <%= link to: Routes.song_song_videos_path(@conn, :new, @song) do %>
   <div class="border border-dashed pt-full relative aspect-ratio-16/9">

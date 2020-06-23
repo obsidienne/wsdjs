@@ -41,7 +41,7 @@
         <div class="voting-position charted">
           <div class="chart-bg"></div>
           <div class="chart-value">
-            <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", class: "voting-position__selector", value: current_user_vote(@votes, rank)) %>
+            <%= select(f, :vote, 1..10, name: "votes[#{rank.song.id}]", prompt: "-", id: "song-#{rank.id}", class: "appearance-none border-0", value: current_user_vote(@votes, rank)) %>
           </div>
         </div>
         <div class="aspect-ratio-square relative">
@@ -50,7 +50,7 @@
             class="responsive absolute top-0" />
         </div>
         <%= if rank.song.url do %>
-        <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play" target="_blank" rel="noopener"
+        <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play absolute" target="_blank" rel="noopener"
           <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
           <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
             <path d='M0 0h24v24H0z' fill='none' />

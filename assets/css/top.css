@@ -1,22 +1,10 @@
 /****************************
   Voting top
 ****************************/
-
-.voting-position__selector {
-  appearance: none;
-  border: none;
-}
-
 .song-art__play {
   @apply z-10;
-  position: absolute;
   bottom: 0.25rem;
   right: 0.25rem;
-}
-
-.voting-position__selector::-ms-expand {
-  display: none;
-  /* hide the default arrow in ie10 and ie11 */
 }
 
 .counting-points {
