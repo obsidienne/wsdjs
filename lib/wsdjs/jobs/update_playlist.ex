@@ -1,4 +1,4 @@
-defmodule WsdjsJobs.UpdatePlaylists do
+defmodule Wsdjs.UpdatePlaylists do
   @moduledoc """
   This modules contains the database calls needed to fill the automatic user
   playlists.

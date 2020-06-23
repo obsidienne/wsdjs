@@ -1,4 +1,4 @@
-defmodule WsdjsJobs.UnmatchSong do
+defmodule Wsdjs.UnmatchSong do
   import Bamboo.Email
   alias Wsdjs.Accounts
 
@@ -21,7 +21,7 @@ defmodule WsdjsJobs.UnmatchSong do
       |> from("no-reply@wsdjs.com")
       |> subject("Radioking unmatch")
       |> html_body(EEx.eval_file(tpl, song: song))
-      |> WsdjsJobs.Mailer.deliver_later()
+      |> Wsdjs.Mailer.deliver_later()
     end
   end
 

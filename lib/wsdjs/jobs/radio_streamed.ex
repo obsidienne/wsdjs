@@ -1,4 +1,4 @@
-defmodule WsdjsJobs.RadioStreamed do
+defmodule Wsdjs.RadioStreamed do
   import Ecto.Query, warn: false
 
   @radioking_api_uri_list "https://www.radioking.com/widgets/api/v1/radio/84322/track/ckoi?limit=10"

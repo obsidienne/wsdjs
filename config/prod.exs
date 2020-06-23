@@ -59,11 +59,11 @@ config :wsdjs, WsdjsWeb.Mailer,
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
 
-config :wsdjs_jobs, WsdjsJobs.Scheduler,
+config :wsdjs, Wsdjs.Scheduler,
   jobs: [
-    {"@daily", {WsdjsJobs.NewSuggestion, :call, []}},
-    {{:extended, "*/5 * * * *"}, {WsdjsJobs.RadioStreamed, :call, []}},
-    {"*/5 * * * *", {WsdjsJobs.UpdatePlaylists, :call, []}}
+    {"@daily", {Wsdjs.NewSuggestion, :call, []}},
+    {{:extended, "*/5 * * * *"}, {Wsdjs.RadioStreamed, :call, []}},
+    {"*/5 * * * *", {Wsdjs.UpdatePlaylists, :call, []}}
   ]
 
 # Finally import the config/prod.secret.exs which loads secrets

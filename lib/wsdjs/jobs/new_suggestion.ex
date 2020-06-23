@@ -1,4 +1,4 @@
-defmodule WsdjsJobs.NewSuggestion do
+defmodule Wsdjs.NewSuggestion do
   import Bamboo.Email
   alias Wsdjs.Accounts
   alias Wsdjs.Musics
@@ -13,7 +13,7 @@ defmodule WsdjsJobs.NewSuggestion do
       |> subject("New songs suggested")
       |> html_body(EEx.eval_file(email_path("html")))
       |> text_body(EEx.eval_file(email_path("txt")))
-      |> WsdjsJobs.Mailer.deliver_later()
+      |> Wsdjs.Mailer.deliver_later()
     end
   end
 

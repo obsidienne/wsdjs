@@ -69,11 +69,11 @@ config :wsdjs, WsdjsWeb.Endpoint,
 
 config :wsdjs, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
 
-config :wsdjs, WsdjsJobs.Scheduler,
+config :wsdjs, Wsdjs.Scheduler,
   jobs: [
-    {"@daily", {WsdjsJobs.NewSuggestion, :call, []}},
-    {{:extended, "*/5 * * * *"}, {WsdjsJobs.RadioStreamed, :call, []}},
-    {"*/5 * * * *", {WsdjsJobs.UpdatePlaylists, :call, []}}
+    {"@daily", {Wsdjs.NewSuggestion, :call, []}},
+    {{:extended, "*/5 * * * *"}, {Wsdjs.RadioStreamed, :call, []}},
+    {"*/5 * * * *", {Wsdjs.UpdatePlaylists, :call, []}}
   ]
 
 # Do not include metadata nor timestamps in development logs
