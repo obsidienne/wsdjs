@@ -39,6 +39,16 @@
 		],
 		"description": "LiveView handle_event function"
 	},
+	"lv_handle_params": {
+		"prefix": "hp",
+		"body": [
+			"def handle_params(params, _url, socket) do",
+			"  socket = assign(socket, ${2:key}: ${3:value})",
+			"  {:noreply, socket}",
+			"end"
+		],
+		"description": "LiveView handle_params function"
+	},
 	"lv_handle_info": {
 		"prefix": "hi",
 		"body": [
