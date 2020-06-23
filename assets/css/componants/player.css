@@ -1,11 +1,14 @@
 .player {
-  @apply fixed inset-y-0 right-0;
+  @apply fixed;
+  @apply inset-y-0;
+  @apply right-0;
   background-color: #1f2532;
   width: 17rem;
 }
 
 .player__art {
-  @apply shadow m-auto;
+  @apply shadow;
+  @apply m-auto;
   width: 15rem;
   height: 15rem;
 }
@@ -24,7 +27,14 @@
 }
 
 .player__play__vinyl {
-  @apply w-16 h-16 rounded-full shadow cursor-pointer bg-white mx-auto mt-8;
+  @apply w-16;
+  @apply h-16;
+  @apply rounded-full;
+  @apply shadow;
+  @apply cursor-pointer;
+  @apply bg-white;
+  @apply mx-auto;
+  @apply mt-8;
   background: url("data:image/svg+xml,%3Csvg fill='%23000000' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath d='M8 5v14l11-7z'/%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3C/svg%3E"),
     #fff;
   background-repeat: no-repeat;

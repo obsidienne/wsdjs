@@ -12,7 +12,10 @@
 }
 
 .voting-position {
-  @apply z-10 absolute overflow-hidden text-lg;
+  @apply z-10;
+  @apply absolute;
+  @apply overflow-hidden;
+  @apply text-lg;
   width: 80px;
   height: 80px;
   top: 0;

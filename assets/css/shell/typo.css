@@ -16,7 +16,8 @@ http://alistapart.com/articles/more-meaningful-typography/
 
 body {
   -webkit-font-smoothing: antialiased;
-  @apply text-base text-black;
+  @apply text-base;
+  @apply text-black;
   line-height: 1.5;
 }
 
@@ -27,7 +28,8 @@ h3,
 .h2,
 .h3 {
   font-family: inherit;
-  @apply py-0 my-0;
+  @apply py-0;
+  @apply my-0;
 }
 
 h1,
@@ -85,7 +87,10 @@ a:hover {
 }
 
 .page-header-sticky {
-  @apply sticky bg-white z-30 top-0;
+  @apply sticky;
+  @apply bg-white;
+  @apply z-30;
+  @apply top-0;
   height: 100px;
 }
 

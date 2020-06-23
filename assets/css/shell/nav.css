@@ -42,7 +42,13 @@
 ****************************/
 
 .glnav {
-  @apply sticky py-6 top-0 z-30 items-center bg-white shadow;
+  @apply sticky;
+  @apply py-6;
+  @apply top-0;
+  @apply z-30;
+  @apply items-center;
+  @apply bg-white;
+  @apply shadow;
 }
 
 .nav-active {
@@ -69,7 +75,9 @@
 
 .glnav__menu {
   margin-right: 24px;
-  @apply border-b-4 border-solid border-transparent;
+  @apply border-b-4;
+  @apply border-solid;
+  @apply border-transparent;
 }
 
 .glnav__menu.active {

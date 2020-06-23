@@ -1,6 +1,14 @@
 .form-control {
-  @apply block rounded bg-white text-gray-800 w-full px-3 py-2;
-  @apply border border-solid border-gray-500;
+  @apply block;
+  @apply rounded;
+  @apply bg-white;
+  @apply text-gray-800;
+  @apply w-full;
+  @apply px-3;
+  @apply py-2;
+  @apply border;
+  @apply border-solid;
+  @apply border-gray-500;
   min-height: 2rem;
   background-image: none;
 }
@@ -10,5 +18,7 @@
 }
 
 .help-block {
-  @apply block my-2 text-gray-800;
+  @apply block;
+  @apply my-2;
+  @apply text-gray-800;
 }
