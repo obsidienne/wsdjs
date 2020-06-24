@@ -7,7 +7,7 @@ defmodule WsdjsWeb.Api.VideoControllerTest do
       Wsdjs.Accounts.create_user(%{"email" => "dummy#{System.unique_integer()}@bshit.com"})
 
     {:ok, user} =
-      Accounts.update_user(user, %{parameter: %{video: true}}, %Accounts.User{admin: true})
+      Accounts.update_user(user, %{, %Accounts.User{admin: true})
 
     user_token = Phoenix.Token.sign(WsdjsWeb.Endpoint, "user", user.id)
 

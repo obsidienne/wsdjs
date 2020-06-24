@@ -26,10 +26,6 @@ defmodule Wsdjs.AccountsTest do
       assert user.profil_dj == false
       assert user.deactivated == false
       assert user.activated_at == nil
-      assert user.parameter.new_song_notification == false
-      assert user.parameter.piwik == true
-      assert user.parameter.video == false
-      assert user.parameter.radioking_unmatch == false
       assert user.verified_profil == false
     end
 
@@ -97,12 +93,6 @@ defmodule Wsdjs.AccountsTest do
       "deactivated" => true,
       "verified_profil" => true,
       "activated_at" => Timex.now(),
-      "parameter" => %{
-        "new_song_notification" => true,
-        "piwik" => false,
-        "video" => true,
-        "radioking_unmatch" => true
-      },
       "detail" => %{
         "description" => "update description",
         "favorite_genre" => "soul",
@@ -164,11 +154,6 @@ defmodule Wsdjs.AccountsTest do
       assert user.activated_at == nil
       assert user.verified_profil == true
 
-      assert user.parameter.new_song_notification == true
-      assert user.parameter.piwik == false
-      assert user.parameter.video == true
-      assert user.parameter.radioking_unmatch == true
-
       assert user.detail.description == "update description"
       assert user.detail.favorite_genre == "soul"
       assert user.detail.favorite_artist == "update favorite artist"
@@ -197,11 +182,6 @@ defmodule Wsdjs.AccountsTest do
       assert user.deactivated == false
       assert user.activated_at == nil
       assert user.verified_profil == false
-
-      assert user.parameter.new_song_notification == true
-      assert user.parameter.piwik == true
-      assert user.parameter.video == false
-      assert user.parameter.radioking_unmatch == false
 
       assert user.detail.description == "update description"
       assert user.detail.favorite_genre == "soul"

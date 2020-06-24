@@ -25,19 +25,6 @@
         <span class="label label-default"><%= Enum.count(user.comments) %> comments</span>
         <% end %>
       </div>
-      <div>
-        <%= if user.parameter do %>
-          <%= if user.parameter.new_song_notification do %>
-            <span class="label label-default">New song notification</span>
-          <% end %>
-          <%= if user.parameter.radioking_unmatch do %>
-            <span class="label label-danger">Radioking umatch</span>
-          <% end %>
-          <%= if user.parameter.video do %>
-            <span class="label label-danger">Add video</span>
-          <% end %>
-        <% end %>
-      </div>
     </div>
 </li>
 

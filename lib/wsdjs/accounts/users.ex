@@ -19,7 +19,6 @@ defmodule Wsdjs.Accounts.Users do
   def can?(_, _, _), do: {:error, :unauthorized}
 
   def can?(%Accounts.User{admin: true}, _), do: :ok
-  def can?(%Accounts.User{profil_djvip: true}, :new_song_notification), do: :ok
   def can?(_, _), do: {:error, :unauthorized}
 
   @doc """

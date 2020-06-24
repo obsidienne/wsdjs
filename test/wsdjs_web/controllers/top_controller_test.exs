@@ -21,7 +21,7 @@ defmodule WsdjsWeb.TopControllerTest do
     {:ok, admin} =
       Accounts.update_user(
         admin,
-        %{"name" => "admin", "admin" => true, "parameter" => %{email_contact: true}},
+        %{"name" => "admin", "admin" => true},
         god
       )
 

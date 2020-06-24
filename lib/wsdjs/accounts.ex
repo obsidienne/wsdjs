@@ -24,14 +24,12 @@ defmodule Wsdjs.Accounts do
     |> load_avatar()
     |> load_songs()
     |> load_comments()
-    |> load_parameter()
     |> load_detail()
   end
 
   def load_avatar(user), do: Repo.preload(user, :avatar)
   def load_songs(user), do: Repo.preload(user, :songs)
   def load_comments(user), do: Repo.preload(user, :comments)
-  def load_parameter(user), do: Repo.preload(user, :parameter)
   def load_detail(user), do: Repo.preload(user, :detail)
 
   def list_users(criteria) when is_list(criteria) do
@@ -50,7 +48,6 @@ defmodule Wsdjs.Accounts do
     |> load_avatar()
     |> load_songs()
     |> load_comments()
-    |> load_parameter()
     |> load_detail()
   end
 
@@ -60,38 +57,6 @@ defmodule Wsdjs.Accounts do
     |> where(profil_djvip: true)
     |> Repo.all()
     |> load_avatar()
-  end
-
-  @doc """
-  Returns the list of users having new_song_notification: true
-
-  ## Examples
-
-      iex> list_users_to_notify(type)
-      [%Accounts.User{}, ...]
-
-  """
-  def list_users_to_notify("new song") do
-    query =
-      from(
-        u in User,
-        join: p in assoc(u, :parameter),
-        where:
-          u.deactivated == false and p.new_song_notification == true and u.profil_djvip == true
-      )
-
-    Repo.all(query)
-  end
-
-  def list_users_to_notify("radioking unmatch") do
-    query =
-      from(
-        u in User,
-        join: p in assoc(u, :parameter),
-        where: u.deactivated == false and p.radioking_unmatch == true
-      )
-
-    Repo.all(query)
   end
 
   @doc """
@@ -132,7 +97,6 @@ defmodule Wsdjs.Accounts do
     |> Repo.get!(id)
     |> load_avatar()
     |> load_detail()
-    |> load_parameter()
   end
 
   def get_user!(id) do
@@ -140,7 +104,6 @@ defmodule Wsdjs.Accounts do
     |> Repo.get!(id)
     |> load_avatar()
     |> load_detail()
-    |> load_parameter()
   end
 
   def get_user_by_email(email) do
@@ -148,7 +111,6 @@ defmodule Wsdjs.Accounts do
     |> Repo.get_by(email: String.downcase(email))
     |> load_avatar()
     |> load_detail()
-    |> load_parameter()
   end
 
   @doc """

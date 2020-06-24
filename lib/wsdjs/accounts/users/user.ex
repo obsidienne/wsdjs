@@ -4,7 +4,7 @@ defmodule Wsdjs.Accounts.User do
   import Ecto.Changeset
 
   alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.{UserDetail, UserParameter}
+  alias Wsdjs.Accounts.UserDetail
   alias Wsdjs.Attachments
   alias Wsdjs.Auth
   alias Wsdjs.Charts
@@ -27,7 +27,6 @@ defmodule Wsdjs.Accounts.User do
     has_many(:comments, Comments.Comment)
     has_one(:avatar, Attachments.Avatars.Avatar, on_replace: :delete)
     has_one(:detail, Accounts.UserDetail, on_replace: :update)
-    has_one(:parameter, Accounts.UserParameter, on_replace: :update)
     has_many(:song_opinions, Opinions.Opinion)
     has_many(:votes, Charts.Vote)
     has_many(:auth_tokens, Auth.AuthToken)
@@ -41,7 +40,6 @@ defmodule Wsdjs.Accounts.User do
     |> cast(attrs, [:user_country, :name, :djname])
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
-    |> cast_assoc(:parameter, with: &Accounts.UserParameter.changeset/2)
   end
 
   def admin_changeset(%__MODULE__{} = user, attrs) do
@@ -59,7 +57,6 @@ defmodule Wsdjs.Accounts.User do
     ])
     |> cast_assoc(:avatar)
     |> cast_assoc(:detail)
-    |> cast_assoc(:parameter, with: &Accounts.UserParameter.admin_changeset/2)
   end
 
   def create_changeset(%__MODULE__{} = user, attrs) do
@@ -69,7 +66,6 @@ defmodule Wsdjs.Accounts.User do
     |> downcase_value()
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
-    |> put_assoc(:parameter, UserParameter.changeset(%UserParameter{}, %{}), required: true)
     |> put_assoc(:detail, UserDetail.changeset(%UserDetail{}, %{}), required: true)
   end
 
