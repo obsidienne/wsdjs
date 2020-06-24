@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
   <meta name="cloudinary_cloud_name" content="don2kwaju">
   <meta name="description" content="World Swing DeeJays. The best West Coast Swing music from all around the world !">
 
@@ -36,7 +37,7 @@
   <link rel="apple-touch-icon" sizes="167x167"
     href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_167/v1503520190/wsdjs/worldswingdjs_single_flat.png">
 
-      <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <link
     href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:1f2532,c_scale,h_2732,w_2048/v1538673297/wsdjs/wsdjs.png"
     sizes="2048x2732" rel="apple-touch-startup-image" />
@@ -61,14 +62,14 @@
 
   <link rel="manifest" href="<%= Routes.static_path(@conn, "/manifest.webmanifest") %>">
 
-    <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "WSDJs", suffix: " · Phoenix Framework" %>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-      <script defer
+  <%= csrf_meta_tag() %>
+  <%= live_title_tag assigns[:page_title] || "WSDJs", suffix: " · Phoenix Framework" %>
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
+  <script defer
     src="https://cdn.polyfill.io/v2/polyfill.js?features=IntersectionObserver,fetch,Promise,IntersectionObserverEntry&flags=gated"></script>
 
   <script defer src="https://widget.cloudinary.com/global/all.js" type="text/javascript"></script>
-    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 
   <%= if user = @conn.assigns[:current_user] do %>
   <script>window.userToken = "<%= Phoenix.Token.sign(@conn, "user", user.id) %>"</script>
@@ -77,11 +78,14 @@
   <script>window.baseApiUrl = "/api"</script>
   <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
 
-  </head>
-  <body class="font-sans">
-      <nav class="glnav md:px-8">
+</head>
+
+<body class="font-sans">
+  <nav class="glnav md:px-8">
     <div class="container flex flex-wrap items-end">
-      <div class="md:hidden logo-small">
+      <%= link to: Routes.home_path(@conn, :index), class: "h1 glnav__menu hidden md:inline #{active_class(@conn, ["home"])}" do %>
+      <div class="logo-small">
+        <span class="sr-only">WSDJs</span>
         <svg class="logo " fill="#D3D8E0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
           <g>
             <path
@@ -99,8 +103,7 @@
           </path>
         </svg>
       </div>
-
-      <%= link "Discover", to: Routes.home_path(@conn, :index), class: "h1 glnav__menu hidden md:inline #{active_class(@conn, ["home"])}" %>
+      <% end %>
 
       <%= if not is_nil(@conn.assigns.current_user) do %>
       <%= link "Charts", to: Routes.top_path(@conn, :index), class: "glnav__menu hidden md:inline #{active_class(@conn, ["top"])}" %>
@@ -121,13 +124,14 @@
       <% end %>
     </div>
   </nav>
-    <%= @inner_content %>
+  <%= @inner_content %>
 
-      <%= render "_radio_player.html", conn: @conn %>
+  <%= render "_radio_player.html", conn: @conn %>
   <%= render "_video_player.html", conn: @conn %>
   <%= render "_mobile_nav.html", conn: @conn %>
 
   <%= render "_desktop-outside.html", conn: @conn, current_user: @current_user %>
 
-  </body>
+</body>
+
 </html>
