@@ -20,7 +20,7 @@ defmodule Wsdjs.Accounts.User do
     field(:profil_djvip, :boolean, default: false)
     field(:profil_dj, :boolean, default: false)
     field(:deactivated, :boolean, default: false)
-    field(:activated_at, :naive_datetime)
+    field(:confirmed_at, :naive_datetime)
     field(:verified_profil, :boolean, default: false)
 
     has_many(:songs, Musics.Song)

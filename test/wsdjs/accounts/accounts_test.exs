@@ -25,7 +25,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.profil_djvip == false
       assert user.profil_dj == false
       assert user.deactivated == false
-      assert user.activated_at == nil
+      assert user.confirmed_at == nil
       assert user.verified_profil == false
     end
 
@@ -92,7 +92,7 @@ defmodule Wsdjs.AccountsTest do
       "profil_dj" => true,
       "deactivated" => true,
       "verified_profil" => true,
-      "activated_at" => Timex.now(),
+      "confirmed_at" => Timex.now(),
       "profil" => %{
         "description" => "update description",
         "favorite_genre" => "soul",
@@ -146,7 +146,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.profil_djvip == true
       assert user.profil_dj == true
       assert user.deactivated == true
-      assert user.activated_at == nil
+      assert user.confirmed_at == nil
       assert user.verified_profil == true
 
       assert user.profil.description == "update description"
@@ -170,7 +170,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.profil_djvip == false
       assert user.profil_dj == false
       assert user.deactivated == false
-      assert user.activated_at == nil
+      assert user.confirmed_at == nil
       assert user.verified_profil == false
 
       assert user.profil.description == "update description"
