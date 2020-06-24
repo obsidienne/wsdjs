@@ -15,8 +15,7 @@ defmodule WsdjsWeb.Api.AccountView do
       name: user.name,
       country: user.user_country,
       djname: user.djname,
-      profil_dj: user.profil_dj,
-      verified_profil: user.verified_profil
+      profil_dj: user.profil_dj
     }
   end
 

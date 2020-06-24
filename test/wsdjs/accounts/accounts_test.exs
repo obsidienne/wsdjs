@@ -24,9 +24,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.admin == false
       assert user.profil_djvip == false
       assert user.profil_dj == false
-      assert user.deactivated == false
       assert user.confirmed_at == nil
-      assert user.verified_profil == false
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -49,19 +47,6 @@ defmodule Wsdjs.AccountsTest do
                Accounts.create_user(%{"email" => "DuMmY@BsHiT.cOm"})
 
       assert "has already been taken" in errors_on(changeset).email
-    end
-
-    test "get_activated_user/1 returns the activated users" do
-      assert {:ok, %User{} = activated} = Accounts.create_user(@valid_attrs)
-      activated = Repo.preload(activated, :avatar)
-      assert Accounts.get_activated_user!(activated.id) == activated
-
-      assert {:ok, %User{} = deactivated} = Accounts.create_user(%{"email" => "dummy2@bshit.com"})
-
-      assert {:ok, %User{} = deactivated} =
-               Accounts.update_user(deactivated, %{deactivated: true}, %User{admin: true})
-
-      assert_raise Ecto.NoResultsError, fn -> Accounts.get_activated_user!(deactivated.id) end
     end
 
     test "get_user!/1 returns the user with given id" do
@@ -90,8 +75,6 @@ defmodule Wsdjs.AccountsTest do
       "admin" => true,
       "profil_djvip" => true,
       "profil_dj" => true,
-      "deactivated" => true,
-      "verified_profil" => true,
       "confirmed_at" => Timex.now(),
       "profil" => %{
         "description" => "update description",
@@ -145,9 +128,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.admin == true
       assert user.profil_djvip == true
       assert user.profil_dj == true
-      assert user.deactivated == true
       assert user.confirmed_at == nil
-      assert user.verified_profil == true
 
       assert user.profil.description == "update description"
       assert user.profil.favorite_genre == "soul"
@@ -169,9 +150,7 @@ defmodule Wsdjs.AccountsTest do
       assert user.admin == false
       assert user.profil_djvip == false
       assert user.profil_dj == false
-      assert user.deactivated == false
       assert user.confirmed_at == nil
-      assert user.verified_profil == false
 
       assert user.profil.description == "update description"
       assert user.profil.favorite_genre == "soul"

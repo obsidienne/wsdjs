@@ -36,7 +36,6 @@ defmodule WsdjsWeb.Api.AccountControllerTest do
           "email" => user.email,
           "name" => user.name,
           "profil_dj" => user.profil_dj,
-          "verified_profil" => false,
           "profil" => %{
             "description" => nil,
             "djing_start_year" => nil,
@@ -70,7 +69,6 @@ defmodule WsdjsWeb.Api.AccountControllerTest do
           "email" => user.email,
           "name" => user.name,
           "profil_dj" => user.profil_dj,
-          "verified_profil" => false,
           "profil" => %{
             "description" => nil,
             "djing_start_year" => nil,

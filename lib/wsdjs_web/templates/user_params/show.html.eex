@@ -40,17 +40,6 @@
           </td>
         </tr>
         <tr>
-          <td><strong>Verified profil</strong>
-            <p class="text-gray-800">The user identity has been verified, try to avoid user usurpation</p>
-          </td>
-          <td>
-            <div class=" ckbx-style-11 ">
-              <%= checkbox f, :verified_profil %>
-              <%= label f,:verified_profil do %><% end %>
-            </div>
-          </td>
-        </tr>
-        <tr>
           <td><strong>Profil DJ VIP</strong>
             <p class="text-gray-800">Can suggest song, vote for official WSDJs TOP10, access all song suggested and
               TOP,
@@ -71,17 +60,6 @@
             <div class=" ckbx-style-11 ">
               <%= checkbox f, :profil_dj %>
               <%= label f,:profil_dj do %><% end %>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Deactivate user</strong>
-            <p class="text-gray-800">Desactivate a user, he can't login or receive notifications.</p>
-          </td>
-          <td>
-            <div class=" ckbx-style-11 danger">
-              <%= checkbox f, :deactivated %>
-              <%= label f,:deactivated do %><% end %>
             </div>
           </td>
         </tr>

@@ -13,7 +13,7 @@ defmodule WsdjsWeb.VerifySession do
 
   def call(conn, _repo) do
     id = get_session(conn, :user_id)
-    user = if id, do: Wsdjs.Accounts.get_activated_user!(id)
+    user = if id, do: Wsdjs.Accounts.get_user!(id)
 
     conn
     |> assign(:current_user, user)

@@ -36,9 +36,9 @@ defmodule Wsdjs.Auth do
     Repo.delete!(token)
   end
 
-  def first_auth(%User{activated_at: nil} = user) do
+  def first_auth(%User{confirmed_at: nil} = user) do
     query = from(User, where: [id: ^user.id])
-    Repo.update_all(query, set: [activated_at: Timex.now()])
+    Repo.update_all(query, set: [confirmed_at: Timex.now()])
 
     {:ok, user}
   end

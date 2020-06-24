@@ -19,9 +19,7 @@ defmodule Wsdjs.Accounts.User do
     field(:djname, :string)
     field(:profil_djvip, :boolean, default: false)
     field(:profil_dj, :boolean, default: false)
-    field(:deactivated, :boolean, default: false)
     field(:confirmed_at, :naive_datetime)
-    field(:verified_profil, :boolean, default: false)
 
     has_many(:songs, Musics.Song)
     has_many(:comments, Comments.Comment)
@@ -51,9 +49,7 @@ defmodule Wsdjs.Accounts.User do
       :djname,
       :admin,
       :profil_djvip,
-      :profil_dj,
-      :deactivated,
-      :verified_profil
+      :profil_dj
     ])
     |> cast_assoc(:avatar)
     |> cast_assoc(:profil)

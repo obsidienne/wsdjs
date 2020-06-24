@@ -77,28 +77,6 @@ defmodule Wsdjs.Accounts do
     |> Repo.insert()
   end
 
-  @doc """
-  Gets a single activated user.
-
-  Raises `Ecto.NoResultsError` if the User does not exist or is deactivated.
-
-  ## Examples
-
-      iex> get_activated_user!(UUID)
-      %User{}
-
-      iex> get_activated_user!(unknow UUID)
-      nil
-
-  """
-  def get_activated_user!(id) do
-    User
-    |> where(deactivated: false)
-    |> Repo.get!(id)
-    |> load_avatar()
-    |> load_profil()
-  end
-
   def get_user!(id) do
     User
     |> Repo.get!(id)

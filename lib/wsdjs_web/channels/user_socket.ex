@@ -23,7 +23,7 @@ defmodule WsdjsWeb.UserSocket do
   def connect(%{"token" => token}, socket) do
     case Phoenix.Token.verify(socket, "user", token, max_age: @max_age) do
       {:ok, user_id} ->
-        user = if user_id, do: Wsdjs.Accounts.get_activated_user!(user_id)
+        user = if user_id, do: Wsdjs.Accounts.get_user!(user_id)
         {:ok, assign(socket, :current_user, user)}
 
       {:error, _reason} ->

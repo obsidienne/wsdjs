@@ -27,7 +27,7 @@ defmodule WsdjsWeb.MagicLink do
   def provide_token(email, device) when is_binary(email) and device in ["api", "browser"] do
     user =
       case Accounts.get_user_by_email(email) do
-        %User{deactivated: false} = user ->
+        %User{} = user ->
           user
 
         nil ->
