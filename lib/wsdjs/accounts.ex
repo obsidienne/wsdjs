@@ -24,13 +24,13 @@ defmodule Wsdjs.Accounts do
     |> load_avatar()
     |> load_songs()
     |> load_comments()
-    |> load_detail()
+    |> load_profil()
   end
 
   def load_avatar(user), do: Repo.preload(user, :avatar)
   def load_songs(user), do: Repo.preload(user, :songs)
   def load_comments(user), do: Repo.preload(user, :comments)
-  def load_detail(user), do: Repo.preload(user, :detail)
+  def load_profil(user), do: Repo.preload(user, :profil)
 
   def list_users(criteria) when is_list(criteria) do
     query = from(d in User)
@@ -48,7 +48,7 @@ defmodule Wsdjs.Accounts do
     |> load_avatar()
     |> load_songs()
     |> load_comments()
-    |> load_detail()
+    |> load_profil()
   end
 
   def list_djs do
@@ -96,21 +96,21 @@ defmodule Wsdjs.Accounts do
     |> where(deactivated: false)
     |> Repo.get!(id)
     |> load_avatar()
-    |> load_detail()
+    |> load_profil()
   end
 
   def get_user!(id) do
     User
     |> Repo.get!(id)
     |> load_avatar()
-    |> load_detail()
+    |> load_profil()
   end
 
   def get_user_by_email(email) do
     User
     |> Repo.get_by(email: String.downcase(email))
     |> load_avatar()
-    |> load_detail()
+    |> load_profil()
   end
 
   @doc """

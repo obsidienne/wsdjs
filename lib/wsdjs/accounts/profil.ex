@@ -1,9 +1,9 @@
-defmodule Wsdjs.Accounts.UserDetail do
+defmodule Wsdjs.Accounts.Profil do
   @moduledoc false
   use Wsdjs.Schema
   import Ecto.Changeset
 
-  schema "user_details" do
+  schema "profils" do
     field(:description, :string)
     field(:description_html, :string)
     field(:favorite_genre, :string)
@@ -29,8 +29,8 @@ defmodule Wsdjs.Accounts.UserDetail do
     :website
   ]
 
-  def changeset(%__MODULE__{} = user_detail, attrs) do
-    user_detail
+  def changeset(%__MODULE__{} = profil, attrs) do
+    profil
     |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:user)
     |> validate_length(:description, max: 2000)

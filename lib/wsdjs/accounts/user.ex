@@ -4,7 +4,7 @@ defmodule Wsdjs.Accounts.User do
   import Ecto.Changeset
 
   alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.UserDetail
+  alias Wsdjs.Accounts.Profil
   alias Wsdjs.Attachments
   alias Wsdjs.Auth
   alias Wsdjs.Charts
@@ -26,7 +26,7 @@ defmodule Wsdjs.Accounts.User do
     has_many(:songs, Musics.Song)
     has_many(:comments, Comments.Comment)
     has_one(:avatar, Attachments.Avatars.Avatar, on_replace: :delete)
-    has_one(:detail, Accounts.UserDetail, on_replace: :update)
+    has_one(:profil, Accounts.Profil, on_replace: :update)
     has_many(:song_opinions, Opinions.Opinion)
     has_many(:votes, Charts.Vote)
     has_many(:auth_tokens, Auth.AuthToken)
@@ -39,7 +39,7 @@ defmodule Wsdjs.Accounts.User do
     user
     |> cast(attrs, [:user_country, :name, :djname])
     |> cast_assoc(:avatar)
-    |> cast_assoc(:detail)
+    |> cast_assoc(:profil)
   end
 
   def admin_changeset(%__MODULE__{} = user, attrs) do
@@ -56,7 +56,7 @@ defmodule Wsdjs.Accounts.User do
       :verified_profil
     ])
     |> cast_assoc(:avatar)
-    |> cast_assoc(:detail)
+    |> cast_assoc(:profil)
   end
 
   def create_changeset(%__MODULE__{} = user, attrs) do
@@ -66,7 +66,7 @@ defmodule Wsdjs.Accounts.User do
     |> downcase_value()
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
-    |> put_assoc(:detail, UserDetail.changeset(%UserDetail{}, %{}), required: true)
+    |> put_assoc(:profil, Profil.changeset(%Profil{}, %{}), required: true)
   end
 
   defp downcase_value(changeset) do

@@ -43,7 +43,7 @@
       value="<%= @current_user.user_country %>" />
   </div>
 
-  <%= inputs_for f, :detail, fn fd -> %>
+  <%= inputs_for f, :profil, fn fd -> %>
   <div class="form-group">
     <label>Description</label>
     <%= textarea fd, :description, placeholder: "Description (2000 characteres max)", class: "form-control h-16", maxlength: 2000 %>

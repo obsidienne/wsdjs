@@ -72,7 +72,7 @@ defmodule Wsdjs.AccountsTest do
 
     test "get_user_by_email!/1 returns the user with given email" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      user = user |> Repo.preload([:avatar, :detail])
+      user = user |> Repo.preload([:avatar, :profil])
       assert Accounts.get_user_by_email(user.email) == user
       assert Accounts.get_user_by_email(String.upcase(user.email)) == user
     end
@@ -93,16 +93,11 @@ defmodule Wsdjs.AccountsTest do
       "deactivated" => true,
       "verified_profil" => true,
       "activated_at" => Timex.now(),
-      "detail" => %{
+      "profil" => %{
         "description" => "update description",
         "favorite_genre" => "soul",
         "favorite_artist" => "update favorite artist",
-        "favorite_color" => "update favorite color",
-        "favorite_meal" => "update favorite meal",
-        "favorite_animal" => "update favorite animal",
         "djing_start_year" => 2000,
-        "love_more" => "update love more",
-        "hate_more" => "update hate more",
         "youtube" => "http://update.youtube.fr",
         "facebook" => "http://update.facebook.fr",
         "soundcloud" => "http://update.soundcloud.fr"
@@ -110,7 +105,7 @@ defmodule Wsdjs.AccountsTest do
     }
 
     @invalid_update_attrs %{
-      detail: %{
+      profil: %{
         "youtube" => "not valid yt",
         "facebook" => "not valid fb",
         "soundcloud" => "not valid sd"
@@ -123,9 +118,9 @@ defmodule Wsdjs.AccountsTest do
       assert {:error, %Ecto.Changeset{} = changeset} =
                Accounts.update_user(user, @invalid_update_attrs, %User{admin: true})
 
-      assert "invalid url: :no_scheme" in errors_on(changeset).detail.facebook
-      assert "invalid url: :no_scheme" in errors_on(changeset).detail.soundcloud
-      assert "invalid url: :no_scheme" in errors_on(changeset).detail.youtube
+      assert "invalid url: :no_scheme" in errors_on(changeset).profil.facebook
+      assert "invalid url: :no_scheme" in errors_on(changeset).profil.soundcloud
+      assert "invalid url: :no_scheme" in errors_on(changeset).profil.youtube
     end
 
     test "update_user/3 with invalid data done by user returns error changeset" do
@@ -134,9 +129,9 @@ defmodule Wsdjs.AccountsTest do
       assert {:error, %Ecto.Changeset{} = changeset} =
                Accounts.update_user(user, @invalid_update_attrs, %User{admin: false})
 
-      assert "invalid url: :no_scheme" in errors_on(changeset).detail.facebook
-      assert "invalid url: :no_scheme" in errors_on(changeset).detail.soundcloud
-      assert "invalid url: :no_scheme" in errors_on(changeset).detail.youtube
+      assert "invalid url: :no_scheme" in errors_on(changeset).profil.facebook
+      assert "invalid url: :no_scheme" in errors_on(changeset).profil.soundcloud
+      assert "invalid url: :no_scheme" in errors_on(changeset).profil.youtube
     end
 
     test "update_user/3 with valid data done by admin updates the user" do
@@ -154,18 +149,13 @@ defmodule Wsdjs.AccountsTest do
       assert user.activated_at == nil
       assert user.verified_profil == true
 
-      assert user.detail.description == "update description"
-      assert user.detail.favorite_genre == "soul"
-      assert user.detail.favorite_artist == "update favorite artist"
-      assert user.detail.favorite_color == "update favorite color"
-      assert user.detail.favorite_meal == "update favorite meal"
-      assert user.detail.favorite_animal == "update favorite animal"
-      assert user.detail.djing_start_year == 2000
-      assert user.detail.love_more == "update love more"
-      assert user.detail.hate_more == "update hate more"
-      assert user.detail.youtube == "http://update.youtube.fr"
-      assert user.detail.facebook == "http://update.facebook.fr"
-      assert user.detail.soundcloud == "http://update.soundcloud.fr"
+      assert user.profil.description == "update description"
+      assert user.profil.favorite_genre == "soul"
+      assert user.profil.favorite_artist == "update favorite artist"
+      assert user.profil.djing_start_year == 2000
+      assert user.profil.youtube == "http://update.youtube.fr"
+      assert user.profil.facebook == "http://update.facebook.fr"
+      assert user.profil.soundcloud == "http://update.soundcloud.fr"
     end
 
     test "update_user/3 with valid data done by user updates the user" do
@@ -183,18 +173,13 @@ defmodule Wsdjs.AccountsTest do
       assert user.activated_at == nil
       assert user.verified_profil == false
 
-      assert user.detail.description == "update description"
-      assert user.detail.favorite_genre == "soul"
-      assert user.detail.favorite_artist == "update favorite artist"
-      assert user.detail.favorite_color == "update favorite color"
-      assert user.detail.favorite_meal == "update favorite meal"
-      assert user.detail.favorite_animal == "update favorite animal"
-      assert user.detail.djing_start_year == 2000
-      assert user.detail.love_more == "update love more"
-      assert user.detail.hate_more == "update hate more"
-      assert user.detail.youtube == "http://update.youtube.fr"
-      assert user.detail.facebook == "http://update.facebook.fr"
-      assert user.detail.soundcloud == "http://update.soundcloud.fr"
+      assert user.profil.description == "update description"
+      assert user.profil.favorite_genre == "soul"
+      assert user.profil.favorite_artist == "update favorite artist"
+      assert user.profil.djing_start_year == 2000
+      assert user.profil.youtube == "http://update.youtube.fr"
+      assert user.profil.facebook == "http://update.facebook.fr"
+      assert user.profil.soundcloud == "http://update.soundcloud.fr"
     end
   end
 end

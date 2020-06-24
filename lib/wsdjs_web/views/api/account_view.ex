@@ -3,11 +3,11 @@ defmodule WsdjsWeb.Api.AccountView do
 
   def render("show.json", %{user: user}) do
     %{
-      data: user |> user_details() |> add_avatar(user.avatar) |> add_details(user.detail)
+      data: user |> profil() |> add_avatar(user.avatar) |> add_details(user.profil)
     }
   end
 
-  defp user_details(user) do
+  defp profil(user) do
     %{
       id: user.id,
       admin: user.admin,
@@ -34,21 +34,16 @@ defmodule WsdjsWeb.Api.AccountView do
   defp add_details(user, nil), do: user
 
   defp add_details(user, detail) do
-    details = %{
+    profil = %{
       description: detail.description,
       favorite_genre: detail.favorite_genre,
       favorite_artist: detail.favorite_artist,
-      favorite_color: detail.favorite_color,
-      favorite_meal: detail.favorite_meal,
-      favorite_animal: detail.favorite_animal,
       djing_start_year: detail.djing_start_year,
-      love_more: detail.love_more,
-      hate_more: detail.hate_more,
       youtube: detail.youtube,
       facebook: detail.facebook,
       soundcloud: detail.soundcloud
     }
 
-    Map.put(user, :detail, details)
+    Map.put(user, :profil, profil)
   end
 end

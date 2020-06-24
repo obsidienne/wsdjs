@@ -37,17 +37,12 @@ defmodule WsdjsWeb.Api.AccountControllerTest do
           "name" => user.name,
           "profil_dj" => user.profil_dj,
           "verified_profil" => false,
-          "detail" => %{
+          "profil" => %{
             "description" => nil,
             "djing_start_year" => nil,
             "facebook" => nil,
-            "favorite_animal" => nil,
             "favorite_artist" => nil,
-            "favorite_color" => nil,
             "favorite_genre" => nil,
-            "favorite_meal" => nil,
-            "hate_more" => nil,
-            "love_more" => nil,
             "soundcloud" => nil,
             "youtube" => nil
           }
@@ -76,17 +71,12 @@ defmodule WsdjsWeb.Api.AccountControllerTest do
           "name" => user.name,
           "profil_dj" => user.profil_dj,
           "verified_profil" => false,
-          "detail" => %{
+          "profil" => %{
             "description" => nil,
             "djing_start_year" => nil,
             "facebook" => nil,
-            "favorite_animal" => nil,
             "favorite_artist" => nil,
-            "favorite_color" => nil,
             "favorite_genre" => nil,
-            "favorite_meal" => nil,
-            "hate_more" => nil,
-            "love_more" => nil,
             "soundcloud" => nil,
             "youtube" => nil
           }
