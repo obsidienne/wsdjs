@@ -1,7 +1,8 @@
-defmodule Wsdjs.Accounts.Users do
+defmodule Wsdjs.Profils do
   @moduledoc """
-
+  The boundary for the Accounts system.
   """
+
   import Ecto.Query, warn: false
   alias Wsdjs.Accounts
 

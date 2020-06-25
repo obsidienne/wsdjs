@@ -3,6 +3,7 @@ defmodule WsdjsWeb.UserController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Accounts
+  alias Wsdjs.Profils
 
   action_fallback(WsdjsWeb.FallbackController)
 
@@ -12,7 +13,7 @@ defmodule WsdjsWeb.UserController do
   end
 
   def index(conn, _params, current_user) do
-    with :ok <- Accounts.Users.can?(current_user, :index) do
+    with :ok <- Profils.can?(current_user, :index) do
       users = Accounts.list_users()
       render(conn, "index.html", users: users, page_title: "List users - World Swing DJs")
     end
@@ -21,7 +22,7 @@ defmodule WsdjsWeb.UserController do
   def show(conn, %{"id" => user_id}, current_user) do
     user = Accounts.get_user!(user_id)
 
-    with :ok <- Accounts.Users.can?(current_user, :show, user) do
+    with :ok <- Profils.can?(current_user, :show, user) do
       playlists = Wsdjs.Playlists.list_frontpage_playlist_songs(current_user)
 
       conn
@@ -37,7 +38,7 @@ defmodule WsdjsWeb.UserController do
   def edit(conn, %{"id" => id}, current_user) do
     user = Accounts.get_user!(id)
 
-    with :ok <- Accounts.Users.can?(current_user, :edit_user, user) do
+    with :ok <- Profils.can?(current_user, :edit_user, user) do
       changeset = Accounts.change_user(user)
 
       render(conn, "edit.html",
@@ -51,7 +52,7 @@ defmodule WsdjsWeb.UserController do
   def update(conn, %{"id" => id, "user" => user_params}, current_user) do
     user = Accounts.get_user!(id)
 
-    with :ok <- Accounts.Users.can?(current_user, :edit_user, user),
+    with :ok <- Profils.can?(current_user, :edit_user, user),
          {:ok, _} <- Accounts.update_user(user, user_params, current_user) do
       conn
       |> put_flash(:info, "Profile updated.")

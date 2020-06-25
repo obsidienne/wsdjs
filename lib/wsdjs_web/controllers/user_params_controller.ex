@@ -3,6 +3,7 @@ defmodule WsdjsWeb.UserParamsController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Accounts
+  alias Wsdjs.Profils
 
   action_fallback(WsdjsWeb.FallbackController)
 
@@ -16,7 +17,7 @@ defmodule WsdjsWeb.UserParamsController do
   def show(conn, %{"id" => user_id}, current_user) do
     user = Accounts.get_user!(user_id)
 
-    with :ok <- Accounts.Users.can?(current_user, :edit_user, user) do
+    with :ok <- Profils.can?(current_user, :edit_user, user) do
       changeset = Accounts.change_user(user)
 
       conn
