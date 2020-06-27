@@ -28,7 +28,7 @@ defmodule Wsdjs.Repo.Migrations.MoveUserFieldToProfilField do
       , name=users.name
       , djname=users.djname
     from users
-    where users.id in (select user_id from profils)
+    where users.id=profils.user_id
     "
 
     alter table(:users) do
