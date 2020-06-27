@@ -19,7 +19,7 @@ defmodule Wsdjs.Accounts do
   """
   def list_users do
     User
-    |> order_by([:name])
+    |> order_by([:email])
     |> Repo.all()
     |> load_avatar()
     |> load_songs()

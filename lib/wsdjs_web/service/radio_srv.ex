@@ -30,7 +30,7 @@ defmodule WsdjsWeb.Service.RadioSrv do
     |> Map.put(:suggested_ts, Timex.to_unix(song.inserted_at))
     |> Map.put(:image_uri, Attachments.art_url(song.art, 900))
     |> Map.put(:image_srcset, Attachments.art_srcset(song.art, 300))
-    |> Map.put(:suggested_by, song.user.name)
+    |> Map.put(:suggested_by, song.user.email)
     |> Map.put(:suggested_by_path, Routes.user_path(conn, :show, song.user))
     |> Map.put(:path, Routes.song_path(conn, :show, song))
     |> Map.put(:tags, tags_for_song(song))

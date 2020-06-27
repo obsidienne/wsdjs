@@ -14,9 +14,6 @@ defmodule Wsdjs.Accounts.User do
   schema "users" do
     field(:email, :string)
     field(:admin, :boolean, default: false)
-    field(:user_country, :string)
-    field(:name, :string)
-    field(:djname, :string)
     field(:profil_djvip, :boolean, default: false)
     field(:profil_dj, :boolean, default: false)
     field(:confirmed_at, :naive_datetime)
@@ -44,9 +41,6 @@ defmodule Wsdjs.Accounts.User do
     user
     |> cast(attrs, [
       :email,
-      :user_country,
-      :name,
-      :djname,
       :admin,
       :profil_djvip,
       :profil_dj

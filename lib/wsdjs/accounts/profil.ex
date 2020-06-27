@@ -13,6 +13,9 @@ defmodule Wsdjs.Accounts.Profil do
     field(:facebook, :string)
     field(:soundcloud, :string)
     field(:website, :string)
+    field(:user_country, :string)
+    field(:name, :string)
+    field(:djname, :string)
 
     belongs_to(:user, Wsdjs.Accounts.User)
     timestamps()
@@ -26,7 +29,11 @@ defmodule Wsdjs.Accounts.Profil do
     :youtube,
     :facebook,
     :soundcloud,
-    :website
+    :website,
+    :user_country,
+    :name,
+    :djname,
+    :user_id
   ]
 
   def changeset(%__MODULE__{} = profil, attrs) do
@@ -36,6 +43,9 @@ defmodule Wsdjs.Accounts.Profil do
     |> validate_length(:description, max: 2000)
     |> validate_length(:favorite_genre, max: 2000)
     |> validate_length(:favorite_artist, max: 2000)
+    |> validate_length(:user_country, max: 2000)
+    |> validate_length(:name, max: 2000)
+    |> validate_length(:djname, max: 2000)
     |> validate_url(:youtube)
     |> validate_url(:facebook)
     |> validate_url(:soundcloud)
