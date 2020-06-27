@@ -32,9 +32,9 @@
 
 <body class="font-sans bg-grey-lightest">
   <header class="hero hot-hero">
-    <nav class="glnav container">
-      <%= link "", to: Routes.home_path(@conn, :index), class: "glnav__logo" %>
-      <%= link "tops", to: Routes.top_path(@conn, :index), class: "glnav__menu text-gray-800" %>
+    <nav class="container">
+      <%= link "", to: Routes.home_path(@conn, :index), class: "" %>
+      <%= link "tops", to: Routes.top_path(@conn, :index), class: " text-gray-800" %>
     </nav>
   </header>
 
