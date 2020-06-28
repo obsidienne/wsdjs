@@ -82,7 +82,7 @@
 
 <body class="font-sans">
   <div>
-    <nav class="bg-gray-800">
+    <nav class="bg-gray-800" x-data="{ open: false }" @keydown.window.escape="open = false">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
@@ -126,6 +126,7 @@
                 </svg>
               </button>
 
+              <%= if @current_user do %>
               <!-- Profile dropdown -->
               <div class="ml-3 relative" @click.away="open = false" x-data="{ open: false}">
                 <div>
@@ -140,16 +141,6 @@
                       alt="" />
                   </button>
                 </div>
-                <!--
-                Profile dropdown panel, show/hide based on dropdown state.
-
-                Entering: "transition ease-out duration-100"
-                  From: "transform opacity-0 scale-95"
-                  To: "transform opacity-100 scale-100"
-                Leaving: "transition ease-in duration-75"
-                  From: "transform opacity-100 scale-100"
-                  To: "transform opacity-0 scale-95"
-              -->
                 <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
                 x-show="open"
                 x-description="Profile dropdown panel, show/hide based on dropdown state."
@@ -169,17 +160,16 @@
                   </div>
                 </div>
               </div>
+              <% end %>
             </div>
           </div>
           <div class="-mr-2 flex md:hidden">
-            <!-- Mobile menu button -->
             <button
               class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
               @click="open = !open"
               x-bind:aria-label="open ? 'Close main menu' : 'Main menu'"
               x-bind:aria-expanded="open"
               >
-              <!-- Menu open: "hidden", Menu closed: "block" -->
               <svg class="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"
                 x-state:on="Menu open"
                 x-state:off="Menu closed"
@@ -187,7 +177,6 @@
                 >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-              <!-- Menu open: "block", Menu closed: "hidden" -->
               <svg class="hidden h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"
                 x-state:on="Menu open"
                 x-state:off="Menu closed"
@@ -198,12 +187,6 @@
           </div>
         </div>
       </div>
-
-      <!--
-      Mobile menu, toggle classes based on menu state.
-
-      Open: "block", closed: "hidden"
-    -->
       <div class="md:hidden hidden "
       x-description="Mobile menu, toggle classes based on menu state."
       x-state:on="Open"
@@ -211,11 +194,12 @@
       :class="{ 'block': open, 'hidden': !open }">
         <div class="px-2 pt-2 pb-3 sm:px-3">
           <%= link "Dashboard", to: Routes.home_path(@conn, :index), class: "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700" %>
-          <%= link "Charts", to: Routes.top_path(@conn, :index), class: "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700" %>
-          <%= link "Library", to: Routes.song_path(@conn, :index), class: "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700" %>
-          <%= link "Members", to: Routes.user_path(@conn, :index), class: "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700" %>
-          <%= link "Events", to: Routes.event_path(@conn, :index), class: "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700" %>
+          <%= link "Charts", to: Routes.top_path(@conn, :index), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
+          <%= link "Library", to: Routes.song_path(@conn, :index), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
+          <%= link "Members", to: Routes.user_path(@conn, :index), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
+          <%= link "Events", to: Routes.event_path(@conn, :index), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
         </div>
+        <%= if @current_user do %>
         <div class="pt-4 pb-3 border-t border-gray-700">
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
@@ -240,6 +224,7 @@
             </a>
           </div>
         </div>
+        <% end %>
       </div>
     </nav>
 
