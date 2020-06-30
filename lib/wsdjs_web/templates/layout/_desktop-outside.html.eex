@@ -1,18 +1,3 @@
-<div id="notifier-container" class="notifier-container">
-  <%= if get_flash(@conn, :info) do %>
-  <div id="info-notification" class="notifier info" role="alert">
-    <span class="notifier-title"><%= get_flash(@conn, :info) %></span>
-  </div>
-  <% end %>
-
-  <%= if get_flash(@conn, :error) do %>
-  <div id="error-notification" class="notifier danger" role="alert">
-    <span class="notifier-title"><%= get_flash(@conn, :error) %></span>
-  </div>
-  <% end %>
-</div>
-
-
 <%= if @current_user do %>
 <%= render "_piwik.html", current_user: @current_user %>
 <% end %>

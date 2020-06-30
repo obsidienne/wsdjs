@@ -38,7 +38,7 @@ defmodule WsdjsWeb.OpinionView do
 
   def opinions_names(kind, opinions) do
     kind_opinions = Enum.filter(opinions, fn x -> x.kind == kind end)
-    names = Enum.map_join(Enum.take(kind_opinions, 3), "<br/>", & &1.user.name)
+    names = Enum.map_join(Enum.take(kind_opinions, 3), "<br/>", & &1.user.email)
 
     remaining_qty = Enum.count(opinions, fn x -> x.kind == kind end) - 3
 

@@ -1,5 +1,4 @@
 import MainView from '../main';
-import Notifier from '../../components/notifier';
 
 export default class View extends MainView {
   constructor() {
@@ -41,29 +40,6 @@ export default class View extends MainView {
           request.open("POST", formElement.getAttribute("action"));
           request.send(new FormData(formElement));
 
-          request.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
-              document.getElementById("notifier-container").innerHTML = `
-              <div id="info-notification" class="notifier info" role="alert">
-                <h2 class="notifier-title">Your avatar is correctly updated.</h2>
-              </div>`;
-            } else {
-              document.getElementById("notifier-container").innerHTML = `
-              <div id="info-notification" class="notifier danger" role="alert">
-                <h2 class="notifier-title">Something went wrong.</h2>
-              </div>`;
-            }
-            var notifier = new Notifier();
-            notifier.show_all();
-          };
-          request.onerror = function () {
-            document.getElementById("notifier-container").innerHTML = `
-                <div id="info-notification" class="notifier danger" role="alert">
-                  <h2 class="notifier-title">Something went wrong.</h2>
-                </div>`;
-          };
-          var notifier = new Notifier();
-          notifier.show_all();
         })
       }
     }, false);

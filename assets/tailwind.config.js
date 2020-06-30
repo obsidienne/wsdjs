@@ -24,5 +24,6 @@ module.exports = {
             classes: ['animate__animated', 'animate__swing'],
             variants: ['responsive', 'hover', 'reduced-motion'],
         }),
+        require('@tailwindcss/ui')
     ]
 };

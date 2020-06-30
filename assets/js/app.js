@@ -48,7 +48,6 @@ import loadView from "./views/loader";
 import Pjax from "pjax-api";
 import Radio from "./components/radio";
 import Search from "./components/search";
-import Notifier from "./components/notifier";
 import Opinions from "./components/opinions";
 import OpinionPicker from "./components/opinionPicker";
 import PlaylistPicker from "./components/playlistPicker";
@@ -70,8 +69,6 @@ function handleDOMContentLoaded() {
 
   window.currentView = view;
 
-  var notifier = new Notifier();
-  notifier.show_all();
 
   /* piwik */
   if (window._paq != null) {
