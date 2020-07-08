@@ -1,5 +1,0 @@
-
-<aside id="player__youtube__container" class="player__youtube__container">
-  <button class="player__youtube_close btn btn-reverse">close</button>
-  <div id="player__youtube" class="player__youtube"></div>
-</aside>

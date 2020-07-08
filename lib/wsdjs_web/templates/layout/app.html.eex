@@ -1,4 +1,4 @@
-<main role="main" class="<%= js_view_name(@conn, @view_template) %> flex flex-col justify-between pb-32"
+<main role="main" class="<%= js_view_name(@conn, @view_template) %>"
   data-js-view-name="<%= js_view_name(@conn, @view_template) %>" data-user-id="<%= current_user_id(@current_user) %>">
 
   <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">

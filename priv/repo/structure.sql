@@ -950,15 +950,16 @@ ALTER SEQUENCE public.user_details_id_seq OWNED BY public.profils.id;
 
 CREATE TABLE public.users (
     uuid uuid,
-    email character varying(255) NOT NULL,
+    email public.citext NOT NULL,
     inserted_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     admin boolean DEFAULT false NOT NULL,
     profils character varying(255)[] DEFAULT ARRAY[]::character varying[],
     profil_djvip boolean DEFAULT false NOT NULL,
     profil_dj boolean DEFAULT false NOT NULL,
-    confirmed_at timestamp without time zone,
-    id bigint NOT NULL
+    confirmed_at timestamp(0) without time zone,
+    id bigint NOT NULL,
+    hashed_password character varying(255)
 );
 
 
@@ -979,6 +980,39 @@ CREATE SEQUENCE public.users_id_seq
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: users_tokens; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.users_tokens (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    token bytea NOT NULL,
+    context character varying(255) NOT NULL,
+    sent_to character varying(255),
+    inserted_at timestamp(0) without time zone NOT NULL
+);
+
+
+--
+-- Name: users_tokens_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.users_tokens_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.users_tokens_id_seq OWNED BY public.users_tokens.id;
 
 
 --
@@ -1153,6 +1187,13 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
+-- Name: users_tokens id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users_tokens ALTER COLUMN id SET DEFAULT nextval('public.users_tokens_id_seq'::regclass);
+
+
+--
 -- Name: videos id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1287,6 +1328,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: users_tokens users_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users_tokens
+    ADD CONSTRAINT users_tokens_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: videos videos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1384,6 +1433,20 @@ CREATE UNIQUE INDEX tops_due_date_index ON public.tops USING btree (due_date);
 --
 
 CREATE UNIQUE INDEX users_email_index ON public.users USING btree (email);
+
+
+--
+-- Name: users_tokens_context_token_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX users_tokens_context_token_index ON public.users_tokens USING btree (context, token);
+
+
+--
+-- Name: users_tokens_user_id_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX users_tokens_user_id_index ON public.users_tokens USING btree (user_id);
 
 
 --
@@ -1512,6 +1575,14 @@ ALTER TABLE ONLY public.tops
 
 ALTER TABLE ONLY public.profils
     ADD CONSTRAINT user_details_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: users_tokens users_tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users_tokens
+    ADD CONSTRAINT users_tokens_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
 
 --
@@ -1649,3 +1720,4 @@ INSERT INTO public."schema_migrations" (version) VALUES (20200624225334);
 INSERT INTO public."schema_migrations" (version) VALUES (20200624232010);
 INSERT INTO public."schema_migrations" (version) VALUES (20200624232912);
 INSERT INTO public."schema_migrations" (version) VALUES (20200625222023);
+INSERT INTO public."schema_migrations" (version) VALUES (20200630211649);
