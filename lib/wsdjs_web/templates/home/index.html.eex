@@ -1,7 +1,3 @@
-<%= if is_nil(@current_user) do %>
-<%= render "_not_connected.html", conn: @conn%>
-<% end %>
-
 <section class="container">
   <%= if Enum.count(@songs) > 0 do %>
   <section class="carousel mt-12">
