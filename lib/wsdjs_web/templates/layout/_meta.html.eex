@@ -1,0 +1,55 @@
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<meta name="cloudinary_cloud_name" content="don2kwaju">
+<meta name="description" content="World Swing DeeJays. The best West Coast Swing music from all around the world !">
+
+<!-- Control the behavior of search engine crawling and indexing -->
+<meta name="robots" content="index,follow"><!-- All Search Engines -->
+<meta name="googlebot" content="index,follow"><!-- Google Specific -->
+<!-- Tells Google not to show the sitelinks search box -->
+<meta name="google" content="nositelinkssearchbox">
+<!-- Tells Google not to provide a translation for this page -->
+<meta name="google" content="notranslate">
+
+
+
+<meta name="apple-mobile-web-app-title" content="WorldSwingDJs">
+<link rel="icon" type="image/png" sizes="16x16"
+    href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+<link rel="icon" type="image/png" sizes="32x32"
+    href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+<link rel="icon" type="image/png" sizes="96x96"
+    href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+
+<link rel="apple-touch-icon"
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_80/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+<link rel="apple-touch-icon" sizes="152x152"
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_152/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+<link rel="apple-touch-icon" sizes="180x180"
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_180/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+<link rel="apple-touch-icon" sizes="167x167"
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_167/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:1f2532,c_scale,h_2732,w_2048/v1538673297/wsdjs/wsdjs.png"
+    sizes="2048x2732" rel="apple-touch-startup-image" />
+<link
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:1f2532,c_scale,h_2224,w_1668/v1538673297/wsdjs/wsdjs.png"
+    sizes="1668x2224" rel="apple-touch-startup-image" />
+<link
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:1f2532,c_scale,h_2048,w_1536/v1538673297/wsdjs/wsdjs.png"
+    sizes="1536x2048" rel="apple-touch-startup-image" />
+<link
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:1f2532,c_scale,h_2436,w_1125/v1538673297/wsdjs/wsdjs.png"
+    sizes="1125x2436" rel="apple-touch-startup-image" />
+<link
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:1f2532,c_scale,h_2208,w_1242/v1538673297/wsdjs/wsdjs.png"
+    sizes="1242x2208" rel="apple-touch-startup-image" />
+<link
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:1f2532,c_scale,h_1334,w_750/v1538673297/wsdjs/wsdjs.png"
+    sizes="750x1334" rel="apple-touch-startup-image" />
+<link
+    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:1f2532,c_scale,h_1136,w_640/v1538673297/wsdjs/wsdjs.png"
+    sizes="640x1136" rel="apple-touch-startup-image" />
+
+<link rel="manifest" href="<%= Routes.static_path(@conn, "/manifest.webmanifest") %>">
