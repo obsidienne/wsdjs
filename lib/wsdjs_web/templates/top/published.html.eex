@@ -31,7 +31,7 @@
   <%= for rank <- @ranks do %>
   <%= if blur_track(rank.song, @current_user) == true do %>
 
-  <article class="top-song">
+  <article class="top-song flex flex-row">
     <div class="song-art-container">
       <div class="voting-position charted">
         <div class="chart-bg"></div>
@@ -58,7 +58,7 @@
 
   <% else %>
 
-  <article class="top-song">
+  <article class="top-song flex flex-row">
     <div class="song-art-container">
       <div class="voting-position charted">
         <div class="chart-bg"></div>

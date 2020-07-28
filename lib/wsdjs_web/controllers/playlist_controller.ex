@@ -14,6 +14,7 @@ defmodule WsdjsWeb.PlaylistController do
   def index(conn, %{"user_id" => user_id}, current_user) do
     with %Accounts.User{} = user <- Accounts.get_user!(user_id) do
       playlists = Wsdjs.Playlists.list_playlists(user, current_user)
+      user = Accounts.load_profil(user)
 
       render(
         conn,
