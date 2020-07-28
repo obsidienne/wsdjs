@@ -29,7 +29,7 @@
 
 <section class="container top-counting">
   <%= for rank <- @ranks do %>
-  <article class="top-song">
+  <article class="top-song flex flex-row">
     <div class="song-art-container">
       <img src="<%= Attachments.art_url(rank.song.art, 300) %>"
         srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive" />

@@ -95,7 +95,7 @@
 <template id="comment-tpl">
   <li class="flex mb-4">
     <div class="hidden md:flex">
-      <img src="{{user.avatars.avatar_uri}}" class="comment__avatar__img">
+      <img src="{{user.avatars.avatar_uri}}" class="w-12 h-12 rounded-full shadow border-2 border-solid border-white">
     </div>
 
     <div class="w-auto md:mx-2 relative bg-white shadow flex-1">

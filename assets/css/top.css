@@ -62,11 +62,9 @@
 }
 
 .top-song {
-  display: flex;
   padding-bottom: 1rem;
   padding-top: calc(1rem - 1px);
   border-bottom: 1px solid hsl(0, 0%, 87%);
-  flex-direction: column;
 }
 
 .song-art-container {
@@ -126,10 +124,6 @@
 .opinions > *:nth-child(2) {
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-.top-song {
-  flex-direction: row;
 }
 
 .top-song-info-container {

@@ -2,7 +2,7 @@
   <a href="<%= Routes.user_path(@conn, :show, @user) %>">
     <div class="aspect-ratio-square relative mb-2">
       <img src="<%= Attachments.art_url(@user.avatar, 200) %>" srcset="<%= Attachments.art_srcset(@user.avatar, 200) %>"
-        class="absolute top-0 responsive rounded-lg rounded-full shadow hover:opacity-50 " />
+        class="absolute top-0 responsive rounded-full shadow hover:opacity-50 " />
     </div>
     <span class="block text-center"><%= @user.email %></span>
   </a>

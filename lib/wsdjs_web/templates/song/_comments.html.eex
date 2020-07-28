@@ -14,7 +14,8 @@
   <li class="flex mb-4">
     <div class="hidden md:flex">
       <img src="<%= Attachments.avatar_url(comment.user.avatar, 50) %>"
-        srcset="<%= Attachments.avatar_srcset(comment.user.avatar, 50) %>" sizes="50px" class="comment__avatar__img"
+        srcset="<%= Attachments.avatar_srcset(comment.user.avatar, 50) %>" sizes="50px"
+        class="w-12 h-12 rounded-full shadow border-2 border-solid border-white"
         alt="<%= user_avatar_alt(comment.user) %>">
     </div>
 

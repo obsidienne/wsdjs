@@ -28,7 +28,7 @@
 
 <section class="container">
   <%= for rank <- @ranks do %>
-  <article class="top-song">
+  <article class="top-song flex flex-row">
     <div class="song-art-container">
       <div class="aspect-ratio-square relative">
         <img src="<%= Attachments.art_url(rank.song.art, 300) %>"

@@ -19,6 +19,7 @@ defmodule WsdjsWeb.UserParamsController do
 
     with :ok <- Profils.can?(current_user, :edit_user, user) do
       changeset = Accounts.change_user(user)
+      user = Accounts.load_profil(user)
 
       conn
       |> render(
