@@ -70,6 +70,4 @@
     <% end %>
   </div>
 
-  <%= link "log out", to: Routes.session_path(@conn, :delete, @current_user), method: :delete, data: [pjax: "false"], class: "btn btn-link text-danger mt-6" %>
-
 </section>

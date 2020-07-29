@@ -14,7 +14,7 @@ defmodule WsdjsWeb.Router do
   end
 
   pipeline :browser_auth do
-    plug(WsdjsWeb.EnsureAuthenticated)
+    plug :require_authenticated_user
   end
 
   pipeline :api do
@@ -82,7 +82,6 @@ defmodule WsdjsWeb.Router do
     get("/tops/:id/stats", TopController, :stat, as: :top_stat)
 
     resources("/ranks", RankController, only: [:update, :delete])
-    resources("/sessions", SessionController, only: [:delete])
     resources("/events", EventController)
 
     resources "/users", UserController, only: [:index, :edit, :update] do
@@ -108,9 +107,6 @@ defmodule WsdjsWeb.Router do
     resources("/users", UserController, only: [:show])
     resources("/home", HomeController, only: [:index])
     resources("/tops", TopController, only: [:show])
-    resources("/sessions", SessionController, only: [:new, :create])
-    resources("/registrations", RegistrationController, only: [:new, :create])
-    get("/signin/:token", SessionController, :show, as: :signin)
 
     resources("/songs", SongController, only: [:show]) do
       resources("/opinions", OpinionController, only: [:index])
@@ -150,8 +146,6 @@ defmodule WsdjsWeb.Router do
     resources("/v1/mobile_config", MobileConfigController, only: [:index])
     resources("/mobile_config", MobileConfigController, only: [:index])
     resources("/radio", RadioController, only: [:index])
-    get("/signin/:token", SessionController, :show, as: :signin)
-    resources("/sessions", SessionController, only: [:create])
 
     resources "/songs", SongController, only: [] do
       resources("/comments", CommentController, only: [:index])
