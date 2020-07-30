@@ -67,7 +67,7 @@
                 <%= link "Your Profile", to: Routes.user_path(@conn, :show, @current_user.id), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings
                 </a>
-                <%= link "log out", to: Routes.session_path(@conn, :delete, @current_user), method: :delete, data: [pjax: "false"], class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
+                <%= link "log out", to: Routes.user_session_path(@conn, :delete), method: :delete, data: [pjax: "false"], class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
               </div>
             </div>
           </div>

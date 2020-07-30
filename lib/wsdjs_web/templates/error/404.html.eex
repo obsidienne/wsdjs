@@ -42,8 +42,6 @@
     <h1>Sorry this page does not exist !</h1>
     <p>
       <%= link "Go to the home page", to: Routes.home_path(@conn, :index), class: "btn btn-link" %>
-      or
-      <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "btn btn-link" %>
     </p>
   </main>
 </body>
