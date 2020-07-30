@@ -96,7 +96,7 @@ window.addEventListener("pjax:unload", handleUnloadContentLoaded, false);
 window.addEventListener("scroll", () => Tippy.hideAllPoppers());
 
 new Pjax({
-  areas: ["main"],
+  areas: ["body"],
   update: {
     css: false,
     js: false
