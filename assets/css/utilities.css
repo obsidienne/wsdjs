@@ -1,4 +1,23 @@
 /******************
+ Configure SIMPLEBAR
+******************/
+.simplebar-content {
+  scroll-behavior: smooth;
+}
+
+/******************
+ CAROUSEL CSS
+******************/
+.carousel-control.disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.carousel-items {
+  grid-auto-columns: 10rem;
+}
+
+/******************
  AUTRES
 ******************/
 .stretched-link::after {

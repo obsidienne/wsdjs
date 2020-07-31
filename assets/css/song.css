@@ -1,15 +1,6 @@
 /****************************
   song-page
 ****************************/
-.song-page__art {
-  flex-basis: 18rem;
-  width: 18rem;
-  height: 18rem;
-}
-
-.song-page__play {
-  max-width: 16ch;
-}
 .song-page__tags.song-opinions {
   padding-top: 1rem;
   display: flex;
