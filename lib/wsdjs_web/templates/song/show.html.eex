@@ -1,6 +1,6 @@
 <section>
   <div class="flex md:flex-row flex-col justify-start container mt-6 pb-12">
-    <div class="song-page__art">
+    <div class="w-64 h-64">
       <img src="<%= Attachments.art_url(@song.art, 300) %>" srcset="<%= Attachments.art_srcset(@song.art, 300) %>"
         sizes="300px" class="responsive shadow rounded" />
     </div>
@@ -46,8 +46,8 @@
         </div>
 
         <%= if @song.url do %>
-        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary song-page__play mt-auto mb-0" target="_blank"
-          rel="noopener" <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
+        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary mt-auto mb-0" target="_blank" rel="noopener"
+          <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
         <% end %>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <%= if blur_track(@song, @current_user) == true do %>
 
 <li class="hover:shadow mr-4 w-48 flex-no-grow flex-no-shrink">
-  <a class="carousel-item">
+  <a class="block">
     <div class="relative">
       <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive" />
       <img class="w-8 rounded-full absolute bottom-0 right-0 border-2 border-white m-1 shadow"
@@ -24,10 +24,10 @@
 <% else %>
 
 <li class="overflow-hidden" style="grid-row: 1">
-  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>" class="carousel-item">
+  <a href="<%= Routes.song_path(@conn, :show, @song.id) %>" class="h-40 w-40">
     <div class="relative">
       <img src="<%= Attachments.art_url(@song.art, 200) %>" srcset="<%= Attachments.art_srcset(@song.art, 200) %>"
-        class="rounded-lg shadow hover:opacity-50 carousel-item-img" />
+        class="rounded-lg shadow hover:opacity-50 h-40 w-40" />
       <img class="w-8 rounded-full absolute bottom-0 right-0 border-2 border-white m-1 shadow tippy"
         data-tippy="<%= user_displayed_name(@song.user) %>" src="<%= Attachments.avatar_url(@song.user.avatar, 40) %>"
         srcset="<%= Attachments.avatar_srcset(@song.user.avatar, 50) %>" sizes="50px">
@@ -35,8 +35,6 @@
     <div class="song-minicard__body flex pt-2">
       <span class="primary-text text-ellipsis truncate"><%= @song.title %></span>
       <span class="secondary-text text-ellipsis truncate"><%= @song.artist %></span>
-      <span class="text-gray-800 text-ellipsis truncate"><%= gettext "by" %>
-        <%= user_displayed_name(@song.user) %></span>
 
       <footer>
         <span class="label label-default"><%= @song.genre %></span>

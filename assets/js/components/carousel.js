@@ -4,7 +4,7 @@ class Carousel {
     document.addEventListener(
       "click",
       e => {
-        if (e.target && e.target.matches(".carousel-prev:not(.disabled)")) {
+        if (e.target && e.target.matches("[data-js-carousel=prev]:not(.disabled)")) {
           e.preventDefault();
           e.stopPropagation();
           this.prev(e.target);
@@ -16,7 +16,7 @@ class Carousel {
     document.addEventListener(
       "click",
       e => {
-        if (e.target && e.target.matches(".carousel-next:not(.disabled)")) {
+        if (e.target && e.target.matches("[data-js-carousel=next]:not(.disabled)")) {
           e.preventDefault();
           e.stopPropagation();
           this.next(e.target);
@@ -50,8 +50,8 @@ class Carousel {
 
   _switchDisable(el) {
     let root = el.closest(".carousel");
-    let next_ctrl = root.querySelector(".carousel-next");
-    let prev_ctrl = root.querySelector(".carousel-prev");
+    let next_ctrl = root.querySelector("[data-js-carousel=next]");
+    let prev_ctrl = root.querySelector("[data-js-carousel=prev]");
 
     let current_step = el.scrollLeft;
     let max_width = el.scrollWidth;
