@@ -23,11 +23,11 @@
         </div>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline">
-            <%= link "Dashboard", to: Routes.home_path(@conn, :index), class: "px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700" %>
-            <%= link "Charts", to: Routes.top_path(@conn, :index), class: "ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-            <%= link "Library", to: Routes.song_path(@conn, :index), class: "ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-            <%= link "Members", to: Routes.user_path(@conn, :index), class: "ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-            <%= link "Events", to: Routes.event_path(@conn, :index), class: "ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
+            <%= navbar_pill @conn, "Dashboard", to: Routes.home_path(@conn, :index) %>
+            <%= navbar_pill @conn, "Charts", to: Routes.top_path(@conn, :index), class: "ml-4" %>
+            <%= navbar_pill @conn, "Library", to: Routes.song_path(@conn, :index), class: "ml-4" %>
+            <%= navbar_pill @conn, "Members", to: Routes.user_path(@conn, :index), class: "ml-4"%>
+            <%= navbar_pill @conn, "Events", to: Routes.event_path(@conn, :index), class: "ml-4" %>
           </div>
         </div>
       </div>
@@ -93,12 +93,12 @@
   <div class="md:hidden hidden " x-description="Mobile menu, toggle classes based on menu state." x-state:on="Open"
     x-state:off="closed" :class="{ 'block': open, 'hidden': !open }">
     <div class="px-2 pt-2 pb-3 sm:px-3">
-      <%= link "Dashboard", to: Routes.home_path(@conn, :index), class: "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700" %>
-      <%= link "Charts", to: Routes.top_path(@conn, :index), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-      <%= link "Library", to: Routes.song_path(@conn, :index), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-      <%= link "Events", to: Routes.event_path(@conn, :index), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
+      <%= navbar_link @conn, "Dashboard", to: Routes.home_path(@conn, :index) %>
+      <%= navbar_link @conn, "Charts", to: Routes.top_path(@conn, :index) %>
+      <%= navbar_link @conn, "Library", to: Routes.song_path(@conn, :index) %>
+      <%= navbar_link @conn, "Events", to: Routes.event_path(@conn, :index) %>
       <%= if @current_user do %>
-      <%= link "Members", to: Routes.user_path(@conn, :index), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
+      <%= navbar_link @conn, "Members", to: Routes.user_path(@conn, :index) %>
       <% end %>
     </div>
 
