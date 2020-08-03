@@ -72,6 +72,11 @@
   </section>
 </div>
 
+
+<%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
+
+
+
 <template id="comment-tpl">
   <li class="flex mb-4">
     <div class="hidden md:flex">

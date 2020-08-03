@@ -151,6 +151,19 @@ defmodule Wsdjs.Musics.Songs do
     |> Repo.all()
   end
 
+    @doc """
+  Returns the songs filtered by facets.
+  """
+  def list_songs(%User{} = user) do
+    user
+    |> Songs.scoped()
+    |> where([s], s.suggestion == true)
+    |> order_by(desc: :inserted_at)
+    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> limit(15)
+    |> Repo.all()
+  end
+
   defp filter_has_video(query, %{"with_video" => "true"}) do
     join(query, :inner, [q], v in fragment("SELECT song_id FROM videos AS v group by song_id"),
       on: q.id == v.song_id
