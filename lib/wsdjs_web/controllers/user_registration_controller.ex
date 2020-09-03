@@ -5,6 +5,8 @@ defmodule WsdjsWeb.UserRegistrationController do
   alias Wsdjs.Accounts.User
   alias WsdjsWeb.UserAuth
 
+  plug :put_root_layout, {WsdjsWeb.LayoutView, :root_auth}
+
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
     render(conn, "new.html", changeset: changeset)
