@@ -4,6 +4,8 @@ defmodule WsdjsWeb.UserSessionController do
   alias Wsdjs.Accounts
   alias WsdjsWeb.UserAuth
 
+  plug :put_root_layout, {WsdjsWeb.LayoutView, :root_auth}
+
   def new(conn, _params) do
     render(conn, "new.html", error_message: nil)
   end

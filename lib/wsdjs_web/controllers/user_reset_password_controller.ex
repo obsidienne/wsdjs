@@ -4,6 +4,7 @@ defmodule WsdjsWeb.UserResetPasswordController do
   alias Wsdjs.Accounts
 
   plug :get_user_by_reset_password_token when action in [:edit, :update]
+  plug :put_root_layout, {WsdjsWeb.LayoutView, :root_auth}
 
   def new(conn, _params) do
     render(conn, "new.html")

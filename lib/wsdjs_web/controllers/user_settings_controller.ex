@@ -5,6 +5,7 @@ defmodule WsdjsWeb.UserSettingsController do
   alias WsdjsWeb.UserAuth
 
   plug :assign_email_and_password_changesets
+  plug :put_root_layout, {WsdjsWeb.LayoutView, :root_auth}
 
   def edit(conn, _params) do
     render(conn, "edit.html")
