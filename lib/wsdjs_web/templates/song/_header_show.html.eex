@@ -24,6 +24,7 @@
             </div>
         </div>
     </div>
+    <%= if @current_user do %>
     <div class="mt-5 flex lg:mt-0 lg:ml-4">
         <span class="hidden sm:block shadow-sm rounded-md">
             <button type="button"
@@ -94,4 +95,5 @@
             </div>
         </span>
     </div>
+    <% end %>
 </div>
