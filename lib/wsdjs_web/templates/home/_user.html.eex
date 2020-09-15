@@ -1,9 +1,12 @@
-<li style="grid-row: 1">
-  <a href="<%= Routes.user_path(@conn, :show, @user) %>">
-    <div class="aspect-ratio-square relative mb-2 h-40 w-40">
-      <img src="<%= Attachments.art_url(@user.avatar, 200) %>" srcset="<%= Attachments.art_srcset(@user.avatar, 200) %>"
-        class="rounded-full shadow hover:opacity-50 h-40 w-40 " />
+<li>
+  <a href="<%= Routes.user_path(@conn, :show, @user) %>" class="space-y-4">
+    <img class="mx-auto h-20 w-20 rounded-full lg:w-24 lg:h-24" src="<%= Attachments.art_url(@user.avatar, 200) %>"
+      srcset="<%= Attachments.art_srcset(@user.avatar, 200) %>" alt="">
+    <div class="space-y-2">
+      <div class="text-xs leading-4 font-medium lg:text-sm lg:leading-5">
+        <h4><%= @user.email %></h4>
+        <p class="text-indigo-600">Co-Founder / CTO</p>
+      </div>
     </div>
-    <span class="block text-center"><%= @user.email %></span>
   </a>
 </li>

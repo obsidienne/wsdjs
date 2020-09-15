@@ -1,4 +1,4 @@
-<section class="container">
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8">
   <%= if Enum.count(@songs) > 0 do %>
   <section class="carousel mt-12">
     <div class="flex items-end justify-between">
@@ -28,8 +28,10 @@
     </div>
   </section>
   <% end %>
+</section>
 
-  <%= if @top && Enum.count(@top.ranks) > 0 do %>
+<%= if @top && Enum.count(@top.ranks) > 0 do %>
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8">
   <section class="carousel mt-12">
     <div class="flex items-end">
       <h2 class="mb-4">
@@ -64,36 +66,23 @@
       </ul>
     </div>
   </section>
-  <% end %>
+</section>
+<% end %>
 
-  <section class="carousel mt-12">
-    <div class="flex items-end justify-between">
-      <h2 class="mb-4">DeeJays</h2>
-      <div class="carousel-controls mb-4">
-        <button class="carousel-control cursor-pointer disabled" type="button">
-          <svg fill="currentColor" viewBox="0 0 20 20" height="2rem" width="2rem">
-            <path fill-rule="evenodd"
-              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-              clip-rule="evenodd"></path>
-          </svg>
-          <span class="sr-only">Back</span>
-        </button>
-        <button class="carousel-control cursor-pointer" data-js-carousel="next" type="button">
-          <svg fill="currentColor" viewBox="0 0 20 20" height="2rem" width="2rem">
-            <path fill-rule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"></path>
-          </svg>
-          <span class="sr-only">Next</span>
-        </button>
+<div class="bg-white">
+  <div class="max-w-screen-xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
+    <div class="space-y-8 sm:space-y-12">
+      <div class="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
+        <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">The People</h2>
+        <p class="text-xl leading-7 text-gray-500">Risus velit condimentum vitae tincidunt tincidunt. Mauris ridiculus
+          fusce amet urna nunc. Ut nisl ornare diam in.</p>
       </div>
-    </div>
-    <div data-simplebar id="a">
-      <ul class="list-reset carousel-items grid gap-4 mt-4">
+      <ul
+        class="mx-auto grid grid-cols-2 col-gap-4 row-gap-8 sm:grid-cols-4 md:col-gap-6 lg:max-w-5xl lg:col-gap-8 lg:row-gap-12 xl:grid-cols-6">
         <%= for user <- @users do %>
         <%= render "_user.html", conn: @conn, user: user, current_user: @current_user %>
         <% end %>
       </ul>
     </div>
-  </section>
-</section>
+  </div>
+</div>

@@ -1,9 +1,11 @@
 <main role="main" class="<%= js_view_name(@conn, @view_template) %>"
   data-js-view-name="<%= js_view_name(@conn, @view_template) %>" data-user-id="<%= current_user_id(@current_user) %>">
 
-  <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+  <div class="py-6">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    </div>
     <%= @inner_content %>
   </div>
 </main>
