@@ -21,9 +21,10 @@
 
 /* LiveView specific classes for your customizations */
 .invalid-feedback {
-  color: #a94442;
+  @apply mt-2;
+  @apply text-sm;
+  @apply text-red-600;
   display: block;
-  margin: -1rem 0 2rem;
 }
 
 .phx-no-feedback.invalid-feedback,

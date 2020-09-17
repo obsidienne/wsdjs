@@ -1,11 +1,52 @@
-<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-  <%= form_for @changeset, Routes.top_path(@conn, :create), fn f -> %>
-  <div class="form-group">
-    <%= label f, :due_date, "Top of", class: "control-label" %>
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen ">
+  <%= form_for @changeset, Routes.top_path(@conn, :create), [id: "top_new_form"], fn f -> %>
+  <div>
     <div>
-      <%= date_select f, :due_date, class: "form-control", required: "required", type: "date", day: [options: [1]] %>
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Create a new Top
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+          Create a very cool new top using the date to deduce the month.
+        </p>
+      </div>
+      <div class="mt-6 sm:mt-5">
+        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= label f, :due_date, "Month of the TOP to create", class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs flex">
+              <%= date_select f, 
+                    :due_date, 
+                    day: [
+                      class: "form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5",
+                      options: [1]
+                    ],
+                    month: [
+                      class: "form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5",
+                      required: "required"
+                    ],
+                    year: [
+                      class: "form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5",
+                      required: "required"
+                    ] %>
+            </div>
+            <p class="mt-2 text-sm text-red-600"><%= error_tag f, :due_date  %></p>
+            <p class="mt-2 text-sm text-gray-500">Select the date to use for this top.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <%= error_tag f, :due_date %>
+  </div>
+  <div class="mt-8 border-t border-gray-200 pt-5">
+    <div class="flex justify-end">
+      <span class="inline-flex rounded-md shadow-sm">
+        <%= link "Cancel", to: Routes.top_path(@conn, :index), class: "py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out" %>
+      </span>
+      <span class="ml-3 inline-flex rounded-md shadow-sm">
+        <%= submit "Next step", form: "top_new_form", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+      </span>
+    </div>
   </div>
   <% end %>
 </div>
