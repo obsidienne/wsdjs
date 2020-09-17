@@ -7,27 +7,6 @@
 }
 
 /****************************
-  top timeline vertical line
-****************************/
-
-.tops::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 33px;
-  height: 100%;
-  width: 4px;
-  background: #d7e4ed;
-}
-
-@media only screen and (min-width: 992px) {
-  .tops::before {
-    left: 50%;
-    margin-left: -2px;
-  }
-}
-
-/****************************
   top timeline
 ****************************/
 
