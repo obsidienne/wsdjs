@@ -53,7 +53,7 @@ defmodule Wsdjs.Accounts do
 
   def list_djs do
     User
-    |> limit(7)
+    |> limit(24)
     |> where(profil_djvip: true)
     |> Repo.all()
     |> load_avatar()
