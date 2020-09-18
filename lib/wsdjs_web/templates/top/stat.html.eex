@@ -40,7 +40,7 @@
     <%= for user <- Wsdjs.Accounts.list_users() do %>
     <%= if user.profil_djvip do %>
     <li class="shadow p-4">
-      <h2 class="h2"><%= user.name %></h2>
+      <h2 class="h2"><%= user.email %></h2>
       <ol>
         <li><%= get_song_by(@top, user, 1) %></li>
         <li><%= get_song_by(@top, user, 2) %></li>
