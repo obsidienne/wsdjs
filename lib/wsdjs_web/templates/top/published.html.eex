@@ -1,111 +1,38 @@
-<%= if @current_user && @current_user.admin do %>
-<%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb py-4">
-  <ol class="container">
-    <li class="visited inline-block">Voting</li>
-    <li class="visited inline-block">
-      <%= submit "Counting", class: "btn btn-link", name: "direction", value: "previous" %>
-    </li>
-    <li class="current inline-block">Published</li>
-  </ol>
-</nav>
-<% end %>
-<% end %>
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen top-voting">
 
-<header>
-  <div class="container">
-    <h1>TOP 10, <time class="date-format"
-        datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time>
-      <span class="text-gray-800"><%= @top.status %></span></h1>
-  </div>
-</header>
+  <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
+    <div class="bg-white px-4 py-5 sm:px-6">
+      <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-no-wrap">
+        <div class="ml-4 mt-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            <time
+              datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time>
 
-<%= if @current_user && @current_user.admin do %>
-<div class="container flex items-center justify-end mb-2 mt-4 h-12">
-  <%= link "Text version", to: Routes.top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link", target: "_blank" %>
-  <%= link "statistics", to: Routes.top_stat_path(@conn, :stat, @top.id), class: "btn btn-link ml-2" %>
-</div>
-<% end %>
-
-<section class="container top-published">
-  <%= for rank <- @ranks do %>
-  <%= if blur_track(rank.song, @current_user) == true do %>
-
-  <article class="top-song flex flex-row">
-    <div class="song-art-container">
-      <div class="voting-position charted">
-        <div class="chart-bg"></div>
-        <div class="chart-value"><%= rank.position %></div>
-      </div>
-      <img src="<%= Attachments.art_url(nil, 200)%>" class="responsive" />
-    </div>
-    <div class="top-song-body">
-      <div>
-        <h2 class="text-gray-800">hidden track</h2>
-      </div>
-
-      <aside>
-        <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
-
-        <span class="label label-default"><%= rank.song.genre %></span>
-        <%= if rank.song.bpm > 0 do %>
-        <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-        <% end %>
-        <span class="label label-primary"><%= rank.votes + rank.bonus + rank.likes %> points</span>
-      </aside>
-    </div>
-  </article>
-
-  <% else %>
-
-  <article class="top-song flex flex-row">
-    <div class="song-art-container">
-      <div class="voting-position charted">
-        <div class="chart-bg"></div>
-        <div class="chart-value"><%= rank.position %></div>
-      </div>
-      <div class="aspect-ratio-square relative">
-        <img src="<%= Attachments.art_url(rank.song.art, 300) %>"
-          srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive absolute top-0" />
-      </div>
-      <%= if rank.song.url do %>
-      <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play absolute" target="_blank" rel="noopener"
-        <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
-        <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-          <path d='M0 0h24v24H0z' fill='none' />
-          <path
-            d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z' />
-        </svg>
-      </a>
-      <% end %>
-    </div>
-    <div class="top-song-body">
-      <div>
-        <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link inline-block" do %>
-        <span><%= rank.song.title %></span>
-        <% end %>
-        <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
-        <span class="text-gray-800 flex">
-          <%= gettext "by" %>&nbsp;<%= proposed_by_link(@conn, rank.song) %>, &nbsp;
-          <time datetime="<%= utc_to_local(rank.song.inserted_at) %>"
-            title="<%= Timex.format!(Timex.to_datetime(rank.song.inserted_at), "%d %b, %k:%M", :strftime) %>">
-            <%= Timex.format!(rank.song.inserted_at, "%b %Y", :strftime) %>
-          </time>
-        </span>
-      </div>
-
-      <aside>
-        <span class="label label-default"><%= rank.song.genre %></span>
-        <%= if rank.song.bpm > 0 do %>
-        <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-        <% end %>
-        <span class="label label-primary"><%= rank.votes + rank.bonus + rank.likes %> points</span>
-        <div class="opinions">
-          <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
+          </h3>
+          <p class="mt-1 text-sm leading-5 text-gray-500"> For this top, there is <%= Enum.count(@ranks) %> songs </p>
         </div>
-      </aside>
+        <div class="ml-4 mt-4 flex-shrink-0 flex">
+          <span class="inline-flex rounded-md shadow-sm">
+            <%= if @current_user && @current_user.admin do %>
+            <%= link to: Routes.top_stat_path(@conn, :stat, @top.id), class: "relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800" do %>
+            <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            </svg>
+            <span> Statistic </span>
+            <% end %>
+
+            <%= link "Text version", to: Routes.top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link", target: "_blank" %>
+
+            <% end %>
+          </span>
+        </div>
+      </div>
     </div>
-  </article>
-  <% end %>
-  <% end %>
+    <ul>
+      <%= for rank <- @ranks do %>
+      <%= render "_published.html", conn: @conn, current_user: @current_user, rank: rank, votes: @votes %>
+      <% end %>
+    </ul>
+  </div>
 </section>
