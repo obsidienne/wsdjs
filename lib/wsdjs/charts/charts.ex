@@ -12,22 +12,6 @@ defmodule Wsdjs.Charts do
   alias Wsdjs.Repo
 
   @doc """
-  Returns the current user's last accessible published Top.
-  """
-  def last_top(current_user) do
-    current_user
-    |> Top.scoped()
-    |> order_by(desc: :due_date)
-    |> where(status: "published")
-    |> limit(1)
-    |> Repo.one()
-    |> Repo.preload(ranks: list_rank())
-    |> Repo.preload(ranks: :song)
-    |> Repo.preload(ranks: [song: :art])
-    |> Repo.preload(ranks: [song: [user: :avatar]])
-  end
-
-  @doc """
   Returns the current user's last 3 accessible published Top.
   """
   def last_tops(current_user) do
