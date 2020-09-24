@@ -72,11 +72,6 @@
   color: hsl(0, 0%, 29%);
 }
 
-.bg-hover:hover {
-  filter: brightness(80%);
-  background-color: rgba(29, 33, 41, 0.04);
-}
-
 .facets-container {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999;

@@ -12,29 +12,6 @@
   padding-left: 0;
 }
 
-.video__delete {
-  display: inline-block;
-  position: absolute;
-  top: 5px;
-  right: 2px;
-  width: 24px;
-  height: 24px;
-}
-
-.overview-video {
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .overview-video {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.overview-video:empty {
-  display: none;
-}
-
 /****************************
   minicard
 ****************************/
@@ -46,71 +23,9 @@
   overflow: hidden;
 }
 
-.song-minicard__heading {
-  width: 96px;
-  height: 96px;
-  flex: 0 0 96px;
-  position: relative;
-  overflow: hidden;
-}
-
 .song-minicard__body {
   flex-direction: column;
   min-width: 0;
   flex: 1 1 auto;
   overflow: hidden;
-}
-
-/****************************
-  card
-****************************/
-.song-card {
-  height: 100%;
-  /* safari bug */
-  width: auto;
-}
-
-.song-card__tags {
-  position: absolute;
-  bottom: 0;
-}
-
-.song-card__tags svg {
-  margin-left: auto;
-  border-radius: 100%;
-  background-color: hsla(0, 0%, 50%, 0.1);
-}
-
-.song-card__header {
-  position: relative;
-  overflow: hidden;
-}
-
-.song-card__header span {
-  transition: all 0.2s ease;
-}
-
-.song-card__header:hover .song-card__tags svg {
-  transform: scale(2) translate(-5px, -5px);
-  background-color: hsl(0, 0%, 50%);
-}
-
-.song-card__header:hover .song-card__tags span {
-  opacity: 0;
-}
-
-/****************************
-  square card
-****************************/
-
-@media (min-width: 768px) {
-  .song-card {
-    width: 216px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .song-card {
-    width: 13rem;
-  }
 }

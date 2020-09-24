@@ -1,26 +1,10 @@
 /****************************
-  ??
-****************************/
-
-.tops__top__art > div {
-  flex: 1 0 20%;
-}
-
-/****************************
   top timeline
 ****************************/
 
 .tops {
   position: relative;
   width: 100%;
-}
-
-.tops__top__anchor {
-  top: 0;
-  width: 3rem;
-  height: 3rem;
-  left: 50%;
-  margin-left: -23px;
 }
 
 .tops__top__content {
