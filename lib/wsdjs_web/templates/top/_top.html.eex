@@ -5,7 +5,7 @@
         <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
       </time>
       <span class="label label-default"><%= @top.status %></span></span>
-    <div class="tops__top__art flex flex-wrap m-top-1 w-full">
+    <div class="flex flex-wrap m-top-1 w-full">
       <%= for rank <- @top.ranks do %>
       <div>
         <div class="aspect-ratio-square relative">

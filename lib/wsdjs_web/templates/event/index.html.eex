@@ -1,23 +1,24 @@
 <section class="container mt-4">
-<ul class="list-reset events">
-  <li class="p-4 border border-dashed bg-white mb-4">
-    <%= link to: Routes.event_path(@conn, :new), class: "flex h-full w-full items-center" do %>
+  <ul class="list-reset events">
+    <li class="p-4 border border-dashed bg-white mb-4">
+      <%= link to: Routes.event_path(@conn, :new), class: "flex h-full w-full items-center" do %>
       <span>Create a new event</span>
       <svg width="24" height="24" viewBox="0 0 24 24" class="ml-auto">
-        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        <path d="M0 0h24v24H0z" fill="none" />
       </svg>
-    <% end %>
-  </li>
-<%= for event <- @events do %>
-    <li class="shadow p-4 mb-4">
-      <%= link to: Routes.event_path(@conn, :show, event), class: "block" do %>
-        <span class="font-bold"><%= event.name %></span>
-        <div>
-          <%= event.starts_on %>
-          <%= event.ends_on %>
-        </div>
       <% end %>
     </li>
-<% end %>
-</ul>
+    <%= for event <- @events do %>
+    <li class="shadow p-4 mb-4">
+      <%= link to: Routes.event_path(@conn, :show, event), class: "block" do %>
+      <span class="font-bold"><%= event.name %></span>
+      <div>
+        <%= event.starts_on %>
+        <%= event.ends_on %>
+      </div>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
 </section>

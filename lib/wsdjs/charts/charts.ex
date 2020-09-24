@@ -28,6 +28,21 @@ defmodule Wsdjs.Charts do
   end
 
   @doc """
+  Returns the current user's last 3 accessible published Top.
+  """
+  def last_tops(current_user) do
+    current_user
+    |> Top.scoped()
+    |> order_by(desc: :due_date)
+    |> where(status: "published")
+    |> limit(3)
+    |> Repo.all()
+    |> Repo.preload(ranks: list_rank())
+    |> Repo.preload(ranks: :song)
+    |> Repo.preload(ranks: [song: :art])
+  end
+
+  @doc """
   Returns Tops accessible for the current user.
   """
   def paginate_tops(current_user, paginate_params \\ %{}) do

@@ -39,12 +39,5 @@
       <% end %>
     </ul>
   </div>
-
-
-  <section class="top-songs-container">
-    <%= for rank <- @ranks do %>
-
-    <% end %>
-  </section>
   <% end %>
 </section>

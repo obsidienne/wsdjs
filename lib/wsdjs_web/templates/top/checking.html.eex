@@ -1,85 +1,37 @@
-<header>
-  <div class="container">
-    <h1>TOP 10, <time class="date-format"
-        datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time>
-      <span class="text-gray-800"><%= @top.status %></span></h1>
-  </div>
-</header>
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen top-voting">
 
-<%= if @current_user && @current_user.id == @top.user_id do %>
-<%= form_for @changeset, Routes.top_path(@conn, :update, @top.id), fn _ -> %>
-<nav class="secondary-nav breadcrumb py-4">
-  <ol class="container">
-    <li class="visited inline-block">Create</li>
-    <li class="current inline-block">Check</li>
-    <li class="inline-block"><%= submit "next step : vote", class: "btn btn-link", name: "direction", value: "next" %>
-    </li>
-  </ol>
-</nav>
-<% end %>
-<% end %>
+  <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
+    <div class="bg-white px-4 py-5 sm:px-6">
+      <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-no-wrap">
+        <div class="ml-4 mt-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            <time
+              datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Timex.format!(@top.due_date, "%b %Y", :strftime) %></time>
 
-<%= if Wsdjs.Charts.Policy.can?(@current_user, :delete_top) == :ok do %>
-<div class="container flex items-center justify-end mb-2 mt-4 h-12">
-  <%= link "Delete top", to: Routes.top_path(@conn, :delete, @top), class: "btn btn-danger", method: "delete", data: [confirm: "Delete top for #{Timex.format!(Timex.to_datetime(@top.due_date), "%B %Y", :strftime)}.\n\nAre you sure ?"] %>
-</div>
-<% end %>
+          </h3>
+          <p class="mt-1 text-sm leading-5 text-gray-500"> For this top, there is <%= Enum.count(@ranks) %> songs </p>
+        </div>
+        <div class="ml-4 mt-4 flex-shrink-0 flex">
+          <span class="inline-flex rounded-md shadow-sm">
 
-
-<section class="container">
-  <%= for rank <- @ranks do %>
-  <article class="top-song flex flex-row">
-    <div class="song-art-container">
-      <div class="aspect-ratio-square relative">
-        <img src="<%= Attachments.art_url(rank.song.art, 300) %>"
-          srcset="<%= Attachments.art_srcset(rank.song.art, 150) %>" sizes="150px" class="responsive absolute top-0" />
+            <%= if @current_user && @current_user.admin do %>
+            <%= link to: Routes.top_stat_path(@conn, :stat, @top.id), class: "relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800" do %>
+            <!-- Heroicon name: phone -->
+            <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            </svg>
+            <span> Statistic </span>
+            <% end %>
+            <% end %>
+          </span>
+        </div>
       </div>
-      <%= if rank.song.url do %>
-      <a href="<%= url_for_provider(rank.song) %>" class="flex song-art__play absolute" target="_blank" rel="noopener"
-        <%= if is_binary(rank.song.video_id), do: "data-video-id=#{rank.song.video_id}" %>>
-        <svg fill='#FFC107' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-          <path d='M0 0h24v24H0z' fill='none' />
-          <path
-            d='M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z' />
-        </svg>
-      </a>
-      <% end %>
     </div>
-    <div class="top-song-info-container">
-      <div class="top-song-body">
-        <div>
-          <%= link to: Routes.song_path(@conn, :show, rank.song), class: "primary-text action-link visible-link" do %>
-          <%= rank.song.title %>
-          <% end %>
-          <span class="text-ellipsis secondary-text truncate"><%= rank.song.artist %></span>
-        </div>
-
-        <aside>
-          <span class="label label-default"><%= rank.song.genre %></span>
-          <%= if rank.song.bpm > 0 do %>
-          <span class="label label-primary"><%= rank.song.bpm %> bpm</span>
-          <% end %>
-          <%= if rank.song.instant_hit do %>
-          <span class="label label-default">instant hit</span>
-          <% end %>
-          <%= if rank.song.hidden_track do %>
-          <span class="label label-default">hidden track</span>
-          <% end %>
-          <%= if rank.song.public_track do %>
-          <span class="label label-default">public track</span>
-          <% end %>
-          <div class="opinions">
-            <%= render WsdjsWeb.OpinionView, "_opinion_count.html", opinions: rank.song.opinions %>
-          </div>
-        </aside>
-      </div>
-      <div>
-        <div>
-          <div class="form-group">
-            <%= link "Remove song from this top", to: Routes.rank_path(@conn, :delete, rank.id), method: :delete, class: "btn btn-danger" %>
-          </div>
-        </div>
-      </div>
-  </article>
-  <% end %>
+    <ul>
+      <%= for rank <- @ranks do %>
+      <%= render "_checking.html", conn: @conn, current_user: @current_user, rank: rank, votes: @votes %>
+      <% end %>
+    </ul>
+  </div>
 </section>

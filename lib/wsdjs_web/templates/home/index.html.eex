@@ -30,43 +30,26 @@
   <% end %>
 </section>
 
-<%= if @top && Enum.count(@top.ranks) > 0 do %>
-<section class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-  <section class="carousel mt-12">
-    <div class="flex items-end">
-      <h2 class="mb-4">
-        <time class="date-format" datetime="<%= Date.to_iso8601(@top.due_date) %>">
-          <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
-        </time>, DJs Top
-      </h2>
-      <%= link "details", to: Routes.top_path(@conn, :show, @top), class: "ml-2 mb-6 @apply border-b-2 border-solid border-yellow-600" %>
-      <div class="carousel-controls mb-4 whitespace-no-wrap ml-auto">
-        <button class="carousel-control cursor-pointer disabled" data-js-carousel="prev" type="button">
-          <svg fill="currentColor" viewBox="0 0 20 20" height="2rem" width="2rem">
-            <path fill-rule="evenodd"
-              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-              clip-rule="evenodd"></path>
-          </svg>
-          <span class="sr-only">Back</span>
-        </button><button class="carousel-control cursor-pointer" data-js-carousel="next" type="button">
-          <svg fill="currentColor" viewBox="0 0 20 20" height="2rem" width="2rem">
-            <path fill-rule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"></path>
-          </svg>
-          <span class="sr-only">Next</span>
-        </button>
+
+
+<%= if @tops do %>
+<div class="bg-white">
+  <div class="mx-auto py-12 px-4 max-w-screen-xl sm:px-6 lg:px-8 lg:py-24">
+    <div class="space-y-12">
+      <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+        <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Our Last Top 10</h2>
+        <p class="text-xl leading-7 text-gray-500">Odio nisi, lectus dis nulla. Ultrices maecenas vitae rutrum dolor
+          ultricies donec risus sodales. Tempus quis et.</p>
       </div>
-    </div>
-    <div data-simplebar>
-      <ul class="list-reset carousel-items grid gap-4 mt-4">
-        <%= for rank <- @top.ranks do %>
-        <%= render "_song.html", conn: @conn, rank: rank, current_user: @current_user %>
+      <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6  sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+        <%= for top <- @tops do %>
+        <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
         <% end %>
       </ul>
     </div>
-  </section>
-</section>
+  </div>
+</div>
+
 <% end %>
 
 <div class="bg-white">
