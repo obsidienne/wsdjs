@@ -1,71 +1,46 @@
-<section class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-  <%= if Enum.count(@songs) > 0 do %>
-  <section class="carousel mt-12">
-    <div class="flex items-end justify-between">
-      <h2>#trends</h2>
-      <div class="carousel-controls whitespace-no-wrap">
-        <button class="carousel-control cursor-pointer disabled" data-js-carousel="prev" type="button">
-          <svg fill="currentColor" viewBox="0 0 20 20" height="2rem" width="2rem">
-            <path fill-rule="evenodd"
-              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-              clip-rule="evenodd"></path>
-          </svg>
-          <span class="sr-only">Back</span>
-        </button><button class="carousel-control cursor-pointer" data-js-carousel="next" type="button">
-          <svg fill="currentColor" viewBox="0 0 20 20" height="2rem" width="2rem">
-            <path fill-rule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"></path>
-          </svg>
-          <span class="sr-only">Next</span>
-        </button>
-      </div>
+<div class="mx-auto py-12 px-4 max-w-screen-xl sm:px-6 lg:px-8 lg:py-24">
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
+    <div class="space-y-5 sm:space-y-4">
+      <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Latest trend</h2>
+      <p class="text-xl leading-7 text-gray-500">Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
+        elementum enim vitae ullamcorper suspendisse. Vivamus fringilla.</p>
     </div>
-    <div data-simplebar>
-      <ul class="list-reset carousel-items grid gap-4 mt-4">
+    <div class="lg:col-span-2">
+      <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
         <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html", conn: @conn, as: :song, current_user: @current_user %>
-      </ul>
-    </div>
-  </section>
-  <% end %>
-</section>
-
-
-
-<%= if @tops do %>
-<div class="bg-white">
-  <div class="mx-auto py-12 px-4 max-w-screen-xl sm:px-6 lg:px-8 lg:py-24">
-    <div class="space-y-12">
-      <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
-        <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Our Last Top 10</h2>
-        <p class="text-xl leading-7 text-gray-500">Odio nisi, lectus dis nulla. Ultrices maecenas vitae rutrum dolor
-          ultricies donec risus sodales. Tempus quis et.</p>
-      </div>
-      <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6  sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
-        <%= for top <- @tops do %>
-        <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
-        <% end %>
       </ul>
     </div>
   </div>
 </div>
 
-<% end %>
 
-<div class="bg-white">
-  <div class="max-w-screen-xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
-    <div class="space-y-8 sm:space-y-12">
-      <div class="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
-        <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">The People</h2>
-        <p class="text-xl leading-7 text-gray-500">Risus velit condimentum vitae tincidunt tincidunt. Mauris ridiculus
-          fusce amet urna nunc. Ut nisl ornare diam in.</p>
-      </div>
-      <ul
-        class="mx-auto grid grid-cols-2 col-gap-4 row-gap-8 sm:grid-cols-4 md:col-gap-6 lg:max-w-5xl lg:col-gap-8 lg:row-gap-12 xl:grid-cols-6">
-        <%= for user <- @users do %>
-        <%= render "_user.html", conn: @conn, user: user, current_user: @current_user %>
-        <% end %>
-      </ul>
+<div class="mx-auto py-12 px-4 max-w-screen-xl sm:px-6 lg:px-8 lg:py-24">
+  <div class="space-y-12">
+    <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+      <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Our Last Top 10</h2>
+      <p class="text-xl leading-7 text-gray-500">Odio nisi, lectus dis nulla. Ultrices maecenas vitae rutrum dolor
+        ultricies donec risus sodales. Tempus quis et.</p>
     </div>
+    <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6  sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+      <%= for top <- @tops do %>
+      <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="max-w-screen-xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
+  <div class="space-y-8 sm:space-y-12">
+    <div class="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
+      <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">The People</h2>
+      <p class="text-xl leading-7 text-gray-500">Risus velit condimentum vitae tincidunt tincidunt. Mauris ridiculus
+        fusce amet urna nunc. Ut nisl ornare diam in.</p>
+    </div>
+    <ul
+      class="mx-auto grid grid-cols-2 col-gap-4 row-gap-8 sm:grid-cols-4 md:col-gap-6 lg:max-w-5xl lg:col-gap-8 lg:row-gap-12 xl:grid-cols-6">
+      <%= for user <- @users do %>
+      <%= render "_user.html", conn: @conn, user: user, current_user: @current_user %>
+      <% end %>
+    </ul>
   </div>
 </div>

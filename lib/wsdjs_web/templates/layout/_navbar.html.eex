@@ -27,9 +27,10 @@
             <%= navbar_pill @conn, "Charts", to: Routes.top_path(@conn, :index), class: "ml-4" %>
             <%= navbar_pill @conn, "Library", to: Routes.song_path(@conn, :index), class: "ml-4" %>
             <%= if @current_user do %>
-            <%= navbar_pill @conn, "Members", to: Routes.user_path(@conn, :index), class: "ml-4"%>
+            <%# navbar_pill @conn, "Members", to: Routes.user_path(@conn, :index), class: "ml-4"%>
             <% end %>
-            <%= navbar_pill @conn, "Events", to: Routes.event_path(@conn, :index), class: "ml-4" %>
+
+            <%# navbar_pill @conn, "Events", to: Routes.event_path(@conn, :index), class: "ml-4" %>
           </div>
         </div>
       </div>

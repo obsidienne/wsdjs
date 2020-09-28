@@ -90,6 +90,7 @@ defmodule Wsdjs.Musics.Songs do
     |> where(instant_hit: true)
     |> preload([:art, user: :avatar, comments: :user, opinions: :user])
     |> order_by(desc: :inserted_at)
+    |> limit(6)
     |> Repo.all()
   end
 
