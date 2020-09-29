@@ -88,8 +88,7 @@
                 <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
                   aria-labelledby="user-menu">
                   <%= link "Your Profile", to: Routes.user_path(@conn, :show, @current_user.id), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings
-                  </a>
+                  <%= link "Settings", to: Routes.user_params_path(@conn, :show, @current_user), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
                   <%= link "log out", to: Routes.user_session_path(@conn, :delete), method: :delete, data: [pjax: "false"], class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
                 </div>
               </div>
@@ -135,7 +134,7 @@
               srcset="<%= Attachments.avatar_srcset(@current_user.avatar, 50) %>" sizes="50px" alt="" />
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium leading-none text-white">Tom Cook
+            <div class="text-base font-medium leading-none text-white"><%= @current_profil.name %>
             </div>
             <div class="mt-1 text-sm font-medium leading-none text-gray-400"><%= @current_user.email %>
             </div>

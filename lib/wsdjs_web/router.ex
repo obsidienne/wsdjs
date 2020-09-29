@@ -2,6 +2,7 @@ defmodule WsdjsWeb.Router do
   use WsdjsWeb, :router
 
   import WsdjsWeb.UserAuth
+  import WsdjsWeb.UserProfil
 
   pipeline :browser do
     plug(:accepts, ["html", "text"])
@@ -11,6 +12,7 @@ defmodule WsdjsWeb.Router do
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
     plug :fetch_current_user
+    plug :fetch_current_user_profil
   end
 
   pipeline :browser_auth do
