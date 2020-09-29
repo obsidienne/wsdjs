@@ -37,7 +37,7 @@
         fusce amet urna nunc. Ut nisl ornare diam in.</p>
     </div>
     <ul
-      class="mx-auto grid grid-cols-2 col-gap-4 row-gap-8 sm:grid-cols-4 md:col-gap-6 lg:max-w-5xl lg:col-gap-8 lg:row-gap-12 xl:grid-cols-6">
+      class="mx-auto grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 md:gap-x-6 lg:max-w-5xl lg:gap-x-8 lg:gap-y-12 xl:grid-cols-6">
       <%= for user <- @users do %>
       <%= render "_user.html", conn: @conn, user: user, current_user: @current_user %>
       <% end %>
