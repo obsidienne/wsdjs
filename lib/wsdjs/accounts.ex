@@ -58,6 +58,7 @@ defmodule Wsdjs.Accounts do
     |> where(profil_djvip: true)
     |> Repo.all()
     |> load_avatar()
+    |> load_profil()
   end
 
   def get_profil_by_user(%User{id: id}) do
