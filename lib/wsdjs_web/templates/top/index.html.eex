@@ -1,4 +1,4 @@
-<section id="top-list" class="tops max-w-7xl mx-auto sm:px-6 lg:px-8">
+<section id="top-list" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
   <%= for top <- @tops do %>
   <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
   <% end %>
