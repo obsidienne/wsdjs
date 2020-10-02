@@ -1,22 +1,4 @@
-<nav class="secondary-nav py-4">
-  <ol class="container">
-    <li class="current inline-block">
-      <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
-    </li>
-    <li class="inline-block">
-      <%= link "playlists", to: Routes.user_playlist_path(@conn, :index, @user) %>
-    </li>
-  </ol>
-</nav>
-
-
 <section class="container pt-4">
-  <div class="flex items-center">
-    <%= if @user && Wsdjs.Profils.can?(@conn.assigns.current_user, :edit_user, @user) == :ok do %>
-    <%= link "edit", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-link ml-auto" %>
-    <% end %>
-  </div>
-
   <dl class="pt-4">
     <%= if @user.profil.description do %>
     <dt>About Me</dt>
@@ -92,18 +74,9 @@
 <% end %>
 <% end %>
 
+<%= render "_playlists.html", conn: @conn, current_user: @current_user, user: @user, playlists: @playlists %>
 
-<%= for playlist <- @playlists do %>
-<div class="container pt-4 w-full">
-  <span class="text-bold"><%= playlist.name %></span>
-  <ol>
-    <%= for playlist_song <- playlist.playlist_songs do %>
-    <li>
-      <%= playlist_song.song.title %>
-    </li>
-    <% end %>
-  </ol>
-</div>
-<% end %>
+
+
 </div>
 </section>

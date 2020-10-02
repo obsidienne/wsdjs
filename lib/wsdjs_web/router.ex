@@ -86,7 +86,7 @@ defmodule WsdjsWeb.Router do
     resources("/events", EventController)
 
     resources "/users", UserController, only: [:index, :edit, :update] do
-      resources("/playlists", PlaylistController, only: [:new, :create, :index])
+      resources("/playlists", PlaylistController, only: [:new, :create])
     end
 
     live "/paginate-users", PaginateUsersLive

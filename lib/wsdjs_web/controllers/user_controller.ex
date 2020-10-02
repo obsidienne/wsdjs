@@ -23,7 +23,7 @@ defmodule WsdjsWeb.UserController do
     user = Accounts.get_user!(user_id)
 
     with :ok <- Profils.can?(current_user, :show, user) do
-      playlists = Wsdjs.Playlists.list_frontpage_playlist_songs(current_user)
+      playlists = Wsdjs.Playlists.list_playlists(user, current_user)
       user = Accounts.load_profil(user)
 
       conn

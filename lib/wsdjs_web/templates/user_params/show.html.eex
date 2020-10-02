@@ -13,8 +13,6 @@
 </nav>
 
 <section class="container pt-4">
-  <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, user: @user %>
-
   <div>
     <%= form_for @changeset, Routes.user_path(@conn, :update, @user), fn f -> %>
 

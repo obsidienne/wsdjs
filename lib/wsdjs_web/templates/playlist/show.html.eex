@@ -1,22 +1,4 @@
-<nav class="secondary-nav py-4">
-  <ol class="container">
-    <li class="inline-block">
-      <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
-    </li>
-    <li class="current inline-block">
-      <%= link "playlists", to: Routes.user_playlist_path(@conn, :index, @user) %>
-    </li>
-    <%= if Wsdjs.Profils.can?(@conn.assigns.current_user, :edit_user, @user) == :ok do %>
-    <li class="inline-block">
-      <%= link "params", to: Routes.user_params_path(@conn, :show, @user) %>
-    </li>
-    <% end %>
-  </ol>
-</nav>
-
 <section class="container pt-4">
-  <%= render WsdjsWeb.UserView, "_sidebar.html", conn: @conn, current_user: @current_user, user: @user %>
-
   <%= if @conn.assigns[:playlist] do %>
   <%= if @playlist.type == "playlist" do %>
   <%= render "_user_playlist.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, playlist_songs: @playlist_songs %>

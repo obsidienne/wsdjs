@@ -1,9 +1,9 @@
 <section id="playlist-section">
   <div class="h-12 flex flex-wrap mb-2 mt-4 items-center">
-    <%= link to: Routes.user_playlist_path(@conn, :index, @user), class: "flex" do %>
+    <%= link to: Routes.user_path(@conn, :show, @user), class: "flex" do %>
     <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-      <path d="M0 0h24v24H0z" fill="none"/>
+      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+      <path d="M0 0h24v24H0z" fill="none" />
     </svg>
     <% end %>
 
@@ -11,15 +11,17 @@
       <%= if @playlist.public == true do %>
       <span class="tippy ml-2" title="this list is public">
         <svg fill="#777777" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0h24v24H0z" fill="none"/>
-          <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/>
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z" />
         </svg>
       </span>
       <% else %>
       <span class="tippy ml-2" title="this list is private">
         <svg fill="#777777" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0h24v24H0z" fill="none"/>
-          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
         </svg>
       </span>
       <% end %>
@@ -28,27 +30,28 @@
 
   <%= if Enum.count(@playlist_songs) > 0 do %>
   <p>
-  <%= Enum.count(@playlist_songs) %> songs
+    <%= Enum.count(@playlist_songs) %> songs
   </p>
   <table class="table">
     <tbody>
-    <%= for song <- @playlist_songs do %>
-    <tr>
-      <td class="w-16">
-        <img src="<%= Attachments.art_url(song.art, 64) %>" srcset="<%= Attachments.art_srcset(song.art, 64) %>" sizes="64px" width="64px" height="64px" />
-      </td>
-      <td>
-        <%= link song.title, to: Routes.song_path(@conn, :show, song), class: "primary-text action-link visible-link" %>
-        <span class="secondary-text"><%= song.artist %></span>
-        <div>
-          <span class="label label-default"><%= song.genre %></span>
-          <%= if song.bpm > 0 do %>
+      <%= for song <- @playlist_songs do %>
+      <tr>
+        <td class="w-16">
+          <img src="<%= Attachments.art_url(song.art, 64) %>" srcset="<%= Attachments.art_srcset(song.art, 64) %>"
+            sizes="64px" width="64px" height="64px" />
+        </td>
+        <td>
+          <%= link song.title, to: Routes.song_path(@conn, :show, song), class: "primary-text action-link visible-link" %>
+          <span class="secondary-text"><%= song.artist %></span>
+          <div>
+            <span class="label label-default"><%= song.genre %></span>
+            <%= if song.bpm > 0 do %>
             <span class="label label-primary"><%= song.bpm %> bpm</span>
-          <% end %>
-        </div>
-      </td>
-    <tr>
-    <% end %>
+            <% end %>
+          </div>
+        </td>
+      <tr>
+        <% end %>
     </tbody>
   </table>
   <% end %>
