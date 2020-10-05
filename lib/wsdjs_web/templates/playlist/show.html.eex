@@ -1,16 +1,21 @@
-<section class="container pt-4">
-  <%= if @conn.assigns[:playlist] do %>
-  <%= if @playlist.type == "playlist" do %>
-  <%= render "_user_playlist.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, playlist_songs: @playlist_songs %>
-  <% end %>
-  <%= if @playlist.type == "suggested" do %>
-  <%= render "_user_suggestions.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, playlist_songs: @playlist_songs %>
-  <% end %>
-  <%= if @playlist.type == "likes and tops" do %>
-  <%= render "_user_top_like.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, playlist_songs: @playlist_songs %>
-  <% end %>
-  <%= if @playlist.type == "top 5" do %>
-  <%= render "_user_top5.html", conn: @conn, current_user: @current_user, user: @user, playlist: @playlist, playlist_songs: @playlist_songs %>
-  <% end %>
-  <% end %>
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen top-voting">
+
+  <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
+    <div class="bg-white px-4 py-5 sm:px-6">
+      <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-no-wrap">
+        <div class="ml-4 mt-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            <%= @playlist.name %>
+          </h3>
+          <p class="mt-1 text-sm leading-5 text-gray-500"> For this playlist, there is
+            <%= Enum.count(@playlist_songs) %> songs </p>
+        </div>
+      </div>
+    </div>
+    <ul>
+      <%= for song <- @playlist_songs do %>
+      <%= render "_song.html", conn: @conn, current_user: @current_user, song: song %>
+      <% end %>
+    </ul>
+  </div>
 </section>

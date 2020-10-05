@@ -1,3 +1,19 @@
+<!--
+  Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
+  Read the documentation to get started: https://tailwindui.com/documentation
+-->
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen ">
+
+  <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">Playlists</h2>
+  <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <%= render "_playlists.html", conn: @conn, current_user: @current_user, user: @user, playlists: @playlists %>
+  </ul>
+</div>
+
+
+
+
+
 <section class="container pt-4">
   <dl class="pt-4">
     <%= if @user.profil.description do %>
@@ -24,7 +40,7 @@
 
 <%= unless is_nil(@user.profil) do %>
 <%= unless is_nil(@user.profil.facebook) and is_nil(@user.profil.youtube) and is_nil(@user.profil.soundcloud) and is_nil(@user.profil.website) do %>
-<ul class="pt-4 list-reset container">
+<ul class="pt-4 list-reset container hidden">
   <li class="text-bold text-gray-800 mb-2">Elsewhere</li>
   <%= unless is_nil(@user.profil.facebook) do %>
   <li class="inline-block ml-2">
@@ -74,7 +90,6 @@
 <% end %>
 <% end %>
 
-<%= render "_playlists.html", conn: @conn, current_user: @current_user, user: @user, playlists: @playlists %>
 
 
 
