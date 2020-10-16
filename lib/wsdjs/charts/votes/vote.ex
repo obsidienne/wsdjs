@@ -3,7 +3,7 @@ defmodule Wsdjs.Charts.Vote do
   use Wsdjs.Schema
   import Ecto.Changeset
 
-  alias Wsdjs.{Accounts, Charts, Musics, Repo}
+  alias Wsdjs.{Accounts, Charts, Songs, Repo}
 
   @type t :: %__MODULE__{
           id: integer,
@@ -17,7 +17,7 @@ defmodule Wsdjs.Charts.Vote do
   schema "votes" do
     field(:votes, :integer)
 
-    belongs_to(:song, Musics.Song)
+    belongs_to(:song, Songs.Song)
     belongs_to(:top, Charts.Top)
     belongs_to(:user, Accounts.User)
 

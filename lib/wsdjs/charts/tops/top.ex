@@ -4,7 +4,7 @@ defmodule Wsdjs.Charts.Top do
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Wsdjs.{Accounts, Charts, Musics}
+  alias Wsdjs.{Accounts, Charts, Songs}
 
   @type t :: %__MODULE__{
           id: integer,
@@ -24,7 +24,7 @@ defmodule Wsdjs.Charts.Top do
     belongs_to(:user, Accounts.User)
     has_many(:ranks, Charts.Rank, on_delete: :delete_all)
     has_many(:votes, Charts.Vote, on_replace: :delete)
-    many_to_many(:songs, Musics.Song, join_through: Charts.Rank)
+    many_to_many(:songs, Songs.Song, join_through: Charts.Rank)
 
     timestamps()
   end

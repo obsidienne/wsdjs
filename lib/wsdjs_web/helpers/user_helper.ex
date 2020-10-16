@@ -9,7 +9,7 @@ defmodule WsdjsWeb.UserHelper do
 
   def user_avatar_alt(user), do: "#{user.name}"
 
-  def proposed_by_link(conn, %Wsdjs.Musics.Song{} = song) do
+  def proposed_by_link(conn, %Wsdjs.Songs.Song{} = song) do
     Phoenix.HTML.Link.link(
       user_displayed_name(song.user),
       to: user_path(conn, :show, song.user.id),

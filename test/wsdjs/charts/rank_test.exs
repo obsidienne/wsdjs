@@ -32,7 +32,7 @@ defmodule Wsdjs.Charts.RankTest do
     {:ok, top} = Wsdjs.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
 
     {:ok, song} =
-      Wsdjs.Musics.Songs.create_song(%{
+      Wsdjs.Songs.create_song(%{
         title: "a",
         artist: "a",
         genre: "soul",

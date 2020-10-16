@@ -18,7 +18,7 @@ defmodule Wsdjs.Reactions.Opinions.Opinion do
     field(:kind, :string)
 
     belongs_to(:user, Wsdjs.Accounts.User)
-    belongs_to(:song, Wsdjs.Musics.Song)
+    belongs_to(:song, Wsdjs.Songs.Song)
 
     timestamps()
   end

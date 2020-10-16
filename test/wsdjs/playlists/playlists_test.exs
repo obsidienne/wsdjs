@@ -112,7 +112,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
     alias Wsdjs.Playlists.Playlist
 
     def song_fixture(user_id) do
-      {:ok, %Wsdjs.Musics.Song{} = song} =
+      {:ok, %Wsdjs.Songs.Song{} = song} =
         %{
           title: "my title#{System.unique_integer([:positive])}",
           artist: "my artist",
@@ -120,7 +120,7 @@ defmodule Wsdjs.Playlists.PlaylistsTest do
           url: "http://youtu.be/dummy"
         }
         |> Map.put(:user_id, user_id)
-        |> Wsdjs.Musics.Songs.create_suggestion()
+        |> Wsdjs.Songs.create_suggestion()
 
       song
     end

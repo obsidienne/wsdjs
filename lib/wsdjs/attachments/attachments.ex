@@ -7,7 +7,7 @@ defmodule Wsdjs.Attachments do
   alias Wsdjs.Repo
 
   alias Wsdjs.Attachments.Videos.Video
-  alias Wsdjs.Musics.Song
+  alias Wsdjs.Songs.Song
 
   @doc """
   Gets a single video.

@@ -23,7 +23,7 @@ defmodule Wsdjs.Charts.Rank do
     field(:bonus, :integer)
     field(:position, :integer)
 
-    belongs_to(:song, Wsdjs.Musics.Song)
+    belongs_to(:song, Wsdjs.Songs.Song)
     belongs_to(:top, Wsdjs.Charts.Top)
 
     timestamps()

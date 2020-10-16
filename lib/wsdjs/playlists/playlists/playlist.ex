@@ -23,7 +23,7 @@ defmodule Wsdjs.Playlists.Playlist do
     timestamps()
 
     belongs_to(:user, Wsdjs.Accounts.User)
-    belongs_to(:cover, Wsdjs.Musics.Song)
+    belongs_to(:cover, Wsdjs.Songs.Song)
     has_many(:playlist_songs, Wsdjs.Playlists.PlaylistSong, on_delete: :delete_all)
   end
 

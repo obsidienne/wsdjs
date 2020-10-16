@@ -18,7 +18,7 @@ defmodule Wsdjs.Reactions.Comments.Comment do
     field(:text_html, :string)
 
     belongs_to(:user, Wsdjs.Accounts.User)
-    belongs_to(:song, Wsdjs.Musics.Song)
+    belongs_to(:song, Wsdjs.Songs.Song)
     timestamps()
   end
 

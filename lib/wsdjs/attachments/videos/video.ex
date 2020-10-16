@@ -29,7 +29,7 @@ defmodule Wsdjs.Attachments.Videos.Video do
     field(:provider, :string, default: "unknown")
 
     belongs_to(:user, Wsdjs.Accounts.User)
-    belongs_to(:song, Wsdjs.Musics.Song)
+    belongs_to(:song, Wsdjs.Songs.Song)
     belongs_to(:event, Wsdjs.Happenings.Event)
     timestamps()
   end

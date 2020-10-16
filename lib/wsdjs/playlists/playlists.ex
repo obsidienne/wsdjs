@@ -7,7 +7,7 @@ defmodule Wsdjs.Playlists do
   alias Wsdjs.Repo
 
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics.Songs
+  alias Wsdjs.Songs
   alias Wsdjs.Playlists
   alias Wsdjs.Playlists.Playlist
   alias Wsdjs.Reactions.Opinions.Opinion

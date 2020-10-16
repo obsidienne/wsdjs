@@ -41,25 +41,25 @@ defmodule WsdjsWeb.SongControllerTest do
     {:ok, song} =
       attrs
       |> Map.put(:title, "song")
-      |> Wsdjs.Musics.Songs.create_song()
+      |> Wsdjs.Songs.create_song()
 
     {:ok, instant_hit} =
       attrs
       |> Map.put(:title, "instant hit")
-      |> Wsdjs.Musics.Songs.create_song!()
-      |> Wsdjs.Musics.Songs.update(%{instant_hit: true}, %User{admin: true})
+      |> Wsdjs.Songs.create_song!()
+      |> Wsdjs.Songs.update(%{instant_hit: true}, %User{admin: true})
 
     {:ok, public_track} =
       attrs
       |> Map.put(:title, "public track")
-      |> Wsdjs.Musics.Songs.create_song!()
-      |> Wsdjs.Musics.Songs.update(%{public_track: true}, %User{admin: true})
+      |> Wsdjs.Songs.create_song!()
+      |> Wsdjs.Songs.update(%{public_track: true}, %User{admin: true})
 
     {:ok, hidden_track} =
       attrs
       |> Map.put(:title, "hidden track")
-      |> Wsdjs.Musics.Songs.create_song!()
-      |> Wsdjs.Musics.Songs.update(%{hidden_track: true}, %User{admin: true})
+      |> Wsdjs.Songs.create_song!()
+      |> Wsdjs.Songs.update(%{hidden_track: true}, %User{admin: true})
 
     {:ok,
      song: song, instant_hit: instant_hit, public_track: public_track, hidden_track: hidden_track}

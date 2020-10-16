@@ -23,7 +23,7 @@ defmodule Wsdjs.Playlists.PlaylistSong do
     timestamps(updated_at: false)
 
     belongs_to(:playlist, Wsdjs.Playlists.Playlist)
-    belongs_to(:song, Wsdjs.Musics.Song)
+    belongs_to(:song, Wsdjs.Songs.Song)
   end
 
   def changeset(%__MODULE__{} = playlist_songs, attrs) do

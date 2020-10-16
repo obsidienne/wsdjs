@@ -5,7 +5,7 @@ defmodule WsdjsWeb.SongVideosController do
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Videos.Video
-  alias Wsdjs.Musics.Songs
+  alias Wsdjs.Songs
 
   action_fallback(WsdjsWeb.FallbackController)
 

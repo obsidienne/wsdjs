@@ -13,7 +13,7 @@ defmodule WsdjsWeb.MusicLibrary do
     per_page = String.to_integer(params["per_page"] || "9")
 
     paginate_options = %{page: page, per_page: per_page}
-    songs = Wsdjs.Musics.Songs.list_songs(current_user, paginate: paginate_options)
+    songs = Wsdjs.Songs.list_songs(current_user, paginate: paginate_options)
 
     socket =
       assign(socket,

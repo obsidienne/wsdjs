@@ -56,7 +56,7 @@
   </div>
   <div class="form-group select optional song_genre">
     <label>Favotire genre</label>
-    <%= select fd, :favorite_genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
+    <%= select fd, :favorite_genre, Wsdjs.Songs.Song.genre, class: "form-control" %>
     <%= error_tag fd, :favorite_genre %>
   </div>
   <div class="form-group">

@@ -20,7 +20,7 @@ defmodule Wsdjs.Attachments.Arts.Art do
     field(:cld_id, :string)
     field(:version, :integer)
 
-    belongs_to(:song, Wsdjs.Musics.Song)
+    belongs_to(:song, Wsdjs.Songs.Song)
 
     timestamps()
   end

@@ -5,8 +5,8 @@ defmodule WsdjsWeb.SongController do
 
   alias Wsdjs.Attachments
   alias Wsdjs.Attachments.Videos.Video
-  alias Wsdjs.Musics.Song
-  alias Wsdjs.Musics.Songs
+  alias Wsdjs.Songs.Song
+  alias Wsdjs.Songs
   alias Wsdjs.Playlists
   alias Wsdjs.Reactions.{Comments, Opinions}
 
@@ -54,7 +54,7 @@ defmodule WsdjsWeb.SongController do
 
   def index(conn, _params, current_user) do
     playlists = Playlists.get_playlist_by_user(current_user, current_user)
-    songs = Wsdjs.Musics.Songs.list_songs(current_user)
+    songs = Wsdjs.Songs.list_songs(current_user)
 
     render(conn, "index.html", playlists: playlists, songs: songs)
   end

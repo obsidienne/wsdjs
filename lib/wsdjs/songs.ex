@@ -1,4 +1,4 @@
-defmodule Wsdjs.Musics.Songs do
+defmodule Wsdjs.Songs do
   @moduledoc """
   The boundary for the Music system.
   """
@@ -8,16 +8,15 @@ defmodule Wsdjs.Musics.Songs do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics
-  alias Wsdjs.Musics.Song
-  alias Wsdjs.Musics.Songs
+  alias Wsdjs.Songs.Song
+  alias Wsdjs.Songs
 
   @doc """
   The scope rules are
     - admin can access any songs
   """
-  def scoped(%Accounts.User{admin: true}), do: Musics.Song
-  def scoped(%Accounts.User{profil_djvip: true}), do: Musics.Song
+  def scoped(%Accounts.User{admin: true}), do: Song
+  def scoped(%Accounts.User{profil_djvip: true}), do: Song
 
   def scoped(%Accounts.User{profil_dj: true} = user) do
     upper = Timex.shift(Timex.beginning_of_month(Timex.now()), months: -3)
@@ -46,7 +45,7 @@ defmodule Wsdjs.Musics.Songs do
 
   defp scoped(%DateTime{} = lower, %DateTime{} = upper) do
     from(
-      s in Musics.Song,
+      s in Songs.Song,
       left_join: r in assoc(s, :ranks),
       left_join: t in assoc(r, :top),
       where:
