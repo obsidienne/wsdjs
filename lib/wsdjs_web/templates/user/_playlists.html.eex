@@ -34,7 +34,7 @@
 
 
 <section id="playlists-section" class="hidden">
-  <ul class="playlists-grid grid list-reset">
+  <ul class="grid list-reset">
     <% if Wsdjs.Playlists.can?(@current_user, :new) == :hidden do %>
     <li>
       <%= link to: Routes.user_playlist_path(@conn, :new, @current_user), class: "playlist" do %>

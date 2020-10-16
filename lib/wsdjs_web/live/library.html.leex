@@ -1,0 +1,87 @@
+<ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <%= for user <- @users do %>
+  <li class="col-span-1 bg-white rounded-lg shadow">
+    <div class="w-full flex items-center justify-between p-6 space-x-6">
+      <div class="flex-1 truncate">
+        <div class="flex items-center space-x-3">
+          <h3 class="text-gray-900 text-sm leading-5 font-medium truncate"><%= user.profil.name || user.email %></h3>
+          <%= if user.profil_dj || user.profil_djvip do %>
+            <span class="flex-shrink-0 inline-block px-2 py-0.5 text-teal-800 text-xs leading-4 font-medium bg-teal-100 rounded-full">DJ</span>
+          <% end %>
+        </div>
+        <p class="mt-1 text-gray-500 text-sm leading-5 truncate"><%= user.profil.description %></p>
+      </div>
+      <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
+          src="<%= Attachments.avatar_url(user.avatar, 96) %>"
+          srcset="<%= Attachments.avatar_srcset(user.avatar, 96) %>" sizes="96px" width="96px" height="96px" alt="" />
+    </div>
+    <div class="border-t border-gray-200">
+      <div class="-mt-px flex">
+        <div class="w-0 flex-1 flex border-r border-gray-200">
+          <a href="#" class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 transition ease-in-out duration-150">
+            <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+            </svg>
+            <span class="ml-3">Email</span>
+          </a>
+        </div>
+        <div class="-ml-px w-0 flex-1 flex">
+          <%= link to: Routes.user_path(WsdjsWeb.Endpoint, :show, user.id), class: "relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 transition ease-in-out duration-150" do %>
+            <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            </svg>
+            <span class="ml-3">Profil</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </li>
+  <% end %>
+</ul>
+
+
+<div class="bg-white py-6">
+<nav class="border-t border-gray-200 px-4 flex items-center justify-between sm:px-0">
+  <div class="w-0 flex-1 flex">
+  <%= if @options.page > 1 do %>
+    <%= pagination_link(@socket,
+                        @options.page - 1,
+                        @options.per_page,
+                        "-mt-px border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm leading-5 font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-400 transition ease-in-out duration-150") do %>
+      <svg class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+      </svg>
+      Previous
+    <% end %>
+  <% end %>
+  </div>
+
+
+  <div class="hidden md:flex">
+    <%= for i <- (@options.page - 2)..(@options.page + 2), i > 0 do %>
+      <%= pagination_link(@socket,
+                            i,
+                            i,
+                            @options.per_page,
+                            (if i == @options.page do
+                                "-mt-px border-t-2 border-indigo-500 pt-4 px-4 inline-flex items-center text-sm leading-5 font-medium text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700 transition ease-in-out duration-150"
+                            else
+                                "-mt-px border-t-2 border-transparent pt-4 px-4 inline-flex items-center text-sm leading-5 font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-400 transition ease-in-out duration-150"
+                            end)) %>
+    <% end %>
+  </div>
+
+  <div class="w-0 flex-1 flex justify-end">
+  <%= pagination_link(@socket,
+                      @options.page + 1,
+                      @options.per_page,
+                      "-mt-px border-t-2 border-transparent pt-4 pl-1 inline-flex items-center text-sm leading-5 font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-400 transition ease-in-out duration-150") do %>
+      Next
+      <svg class="ml-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+      </svg>
+  <% end %>
+  </div>
+</nav>
+</div>

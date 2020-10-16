@@ -1,5 +1,5 @@
 <section id="playlists-section">
-  <ul class="playlists-grid grid list-reset">
+  <ul class="grid list-reset">
     <%= if Wsdjs.Playlists.can?(@current_user, :new) == :ok do %>
     <li>
       <%= link to: Routes.user_playlist_path(@conn, :new, @current_user), class: "playlist" do %>
@@ -30,14 +30,14 @@
 
 
         <%= if playlist.public == true do %>
-        <span class="tippy absolute top-0 right-0 p-2 blend-exclusion" title="this list is public">
+        <span class="absolute top-0 right-0 p-2 " title="this list is public">
           <svg fill="#D3D8E0" height="24" viewBox="0 0 24 24" width="24">
             <path
               d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
           </svg>
         </span>
         <% else %>
-        <span class="tippy absolute top-0 right-0 p-2 blend-exclusion" title="this list is private">
+        <span class="absolute top-0 right-0 p-2" title="this list is private">
           <svg fill="#D3D8E0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0h24v24H0z" fill="none" />
             <path
@@ -46,7 +46,7 @@
         </span>
         <% end %>
 
-        <span class="absolute bottom-0 p-2 text-overlay text-grey-lighter"><%= playlist.name %></span>
+        <span class="absolute bottom-0 p-2 text-grey-lighter"><%= playlist.name %></span>
         </span>
       </div>
       <% end %>

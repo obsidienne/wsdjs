@@ -1,41 +1,54 @@
-<article class="flex mb-12 lg:mb-24 relative">
-  <a href="<%= Routes.top_path(@conn, :show, @top.id) %>" class="card tops__top__content shadow">
-    <span class="tops__top__date flex mb-2">
-      <time class="date-format pr-4" datetime="<%= Date.to_iso8601(@top.due_date) %>">
-        <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
-      </time>
-      <span class="label label-default"><%= @top.status %></span></span>
-    <div class="flex flex-wrap m-top-1 w-full">
-      <%= for rank <- @top.ranks do %>
-      <div>
-        <div class="aspect-ratio-square relative">
-          <%= if blur_track(rank.song, @current_user) == true do %>
-          <img src="<%= Attachments.art_url(nil, 200) %>" class="responsive w-full absolute top-0">
-          <% else %>
-          <img src="<%= Attachments.art_url(rank.song.art, 200) %>"
-            srcset="<%= Attachments.art_srcset(rank.song.art, 100) %>" sizes="100px"
-            class="responsive w-full absolute top-0" />
-          <% end %>
+<li>
+  <%= link to: Routes.top_path(@conn, :show, @top.id), class: "block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out" do %>
+  <div class="px-4 py-4 sm:px-6">
+    <div class="flex items-center justify-between">
+      <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
+        Back End Developer
+      </div>
+      <div class="ml-2 flex-shrink-0 flex">
+        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+          <%= @top.status %>
+        </span>
+      </div>
+    </div>
+    <div class="mt-2 sm:flex sm:justify-between">
+      <div class="sm:flex">
+        <div class="mr-6 flex items-center text-sm leading-5 text-gray-500">
+          <!-- Heroicon name: users -->
+          <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+            fill="currentColor">
+            <path
+              d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+          </svg>
+          <%= Enum.count(@top.songs) %> / <%= dominante_genre(@top.songs) %>
+        </div>
+        <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0">
+          <!-- Heroicon name: location-marker -->
+          <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+            fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+              clip-rule="evenodd" />
+          </svg>
+          <%= count_dj(@top.songs) %>
         </div>
       </div>
-      <% end %>
+      <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0">
+        <!-- Heroicon name: calendar -->
+        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+          fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+            clip-rule="evenodd" />
+        </svg>
+        <span>
+          Closing on
+          <time datetime="<%= Date.to_iso8601(@top.due_date) %>">
+            <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
+          </time>
+        </span>
+      </div>
     </div>
-
-    <table class="table my-8 mx-0">
-      <thead class="bg-transparent">
-        <tr>
-          <th>Songs</th>
-          <th>Djs</th>
-          <th>Genres</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= Enum.count(@top.songs) %></td>
-          <td><%= count_dj(@top.songs) %></td>
-          <td><%= dominante_genre(@top.songs) %></td>
-        </tr>
-      </tbody>
-    </table>
-  </a>
-</article>
+  </div>
+  <% end %>
+</li>

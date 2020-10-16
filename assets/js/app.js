@@ -2,7 +2,6 @@
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
 import "../css/app.scss"
-import "tippy.js/dist/tippy.css";
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -42,54 +41,3 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)
 window.liveSocket = liveSocket
 
-// Import local files
-import "./helpers";
-import loadView from "./views/loader";
-import Pjax from "pjax-api";
-import Radio from "./components/radio";
-import Search from "./components/search";
-import Opinions from "./components/opinions";
-import OpinionPicker from "./components/opinionPicker";
-import PlaylistPicker from "./components/playlistPicker";
-import Tippy from "tippy.js";
-import "simplebar";
-import "simplebar/dist/simplebar.css";
-
-//https://blog.diacode.com/page-specific-javascript-in-phoenix-framework-pt-1
-function handleDOMContentLoaded() {
-  // Get the current view name
-  const viewName = document.getElementsByTagName("main")[0].dataset.jsViewName;
-  console.log(`Loading ${viewName}`);
-
-  // Load view class and mount it
-  const ViewClass = loadView(viewName);
-  const view = new ViewClass();
-  view.mount();
-
-  window.currentView = view;
-
-
-  /* piwik */
-  if (window._paq != null) {
-    return _paq.push(["trackPageView"]);
-  } else if (window.piwikTracker != null) {
-    return piwikTracker.trackPageview();
-  }
-
-  Opinions.mount();
-}
-
-function handleUnloadContentLoaded() {
-  if (window.currentView && window.currentView.unmount) {
-    window.currentView.unmount();
-  }
-  Opinions.unmount();
-}
-
-var radio = new Radio();
-var search = new Search();
-
-document.addEventListener("DOMContentLoaded", handleDOMContentLoaded, false);
-document.addEventListener("pjax:ready", handleDOMContentLoaded, false);
-window.addEventListener("pjax:unload", handleUnloadContentLoaded, false);
-window.addEventListener("scroll", () => Tippy.hideAllPoppers());

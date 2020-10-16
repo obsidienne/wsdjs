@@ -1,28 +1,29 @@
 <section class="container mt-4">
   <div class="radio-song flex items-center flex-col ">
     <%= if @songs == :empty do %>
-      <strong>Something went really bad</strong>
+    <strong>Something went really bad</strong>
     <% else %>
-      <% song = List.first(@songs) %>
-      <%= if Map.has_key?(song, "path") do %>
-        <img src="<%= Map.fetch!(song, "image_uri") %>" 
-            srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="288px" class="shadow"/>
-        <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body visible-link action-link h1 text-center">
-          <%=Map.fetch!(song, "title") %>
-        </a>
-        <div class="radio-suggestor mt-4 text-center">
-          <a href="<%= Map.fetch!(song, "suggested_by_path") %>" class="inline-block visible-link"><%= Map.fetch!(song, "suggested_by") %></a>
-        </div>
-      <% else %>
-        <img src="<%= Map.fetch!(song, "cover") %>" class="shadow"/>
-        <%=Map.fetch!(song, "title") %>
-      <% end %>
+    <% song = List.first(@songs) %>
+    <%= if Map.has_key?(song, "path") do %>
+    <img src="<%= Map.fetch!(song, "image_uri") %>" srcset="<%= Map.fetch!(song, "image_srcset") %>" sizes="288px"
+      class="shadow" />
+    <a href="<%= Map.fetch!(song, "path") %>" class="radio-song_body h1 text-center">
+      <%=Map.fetch!(song, "title") %>
+    </a>
+    <div class="radio-suggestor mt-4 text-center">
+      <a href="<%= Map.fetch!(song, "suggested_by_path") %>"
+        class="inline-block"><%= Map.fetch!(song, "suggested_by") %></a>
+    </div>
+    <% else %>
+    <img src="<%= Map.fetch!(song, "cover") %>" class="shadow" />
+    <%=Map.fetch!(song, "title") %>
+    <% end %>
     <% end %>
 
     <button class="playing pt-4 radio-toggle-play">
       <svg fill='#000000' height='48' viewBox='0 0 24 24' width='48' class="icon-play">
-        <path d='M8 5v14l11-7z'/>
-        <path d='M0 0h24v24H0z' fill='none'/>
+        <path d='M8 5v14l11-7z' />
+        <path d='M0 0h24v24H0z' fill='none' />
       </svg>
 
       <svg fill="#000000" height='48' viewBox='0 0 24 24' width='48' class="icon-pause">

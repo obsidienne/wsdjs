@@ -15,11 +15,11 @@
     </div>
     <div class="pl-4">
       <div>
-        <span class="primary-text"><%= @song.title %></span>
-        <span class="secondary-text pb-2"><span class="text-gray-800">by</span> <%= @song.artist %></span>
+        <span><%= @song.title %></span>
+        <span class="pb-2"><span class="text-gray-800">by</span> <%= @song.artist %></span>
       </div>
       <div class="text-gray-800"> suggested by
-        <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "visible-link action-link text-gray-800 inline-block" %>,
+        <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "text-gray-800 inline-block" %>,
         <time datetime="<%= utc_to_local(@song.inserted_at) %>"
           title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
           <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>

@@ -16,8 +16,7 @@ defmodule WsdjsWeb.UserHelper do
       title:
         "suggested by #{song.user.name}, #{
           Timex.format!(song.inserted_at, "%b %d, %Y", :strftime)
-        }",
-      class: "visible-link action-link"
+        }"
     )
   end
 end

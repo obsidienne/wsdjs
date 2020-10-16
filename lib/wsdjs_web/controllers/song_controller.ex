@@ -52,7 +52,7 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  def index(conn, params, current_user) do
+  def index(conn, _params, current_user) do
     playlists = Playlists.get_playlist_by_user(current_user, current_user)
     songs = Wsdjs.Musics.Songs.list_songs(current_user)
 

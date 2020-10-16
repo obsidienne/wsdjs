@@ -1,7 +1,20 @@
 <section id="top-list" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-  <%= for top <- @tops do %>
-  <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
-  <% end %>
+  <!--
+  Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
+  Read the documentation to get started: https://tailwindui.com/documentation
+-->
+  <div class="bg-white shadow overflow-hidden sm:rounded-md">
+    <ul>
+      <%= for top <- @tops do %>
+
+      <%= render "_top.html", conn: @conn, top: top, current_user: @current_user %>
+      <% end %>
+
+    </ul>
+  </div>
+
+
+
 
   <nav class="border-t border-gray-200 px-4 flex items-center justify-between sm:px-0">
     <div class="w-0 flex-1 flex">

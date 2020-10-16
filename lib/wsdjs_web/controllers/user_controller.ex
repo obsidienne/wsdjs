@@ -24,7 +24,7 @@ defmodule WsdjsWeb.UserController do
 
     with :ok <- Profils.can?(current_user, :show, user) do
       playlists = Wsdjs.Playlists.list_playlists(user, current_user)
-      user = Accounts.load_profil(user)
+      user = user |> Accounts.load_profil() |> Accounts.load_avatar()
 
       conn
       |> render(
