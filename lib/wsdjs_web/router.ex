@@ -81,7 +81,7 @@ defmodule WsdjsWeb.Router do
     end
 
     live "/paginate-users", PaginateUsersLive
-    live "/library", Library
+    live "/library", MusicLibrary
 
     resources("/user-params", UserParamsController, only: [:show])
 

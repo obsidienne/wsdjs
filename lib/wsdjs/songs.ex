@@ -94,36 +94,22 @@ defmodule Wsdjs.Musics.Songs do
     |> Repo.all()
   end
 
-  def songs_interval(%User{} = user, %{"month" => month} = facets) do
-    month =
-      month
-      |> Timex.parse!("%Y-%m-%d", :strftime)
-      |> Timex.to_naive_datetime()
+  def list_songs(%User{} = user, criteria) when is_list(criteria) do
+    query = Songs.scoped(user)
 
-    user
-    |> Songs.scoped()
-    |> filter_by_fulltext(facets)
-    |> filter_by_bpm(facets)
-    |> filter_by_genre(facets)
-    |> where([s], s.inserted_at < ^month)
-    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
-    |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
-    |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
-    |> limit(1)
-    |> Repo.one()
-  end
+    # query = from(d in Song)
 
-  def songs_interval(%User{} = user, facets) when is_map(facets) do
-    user
-    |> Songs.scoped()
-    |> filter_by_fulltext(facets)
-    |> filter_by_bpm(facets)
-    |> filter_by_genre(facets)
-    |> group_by([s], fragment("date_trunc('month', ?)", s.inserted_at))
-    |> order_by([s], desc: fragment("date_trunc('month', ?)", s.inserted_at))
-    |> select([s], fragment("date_trunc('month', ?)", s.inserted_at))
-    |> limit(1)
-    |> Repo.one()
+    Enum.reduce(criteria, query, fn
+      {:paginate, %{page: page, per_page: per_page}}, query ->
+        from q in query,
+          offset: ^((page - 1) * per_page),
+          limit: ^per_page
+
+      {:sort, %{sort_by: sort_by, sort_order: sort_order}}, query ->
+        from q in query, order_by: [{^sort_order, ^sort_by}]
+    end)
+    |> preload([:art])
+    |> Repo.all()
   end
 
   @doc """
@@ -136,23 +122,6 @@ defmodule Wsdjs.Musics.Songs do
   end
 
   @doc """
-  Returns the songs filtered by facets.
-  """
-  def list_songs(%User{} = user, facets) do
-    user
-    |> Songs.scoped()
-    |> filter_by_date(facets)
-    |> filter_by_fulltext(facets)
-    |> filter_by_bpm(facets)
-    |> filter_by_genre(facets)
-    |> filter_has_video(facets)
-    |> where([s], s.suggestion == true)
-    |> order_by(desc: :inserted_at)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
-    |> Repo.all()
-  end
-
-    @doc """
   Returns the songs filtered by facets.
   """
   def list_songs(%User{} = user) do

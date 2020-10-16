@@ -1,23 +1,24 @@
-defmodule WsdjsWeb.Library do
+defmodule WsdjsWeb.MusicLibrary do
   use WsdjsWeb, :live_view
 
-  alias Wsdjs.Accounts
+  alias WsdjsWeb.MusicComponent
 
-  def mount(_params, _session, socket) do
-    {:ok, socket, temporary_assigns: [users: []]}
+  def mount(_params, session, socket) do
+    {:ok, assign_defaults(session, socket), temporary_assigns: [songs: []]}
   end
 
   def handle_params(params, _url, socket) do
+    current_user = socket.assigns[:current_user]
     page = String.to_integer(params["page"] || "1")
     per_page = String.to_integer(params["per_page"] || "9")
 
     paginate_options = %{page: page, per_page: per_page}
-    users = Accounts.list_users(paginate: paginate_options)
+    songs = Wsdjs.Musics.Songs.list_songs(current_user, paginate: paginate_options)
 
     socket =
       assign(socket,
         options: paginate_options,
-        users: users
+        songs: songs
       )
 
     {:noreply, socket}

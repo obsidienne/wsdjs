@@ -48,6 +48,8 @@ defmodule WsdjsWeb do
         layout: {WsdjsWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
+
+      import Wsdjs.LiveHelpers
     end
   end
 
