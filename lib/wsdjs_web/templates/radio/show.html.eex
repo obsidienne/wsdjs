@@ -1,4 +1,4 @@
-<section class="container mt-4">
+<section class="mt-4">
   <div class="radio-song flex items-center flex-col ">
     <%= if @songs == :empty do %>
     <strong>Something went really bad</strong>

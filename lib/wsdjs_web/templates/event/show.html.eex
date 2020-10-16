@@ -1,33 +1,33 @@
-<section class="container">
-<h2>Show Event</h2>
+<section>
+  <h2>Show Event</h2>
 
-<ul class="list-reset">
+  <ul class="list-reset">
 
-  <li>
-    <strong>Name:</strong>
-    <%= @event.name %>
-  </li>
+    <li>
+      <strong>Name:</strong>
+      <%= @event.name %>
+    </li>
 
-  <li>
-    <strong>Starts on:</strong>
-    <%= @event.starts_on %>
-  </li>
+    <li>
+      <strong>Starts on:</strong>
+      <%= @event.starts_on %>
+    </li>
 
-  <li>
-    <strong>Ends on:</strong>
-    <%= @event.ends_on %>
-  </li>
+    <li>
+      <strong>Ends on:</strong>
+      <%= @event.ends_on %>
+    </li>
 
-  <li>
-    <strong>Venue</strong>
-    <%= @event.venue %>
-  </li>
+    <li>
+      <strong>Venue</strong>
+      <%= @event.venue %>
+    </li>
 
-</ul>
+  </ul>
 
 
-<div class="flex mt-16">
-<%= link "Edit", to: Routes.event_path(@conn, :edit, @event), class: "btn btn-primary" %>
-<%= link "Delete", to: Routes.event_path(@conn, :delete, @event), method: :delete, class: "text-danger ml-auto", data: [confirm: "Are you sure?"] %>
-</div>
+  <div class="flex mt-16">
+    <%= link "Edit", to: Routes.event_path(@conn, :edit, @event), class: "btn btn-primary" %>
+    <%= link "Delete", to: Routes.event_path(@conn, :delete, @event), method: :delete, class: "text-danger ml-auto", data: [confirm: "Are you sure?"] %>
+  </div>
 </section>

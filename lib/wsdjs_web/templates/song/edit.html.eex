@@ -1,11 +1,11 @@
-<nav class="secondary-nav mb-4 py-4">
-  <ol class="container">
+<nav class="mb-4 py-4">
+  <ol>
     <li class="inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
   </ol>
 </nav>
 
 
-<section class="container mb-8">
+<section class="mb-8">
   <div class="flex p-2 bg-white shadow">
     <div>
       <div class="relative w-12 h-12 aspect-ratio-square">
@@ -29,7 +29,7 @@
   </div>
 </section>
 
-<section class="container mb-32">
+<section class="mb-32">
   <div id="art_div" class="relative mb-4">
     <img id="art_thumbnail" class="opacity-25 shadow rounded" src="<%= Attachments.art_url(@song.art, 240) %>"
       style="width:240px;height:240px;">
@@ -142,7 +142,7 @@
   <% end %>
 </section>
 
-<section class="container">
+<section>
   <%= form_for @conn, Routes.song_path(@conn, :delete, @song), [method: "DELETE", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"]], fn _ -> %>
   <%= submit "Delete song", class: "btn btn-danger w-full" %>
   <% end %>

@@ -1,9 +1,9 @@
-<div class="container">
-<h2>New Playlist</h2>
-<p>
-<%= name_or_email(@user) %>, you are creating a new playlist. By default, your playlist is private
-</p>
-<%= render "form.html", Map.put(assigns, :action, Routes.user_playlist_path(@conn, :create, @user)) %>
+<div>
+    <h2>New Playlist</h2>
+    <p>
+        <%= name_or_email(@user) %>, you are creating a new playlist. By default, your playlist is private
+    </p>
+    <%= render "form.html", Map.put(assigns, :action, Routes.user_playlist_path(@conn, :create, @user)) %>
 
-<span><%= link "Back", to: Routes.user_playlist_path(@conn, :index, @current_user) %></span>
+    <span><%= link "Back", to: Routes.user_playlist_path(@conn, :index, @current_user) %></span>
 </div>

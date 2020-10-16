@@ -33,13 +33,13 @@
 
 <body class="font-sans bg-grey-lightest">
   <header class="hero hot-hero">
-    <nav class=" container">
+    <nav>
       <%= link "", to: Routes.home_path(@conn, :index), class: "" %>
       <%= link "tops", to: Routes.top_path(@conn, :index), class: " text-gray-800" %>
     </nav>
   </header>
 
-  <main class="container">
+  <main>
     <h1>Sorry something went <u>REALLY</u> wrong !</h1>
     <p>
       <%= link "Go to the home page", to: Routes.home_path(@conn, :index), class: "btn btn-link" %>

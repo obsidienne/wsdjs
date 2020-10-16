@@ -1,4 +1,4 @@
-<section class="container mt-4">
+<section class="mt-4">
   <ul class="list-reset events">
     <li class="p-4 border border-dashed bg-white mb-4">
       <%= link to: Routes.event_path(@conn, :new), class: "flex h-full w-full items-center" do %>

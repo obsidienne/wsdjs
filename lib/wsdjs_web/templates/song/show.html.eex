@@ -1,5 +1,5 @@
 <section>
-  <div class="flex md:flex-row flex-col justify-start container mt-6 pb-12">
+  <div class="flex md:flex-row flex-col justify-start mt-6 pb-12">
     <div class="w-64 h-64">
       <img src="<%= Attachments.art_url(@song.art, 300) %>" srcset="<%= Attachments.art_srcset(@song.art, 300) %>"
         sizes="300px" class="responsive shadow rounded" />
@@ -66,7 +66,7 @@
   </template>
 </section>
 
-<div class="container">
+<div>
   <section id="overview-section" class="w-full">
     <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
   </section>

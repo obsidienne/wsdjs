@@ -1,5 +1,5 @@
-<nav class="secondary-nav py-4">
-  <ol class="container">
+<nav class="py-4">
+  <ol>
     <li class="inline-block">
       <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
     </li>
@@ -12,7 +12,7 @@
   </ol>
 </nav>
 
-<section class="container pt-4">
+<section class="pt-4">
   <div>
     <%= form_for @changeset, Routes.user_path(@conn, :update, @user), fn f -> %>
 

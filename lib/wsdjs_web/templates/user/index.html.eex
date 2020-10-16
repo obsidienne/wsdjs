@@ -1,4 +1,4 @@
-<section id="users-section" class="container">
+<section id="users-section">
 
   <span class="font-bold my-2 block">Users: <%= Enum.count(@users) %></span>
   <ul class="list-reset">

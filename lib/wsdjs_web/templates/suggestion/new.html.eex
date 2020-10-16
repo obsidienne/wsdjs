@@ -1,10 +1,10 @@
 <header>
-  <div class="container">
+  <div>
     <h1><%= gettext "Suggest a new song" %> </h1>
   </div>
 </header>
 
-<section class="container song-new mt-4">
+<section class="song-new mt-4">
   <div id="art_div">
     <img id="art_thumbnail" src="<%= Attachments.art_url(nil, 250) %>" style="width:250px;height:250px;">
     <div class="form-group">
@@ -13,41 +13,41 @@
   </div>
 
   <%= form_for @changeset, Routes.suggestion_path(@conn, :create), fn f -> %>
-    <p>
+  <p>
     This song will be used in the current month TOP 10
-    </p>
-    <div id="cloudinary_form_div">
-      <%= inputs_for f, :art, fn fp -> %>
-        <%= hidden_input fp, :cld_id, disabled: :disabled %>
-        <%= hidden_input fp, :version, disabled: :disabled %>
-      <% end %>
-    </div>
+  </p>
+  <div id="cloudinary_form_div">
+    <%= inputs_for f, :art, fn fp -> %>
+    <%= hidden_input fp, :cld_id, disabled: :disabled %>
+    <%= hidden_input fp, :version, disabled: :disabled %>
+    <% end %>
+  </div>
 
-    <div class="form-group">
-      <%= text_input f, :artist, placeholder: "Artist name", class: "form-control", required: true %>
-      <%= error_tag f, :artist %>
-    </div>
+  <div class="form-group">
+    <%= text_input f, :artist, placeholder: "Artist name", class: "form-control", required: true %>
+    <%= error_tag f, :artist %>
+  </div>
 
-    <div class="form-group">
-      <%= text_input f, :title, placeholder: "Song title", class: "form-control", required: true %>
-      <%= error_tag f, :title %>
-    </div>
+  <div class="form-group">
+    <%= text_input f, :title, placeholder: "Song title", class: "form-control", required: true %>
+    <%= error_tag f, :title %>
+  </div>
 
-    <div class="form-group">
-      <%= text_input f, :url, type: "url", placeholder: "An URL for the song (youtube prefered).", class: "form-control", required: true %>
-      <%= error_tag f, :url %>
-    </div>
-    
-    <div class="form-group">
-      <%= number_input f, :bpm, placeholder: "bpm", min: 1, class: "form-control" %>
-      <%= error_tag f, :bpm %>
-    </div>
+  <div class="form-group">
+    <%= text_input f, :url, type: "url", placeholder: "An URL for the song (youtube prefered).", class: "form-control", required: true %>
+    <%= error_tag f, :url %>
+  </div>
 
-    <div class="form-group select optional song_genre">
-      <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
-      <%= error_tag f, :genre %>
-    </div>
+  <div class="form-group">
+    <%= number_input f, :bpm, placeholder: "bpm", min: 1, class: "form-control" %>
+    <%= error_tag f, :bpm %>
+  </div>
 
-    <%= submit "Suggest this song", class: "btn btn-primary " %>
+  <div class="form-group select optional song_genre">
+    <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
+    <%= error_tag f, :genre %>
+  </div>
+
+  <%= submit "Suggest this song", class: "btn btn-primary " %>
   <% end %>
 </section>
