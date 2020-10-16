@@ -11,8 +11,6 @@ defmodule Wsdjs.Application do
       Wsdjs.Repo,
       # Start the Telemetry supervisor
       WsdjsWeb.Telemetry,
-      # start the Scheduler
-      Wsdjs.Scheduler,
       # Start the PubSub system
       {Phoenix.PubSub, name: Wsdjs.PubSub},
       # Start the endpoint when the application starts
