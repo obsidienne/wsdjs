@@ -71,7 +71,6 @@ defmodule Wsdjs.MixProject do
       {:httpoison, "~> 1.4"},
       {:earmark, "~> 1.4"},
       {:hashids, "~> 2.0"},
-      {:quantum, "~> 2.3.3"},
       {:geo_postgis, "~> 3.1"},
       {:html_sanitize_ex, "~> 1.3.0"},
       {:corsica, "~> 1.1"},
