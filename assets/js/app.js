@@ -51,7 +51,6 @@ import Search from "./components/search";
 import Opinions from "./components/opinions";
 import OpinionPicker from "./components/opinionPicker";
 import PlaylistPicker from "./components/playlistPicker";
-import Carousel from "./components/carousel";
 import Tippy from "tippy.js";
 import "simplebar";
 import "simplebar/dist/simplebar.css";
