@@ -133,29 +133,6 @@ defmodule Wsdjs.Songs do
     |> Repo.all()
   end
 
-  defp filter_has_video(query, %{"with_video" => "true"}) do
-    join(query, :inner, [q], v in fragment("SELECT song_id FROM videos AS v group by song_id"),
-      on: q.id == v.song_id
-    )
-  end
-
-  defp filter_has_video(query, _), do: query
-
-  defp filter_by_genre(query, %{"genre" => genre}) when is_list(genre) do
-    dynamic =
-      List.foldl(genre, false, fn x, acc ->
-        dynamic([p], p.genre == ^x or ^acc)
-      end)
-
-    from(query, where: ^dynamic)
-  end
-
-  defp filter_by_genre(query, %{"genre" => genre}) when is_binary(genre) do
-    where(query, genre: ^genre)
-  end
-
-  defp filter_by_genre(query, _), do: query
-
   def bpm_ranges do
     %{
       "vs" => 1..69,
@@ -166,59 +143,6 @@ defmodule Wsdjs.Songs do
     }
   end
 
-  defp filter_by_bpm(query, %{"bpm" => bpm}) when is_list(bpm) do
-    dynamic =
-      List.foldl(bpm, false, fn x, acc ->
-        lower..upper = Map.fetch!(bpm_ranges(), x)
-        dynamic([p], (p.bpm >= ^lower and p.bpm <= ^upper) or ^acc)
-      end)
-
-    from(query, where: ^dynamic)
-  end
-
-  defp filter_by_bpm(query, %{"bpm" => bpm}) do
-    lower..upper = Map.fetch!(bpm_ranges(), bpm)
-
-    where(query, [s], s.bpm >= ^lower and s.bpm <= ^upper)
-  end
-
-  defp filter_by_bpm(query, _), do: query
-
-  defp filter_by_date(query, %{"month" => month}) do
-    month =
-      month
-      |> Timex.parse!("%Y-%m-%d", :strftime)
-      |> Timex.to_date()
-
-    begin_period = Timex.to_datetime(Timex.beginning_of_month(month))
-    end_period = Timex.to_datetime(Timex.end_of_month(month))
-
-    query
-    |> where(
-      [s],
-      s.inserted_at >= ^begin_period and s.inserted_at <= ^end_period
-    )
-  end
-
-  defp filter_by_fulltext(query, %{"q" => q}) do
-    q =
-      q
-      |> String.trim()
-      |> String.split(" ")
-      |> Enum.map(&"#{&1}:*")
-      |> Enum.join(" & ")
-
-    query
-    |> where(
-      fragment(
-        "(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))",
-        ^q
-      )
-    )
-  end
-
-  defp filter_by_fulltext(query, _), do: query
-
   def list_suggested_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
     query =
       from(
@@ -227,19 +151,6 @@ defmodule Wsdjs.Songs do
       )
 
     Repo.all(query)
-  end
-
-  def last_suggested_song(%User{} = user) do
-    query =
-      from(
-        s in Song,
-        where: s.suggestion == true and s.user_id == ^user.id,
-        order_by: [desc: s.inserted_at],
-        preload: [:art],
-        limit: 1
-      )
-
-    Repo.one(query)
   end
 
   @doc """
@@ -258,12 +169,6 @@ defmodule Wsdjs.Songs do
     %Song{}
     |> Song.create_changeset(params)
     |> Repo.insert()
-  end
-
-  def create_song!(params) do
-    %Song{}
-    |> Song.create_changeset(params)
-    |> Repo.insert!()
   end
 
   @doc """
@@ -301,12 +206,6 @@ defmodule Wsdjs.Songs do
   def get_song!(id, to_preload \\ [:art, :user]) do
     Song
     |> Repo.get!(id)
-    |> Repo.preload(to_preload)
-  end
-
-  def get_song_by_uuid!(uuid, to_preload \\ [:art, :user]) do
-    Song
-    |> Repo.get_by!(uuid: uuid)
     |> Repo.preload(to_preload)
   end
 

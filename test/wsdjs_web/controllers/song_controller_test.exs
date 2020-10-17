@@ -43,24 +43,6 @@ defmodule WsdjsWeb.SongControllerTest do
       |> Map.put(:title, "song")
       |> Wsdjs.Songs.create_song()
 
-    {:ok, instant_hit} =
-      attrs
-      |> Map.put(:title, "instant hit")
-      |> Wsdjs.Songs.create_song!()
-      |> Wsdjs.Songs.update(%{instant_hit: true}, %User{admin: true})
-
-    {:ok, public_track} =
-      attrs
-      |> Map.put(:title, "public track")
-      |> Wsdjs.Songs.create_song!()
-      |> Wsdjs.Songs.update(%{public_track: true}, %User{admin: true})
-
-    {:ok, hidden_track} =
-      attrs
-      |> Map.put(:title, "hidden track")
-      |> Wsdjs.Songs.create_song!()
-      |> Wsdjs.Songs.update(%{hidden_track: true}, %User{admin: true})
-
     {:ok,
      song: song, instant_hit: instant_hit, public_track: public_track, hidden_track: hidden_track}
   end

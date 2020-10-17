@@ -6,7 +6,7 @@
 
   <div>
     <div>
-      <%= link name_or_email(@user), to: Routes.user_path(@conn, :show, @user.id), class: "block", title: user_tooltip(@user) %>
+      <%= link name_or_email(@user), to: Routes.user_path(@conn, :show, @user.id), class: "block" %>
 
       <%= if @user.profil_djvip do %><span class="label label-default">DJ VIP</span><% end %>
       <%= if @user.profil_dj do %><span class="label label-default">DJ</span><% end %>

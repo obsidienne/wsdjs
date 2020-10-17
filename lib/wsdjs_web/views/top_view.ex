@@ -22,16 +22,6 @@ defmodule WsdjsWeb.TopView do
     render_template(template, assigns)
   end
 
-  def current_user_vote(votes, rank) do
-    vote = Enum.find(votes, fn x -> x.song_id == rank.song.id end)
-
-    if is_nil(vote) do
-      nil
-    else
-      vote.votes
-    end
-  end
-
   def count_dj(songs) do
     songs
     |> Enum.map(fn x -> x.user_id end)

@@ -20,12 +20,7 @@ defmodule WsdjsWeb.SongController do
   @spec show(Plug.Conn.t(), %{id: String.t()}, nil | Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def show(conn, %{"id" => id}, current_user) do
-    song =
-      if String.match?(id, ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/) do
-        Songs.get_song_by_uuid!(id)
-      else
-        Songs.get_song!(id)
-      end
+    song = Songs.get_song!(id)
 
     with :ok <- Songs.can?(current_user, :show, song) do
       opinions = Opinions.list(song)

@@ -3,15 +3,5 @@ defmodule WsdjsWeb.UserView do
 
   alias Wsdjs.Accounts.User
 
-  def can_edit_page?(user, current_user) do
-    current_user == user
-  end
-
   def name_or_email(%User{email: email}), do: email
-
-  def user_tooltip(%User{} = user) do
-    "#{user.email}<br/>member since #{Timex.format!(user.inserted_at, "{Mfull} {YYYY}")}"
-  end
-
-  def user_tooltip(_), do: ""
 end
