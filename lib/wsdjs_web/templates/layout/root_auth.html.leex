@@ -22,7 +22,6 @@
   <script>window.userToken = "<%= Phoenix.Token.sign(@conn, "user", user.id) %>"</script>
   <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", user.id) %>
   <% end %>
-  <script>window.baseApiUrl = "/api"</script>
   <%= render_existing(@view_module, "_meta." <> @view_template, assigns) %>
 
 </head>
