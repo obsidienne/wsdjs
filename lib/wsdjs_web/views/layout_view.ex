@@ -11,7 +11,7 @@ defmodule WsdjsWeb.LayoutView do
         @normal_link
       end
 
-    link(text, to: route, class: css)
+    live_redirect(text, to: route, class: css)
   end
 
   @active_pill "px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700"
@@ -26,6 +26,6 @@ defmodule WsdjsWeb.LayoutView do
         @normal_pill
       end
 
-    link(text, to: route, class: "#{class} #{css}")
+    live_redirect(text, to: route, class: "#{class} #{css}")
   end
 end

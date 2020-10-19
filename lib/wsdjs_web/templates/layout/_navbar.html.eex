@@ -25,7 +25,7 @@
           <div class="ml-10 flex items-baseline">
             <%= navbar_pill @conn, "Dashboard", to: Routes.home_path(@conn, :index) %>
             <%= navbar_pill @conn, "Charts", to: Routes.top_path(@conn, :index), class: "ml-4" %>
-            <%= navbar_pill @conn, "Library", to: Routes.song_path(@conn, :index), class: "ml-4" %>
+            <%= navbar_pill @conn, "Library", to: Routes.live_path(@conn, WsdjsWeb.MusicLibrary), class: "ml-4" %>
             <%= if @current_user do %>
             <%# navbar_pill @conn, "Members", to: Routes.user_path(@conn, :index), class: "ml-4"%>
             <% end %>
@@ -119,7 +119,8 @@
       <div class="px-2 pt-2 pb-3 sm:px-3">
         <%= navbar_link @conn, "Dashboard", to: Routes.home_path(@conn, :index) %>
         <%= navbar_link @conn, "Charts", to: Routes.top_path(@conn, :index) %>
-        <%= navbar_link @conn, "Library", to: Routes.song_path(@conn, :index) %>
+        <%= navbar_link @conn, "Library", to: Routes.live_path(@conn, WsdjsWeb.MusicLibrary) %>
+
         <%= navbar_link @conn, "Events", to: Routes.event_path(@conn, :index) %>
         <%= if @current_user do %>
         <%= navbar_link @conn, "Members", to: Routes.user_path(@conn, :index) %>

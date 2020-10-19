@@ -47,13 +47,6 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  def index(conn, _params, current_user) do
-    playlists = Playlists.get_playlist_by_user(current_user, current_user)
-    songs = Wsdjs.Songs.list_songs(current_user)
-
-    render(conn, "index.html", playlists: playlists, songs: songs)
-  end
-
   @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def new(conn, _params, current_user) do
