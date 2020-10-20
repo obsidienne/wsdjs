@@ -111,6 +111,8 @@ defmodule Wsdjs.Songs do
     |> Repo.all()
   end
 
+  def count_songs(%User{} = user), do: Repo.aggregate(Songs.scoped(user), :count, :id)
+
   @doc """
   Returns the songs added the 24 last hours.
   """
