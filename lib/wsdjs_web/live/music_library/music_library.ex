@@ -19,11 +19,13 @@ defmodule WsdjsWeb.MusicLibrary do
 
     paginate_options = %{page: page, per_page: per_page, total_pages: total_pages}
     sort_options = %{sort_by: sort_by, sort_order: sort_order}
+    query = %{q: params["q"] || ""}
 
     songs =
       Wsdjs.Songs.list_songs(current_user,
         paginate: paginate_options,
-        sort: sort_options
+        sort: sort_options,
+        query: query
       )
 
     songs = Wsdjs.Reactions.last_reactions(songs)
@@ -31,7 +33,7 @@ defmodule WsdjsWeb.MusicLibrary do
 
     socket =
       assign(socket,
-        options: Map.merge(paginate_options, sort_options),
+        options: Map.merge(paginate_options, sort_options) |> Map.merge(query),
         songs: songs
       )
 
@@ -47,7 +49,8 @@ defmodule WsdjsWeb.MusicLibrary do
           page: page,
           per_page: options.per_page,
           sort_by: options.sort_by,
-          sort_order: options.sort_order
+          sort_order: options.sort_order,
+          q: options.q
         ),
       class: class,
       do: content
@@ -63,7 +66,8 @@ defmodule WsdjsWeb.MusicLibrary do
           page: page,
           per_page: options.per_page,
           sort_by: options.sort_by,
-          sort_order: options.sort_order
+          sort_order: options.sort_order,
+          q: options.q
         ),
       class: class
     )
@@ -80,7 +84,8 @@ defmodule WsdjsWeb.MusicLibrary do
           sort_by: sort_by,
           sort_order: toggle_sort_order(options.sort_order),
           page: options.page,
-          per_page: options.per_page
+          per_page: options.per_page,
+          q: options.q
         ),
       class:
         "-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-r-md text-gray-700 bg-gray-50 hover:text-gray-500 hover:bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"

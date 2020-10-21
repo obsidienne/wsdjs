@@ -106,6 +106,25 @@ defmodule Wsdjs.Songs do
 
       {:sort, %{sort_by: sort_by, sort_order: sort_order}}, query ->
         from q in query, order_by: [{^sort_order, ^sort_by}]
+
+      {:query, %{q: ""}}, query ->
+        query
+
+      {:query, %{q: q}}, query ->
+        q =
+          q
+          |> String.trim()
+          |> String.split(" ")
+          |> Enum.map(&"#{&1}:*")
+          |> Enum.join(" & ")
+
+        query
+        |> where(
+          fragment(
+            "(to_tsvector('english', coalesce(artist, '') || ' ' ||  coalesce(title, '')) @@ to_tsquery('english', ?))",
+            ^q
+          )
+        )
     end)
     |> preload([:art])
     |> Repo.all()
