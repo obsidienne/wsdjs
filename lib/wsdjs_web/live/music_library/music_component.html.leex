@@ -23,7 +23,7 @@
                                     clip-rule="evenodd" />
                             </svg>
 
-                            <span><span class="hidden md:inline">Suggested on </span><time datetime="2020-01-07">January 7, 2020</time> </span>
+                            <span><span class="hidden md:inline">Suggested on </span><time datetime="2020-01-07"><%= Cldr.Date.to_string!(@song.inserted_at, format: :medium) %></time> </span>
                         </div>
                     </div>
                 </div>

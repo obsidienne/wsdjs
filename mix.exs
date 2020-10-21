@@ -67,6 +67,7 @@ defmodule Wsdjs.MixProject do
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:scrivener_ecto, "~> 2.0"},
+      {:ex_cldr_dates_times, "~> 2.0"},
       {:bamboo, "~> 1.1"},
       {:httpoison, "~> 1.4"},
       {:earmark, "~> 1.4"},
