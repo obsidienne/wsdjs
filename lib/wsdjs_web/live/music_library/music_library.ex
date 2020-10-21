@@ -15,11 +15,10 @@ defmodule WsdjsWeb.MusicLibrary do
 
     sort_by = (params["sort_by"] || "id") |> String.to_atom()
     sort_order = (params["sort_order"] || "asc") |> String.to_atom()
-
-    paginate_options = %{page: page, per_page: per_page}
-    sort_options = %{sort_by: sort_by, sort_order: sort_order}
-
     total_pages = ceil(Wsdjs.Songs.count_songs(current_user) / per_page)
+
+    paginate_options = %{page: page, per_page: per_page, total_pages: total_pages}
+    sort_options = %{sort_by: sort_by, sort_order: sort_order}
 
     songs =
       Wsdjs.Songs.list_songs(current_user,
@@ -27,10 +26,12 @@ defmodule WsdjsWeb.MusicLibrary do
         sort: sort_options
       )
 
+    songs = Wsdjs.Reactions.last_reactions(songs)
+    songs = Attachments.preload_avatar(songs)
+
     socket =
       assign(socket,
         options: Map.merge(paginate_options, sort_options),
-        total_pages: total_pages,
         songs: songs
       )
 

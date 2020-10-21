@@ -4,8 +4,8 @@
         <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <img class="h-12 w-12 rounded" src="<%= Attachments.art_url(@song.art, 200) %>"
-                        srcset="<%= Attachments.art_url(@song.art, 200) %>" alt="">
+                    <img class="h-12 w-12 rounded" src="<%= Attachments.art_url(@song.art, 100) %>"
+                        srcset="<%= Attachments.art_url(@song.art, 100) %>" alt="">
                 </div>
                 <div class="ml-2">
                     <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
@@ -23,7 +23,7 @@
                                     clip-rule="evenodd" />
                             </svg>
 
-                            <span> Suggested on <time datetime="2020-01-07">January 7, 2020</time> </span>
+                            <span><span class="hidden md:inline">Suggested on </span><time datetime="2020-01-07">January 7, 2020</time> </span>
                         </div>
                     </div>
                 </div>
@@ -32,17 +32,14 @@
             <div class="mt-4 flex-shrink-0 sm:mt-0">
                 <div class="flex overflow-hidden">
                     <img class="inline-block h-6 w-6 rounded-full text-white shadow-solid"
-                        src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="<%= Attachments.avatar_url(@song.user.avatar, 50) %>"
                         alt="">
+
+                    <%= for opinion <- @song.opinions do %>
                     <img class="-ml-1 inline-block h-6 w-6 rounded-full text-white shadow-solid"
-                        src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="<%= Attachments.avatar_url(opinion.user.avatar, 50) %>"
                         alt="">
-                    <img class="-ml-1 inline-block h-6 w-6 rounded-full text-white shadow-solid"
-                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-                        alt="">
-                    <img class="-ml-1 inline-block h-6 w-6 rounded-full text-white shadow-solid"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt="">
+                    <% end %>
                 </div>
             </div>
         </div>

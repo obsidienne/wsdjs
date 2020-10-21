@@ -97,4 +97,9 @@ defmodule Attachments do
 
   def avatar_srcset(_, base),
     do: avatar_srcset(%{cld_id: "wsdjs/missing_avatar", version: "1"}, base)
+
+  def preload_avatar(songs) when is_list(songs) do
+    songs
+    |> Wsdjs.Repo.preload(user: :avatar)
+  end
 end

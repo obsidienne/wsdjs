@@ -34,7 +34,7 @@
 
   <nav class="border-t border-gray-200 px-4 flex items-center justify-between sm:px-0">
     <div class="w-0 flex-1 flex">
-      <%= if @options.page > 1 and @total_pages > 1 do %>
+      <%= if @options.page > 1 and @options.total_pages > 1 do %>
         <%= pagination_link(@socket,
                             @options.page - 1,
                             @options,
@@ -47,7 +47,7 @@
       <% end %>
     </div>
     <div class="hidden md:flex">
-        <%= for i <- (@options.page - 2)..(@options.page + 2), i > 0, i <= @total_pages do %>
+        <%= for i <- (@options.page - 2)..(@options.page + 2), i > 0, i <= @options.total_pages do %>
           <%= pagination_link(@socket,
                                 i,
                                 i,
@@ -59,7 +59,7 @@
         <% end %>
     </div>
     <div class="w-0 flex-1 flex justify-end">
-        <%= if @options.page < @total_pages do %>
+        <%= if @options.page < @options.total_pages do %>
 
           <%= pagination_link(@socket,
                               @options.page + 1,
