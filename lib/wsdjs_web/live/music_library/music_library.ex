@@ -13,8 +13,8 @@ defmodule WsdjsWeb.MusicLibrary do
     page = String.to_integer(params["page"] || "1")
     per_page = String.to_integer(params["per_page"] || "9")
 
-    sort_by = (params["sort_by"] || "id") |> String.to_atom()
-    sort_order = (params["sort_order"] || "asc") |> String.to_atom()
+    sort_by = (params["sort_by"] || "inserted_at") |> String.to_atom()
+    sort_order = (params["sort_order"] || "desc") |> String.to_atom()
     total_pages = ceil(Wsdjs.Songs.count_songs(current_user) / per_page)
 
     paginate_options = %{page: page, per_page: per_page, total_pages: total_pages}
