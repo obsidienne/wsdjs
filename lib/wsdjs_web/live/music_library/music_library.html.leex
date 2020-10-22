@@ -12,9 +12,13 @@
                 clip-rule="evenodd" />
             </svg>
           </div>
-          <input id="filter_songs"
-            class="form-input block w-full rounded-none rounded-l-md pl-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-            placeholder="Start searching a song..." value="<%= @options.q %>">
+          <form phx-change="search">
+            <input id="filter_songs" name="q"
+              class="form-input block w-full rounded-none rounded-l-md pl-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+              autofocus autocomplete="off"
+              phx-debounce="1000"
+              placeholder="Start searching a song..." value="<%= @options.q %>">
+          </form>
         </div>
         <%= sort_link(@socket, "Sort", :inserted_at, @options) %>
 

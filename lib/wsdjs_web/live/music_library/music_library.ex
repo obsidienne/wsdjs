@@ -40,6 +40,26 @@ defmodule WsdjsWeb.MusicLibrary do
     {:noreply, socket}
   end
 
+  def handle_event("search", %{"q" => q}, socket) do
+    IO.inspect(q)
+
+    socket =
+      push_patch(socket,
+        to:
+          Routes.live_path(
+            socket,
+            __MODULE__,
+            page: socket.assigns.options.page,
+            per_page: socket.assigns.options.per_page,
+            sort_by: socket.assigns.options.sort_by,
+            sort_order: socket.assigns.options.sort_order,
+            q: q
+          )
+      )
+
+    {:noreply, socket}
+  end
+
   defp pagination_link(socket, page, options, class, do: content) do
     live_patch(
       to:
