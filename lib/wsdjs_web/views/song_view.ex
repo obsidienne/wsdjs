@@ -2,7 +2,6 @@ defmodule WsdjsWeb.SongView do
   use WsdjsWeb, :view
 
   alias Wsdjs.Accounts
-  alias Wsdjs.Happenings
   alias Wsdjs.Reactions.Opinions.Opinion
 
   def current_opinion(_opinions, nil), do: nil
@@ -26,11 +25,6 @@ defmodule WsdjsWeb.SongView do
   def list_users do
     users = Accounts.list_users()
     Enum.map(users, &{user_displayed_name(&1), &1.id})
-  end
-
-  def list_events do
-    events = Happenings.list_events()
-    Enum.map(events, &{&1.name, &1.id})
   end
 
   def song_full_description(song) do

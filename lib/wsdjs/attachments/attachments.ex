@@ -23,13 +23,7 @@ defmodule Wsdjs.Attachments do
       ** (Ecto.NoResultsError)
 
   """
-  def get_video!(id) do
-    Video
-    |> Repo.get!(id)
-    |> load_event()
-  end
-
-  def load_event(video), do: Repo.preload(video, :event)
+  def get_video!(id), do: Repo.get!(Video, id)
 
   @doc """
   Returns the list of videos.
@@ -44,7 +38,6 @@ defmodule Wsdjs.Attachments do
     |> where(song_id: ^id)
     |> order_by(desc: :inserted_at)
     |> Repo.all()
-    |> load_event()
   end
 
   @doc """
@@ -60,19 +53,9 @@ defmodule Wsdjs.Attachments do
 
   """
   def create_video(params) do
-    video =
-      %Video{}
-      |> Video.changeset(params)
-      |> Repo.insert()
-
-    case video do
-      {:ok, video} ->
-        video = load_event(video)
-        {:ok, video}
-
-      _ ->
-        video
-    end
+    %Video{}
+    |> Video.changeset(params)
+    |> Repo.insert()
   end
 
   @doc """

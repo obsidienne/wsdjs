@@ -41,8 +41,6 @@ defmodule WsdjsWeb.MusicLibrary do
   end
 
   def handle_event("search", %{"q" => q}, socket) do
-    IO.inspect(q)
-
     socket =
       push_patch(socket,
         to:

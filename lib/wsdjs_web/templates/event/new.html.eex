@@ -1,3 +1,0 @@
-<section>
-    <%= render "form.html", Map.put(assigns, :action, Routes.event_path(@conn, :create)) %>
-</section>

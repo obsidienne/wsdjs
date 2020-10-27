@@ -29,8 +29,6 @@
             <%= if @current_user do %>
             <%# navbar_pill @conn, "Members", to: Routes.user_path(@conn, :index), class: "ml-4"%>
             <% end %>
-
-            <%# navbar_pill @conn, "Events", to: Routes.event_path(@conn, :index), class: "ml-4" %>
           </div>
         </div>
       </div>
@@ -121,7 +119,6 @@
         <%= navbar_link @conn, "Charts", to: Routes.top_path(@conn, :index) %>
         <%= navbar_link @conn, "Library", to: Routes.live_path(@conn, WsdjsWeb.MusicLibrary) %>
 
-        <%= navbar_link @conn, "Events", to: Routes.event_path(@conn, :index) %>
         <%= if @current_user do %>
         <%= navbar_link @conn, "Members", to: Routes.user_path(@conn, :index) %>
         <% end %>

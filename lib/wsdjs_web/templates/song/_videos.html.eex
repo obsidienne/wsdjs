@@ -7,8 +7,6 @@
   <div class="mt-2 flex">
     <div>
       <span class="text-bold"><%= video.title %></span>
-      <br />
-      <span><%= if is_nil(video.event) do video.event_str else video.event.name end %></span>
     </div>
     <%= if Wsdjs.Attachments.Policy.can?(@conn.assigns[:current_user], :delete, video) == :ok do %>
     <div class="ml-auto">

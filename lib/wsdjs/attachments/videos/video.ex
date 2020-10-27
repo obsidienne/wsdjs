@@ -1,6 +1,6 @@
 defmodule Wsdjs.Attachments.Videos.Video do
   @moduledoc """
-  A video attached to a song and maybe an event.
+  A video attached to a song.
   """
   use Wsdjs.Schema
   import Ecto.Changeset
@@ -10,27 +10,24 @@ defmodule Wsdjs.Attachments.Videos.Video do
           url: String.t(),
           video_id: String.t(),
           title: String.t(),
-          event_str: String.t(),
           published_at: Date.t(),
           provider: String.t(),
           updated_at: DateTime.t(),
           inserted_at: DateTime.t()
         }
 
-  @allowed_fields ~w(url event_str event_id title user_id song_id published_at)a
+  @allowed_fields ~w(url title user_id song_id published_at)a
   @required_fields ~w(url)a
 
   schema "videos" do
     field(:url, :string)
     field(:video_id, :string)
     field(:title, :string)
-    field(:event_str, :string, source: :event)
     field(:published_at, :date)
     field(:provider, :string, default: "unknown")
 
     belongs_to(:user, Wsdjs.Accounts.User)
     belongs_to(:song, Wsdjs.Songs.Song)
-    belongs_to(:event, Wsdjs.Happenings.Event)
     timestamps()
   end
 

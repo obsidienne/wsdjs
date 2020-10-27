@@ -74,7 +74,6 @@ defmodule WsdjsWeb.Router do
     get("/tops/:id/stats", TopController, :stat, as: :top_stat)
 
     resources("/ranks", RankController, only: [:update, :delete])
-    resources("/events", EventController)
 
     resources "/users", UserController, only: [:index, :edit, :update]
     live "/library", MusicLibrary
