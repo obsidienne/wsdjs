@@ -77,7 +77,6 @@ defmodule WsdjsWeb.Router do
     resources("/events", EventController)
 
     resources "/users", UserController, only: [:index, :edit, :update]
-    live "/paginate-users", PaginateUsersLive
     live "/library", MusicLibrary
 
     resources("/user-params", UserParamsController, only: [:show])
