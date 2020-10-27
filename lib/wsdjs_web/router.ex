@@ -76,18 +76,11 @@ defmodule WsdjsWeb.Router do
     resources("/ranks", RankController, only: [:update, :delete])
     resources("/events", EventController)
 
-    resources "/users", UserController, only: [:index, :edit, :update] do
-      resources("/playlists", PlaylistController, only: [:new, :create])
-    end
-
+    resources "/users", UserController, only: [:index, :edit, :update]
     live "/paginate-users", PaginateUsersLive
     live "/library", MusicLibrary
 
     resources("/user-params", UserParamsController, only: [:show])
-
-    resources("/playlists", PlaylistController, only: [:show, :edit, :delete, :update]) do
-      resources("/songs", PlaylistSongsController, only: [:create, :delete, :update])
-    end
   end
 
   scope "/", WsdjsWeb do

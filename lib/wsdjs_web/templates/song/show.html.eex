@@ -51,19 +51,6 @@
         <% end %>
     </div>
   </div>
-  <template id="playlist-picker-tpl">
-    <div>
-      <span class="block pb-2 mx-4 text-center border-bottom">Playlists</span>
-      <ul class="list-reset">
-        <%= for playlist <- @playlists do %>
-        <li class="hover:bg-grey p-1">
-          <button class="btn-no-style w-full text-left song-picker-playlist"
-            data-id="<%= playlist.id %>"><%= playlist.name %></button>
-        </li>
-        <% end %>
-      </ul>
-    </div>
-  </template>
 </section>
 
 <div>

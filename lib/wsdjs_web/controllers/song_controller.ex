@@ -7,7 +7,6 @@ defmodule WsdjsWeb.SongController do
   alias Wsdjs.Attachments.Videos.Video
   alias Wsdjs.Songs.Song
   alias Wsdjs.Songs
-  alias Wsdjs.Playlists
   alias Wsdjs.Reactions.{Comments, Opinions}
 
   action_fallback(WsdjsWeb.FallbackController)
@@ -29,7 +28,6 @@ defmodule WsdjsWeb.SongController do
       comment_changeset = Comments.change()
       ranks = Wsdjs.Charts.get_ranks(song)
       comments = Comments.list(song)
-      playlists = Playlists.get_playlist_by_user(current_user, current_user)
 
       render(
         conn,
@@ -37,7 +35,6 @@ defmodule WsdjsWeb.SongController do
         song: song,
         opinions: opinions,
         comments: comments,
-        playlists: playlists,
         comment_changeset: comment_changeset,
         videos: videos,
         ranks: ranks,

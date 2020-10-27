@@ -76,11 +76,3 @@
 </ul>
 <% end %>
 <% end %>
-
-
-<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen ">
-  <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">Playlists</h2>
-  <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <%= render "_playlists.html", conn: @conn, current_user: @current_user, user: @user, playlists: @playlists %>
-  </ul>
-</div>

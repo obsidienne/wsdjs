@@ -23,14 +23,12 @@ defmodule WsdjsWeb.UserController do
     user = Accounts.get_user!(user_id)
 
     with :ok <- Profils.can?(current_user, :show, user) do
-      playlists = Wsdjs.Playlists.list_playlists(user, current_user)
       user = user |> Accounts.load_profil() |> Accounts.load_avatar()
 
       conn
       |> render(
         "show.html",
         user: user,
-        playlists: playlists,
         page_title: "User - World Swing DJs"
       )
     end

@@ -3,9 +3,6 @@
     <li class="inline-block">
       <%= link "bio", to: Routes.user_path(@conn, :show, @user) %>
     </li>
-    <li class="inline-block">
-      <%= link "playlists", to: Routes.user_playlist_path(@conn, :index, @user) %>
-    </li>
     <li class="current inline-block">
       <%= link "params", to: Routes.user_params_path(@conn, :show, @user) %>
     </li>
