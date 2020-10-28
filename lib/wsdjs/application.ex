@@ -14,10 +14,9 @@ defmodule Wsdjs.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Wsdjs.PubSub},
       # Start the endpoint when the application starts
-      WsdjsWeb.Endpoint,
+      WsdjsWeb.Endpoint
       # Starts a worker by calling: WsdjsWeb.Worker.start_link(arg)
       # {WsdjsWeb.Worker, arg},
-      {ConCache, [name: :wsdjs_cache, ttl_check_interval: false]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

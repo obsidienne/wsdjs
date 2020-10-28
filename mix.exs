@@ -75,7 +75,6 @@ defmodule Wsdjs.MixProject do
       {:geo_postgis, "~> 3.1"},
       {:html_sanitize_ex, "~> 1.3.0"},
       {:corsica, "~> 1.1"},
-      {:con_cache, "~> 0.13.0"},
       {:timex, "~> 3.4"}
     ]
   end
