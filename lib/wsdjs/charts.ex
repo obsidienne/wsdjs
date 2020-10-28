@@ -11,8 +11,6 @@ defmodule Wsdjs.Charts do
   alias Wsdjs.Songs
   alias Wsdjs.Repo
 
-
-
   def can?(%User{admin: true}, _), do: :ok
   def can?(%User{profil_djvip: true}, :vote), do: :ok
   def can?(_, _), do: {:error, :unauthorized}
@@ -29,7 +27,6 @@ defmodule Wsdjs.Charts do
   end
 
   def can?(_, _, _), do: {:error, :unauthorized}
-
 
   @doc """
   Returns the current user's last 3 accessible published Top.
@@ -49,23 +46,13 @@ defmodule Wsdjs.Charts do
   @doc """
   Returns Tops accessible for the current user.
   """
-  def paginate_tops(current_user, paginate_params \\ %{}) do
-    tops =
-      current_user
-      |> Top.scoped()
-      |> order_by(desc: :due_date)
-      |> Repo.paginate(paginate_params)
-
-    entries =
-      tops.entries
-      |> Repo.preload(ranks: list_rank())
-      |> Repo.preload(:songs)
-
-    %{
-      entries: entries,
-      total_pages: tops.total_pages,
-      page_number: tops.page_number
-    }
+  def list_tops(current_user) do
+    current_user
+    |> Top.scoped()
+    |> order_by(desc: :due_date)
+    |> Repo.all()
+    |> Repo.preload(ranks: list_rank())
+    |> Repo.preload(:songs)
   end
 
   def stat_top!(current_user, top_id) do
