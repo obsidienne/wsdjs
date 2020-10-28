@@ -17,8 +17,9 @@ defmodule WsdjsWeb.TopController do
     render(conn, "index.html", tops: tops)
   end
 
+  @spec stat(any, map, any) :: {:error, :unauthorized} | Plug.Conn.t()
   def stat(conn, %{"id" => id}, current_user) do
-    with :ok <- Charts.Policy.can?(current_user, :stats_top) do
+    with :ok <- Charts.can?(current_user, :stats_top) do
       top = Charts.stat_top!(current_user, id)
 
       render(conn, :stat, top: top)
@@ -33,7 +34,7 @@ defmodule WsdjsWeb.TopController do
         Charts.get_top!(id)
       end
 
-    with :ok <- Charts.Policy.can?(current_user, :show, top) do
+    with :ok <- Charts.can?(current_user, :show, top) do
       render(
         conn,
         :show,
@@ -48,7 +49,7 @@ defmodule WsdjsWeb.TopController do
   @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def new(conn, _params, current_user) do
-    with :ok <- Charts.Policy.can?(current_user, :create_top) do
+    with :ok <- Charts.can?(current_user, :create_top) do
       changeset = Charts.change_top_creation(%Top{})
       render(conn, "new.html", changeset: changeset)
     end
@@ -59,7 +60,7 @@ defmodule WsdjsWeb.TopController do
   def update(conn, %{"id" => id, "direction" => "next"}, current_user) do
     top = Charts.get_top!(id)
 
-    with :ok <- Charts.Policy.can?(current_user, :update_top, top),
+    with :ok <- Charts.can?(current_user, :update_top, top),
          {:ok, _top} = Charts.next_step(top) do
       redirect(conn, to: Routes.top_path(conn, :show, top))
     end
@@ -68,7 +69,7 @@ defmodule WsdjsWeb.TopController do
   def update(conn, %{"id" => id, "direction" => "previous"}, current_user) do
     top = Charts.get_top!(id)
 
-    with :ok <- Charts.Policy.can?(current_user, :update_top, top),
+    with :ok <- Charts.can?(current_user, :update_top, top),
          {:ok, _top} = Charts.previous_step(top) do
       redirect(conn, to: Routes.top_path(conn, :show, top))
     end
@@ -80,7 +81,7 @@ defmodule WsdjsWeb.TopController do
       |> Map.put("user_id", current_user.id)
       |> Map.put("due_date", Timex.beginning_of_month(params["due_date"]))
 
-    with :ok <- Charts.Policy.can?(current_user, :create_top),
+    with :ok <- Charts.can?(current_user, :create_top),
          {:ok, top} <- Charts.create_top(params) do
       conn
       |> put_flash(:info, "Top created !")
@@ -93,7 +94,7 @@ defmodule WsdjsWeb.TopController do
   def delete(conn, %{"id" => id}, current_user) do
     top = Charts.get_top!(id)
 
-    with :ok <- Charts.Policy.can?(current_user, :delete_top, top),
+    with :ok <- Charts.can?(current_user, :delete_top, top),
          {:ok, _top} = Charts.delete_top(top) do
       conn
       |> put_flash(:info, "Top deleted successfully.")
