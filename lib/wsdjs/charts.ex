@@ -11,6 +11,26 @@ defmodule Wsdjs.Charts do
   alias Wsdjs.Songs
   alias Wsdjs.Repo
 
+
+
+  def can?(%User{admin: true}, _), do: :ok
+  def can?(%User{profil_djvip: true}, :vote), do: :ok
+  def can?(_, _), do: {:error, :unauthorized}
+
+  def can?(%User{admin: true}, _, %Top{}), do: :ok
+
+  def can?(user, :show, %Top{id: id}) do
+    top = Repo.get(Top.scoped(user), id)
+
+    case top do
+      %Top{} -> :ok
+      nil -> {:error, :unauthorized}
+    end
+  end
+
+  def can?(_, _, _), do: {:error, :unauthorized}
+
+
   @doc """
   Returns the current user's last 3 accessible published Top.
   """
