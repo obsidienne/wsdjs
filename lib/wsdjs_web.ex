@@ -94,6 +94,7 @@ defmodule WsdjsWeb do
       alias WsdjsWeb.Router.Helpers, as: Routes
 
       # Import custom helpers
+      import WsdjsWeb.CloudexImageHelper
       import WsdjsWeb.CloudinaryHelper
       import WsdjsWeb.SongHelper
       import WsdjsWeb.UserHelper

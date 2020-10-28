@@ -62,16 +62,6 @@ defmodule Attachments do
   def art_srcset(nil, base),
     do: art_srcset(%{cld_id: "wsdjs/missing_cover", version: "1"}, base)
 
-  def art_url_blured(%{cld_id: cld_id, version: version}, resolution)
-      when is_integer(resolution) do
-    @cld_https <>
-      "c_crop,g_custom/c_fit,f_auto,o_30,q_auto,w_#{resolution}/fl_immutable_cache/" <>
-      "v#{version}/#{cld_id}.jpg"
-  end
-
-  def art_url_blured(nil, resolution),
-    do: art_url_blured(%{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
-
   ###############################################
   #
   # AVATAR
