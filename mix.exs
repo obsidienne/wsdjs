@@ -68,12 +68,12 @@ defmodule Wsdjs.MixProject do
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:ex_cldr_dates_times, "~> 2.0"},
       {:bamboo, "~> 1.1"},
-      {:httpoison, "~> 1.4"},
       {:earmark, "~> 1.4"},
       {:hashids, "~> 2.0"},
       {:geo_postgis, "~> 3.1"},
       {:html_sanitize_ex, "~> 1.3.0"},
       {:corsica, "~> 1.1"},
+      {:cloudex, "~> 1.3.0"},
       {:timex, "~> 3.4"}
     ]
   end
