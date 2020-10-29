@@ -46,6 +46,21 @@ defmodule Wsdjs.Charts do
   @doc """
   Returns Tops accessible for the current user.
   """
+  def list_tops(%User{} = user, criteria) when is_list(criteria) do
+    query = Top.scoped(user)
+
+    Enum.reduce(criteria, query, fn
+      {:paginate, %{page: page, per_page: per_page}}, query ->
+        from q in query,
+          offset: ^((page - 1) * per_page),
+          limit: ^per_page
+
+      {:sort, %{sort_by: sort_by, sort_order: sort_order}}, query ->
+        from q in query, order_by: [{^sort_order, ^sort_by}]
+    end)
+    |> Repo.all()
+  end
+
   def list_tops(current_user) do
     current_user
     |> Top.scoped()
@@ -54,6 +69,8 @@ defmodule Wsdjs.Charts do
     |> Repo.preload(ranks: list_rank())
     |> Repo.preload(:songs)
   end
+
+  def count_charts(%User{} = user), do: Repo.aggregate(Top.scoped(user), :count, :id)
 
   def stat_top!(current_user, top_id) do
     current_user

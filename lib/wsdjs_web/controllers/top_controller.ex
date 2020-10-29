@@ -12,11 +12,6 @@ defmodule WsdjsWeb.TopController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def index(conn, _params, current_user) do
-    tops = Charts.list_tops(current_user)
-    render(conn, "index.html", tops: tops)
-  end
-
   @spec stat(any, map, any) :: {:error, :unauthorized} | Plug.Conn.t()
   def stat(conn, %{"id" => id}, current_user) do
     with :ok <- Charts.can?(current_user, :stats_top) do

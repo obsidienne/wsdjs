@@ -174,6 +174,8 @@ defmodule Wsdjs.Songs do
     Repo.all(query)
   end
 
+  def preload_songs(tops) when is_list(tops), do: Repo.preload(tops, :songs)
+
   @doc """
   Creates a song.
 

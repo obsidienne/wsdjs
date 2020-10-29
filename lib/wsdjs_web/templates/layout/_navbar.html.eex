@@ -24,7 +24,7 @@
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline">
             <%= navbar_pill @conn, "Dashboard", to: Routes.home_path(@conn, :index) %>
-            <%= navbar_pill @conn, "Charts", to: Routes.top_path(@conn, :index), class: "ml-4" %>
+            <%= navbar_pill @conn, "Charts", to: Routes.live_path(@conn, WsdjsWeb.ChartList), class: "ml-4" %>
             <%= navbar_pill @conn, "Library", to: Routes.live_path(@conn, WsdjsWeb.MusicLibrary), class: "ml-4" %>
             <%= if @current_user do %>
             <%# navbar_pill @conn, "Members", to: Routes.user_path(@conn, :index), class: "ml-4"%>
@@ -116,7 +116,7 @@
       x-state:off="closed" :class="{ 'block': open, 'hidden': !open }">
       <div class="px-2 pt-2 pb-3 sm:px-3">
         <%= navbar_link @conn, "Dashboard", to: Routes.home_path(@conn, :index) %>
-        <%= navbar_link @conn, "Charts", to: Routes.top_path(@conn, :index) %>
+        <%= navbar_link @conn, "Charts", to: Routes.live_path(@conn, WsdjsWeb.ChartList) %>
         <%= navbar_link @conn, "Library", to: Routes.live_path(@conn, WsdjsWeb.MusicLibrary) %>
 
         <%= if @current_user do %>

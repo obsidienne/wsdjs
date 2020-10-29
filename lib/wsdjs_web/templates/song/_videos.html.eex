@@ -8,17 +8,6 @@
     <div>
       <span class="text-bold"><%= video.title %></span>
     </div>
-    <%= if Wsdjs.Attachments.can?(@conn.assigns[:current_user], :delete, video) == :ok do %>
-    <div class="ml-auto">
-      <%= link to: Routes.song_song_videos_path(@conn, :delete, @song, video), class: "block", method: "delete", data: [pjax: "false", confirm: "Delete video.\n\nAre you sure ?"] do %>
-      <svg fill="#455A64" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-        <path d="M0 0h24v24H0z" fill="none" />
-      </svg>
-      <% end %>
-    </div>
-    <% end %>
-
   </div>
 </article>
 <% end %>
