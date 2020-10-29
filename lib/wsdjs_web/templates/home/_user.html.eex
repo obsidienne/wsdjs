@@ -1,8 +1,9 @@
 <li>
   <div class="space-y-4">
     <a href="<%= Routes.user_path(@conn, :show, @user) %>" class="space-y-4">
-      <img class="mx-auto h-20 w-20 rounded-full lg:w-24 lg:h-24" src="<%= Attachments.art_url(@user.avatar, 200) %>"
-        srcset="<%= Attachments.art_srcset(@user.avatar, 200) %>" alt="">
+      <img class="mx-auto h-20 w-20 rounded-full lg:w-24 lg:h-24"
+        src="<%= Wsdjs.Attachments.art_url(@user.avatar, 200) %>"
+        srcset="<%= Wsdjs.Attachments.art_srcset(@user.avatar, 200) %>" alt="">
       <div class="space-y-2">
         <div class="text-xs leading-4 font-medium lg:text-sm lg:leading-5">
           <h4><%= @user.profil.djname || @user.profil.name %></h4>

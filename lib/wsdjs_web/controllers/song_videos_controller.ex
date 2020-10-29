@@ -50,7 +50,7 @@ defmodule WsdjsWeb.SongVideosController do
       |> Map.put("user_id", current_user.id)
       |> Map.put("song_id", song_id)
 
-    with :ok <- Attachments.Policy.can?(current_user, :create_video),
+    with :ok <- Attachments.can?(current_user, :create_video),
          {:ok, _} <- Attachments.create_video(params) do
       conn
       |> put_flash(:info, "Video created")
@@ -62,7 +62,7 @@ defmodule WsdjsWeb.SongVideosController do
     video = Attachments.get_video!(id)
     song = Songs.get_song!(video.song_id)
 
-    with :ok <- Attachments.Policy.can?(current_user, :delete, video),
+    with :ok <- Attachments.can?(current_user, :delete, video),
          {:ok, _} <- Attachments.delete_video(video) do
       conn
       |> put_flash(:info, "Video deleted")

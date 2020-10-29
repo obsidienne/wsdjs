@@ -29,7 +29,7 @@ defmodule WsdjsWeb.MusicLibrary do
       )
 
     songs = Wsdjs.Reactions.last_reactions(songs)
-    songs = Attachments.preload_avatar(songs)
+    songs = Wsdjs.Attachments.preload_avatar(songs)
 
     socket =
       assign(socket,

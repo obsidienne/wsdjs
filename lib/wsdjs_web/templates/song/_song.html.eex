@@ -4,8 +4,8 @@
         <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <img class="h-12 w-12 rounded" src="<%= Attachments.art_url(@song.art, 200) %>"
-                        srcset="<%= Attachments.art_url(@song.art, 200) %>" alt="">
+                    <img class="h-12 w-12 rounded" src="<%= Wsdjs.Attachments.art_url(@song.art, 200) %>"
+                        srcset="<%= Wsdjs.Attachments.art_url(@song.art, 200) %>" alt="">
                 </div>
                 <div class="ml-2">
                     <div class="text-sm leading-5 font-medium text-indigo-600 truncate">

@@ -3,12 +3,14 @@
         <!-- Profile -->
         <div class="flex items-center">
 
-            <img class="hidden h-15 w-15 rounded-full sm:block" src="<%= Attachments.avatar_url(@user.avatar, 48) %>"
-                srcset="<%= Attachments.avatar_srcset(@user.avatar, 48) %>" alt="">
+            <img class="hidden h-15 w-15 rounded-full sm:block"
+                src="<%= Wsdjs.Attachments.avatar_url(@user.avatar, 48) %>"
+                srcset="<%= Wsdjs.Attachments.avatar_srcset(@user.avatar, 48) %>" alt="">
             <div>
                 <div class="flex items-center">
-                    <img class="h-15 w-15 rounded-full sm:hidden" src="<%= Attachments.avatar_url(@user.avatar, 48) %>"
-                        srcset="<%= Attachments.avatar_srcset(@user.avatar, 48) %>" alt="">
+                    <img class="h-15 w-15 rounded-full sm:hidden"
+                        src="<%= Wsdjs.Attachments.avatar_url(@user.avatar, 48) %>"
+                        srcset="<%= Wsdjs.Attachments.avatar_srcset(@user.avatar, 48) %>" alt="">
                     <h1 class="ml-3 text-2xl font-bold leading-7 text-cool-gray-900 sm:leading-9 sm:truncate">
                         Good morning, <%= @current_profil.djname || @current_profil.name %>
                     </h1>

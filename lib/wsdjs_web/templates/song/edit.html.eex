@@ -9,8 +9,8 @@
   <div class="flex p-2 bg-white shadow">
     <div>
       <div class="relative w-12 h-12 aspect-ratio-square">
-        <img src="<%= Attachments.art_url(@song.art, 48) %>" srcset="<%= Attachments.art_srcset(@song.art, 48) %>"
-          sizes="48px" class="responsive absolute top-0" />
+        <img src="<%= Wsdjs.Attachments.art_url(@song.art, 48) %>"
+          srcset="<%= Wsdjs.Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive absolute top-0" />
       </div>
     </div>
     <div class="pl-4">
@@ -31,7 +31,7 @@
 
 <section class="mb-32">
   <div id="art_div" class="relative mb-4">
-    <img id="art_thumbnail" class="opacity-25 shadow rounded" src="<%= Attachments.art_url(@song.art, 240) %>"
+    <img id="art_thumbnail" class="opacity-25 shadow rounded" src="<%= Wsdjs.Attachments.art_url(@song.art, 240) %>"
       style="width:240px;height:240px;">
     <button id="song_edit_cldwidget_opener" class="btn btn-primary absolute bottom-0 pin-l">Update cover</button>
   </div>

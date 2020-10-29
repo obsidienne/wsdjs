@@ -1,7 +1,7 @@
 <li class="mb-4 p-2 flex shadow relative">
   <div class="mr-4">
-    <img src="<%= Attachments.avatar_url(@user.avatar, 96) %>"
-      srcset="<%= Attachments.avatar_srcset(@user.avatar, 96) %>" sizes="96px" width="96px" height="96px" />
+    <img src="<%= Wsdjs.Attachments.avatar_url(@user.avatar, 96) %>"
+      srcset="<%= Wsdjs.Attachments.avatar_srcset(@user.avatar, 96) %>" sizes="96px" width="96px" height="96px" />
   </div>
 
   <div>

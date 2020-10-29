@@ -2,8 +2,8 @@
     <div class="space-y-4">
         <div class="relative pb-2/3">
             <%= link to: Routes.top_path(@conn, :show, @top) do %>
-            <img src="<%= Attachments.art_url(Enum.at(@top.ranks, 0).song.art, 00) %>"
-                srcset="<%= Attachments.art_srcset(Enum.at(@top.ranks, 0).song.art, 400) %>" sizes="100px"
+            <img src="<%= Wsdjs.Attachments.art_url(Enum.at(@top.ranks, 0).song.art, 00) %>"
+                srcset="<%= Wsdjs.Attachments.art_srcset(Enum.at(@top.ranks, 0).song.art, 400) %>" sizes="100px"
                 class="absolute object-cover h-full w-full shadow-lg rounded-lg" />
             <% end %>
         </div>

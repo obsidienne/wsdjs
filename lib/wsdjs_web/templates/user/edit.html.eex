@@ -1,6 +1,7 @@
 <section class="user-profile-edit mt-4">
   <div id="avatar_div" class="flex flex-col mb-12">
-    <img id="avatar_thumbnail" src="<%= Attachments.avatar_url(@user.avatar, 250) %>" style="width:250px;height:250px;">
+    <img id="avatar_thumbnail" src="<%= Wsdjs.Attachments.avatar_url(@user.avatar, 250) %>"
+      style="width:250px;height:250px;">
     <div class="form-group">
       <button id="user_upload_widget_opener" class="btn btn-primary">Upload avatar</button>
     </div>

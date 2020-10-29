@@ -20,10 +20,8 @@ defmodule WsdjsWeb.CloudinaryHelper do
     @cld_https <> "c_scale,w_400/wsdjs/worldswingdjs_single_flat.jpg"
   end
 
-  @doc """
-  Retrieve the image URL corresping to a top in published status.
-  It creates a sprite of the 10 first ranked song.
-  """
+  # Retrieve the image URL corresping to a top in published status.
+  # It creates a sprite of the 10 first ranked song.
   def top_art(%Top{status: "published"} = top) do
     @cld_https <>
       "c_scale,w_400/" <>

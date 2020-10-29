@@ -4,8 +4,8 @@
         <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <img class="h-12 w-12 rounded" src="<%= Attachments.art_url(@song.art, 100) %>"
-                        srcset="<%= Attachments.art_url(@song.art, 100) %>" alt="">
+                    <img class="h-12 w-12 rounded" src="<%= Wsdjs.Attachments.art_url(@song.art, 100) %>"
+                        srcset="<%= Wsdjs.Attachments.art_url(@song.art, 100) %>" alt="">
                 </div>
                 <div class="ml-2">
                     <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
@@ -32,12 +32,12 @@
             <div class="mt-4 flex-shrink-0 sm:mt-0">
                 <div class="flex overflow-hidden">
                     <img class="inline-block h-6 w-6 rounded-full text-white shadow-solid"
-                        src="<%= Attachments.avatar_url(@song.user.avatar, 50) %>"
+                        src="<%= Wsdjs.Attachments.avatar_url(@song.user.avatar, 50) %>"
                         alt="">
 
                     <%= for opinion <- @song.opinions do %>
                     <img class="-ml-1 inline-block h-6 w-6 rounded-full text-white shadow-solid"
-                        src="<%= Attachments.avatar_url(opinion.user.avatar, 50) %>"
+                        src="<%= Wsdjs.Attachments.avatar_url(opinion.user.avatar, 50) %>"
                         alt="">
                     <% end %>
                 </div>
