@@ -4,8 +4,12 @@
         <div class="flex items-center px-4 py-4 sm:px-6">
             <div class="min-w-0 flex-1 flex items-center">
                 <div class="flex-shrink-0">
-                    <img class="h-12 w-12 rounded" src="<%= Wsdjs.Attachments.art_url(@rank.song.art, 300) %>"
-                        srcset="<%= Wsdjs.Attachments.art_srcset(@rank.song.art, 150) %>" sizes="150px" alt="">
+                    <%= cl_image_tag(@rank.song.cld_id, 
+                     class: "h-12 w-12 rounded",
+                     transforms: [
+                        %{crop: "crop", gravity: "custom"},
+                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 300, quality: "auto", width: 300 }
+                     ]) %>
                 </div>
                 <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-3 md:gap-4">
                     <div>

@@ -39,17 +39,17 @@ defmodule Wsdjs.MusicsTest do
     test "instant_hits/0 returns all instant hit" do
       song = song_fixture()
       {:ok, %Song{} = song} = Songs.update(song, %{instant_hit: true}, %User{admin: true})
-      song = Repo.preload(song, [:art, :comments, :opinions, :user])
+      song = Repo.preload(song, [:comments, :opinions, :user])
       assert Songs.instant_hits() == [song]
     end
 
     test "get_song!/1 returns the song with given id" do
-      song = song_fixture() |> Repo.preload([:art, :user])
+      song = song_fixture() |> Repo.preload(:user)
       assert Songs.get_song!(song.id) == song
     end
 
     test "get_song_by!/2 returns the song with given artist and title" do
-      song = song_fixture() |> Repo.preload([:art, :user, tops: :ranks])
+      song = song_fixture() |> Repo.preload(:user, tops: :ranks)
       assert Songs.get_song_by("my artist", "my title") == song
     end
 

@@ -40,7 +40,6 @@ defmodule Wsdjs.Charts do
     |> Repo.all()
     |> Repo.preload(ranks: list_rank())
     |> Repo.preload(ranks: :song)
-    |> Repo.preload(ranks: [song: :art])
   end
 
   @doc """
@@ -79,7 +78,6 @@ defmodule Wsdjs.Charts do
     |> Repo.preload([:songs, :votes])
     |> Repo.preload(ranks: list_rank())
     |> Repo.preload(ranks: :song)
-    |> Repo.preload(ranks: [song: :art])
     |> Repo.preload(ranks: [song: [user: :user_profil]])
   end
 
@@ -431,7 +429,7 @@ defmodule Wsdjs.Charts do
         left_join: v in ^votes,
         on: [song_id: r.song_id],
         order_by: [asc: v.votes, desc: :inserted_at],
-        preload: [song: [:art, :user, opinions: :user]]
+        preload: [song: [:user, opinions: :user]]
       )
 
     Repo.all(query)
@@ -441,7 +439,7 @@ defmodule Wsdjs.Charts do
     from(
       r in Rank,
       where: r.top_id == ^id,
-      preload: [song: [:art, :user, opinions: :user]]
+      preload: [song: [:user, opinions: :user]]
     )
   end
 
@@ -450,7 +448,7 @@ defmodule Wsdjs.Charts do
       q in Rank,
       where: q.position <= 10,
       order_by: [asc: q.position],
-      preload: [song: :art]
+      preload: :song
     )
   end
 end

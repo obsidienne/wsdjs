@@ -37,31 +37,6 @@ defmodule Wsdjs.Attachments do
     |> Enum.join(", ")
   end
 
-  ###############################################
-  #
-  # SONG ART
-  #
-  ###############################################
-  def art_url(%{cld_id: cld_id, version: version}, resolution) when is_integer(resolution) do
-    @cld_https <>
-      "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <>
-      "v#{version}/#{cld_id}.jpg"
-  end
-
-  def art_url(nil, resolution),
-    do: art_url(%{cld_id: "wsdjs/missing_cover", version: "1"}, resolution)
-
-  def art_srcset(%{} = art, base) when is_integer(base) do
-    resolutions = Enum.map(@dpr_multiple, &(base * &1))
-
-    resolutions
-    |> Enum.map(fn r -> "#{art_url(art, r)} #{r}w" end)
-    |> Enum.join(", ")
-  end
-
-  def art_srcset(nil, base),
-    do: art_srcset(%{cld_id: "wsdjs/missing_cover", version: "1"}, base)
-
   import Ecto.{Query, Changeset}, warn: false
 
   alias Wsdjs.Repo

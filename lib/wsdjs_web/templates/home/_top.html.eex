@@ -2,9 +2,13 @@
     <div class="space-y-4">
         <div class="relative pb-2/3">
             <%= link to: Routes.top_path(@conn, :show, @top) do %>
-            <img src="<%= Wsdjs.Attachments.art_url(Enum.at(@top.ranks, 0).song.art, 00) %>"
-                srcset="<%= Wsdjs.Attachments.art_srcset(Enum.at(@top.ranks, 0).song.art, 400) %>" sizes="100px"
-                class="absolute object-cover h-full w-full shadow-lg rounded-lg" />
+
+            <%= cl_image_tag(Enum.at(@top.ranks, 0).song.cld_id, 
+                     class: "absolute object-cover h-full w-full shadow-lg rounded-lg",
+                     transforms: [
+                        %{crop: "crop", gravity: "custom"},
+                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 200, quality: "auto", width: 200 }
+                     ]) %>
             <% end %>
         </div>
 

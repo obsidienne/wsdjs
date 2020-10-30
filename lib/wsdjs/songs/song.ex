@@ -3,7 +3,6 @@ defmodule Wsdjs.Songs.Song do
   import Ecto.Changeset
 
   alias Wsdjs.Accounts
-  alias Wsdjs.Attachments
   alias Wsdjs.Charts
   alias Wsdjs.Reactions.{Comments, Opinions}
 
@@ -36,10 +35,10 @@ defmodule Wsdjs.Songs.Song do
     field(:video_id, :string)
     field(:public_track, :boolean, default: false)
     field(:suggestion, :boolean, default: true)
+    field(:cld_id, :string, default: "wsdjs/missing_cover.jpg")
     timestamps()
 
     belongs_to(:user, Accounts.User)
-    has_one(:art, Attachments.Arts.Art, on_replace: :delete)
     has_many(:comments, Comments.Comment)
     has_many(:ranks, Charts.Rank)
     has_many(:opinions, Opinions.Opinion)
@@ -53,7 +52,6 @@ defmodule Wsdjs.Songs.Song do
     |> validate_required([:title, :artist, :url, :bpm, :genre, :user_id])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
-    |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
@@ -67,7 +65,6 @@ defmodule Wsdjs.Songs.Song do
     |> validate_required([:title, :artist, :url, :bpm, :genre, :user_id])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
-    |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
@@ -81,7 +78,6 @@ defmodule Wsdjs.Songs.Song do
     |> validate_required([:url, :bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
-    |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
@@ -106,7 +102,6 @@ defmodule Wsdjs.Songs.Song do
     |> validate_required([:url, :bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
-    |> cast_assoc(:art)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)

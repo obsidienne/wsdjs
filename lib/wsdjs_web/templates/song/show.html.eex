@@ -1,7 +1,7 @@
 <section>
   <div class="flex md:flex-row flex-col justify-start mt-6 pb-12">
     <div class="w-64 h-64">
-      <%= cl_image_tag(@song.art.cld_id, 
+      <%= cl_image_tag(@song.cld_id, 
                        class: "responsive shadow rounded",
                        transforms: [
                           %{crop: "crop", gravity: "custom"},

@@ -1,8 +1,16 @@
 <li>
   <%= link to: Routes.song_path(@conn, :show, @song.id), class: "flex items-center space-x-4 lg:space-x-6" do %>
   <div class="flex-shrink-0 relative w-24 h-24 rounded-full lg:w-32 lg:h-32">
-    <img class="h-auto w-full rounded" src="<%= Wsdjs.Attachments.art_url(@song.art, 200) %>"
-      srcset="<%= Wsdjs.Attachments.art_srcset(@song.art, 200) %>" alt="">
+    <%= cl_image_tag(@song.cld_id, 
+                     class: "h-auto w-full rounded",
+                     transforms: [
+                        %{crop: "crop", gravity: "custom"},
+                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 200, quality: "auto", width: 200 }
+                     ]) %>
+
+
+
+
     <%= cl_image_tag(@song.user.user_profil.cld_id, 
                      class: "hidden lg:block w-8 rounded-full absolute bottom-0 right-0 border-2 border-white m-1 shadow",
                      transforms: [

@@ -4,9 +4,14 @@
         <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <img class="h-12 w-12 rounded" src="<%= Wsdjs.Attachments.art_url(@song.art, 100) %>"
-                        srcset="<%= Wsdjs.Attachments.art_url(@song.art, 100) %>" alt="">
+                    <%= cl_image_tag(@song.cld_id,
+                                    class: "h-12 w-12 rounded",
+                                    transforms: [
+                                        %{crop: "crop", gravity: "custom"},
+                                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 100, quality: "auto", width: 100 }
+                                ]) %>
                 </div>
+
                 <div class="ml-2">
                     <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
                         <%= @song.title %>

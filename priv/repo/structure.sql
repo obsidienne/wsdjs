@@ -844,7 +844,8 @@ CREATE TABLE public.songs (
     hidden_track boolean DEFAULT false NOT NULL,
     suggestion boolean DEFAULT true NOT NULL,
     user_id bigint NOT NULL,
-    id bigint NOT NULL
+    id bigint NOT NULL,
+    cld_id character varying(255) DEFAULT 'wsdjs/missing_cover'::character varying NOT NULL
 );
 
 
@@ -1723,3 +1724,4 @@ INSERT INTO public."schema_migrations" (version) VALUES (20200624232912);
 INSERT INTO public."schema_migrations" (version) VALUES (20200625222023);
 INSERT INTO public."schema_migrations" (version) VALUES (20200630211649);
 INSERT INTO public."schema_migrations" (version) VALUES (20201029231738);
+INSERT INTO public."schema_migrations" (version) VALUES (20201030225815);

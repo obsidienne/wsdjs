@@ -87,7 +87,7 @@ defmodule Wsdjs.Songs do
   def instant_hits do
     Song
     |> where(instant_hit: true)
-    |> preload([:art, user: :user_profil, comments: :user, opinions: :user])
+    |> preload([user: :user_profil, comments: :user, opinions: :user])
     |> order_by(desc: :inserted_at)
     |> limit(6)
     |> Repo.all()
@@ -126,7 +126,6 @@ defmodule Wsdjs.Songs do
           )
         )
     end)
-    |> preload([:art])
     |> Repo.all()
   end
 
@@ -149,7 +148,7 @@ defmodule Wsdjs.Songs do
     |> Songs.scoped()
     |> where([s], s.suggestion == true)
     |> order_by(desc: :inserted_at)
-    |> preload([:art, user: :user_profil, comments: :user, opinions: :user])
+    |> preload([user: :user_profil, comments: :user, opinions: :user])
     |> limit(15)
     |> Repo.all()
   end
@@ -226,7 +225,7 @@ defmodule Wsdjs.Songs do
       ** (Ecto.NoResultsError)
 
   """
-  def get_song!(id, to_preload \\ [:art, :user]) do
+  def get_song!(id, to_preload \\ [:user]) do
     Song
     |> Repo.get!(id)
     |> Repo.preload(to_preload)
@@ -241,7 +240,7 @@ defmodule Wsdjs.Songs do
     Song
     |> where([s], fragment("lower(?)", s.title) == ^String.downcase(title))
     |> where([s], fragment("lower(?)", s.artist) == ^String.downcase(artist))
-    |> preload([:user, :art])
+    |> preload(:user)
     |> preload(tops: :ranks)
     |> Repo.one()
   end

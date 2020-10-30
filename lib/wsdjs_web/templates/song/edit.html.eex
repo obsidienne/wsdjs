@@ -9,8 +9,12 @@
   <div class="flex p-2 bg-white shadow">
     <div>
       <div class="relative w-12 h-12 aspect-ratio-square">
-        <img src="<%= Wsdjs.Attachments.art_url(@song.art, 48) %>"
-          srcset="<%= Wsdjs.Attachments.art_srcset(@song.art, 48) %>" sizes="48px" class="responsive absolute top-0" />
+        <%= cl_image_tag(@song.cld_id, 
+                     class: "responsive absolute top-0",
+                     transforms: [
+                        %{crop: "crop", gravity: "custom"},
+                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 48, quality: "auto", width: 48 }
+                     ]) %>
       </div>
     </div>
     <div class="pl-4">
@@ -31,17 +35,20 @@
 
 <section class="mb-32">
   <div id="art_div" class="relative mb-4">
-    <img id="art_thumbnail" class="opacity-25 shadow rounded" src="<%= Wsdjs.Attachments.art_url(@song.art, 240) %>"
-      style="width:240px;height:240px;">
+    <%= cl_image_tag(@song.cld_id, 
+                     class: "opacity-25 shadow rounded",
+                     transforms: [
+                        %{crop: "crop", gravity: "custom"},
+                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 240, quality: "auto", width: 240 }
+                     ]) %>
+
+
     <button id="song_edit_cldwidget_opener" class="btn btn-primary absolute bottom-0 pin-l">Update cover</button>
   </div>
 
   <%= form_for @changeset, Routes.song_path(@conn, :update, @song), fn f -> %>
   <div id="cloudinary_form_div">
-    <%= inputs_for f, :art, fn fp -> %>
-    <%= hidden_input fp, :cld_id, disabled: :disabled %>
-    <%= hidden_input fp, :version, disabled: :disabled %>
-    <% end %>
+    <%= hidden_input f, :cld_id, disabled: :disabled %>
   </div>
 
   <%= if @current_user.admin do %>
