@@ -12,15 +12,6 @@ defmodule WsdjsWeb.TopController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  @spec stat(any, map, any) :: {:error, :unauthorized} | Plug.Conn.t()
-  def stat(conn, %{"id" => id}, current_user) do
-    with :ok <- Charts.can?(current_user, :stats_top) do
-      top = Charts.stat_top!(current_user, id)
-
-      render(conn, :stat, top: top)
-    end
-  end
-
   def show(conn, %{"id" => id}, current_user) do
     top =
       if String.match?(id, ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/) do

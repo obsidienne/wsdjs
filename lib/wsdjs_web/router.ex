@@ -71,8 +71,6 @@ defmodule WsdjsWeb.Router do
       resources("/votes", VoteController, only: [:create])
     end
 
-    get("/tops/:id/stats", TopController, :stat, as: :top_stat)
-
     resources("/ranks", RankController, only: [:update, :delete])
 
     resources "/users", UserController, only: [:index, :edit, :update]

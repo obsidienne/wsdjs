@@ -71,16 +71,6 @@ defmodule Wsdjs.Charts do
 
   def count_charts(%User{} = user), do: Repo.aggregate(Top.scoped(user), :count, :id)
 
-  def stat_top!(current_user, top_id) do
-    current_user
-    |> Top.scoped()
-    |> Repo.get(top_id)
-    |> Repo.preload([:songs, :votes])
-    |> Repo.preload(ranks: list_rank())
-    |> Repo.preload(ranks: :song)
-    |> Repo.preload(ranks: [song: [user: :user_profil]])
-  end
-
   @doc """
   Gets a single top.
 
