@@ -17,18 +17,19 @@
               Location
             </dt>
             <dd class="text-sm leading-5 text-gray-900 sm:col-span-2">
-              New York, NY, USA
+              <%= @user.user_profil.user_country %>
             </dd>
           </div>
+          <%= if @user.user_profil.website do %>
           <div class="space-y-1">
             <dt class="text-sm leading-5 font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
               Website
             </dt>
             <dd class="text-sm leading-5 text-gray-900 sm:col-span-2">
-              <%# link @user.user_profil.website, to: @user.user_profil.website, target: "_blank", class: "flex items-center mb-2" do %>
-              bernardes.eu
+              <%= link @user.user_profil.website, to: @user.user_profil.website, target: "_blank", class: "flex items-center mb-2" %>
             </dd>
           </div>
+          <% end %>
         </dl>
       </div>
     </div>

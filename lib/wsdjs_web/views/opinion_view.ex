@@ -5,16 +5,6 @@ defmodule WsdjsWeb.OpinionView do
     Enum.count(opinions, fn x -> x.kind == kind end)
   end
 
-  def current_opinion(opinions, current_user) do
-    opinion = Enum.find(opinions, fn x -> x.user_id == current_user.id end)
-
-    if is_nil(opinion) do
-      nil
-    else
-      opinion.kind
-    end
-  end
-
   def options(kind, _conn, _song, _opinions, nil) do
     [class: "border-0 p-2 song-#{kind}"]
   end

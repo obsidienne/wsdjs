@@ -89,9 +89,6 @@ defmodule WsdjsWeb.Router do
     resources("/users", UserController, only: [:show])
     resources("/home", HomeController, only: [:index])
     resources("/tops", TopController, only: [:show])
-
-    resources("/songs", SongController, only: [:show]) do
-      resources("/opinions", OpinionController, only: [:index])
-    end
+    resources("/songs", SongController, only: [:show])
   end
 end
