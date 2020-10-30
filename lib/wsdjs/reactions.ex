@@ -23,7 +23,6 @@ defmodule Wsdjs.Reactions do
         join: r in subquery(last_opinions),
         on: o.id == r.id and r.row_number <= 4
 
-    songs
-    |> Wsdjs.Repo.preload(opinions: {opinions_query, [user: :user_profil]})
+    Wsdjs.Repo.preload(songs, opinions: {opinions_query, [user: :user_profil]})
   end
 end
