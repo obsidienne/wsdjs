@@ -232,20 +232,6 @@ defmodule Wsdjs.Songs do
   end
 
   @doc """
-  Get the song matching the "artist - title" pattern.
-  The uniq index artist / title ensure the uniquenes of result.
-  This a privileged function, no song restriction access.
-  """
-  def get_song_by(artist, title) when is_binary(artist) and is_binary(title) do
-    Song
-    |> where([s], fragment("lower(?)", s.title) == ^String.downcase(title))
-    |> where([s], fragment("lower(?)", s.artist) == ^String.downcase(artist))
-    |> preload(:user)
-    |> preload(tops: :ranks)
-    |> Repo.one()
-  end
-
-  @doc """
   Returns an `%Ecto.Changeset{}` for tracking song changes.
 
   ## Examples
