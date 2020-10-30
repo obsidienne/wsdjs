@@ -52,20 +52,21 @@ defmodule Wsdjs.Charts.Top do
     from(m in Charts.Top, where: m.status in ["voting", "published"])
   end
 
-  def scoped(%Accounts.User{profil_dj: true}), do: scoped(-24, -3)
+  def scoped(%Accounts.User{profil_dj: true}) do
+    from(m in Charts.Top, where: m.status in ["published"])
+  end
 
-  # Connected user can see voting and published Top + Top he has created
-  def scoped(%Accounts.User{}), do: scoped(-12, -3)
-  def scoped(nil), do: scoped(-5, -3)
-
-  defp scoped(lower, upper) when is_integer(lower) and is_integer(upper) do
-    dt = Timex.beginning_of_month(Timex.today())
-    lower_date = Timex.shift(dt, months: lower)
-    upper_date = Timex.shift(dt, months: upper)
-
+  def scoped(%Accounts.User{}) do
     Charts.Top
     |> where(status: "published")
-    |> where([t], t.due_date >= ^lower_date)
-    |> where([t], t.due_date <= ^upper_date)
+    |> offset(3)
+    |> limit(12)
+  end
+
+  def scoped(nil) do
+    Charts.Top
+    |> where(status: "published")
+    |> offset(3)
+    |> limit(3)
   end
 end
