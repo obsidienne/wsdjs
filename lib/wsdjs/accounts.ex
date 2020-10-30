@@ -7,7 +7,7 @@ defmodule Wsdjs.Accounts do
   alias Wsdjs.Repo
 
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Accounts.Profil
+  alias Wsdjs.Accounts.UserProfil
 
   @doc """
   Returns the list of users.
@@ -62,7 +62,7 @@ defmodule Wsdjs.Accounts do
   end
 
   def get_profil_by_user(%User{id: id}) do
-    Profil
+    UserProfil
     |> where(user_id: ^id)
     |> Repo.one()
   end

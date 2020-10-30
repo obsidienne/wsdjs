@@ -780,30 +780,6 @@ ALTER SEQUENCE public.playlists_id_seq OWNED BY public.playlists.id;
 
 
 --
--- Name: profils; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.profils (
-    description text,
-    favorite_genre character varying(255),
-    favorite_artist character varying(255),
-    djing_start_year integer,
-    inserted_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    youtube character varying(255),
-    facebook character varying(255),
-    soundcloud character varying(255),
-    website character varying(255),
-    description_html text,
-    user_id bigint NOT NULL,
-    id bigint NOT NULL,
-    user_country character varying(255),
-    name character varying(255),
-    djname character varying(255)
-);
-
-
---
 -- Name: ranks; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -926,6 +902,31 @@ ALTER SEQUENCE public.tops_id_seq OWNED BY public.tops.id;
 
 
 --
+-- Name: users_profils; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.users_profils (
+    description text,
+    favorite_genre character varying(255),
+    favorite_artist character varying(255),
+    djing_start_year integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    youtube character varying(255),
+    facebook character varying(255),
+    soundcloud character varying(255),
+    website character varying(255),
+    description_html text,
+    user_id bigint NOT NULL,
+    id bigint NOT NULL,
+    user_country character varying(255),
+    name character varying(255),
+    djname character varying(255),
+    cld_id character varying(255) DEFAULT 'wsdjs/missing_avatar'::character varying NOT NULL
+);
+
+
+--
 -- Name: user_details_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -941,7 +942,7 @@ CREATE SEQUENCE public.user_details_id_seq
 -- Name: user_details_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.user_details_id_seq OWNED BY public.profils.id;
+ALTER SEQUENCE public.user_details_id_seq OWNED BY public.users_profils.id;
 
 
 --
@@ -1152,13 +1153,6 @@ ALTER TABLE ONLY public.playlists ALTER COLUMN id SET DEFAULT nextval('public.pl
 
 
 --
--- Name: profils id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.profils ALTER COLUMN id SET DEFAULT nextval('public.user_details_id_seq'::regclass);
-
-
---
 -- Name: ranks id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1184,6 +1178,13 @@ ALTER TABLE ONLY public.tops ALTER COLUMN id SET DEFAULT nextval('public.tops_id
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: users_profils id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users_profils ALTER COLUMN id SET DEFAULT nextval('public.user_details_id_seq'::regclass);
 
 
 --
@@ -1312,10 +1313,10 @@ ALTER TABLE ONLY public.tops
 
 
 --
--- Name: profils user_details_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users_profils user_details_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.profils
+ALTER TABLE ONLY public.users_profils
     ADD CONSTRAINT user_details_pkey PRIMARY KEY (id);
 
 
@@ -1570,10 +1571,10 @@ ALTER TABLE ONLY public.tops
 
 
 --
--- Name: profils user_details_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: users_profils user_details_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.profils
+ALTER TABLE ONLY public.users_profils
     ADD CONSTRAINT user_details_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
@@ -1721,3 +1722,4 @@ INSERT INTO public."schema_migrations" (version) VALUES (20200624232010);
 INSERT INTO public."schema_migrations" (version) VALUES (20200624232912);
 INSERT INTO public."schema_migrations" (version) VALUES (20200625222023);
 INSERT INTO public."schema_migrations" (version) VALUES (20200630211649);
+INSERT INTO public."schema_migrations" (version) VALUES (20201029231738);

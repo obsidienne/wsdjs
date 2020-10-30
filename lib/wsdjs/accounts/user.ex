@@ -4,7 +4,7 @@ defmodule Wsdjs.Accounts.User do
   import Ecto.Changeset
 
   alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.Profil
+  alias Wsdjs.Accounts.UserProfil
   alias Wsdjs.Attachments
   alias Wsdjs.Auth
   alias Wsdjs.Charts
@@ -59,7 +59,7 @@ defmodule Wsdjs.Accounts.User do
     |> downcase_value()
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/.*@.*/)
-    |> put_assoc(:profil, Profil.changeset(%Profil{}, %{}), required: true)
+    |> put_assoc(:profil, UserProfil.changeset(%UserProfil{}, %{}), required: true)
   end
 
   defp downcase_value(changeset) do

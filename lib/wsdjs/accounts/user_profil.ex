@@ -1,9 +1,9 @@
-defmodule Wsdjs.Accounts.Profil do
+defmodule Wsdjs.Accounts.UserProfil do
   @moduledoc false
   use Wsdjs.Schema
   import Ecto.Changeset
 
-  schema "profils" do
+  schema "users_profils" do
     field(:description, :string)
     field(:description_html, :string)
     field(:favorite_genre, :string)
@@ -16,6 +16,7 @@ defmodule Wsdjs.Accounts.Profil do
     field(:user_country, :string)
     field(:name, :string)
     field(:djname, :string)
+    field(:cld_id, :string, default: "wsdjs/missing_avatar.jpg")
 
     belongs_to(:user, Wsdjs.Accounts.User)
     timestamps()
@@ -33,7 +34,8 @@ defmodule Wsdjs.Accounts.Profil do
     :user_country,
     :name,
     :djname,
-    :user_id
+    :user_id,
+    :cld_id
   ]
 
   def changeset(%__MODULE__{} = profil, attrs) do
