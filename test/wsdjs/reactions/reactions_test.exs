@@ -24,7 +24,7 @@ defmodule Wsdjs.ReactionsTest do
 
     test "get_comment!/1 returns the comment with given id" do
       comment = comment_fixture()
-      assert Reactions.Comments.get!(comment.id) |> Wsdjs.Repo.preload(user: :avatar) == comment
+      assert Reactions.Comments.get!(comment.id) |> Wsdjs.Repo.preload(:user) == comment
     end
 
     test "list_comments/1 returns all song comments" do

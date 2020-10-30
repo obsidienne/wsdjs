@@ -39,7 +39,7 @@ defmodule Wsdjs.MusicsTest do
     test "instant_hits/0 returns all instant hit" do
       song = song_fixture()
       {:ok, %Song{} = song} = Songs.update(song, %{instant_hit: true}, %User{admin: true})
-      song = Repo.preload(song, [:art, :comments, :opinions, user: :avatar])
+      song = Repo.preload(song, [:art, :comments, :opinions, :user])
       assert Songs.instant_hits() == [song]
     end
 

@@ -31,14 +31,20 @@
 
             <div class="mt-4 flex-shrink-0 sm:mt-0">
                 <div class="flex overflow-hidden">
-                    <img class="inline-block h-6 w-6 rounded-full text-white shadow-solid"
-                        src="<%= Wsdjs.Attachments.avatar_url(@song.user.avatar, 50) %>"
-                        alt="">
+                    <%= cl_image_tag(@song.user.user_profil.cld_id,
+                       class: "inline-block h-6 w-6 rounded-full text-white shadow-solid",
+                       transforms: [
+                          %{crop: "crop", gravity: "custom"},
+                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 50, quality: "auto", width: 50 }
+                       ]) %>
 
                     <%= for opinion <- @song.opinions do %>
-                    <img class="-ml-1 inline-block h-6 w-6 rounded-full text-white shadow-solid"
-                        src="<%= Wsdjs.Attachments.avatar_url(opinion.user.avatar, 50) %>"
-                        alt="">
+                    <%= cl_image_tag(opinion.user.user_profil.cld_id,
+                       class: "-ml-1 inline-block h-6 w-6 rounded-full text-white shadow-solid",
+                       transforms: [
+                          %{crop: "crop", gravity: "custom"},
+                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 50, quality: "auto", width: 50 }
+                       ]) %>
                     <% end %>
                 </div>
             </div>

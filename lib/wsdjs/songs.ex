@@ -87,7 +87,7 @@ defmodule Wsdjs.Songs do
   def instant_hits do
     Song
     |> where(instant_hit: true)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> preload([:art, user: :user_profil, comments: :user, opinions: :user])
     |> order_by(desc: :inserted_at)
     |> limit(6)
     |> Repo.all()
@@ -149,7 +149,7 @@ defmodule Wsdjs.Songs do
     |> Songs.scoped()
     |> where([s], s.suggestion == true)
     |> order_by(desc: :inserted_at)
-    |> preload([:art, user: :avatar, comments: :user, opinions: :user])
+    |> preload([:art, user: :user_profil, comments: :user, opinions: :user])
     |> limit(15)
     |> Repo.all()
   end

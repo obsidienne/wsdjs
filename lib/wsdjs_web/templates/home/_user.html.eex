@@ -1,12 +1,15 @@
 <li>
   <div class="space-y-4">
     <a href="<%= Routes.user_path(@conn, :show, @user) %>" class="space-y-4">
-      <img class="mx-auto h-20 w-20 rounded-full lg:w-24 lg:h-24"
-        src="<%= Wsdjs.Attachments.art_url(@user.avatar, 200) %>"
-        srcset="<%= Wsdjs.Attachments.art_srcset(@user.avatar, 200) %>" alt="">
+      <%= cl_image_tag(@user.user_profil.cld_id, 
+                       class: "mx-auto h-20 w-20 rounded-full lg:w-24 lg:h-24",
+                       transforms: [
+                          %{crop: "crop", gravity: "custom"},
+                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 200, quality: "auto", width: 200 }
+                       ]) %>
       <div class="space-y-2">
         <div class="text-xs leading-4 font-medium lg:text-sm lg:leading-5">
-          <h4><%= @user.profil.djname || @user.profil.name %></h4>
+          <h4><%= @user.user_profil.djname || @user.user_profil.name %></h4>
           <p class="text-indigo-600">
             <%= if @user.profil_dj || @user.profil_djvip do %>DeeJay<% end %>
           </p>

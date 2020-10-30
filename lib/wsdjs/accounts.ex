@@ -22,16 +22,15 @@ defmodule Wsdjs.Accounts do
     User
     |> order_by([:email])
     |> Repo.all()
-    |> load_avatar()
     |> load_songs()
     |> load_comments()
-    |> load_profil()
+    |> load_user_profil()
   end
 
-  def load_avatar(user), do: Repo.preload(user, :avatar)
   def load_songs(user), do: Repo.preload(user, :songs)
   def load_comments(user), do: Repo.preload(user, :comments)
-  def load_profil(user), do: Repo.preload(user, :profil)
+  def load_user_profil(user), do: Repo.preload(user, :user_profil)
+  def load_user_profil_for_songs(songs), do: Repo.preload(songs, user: :user_profil)
 
   def list_users(criteria) when is_list(criteria) do
     query = from(d in User)
@@ -46,10 +45,9 @@ defmodule Wsdjs.Accounts do
         from q in query, order_by: [{^sort_order, ^sort_by}]
     end)
     |> Repo.all()
-    |> load_avatar()
     |> load_songs()
     |> load_comments()
-    |> load_profil()
+    |> load_user_profil()
   end
 
   def list_djs do
@@ -57,8 +55,7 @@ defmodule Wsdjs.Accounts do
     |> limit(18)
     |> where(profil_djvip: true)
     |> Repo.all()
-    |> load_avatar()
-    |> load_profil()
+    |> load_user_profil()
   end
 
   def get_profil_by_user(%User{id: id}) do

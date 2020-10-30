@@ -118,6 +118,6 @@ defmodule Wsdjs.Reactions.Opinions do
   end
 
   def load_user(opinion) do
-    Repo.preload(opinion, user: :avatar)
+    Repo.preload(opinion, user: :user_profil)
   end
 end

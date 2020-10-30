@@ -114,7 +114,5 @@ defmodule Wsdjs.Reactions.Comments do
     Repo.delete(comment)
   end
 
-  def load_user(comment) do
-    Repo.preload(comment, user: :avatar)
-  end
+  def load_user(comment), do: Repo.preload(comment, user: :user_profil)
 end

@@ -1,7 +1,11 @@
 <li class="mb-4 p-2 flex shadow relative">
   <div class="mr-4">
-    <img src="<%= Wsdjs.Attachments.avatar_url(@user.avatar, 96) %>"
-      srcset="<%= Wsdjs.Attachments.avatar_srcset(@user.avatar, 96) %>" sizes="96px" width="96px" height="96px" />
+    <%= cl_image_tag(@user.user_profil.cld_id, 
+                       class: "responsive shadow rounded",
+                       transforms: [
+                          %{crop: "crop", gravity: "custom"},
+                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 96, quality: "auto", width: 96 }
+                       ]) %>
   </div>
 
   <div>

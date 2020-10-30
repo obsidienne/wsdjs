@@ -10,7 +10,7 @@ defmodule Wsdjs.AccountsTest do
 
     test "list_users/0 returns all users" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      user = user |> Repo.preload([:avatar, :songs, :comments])
+      user = user |> Repo.preload([:profil, :songs, :comments])
 
       assert Accounts.list_users() == [user]
     end
@@ -51,13 +51,12 @@ defmodule Wsdjs.AccountsTest do
 
     test "get_user!/1 returns the user with given id" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      user = user |> Repo.preload(:avatar)
       assert Accounts.get_user!(user.id) == user
     end
 
     test "get_user_by_email!/1 returns the user with given email" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      user = user |> Repo.preload([:avatar, :profil])
+      user = user |> Repo.preload(:profil)
       assert Accounts.get_user_by_email(user.email) == user
       assert Accounts.get_user_by_email(String.upcase(user.email)) == user
     end

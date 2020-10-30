@@ -2,10 +2,12 @@
   <%= for comment <- @comments do %>
   <li class="flex mb-4">
     <div class="hidden md:flex">
-      <img src="<%= Wsdjs.Attachments.avatar_url(comment.user.avatar, 50) %>"
-        srcset="<%= Wsdjs.Attachments.avatar_srcset(comment.user.avatar, 50) %>" sizes="50px"
-        class="w-12 h-12 rounded-full shadow border-2 border-solid border-white"
-        alt="<%= user_avatar_alt(comment.user) %>">
+      <%= cl_image_tag(comment.user.user_profil.cld_id,
+                       class: "w-12 h-12 rounded-full shadow border-2 border-solid border-white",
+                       transforms: [
+                          %{crop: "crop", gravity: "custom"},
+                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 50, quality: "auto", width: 50 }
+                       ]) %>
     </div>
 
     <div class="w-auto md:mx-2 relative bg-white shadow flex-1">

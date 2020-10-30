@@ -38,8 +38,8 @@ defmodule Wsdjs.Accounts.UserProfil do
     :cld_id
   ]
 
-  def changeset(%__MODULE__{} = profil, attrs) do
-    profil
+  def changeset(%__MODULE__{} = user_profil, attrs) do
+    user_profil
     |> cast(attrs, @allowed_fields)
     |> assoc_constraint(:user)
     |> validate_length(:description, max: 2000)

@@ -1,7 +1,7 @@
 <section>
   <div class="flex md:flex-row flex-col justify-start mt-6 pb-12">
     <div class="w-64 h-64">
-      <%= cl_image_tag("#{@song.art.cld_id}", 
+      <%= cl_image_tag(@song.art.cld_id, 
                        class: "responsive shadow rounded",
                        transforms: [
                           %{crop: "crop", gravity: "custom"},
@@ -65,23 +65,3 @@
 
 
 <%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
-
-
-
-<template id="comment-tpl">
-  <li class="flex mb-4">
-    <div class="hidden md:flex">
-      <img src="{{user.avatars.avatar_uri}}" class="w-12 h-12 rounded-full shadow border-2 border-solid border-white">
-    </div>
-
-    <div class="w-auto md:mx-2 relative bg-white shadow flex-1">
-      <header class="bg-grey-light flex items-center p-2">
-        <span>
-          <a href="{{user.path}}" class="inline-block">{{user.name}}</a>
-          <time title="{{commented_at}}" datetime="{{commented_at}}"></time>
-        </span>
-      </header>
-      <div class="text-black bg-white px-2 comment_body" data-autolink>{{text_html}}</div>
-    </div>
-  </li>
-</template>

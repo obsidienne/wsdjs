@@ -3,14 +3,21 @@
         <!-- Profile -->
         <div class="flex items-center">
 
-            <img class="hidden h-15 w-15 rounded-full sm:block"
-                src="<%= Wsdjs.Attachments.avatar_url(@user.avatar, 48) %>"
-                srcset="<%= Wsdjs.Attachments.avatar_srcset(@user.avatar, 48) %>" alt="">
+            <%= cl_image_tag(@user.user_profil.cld_id, 
+                       class: "hidden h-15 w-15 rounded-full sm:block",
+                       transforms: [
+                          %{crop: "crop", gravity: "custom"},
+                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 48, quality: "auto", width: 48 }
+                       ]) %>
+
             <div>
                 <div class="flex items-center">
-                    <img class="h-15 w-15 rounded-full sm:hidden"
-                        src="<%= Wsdjs.Attachments.avatar_url(@user.avatar, 48) %>"
-                        srcset="<%= Wsdjs.Attachments.avatar_srcset(@user.avatar, 48) %>" alt="">
+                    <%= cl_image_tag(@user.user_profil.cld_id, 
+                       class: "h-15 w-15 rounded-full sm:hidden",
+                       transforms: [
+                          %{crop: "crop", gravity: "custom"},
+                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 48, quality: "auto", width: 48 }
+                       ]) %>
                     <h1 class="ml-3 text-2xl font-bold leading-7 text-cool-gray-900 sm:leading-9 sm:truncate">
                         Good morning, <%= @current_profil.djname || @current_profil.name %>
                     </h1>
@@ -54,7 +61,7 @@
     </div>
     <div class="mt-4 flex md:mt-0 md:ml-4">
         <span class="shadow-sm rounded-md">
-            <%= if @user && Wsdjs.Profils.can?(@conn.assigns.current_user, :edit_user, @user) == :ok do %>
+            <%= if @user do %>
             <%= link "Edit", to: Routes.user_path(@conn, :edit, @user), class: "inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out" %>
             <% end %>
         </span>

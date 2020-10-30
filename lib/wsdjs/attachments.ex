@@ -62,37 +62,6 @@ defmodule Wsdjs.Attachments do
   def art_srcset(nil, base),
     do: art_srcset(%{cld_id: "wsdjs/missing_cover", version: "1"}, base)
 
-  ###############################################
-  #
-  # AVATAR
-  #
-  ###############################################
-  def avatar_url(%{cld_id: cld_id, version: version}, resolution)
-      when is_integer(resolution) do
-    @cld_https <>
-      "c_crop,g_custom/c_fit,f_auto,h_#{resolution},q_auto,w_#{resolution}/fl_immutable_cache/" <>
-      "v#{version}/#{cld_id}.jpg"
-  end
-
-  def avatar_url(_, resolution),
-    do: avatar_url(%{cld_id: "wsdjs/missing_avatar", version: "1"}, resolution)
-
-  def avatar_srcset(%{} = art, base) when is_integer(base) do
-    resolutions = Enum.map(@dpr_multiple, &(base * &1))
-
-    resolutions
-    |> Enum.map(fn r -> "#{avatar_url(art, r)} #{r}w" end)
-    |> Enum.join(", ")
-  end
-
-  def avatar_srcset(_, base),
-    do: avatar_srcset(%{cld_id: "wsdjs/missing_avatar", version: "1"}, base)
-
-  def preload_avatar(songs) when is_list(songs) do
-    songs
-    |> Wsdjs.Repo.preload(user: :avatar)
-  end
-
   import Ecto.{Query, Changeset}, warn: false
 
   alias Wsdjs.Repo
@@ -182,29 +151,5 @@ defmodule Wsdjs.Attachments do
   """
   def delete_video(%Video{} = video) do
     Repo.delete(video)
-  end
-
-  ###############################################
-  #
-  # Avatar
-  #
-  ###############################################
-  alias Wsdjs.Accounts.User
-  alias Wsdjs.Attachments.Avatars.Avatar
-
-  @doc """
-  Returns the user avatar.
-
-  ## Examples
-
-      iex> get_avatar(%User{})
-      %Avatar{}
-  """
-  def get_avatar(%User{id: id}) do
-    Avatar
-    |> where(user_id: ^id)
-    |> order_by(desc: :inserted_at)
-    |> limit(1)
-    |> Repo.all()
   end
 end

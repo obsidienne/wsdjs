@@ -24,6 +24,6 @@ defmodule Wsdjs.Reactions do
         on: o.id == r.id and r.row_number <= 4
 
     songs
-    |> Wsdjs.Repo.preload(opinions: {opinions_query, [user: :avatar]})
+    |> Wsdjs.Repo.preload(opinions: {opinions_query, [user: :user_profil]})
   end
 end
