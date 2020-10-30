@@ -38,8 +38,7 @@ defmodule WsdjsWeb.SongController do
         comment_changeset: comment_changeset,
         videos: videos,
         ranks: ranks,
-        video_changeset: video_changeset,
-        page_title: "Song - World Swing DJs"
+        video_changeset: video_changeset
       )
     end
   end
