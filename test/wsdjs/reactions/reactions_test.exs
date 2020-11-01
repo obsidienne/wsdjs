@@ -19,7 +19,7 @@ defmodule Wsdjs.ReactionsTest do
       {:ok, comment} =
         Reactions.Comments.create(%{text: "mega song", user_id: user.id, song_id: song.id})
 
-      comment
+      comment |> Repo.forget(:user_profil)
     end
 
     test "get_comment!/1 returns the comment with given id" do

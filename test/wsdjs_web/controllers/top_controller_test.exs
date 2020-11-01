@@ -73,25 +73,5 @@ defmodule WsdjsWeb.TopControllerTest do
         end
       )
     end
-
-    test "all user can access index", %{
-      conn: conn,
-      user: user,
-      djvip: djvip,
-      admin: admin
-    } do
-      Enum.each(
-        [
-          assign(conn, :current_user, admin),
-          assign(conn, :current_user, djvip),
-          assign(conn, :current_user, user),
-          assign(conn, :current_user, nil)
-        ],
-        fn conn ->
-          conn = get(conn, Routes.top_path(conn, :index))
-          assert html_response(conn, 200) =~ "List tops - World Swing DJs"
-        end
-      )
-    end
   end
 end

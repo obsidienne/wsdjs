@@ -29,15 +29,4 @@ defmodule WsdjsWeb.UserRegistrationController do
         render(conn, "new.html", changeset: changeset)
     end
   end
-
-  defp create_with_profil(conn, user_params) do
-    Ecto.Multi.new()
-    |> Ecto.Multi.insert(:user, Accounts.register_user(account, params))
-    |> Ecto.Multi.insert(:user_profil, Accounts.create_profil_for_user(user))
-    |> Repo.transaction()
-    |> case do
-      {:ok, %{user: user}} -> {:ok, user}
-      {:error, :user, changeset, _} -> {:error, changeset}
-    end
-  end
 end

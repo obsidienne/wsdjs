@@ -119,12 +119,6 @@ defmodule Wsdjs.Accounts do
     |> Repo.update()
   end
 
-  def create_profil_for_user(%User{} = user) do
-    %UserProfil{}
-    |> UserProfil.changeset(%{user_id: user.id})
-    |> Repo.insert()
-  end
-
   alias Wsdjs.Accounts.{User, UserToken, UserNotifier}
 
   ## Database getters
@@ -194,9 +188,23 @@ defmodule Wsdjs.Accounts do
 
   """
   def register_user(attrs) do
-    %User{}
-    |> User.registration_changeset(attrs)
-    |> Repo.insert()
+    user_changeset = User.registration_changeset(%User{}, attrs)
+
+    Ecto.Multi.new()
+    |> Ecto.Multi.insert(:user, user_changeset)
+    |> Ecto.Multi.run(:user_profil, fn _repo, %{user: user} ->
+      %UserProfil{}
+      |> UserProfil.changeset(%{user_id: user.id})
+      |> Repo.insert()
+    end)
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{user: user, user_profil: _user_profil}} ->
+        {:ok, user}
+
+      {:error, :user, changeset, _} ->
+        {:error, changeset}
+    end
   end
 
   @doc """

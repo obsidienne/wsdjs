@@ -213,8 +213,7 @@ defmodule WsdjsWeb.UserControllerTest do
         profil_djvip: true,
         profil_dj: true,
         admin: true,
-        djname: "DJ has been",
-        profil: %{description: "J'aurai voulu être un artist"}
+        profil: %{djname: "DJ has been", description: "J'aurai voulu être un artist"}
       }
 
       # change values
@@ -223,9 +222,9 @@ defmodule WsdjsWeb.UserControllerTest do
       |> put(Routes.user_path(conn, :update, user, %{"user" => params}))
 
       user_updated = Wsdjs.Accounts.get_user!(user.id)
-      assert user_updated.djname == "DJ has been"
-      assert user_updated.profil.description == "J'aurai voulu être un artist"
-      refute user_updated.profil_djvip
+      assert user_updated.user_profil.djname == "DJ has been"
+      assert user_updated.user_profil.description == "J'aurai voulu être un artist"
+      refute user_updated.user_profil_djvip
       refute user_updated.profil_dj
       refute user_updated.admin
     end
