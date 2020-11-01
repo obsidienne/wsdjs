@@ -8,6 +8,8 @@ defmodule WsdjsWeb.HomeController do
   @spec index(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def index(conn, _params) do
     songs = Songs.instant_hits()
+    songs = Wsdjs.Accounts.load_user_profil_for_songs(songs)
+
     tops = Charts.last_tops(conn.assigns.current_user)
     users = Wsdjs.Accounts.list_djs()
 

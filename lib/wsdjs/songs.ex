@@ -87,7 +87,6 @@ defmodule Wsdjs.Songs do
   def instant_hits do
     Song
     |> where(instant_hit: true)
-    |> preload([user: :user_profil, comments: :user, opinions: :user])
     |> order_by(desc: :inserted_at)
     |> limit(6)
     |> Repo.all()
@@ -148,7 +147,7 @@ defmodule Wsdjs.Songs do
     |> Songs.scoped()
     |> where([s], s.suggestion == true)
     |> order_by(desc: :inserted_at)
-    |> preload([user: :user_profil, comments: :user, opinions: :user])
+    |> preload(user: :user_profil, comments: :user, opinions: :user)
     |> limit(15)
     |> Repo.all()
   end
@@ -190,24 +189,6 @@ defmodule Wsdjs.Songs do
   def create_song(params) do
     %Song{}
     |> Song.create_changeset(params)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Creates a suggestion.
-
-  ## Examples
-
-      iex> create_suggestion(%{field: value})
-      {:ok, %Song{}}
-
-      iex> create_suggestion(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_suggestion(params) do
-    %Song{}
-    |> Song.suggestion_changeset(params)
     |> Repo.insert()
   end
 

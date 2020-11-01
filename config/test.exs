@@ -26,5 +26,10 @@ config :wsdjs, WsdjsWeb.Endpoint,
 
 config :wsdjs, WsdjsWeb.Mailer, adapter: Bamboo.TestAdapter
 
+config :cloudex,
+  api_key: "my-api-key",
+  secret: "my-secret",
+  cloud_name: "dummy"
+
 # Print only warnings and errors during test
 config :logger, level: :warn

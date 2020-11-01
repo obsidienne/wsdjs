@@ -1,10 +1,10 @@
-defmodule Wsdjs.Charts.PolicyTest do
+defmodule Wsdjs.Charts.ChartsTest do
   use Wsdjs.DataCase
 
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Charts.Policy
+  alias Wsdjs.Charts
 
-  describe "policy" do
+  describe "Charts" do
     defp top_fixture(attrs) do
       {:ok, %User{} = user} =
         Wsdjs.Accounts.create_user(%{"email" => "dummy#{System.unique_integer()}@bshit.com"})
@@ -24,28 +24,28 @@ defmodule Wsdjs.Charts.PolicyTest do
       dt = Timex.beginning_of_month(Timex.today())
 
       top = top_fixture(%{"due_date" => dt})
-      assert :ok == Policy.can?(%User{admin: true}, :show, top)
-      assert :ok == Policy.can?(%User{profil_djvip: true}, :show, top)
-      refute :ok == Policy.can?(%User{profil_dj: true}, :show, top)
-      refute :ok == Policy.can?(nil, :show, top)
+      assert :ok == Charts.can?(%User{admin: true}, :show, top)
+      assert :ok == Charts.can?(%User{profil_djvip: true}, :show, top)
+      refute :ok == Charts.can?(%User{profil_dj: true}, :show, top)
+      refute :ok == Charts.can?(nil, :show, top)
 
       top = top_fixture(%{"due_date" => Timex.shift(dt, months: -2)})
-      assert :ok == Policy.can?(%User{admin: true}, :show, top)
-      assert :ok == Policy.can?(%User{profil_djvip: true}, :show, top)
-      refute :ok == Policy.can?(%User{profil_dj: true}, :show, top)
-      refute :ok == Policy.can?(nil, :show, top)
+      assert :ok == Charts.can?(%User{admin: true}, :show, top)
+      assert :ok == Charts.can?(%User{profil_djvip: true}, :show, top)
+      refute :ok == Charts.can?(%User{profil_dj: true}, :show, top)
+      refute :ok == Charts.can?(nil, :show, top)
 
       top = top_fixture(%{"due_date" => Timex.shift(dt, months: -5)})
-      assert :ok == Policy.can?(%User{admin: true}, :show, top)
-      assert :ok == Policy.can?(%User{profil_djvip: true}, :show, top)
-      assert :ok == Policy.can?(%User{profil_dj: true}, :show, top)
-      assert :ok == Policy.can?(nil, :show, top)
+      assert :ok == Charts.can?(%User{admin: true}, :show, top)
+      assert :ok == Charts.can?(%User{profil_djvip: true}, :show, top)
+      assert :ok == Charts.can?(%User{profil_dj: true}, :show, top)
+      assert :ok == Charts.can?(nil, :show, top)
 
       top = top_fixture(%{"due_date" => Timex.shift(dt, months: -6)})
-      assert :ok == Policy.can?(%User{admin: true}, :show, top)
-      assert :ok == Policy.can?(%User{profil_djvip: true}, :show, top)
-      assert :ok == Policy.can?(%User{profil_dj: true}, :show, top)
-      refute :ok == Policy.can?(nil, :show, top)
+      assert :ok == Charts.can?(%User{admin: true}, :show, top)
+      assert :ok == Charts.can?(%User{profil_djvip: true}, :show, top)
+      assert :ok == Charts.can?(%User{profil_dj: true}, :show, top)
+      refute :ok == Charts.can?(nil, :show, top)
     end
   end
 end

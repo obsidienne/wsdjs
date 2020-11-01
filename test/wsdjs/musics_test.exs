@@ -1,11 +1,11 @@
 defmodule Wsdjs.MusicsTest do
   use Wsdjs.DataCase
-  alias Wsdjs.Musics
   alias Wsdjs.Repo
 
   describe "songs" do
     alias Wsdjs.Accounts.User
     alias Wsdjs.Songs.Song
+    alias Wsdjs.Songs
 
     @valid_attrs %{
       title: "my title",
@@ -24,8 +24,12 @@ defmodule Wsdjs.MusicsTest do
     end
 
     def song_fixture(attrs \\ %{}) do
-      {:ok, %Song{} = song} = Songs.create_suggestion(song_params(attrs))
+      {:ok, %Song{} = song} = Songs.create_song(song_params(attrs))
+
       song
+      |> Repo.forget(:comments, :many)
+      |> Repo.forget(:opinions, :many)
+      |> Repo.forget(:user)
     end
 
     def song_params(attrs \\ %{}) do
@@ -39,33 +43,12 @@ defmodule Wsdjs.MusicsTest do
     test "instant_hits/0 returns all instant hit" do
       song = song_fixture()
       {:ok, %Song{} = song} = Songs.update(song, %{instant_hit: true}, %User{admin: true})
-      song = Repo.preload(song, [:comments, :opinions, :user])
       assert Songs.instant_hits() == [song]
     end
 
     test "get_song!/1 returns the song with given id" do
       song = song_fixture() |> Repo.preload(:user)
       assert Songs.get_song!(song.id) == song
-    end
-
-    test "get_song_by!/2 returns the song with given artist and title" do
-      song = song_fixture() |> Repo.preload(:user, tops: :ranks)
-      assert Songs.get_song_by("my artist", "my title") == song
-    end
-
-    test "create_suggestion/1 with valid data suggest a song" do
-      user = user_fixture()
-      params = Map.put(@valid_attrs, :user_id, user.id)
-
-      assert {:ok, %Song{} = song} = Songs.create_suggestion(params)
-      assert song.artist == params.artist
-      assert song.title == params.title
-      assert song.url == params.url
-      assert song.bpm == 0
-      assert song.instant_hit == false
-      assert song.hidden_track == false
-      assert song.public_track == false
-      assert song.suggestion == true
     end
 
     test "create_song/1 with valid data creates a song" do
@@ -80,7 +63,6 @@ defmodule Wsdjs.MusicsTest do
       assert song.instant_hit == false
       assert song.hidden_track == false
       assert song.public_track == false
-      assert song.suggestion == false
     end
 
     test "create_song/1 with invalid data returns error changeset" do
@@ -146,7 +128,6 @@ defmodule Wsdjs.MusicsTest do
       assert song.instant_hit == false
       assert song.hidden_track == true
       assert song.public_track == true
-      assert song.suggestion == true
     end
 
     test "update_song/3 with invalid data returns error changeset" do

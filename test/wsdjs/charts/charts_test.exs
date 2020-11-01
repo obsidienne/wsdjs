@@ -117,7 +117,7 @@ defmodule Wsdjs.ChartsTest do
         "url" => "http://youtu.be/dummy"
       }
       |> Map.put("user_id", user.id)
-      |> Wsdjs.Songs.create_suggestion()
+      |> Wsdjs.Songs.create_song()
 
     {:ok, song} = Wsdjs.Songs.update(song, attrs, %Wsdjs.Accounts.User{admin: true})
     song

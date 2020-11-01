@@ -119,6 +119,12 @@ defmodule Wsdjs.Accounts do
     |> Repo.update()
   end
 
+  def create_profil_for_user(%User{} = user) do
+    %UserProfil{}
+    |> UserProfil.changeset(%{user_id: user.id})
+    |> Repo.insert()
+  end
+
   alias Wsdjs.Accounts.{User, UserToken, UserNotifier}
 
   ## Database getters

@@ -63,8 +63,6 @@ defmodule WsdjsWeb.Router do
 
     resources("/songs", SongController, only: [:create, :new, :delete, :update, :edit])
 
-    resources("/suggestions", SuggestionController, only: [:create, :new])
-
     live "/tops", ChartList
 
     resources "/tops", TopController, only: [:create, :new, :update, :delete] do

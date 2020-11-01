@@ -26,7 +26,6 @@ defmodule Wsdjs.AttachmentsTest do
 
     @valid_attrs %{
       "title" => "my title",
-      "event" => "my event",
       "published_at" => "2012-12-12",
       "url" => "http://youtu.be/dummy"
     }
@@ -45,7 +44,7 @@ defmodule Wsdjs.AttachmentsTest do
     test "list_videos/1 returns all videos for a song" do
       video = video_fixture()
       song = Wsdjs.Songs.get_song!(video.song_id)
-      assert Attachments.list_videos(song) == [video] |> Repo.preload(:event)
+      assert Attachments.list_videos(song) == [video]
     end
 
     test "get_video!/1 returns the videos with given id" do

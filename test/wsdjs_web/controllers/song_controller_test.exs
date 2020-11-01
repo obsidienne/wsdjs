@@ -1,7 +1,6 @@
 defmodule WsdjsWeb.SongControllerTest do
   use WsdjsWeb.ConnCase
   alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.User
 
   defp create_users(_) do
     god = %Accounts.User{admin: true}
@@ -43,8 +42,7 @@ defmodule WsdjsWeb.SongControllerTest do
       |> Map.put(:title, "song")
       |> Wsdjs.Songs.create_song()
 
-    {:ok,
-     song: song, instant_hit: instant_hit, public_track: public_track, hidden_track: hidden_track}
+    {:ok, song: song}
   end
 
   # defp create_ranks(%{admin: admin}) do

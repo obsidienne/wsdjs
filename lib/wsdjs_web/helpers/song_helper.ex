@@ -15,5 +15,4 @@ defmodule WsdjsWeb.SongHelper do
     |> Timex.to_datetime()
     |> Timex.format!("{ISO:Extended}")
   end
-
 end

@@ -53,20 +53,20 @@ defmodule Wsdjs.Charts.Top do
   end
 
   def scoped(%Accounts.User{profil_dj: true}) do
-    from(m in Charts.Top, where: m.status in ["published"])
+    from(m in Charts.Top, where: m.status in ["published"], offset: 2)
   end
 
   def scoped(%Accounts.User{}) do
     Charts.Top
     |> where(status: "published")
-    |> offset(3)
+    |> offset(2)
     |> limit(12)
   end
 
   def scoped(nil) do
     Charts.Top
     |> where(status: "published")
-    |> offset(3)
+    |> offset(2)
     |> limit(3)
   end
 end

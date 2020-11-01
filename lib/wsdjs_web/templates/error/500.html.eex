@@ -35,7 +35,7 @@
   <header class="hero hot-hero">
     <nav>
       <%= link "", to: Routes.home_path(@conn, :index), class: "" %>
-      <%= link "tops", to: Routes.top_path(@conn, :index), class: " text-gray-800" %>
+      <%= link "tops", to: Routes.home_path(@conn, :index), class: " text-gray-800" %>
     </nav>
   </header>
 

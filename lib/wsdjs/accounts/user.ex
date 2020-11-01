@@ -5,7 +5,6 @@ defmodule Wsdjs.Accounts.User do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.UserProfil
-  alias Wsdjs.Auth
   alias Wsdjs.Charts
   alias Wsdjs.Songs
   alias Wsdjs.Reactions.{Comments, Opinions}
@@ -25,7 +24,6 @@ defmodule Wsdjs.Accounts.User do
     has_one(:user_profil, Accounts.UserProfil, on_replace: :update)
     has_many(:song_opinions, Opinions.Opinion)
     has_many(:votes, Charts.Vote)
-    has_many(:auth_tokens, Auth.AuthToken)
 
     timestamps()
   end

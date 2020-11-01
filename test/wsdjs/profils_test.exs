@@ -1,4 +1,4 @@
-defmodule Wsdjs.AccountsTest do
+defmodule Wsdjs.ProfilsTest do
   use Wsdjs.DataCase
 
   alias Wsdjs.Accounts
@@ -27,30 +27,9 @@ defmodule Wsdjs.AccountsTest do
       assert user.confirmed_at == nil
     end
 
-    test "create_user/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{} = changeset} =
-               Accounts.create_user(%{"email" => "bullshit"})
-
-      assert "has invalid format" in errors_on(changeset).email
-
-      assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(%{"email" => nil})
-      assert "can't be blank" in errors_on(changeset).email
-    end
-
-    test "create_user/1 duplicating an existing user returns error changeset" do
-      assert {:ok, %User{}} = Accounts.create_user(@valid_attrs)
-
-      assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(@valid_attrs)
-      assert "has already been taken" in errors_on(changeset).email
-
-      assert {:error, %Ecto.Changeset{} = changeset} =
-               Accounts.create_user(%{"email" => "DuMmY@BsHiT.cOm"})
-
-      assert "has already been taken" in errors_on(changeset).email
-    end
-
     test "get_user!/1 returns the user with given id" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
+      user = Repo.forget(user, :user_profil)
       assert Accounts.get_user!(user.id) == user
     end
 

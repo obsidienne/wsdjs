@@ -29,8 +29,8 @@ defmodule Wsdjs.Charts.TopTest do
     test "current month", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", 0)
 
-      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all()
+      assert [top] == djvip |> Top.scoped() |> Repo.all()
       assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
@@ -38,8 +38,8 @@ defmodule Wsdjs.Charts.TopTest do
     test "current month -2", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -2)
 
-      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all()
+      assert [top] == djvip |> Top.scoped() |> Repo.all()
       assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
@@ -47,45 +47,45 @@ defmodule Wsdjs.Charts.TopTest do
     test "current month -3", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -3)
 
-      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == dj |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all()
+      assert [top] == djvip |> Top.scoped() |> Repo.all()
+      assert [top] == dj |> Top.scoped() |> Repo.all()
+      assert [top] == nil |> Top.scoped() |> Repo.all()
     end
 
     test "current month -5", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -5)
 
-      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == dj |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == nil |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all()
+      assert [top] == djvip |> Top.scoped() |> Repo.all()
+      assert [top] == dj |> Top.scoped() |> Repo.all()
+      assert [top] == nil |> Top.scoped() |> Repo.all()
     end
 
     test "current month -6", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -6)
 
-      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == dj |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all()
+      assert [top] == djvip |> Top.scoped() |> Repo.all()
+      assert [top] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
 
     test "current month -24", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -24)
 
-      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == dj |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert [top] == admin |> Top.scoped() |> Repo.all()
+      assert [top] == djvip |> Top.scoped() |> Repo.all()
+      assert [top] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
 
     test "current month -25", %{admin: admin, djvip: djvip, dj: dj} do
       top = top_fixture("published", -25)
 
-      assert [top] == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [top] == djvip |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
-      assert [] == dj |> Top.scoped() |> Repo.all()
+      assert [top] == admin |> Top.scoped() |> Repo.all()
+      assert [top] == djvip |> Top.scoped() |> Repo.all()
+      assert [top] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
@@ -110,7 +110,6 @@ defmodule Wsdjs.Charts.TopTest do
                admin
                |> Top.scoped()
                |> Repo.all()
-               |> Repo.preload(:songs)
                |> Enum.sort()
 
       assert [] == djvip |> Top.scoped() |> Repo.all() |> Enum.sort()
@@ -142,7 +141,6 @@ defmodule Wsdjs.Charts.TopTest do
             u
             |> Top.scoped()
             |> Repo.all()
-            |> Repo.preload(:songs)
             |> Enum.sort()
 
           assert tops == expected
@@ -168,7 +166,7 @@ defmodule Wsdjs.Charts.TopTest do
         top_fixture("checking", -27)
       ]
 
-      assert tops == admin |> Top.scoped() |> Repo.all() |> Repo.preload(:songs)
+      assert tops == admin |> Top.scoped() |> Repo.all()
       assert [] == djvip |> Top.scoped() |> Repo.all()
       assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
@@ -177,7 +175,7 @@ defmodule Wsdjs.Charts.TopTest do
 
   test "get_top!/1 returns the top with given id" do
     top = top_fixture()
-    assert top == Charts.get_top!(top.id) |> Repo.preload(:songs)
+    assert top == Charts.get_top!(top.id)
   end
 
   test "create_top/1 with valid data creates a top" do
@@ -202,7 +200,7 @@ defmodule Wsdjs.Charts.TopTest do
   def top_fixture do
     user = user_fixture()
     {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
-    top
+    top |> Repo.forget(:songs, :many)
   end
 
   def top_fixture("checking", offset) do
@@ -214,28 +212,28 @@ defmodule Wsdjs.Charts.TopTest do
     user = user_fixture()
     {:ok, %Top{} = top} = Charts.create_top(%{due_date: dt, user_id: user.id})
 
-    top
+    top |> Repo.forget(:songs, :many)
   end
 
   def top_fixture("voting", offset) do
     top = top_fixture("checking", offset)
 
     {:ok, top} = Charts.next_step(top)
-    top
+    top |> Repo.forget(:songs, :many)
   end
 
   def top_fixture("counting", offset) do
     top = top_fixture("voting", offset)
 
     {:ok, top} = Charts.next_step(top)
-    top
+    top |> Repo.forget(:songs, :many)
   end
 
   def top_fixture("published", offset) do
     top = top_fixture("counting", offset)
 
     {:ok, top} = Charts.next_step(top)
-    top
+    top |> Repo.forget(:songs, :many)
   end
 
   defp create_users(_) do
