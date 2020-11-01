@@ -48,7 +48,6 @@ defmodule Wsdjs.Reactions.Comments do
     |> where(song_id: ^id)
     |> order_by(desc: :inserted_at)
     |> Repo.all()
-    |> load_user()
   end
 
   @doc """

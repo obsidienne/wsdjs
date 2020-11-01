@@ -1,6 +1,7 @@
 defmodule WsdjsWeb.UserControllerTest do
   use WsdjsWeb.ConnCase
   alias Wsdjs.Accounts
+  import Wsdjs.AccountsFixtures
 
   test "requires user authentication on actions", %{conn: conn} do
     Enum.each(
@@ -17,19 +18,19 @@ defmodule WsdjsWeb.UserControllerTest do
 
   defp create_users(_) do
     god = %Accounts.User{admin: true}
-    {:ok, user} = Wsdjs.Accounts.create_user(%{"email" => "user@wsdjs.com"})
+    user = user_fixture()
     {:ok, user} = Accounts.update_user(user, %{"name" => "user"}, god)
 
-    {:ok, user2} = Wsdjs.Accounts.create_user(%{"email" => "user2@wsdjs.com"})
+    user2 = user_fixture()
     {:ok, user2} = Accounts.update_user(user2, %{"name" => "user2"}, god)
 
-    {:ok, dj} = Wsdjs.Accounts.create_user(%{"email" => "dj@wsdjs.com"})
+    dj = user_fixture()
     {:ok, dj} = Accounts.update_user(dj, %{"name" => "dj", "profil_dj" => true}, god)
 
-    {:ok, djvip} = Wsdjs.Accounts.create_user(%{"email" => "djvip@wsdjs.com"})
+    djvip = user_fixture()
     {:ok, djvip} = Accounts.update_user(djvip, %{"name" => "djvip", "profil_djvip" => true}, god)
 
-    {:ok, admin} = Wsdjs.Accounts.create_user(%{"name" => "admin", "email" => "admin@wsdjs.com"})
+    admin = user_fixture()
 
     {:ok, admin} =
       Accounts.update_user(
@@ -129,21 +130,24 @@ defmodule WsdjsWeb.UserControllerTest do
             |> get(Routes.user_path(conn, :show, djvip.id))
             |> html_response(200)
 
-          assert String.contains?(response, djvip.name)
+          djvip_profil = Accounts.get_profil_by_user(djvip)
+          assert String.contains?(response, djvip_profil.name)
 
           response =
             conn
             |> get(Routes.user_path(conn, :show, dj.id))
             |> html_response(200)
 
-          assert String.contains?(response, dj.name)
+          dj_profil = Accounts.get_profil_by_user(dj)
+          assert String.contains?(response, dj_profil.name)
 
           response =
             conn
             |> get(Routes.user_path(conn, :show, user.id))
             |> html_response(200)
 
-          assert String.contains?(response, user.name)
+          user_profil = Accounts.get_profil_by_user(user)
+          assert String.contains?(response, user_profil.name)
         end
       )
     end
@@ -222,8 +226,10 @@ defmodule WsdjsWeb.UserControllerTest do
       |> put(Routes.user_path(conn, :update, user, %{"user" => params}))
 
       user_updated = Wsdjs.Accounts.get_user!(user.id)
-      assert user_updated.user_profil.djname == "DJ has been"
-      assert user_updated.user_profil.description == "J'aurai voulu être un artist"
+      user_profil = Wsdjs.Accounts.get_profil_by_user(user_updated)
+
+      assert user_profil.djname == "DJ has been"
+      assert user_profil.description == "J'aurai voulu être un artist"
       refute user_updated.user_profil_djvip
       refute user_updated.profil_dj
       refute user_updated.admin

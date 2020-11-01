@@ -25,7 +25,7 @@ defmodule WsdjsWeb.UserSettingsController do
         conn
         |> put_flash(
           :info,
-          "A link to confirm your e-mail change has been sent to the new address."
+          "A link to confirm your email change has been sent to the new address."
         )
         |> redirect(to: Routes.user_settings_path(conn, :edit))
 
@@ -38,7 +38,7 @@ defmodule WsdjsWeb.UserSettingsController do
     case Accounts.update_user_email(conn.assigns.current_user, token) do
       :ok ->
         conn
-        |> put_flash(:info, "E-mail changed successfully.")
+        |> put_flash(:info, "Email changed successfully.")
         |> redirect(to: Routes.user_settings_path(conn, :edit))
 
       :error ->

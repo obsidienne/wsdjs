@@ -64,7 +64,7 @@ defmodule WsdjsWeb.UserSessionControllerTest do
       response = html_response(conn, 200)
       #      assert response =~ "<h1>Log in</h1>"
       assert response =~ "Log in to your account"
-      assert response =~ "Invalid e-mail or password"
+      assert response =~ "Invalid email or password"
     end
   end
 

@@ -85,7 +85,7 @@ defmodule Wsdjs.Charts.TopTest do
 
       assert [top] == admin |> Top.scoped() |> Repo.all()
       assert [top] == djvip |> Top.scoped() |> Repo.all()
-      assert [top] == dj |> Top.scoped() |> Repo.all()
+      assert [] == dj |> Top.scoped() |> Repo.all()
       assert [] == nil |> Top.scoped() |> Repo.all()
     end
   end
