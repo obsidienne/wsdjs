@@ -1,27 +1,20 @@
 defmodule Wsdjs.Charts.Top do
   @moduledoc false
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
 
   alias Wsdjs.{Accounts, Charts, Songs}
 
-  @type t :: %__MODULE__{
-          id: integer,
-          due_date: Date.t(),
-          status: String.t(),
-          updated_at: DateTime.t(),
-          inserted_at: DateTime.t()
-        }
-
   @allowed_fields ~w(due_date user_id)a
   @valid_status ~w(checking voting counting published)
 
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
   schema "tops" do
     field(:due_date, :date)
     field(:status, :string)
 
-    belongs_to(:user, Accounts.User)
+    belongs_to(:user, Accounts.User, type: Wsdjs.HashID)
     has_many(:ranks, Charts.Rank, on_delete: :delete_all)
     has_many(:votes, Charts.Vote, on_replace: :delete)
     many_to_many(:songs, Songs.Song, join_through: Charts.Rank)

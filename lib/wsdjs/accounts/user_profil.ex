@@ -1,6 +1,6 @@
 defmodule Wsdjs.Accounts.UserProfil do
   @moduledoc false
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
 
   schema "users_profils" do
@@ -18,7 +18,7 @@ defmodule Wsdjs.Accounts.UserProfil do
     field(:djname, :string)
     field(:cld_id, :string, default: "wsdjs/missing_avatar.jpg")
 
-    belongs_to(:user, Wsdjs.Accounts.User)
+    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
     timestamps()
   end
 

@@ -1,6 +1,6 @@
 defmodule Wsdjs.Accounts.User do
   @moduledoc false
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
 
   alias Wsdjs.Accounts
@@ -10,6 +10,7 @@ defmodule Wsdjs.Accounts.User do
   alias Wsdjs.Reactions.{Comments, Opinions}
 
   @derive {Inspect, except: [:password]}
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
   schema "users" do
     field(:email, :string)
     field(:password, :string, virtual: true)

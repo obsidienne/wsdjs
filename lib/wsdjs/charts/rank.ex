@@ -2,18 +2,8 @@ defmodule Wsdjs.Charts.Rank do
   @moduledoc """
   A rank in a chart.
   """
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
-
-  @type t :: %__MODULE__{
-          id: integer,
-          likes: integer,
-          votes: integer,
-          bonus: integer,
-          position: integer,
-          updated_at: DateTime.t(),
-          inserted_at: DateTime.t()
-        }
 
   @allowed_fields ~w(likes votes bonus song_id top_id)a
 
@@ -23,8 +13,8 @@ defmodule Wsdjs.Charts.Rank do
     field(:bonus, :integer)
     field(:position, :integer)
 
-    belongs_to(:song, Wsdjs.Songs.Song)
-    belongs_to(:top, Wsdjs.Charts.Top)
+    belongs_to(:song, Wsdjs.Songs.Song, type: Wsdjs.HashID)
+    belongs_to(:top, Wsdjs.Charts.Top, type: Wsdjs.HashID)
 
     timestamps()
   end

@@ -1,15 +1,7 @@
 defmodule Wsdjs.Reactions.Comments.Comment do
   @moduledoc false
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
-
-  @type t :: %__MODULE__{
-          id: integer,
-          text: String.t(),
-          text_html: String.t(),
-          updated_at: DateTime.t(),
-          inserted_at: DateTime.t()
-        }
 
   @allowed_fields ~w(text user_id song_id)a
 
@@ -17,8 +9,8 @@ defmodule Wsdjs.Reactions.Comments.Comment do
     field(:text, :string)
     field(:text_html, :string)
 
-    belongs_to(:user, Wsdjs.Accounts.User)
-    belongs_to(:song, Wsdjs.Songs.Song)
+    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
+    belongs_to(:song, Wsdjs.Songs.Song, type: Wsdjs.HashID)
     timestamps()
   end
 

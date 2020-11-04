@@ -2,23 +2,13 @@ defmodule Wsdjs.Attachments.Videos.Video do
   @moduledoc """
   A video attached to a song.
   """
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
-
-  @type t :: %__MODULE__{
-          id: integer,
-          url: String.t(),
-          video_id: String.t(),
-          title: String.t(),
-          published_at: Date.t(),
-          provider: String.t(),
-          updated_at: DateTime.t(),
-          inserted_at: DateTime.t()
-        }
 
   @allowed_fields ~w(url title user_id song_id published_at)a
   @required_fields ~w(url)a
 
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
   schema "videos" do
     field(:url, :string)
     field(:video_id, :string)
@@ -26,8 +16,8 @@ defmodule Wsdjs.Attachments.Videos.Video do
     field(:published_at, :date)
     field(:provider, :string, default: "unknown")
 
-    belongs_to(:user, Wsdjs.Accounts.User)
-    belongs_to(:song, Wsdjs.Songs.Song)
+    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
+    belongs_to(:song, Wsdjs.Songs.Song, type: Wsdjs.HashID)
     timestamps()
   end
 

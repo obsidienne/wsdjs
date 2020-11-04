@@ -1,5 +1,5 @@
 defmodule Wsdjs.Accounts.UserToken do
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Query
 
   @hash_algorithm :sha256
@@ -16,7 +16,7 @@ defmodule Wsdjs.Accounts.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, Wsdjs.Accounts.User
+    belongs_to :user, Wsdjs.Accounts.User, type: Wsdjs.HashID
 
     timestamps(updated_at: false)
   end

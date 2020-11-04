@@ -1,29 +1,14 @@
 defmodule Wsdjs.Songs.Song do
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
 
   alias Wsdjs.Accounts
   alias Wsdjs.Charts
   alias Wsdjs.Reactions.{Comments, Opinions}
 
-  @type t :: %__MODULE__{
-          id: integer,
-          title: String.t(),
-          artist: String.t(),
-          url: String.t(),
-          bpm: integer,
-          genre: String.t(),
-          instant_hit: boolean,
-          hidden_track: boolean,
-          video_id: String.t(),
-          public_track: boolean,
-          suggestion: boolean,
-          updated_at: DateTime.t(),
-          inserted_at: DateTime.t()
-        }
-
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
+  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
   schema "songs" do
     field(:title, :string)
     field(:artist, :string)
@@ -38,7 +23,7 @@ defmodule Wsdjs.Songs.Song do
     field(:cld_id, :string, default: "wsdjs/missing_cover.jpg")
     timestamps()
 
-    belongs_to(:user, Accounts.User)
+    belongs_to(:user, Accounts.User, type: Wsdjs.HashID)
     has_many(:comments, Comments.Comment)
     has_many(:ranks, Charts.Rank)
     has_many(:opinions, Opinions.Opinion)

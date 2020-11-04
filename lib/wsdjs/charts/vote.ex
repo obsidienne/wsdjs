@@ -1,25 +1,18 @@
 defmodule Wsdjs.Charts.Vote do
   @moduledoc false
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
 
   alias Wsdjs.{Accounts, Charts, Songs, Repo}
-
-  @type t :: %__MODULE__{
-          id: integer,
-          votes: integer,
-          updated_at: DateTime.t(),
-          inserted_at: DateTime.t()
-        }
 
   @allowed_fields ~w(votes user_id song_id)a
 
   schema "votes" do
     field(:votes, :integer)
 
-    belongs_to(:song, Songs.Song)
-    belongs_to(:top, Charts.Top)
-    belongs_to(:user, Accounts.User)
+    belongs_to(:song, Songs.Song, type: Wsdjs.HashID)
+    belongs_to(:top, Charts.Top, type: Wsdjs.HashID)
+    belongs_to(:user, Accounts.User, type: Wsdjs.HashID)
 
     timestamps()
   end

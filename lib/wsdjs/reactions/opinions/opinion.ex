@@ -1,14 +1,7 @@
 defmodule Wsdjs.Reactions.Opinions.Opinion do
   @moduledoc false
-  use Wsdjs.Schema
+  use Ecto.Schema
   import Ecto.Changeset
-
-  @type t :: %__MODULE__{
-          id: integer,
-          kind: String.t(),
-          updated_at: DateTime.t(),
-          inserted_at: DateTime.t()
-        }
 
   @allowed_fields ~w(kind user_id song_id)a
   @validated_opinions ~w(up like down)
@@ -17,8 +10,8 @@ defmodule Wsdjs.Reactions.Opinions.Opinion do
   schema "opinions" do
     field(:kind, :string)
 
-    belongs_to(:user, Wsdjs.Accounts.User)
-    belongs_to(:song, Wsdjs.Songs.Song)
+    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
+    belongs_to(:song, Wsdjs.Songs.Song, type: Wsdjs.HashID)
 
     timestamps()
   end
