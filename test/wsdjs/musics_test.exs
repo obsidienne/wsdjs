@@ -98,8 +98,7 @@ defmodule Wsdjs.MusicsTest do
       genre: "rnb",
       instant_hit: true,
       hidden_track: true,
-      public_track: true,
-      suggestion: false
+      public_track: true
     }
 
     test "update_song/3 with valid data done by admin updates the song" do
@@ -113,7 +112,6 @@ defmodule Wsdjs.MusicsTest do
       assert song.instant_hit == true
       assert song.hidden_track == true
       assert song.public_track == true
-      assert song.suggestion == false
     end
 
     test "update_song/3 with valid data done by user updates the song" do

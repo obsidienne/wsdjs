@@ -17,10 +17,6 @@ defmodule Wsdjs.ChartsTest do
       song_fixture(%{inserted_at: dtend})
     ]
 
-    song_fixture(%{inserted_at: Timex.shift(dt, microseconds: 1), suggestion: false})
-    song_fixture(%{inserted_at: Timex.shift(dt, days: 1, microseconds: 1), suggestion: false})
-    song_fixture(%{inserted_at: dtend, suggestion: false})
-
     user = user_fixture()
     {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
     assert Enum.count(top.songs) == 3

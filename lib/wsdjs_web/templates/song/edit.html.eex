@@ -9,7 +9,7 @@
   <div class="flex p-2 bg-white shadow">
     <div>
       <div class="relative w-12 h-12 aspect-ratio-square">
-        <%= cl_image_tag(@song.cld_id, 
+        <%= cl_image_tag(@song.cld_id,
                      class: "responsive absolute top-0",
                      transforms: [
                         %{crop: "crop", gravity: "custom"},
@@ -35,7 +35,7 @@
 
 <section class="mb-32">
   <div id="art_div" class="relative mb-4">
-    <%= cl_image_tag(@song.cld_id, 
+    <%= cl_image_tag(@song.cld_id,
                      class: "opacity-25 shadow rounded",
                      transforms: [
                         %{crop: "crop", gravity: "custom"},
@@ -90,16 +90,6 @@
 
   <table class="table">
     <%= if @current_user.admin do %>
-    <tr>
-      <td>Suggested song</td>
-      <td>
-        <div class=" ckbx-style-11 danger">
-          <%= checkbox f, :suggestion %>
-          <%= label f,:suggestion do %><% end %>
-        </div>
-        <p class="help-block">Use this song in a month TOP 10<br />Change with caution !</p>
-      </td>
-    </tr>
     <tr>
       <td>Instant hit</td>
       <td>

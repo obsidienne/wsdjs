@@ -128,13 +128,14 @@ defmodule Wsdjs.Songs do
     |> Repo.all()
   end
 
-  def count_songs(%User{} = user), do: Repo.aggregate(Songs.scoped(user), :count, :id)
-
   @doc """
   Returns the songs added the 24 last hours.
   """
   def list_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
-    query = from(s in Song, where: s.inserted_at >= ^lower and s.inserted_at <= ^upper)
+    query =
+      from(s in Song,
+        where: s.inserted_at >= ^lower and s.inserted_at <= ^upper
+      )
 
     Repo.all(query)
   end
@@ -145,12 +146,13 @@ defmodule Wsdjs.Songs do
   def list_songs(%User{} = user) do
     user
     |> Songs.scoped()
-    |> where([s], s.suggestion == true)
     |> order_by(desc: :inserted_at)
     |> preload(user: :user_profil, comments: :user, opinions: :user)
     |> limit(15)
     |> Repo.all()
   end
+
+  def count_songs(%User{} = user), do: Repo.aggregate(Songs.scoped(user), :count, :id)
 
   def bpm_ranges do
     %{
@@ -160,16 +162,6 @@ defmodule Wsdjs.Songs do
       "f" => 110..129,
       "vf" => 130..9999
     }
-  end
-
-  def list_suggested_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
-    query =
-      from(
-        s in Song,
-        where: s.inserted_at >= ^lower and s.inserted_at <= ^upper and s.suggestion == true
-      )
-
-    Repo.all(query)
   end
 
   def preload_songs(tops) when is_list(tops), do: Repo.preload(tops, :songs)

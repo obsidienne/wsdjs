@@ -19,7 +19,6 @@ defmodule Wsdjs.Songs.Song do
     field(:hidden_track, :boolean, default: false)
     field(:video_id, :string)
     field(:public_track, :boolean, default: false)
-    field(:suggestion, :boolean, default: true)
     field(:cld_id, :string, default: "wsdjs/missing_cover.jpg")
     timestamps()
 
@@ -41,20 +40,6 @@ defmodule Wsdjs.Songs.Song do
     |> validate_inclusion(:genre, @validated_genre)
     |> validate_url(:url)
     |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
-    |> put_change(:suggestion, false)
-  end
-
-  def suggestion_changeset(%__MODULE__{} = song, attrs) do
-    song
-    |> cast(attrs, [:title, :artist, :url, :bpm, :genre, :user_id])
-    |> validate_required([:title, :artist, :url, :bpm, :genre, :user_id])
-    |> unique_constraint(:title, name: :songs_title_artist_index)
-    |> assoc_constraint(:user)
-    |> validate_number(:bpm, greater_than: 0)
-    |> validate_inclusion(:genre, @validated_genre)
-    |> validate_url(:url)
-    |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
-    |> put_change(:suggestion, true)
   end
 
   def update_changeset(%__MODULE__{} = song, attrs) do
@@ -81,8 +66,7 @@ defmodule Wsdjs.Songs.Song do
       :instant_hit,
       :hidden_track,
       :inserted_at,
-      :public_track,
-      :suggestion
+      :public_track
     ])
     |> validate_required([:url, :bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
