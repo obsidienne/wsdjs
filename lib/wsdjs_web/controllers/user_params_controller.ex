@@ -4,8 +4,6 @@ defmodule WsdjsWeb.UserParamsController do
 
   alias Wsdjs.Accounts
 
-  action_fallback(WsdjsWeb.FallbackController)
-
   def show(conn, %{"id" => user_id}) do
     user = Accounts.get_user!(user_id)
 

@@ -5,8 +5,6 @@ defmodule WsdjsWeb.TopController do
   alias Wsdjs.Charts
   alias Wsdjs.Charts.Top
 
-  action_fallback(WsdjsWeb.FallbackController)
-
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]
     apply(__MODULE__, action_name(conn), args)
