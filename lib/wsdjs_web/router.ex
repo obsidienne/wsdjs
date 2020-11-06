@@ -15,10 +15,6 @@ defmodule WsdjsWeb.Router do
     plug :fetch_current_user_profil
   end
 
-  pipeline :browser_auth do
-    plug :require_authenticated_user
-  end
-
   if Mix.env() == :dev do
     forward("/sent_emails", Bamboo.SentEmailViewerPlug)
   end
@@ -59,7 +55,7 @@ defmodule WsdjsWeb.Router do
   ## Application routes
 
   scope "/", WsdjsWeb do
-    pipe_through([:browser, :browser_auth])
+    pipe_through [:browser, :require_authenticated_user]
 
     resources("/songs", SongController, only: [:create, :new, :delete, :update, :edit])
 
