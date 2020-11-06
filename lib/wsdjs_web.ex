@@ -45,7 +45,8 @@ defmodule WsdjsWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {WsdjsWeb.LayoutView, "live.html"}
+        layout: {WsdjsWeb.LayoutView, "live.html"},
+        container: {:div, class: "contents"}
 
       unquote(view_helpers())
 
