@@ -2,6 +2,8 @@ defmodule Wsdjs.MusicsTest do
   use Wsdjs.DataCase
   alias Wsdjs.Repo
 
+  import Wsdjs.AccountsFixtures
+
   describe "songs" do
     alias Wsdjs.Accounts.User
     alias Wsdjs.Songs.Song
@@ -13,15 +15,6 @@ defmodule Wsdjs.MusicsTest do
       genre: "soul",
       url: "http://youtu.be/dummy"
     }
-
-    def user_fixture(attrs \\ %{}) do
-      {:ok, %Wsdjs.Accounts.User{} = user} =
-        attrs
-        |> Enum.into(%{email: "dummy#{System.unique_integer([:positive])}@bshit.com"})
-        |> Wsdjs.Accounts.create_user()
-
-      user
-    end
 
     def song_fixture(attrs \\ %{}) do
       {:ok, %Song{} = song} = Songs.create_song(song_params(attrs))

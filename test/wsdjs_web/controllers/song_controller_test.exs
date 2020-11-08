@@ -2,21 +2,23 @@ defmodule WsdjsWeb.SongControllerTest do
   use WsdjsWeb.ConnCase
   alias Wsdjs.Accounts
 
+  import Wsdjs.AccountsFixtures
+
   defp create_users(_) do
     god = %Accounts.User{admin: true}
-    {:ok, suggestor} = Wsdjs.Accounts.create_user(%{"email" => "suggestor@wsdjs.com"})
+    suggestor = user_fixture()
     {:ok, suggestor} = Accounts.update_user(suggestor, %{"name" => "suggestor"}, god)
 
-    {:ok, user} = Wsdjs.Accounts.create_user(%{"email" => "user@wsdjs.com"})
+    user = user_fixture()
     {:ok, user} = Accounts.update_user(user, %{"name" => "user"}, god)
 
-    {:ok, dj} = Wsdjs.Accounts.create_user(%{"email" => "dj@wsdjs.com"})
+    dj = user_fixture()
     {:ok, dj} = Accounts.update_user(dj, %{"name" => "dj", "profil_dj" => true}, god)
 
-    {:ok, djvip} = Wsdjs.Accounts.create_user(%{"email" => "djvip@wsdjs.com"})
+    djvip = user_fixture()
     {:ok, djvip} = Accounts.update_user(djvip, %{"name" => "djvip", "profil_djvip" => true}, god)
 
-    {:ok, admin} = Wsdjs.Accounts.create_user(%{"name" => "admin", "email" => "admin@wsdjs.com"})
+    admin = user_fixture()
 
     {:ok, admin} =
       Accounts.update_user(

@@ -2,13 +2,13 @@ defmodule Wsdjs.AttachmentsTest do
   use Wsdjs.DataCase
 
   alias Wsdjs.Attachments
+  import Wsdjs.AccountsFixtures
 
   describe "video" do
     alias Wsdjs.Attachments.Videos.Video
 
     def song_fixture(attrs \\ %{}) do
-      user_attrs = %{"email" => "dummy#{System.unique_integer()}@bshit.com"}
-      {:ok, %Wsdjs.Accounts.User{} = user} = Wsdjs.Accounts.create_user(user_attrs)
+      user = user_fixture()
 
       {:ok, %Wsdjs.Songs.Song{} = song} =
         attrs

@@ -3,6 +3,7 @@ defmodule Wsdjs.Charts.RankTest do
 
   alias Wsdjs.Charts.Rank
   alias Wsdjs.Repo
+  import Wsdjs.AccountsFixtures
 
   test "rank song must exist" do
     attrs = rank_fixture_params()
@@ -28,7 +29,7 @@ defmodule Wsdjs.Charts.RankTest do
   end
 
   defp rank_fixture_params(attrs \\ %{}) do
-    {:ok, user} = Wsdjs.Accounts.create_user(%{email: "dummy@bshit.com"})
+    user = user_fixture()
     {:ok, top} = Wsdjs.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
 
     {:ok, song} =

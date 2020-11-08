@@ -4,6 +4,8 @@ defmodule Wsdjs.ChartsTest do
   alias Wsdjs.Charts
   alias Wsdjs.Charts.Top
 
+  import Wsdjs.AccountsFixtures
+
   test "Create TOP, Song are selected according to month" do
     dt = Timex.beginning_of_month(Timex.now())
     dtend = Timex.end_of_month(Timex.now())
@@ -117,13 +119,6 @@ defmodule Wsdjs.ChartsTest do
 
     {:ok, song} = Wsdjs.Songs.update(song, attrs, %Wsdjs.Accounts.User{admin: true})
     song
-  end
-
-  defp user_fixture do
-    {:ok, %Wsdjs.Accounts.User{} = user} =
-      Wsdjs.Accounts.create_user(%{"email" => "dummy#{System.unique_integer()}@bshit.com"})
-
-    user
   end
 
   defp create_top(_) do

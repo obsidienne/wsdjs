@@ -2,10 +2,11 @@ defmodule Wsdjs.ReactionsTest do
   use Wsdjs.DataCase
   alias Wsdjs.Reactions
 
+  import Wsdjs.AccountsFixtures
+
   describe "comments" do
     def comment_fixture do
-      {:ok, user} =
-        Wsdjs.Accounts.create_user(%{email: "dummy#{System.unique_integer()}@bshit.com"})
+      user = user_fixture()
 
       {:ok, song} =
         Wsdjs.Songs.create_song(%{

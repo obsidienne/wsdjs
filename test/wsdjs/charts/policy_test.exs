@@ -3,11 +3,11 @@ defmodule Wsdjs.Charts.ChartsTest do
 
   alias Wsdjs.Accounts.User
   alias Wsdjs.Charts
+  import Wsdjs.AccountsFixtures
 
   describe "Charts" do
     defp top_fixture(attrs) do
-      {:ok, %User{} = user} =
-        Wsdjs.Accounts.create_user(%{"email" => "dummy#{System.unique_integer()}@bshit.com"})
+      user = user_fixture()
 
       {:ok, %Wsdjs.Charts.Top{} = top} =
         attrs
