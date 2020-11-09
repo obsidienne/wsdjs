@@ -9,7 +9,7 @@
                        class: "hidden h-15 w-15 rounded-full sm:block",
                        transforms: [
                           %{crop: "crop", gravity: "custom"},
-                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 48, quality: "auto", width: 48 }
+                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 96, quality: "auto", width: 96 }
                        ]) %>
 
                     <div>
