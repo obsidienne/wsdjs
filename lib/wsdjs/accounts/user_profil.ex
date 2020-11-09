@@ -48,21 +48,20 @@ defmodule Wsdjs.Accounts.UserProfil do
     |> validate_length(:user_country, max: 2000)
     |> validate_length(:name, max: 2000)
     |> validate_length(:djname, max: 2000)
-    |> validate_url(:youtube)
-    |> validate_url(:facebook)
-    |> validate_url(:soundcloud)
-    |> validate_url(:website)
     |> markdown_text(attrs)
   end
 
-  # This function validates the format of an URL not it's validity.
-  defp validate_url(changeset, field, options \\ []) do
-    validate_change(changeset, field, fn _, url ->
-      case url |> String.to_charlist() |> :http_uri.parse() do
-        {:ok, _} -> []
-        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect(msg)}"}]
-      end
-    end)
+  def update_changeset(%__MODULE__{} = user_profil, attrs) do
+    user_profil
+    |> cast(attrs, @allowed_fields)
+    |> assoc_constraint(:user)
+    |> validate_length(:description, max: 2000)
+    |> validate_length(:favorite_genre, max: 2000)
+    |> validate_length(:favorite_artist, max: 2000)
+    |> validate_length(:user_country, max: 2000)
+    |> validate_length(:name, max: 2000)
+    |> validate_length(:djname, max: 2000)
+    |> markdown_text(attrs)
   end
 
   defp markdown_text(model, %{"description" => nil}) do

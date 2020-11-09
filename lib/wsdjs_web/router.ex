@@ -67,7 +67,10 @@ defmodule WsdjsWeb.Router do
 
     resources("/ranks", RankController, only: [:update, :delete])
 
-    resources "/users", UserController, only: [:index, :edit, :update]
+    get "/users/profils", UserProfilController, :edit
+    put "/users/profils", UserProfilController, :update
+    resources "/users", UserController, only: [:index, :update]
+
     live "/library", MusicLibrary
 
     resources("/user-params", UserParamsController, only: [:show])

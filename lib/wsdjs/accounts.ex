@@ -58,12 +58,6 @@ defmodule Wsdjs.Accounts do
     |> load_user_profil()
   end
 
-  def get_profil_by_user(%User{id: id}) do
-    UserProfil
-    |> where(user_id: ^id)
-    |> Repo.one()
-  end
-
   @doc """
   Updates a user.
 
@@ -87,6 +81,56 @@ defmodule Wsdjs.Accounts do
     |> User.admin_changeset(attrs)
     |> Repo.update()
   end
+
+  ## user profil context functions
+
+  @doc """
+  Updates a user profil.
+
+  ## Examples
+
+      iex> update_user_profil(user_profil, %{field: new_value})
+      {:ok, %UserProfil{}}
+
+      iex> update_user_profil(user_profil, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_user_profil(%UserProfil{} = user_profil, attrs) do
+    user_profil
+    |> UserProfil.update_changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking userchanges.
+
+  ## Examples
+
+      iex> change_user_registration(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user_profil(%UserProfil{} = user_profil, attrs \\ %{}) do
+    UserProfil.update_changeset(user_profil, attrs)
+  end
+
+  @doc """
+  Returns the user_profil for a user.
+
+  ## Examples
+
+      iex> get_profil_by_user(user)
+      %UserProfil{}
+
+  """
+  def get_profil_by_user(%User{id: id}) do
+    UserProfil
+    |> where(user_id: ^id)
+    |> Repo.one()
+  end
+
+  ## Scaffolf code from phx_gen_auth
 
   alias Wsdjs.Accounts.{User, UserToken, UserNotifier}
 
