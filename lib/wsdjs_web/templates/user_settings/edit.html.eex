@@ -1,49 +1,107 @@
-<h1>Settings</h1>
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen">
+  <div class="px-4 py-4 sm:px-6">
 
-<h3>Change e-mail</h3>
+    <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update_email), fn f -> %>
+    <div>
+      <div class="mt-8">
+        <div>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Email
+          </h3>
+          <p class="mt-1 text-sm leading-5 text-gray-500">
+            Change email
+          </p>
+        </div>
 
-<%= form_for @email_changeset, Routes.user_settings_path(@conn, :update_email), fn f -> %>
-  <%= if @email_changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+        <%= if @email_changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+        <% end %>
+
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <div class="sm:col-span-3">
+            <%= label f, :email, class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= email_input f, :email, required: true, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :email %>
+          </div>
+
+          <div class="sm:col-span-3">
+            <%= label f, :current_password, for: "current_password_for_email", class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :current_password %>
+          </div>
+
+        </div>
+      </div>
     </div>
-  <% end %>
+    <div class="mt-8 border-t border-gray-200 pt-5">
+      <div class="flex justify-end">
 
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
-
-  <%= label f, :current_password, for: "current_password_for_email" %>
-  <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email" %>
-  <%= error_tag f, :current_password %>
-
-  <div>
-    <%= submit "Change e-mail" %>
-  </div>
-<% end %>
-
-<h3>Change password</h3>
-
-<%= form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f -> %>
-  <%= if @password_changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+        <span class="ml-3 inline-flex rounded-md shadow-sm">
+          <%= submit "Change e-mail", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+        </span>
+      </div>
     </div>
-  <% end %>
+    <% end %>
 
-  <%= label f, :password, "New password" %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation, "Confirm new password" %>
-  <%= password_input f, :password_confirmation, required: true %>
-  <%= error_tag f, :password_confirmation %>
+    <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f -> %>
+    <div>
+      <div class="mt-8">
+        <div>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Password
+          </h3>
+          <p class="mt-1 text-sm leading-5 text-gray-500">
+            Change password</p>
+        </div>
 
-  <%= label f, :current_password, for: "current_password_for_password" %>
-  <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password" %>
-  <%= error_tag f, :current_password %>
+        <%= if @password_changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+        <% end %>
 
-  <div>
-    <%= submit "Change password" %>
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <div class="sm:col-span-2">
+            <%= label f, :password, "New password", class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= password_input f, :password, required: true, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :password %>
+          </div>
+
+          <div class="sm:col-span-2">
+            <%= label f, :password_confirmation, "Confirm new password", class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= password_input f, :password_confirmation, required: true , name: "current_password", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :password_confirmation %>
+          </div>
+
+          <div class="sm:col-span-2">
+            <%= label f, :current_password, for: "current_password_for_password", class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :current_password %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 border-t border-gray-200 pt-5">
+      <div class="flex justify-end">
+        <span class="ml-3 inline-flex rounded-md shadow-sm">
+          <%= submit "Change password", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+        </span>
+      </div>
+    </div>
+    <% end %>
+
   </div>
-<% end %>
+</section>
