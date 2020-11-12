@@ -72,8 +72,6 @@ defmodule WsdjsWeb.Router do
     resources "/users", UserController, only: [:index, :update]
 
     live "/library", MusicLibrary
-
-    resources("/user-params", UserParamsController, only: [:show])
   end
 
   scope "/", WsdjsWeb do
