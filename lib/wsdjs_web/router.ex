@@ -84,4 +84,7 @@ defmodule WsdjsWeb.Router do
     resources("/tops", TopController, only: [:show])
     resources("/songs", SongController, only: [:show])
   end
+
+  ## Admin routes
+  use Kaffy.Routes, scope: "/admin", pipe_through: [:browser, :require_authenticated_user]
 end

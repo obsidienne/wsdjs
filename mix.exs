@@ -73,6 +73,7 @@ defmodule Wsdjs.MixProject do
       {:geo_postgis, "~> 3.1"},
       {:html_sanitize_ex, "~> 1.3.0"},
       {:corsica, "~> 1.1"},
+      {:kaffy, "~> 0.9.0"},
       {:cloudex, "~> 1.3.0"},
       {:timex, "~> 3.4"}
     ]
