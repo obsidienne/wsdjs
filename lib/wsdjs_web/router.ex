@@ -2,6 +2,7 @@ defmodule WsdjsWeb.Router do
   use WsdjsWeb, :router
 
   import WsdjsWeb.UserAuth
+  import WsdjsWeb.AdminAuth
   import WsdjsWeb.UserProfil
 
   pipeline :browser do
@@ -86,5 +87,5 @@ defmodule WsdjsWeb.Router do
   end
 
   ## Admin routes
-  use Kaffy.Routes, scope: "/admin", pipe_through: [:browser, :require_authenticated_user]
+  use Kaffy.Routes, scope: "/admin", pipe_through: [:browser, :require_authenticated_admin]
 end

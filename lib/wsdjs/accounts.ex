@@ -82,6 +82,8 @@ defmodule Wsdjs.Accounts do
     |> Repo.update()
   end
 
+  def user_is_admin(%User{admin: is_admin}), do: is_admin
+
   ## user profil context functions
 
   @doc """
