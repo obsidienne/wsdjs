@@ -20,6 +20,17 @@ defmodule WsdjsWeb.Router do
     forward("/sent_emails", Bamboo.SentEmailViewerPlug)
   end
 
+  ## Admin routes
+
+  pipeline :admin_browser do
+    plug :put_root_layout, {WsdjsWeb.LayoutView, :root_admin}
+    plug :fetch_current_user
+    plug :fetch_current_user_profil
+    plug :require_authenticated_admin
+  end
+
+  use Kaffy.Routes, scope: "/admin", pipe_through: [:admin_browser]
+
   ## Authentication routes
 
   scope "/", WsdjsWeb do
@@ -85,7 +96,4 @@ defmodule WsdjsWeb.Router do
     resources("/tops", TopController, only: [:show])
     resources("/songs", SongController, only: [:show])
   end
-
-  ## Admin routes
-  use Kaffy.Routes, scope: "/admin", pipe_through: [:browser, :require_authenticated_admin]
 end
