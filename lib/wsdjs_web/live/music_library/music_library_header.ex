@@ -3,5 +3,9 @@ defmodule WsdjsWeb.MusicLibraryHeader do
 
   alias Wsdjs.Musics
 
-  defp count_songs(), do: Musics.count_songs()
+  defp count_songs() do
+    count = Musics.count_songs()
+    {:ok, formated_count} = Wsdjs.Cldr.Number.to_string(count)
+    formated_count
+  end
 end
