@@ -42,7 +42,6 @@
             clip-rule="evenodd" />
         </svg>
         <span>
-          Closing on
           <time datetime="<%= Date.to_iso8601(@top.due_date) %>">
             <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
           </time>
