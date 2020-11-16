@@ -43,7 +43,17 @@ defmodule Wsdjs.Musics.Song do
 
   def update_changeset(%__MODULE__{} = song, attrs) do
     song
-    |> cast(attrs, [:url, :bpm, :genre, :hidden_track, :public_track])
+    |> cast(attrs, [
+      :title,
+      :artist,
+      :url,
+      :bpm,
+      :genre,
+      :instant_hit,
+      :hidden_track,
+      :public_track,
+      :inserted_at
+    ])
     |> validate_required([:url, :bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)

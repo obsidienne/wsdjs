@@ -5,7 +5,6 @@ defmodule Wsdjs.MusicsTest do
   import Wsdjs.AccountsFixtures
 
   describe "songs" do
-    alias Wsdjs.Accounts.User
     alias Wsdjs.Musics.Song
     alias Wsdjs.Musics
 
@@ -74,9 +73,6 @@ defmodule Wsdjs.MusicsTest do
       assert {:error, changeset} = Musics.create_song(song_params(artist: nil))
       assert "can't be blank" in errors_on(changeset).artist
 
-      assert {:error, changeset} = Musics.create_song(song_params(url: "bullshit"))
-      assert "invalid url: :no_scheme" in errors_on(changeset).url
-
       params = song_params()
       assert {:ok, %Song{}} = Musics.create_song(params)
       assert {:error, %Ecto.Changeset{} = changeset} = Musics.create_song(params)
@@ -94,7 +90,7 @@ defmodule Wsdjs.MusicsTest do
       public_track: true
     }
 
-    test "update_song/3 with valid data done by admin updates the song" do
+    test "update_song/3 with valid data updates the song" do
       song = song_fixture()
       assert {:ok, %Song{} = song} = Musics.update(song, @update_attrs)
       assert song.title == "update title"
@@ -103,20 +99,6 @@ defmodule Wsdjs.MusicsTest do
       assert song.url == "http://youtube.com/update_url"
       assert song.genre == "rnb"
       assert song.instant_hit == true
-      assert song.hidden_track == true
-      assert song.public_track == true
-    end
-
-    test "update_song/3 with valid data done by user updates the song" do
-      song = song_fixture()
-
-      assert {:ok, song} = Musics.update(song, @update_attrs)
-      assert song.title == "my title"
-      assert song.artist == "my artist"
-      assert song.bpm == 333
-      assert song.url == "http://youtube.com/update_url"
-      assert song.genre == "rnb"
-      assert song.instant_hit == false
       assert song.hidden_track == true
       assert song.public_track == true
     end
