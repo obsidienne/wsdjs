@@ -1,5 +1,5 @@
 <section class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-  <div class="flex md:flex-row flex-col justify-start mt-6 pb-12">
+  <div class="flex md:flex-row flex-col justify-start pb-12">
     <div class="w-64 h-64">
       <%= cl_image_tag(@song.cld_id,
                        class: "responsive shadow rounded",
@@ -11,7 +11,7 @@
     <div class="flex flex-col md:pl-4">
       <span class="h3 pb-2"><span class="text-gray-800"></span>
         <div class="text-gray-800"> suggested by
-          <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "text-gray-800 inline-block" %>,
+          <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "text-gray-800 inline-block" %>
         </div>
 
         <div class="pt-4">

@@ -1,146 +1,118 @@
-<nav class="mb-4 py-4">
-  <ol>
-    <li class="inline-block"><%= link "Song", to: Routes.song_path(@conn, :show, @song) %></li>
-  </ol>
-</nav>
-
-
-<section class="mb-8">
-  <div class="flex p-2 bg-white shadow">
-    <div>
-      <div class="relative w-12 h-12 aspect-ratio-square">
-        <%= cl_image_tag(@song.cld_id,
-                     class: "responsive absolute top-0",
-                     transforms: [
-                        %{crop: "crop", gravity: "custom"},
-                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 48, quality: "auto", width: 48 }
-                     ]) %>
-      </div>
-    </div>
-    <div class="pl-4">
-      <div>
-        <span><%= @song.title %></span>
-        <span class="pb-2"><span class="text-gray-800">by</span> <%= @song.artist %></span>
-      </div>
-      <div class="text-gray-800"> suggested by
-        <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "text-gray-800 inline-block" %>,
-        <time datetime="<%= utc_to_local(@song.inserted_at) %>"
-          title="<%= Timex.format!(Timex.to_datetime(@song.inserted_at), "%d %b %Y, %k:%M", :strftime) %>">
-          <%= Timex.format!(@song.inserted_at, "%b %Y", :strftime) %>
-        </time>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="mb-32">
-  <div id="art_div" class="relative mb-4">
-    <%= cl_image_tag(@song.cld_id,
-                     class: "opacity-25 shadow rounded",
-                     transforms: [
-                        %{crop: "crop", gravity: "custom"},
-                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 240, quality: "auto", width: 240 }
-                     ]) %>
-
-
-    <button id="song_edit_cldwidget_opener" class="btn btn-primary absolute bottom-0 pin-l">Update cover</button>
-  </div>
-
+<section class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen">
   <%= form_for @changeset, Routes.song_path(@conn, :update, @song), fn f -> %>
-  <div id="cloudinary_form_div">
-    <%= hidden_input f, :cld_id, disabled: :disabled %>
-  </div>
-
-  <%= if @current_user.admin do %>
-  <div class="form-group">
-    <label class="text-gray-800">Artist</label>
-    <%= text_input f, :artist, placeholder: "Artist name", class: "form-control" %>
-    <%= error_tag f, :artist %>
-  </div>
-  <div class="form-group">
-    <label class="text-gray-800">Title</label>
-    <%= text_input f, :title, placeholder: "Song title", class: "form-control" %>
-    <%= error_tag f, :title %>
-  </div>
-  <% else %>
-  <div class="form-group">
-    <%= @song.artist %>
-  </div>
-  <div class="form-group">
-    <%= @song.title %>
-  </div>
-  <% end %>
-
-  <div class="form-group">
-    <label>URL</label>
-    <%= text_input f, :url, type: "url", placeholder: "An URL for the song (youtube prefered).", class: "form-control" %>
-    <%= error_tag f, :url %>
-  </div>
-  <div class="form-group">
-    <label>BPM</label>
-    <%= number_input f, :bpm, placeholder: "bpm", min: 0, class: "form-control" %>
-    <%= error_tag f, :bpm %>
-  </div>
-
-  <div class="form-group select optional song_genre">
-    <label>Genre</label>
-    <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
-    <%= error_tag f, :genre %>
-  </div>
-
-  <table class="table">
-    <%= if @current_user.admin do %>
-    <tr>
-      <td>Instant hit</td>
-      <td>
-        <div class=" ckbx-style-11 ">
-          <%= checkbox f, :instant_hit %>
-          <%= label f,:instant_hit do %><% end %>
+  <div>
+    <div>
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Song</h3>
+        <p class="mt-1tmax-w-2xl text-sm leading-5 text-gray-500">
+          Song detail, This information will be displayed publicly so be careful what you share.
+        </p>
+      </div>
+      <div class="mt-6 sm:mt-5">
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= label f, :artist, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+              <%= text_input f, :artist, placeholder: "Artist name", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :artist %>
+          </div>
         </div>
-        <p class="help-block">This song is visible and in front page</p>
-      </td>
-    </tr>
-    <% end %>
-    <tr>
-      <td>Hidden track</td>
-      <td>
-        <div class=" ckbx-style-11 ">
-          <%= checkbox f, :hidden_track %>
-          <%= label f,:hidden_track do %><% end %>
-        </div>
-        <p class="help-block">This song is visible only by DJ VIP</p>
-      </td>
-    </tr>
-    <tr>
-      <td>Public track</td>
-      <td>
-        <div class=" ckbx-style-11 ">
-          <%= checkbox f, :public_track %>
-          <%= label f,:public_track do %><% end %>
-        </div>
-        <p class="help-block">This song is always visible, no matter when it was created</p>
-      </td>
-    </tr>
-  </table>
 
-  <%= if @current_user.admin do %>
-  <div class="form-group">
-    <label class="text-gray-800">Suggestor</label>
-    <%= select f, :user_id, list_users(), class: "form-control" %>
-    <%= error_tag f, :user_id %>
-  </div>
-  <div class="form-group">
-    <label class="text-gray-800">Suggested at</label>
-    <%= datetime_select f, :inserted_at, class: "form-control" %>
-    <%= error_tag f, :inserted_at %>
-  </div>
-  <% end %>
-  <%= submit "Update", class: "btn btn-primary" %>
-  <% end %>
-</section>
+        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= label f, :title, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+              <%= text_input f, :title, placeholder: "Song title", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :title %>
+          </div>
+        </div>
 
-<section>
-  <%= form_for @conn, Routes.song_path(@conn, :delete, @song), [method: "DELETE", data: [confirm: "Delete #{@song.title} by #{@song.artist}.\n\nAre you sure ?"]], fn _ -> %>
-  <%= submit "Delete song", class: "btn btn-danger w-full" %>
+        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= label f, :genre, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+              <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :genre %>
+          </div>
+        </div>
+
+        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= label f, :bpm, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+              <%= number_input f, :bpm, min: 0, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :bpm %>
+          </div>
+        </div>
+
+        <div
+          class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="photo" class="block text-sm leading-5 font-medium text-gray-700">
+            Photo
+          </label>
+          <div class="mt-2 sm:mt-0 sm:col-span-2">
+            <div class="flex items-center">
+              <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                <%= cl_image_tag(@song.cld_id,
+                    class: "opacity-25 shadow rounded",
+                    transforms: [
+                      %{crop: "crop", gravity: "custom"},
+                      %{crop: "fit", fetch_format: "auto", format: "jpg", height: 240, quality: "auto", width: 240 }
+                ]) %>
+                <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </span>
+              <span class="ml-5 rounded-md shadow-sm">
+                <button type="button"
+                  class="py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
+                  Change
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Personal Information
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+          Use a permanent address where you can receive mail.
+        </p>
+      </div>
+      <div class="mt-6 sm:mt-5">
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="username" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+            Username
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <span
+                class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                youtube.com/
+              </span>
+              <%= text_input f, :url, class: "flex-1 form-input block w-full min-w-0 rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <%= error_tag f, :url %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 border-t border-gray-200 pt-5">
+    <div class="flex justify-end">
+      <span class="ml-3 inline-flex rounded-md shadow-sm">
+        <%= submit "Save", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+      </span>
+    </div>
+  </div>
   <% end %>
 </section>
