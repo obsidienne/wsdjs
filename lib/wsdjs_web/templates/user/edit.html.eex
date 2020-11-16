@@ -1,6 +1,6 @@
 <section class="user-profile-edit mt-4">
   <div id="avatar_div" class="flex flex-col mb-12">
-    <%= cl_image_tag(@user.user_profil.cld_id, 
+    <%= cl_image_tag(@user.user_profil.cld_id,
                        class: "avatar_thumbnail",
                        transforms: [
                           %{crop: "crop", gravity: "custom"},
@@ -62,7 +62,7 @@
   </div>
   <div class="form-group select optional song_genre">
     <label>Favotire genre</label>
-    <%= select fd, :favorite_genre, Wsdjs.Songs.Song.genre, class: "form-control" %>
+    <%= select fd, :favorite_genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
     <%= error_tag fd, :favorite_genre %>
   </div>
   <div class="form-group">

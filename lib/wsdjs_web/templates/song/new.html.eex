@@ -7,7 +7,7 @@
 <section class="song-new mt-4">
   <div id="art_div">
 
-    <%= cl_image_tag(@song.cld_id, 
+    <%= cl_image_tag(@song.cld_id,
                      class: "opacity-25 shadow rounded",
                      transforms: [
                         %{crop: "crop", gravity: "custom"},
@@ -56,7 +56,7 @@
 
   <div class="form-group select optional song_genre">
     <label>Genre</label>
-    <%= select f, :genre, Wsdjs.Songs.Song.genre, class: "form-control" %>
+    <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-control" %>
     <%= error_tag f, :genre %>
   </div>
 

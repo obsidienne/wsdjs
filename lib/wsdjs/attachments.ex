@@ -41,7 +41,7 @@ defmodule Wsdjs.Attachments do
 
   alias Wsdjs.Repo
   alias Wsdjs.Attachments.Videos.Video
-  alias Wsdjs.Songs.Song
+  alias Wsdjs.Musics.Song
 
   def can?(%Wsdjs.Accounts.User{admin: true}, _, _), do: :ok
   def can?(%Wsdjs.Accounts.User{id: id}, :delete, %Video{user_id: id}), do: :ok

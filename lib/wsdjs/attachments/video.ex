@@ -17,7 +17,7 @@ defmodule Wsdjs.Attachments.Videos.Video do
     field(:provider, :string, default: "unknown")
 
     belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
-    belongs_to(:song, Wsdjs.Songs.Song, type: Wsdjs.HashID)
+    belongs_to(:song, Wsdjs.Musics.Song, type: Wsdjs.HashID)
     timestamps()
   end
 

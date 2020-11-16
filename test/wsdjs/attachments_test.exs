@@ -10,7 +10,7 @@ defmodule Wsdjs.AttachmentsTest do
     def song_fixture(attrs \\ %{}) do
       user = user_fixture()
 
-      {:ok, %Wsdjs.Songs.Song{} = song} =
+      {:ok, %Wsdjs.Musics.Song{} = song} =
         attrs
         |> Enum.into(%{
           "title" => "my title",
@@ -19,7 +19,7 @@ defmodule Wsdjs.AttachmentsTest do
           "url" => "http://youtu.be/dummy"
         })
         |> Map.put("user_id", user.id)
-        |> Wsdjs.Songs.create_song()
+        |> Wsdjs.Musics.create_song()
 
       song
     end
@@ -43,7 +43,7 @@ defmodule Wsdjs.AttachmentsTest do
 
     test "list_videos/1 returns all videos for a song" do
       video = video_fixture()
-      song = Wsdjs.Songs.get_song!(video.song_id)
+      song = Wsdjs.Musics.get_song!(video.song_id)
       assert Attachments.list_videos(song) == [video]
     end
 

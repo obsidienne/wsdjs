@@ -42,7 +42,7 @@ defmodule WsdjsWeb.SongControllerTest do
     {:ok, song} =
       attrs
       |> Map.put(:title, "song")
-      |> Wsdjs.Songs.create_song()
+      |> Wsdjs.Musics.create_song()
 
     {:ok, song: song}
   end

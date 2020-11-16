@@ -1,4 +1,4 @@
-defmodule Wsdjs.Songs.Song do
+defmodule Wsdjs.Musics.Song do
   use Ecto.Schema
   import Ecto.Changeset
 

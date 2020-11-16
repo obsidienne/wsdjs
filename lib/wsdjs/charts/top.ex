@@ -4,7 +4,7 @@ defmodule Wsdjs.Charts.Top do
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Wsdjs.{Accounts, Charts, Songs}
+  alias Wsdjs.{Accounts, Charts}
 
   @allowed_fields ~w(due_date user_id)a
   @valid_status ~w(checking voting counting published)
@@ -14,10 +14,10 @@ defmodule Wsdjs.Charts.Top do
     field(:due_date, :date)
     field(:status, :string)
 
-    belongs_to(:user, Accounts.User, type: Wsdjs.HashID)
-    has_many(:ranks, Charts.Rank, on_delete: :delete_all)
-    has_many(:votes, Charts.Vote, on_replace: :delete)
-    many_to_many(:songs, Songs.Song, join_through: Charts.Rank)
+    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
+    has_many(:ranks, Wsdjs.Charts.Rank, on_delete: :delete_all)
+    has_many(:votes, Wsdjs.Charts.Vote, on_replace: :delete)
+    many_to_many(:songs, Wsdjs.Musics.Song, join_through: Charts.Rank)
 
     timestamps()
   end

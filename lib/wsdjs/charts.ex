@@ -8,7 +8,7 @@ defmodule Wsdjs.Charts do
   alias Ecto.Changeset
   alias Wsdjs.Accounts.User
   alias Wsdjs.Charts.{Rank, Top, Vote}
-  alias Wsdjs.Songs
+  alias Wsdjs.Musics
   alias Wsdjs.Repo
 
   def can?(%User{admin: true}, _), do: :ok
@@ -95,7 +95,7 @@ defmodule Wsdjs.Charts do
     lower = Timex.beginning_of_month(Timex.to_datetime(month))
     upper = Timex.end_of_month(Timex.to_datetime(month))
 
-    songs = Songs.list_songs(lower, upper)
+    songs = Musics.list_songs(lower, upper)
 
     top_changeset
     |> put_assoc(:songs, songs)
@@ -325,7 +325,7 @@ defmodule Wsdjs.Charts do
   """
   def get_rank!(id), do: Repo.get!(Rank, id)
 
-  def get_ranks(%Wsdjs.Songs.Song{id: id}) do
+  def get_ranks(%Wsdjs.Musics.Song{id: id}) do
     Rank
     |> where(song_id: ^id)
     |> Repo.all()

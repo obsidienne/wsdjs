@@ -21,7 +21,7 @@ defmodule WsdjsWeb.ChartList do
         sort: sort_options
       )
 
-    tops = Wsdjs.Songs.preload_songs(tops)
+    tops = Wsdjs.Musics.preload_songs(tops)
 
     socket =
       assign(socket,

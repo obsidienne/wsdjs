@@ -9,7 +9,7 @@ defmodule Wsdjs.ReactionsTest do
       user = user_fixture()
 
       {:ok, song} =
-        Wsdjs.Songs.create_song(%{
+        Wsdjs.Musics.create_song(%{
           title: "my title#{System.unique_integer()}",
           artist: "my artist",
           genre: "soul",
@@ -31,7 +31,7 @@ defmodule Wsdjs.ReactionsTest do
     test "list_comments/1 returns all song comments" do
       comment = comment_fixture()
       _dummy = comment_fixture()
-      song = Wsdjs.Songs.get_song!(comment.song_id)
+      song = Wsdjs.Musics.get_song!(comment.song_id)
       assert Wsdjs.Reactions.Comments.list(song) == [comment]
     end
   end

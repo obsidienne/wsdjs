@@ -1,4 +1,4 @@
-defmodule Wsdjs.Songs do
+defmodule Wsdjs.Musics do
   @moduledoc """
   The boundary for the Music system.
   """
@@ -8,8 +8,8 @@ defmodule Wsdjs.Songs do
 
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Songs.Song
-  alias Wsdjs.Songs
+  alias Wsdjs.Musics
+  alias Wsdjs.Musics.Song
 
   @doc """
   The scope rules are
@@ -45,7 +45,7 @@ defmodule Wsdjs.Songs do
 
   defp scoped(%DateTime{} = lower, %DateTime{} = upper) do
     from(
-      s in Songs.Song,
+      s in Musics.Song,
       left_join: r in assoc(s, :ranks),
       left_join: t in assoc(r, :top),
       where:
@@ -66,7 +66,7 @@ defmodule Wsdjs.Songs do
   def can?(%User{profil_djvip: true}, :show, %Song{hidden_track: true}), do: :ok
 
   def can?(user, :show, %Song{id: id}) do
-    song = Repo.get(Songs.scoped(user), id)
+    song = Repo.get(Musics.scoped(user), id)
 
     case song do
       %Song{} -> :ok
@@ -93,7 +93,7 @@ defmodule Wsdjs.Songs do
   end
 
   def list_songs(%User{} = user, criteria) when is_list(criteria) do
-    query = Songs.scoped(user)
+    query = Musics.scoped(user)
 
     # query = from(d in Song)
 
@@ -145,14 +145,15 @@ defmodule Wsdjs.Songs do
   """
   def list_songs(%User{} = user) do
     user
-    |> Songs.scoped()
+    |> Musics.scoped()
     |> order_by(desc: :inserted_at)
     |> preload(user: :user_profil, comments: :user, opinions: :user)
     |> limit(15)
     |> Repo.all()
   end
 
-  def count_songs(%User{} = user), do: Repo.aggregate(Songs.scoped(user), :count, :id)
+  def count_songs(%User{} = user), do: Repo.aggregate(Musics.scoped(user), :count, :id)
+  def count_songs(), do: Repo.aggregate(Musics, :count, :id)
 
   def bpm_ranges do
     %{

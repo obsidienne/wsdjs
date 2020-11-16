@@ -4,7 +4,7 @@ defmodule Wsdjs.Reactions.Opinions do
   import Ecto.Query, warn: false
 
   alias Wsdjs.Accounts.User
-  alias Wsdjs.Songs.Song
+  alias Wsdjs.Musics.Song
   alias Wsdjs.Reactions.Opinions.Opinion
   alias Wsdjs.Repo
 

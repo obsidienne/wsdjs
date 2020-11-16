@@ -6,7 +6,6 @@ defmodule Wsdjs.Accounts.User do
   alias Wsdjs.Accounts
   alias Wsdjs.Accounts.UserProfil
   alias Wsdjs.Charts
-  alias Wsdjs.Songs
   alias Wsdjs.Reactions.{Comments, Opinions}
 
   @derive {Inspect, except: [:password]}
@@ -20,7 +19,7 @@ defmodule Wsdjs.Accounts.User do
     field(:profil_dj, :boolean, default: false)
     field(:confirmed_at, :naive_datetime)
 
-    has_many(:songs, Songs.Song)
+    has_many(:songs, Wsdjs.Musics.Song)
     has_many(:comments, Comments.Comment)
     has_one(:user_profil, Accounts.UserProfil, on_replace: :update)
     has_many(:song_opinions, Opinions.Opinion)

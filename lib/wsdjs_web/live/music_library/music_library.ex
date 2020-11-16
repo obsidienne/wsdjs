@@ -15,14 +15,14 @@ defmodule WsdjsWeb.MusicLibrary do
 
     sort_by = (params["sort_by"] || "inserted_at") |> String.to_atom()
     sort_order = (params["sort_order"] || "desc") |> String.to_atom()
-    total_pages = ceil(Wsdjs.Songs.count_songs(current_user) / per_page)
+    total_pages = ceil(Wsdjs.Musics.count_songs(current_user) / per_page)
 
     paginate_options = %{page: page, per_page: per_page, total_pages: total_pages}
     sort_options = %{sort_by: sort_by, sort_order: sort_order}
     query = %{q: params["q"] || ""}
 
     songs =
-      Wsdjs.Songs.list_songs(current_user,
+      Wsdjs.Musics.list_songs(current_user,
         paginate: paginate_options,
         sort: sort_options,
         query: query
