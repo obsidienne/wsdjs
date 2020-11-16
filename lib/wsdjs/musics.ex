@@ -155,6 +155,11 @@ defmodule Wsdjs.Musics do
   def count_songs(%User{} = user), do: Repo.aggregate(Musics.scoped(user), :count, :id)
   def count_songs(), do: Repo.aggregate(Wsdjs.Musics.Song, :count, :id)
 
+  def count_artists() do
+    query = from(s in Wsdjs.Musics.Song, distinct: true, select: s.artist)
+    Repo.aggregate(query, :count, :artist)
+  end
+
   def bpm_ranges do
     %{
       "vs" => 1..69,
