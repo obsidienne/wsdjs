@@ -1,4 +1,4 @@
-defmodule Wsdjs.Attachments.Videos.Video do
+defmodule Wsdjs.Attachments.Video do
   @moduledoc """
   A video attached to a song.
   """

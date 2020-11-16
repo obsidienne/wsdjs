@@ -4,7 +4,7 @@ defmodule WsdjsWeb.SongController do
   use WsdjsWeb, :controller
 
   alias Wsdjs.Attachments
-  alias Wsdjs.Attachments.Videos.Video
+  alias Wsdjs.Attachments.Video
   alias Wsdjs.Musics.Song
   alias Wsdjs.Musics
   alias Wsdjs.Reactions.{Comments, Opinions}

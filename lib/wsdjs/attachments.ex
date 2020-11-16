@@ -40,7 +40,7 @@ defmodule Wsdjs.Attachments do
   import Ecto.{Query, Changeset}, warn: false
 
   alias Wsdjs.Repo
-  alias Wsdjs.Attachments.Videos.Video
+  alias Wsdjs.Attachments.Video
   alias Wsdjs.Musics.Song
 
   def can?(%Wsdjs.Accounts.User{admin: true}, _, _), do: :ok
@@ -127,4 +127,6 @@ defmodule Wsdjs.Attachments do
   def delete_video(%Video{} = video) do
     Repo.delete(video)
   end
+
+  def count_videos(), do: Repo.aggregate(Wsdjs.Attachments.Video, :count, :id)
 end
