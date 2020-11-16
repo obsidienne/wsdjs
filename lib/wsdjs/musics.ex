@@ -228,22 +228,16 @@ defmodule Wsdjs.Musics do
 
   ## Examples
 
-      iex> update(song, %{field: new_value}, %User{})
+      iex> update(song, %{field: new_value})
       {:ok, %Song{}}
 
-      iex> update(song, %{field: bad_value}, %User{})
+      iex> update(song, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update(%Song{} = song, attrs, %User{admin: false}) do
+  def update(%Song{} = song, attrs) do
     song
     |> Song.update_changeset(attrs)
-    |> Repo.update()
-  end
-
-  def update(%Song{} = song, attrs, %User{admin: true}) do
-    song
-    |> Song.admin_changeset(attrs)
     |> Repo.update()
   end
 

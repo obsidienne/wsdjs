@@ -117,7 +117,7 @@ defmodule Wsdjs.ChartsTest do
       |> Map.put("user_id", user.id)
       |> Wsdjs.Musics.create_song()
 
-    {:ok, song} = Wsdjs.Musics.update(song, attrs, %Wsdjs.Accounts.User{admin: true})
+    {:ok, song} = Wsdjs.Musics.update(song, attrs)
     song
   end
 

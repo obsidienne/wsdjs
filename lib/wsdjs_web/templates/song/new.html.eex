@@ -1,31 +1,5 @@
-<header>
-  <div>
-    <h1><%= gettext "Add a new song" %> </h1>
-  </div>
-</header>
-
-<section class="song-new mt-4">
-  <div id="art_div">
-
-    <%= cl_image_tag(@song.cld_id,
-                     class: "opacity-25 shadow rounded",
-                     transforms: [
-                        %{crop: "crop", gravity: "custom"},
-                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 240, quality: "auto", width: 240 }
-                     ]) %>
-
-
-
-    <div class="form-group">
-      <button id="song_upload_widget_opener" class="btn btn-primary">Upload cover</button>
-    </div>
-  </div>
-
+<section>
   <%= form_for @changeset, Routes.song_path(@conn, :create), [class: "row"], fn f -> %>
-  <p>
-    This song will <strong>NOT</strong> be used in the current month TOP 10
-  </p>
-
   <div id="cloudinary_form_div">
     <%= hidden_input f, :cld_id, disabled: :disabled %>
   </div>

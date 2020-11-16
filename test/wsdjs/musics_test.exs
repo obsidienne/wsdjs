@@ -35,7 +35,7 @@ defmodule Wsdjs.MusicsTest do
 
     test "instant_hits/0 returns all instant hit" do
       song = song_fixture()
-      {:ok, %Song{} = song} = Musics.update(song, %{instant_hit: true}, %User{admin: true})
+      {:ok, %Song{} = song} = Musics.update(song, %{instant_hit: true})
       assert Musics.instant_hits() == [song]
     end
 
@@ -96,7 +96,7 @@ defmodule Wsdjs.MusicsTest do
 
     test "update_song/3 with valid data done by admin updates the song" do
       song = song_fixture()
-      assert {:ok, %Song{} = song} = Musics.update(song, @update_attrs, %User{admin: true})
+      assert {:ok, %Song{} = song} = Musics.update(song, @update_attrs)
       assert song.title == "update title"
       assert song.artist == "update artist"
       assert song.bpm == 333
@@ -110,7 +110,7 @@ defmodule Wsdjs.MusicsTest do
     test "update_song/3 with valid data done by user updates the song" do
       song = song_fixture()
 
-      assert {:ok, song} = Musics.update(song, @update_attrs, %User{admin: false})
+      assert {:ok, song} = Musics.update(song, @update_attrs)
       assert song.title == "my title"
       assert song.artist == "my artist"
       assert song.bpm == 333
@@ -123,7 +123,7 @@ defmodule Wsdjs.MusicsTest do
 
     test "update_song/3 with invalid data returns error changeset" do
       song = song_fixture()
-      assert {:error, %Ecto.Changeset{}} = Musics.update(song, %{bpm: -1}, %User{})
+      assert {:error, %Ecto.Changeset{}} = Musics.update(song, %{bpm: -1})
     end
 
     test "delete_song/1 deletes the song" do

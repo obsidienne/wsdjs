@@ -40,7 +40,7 @@ defmodule WsdjsWeb.SongController do
   end
 
   def new(conn, _params, current_user) do
-    with :ok <- Songs.can?(current_user, :create) do
+    with :ok <- Musics.can?(current_user, :create) do
       changeset = Musics.change(%Song{})
       render(conn, "new.html", changeset: changeset)
     end
@@ -78,7 +78,7 @@ defmodule WsdjsWeb.SongController do
     song = Musics.get_song!(id)
 
     with :ok <- Musics.can?(current_user, :edit, song),
-         {:ok, %Song{} = song} <- Songs.update(song, song_params, current_user) do
+         {:ok, %Song{} = song} <- Musics.update(song, song_params) do
       conn
       |> put_flash(:info, "Song updated")
       |> redirect(to: Routes.song_path(conn, :show, song))
