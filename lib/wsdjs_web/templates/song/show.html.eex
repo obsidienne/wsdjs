@@ -1,7 +1,7 @@
-<section>
+<section class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
   <div class="flex md:flex-row flex-col justify-start mt-6 pb-12">
     <div class="w-64 h-64">
-      <%= cl_image_tag(@song.cld_id, 
+      <%= cl_image_tag(@song.cld_id,
                        class: "responsive shadow rounded",
                        transforms: [
                           %{crop: "crop", gravity: "custom"},
@@ -38,15 +38,6 @@
 
         <div class="mb-4">
           <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
-
-          <%= unless is_nil(@current_user) do %>
-          <span class="ml-auto p-2 pr-0 text-right playlist-picker" data-song-id="<%= @song.id %>">
-            <svg height='24' viewBox='0 0 24 24' width='24'>
-              <path fill="#455A64"
-                d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
-            </svg>
-          </span>
-          <% end %>
         </div>
 
         <%= if @song.url do %>

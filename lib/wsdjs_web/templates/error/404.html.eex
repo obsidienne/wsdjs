@@ -31,13 +31,6 @@
 </head>
 
 <body class="font-sans bg-grey-lightest">
-  <header class="hero hot-hero">
-    <nav>
-      <%= link "", to: Routes.home_path(@conn, :index), class: "" %>
-      <%= link "tops", to: Routes.top_path(@conn, :index), class: " text-gray-800" %>
-    </nav>
-  </header>
-
   <main>
     <h1>Sorry this page does not exist !</h1>
     <p>

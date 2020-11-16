@@ -82,7 +82,7 @@ defmodule WsdjsWeb.TopController do
          {:ok, _top} = Charts.delete_top(top) do
       conn
       |> put_flash(:info, "Top deleted successfully.")
-      |> redirect(to: Routes.top_path(conn, :index))
+      |> redirect(to: Routes.live_path(conn, WsdjsWeb.ChartList))
     end
   end
 end
