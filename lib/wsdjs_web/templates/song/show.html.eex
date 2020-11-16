@@ -15,19 +15,16 @@
         </div>
 
         <div class="pt-4">
-          <span class="label label-default"><%= @song.genre %></span>
+          <span
+            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-yellow-100 text-yellow-800">
+            <%= @song.genre %>
+          </span>
           <%= if @song.bpm > 0 do %>
-          <span class="label label-primary"><%= @song.bpm %> bpm</span>
+          <span
+            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-yellow-100 text-yellow-800">
+            <%= @song.bpm %> bpm </span>
           <% end %>
-          <%= if @song.hidden_track do %>
-          <span class="label label-default">hidden track</span>
-          <% end %>
-          <%= if @song.public_track do %>
-          <span class="label label-default">public track</span>
-          <% end %>
-          <%= if @song.instant_hit do %>
-          <span class="label label-default">instant hit</span>
-          <% end %>
+
           <%= for rank <- @ranks do %>
           <%= if rank.position <= 10 do %>
           <span class="label label-default">Top <%= Timex.format!(rank.top.due_date, "%b%y", :strftime) %> #
