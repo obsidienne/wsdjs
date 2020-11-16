@@ -11,12 +11,7 @@ defmodule WsdjsWeb.TopController do
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    top =
-      if String.match?(id, ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/) do
-        Charts.get_top_by_uuid!(id)
-      else
-        Charts.get_top!(id)
-      end
+    top = Charts.get_top!(id)
 
     with :ok <- Charts.can?(current_user, :show, top) do
       render(

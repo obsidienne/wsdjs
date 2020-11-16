@@ -86,7 +86,6 @@ defmodule Wsdjs.Charts do
 
   """
   def get_top!(id), do: Repo.get!(Top, id)
-  def get_top_by_uuid!(id), do: Repo.get_by!(Top, uuid: id)
 
   def create_top(params) do
     top_changeset = Top.create_changeset(%Top{}, params)
