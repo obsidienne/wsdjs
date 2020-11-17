@@ -1,4 +1,4 @@
-<ul id="comments-container" class="mt-4 list-reset">
+<ul id="comments-container" class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
   <%= for comment <- @comments do %>
   <li class="flex mb-4">
     <div class="hidden md:flex">
@@ -14,7 +14,7 @@
       <header class="bg-grey-light flex items-center p-2">
         <span>
           <a href="<%= Routes.user_path(@conn, :show, comment.user) %>"
-            class="inline-block"><%= comment.user.name %></a>
+            class="inline-block"><%= comment.user.user_profil.name %></a>
           <time title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>"
             datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
         </span>

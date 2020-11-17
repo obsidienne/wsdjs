@@ -32,6 +32,8 @@ defmodule Wsdjs.Accounts do
   def load_user_profil(user), do: Repo.preload(user, :user_profil)
   def load_user_profil_for_songs(songs), do: Repo.preload(songs, user: :user_profil)
 
+  def load_user_profil_for_comments(comments), do: Repo.preload(comments, user: :user_profil)
+
   def list_users(criteria) when is_list(criteria) do
     query = from(d in User)
 

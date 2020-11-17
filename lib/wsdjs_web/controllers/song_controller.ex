@@ -23,7 +23,7 @@ defmodule WsdjsWeb.SongController do
       video_changeset = Attachments.change_video(%Video{})
       comment_changeset = Comments.change()
       ranks = Wsdjs.Charts.get_ranks(song)
-      comments = Comments.list(song)
+      comments = Comments.list(song) |> Wsdjs.Accounts.load_user_profil_for_comments()
 
       render(
         conn,
