@@ -70,6 +70,12 @@ defmodule Wsdjs.Charts do
   end
 
   def count_charts(%User{} = user), do: Repo.aggregate(Top.scoped(user), :count, :id)
+  def count_charts(), do: Repo.aggregate(Top, :count, :id)
+
+  def count_djs() do
+    query = from(s in Wsdjs.Charts.Vote, distinct: true, select: s.user_id)
+    Repo.aggregate(query, :count, :user_id)
+  end
 
   @doc """
   Gets a single top.
