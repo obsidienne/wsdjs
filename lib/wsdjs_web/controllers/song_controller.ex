@@ -54,6 +54,9 @@ defmodule WsdjsWeb.SongController do
       conn
       |> put_flash(:info, "#{song.title} created")
       |> redirect(to: Routes.song_path(conn, :show, song.id))
+    else
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new.html", changeset: changeset)
     end
   end
 
