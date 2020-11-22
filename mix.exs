@@ -75,7 +75,7 @@ defmodule Wsdjs.MixProject do
       {:corsica, "~> 1.1"},
       {:kaffy, "~> 0.9.0"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
-      {:cloudex, "~> 1.3.0"},
+      {:cloudex, "~> 1.3"},
       {:timex, "~> 3.4"}
     ]
   end
