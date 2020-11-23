@@ -1,20 +1,18 @@
 <section class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen">
-  <%= form_for @changeset, Routes.song_path(@conn, :create), [class: "row"], fn f -> %>
-  <div>
+  <%= form_for @changeset, Routes.song_path(@conn, :create), fn f -> %>
+  <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
     <div>
       <div>
         <h3 class="text-lg leading-6 font-medium text-gray-900">Song</h3>
-        <p class="mt-1tmax-w-2xl text-sm leading-5 text-gray-500">
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
           Song detail, This information will be displayed publicly so be careful what you share.
         </p>
       </div>
-      <div class="mt-6 sm:mt-5">
+      <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <%= label f, :artist, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <%= label f, :artist, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
-              <%= text_input f, :artist, placeholder: "Artist name", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-            </div>
+            <%= text_input f, :artist, placeholder: "Artist name", class: "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" %>
             <%= error_tag f, :artist %>
           </div>
         </div>
