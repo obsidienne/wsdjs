@@ -1,6 +1,8 @@
 defmodule WsdjsWeb.Router do
   use WsdjsWeb, :router
 
+  import Phoenix.LiveDashboard.Router
+
   import WsdjsWeb.UserAuth
   import WsdjsWeb.AdminAuth
   import WsdjsWeb.UserProfil
@@ -30,6 +32,13 @@ defmodule WsdjsWeb.Router do
   end
 
   use Kaffy.Routes, scope: "/admin", pipe_through: [:admin_browser]
+
+  if Mix.env() == :dev do
+    scope "/" do
+      pipe_through :browser
+      live_dashboard "/dashboard", metrics: WsdjsWeb.Telemetry, ecto_repos: [Wsdjs.Repo]
+    end
+  end
 
   ## Authentication routes
 
