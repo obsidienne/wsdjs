@@ -10,35 +10,35 @@
       </div>
       <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <%= label f, :artist, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <%= label f, :artist, class: "form-label" %>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <%= text_input f, :artist, placeholder: "Artist name", class: "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" %>
+            <%= text_input f, :artist, placeholder: "Artist name", class: "form-input-text" %>
             <%= error_tag f, :artist %>
           </div>
         </div>
 
         <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <%= label f, :title, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <%= label f, :title, class: "form-label" %>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
             <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
-              <%= text_input f, :title, placeholder: "Song title", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+              <%= text_input f, :title, placeholder: "Song title", class: "form-input-text" %>
             </div>
             <%= error_tag f, :title %>
           </div>
         </div>
 
         <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <%= label f, :genre, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <%= label f, :genre, class: "form-label" %>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
             <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
-              <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+              <%= select f, :genre, Wsdjs.Musics.Song.genre, class: "form-select" %>
             </div>
             <%= error_tag f, :genre %>
           </div>
         </div>
 
         <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <%= label f, :bpm, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <%= label f, :bpm, class: "form-label" %>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
             <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
               <%= number_input f, :bpm, min: 0, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
@@ -49,7 +49,7 @@
 
         <div
           class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
-          <label for="photo" class="block text-sm leading-5 font-medium text-gray-700">
+          <label for="photo" class="form-label" >
             Photo
           </label>
           <div class="mt-2 sm:mt-0 sm:col-span-2">
@@ -80,10 +80,11 @@
           Use a permanent address where you can receive mail.
         </p>
       </div>
+
       <div class="mt-6 sm:mt-5">
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <label for="username" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-            Username
+          <label for="username" class="form-label" >
+            Youtube link
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
             <div class="max-w-lg flex rounded-md shadow-sm">
@@ -91,18 +92,19 @@
                 class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
                 youtube.com/
               </span>
-              <%= text_input f, :url, class: "flex-1 form-input block w-full min-w-0 rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+              <%= text_input f, :url, class: "flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300" %>
             </div>
             <%= error_tag f, :url %>
           </div>
         </div>
       </div>
+
     </div>
   </div>
   <div class="mt-8 border-t border-gray-200 pt-5">
     <div class="flex justify-end">
       <span class="ml-3 inline-flex rounded-md shadow-sm">
-        <%= submit "Create", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+        <%= submit "Create", class: "form-btn-primary" %>
       </span>
     </div>
   </div>

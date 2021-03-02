@@ -39,8 +39,8 @@
 
   <div class="pt-5">
     <div class="flex justify-end">
-      <%= link "Cancel", to: Routes.live_path(@conn, WsdjsWeb.ChartList), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-      <%= submit "Next step", form: "top_new_form", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <%= link "Cancel", to: Routes.live_path(@conn, WsdjsWeb.ChartList), class: "form-btn-secondary" %>
+      <%= submit "Next step", form: "top_new_form", class: "ml-3 form-btn-primary"  %>
     </div>
   </div>
   <% end %>
