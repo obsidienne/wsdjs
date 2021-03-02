@@ -3,7 +3,7 @@
   <div class="px-4 py-4 sm:px-6">
     <div class="flex items-center justify-between">
       <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
-        Back End Developer
+        <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
       </div>
       <div class="ml-2 flex-shrink-0 flex">
         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -20,17 +20,15 @@
             <path
               d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
           </svg>
-          <%= Enum.count(@top.songs) %> / <%= dominante_genre(@top.songs) %>
+          <%= count_dj(@top.songs) %> djs
         </div>
         <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0">
-          <!-- Heroicon name: location-marker -->
-          <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-            fill="currentColor">
-            <path fill-rule="evenodd"
-              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-              clip-rule="evenodd" />
+          <!-- Heroicon name: music-note -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400">
+            <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
           </svg>
-          <%= count_dj(@top.songs) %>
+
+          <%= Enum.count(@top.songs) %> songs
         </div>
       </div>
       <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0">
@@ -43,7 +41,7 @@
         </svg>
         <span>
           <time datetime="<%= Date.to_iso8601(@top.due_date) %>">
-            <%= Timex.format!(@top.due_date, "%B %Y", :strftime) %>
+            <%= Timex.format!(@top.due_date, "%b %Y", :strftime) %>
           </time>
         </span>
       </div>
