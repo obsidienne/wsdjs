@@ -11,13 +11,6 @@
           </h3>
           <p class="mt-1 text-sm leading-5 text-gray-500"> For this top, there is <%= Enum.count(@ranks) %> songs </p>
         </div>
-        <div class="ml-4 mt-4 flex-shrink-0 flex">
-          <span class="inline-flex rounded-md shadow-sm">
-            <%= if @current_user && @current_user.admin do %>
-            <%= link "Text version", to: Routes.top_path(@conn, :show, @top.id, _format: "text"), title: "Text version", class: "btn btn-link", target: "_blank" %>
-            <% end %>
-          </span>
-        </div>
       </div>
     </div>
     <ul>
