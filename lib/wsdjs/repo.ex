@@ -3,6 +3,10 @@ defmodule Wsdjs.Repo do
     otp_app: :wsdjs,
     adapter: Ecto.Adapters.Postgres
 
+  @doc """
+  This is used to replace relation with a %Ecto.Association.NotLoaded{} struct.
+  You can use it in test to remove cardinality.
+  """
   def forget(_, _, cardinality \\ :one)
 
   def forget(struct, fields, cardinality) when is_list(fields),
