@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.MoveUserFieldToProfilField do
+defmodule Brididi.Repo.Migrations.MoveUserFieldToProfilField do
   use Ecto.Migration
 
   def up do

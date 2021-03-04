@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.AccountView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.AccountView do
+  use BrididiWeb, :view
 end

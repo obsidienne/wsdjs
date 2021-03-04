@@ -1,5 +1,5 @@
-defmodule WsdjsWeb.TopView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.TopView do
+  use BrididiWeb, :view
 
   def render("show.html", %{top: top} = assigns) do
     template =

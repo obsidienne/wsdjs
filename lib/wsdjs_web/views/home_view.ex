@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.HomeView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.HomeView do
+  use BrididiWeb, :view
 end

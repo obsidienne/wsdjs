@@ -1,5 +1,5 @@
-defmodule WsdjsWeb.ChartList do
-  use WsdjsWeb, :live_view
+defmodule BrididiWeb.ChartList do
+  use BrididiWeb, :live_view
 
   def mount(_params, session, socket) do
     {:ok, assign_defaults(session, socket), temporary_assigns: [charts: []]}
@@ -10,18 +10,18 @@ defmodule WsdjsWeb.ChartList do
 
     page = String.to_integer(params["page"] || "1")
     per_page = String.to_integer(params["per_page"] || "12")
-    total_pages = ceil(Wsdjs.Charts.count_charts(current_user) / per_page)
+    total_pages = ceil(Brididi.Charts.count_charts(current_user) / per_page)
 
     paginate_options = %{page: page, per_page: per_page, total_pages: total_pages}
     sort_options = %{sort_by: :due_date, sort_order: :desc}
 
     tops =
-      Wsdjs.Charts.list_tops(current_user,
+      Brididi.Charts.list_tops(current_user,
         paginate: paginate_options,
         sort: sort_options
       )
 
-    tops = Wsdjs.Musics.preload_songs(tops)
+    tops = Brididi.Musics.preload_songs(tops)
 
     socket =
       assign(socket,

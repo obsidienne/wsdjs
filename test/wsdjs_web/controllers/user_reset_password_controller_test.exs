@@ -1,9 +1,9 @@
-defmodule WsdjsWeb.UserResetPasswordControllerTest do
-  use WsdjsWeb.ConnCase, async: true
+defmodule BrididiWeb.UserResetPasswordControllerTest do
+  use BrididiWeb.ConnCase, async: true
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Repo
-  import Wsdjs.AccountsFixtures
+  alias Brididi.Accounts
+  alias Brididi.Repo
+  import Brididi.AccountsFixtures
 
   setup do
     %{user: user_fixture()}

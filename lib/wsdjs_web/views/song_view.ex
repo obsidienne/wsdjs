@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.SongView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.SongView do
+  use BrididiWeb, :view
 
-  alias Wsdjs.Accounts
+  alias Brididi.Accounts
 
   def list_users do
     users = Accounts.list_users()

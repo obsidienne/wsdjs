@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.MusicComponent do
-  use WsdjsWeb, :live_component
+defmodule BrididiWeb.MusicComponent do
+  use BrididiWeb, :live_component
 end

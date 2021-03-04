@@ -1,47 +1,44 @@
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-screen ">
-  <%= form_for @changeset, Routes.top_path(@conn, :create), [id: "top_new_form", class: "space-y-8 divide-y divide-gray-200"], fn f -> %>
-  <div class="space-y-8 divide-y divide-gray-200">
-    <div>
+  <%= form_for @changeset, Routes.top_path(@conn, :create), [id: "top_new_form" ,
+    class: "space-y-8 divide-y divide-gray-200" ], fn f -> %>
+    <div class="space-y-8 divide-y divide-gray-200">
       <div>
-        <h3 class="text-lg leading-6 font-medium text-gray-900">Create a new Top</h3>
-        <p class="mt-1 text-sm text-gray-500">
-          Create a very cool new top using the date to deduce the month.
-        </p>
-      </div>
+        <div>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Create a new Top</h3>
+          <p class="mt-1 text-sm text-gray-500">
+            Create a very cool new top using the date to deduce the month.
+          </p>
+        </div>
 
-      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-        <div class="sm:col-span-4">
-            <%= label f, :due_date, "Month of the TOP to create", class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
-            <div class="mt-1 sm:mt-0 sm:col-span-2">
-              <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs flex">
-                <%= date_select f,
-                      :due_date,
-                      day: [
-                        class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md",
-                        options: [1]
-                      ],
-                      month: [
-                        class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md",
-                        required: "required"
-                      ],
-                      year: [
-                        class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md",
-                        required: "required"
-                      ] %>
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <div class="sm:col-span-4">
+            <%= label f, :due_date, "Month of the TOP to create" ,
+              class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+              <div class="mt-1 sm:mt-0 sm:col-span-2">
+                <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs flex">
+                  <%= date_select f, :due_date, day: [
+                    class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    , options: [1] ], month: [
+                    class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    , required: "required" ], year: [
+                    class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    , required: "required" ] %>
+                </div>
+                <p class="mt-2 text-sm text-red-600">
+                  <%= error_tag f, :due_date %>
+                </p>
+                <p class="mt-2 text-sm text-gray-500">Select the date to use for this top.</p>
               </div>
-              <p class="mt-2 text-sm text-red-600"><%= error_tag f, :due_date  %></p>
-              <p class="mt-2 text-sm text-gray-500">Select the date to use for this top.</p>
-            </div>
           </div>
 
         </div>
       </div>
 
-  <div class="pt-5">
-    <div class="flex justify-end">
-      <%= link "Cancel", to: Routes.live_path(@conn, WsdjsWeb.ChartList), class: "form-btn-secondary" %>
-      <%= submit "Next step", form: "top_new_form", class: "ml-3 form-btn-primary"  %>
+      <div class="pt-5">
+        <div class="flex justify-end">
+          <%= link "Cancel" , to: Routes.live_path(@conn, BrididiWeb.ChartList), class: "form-btn-secondary" %>
+            <%= submit "Next step" , form: "top_new_form" , class: "ml-3 form-btn-primary" %>
+        </div>
+      </div>
+      <% end %>
     </div>
-  </div>
-  <% end %>
-</div>

@@ -1,4 +1,4 @@
-defmodule Wsdjs.Application do
+defmodule Brididi.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,27 +8,27 @@ defmodule Wsdjs.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      Wsdjs.Repo,
+      Brididi.Repo,
       # Start the Telemetry supervisor
-      WsdjsWeb.Telemetry,
+      BrididiWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: Wsdjs.PubSub},
+      {Phoenix.PubSub, name: Brididi.PubSub},
       # Start the endpoint when the application starts
-      WsdjsWeb.Endpoint
-      # Starts a worker by calling: WsdjsWeb.Worker.start_link(arg)
-      # {WsdjsWeb.Worker, arg},
+      BrididiWeb.Endpoint
+      # Starts a worker by calling: BrididiWeb.Worker.start_link(arg)
+      # {BrididiWeb.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Wsdjs.Supervisor]
+    opts = [strategy: :one_for_one, name: Brididi.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    WsdjsWeb.Endpoint.config_change(changed, removed)
+    BrididiWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

@@ -1,5 +1,5 @@
-defmodule WsdjsWeb.OpinionView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.OpinionView do
+  use BrididiWeb, :view
 
   def count(opinions, kind) when kind in ["up", "down", "like"] do
     Enum.count(opinions, fn x -> x.kind == kind end)
@@ -15,7 +15,7 @@ defmodule WsdjsWeb.OpinionView do
     [class: html_class(kind, my_opinion)]
   end
 
-  defp html_class(kind, %Wsdjs.Reactions.Opinions.Opinion{kind: my_kind}) when kind == my_kind,
+  defp html_class(kind, %Brididi.Reactions.Opinions.Opinion{kind: my_kind}) when kind == my_kind,
     do: "border-0 p-2 song-#{kind} active hover:animate__animated hover:animate__swing"
 
   defp html_class(kind, _),

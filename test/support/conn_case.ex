@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.ConnCase do
+defmodule BrididiWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule WsdjsWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use WsdjsWeb.ConnCase, async: true`, although
+  by setting `use BrididiWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,20 +22,20 @@ defmodule WsdjsWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import WsdjsWeb.ConnCase
+      import BrididiWeb.ConnCase
 
-      alias WsdjsWeb.Router.Helpers, as: Routes
+      alias BrididiWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint WsdjsWeb.Endpoint
+      @endpoint BrididiWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wsdjs.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Brididi.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Wsdjs.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Brididi.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
@@ -50,7 +50,7 @@ defmodule WsdjsWeb.ConnCase do
   test context.
   """
   def register_and_log_in_user(%{conn: conn}) do
-    user = Wsdjs.AccountsFixtures.user_fixture()
+    user = Brididi.AccountsFixtures.user_fixture()
     %{conn: log_in_user(conn, user), user: user}
   end
 
@@ -60,7 +60,7 @@ defmodule WsdjsWeb.ConnCase do
   It returns an updated `conn`.
   """
   def log_in_user(conn, user) do
-    token = Wsdjs.Accounts.generate_user_session_token(user)
+    token = Brididi.Accounts.generate_user_session_token(user)
 
     conn
     |> Phoenix.ConnTest.init_test_session(%{})

@@ -1,4 +1,4 @@
-defmodule Wsdjs.Attachments do
+defmodule Brididi.Attachments do
   @moduledoc """
   Documentation for Attachments.
   """
@@ -21,12 +21,12 @@ defmodule Wsdjs.Attachments do
   end
 
   def thumbnail_url(%{provider: "facebook"}, resolution) when is_integer(resolution) do
-    @cld_https <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/v1/wsdjs/facebook.jpg"
+    @cld_https <> "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/v1/brididi/facebook.jpg"
   end
 
   def thumbnail_url(%{}, resolution) when is_integer(resolution) do
     @cld_https <>
-      "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/v1/wsdjs/missing_cover.jpg"
+      "c_fit,f_auto,w_#{resolution},q_auto/fl_immutable_cache/v1/brididi/missing_cover.jpg"
   end
 
   def thumbnail_srcset(%{} = video, base) when is_integer(base) do
@@ -39,15 +39,15 @@ defmodule Wsdjs.Attachments do
 
   import Ecto.{Query, Changeset}, warn: false
 
-  alias Wsdjs.Repo
-  alias Wsdjs.Attachments.Video
-  alias Wsdjs.Musics.Song
+  alias Brididi.Repo
+  alias Brididi.Attachments.Video
+  alias Brididi.Musics.Song
 
-  def can?(%Wsdjs.Accounts.User{admin: true}, _, _), do: :ok
-  def can?(%Wsdjs.Accounts.User{id: id}, :delete, %Video{user_id: id}), do: :ok
+  def can?(%Brididi.Accounts.User{admin: true}, _, _), do: :ok
+  def can?(%Brididi.Accounts.User{id: id}, :delete, %Video{user_id: id}), do: :ok
   def can?(_, _, _), do: {:error, :unauthorized}
 
-  def can?(%Wsdjs.Accounts.User{admin: true}, _), do: :ok
+  def can?(%Brididi.Accounts.User{admin: true}, _), do: :ok
   def can?(_, _), do: {:error, :unauthorized}
 
   @doc """
@@ -128,5 +128,5 @@ defmodule Wsdjs.Attachments do
     Repo.delete(video)
   end
 
-  def count_videos(), do: Repo.aggregate(Wsdjs.Attachments.Video, :count, :id)
+  def count_videos(), do: Repo.aggregate(Brididi.Attachments.Video, :count, :id)
 end

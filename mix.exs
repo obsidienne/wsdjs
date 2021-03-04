@@ -1,9 +1,9 @@
-defmodule Wsdjs.MixProject do
+defmodule Brididi.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :wsdjs,
+      app: :brididi,
       version: "2.4.0",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -12,8 +12,8 @@ defmodule Wsdjs.MixProject do
       aliases: aliases(),
       test_coverage: [tool: ExCoveralls],
       # Docs
-      name: "WSDJs",
-      source_url: "https://github.com/obsidienne/wsdjs",
+      name: "Brididi",
+      source_url: "https://github.com/obsidienne/brididi",
       docs: [
         # The main page in the docs
         extras: ["README.md"]
@@ -33,7 +33,7 @@ defmodule Wsdjs.MixProject do
   # Type "mix help compile.app" for more information
   def application do
     [
-      mod: {Wsdjs.Application, []},
+      mod: {Brididi.Application, []},
       extra_applications: [:logger, :runtime_tools, :inets, :os_mon]
     ]
   end

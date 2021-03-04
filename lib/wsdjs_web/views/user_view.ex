@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.UserView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.UserView do
+  use BrididiWeb, :view
 
-  alias Wsdjs.Accounts.User
+  alias Brididi.Accounts.User
 
   def name_or_email(%User{email: email}), do: email
 end

@@ -1,5 +1,5 @@
-defmodule WsdjsWeb.ChartComponent do
-  use WsdjsWeb, :live_component
+defmodule BrididiWeb.ChartComponent do
+  use BrididiWeb, :live_component
 
   def count_dj(songs) do
     songs

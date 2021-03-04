@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.RemoveSongSuggestionField do
+defmodule Brididi.Repo.Migrations.RemoveSongSuggestionField do
   use Ecto.Migration
 
   def change do

@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.RemoveDeactivated do
+defmodule Brididi.Repo.Migrations.RemoveDeactivated do
   use Ecto.Migration
 
   def change do

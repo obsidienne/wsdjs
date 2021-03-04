@@ -1,13 +1,15 @@
 <%= for video <- @videos do %>
-<article class="song-page__video block">
-  <%= link to: video.url, target: "_blank", class: "aspect-ratio-16/9 relative block hover:opacity-50" do %>
-  <img src="<%= Wsdjs.Attachments.thumbnail_url(video, 320) %>"
-    srcset="<%= Wsdjs.Attachments.thumbnail_srcset(video, 320) %>" class="absolute top-0 w-full h-full shadow">
+  <article class="song-page__video block">
+    <%= link to: video.url, target: "_blank" , class: "aspect-ratio-16/9 relative block hover:opacity-50" do %>
+      <img src="<%= Brididi.Attachments.thumbnail_url(video, 320) %>"
+        srcset="<%= Brididi.Attachments.thumbnail_srcset(video, 320) %>" class="absolute top-0 w-full h-full shadow">
+      <% end %>
+        <div class="mt-2 flex">
+          <div>
+            <span class="text-bold">
+              <%= video.title %>
+            </span>
+          </div>
+        </div>
+  </article>
   <% end %>
-  <div class="mt-2 flex">
-    <div>
-      <span class="text-bold"><%= video.title %></span>
-    </div>
-  </div>
-</article>
-<% end %>

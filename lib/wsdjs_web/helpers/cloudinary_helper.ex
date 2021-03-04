@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.CloudinaryHelper do
+defmodule BrididiWeb.CloudinaryHelper do
   @moduledoc """
   This modules contains all helpers in connection with Cloudinary.
   Notably the html tag and url helpers.
@@ -11,13 +11,13 @@ defmodule WsdjsWeb.CloudinaryHelper do
   # TOP
   #
   ###############################################
-  alias Wsdjs.Charts.Top
+  alias Brididi.Charts.Top
 
   @doc """
   Retrieve the image URL corresping to a top in voting status
   """
   def top_art(%Top{status: "voting"}) do
-    @cld_https <> "c_scale,w_400/wsdjs/worldswingdjs_single_flat.jpg"
+    @cld_https <> "c_scale,w_400/brididi/worldswingdjs_single_flat.jpg"
   end
 
   # Retrieve the image URL corresping to a top in published status.

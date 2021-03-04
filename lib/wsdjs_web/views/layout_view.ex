@@ -1,5 +1,5 @@
-defmodule WsdjsWeb.LayoutView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.LayoutView do
+  use BrididiWeb, :view
 
   @active_link "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700"
   @normal_link "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"

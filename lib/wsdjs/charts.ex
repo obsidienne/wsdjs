@@ -1,4 +1,4 @@
-defmodule Wsdjs.Charts do
+defmodule Brididi.Charts do
   @moduledoc """
   The boundary for the Charts system.
   """
@@ -6,10 +6,10 @@ defmodule Wsdjs.Charts do
   import Ecto.{Query, Changeset}, warn: false
 
   alias Ecto.Changeset
-  alias Wsdjs.Accounts.User
-  alias Wsdjs.Charts.{Rank, Top, Vote}
-  alias Wsdjs.Musics
-  alias Wsdjs.Repo
+  alias Brididi.Accounts.User
+  alias Brididi.Charts.{Rank, Top, Vote}
+  alias Brididi.Musics
+  alias Brididi.Repo
 
   def can?(%User{admin: true}, _), do: :ok
   def can?(%User{profil_djvip: true}, :vote), do: :ok
@@ -73,7 +73,7 @@ defmodule Wsdjs.Charts do
   def count_charts(), do: Repo.aggregate(Top, :count, :id)
 
   def count_djs() do
-    query = from(s in Wsdjs.Charts.Vote, distinct: true, select: s.user_id)
+    query = from(s in Brididi.Charts.Vote, distinct: true, select: s.user_id)
     Repo.aggregate(query, :count, :user_id)
   end
 
@@ -188,7 +188,7 @@ defmodule Wsdjs.Charts do
   # After that, the top creator can apply bonus to the top.
   defp go_step("counting", top) do
     # credo:disable-for-lines:2
-    from(p in Wsdjs.Charts.Rank, where: [top_id: ^top.id])
+    from(p in Brididi.Charts.Rank, where: [top_id: ^top.id])
     |> Repo.update_all(set: [votes: 0, likes: 0, position: nil])
 
     set_likes(top)
@@ -219,7 +219,7 @@ defmodule Wsdjs.Charts do
     |> Repo.all()
     |> Enum.each(fn rank ->
       # credo:disable-for-lines:2
-      from(p in Wsdjs.Charts.Rank, where: [id: ^rank.id])
+      from(p in Brididi.Charts.Rank, where: [id: ^rank.id])
       |> Repo.update_all(set: [position: rank.pos])
     end)
 
@@ -291,7 +291,7 @@ defmodule Wsdjs.Charts do
       |> Repo.all()
 
     Enum.each(ranks, fn rank ->
-      val = Wsdjs.Reactions.Opinions.opinions_value(rank.song.opinions)
+      val = Brididi.Reactions.Opinions.opinions_value(rank.song.opinions)
 
       rank
       |> Rank.changeset(%{likes: val})
@@ -300,7 +300,7 @@ defmodule Wsdjs.Charts do
   end
 
   def set_votes(%Top{id: id}) do
-    Wsdjs.Charts.Vote
+    Brididi.Charts.Vote
     |> where(top_id: ^id)
     |> group_by(:song_id)
     |> select([v], %{song_id: v.song_id, count: count(v.song_id), sum: sum(v.votes)})
@@ -309,7 +309,7 @@ defmodule Wsdjs.Charts do
       val = 10 * vote[:count] - vote[:sum] + vote[:count]
 
       # credo:disable-for-lines:2
-      from(p in Wsdjs.Charts.Rank, where: [top_id: ^id, song_id: ^vote.song_id])
+      from(p in Brididi.Charts.Rank, where: [top_id: ^id, song_id: ^vote.song_id])
       |> Repo.update_all(set: [votes: val])
     end)
   end
@@ -330,7 +330,7 @@ defmodule Wsdjs.Charts do
   """
   def get_rank!(id), do: Repo.get!(Rank, id)
 
-  def get_ranks(%Wsdjs.Musics.Song{id: id}) do
+  def get_ranks(%Brididi.Musics.Song{id: id}) do
     Rank
     |> where(song_id: ^id)
     |> Repo.all()

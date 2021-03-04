@@ -1,8 +1,8 @@
-defmodule WsdjsWeb.TopControllerTest do
-  use WsdjsWeb.ConnCase
-  alias Wsdjs.Accounts
+defmodule BrididiWeb.TopControllerTest do
+  use BrididiWeb.ConnCase
+  alias Brididi.Accounts
 
-  import Wsdjs.AccountsFixtures
+  import Brididi.AccountsFixtures
 
   defp create_users(_) do
     god = %Accounts.User{admin: true}
@@ -32,7 +32,7 @@ defmodule WsdjsWeb.TopControllerTest do
 
   defp create_top(%{suggestor: suggestor}) do
     {:ok, top} =
-      Wsdjs.Charts.create_top(%{
+      Brididi.Charts.create_top(%{
         due_date: Timex.beginning_of_month(Timex.today()),
         user_id: suggestor.id
       })

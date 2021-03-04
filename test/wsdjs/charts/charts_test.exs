@@ -1,10 +1,10 @@
-defmodule Wsdjs.ChartsTest do
-  use Wsdjs.DataCase
+defmodule Brididi.ChartsTest do
+  use Brididi.DataCase
 
-  alias Wsdjs.Charts
-  alias Wsdjs.Charts.Top
+  alias Brididi.Charts
+  alias Brididi.Charts.Top
 
-  import Wsdjs.AccountsFixtures
+  import Brididi.AccountsFixtures
 
   test "Create TOP, Song are selected according to month" do
     dt = Timex.beginning_of_month(Timex.now())
@@ -115,9 +115,9 @@ defmodule Wsdjs.ChartsTest do
         "url" => "http://youtu.be/dummy"
       }
       |> Map.put("user_id", user.id)
-      |> Wsdjs.Musics.create_song()
+      |> Brididi.Musics.create_song()
 
-    {:ok, song} = Wsdjs.Musics.update(song, attrs)
+    {:ok, song} = Brididi.Musics.update(song, attrs)
     song
   end
 
@@ -131,9 +131,9 @@ defmodule Wsdjs.ChartsTest do
 
     user = user_fixture()
 
-    {:ok, _} = Wsdjs.Reactions.Opinions.upsert(user, song1, "like")
-    {:ok, _} = Wsdjs.Reactions.Opinions.upsert(user, song2, "up")
-    {:ok, _} = Wsdjs.Reactions.Opinions.upsert(user, song3, "down")
+    {:ok, _} = Brididi.Reactions.Opinions.upsert(user, song1, "like")
+    {:ok, _} = Brididi.Reactions.Opinions.upsert(user, song2, "up")
+    {:ok, _} = Brididi.Reactions.Opinions.upsert(user, song3, "down")
 
     # vote = 10 * vote[:count] - vote[:sum] + vote[:count]
     # opinion = "up"-> 4, "like" -> 2, "down" -> 3
@@ -147,7 +147,7 @@ defmodule Wsdjs.ChartsTest do
     user = user_fixture()
     {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
 
-    Wsdjs.Charts.vote(user, %{
+    Brididi.Charts.vote(user, %{
       "top_id" => top.id,
       "votes" => %{
         song1.id => "1",

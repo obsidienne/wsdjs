@@ -1,11 +1,11 @@
-<%= live_component @socket, WsdjsWeb.ChartHeader, socket: @socket %>
+<%= live_component @socket, BrididiWeb.ChartHeader, socket: @socket %>
 
 <section id="top-list" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
   <div class="bg-white shadow overflow-hidden sm:rounded-md">
     <ul>
       <%= for top <- @tops do %>
-      <%= live_component @socket, WsdjsWeb.ChartComponent, top: top, socket: @socket %>
+      <%= live_component @socket, BrididiWeb.ChartComponent, top: top, socket: @socket %>
       <% end %>
     </ul>
   </div>

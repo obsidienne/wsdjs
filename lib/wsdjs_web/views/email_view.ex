@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.EmailView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.EmailView do
+  use BrididiWeb, :view
 end

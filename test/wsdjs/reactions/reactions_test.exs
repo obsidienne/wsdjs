@@ -1,15 +1,15 @@
-defmodule Wsdjs.ReactionsTest do
-  use Wsdjs.DataCase
-  alias Wsdjs.Reactions
+defmodule Brididi.ReactionsTest do
+  use Brididi.DataCase
+  alias Brididi.Reactions
 
-  import Wsdjs.AccountsFixtures
+  import Brididi.AccountsFixtures
 
   describe "comments" do
     def comment_fixture do
       user = user_fixture()
 
       {:ok, song} =
-        Wsdjs.Musics.create_song(%{
+        Brididi.Musics.create_song(%{
           title: "my title#{System.unique_integer()}",
           artist: "my artist",
           genre: "soul",
@@ -31,8 +31,8 @@ defmodule Wsdjs.ReactionsTest do
     test "list_comments/1 returns all song comments" do
       comment = comment_fixture()
       _dummy = comment_fixture()
-      song = Wsdjs.Musics.get_song!(comment.song_id)
-      assert Wsdjs.Reactions.Comments.list(song) == [comment]
+      song = Brididi.Musics.get_song!(comment.song_id)
+      assert Brididi.Reactions.Comments.list(song) == [comment]
     end
   end
 end

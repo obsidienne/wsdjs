@@ -1,16 +1,16 @@
-defmodule Wsdjs.AttachmentsTest do
-  use Wsdjs.DataCase
+defmodule Brididi.AttachmentsTest do
+  use Brididi.DataCase
 
-  alias Wsdjs.Attachments
-  import Wsdjs.AccountsFixtures
+  alias Brididi.Attachments
+  import Brididi.AccountsFixtures
 
   describe "video" do
-    alias Wsdjs.Attachments.Video
+    alias Brididi.Attachments.Video
 
     def song_fixture(attrs \\ %{}) do
       user = user_fixture()
 
-      {:ok, %Wsdjs.Musics.Song{} = song} =
+      {:ok, %Brididi.Musics.Song{} = song} =
         attrs
         |> Enum.into(%{
           "title" => "my title",
@@ -19,7 +19,7 @@ defmodule Wsdjs.AttachmentsTest do
           "url" => "http://youtu.be/dummy"
         })
         |> Map.put("user_id", user.id)
-        |> Wsdjs.Musics.create_song()
+        |> Brididi.Musics.create_song()
 
       song
     end
@@ -32,18 +32,18 @@ defmodule Wsdjs.AttachmentsTest do
     def video_fixture do
       song = song_fixture()
 
-      {:ok, %Wsdjs.Attachments.Video{} = video} =
+      {:ok, %Brididi.Attachments.Video{} = video} =
         @valid_attrs
         |> Map.put("user_id", song.user_id)
         |> Map.put("song_id", song.id)
-        |> Wsdjs.Attachments.create_video()
+        |> Brididi.Attachments.create_video()
 
       video
     end
 
     test "list_videos/1 returns all videos for a song" do
       video = video_fixture()
-      song = Wsdjs.Musics.get_song!(video.song_id)
+      song = Brididi.Musics.get_song!(video.song_id)
       assert Attachments.list_videos(song) == [video]
     end
 

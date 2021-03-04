@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.AddCitext do
+defmodule Brididi.Repo.Migrations.AddCitext do
   use Ecto.Migration
 
   def change do

@@ -1,8 +1,8 @@
-defmodule Wsdjs.ProviderTest do
+defmodule Brididi.ProviderTest do
   @moduledoc false
 
-  use Wsdjs.DataCase
-  doctest Wsdjs.Attachments.Provider, import: true
+  use Brididi.DataCase
+  doctest Brididi.Attachments.Provider, import: true
 
   @youtube_urls [
     {"http://www.youtube.com/user/Scobleizer#p/u/1/1p3vcRhsYGo", "1p3vcRhsYGo"},
@@ -25,7 +25,7 @@ defmodule Wsdjs.ProviderTest do
 
   test "youtube urls" do
     Enum.each(@youtube_urls, fn {url, video_id} ->
-      assert Wsdjs.Attachments.Provider.extract(url) == video_id
+      assert Brididi.Attachments.Provider.extract(url) == video_id
     end)
   end
 end

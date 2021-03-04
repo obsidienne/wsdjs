@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.RankController do
+defmodule BrididiWeb.RankController do
   @moduledoc false
-  use WsdjsWeb, :controller
-  alias Wsdjs.Charts
+  use BrididiWeb, :controller
+  alias Brididi.Charts
 
   def update(conn, %{"id" => id, "rank" => rank_params}) do
     case Charts.set_bonus(id, rank_params["bonus"]) do
@@ -11,7 +11,7 @@ defmodule WsdjsWeb.RankController do
         |> redirect(to: Routes.top_path(conn, :show, rank.top_id))
 
       {:error, _changeset} ->
-        rank = Wsdjs.Repo.get!(Charts.Rank, id)
+        rank = Brididi.Repo.get!(Charts.Rank, id)
 
         conn
         |> put_flash(:error, "Something went wrong")

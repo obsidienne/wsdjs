@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.UserSessionControllerTest do
-  use WsdjsWeb.ConnCase, async: true
+defmodule BrididiWeb.UserSessionControllerTest do
+  use BrididiWeb.ConnCase, async: true
 
-  import Wsdjs.AccountsFixtures
+  import Brididi.AccountsFixtures
 
   setup do
     %{user: user_fixture()}

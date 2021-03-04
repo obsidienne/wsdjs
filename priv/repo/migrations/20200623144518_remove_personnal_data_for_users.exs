@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.RemovePersonnalDataForUsers do
+defmodule Brididi.Repo.Migrations.RemovePersonnalDataForUsers do
   use Ecto.Migration
 
   def change do

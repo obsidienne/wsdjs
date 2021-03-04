@@ -1,4 +1,4 @@
-defmodule Wsdjs.Reactions.Opinions.Opinion do
+defmodule Brididi.Reactions.Opinions.Opinion do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
@@ -10,8 +10,8 @@ defmodule Wsdjs.Reactions.Opinions.Opinion do
   schema "opinions" do
     field(:kind, :string)
 
-    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
-    belongs_to(:song, Wsdjs.Musics.Song, type: Wsdjs.HashID)
+    belongs_to(:user, Brididi.Accounts.User, type: Brididi.HashID)
+    belongs_to(:song, Brididi.Musics.Song, type: Brididi.HashID)
 
     timestamps()
   end

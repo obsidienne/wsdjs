@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.MoveAvatarToProfil do
+defmodule Brididi.Repo.Migrations.MoveAvatarToProfil do
   use Ecto.Migration
   import Ecto.Query
 
@@ -7,7 +7,7 @@ defmodule Wsdjs.Repo.Migrations.MoveAvatarToProfil do
     flush()
 
     alter table(:users_profils) do
-      add :cld_id, :string, null: false, default: "wsdjs/missing_avatar"
+      add :cld_id, :string, null: false, default: "brididi/missing_avatar"
     end
 
     execute "

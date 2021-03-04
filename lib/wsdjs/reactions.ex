@@ -1,10 +1,10 @@
-defmodule Wsdjs.Reactions do
+defmodule Brididi.Reactions do
   @moduledoc """
   The boundary for the Reaction system.
   """
   import Ecto.{Query, Changeset}, warn: false
 
-  alias Wsdjs.Reactions.Opinions
+  alias Brididi.Reactions.Opinions
 
   def last_reactions(songs) when is_list(songs) do
     last_opinions =
@@ -23,6 +23,6 @@ defmodule Wsdjs.Reactions do
         join: r in subquery(last_opinions),
         on: o.id == r.id and r.row_number <= 4
 
-    Wsdjs.Repo.preload(songs, opinions: {opinions_query, [user: :user_profil]})
+    Brididi.Repo.preload(songs, opinions: {opinions_query, [user: :user_profil]})
   end
 end

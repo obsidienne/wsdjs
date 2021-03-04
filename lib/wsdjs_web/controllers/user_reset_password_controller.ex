@@ -1,10 +1,10 @@
-defmodule WsdjsWeb.UserResetPasswordController do
-  use WsdjsWeb, :controller
+defmodule BrididiWeb.UserResetPasswordController do
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Accounts
+  alias Brididi.Accounts
 
   plug :get_user_by_reset_password_token when action in [:edit, :update]
-  plug :put_root_layout, {WsdjsWeb.LayoutView, :root_auth}
+  plug :put_root_layout, {BrididiWeb.LayoutView, :root_auth}
 
   def new(conn, _params) do
     render(conn, "new.html")

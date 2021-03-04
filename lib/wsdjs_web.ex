@@ -1,12 +1,12 @@
-defmodule WsdjsWeb do
+defmodule BrididiWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use WsdjsWeb, :controller
-      use WsdjsWeb, :view
+      use BrididiWeb, :controller
+      use BrididiWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,19 +19,19 @@ defmodule WsdjsWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: WsdjsWeb
+      use Phoenix.Controller, namespace: BrididiWeb
 
       import Plug.Conn
-      import WsdjsWeb.Gettext
-      alias WsdjsWeb.Router.Helpers, as: Routes
+      import BrididiWeb.Gettext
+      alias BrididiWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/wsdjs_web/templates",
-        namespace: WsdjsWeb
+        root: "lib/brididi_web/templates",
+        namespace: BrididiWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -45,12 +45,12 @@ defmodule WsdjsWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {WsdjsWeb.LayoutView, "live.html"},
+        layout: {BrididiWeb.LayoutView, "live.html"},
         container: {:div, class: "contents"}
 
       unquote(view_helpers())
 
-      import Wsdjs.LiveHelpers
+      import Brididi.LiveHelpers
     end
   end
 
@@ -75,7 +75,7 @@ defmodule WsdjsWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import WsdjsWeb.Gettext
+      import BrididiWeb.Gettext
     end
   end
 
@@ -90,15 +90,15 @@ defmodule WsdjsWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import WsdjsWeb.ErrorHelpers
-      import WsdjsWeb.Gettext
-      alias WsdjsWeb.Router.Helpers, as: Routes
+      import BrididiWeb.ErrorHelpers
+      import BrididiWeb.Gettext
+      alias BrididiWeb.Router.Helpers, as: Routes
 
       # Import custom helpers
-      import WsdjsWeb.CloudexImageHelper
-      import WsdjsWeb.CloudinaryHelper
-      import WsdjsWeb.SongHelper
-      import WsdjsWeb.UserHelper
+      import BrididiWeb.CloudexImageHelper
+      import BrididiWeb.CloudinaryHelper
+      import BrididiWeb.SongHelper
+      import BrididiWeb.UserHelper
     end
   end
 

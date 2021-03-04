@@ -1,10 +1,10 @@
-defmodule WsdjsWeb.UserSessionController do
-  use WsdjsWeb, :controller
+defmodule BrididiWeb.UserSessionController do
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Accounts
-  alias WsdjsWeb.UserAuth
+  alias Brididi.Accounts
+  alias BrididiWeb.UserAuth
 
-  plug :put_root_layout, {WsdjsWeb.LayoutView, :root_auth}
+  plug :put_root_layout, {BrididiWeb.LayoutView, :root_auth}
 
   def new(conn, _params) do
     render(conn, "new.html", error_message: nil)

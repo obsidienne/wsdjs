@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.UserResetPasswordView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.UserResetPasswordView do
+  use BrididiWeb, :view
 end

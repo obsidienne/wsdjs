@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.CloudexImageHelper do
+defmodule BrididiWeb.CloudexImageHelper do
   import Phoenix.HTML.Tag
 
   def cl_image_tag(public_id, options \\ []) do

@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.ChannelCase do
+defmodule BrididiWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -11,7 +11,7 @@ defmodule WsdjsWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use WsdjsWeb.ChannelCase, async: true`, although
+  by setting `use BrididiWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -21,18 +21,18 @@ defmodule WsdjsWeb.ChannelCase do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
-      import WsdjsWeb.ChannelCase
+      import BrididiWeb.ChannelCase
 
       # The default endpoint for testing
-      @endpoint WsdjsWeb.Endpoint
+      @endpoint BrididiWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wsdjs.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Brididi.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Wsdjs.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Brididi.Repo, {:shared, self()})
     end
 
     :ok

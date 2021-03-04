@@ -1,4 +1,4 @@
-defmodule Wsdjs.Accounts.UserNotifier do
+defmodule Brididi.Accounts.UserNotifier do
   # For simplicity, this module simply logs messages to the terminal.
   # You should replace it by a proper email or notification tool, such as:
   #

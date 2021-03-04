@@ -20,11 +20,11 @@
   <title>404 error page</title>
 
   <link rel="icon" type="image/png" sizes="16x16"
-    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
   <link rel="icon" type="image/png" sizes="32x32"
-    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
   <link rel="icon" type="image/png" sizes="96x96"
-    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/wsdjs/worldswingdjs_single_flat.png">
+    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
 
 
   <link defer rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/app.css") %>">

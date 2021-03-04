@@ -1,7 +1,7 @@
-defmodule Wsdjs.AccountsFixtures do
+defmodule Brididi.AccountsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `Wsdjs.Accounts` context.
+  entities via the `Brididi.Accounts` context.
   """
 
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
@@ -14,7 +14,7 @@ defmodule Wsdjs.AccountsFixtures do
         email: unique_user_email(),
         password: valid_user_password()
       })
-      |> Wsdjs.Accounts.register_user()
+      |> Brididi.Accounts.register_user()
 
     user
   end

@@ -1,13 +1,13 @@
-defmodule Wsdjs.Accounts do
+defmodule Brididi.Accounts do
   @moduledoc """
   The boundary for the Accounts system.
   """
 
   import Ecto.Query, warn: false
-  alias Wsdjs.Repo
+  alias Brididi.Repo
 
-  alias Wsdjs.Accounts.User
-  alias Wsdjs.Accounts.UserProfil
+  alias Brididi.Accounts.User
+  alias Brididi.Accounts.UserProfil
 
   @doc """
   Returns the list of users.
@@ -136,7 +136,7 @@ defmodule Wsdjs.Accounts do
 
   ## Scaffolf code from phx_gen_auth
 
-  alias Wsdjs.Accounts.{User, UserToken, UserNotifier}
+  alias Brididi.Accounts.{User, UserToken, UserNotifier}
 
   ## Database getters
 

@@ -1,13 +1,13 @@
-defmodule Wsdjs.Charts.RankTest do
-  use Wsdjs.DataCase, async: true
+defmodule Brididi.Charts.RankTest do
+  use Brididi.DataCase, async: true
 
-  alias Wsdjs.Charts.Rank
-  alias Wsdjs.Repo
-  import Wsdjs.AccountsFixtures
+  alias Brididi.Charts.Rank
+  alias Brididi.Repo
+  import Brididi.AccountsFixtures
 
   test "rank song must exist" do
     attrs = rank_fixture_params()
-    {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+    {:ok, dummy_id} = Brididi.HashID.load(999_999_999)
 
     params = %{top_id: attrs.top_id, song_id: dummy_id}
     rank = Rank.changeset(%Rank{}, params)
@@ -16,7 +16,7 @@ defmodule Wsdjs.Charts.RankTest do
 
   test "rank top must exist" do
     attrs = rank_fixture_params()
-    {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+    {:ok, dummy_id} = Brididi.HashID.load(999_999_999)
 
     params = %{top_id: dummy_id, song_id: attrs.song_id}
     rank = Rank.changeset(%Rank{}, params)
@@ -30,10 +30,10 @@ defmodule Wsdjs.Charts.RankTest do
 
   defp rank_fixture_params(attrs \\ %{}) do
     user = user_fixture()
-    {:ok, top} = Wsdjs.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
+    {:ok, top} = Brididi.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
 
     {:ok, song} =
-      Wsdjs.Musics.create_song(%{
+      Brididi.Musics.create_song(%{
         title: "a",
         artist: "a",
         genre: "soul",

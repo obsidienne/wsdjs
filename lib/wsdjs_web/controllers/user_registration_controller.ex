@@ -1,11 +1,11 @@
-defmodule WsdjsWeb.UserRegistrationController do
-  use WsdjsWeb, :controller
+defmodule BrididiWeb.UserRegistrationController do
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.User
-  alias WsdjsWeb.UserAuth
+  alias Brididi.Accounts
+  alias Brididi.Accounts.User
+  alias BrididiWeb.UserAuth
 
-  plug :put_root_layout, {WsdjsWeb.LayoutView, :root_auth}
+  plug :put_root_layout, {BrididiWeb.LayoutView, :root_auth}
 
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})

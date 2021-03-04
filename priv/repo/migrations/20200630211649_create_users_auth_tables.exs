@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.CreateUsersAuthTables do
+defmodule Brididi.Repo.Migrations.CreateUsersAuthTables do
   use Ecto.Migration
 
   def change do

@@ -1,5 +1,5 @@
-defmodule WsdjsWeb.ErrorView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.ErrorView do
+  use BrididiWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

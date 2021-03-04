@@ -1,8 +1,8 @@
-defmodule WsdjsWeb.UserController do
+defmodule BrididiWeb.UserController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Accounts
+  alias Brididi.Accounts
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]

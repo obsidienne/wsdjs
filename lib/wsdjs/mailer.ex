@@ -1,3 +1,3 @@
-defmodule Wsdjs.Mailer do
-  use Bamboo.Mailer, otp_app: :wsdjs
+defmodule Brididi.Mailer do
+  use Bamboo.Mailer, otp_app: :brididi
 end

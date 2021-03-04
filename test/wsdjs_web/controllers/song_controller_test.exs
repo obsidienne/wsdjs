@@ -1,8 +1,8 @@
-defmodule WsdjsWeb.SongControllerTest do
-  use WsdjsWeb.ConnCase
-  alias Wsdjs.Accounts
+defmodule BrididiWeb.SongControllerTest do
+  use BrididiWeb.ConnCase
+  alias Brididi.Accounts
 
-  import Wsdjs.AccountsFixtures
+  import Brididi.AccountsFixtures
 
   defp create_users(_) do
     god = %Accounts.User{admin: true}
@@ -42,7 +42,7 @@ defmodule WsdjsWeb.SongControllerTest do
     {:ok, song} =
       attrs
       |> Map.put(:title, "song")
-      |> Wsdjs.Musics.create_song()
+      |> Brididi.Musics.create_song()
 
     {:ok, song: song}
   end
@@ -54,7 +54,7 @@ defmodule WsdjsWeb.SongControllerTest do
       Enum.each(
         [
           get(conn, Routes.song_path(conn, :new)),
-          get(conn, Routes.live_path(conn, WsdjsWeb.MusicLibrary)),
+          get(conn, Routes.live_path(conn, BrididiWeb.MusicLibrary)),
           get(conn, Routes.song_path(conn, :edit, song.id)),
           put(conn, Routes.song_path(conn, :update, song.id, %{})),
           post(conn, Routes.song_path(conn, :create, %{})),

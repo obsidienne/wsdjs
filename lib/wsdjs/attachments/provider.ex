@@ -1,4 +1,4 @@
-defmodule Wsdjs.Attachments.Provider do
+defmodule Brididi.Attachments.Provider do
   @moduledoc """
   This module extract the video id of a youtube url exclusively.
   No vimeo, or dailymotin, or anything else. Only youtube.
@@ -41,7 +41,7 @@ defmodule Wsdjs.Attachments.Provider do
     {re, func} =
       Enum.find(@provider_types, {nil, :unknown}, fn {reg, _} -> String.match?(url, reg) end)
 
-    Kernel.apply(Wsdjs.Attachments.Provider, func, [re, url])
+    Kernel.apply(Brididi.Attachments.Provider, func, [re, url])
   end
 
   def type(url) when is_nil(url), do: nil

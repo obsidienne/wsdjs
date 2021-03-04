@@ -1,5 +1,5 @@
-defmodule Wsdjs.Reactions.OpinionTest do
-  use Wsdjs.DataCase, async: true
+defmodule Brididi.Reactions.OpinionTest do
+  use Brididi.DataCase, async: true
 
   test "Opinions are correctly summed" do
     opinions = [
@@ -11,6 +11,6 @@ defmodule Wsdjs.Reactions.OpinionTest do
       %{kind: "like"}
     ]
 
-    assert Wsdjs.Reactions.Opinions.opinions_value(opinions) == 6
+    assert Brididi.Reactions.Opinions.opinions_value(opinions) == 6
   end
 end

@@ -1,9 +1,9 @@
-defmodule WsdjsWeb.UserProfilController do
+defmodule BrididiWeb.UserProfilController do
   @moduledoc false
 
-  use WsdjsWeb, :controller
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Accounts
+  alias Brididi.Accounts
 
   def edit(conn, _params) do
     user_profil = get_current_user_profil(conn)

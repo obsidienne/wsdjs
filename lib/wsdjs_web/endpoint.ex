@@ -1,12 +1,12 @@
-defmodule WsdjsWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :wsdjs
+defmodule BrididiWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :brididi
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_wsdjs_key",
+    key: "_brididi_key",
     signing_salt: "zZ+d/sxu"
   ]
 
@@ -18,7 +18,7 @@ defmodule WsdjsWeb.Endpoint do
     allow_credentials: true
   )
 
-  socket "/socket", WsdjsWeb.UserSocket,
+  socket "/socket", BrididiWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -36,7 +36,7 @@ defmodule WsdjsWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :wsdjs,
+    from: :brididi,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -46,7 +46,7 @@ defmodule WsdjsWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :wsdjs
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :brididi
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
@@ -67,5 +67,5 @@ defmodule WsdjsWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug WsdjsWeb.Router
+  plug BrididiWeb.Router
 end

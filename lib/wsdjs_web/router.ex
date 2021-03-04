@@ -1,17 +1,17 @@
-defmodule WsdjsWeb.Router do
-  use WsdjsWeb, :router
+defmodule BrididiWeb.Router do
+  use BrididiWeb, :router
 
   import Phoenix.LiveDashboard.Router
 
-  import WsdjsWeb.UserAuth
-  import WsdjsWeb.AdminAuth
-  import WsdjsWeb.UserProfil
+  import BrididiWeb.UserAuth
+  import BrididiWeb.AdminAuth
+  import BrididiWeb.UserProfil
 
   pipeline :browser do
     plug(:accepts, ["html", "text"])
     plug(:fetch_session)
     plug :fetch_live_flash
-    plug :put_root_layout, {WsdjsWeb.LayoutView, :root}
+    plug :put_root_layout, {BrididiWeb.LayoutView, :root}
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
     plug :fetch_current_user
@@ -25,7 +25,7 @@ defmodule WsdjsWeb.Router do
   ## Admin routes
 
   pipeline :admin_browser do
-    plug :put_root_layout, {WsdjsWeb.LayoutView, :root_admin}
+    plug :put_root_layout, {BrididiWeb.LayoutView, :root_admin}
     plug :fetch_current_user
     plug :fetch_current_user_profil
     plug :require_authenticated_admin
@@ -36,13 +36,13 @@ defmodule WsdjsWeb.Router do
   if Mix.env() == :dev do
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: WsdjsWeb.Telemetry, ecto_repos: [Wsdjs.Repo]
+      live_dashboard "/dashboard", metrics: BrididiWeb.Telemetry, ecto_repos: [Brididi.Repo]
     end
   end
 
   ## Authentication routes
 
-  scope "/", WsdjsWeb do
+  scope "/", BrididiWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
     get "/users/register", UserRegistrationController, :new
@@ -55,7 +55,7 @@ defmodule WsdjsWeb.Router do
     put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
-  scope "/", WsdjsWeb do
+  scope "/", BrididiWeb do
     pipe_through [:browser, :require_authenticated_user]
 
     get "/users/settings", UserSettingsController, :edit
@@ -64,7 +64,7 @@ defmodule WsdjsWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
-  scope "/", WsdjsWeb do
+  scope "/", BrididiWeb do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete
@@ -75,7 +75,7 @@ defmodule WsdjsWeb.Router do
 
   ## Application routes
 
-  scope "/", WsdjsWeb do
+  scope "/", BrididiWeb do
     pipe_through [:browser, :require_authenticated_user]
 
     resources("/songs", SongController, only: [:create, :new, :delete, :update, :edit])
@@ -95,7 +95,7 @@ defmodule WsdjsWeb.Router do
     live "/library", MusicLibrary
   end
 
-  scope "/", WsdjsWeb do
+  scope "/", BrididiWeb do
     # Use the default browser stack
     pipe_through(:browser)
 

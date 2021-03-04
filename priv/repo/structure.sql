@@ -411,7 +411,7 @@ CREATE TABLE public.songs (
     hidden_track boolean DEFAULT false NOT NULL,
     user_id bigint NOT NULL,
     id bigint NOT NULL,
-    cld_id character varying(255) DEFAULT 'wsdjs/missing_cover'::character varying NOT NULL
+    cld_id character varying(255) DEFAULT 'brididi/missing_cover'::character varying NOT NULL
 );
 
 
@@ -489,7 +489,7 @@ CREATE TABLE public.users_profils (
     user_country character varying(255),
     name character varying(255),
     djname character varying(255),
-    cld_id character varying(255) DEFAULT 'wsdjs/missing_avatar'::character varying NOT NULL
+    cld_id character varying(255) DEFAULT 'brididi/missing_avatar'::character varying NOT NULL
 );
 
 

@@ -7,11 +7,13 @@
                 </h2>
             </div>
             <div class="mt-4 flex md:mt-0 md:ml-4">
-                <%= if Wsdjs.Charts.can?(@conn.assigns.current_user, :create_top) == :ok do %>
-                <span class="ml-3 shadow-sm rounded-md">
-                    <%= link "Create a new top", to: Routes.top_path(@conn, :new), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700 transition duration-150 ease-in-out" %>
-                </span>
-                <% end %>
+                <%= if Brididi.Charts.can?(@conn.assigns.current_user, :create_top)==:ok do %>
+                    <span class="ml-3 shadow-sm rounded-md">
+                        <%= link "Create a new top" , to: Routes.top_path(@conn, :new),
+                            class: "inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700 transition duration-150 ease-in-out"
+                            %>
+                    </span>
+                    <% end %>
             </div>
         </div>
     </div>

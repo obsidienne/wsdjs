@@ -1,4 +1,4 @@
-defmodule Wsdjs.Reactions.Comments.Comment do
+defmodule Brididi.Reactions.Comments.Comment do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
@@ -9,8 +9,8 @@ defmodule Wsdjs.Reactions.Comments.Comment do
     field(:text, :string)
     field(:text_html, :string)
 
-    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
-    belongs_to(:song, Wsdjs.Musics.Song, type: Wsdjs.HashID)
+    belongs_to(:user, Brididi.Accounts.User, type: Brididi.HashID)
+    belongs_to(:song, Brididi.Musics.Song, type: Brididi.HashID)
     timestamps()
   end
 

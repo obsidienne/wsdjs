@@ -1,8 +1,8 @@
-defmodule WsdjsWeb.UserSettingsController do
-  use WsdjsWeb, :controller
+defmodule BrididiWeb.UserSettingsController do
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Accounts
-  alias WsdjsWeb.UserAuth
+  alias Brididi.Accounts
+  alias BrididiWeb.UserAuth
 
   plug :assign_email_and_password_changesets
 

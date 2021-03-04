@@ -1,4 +1,4 @@
-defmodule Wsdjs.Charts.Rank do
+defmodule Brididi.Charts.Rank do
   @moduledoc """
   A rank in a chart.
   """
@@ -13,8 +13,8 @@ defmodule Wsdjs.Charts.Rank do
     field(:bonus, :integer)
     field(:position, :integer)
 
-    belongs_to(:song, Wsdjs.Musics.Song, type: Wsdjs.HashID)
-    belongs_to(:top, Wsdjs.Charts.Top, type: Wsdjs.HashID)
+    belongs_to(:song, Brididi.Musics.Song, type: Brididi.HashID)
+    belongs_to(:top, Brididi.Charts.Top, type: Brididi.HashID)
 
     timestamps()
   end

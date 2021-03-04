@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.UserProfil do
+defmodule BrididiWeb.UserProfil do
   import Plug.Conn
 
-  alias Wsdjs.Accounts
+  alias Brididi.Accounts
 
   @doc """
   Authenticates the user by looking into the session

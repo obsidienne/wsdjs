@@ -1,12 +1,12 @@
-defmodule WsdjsWeb.VoteController do
+defmodule BrididiWeb.VoteController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use BrididiWeb, :controller
 
   @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def create(conn, %{"votes" => _votes_params, "top_id" => top_id} = params) do
     current_user = conn.assigns.current_user
 
-    case Wsdjs.Charts.vote(current_user, params) do
+    case Brididi.Charts.vote(current_user, params) do
       {:ok, _top} ->
         conn
         |> put_flash(:info, "Voted !")

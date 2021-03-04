@@ -1,15 +1,15 @@
-defmodule Wsdjs.Accounts.User do
+defmodule Brididi.Accounts.User do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.UserProfil
-  alias Wsdjs.Charts
-  alias Wsdjs.Reactions.{Comments, Opinions}
+  alias Brididi.Accounts
+  alias Brididi.Accounts.UserProfil
+  alias Brididi.Charts
+  alias Brididi.Reactions.{Comments, Opinions}
 
   @derive {Inspect, except: [:password]}
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @primary_key {:id, Brididi.HashID, autogenerate: true}
   schema "users" do
     field(:email, :string)
     field(:password, :string, virtual: true)
@@ -19,7 +19,7 @@ defmodule Wsdjs.Accounts.User do
     field(:profil_dj, :boolean, default: false)
     field(:confirmed_at, :naive_datetime)
 
-    has_many(:songs, Wsdjs.Musics.Song)
+    has_many(:songs, Brididi.Musics.Song)
     has_many(:comments, Comments.Comment)
     has_one(:user_profil, Accounts.UserProfil, on_replace: :update)
     has_many(:song_opinions, Opinions.Opinion)
@@ -80,7 +80,7 @@ defmodule Wsdjs.Accounts.User do
     |> validate_required([:email])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> validate_length(:email, max: 160)
-    |> unsafe_validate_unique(:email, Wsdjs.Repo)
+    |> unsafe_validate_unique(:email, Brididi.Repo)
     |> unique_constraint(:email)
   end
 
@@ -141,7 +141,7 @@ defmodule Wsdjs.Accounts.User do
   If there is no user or the user doesn't have a password, we call
   `Argon2.no_user_verify/0` to avoid timing attacks.
   """
-  def valid_password?(%Wsdjs.Accounts.User{hashed_password: hashed_password}, password)
+  def valid_password?(%Brididi.Accounts.User{hashed_password: hashed_password}, password)
       when is_binary(hashed_password) and byte_size(password) > 0 do
     Argon2.verify_pass(password, hashed_password)
   end
@@ -163,7 +163,7 @@ defmodule Wsdjs.Accounts.User do
   end
 end
 
-defimpl Bamboo.Formatter, for: Wsdjs.Accounts.User do
+defimpl Bamboo.Formatter, for: Brididi.Accounts.User do
   def format_email_address(user, _opts) do
     {user.name, user.email}
   end

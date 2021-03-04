@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.RenameActivatedAt do
+defmodule Brididi.Repo.Migrations.RenameActivatedAt do
   use Ecto.Migration
 
   def change do

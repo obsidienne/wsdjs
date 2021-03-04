@@ -1,9 +1,9 @@
-defmodule WsdjsWeb.UserAuth do
+defmodule BrididiWeb.UserAuth do
   import Plug.Conn
   import Phoenix.Controller
 
-  alias Wsdjs.Accounts
-  alias WsdjsWeb.Router.Helpers, as: Routes
+  alias Brididi.Accounts
+  alias BrididiWeb.Router.Helpers, as: Routes
 
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
@@ -75,7 +75,7 @@ defmodule WsdjsWeb.UserAuth do
     user_token && Accounts.delete_session_token(user_token)
 
     if live_socket_id = get_session(conn, :live_socket_id) do
-      WsdjsWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
+      BrididiWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
     end
 
     conn

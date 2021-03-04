@@ -1,17 +1,15 @@
 <section class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
   <div class="flex md:flex-row flex-col justify-start pb-12">
     <div class="w-64 h-64">
-      <%= cl_image_tag(@song.cld_id,
-                       class: "responsive shadow rounded",
-                       transforms: [
-                          %{crop: "crop", gravity: "custom"},
-                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 300, quality: "auto", width: 300 }
-                       ]) %>
+      <%= cl_image_tag(@song.cld_id, class: "responsive shadow rounded" , transforms: [ %{crop: "crop" ,
+        gravity: "custom" }, %{crop: "fit" , fetch_format: "auto" , format: "jpg" , height: 300, quality: "auto" ,
+        width: 300 } ]) %>
     </div>
     <div class="flex flex-col md:pl-4">
       <span class="h3 pb-2"><span class="text-gray-800"></span>
         <div class="text-gray-800"> suggested by
-          <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user), class: "text-gray-800 inline-block" %>
+          <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user),
+            class: "text-gray-800 inline-block" %>
         </div>
 
         <div class="pt-4">
@@ -19,37 +17,40 @@
             class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-yellow-100 text-yellow-800">
             <%= @song.genre %>
           </span>
-          <%= if @song.bpm > 0 do %>
-          <span
-            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-yellow-100 text-yellow-800">
-            <%= @song.bpm %> bpm </span>
-          <% end %>
+          <%= if @song.bpm> 0 do %>
+            <span
+              class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-yellow-100 text-yellow-800">
+              <%= @song.bpm %> bpm
+            </span>
+            <% end %>
 
-          <%= for rank <- @ranks do %>
-          <%= if rank.position <= 10 do %>
-          <span class="label label-default">Top <%= Timex.format!(rank.top.due_date, "%b%y", :strftime) %> #
-            <%= rank.position %></span>
-          <% end %>
-          <% end %>
+              <%= for rank <- @ranks do %>
+                <%= if rank.position <=10 do %>
+                  <span class="label label-default">Top <%= Timex.format!(rank.top.due_date, "%b%y" , :strftime) %> #
+                      <%= rank.position %></span>
+                  <% end %>
+                    <% end %>
         </div>
 
         <div class="mb-4">
-          <%= render WsdjsWeb.OpinionView, "_opinion_link.html", conn: @conn, song: @song, opinions: @opinions%>
+          <%= render BrididiWeb.OpinionView, "_opinion_link.html" , conn: @conn, song: @song, opinions: @opinions%>
         </div>
 
         <%= if @song.url do %>
-        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary mt-auto mb-0" target="_blank" rel="noopener"
-          <%= if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
-        <% end %>
+          <a href="<%= url_for_provider(@song) %>" class="btn btn-primary mt-auto mb-0" target="_blank" rel="noopener"
+            <%=if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
+          <% end %>
     </div>
   </div>
 </section>
 
 <div>
   <section id="overview-section" class="w-full">
-    <%= render @view_module, "_comments.html", conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset: @comment_changeset %>
+    <%= render @view_module, "_comments.html" , conn: @conn, song: @song, comments: Enum.reverse(@comments), changeset:
+      @comment_changeset %>
   </section>
 </div>
 
 
-<%= render @view_module, "_videos.html", conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset: @video_changeset %>
+<%= render @view_module, "_videos.html" , conn: @conn, song: @song, videos: Enum.reverse(@videos), changeset:
+  @video_changeset %>

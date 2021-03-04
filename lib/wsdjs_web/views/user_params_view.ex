@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.UserParamsView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.UserParamsView do
+  use BrididiWeb, :view
 end

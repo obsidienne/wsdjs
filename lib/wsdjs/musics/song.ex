@@ -1,14 +1,14 @@
-defmodule Wsdjs.Musics.Song do
+defmodule Brididi.Musics.Song do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Charts
-  alias Wsdjs.Reactions.{Comments, Opinions}
+  alias Brididi.Accounts
+  alias Brididi.Charts
+  alias Brididi.Reactions.{Comments, Opinions}
 
   @validated_genre ~w(acoustic blues country dance hiphop jazz pop rnb rock soul)
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @primary_key {:id, Brididi.HashID, autogenerate: true}
   schema "songs" do
     field(:title, :string)
     field(:artist, :string)
@@ -19,10 +19,10 @@ defmodule Wsdjs.Musics.Song do
     field(:hidden_track, :boolean, default: false)
     field(:video_id, :string)
     field(:public_track, :boolean, default: false)
-    field(:cld_id, :string, default: "wsdjs/missing_cover.jpg")
+    field(:cld_id, :string, default: "brididi/missing_cover.jpg")
     timestamps()
 
-    belongs_to(:user, Accounts.User, type: Wsdjs.HashID)
+    belongs_to(:user, Accounts.User, type: Brididi.HashID)
     has_many(:comments, Comments.Comment)
     has_many(:ranks, Charts.Rank)
     has_many(:opinions, Opinions.Opinion)
@@ -38,7 +38,7 @@ defmodule Wsdjs.Musics.Song do
     |> assoc_constraint(:user)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
-    |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
+    |> put_change(:video_id, Brididi.Attachments.Provider.extract(attrs["url"]))
   end
 
   def update_changeset(%__MODULE__{} = song, attrs) do
@@ -59,7 +59,7 @@ defmodule Wsdjs.Musics.Song do
     |> assoc_constraint(:user)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
-    |> put_change(:video_id, Wsdjs.Attachments.Provider.extract(attrs["url"]))
+    |> put_change(:video_id, Brididi.Attachments.Provider.extract(attrs["url"]))
   end
 
   def genre, do: @validated_genre

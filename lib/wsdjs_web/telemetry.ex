@@ -1,4 +1,4 @@
-defmodule WsdjsWeb.Telemetry do
+defmodule BrididiWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -31,11 +31,11 @@ defmodule WsdjsWeb.Telemetry do
       ),
 
       # Database Time Metrics
-      summary("wsdjs.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("wsdjs.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("wsdjs.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("wsdjs.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("wsdjs.repo.query.idle_time", unit: {:native, :millisecond}),
+      summary("brididi.repo.query.total_time", unit: {:native, :millisecond}),
+      summary("brididi.repo.query.decode_time", unit: {:native, :millisecond}),
+      summary("brididi.repo.query.query_time", unit: {:native, :millisecond}),
+      summary("brididi.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("brididi.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),

@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.UserConfirmationController do
-  use WsdjsWeb, :controller
+defmodule BrididiWeb.UserConfirmationController do
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Accounts
+  alias Brididi.Accounts
 
   def new(conn, _params) do
     render(conn, "new.html")

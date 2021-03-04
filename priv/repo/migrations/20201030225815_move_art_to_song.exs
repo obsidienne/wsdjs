@@ -1,9 +1,9 @@
-defmodule Wsdjs.Repo.Migrations.MoveArtToSong do
+defmodule Brididi.Repo.Migrations.MoveArtToSong do
   use Ecto.Migration
 
   def change do
     alter table(:songs) do
-      add :cld_id, :string, null: false, default: "wsdjs/missing_cover"
+      add :cld_id, :string, null: false, default: "brididi/missing_cover"
     end
 
     execute "

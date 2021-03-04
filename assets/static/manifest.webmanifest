@@ -1,13 +1,14 @@
 {
-    "short_name": "WSDJs",
+    "short_name": "Brididi",
     "name": "World Swing DJs",
-    "icons": [{
-            "src": "https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,h_192,w_192/v1503520190/wsdjs/worldswingdjs_single_flat.png",
+    "icons": [
+        {
+            "src": "https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,h_192,w_192/v1503520190/brididi/worldswingdjs_single_flat.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,h_512,w_512/v1503520190/wsdjs/worldswingdjs_single_flat.png",
+            "src": "https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,h_512,w_512/v1503520190/brididi/worldswingdjs_single_flat.png",
             "type": "image/png",
             "sizes": "512x512"
         }

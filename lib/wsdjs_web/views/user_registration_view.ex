@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.UserRegistrationView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.UserRegistrationView do
+  use BrididiWeb, :view
 end

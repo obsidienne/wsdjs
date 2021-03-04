@@ -1,14 +1,14 @@
-defmodule WsdjsWeb.UserAuthTest do
-  use WsdjsWeb.ConnCase, async: true
+defmodule BrididiWeb.UserAuthTest do
+  use BrididiWeb.ConnCase, async: true
 
-  alias Wsdjs.Accounts
-  alias WsdjsWeb.UserAuth
-  import Wsdjs.AccountsFixtures
+  alias Brididi.Accounts
+  alias BrididiWeb.UserAuth
+  import Brididi.AccountsFixtures
 
   setup %{conn: conn} do
     conn =
       conn
-      |> Map.replace!(:secret_key_base, WsdjsWeb.Endpoint.config(:secret_key_base))
+      |> Map.replace!(:secret_key_base, BrididiWeb.Endpoint.config(:secret_key_base))
       |> init_test_session(%{})
 
     %{user: user_fixture(), conn: conn}
@@ -63,7 +63,7 @@ defmodule WsdjsWeb.UserAuthTest do
 
     test "broadcasts to the given live_socket_id", %{conn: conn} do
       live_socket_id = "users_sessions:abcdef-token"
-      WsdjsWeb.Endpoint.subscribe(live_socket_id)
+      BrididiWeb.Endpoint.subscribe(live_socket_id)
 
       conn
       |> put_session(:live_socket_id, live_socket_id)

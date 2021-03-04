@@ -1,7 +1,7 @@
-defmodule Wsdjs.Reactions.CommentsTest do
-  use Wsdjs.DataCase, async: true
+defmodule Brididi.Reactions.CommentsTest do
+  use Brididi.DataCase, async: true
 
-  alias Wsdjs.Reactions.Comments.Comment
+  alias Brididi.Reactions.Comments.Comment
 
   @create_attrs %{text: "song title"}
 
@@ -11,7 +11,7 @@ defmodule Wsdjs.Reactions.CommentsTest do
   end
 
   test "comment user and song must exist" do
-    {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+    {:ok, dummy_id} = Brididi.HashID.load(999_999_999)
 
     params = Map.put(@create_attrs, :user_id, dummy_id)
     params = Map.put(params, :song_id, dummy_id)

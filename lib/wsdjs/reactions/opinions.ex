@@ -1,12 +1,12 @@
-defmodule Wsdjs.Reactions.Opinions do
+defmodule Brididi.Reactions.Opinions do
   @moduledoc """
   """
   import Ecto.Query, warn: false
 
-  alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics.Song
-  alias Wsdjs.Reactions.Opinions.Opinion
-  alias Wsdjs.Repo
+  alias Brididi.Accounts.User
+  alias Brididi.Musics.Song
+  alias Brididi.Reactions.Opinions.Opinion
+  alias Brididi.Repo
 
   @doc """
         The policies of this module are

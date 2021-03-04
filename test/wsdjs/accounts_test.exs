@@ -1,9 +1,9 @@
-defmodule Wsdjs.AccountsTest do
-  use Wsdjs.DataCase
+defmodule Brididi.AccountsTest do
+  use Brididi.DataCase
 
-  alias Wsdjs.Accounts
-  import Wsdjs.AccountsFixtures
-  alias Wsdjs.Accounts.{User, UserToken}
+  alias Brididi.Accounts
+  import Brididi.AccountsFixtures
+  alias Brididi.Accounts.{User, UserToken}
 
   describe "get_user_by_email/1" do
     test "does not return the user if the email does not exist" do
@@ -36,7 +36,7 @@ defmodule Wsdjs.AccountsTest do
 
   describe "get_user!/1" do
     test "raises if id is invalid" do
-      {:ok, id} = Wsdjs.HashID.load(0)
+      {:ok, id} = Brididi.HashID.load(0)
 
       assert_raise Ecto.NoResultsError, fn ->
         Accounts.get_user!(id)

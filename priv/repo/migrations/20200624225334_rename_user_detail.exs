@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.RenameUserDetail do
+defmodule Brididi.Repo.Migrations.RenameUserDetail do
   use Ecto.Migration
 
   def change do

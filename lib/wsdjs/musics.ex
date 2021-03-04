@@ -1,15 +1,15 @@
-defmodule Wsdjs.Musics do
+defmodule Brididi.Musics do
   @moduledoc """
   The boundary for the Music system.
   """
 
   import Ecto.Query, warn: false
-  alias Wsdjs.Repo
+  alias Brididi.Repo
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Accounts.User
-  alias Wsdjs.Musics
-  alias Wsdjs.Musics.Song
+  alias Brididi.Accounts
+  alias Brididi.Accounts.User
+  alias Brididi.Musics
+  alias Brididi.Musics.Song
 
   @doc """
   The scope rules are
@@ -153,10 +153,10 @@ defmodule Wsdjs.Musics do
   end
 
   def count_songs(%User{} = user), do: Repo.aggregate(Musics.scoped(user), :count, :id)
-  def count_songs(), do: Repo.aggregate(Wsdjs.Musics.Song, :count, :id)
+  def count_songs(), do: Repo.aggregate(Brididi.Musics.Song, :count, :id)
 
   def count_artists() do
-    query = from(s in Wsdjs.Musics.Song, distinct: true, select: s.artist)
+    query = from(s in Brididi.Musics.Song, distinct: true, select: s.artist)
     Repo.aggregate(query, :count, :artist)
   end
 

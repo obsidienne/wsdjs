@@ -1,13 +1,13 @@
-defmodule WsdjsWeb.SongController do
+defmodule BrididiWeb.SongController do
   @moduledoc false
 
-  use WsdjsWeb, :controller
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Attachments
-  alias Wsdjs.Attachments.Video
-  alias Wsdjs.Musics.Song
-  alias Wsdjs.Musics
-  alias Wsdjs.Reactions.{Comments, Opinions}
+  alias Brididi.Attachments
+  alias Brididi.Attachments.Video
+  alias Brididi.Musics.Song
+  alias Brididi.Musics
+  alias Brididi.Reactions.{Comments, Opinions}
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]
@@ -22,8 +22,8 @@ defmodule WsdjsWeb.SongController do
       videos = Attachments.list_videos(song)
       video_changeset = Attachments.change_video(%Video{})
       comment_changeset = Comments.change()
-      ranks = Wsdjs.Charts.get_ranks(song)
-      comments = Comments.list(song) |> Wsdjs.Accounts.load_user_profil_for_comments()
+      ranks = Brididi.Charts.get_ranks(song)
+      comments = Comments.list(song) |> Brididi.Accounts.load_user_profil_for_comments()
 
       render(
         conn,
@@ -75,7 +75,7 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  @spec update(Plug.Conn.t(), %{id: String.t(), song: map()}, Wsdjs.Accounts.User.t()) ::
+  @spec update(Plug.Conn.t(), %{id: String.t(), song: map()}, Brididi.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def update(conn, %{"id" => id, "song" => song_params}, current_user) do
     song = Musics.get_song!(id)
@@ -94,7 +94,7 @@ defmodule WsdjsWeb.SongController do
     end
   end
 
-  @spec delete(Plug.Conn.t(), %{id: String.t()}, Wsdjs.Accounts.User.t()) ::
+  @spec delete(Plug.Conn.t(), %{id: String.t()}, Brididi.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
     song = Musics.get_song!(id)

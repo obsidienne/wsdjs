@@ -1,12 +1,12 @@
-defmodule Wsdjs.MusicsTest do
-  use Wsdjs.DataCase
-  alias Wsdjs.Repo
+defmodule Brididi.MusicsTest do
+  use Brididi.DataCase
+  alias Brididi.Repo
 
-  import Wsdjs.AccountsFixtures
+  import Brididi.AccountsFixtures
 
   describe "songs" do
-    alias Wsdjs.Musics.Song
-    alias Wsdjs.Musics
+    alias Brididi.Musics.Song
+    alias Brididi.Musics
 
     @valid_attrs %{
       title: "my title",
@@ -58,7 +58,7 @@ defmodule Wsdjs.MusicsTest do
     end
 
     test "create_song/1 with invalid data returns error changeset" do
-      {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+      {:ok, dummy_id} = Brididi.HashID.load(999_999_999)
       params = Map.put(@valid_attrs, :user_id, dummy_id)
 
       assert {:error, changeset} = Musics.create_song(params)

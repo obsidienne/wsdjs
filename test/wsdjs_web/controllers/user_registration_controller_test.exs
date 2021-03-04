@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.UserRegistrationControllerTest do
-  use WsdjsWeb.ConnCase, async: true
+defmodule BrididiWeb.UserRegistrationControllerTest do
+  use BrididiWeb.ConnCase, async: true
 
-  import Wsdjs.AccountsFixtures
+  import Brididi.AccountsFixtures
 
   describe "GET /users/register" do
     test "renders registration page", %{conn: conn} do

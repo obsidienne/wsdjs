@@ -1,18 +1,18 @@
-defmodule Wsdjs.Charts.Vote do
+defmodule Brididi.Charts.Vote do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Wsdjs.Repo
+  alias Brididi.Repo
 
   @allowed_fields ~w(votes user_id song_id)a
 
   schema "votes" do
     field(:votes, :integer)
 
-    belongs_to(:song, Wsdjs.Musics.Song, type: Wsdjs.HashID)
-    belongs_to(:top, Wsdjs.Charts.Top, type: Wsdjs.HashID)
-    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
+    belongs_to(:song, Brididi.Musics.Song, type: Brididi.HashID)
+    belongs_to(:top, Brididi.Charts.Top, type: Brididi.HashID)
+    belongs_to(:user, Brididi.Accounts.User, type: Brididi.HashID)
 
     timestamps()
   end
@@ -29,7 +29,7 @@ defmodule Wsdjs.Charts.Vote do
 
   def get_or_build(top, user_id, song_id, votes) do
     struct =
-      Repo.get_by(Wsdjs.Charts.Vote, user_id: user_id, top_id: top.id, song_id: song_id) ||
+      Repo.get_by(Brididi.Charts.Vote, user_id: user_id, top_id: top.id, song_id: song_id) ||
         Ecto.build_assoc(top, :votes, user_id: user_id, song_id: song_id)
 
     Ecto.Changeset.change(struct, votes: String.to_integer(votes))

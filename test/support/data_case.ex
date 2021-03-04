@@ -1,4 +1,4 @@
-defmodule Wsdjs.DataCase do
+defmodule Brididi.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule Wsdjs.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Wsdjs.DataCase, async: true`, although
+  by setting `use Brididi.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,20 +18,20 @@ defmodule Wsdjs.DataCase do
 
   using do
     quote do
-      alias Wsdjs.Repo
+      alias Brididi.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Wsdjs.DataCase
+      import Brididi.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wsdjs.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Brididi.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Wsdjs.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Brididi.Repo, {:shared, self()})
     end
 
     :ok

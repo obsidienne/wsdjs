@@ -1,4 +1,4 @@
-defmodule Wsdjs.HashID do
+defmodule Brididi.HashID do
   @behaviour Ecto.Type
   @hashids Hashids.new(min_len: 8, salt: "ISeeFireByEdSheeranFromTheDesolationOfSmaug")
   @moduledoc """

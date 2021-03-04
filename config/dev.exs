@@ -1,13 +1,13 @@
 use Mix.Config
 
 # Configure your database
-config :wsdjs, Wsdjs.Repo,
+config :brididi, Brididi.Repo,
   username: "postgres",
   password: "postgres",
-  database: "wsdjs_dev",
+  database: "brididi_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
-  types: Wsdjs.PostgresTypes,
+  types: Brididi.PostgresTypes,
   pool_size: 10
 
 # For development, we disable any cache and enable
@@ -16,7 +16,7 @@ config :wsdjs, Wsdjs.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :wsdjs, WsdjsWeb.Endpoint,
+config :brididi, BrididiWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -57,17 +57,17 @@ config :wsdjs, WsdjsWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :wsdjs, WsdjsWeb.Endpoint,
+config :brididi, BrididiWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/wsdjs_web/(live|views)/.*(ex)$",
-      ~r"lib/wsdjs_web/templates/.*(eex)$"
+      ~r"lib/brididi_web/(live|views)/.*(ex)$",
+      ~r"lib/brididi_web/templates/.*(eex)$"
     ]
   ]
 
-config :wsdjs, WsdjsWeb.Mailer, adapter: Bamboo.LocalAdapter
+config :brididi, BrididiWeb.Mailer, adapter: Bamboo.LocalAdapter
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

@@ -1,20 +1,20 @@
-defmodule Wsdjs.Charts.ChartsTest do
-  use Wsdjs.DataCase
+defmodule Brididi.Charts.ChartsTest do
+  use Brididi.DataCase
 
-  alias Wsdjs.Accounts.User
-  alias Wsdjs.Charts
-  import Wsdjs.AccountsFixtures
+  alias Brididi.Accounts.User
+  alias Brididi.Charts
+  import Brididi.AccountsFixtures
 
   describe "Charts" do
     defp top_fixture(attrs) do
       user = user_fixture()
 
-      {:ok, %Wsdjs.Charts.Top{} = top} =
+      {:ok, %Brididi.Charts.Top{} = top} =
         attrs
         |> Map.put("user_id", user.id)
-        |> Wsdjs.Charts.create_top()
+        |> Brididi.Charts.create_top()
 
-      query = from(Wsdjs.Charts.Top, where: [id: ^top.id])
+      query = from(Brididi.Charts.Top, where: [id: ^top.id])
       {1, nil} = Repo.update_all(query, set: [status: "published"])
 
       top

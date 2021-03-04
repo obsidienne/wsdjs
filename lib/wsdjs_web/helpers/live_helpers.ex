@@ -1,7 +1,7 @@
-defmodule Wsdjs.LiveHelpers do
+defmodule Brididi.LiveHelpers do
   import Phoenix.LiveView
 
-  alias Wsdjs.Accounts
+  alias Brididi.Accounts
 
   def assign_defaults(%{"user_token" => user_token}, socket) do
     socket =

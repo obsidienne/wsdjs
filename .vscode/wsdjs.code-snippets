@@ -2,8 +2,8 @@
 	"lv_module": {
 		"prefix": "lv",
 		"body": [
-			"defmodule WsdjsWeb.${1}Live do",
-			"  use WsdjsWeb, :live_view",
+			"defmodule BrididiWeb.${1}Live do",
+			"  use BrididiWeb, :live_view",
 			"end"
 		],
 		"description": "LiveView module"

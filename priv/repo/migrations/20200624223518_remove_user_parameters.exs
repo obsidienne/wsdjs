@@ -1,4 +1,4 @@
-defmodule Wsdjs.Repo.Migrations.RemoveUserParameters do
+defmodule Brididi.Repo.Migrations.RemoveUserParameters do
   use Ecto.Migration
 
   def change do

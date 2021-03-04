@@ -1,4 +1,4 @@
-defmodule Wsdjs.Accounts.UserProfil do
+defmodule Brididi.Accounts.UserProfil do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
@@ -16,9 +16,9 @@ defmodule Wsdjs.Accounts.UserProfil do
     field(:user_country, :string)
     field(:name, :string)
     field(:djname, :string)
-    field(:cld_id, :string, default: "wsdjs/missing_avatar.jpg")
+    field(:cld_id, :string, default: "brididi/missing_avatar.jpg")
 
-    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
+    belongs_to(:user, Brididi.Accounts.User, type: Brididi.HashID)
     timestamps()
   end
 

@@ -1,23 +1,23 @@
-defmodule Wsdjs.Charts.TopTest do
-  use Wsdjs.DataCase, async: true
+defmodule Brididi.Charts.TopTest do
+  use Brididi.DataCase, async: true
 
-  alias Wsdjs.Accounts
-  alias Wsdjs.Charts
-  alias Wsdjs.Charts.Top
-  alias Wsdjs.Repo
+  alias Brididi.Accounts
+  alias Brididi.Charts
+  alias Brididi.Charts.Top
+  alias Brididi.Repo
 
-  import Wsdjs.AccountsFixtures
+  import Brididi.AccountsFixtures
 
   describe "changeset" do
     test "changeset with minimal valid attributes" do
-      {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+      {:ok, dummy_id} = Brididi.HashID.load(999_999_999)
       changeset = Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: dummy_id})
 
       assert changeset.valid?
     end
 
     test "top owner account must exist" do
-      {:ok, dummy_id} = Wsdjs.HashID.load(999_999_999)
+      {:ok, dummy_id} = Brididi.HashID.load(999_999_999)
       top = Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: dummy_id})
 
       assert {:error, %Ecto.Changeset{} = changeset} = Repo.insert(top)

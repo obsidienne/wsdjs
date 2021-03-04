@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: wsdjs_dev
+      POSTGRES_DB: brididi_dev
     volumes:
       - "./database/datadir:/var/lib/postgresql/data"
     ports:

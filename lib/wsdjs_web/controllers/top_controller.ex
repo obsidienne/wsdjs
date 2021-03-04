@@ -1,9 +1,9 @@
-defmodule WsdjsWeb.TopController do
+defmodule BrididiWeb.TopController do
   @moduledoc false
-  use WsdjsWeb, :controller
+  use BrididiWeb, :controller
 
-  alias Wsdjs.Charts
-  alias Wsdjs.Charts.Top
+  alias Brididi.Charts
+  alias Brididi.Charts.Top
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]
@@ -25,7 +25,7 @@ defmodule WsdjsWeb.TopController do
     end
   end
 
-  @spec new(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
+  @spec new(Plug.Conn.t(), any(), Brididi.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def new(conn, _params, current_user) do
     with :ok <- Charts.can?(current_user, :create_top) do
@@ -34,7 +34,7 @@ defmodule WsdjsWeb.TopController do
     end
   end
 
-  @spec update(Plug.Conn.t(), any(), Wsdjs.Accounts.User.t()) ::
+  @spec update(Plug.Conn.t(), any(), Brididi.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def update(conn, %{"id" => id, "direction" => "next"}, current_user) do
     top = Charts.get_top!(id)
@@ -68,7 +68,7 @@ defmodule WsdjsWeb.TopController do
     end
   end
 
-  @spec delete(Plug.Conn.t(), map(), Wsdjs.Accounts.User.t()) ::
+  @spec delete(Plug.Conn.t(), map(), Brididi.Accounts.User.t()) ::
           {:error, :unauthorized} | Plug.Conn.t()
   def delete(conn, %{"id" => id}, current_user) do
     top = Charts.get_top!(id)
@@ -77,7 +77,7 @@ defmodule WsdjsWeb.TopController do
          {:ok, _top} = Charts.delete_top(top) do
       conn
       |> put_flash(:info, "Top deleted successfully.")
-      |> redirect(to: Routes.live_path(conn, WsdjsWeb.ChartList))
+      |> redirect(to: Routes.live_path(conn, BrididiWeb.ChartList))
     end
   end
 end

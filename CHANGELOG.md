@@ -6,7 +6,7 @@
 
 # version 2.4.0
 
-- move master_proxy to wsdjs_web
+- move master_proxy to brididi_web
 - add a scroll system for smarphone
 - update dependecies
 

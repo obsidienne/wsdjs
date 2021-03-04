@@ -1,7 +1,7 @@
-defmodule WsdjsWeb.MusicLibrary do
-  use WsdjsWeb, :live_view
+defmodule BrididiWeb.MusicLibrary do
+  use BrididiWeb, :live_view
 
-  alias WsdjsWeb.MusicComponent
+  alias BrididiWeb.MusicComponent
 
   def mount(_params, session, socket) do
     {:ok, assign_defaults(session, socket), temporary_assigns: [songs: []]}
@@ -15,21 +15,21 @@ defmodule WsdjsWeb.MusicLibrary do
 
     sort_by = (params["sort_by"] || "inserted_at") |> String.to_atom()
     sort_order = (params["sort_order"] || "desc") |> String.to_atom()
-    total_pages = ceil(Wsdjs.Musics.count_songs(current_user) / per_page)
+    total_pages = ceil(Brididi.Musics.count_songs(current_user) / per_page)
 
     paginate_options = %{page: page, per_page: per_page, total_pages: total_pages}
     sort_options = %{sort_by: sort_by, sort_order: sort_order}
     query = %{q: params["q"] || ""}
 
     songs =
-      Wsdjs.Musics.list_songs(current_user,
+      Brididi.Musics.list_songs(current_user,
         paginate: paginate_options,
         sort: sort_options,
         query: query
       )
 
-    songs = Wsdjs.Reactions.last_reactions(songs)
-    songs = Wsdjs.Accounts.load_user_profil_for_songs(songs)
+    songs = Brididi.Reactions.last_reactions(songs)
+    songs = Brididi.Accounts.load_user_profil_for_songs(songs)
 
     socket =
       assign(socket,

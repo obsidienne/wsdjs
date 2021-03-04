@@ -1,6 +1,6 @@
-defmodule Wsdjs.Repo do
+defmodule Brididi.Repo do
   use Ecto.Repo,
-    otp_app: :wsdjs,
+    otp_app: :brididi,
     adapter: Ecto.Adapters.Postgres
 
   @doc """

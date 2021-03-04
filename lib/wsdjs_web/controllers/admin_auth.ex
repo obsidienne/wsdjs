@@ -1,9 +1,9 @@
-defmodule WsdjsWeb.AdminAuth do
+defmodule BrididiWeb.AdminAuth do
   import Plug.Conn
 
   import Phoenix.Controller
-  alias Wsdjs.Accounts
-  alias WsdjsWeb.Router.Helpers, as: Routes
+  alias Brididi.Accounts
+  alias BrididiWeb.Router.Helpers, as: Routes
 
   def require_authenticated_admin(conn, _opts) do
     if conn.assigns[:current_user] && Accounts.user_is_admin(conn.assigns[:current_user]) do

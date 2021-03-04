@@ -1,23 +1,23 @@
-defmodule Wsdjs.Charts.Top do
+defmodule Brididi.Charts.Top do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Wsdjs.{Accounts, Charts}
+  alias Brididi.{Accounts, Charts}
 
   @allowed_fields ~w(due_date user_id)a
   @valid_status ~w(checking voting counting published)
 
-  @primary_key {:id, Wsdjs.HashID, autogenerate: true}
+  @primary_key {:id, Brididi.HashID, autogenerate: true}
   schema "tops" do
     field(:due_date, :date)
     field(:status, :string)
 
-    belongs_to(:user, Wsdjs.Accounts.User, type: Wsdjs.HashID)
-    has_many(:ranks, Wsdjs.Charts.Rank, on_delete: :delete_all)
-    has_many(:votes, Wsdjs.Charts.Vote, on_replace: :delete)
-    many_to_many(:songs, Wsdjs.Musics.Song, join_through: Charts.Rank)
+    belongs_to(:user, Brididi.Accounts.User, type: Brididi.HashID)
+    has_many(:ranks, Brididi.Charts.Rank, on_delete: :delete_all)
+    has_many(:votes, Brididi.Charts.Vote, on_replace: :delete)
+    many_to_many(:songs, Brididi.Musics.Song, join_through: Charts.Rank)
 
     timestamps()
   end

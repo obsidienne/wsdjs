@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
         <div class="flex-shrink-0">
-          <span class="sr-only">WSDJs</span>
+          <span class="sr-only">Brididi</span>
           <svg class="h-8 w-8" fill="#D3D8E0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
             <g>
               <path
@@ -22,129 +22,144 @@
           </svg>
         </div>
         <%= if @current_user do %>
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline">
-            <%= navbar_pill @conn, "Charts", to: Routes.live_path(@conn, WsdjsWeb.ChartList), class: "ml-4" %>
-            <%= navbar_pill @conn, "Library", to: Routes.live_path(@conn, WsdjsWeb.MusicLibrary), class: "ml-4" %>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline">
+              <%= navbar_pill @conn, "Charts" , to: Routes.live_path(@conn, BrididiWeb.ChartList), class: "ml-4" %>
+                <%= navbar_pill @conn, "Library" , to: Routes.live_path(@conn, BrididiWeb.MusicLibrary), class: "ml-4"
+                  %>
+            </div>
           </div>
-        </div>
-        <% end %>
+          <% end %>
       </div>
 
       <div class="flex items-center">
         <%= unless @current_user do %>
-        <div class="flex-shrink-0 hidden md:block">
-          <span class="rounded-md shadow-sm">
-            <%= link to: Routes.user_registration_path(@conn, :new), class: "relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600 transition duration-150 ease-in-out" do %>
-            <svg viewBox="0 0 20 20" fill="currentColor" class="user-circle -ml-1 mr-2 h-5 w-5">
-              <path fill-rule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                clip-rule="evenodd"></path>
-            </svg>
+          <div class="flex-shrink-0 hidden md:block">
+            <span class="rounded-md shadow-sm">
+              <%= link to: Routes.user_registration_path(@conn, :new),
+                class: "relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600 transition duration-150 ease-in-out"
+                do %>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="user-circle -ml-1 mr-2 h-5 w-5">
+                  <path fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                    clip-rule="evenodd"></path>
+                </svg>
 
-            <span>Register</span>
-            <% end %>
-          </span>
-        </div>
-
-        <%= navbar_pill @conn, "Sign in", to: Routes.user_session_path(@conn, :new), class: "ml-4 hidden md:block" %>
-
-        <% end %>
-
-        <%= if @current_user do %>
-        <div class="hidden md:block">
-          <div class="ml-4 flex items-center md:ml-6">
-            <!-- Profile dropdown -->
-            <div class="ml-3 relative" @click.away="open = false" x-data="{ open: false}">
-              <div>
-                <button
-                  class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
-                  id="user-menu" aria-label="User menu" aria-haspopup="true" @click="open = !open"
-                  x-bind:aria-expanded="open">
-                  <%= cl_image_tag(@current_profil.cld_id,
-                       class: "h-8 w-8 rounded-full",
-                       transforms: [
-                          %{crop: "crop", gravity: "custom"},
-                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 300, quality: "auto", width: 300 }
-                       ]) %>
-                </button>
-              </div>
-              <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" x-show="open"
-                x-description="Profile dropdown panel, show/hide based on dropdown state."
-                x-transition:enter="transition ease-out duration-200"
-                x-transition:enter-start="transform opacity-0 scale-95"
-                x-transition:enter-end="transform opacity-100 scale-100"
-                x-transition:leave="transition ease-in duration-75"
-                x-transition:leave-start="transform opacity-100 scale-100"
-                x-transition:leave-end="transform opacity-0 scale-95">
-                <div class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical"
-                  aria-labelledby="user-menu">
-                  <%= link "Your Profile", to: Routes.user_path(@conn, :show, @current_user.id), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
-                  <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
-                  <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, data: [pjax: "false"], class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
-                </div>
-              </div>
-            </div>
+                <span>Register</span>
+                <% end %>
+            </span>
           </div>
-        </div>
-        <% end %>
 
-        <div class="-mr-2 flex md:hidden">
-          <button
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
-            @click="open = !open" x-bind:aria-label="open ? 'Close main menu' : 'Main menu'"
-            x-bind:aria-expanded="open">
-            <svg class="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24" x-state:on="Menu open"
-              x-state:off="Menu closed" :class="{ 'hidden': open, 'block': !open }">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <svg class="hidden h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24" x-state:on="Menu open"
-              x-state:off="Menu closed" :class="{ 'hidden': !open, 'block': open }">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
+          <%= navbar_pill @conn, "Sign in" , to: Routes.user_session_path(@conn, :new), class: "ml-4 hidden md:block" %>
+
+            <% end %>
+
+              <%= if @current_user do %>
+                <div class="hidden md:block">
+                  <div class="ml-4 flex items-center md:ml-6">
+                    <!-- Profile dropdown -->
+                    <div class="ml-3 relative" @click.away="open = false" x-data="{ open: false}">
+                      <div>
+                        <button
+                          class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
+                          id="user-menu" aria-label="User menu" aria-haspopup="true" @click="open = !open"
+                          x-bind:aria-expanded="open">
+                          <%= cl_image_tag(@current_profil.cld_id, class: "h-8 w-8 rounded-full" , transforms: [
+                            %{crop: "crop" , gravity: "custom" }, %{crop: "fit" , fetch_format: "auto" , format: "jpg" ,
+                            height: 300, quality: "auto" , width: 300 } ]) %>
+                        </button>
+                      </div>
+                      <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" x-show="open"
+                        x-description="Profile dropdown panel, show/hide based on dropdown state."
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95">
+                        <div class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5" role="menu"
+                          aria-orientation="vertical" aria-labelledby="user-menu">
+                          <%= link "Your Profile" , to: Routes.user_path(@conn, :show, @current_user.id),
+                            class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" , role: "menuitem" %>
+                            <%= link "Settings" , to: Routes.user_settings_path(@conn, :edit),
+                              class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" , role: "menuitem" %>
+                              <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), method: :delete, data:
+                                [pjax: "false" ], class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" ,
+                                role: "menuitem" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+
+                  <div class="-mr-2 flex md:hidden">
+                    <button
+                      class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
+                      @click="open = !open" x-bind:aria-label="open ? 'Close main menu' : 'Main menu'"
+                      x-bind:aria-expanded="open">
+                      <svg class="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                        x-state:on="Menu open" x-state:off="Menu closed" :class="{ 'hidden': open, 'block': !open }">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16" />
+                      </svg>
+                      <svg class="hidden h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                        x-state:on="Menu open" x-state:off="Menu closed" :class="{ 'hidden': !open, 'block': open }">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
       </div>
     </div>
     <div class="md:hidden hidden " x-description="Mobile menu, toggle classes based on menu state." x-state:on="Open"
       x-state:off="closed" :class="{ 'block': open, 'hidden': !open }">
       <%= if @current_user do %>
-      <div class="px-2 pt-2 pb-3 sm:px-3">
-        <%= navbar_link @conn, "Charts", to: Routes.live_path(@conn, WsdjsWeb.ChartList) %>
-        <%= navbar_link @conn, "Library", to: Routes.live_path(@conn, WsdjsWeb.MusicLibrary) %>
-      </div>
+        <div class="px-2 pt-2 pb-3 sm:px-3">
+          <%= navbar_link @conn, "Charts" , to: Routes.live_path(@conn, BrididiWeb.ChartList) %>
+            <%= navbar_link @conn, "Library" , to: Routes.live_path(@conn, BrididiWeb.MusicLibrary) %>
+        </div>
 
-      <div class="pt-4 pb-3 border-t border-gray-700">
-        <div class="flex items-center px-5">
-          <div class="flex-shrink-0">
-            <%= cl_image_tag(@current_profil.cld_id,
-                       class: "h-10 w-10 rounded-full",
-                       transforms: [
-                          %{crop: "crop", gravity: "custom"},
-                          %{crop: "fit", fetch_format: "auto", format: "jpg", height: 300, quality: "auto", width: 300 }
-                       ]) %>
-          </div>
-          <div class="ml-3">
-            <div class="text-base font-medium leading-none text-white"><%= @current_profil.name %>
+        <div class="pt-4 pb-3 border-t border-gray-700">
+          <div class="flex items-center px-5">
+            <div class="flex-shrink-0">
+              <%= cl_image_tag(@current_profil.cld_id, class: "h-10 w-10 rounded-full" , transforms: [ %{crop: "crop" ,
+                gravity: "custom" }, %{crop: "fit" , fetch_format: "auto" , format: "jpg" , height: 300, quality: "auto"
+                , width: 300 } ]) %>
             </div>
-            <div class="mt-1 text-sm font-medium leading-none text-gray-400"><%= @current_user.email %>
+            <div class="ml-3">
+              <div class="text-base font-medium leading-none text-white">
+                <%= @current_profil.name %>
+              </div>
+              <div class="mt-1 text-sm font-medium leading-none text-gray-400">
+                <%= @current_user.email %>
+              </div>
             </div>
           </div>
+          <div class="mt-3 px-2">
+            <%= link "Your Profile" , to: Routes.user_path(@conn, :show, @current_user.id),
+              class: "block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+              %>
+              <%= link "Settings" , to: Routes.user_settings_path(@conn, :edit),
+                class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                %>
+                <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), method: :delete,
+                  class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                  %>
+          </div>
         </div>
-        <div class="mt-3 px-2">
-          <%= link "Your Profile", to: Routes.user_path(@conn, :show, @current_user.id), class: "block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-          <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-          <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-        </div>
-      </div>
-      <% else %>
-      <div class="pt-4 pb-3 border-t border-gray-700">
-        <div class="mt-3 px-2">
-          <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-          <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" %>
-        </div>
-      </div>
-      <% end %>
+        <% else %>
+          <div class="pt-4 pb-3 border-t border-gray-700">
+            <div class="mt-3 px-2">
+              <%= link "Register" , to: Routes.user_registration_path(@conn, :new),
+                class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                %>
+                <%= link "Log in" , to: Routes.user_session_path(@conn, :new),
+                  class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                  %>
+            </div>
+          </div>
+          <% end %>
     </div>
   </div>
 </nav>

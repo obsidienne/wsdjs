@@ -7,7 +7,7 @@
     </div>
     <div class="lg:col-span-2">
       <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
-        <%= render_many @songs, WsdjsWeb.HomeView, "_song_minicard.html" , conn: @conn, as: :song, current_user:
+        <%= render_many @songs, BrididiWeb.HomeView, "_song_minicard.html" , conn: @conn, as: :song, current_user:
           @current_user %>
       </ul>
     </div>

@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.UserProfilView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.UserProfilView do
+  use BrididiWeb, :view
 end

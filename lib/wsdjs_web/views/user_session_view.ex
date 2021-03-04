@@ -1,3 +1,3 @@
-defmodule WsdjsWeb.UserSessionView do
-  use WsdjsWeb, :view
+defmodule BrididiWeb.UserSessionView do
+  use BrididiWeb, :view
 end

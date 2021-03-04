@@ -1,8 +1,8 @@
-defmodule WsdjsWeb.UserSettingsControllerTest do
-  use WsdjsWeb.ConnCase, async: true
+defmodule BrididiWeb.UserSettingsControllerTest do
+  use BrididiWeb.ConnCase, async: true
 
-  alias Wsdjs.Accounts
-  import Wsdjs.AccountsFixtures
+  alias Brididi.Accounts
+  import Brididi.AccountsFixtures
 
   setup :register_and_log_in_user
 
