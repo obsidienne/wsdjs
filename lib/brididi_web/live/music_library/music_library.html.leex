@@ -31,7 +31,7 @@
 
     <ul>
       <%= for song <- @songs do %>
-      <%= live_component @socket, MusicComponent, song: song %>
+      <%= live_component @socket, MusicLibraryComponent, song: song %>
       <% end %>
     </ul>
 

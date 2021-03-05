@@ -155,19 +155,19 @@ defmodule Brididi.Charts do
   #
   ###############################################
   # Change the top status.
-  # The steps are the following : check -> vote -> count -> publish
+  # The steps are the following : check -> vote -> publish
   # The step create does not use this function.
   def next_step(top) do
-    %{checking: "voting", voting: "counting", counting: "published"}
+    %{checking: "voting", voting: "published"}
     |> Map.fetch!(String.to_atom(top.status))
     |> go_step(top)
   end
 
   # Change the top status.
-  # The steps are the following : check -> vote -> count -> publish
+  # The steps are the following : check -> vote -> publish
   # The step create does not use this function.
   def previous_step(top) do
-    %{published: "counting", counting: "voting"}
+    %{published: "voting", voting: "checking"}
     |> Map.fetch!(String.to_atom(top.status))
     |> go_step(top)
   end
@@ -185,22 +185,14 @@ defmodule Brididi.Charts do
   # we reinitialize the total votes and likes (admin can return from published)
   # Need to sum the votes according to this rule
   # vote = 10 * (nb vote for song) - (total vote position for song) + (nb vote for song)
-  # After that, the top creator can apply bonus to the top.
-  defp go_step("counting", top) do
-    # credo:disable-for-lines:2
+  # Need to calculate the position according to likes + votes.
+  defp go_step("published", top) do
     from(p in Brididi.Charts.Rank, where: [top_id: ^top.id])
     |> Repo.update_all(set: [votes: 0, likes: 0, position: nil])
 
     set_likes(top)
     set_votes(top)
 
-    top
-    |> Top.step_changeset(%{status: "counting"})
-    |> Repo.update()
-  end
-
-  # Need to calculate the position according to likes + votes + bonus.
-  defp go_step("published", top) do
     query =
       from(
         q in Rank,
@@ -274,14 +266,6 @@ defmodule Brididi.Charts do
   # Rank
   #
   ###############################################
-
-  def set_bonus(rank_id, bonus) do
-    rank = Repo.get!(Rank, rank_id)
-
-    rank
-    |> Rank.changeset(%{bonus: bonus})
-    |> Repo.update()
-  end
 
   def set_likes(%Top{id: id}) do
     ranks =

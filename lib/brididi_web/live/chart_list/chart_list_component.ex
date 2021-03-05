@@ -1,4 +1,4 @@
-defmodule BrididiWeb.ChartComponent do
+defmodule BrididiWeb.ChartListComponent do
   use BrididiWeb, :live_component
 
   def count_dj(songs) do

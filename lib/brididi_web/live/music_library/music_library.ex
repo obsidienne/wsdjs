@@ -1,7 +1,7 @@
 defmodule BrididiWeb.MusicLibrary do
   use BrididiWeb, :live_view
 
-  alias BrididiWeb.MusicComponent
+  alias BrididiWeb.MusicLibraryComponent
 
   def mount(_params, session, socket) do
     {:ok, assign_defaults(session, socket), temporary_assigns: [songs: []]}

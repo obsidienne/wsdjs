@@ -1,4 +1,4 @@
-defmodule BrididiWeb.ChartHeader do
+defmodule BrididiWeb.ChartListHeader do
   use BrididiWeb, :live_component
 
   defp count_tops() do

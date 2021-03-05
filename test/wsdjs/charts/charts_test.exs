@@ -37,7 +37,6 @@ defmodule Brididi.ChartsTest do
       Enum.each(ranks, fn rank ->
         assert rank.likes == 0
         assert rank.votes == 0
-        assert rank.bonus == 0
         assert is_nil(rank.position)
       end)
     end
@@ -52,7 +51,6 @@ defmodule Brididi.ChartsTest do
       Enum.each(ranks, fn rank ->
         assert rank.likes == 0
         assert rank.votes == 0
-        assert rank.bonus == 0
         assert is_nil(rank.position)
       end)
     end
@@ -68,7 +66,6 @@ defmodule Brididi.ChartsTest do
       Enum.each(ranks, fn rank ->
         refute rank.likes == 0
         refute rank.votes == 0
-        assert rank.bonus == 0
         assert is_nil(rank.position)
       end)
     end

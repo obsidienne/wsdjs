@@ -5,7 +5,7 @@ defmodule Brididi.Charts.Rank do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @allowed_fields ~w(likes votes bonus song_id top_id)a
+  @allowed_fields ~w(likes votes song_id top_id)a
 
   schema "ranks" do
     field(:likes, :integer)
@@ -26,6 +26,5 @@ defmodule Brididi.Charts.Rank do
     |> assoc_constraint(:song)
     |> assoc_constraint(:top)
     |> validate_number(:votes, greater_than_or_equal_to: 0)
-    |> validate_number(:bonus, greater_than_or_equal_to: 0)
   end
 end

@@ -23,8 +23,8 @@ defmodule Brididi.Charts.RankTest do
     assert {:error, %{errors: [top: {"does not exist", _}]}} = Repo.insert(rank)
   end
 
-  test "votes/bonus can be equal to zero" do
-    changeset = Rank.changeset(%Rank{}, rank_fixture_params(%{votes: 0, bonus: 0}))
+  test "votes can be equal to zero" do
+    changeset = Rank.changeset(%Rank{}, rank_fixture_params(%{votes: 0}))
     assert changeset.valid?
   end
 
