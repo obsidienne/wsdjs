@@ -10,20 +10,11 @@
 <!-- Tells Google not to provide a translation for this page -->
 <meta name="google" content="notranslate">
 
+<link rel="icon" type="image/png" sizes="16x16" href="<%= Routes.static_path(@conn, "/images/brididi-16x16.png") %>">
+<link rel="icon" type="image/png" sizes="32x32" href="<%= Routes.static_path(@conn, "/images/brididi-32x32.png") %>">
+<link rel="icon" type="image/png" sizes="96x96" href="<%= Routes.static_path(@conn, "/images/brididi-96x96.png") %>">
 
-
-<link rel="icon" type="image/png" sizes="16x16"
-    href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
-<link rel="icon" type="image/png" sizes="32x32"
-    href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
-<link rel="icon" type="image/png" sizes="96x96"
-    href="https://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
-
-<link rel="apple-touch-icon"
-    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_80/v1503520190/brididi/worldswingdjs_single_flat.png">
-<link rel="apple-touch-icon" sizes="152x152"
-    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_152/v1503520190/brididi/worldswingdjs_single_flat.png">
-<link rel="apple-touch-icon" sizes="180x180"
-    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_180/v1503520190/brididi/worldswingdjs_single_flat.png">
-<link rel="apple-touch-icon" sizes="167x167"
-    href="https://res.cloudinary.com/don2kwaju/image/upload/b_rgb:ffffff,c_fit,w_167/v1503520190/brididi/worldswingdjs_single_flat.png">
+<link rel="apple-touch-icon" href="<%= Routes.static_path(@conn, "/images/brididi-80x80.png") %>">
+<link rel="apple-touch-icon" sizes="152x152" href="<%= Routes.static_path(@conn, "/images/brididi-152x152.png") %>">
+<link rel="apple-touch-icon" sizes="167x167" href="<%= Routes.static_path(@conn, "/images/brididi-167x167.png") %>">
+<link rel="apple-touch-icon" sizes="180x180" href="<%= Routes.static_path(@conn, "/images/brididi-180x180.png") %>">
