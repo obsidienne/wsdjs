@@ -10,14 +10,6 @@ defmodule BrididiWeb.Endpoint do
     signing_salt: "zZ+d/sxu"
   ]
 
-  plug(
-    Corsica,
-    origins: ["http://radiowcs.com", "http://www.radiowcs.com"],
-    allow_headers: ["Authorization", "Origin", "user-token", "Content-Type", "X-Requested-With"],
-    allow_methods: ["GET"],
-    allow_credentials: true
-  )
-
   socket "/socket", BrididiWeb.UserSocket,
     websocket: true,
     longpoll: false
