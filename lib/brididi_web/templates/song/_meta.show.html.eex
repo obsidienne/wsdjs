@@ -1,9 +1,0 @@
-<meta property="og:url" content="<%= Phoenix.Controller.current_url(@conn) %>">
-<meta property="og:type" content="website">
-<meta property="og:title" content="<%= @song.title %>">
-<meta property="og:image" content="<%= Cloudex.Url.for(@song.cld_id, transforms: [
-                        %{crop: "crop", gravity: "custom"},
-                        %{crop: "fit", fetch_format: "auto", format: "jpg", height: 200, quality: "auto", width: 200 }
-                     ]) %>">
-<meta property="og:description" content="<%= song_full_description(@song) %>">
-<meta property="og:site_name" content="worldswingdjs">

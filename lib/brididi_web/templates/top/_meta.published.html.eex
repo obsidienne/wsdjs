@@ -1,6 +1,0 @@
-<meta property="og:url" content="<%= Phoenix.Controller.current_url(@conn) %>">
-<meta property="og:type" content="website">
-<meta property="og:title" content="<%= top_full_description(@top) %>">
-<meta property="og:image" content="<%= top_art(@top) %>">
-<meta property="og:description" content="<%= top_full_description(@top) %>">
-<meta property="og:site_name" content="worldswingdjs">
