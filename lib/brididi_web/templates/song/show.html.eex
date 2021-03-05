@@ -8,7 +8,7 @@
     <div class="flex flex-col md:pl-4">
       <span class="h3 pb-2"><span class="text-gray-800"></span>
         <div class="text-gray-800"> suggested by
-          <%= link user_displayed_name(@song.user), to: Routes.user_path(@conn, :show, @song.user),
+          <%= link @song.user.email, to: Routes.user_path(@conn, :show, @song.user),
             class: "text-gray-800 inline-block" %>
         </div>
 

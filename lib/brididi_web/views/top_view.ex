@@ -28,38 +28,4 @@ defmodule BrididiWeb.TopView do
     |> Enum.uniq()
     |> Enum.count()
   end
-
-  def all_genre(songs) do
-    {:safe,
-     songs
-     |> Enum.sort(&(&1 <= &2))
-     |> Enum.group_by(fn x -> x.genre end)
-     |> Enum.map(fn {k, v} -> {k, Enum.count(v)} end)
-     |> Enum.sort(fn {_, v1}, {_, v2} -> v1 >= v2 end)
-     |> Enum.map(fn {k, v} -> "#{k} <span class=\"text-gray-800\">(#{v})</span>" end)
-     |> Enum.join(", ")}
-  end
-
-  def get_song_by(top, user, position) do
-    vote =
-      Enum.find(top.votes, fn vote ->
-        vote.votes == position && vote.user_id == user.id
-      end)
-
-    if vote do
-      song = Enum.find(top.songs, fn song -> song.id == vote.song_id end)
-      {:safe, "#{song.title}"}
-    else
-      ""
-    end
-  end
-
-  def top_full_description(song) do
-    date_str =
-      song.inserted_at
-      |> Timex.to_date()
-      |> Timex.format!("%b %Y", :strftime)
-
-    "TOP 10 #{date_str}"
-  end
 end

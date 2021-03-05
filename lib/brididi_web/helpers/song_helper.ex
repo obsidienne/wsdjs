@@ -9,10 +9,4 @@ defmodule BrididiWeb.SongHelper do
 
   def url_for_provider(%Song{url: url}) when is_binary(url), do: url
   def url_for_provider(_), do: "#"
-
-  def utc_to_local(dt) do
-    dt
-    |> Timex.to_datetime()
-    |> Timex.format!("{ISO:Extended}")
-  end
 end

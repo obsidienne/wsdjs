@@ -4,7 +4,7 @@
         <div class="flex items-center px-4 py-4 sm:px-6">
             <div class="min-w-0 flex-1 flex items-center">
                 <div class="flex-shrink-0">
-                    <%= cl_image_tag(@rank.song.cld_id, 
+                    <%= cl_image_tag(@rank.song.cld_id,
                      class: "h-12 w-12 rounded",
                      transforms: [
                         %{crop: "crop", gravity: "custom"},
@@ -27,7 +27,7 @@
                     <div class="hidden md:block">
                         <div>
                             <div class="text-sm leading-5 text-gray-900">
-                                Suggested by <%= user_displayed_name(@rank.song.user) %>
+                                Suggested by <%= @rank.song.user.email %>
                             </div>
                             <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
                                 <span

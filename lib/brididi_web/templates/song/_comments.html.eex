@@ -15,8 +15,6 @@
         <span>
           <a href="<%= Routes.user_path(@conn, :show, comment.user) %>"
             class="inline-block"><%= comment.user.user_profil.name %></a>
-          <time title="<%= Timex.format!(Timex.to_datetime(comment.inserted_at), "%d %b %Y, %k:%M", :strftime) %>"
-            datetime="<%= utc_to_local(comment.inserted_at) %>"></time>
         </span>
       </header>
       <div class="text-black bg-white px-2 comment_body" data-autolink>
