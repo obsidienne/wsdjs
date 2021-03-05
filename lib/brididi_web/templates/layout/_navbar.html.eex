@@ -124,8 +124,8 @@
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
               <%= cl_image_tag(@current_profil.cld_id, class: "h-10 w-10 rounded-full" , transforms: [ %{crop: "crop" ,
-                gravity: "custom" }, %{crop: "fit" , fetch_format: "auto" , format: "jpg" , height: 300, quality: "auto"
-                , width: 300 } ]) %>
+                gravity: "custom" }, %{crop: "fit" , fetch_format: "auto" , format: "jpg" , height: 300, quality: "auto",
+                width: 300 } ]) %>
             </div>
             <div class="ml-3">
               <div class="text-base font-medium leading-none text-white">
