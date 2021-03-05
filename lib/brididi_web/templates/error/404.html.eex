@@ -6,7 +6,6 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
-  <meta name="cloudinary_cloud_name" content="don2kwaju">
   <meta name="description" content="World Swing DeeJays. The best West Coast Swing music from all around the world !">
 
   <!-- Control the behavior of search engine crawling and indexing -->
@@ -19,13 +18,9 @@
 
   <title>404 error page</title>
 
-  <link rel="icon" type="image/png" sizes="16x16"
-    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_16/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_32/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-    href="http://res.cloudinary.com/don2kwaju/image/upload/c_scale,w_96/fl_immutable_cache/v1503520190/brididi/worldswingdjs_single_flat.png">
-
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= Routes.static_path(@conn, "/images/brididi-16x16.png") %>">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= Routes.static_path(@conn, "/images/brididi-32x32.png") %>">
+  <link rel="icon" type="image/png" sizes="96x96" href="<%= Routes.static_path(@conn, "/images/brididi-96x96.png") %>">
 
   <link defer rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
 </head>
