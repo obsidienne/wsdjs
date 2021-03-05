@@ -72,6 +72,7 @@ defmodule Brididi.MixProject do
       {:hashids, "~> 2.0"},
       {:geo_postgis, "~> 3.1"},
       {:ecto_psql_extras, "~> 0.2"},
+      {:html_sanitize_ex, "~> 1.4"},
       {:kaffy, "~> 0.9.0"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:cloudex, "~> 1.3"},
