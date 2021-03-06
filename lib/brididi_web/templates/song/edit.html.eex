@@ -5,7 +5,7 @@
         <div>
           <h3 class="text-lg leading-6 font-medium text-gray-900">Song</h3>
           <p class="mt-1tmax-w-2xl text-sm leading-5 text-gray-500">
-            Song detail, This information will be displayed publicly so be careful what you share.
+            Song details
           </p>
         </div>
         <div class="mt-6 sm:mt-5">
@@ -85,25 +85,23 @@
       </div>
       <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
         <div>
-          <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Personal Information
-          </h3>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Where to find it ?</h3>
           <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
-            Use a permanent address where you can receive mail.
+          We manage only a subset of all the streaming website.
           </p>
         </div>
         <div class="mt-6 sm:mt-5">
           <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
             <label for="username" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-              Username
+            youtube
             </label>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <div class="max-w-lg flex rounded-md shadow-sm">
                 <span
                   class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                  youtube.com/
+                  https://youtu.be/
                 </span>
-                <%= text_input f, :url,
+                <%= text_input f, :youtube_url,
                   class: "flex-1 form-input block w-full min-w-0 rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                   %>
               </div>

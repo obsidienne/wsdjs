@@ -72,7 +72,7 @@
         </div>
 
         <%= if @song.url do %>
-        <a href="<%= url_for_provider(@song) %>" class="btn btn-primary mt-auto mb-0" target="_blank" rel="noopener"
+        <a href="<%= @song.youtube_url %>" class="btn btn-primary mt-auto mb-0" target="_blank" rel="noopener"
             <%=if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
         <% end %>
     </div>

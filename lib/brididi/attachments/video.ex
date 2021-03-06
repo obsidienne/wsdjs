@@ -29,8 +29,6 @@ defmodule Brididi.Attachments.Video do
     |> assoc_constraint(:user)
     |> validate_url(:url)
     |> assoc_constraint(:song)
-    |> put_change(:video_id, Brididi.Attachments.Provider.extract(attrs["url"]))
-    |> put_change(:provider, Brididi.Attachments.Provider.type(attrs["url"]))
     |> validate_required(:provider)
   end
 

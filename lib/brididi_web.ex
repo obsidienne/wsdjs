@@ -96,7 +96,6 @@ defmodule BrididiWeb do
 
       # Import custom helpers
       import BrididiWeb.CloudexImageHelper
-      import BrididiWeb.SongHelper
     end
   end
 

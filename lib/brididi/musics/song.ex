@@ -12,7 +12,7 @@ defmodule Brididi.Musics.Song do
   schema "songs" do
     field(:title, :string)
     field(:artist, :string)
-    field(:url, :string)
+    field(:youtube_url, :string)
     field(:bpm, :integer, default: 0)
     field(:genre, :string)
     field(:instant_hit, :boolean, default: false)
@@ -32,13 +32,12 @@ defmodule Brididi.Musics.Song do
 
   def create_changeset(%__MODULE__{} = song, attrs) do
     song
-    |> cast(attrs, [:title, :artist, :url, :bpm, :genre, :user_id])
-    |> validate_required([:title, :artist, :url, :bpm, :genre, :user_id])
+    |> cast(attrs, [:title, :artist, :youtube_url, :bpm, :genre, :user_id])
+    |> validate_required([:title, :artist, :youtube_url, :bpm, :genre, :user_id])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
-    |> put_change(:video_id, Brididi.Attachments.Provider.extract(attrs["url"]))
   end
 
   def update_changeset(%__MODULE__{} = song, attrs) do
@@ -46,7 +45,7 @@ defmodule Brididi.Musics.Song do
     |> cast(attrs, [
       :title,
       :artist,
-      :url,
+      :youtube_url,
       :bpm,
       :genre,
       :instant_hit,
@@ -54,12 +53,11 @@ defmodule Brididi.Musics.Song do
       :public_track,
       :inserted_at
     ])
-    |> validate_required([:url, :bpm, :genre])
+    |> validate_required([:youtube_url, :bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
     |> validate_number(:bpm, greater_than: 0)
     |> validate_inclusion(:genre, @validated_genre)
-    |> put_change(:video_id, Brididi.Attachments.Provider.extract(attrs["url"]))
   end
 
   def genre, do: @validated_genre
