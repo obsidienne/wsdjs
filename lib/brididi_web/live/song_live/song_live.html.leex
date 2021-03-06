@@ -67,6 +67,9 @@
           </span>
           <% end %>
         </div>
+        <div class="mb-4">
+          <%= live_component @socket, BrididiWeb.SongOpinionsComponent, opinions: @opinions %>
+        </div>
 
         <%= if @song.url do %>
         <a href="<%= url_for_provider(@song) %>" class="btn btn-primary mt-auto mb-0" target="_blank" rel="noopener"
