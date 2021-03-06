@@ -8,7 +8,7 @@ defmodule BrididiWeb.MusicLibraryHeader do
   end
 
   defp count_videos() do
-    count = Brididi.Attachments.count_videos()
+    count = Brididi.Musics.count_videos()
     {:ok, formated_count} = Brididi.Cldr.Number.to_string(count)
     formated_count
   end

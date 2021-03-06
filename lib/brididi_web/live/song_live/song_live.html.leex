@@ -71,7 +71,7 @@
           <%= live_component @socket, BrididiWeb.SongOpinionsComponent, opinions: @opinions %>
         </div>
 
-        <%= if @song.url do %>
+        <%= if @song.youtube_url do %>
         <a href="<%= @song.youtube_url %>" class="btn btn-primary mt-auto mb-0" target="_blank" rel="noopener"
             <%=if is_binary(@song.video_id), do: "data-video-id=#{@song.video_id}" %>>play song</a>
         <% end %>

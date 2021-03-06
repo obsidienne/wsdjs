@@ -4,7 +4,7 @@ defmodule BrididiWeb.SongController do
   use BrididiWeb, :controller
 
   alias Brididi.Attachments
-  alias Brididi.Attachments.Video
+  alias Brididi.Musics.Video
   alias Brididi.Musics.Song
   alias Brididi.Musics
   alias Brididi.Reactions.{Comments, Opinions}

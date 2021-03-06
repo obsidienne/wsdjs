@@ -1,4 +1,4 @@
-defmodule Brididi.Attachments.Video do
+defmodule Brididi.Musics.Video do
   @moduledoc """
   A video attached to a song.
   """
