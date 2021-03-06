@@ -14,31 +14,6 @@ defmodule BrididiWeb.SongController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def show(conn, %{"id" => id}, current_user) do
-    song = Musics.get_song!(id)
-
-    with :ok <- Musics.can?(current_user, :show, song) do
-      opinions = Opinions.list(song)
-      videos = Attachments.list_videos(song)
-      video_changeset = Attachments.change_video(%Video{})
-      comment_changeset = Comments.change()
-      ranks = Brididi.Charts.get_ranks(song)
-      comments = Comments.list(song) |> Brididi.Accounts.load_user_profil_for_comments()
-
-      render(
-        conn,
-        "show.html",
-        song: song,
-        opinions: opinions,
-        comments: comments,
-        comment_changeset: comment_changeset,
-        videos: videos,
-        ranks: ranks,
-        video_changeset: video_changeset
-      )
-    end
-  end
-
   def new(conn, _params, current_user) do
     with :ok <- Musics.can?(current_user, :create) do
       changeset = Musics.change(%Song{})

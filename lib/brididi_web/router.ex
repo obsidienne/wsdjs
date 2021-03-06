@@ -93,6 +93,7 @@ defmodule BrididiWeb.Router do
     resources "/users", UserController, only: [:index, :update]
 
     live "/library", MusicLibrary
+    live "/songs/:song_id", SongLive
   end
 
   scope "/", BrididiWeb do
@@ -103,6 +104,5 @@ defmodule BrididiWeb.Router do
     resources("/users", UserController, only: [:show])
     resources("/home", HomeController, only: [:index])
     resources("/tops", TopController, only: [:show])
-    resources("/songs", SongController, only: [:show])
   end
 end

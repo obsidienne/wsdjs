@@ -1,5 +1,5 @@
 <li>
-    <%= link to: Routes.song_path(@socket, :show, @song.id), class: "block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out" do %>
+    <%= link to: Routes.live_path(@socket, BrididiWeb.SongLive, @song.id), class: "block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out" do %>
     <div class="px-4 py-4 flex items-center sm:px-6">
         <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
             <div class="flex">
