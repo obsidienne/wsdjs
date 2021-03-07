@@ -216,3 +216,7 @@ temp/
 
 priv/cldr
 *.dump
+
+# Minio specific
+data
+minio
