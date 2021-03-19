@@ -1,5 +1,5 @@
 <li>
-  <%= link to: Routes.song_path(@conn, :show, @song.id), class: "flex items-center space-x-4 lg:space-x-6" do %>
+  <%= link to: Routes.live_path(@conn, BrididiWeb.SongLive, @song.id), class: "flex items-center space-x-4 lg:space-x-6" do %>
   <div class="flex-shrink-0 relative w-24 h-24 rounded-full lg:w-32 lg:h-32">
     <%= cl_image_tag(@song.cld_id, 
                      class: "h-auto w-full rounded",
