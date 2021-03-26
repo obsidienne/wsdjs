@@ -33,7 +33,7 @@ defmodule Brididi.Musics.Song do
   def create_changeset(%__MODULE__{} = song, attrs) do
     song
     |> cast(attrs, [:title, :artist, :youtube_url, :bpm, :genre, :user_id])
-    |> validate_required([:title, :artist, :youtube_url, :bpm, :genre, :user_id])
+    |> validate_required([:title, :artist, :bpm, :genre, :user_id])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
     |> validate_number(:bpm, greater_than: 0)
@@ -53,7 +53,7 @@ defmodule Brididi.Musics.Song do
       :public_track,
       :inserted_at
     ])
-    |> validate_required([:youtube_url, :bpm, :genre])
+    |> validate_required([:bpm, :genre])
     |> unique_constraint(:title, name: :songs_title_artist_index)
     |> assoc_constraint(:user)
     |> validate_number(:bpm, greater_than: 0)

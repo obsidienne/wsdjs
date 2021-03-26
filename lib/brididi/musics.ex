@@ -342,6 +342,4 @@ defmodule Brididi.Musics do
   end
 
   def count_videos(), do: Repo.aggregate(Brididi.Musics.Video, :count, :id)
-
-
 end
