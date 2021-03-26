@@ -198,5 +198,4 @@ defmodule Brididi.MusicsTest do
       assert %Ecto.Changeset{} = Attachments.change_video(video)
     end
   end
-
 end
