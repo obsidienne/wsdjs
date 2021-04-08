@@ -66,7 +66,6 @@ defmodule Brididi.MixProject do
       {:ecto_psql_extras, "~> 0.2"},
       {:html_sanitize_ex, "~> 1.4"},
       {:kaffy, "~> 0.9.0"},
-      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:cloudex, "~> 1.3"},
       {:timex, "~> 3.4"}
     ]
