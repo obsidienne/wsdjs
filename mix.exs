@@ -56,7 +56,7 @@ defmodule Brididi.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.3"},
       {:phx_gen_auth, "~> 0.5.0", only: [:dev], runtime: false},
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:ex_cldr_dates_times, "~> 2.0"},
       {:bamboo, "~> 1.1"},
