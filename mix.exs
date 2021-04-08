@@ -10,19 +10,12 @@ defmodule Brididi.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      test_coverage: [tool: ExCoveralls],
       # Docs
       name: "Brididi",
       source_url: "https://github.com/obsidienne/brididi",
       docs: [
         # The main page in the docs
         extras: ["README.md"]
-      ],
-      preferred_cli_env: [
-        coveralls: :test,
-        "coveralls.detail": :test,
-        "coveralls.post": :test,
-        "coveralls.html": :test
       ],
       deps: deps()
     ]
@@ -63,7 +56,6 @@ defmodule Brididi.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.3"},
       {:phx_gen_auth, "~> 0.5.0", only: [:dev], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:ex_cldr_dates_times, "~> 2.0"},
