@@ -100,7 +100,5 @@ defmodule BrididiWeb.Router do
 
     get("/", HomeController, :index)
     resources("/users", UserController, only: [:show])
-    resources("/home", HomeController, only: [:index])
-    resources("/tops", TopController, only: [:show])
   end
 end
