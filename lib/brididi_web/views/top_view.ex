@@ -6,7 +6,6 @@ defmodule BrididiWeb.TopView do
       case top.status do
         "checking" -> "checking.html"
         "voting" -> "voting.html"
-        "counting" -> "counting.html"
         "published" -> "published.html"
       end
 

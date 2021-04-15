@@ -86,8 +86,6 @@ defmodule BrididiWeb.Router do
       resources("/votes", VoteController, only: [:create])
     end
 
-    resources("/ranks", RankController, only: [:update, :delete])
-
     get "/users/profils", UserProfilController, :edit
     put "/users/profils", UserProfilController, :update
     resources "/users", UserController, only: [:index, :update]

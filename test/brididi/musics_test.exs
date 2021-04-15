@@ -50,7 +50,7 @@ defmodule Brididi.MusicsTest do
       assert {:ok, %Song{} = song} = Musics.create_song(params)
       assert song.artist == params.artist
       assert song.title == params.title
-      assert song.youtube_url == params.url
+      assert song.youtube_url == params.youtube_url
       assert song.bpm == 0
       assert song.instant_hit == false
       assert song.hidden_track == false

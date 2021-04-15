@@ -6,7 +6,7 @@ defmodule BrididiWeb.SongLive do
   end
 
   def handle_params(%{"song_id" => song_id}, _url, socket) do
-    current_user = socket.assigns[:current_user]
+    _current_user = socket.assigns[:current_user]
 
     song = Brididi.Musics.get_song!(song_id)
     opinions = Brididi.Reactions.Opinions.list(song)

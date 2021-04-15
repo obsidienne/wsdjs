@@ -384,13 +384,6 @@ defmodule Brididi.Charts do
     |> Repo.all()
   end
 
-  def list_rank(%User{admin: true}, %Top{status: "counting"} = top) do
-    top
-    |> list_rank()
-    |> order_by([r], desc: fragment("? + ? + ?", r.votes, r.bonus, r.likes))
-    |> Repo.all()
-  end
-
   def list_rank(%User{admin: true}, %Top{status: "checking"} = top) do
     top
     |> list_rank()

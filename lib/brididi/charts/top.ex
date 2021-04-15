@@ -7,7 +7,7 @@ defmodule Brididi.Charts.Top do
   alias Brididi.{Accounts, Charts}
 
   @allowed_fields ~w(due_date user_id)a
-  @valid_status ~w(checking voting counting published)
+  @valid_status ~w(checking voting published)
 
   @primary_key {:id, Brididi.HashID, autogenerate: true}
   schema "tops" do

@@ -3,11 +3,8 @@ defmodule BrididiWeb.SongController do
 
   use BrididiWeb, :controller
 
-  alias Brididi.Attachments
-  alias Brididi.Musics.Video
   alias Brididi.Musics.Song
   alias Brididi.Musics
-  alias Brididi.Reactions.{Comments, Opinions}
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]

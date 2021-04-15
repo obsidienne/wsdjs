@@ -55,23 +55,7 @@ defmodule Brididi.ChartsTest do
       end)
     end
 
-    test "in counting: Ranks has values", %{top: top} do
-      {:ok, top_updated} = Charts.next_step(top)
-      {:ok, top_updated} = Charts.next_step(top_updated)
-      assert top_updated.status == "counting"
-
-      ranks = Repo.all(Ecto.assoc(top_updated, :ranks))
-      assert Enum.count(ranks) == 3
-
-      Enum.each(ranks, fn rank ->
-        refute rank.likes == 0
-        refute rank.votes == 0
-        assert is_nil(rank.position)
-      end)
-    end
-
     test "in published: Ranks has the correct position", %{top: top, positions: positions} do
-      {:ok, top} = Charts.next_step(top)
       {:ok, top} = Charts.next_step(top)
       {:ok, top} = Charts.next_step(top)
       assert top.status == "published"
@@ -82,21 +66,6 @@ defmodule Brididi.ChartsTest do
       Enum.each(ranks, fn rank ->
         position = Map.fetch!(positions, rank.song_id)
         assert rank.position == position
-      end)
-    end
-
-    test "in counting from published: Ranks has no position", %{top: top} do
-      {:ok, top} = Charts.next_step(top)
-      {:ok, top} = Charts.next_step(top)
-      {:ok, top} = Charts.next_step(top)
-      {:ok, top} = Charts.previous_step(top)
-      assert top.status == "counting"
-
-      ranks = Repo.all(Ecto.assoc(top, :ranks))
-      assert Enum.count(ranks) == 3
-
-      Enum.each(ranks, fn rank ->
-        assert is_nil(rank.position)
       end)
     end
   end

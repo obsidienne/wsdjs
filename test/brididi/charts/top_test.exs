@@ -92,34 +92,6 @@ defmodule Brididi.Charts.TopTest do
     end
   end
 
-  describe "Counting top" do
-    setup :create_users
-
-    test "current month to n-27 n", %{admin: admin, djvip: djvip, dj: dj} do
-      tops =
-        [
-          top_fixture("counting", 0),
-          top_fixture("counting", -2),
-          top_fixture("counting", -3),
-          top_fixture("counting", -5),
-          top_fixture("counting", -6),
-          top_fixture("counting", -26),
-          top_fixture("counting", -27)
-        ]
-        |> Enum.sort()
-
-      assert tops ==
-               admin
-               |> Top.scoped()
-               |> Repo.all()
-               |> Enum.sort()
-
-      assert [] == djvip |> Top.scoped() |> Repo.all() |> Enum.sort()
-      assert [] == dj |> Top.scoped() |> Repo.all() |> Enum.sort()
-      assert [] == nil |> Top.scoped() |> Repo.all()
-    end
-  end
-
   describe "Voting top" do
     setup :create_users
 
@@ -217,15 +189,8 @@ defmodule Brididi.Charts.TopTest do
     top |> Repo.forget(:songs, :many)
   end
 
-  def top_fixture("counting", offset) do
-    top = top_fixture("voting", offset)
-
-    {:ok, top} = Charts.next_step(top)
-    top |> Repo.forget(:songs, :many)
-  end
-
   def top_fixture("published", offset) do
-    top = top_fixture("counting", offset)
+    top = top_fixture("voting", offset)
 
     {:ok, top} = Charts.next_step(top)
     top |> Repo.forget(:songs, :many)
