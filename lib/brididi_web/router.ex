@@ -82,7 +82,7 @@ defmodule BrididiWeb.Router do
 
     live "/tops", ChartList
 
-    resources "/tops", TopController, only: [:create, :new, :update, :delete] do
+    resources "/tops", TopController, only: [:show, :create, :new, :update, :delete] do
       resources("/votes", VoteController, only: [:create])
     end
 
