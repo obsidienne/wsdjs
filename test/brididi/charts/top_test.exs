@@ -11,14 +11,26 @@ defmodule Brididi.Charts.TopTest do
   describe "changeset" do
     test "changeset with minimal valid attributes" do
       {:ok, dummy_id} = Brididi.HashID.load(999_999_999)
-      changeset = Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: dummy_id})
+
+      changeset =
+        Top.create_changeset(%Top{}, %{
+          start_date: Date.utc_today(),
+          end_date: Date.utc_today(),
+          user_id: dummy_id
+        })
 
       assert changeset.valid?
     end
 
     test "top owner account must exist" do
       {:ok, dummy_id} = Brididi.HashID.load(999_999_999)
-      top = Top.create_changeset(%Top{}, %{due_date: Timex.today(), user_id: dummy_id})
+
+      top =
+        Top.create_changeset(%Top{}, %{
+          start_date: Date.beginning_of_month(Date.utc_today()),
+          end_date: Date.end_of_month(Date.utc_today()),
+          user_id: dummy_id
+        })
 
       assert {:error, %Ecto.Changeset{} = changeset} = Repo.insert(top)
       assert "does not exist" in errors_on(changeset).user
@@ -154,8 +166,15 @@ defmodule Brididi.Charts.TopTest do
 
   test "create_top/1 with valid data creates a top" do
     user = user_fixture()
-    assert {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
-    assert top.due_date == Timex.today()
+
+    assert {:ok, %Top{} = top} =
+             Charts.create_top(%{
+               start_date: Date.beginning_of_month(Date.utc_today()),
+               end_date: Date.end_of_month(Date.utc_today()),
+               user_id: user.id
+             })
+
+    assert top.start_date == Date.beginning_of_month(Date.utc_today())
   end
 
   test "delete_top/1 deletes the top" do
@@ -166,18 +185,31 @@ defmodule Brididi.Charts.TopTest do
 
   def top_fixture do
     user = user_fixture()
-    {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
+
+    {:ok, %Top{} = top} =
+      Charts.create_top(%{
+        start_date: Date.beginning_of_month(Date.utc_today()),
+        end_date: Date.end_of_month(Date.utc_today()),
+        user_id: user.id
+      })
+
     top |> Repo.forget(:songs, :many)
   end
 
   def top_fixture("checking", offset) do
     dt =
-      Timex.today()
-      |> Timex.beginning_of_month()
+      Date.utc_today()
+      |> Date.beginning_of_month()
       |> Timex.shift(months: offset)
 
     user = user_fixture()
-    {:ok, %Top{} = top} = Charts.create_top(%{due_date: dt, user_id: user.id})
+
+    {:ok, %Top{} = top} =
+      Charts.create_top(%{
+        start_date: Date.beginning_of_month(dt),
+        end_date: Date.end_of_month(dt),
+        user_id: user.id
+      })
 
     top |> Repo.forget(:songs, :many)
   end

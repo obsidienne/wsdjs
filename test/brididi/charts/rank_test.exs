@@ -30,7 +30,13 @@ defmodule Brididi.Charts.RankTest do
 
   defp rank_fixture_params(attrs \\ %{}) do
     user = user_fixture()
-    {:ok, top} = Brididi.Charts.create_top(%{due_date: Timex.now(), user_id: user.id})
+
+    {:ok, top} =
+      Brididi.Charts.create_top(%{
+        start_date: Date.beginning_of_month(Date.utc_today()),
+        end_date: Date.end_of_month(Date.utc_today()),
+        user_id: user.id
+      })
 
     {:ok, song} =
       Brididi.Musics.create_song(%{

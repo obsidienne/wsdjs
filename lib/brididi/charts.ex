@@ -34,7 +34,7 @@ defmodule Brididi.Charts do
   def last_tops(current_user) do
     current_user
     |> Top.scoped()
-    |> order_by(desc: :due_date)
+    |> order_by(desc: :end_date)
     |> where(status: "published")
     |> limit(3)
     |> Repo.all()
@@ -94,15 +94,10 @@ defmodule Brididi.Charts do
   def get_top!(id), do: Repo.get!(Top, id)
 
   def create_top(params) do
-    top_changeset = Top.create_changeset(%Top{}, params)
+    changeset = Top.create_changeset(%Top{}, params)
+    songs = Musics.list_songs(changeset.changes.start_date, changeset.changes.end_date)
 
-    month = top_changeset.changes.due_date
-    lower = Timex.beginning_of_month(Timex.to_datetime(month))
-    upper = Timex.end_of_month(Timex.to_datetime(month))
-
-    songs = Musics.list_songs(lower, upper)
-
-    top_changeset
+    changeset
     |> put_assoc(:songs, songs)
     |> Repo.insert()
   end

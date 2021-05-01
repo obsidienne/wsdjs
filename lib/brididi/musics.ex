@@ -129,9 +129,12 @@ defmodule Brididi.Musics do
   end
 
   @doc """
-  Returns the songs added the 24 last hours.
+  Retrieve the songs matching the lower and upper date
   """
-  def list_songs(%DateTime{} = lower, %DateTime{} = upper) when lower < upper do
+  def list_songs(%Date{} = lower, %Date{} = upper) when lower < upper do
+    lower = NaiveDateTime.new!(lower, ~T[00:00:00.000])
+    upper = NaiveDateTime.new!(upper, ~T[23:59:59.999])
+
     query =
       from(s in Song,
         where: s.inserted_at >= ^lower and s.inserted_at <= ^upper

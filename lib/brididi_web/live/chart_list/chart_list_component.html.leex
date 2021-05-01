@@ -3,7 +3,7 @@
   <div class="px-4 py-4 sm:px-6">
     <div class="flex items-center justify-between">
       <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
-        <%= Brididi.Cldr.Date.to_string!(@top.due_date) %>
+        <%= Brididi.Cldr.Date.to_string!(@top.start_date) %> - <%= Brididi.Cldr.Date.to_string!(@top.end_date) %>
       </div>
       <div class="ml-2 flex-shrink-0 flex">
         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -40,8 +40,8 @@
             clip-rule="evenodd" />
         </svg>
         <span>
-          <time datetime="<%= Date.to_iso8601(@top.due_date) %>">
-            <%= Brididi.Cldr.Date.to_string!(@top.due_date) %>
+          <time datetime="<%= Date.to_iso8601(@top.start_date) %>">
+            <%= Brididi.Cldr.Date.to_string!(@top.start_date) %>
           </time>
         </span>
       </div>

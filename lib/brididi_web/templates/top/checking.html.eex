@@ -6,7 +6,10 @@
         <div class="ml-4 mt-4">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
             <time
-              datetime="<%= Date.to_iso8601(@top.due_date) %>"><%= Brididi.Cldr.Date.to_string!(@top.due_date) %></time>
+              datetime="<%= Date.to_iso8601(@top.start_date) %>"><%= Brididi.Cldr.Date.to_string!(@top.start_date) %></time>
+            -
+            <time
+              datetime="<%= Date.to_iso8601(@top.end_date) %>"><%= Brididi.Cldr.Date.to_string!(@top.end_date) %></time>
 
           </h3>
           <p class="mt-1 text-sm leading-5 text-gray-500"> For this top, there is <%= Enum.count(@ranks) %> songs </p>

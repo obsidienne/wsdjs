@@ -21,27 +21,43 @@ defmodule Brididi.Charts.ChartsTest do
     end
 
     test "published" do
-      dt = Timex.beginning_of_month(Timex.today())
+      dt_start = Date.beginning_of_month(Date.utc_today())
+      dt_end = Date.end_of_month(Date.utc_today())
 
-      top = top_fixture(%{"due_date" => dt})
+      top = top_fixture(%{"start_date" => dt_start, "end_date" => dt_end})
       assert :ok == Charts.can?(%User{admin: true}, :show, top)
       assert :ok == Charts.can?(%User{profil_djvip: true}, :show, top)
       refute :ok == Charts.can?(%User{profil_dj: true}, :show, top)
       refute :ok == Charts.can?(nil, :show, top)
 
-      top = top_fixture(%{"due_date" => Timex.shift(dt, months: -2)})
+      top =
+        top_fixture(%{
+          "start_date" => Timex.shift(dt_start, months: -2),
+          "end_date" => Timex.shift(dt_end, months: -2)
+        })
+
       assert :ok == Charts.can?(%User{admin: true}, :show, top)
       assert :ok == Charts.can?(%User{profil_djvip: true}, :show, top)
       refute :ok == Charts.can?(%User{profil_dj: true}, :show, top)
       refute :ok == Charts.can?(nil, :show, top)
 
-      top = top_fixture(%{"due_date" => Timex.shift(dt, months: -5)})
+      top =
+        top_fixture(%{
+          "start_date" => Timex.shift(dt_start, months: -5),
+          "end_date" => Timex.shift(dt_end, months: -5)
+        })
+
       assert :ok == Charts.can?(%User{admin: true}, :show, top)
       assert :ok == Charts.can?(%User{profil_djvip: true}, :show, top)
       assert :ok == Charts.can?(%User{profil_dj: true}, :show, top)
       assert :ok == Charts.can?(nil, :show, top)
 
-      top = top_fixture(%{"due_date" => Timex.shift(dt, months: -6)})
+      top =
+        top_fixture(%{
+          "start_date" => Timex.shift(dt_start, months: -6),
+          "end_date" => Timex.shift(dt_end, months: -6)
+        })
+
       assert :ok == Charts.can?(%User{admin: true}, :show, top)
       assert :ok == Charts.can?(%User{profil_djvip: true}, :show, top)
       assert :ok == Charts.can?(%User{profil_dj: true}, :show, top)

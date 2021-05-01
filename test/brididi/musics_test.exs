@@ -120,4 +120,3 @@ defmodule Brididi.MusicsTest do
     end
   end
 end
-

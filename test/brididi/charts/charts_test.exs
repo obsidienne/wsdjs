@@ -20,7 +20,14 @@ defmodule Brididi.ChartsTest do
     ]
 
     user = user_fixture()
-    {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
+
+    {:ok, %Top{} = top} =
+      Charts.create_top(%{
+        start_date: Date.beginning_of_month(Date.utc_today()),
+        end_date: Date.end_of_month(Date.utc_today()),
+        user_id: user.id
+      })
+
     assert Enum.count(top.songs) == 3
     assert Enum.sort(song_in) == Enum.sort(top.songs)
   end
@@ -111,7 +118,13 @@ defmodule Brididi.ChartsTest do
     }
 
     user = user_fixture()
-    {:ok, %Top{} = top} = Charts.create_top(%{due_date: Timex.today(), user_id: user.id})
+
+    {:ok, %Top{} = top} =
+      Charts.create_top(%{
+        start_date: Date.beginning_of_month(Date.utc_today()),
+        end_date: Date.end_of_month(Date.utc_today()),
+        user_id: user.id
+      })
 
     Brididi.Charts.vote(user, %{
       "top_id" => top.id,

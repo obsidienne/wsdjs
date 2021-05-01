@@ -4,39 +4,26 @@
     <div class="space-y-8 divide-y divide-gray-200">
       <div>
         <div>
-          <h3 class="text-lg leading-6 font-medium text-gray-900">Create a new Top</h3>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Basic options</h3>
           <p class="mt-1 text-sm text-gray-500">
-            Create a very cool new top using the date to deduce the month.
+            Initiate a top according to the following parameters
           </p>
         </div>
 
         <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-          <div class="sm:col-span-4">
-            <%= label f, :due_date, "Month of the TOP to create" ,
-              class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
-              <div class="mt-1 sm:mt-0 sm:col-span-2">
-                <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs flex">
-                  <%= date_select f, :due_date,
-                   day: [
-                    class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md",
-                    options: [1]
-                   ],
-                   month: [
-                    class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md",
-                    required: "required"
-                   ], 
-                   year: [
-                    class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md",
-                    required: "required" 
-                   ] %>
-                </div>
-                <p class="mt-2 text-sm text-red-600">
-                  <%= error_tag f, :due_date %>
-                </p>
-                <p class="mt-2 text-sm text-gray-500">Select the date to use for this top.</p>
-              </div>
+          <div>
+            <%= label f, :start, "Starting date", class: "form-label" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= text_input f, :start, class: "form-input-text", type: "date" %>
+            </div>
           </div>
 
+          <div>
+            <%= label f, :end, "Ending date", class: "form-label"  %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= text_input f, :end, class: "form-input-text", type: "date" %>
+            </div>
+          </div>
         </div>
       </div>
 

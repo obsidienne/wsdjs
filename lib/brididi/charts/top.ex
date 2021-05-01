@@ -6,12 +6,13 @@ defmodule Brididi.Charts.Top do
 
   alias Brididi.{Accounts, Charts}
 
-  @allowed_fields ~w(due_date user_id)a
+  @allowed_fields ~w(start_date end_date user_id)a
   @valid_status ~w(checking voting published)
 
   @primary_key {:id, Brididi.HashID, autogenerate: true}
   schema "tops" do
-    field(:due_date, :date)
+    field(:start_date, :date)
+    field(:end_date, :date)
     field(:status, :string)
 
     belongs_to(:user, Brididi.Accounts.User, type: Brididi.HashID)
@@ -25,10 +26,9 @@ defmodule Brididi.Charts.Top do
   def create_changeset(%__MODULE__{} = top, attrs) do
     top
     |> cast(attrs, @allowed_fields)
-    |> validate_required(:due_date)
+    |> validate_required([:start_date, :end_date])
     |> change(status: "checking")
     |> validate_inclusion(:status, @valid_status)
-    |> unique_constraint(:due_date)
     |> assoc_constraint(:user)
   end
 
@@ -60,7 +60,7 @@ defmodule Brididi.Charts.Top do
     from t in Charts.Top,
       where:
         t.status == "published" and
-          t.due_date >= datetime_add(^current_month, ^lower, "month") and
-          t.due_date <= datetime_add(^current_month, ^upper, "month")
+          t.start_date >= datetime_add(^current_month, ^lower, "month") and
+          t.start_date <= datetime_add(^current_month, ^upper, "month")
   end
 end

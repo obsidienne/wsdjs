@@ -922,12 +922,13 @@ ALTER SEQUENCE public.songs_id_seq OWNED BY public.songs.id;
 
 CREATE TABLE public.tops (
     uuid uuid,
-    due_date date NOT NULL,
     status text DEFAULT 'checking'::text NOT NULL,
     inserted_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     user_id bigint NOT NULL,
-    id bigint NOT NULL
+    id bigint NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL
 );
 
 
@@ -1472,13 +1473,6 @@ CREATE UNIQUE INDEX songs_title_artist_index ON public.songs USING btree (title,
 
 
 --
--- Name: tops_due_date_index; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX tops_due_date_index ON public.tops USING btree (due_date);
-
-
---
 -- Name: users_email_index; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1774,3 +1768,5 @@ INSERT INTO public."schema_migrations" (version) VALUES (20201029231738);
 INSERT INTO public."schema_migrations" (version) VALUES (20201030225815);
 INSERT INTO public."schema_migrations" (version) VALUES (20201104143352);
 INSERT INTO public."schema_migrations" (version) VALUES (20210306225827);
+INSERT INTO public."schema_migrations" (version) VALUES (20210427173616);
+INSERT INTO public."schema_migrations" (version) VALUES (20210429153954);

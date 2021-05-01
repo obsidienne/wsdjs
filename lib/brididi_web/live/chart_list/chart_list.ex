@@ -13,7 +13,7 @@ defmodule BrididiWeb.ChartList do
     total_pages = ceil(Brididi.Charts.count_charts(current_user) / per_page)
 
     paginate_options = %{page: page, per_page: per_page, total_pages: total_pages}
-    sort_options = %{sort_by: :due_date, sort_order: :desc}
+    sort_options = %{sort_by: :end_date, sort_order: :desc}
 
     tops =
       Brididi.Charts.list_tops(current_user,
