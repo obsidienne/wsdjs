@@ -1,0 +1,29 @@
+version: "3.5"
+
+services:
+  db:
+    image: postgis/postgis:12-3.0-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: wsdjs_dev
+    volumes:
+      - "./database/datadir:/var/lib/postgresql/data"
+    ports:
+      - 5432:5432
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+    depends_on:
+      - db
+
+networks:
+  backend:
+    name: run_backend
